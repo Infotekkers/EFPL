@@ -1,4 +1,5 @@
 .vscode
+.eslintcache
 
 ############### Flutter #############################
 # Miscellaneous
@@ -55,6 +56,7 @@ flutter-user-client/android/app/debug
 flutter-user-client/android/app/profile
 flutter-user-client/android/app/release
 
+flutter-user-client/.metadata
 
 ################# Express ######################################
 server/node_modules

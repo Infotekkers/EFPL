@@ -1,4 +1,4 @@
-const { print_console } = require("../utils/development");
+const { printConsole } = require("../utils/development");
 
 const mongoose = require("mongoose");
 const MONGO_DB_URI =
@@ -6,7 +6,7 @@ const MONGO_DB_URI =
 
 const connectToDB = async () => {
   try {
-    print_console(
+    printConsole(
       { data: "Connecting to MongoDB ......" },
       { printLocation: "db_config.js:12" },
       { textColor: "yellow" }
@@ -18,7 +18,7 @@ const connectToDB = async () => {
       // useFindAndModify: false,
     });
 
-    print_console(
+    printConsole(
       { data: `Database Connected : ${DBConnection.connection.host}` },
       { printLocation: "db_config.js:24" },
       {
@@ -26,7 +26,7 @@ const connectToDB = async () => {
       }
     );
   } catch (error) {
-    print_console(error);
+    printConsole(error);
 
     process.exit(1);
   }

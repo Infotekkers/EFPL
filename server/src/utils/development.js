@@ -1,13 +1,13 @@
 require("colors");
 
 // DEBUG PRINT WITH COLORS SUPPORT
-function print_console(
+function printConsole(
   { data = "No data" } = {},
   { printLocation = "Print Location not Added" } = {},
   { bgColor = "", textColor = "", underline = false } = {}
 ) {
-  if (process.env.EXPRESS_ENV == "development") {
-    var finalPrint = getUnderline(
+  if (process.env.EXPRESS_ENV === "development") {
+    const finalPrint = getUnderline(
       getTextColor(getBgColor(data, bgColor), textColor),
       underline
     );
@@ -73,5 +73,5 @@ function getUnderline(data, underline) {
 }
 
 module.exports = {
-  print_console,
+  printConsole,
 };

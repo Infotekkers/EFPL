@@ -1,4 +1,4 @@
-name: vue-ci
+name: Vue CI
 
 on:
   push:
