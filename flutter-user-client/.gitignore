@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+.env
 
 # Flutter Output
 android
