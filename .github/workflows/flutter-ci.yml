@@ -1,0 +1,35 @@
+name: flutter-ci
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "flutter-user-client/**"
+  pull_request:
+    branches:
+      - main
+      - master
+    paths:
+      - "flutter-user-client/"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.10.2'
+
+      - name: Get all Flutter Packages
+        run: cd flutter-user-client && flutter pub get
+
+      - name: Run Flutter Test
+        run: cd flutter-user-client && flutter test

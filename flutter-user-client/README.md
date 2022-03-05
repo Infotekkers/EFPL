@@ -1,7 +1,7 @@
 # EFPL User Client
 
 ## Flutter Version
-Flutter 2.10.2 • channel stable • https://github.com/flutter/flutter.git
+Flutter **2.10.2** • channel stable • https://github.com/flutter/flutter.git
 
 Framework • revision 097d3313d8 (2 weeks ago) • 2022-02-18 19:33:08 -0600
 
@@ -17,4 +17,13 @@ Tools • Dart 2.16.1 • DevTools 2.9.2
 
 ## Configuration Files
 - __analysis_options.yaml__: Dart analyzer liniting settings
-    - Trailing commas enabled
+    - Trailing commas 
+    
+
+
+## Project setup
+### Add .env file
+
+```
+API=YOUR_EXPRESS_SERVER_ADDRESS:PORT
+```

@@ -1,0 +1,54 @@
+name: vue-ci
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "vue-admin-client/**"
+  pull_request:
+    branches:
+      - main
+      - master
+    paths:
+      - "vue-admin-client/"
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v2.1.4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies 👨🏻‍💻
+        run: cd vue-admin-client && npm ci --prefer-offline --no-audit
+
+      - name: Run linter 👀
+        run: cd vue-admin-client && npm run lintfix
+
+      - name: Run unit tests 🧪
+        run: cd vue-admin-client && npm run test-unit
+
+      - name: Run e2e tests 🧪
+        run: cd vue-admin-client && npm run test-e2e
