@@ -3,7 +3,7 @@
 
 ## File Naming
 
-- **Uses a flat naming structure where child components carry their parent's name**
+- **Use a flat naming structure where child components carry their parent's name**
 
   - HelloWorld.vue
   - HelloWorldMsg.vue
@@ -33,6 +33,8 @@
 ```
 API=YOUR_EXPRESS_SERVER_ADDRESS:PORT
 ```
+
+### Install dependencies
 
 ```
 npm ci
