@@ -1,0 +1,13 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # require_trailing_commas: true
+    
+analyzer:
+  errors:
+    missing_required_param: error
+    missing_return: error
+    must_be_immutable: error
+    require_trailing_commas: error
+    sort_unnamed_constructors_first: ignore

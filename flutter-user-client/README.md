@@ -1,16 +1,20 @@
-# efpl
+# EFPL User Client
 
-A new Flutter project.
+## Flutter Version
+Flutter 2.10.2 • channel stable • https://github.com/flutter/flutter.git
 
-## Getting Started
+Framework • revision 097d3313d8 (2 weeks ago) • 2022-02-18 19:33:08 -0600
 
-This project is a starting point for a Flutter application.
+Engine • revision a83ed0e5e3
 
-A few resources to get you started if this is your first Flutter project:
+Tools • Dart 2.16.1 • DevTools 2.9.2
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## File Structure
+- __infrastructure/__:
+- __domain/__:
+- __application/__:
+- __presentation/__:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Configuration Files
+- __analysis_options.yaml__: Dart analyzer liniting settings
+    - Trailing commas enabled
