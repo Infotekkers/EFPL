@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 // Development Supports
-const { print_console } = require("./src/utils/development");
+const { printConsole } = require("./src/utils/development");
 
 // Import ENV Variables
 const PORT = process.env.PORT || 3000;
@@ -30,7 +30,7 @@ app.use(cors());
 
 // Run Node app
 app.listen(PORT, () =>
-  print_console(
+  printConsole(
     { data: `Server is live @${PORT}` },
     { printLocation: "index.js:28" },
     {

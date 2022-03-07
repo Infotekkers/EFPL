@@ -1,0 +1,93 @@
+.vscode
+.eslintcache
+
+############### Flutter #############################
+# Miscellaneous
+flutter-user-client/*.class
+flutter-user-client/*.log
+flutter-user-client/*.pyc
+flutter-user-client/*.swp
+flutter-user-client/.DS_Store
+flutter-user-client/.atom/
+flutter-user-client/.buildlog/
+flutter-user-client/.history
+flutter-user-client/.svn/
+flutter-user-client/.env
+
+# Flutter Output
+flutter-user-client/android
+flutter-user-client/ios
+flutter-user-client/web
+flutter-user-client/windows
+
+# IntelliJ related
+flutter-user-client/*.iml
+flutter-user-client/*.ipr
+flutter-user-client/*.iws
+flutter-user-client/.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+flutter-user-client/**/doc/api/
+flutter-user-client/**/ios/Flutter/.last_build_id
+flutter-user-client/.dart_tool/
+flutter-user-client/.flutter-plugins
+flutter-user-client/.flutter-plugins-dependencies
+flutter-user-client/.packages
+flutter-user-client/.pub-cache/
+flutter-user-client/.pub/
+flutter-user-client/build/
+
+# Web related
+flutter-user-client/lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+flutter-user-client/android/app/debug
+flutter-user-client/android/app/profile
+flutter-user-client/android/app/release
+
+flutter-user-client/.metadata
+
+################# Express ######################################
+server/node_modules
+server/.env
+server/.vscode
+
+
+################# Vue ########################################
+.DS_Store
+node_modules
+vue-admin-client/dist
+vue-admin-client.env
+
+vue-admin-client/test/videos/
+vue-admin-client/test/screenshots/
+
+
+# local env files
+vue-admin-client/.env
+
+# Log files
+vue-admin-client/npm-debug.log*
+vue-admin-client/yarn-debug.log*
+vue-admin-client/yarn-error.log*
+vue-admin-client/pnpm-debug.log*
+
+# Editor directories and files
+vue-client-admin/.idea
+vue-client-admin/.vscode
+vue-client-admin/*.suo
+vue-client-admin/*.ntvs*
+vue-client-admin/*.njsproj
+vue-client-admin/*.sln
+vue-client-admin/*.sw?
