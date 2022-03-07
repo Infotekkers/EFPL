@@ -11,7 +11,7 @@ on:
       - master
 
 jobs:
-  build:
+  Test Runner:
 
     runs-on: ubuntu-latest
 
@@ -28,10 +28,10 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies 👨🏻‍💻
-        run: cd server && npm ci --prefer-offline --no-audit
+      - run: cd server && npm ci --prefer-offline --no-audit
 
     - name: Run linter 👀
-        run: cd server && npm run lint
+      - run: cd server && npm run lint
 
     - name: Run tests 🧪
       - run: cd server && npm test

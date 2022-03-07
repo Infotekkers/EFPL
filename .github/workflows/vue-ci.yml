@@ -15,7 +15,7 @@ on:
       - "vue-admin-client/"
 
 jobs:
-  ci:
+  Test Runner:
     runs-on: ${{ matrix.os }}
 
     strategy:
