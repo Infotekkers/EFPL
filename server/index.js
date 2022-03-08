@@ -18,6 +18,7 @@ const connectToDB = require("./src/config/db_config");
 connectToDB();
 
 // Import Routes
+var user2Router = require("./src/routes/user2.route");
 
 // Import Middleware
 
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
 // Add Routes to app
+app.use("/user", user2Router);
 
 // Run Node app
 app.listen(PORT, () =>
