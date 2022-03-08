@@ -1,5 +1,27 @@
 const mongoose = require("mongoose");
 
+const fantasyLeaguesSchema = mongoose.Schema({
+  leagueId: Number,
+  previousRank: Number,
+});
+
+const playerSchema = mongoose.Schema({
+  playerId: Number,
+  multiplier: Number,
+  isCaptain: Boolean,
+  isViceCaptain: Boolean,
+});
+
+const teamSchema = mongoose.Schema({
+  gameweekId: Number,
+  activeChip: String,
+  deduction: Number,
+  players: {
+    type: Map,
+    of: playerSchema,
+  },
+});
+
 const userSchema = mongoose.Schema({
   userName: String,
   password: String,
@@ -8,21 +30,8 @@ const userSchema = mongoose.Schema({
   country: String,
   favouriteEplTeam: Number,
   availableChips: [String],
-  fantasyLeagues: [{ leagueId: Number, previousRank: Number }],
-  team: [
-    {
-      gameweekId: Number,
-      activeChip: String,
-      players: [
-        {
-          playerId: Number,
-          multiplier: Number,
-          isCaptain: Boolean,
-          isViceCaptain: Boolean,
-        },
-      ],
-    },
-  ],
+  fantasyLeagues: [fantasyLeaguesSchema],
+  team: [teamSchema],
 });
 
 module.exports = mongoose.model("users", userSchema);
