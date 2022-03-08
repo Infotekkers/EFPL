@@ -5,33 +5,47 @@ on:
     branches:
       - main
       - master
+    paths:
+      - "server/**"
   pull_request:
     branches:
       - main
       - master
+    paths:
+      - "server/**"
 
 jobs:
-  Test Runner:
+  test-runner:
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - name: Checkout 🛎
+        uses: actions/checkout@master
 
-    - name: Install dependencies 👨🏻‍💻
-      - run: cd server && npm ci --prefer-offline --no-audit
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
 
-    - name: Run linter 👀
-      - run: cd server && npm run lint
+      - name: Cache node_modules 📦
+        uses: actions/cache@v2.1.4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: Run tests 🧪
-      - run: cd server && npm test
+      - name: Install dependencies 
+        run: cd server && npm ci --prefer-offline --no-audit
+
+      - name: Run linter 👀
+        run: cd server && npm run lint
+
+      - name: Run tests 🧪
+        run: cd server && npm test
