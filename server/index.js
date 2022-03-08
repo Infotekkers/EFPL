@@ -17,6 +17,7 @@ const connectToDB = require("./src/config/db_config");
 connectToDB();
 
 // Import Routes
+const fixtures = require("./src/routes/fixtures.routes");
 
 // Import Middleware
 
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
 // Add Routes to app
+app.use("/fixtures", fixtures);
 
 // Run Node app
 app.listen(PORT, () =>
