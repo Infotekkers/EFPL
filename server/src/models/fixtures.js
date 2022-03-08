@@ -1,25 +1,24 @@
 const mongoose = require("mongoose");
 
 // used within fixtureSchema below
-const fixtureTeamSchema = mongoose.Schema({
+const lineupSchema = mongoose.Schema({
   lineup: {
-    goalkeepers: {type: [Number], required: true},
-    defenders: {type: [Number], required: true},
-    midfielders: {type: [Number], required: true},
-    strikers: {type: [Number], required: true},
-    bench: {type: [Number], required: true},
-  }
-})
+    goalkeepers: { type: [Number], required: true },
+    defenders: { type: [Number], required: true },
+    midfielders: { type: [Number], required: true },
+    strikers: { type: [Number], required: true },
+    bench: { type: [Number], required: true },
+  },
+});
 
 const fixtureSchema = mongoose.Schema({
-  gameweekId: {type: String, required: true},
-  schedule: {type: Date, required: true},
-  status: {type: String, default: "s"}, // s for scheduled
-  homeTeam: fixtureTeamSchema,
-  awayTeam: fixtureTeamSchema,
-})
+  gameweekId: { type: Number, required: true },
+  schedule: { type: Date, required: true },
+  status: { type: String, default: "s" }, // s for scheduled
+  homeTeam: { type: lineupSchema, required: true },
+  awayTeam: { type: lineupSchema, required: true },
+});
 
 const Fixture = mongoose.model("fixtures", fixtureSchema);
 
 module.exports = Fixture;
-
