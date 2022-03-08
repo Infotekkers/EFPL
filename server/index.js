@@ -1,7 +1,6 @@
 // Import Libraries
 const express = require("express");
 require("dotenv").config();
-const bodyParser = require("body-parser");
 const cors = require("cors");
 
 // Development Supports
@@ -22,8 +21,8 @@ connectToDB();
 // Import Middleware
 
 // Add Node Features
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
 // Add Routes to app
