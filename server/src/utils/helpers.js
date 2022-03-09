@@ -8,6 +8,22 @@ const generateJWTToken = expressAsyncHandler(async (id) => {
   });
 });
 
+// Function to deduct points from user team
+const pointDeductor = (activeTeam, incomingTeam) => {
+  let deduction = activeTeam.deduction;
+
+  // Loop over playerIds of incomingTeam
+  for (const playerId of Object.entries(incomingTeam.players)) {
+    // Check if the playerIds are in the activeTeam
+    if (playerId in activeTeam.players) continue;
+    // If not deduct 4 points
+    deduction += 4;
+  }
+
+  return deduction;
+};
+
 module.exports = {
   generateJWTToken,
+  pointDeductor,
 };

@@ -8,7 +8,10 @@ const generateJWTToken = expressAsyncHandler(async (id) => {
   });
 });
 
-const validateTeam = (team) => {};
+// TODO: Validate user team
+const validateTeam = (team) => {
+  return [true];
+};
 
 module.exports = {
   generateJWTToken,

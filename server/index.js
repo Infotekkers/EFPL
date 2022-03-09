@@ -6,6 +6,7 @@ const cors = require("cors");
 
 // Development Supports
 const { printConsole } = require("./src/utils/development");
+const populate = require("./src/utils/populate"); // eslint-disable-line
 
 // Import ENV Variables
 const PORT = process.env.PORT || 3000;
@@ -18,7 +19,7 @@ const connectToDB = require("./src/config/db_config");
 connectToDB();
 
 // Import Routes
-var user2Router = require("./src/routes/user2.route");
+const user2Router = require("./src/routes/user2.route");
 
 // Import Middleware
 
@@ -29,6 +30,9 @@ app.use(cors());
 
 // Add Routes to app
 app.use("/user", user2Router);
+
+// Run populate scripts
+// populate.addTestUser();
 
 // Run Node app
 app.listen(PORT, () =>
