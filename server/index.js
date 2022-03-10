@@ -1,14 +1,9 @@
 // Import Libraries
 const express = require("express");
-require("dotenv").config();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
 // Development Supports
-const { printConsole } = require("./src/utils/development");
-
-// Import ENV Variables
-const PORT = process.env.PORT || 3000;
 
 // Create express app
 const app = express();
@@ -28,15 +23,5 @@ app.use(cors());
 
 // Add Routes to app
 
-// Run Node app
-app.listen(PORT, () =>
-  printConsole(
-    { data: `Server is live @${PORT}` },
-    { printLocation: "index.js:28" },
-    {
-      bgColor: "bgGreen",
-      textColor: "black",
-      underline: true,
-    }
-  )
-);
+// Export app
+module.exports = app;
