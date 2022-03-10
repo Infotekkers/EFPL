@@ -26,7 +26,19 @@ const transfer = asyncHandler(async (req, res) => {
     // Save deduction and incomingTeam to DB
     activeTeam = incomingTeam;
     activeTeam.deduction = deduction;
+
+    // Update team with deduction for the current gameweek
     await User.findByIdAndUpdate(userId, { team: activeTeam });
+
+    // !! SKIP if FH played
+    if (incomingTeam.activeChip !== "FH") {
+      // Update team with 0 deduction for the upcoming gameweeks
+      activeTeam.deduction = 0;
+      for (let gw = activeGameweek + 1; gw < 31; gw++) {
+        activeTeam.gameweekId = gw;
+        await User.findByIdAndUpdate(userId, { $push: { team: activeTeam } });
+      }
+    }
 
     res.status(200).json({ message: "Successfuly saved team" });
   } else {

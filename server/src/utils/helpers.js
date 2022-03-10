@@ -12,12 +12,17 @@ const generateJWTToken = expressAsyncHandler(async (id) => {
 const pointDeductor = (activeTeam, incomingTeam) => {
   let deduction = activeTeam.deduction;
 
-  // Loop over playerIds of incomingTeam
-  for (const playerId of Object.entries(incomingTeam.players)) {
-    // Check if the playerIds are in the activeTeam
-    if (playerId in activeTeam.players) continue;
-    // If not deduct 4 points
-    deduction += 4;
+  // Check if wildcard or free hit chips are active
+  if (incomingTeam.activeChip === "WC" || incomingTeam.activeChip === "FH")
+    deduction = 0;
+  else {
+    // Loop over playerIds of incomingTeam
+    for (const playerId of Object.entries(incomingTeam.players)) {
+      // Check if the playerIds are in the activeTeam
+      if (playerId in activeTeam.players) continue;
+      // If not deduct 4 points
+      deduction += 4;
+    }
   }
 
   return deduction;
