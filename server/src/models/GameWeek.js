@@ -20,6 +20,7 @@ const gameWeekSchema = mongoose.Schema({
   },
   startTimestamp: {
     type: Number,
+    unique: true,
     required: [
       true,
       "Custom Error - Required Value *:Start timestamp is required.",

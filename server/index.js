@@ -13,13 +13,22 @@ const connectToDB = require("./src/config/db_config");
 connectToDB();
 
 // Import Routes
+const gameWeekRoutes = require("./src/routes/gameWeek.routes");
 
 // Import Middleware
+// const errorMiddleware = require("./src/middleware/");
 
 // Add Node Features
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
+
+// Add Routes to app
+app.use("/gameWeek", gameWeekRoutes);
+
+// Add Middleware
+
+// app.use(errorMiddleware);
 
 // Add Routes to app
 
