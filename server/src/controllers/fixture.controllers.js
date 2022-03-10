@@ -34,7 +34,6 @@ async function startFixture(req, res) {
   }
 }
 
-// Half time
 async function pauseFixture(req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 

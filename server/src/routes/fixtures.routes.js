@@ -3,10 +3,10 @@ const router = express.Router();
 
 const fixtureController = require("../controllers/fixture.controllers");
 
-router.post("/add-fixture", fixtureController.postFixture);
-router.patch("/start-fixture/:matchId", fixtureController.startFixture);
-router.patch("/pause-fixture/:matchId", fixtureController.pauseFixture);
-router.patch("/resume-fixture/:matchId", fixtureController.resumeFixture);
-router.patch("/end-fixture/:matchId", fixtureController.endFixture);
+router.post("/add", fixtureController.postFixture);
+router.patch("/start/:matchId", fixtureController.startFixture);
+router.patch("/pause/:matchId", fixtureController.pauseFixture);
+router.patch("/resume/:matchId", fixtureController.resumeFixture);
+router.patch("/end/:matchId", fixtureController.endFixture);
 
 module.exports = router;
