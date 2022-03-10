@@ -25,7 +25,13 @@ const transfer = asyncHandler(async (req, res) => {
   // Save team || Send err
   if (isTeamValid === true) {
     // Calculate deduction
-    const deduction = pointDeductor(activeTeam, incomingTeam);
+    const [deduction, transfersMade] = pointDeductor(activeTeam, incomingTeam);
+
+    // Deduct free transfer
+    activeTeam.freeTransers =
+      activeTeam.freeTransers < transfersMade
+        ? 0
+        : activeTeam.freeTransers - transfersMade;
 
     // Remove active chips from available chips
     if (incomingTeam.activeChip) {
