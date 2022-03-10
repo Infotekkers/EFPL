@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 
-// used within fixtureSchema below
+// used within PlayerSchema below
 const playersSchema = mongoose.Schema({
   playerId: { type: Number, required: true },
   playerName: { type: String, required: true },
   eplTeamId: { type: String, required: true },
   position: { type: String, required: true },
   currentPrice: { type: Number, required: true },
+  score: {type: [scoreSchema], required:true},
   availability: { type: [avaliablitySchema], required: true },
   history: [yearSchema],
 });
@@ -61,4 +62,6 @@ const yearSchema = mongoose.Schema({
   totalform: { type: Number, required: true },
 });
 
-module.exports = mongoose.model("players", playersSchema);
+const Players = mongoose.model("players", playersSchema); 
+
+module.exports = Players;
