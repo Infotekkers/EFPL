@@ -22,4 +22,59 @@ async function postFixture(req, res) {
   }
 }
 
-module.exports = { postFixture };
+async function startFixture(req, res) {
+  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+
+  if (match?.status === "scheduled") {
+    match.status = "live";
+    match
+      .save()
+      .then(() => res.send("Match is live."))
+      .catch(() => res.status(500).send("Try again!"));
+  }
+}
+
+// Half time
+async function pauseFixture(req, res) {
+  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+
+  if (match?.status === "live") {
+    match.status = "HT";
+    match
+      .save()
+      .then(() => res.send("Match is live"))
+      .catch(() => res.status(500).send("Try again!"));
+  }
+}
+
+async function resumeFixture(req, res) {
+  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+
+  if (match?.status === "HT") {
+    match.status = "live";
+    match
+      .save()
+      .then(() => res.send("Match resumed."))
+      .catch(() => res.status(500).send("Try again!"));
+  }
+}
+
+async function endFixture(req, res) {
+  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+
+  if (match?.status === "live") {
+    match.status = "FT";
+    match
+      .save()
+      .then(() => res.send("Full time!"))
+      .catch(() => res.status(500).send("Try again!"));
+  }
+}
+
+module.exports = {
+  postFixture,
+  startFixture,
+  pauseFixture,
+  resumeFixture,
+  endFixture,
+};
