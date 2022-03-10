@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 // used within fixtureSchema below
 const lineupSchema = mongoose.Schema({
+  teamId: { type: Number, required: true },
   lineup: {
     goalkeepers: { type: [Number], required: true },
     defenders: { type: [Number], required: true },
@@ -13,6 +14,7 @@ const lineupSchema = mongoose.Schema({
 
 const fixtureSchema = mongoose.Schema({
   gameweekId: { type: Number, required: true },
+  matchId: { type: String, required: true },
   schedule: { type: Date, required: true },
   status: { type: String, default: "s" }, // s for scheduled
   homeTeam: { type: lineupSchema, required: true },

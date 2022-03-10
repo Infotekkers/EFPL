@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const testController = require("../controllers/test.controllers");
+const fixtureController = require("../controllers/fixture.controllers");
 
-router.get("/test", testController.getTest);
+router.post("/add-fixture", fixtureController.postFixture);
+
 module.exports = router;
