@@ -23,6 +23,9 @@ const pointDeductor = (activeTeam, incomingTeam) => {
       // If not deduct 4 points
       deduction += 4;
     }
+
+    // Use free transfers if any
+    deduction -= 4 * activeTeam.freeTransfers;
   }
 
   return deduction;

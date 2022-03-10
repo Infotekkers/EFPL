@@ -8,6 +8,8 @@ const fantasyLeaguesSchema = mongoose.Schema({
 const playerSchema = mongoose.Schema({
   playerId: { type: Number, required: true },
   multiplier: { type: Number, required: true },
+  eplTeamId: { type: String, required: true },
+  price: { type: Number, required: true },
   isCaptain: { type: Boolean, default: false },
   isViceCaptain: { type: Boolean, default: false },
 });
@@ -15,6 +17,7 @@ const playerSchema = mongoose.Schema({
 const teamSchema = mongoose.Schema({
   gameweekId: { type: Number, required: true },
   activeChip: { type: String, default: "" },
+  freeTransfers: { type: Number, default: 1 },
   deduction: { type: Number, default: 0 },
   players: {
     type: Map,
