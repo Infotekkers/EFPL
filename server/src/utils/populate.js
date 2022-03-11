@@ -16,6 +16,7 @@ const addTestPlayer = async () => {
       {
         gameweekId: 3,
         goals: 2,
+        reds: 1,
       },
     ],
   });
@@ -26,6 +27,7 @@ const addTestPlayer = async () => {
       {
         gameweekId: 1,
         goals: 0,
+        assists: 3,
       },
       {
         gameweekId: 2,
@@ -38,8 +40,29 @@ const addTestPlayer = async () => {
     ],
   });
 
+  const testPlayer3 = new Player({
+    name: "Keeper",
+    score: [
+      {
+        gameweekId: 1,
+        goals: 0,
+        saves: 3,
+      },
+      {
+        gameweekId: 2,
+        goals: 0,
+      },
+      {
+        gameweekId: 3,
+        goals: 1,
+        minutesPlayed: 90,
+      },
+    ],
+  });
+
   await testPlayer1.save();
   await testPlayer2.save();
+  await testPlayer3.save();
 };
 
 module.exports = {
