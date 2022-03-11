@@ -41,7 +41,7 @@ async function pauseFixture(req, res) {
     match.status = "HT";
     match
       .save()
-      .then(() => res.send("Match is live"))
+      .then(() => res.send("Half Time!"))
       .catch(() => res.status(500).send("Try again!"));
   }
 }
@@ -70,10 +70,25 @@ async function endFixture(req, res) {
   }
 }
 
+async function postponeFixture(req, res) {
+  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+
+  if (match?.status === "scheduled") {
+    match.status = "postponed";
+    match
+      .save()
+      .then(() => res.send("Match postponed!"))
+      .catch(() => res.status(500).send("Try again!"));
+  }
+}
+
+async function updateFixture(req, res) {}
+
 module.exports = {
   postFixture,
   startFixture,
   pauseFixture,
   resumeFixture,
   endFixture,
+  postponeFixture,
 };
