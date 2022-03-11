@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const { Router } = require("express");
 const secret_key = process.env.JWT_SECRET;
 
+
 // import node mailer
 const nodemailer = require("nodemailer")
 
@@ -23,19 +24,18 @@ const register = asyncHandler(async(req, res)=>{
     // check for used team name
     const teamNameExists = await User.findOne({teamName:req.body.teamName});
 
+    
     if(emailExists) return res.status(400).send('Email in Use');
     if(teamNameExists) return res.status(400).send('Team Name in Use');
 
-    // hash password
-   const salt = await bcrypt.genSalt(10);
-   const hashedPass = await bcrypt.hash(req.body.password, salt);
-
+    
    // create user
    const user = new User({
        userName:req.body.userName,
-       password:hashedPass,
+       password:req.body.password,
        email:req.body.email,
        teamName:req.body.teamName,
+       country:req.body.country,
        favoriteEplTeamId:req.body.favoriteEplTeamId
 
    })
