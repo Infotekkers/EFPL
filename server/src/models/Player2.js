@@ -10,7 +10,7 @@ const scoreSchema = mongoose.Schema({
   price: Number,
   fantasyScore: Number,
   minutesPlayed: Number,
-  goal: Number,
+  goals: Number,
   assists: Number,
   cleanSheet: Number,
   yellows: Number,
