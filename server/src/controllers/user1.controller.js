@@ -134,7 +134,7 @@ const requestReset = asyncHandler(async(req,res)=>{
         secret_key,
         {expiresIn:60 * 60}
     );
-    const resetUrl = `http://localhost:5000/${resetToken}`;
+    const resetUrl = `http://localhost:5000/user1/resetPass/${resetToken}`;
 
     const mailOptions = {
         from:process.env.user,
@@ -157,6 +157,28 @@ const requestReset = asyncHandler(async(req,res)=>{
 
 });
 
+// reset password
+const resetPass = asyncHandler(async(req,res)=>{
+    // check token expiry
+    const token = req.params.token;
+
+    // get email
+    const decoded = jwt.verify(token, secret_key);
+    const email = decoded.data;
+
+    const newPass = req.body.password;
+    // will add validation here 
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(newPass,salt);
+    const updateValue = {password : hashedPassword};
+    console.log(updateValue);
+
+    // update item
+    const user = await User.updateOne({email},{$set:updateValue});
+    res.json({message:"password reset successfully"});
+
+})
+
 // helper 
 // async  function getUser(req,res,next){
 //     let user;
@@ -170,4 +192,4 @@ const requestReset = asyncHandler(async(req,res)=>{
 //     next();
 // }
 
-module.exports={register,login, fetchUsers, fetchOneUser,updateUser, deleteUser,requestReset};
+module.exports={register,login, fetchUsers, fetchOneUser,updateUser, deleteUser,requestReset,resetPass};

@@ -9,4 +9,5 @@ router.get('/fetchOne/:id', user1controller.fetchOneUser);
 router.patch('/updateUser/:id', user1controller.updateUser);
 router.patch('/deleteUser/:id', user1controller.deleteUser);
 router.post('/requestReset', user1controller.requestReset);
+router.post('/resetPass/:token', user1controller.resetPass);
 module.exports = router;
