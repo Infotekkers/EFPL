@@ -4,5 +4,7 @@ const router = express.Router();
 
 router.post('/register',user1controller.register);
 router.post('/login', user1controller.login);
-
+router.get('/fetchAll', user1controller.fetchUsers);
+router.get('/fetchOne/:id', user1controller.fetchOneUser);
+// router.patch('/updateuserName/:id', user1controller.changeUserName);
 module.exports = router;

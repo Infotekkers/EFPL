@@ -48,4 +48,25 @@ const login = asyncHandler(async(req,res)=>{
 
     
 })
-module.exports={register,login};
+
+// fetch all users
+const fetchUsers = asyncHandler(async(req,res)=>{
+    const users = await User.find();
+    res.json(users);
+})
+
+// fetch one user
+const fetchOneUser = asyncHandler(async(req,res)=>{
+    let user;
+    user = await User.findById(req.params.id);
+    if(user==null){
+        return res.status(404).json({messaage:"No user found"})
+    }
+    res.user = user
+    res.json(res.user);
+})
+// // change
+// const changeUserName = asyncHandler(async(req,res)=>{
+
+// }
+module.exports={register,login, fetchUsers, fetchOneUser};
