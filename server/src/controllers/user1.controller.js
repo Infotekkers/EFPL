@@ -90,7 +90,16 @@ const updateUser = asyncHandler(async(req,res)=>{
     res.json(updatedUser);
 })
 
-// change password
+const deleteUser = asyncHandler(async(req,res)=>{
+    let user;
+    user = await User.findById(req.params.id);
+    if(user==null){
+        return res.status(404).json({messaage:"No user found"})
+    }
+    res.user = user
+    await res.user.remove()
+    res.json({messaage:"user removed"})
+})
 // reset password
 
 // helper 
@@ -106,4 +115,4 @@ const updateUser = asyncHandler(async(req,res)=>{
 //     next();
 // }
 
-module.exports={register,login, fetchUsers, fetchOneUser,updateUser};
+module.exports={register,login, fetchUsers, fetchOneUser,updateUser, deleteUser};
