@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-
+// Registration
 const register = asyncHandler(async(req, res)=>{
     // check for prexisting email
     const emailExists = await User.findOne({email:req.body.email});
@@ -16,6 +16,7 @@ const register = asyncHandler(async(req, res)=>{
    const salt = await bcrypt.genSalt(10);
    const hashedPass = await bcrypt.hash(req.body.password, salt);
 
+   // create user
    const user = new User({
        userName:req.body.userName,
        password:hashedPass,
@@ -24,9 +25,27 @@ const register = asyncHandler(async(req, res)=>{
        favoriteEplTeamId:req.body.favoriteEplTeamId
 
    })
+   // save user to db
    const savedUser = await user.save();
    res.send(savedUser);
 
 
 })
-module.exports={register};
+
+// Login
+const login = asyncHandler(async(req,res)=>{
+    
+// check if email exists
+  const user = await User.findOne({email:req.body.email});
+  // check if password valid
+  if(user){
+      const passwordCheck = await bcrypt.compare(req.body.password,user.password);
+      if(passwordCheck){
+          res.send("logged in");
+      }
+      res.send("invalid email - password combination");
+  } res.send("invalid email - password combination");
+
+    
+})
+module.exports={register,login};
