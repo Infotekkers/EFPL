@@ -65,8 +65,40 @@ const fetchOneUser = asyncHandler(async(req,res)=>{
     res.user = user
     res.json(res.user);
 })
-// // change
-// const changeUserName = asyncHandler(async(req,res)=>{
 
+// change favoriteteam or username
+const updateUser = asyncHandler(async(req,res)=>{
+    let user;
+    user = await User.findById(req.params.id);
+    if(user==null){
+        return res.status(404).json({messaage:"No user found"})
+    }
+    res.user = user
+    
+    if(req.body.favoriteEplTeamId != null){
+        res.user.favoriteEplTeamId = req.body.favoriteEplTeamId
+    }
+    if(req.body.userName != null){
+        res.user.userName = req.body.userName
+    }
+    const updatedUser = await res.user.save();
+    res.json(updatedUser);
+})
+
+// change password
+// reset password
+
+// helper 
+// async  function getUser(req,res,next){
+//     let user;
+//     try{user = await User.findById(req.params.id);
+//     if(user==null){
+//         return res.status(404).json({messaage:"No user found"})
+//     }}catch(err){
+//         return res.status(500).json({messaage:err.messaage})
+//     }
+//     res.user = user
+//     next();
 // }
-module.exports={register,login, fetchUsers, fetchOneUser};
+
+module.exports={register,login, fetchUsers, fetchOneUser,updateUser};
