@@ -5,7 +5,7 @@ const FixtureModel = require("../models/fixtures");
 const postFixture = asyncHandler(async function (req, res) {
   const { gameweekId, schedule, status, homeTeam, awayTeam } = req.body;
 
-  const matchId = `${homeTeam.teamId}v${awayTeam.teamId}`;
+  const matchId = `${homeTeam.teamId}|${awayTeam.teamId}`;
 
   const verifyMatch = await FixtureModel.find({ matchId: matchId });
 
@@ -84,7 +84,26 @@ const postponeFixture = asyncHandler(async function (req, res) {
   }
 });
 
-const updateFixture = asyncHandler(async function (req, res) {});
+const updateFixture = asyncHandler(async function (req, res) {
+  const { gameweekId, schedule, status, homeTeam, awayTeam } = req.body;
+
+  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+
+  if (match) {
+    const matchId = `${homeTeam.teamId}|${awayTeam.teamId}`;
+
+    match.gameweekId = gameweekId ?? match.gameweekId;
+    match.matchId = matchId ?? match.matchId;
+    match.schedule = schedule ?? match.schedule;
+    match.status = status ?? match.status;
+    match.homeTeam = homeTeam ?? match.homeTeam;
+    match.awayTeam = awayTeam ?? match.awayTeam;
+
+    await match.save();
+
+    res.send("Match updated!");
+  }
+});
 
 const getAllFixtures = asyncHandler(async function (req, res) {
   const matches = await FixtureModel.find();
@@ -114,4 +133,5 @@ module.exports = {
   getAllFixtures,
   getFixture,
   deleteFixture,
+  updateFixture,
 };
