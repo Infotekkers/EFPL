@@ -81,6 +81,11 @@ const updateUser = asyncHandler(async(req,res)=>{
     if(req.body.userName != null){
         res.user.userName = req.body.userName
     }
+    if(req.body.password != null){
+        const salt = await bcrypt.genSalt(10);
+        const newPass = await bcrypt.hash(req.body.password, salt)
+        res.user.password = newPass
+    }
     const updatedUser = await res.user.save();
     res.json(updatedUser);
 })
