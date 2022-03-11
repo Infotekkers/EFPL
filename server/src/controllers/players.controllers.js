@@ -15,25 +15,29 @@ async function addplayers (req,res){
 };
 
 
-// async function updateplayer (req,res){
-//     const { playerName, playerId, position, currentPrice} = req.body;
-//     const player = PlayerModel.find({playerId: req.params.playerId});
-//     const PID = req.params.playerId;
-//     if (!player) res.status(404).send('Player not found'); 
-   
-//         player.collection('players').update({_id: PID}, req.body)
-//            res.send(player)
-   
-   
+async function updateplayer (req,res){
+    const { playerName, playerId, position, currentPrice} = req.body;
+    const player = await PlayerModel
+    .updateOne({ playerId: req.params.playerId}, {
+        $set: {
+            playerName: playerName,
+            position: position,
+            playerId: playerId,
+            currentPrice:currentPrice,
+        }
+    });
+    res.send(player);
    
     
-// };
+};
 
 async function getplayer(req,res){
-    const player = await PlayerModel.findOne({ playerId: req.params.playerId});
+    
+    const players = await PlayerModel.find( {playerId: req.params.playerId});
 
-    res.send(player);
+    res.send(players);
 
+   
 };
 
 
