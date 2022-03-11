@@ -74,31 +74,39 @@ const updateUser = asyncHandler(async(req,res)=>{
         return res.status(404).json({messaage:"No user found"})
     }
     res.user = user
-    
+
+    // change favorite team
     if(req.body.favoriteEplTeamId != null){
         res.user.favoriteEplTeamId = req.body.favoriteEplTeamId
     }
+    // change userName
     if(req.body.userName != null){
         res.user.userName = req.body.userName
     }
+    // change password
     if(req.body.password != null){
         const salt = await bcrypt.genSalt(10);
         const newPass = await bcrypt.hash(req.body.password, salt)
         res.user.password = newPass
     }
+
+    // save changed data to db
     const updatedUser = await res.user.save();
     res.json(updatedUser);
 })
 
+// delete user
 const deleteUser = asyncHandler(async(req,res)=>{
+    // find user in question
     let user;
     user = await User.findById(req.params.id);
     if(user==null){
         return res.status(404).json({messaage:"No user found"})
     }
     res.user = user
+    // delete user
     await res.user.remove()
-    res.json({messaage:"user removed"})
+    res.json({messaage:`user ${user.userName} removed`})
 })
 // reset password
 
