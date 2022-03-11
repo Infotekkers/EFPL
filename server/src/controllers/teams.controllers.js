@@ -1,8 +1,8 @@
 const { collection } = require("../models/Teams");
 const TeamModel = require("../models/Teams");
+const asyncHandler = require("express-async-handler");
 
-
-async function addteam(req,res){
+const addteam = asyncHandler(async(req,res) => {
     const { teamName, id } = req.body;
 
     await new TeamModel ({
@@ -12,20 +12,22 @@ async function addteam(req,res){
     }).save();
     res.send(`${teamName} is added to teams.`);
 
-}
+});
 
 
-async function getteams(req,res){
+const getteams = asyncHandler(async (req,res) =>{
     const team = await TeamModel.find()
     res.send(team);
-}
+});
 
-async function getteam(req,res){
+const getteam = asyncHandler( async(req,res) =>{
+
     const team = await TeamModel.find({teamId: req.body.id});
-    res.send(team);
-}
 
-async function updateteam(req,res){
+    res.send(team);
+});
+
+const updateteam = asyncHandler(async (req,res)=>{
     const { teamName } = req.body;
     const team = await TeamModel
     .updateOne({
@@ -35,7 +37,8 @@ async function updateteam(req,res){
             }
         })
         res.send(team);
-}
+});
+
 module.exports = {
     addteam,
     getteams,
