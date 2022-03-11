@@ -10,4 +10,7 @@ router.patch("/resume/:matchId", fixtureController.resumeFixture);
 router.patch("/end/:matchId", fixtureController.endFixture);
 router.patch("/postpone/:matchId", fixtureController.postponeFixture);
 
+router.get("/", fixtureController.getAllFixtures);
+router.get("/:matchId", fixtureController.getFixture);
+
 module.exports = router;

@@ -84,6 +84,18 @@ async function postponeFixture(req, res) {
 
 async function updateFixture(req, res) {}
 
+async function getAllFixtures(req, res) {
+  const matches = await FixtureModel.find();
+
+  res.send(matches);
+}
+
+async function getFixture(req, res) {
+  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+
+  res.send(match);
+}
+
 module.exports = {
   postFixture,
   startFixture,
@@ -91,4 +103,6 @@ module.exports = {
   resumeFixture,
   endFixture,
   postponeFixture,
+  getAllFixtures,
+  getFixture,
 };
