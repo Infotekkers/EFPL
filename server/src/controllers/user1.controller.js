@@ -1,6 +1,20 @@
 const asyncHandler = require("express-async-handler");
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { Router } = require("express");
+const secret_key = process.env.JWT_SECRET;
+
+// import node mailer
+const nodemailer = require("nodemailer")
+
+const transporter = nodemailer.createTransport({
+    service:process.env.service,
+    auth:{
+        user:process.env.user,
+        pass: process.env.pass
+    }
+});
 
 // Registration
 const register = asyncHandler(async(req, res)=>{
@@ -108,7 +122,40 @@ const deleteUser = asyncHandler(async(req,res)=>{
     await res.user.remove()
     res.json({messaage:`user ${user.userName} removed`})
 })
-// reset password
+// request reset password
+const requestReset = asyncHandler(async(req,res)=>{
+    const {email} = req.body;
+
+    // generate reset token
+    const resetToken = jwt.sign(
+        {
+            data: email,
+        },
+        secret_key,
+        {expiresIn:60 * 60}
+    );
+    const resetUrl = `http://localhost:5000/${resetToken}`;
+
+    const mailOptions = {
+        from:process.env.user,
+        to:"mikealexiv565@gmail.com",
+        subject:"Reset Email via Node",
+        text:`${resetUrl}`,
+    };
+
+    transporter.sendMail(mailOptions, function(error,info){
+        if(error){
+            res.status(400).json({
+                messaage:"could not send reset email"
+            });
+            console.log(error);
+        }else{
+            res.status(200).json({messaage:"Email Sent Successfully"});
+            console.log("email sent: "+ info.response);
+        }
+    });
+
+});
 
 // helper 
 // async  function getUser(req,res,next){
@@ -123,4 +170,4 @@ const deleteUser = asyncHandler(async(req,res)=>{
 //     next();
 // }
 
-module.exports={register,login, fetchUsers, fetchOneUser,updateUser, deleteUser};
+module.exports={register,login, fetchUsers, fetchOneUser,updateUser, deleteUser,requestReset};
