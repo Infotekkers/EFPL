@@ -28,6 +28,7 @@ app.use("/user", user2Router);
 
 // Run populate scripts
 // populate.addTestUser();
+// populate.addTestGameweek();
 
 // Export app
 module.exports = app;

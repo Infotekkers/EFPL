@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Gameweek = require("../models/Gameweek2");
 
 const addTestUser = async () => {
   // Test USER
@@ -113,6 +114,17 @@ const addTestUser = async () => {
   await testUser.save();
 };
 
+const addTestGameweek = async () => {
+  // Test Gameweek
+  const testGameweek = new Gameweek({
+    number: 1,
+    status: "active",
+  });
+
+  await testGameweek.save();
+};
+
 module.exports = {
   addTestUser,
+  addTestGameweek,
 };
