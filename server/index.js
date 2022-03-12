@@ -13,7 +13,7 @@ const connectToDB = require("./src/config/db_config");
 connectToDB();
 
 // Import Routes
-
+const fantasyStatsRouter = require('./src/routes/fantasyStat.routes')
 // Import Middleware
 
 // Add Node Features
@@ -22,6 +22,6 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
 // Add Routes to app
-
+app.use("/fantasyStats", fantasyStatsRouter);
 // Export app
 module.exports = app;
