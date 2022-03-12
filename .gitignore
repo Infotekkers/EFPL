@@ -62,7 +62,6 @@ flutter-user-client/.metadata
 server/node_modules
 server/.env
 server/.vscode
-server/.jest
 
 
 ################# Vue ########################################
