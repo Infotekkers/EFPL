@@ -1,6 +1,7 @@
 # EFPL Express Server
 
 ## File Structure
+
 - **controllers/**:
 - **routes/**:
 - **models/**:
@@ -16,16 +17,20 @@
 EXPRESS_ENV=development
 PORT=5000
 JWT_SECRET=2dcff06eeae972b87f6232d8835beb56
-MONGO_REMOTE_URL= 
-MONGO_LOCAL_URL= 
+MONGO_REMOTE_URL=
+MONGO_LOCAL_URL=
 ```
 
+### Populate /.jest/setEnvVars.js with enviromental variables for testing
+
 ### Start express server
+
 ```
 npm run start
 ```
 
 ### Run tests
+
 ```
 npm test
 ```
