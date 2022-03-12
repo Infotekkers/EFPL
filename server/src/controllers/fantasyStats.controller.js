@@ -16,13 +16,28 @@ const fetchFantasyStat = asyncHandler(async(req,res)=>{
 // get all stats
 const fetchAllFantasyStats = asyncHandler(async(req,res)=>{
     const stats = await Stats2.find();
-    resizeBy.json(stats)
+    res.json(stats);
 })
 
 // add stats
-// const addFantasyStats = asyncHandler(async(req,res)=>{
-    
-// })
+const addFantasyStats = asyncHandler(async(req,res)=>{
+    // create stats
+    const stat = new Stats2({
+        fixtureId:req.body.fixtureId,
+        minutesPlayed:req.body.minutesPlayed,
+        goalsScored:req.body.goalsScored,
+        assists:req.body.assists,
+        yellows:req.body.yellows,
+        reds:req.body.reds,
+        penaltiesMissed:req.body.penaltiesMissed,
+        saves:req.body.saves,
+        fantasyScores:req.body.fantasyScores
+    });
+
+    // save to db
+    const savedStats = await stat.save();
+    res.send(savedStats);
+})
 
 // update stats
 // const updateFantasyStats = asyncHandler(async(req,res)=>{
@@ -30,8 +45,17 @@ const fetchAllFantasyStats = asyncHandler(async(req,res)=>{
 // })
 
 // delete stats
-// const deleteFantasyStats = asyncHandler(async(req,res)=>{
-    
-// })
+const deleteFantasyStats = asyncHandler(async(req,res)=>{
+    let stat;
+    stat = await Stats2.findById(req.params.id);
+    if(user==null){
+        return res.status(404).json({message:"no stat found"})
+    }
+    res.stat = stat;
 
-module.exports={fetchFantasyStat, fetchAllFantasyStats};
+    // delete stat
+    await res.stat.remove();
+    res.json({message:`stat for ${stat.fixtureId} removed`})
+})
+
+module.exports={fetchFantasyStat, fetchAllFantasyStats, addFantasyStats, deleteFantasyStats};
