@@ -22,6 +22,9 @@ const overview = asyncHandler(async (_, res) => {
         minutesPlayed: { $sum: "$score.minutesPlayed" },
       },
     },
+    {
+      $sort: { name: 1 },
+    },
   ]);
 
   // Get the highest achiever in each stat category
@@ -57,7 +60,7 @@ const goals = asyncHandler(async (_, res) => {
       },
     },
     // Sort in ascending order
-    { $sort: { goals: -1 } },
+    { $sort: { goals: -1, name: 1 } },
   ]).limit(10);
 
   res.status(200).json(result);
@@ -75,8 +78,8 @@ const assists = asyncHandler(async (_, res) => {
         assists: { $sum: "$score.assists" },
       },
     },
-    // Sort in ascending order
-    { $sort: { goals: -1 } },
+    // Sort in descending order then ascending order of name
+    { $sort: { assists: -1, name: 1 } },
   ]).limit(10);
 
   res.status(200).json(result);
@@ -94,8 +97,8 @@ const cleanSheets = asyncHandler(async (_, res) => {
         cleanSheets: { $sum: "$score.cleanSheets" },
       },
     },
-    // Sort in ascending order
-    { $sort: { goals: -1 } },
+    // Sort in descending order then ascending order of name
+    { $sort: { cleanSheets: -1, name: 1 } },
   ]).limit(10);
 
   res.status(200).json(result);
@@ -113,8 +116,8 @@ const reds = asyncHandler(async (_, res) => {
         reds: { $sum: "$score.reds" },
       },
     },
-    // Sort in ascending order
-    { $sort: { goals: -1 } },
+    // Sort in descending order then ascending order of name
+    { $sort: { reds: -1, name: 1 } },
   ]).limit(10);
 
   res.status(200).json(result);
@@ -132,8 +135,8 @@ const yellows = asyncHandler(async (_, res) => {
         yellows: { $sum: "$score.yellows" },
       },
     },
-    // Sort in ascending order
-    { $sort: { goals: -1 } },
+    // Sort in descending order then ascending order of name
+    { $sort: { yellows: -1, name: 1 } },
   ]).limit(10);
 
   res.status(200).json(result);
@@ -151,8 +154,8 @@ const saves = asyncHandler(async (_, res) => {
         saves: { $sum: "$score.saves" },
       },
     },
-    // Sort in ascending order
-    { $sort: { goals: -1 } },
+    // Sort in descending order then ascending order of name
+    { $sort: { saves: -1, name: 1 } },
   ]).limit(10);
 
   res.status(200).json(result);
@@ -170,8 +173,8 @@ const minutesPlayed = asyncHandler(async (_, res) => {
         minutesPlayed: { $sum: "$score.minutesPlayed" },
       },
     },
-    // Sort in ascending order
-    { $sort: { goals: -1 } },
+    // Sort in descending order then ascending order of name
+    { $sort: { minutesPlayed: -1, name: 1 } },
   ]).limit(10);
 
   res.status(200).json(result);
