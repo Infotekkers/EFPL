@@ -49,10 +49,10 @@ const updateGameWeekStatus = asyncHandler(async (req, res, next) => {
 
   if (updated) {
     //   get updated info
-    const updated_gameWeek = await GameWeek.findById(gameWeekId);
+    const updatedGameWeek = await GameWeek.findById(gameWeekId);
 
     // send response - with updated info
-    res.status(200).json(updated_gameWeek);
+    res.status(200).json(updatedGameWeek);
   } else {
     res.status(404).json({
       message: "Game week not found",
@@ -82,10 +82,10 @@ const updateGameWeekDeadline = asyncHandler(async (req, res) => {
 
   if (updated) {
     //   get updated info
-    const updated_gameWeek = await GameWeek.findById(gameWeekId);
+    const updatedGameWeek = await GameWeek.findById(gameWeekId);
 
     // send response - with updated info
-    res.status(200).json(updated_gameWeek);
+    res.status(200).json(updatedGameWeek);
   } else {
     res.status(404).json({
       message: "Game week not found",
