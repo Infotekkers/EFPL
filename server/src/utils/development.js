@@ -90,16 +90,15 @@ function getUnderline(data, underline) {
 const devAddGameWeekRoute = asyncHandler(async (req, res) => {
   if (ENV === "development") {
     // get data from body
-    const { new_game_week_data } = req.body;
+    const { newGameWeekData } = req.body;
+
+    console.log(newGameWeekData);
 
     // create data from model
-    const new_game_week = await GameWeek.create(new_game_week_data);
-    // const game_week = await GameWeek.findById(new_game_week["id"])
-    //   // .select(""
-    //   .select("-__v");
+    const newGameWeek = await GameWeek.create(newGameWeekData);
 
     // send response
-    res.status(201).json(new_game_week);
+    res.status(201).json(newGameWeek);
 
     // print dev warning
     printConsole(

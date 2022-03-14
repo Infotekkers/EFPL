@@ -1,5 +1,3 @@
-const { printConsole } = require("../utils/development");
-
 function processErrorMessage(errorObject) {
   /*
     ================================================================================================

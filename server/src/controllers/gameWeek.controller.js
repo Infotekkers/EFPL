@@ -6,13 +6,13 @@ const GameWeek = require("../models/GameWeek");
 // Get game week status by ID
 const getGameWeek = asyncHandler(async (req, res) => {
   // get required game week ID from URL Params
-  const game_week_id = req.params.Id;
+  const gameWeekId = req.params.Id;
 
   // find the game week
-  const game_week = await GameWeek.findById(game_week_id);
+  const gameWeek = await GameWeek.findById(gameWeekId);
 
-  game_week
-    ? res.status(200).json(game_week)
+  gameWeek
+    ? res.status(200).json(gameWeek)
     : res.status(404).json({
         message: "Game week not found",
         status: 404,
@@ -24,35 +24,35 @@ const getGameWeek = asyncHandler(async (req, res) => {
 // Get all game weeks
 const getAllGameWeeks = asyncHandler(async (req, res) => {
   // Fetch all game weeks
-  const all_game_weeks = await GameWeek.find();
+  const allGameWeeks = await GameWeek.find();
 
   // send response - all game weeks
-  res.status(200).json(all_game_weeks);
+  res.status(200).json(allGameWeeks);
 });
 
 // update status
 const updateGameWeekStatus = asyncHandler(async (req, res, next) => {
   // get id from URL Params
-  const game_week_id = req.params.Id;
+  const gameWeekId = req.params.Id;
 
   // get update data from body
-  const { update_info } = req.body;
+  const { updateInfo } = req.body;
 
   //   Check update status value
   const updated = await GameWeek.findByIdAndUpdate(
-    game_week_id,
+    gameWeekId,
     {
-      status: update_info.status,
+      status: updateInfo.status,
     },
     { runValidators: true }
   );
 
   if (updated) {
     //   get updated info
-    const updated_game_week = await GameWeek.findById(game_week_id);
+    const updated_gameWeek = await GameWeek.findById(gameWeekId);
 
     // send response - with updated info
-    res.status(200).json(updated_game_week);
+    res.status(200).json(updated_gameWeek);
   } else {
     res.status(404).json({
       message: "Game week not found",
@@ -64,17 +64,17 @@ const updateGameWeekStatus = asyncHandler(async (req, res, next) => {
 // update deadline
 const updateGameWeekDeadline = asyncHandler(async (req, res) => {
   // get id from URL Params
-  const game_week_id = req.params.Id;
+  const gameWeekId = req.params.Id;
 
   // get update data from body
-  const { update_info } = req.body;
+  const { updateInfo } = req.body;
 
   // Get game week deadline
 
   const updated = await GameWeek.findByIdAndUpdate(
-    game_week_id,
+    gameWeekId,
     {
-      startTimestamp: update_info.startTimestamp,
+      startTimestamp: updateInfo.startTimestamp,
     },
 
     { runValidators: true }
@@ -82,10 +82,10 @@ const updateGameWeekDeadline = asyncHandler(async (req, res) => {
 
   if (updated) {
     //   get updated info
-    const updated_game_week = await GameWeek.findById(game_week_id);
+    const updated_gameWeek = await GameWeek.findById(gameWeekId);
 
     // send response - with updated info
-    res.status(200).json(updated_game_week);
+    res.status(200).json(updated_gameWeek);
   } else {
     res.status(404).json({
       message: "Game week not found",

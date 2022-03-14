@@ -10,7 +10,7 @@ afterAll(async () => {
   mongoose.connection.close();
 });
 describe("Testing Game week routes ", () => {
-  let game_week_id;
+  let gameWeekId;
   const data = {
     gameWeekNumber: 2,
     startTimestamp: 1646724092556,
@@ -19,12 +19,9 @@ describe("Testing Game week routes ", () => {
 
   //   Add new game week - Error Scenario
   test("POST /gameWeek/dev/add --Error", async () => {
-    // Clear DB
-    await GameWeek.deleteMany();
-
     // Send request
     const res = await req.post("/gameWeek/dev/add").send({
-      new_game_week_data: {
+      newGameWeekData: {
         gameWeekNumber: "",
         startTimestamp: 1646724092556,
         status: "Active",
@@ -43,10 +40,10 @@ describe("Testing Game week routes ", () => {
 
     // Send request
     const res = await req.post("/gameWeek/dev/add").send({
-      new_game_week_data: data,
+      newGameWeekData: data,
     });
 
-    game_week_id = res.body._id;
+    gameWeekId = res.body._id;
 
     // Expect response
     expect(res.statusCode).toBe(201);
@@ -54,10 +51,10 @@ describe("Testing Game week routes ", () => {
     expect(res.body).toMatchObject(data);
   });
 
-  //   Get Game week by id - Success Scenario
+  // Get Game week by id - Success Scenario
   test("GET /gameWeek/info/id/:ID", async () => {
     // Send request
-    const res = await req.get(`/gameWeek/info/id/${game_week_id}`);
+    const res = await req.get(`/gameWeek/info/id/${gameWeekId}`);
 
     expect(res.statusCode).toBe(200);
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
@@ -86,13 +83,12 @@ describe("Testing Game week routes ", () => {
   test("PATCH /update/status/id/:Id", async () => {
     // Send request
     const res = await req
-      .patch(`/gameWeek/update/status/id/${game_week_id}`)
+      .patch(`/gameWeek/update/status/id/${gameWeekId}`)
       .send({
-        update_info: {
+        updateInfo: {
           status: "TBD",
         },
       });
-    // console.log(res);
     expect(res.statusCode).toBe(200);
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
     expect(res.body.status).toBe("TBD");
@@ -100,16 +96,14 @@ describe("Testing Game week routes ", () => {
 
   //   Update game week status - Error Scenario
   test("PATCH /update/status/id/:Id", async () => {
-    console.log(game_week_id);
     // Send request
     const res = await req
-      .patch(`/gameWeek/update/status/id/${game_week_id}`)
+      .patch(`/gameWeek/update/status/id/${gameWeekId}`)
       .send({
-        update_info: {
+        updateInfo: {
           status: "NOTValid",
         },
       });
-    // console.log(res);
     expect(res.statusCode).toBe(422);
   });
 
@@ -117,13 +111,12 @@ describe("Testing Game week routes ", () => {
   test("PATCH /update/deadline/id/:Id", async () => {
     // Send request
     const res = await req
-      .patch(`/gameWeek/update/deadline/id/${game_week_id}`)
+      .patch(`/gameWeek/update/deadline/id/${gameWeekId}`)
       .send({
-        update_info: {
+        updateInfo: {
           startTimestamp: "",
         },
       });
-    // console.log(res);
     expect(res.statusCode).toBe(422);
   });
 
@@ -131,13 +124,12 @@ describe("Testing Game week routes ", () => {
   test("PATCH /update/deadline/id/:Id", async () => {
     // Send request
     const res = await req
-      .patch(`/gameWeek/update/deadline/id/${game_week_id}`)
+      .patch(`/gameWeek/update/deadline/id/${gameWeekId}`)
       .send({
-        update_info: {
+        updateInfo: {
           startTimestamp: "160",
         },
       });
-    // console.log(res);
     expect(res.statusCode).toBe(200);
   });
 
@@ -145,10 +137,10 @@ describe("Testing Game week routes ", () => {
   test("POST /gameWeek/dev/add --Error", async () => {
     // Send request
     const res = await req.post("/gameWeek/dev/add").send({
-      new_game_week_data: data,
+      newGameWeekData: data,
     });
 
-    game_week_id = res.body._id;
+    gameWeekId = res.body._id;
 
     // Expect response
     expect(res.statusCode).toBe(422);
