@@ -27,9 +27,6 @@ app.use(rateLimiter);
 
 // Add Routes to app
 app.use("/gameWeek", gameWeekRoutes);
-app.get("/rate", (req, res) => {
-  res.send("Done");
-});
 
 // Add Middleware
 app.use(errorMiddleware);
