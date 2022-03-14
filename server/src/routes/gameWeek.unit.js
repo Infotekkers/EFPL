@@ -62,7 +62,7 @@ describe("Testing Game week routes ", () => {
   });
 
   //   Get Game week by id - Error Scenario
-  test("GET /gameWeek/info/id/:ID", async () => {
+  test("GET /gameWeek/info/id/:ID --Error", async () => {
     // Send request
     const res = await req.get(`/gameWeek/info/id/9999`);
 
@@ -80,7 +80,7 @@ describe("Testing Game week routes ", () => {
   });
 
   //   Update game week status - Success Scenario
-  test("PATCH /update/status/id/:Id", async () => {
+  test("PATCH /update/status/id/:Id --Success", async () => {
     // Send request
     const res = await req
       .patch(`/gameWeek/update/status/id/${gameWeekId}`)
@@ -95,7 +95,7 @@ describe("Testing Game week routes ", () => {
   });
 
   //   Update game week status - Error Scenario
-  test("PATCH /update/status/id/:Id", async () => {
+  test("PATCH /update/status/id/:Id --Error", async () => {
     // Send request
     const res = await req
       .patch(`/gameWeek/update/status/id/${gameWeekId}`)
@@ -108,7 +108,7 @@ describe("Testing Game week routes ", () => {
   });
 
   //   Update Deadline - Error Scenario
-  test("PATCH /update/deadline/id/:Id", async () => {
+  test("PATCH /update/deadline/id/:Id --Error", async () => {
     // Send request
     const res = await req
       .patch(`/gameWeek/update/deadline/id/${gameWeekId}`)
@@ -121,7 +121,7 @@ describe("Testing Game week routes ", () => {
   });
 
   //   Update Deadline - Success Scenario
-  test("PATCH /update/deadline/id/:Id", async () => {
+  test("PATCH /update/deadline/id/:Id --Success", async () => {
     // Send request
     const res = await req
       .patch(`/gameWeek/update/deadline/id/${gameWeekId}`)
