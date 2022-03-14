@@ -25,11 +25,7 @@ function processErrorMessage(errorObject) {
   else if (errorObject.message.includes("Custom Error - Maximum Value")) {
     errorObject.message = errorObject.message.split("*:")[1];
   }
-  //   Max Value
-  else if (errorObject.message.includes("Custom Error - Required Value")) {
-    errorObject.message = errorObject.message.split("*:")[1];
-  }
-  //   Unique Error
+//  Unique Error
   else if (
     errorObject.message.includes("E11000 duplicate key error collection")
   ) {
