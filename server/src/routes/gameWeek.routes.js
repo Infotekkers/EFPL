@@ -21,10 +21,10 @@ router.get("/info/id/:Id", gameWeekController.getGameWeek);
 router.get("/info/all", gameWeekController.getAllGameWeeks);
 
 // Update Game Week Status by ID
-router.post("/update/status/id/:Id", gameWeekController.updateGameWeekStatus);
+router.patch("/update/status/id/:Id", gameWeekController.updateGameWeekStatus);
 
 // Update Game Week Deadline by ID
-router.post(
+router.patch(
   "/update/deadline/id/:Id",
   gameWeekController.updateGameWeekDeadline
 );

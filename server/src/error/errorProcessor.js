@@ -51,6 +51,9 @@ function processErrorMessage(errorObject) {
 
     errorObject.message = `Value '${errorValue[1]}' not allowed for ${errorValue[3]}`;
   }
+
+  // Invalid Id sent
+
   return errorObject;
 }
 

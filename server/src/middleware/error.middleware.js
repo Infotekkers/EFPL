@@ -7,7 +7,7 @@ const errorHandler = (err, req, res, next) => {
   // get error json
   const errorObject = {
     message: err.message,
-    status: err.status ? err.status : 403,
+    status: err.status ? err.status : 422,
     stack: process.env.EXPRESS_ENV === "development" ? err.stack : null,
   };
 

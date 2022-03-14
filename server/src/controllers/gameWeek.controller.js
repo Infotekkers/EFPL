@@ -11,8 +11,14 @@ const getGameWeek = asyncHandler(async (req, res) => {
   // find the game week
   const game_week = await GameWeek.findById(game_week_id);
 
+  game_week
+    ? res.status(200).json(game_week)
+    : res.status(404).json({
+        message: "Game week not found",
+        status: 404,
+      });
+
   // send response
-  res.status(200).json(game_week);
 });
 
 // Get all game weeks
@@ -33,7 +39,7 @@ const updateGameWeekStatus = asyncHandler(async (req, res, next) => {
   const { update_info } = req.body;
 
   //   Check update status value
-  await GameWeek.findByIdAndUpdate(
+  const updated = await GameWeek.findByIdAndUpdate(
     game_week_id,
     {
       status: update_info.status,
@@ -41,11 +47,18 @@ const updateGameWeekStatus = asyncHandler(async (req, res, next) => {
     { runValidators: true }
   );
 
-  //   get updated info
-  const updated_game_week = await GameWeek.findById(game_week_id);
+  if (updated) {
+    //   get updated info
+    const updated_game_week = await GameWeek.findById(game_week_id);
 
-  // send response - with updated info
-  res.status(200).send(updated_game_week);
+    // send response - with updated info
+    res.status(200).json(updated_game_week);
+  } else {
+    res.status(404).json({
+      message: "Game week not found",
+      status: 404,
+    });
+  }
 });
 
 // update deadline
@@ -58,22 +71,27 @@ const updateGameWeekDeadline = asyncHandler(async (req, res) => {
 
   // Get game week deadline
 
-  //   Check update status value
-  if (update_info.startTimestamp) {
-    // Update the game week in db
-    await GameWeek.findByIdAndUpdate(game_week_id, {
+  const updated = await GameWeek.findByIdAndUpdate(
+    game_week_id,
+    {
       startTimestamp: update_info.startTimestamp,
-    });
+    },
 
+    { runValidators: true }
+  );
+
+  if (updated) {
     //   get updated info
     const updated_game_week = await GameWeek.findById(game_week_id);
 
     // send response - with updated info
-    res.status(200).send(updated_game_week);
+    res.status(200).json(updated_game_week);
+  } else {
+    res.status(404).json({
+      message: "Game week not found",
+      status: 404,
+    });
   }
-  throw new Error(
-    `Invalid start time '${update_info.startTimestamp}' for Game week.`
-  );
 });
 
 module.exports = {

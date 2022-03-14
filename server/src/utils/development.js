@@ -94,9 +94,12 @@ const devAddGameWeekRoute = asyncHandler(async (req, res) => {
 
     // create data from model
     const new_game_week = await GameWeek.create(new_game_week_data);
+    // const game_week = await GameWeek.findById(new_game_week["id"])
+    //   // .select(""
+    //   .select("-__v");
 
     // send response
-    res.status(400).json(new_game_week);
+    res.status(201).json(new_game_week);
 
     // print dev warning
     printConsole(
