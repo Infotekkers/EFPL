@@ -1,15 +1,9 @@
 // Import Libraries
 const express = require("express");
-require("dotenv").config();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
 // Development Supports
-const { printConsole } = require("./src/utils/development");
-const populate = require("./src/utils/populate"); // eslint-disable-line
-
-// Import ENV Variables
-const PORT = process.env.PORT || 3000;
 
 // Create express app
 const app = express();
@@ -35,15 +29,5 @@ app.use("/user", user2Router);
 // Run populate scripts
 // populate.addTestUser();
 
-// Run Node app
-app.listen(PORT, () =>
-  printConsole(
-    { data: `Server is live @${PORT}` },
-    { printLocation: "index.js:28" },
-    {
-      bgColor: "bgGreen",
-      textColor: "black",
-      underline: true,
-    }
-  )
-);
+// Export app
+module.exports = app;
