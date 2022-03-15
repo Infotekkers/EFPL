@@ -41,7 +41,26 @@ const register = asyncHandler(async(req, res)=>{
    })
    // save user to db
    const savedUser = await user.save();
-   res.send(savedUser);
+
+   // fetch id
+   const userId = await user._id;
+   
+   // generate token 
+   const token = jwt.sign({
+       data:userId,
+   },
+   secret_key,{
+       expiresIn:"1h"
+   }
+   );
+
+   // return token  with user
+   res.status(201).json({
+       token:token,
+       name:user.userName,
+       email:user.email,
+   })
+   
 
 
 })
@@ -55,7 +74,24 @@ const login = asyncHandler(async(req,res)=>{
   if(user){
       const passwordCheck = await bcrypt.compare(req.body.password,user.password);
       if(passwordCheck){
-          res.send("logged in");
+        // fetch id
+   const userId = await user._id;
+   
+   // generate token 
+   const token = jwt.sign({
+       data:userId,
+   },
+   secret_key,{
+       expiresIn:"1h"
+   }
+   );
+
+   // return token  with user
+   res.status(201).json({
+       token:token,
+       name:user.userName,
+       email:user.email,
+   })
       }
       res.send("invalid email - password combination");
   } res.send("invalid email - password combination");
@@ -178,18 +214,5 @@ const resetPass = asyncHandler(async(req,res)=>{
     res.json({message:"password reset successfully"});
 
 })
-
-// helper 
-// async  function getUser(req,res,next){
-//     let user;
-//     try{user = await User.findById(req.params.id);
-//     if(user==null){
-//         return res.status(404).json({messaage:"No user found"})
-//     }}catch(err){
-//         return res.status(500).json({messaage:err.messaage})
-//     }
-//     res.user = user
-//     next();
-// }
 
 module.exports={register,login, fetchUsers, fetchOneUser,updateUser, deleteUser,requestReset,resetPass};
