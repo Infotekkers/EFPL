@@ -9,7 +9,7 @@ const req = supertest(app);
 
 describe("Testing User ",()=>{
 
-    // Register Test
+    // Register Test Success
     test("POST /user1/register SUCCESS", async()=>{
         const reqBody = {
             
@@ -34,7 +34,7 @@ describe("Testing User ",()=>{
         
     });
 
-    // Login Test
+    // Login Test Success
      test("POST /user1/login SUCCESS", async()=>{
         const reqBody = {
             "email":"chatadgaeonia@gmail.com",
@@ -50,6 +50,25 @@ describe("Testing User ",()=>{
            // expect response
         expect(res.statusCode).toBe(201);
         expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+
+     });
+     // Login Test Failure
+     test("POST /user1/login Failure", async()=>{
+        const reqBody = {
+            "email":"fhatadgaeonia@gmail.com",
+            "password":"12345679@gAl",
+        };
+
+        // clear db 
+        // await User.deleteMany();
+
+         // send request
+         const res = await req.post("/user1/login").send(reqBody);
+
+           // expect response
+        expect(res.statusCode).toBe(400);
+        expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+        expect(res.body).toMatchObject({message:"invalid email - password combination"});
 
      })
     test("Close DB", async()=>{

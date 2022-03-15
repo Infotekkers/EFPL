@@ -93,8 +93,8 @@ const login = asyncHandler(async(req,res)=>{
        email:user.email,
    })
       }
-      res.send("invalid email - password combination");
-  } res.send("invalid email - password combination");
+      res.status(400).json({message:"invalid email - password combination"});
+  } res.status(400).json({message:"invalid email - password combination"});
 
     
 })
