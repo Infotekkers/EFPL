@@ -28,23 +28,27 @@ const startFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
   if (match?.status === "scheduled") {
-    match.status = "live";
+    match.status = "liveFH"; // First half
     match
       .save()
       .then(() => res.send("Match is live."))
       .catch(() => res.status(500).send("Try again!"));
+  } else {
+    res.status(400).send("Match hasn't been scheduled");
   }
 });
 
 const pauseFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
-  if (match?.status === "live") {
+  if (match?.status === "liveFH") {
     match.status = "HT";
     match
       .save()
       .then(() => res.send("Half Time!"))
       .catch(() => res.status(500).send("Try again!"));
+  } else {
+    res.status(400).send("Match hasn't started");
   }
 });
 
@@ -52,23 +56,27 @@ const resumeFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
   if (match?.status === "HT") {
-    match.status = "live";
+    match.status = "liveSH"; // Second half
     match
       .save()
       .then(() => res.send("Match resumed."))
       .catch(() => res.status(500).send("Try again!"));
+  } else {
+    res.status(400).send("Match can't be resumed.");
   }
 });
 
 const endFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
-  if (match?.status === "live") {
+  if (match?.status === "liveSH") {
     match.status = "FT";
     match
       .save()
       .then(() => res.send("Full time!"))
       .catch(() => res.status(500).send("Try again!"));
+  } else {
+    res.status(400).send("Match can't be ended.");
   }
 });
 
@@ -81,6 +89,8 @@ const postponeFixture = asyncHandler(async function (req, res) {
       .save()
       .then(() => res.send("Match postponed!"))
       .catch(() => res.status(500).send("Try again!"));
+  } else {
+    res.status(400).send("Match is ongoing.");
   }
 });
 
@@ -102,6 +112,8 @@ const updateFixture = asyncHandler(async function (req, res) {
     await match.save();
 
     res.send("Match updated!");
+  } else {
+    res.status(400).send("Match with provided matchid doesn't exist.");
   }
 });
 
@@ -114,13 +126,17 @@ const getAllFixtures = asyncHandler(async function (req, res) {
 const getFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
-  res.send(match);
+  match
+    ? res.send(match)
+    : res.status(400).send("Fixture with provided matchid doesn't exist.");
 });
 
 const deleteFixture = asyncHandler(async function (req, res) {
-  await FixtureModel.deleteOne({ matchId: req.params.matchId });
+  await FixtureModel.deleteOne({ matchId: req.params.matchId }).then(() => {
+    return res.send("Match deleted from database.");
+  });
 
-  res.send("Match deleted from database.");
+  res.status(400).send("Match with provided matchid doesn't exist");
 });
 
 module.exports = {
