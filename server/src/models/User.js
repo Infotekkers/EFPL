@@ -30,10 +30,7 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true, validate:[isEmail,"input valid email"]},
   teamName: { type: String, required: true },
   country: String,
-  favouriteEplTeamId: { type: String, default: "" },
-  availableChips: { type: [String], default: ["BB", "WC", "TC", "FH"] },
-  fantasyLeagues: { type: [fantasyLeaguesSchema], default: [] },
-  team: [teamSchema],
+  
 });
 userSchema.pre("save", async function(next){
   const salt = await bcrypt.genSalt();
