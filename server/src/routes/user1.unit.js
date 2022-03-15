@@ -8,20 +8,20 @@ const req = supertest(app);
 
 
 describe("Testing User ",()=>{
+
+    // Register Test
     test("POST /user1/register SUCCESS", async()=>{
         const reqBody = {
             
                 "userName":"wechdad",
-                "email":"fatadgaeonia@gmail.com",
+                "email":"chatadgaeonia@gmail.com",
                 "password":"12345679@gAl",
                 "teamName":"arrimish",
-                "country":"Ethiopia"
+                "country":"bEthiopia"
             
             };
         // clear db 
         await User.deleteMany();
-
-        // reqBody.userId = String((await User.findOne()._id));
 
         // send request
         const res = await req.post("/user1/register").send(reqBody);
@@ -33,7 +33,25 @@ describe("Testing User ",()=>{
     
         
     });
-    // test("POST")
+
+    // Login Test
+     test("POST /user1/login SUCCESS", async()=>{
+        const reqBody = {
+            "email":"chatadgaeonia@gmail.com",
+            "password":"12345679@gAl",
+        };
+
+        // clear db 
+        // await User.deleteMany();
+
+         // send request
+         const res = await req.post("/user1/login").send(reqBody);
+
+           // expect response
+        expect(res.statusCode).toBe(201);
+        expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+
+     })
     test("Close DB", async()=>{
         mongoose.connection.close();
     })
