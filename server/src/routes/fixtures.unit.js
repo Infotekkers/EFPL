@@ -31,13 +31,6 @@ describe("Fixture status updates", () => {
     expect(res.text).toBe("Match is live!");
   });
 
-  test("PATCH /fixtures/start/:matchId Error: Fixture doesn't exist.🔴", async () => {
-    const res = await req.patch("/fixtures/start/<>");
-
-    expect(res.statusCode).toBe(404);
-    expect(res.text).toBe("Match doesn't exist!");
-  });
-
   test("Patch /fixtures/start/:matchId Error: Fixture status not 'scheduled'.🔴", async () => {
     const match = await Fixture.findOne({ matchId });
     match.status = "liveFH";
@@ -62,14 +55,7 @@ describe("Fixture status updates", () => {
     expect(res.text).toBe("Half Time!");
   });
 
-  test("PATCH /fixtures/pause/:matchId Error: Fixture doesn't exist.🔴", async () => {
-    const res = await req.patch("/fixtures/pause/<>");
-
-    expect(res.statusCode).toBe(404);
-    expect(res.text).toBe("Match doesn't exist!");
-  });
-
-  test("Patch /fixtures/pause/:matchId Error: Fixture status not 'scheduled'.🔴", async () => {
+  test("Patch /fixtures/pause/:matchId Error: Fixture status not 'liveFH'.🔴", async () => {
     const res = await req.patch(`/fixtures/pause/${matchId}`);
 
     expect(res.statusCode).toBe(400);
@@ -87,13 +73,6 @@ describe("Fixture status updates", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.text).toBe("Match resumed!");
-  });
-
-  test("PATCH /fixtures/resume/:matchId Error: Fixture doesn't exist.🔴", async () => {
-    const res = await req.patch("/fixtures/resume/<>");
-
-    expect(res.statusCode).toBe(404);
-    expect(res.text).toBe("Match doesn't exist!");
   });
 
   test("PATCH /fixtures/resume/:matchId Error: Fixture status not 'HT'.🔴", async () => {
@@ -120,14 +99,7 @@ describe("Fixture status updates", () => {
     expect(res.text).toBe("Full time!");
   });
 
-  test("PATCH /fixtures/end/:matchId Error: Fixture doesn't exist.🔴", async () => {
-    const res = await req.patch("/fixtures/end/<>");
-
-    expect(res.statusCode).toBe(404);
-    expect(res.text).toBe("Match doesn't exist!");
-  });
-
-  test("PATCH /fixtures/end/:matchId Error: Fixture status not 'LiveSH'.🔴", async () => {
+  test("PATCH /fixtures/end/:matchId Error: Fixture status not 'liveSH'.🔴", async () => {
     const res = await req.patch(`/fixtures/end/${matchId}`);
 
     expect(res.statusCode).toBe(400);
@@ -143,13 +115,6 @@ describe("Fixture status updates", () => {
     expect(res.text).toBe("Match postponed!");
   });
 
-  test("PATCH /fixtures/postpone/:matchId Error: Fixture doesn't exist.🔴", async () => {
-    const res = await req.patch("/fixtures/postpone/<>");
-
-    expect(res.statusCode).toBe(404);
-    expect(res.text).toBe("Match doesn't exist!");
-  });
-
   test("PATCH /fixtures/end/:matchId Success: Fixture has been started.🔴", async () => {
     const match = await Fixture.findOne({ matchId });
     match.status = "liveFH";
@@ -159,5 +124,18 @@ describe("Fixture status updates", () => {
 
     expect(res.statusCode).toBe(400);
     expect(res.text).toBe("Match is ongoing!");
+  });
+
+  /***********************************************************/
+  // Fixture doesn't exist
+  test("PATCH /fixtures/(start, pause, resume, postpone))/:matchId Error: Fixture doesn't exist.🔴", async () => {
+    let res;
+
+    for (const route of ["start", "pause", "resume", "end", "postpone"]) {
+      res = await req.patch(`/fixtures/${route}/<>`);
+
+      expect(res.statusCode).toBe(404);
+      expect(res.text).toBe("Match doesn't exist!");
+    }
   });
 });
