@@ -1,5 +1,3 @@
-const expressAsyncHandler = require("express-async-handler");
-
 // TODO: Check if multipliers are valid
 const validateTeam = (team, availableChips) => {
   let teamBudget = 0;
