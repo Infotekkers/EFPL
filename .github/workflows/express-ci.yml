@@ -5,12 +5,14 @@ on:
     branches:
       - main
       - master
+      - uat
     paths:
       - "server/**"
   pull_request:
     branches:
       - main
       - master
+      - uat
     paths:
       - "server/**"
 
