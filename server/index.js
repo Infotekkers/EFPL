@@ -11,6 +11,7 @@ const connectToDB = require("./src/config/db_config");
 connectToDB();
 
 // Import Routes
+const fantasyStatsRouter = require('./src/routes/fantasyStat.routes')
 const user1Router = require("./src/routes/user1.route");
 const user2Router = require("./src/routes/user2.route");
 const fixtures = require("./src/routes/fixtures.routes");
@@ -29,6 +30,7 @@ const rateLimiter = require("./src/config/rate_config");
 app.use(rateLimiter);
 
 // Add Routes to app
+app.use("/fantasyStats", fantasyStatsRouter);
 app.use("/user1",user1Router);
 app.use("/user", user2Router);
 
