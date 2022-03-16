@@ -5,23 +5,41 @@ const validateTeam = require("../utils/validators").validateTeam;
 const pointDeductor = require("../utils/helpers").pointDeductor;
 
 const transfer = asyncHandler(async (req, res) => {
+  // Destructure request body
   const { userId, incomingTeam } = req.body;
 
   // Fetch active gameweek
   let activeGameweek = await Gameweek.findOne({ status: "active" }).exec();
   activeGameweek = activeGameweek.number;
 
+  // Fetch User Details
+  const user = await User.findById(userId).exec();
+  let activeTeam = user.team[activeGameweek - 1];
+
   // Validate team
-  const [isTeamValid, errorType] = validateTeam(incomingTeam);
+  const [isTeamValid, errorType] = validateTeam(
+    incomingTeam,
+    user.availableChips
+  );
 
   // Save team || Send err
   if (isTeamValid === true) {
-    // Fetch User Details
-    const user = await User.findById(userId).exec();
-    let activeTeam = user.team[activeGameweek - 1];
-
     // Calculate deduction
-    const deduction = pointDeductor(activeTeam, incomingTeam);
+    const [deduction, transfersMade] = pointDeductor(activeTeam, incomingTeam);
+
+    // Deduct free transfer
+    activeTeam.freeTransers =
+      activeTeam.freeTransers < transfersMade
+        ? 0
+        : activeTeam.freeTransers - transfersMade;
+
+    // Remove active chips from available chips
+    if (incomingTeam.activeChip) {
+      const remainingChips = user.availableChips.filter(
+        (word) => word !== incomingTeam.activeChip
+      );
+      await User.findByIdAndUpdate(userId, { availableChips: remainingChips });
+    }
 
     // Save deduction and incomingTeam to DB
     activeTeam = incomingTeam;

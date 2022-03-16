@@ -45,6 +45,7 @@ app.use("/user", user2Router);
 // Run populate scripts
 // populate.addTestPlayer();
 // populate.addTestUser();
+// populate.addTestGameweek();
 
 // Add Middleware
 app.use(errorMiddleware);
