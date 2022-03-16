@@ -67,8 +67,6 @@ const addTestPlayer = async () => {
   await testPlayer3.save();
 };
 
-const User = require("../models/User");
-
 const addTestUser = async () => {
   // Test USER
   const testUser = new User({
