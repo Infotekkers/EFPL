@@ -1,5 +1,3 @@
-const expressAsyncHandler = require("express-async-handler");
-
 // TODO: Validate user team
 const validateTeam = (team) => {
   // Three player limit
