@@ -204,7 +204,7 @@ const resetPass = asyncHandler(async (req, res) => {
   console.log(updateValue);
 
   // update item
-  const user = await User.updateOne({ email }, { $set: updateValue });
+  await User.updateOne({ email }, { $set: updateValue });
   res.json({ message: "password reset successfully" });
 });
 
