@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const { isEmail, isStrongPassword } = require("validator");
 
 const fantasyLeaguesSchema = mongoose.Schema({
   leagueId: { type: Number, required: true },
@@ -27,8 +29,8 @@ const teamSchema = mongoose.Schema({
 
 const userSchema = mongoose.Schema({
   userName: { type: String, required: true },
-  password: { type: String, required: true },
-  email: { type: String, required: true },
+  password: { type: String,minlength:8, required: true,validate:[isStrongPassword, "minimum 8 characters,1uppercase,1lowercase,symbol&number"] },
+  email: { type: String, required: true, validate:[isEmail,"input valid email"]},
   teamName: { type: String, required: true },
   country: String,
   favouriteEplTeamId: { type: String, default: "" },
@@ -36,5 +38,9 @@ const userSchema = mongoose.Schema({
   fantasyLeagues: { type: [fantasyLeaguesSchema], default: [] },
   team: [teamSchema],
 });
+userSchema.pre("save", async function(next){
+  const salt = await bcrypt.genSalt();
+  this.password = await bcrypt.hash(this.password, salt)
+})
 
 module.exports = mongoose.model("users", userSchema);

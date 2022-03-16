@@ -1,12 +1,4 @@
 const expressAsyncHandler = require("express-async-handler");
-const JWT = require("jsonwebtoken");
-
-//
-const generateJWTToken = expressAsyncHandler(async (id) => {
-  return JWT.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "5d",
-  });
-});
 
 // TODO: Check if multipliers are valid
 const validateTeam = (team, availableChips) => {
@@ -112,6 +104,5 @@ const validateTeam = (team, availableChips) => {
 };
 
 module.exports = {
-  generateJWTToken,
   validateTeam,
 };
