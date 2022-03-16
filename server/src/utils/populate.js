@@ -56,15 +56,48 @@ const addTestPlayer = async () => {
         gameweekId: 3,
         goals: 1,
         minutesPlayed: 90,
+              },
+    ],
+  });
+
+const User = require("../models/User");
+
+const addTestUser = async () => {
+  const testUser = new User({
+    userName: "Testy",
+    password: "Tester@123456",
+    email: "tester@testy.com",
+    teamName: "The Testies",
+    country: "ET",
+    favouriteEplTeam: "",
+    team: [
+      {
+        gameweekId: "1",
+        players: {
+          100: {
+            playerId: "100",
+            multiplier: "1",
+          },
+          200: {
+            playerId: "200",
+            multiplier: "1",
+          },
+          300: {
+            playerId: "300",
+            multiplier: "1",
+          },
+        },
       },
     ],
   });
 
+  await testUser.save();
   await testPlayer1.save();
   await testPlayer2.save();
   await testPlayer3.save();
 };
 
 module.exports = {
+  addTestUser,
   addTestPlayer,
 };
