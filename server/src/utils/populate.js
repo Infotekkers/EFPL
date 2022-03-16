@@ -56,9 +56,14 @@ const addTestPlayer = async () => {
         gameweekId: 3,
         goals: 1,
         minutesPlayed: 90,
-              },
+      },
     ],
   });
+
+  await testPlayer1.save();
+  await testPlayer2.save();
+  await testPlayer3.save();
+};
 
 const User = require("../models/User");
 
@@ -92,9 +97,6 @@ const addTestUser = async () => {
   });
 
   await testUser.save();
-  await testPlayer1.save();
-  await testPlayer2.save();
-  await testPlayer3.save();
 };
 
 module.exports = {
