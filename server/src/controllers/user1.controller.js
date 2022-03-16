@@ -2,8 +2,7 @@ const asyncHandler = require("express-async-handler");
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { Router } = require("express");
-const secret_key = process.env.JWT_SECRET;
+const secretKey = process.env.JWT_SECRET;
 
 
 // import node mailer
@@ -40,7 +39,7 @@ const register = asyncHandler(async(req, res)=>{
 
    })
    // save user to db
-   const savedUser = await user.save();
+   await user.save();
 
    // fetch id
    const userId = await user._id;
@@ -49,7 +48,7 @@ const register = asyncHandler(async(req, res)=>{
    const token = jwt.sign({
        data:userId,
    },
-   secret_key,{
+   secretKey,{
        expiresIn:"1h"
    }
    );
@@ -81,7 +80,7 @@ const login = asyncHandler(async(req,res)=>{
    const token = jwt.sign({
        data:userId,
    },
-   secret_key,{
+   secretKey,{
        expiresIn:"1h"
    }
    );
@@ -107,8 +106,7 @@ const fetchUsers = asyncHandler(async(req,res)=>{
 
 // fetch one user
 const fetchOneUser = asyncHandler(async(req,res)=>{
-    let user;
-    user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
     if(user==null){
         return res.status(404).json({messaage:"No user found"})
     }
@@ -118,8 +116,8 @@ const fetchOneUser = asyncHandler(async(req,res)=>{
 
 // change favoriteteam or username
 const updateUser = asyncHandler(async(req,res)=>{
-    let user;
-    user = await User.findById(req.params.id);
+   
+    const user = await User.findById(req.params.id);
     if(user==null){
         return res.status(404).json({messaage:"No user found"})
     }
@@ -148,8 +146,7 @@ const updateUser = asyncHandler(async(req,res)=>{
 // delete user
 const deleteUser = asyncHandler(async(req,res)=>{
     // find user in question
-    let user;
-    user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
     if(user==null){
         return res.status(404).json({messaage:"No user found"})
     }
@@ -167,7 +164,7 @@ const requestReset = asyncHandler(async(req,res)=>{
         {
             data: email,
         },
-        secret_key,
+        secretKey,
         {expiresIn:60 * 60}
     );
     const resetUrl = `http://localhost:5000/user1/resetPass/${resetToken}`;
@@ -199,7 +196,7 @@ const resetPass = asyncHandler(async(req,res)=>{
     const token = req.params.token;
 
     // get email
-    const decoded = jwt.verify(token, secret_key);
+    const decoded = jwt.verify(token, secretKey);
     const email = decoded.data;
 
     const newPass = req.body.password;
@@ -210,7 +207,7 @@ const resetPass = asyncHandler(async(req,res)=>{
     console.log(updateValue);
 
     // update item
-    const user = await User.updateOne({email},{$set:updateValue});
+    await User.updateOne({email},{$set:updateValue});
     res.json({message:"password reset successfully"});
 
 })
