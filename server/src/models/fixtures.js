@@ -16,7 +16,7 @@ const fixtureSchema = mongoose.Schema({
   gameweekId: { type: Number, required: true },
   matchId: { type: String, required: true },
   schedule: { type: Date, required: true },
-  status: { type: String, default: "s" }, // s for scheduled
+  status: { type: String, default: "scheduled" },
   homeTeam: { type: lineupSchema, required: true },
   awayTeam: { type: lineupSchema, required: true },
 });

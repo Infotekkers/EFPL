@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const FixtureModel = require("../models/fixtures");
 
 const postFixture = asyncHandler(async function (req, res) {
-  const { gameweekId, schedule, status, homeTeam, awayTeam } = req.body;
+  const { gameweekId, schedule, homeTeam, awayTeam } = req.body;
 
   const matchId = `${homeTeam.teamId}|${awayTeam.teamId}`;
 
@@ -14,7 +14,6 @@ const postFixture = asyncHandler(async function (req, res) {
       gameweekId,
       matchId,
       schedule,
-      status,
       homeTeam,
       awayTeam,
     }).save();
@@ -31,10 +30,12 @@ const startFixture = asyncHandler(async function (req, res) {
     match.status = "liveFH"; // First half
     match
       .save()
-      .then(() => res.send("Match is live."))
+      .then(() => res.send("Match is live!"))
       .catch(() => res.status(500).send("Try again!"));
+  } else if (!match) {
+    res.status(404).send("Match doesn't exist!");
   } else {
-    res.status(400).send("Match hasn't been scheduled");
+    res.status(400).send("Match can't be started!");
   }
 });
 
@@ -47,8 +48,10 @@ const pauseFixture = asyncHandler(async function (req, res) {
       .save()
       .then(() => res.send("Half Time!"))
       .catch(() => res.status(500).send("Try again!"));
+  } else if (!match) {
+    res.status(404).send("Match doesn't exist!");
   } else {
-    res.status(400).send("Match hasn't started");
+    res.status(400).send("Match hasn't started!");
   }
 });
 
@@ -59,10 +62,12 @@ const resumeFixture = asyncHandler(async function (req, res) {
     match.status = "liveSH"; // Second half
     match
       .save()
-      .then(() => res.send("Match resumed."))
+      .then(() => res.send("Match resumed!"))
       .catch(() => res.status(500).send("Try again!"));
+  } else if (!match) {
+    res.status(404).send("Match doesn't exist!");
   } else {
-    res.status(400).send("Match can't be resumed.");
+    res.status(400).send("Match can't be resumed!");
   }
 });
 
@@ -75,8 +80,10 @@ const endFixture = asyncHandler(async function (req, res) {
       .save()
       .then(() => res.send("Full time!"))
       .catch(() => res.status(500).send("Try again!"));
+  } else if (!match) {
+    res.status(404).send("Match doesn't exist!");
   } else {
-    res.status(400).send("Match can't be ended.");
+    res.status(400).send("Match can't be ended!");
   }
 });
 
@@ -89,8 +96,10 @@ const postponeFixture = asyncHandler(async function (req, res) {
       .save()
       .then(() => res.send("Match postponed!"))
       .catch(() => res.status(500).send("Try again!"));
+  } else if (!match) {
+    res.status(404).send("Match doesn't exist!");
   } else {
-    res.status(400).send("Match is ongoing.");
+    res.status(400).send("Match is ongoing!");
   }
 });
 
@@ -112,6 +121,8 @@ const updateFixture = asyncHandler(async function (req, res) {
     await match.save();
 
     res.send("Match updated!");
+  } else if (!match) {
+    res.status(404).send("Match doesn't exist!");
   } else {
     res.status(400).send("Match with provided matchid doesn't exist.");
   }
