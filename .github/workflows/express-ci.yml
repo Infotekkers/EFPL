@@ -5,12 +5,14 @@ on:
     branches:
       - main
       - master
+      - uat
     paths:
       - "server/**"
   pull_request:
     branches:
       - main
       - master
+      - uat
     paths:
       - "server/**"
 
@@ -22,6 +24,7 @@ jobs:
     strategy:
       matrix:
         node-version: [14]
+        mongodb-version: [5]
 
     steps:
       - name: Checkout 🛎
@@ -32,6 +35,12 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
+
+      - name: Setup mongo env 🏛
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+          mongodb-port: 27017
 
       - name: Cache node_modules 📦
         uses: actions/cache@v2.1.4
