@@ -128,21 +128,11 @@ describe("Fixture status updates", () => {
 
   /***********************************************************/
   // Fixture doesn't exist
-  test("PATCH /fixtures/(start, pause, resume, postpone, delete))/:matchId Error: Fixture doesn't exist.🔴", async () => {
+  test("PATCH /fixtures/(start, pause, resume, postpone))/:matchId Error: Fixture doesn't exist.🔴", async () => {
     let res;
 
-    for (const route of [
-      "start",
-      "pause",
-      "resume",
-      "end",
-      "postpone",
-      "delete",
-    ]) {
-      res =
-        route !== "delete"
-          ? await req.patch(`/fixtures/${route}/<>`)
-          : await req.delete(`/fixtures/delete/<>`);
+    for (const route of ["start", "pause", "resume", "end", "postpone"]) {
+      res = await req.patch(`/fixtures/${route}/<>`);
 
       expect(res.statusCode).toBe(404);
       expect(res.text).toBe("Match doesn't exist!");
@@ -181,11 +171,41 @@ describe("Fetch fixtures", () => {
 
 describe("Fixture add, update, and delete", () => {
   beforeAll(async () => {
-    await new FixtureModel(reqBody).save();
+    await FixtureModel.deleteMany({});
   });
 
-  afterAll(() => {
+  afterAll(async () => {
     mongoose.connection.close();
+  });
+
+  test("POST /fixtures/add Success: Fixture added to database.🟢", async () => {
+    const res = await req.post("/fixtures/add").send(reqBody);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.text).toBe("Fixture added!");
+  });
+
+  test("POST /fixtures/add Error: Fixture already in Database.🔴", async () => {
+    const res = await req.post("/fixtures/add").send(reqBody);
+
+    expect(res.statusCode).toBe(400);
+    expect(res.text).toBe("Fixture already in database!");
+  });
+
+  test("PATCH /fixtures/update/:matchId Success: Fixture updated.🟢", async () => {
+    reqBody.gameweekId = 18;
+
+    const res = await req.patch(`/fixtures/update/${matchId}`).send(reqBody);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.text).toBe("Match updated!");
+  });
+
+  test("PATCH /fixtures/update/:matchId Error: Fixture doesn't exist.🔴", async () => {
+    const res = await req.patch(`/fixtures/update/<>`).send(reqBody);
+
+    expect(res.statusCode).toBe(404);
+    expect(res.text).toBe("Match doesn't exist!");
   });
 
   test("DELETE /fixtures/delete/:matchId Success: Fixture deleted.🟢", async () => {
@@ -193,5 +213,12 @@ describe("Fixture add, update, and delete", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.text).toBe("Match deleted!");
+  });
+
+  test("DELETE /fixtures/delete/:matchId Error: Fixture doesn't exist.🔴", async () => {
+    const res = await req.delete(`/fixtures/delete/<>`);
+
+    expect(res.statusCode).toBe(404);
+    expect(res.text).toBe("Match doesn't exist!");
   });
 });
