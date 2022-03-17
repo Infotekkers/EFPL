@@ -22,7 +22,7 @@ const getteams = asyncHandler(async (req,res) =>{
 
 const getteam = asyncHandler( async(req,res) =>{
 
-    const team = await TeamModel.find({teamId: req.body.id});
+    const team = await TeamModel.find({teamId: req.params.id});
 
     res.send(team);
 });
@@ -36,12 +36,21 @@ const updateteam = asyncHandler(async (req,res)=>{
                 teamName: teamName,
             }
         })
-        res.send(team);
+        res.send(`Team ${team.teamName} info updated successfully`);
 });
+
+const deleteteam  = asyncHandler(async(req,res)=>{
+    const team = await TeamModel.deleteOne({teamId: req.params.id});
+    res.send(`Team ${team.teamName} is removed`);
+  
+  
+});
+
 
 module.exports = {
     addteam,
     getteams,
     getteam,
     updateteam,
+    deleteteam
 }
