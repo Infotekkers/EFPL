@@ -1,7 +1,7 @@
 const supertest = require("supertest");
 const app = require("../../index");
 
-const Fixture = require("../models/fixtures");
+const FixtureModel = require("../models/fixtures");
 const mongoose = require("mongoose");
 
 // Test data import
@@ -10,12 +10,16 @@ const [reqBody, matchId] = require("../utils/fixture.test.data");
 const req = supertest(app);
 
 describe("Fixture status updates", () => {
+  beforeAll(async () => {
+    await FixtureModel.deleteMany({});
+  });
+
   beforeEach(async () => {
-    await new Fixture(reqBody).save();
+    await new FixtureModel(reqBody).save();
   });
 
   afterEach(async () => {
-    await Fixture.findOne({ matchId }).deleteOne();
+    await FixtureModel.findOne({ matchId }).deleteOne();
   });
 
   /***********************************************************/
@@ -28,7 +32,7 @@ describe("Fixture status updates", () => {
   });
 
   test("Patch /fixtures/start/:matchId Error: Fixture status not 'scheduled'.🔴", async () => {
-    const match = await Fixture.findOne({ matchId });
+    const match = await FixtureModel.findOne({ matchId });
     match.status = "liveFH";
     match.save();
 
@@ -41,7 +45,7 @@ describe("Fixture status updates", () => {
   /***********************************************************/
   // Pause route
   test("PATCH /fixtures/pause/:matchId Success: Fixture paused.🟢", async () => {
-    const match = await Fixture.findOne({ matchId });
+    const match = await FixtureModel.findOne({ matchId });
     match.status = "liveFH";
     match.save();
 
@@ -61,7 +65,7 @@ describe("Fixture status updates", () => {
   /***********************************************************/
   // Resume route
   test("PATCH /fixtures/resume/:matchId Success: Fixture resumed.🟢", async () => {
-    const match = await Fixture.findOne({ matchId });
+    const match = await FixtureModel.findOne({ matchId });
     match.status = "HT";
     match.save();
 
@@ -72,7 +76,7 @@ describe("Fixture status updates", () => {
   });
 
   test("PATCH /fixtures/resume/:matchId Error: Fixture status not 'HT'.🔴", async () => {
-    const match = await Fixture.findOne({ matchId });
+    const match = await FixtureModel.findOne({ matchId });
     match.status = "scheduled";
     match.save();
 
@@ -85,7 +89,7 @@ describe("Fixture status updates", () => {
   /***********************************************************/
   // End route
   test("PATCH /fixtures/end/:matchId Success: Fixture ended.🟢", async () => {
-    const match = await Fixture.findOne({ matchId });
+    const match = await FixtureModel.findOne({ matchId });
     match.status = "liveSH";
     match.save();
 
@@ -112,7 +116,7 @@ describe("Fixture status updates", () => {
   });
 
   test("PATCH /fixtures/end/:matchId Success: Fixture has been started.🔴", async () => {
-    const match = await Fixture.findOne({ matchId });
+    const match = await FixtureModel.findOne({ matchId });
     match.status = "liveFH";
     match.save();
 
@@ -124,11 +128,21 @@ describe("Fixture status updates", () => {
 
   /***********************************************************/
   // Fixture doesn't exist
-  test("PATCH /fixtures/(start, pause, resume, postpone))/:matchId Error: Fixture doesn't exist.🔴", async () => {
+  test("PATCH /fixtures/(start, pause, resume, postpone, delete))/:matchId Error: Fixture doesn't exist.🔴", async () => {
     let res;
 
-    for (const route of ["start", "pause", "resume", "end", "postpone"]) {
-      res = await req.patch(`/fixtures/${route}/<>`);
+    for (const route of [
+      "start",
+      "pause",
+      "resume",
+      "end",
+      "postpone",
+      "delete",
+    ]) {
+      res =
+        route !== "delete"
+          ? await req.patch(`/fixtures/${route}/<>`)
+          : await req.delete(`/fixtures/delete/<>`);
 
       expect(res.statusCode).toBe(404);
       expect(res.text).toBe("Match doesn't exist!");
@@ -137,23 +151,19 @@ describe("Fixture status updates", () => {
 });
 
 describe("Fetch fixtures", () => {
-  beforeEach(async () => {
-    await Fixture.deleteMany({});
-    await new Fixture(reqBody).save();
+  beforeAll(async () => {
+    await FixtureModel.deleteMany({});
+    await new FixtureModel(reqBody).save();
   });
 
-  afterEach(async () => {
-    await Fixture.findOne({ matchId }).deleteOne();
-  });
-
-  afterAll(() => {
-    mongoose.connection.close();
+  afterAll(async () => {
+    await FixtureModel.deleteMany({});
   });
 
   test("GET /fixtures/ Success: Get all fixtures.🟢", async () => {
     const alternateReqbody = { ...reqBody };
-    alternateReqbody.gameweekId = 2;
-    await new Fixture(alternateReqbody).save();
+    alternateReqbody.matchId = "4|2";
+    await new FixtureModel(alternateReqbody).save();
 
     const res = await req.get("/fixtures/");
 
@@ -166,5 +176,22 @@ describe("Fetch fixtures", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body.matchId).toBe(matchId);
+  });
+});
+
+describe("Fixture add, update, and delete", () => {
+  beforeAll(async () => {
+    await new FixtureModel(reqBody).save();
+  });
+
+  afterAll(() => {
+    mongoose.connection.close();
+  });
+
+  test("DELETE /fixtures/delete/:matchId Success: Fixture deleted.🟢", async () => {
+    const res = await req.delete(`/fixtures/delete/${matchId}`);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.text).toBe("Match deleted!");
   });
 });
