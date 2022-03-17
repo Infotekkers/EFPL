@@ -18,10 +18,6 @@ describe("Fixture status updates", () => {
     await Fixture.findOne({ matchId }).deleteOne();
   });
 
-  afterAll(() => {
-    mongoose.connection.close();
-  });
-
   /***********************************************************/
   // Start route
   test("PATCH /fixtures/start/:matchId Success: Fixture started.🟢", async () => {
@@ -137,5 +133,38 @@ describe("Fixture status updates", () => {
       expect(res.statusCode).toBe(404);
       expect(res.text).toBe("Match doesn't exist!");
     }
+  });
+});
+
+describe("Fetch fixtures", () => {
+  beforeEach(async () => {
+    await Fixture.deleteMany({});
+    await new Fixture(reqBody).save();
+  });
+
+  afterEach(async () => {
+    await Fixture.findOne({ matchId }).deleteOne();
+  });
+
+  afterAll(() => {
+    mongoose.connection.close();
+  });
+
+  test("GET /fixtures/ Success: Get all fixtures.🟢", async () => {
+    const alternateReqbody = { ...reqBody };
+    alternateReqbody.gameweekId = 2;
+    await new Fixture(alternateReqbody).save();
+
+    const res = await req.get("/fixtures/");
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toEqual(2);
+  });
+
+  test("Get /fixtures/:matchId Success: Get specific fixture.🟢", async () => {
+    const res = await req.get(`/fixtures/${matchId}`);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.matchId).toBe(matchId);
   });
 });
