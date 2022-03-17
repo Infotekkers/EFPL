@@ -3,22 +3,75 @@ const { collection } = require("../models/Players");
 const PlayerModel = require("../models/Players");
 
 const addplayers = asyncHandler(async (req,res) =>{
-    const { playerName, playerId, eplTeamId,position,currentPrice,score,availablity,history} = req.body;
-    await new PlayerModel ({
-        playerName,
-        playerId, //range increment 
-        position,
-        currentPrice,
-        score,
-        history,
-        availablity,
-        eplTeamId,
-    }).save();
-    res.send(`${playerName} is added to players.`);
+    const { playername, playerId, eplTeamId,position,currentPrice,score,availablity,history} = req.body;
+    
+    const verifyPlayer =  await PlayerModel.find({playername:req.params.playername})
+    
+    if(verifyPlayer.length == 0 ){
+        await new PlayerModel ({
+            playername,
+            playerId, //range increment 
+            position,
+            currentPrice,
+            score,
+            history,
+            availablity,
+            eplTeamId,
+        }).save();
+        res.send(`${playername} is added to players.`);
+    } else {
+        res.send("Player already Exist!")
+    }
+
 });
 
-const addScore = asyncHandler(async(req,res) => {
+const updateplayer = asyncHandler(async(req,res) =>{
+    const { playerName, playerId, position, currentPrice} = req.body; 
+
+    const verifyPlayer =  await PlayerModel.find({playerId:req.params.playerId})
+    
+    if(verifyPlayer){
+        const player = await PlayerModel
+        .updateOne({ playerId: req.params.playerId}, {
+            $set: {
+                playerName: playerName,
+                position: position,
+                playerId: playerId,
+                currentPrice:currentPrice,
+            
+            }
+        });
+        res.send(`${playerName} data updated sucesfully`); 
+    }else{
+        res.send("Player does not Exits");
+    }
+   
+}); 
+
+
+const updateScore = asyncHandler(async(req,res) => {
     const { score } = req.body;
+
+    const verifyPlayer =  await PlayerModel.find({playerId:req.params.playerId})
+    
+    if(verifyPlayer){
+
+    const player = await PlayerModel
+    .updateOne({playerId:req.params.playerId},{
+        $set: {
+           score:score
+        }
+    })
+    res.send(`Player ${playerName} Score for Gameweek ${score.gameweekId} Updated Successfully`)
+    }else{
+        res.send("Player does not Exits");
+    }
+})
+
+
+const addScore = asyncHandler(async(req,res) => {
+    const { score } = req.body; 
+
     const player= await PlayerModel
     .updateMany({playerId:req.params.playerId},{
         $push: {
@@ -27,32 +80,6 @@ const addScore = asyncHandler(async(req,res) => {
     })
     res.send("new score added")
 })
-
-const updateScore = asyncHandler(async(req,res) => {
-    const { score } = req.body;
-    const player = await PlayerModel
-    .updateOne({playerId:req.params.playerId},{
-        $set: {
-           score:score
-        }
-    })
-    res.send("updated")
-})
-
-const updateplayer = asyncHandler(async(req,res) =>{
-    const { playerName, playerId, position, currentPrice} = req.body;
-    const player = await PlayerModel
-    .updateOne({ playerId: req.params.playerId}, {
-        $set: {
-            playerName: playerName,
-            position: position,
-            playerId: playerId,
-            currentPrice:currentPrice,
-        
-        }
-    });
-    res.send(player); 
-});
 
 
 const getplayer = asyncHandler(async(req,res) =>{

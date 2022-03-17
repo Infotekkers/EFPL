@@ -10,9 +10,9 @@ afterAll(async () => {
     mongoose.connection.close();
 });
 
-
+let playerId;
 describe("Testing Players",()=>{
-//add players test success 
+// add players test success 
         test("POST /players/addplayer SUCCESS",async()=>{
             const reqBody = {
                 "playerName": "barok",
@@ -65,8 +65,8 @@ describe("Testing Players",()=>{
 
             const res = await req.post("/players/addplayer").send(reqBody);
 
-            //expect Response 
-            expect(res.statusCode).tobe(201);
+            // expect Response 
+            expect(res.statusCode).tobe(200);
             expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
 
         });
