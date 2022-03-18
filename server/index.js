@@ -16,7 +16,7 @@ connectToDB();
 // Import Routes
 const eplStatsRouter = require("./src/routes/eplStats.routes");
 const fantasyStatsRouter = require("./src/routes/fantasyStat.routes");
-const userRouter = require("./src/routes/user.route");
+const userRouter = require("./src/routes/user.routes");
 const fixtures = require("./src/routes/fixtures.routes");
 const gameWeekRoutes = require("./src/routes/gameWeek.routes");
 

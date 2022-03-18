@@ -133,7 +133,6 @@ describe("Testing EPL stats ", () => {
     const res = await req.get("/eplStats/assists");
 
     // Expect response
-    console.log(res.body);
     expect(res.statusCode).toBe(200);
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
     expect(res.body).toMatchObject(expectedResult);
@@ -158,7 +157,6 @@ describe("Testing EPL stats ", () => {
     const res = await req.get("/eplStats/cleanSheets");
 
     // Expect response
-    console.log(res.body);
     expect(res.statusCode).toBe(200);
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
     expect(res.body).toMatchObject(expectedResult);
@@ -180,7 +178,6 @@ describe("Testing EPL stats ", () => {
     const res = await req.get("/eplStats/reds");
 
     // Expect response
-    console.log(res.body);
     expect(res.statusCode).toBe(200);
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
     expect(res.body).toMatchObject(expectedResult);
@@ -202,7 +199,6 @@ describe("Testing EPL stats ", () => {
     const res = await req.get("/eplStats/yellows");
 
     // Expect response
-    console.log(res.body);
     expect(res.statusCode).toBe(200);
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
     expect(res.body).toMatchObject(expectedResult);
@@ -224,7 +220,6 @@ describe("Testing EPL stats ", () => {
     const res = await req.get("/eplStats/saves");
 
     // Expect response
-    console.log(res.body);
     expect(res.statusCode).toBe(200);
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
     expect(res.body).toMatchObject(expectedResult);
@@ -252,7 +247,6 @@ describe("Testing EPL stats ", () => {
     const res = await req.get("/eplStats/minutesPlayed");
 
     // Expect response
-    console.log(res.body);
     expect(res.statusCode).toBe(200);
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
     expect(res.body).toMatchObject(expectedResult);

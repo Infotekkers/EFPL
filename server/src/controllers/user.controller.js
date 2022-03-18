@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const Gameweek = require("../models/Gameweek2");
+const Gameweek = require("../models/Gameweek");
 const validateTeam = require("../utils/validators").validateTeam;
 const pointDeductor = require("../utils/helpers").pointDeductor;
 const secretKey = process.env.JWT_SECRET;
@@ -16,7 +16,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Registration
 const register = asyncHandler(async (req, res) => {
   // check for prexisting email
   const emailExists = await User.findOne({ email: req.body.email });
@@ -60,7 +59,6 @@ const register = asyncHandler(async (req, res) => {
   });
 });
 
-// Login
 const login = asyncHandler(async (req, res) => {
   // check if email exists
   const user = await User.findOne({ email: req.body.email });
@@ -97,13 +95,11 @@ const login = asyncHandler(async (req, res) => {
   res.status(400).json({ message: "invalid email - password combination" });
 });
 
-// fetch all users
 const fetchUsers = asyncHandler(async (req, res) => {
   const users = await User.find();
   res.json(users);
 });
 
-// fetch one user
 const fetchOneUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user == null) {
@@ -113,7 +109,6 @@ const fetchOneUser = asyncHandler(async (req, res) => {
   res.json(res.user);
 });
 
-// change favoriteteam or username
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user == null) {
@@ -141,7 +136,6 @@ const updateUser = asyncHandler(async (req, res) => {
   res.json(updatedUser);
 });
 
-// delete user
 const deleteUser = asyncHandler(async (req, res) => {
   // find user in question
 
@@ -154,7 +148,7 @@ const deleteUser = asyncHandler(async (req, res) => {
   await res.user.remove();
   res.json({ messaage: `user ${user.userName} removed` });
 });
-// request reset password
+
 const requestReset = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
@@ -188,7 +182,6 @@ const requestReset = asyncHandler(async (req, res) => {
   });
 });
 
-// reset password
 const resetPass = asyncHandler(async (req, res) => {
   // check token expiry
   const token = req.params.token;
@@ -214,8 +207,8 @@ const transfer = asyncHandler(async (req, res) => {
   const { userId, incomingTeam } = req.body;
 
   // Fetch active gameweek
-  let activeGameweek = await Gameweek.findOne({ status: "active" }).exec();
-  activeGameweek = activeGameweek.number;
+  let activeGameweek = await Gameweek.findOne({ status: "Active" }).exec();
+  activeGameweek = activeGameweek.gameWeekNumber;
 
   // Fetch User Details
   const user = await User.findById(userId).exec();

@@ -1,6 +1,6 @@
 const Player = require("../models/Player2");
 const User = require("../models/User");
-const Gameweek = require("../models/Gameweek2");
+const Gameweek = require("../models/Gameweek");
 
 const addTestPlayer = async () => {
   // Test PLAYER
@@ -183,8 +183,9 @@ const addTestUser = async () => {
 const addTestGameweek = async () => {
   // Test Gameweek
   const testGameweek = new Gameweek({
-    number: 1,
-    status: "active",
+    gameWeekNumber: 1,
+    startTimestamp: 1647595217,
+    status: "Active",
   });
 
   await testGameweek.save();
