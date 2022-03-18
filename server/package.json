@@ -20,6 +20,7 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.4",
+    "mongoose-auto-increment": "^5.0.1",
     "prettier": "^2.5.1"
   },
   "devDependencies": {
