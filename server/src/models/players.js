@@ -44,7 +44,7 @@ const historySchema = mongoose.Schema({
 });
 
 const playerSchema = mongoose.Schema({
-  playername: String,
+  playerName: String,
   eplTeamId: String,
   currentPrice: Number,
   position: String,
