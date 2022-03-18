@@ -1,12 +1,68 @@
 const supertest = require("supertest");
-const app = require("../../index");
-const populate = require("../utils/populate");
-const User = require("../models/User");
 const mongoose = require("mongoose");
+const app = require("../../index");
+const User = require("../models/User");
+const populate = require("../utils/populate");
 
 const req = supertest(app);
 
-describe("Testing user ", () => {
+describe("Testing User ", () => {
+  test("POST /user/register SUCCESS", async () => {
+    const reqBody = {
+      userName: "wechdad",
+      email: "chatadgaeonia@gmail.com",
+      password: "12345679@gAl",
+      teamName: "arrimish",
+      country: "bEthiopia",
+    };
+    // clear db
+    await User.deleteMany();
+
+    // send request
+    const res = await req.post("/user/register").send(reqBody);
+
+    // expect response
+    expect(res.statusCode).toBe(201);
+    expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+  });
+
+  test("POST /user/login SUCCESS", async () => {
+    const reqBody = {
+      email: "chatadgaeonia@gmail.com",
+      password: "12345679@gAl",
+    };
+
+    // clear db
+    // await User.deleteMany();
+
+    // send request
+    const res = await req.post("/user/login").send(reqBody);
+
+    // expect response
+    expect(res.statusCode).toBe(201);
+    expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+  });
+
+  test("POST /user/login ERROR", async () => {
+    const reqBody = {
+      email: "fhatadgaeonia@gmail.com",
+      password: "12345679@gAl",
+    };
+
+    // clear db
+    // await User.deleteMany();
+
+    // send request
+    const res = await req.post("/user/login").send(reqBody);
+
+    // expect response
+    expect(res.statusCode).toBe(400);
+    expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+    expect(res.body).toMatchObject({
+      message: "invalid email - password combination",
+    });
+  });
+
   test("PUT /user/transfer SUCCESS", async () => {
     // Request body
     const reqBody = {
