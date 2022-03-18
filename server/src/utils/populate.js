@@ -1,6 +1,6 @@
 const Player = require("../models/Player2");
 const User = require("../models/User");
-const Gameweek = require("../models/Gameweek");
+const Gameweek = require("../models/GameWeek");
 
 const addTestPlayer = async () => {
   // Test PLAYER
