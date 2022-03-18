@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+const autoIncrement = require('mongoose-auto-increment');
+
+var connection = mongoose.createConnection("mongodb://localhost:27017/FPLDB");
+autoIncrement.initialize(connection);
 
 const availabilitySchema = mongoose.Schema({
   injuryStatus: String,
@@ -48,11 +52,20 @@ const playerSchema = mongoose.Schema({
   eplTeamId: String,
   currentPrice: Number,
   position: String,
-  playerId: Number,
+  
 
  availability: {type: [availabilitySchema]},
   score: {type: [scoreSchema]},
   history: {type: [historySchema]}
-});
+}); 
+
+var player = connection.model('player', playerSchema);
+
+playerSchema.plugin(autoIncrement.plugin, 
+        { model: 'player', 
+          field:'playerId', 
+          startAt:100000, 
+          incrmentBy: 1
+        });
 
 module.exports = mongoose.model("players", playerSchema);

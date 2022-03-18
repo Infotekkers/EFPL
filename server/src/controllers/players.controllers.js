@@ -3,13 +3,13 @@ const { collection } = require("../models/Players");
 const PlayerModel = require("../models/Players");
 
 const addplayers = asyncHandler(async (req,res) =>{
-    const { playerName, playerId, eplTeamId,position,currentPrice,score,availablity,history} = req.body;
+    const { playerName, eplTeamId,position,currentPrice,score,availablity,history} = req.body;
     
     const verifyPlayer =  await PlayerModel.findOne({playerName:req.body.playerName});
     if(!verifyPlayer){
         await new PlayerModel ({
             playerName,
-            playerId, //range increment 
+            
             position,
             currentPrice,
             score,
