@@ -31,6 +31,7 @@ router.patch(
 
 // DEVELOPMENT ROUTE
 router.post("/dev/add", development.devAddGameWeekRoute);
+router.delete("/dev/remove/all", development.devClearGameWeekRoute);
 
 // export router
 module.exports = router;

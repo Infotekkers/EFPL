@@ -1,6 +1,11 @@
+const axios = require("axios");
+const PORT = process.env.PORT || 3000;
+const baseURL = process.env.BASE_URL;
+
 const Player = require("../models/Player2");
 const User = require("../models/User");
 const Gameweek = require("../models/GameWeek");
+const { printConsole } = require("./development");
 
 const addTestPlayer = async () => {
   // Test PLAYER
@@ -191,8 +196,76 @@ const addTestGameweek = async () => {
   await testGameweek.save();
 };
 
+/*
+  ===============================================================
+  Populate
+  ===============================================================
+*/
+const populateGameWeeks = async () => {
+  // Check game weeks
+  const gameWeeks = await axios.get(`${baseURL}${PORT}/gameWeek/info/all`);
+
+  // if no game week
+  if (gameWeeks.data.length == 0) {
+    let gameWeekDate = 604800;
+    let gameWeekStatus = "Active";
+    for (let i = 1; i <= 30; i++) {
+      gameWeekDate = gameWeekDate + 604800;
+      i == 1 ? (gameWeekStatus = "Active") : (gameWeekStatus = "ToBePlayed");
+      axios.post(`${baseURL}${PORT}/gameWeek/dev/add`, {
+        newGameWeekData: {
+          gameWeekNumber: i,
+          startTimestamp: gameWeekDate,
+          status: gameWeekStatus,
+        },
+      });
+    }
+    printConsole(
+      { data: "All Game weeks added properly" },
+      { printLocation: "populate.js:218" },
+      { textColor: "black" },
+      { bgColor: "bgGreen" }
+    );
+  }
+
+  // if incomplete gameweek
+  else if (gameWeeks.data.length < 30) {
+    await axios.delete(`${baseURL}${PORT}/gameWeek/dev/add`);
+    let gameWeekDate = 604800;
+    let gameWeekStatus = "Active";
+    for (let i = 1; i <= 30; i++) {
+      gameWeekDate = gameWeekDate + 604800;
+      i == 1 ? (gameWeekStatus = "Active") : (gameWeekStatus = "ToBePlayed");
+      axios.post(`${baseURL}${PORT}/gameWeek/dev/add`, {
+        newGameWeekData: {
+          gameWeekNumber: i,
+          startTimestamp: gameWeekDate,
+          status: gameWeekStatus,
+        },
+      });
+    }
+    printConsole(
+      { data: "All Game weeks added properly" },
+      { printLocation: "populate.js:218" },
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  } else {
+    printConsole(
+      { data: "Gameweek already populated" },
+      { printLocation: "populate.js:218" },
+
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  }
+
+  // else if(gameWeeks.d)
+};
+
 module.exports = {
   addTestUser,
   addTestGameweek,
   addTestPlayer,
+
+  // Scripts
+  populateGameWeeks,
 };

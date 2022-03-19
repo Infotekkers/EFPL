@@ -14,7 +14,7 @@ const gameWeekSchema = mongoose.Schema({
     ],
 
     max: [
-      17,
+      30,
       "Custom Error - Maximum Value *:Game week number {VALUE} exceeds maximum allowed value.",
     ],
   },

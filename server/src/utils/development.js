@@ -92,8 +92,6 @@ const devAddGameWeekRoute = asyncHandler(async (req, res) => {
     // get data from body
     const { newGameWeekData } = req.body;
 
-    console.log(newGameWeekData);
-
     // create data from model
     const newGameWeek = await GameWeek.create(newGameWeekData);
 
@@ -112,7 +110,16 @@ const devAddGameWeekRoute = asyncHandler(async (req, res) => {
   }
 });
 
+const devClearGameWeekRoute = asyncHandler(async (req, res) => {
+  if (ENV === "development") {
+    const deletedGameWeek = await GameWeek.deleteMany();
+
+    res.status(200).json(deletedGameWeek);
+  }
+});
+
 module.exports = {
   printConsole,
   devAddGameWeekRoute,
+  devClearGameWeekRoute,
 };
