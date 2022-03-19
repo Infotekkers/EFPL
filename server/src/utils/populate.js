@@ -211,7 +211,7 @@ const populateGameWeeks = async () => {
     let gameWeekStatus = "Active";
     for (let i = 1; i <= 30; i++) {
       gameWeekDate = gameWeekDate + 604800;
-      i == 1 ? (gameWeekStatus = "Active") : (gameWeekStatus = "ToBePlayed");
+      i === 1 ? (gameWeekStatus = "Active") : (gameWeekStatus = "ToBePlayed");
       axios.post(`${baseURL}${PORT}/gameWeek/dev/add`, {
         newGameWeekData: {
           gameWeekNumber: i,
@@ -235,7 +235,7 @@ const populateGameWeeks = async () => {
     let gameWeekStatus = "Active";
     for (let i = 1; i <= 30; i++) {
       gameWeekDate = gameWeekDate + 604800;
-      i == 1 ? (gameWeekStatus = "Active") : (gameWeekStatus = "ToBePlayed");
+      i === 1 ? (gameWeekStatus = "Active") : (gameWeekStatus = "ToBePlayed");
       axios.post(`${baseURL}${PORT}/gameWeek/dev/add`, {
         newGameWeekData: {
           gameWeekNumber: i,
