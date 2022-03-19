@@ -206,7 +206,7 @@ const populateGameWeeks = async () => {
   const gameWeeks = await axios.get(`${baseURL}${PORT}/gameWeek/info/all`);
 
   // if no game week
-  if (gameWeeks.data.length == 0) {
+  if (gameWeeks.data.length === 0) {
     let gameWeekDate = 604800;
     let gameWeekStatus = "Active";
     for (let i = 1; i <= 30; i++) {
