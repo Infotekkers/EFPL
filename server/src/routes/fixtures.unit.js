@@ -1,7 +1,7 @@
 const supertest = require("supertest");
 const app = require("../../index");
 
-const Fixture = require("../models/Fixtures");
+const Fixture = require("../models/fixtures");
 const mongoose = require("mongoose");
 
 // Test data import
