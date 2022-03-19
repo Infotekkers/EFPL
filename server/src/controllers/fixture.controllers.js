@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 
-const FixtureModel = require("../models/fixtures");
+const FixtureModel = require("../models/Fixtures");
 
 const postFixture = asyncHandler(async function (req, res) {
   const { gameweekId, schedule, homeTeam, awayTeam } = req.body;
