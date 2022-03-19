@@ -140,7 +140,7 @@ const updateUser = asyncHandler(async(req,res)=>{
 
     // save changed data to db
     const updatedUser = await res.user.save();
-    res.json(updatedUser);
+    res.status(201).json(updatedUser);
 })
 
 // delete user
@@ -184,7 +184,8 @@ const requestReset = asyncHandler(async(req,res)=>{
             console.log(error);
         }else{
             res.status(200).json({messaage:"Email Sent Successfully"});
-            console.log("email sent: "+ info.response);
+            console.log(resetToken);
+            // console.log("email sent: "+ info.response);
         }
     });
 
@@ -208,7 +209,7 @@ const resetPass = asyncHandler(async(req,res)=>{
 
     // update item
     await User.updateOne({email},{$set:updateValue});
-    res.json({message:"password reset successfully"});
+    res.status(200).json({message:"password reset successfully"});
 
 })
 

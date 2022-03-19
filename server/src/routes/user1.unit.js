@@ -71,7 +71,70 @@ describe("Testing User ",()=>{
         expect(res.body).toMatchObject({message:"invalid email - password combination"});
 
      })
-    test("Close DB", async()=>{
+    
+
+    // change item success
+    test("PATCH /user1/updateUser/:id SUCCESS", async()=>{
+        const reqBody = {
+            "userName":"Megalodons"
+        };
+
+        // clear db 
+        // await User.deleteMany();
+
+        userId = String((await User.findOne())._id);
+        
+         // send request
+         const res = await req.patch(`/user1/updateUser/${userId}`).send(reqBody);
+
+        //    expect response
+        expect(res.statusCode).toBe(201);
+        expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+
+     });
+     // change item failure
+    test("PATCH /user1/updateUser/:id FAILURE", async()=>{
+        const reqBody = {
+            "userName":"Megalodons"
+        };
+        userId = "623592e7efb835b140828098"
+         // send request
+         const res = await req.patch(`/user1/updateUser/${userId}`).send(reqBody);
+        //    expect response
+        expect(res.statusCode).toBe(404);
+        expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+     });
+     
+     // request reset test
+     test("POST /user1/requestReset SUCCESS", async()=>{
+        const reqBody = {
+            "email":"chatadgaeonia@gmail.com"
+        };      
+
+         // send request
+         const res = await req.post(`/user1/requestReset`).send(reqBody);
+         
+        //    expect response
+        expect(res.statusCode).toBe(200);
+        expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+        expect(res.body).toMatchObject({messaage:"Email Sent Successfully"});
+     });
+     
+     // reset password test
+     test("POST /user1/resetPass/:token SUCCESS", async()=>{
+        const reqBody = {
+            "password":"Bingus@12345678!"
+        };        
+
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiY2hhdGFkZ2Flb25pYUBnbWFpbC5jb20iLCJpYXQiOjE2NDc2Nzk1NzgsImV4cCI6MTY0NzY4MzE3OH0.kjyfS2EfphjGETuQCOG4c_jkq4KcSytCQJwrb0cbAVM";
+         // send request
+         const res = await req.post(`/user1/resetPass/${token}`).send(reqBody);
+        //    expect response
+        expect(res.statusCode).toBe(200);
+        expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+        expect(res.body).toMatchObject({message:"password reset successfully"});
+     });
+     test("Close DB", async()=>{
         mongoose.connection.close();
     })
 })
