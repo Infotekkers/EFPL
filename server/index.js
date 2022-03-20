@@ -29,14 +29,6 @@ app.use(cors());
 app.use("/players", players);
 // Export app
 // Run Node app
-app.listen(PORT, () =>
-  printConsole(
-    { data: `Server is live @${PORT}` },
-    { printLocation: "index.js:28" },
-    {
-      bgColor: "bgGreen",
-      textColor: "black",
-      underline: true,
-    }
-  )
-);
+
+// Export app
+module.exports = app;
