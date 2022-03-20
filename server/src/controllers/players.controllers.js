@@ -4,12 +4,8 @@ const PlayerModel = require("../models/Players");
 
 const addplayers = asyncHandler(async (req,res) =>{
     const { playerName, eplTeamId,position,currentPrice,score,availablity,history} = req.body;
-    
-    const verifyPlayer =  await PlayerModel.findOne({playerName:req.body.playerName});
-    if(!verifyPlayer){
         await new PlayerModel ({
             playerName,
-            
             position,
             currentPrice,
             score,
@@ -17,18 +13,14 @@ const addplayers = asyncHandler(async (req,res) =>{
             availablity,
             eplTeamId,
         }).save();
-        return res.status(200).send(`${playerName} add successful`);
-    } else {
-        return res.status(404).send(`Player Exist`);
-    }
-
+        res.status(201).send(`${playerName} added successfully`);
 });
 //Questions eplTeamId -  what is that
 const updateplayer = asyncHandler(async(req,res) =>{
-    const { playerName, playerId, position, currentPrice} = req.body; 
+    const { playerName,history,eplTeamId,availablity, playerId, position, currentPrice} = req.body; 
 
-    const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
     
+    const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
     if(verifyPlayer){
         const player = await PlayerModel
         .updateOne({ playerId: req.body.playerId}, {
@@ -37,12 +29,18 @@ const updateplayer = asyncHandler(async(req,res) =>{
                 position: position,
                 playerId: playerId,
                 currentPrice:currentPrice,
+                history:history,
+                eplTeamId:eplTeamId,
+                availablity:availablity
             }
         });
-        return res.status(201).send(`${playerName} Info updated successful`);
-    }else{
+       
+        res.status(201).send(`Info updated successful`);
+    } else{
         return res.status(404).send(`player doesn exist`);
     }
+    
+    
    
 }); 
 
@@ -50,16 +48,18 @@ const updateplayer = asyncHandler(async(req,res) =>{
 const updateScore = asyncHandler(async(req,res) => {
     const { score } = req.body;
     const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
+    console.log(verifyPlayer);
     if(verifyPlayer){
     const scorearray = verifyPlayer.score;
     const Gameweek = scorearray.filter(s=>s.gameweekId == req.params.gameweekId);
     const index = scorearray.indexOf(Gameweek[0]);
     scorearray[index] = score;
     verifyPlayer.score == scorearray;
+    console.log(verifyPlayer);
     await verifyPlayer.save();
-        return res.status(201).send(`Score for Gameweek ${Gameweek[0].gameweekId} update successful `);
-    }else{
-        return res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
+        res.status(201).send(`Score for Gameweek update successful`);
+     }else{
+        res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
     } 
 });
 
@@ -67,17 +67,17 @@ const updateScore = asyncHandler(async(req,res) => {
 const addScore = asyncHandler(async(req,res) => {
     const { score } = req.body; 
     const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
-   if(verifyPlayer){
+    if(verifyPlayer){
         const player= await PlayerModel
         .updateMany({playerId:req.params.playerId},{
             $push: {
                 score: score
             }
         })
-        return res.status(201).send(`Score added successful `);
-   }else{
-        return res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
-   }
+        res.status(201).send(`Score added successfully`);
+    }else{
+        res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
+    }
 });
 
 
