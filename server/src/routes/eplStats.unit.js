@@ -248,7 +248,6 @@ describe("Testing EPL stats ", () => {
 
     // Send request
     const res = await req.get("/eplStats/minutesPlayed");
-    console.log(res.body);
 
     // Expect response
     expect(res.statusCode).toBe(200);
