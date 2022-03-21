@@ -1,3 +1,7 @@
+const axios = require("axios");
+const PORT = process.env.PORT || 3000;
+const baseURL = process.env.BASE_URL;
+
 const Player = require("../models/Player");
 const User = require("../models/User");
 const Gameweek = require("../models/GameWeek");
