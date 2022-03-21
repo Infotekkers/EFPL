@@ -8,6 +8,32 @@ const generateJWTToken = expressAsyncHandler(async (id) => {
   });
 });
 
+// Function to deduct points from user team
+const pointDeductor = (activeTeam, incomingTeam) => {
+  let deduction = activeTeam.deduction;
+  let transfersMade = 0;
+
+  // Check if wildcard or free hit chips are active
+  if (incomingTeam.activeChip === "WC" || incomingTeam.activeChip === "FH")
+    deduction = 0;
+  else {
+    // Loop over playerIds of incomingTeam
+    for (const playerId of Object.entries(incomingTeam.players)) {
+      // Check if the playerIds are in the activeTeam
+      if (playerId in activeTeam.players) continue;
+      // If not deduct 4 points
+      deduction += 4;
+      transfersMade += 1;
+    }
+
+    // Use free transfers if any
+    deduction -= 4 * activeTeam.freeTransfers;
+  }
+
+  return [deduction, transfersMade];
+};
+
 module.exports = {
   generateJWTToken,
+  pointDeductor,
 };
