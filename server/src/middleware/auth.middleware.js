@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 
+// Concern HERE - How do we identify user here?
 const verifyJWTToken = (req, res, next) => {
   const token = req.query.token;
 
