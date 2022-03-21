@@ -9,7 +9,7 @@ const reqaddPlayer = {
         fantasyScore: 4,
         minutesPlayed:62,
         goal:0,
-        assist:3, 
+        assists:3, 
         cleanSheet:4,
         yellows:1,
         reds:1,
@@ -21,7 +21,7 @@ const reqaddPlayer = {
         transfersOut:3,
         form:6
      },
-     availablity : {
+     availability : {
          injuryStatus: false,
          injuryMessage: "fit to play"
     },

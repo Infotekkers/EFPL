@@ -3,14 +3,14 @@ const { collection } = require("../models/Players");
 const PlayerModel = require("../models/Players");
 
 const addplayers = asyncHandler(async (req,res) =>{
-    const { playerName, eplTeamId,position,currentPrice,score,availablity,history} = req.body;
+    const { playerName, eplTeamId,position,currentPrice,score,availability,history} = req.body;
         await new PlayerModel ({
             playerName,
             position,
             currentPrice,
             score,
             history,
-            availablity,
+            availability,
             eplTeamId,
         }).save();
         res.status(201).send(`${playerName} added successfully`);
