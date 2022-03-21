@@ -31,15 +31,15 @@ describe("Testing Players",()=>{
         });
 
         //update score test success 
-        test("PATCH /players/updatescore/:playerId/:gameweekId SUCCESS", async()=>{
-            // send request
-            const res = await req.patch(`/players/updatescore/${playerId}/${gameweekId}`).send(requpdateScore);
-            // expect response
-            expect(res.statusCode).toBe(201);
-            expect(res.text).toBe(`Score for Gameweek update successful`);
+        // test("PATCH /players/updatescore/:playerId/:gameweekId SUCCESS", async()=>{
+        //     // send request
+        //     const res = await req.patch(`/players/updatescore/${playerId}/${gameweekId}`).send(requpdateScore);
+        //     // expect response
+        //     expect(res.statusCode).toBe(201);
+        //     expect(res.text).toBe(`Score for Gameweek update successful`);
             
 
-        });
+        // });
         
         // Add score test success 
         test("PATCH /players/addscore/:playerId SUCCESS", async()=>{
