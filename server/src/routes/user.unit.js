@@ -82,7 +82,7 @@ describe("Testing User ",()=>{
         // clear db 
         // await User.deleteMany();
 
-        userId = String((await User.findOne())._id);
+        const userId = String((await User.findOne())._id);
         
          // send request
          const res = await req.patch(`/user1/updateUser/${userId}`).send(reqBody);
@@ -97,7 +97,7 @@ describe("Testing User ",()=>{
         const reqBody = {
             "userName":"Megalodons"
         };
-        userId = "623592e7efb835b140828098"
+        const userId = "623592e7efb835b140828098"
          // send request
          const res = await req.patch(`/user1/updateUser/${userId}`).send(reqBody);
         //    expect response
