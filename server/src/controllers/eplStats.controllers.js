@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const Player = require("../models/Player2");
+const Player = require("../models/Player");
 
 const overview = asyncHandler(async (_, res) => {
   const result = {};
@@ -12,7 +12,7 @@ const overview = asyncHandler(async (_, res) => {
     {
       $group: {
         _id: "$_id",
-        name: { $first: "$name" },
+        name: { $first: "$playerName" },
         goals: { $sum: "$score.goals" },
         assists: { $sum: "$score.assists" },
         cleanSheets: { $sum: "$score.cleanSheets" },
@@ -55,7 +55,7 @@ const goals = asyncHandler(async (_, res) => {
     {
       $group: {
         _id: "$_id",
-        name: { $first: "$name" },
+        name: { $first: "$playerName" },
         goals: { $sum: "$score.goals" },
       },
     },
@@ -74,7 +74,7 @@ const assists = asyncHandler(async (_, res) => {
     {
       $group: {
         _id: "$_id",
-        name: { $first: "$name" },
+        name: { $first: "$playerName" },
         assists: { $sum: "$score.assists" },
       },
     },
@@ -93,7 +93,7 @@ const cleanSheets = asyncHandler(async (_, res) => {
     {
       $group: {
         _id: "$_id",
-        name: { $first: "$name" },
+        name: { $first: "$playerName" },
         cleanSheets: { $sum: "$score.cleanSheets" },
       },
     },
@@ -112,7 +112,7 @@ const reds = asyncHandler(async (_, res) => {
     {
       $group: {
         _id: "$_id",
-        name: { $first: "$name" },
+        name: { $first: "$playerName" },
         reds: { $sum: "$score.reds" },
       },
     },
@@ -131,7 +131,7 @@ const yellows = asyncHandler(async (_, res) => {
     {
       $group: {
         _id: "$_id",
-        name: { $first: "$name" },
+        name: { $first: "$playerName" },
         yellows: { $sum: "$score.yellows" },
       },
     },
@@ -150,7 +150,7 @@ const saves = asyncHandler(async (_, res) => {
     {
       $group: {
         _id: "$_id",
-        name: { $first: "$name" },
+        name: { $first: "$playerName" },
         saves: { $sum: "$score.saves" },
       },
     },
@@ -169,7 +169,7 @@ const minutesPlayed = asyncHandler(async (_, res) => {
     {
       $group: {
         _id: "$_id",
-        name: { $first: "$name" },
+        name: { $first: "$playerName" },
         minutesPlayed: { $sum: "$score.minutesPlayed" },
       },
     },
