@@ -1,7 +1,7 @@
 const supertest = require("supertest");
 const app = require("../../index");
 const populate = require("../utils/populate");
-const Player = require("../models/Player2");
+const Player = require("../models/Player");
 const mongoose = require("mongoose");
 
 const req = supertest(app);
@@ -11,73 +11,73 @@ describe("Testing EPL stats ", () => {
     const expectedResult = {
       mostGoals: {
         name: "Kicker",
-        goals: 6,
+        goals: 9,
         assists: 0,
         cleanSheets: 0,
         reds: 1,
         yellows: 0,
         saves: 0,
-        minutesPlayed: 0,
+        minutesPlayed: 30,
       },
       mostAssists: {
         name: "Not Kicker",
-        goals: 1,
-        assists: 3,
+        goals: 0,
+        assists: 9,
         cleanSheets: 0,
         reds: 0,
-        yellows: 0,
+        yellows: 6,
         saves: 0,
-        minutesPlayed: 0,
+        minutesPlayed: 60,
       },
       mostCleanSheets: {
         name: "Not Kicker",
-        goals: 1,
-        assists: 3,
+        goals: 0,
+        assists: 9,
         cleanSheets: 0,
         reds: 0,
-        yellows: 0,
+        yellows: 6,
         saves: 0,
-        minutesPlayed: 0,
+        minutesPlayed: 60,
       },
       mostReds: {
         name: "Kicker",
-        goals: 6,
+        goals: 9,
         assists: 0,
         cleanSheets: 0,
         reds: 1,
         yellows: 0,
         saves: 0,
-        minutesPlayed: 0,
+        minutesPlayed: 30,
       },
       mostYellows: {
-        name: "Kicker",
-        goals: 6,
-        assists: 0,
+        name: "Not Kicker",
+        goals: 0,
+        assists: 9,
         cleanSheets: 0,
-        reds: 1,
-        yellows: 0,
+        reds: 0,
+        yellows: 6,
         saves: 0,
-        minutesPlayed: 0,
+        minutesPlayed: 60,
       },
       mostSaves: {
         name: "Keeper",
         goals: 1,
         assists: 0,
         cleanSheets: 0,
-        reds: 0,
-        yellows: 0,
-        saves: 3,
-        minutesPlayed: 90,
+        reds: 1,
+        yellows: 3,
+        saves: 15,
+        minutesPlayed: 270,
       },
       mostMinutesPlayed: {
         name: "Keeper",
         goals: 1,
         assists: 0,
         cleanSheets: 0,
-        reds: 0,
-        yellows: 0,
-        saves: 3,
-        minutesPlayed: 90,
+        reds: 1,
+        yellows: 3,
+        saves: 15,
+        minutesPlayed: 270,
       },
     };
 
@@ -98,9 +98,9 @@ describe("Testing EPL stats ", () => {
 
   test("GET /eplStats/goals", async () => {
     const expectedResult = [
-      { name: "Kicker", goals: 6 },
+      { name: "Kicker", goals: 9 },
       { name: "Keeper", goals: 1 },
-      { name: "Not Kicker", goals: 1 },
+      { name: "Not Kicker", goals: 0 },
     ];
     // Clear DB
     await Player.deleteMany();
@@ -119,7 +119,7 @@ describe("Testing EPL stats ", () => {
 
   test("GET /eplStats/assists", async () => {
     const expectedResult = [
-      { name: "Not Kicker", assists: 3 },
+      { name: "Not Kicker", assists: 9 },
       { name: "Keeper", assists: 0 },
       { name: "Kicker", assists: 0 },
     ];
@@ -164,8 +164,8 @@ describe("Testing EPL stats ", () => {
 
   test("GET /eplStats/reds", async () => {
     const expectedResult = [
+      { name: "Keeper", reds: 1 },
       { name: "Kicker", reds: 1 },
-      { name: "Keeper", reds: 0 },
       { name: "Not Kicker", reds: 0 },
     ];
     // Clear DB
@@ -185,9 +185,9 @@ describe("Testing EPL stats ", () => {
 
   test("GET /eplStats/yellows", async () => {
     const expectedResult = [
-      { name: "Keeper", yellows: 0 },
+      { name: "Not Kicker", yellows: 6 },
+      { name: "Keeper", yellows: 3 },
       { name: "Kicker", yellows: 0 },
-      { name: "Not Kicker", yellows: 0 },
     ];
     // Clear DB
     await Player.deleteMany();
@@ -206,7 +206,7 @@ describe("Testing EPL stats ", () => {
 
   test("GET /eplStats/saves", async () => {
     const expectedResult = [
-      { name: "Keeper", saves: 3 },
+      { name: "Keeper", saves: 15 },
       { name: "Kicker", saves: 0 },
       { name: "Not Kicker", saves: 0 },
     ];
@@ -229,12 +229,15 @@ describe("Testing EPL stats ", () => {
     const expectedResult = [
       {
         name: "Keeper",
-        minutesPlayed: 90,
+        minutesPlayed: 270,
       },
-      { name: "Kicker", minutesPlayed: 0 },
       {
         name: "Not Kicker",
-        minutesPlayed: 0,
+        minutesPlayed: 60,
+      },
+      {
+        name: "Kicker",
+        minutesPlayed: 30,
       },
     ];
     // Clear DB
@@ -245,6 +248,7 @@ describe("Testing EPL stats ", () => {
 
     // Send request
     const res = await req.get("/eplStats/minutesPlayed");
+    console.log(res.body);
 
     // Expect response
     expect(res.statusCode).toBe(200);

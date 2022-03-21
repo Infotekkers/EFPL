@@ -10,7 +10,7 @@ const populate = require("./src/utils/populate"); // eslint-disable-line
 const app = express();
 
 // Import DB Config
-const connectToDB = require("./src/config/db_config").connectToDB;
+const connectToDB = require("./src/config/db_config");
 connectToDB();
 
 // Import Routes

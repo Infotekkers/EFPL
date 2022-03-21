@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
-const autoIncrementConnection =
-  require("../config/db_config").connectToDBAutoIncrement;
 
-autoIncrement.initialize(autoIncrementConnection);
+autoIncrement.initialize(mongoose.connection);
 
 const availabilitySchema = mongoose.Schema({
   injuryStatus: String,
@@ -15,7 +13,7 @@ const scoreSchema = mongoose.Schema({
   price: { type: Number },
   fantasyScore: { type: Number },
   minutesPlayed: { type: Number },
-  goal: { type: Number },
+  goals: { type: Number },
   assists: { type: Number },
   cleanSheet: { type: Number },
   yellows: { type: Number },
@@ -58,10 +56,10 @@ const playerSchema = mongoose.Schema({
   history: { type: [historySchema] },
 });
 
-const player = autoIncrementConnection.model("player", playerSchema);
+// const player = autoIncrementConnection.model("players", playerSchema);
 
 playerSchema.plugin(autoIncrement.plugin, {
-  model: player,
+  model: "players",
   field: "playerId",
   startAt: 100000,
   incrmentBy: 1,

@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const PlayerModel = require("../models/Players");
+const PlayerModel = require("../models/Player");
 
 const addplayers = asyncHandler(async (req, res) => {
   const {

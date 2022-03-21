@@ -32,21 +32,4 @@ const connectToDB = async () => {
   }
 };
 
-const connectToDBAutoIncrement = async () => {
-  try {
-    printConsole(
-      { data: "Connecting to MongoDB FPLDB (Auto Increment) ......" },
-      { printLocation: "db_config.js:12" },
-      { textColor: "yellow" }
-    );
-    const DBConnection = mongoose.createConnection(`${MONGO_DB_URI}/FPLDB`);
-
-    return DBConnection;
-  } catch (error) {
-    printConsole(error);
-
-    process.exit(1);
-  }
-};
-
-module.exports = { connectToDB, connectToDBAutoIncrement };
+module.exports = connectToDB;

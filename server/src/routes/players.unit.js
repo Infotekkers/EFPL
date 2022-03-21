@@ -1,8 +1,10 @@
 const supertest = require("supertest");
 const app = require("../../index");
 
-const PlayerModel = require("../models/players");
+const PlayerModel = require("../models/Player");
 const mongoose = require("mongoose");
+
+const req = supertest(app);
 
 const [
   reqaddPlayer,
@@ -12,7 +14,6 @@ const [
   gameweekId, // eslint-disable-line
   playerId,
 ] = require("../utils/players.test.data");
-const req = supertest(app);
 
 describe("Testing Players", () => {
   // Add players test success
