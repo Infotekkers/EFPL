@@ -19,7 +19,7 @@ const postFixture = asyncHandler(async function (req, res) {
     }).save();
     res.send("Fixture added!");
   } else {
-    res.send("Fixture already exists in database");
+    res.status(400).send("Fixture already in database!");
   }
 });
 
@@ -121,10 +121,8 @@ const updateFixture = asyncHandler(async function (req, res) {
     await match.save();
 
     res.send("Match updated!");
-  } else if (!match) {
-    res.status(404).send("Match doesn't exist!");
   } else {
-    res.status(400).send("Match with provided matchid doesn't exist.");
+    res.status(404).send("Match doesn't exist!");
   }
 });
 
@@ -137,17 +135,18 @@ const getAllFixtures = asyncHandler(async function (req, res) {
 const getFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
-  match
-    ? res.send(match)
-    : res.status(400).send("Fixture with provided matchid doesn't exist.");
+  match ? res.send(match) : res.status(400).send("Match doesn't exist!");
 });
 
 const deleteFixture = asyncHandler(async function (req, res) {
-  await FixtureModel.deleteOne({ matchId: req.params.matchId }).then(() => {
-    return res.send("Match deleted from database.");
-  });
+  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
-  res.status(400).send("Match with provided matchid doesn't exist");
+  if (match) {
+    await FixtureModel.deleteOne({ matchId: req.params.matchId });
+    res.send("Match deleted!");
+  } else {
+    res.status(404).send("Match doesn't exist!");
+  }
 });
 
 module.exports = {
