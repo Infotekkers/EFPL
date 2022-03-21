@@ -30,14 +30,4 @@ app.use(cors());
 app.use("/teams", teams);
 
 // Run Node app
-app.listen(PORT, () =>
-  printConsole(
-    { data: `Server is live @${PORT}` },
-    { printLocation: "index.js:28" },
-    {
-      bgColor: "bgGreen",
-      textColor: "black",
-      underline: true,
-    }
-  )
-);
+module.exports = app;

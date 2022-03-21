@@ -11,9 +11,9 @@ const addteam = asyncHandler(async(req,res) => {
         await new TeamModel ({
             teamName, 
         }).save();
-        return res.status(201).send(`${teamName} added Succesfully `);
+        res.status(201).send(`${teamName} added Succesfully `);
     }else{
-        return res.send(`${teamName} EXIST.`);
+        res.status(404).send(`${teamName} EXIST.`);
     }
    
 
@@ -22,14 +22,14 @@ const addteam = asyncHandler(async(req,res) => {
 
 const getteams = asyncHandler(async (req,res) =>{
     const team = await TeamModel.find()
-    return res.status(200).send(team);
+    res.status(200).send(team);
 });
 
 const getteam = asyncHandler( async(req,res) =>{
 
     const team = await TeamModel.find({teamId: req.params.id});
 
-    return res.status(200).send(team);
+    res.status(200).send(team);
 
 });
 
@@ -46,15 +46,15 @@ const updateteam = asyncHandler(async (req,res)=>{
                 teamName: teamName,
             }
         })
-        return res.status(201).send(`${teamName} Info updated Succesfully `);
+        res.status(201).send(`${teamName} Info updated Succesfully `);
     }else{
-        return res.send(`${teamName} EXIST.`);
+        res.status(404).send(`${teamName} EXIST.`);
     }
 });
 
 const deleteteam  = asyncHandler(async(req,res)=>{
     const team = await TeamModel.deleteOne({teamId: req.params.teamId});
-    return res.status(204).send(`Team ${team.teamName} is removed`); 
+    res.status(204).send(`Team is removed.`); 
 });
 
 
