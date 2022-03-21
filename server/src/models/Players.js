@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
+const autoIncrementConnection =
+  require("../config/db_config").connectToDBAutoIncrement;
 
-const connection = mongoose.createConnection("mongodb://localhost:27017/FPLDB");
-autoIncrement.initialize(connection);
+autoIncrement.initialize(autoIncrementConnection);
 
 const availabilitySchema = mongoose.Schema({
   injuryStatus: String,
@@ -57,7 +58,7 @@ const playerSchema = mongoose.Schema({
   history: { type: [historySchema] },
 });
 
-const player = connection.model("player", playerSchema);
+const player = autoIncrementConnection.model("player", playerSchema);
 
 playerSchema.plugin(autoIncrement.plugin, {
   model: player,
