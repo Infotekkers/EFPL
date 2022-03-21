@@ -20,8 +20,8 @@ const updateplayer = asyncHandler(async(req,res) =>{
     const { playerName,history,eplTeamId,availablity, playerId, position, currentPrice} = req.body; 
 
     
-    const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
-    if(verifyPlayer){
+    // const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
+    // if(verifyPlayer){
         const player = await PlayerModel
         .updateOne({ playerId: req.body.playerId}, {
             $set: {
@@ -36,9 +36,9 @@ const updateplayer = asyncHandler(async(req,res) =>{
         });
        
         res.status(201).send(`Info updated successful`);
-    } else{
-        return res.status(404).send(`player doesn exist`);
-    }
+    // } else{
+    //     return res.status(404).send(`player doesn exist`);
+    // }
     
     
    
@@ -49,7 +49,7 @@ const updateScore = asyncHandler(async(req,res) => {
     const { score } = req.body;
     const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
     console.log(verifyPlayer);
-    if(verifyPlayer){
+    // if(verifyPlayer){
     const scorearray = verifyPlayer.score;
     const Gameweek = scorearray.filter(s=>s.gameweekId == req.params.gameweekId);
     const index = scorearray.indexOf(Gameweek[0]);
@@ -58,16 +58,16 @@ const updateScore = asyncHandler(async(req,res) => {
     console.log(verifyPlayer);
     await verifyPlayer.save();
         res.status(201).send(`Score for Gameweek update successful`);
-     }else{
-        res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
-    } 
+    //  }else{
+    //     res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
+    // } 
 });
 
 
 const addScore = asyncHandler(async(req,res) => {
     const { score } = req.body; 
     const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
-    if(verifyPlayer){
+    // if(verifyPlayer){
         const player= await PlayerModel
         .updateMany({playerId:req.params.playerId},{
             $push: {
@@ -75,9 +75,9 @@ const addScore = asyncHandler(async(req,res) => {
             }
         })
         res.status(201).send(`Score added successfully`);
-    }else{
-        res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
-    }
+    // }else{
+    //     res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
+    // }
 });
 
 
