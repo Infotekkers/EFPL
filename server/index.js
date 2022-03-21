@@ -4,10 +4,8 @@ require("dotenv").config();
 const cors = require("cors");
 
 // Development Supports
-const cors = require("cors");
 const populate = require("./src/utils/populate"); // eslint-disable-line
 
-const PORT = process.env.PORT || 3000;
 // Create express app
 const app = express();
 
