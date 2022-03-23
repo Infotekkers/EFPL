@@ -56,8 +56,6 @@ const playerSchema = mongoose.Schema({
   history: { type: [historySchema] },
 });
 
-// const player = autoIncrementConnection.model("players", playerSchema);
-
 playerSchema.plugin(autoIncrement.plugin, {
   model: "players",
   field: "playerId",
