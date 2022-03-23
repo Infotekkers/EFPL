@@ -30,7 +30,7 @@ const getTeam = asyncHandler(async (req, res) => {
 const updateTeam = asyncHandler(async (req, res) => {
   const { teamName } = req.body;
 
-  const verifyTeam = await TeamModel.findOne({ teamId: req.body.teamId });
+  const verifyTeam = await TeamModel.findOne({ teamId: req.params.teamId });
 
   if (!verifyTeam) {
     await TeamModel.updateOne(
@@ -43,7 +43,7 @@ const updateTeam = asyncHandler(async (req, res) => {
         },
       }
     );
-    res.status(201).send(`${teamName} Info updated Succesfully `);
+    res.status(201).send(`${teamName} Info updated Successfully `);
   } else {
     res.status(404).send(`${teamName} EXIST.`);
   }

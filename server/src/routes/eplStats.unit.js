@@ -7,6 +7,10 @@ const mongoose = require("mongoose");
 const req = supertest(app);
 
 describe("Testing EPL stats ", () => {
+  afterAll(() => {
+    mongoose.connection.close();
+  });
+
   test("GET /eplStats/overview", async () => {
     const expectedResult = {
       mostGoals: {
@@ -253,10 +257,5 @@ describe("Testing EPL stats ", () => {
     expect(res.statusCode).toBe(200);
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
     expect(res.body).toMatchObject(expectedResult);
-  });
-
-  test("Close DB", async () => {
-    // Close DB connection
-    mongoose.connection.close();
   });
 });
