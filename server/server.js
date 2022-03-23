@@ -10,7 +10,7 @@ const { printConsole } = require("./src/utils/development");
 const PORT = process.env.PORT || 3000;
 
 // Import Pouplators
-const { populateGameWeeks } = require("./src/utils/populate");
+const { populateGameWeeks, populateTeams } = require("./src/utils/populate");
 
 // Run Node app
 app.listen(PORT, async () => {
@@ -25,4 +25,5 @@ app.listen(PORT, async () => {
   );
 
   await populateGameWeeks();
+  await populateTeams();
 });

@@ -16,6 +16,10 @@ const [
 ] = require("../utils/players.test.data");
 
 describe("Testing Players", () => {
+  afterAll(() => {
+    mongoose.connection.close();
+  });
+
   // Add players test success
   test("POST /players/addplayer SUCCESS: Player added Successfully ", async () => {
     // send request
@@ -57,8 +61,5 @@ describe("Testing Players", () => {
     // expect response
     expect(res.statusCode).toBe(201);
     expect(res.text).toBe(`Score added successfully`);
-  });
-  test("Close DB", async () => {
-    mongoose.connection.close();
   });
 });

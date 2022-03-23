@@ -1,45 +1,51 @@
-const supertest = require('supertest');
-const app = require('../../index');
+const supertest = require("supertest");
+const app = require("../../index");
 
-const TeamModel = require('../models/Teams');
-const mongoose = require('mongoose');
+const TeamModel = require("../models/Teams");
+const mongoose = require("mongoose");
 
-const [reqbody, teamId] = require("../utils/teams.test.data")
+const { teamData } = require("../utils/data/teams.data");
 const req = supertest(app);
 
-describe("Testing teams",()=>{
-        
-        
-        // Add teams test success 
-        test("POST /teams/addteam SUCCESS: Team added Successfully ",async()=>{
-            // send request
+describe("Testing teams", () => {
+  afterAll(() => {
+    mongoose.connection.close();
+  });
 
-            await TeamModel.deleteMany();
-            const res =  await req.post(`/teams/addteam`).send(reqbody);
-             // expect response
-            expect(res.statusCode).toBe(201);
-            expect(res.text).toBe(`${reqbody.teamName} added Succesfully `)
-        });
-        
-        // update teams test success 
-        test("PATCH /teams/updateteams/:teamId SUCCESS", async()=>{
-            // send request
-            const res = await req.patch(`/teams/updateteam/${teamId}`).send(reqbody);
-            // expect response
-            expect(res.statusCode).toBe(201);
-            expect(res.text).toBe(`${reqbody.teamName} Info updated Succesfully `);
-        });
+  beforeAll(async () => {
+    await TeamModel.deleteMany();
+  });
 
-        // Add score test success 
-        test("PATCH /teams/deleteteam/:teamId SUCCESS", async()=>{
-        // send request
-            const res = await req.delete(`/teams/deleteteam/${teamId}`);
-            // expect response
-            expect(res.statusCode).toBe(204);
-            // expect(res.text).toBe(`Team is removed.`);
-        });
+  // Add teams test success
+  test("POST /teams/ SUCCESS: Team added Successfully ", async () => {
+    // send request
 
-        test("Close DB", async () => {
-            mongoose.connection.close();
-          });
+    await TeamModel.deleteMany();
+    const res = await req.post(`/teams/`).send({
+      teamName: teamData[0],
+    });
+    // expect response
+    expect(res.statusCode).toBe(201);
+    expect(res.text).toBe(`${teamData[0]} added Successfully `);
+  });
+
+  // update teams test success
+  test("PATCH /teams/:teamId SUCCESS", async () => {
+    // send request
+    const res = await req.patch(`/teams/1`).send({
+      teamName: teamData[0],
+    });
+    // expect response
+    expect(res.statusCode).toBe(201);
+    expect(res.text).toBe(`${teamData[0]} Info updated Successfully `);
+  });
+
+  // Add score test success
+  test("PATCH /teams/:teamId SUCCESS", async () => {
+    // send request
+    const res = await req.delete(`/teams/1`);
+    // expect response
+    expect(res.statusCode).toBe(204);
+    // expect(res.text).toBe(`Team is removed.`);
+  });
 });

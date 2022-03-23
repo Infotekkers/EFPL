@@ -1,11 +1,16 @@
 const axios = require("axios");
 const PORT = process.env.PORT || 3000;
 const baseURL = process.env.BASE_URL;
+const { printConsole } = require("./development");
 
+// Import Models
 const Player = require("../models/Player");
 const User = require("../models/User");
 const Gameweek = require("../models/GameWeek");
-const { printConsole } = require("./development");
+const Team = require("../models/Teams");
+
+// Import Data
+const { teamData } = require("./data/teams.data");
 
 const addTestPlayer = async () => {
   // Test PLAYER
@@ -458,6 +463,46 @@ const populateGameWeeks = async () => {
   // else if(gameWeeks.d)
 };
 
+const populateTeams = async () => {
+  // check teams
+  const teams = await axios.get(`${baseURL}${PORT}/teams/all`);
+
+  // if no teams
+  if (teams.data.length === 0) {
+    teamData.forEach((team) => {
+      axios.post(`${baseURL}${PORT}/teams`, {
+        teamName: team,
+      });
+    });
+  }
+  // If incomplete team
+  else if (teams.data.length !== 16) {
+    // clear DB
+    await Team.deleteMany();
+
+    // add all teams
+    teamData.forEach((team) => {
+      axios.post(`${baseURL}${PORT}/teams`, {
+        teamName: team,
+      });
+    });
+    printConsole(
+      { data: "All Teams added properly" },
+      { printLocation: "populate.js:490" },
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  }
+  // If already added
+  else {
+    printConsole(
+      { data: "Teams already populated" },
+      { printLocation: "populate.js:497" },
+
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  }
+};
+
 module.exports = {
   addTestUser,
   addTestGameweek,
@@ -465,4 +510,5 @@ module.exports = {
 
   // Scripts
   populateGameWeeks,
+  populateTeams,
 };

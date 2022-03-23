@@ -1,11 +1,15 @@
 const asyncHandler = require("express-async-handler");
 
 const FixtureModel = require("../models/Fixtures");
+const TeamModel = require("../models/Teams");
 
 const postFixture = asyncHandler(async function (req, res) {
   const { gameweekId, schedule, homeTeam, awayTeam } = req.body;
 
-  const matchId = `${homeTeam.teamId}|${awayTeam.teamId}`;
+  // query team for id
+  const homeTeamData = await TeamModel.findOne({ teamName: homeTeam });
+  const awayTeamData = await TeamModel.findOne({ teamName: awayTeam });
+  const matchId = `${homeTeamData.teamId}|${awayTeamData.teamId}`;
 
   const verifyMatch = await FixtureModel.find({ matchId: matchId });
 
