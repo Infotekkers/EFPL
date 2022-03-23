@@ -1,9 +1,12 @@
 import { createStore } from "vuex";
 
+// Fixtures Store
+import GlobalStore from "./global.store";
+import FixtureStore from "./fixture.store";
+
 export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+  modules: {
+    Global: GlobalStore,
+    Fixture: FixtureStore,
+  },
 });

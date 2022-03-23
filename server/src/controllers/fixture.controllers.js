@@ -21,9 +21,9 @@ const postFixture = asyncHandler(async function (req, res) {
       homeTeam,
       awayTeam,
     }).save();
-    res.send("Fixture added!");
+    res.status(200).send("Fixture added!");
   } else {
-    res.send("Fixture already exists in database");
+    res.status(409).send("Fixture already exists in database");
   }
 });
 
@@ -133,13 +133,15 @@ const updateFixture = asyncHandler(async function (req, res) {
 });
 
 const getAllFixtures = asyncHandler(async function (req, res) {
-  const matches = await FixtureModel.find();
+  const matches = await FixtureModel.find().select("-__v");
 
-  res.send(matches);
+  res.status(200).send(matches);
 });
 
 const getFixture = asyncHandler(async function (req, res) {
-  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+  const match = await FixtureModel.findOne({
+    matchId: req.params.matchId,
+  }).select("-__v");
 
   match
     ? res.send(match)
