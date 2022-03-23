@@ -14,6 +14,7 @@ const connectToDB = require("./src/config/db_config");
 connectToDB();
 
 // Import Routes
+const teams = require("./src/routes/team.routes");
 const players = require("./src/routes/players.routes");
 const eplStatsRouter = require("./src/routes/eplStats.routes");
 const fantasyStatsRouter = require("./src/routes/fantasyStat.routes");
@@ -34,6 +35,7 @@ const rateLimiter = require("./src/config/rate_config");
 app.use(rateLimiter);
 
 // Add Routes to app
+app.use("/teams", teams);
 app.use("/players", players);
 app.use("/fixtures", fixtures);
 app.use("/gameWeek", gameWeekRoutes);
@@ -49,5 +51,5 @@ app.use("/user", userRouter);
 // Add Middleware
 app.use(errorMiddleware);
 
-// Export app
+// Run Node app
 module.exports = app;
