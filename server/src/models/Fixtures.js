@@ -65,18 +65,25 @@ const fixtureSchema = mongoose.Schema({
   // Concern Here what are the possible values
   status: { type: String, default: "scheduled" },
   homeTeam: {
-    type: lineupSchema,
+    type: String,
     required: [
       true,
       "Custom Error - Required Value *:Home Team is required for a fixture.",
     ],
   },
   awayTeam: {
-    type: lineupSchema,
+    type: String,
     required: [
       true,
       "Custom Error - Required Value *:Away Team is required for a fixture.",
     ],
+  },
+
+  homeTeamLineUp: {
+    type: lineupSchema,
+  },
+  awayTeamLineUp: {
+    type: lineupSchema,
   },
 });
 
