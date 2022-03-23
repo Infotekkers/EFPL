@@ -7,10 +7,12 @@ const { printConsole } = require("./development");
 const Player = require("../models/Player");
 const User = require("../models/User");
 const Gameweek = require("../models/GameWeek");
+const Fixture = require("../models/Fixtures");
 const Team = require("../models/Teams");
 
 // Import Data
 const { teamData } = require("./data/teams.data");
+const { fixtureData } = require("../utils/data/fixture.test.data");
 
 const addTestPlayer = async () => {
   // Test PLAYER
@@ -503,6 +505,35 @@ const populateTeams = async () => {
   }
 };
 
+const populateFixture = async () => {
+  const fixtures = await axios.get(`${baseURL}${PORT}/fixtures/`);
+  //  if no fixtures
+  if (fixtures.data.length === 0) {
+    fixtureData.forEach((fixture) => {
+      axios.post(`${baseURL}${PORT}/fixtures/add`, fixture);
+    });
+  }
+  // Incomplete data
+  else if (fixtures.data.length !== 20) {
+    await Fixture.deleteMany();
+    fixtureData.forEach((fixture) => {
+      axios.post(`${baseURL}${PORT}/fixtures/add`, fixture);
+    });
+    printConsole(
+      { data: "All Fixtures added properly" },
+      { printLocation: "populate.js:524" },
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  }
+  //  complete data
+  else {
+    printConsole(
+      { data: "Fixtures already populated" },
+      { printLocation: "populate.js:532" },
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  }
+};
 module.exports = {
   addTestUser,
   addTestGameweek,
@@ -511,4 +542,5 @@ module.exports = {
   // Scripts
   populateGameWeeks,
   populateTeams,
+  populateFixture,
 };

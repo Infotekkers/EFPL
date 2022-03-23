@@ -14,7 +14,12 @@
       </div>
 
       <!-- COntent -->
-      <div>{{ currentGWFixtures }}</div>
+      <!-- <div>{{ currentGWFixtures }}</div> -->
+      <FixtureComponent
+        v-for="(fixture, index) in currentGWFixtures"
+        :key="index"
+        :fixture="fixture"
+      />
     </div>
   </div>
 </template>
@@ -48,22 +53,24 @@
   font-weight: 400;
   border: 1px solid black;
   padding: 2px 8px;
+  cursor: pointer;
 }
 </style>
 
 <script>
 import axios from "axios";
 import store from "../store/index";
+
 import { compareCache } from "../utils/helpers";
 
 // Components
-// import FixtureComponent from "@/components/FixtureComponent";
+import FixtureComponent from "@/components/FixtureComponent";
 
 export default {
   name: "FixturesComponent",
 
   components: {
-    // FixtureComponent,
+    FixtureComponent,
   },
 
   methods: {

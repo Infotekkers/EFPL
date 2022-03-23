@@ -55,7 +55,7 @@ const fixtureSchema = mongoose.Schema({
     required: [true, "Custom Error - Required Value *:Match ID is required."],
   },
   schedule: {
-    type: Number,
+    type: Date,
     required: [
       true,
       "Custom Error - Required Value *:Fixture Schedule ID is required.",
