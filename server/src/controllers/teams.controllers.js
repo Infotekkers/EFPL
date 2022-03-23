@@ -1,7 +1,7 @@
 const TeamModel = require("../models/Teams");
 const asyncHandler = require("express-async-handler");
 
-const addteam = asyncHandler(async (req, res) => {
+const addTeam = asyncHandler(async (req, res) => {
   const { teamName } = req.body;
 
   const verifyTeam = await TeamModel.findOne({ teamName: req.body.teamName });
@@ -10,24 +10,24 @@ const addteam = asyncHandler(async (req, res) => {
     await new TeamModel({
       teamName,
     }).save();
-    res.status(201).send(`${teamName} added Succesfully `);
+    res.status(201).send(`${teamName} added Successfully `);
   } else {
     res.status(404).send(`${teamName} EXIST.`);
   }
 });
 
-const getteams = asyncHandler(async (req, res) => {
+const getTeams = asyncHandler(async (req, res) => {
   const team = await TeamModel.find();
   res.status(200).send(team);
 });
 
-const getteam = asyncHandler(async (req, res) => {
+const getTeam = asyncHandler(async (req, res) => {
   const team = await TeamModel.find({ teamId: req.params.id });
 
   res.status(200).send(team);
 });
 
-const updateteam = asyncHandler(async (req, res) => {
+const updateTeam = asyncHandler(async (req, res) => {
   const { teamName } = req.body;
 
   const verifyTeam = await TeamModel.findOne({ teamId: req.body.teamId });
@@ -49,15 +49,15 @@ const updateteam = asyncHandler(async (req, res) => {
   }
 });
 
-const deleteteam = asyncHandler(async (req, res) => {
+const deleteTeam = asyncHandler(async (req, res) => {
   await TeamModel.deleteOne({ teamId: req.params.teamId });
   res.status(204).send(`Team is removed.`);
 });
 
 module.exports = {
-  addteam,
-  getteams,
-  getteam,
-  updateteam,
-  deleteteam,
+  addTeam,
+  getTeams,
+  getTeam,
+  updateTeam,
+  deleteTeam,
 };

@@ -3,10 +3,10 @@ const router = express.Router();
 
 const teamsController = require("../controllers/teams.controllers");
 
-router.post("/addteam", teamsController.addteam);
-router.get("/getteams", teamsController.getteams);
-router.get("/getteam/:teamId", teamsController.getteam);
-router.patch("/updateteam/:teamId", teamsController.updateteam);
-router.delete("/deleteteam/:teamId", teamsController.deleteteam);
+router.post("/", teamsController.addTeam);
+router.get("/all", teamsController.getTeams);
+router.get("/:teamId", teamsController.getTeam);
+router.patch("/:teamId", teamsController.updateTeam);
+router.delete("/:teamId", teamsController.deleteTeam);
 
 module.exports = router;
