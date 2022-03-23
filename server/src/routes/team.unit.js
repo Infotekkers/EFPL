@@ -12,7 +12,7 @@ describe("Testing teams",()=>{
         
         // Add teams test success 
         test("POST /teams/addteam SUCCESS: Team added Successfully ",async()=>{
-            //send request
+            // send request
 
             await TeamModel.deleteMany();
             const res =  await req.post(`/teams/addteam`).send(reqbody);
@@ -23,7 +23,7 @@ describe("Testing teams",()=>{
         
         // update teams test success 
         test("PATCH /teams/updateteams/:teamId SUCCESS", async()=>{
-            //send request
+            // send request
             const res = await req.patch(`/teams/updateteam/${teamId}`).send(reqbody);
             // expect response
             expect(res.statusCode).toBe(201);
@@ -36,7 +36,7 @@ describe("Testing teams",()=>{
             const res = await req.delete(`/teams/deleteteam/${teamId}`);
             // expect response
             expect(res.statusCode).toBe(204);
-            //expect(res.text).toBe(`Team is removed.`);
+            // expect(res.text).toBe(`Team is removed.`);
         });
 
         test("Close DB", async () => {
