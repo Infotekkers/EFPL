@@ -3,7 +3,9 @@ const reqBody = {
   matchId: "2|5",
   schedule: new Date(),
   status: "scheduled",
-  homeTeam: {
+  homeTeam: "Addis Ababa City",
+  awayTeam: "Dire Dawa",
+  homeTeamLineUp: {
     teamId: 2,
     lineup: {
       goalkeepers: [101],
@@ -13,7 +15,7 @@ const reqBody = {
       bench: [105, 302, 205, 401, 206, 410, 308],
     },
   },
-  awayTeam: {
+  awayTeamLineUp: {
     teamId: 5,
     lineup: {
       goalkeepers: [110],

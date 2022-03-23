@@ -31,6 +31,7 @@ const postFixture = asyncHandler(async function (req, res) {
 
 const startFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+  console.log("Here", match);
 
   if (match?.status === "scheduled") {
     match.status = "liveFH"; // First half

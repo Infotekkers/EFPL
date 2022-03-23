@@ -5,7 +5,7 @@ const Fixture = require("../models/Fixtures");
 const mongoose = require("mongoose");
 
 // Test data import
-const [reqBody, matchId] = require("../utils/fixture.test.data");
+const [reqBody, matchId] = require("../utils/data/fixture.test.data");
 
 const req = supertest(app);
 
