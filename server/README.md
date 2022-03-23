@@ -21,7 +21,6 @@ MONGO_REMOTE_URL=
 MONGO_LOCAL_URL=
 ```
 
-### Populate /.jest/setEnvVars.js with enviromental variables for testing
 
 ### Start express server
 

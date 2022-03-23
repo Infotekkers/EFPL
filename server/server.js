@@ -9,8 +9,11 @@ const { printConsole } = require("./src/utils/development");
 // Import ENV Variables
 const PORT = process.env.PORT || 3000;
 
+// Import Pouplators
+const { populateGameWeeks } = require("./src/utils/populate");
+
 // Run Node app
-app.listen(PORT, () =>
+app.listen(PORT, async () => {
   printConsole(
     { data: `Server is live @${PORT}` },
     { printLocation: "index.js:28" },
@@ -19,5 +22,7 @@ app.listen(PORT, () =>
       textColor: "black",
       underline: true,
     }
-  )
-);
+  );
+
+  await populateGameWeeks();
+});
