@@ -1,7 +1,5 @@
 <template>
   <div class="fixture" @click="goToDetailPage">
-    <div class="date-info">{{ formatDate }}</div>
-
     <div v-if="fixture" :class="index % 2 == 0 ? 'grey' : 'white'">
       <span class="homeTeam">{{ fixture.homeTeam }}</span>
       <span class="gameTime">{{ formatTime }}</span>
@@ -45,39 +43,6 @@ export default {
   },
 
   computed: {
-    formatDate() {
-      const days = [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ];
-      const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-      const value = new Date(this.fixture.schedule);
-
-      const fullDate = `${days[value.getDay()]} ${value.getDate()} ${
-        months[value.getMonth()]
-      } ${value.getFullYear()}`;
-
-      return fullDate;
-    },
-
     formatTime() {
       const value = new Date(this.fixture.schedule);
       let hour =

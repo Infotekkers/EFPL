@@ -1,8 +1,9 @@
 <template>
   <div class="container">
-    <div v-if="fixtureLoader">Loading</div>
+    <div v-if="connectionStatus === false">No connection</div>
+    <div v-else-if="fixtureLoader">Loading</div>
     <div v-else class="gameweek-container">
-      <!-- HEader -->
+      <!-- Header -->
       <div class="gameweek-header">
         <span v-on="showingGameWeek == 1 ? {} : { click: prevGameWeek }"
           >Prev</span
@@ -13,13 +14,23 @@
         >
       </div>
 
+      <!-- <div class="date-info">{{ formatDate }}</div> -->
+
       <!-- COntent -->
-      <!-- <div>{{ currentGWFixtures }}</div> -->
-      <FixtureComponent
-        v-for="(fixture, index) in currentGWFixtures"
-        :key="index"
-        :fixture="fixture"
-      />
+      <div v-if="currentGWFixtures.length > 0">
+        <div v-for="(fixtureBatch, index) in currentGWFixtures" :key="index">
+          <div class="date">
+            {{ formatDate[index] }}
+          </div>
+          <FixtureComponent
+            v-for="(fixture, index) in fixtureBatch"
+            :key="index"
+            :fixture="fixture"
+          />
+        </div>
+      </div>
+
+      <div v-else>No Fixtures</div>
     </div>
   </div>
 </template>
@@ -54,6 +65,11 @@
   border: 1px solid black;
   padding: 2px 8px;
   cursor: pointer;
+}
+.date {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  font-size: 16px;
 }
 </style>
 
@@ -167,14 +183,91 @@ export default {
     },
 
     currentGWFixtures() {
+      // Filter only current gw fixtures
       const currentGW = store.state.Fixture.showingGameWeek;
       const allFixtures = store.state.Fixture.allFixtures;
       const filtered = allFixtures.filter((fixture) => {
         return fixture.gameweekId == currentGW;
       });
-      console.log(filtered);
 
-      return filtered;
+      // get all possible fixture dates
+      let allDates = [];
+
+      filtered.forEach((fixture) => {
+        const date = fixture.schedule.split("T")[0];
+        if (!allDates.includes(date)) {
+          allDates.push(date);
+        }
+      });
+
+      let formattedAndFiltered = [];
+      // console.log(filtered);
+      allDates.forEach((date) => {
+        let fix = filtered.filter((fixture) => {
+          return fixture.schedule.split("T")[0] === date;
+        });
+
+        formattedAndFiltered.push(fix);
+      });
+
+      console.log(formattedAndFiltered);
+
+      return formattedAndFiltered;
+    },
+
+    formatDate() {
+      const days = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ];
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      const currentGW = store.state.Fixture.showingGameWeek;
+      const allFixtures = store.state.Fixture.allFixtures;
+      const filtered = allFixtures.filter((fixture) => {
+        return fixture.gameweekId == currentGW;
+      });
+
+      // get all possible fixture dates
+      let allDates = [];
+
+      filtered.forEach((fixture) => {
+        const date = fixture.schedule.split("T")[0];
+        if (!allDates.includes(date)) {
+          allDates.push(date);
+        }
+      });
+
+      let allFormattedDates = [];
+      allDates.forEach((date) => {
+        const value = new Date(date);
+        const fullDate = `${days[value.getDay()]} ${value.getDate()} ${
+          months[value.getMonth()]
+        } ${value.getFullYear()}`;
+
+        allFormattedDates.push(fullDate);
+      });
+      // const value = new Date(fixture.schedule);
+
+      return allFormattedDates;
     },
 
     //
