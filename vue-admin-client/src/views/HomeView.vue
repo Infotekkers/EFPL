@@ -5,7 +5,9 @@
     <NotificationComponent
       message="A global Notification System Message here."
       type="success"
-      :showNotification="true"
+      v-show="showNotification"
+      @closeNotification="showNotification = false"
+      :duration="2000"
     />
   </div>
 </template>
@@ -20,6 +22,11 @@ export default {
   components: {
     HelloWorld,
     NotificationComponent,
+  },
+  data() {
+    return {
+      showNotification: true,
+    };
   },
 };
 </script>
