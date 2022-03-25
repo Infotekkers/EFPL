@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <FixtureModalComponent :showModal="showModal" />
     <div v-if="connectionStatus === false">No connection</div>
     <div v-else-if="fixtureLoader">Loading</div>
     <div v-else class="gameweek-container">
@@ -12,6 +13,7 @@
         <span v-on="showingGameWeek == 30 ? {} : { click: nextGameWeek }"
           >Next</span
         >
+        <span @click="activateModal">Add New</span>
       </div>
 
       <!-- <div class="date-info">{{ formatDate }}</div> -->
@@ -42,6 +44,7 @@
   display: grid;
   place-items: center;
 }
+
 .gameweek-container {
   width: 900px;
   min-height: 200px;
@@ -81,15 +84,27 @@ import { compareCache } from "../utils/helpers";
 
 // Components
 import FixtureComponent from "@/components/FixtureComponent";
+import FixtureModalComponent from "@/components/FixtureModalComponent";
 
 export default {
   name: "FixturesComponent",
 
   components: {
     FixtureComponent,
+    FixtureModalComponent,
+  },
+
+  data() {
+    return {
+      showModal: false,
+    };
   },
 
   methods: {
+    activateModal() {
+      this.showModal = true;
+    },
+
     async addNewFixture() {
       const fixture = {
         gameweekId: 4,
@@ -209,8 +224,6 @@ export default {
 
         formattedAndFiltered.push(fix);
       });
-
-      console.log(formattedAndFiltered);
 
       return formattedAndFiltered;
     },

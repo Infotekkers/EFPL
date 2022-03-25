@@ -4,6 +4,7 @@ export default {
     isFixtureLoading: false,
     allFixtures: [],
     tempCache: [],
+    allTeams: [],
     showingGameWeek: 2,
   },
   getters: {
