@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <FixtureModalComponent :showModal="showModal" />
+    <FixtureModalComponent v-show="showModal" @closeModal="showModal = false" />
     <div v-if="connectionStatus === false">No connection</div>
     <div v-else-if="fixtureLoader">Loading</div>
     <div v-else class="gameweek-container">
@@ -169,6 +169,29 @@ export default {
       // }, 4000);
     },
 
+    async getTeams() {
+      const allTeams = [
+        "Saint George",
+        "Welayta Dicha",
+        "Hawassa",
+        "Fasil Ketema",
+        "Sidama Coffee",
+        "Adama City",
+        "Bahir Dar Kenema",
+        "Ethiopian Coffee",
+        "Wolkite Ketema",
+        "Arba Minch",
+        "Defence Force",
+        "Hadiya Hossana",
+        "Dire Dawa Kenema",
+        "Addis Ababa City",
+        "Jimma Kenema",
+        "Sebeta City",
+      ];
+
+      store.dispatch("Fixture/setAllTeams", allTeams);
+    },
+
     // Event Handlers
 
     prevGameWeek() {
@@ -291,6 +314,7 @@ export default {
 
   async beforeMount() {
     await this.getFixtures();
+    await this.getTeams();
   },
 };
 </script>
