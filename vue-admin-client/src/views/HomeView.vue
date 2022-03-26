@@ -1,10 +1,11 @@
 <template>
-  <FixturesComponent />
+  <div class="home">
+    <FixturesComponent />
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
 import FixturesComponent from "@/components/FixturesComponent";
 
 export default {
@@ -12,9 +13,10 @@ export default {
   components: {
     FixturesComponent,
   },
-
-  mounted() {
-    console.log("Mounted Home");
+  data() {
+    return {
+      showNotification: true,
+    };
   },
 };
 </script>

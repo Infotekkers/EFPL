@@ -5,6 +5,13 @@
       :class="index % 2 == 0 ? 'grey' : 'white'"
       class="main-container"
     >
+      <NotificationComponent
+        :message="notificationMessage"
+        :type="notificationType"
+        v-show="showNotification"
+        @closeNotification="showNotification = false"
+        :duration="notificationDuration"
+      />
       <div class="fixture-info" @click="goToDetailPage">
         <!-- Home team -->
         <div class="fixture-container">
@@ -112,11 +119,25 @@
 
 <script>
 import router from "../router/index";
+
+// Components
+import NotificationComponent from "@/components/NotificationComponent";
 export default {
   name: "FixtureComponent",
   props: {
     fixture: Object,
     index: Number,
+  },
+  components: {
+    NotificationComponent,
+  },
+  data() {
+    return {
+      showNotification: false,
+      notificationType: "success",
+      notificationMessage: "",
+      notificationDuration: 4000,
+    };
   },
 
   computed: {
@@ -166,6 +187,10 @@ export default {
 
     startMatch() {
       console.log("Starting", this.getMatchKey);
+      this.showNotification = true;
+      this.notificationType = "success";
+      const message = `Match ${this.fixture.homeTeam} vs ${this.fixture.awayTeam} has been started.`;
+      this.notificationMessage = message;
     },
 
     pauseMatch() {
