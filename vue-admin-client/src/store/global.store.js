@@ -31,7 +31,7 @@ export default {
           : ""),
         (state.notificationDuration = payload.notificationDuration
           ? payload.notificationDuration
-          : 4000);
+          : 6000);
     },
   },
   actions: {

@@ -1,13 +1,7 @@
 <template>
   <div class="home">
     <FixturesComponent />
-    <NotificationComponent
-      :message="notificationMessage"
-      :type="notificationType"
-      v-show="showNotification"
-      @closeNotification="closeNotification"
-      :duration="notificationDuration"
-    />
+    <NotificationComponent />
   </div>
 </template>
 
@@ -27,22 +21,6 @@ export default {
   methods: {
     closeNotification() {
       store.dispatch("Global/setNotificationInfo", { showNotification: false });
-    },
-  },
-
-  computed: {
-    showNotification() {
-      return store.state.Global.showNotification;
-    },
-    notificationMessage() {
-      return store.state.Global.notificationMessage;
-    },
-    notificationType() {
-      return store.state.Global.notificationType;
-    },
-    notificationDuration() {
-      console.log("Duration", store.state.Global.notificationDuration);
-      return store.state.Global.notificationDuration;
     },
   },
 };

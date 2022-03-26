@@ -2,10 +2,11 @@
   <!-- Notification Bar -->
 
   <section
+    v-show="showNotification"
     :class="
-      type === 'success'
+      notificationType === 'success'
         ? 'success-bg'
-        : type === 'warning'
+        : notificationType === 'warning'
         ? 'warning-bg'
         : 'error-bg'
     "
@@ -40,9 +41,9 @@
           >
             <path
               :class="
-                type === 'success'
+                notificationType === 'success'
                   ? 'success-fill'
-                  : type === 'warning'
+                  : notificationType === 'warning'
                   ? 'warning-fill'
                   : 'error-fill'
               "
@@ -69,24 +70,24 @@
     <!-- Text -->
     <div
       :class="
-        type === 'success'
+        notificationType === 'success'
           ? 'success-fg'
-          : type === 'warning'
+          : notificationType === 'warning'
           ? 'warning-fg'
           : 'error-fg'
       "
       class="message-container"
     >
-      {{ message }}
+      {{ notificationMessage }}
     </div>
 
     <div
-      @click="$emit('closeNotification')"
+      @click="closeNotification"
       class="close-button"
       :class="
-        type === 'success'
+        notificationType === 'success'
           ? 'success-fg'
-          : type === 'warning'
+          : notificationType === 'warning'
           ? 'warning-fg'
           : 'error-fg'
       "
@@ -164,25 +165,37 @@ section {
 </style>
 
 <script>
+import store from "../store/index";
 export default {
   name: "NotificationComponent",
-  props: {
-    type: String,
-    message: String,
-    duration: Number,
+
+  computed: {
+    showNotification() {
+      return store.state.Global.showNotification;
+    },
+    notificationMessage() {
+      return store.state.Global.notificationMessage;
+    },
+    notificationType() {
+      return store.state.Global.notificationType;
+    },
+    notificationDuration() {
+      return store.state.Global.notificationDuration;
+    },
   },
 
   methods: {
     closeNotification() {
-      const notificationDuration = this.duration ? this.duration : 6000;
-      setTimeout(() => {
-        this.$emit("closeNotification");
-      }, notificationDuration);
+      store.dispatch("Global/setNotificationInfo", {
+        showNotification: false,
+      });
     },
   },
 
-  created() {
-    this.closeNotification();
+  updated() {
+    setTimeout(() => {
+      this.closeNotification();
+    }, this.notificationDuration);
   },
 };
 </script>

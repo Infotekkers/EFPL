@@ -156,5 +156,114 @@ export default {
 
       // context.commit("SET_NEW_FIXTURE", newFixture);
     },
+
+    // Start match
+    async startMatch(context, matchId) {
+      axios
+        .patch(`${baseURL}/fixtures/start/${matchId}`)
+        .then((response) => {
+          if (response.status === 200) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: response.data,
+            });
+          }
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
+
+    // Pause match
+    async pauseMatch(context, matchId) {
+      axios
+        .patch(`${baseURL}/fixtures/pause/${matchId}`)
+        .then((response) => {
+          if (response.status === 200) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: response.data,
+            });
+          }
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
+
+    // Resume match
+    async resumeMatch(context, matchId) {
+      axios
+        .patch(`${baseURL}/fixtures/resume/${matchId}`)
+        .then((response) => {
+          if (response.status === 200) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: response.data,
+            });
+          }
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
+
+    // end match
+    async endMatch(context, matchId) {
+      axios
+        .patch(`${baseURL}/fixtures/end/${matchId}`)
+        .then((response) => {
+          if (response.status === 200) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: response.data,
+            });
+          }
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
+
+    // delete match
+    async deleteMatch(context, matchId) {
+      axios
+        .delete(`${baseURL}/fixtures/delete/${matchId}`)
+        .then((response) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "success",
+            notificationMessage: response.data,
+          });
+          store.dispatch("Fixture/setAllFixtures");
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
   },
 };

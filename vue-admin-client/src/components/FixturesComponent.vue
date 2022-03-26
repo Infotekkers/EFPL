@@ -35,6 +35,8 @@
             v-for="fixture in fixtureBatch"
             :key="fixture.matchId"
             :fixture="fixture"
+            :isEditMode="isEditMode"
+            @activateModal="activateModalChild"
           />
         </div>
       </div>
@@ -107,12 +109,17 @@ export default {
     return {
       showModal: false,
       isFixtureLoading: false,
+      isEditMode: false,
     };
   },
 
   methods: {
     activateModal() {
       this.showModal = true;
+    },
+    activateModalChild() {
+      this.showModal = true;
+      this.isEditMode = true;
     },
 
     getFixtures() {

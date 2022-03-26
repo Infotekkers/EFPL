@@ -1,6 +1,8 @@
 <template>
   <div ref="modal" class="modal-show">
-    <div class="close-button" @click="$emit('closeModal')">X</div>
+    <div class="close-button" @click="$emit('closeModal')">
+      X {{ isEditMode }}
+    </div>
 
     <div class="main-section" v-if="homeTeams.length > 0">
       <!-- Title -->
@@ -232,6 +234,9 @@
 import store from "../store/index";
 export default {
   name: "FixtureModalComponent",
+  props: {
+    isEditMode: Boolean,
+  },
   data() {
     return {
       homeIconError: false,
@@ -267,8 +272,6 @@ export default {
           return !allPlayedTeams.includes(team.teamName);
         });
       }
-
-      console.log(allUnplayedTeams);
 
       store.dispatch("Fixture/setHomeTeams", allUnplayedTeams);
       store.dispatch("Fixture/setHomeTeamIndex", 0);
@@ -372,7 +375,5 @@ export default {
       }
     },
   },
-
-  updated() {},
 };
 </script>

@@ -38,7 +38,10 @@
       <div class="controls">
         <div @click="startMatch">Play</div>
         <div @click="pauseMatch">Pause</div>
+        <div @click="resumeMatch">Resume</div>
         <div @click="stopMatch">Stop</div>
+        <div @click="editMatch">Edit</div>
+        <div @click="deleteMatch">Delete</div>
       </div>
     </div>
   </div>
@@ -60,7 +63,7 @@
   justify-content: flex-start;
 }
 .main-container {
-  width: 850px;
+  width: 950px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -106,7 +109,7 @@
   flex-direction: row;
 }
 .controls > div {
-  margin-left: 3px;
+  margin-left: 15px;
 }
 </style>
 
@@ -115,20 +118,13 @@ import router from "../router/index";
 
 // Components
 import store from "../store";
+
 export default {
   name: "FixtureComponent",
+
   props: {
     fixture: Object,
     index: Number,
-  },
-  components: {},
-  data() {
-    return {
-      // showNotification: false,
-      notificationType: "success",
-      notificationMessage: "",
-      notificationDuration: 4000,
-    };
   },
 
   computed: {
@@ -181,18 +177,49 @@ export default {
     },
 
     startMatch() {
-      console.log("Starting", this.getMatchKey);
-      this.showNotification = true;
-      this.notificationType = "success";
-      const message = `Match ${this.fixture.homeTeam} vs ${this.fixture.awayTeam} has been started.`;
-      this.notificationMessage = message;
+      store.dispatch("Fixture/startMatch", this.getMatchKey);
     },
 
     pauseMatch() {
-      console.log("Pausing", this.getMatchKey);
+      store.dispatch("Fixture/pauseMatch", this.getMatchKey);
+    },
+    resumeMatch() {
+      store.dispatch("Fixture/resumeMatch", this.getMatchKey);
+      console.log("Res");
     },
     stopMatch() {
-      console.log("Ending Match", this.getMatchKey);
+      store.dispatch("Fixture/endMatch", this.getMatchKey);
+    },
+    deleteMatch() {
+      store.dispatch("Fixture/deleteMatch", this.getMatchKey);
+    },
+    editMatch() {
+      // TODO: Hook to api
+      // TODO: Improve response messages
+      const teamIds = this.getMatchKey.split("|");
+
+      const allTeams = store.state.Fixture.allTeams;
+
+      const homeTeam = allTeams.filter((team) => {
+        return team.teamId == parseInt(teamIds[0]);
+      });
+
+      const awayTeam = allTeams.filter((team) => {
+        return team.teamId == parseInt(teamIds[1]);
+      });
+
+      store.dispatch("Fixture/setHomeTeams", [homeTeam, awayTeam]);
+      store.dispatch("Fixture/setHomeTeamIndex", 0);
+
+      console.log(store.state.Fixture.homeTeams);
+
+      store.dispatch("Fixture/setAwayTeams", [homeTeam, awayTeam]);
+      store.dispatch("Fixture/setAwayTeamIndex", 1);
+
+      this.$emit("activateModal");
+
+      // TODO: Hook to api
+      console.log("Editing Match", this.getMatchKey);
     },
   },
 };
