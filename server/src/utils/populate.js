@@ -8,6 +8,7 @@ const Player = require("../models/Player");
 const User = require("../models/User");
 const Gameweek = require("../models/GameWeek");
 const Team = require("../models/Teams");
+const Admin = require("../models/Admin");
 
 // Import Data
 const { teamData } = require("./data/teams.data");
@@ -387,6 +388,16 @@ const addTestUser = async () => {
   await testUser.save();
 };
 
+
+const addTestAdmin = async()=>{
+  // test admin
+  const testAdmin = new Admin({
+    email:"mikealexiv565@gmail.com",
+    password:"Strong@Password123"
+  });
+  await testAdmin.save();
+}
+
 const addTestGameweek = async () => {
   // Test Gameweek
   const testGameweek = new Gameweek({
@@ -397,6 +408,7 @@ const addTestGameweek = async () => {
 
   await testGameweek.save();
 };
+
 
 /*
   ===============================================================
@@ -507,6 +519,7 @@ module.exports = {
   addTestUser,
   addTestGameweek,
   addTestPlayer,
+  addTestAdmin,
 
   // Scripts
   populateGameWeeks,
