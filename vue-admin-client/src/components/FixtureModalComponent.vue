@@ -3,6 +3,7 @@
     <div class="close-button" @click="$emit('closeModal')">X</div>
 
     <div class="main-section" v-if="homeTeams">
+      <h6>Add New Fixture for Game week {{ currentGameweek }}</h6>
       <!-- Home team info -->
       <div class="homeTeam">
         <div class="prev" @click="prevHomeTeam">Prev</div>
@@ -178,6 +179,10 @@ export default {
   },
 
   computed: {
+    // Game week
+    currentGameweek() {
+      return store.state.Fixture.showingGameWeek;
+    },
     // Scroller methods
     homeTeams() {
       return store.state.Fixture.homeTeams;

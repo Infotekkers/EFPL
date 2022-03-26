@@ -25,8 +25,8 @@
             {{ formatDate[index] }}
           </div>
           <FixtureComponent
-            v-for="(fixture, index) in fixtureBatch"
-            :key="index"
+            v-for="fixture in fixtureBatch"
+            :key="fixture.matchId"
             :fixture="fixture"
           />
         </div>
@@ -73,6 +73,9 @@
   margin-top: 32px;
   margin-bottom: 32px;
   font-size: 16px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
 }
 </style>
 
