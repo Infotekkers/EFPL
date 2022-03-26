@@ -32,7 +32,7 @@ label {
   text-transform: uppercase;
 }
 button {
-  background: rgb(43, 31, 156);
+  background: #42b983;
   color: white;
   border: 0;
   padding: 10px 20px;
