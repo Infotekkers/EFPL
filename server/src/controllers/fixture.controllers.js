@@ -13,7 +13,32 @@ const postFixture = asyncHandler(async function (req, res) {
 
   const verifyMatch = await FixtureModel.find({ matchId: matchId });
 
-  if (!verifyMatch.length) {
+  const homeTeamHasMatch = await FixtureModel.find({
+    gameweekId: gameweekId,
+    homeTeam: homeTeam,
+  });
+
+  const awayTeamHasMatch = await FixtureModel.find({
+    gameweekId: gameweekId,
+    awayTeam: awayTeam,
+  });
+
+  console.log(homeTeamHasMatch, awayTeamHasMatch);
+
+  // If home team already has match
+  if (homeTeamHasMatch.length > 0) {
+    res
+      .status(409)
+      .send(
+        `Team ${homeTeam} already has a match for game week ${gameweekId}.`
+      );
+  } else if (awayTeamHasMatch.length > 0) {
+    res
+      .status(409)
+      .send(
+        `Team ${awayTeam} already has a match for game week ${gameweekId}.`
+      );
+  } else if (!verifyMatch.length) {
     await new FixtureModel({
       gameweekId,
       matchId,
@@ -23,7 +48,11 @@ const postFixture = asyncHandler(async function (req, res) {
     }).save();
     res.status(200).send("Fixture added!");
   } else {
-    res.status(409).send("Fixture already exists in database");
+    res
+      .status(409)
+      .send(
+        `Fixture ${homeTeam} vs ${awayTeam} for game week ${gameweekId} already exists. `
+      );
   }
 });
 

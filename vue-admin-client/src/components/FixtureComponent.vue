@@ -5,13 +5,6 @@
       :class="index % 2 == 0 ? 'grey' : 'white'"
       class="main-container"
     >
-      <NotificationComponent
-        :message="notificationMessage"
-        :type="notificationType"
-        v-show="showNotification"
-        @closeNotification="showNotification = false"
-        :duration="notificationDuration"
-      />
       <div class="fixture-info" @click="goToDetailPage">
         <!-- Home team -->
         <div class="fixture-container">
@@ -121,19 +114,17 @@
 import router from "../router/index";
 
 // Components
-import NotificationComponent from "@/components/NotificationComponent";
+import store from "../store";
 export default {
   name: "FixtureComponent",
   props: {
     fixture: Object,
     index: Number,
   },
-  components: {
-    NotificationComponent,
-  },
+  components: {},
   data() {
     return {
-      showNotification: false,
+      // showNotification: false,
       notificationType: "success",
       notificationMessage: "",
       notificationDuration: 4000,
@@ -141,6 +132,10 @@ export default {
   },
 
   computed: {
+    showNotification() {
+      console.log(store.state.Fixture.showNotification);
+      return store.state.Fixture.showNotification;
+    },
     getMatchKey() {
       return this.$.vnode.key;
     },

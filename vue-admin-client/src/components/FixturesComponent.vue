@@ -1,8 +1,15 @@
 <template>
   <div class="container">
+    <!-- Add Modal -->
     <FixtureModalComponent v-show="showModal" @closeModal="showModal = false" />
+
+    <!-- No Connection -->
     <div v-if="connectionStatus === false">No connection</div>
-    <div v-else-if="fixtureLoader">Loading</div>
+
+    <!-- Loading Data -->
+    <div v-else-if="isFixtureLoading">Loading</div>
+
+    <!-- After Data Loaded -->
     <div v-else class="gameweek-container">
       <!-- Header -->
       <div class="gameweek-header">
@@ -48,10 +55,12 @@
 .gameweek-container {
   width: 900px;
   min-height: 200px;
-  background: grey;
+  /* background: grey; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 1px solid black;
+  padding: 12px 12px 24px 12px;
 }
 .gameweek-header {
   width: 98%;
@@ -60,7 +69,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: teal;
+  /* background: teal; */
   /* align-items: space-between; */
 }
 .gameweek-header > span {
@@ -80,10 +89,7 @@
 </style>
 
 <script>
-import axios from "axios";
 import store from "../store/index";
-
-import { compareCache } from "../utils/helpers";
 
 // Components
 import FixtureComponent from "@/components/FixtureComponent";
@@ -100,6 +106,7 @@ export default {
   data() {
     return {
       showModal: false,
+      isFixtureLoading: false,
     };
   },
 
@@ -108,91 +115,15 @@ export default {
       this.showModal = true;
     },
 
-    async addNewFixture() {
-      const fixture = {
-        gameweekId: 4,
-        homeTeam: "Welayta Dicha",
-        awayTeam: "Saint George",
-        schedule: "03-23-22",
-      };
-      if (this.connectionStatus) {
-        console.log("Adding New");
-        axios
-          .post(`${this.baseURL}/fixtures/add`, fixture)
-          .then((response) => {
-            if (response.status === 200) {
-              console.log("Added new fixture");
-            }
-          })
-          .catch((error) => {
-            switch (error.response.status) {
-              case 409:
-                console.log("Fixture already exists");
-                break;
-
-              default:
-                console.log(error);
-                break;
-            }
-          });
-      } else {
-        console.log("Caching");
-        const currentCache = store.state.Fixture.tempCache;
-
-        // Check if value is cached
-        const result = compareCache(fixture, currentCache);
-
-        if (!result) {
-          store.dispatch("Fixture/setTempCache", fixture);
-        }
-      }
-    },
-
-    async getFixtures() {
+    getFixtures() {
       //   Set Loader
-      store.dispatch("Fixture/setFixtureLoader", true);
-      const existingFixtures = await axios.get(`${this.baseURL}/fixtures/`);
-
-      //    Check status
-      switch (existingFixtures.status) {
-        case 200:
-          store.dispatch("Fixture/setAllFixtures", existingFixtures.data);
-          break;
-
-        default:
-          store.dispatch(
-            "Fixture/setConnectionStatus",
-            existingFixtures.status
-          );
-          break;
-      }
-
-      // setTimeout(async () => {
-      store.dispatch("Fixture/setFixtureLoader", false);
-      // }, 4000);
+      this.isFixtureLoading = true;
+      store.dispatch("Fixture/setAllFixtures");
+      this.isFixtureLoading = false;
     },
 
-    async getTeams() {
-      const allTeams = [
-        "Saint George",
-        "Welayta Dicha",
-        "Hawassa",
-        "Fasil Ketema",
-        "Sidama Coffee",
-        "Adama City",
-        "Bahir Dar Kenema",
-        "Ethiopian Coffee",
-        "Wolkite Ketema",
-        "Arba Minch",
-        "Defence Force",
-        "Hadiya Hossana",
-        "Dire Dawa Kenema",
-        "Addis Ababa City",
-        "Jimma Kenema",
-        "Sebeta City",
-      ];
-
-      store.dispatch("Fixture/setAllTeams", allTeams);
+    getTeams() {
+      store.dispatch("Fixture/setAllTeams");
     },
 
     // Event Handlers
@@ -208,17 +139,10 @@ export default {
   },
 
   computed: {
-    baseURL() {
-      return process.env.VUE_APP_API_BASE_URL;
-    },
-
     connectionStatus() {
       return store.state.Global.connection;
     },
 
-    fixtureLoader() {
-      return store.state.Fixture.isFixtureLoading;
-    },
     showingGameWeek() {
       return store.state.Fixture.showingGameWeek;
     },
@@ -315,9 +239,9 @@ export default {
     },
   },
 
-  async beforeMount() {
-    await this.getFixtures();
-    await this.getTeams();
+  beforeMount() {
+    this.getFixtures();
+    this.getTeams();
   },
 };
 </script>

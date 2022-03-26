@@ -102,6 +102,7 @@ section {
   width: 450px;
   min-height: 80px;
   position: fixed;
+  z-index: 10;
   top: 80px;
   right: 0px;
   padding: 2px 12px;
@@ -173,7 +174,7 @@ export default {
 
   methods: {
     closeNotification() {
-      const notificationDuration = this.duration ? this.duration : 8000;
+      const notificationDuration = this.duration ? this.duration : 6000;
       setTimeout(() => {
         this.$emit("closeNotification");
       }, notificationDuration);

@@ -10,6 +10,11 @@ const errorHandler = (err, vm, info) => {
 
   if (err.message == "Network Error") {
     store.dispatch("Global/setConnection", false);
+    store.dispatch("Global/setNotificationInfo", {
+      showNotification: true,
+      notificationType: "error",
+      notificationMessage: "No Connection to server.",
+    });
   } else if (err.message == "Cannot find module") {
     console.log("Module Err");
   }
