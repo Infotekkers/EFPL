@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import AdminLoginView from "../views/AdminLoginView.vue";
-import PageNotFound from "../views/PageNotFound.vue";
+import PageNotFoundView from "../views/PageNotFoundView.vue";
+import SettingsView from "../views/SettingsView.vue";
 const routes = [
   {
     path: "/",
@@ -17,16 +18,23 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
+  // admin login page
   {
     path: "/admin/login",
     name: "admin-login",
     component: AdminLoginView,
   },
-  // should alway be the last route add routes above this
+  // settings page
+  {
+    path: "/admin/settings",
+    name: "settings",
+    component: SettingsView,
+  },
+  // 404 page should always be the last route add routes above this
   {
     path: "/:catchAll(.*)",
     name: "pagenotfound",
-    component: PageNotFound,
+    component: PageNotFoundView,
   },
 ];
 
