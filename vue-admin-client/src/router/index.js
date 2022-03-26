@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-
+import AdminLoginView from "../views/AdminLoginView.vue";
+import PageNotFound from "../views/PageNotFound.vue";
 const routes = [
   {
     path: "/",
@@ -15,6 +16,17 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+  },
+  {
+    path: "/admin/login",
+    name: "admin-login",
+    component: AdminLoginView,
+  },
+  // should alway be the last route add routes above this
+  {
+    path: "/:catchAll(.*)",
+    name: "pagenotfound",
+    component: PageNotFound,
   },
 ];
 
