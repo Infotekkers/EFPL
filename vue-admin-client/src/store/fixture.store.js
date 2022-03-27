@@ -76,7 +76,6 @@ export default {
               var d = new Date(b.schedule);
               return c - d;
             });
-            console.log(response.data);
             context.commit("SET_ALL_FIXTURES", response.data);
           }
         })
@@ -152,7 +151,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.response);
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
@@ -185,8 +183,6 @@ export default {
           notificationMessage: "No change in Fixture information for update.",
         });
       } else {
-        updatedFixture.matchId = store.state.Fixture.editFixtureId;
-        console.log(updatedFixture);
         await axios
           .patch(
             `${baseURL}/fixtures/postpone/${store.state.Fixture.editFixtureId}`,

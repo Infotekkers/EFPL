@@ -193,6 +193,7 @@ export default {
   },
 
   updated() {
+    // Auto duration close
     setTimeout(() => {
       this.closeNotification();
     }, this.notificationDuration);

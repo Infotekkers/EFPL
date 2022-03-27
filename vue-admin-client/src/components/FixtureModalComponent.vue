@@ -1,5 +1,7 @@
 <template>
+  <!-- Modal -->
   <div ref="modal" class="modal-show">
+    <!-- Top Close Button -->
     <div
       class="close-button"
       v-on="
@@ -8,23 +10,31 @@
           : { click: modalCancel }
       "
     >
-      X {{ isEditMode }}
+      X
     </div>
+    <!-- Top Close Button -->
 
+    <!-- Main Section -->
     <div class="main-section" v-if="homeTeams.length > 0">
-      <!-- Title -->
+      <!-- Title for add mode-->
       <div class="title" v-show="isEditMode === false">
         Add new fixture for Game week {{ currentGameWeek }}
       </div>
 
+      <!-- Title for edit mode -->
       <div class="title" v-show="isEditMode === true">
         Editing fixture for Game week {{ currentGameWeek }}
       </div>
+      <!-- Title for edit mode -->
 
+      <!-- Content -->
       <div class="content-section" v-if="homeTeams">
         <!-- Home team info -->
         <div class="homeTeam">
+          <!-- Previous button -->
           <div class="prev" @click="prevHomeTeam">Prev</div>
+          <!-- Previous button -->
+
           <div class="content">
             <!-- Image -->
             <div
@@ -34,15 +44,22 @@
               }"
             ></div>
 
+            <!-- Team title -->
             <div class="name">{{ homeTeams[homeTeamIndex].teamName }}</div>
+            <!-- Team title -->
           </div>
+
+          <!-- Next Button -->
           <div class="next" @click="nextHomeTeam">Next</div>
+          <!-- Next Button -->
         </div>
         <!-- Home team info -->
 
         <!-- Time and Date info -->
         <div>
+          <!-- Date -->
           <div class="date">
+            <!-- Label -->
             <label for="Date">Date <span>(DD/MM/YY)</span> : </label>
             <div>
               <div class="date">
@@ -64,7 +81,11 @@
               </div>
             </div>
           </div>
+          <!-- Date -->
+
+          <!-- Time -->
           <div class="time">
+            <!-- Label -->
             <label for="Time">Time :</label>
             <div>
               <div class="hour">
@@ -87,6 +108,7 @@
               </div>
             </div>
           </div>
+          <!-- Time -->
         </div>
         <!-- Time and Date info -->
 
@@ -113,7 +135,11 @@
 
         <!-- Buttons Container -->
       </div>
+      <!-- Content -->
+
+      <!-- Buttons -->
       <div class="buttons-container">
+        <!-- Cancel button *2 modes -->
         <div
           v-on="
             isEditMode === true
@@ -123,6 +149,9 @@
         >
           Cancel
         </div>
+        <!-- Cancel button *2 modes -->
+
+        <!-- Save Button *2 modes -->
         <div
           v-on="
             isEditMode === true
@@ -132,11 +161,17 @@
         >
           Save
         </div>
+        <!-- Save Button *2 modes -->
       </div>
+      <!-- Buttons -->
     </div>
+    <!-- Main Section -->
 
+    <!-- all teams have matches -->
     <div v-else class="container">All Teams have matches</div>
+    <!-- all teams have matches -->
   </div>
+  <!-- Modal -->
 </template>
 
 <style scoped>
@@ -258,7 +293,9 @@
 </style>
 
 <script>
+// Utils
 import store from "../store/index";
+
 export default {
   name: "FixtureModalComponent",
   props: {
@@ -269,60 +306,123 @@ export default {
       homeIconError: false,
     };
   },
-
   computed: {
-    modalMode() {
-      return this.isEditMode;
-    },
+    // gets current gameweek
     currentGameWeek() {
       return store.state.Fixture.showingGameWeek;
     },
-    // Scroller methods
+
+    // gets all possible home teams
     homeTeams() {
+      // If not edit mode , remove all played teams
       if (!this.isEditMode) {
-        // All GW Matches
+        // get all current gw matches
         const allGwMatches = store.state.Fixture.allFixtures.filter((match) => {
           return match.gameweekId == this.currentGameWeek;
         });
 
         let allUnplayedTeams = [];
+        // get all teams
         const allTeams = store.state.Fixture.allTeams;
 
+        // if no fixture this gw use all teams as possible
         if (allGwMatches.length == 0) {
           allUnplayedTeams = Array.from(allTeams);
-        } else {
-          // All Teams
-
+        }
+        // if teams have fixtures
+        else {
+          // filter played teams
           let allPlayedTeams = [];
           allGwMatches.forEach((match) => {
             allPlayedTeams.push(match.homeTeam);
             allPlayedTeams.push(match.awayTeam);
           });
 
+          // filter unplayed teams
           allUnplayedTeams = allTeams.filter((team) => {
             return !allPlayedTeams.includes(team.teamName);
           });
         }
 
+        // Dispatch Store Action
         store.dispatch("Fixture/setHomeTeams", allUnplayedTeams);
         store.dispatch("Fixture/setHomeTeamIndex", 0);
         store.dispatch("Fixture/setAwayTeams", allUnplayedTeams);
         store.dispatch("Fixture/setAwayTeamIndex", 1);
       }
+      // If edit mode
+      else {
+        // get edit fixture teams
+        const teamIds = store.state.Fixture.editFixtureId.split("|");
+        const allTeams = store.state.Fixture.allTeams;
+        const homeTeam = JSON.parse(
+          JSON.stringify(
+            allTeams.filter((team) => {
+              return team.teamId == parseInt(teamIds[0]);
+            })
+          )
+        )[0];
+        const awayTeam = JSON.parse(
+          JSON.stringify(
+            allTeams.filter((team) => {
+              return team.teamId == parseInt(teamIds[1]);
+            })
+          )
+        )[0];
+
+        // get teams with no match if any
+        const existingTeams = JSON.parse(
+          JSON.stringify(store.state.Fixture.homeTeams)
+        );
+
+        // existing teams added as options during edit
+        let allPossibleTeams = Array.from(existingTeams);
+        allPossibleTeams.push(homeTeam);
+        allPossibleTeams.push(awayTeam);
+
+        // get edit fixture team's index to start at those index
+        let editHomeTeamIndex, editAwayTeamIndex;
+
+        for (let i = 0; i < allPossibleTeams.length; i++) {
+          if (allPossibleTeams[i].teamName == homeTeam.teamName) {
+            editHomeTeamIndex = i;
+          } else if (allPossibleTeams[i].teamName == awayTeam.teamName) {
+            editAwayTeamIndex = i;
+          }
+        }
+
+        // dispatch store actions
+        store.dispatch("Fixture/setHomeTeams", allPossibleTeams);
+        store.dispatch(
+          "Fixture/setHomeTeamIndex",
+          editHomeTeamIndex ? editHomeTeamIndex : 0
+        );
+
+        store.dispatch("Fixture/setAwayTeams", allPossibleTeams);
+        store.dispatch(
+          "Fixture/setAwayTeamIndex",
+          editAwayTeamIndex ? editAwayTeamIndex : 1
+        );
+      }
       return store.state.Fixture.homeTeams;
     },
+
+    // gets home team index
     homeTeamIndex() {
       return store.state.Fixture.currentHomeTeamIndex;
     },
 
+    // gets possible away teams
     awayTeams() {
       return store.state.Fixture.awayTeams;
     },
+
+    // gets away team index
     awayTeamIndex() {
       return store.state.Fixture.currentAwayTeamIndex;
     },
 
-    // image methods
+    // get home team image
     getHomeTeamImage() {
       const homeTeam = this.homeTeams[this.homeTeamIndex].teamName;
       let path;
@@ -335,6 +435,7 @@ export default {
       return homeTeam ? path : placerHolder;
     },
 
+    // get away team image
     getAwayTeamImage() {
       const awayTeam = this.awayTeams[this.awayTeamIndex].teamName;
       let path;
@@ -362,7 +463,10 @@ export default {
 
       index > 0
         ? store.dispatch("Fixture/setHomeTeamIndex", index - 1)
-        : store.dispatch("Fixture/setHomeTeamIndex", index);
+        : store.dispatch(
+            "Fixture/setHomeTeamIndex",
+            store.state.Fixture.homeTeams.length - 1
+          );
     },
     nextAwayTeam() {
       const index = store.state.Fixture.currentAwayTeamIndex;
@@ -382,7 +486,7 @@ export default {
         : store.dispatch("Fixture/setAwayTeamIndex", index - 1);
     },
 
-    //
+    // add new fixture event handler - add mode
     addNewFixture() {
       // If same team warn
       if (this.awayTeamIndex === this.homeTeamIndex) {
@@ -406,6 +510,7 @@ export default {
       }
     },
 
+    // update fixture event handler - edit mode
     updateFixture() {
       // If same team warn
       if (this.awayTeamIndex === this.homeTeamIndex) {
@@ -429,10 +534,12 @@ export default {
       }
     },
 
+    // close modal event handler - add mode
     modalCancel() {
       this.$emit("closeModal");
     },
 
+    // close modal event handler - edit mode
     modalEditCancel() {
       /*
         ==================================
