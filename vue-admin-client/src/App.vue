@@ -9,6 +9,8 @@
 </template>
 
 <style>
+@import url("./assets/design-system.css");
+
 /* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,14 +34,5 @@ nav a.router-link-exact-active {
 </style>
 
 <script>
-export default {
-  updated() {
-    console.log("CHKK");
-  },
-  // mounted: function () {
-  //   this.timer = setInterval(() => {
-  //     console.log("check");
-  //   }, 60000);
-  // },
-};
+export default {};
 </script>

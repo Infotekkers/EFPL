@@ -196,30 +196,46 @@ export default {
     editMatch() {
       // TODO: Hook to api
       // TODO: Improve response messages
+
+      // get teams in the edited fixture
       const teamIds = this.getMatchKey.split("|");
-
       const allTeams = store.state.Fixture.allTeams;
+      const homeTeam = JSON.parse(
+        JSON.stringify(
+          allTeams.filter((team) => {
+            return team.teamId == parseInt(teamIds[0]);
+          })
+        )
+      )[0];
+      const awayTeam = JSON.parse(
+        JSON.stringify(
+          allTeams.filter((team) => {
+            return team.teamId == parseInt(teamIds[1]);
+          })
+        )
+      )[0];
 
-      const homeTeam = allTeams.filter((team) => {
-        return team.teamId == parseInt(teamIds[0]);
-      });
+      // Get teams with no fixture if any
+      const existingTeams = JSON.parse(
+        JSON.stringify(store.state.Fixture.homeTeams)
+      );
 
-      const awayTeam = allTeams.filter((team) => {
-        return team.teamId == parseInt(teamIds[1]);
-      });
+      let allPossibleTeams = Array.from(existingTeams);
+      allPossibleTeams.push(homeTeam);
+      allPossibleTeams.push(awayTeam);
 
-      store.dispatch("Fixture/setHomeTeams", [homeTeam, awayTeam]);
+      store.dispatch("Fixture/setHomeTeams", allPossibleTeams);
       store.dispatch("Fixture/setHomeTeamIndex", 0);
 
-      console.log(store.state.Fixture.homeTeams);
-
-      store.dispatch("Fixture/setAwayTeams", [homeTeam, awayTeam]);
+      store.dispatch("Fixture/setAwayTeams", allPossibleTeams);
       store.dispatch("Fixture/setAwayTeamIndex", 1);
+
+      // Set Update Match id
+      store.dispatch("Fixture/setEditFixtureId", this.getMatchKey);
 
       this.$emit("activateModal");
 
       // TODO: Hook to api
-      console.log("Editing Match", this.getMatchKey);
     },
   },
 };

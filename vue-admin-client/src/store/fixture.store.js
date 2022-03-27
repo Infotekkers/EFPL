@@ -20,18 +20,11 @@ export default {
     // Scroller states
     currentHomeTeamIndex: 0,
     currentAwayTeamIndex: 1,
+
+    // Fixture edit mode
+    editFixtureId: "",
   },
-  getters: {
-    getIsFixtureLoading: function (state) {
-      return state.isFixtureLoading;
-    },
-    getAllFixtures: function (state) {
-      return state.allFixtures;
-    },
-    getTempCache: function (state) {
-      return state.tempCache;
-    },
-  },
+  getters: {},
   mutations: {
     SET_ALL_FIXTURES(state, payload) {
       state.allFixtures = payload;
@@ -66,6 +59,10 @@ export default {
     SET_AWAY_TEAM_INDEX(state, payload) {
       state.currentAwayTeamIndex = payload;
     },
+
+    SET_EDIT_FIXTURE_ID(state, payload) {
+      state.editFixtureId = payload;
+    },
   },
   actions: {
     // Fetches all fixtures
@@ -74,6 +71,12 @@ export default {
         .get(`${baseURL}/fixtures/`)
         .then((response) => {
           if (response.status === 200) {
+            response.data.sort(function (a, b) {
+              var c = new Date(a.schedule);
+              var d = new Date(b.schedule);
+              return c - d;
+            });
+            console.log(response.data);
             context.commit("SET_ALL_FIXTURES", response.data);
           }
         })
@@ -129,6 +132,10 @@ export default {
       context.commit("SET_AWAY_TEAM_INDEX", awayTeamIndex);
     },
 
+    setEditFixtureId(context, matchId) {
+      context.commit("SET_EDIT_FIXTURE_ID", matchId);
+    },
+
     // Saves new fixture
     async saveNewFixture(context, newFixture) {
       await axios
@@ -155,6 +162,81 @@ export default {
         });
 
       // context.commit("SET_NEW_FIXTURE", newFixture);
+    },
+
+    async updateFixture(context, updatedFixture) {
+      const allFixtures = store.state.Fixture.allFixtures;
+
+      const verifyChange = allFixtures.filter((fixture) => {
+        return (
+          fixture.gameweekId == updatedFixture.gameweekId &&
+          new Date(fixture.schedule).toString() ==
+            new Date(updatedFixture.schedule).toString() &&
+          fixture.homeTeam === updatedFixture.homeTeam &&
+          fixture.awayTeam === updatedFixture.awayTeam
+        );
+      });
+
+      // If no change in data
+      if (verifyChange.length > 0) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "warning",
+          notificationMessage: "No change in Fixture information for update.",
+        });
+      } else {
+        updatedFixture.matchId = store.state.Fixture.editFixtureId;
+        console.log(updatedFixture);
+        await axios
+          .patch(
+            `${baseURL}/fixtures/postpone/${store.state.Fixture.editFixtureId}`,
+            updatedFixture
+          )
+          .then(async (response) => {
+            if (response.status === 200) {
+              console.log(response);
+              store.dispatch("Global/setNotificationInfo", {
+                showNotification: true,
+                notificationType: "success",
+                notificationMessage: response.data,
+              });
+              await store.dispatch("Fixture/setAllFixtures");
+              // store.dispatch("Fixture/setHomeTeams");
+            }
+          })
+          .catch((err) => {
+            // console.log(err.response);
+            // store.dispatch("Global/setNotificationInfo", {
+            //   showNotification: true,
+            //   notificationType: "error",
+            //   notificationMessage: `${err.response.data}`,
+            //   notificationDuration: 8000,
+            // });
+            err.a = "";
+          });
+      }
+      // await axios
+      //   .patch(`${baseURL}/fixtures//update/`, newFixture)
+      //   .then(async (response) => {
+      //     if (response.status === 200) {
+      //       store.dispatch("Global/setNotificationInfo", {
+      //         showNotification: true,
+      //         notificationType: "success",
+      //         notificationMessage: `Fixture ${newFixture.homeTeam} vs ${newFixture.awayTeam} added for game week ${newFixture.gameweekId}`,
+      //       });
+      //       await store.dispatch("Fixture/setAllFixtures");
+      //       // store.dispatch("Fixture/setHomeTeams");
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.response);
+      //     store.dispatch("Global/setNotificationInfo", {
+      //       showNotification: true,
+      //       notificationType: "error",
+      //       notificationMessage: `${err.response.data}`,
+      //       notificationDuration: 8000,
+      //     });
+      //   });
     },
 
     // Start match

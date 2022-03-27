@@ -1,13 +1,24 @@
 <template>
   <div ref="modal" class="modal-show">
-    <div class="close-button" @click="$emit('closeModal')">
+    <div
+      class="close-button"
+      v-on="
+        isEditMode === true
+          ? { click: modalEditCancel }
+          : { click: modalCancel }
+      "
+    >
       X {{ isEditMode }}
     </div>
 
     <div class="main-section" v-if="homeTeams.length > 0">
       <!-- Title -->
-      <div class="title">
+      <div class="title" v-show="isEditMode === false">
         Add new fixture for Game week {{ currentGameWeek }}
+      </div>
+
+      <div class="title" v-show="isEditMode === true">
+        Editing fixture for Game week {{ currentGameWeek }}
       </div>
 
       <div class="content-section" v-if="homeTeams">
@@ -103,8 +114,24 @@
         <!-- Buttons Container -->
       </div>
       <div class="buttons-container">
-        <div @click="$emit('closeModal')">Cancel</div>
-        <div @click="addNewFixture">Save</div>
+        <div
+          v-on="
+            isEditMode === true
+              ? { click: modalEditCancel }
+              : { click: modalCancel }
+          "
+        >
+          Cancel
+        </div>
+        <div
+          v-on="
+            isEditMode === true
+              ? { click: updateFixture }
+              : { click: addNewFixture }
+          "
+        >
+          Save
+        </div>
       </div>
     </div>
 
@@ -244,40 +271,44 @@ export default {
   },
 
   computed: {
+    modalMode() {
+      return this.isEditMode;
+    },
     currentGameWeek() {
       return store.state.Fixture.showingGameWeek;
     },
     // Scroller methods
     homeTeams() {
-      // All GW Matches
-      const allGwMatches = store.state.Fixture.allFixtures.filter((match) => {
-        return match.gameweekId == this.currentGameWeek;
-      });
-
-      let allUnplayedTeams = [];
-      const allTeams = store.state.Fixture.allTeams;
-
-      if (allGwMatches.length == 0) {
-        allUnplayedTeams = Array.from(allTeams);
-      } else {
-        // All Teams
-
-        let allPlayedTeams = [];
-        allGwMatches.forEach((match) => {
-          allPlayedTeams.push(match.homeTeam);
-          allPlayedTeams.push(match.awayTeam);
+      if (!this.isEditMode) {
+        // All GW Matches
+        const allGwMatches = store.state.Fixture.allFixtures.filter((match) => {
+          return match.gameweekId == this.currentGameWeek;
         });
 
-        allUnplayedTeams = allTeams.filter((team) => {
-          return !allPlayedTeams.includes(team.teamName);
-        });
+        let allUnplayedTeams = [];
+        const allTeams = store.state.Fixture.allTeams;
+
+        if (allGwMatches.length == 0) {
+          allUnplayedTeams = Array.from(allTeams);
+        } else {
+          // All Teams
+
+          let allPlayedTeams = [];
+          allGwMatches.forEach((match) => {
+            allPlayedTeams.push(match.homeTeam);
+            allPlayedTeams.push(match.awayTeam);
+          });
+
+          allUnplayedTeams = allTeams.filter((team) => {
+            return !allPlayedTeams.includes(team.teamName);
+          });
+        }
+
+        store.dispatch("Fixture/setHomeTeams", allUnplayedTeams);
+        store.dispatch("Fixture/setHomeTeamIndex", 0);
+        store.dispatch("Fixture/setAwayTeams", allUnplayedTeams);
+        store.dispatch("Fixture/setAwayTeamIndex", 1);
       }
-
-      store.dispatch("Fixture/setHomeTeams", allUnplayedTeams);
-      store.dispatch("Fixture/setHomeTeamIndex", 0);
-      store.dispatch("Fixture/setAwayTeams", allUnplayedTeams);
-      store.dispatch("Fixture/setAwayTeamIndex", 1);
-
       return store.state.Fixture.homeTeams;
     },
     homeTeamIndex() {
@@ -373,6 +404,76 @@ export default {
         };
         store.dispatch("Fixture/saveNewFixture", newFixture);
       }
+    },
+
+    updateFixture() {
+      // If same team warn
+      if (this.awayTeamIndex === this.homeTeamIndex) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "warning",
+          notificationMessage: `Both home and away team are the same.(${
+            this.homeTeams[this.homeTeamIndex].teamName
+          })`,
+        });
+      } else {
+        const schedule = `${this.$refs.date.value}T${this.$refs.hour.value}:${this.$refs.minutes.value}`;
+
+        const newFixture = {
+          gameweekId: this.currentGameWeek,
+          schedule: schedule,
+          homeTeam: this.homeTeams[this.homeTeamIndex].teamName,
+          awayTeam: this.awayTeams[this.awayTeamIndex].teamName,
+        };
+        store.dispatch("Fixture/updateFixture", newFixture);
+      }
+    },
+
+    modalCancel() {
+      this.$emit("closeModal");
+    },
+
+    modalEditCancel() {
+      /*
+        ==================================
+        Remove Teams in the edit fixture
+        ==================================
+      */
+      // All GW Matches
+      const allGwMatches = store.state.Fixture.allFixtures.filter((match) => {
+        return match.gameweekId == this.currentGameWeek;
+      });
+
+      let allUnplayedTeams = [];
+      const allTeams = store.state.Fixture.allTeams;
+
+      if (allGwMatches.length == 0) {
+        allUnplayedTeams = Array.from(allTeams);
+      } else {
+        // All Teams
+
+        let allPlayedTeams = [];
+        allGwMatches.forEach((match) => {
+          allPlayedTeams.push(match.homeTeam);
+          allPlayedTeams.push(match.awayTeam);
+        });
+
+        allUnplayedTeams = allTeams.filter((team) => {
+          return !allPlayedTeams.includes(team.teamName);
+        });
+      }
+
+      store.dispatch("Fixture/setHomeTeams", allUnplayedTeams);
+      store.dispatch("Fixture/setHomeTeamIndex", 0);
+      store.dispatch("Fixture/setAwayTeams", allUnplayedTeams);
+      store.dispatch("Fixture/setAwayTeamIndex", 1);
+
+      /*
+        ==================================
+        Close Modal
+        ==================================
+      */
+      this.$emit("closeModal");
     },
   },
 };

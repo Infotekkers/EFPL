@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <!-- Add Modal -->
-    <FixtureModalComponent v-show="showModal" @closeModal="showModal = false" />
+    <FixtureModalComponent
+      v-show="showModal"
+      @closeModal="showModal = false"
+      :isEditMode="isEditMode"
+    />
 
     <!-- No Connection -->
     <div v-if="connectionStatus === false">No connection</div>
@@ -115,11 +119,12 @@ export default {
 
   methods: {
     activateModal() {
+      this.isEditMode = false;
       this.showModal = true;
     },
     activateModalChild() {
-      this.showModal = true;
       this.isEditMode = true;
+      this.showModal = true;
     },
 
     getFixtures() {

@@ -49,7 +49,7 @@ const postFixture = asyncHandler(async function (req, res) {
     res
       .status(409)
       .send(
-        `Fixture ${homeTeam} vs ${awayTeam} for game week ${gameweekId} already exists. `
+        `Fixture ${homeTeam} vs ${awayTeam} already exists for game week ${verifyMatch[0].gameweekId}.`
       );
   }
 });
@@ -227,18 +227,61 @@ const endFixture = asyncHandler(async function (req, res) {
 
 const postponeFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+  const { gameweekId, schedule, homeTeam, awayTeam, matchStatus } = req.body;
 
-  if (match?.status === "scheduled") {
-    match.status = "postponed";
-    match
-      .save()
-      .then(() => res.send("Match postponed!"))
-      .catch(() => res.status(500).send("Try again!"));
+  // Compare old and new match
+  if (match) {
+    if (match.homeTeam === homeTeam && match.awayTeam === awayTeam) {
+      match.gameweekId = gameweekId ?? match.gameweekId;
+      match.schedule = schedule ?? match.schedule;
+      match.status = matchStatus ?? match.status;
+      match.homeTeam = homeTeam ?? match.homeTeam;
+      match.awayTeam = awayTeam ?? match.awayTeam;
+
+      await match.save();
+
+      res
+        .status(200)
+        .send(`Match ${homeTeam} vs ${awayTeam} updated successfully`);
+    } else {
+      const homeTeamNew = await TeamModel.find({
+        teamName: homeTeam,
+      });
+
+      const awayTeamNew = await TeamModel.find({
+        teamName: awayTeam,
+      });
+
+      await match.delete();
+
+      await new FixtureModel({
+        gameweekId: gameweekId,
+        schedule: schedule,
+        matchId: `${homeTeamNew[0].teamId}|${awayTeamNew[0].teamId}`,
+        status: matchStatus ?? "scheduled",
+        homeTeam: homeTeam,
+        awayTeam: awayTeam,
+      }).save();
+
+      res.status(200).send(`Match updated to ${homeTeam} vs ${awayTeam}`);
+    }
   } else if (!match) {
     res.status(404).send("Match doesn't exist!");
   } else {
-    res.status(400).send("Match is ongoing!");
+    res.status(400).send(`Match with Id ${req.params.matchId} doesn't exist.`);
   }
+
+  // if (match?.status === "scheduled") {
+  //   match.status = "postponed";
+  //   match
+  //     .save()
+  //     .then(() => res.send("Match postponed!"))
+  //     .catch(() => res.status(500).send("Try again!"));
+  // } else if (!match) {
+  //   res.status(404).send("Match doesn't exist!");
+  // } else {
+  // res.status(400).send("Match is ongoing!");
+  // }
 });
 
 const updateFixture = asyncHandler(async function (req, res) {
