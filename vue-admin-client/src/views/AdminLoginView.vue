@@ -76,6 +76,7 @@ export default {
           .then((response) => {
             if (response.status === 201) {
               console.log("logged in");
+              this.$router.push("/admin/settings");
             }
           })
           .catch((error) => {
