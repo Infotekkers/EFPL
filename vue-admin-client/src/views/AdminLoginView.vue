@@ -8,6 +8,7 @@
       <input type="password" required v-model="login.password" />
       <div class="submit"><button>Login</button></div>
     </form>
+    <div class="error" :error="error">{{ error }}</div>
   </div>
 </template>
 
@@ -52,6 +53,10 @@ input {
 .submit {
   text-align: center;
 }
+
+.error {
+  color: red;
+}
 </style>
 
 <script>
@@ -64,6 +69,7 @@ export default {
         email: "",
         password: "",
       },
+      error: "",
     };
   },
   name: "AdminLoginView",
@@ -81,6 +87,9 @@ export default {
           })
           .catch((error) => {
             console.log(error);
+            if (error.response.status == 400) {
+              this.error = "Invalid Login Credentials";
+            }
           });
       }
       console.log(this.baseURL);
