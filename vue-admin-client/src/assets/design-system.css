@@ -31,6 +31,25 @@
   --neutral-800: #47546b;
   --neutral-900: #374153;
 
+  --success-100: #b7efc5;
+  --success-200: #6ede8a;
+  --success-300: #42d773;
+  --success-400: #208b3a;
+  --success-500: #10451d;
+
+  --warning-100: #eaefb7;
+  --warning-200: #d5de6e;
+  --warning-300: #cad742;
+  --warning-400: #828b20;
+  --warning-500: #414510;
+
+  --error-100: #efc5b7;
+  --error-200: #de8a6e;
+  --error-300: #d76742;
+  --error-400: #8b3b20;
+  --error-500: #451d10;
+
+
   /* Spacing */
   --spacing-3xsmall: 1px;
   --spacing-2xsmall: 4px;
