@@ -1,11 +1,11 @@
 <template>
   <div class="admin-login">
     <h1>Admin Login</h1>
-    <form>
+    <form @submit.prevent="loginAdmin">
       <label>Email:</label>
-      <input type="email" required v-model="email" />
+      <input type="email" required v-model="login.email" />
       <label>Password:</label>
-      <input type="password" required v-model="password" />
+      <input type="password" required v-model="login.password" />
       <div class="submit"><button>Login</button></div>
     </form>
   </div>
@@ -53,3 +53,46 @@ input {
   text-align: center;
 }
 </style>
+
+<script>
+import axios from "axios";
+import store from "../store/index";
+export default {
+  data() {
+    return {
+      login: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  name: "AdminLoginView",
+
+  methods: {
+    async loginAdmin() {
+      if (this.connectionStatus) {
+        axios
+          .post(`${this.baseURL}/admin/login`, this.login)
+          .then((response) => {
+            if (response.status === 201) {
+              console.log("logged in");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      console.log(this.baseURL);
+    },
+  },
+  computed: {
+    baseURL() {
+      return process.env.VUE_APP_API_BASE_URL;
+    },
+
+    connectionStatus() {
+      return store.state.Global.connection;
+    },
+  },
+};
+</script>
