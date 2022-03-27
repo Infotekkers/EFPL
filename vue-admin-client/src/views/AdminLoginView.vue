@@ -8,6 +8,7 @@
       <input type="password" required v-model="login.password" />
       <div class="submit"><button>Login</button></div>
     </form>
+    <div v-if="isLoading">Loading...</div>
     <div class="error" :error="error">{{ error }}</div>
   </div>
 </template>
@@ -70,19 +71,24 @@ export default {
         password: "",
       },
       error: "",
+      isLoading: false,
     };
   },
   name: "AdminLoginView",
 
   methods: {
     async loginAdmin() {
+      this.isLoading = true;
+      console.log(this.isLoading);
+
       if (this.connectionStatus) {
         axios
           .post(`${this.baseURL}/admin/login`, this.login)
+
           .then((response) => {
             if (response.status === 201) {
               console.log("logged in");
-              this.$router.push("/admin/settings");
+              // this.$router.push("/admin/settings");
             }
           })
           .catch((error) => {
@@ -92,7 +98,8 @@ export default {
             }
           });
       }
-      console.log(this.baseURL);
+      this.isLoading = false;
+      console.log(this.isLoading);
     },
   },
   computed: {
