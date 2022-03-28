@@ -109,6 +109,21 @@ const getplayers = asyncHandler(async (req, res) => {
   res.send(players);
 });
 
+const getHomeAndAwayPlayers = asyncHandler(async (req, res) => {
+  const homePlayers = await PlayerModel.find({
+    eplTeamId: req.params.homeTeamId,
+  }).select("playerName eplTeamId position availabilty");
+  const awayPlayers = await PlayerModel.find({
+    eplTeamId: req.params.awayTeamId,
+  }).select("playerName eplTeamId position availabilty");
+
+  const result = {
+    homePlayers,
+    awayPlayers,
+  };
+  res.status(200).send(result);
+});
+
 const deleteplayer = asyncHandler(async (req, res) => {
   const player = await PlayerModel.deleteOne({ playerId: req.params.playerId });
   res.send(`player ${player.playerName} is removed`);
@@ -118,6 +133,7 @@ module.exports = {
   addplayers,
   getplayer,
   getplayers,
+  getHomeAndAwayPlayers,
   updateplayer,
   deleteplayer,
   updateScore,
