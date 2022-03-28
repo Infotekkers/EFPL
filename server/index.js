@@ -17,7 +17,6 @@ connectToDB();
 const teams = require("./src/routes/team.routes");
 const players = require("./src/routes/players.routes");
 const eplStatsRouter = require("./src/routes/eplStats.routes");
-const fantasyStatsRouter = require("./src/routes/fantasyStat.routes");
 const userRouter = require("./src/routes/user.routes");
 const fixtures = require("./src/routes/fixtures.routes");
 const gameWeekRoutes = require("./src/routes/gameWeek.routes");
@@ -40,13 +39,13 @@ app.use("/players", players);
 app.use("/fixtures", fixtures);
 app.use("/gameWeek", gameWeekRoutes);
 app.use("/eplStats", eplStatsRouter);
-app.use("/fantasyStats", fantasyStatsRouter);
 app.use("/user", userRouter);
 
 // Run populate scripts
 // populate.addTestPlayer();
 // populate.addTestUser();
 // populate.addTestGameweek();
+// populate.addTestFixture();
 
 // Add Middleware
 app.use(errorMiddleware);
