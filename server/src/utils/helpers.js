@@ -33,7 +33,125 @@ const pointDeductor = (activeTeam, incomingTeam) => {
   return [deduction, transfersMade];
 };
 
+// Function to apply statistical updates to existing teams
+const statUpdater = ({ activeMatch, incomingUpdate }) => {
+  const {
+    minutesPlayed,
+    goalsScored,
+    assists,
+    yellows,
+    reds,
+    penaltiesMissed,
+    penaltiesSaved,
+    saves,
+    fantasyScores,
+  } = incomingUpdate;
+
+  for (const position in activeMatch.homeTeamLineUp.lineup) {
+    if (position === "on") break;
+    for (const playerId of activeMatch.homeTeamLineUp.lineup[position]) {
+      activeMatch.matchStat.minutesPlayed[playerId] =
+        minutesPlayed && playerId in minutesPlayed
+          ? minutesPlayed[playerId]
+          : null ?? activeMatch.matchStat.minutesPlayed[playerId] ?? {};
+
+      activeMatch.matchStat.goalsScored[playerId] =
+        goalsScored && playerId in goalsScored
+          ? goalsScored[playerId]
+          : null ?? activeMatch.matchStat.goalsScored[playerId] ?? {};
+
+      activeMatch.matchStat.assists[playerId] =
+        assists && playerId in assists
+          ? assists[playerId]
+          : null ?? activeMatch.matchStat.assists[playerId] ?? {};
+
+      activeMatch.matchStat.yellows[playerId] =
+        yellows && playerId in yellows
+          ? yellows[playerId]
+          : null ?? activeMatch.matchStat.yellows[playerId] ?? {};
+
+      activeMatch.matchStat.reds[playerId] =
+        reds && playerId in reds
+          ? reds[playerId]
+          : null ?? activeMatch.matchStat.reds[playerId] ?? {};
+
+      activeMatch.matchStat.penaltiesMissed[playerId] =
+        penaltiesMissed && playerId in penaltiesMissed
+          ? penaltiesMissed[playerId]
+          : null ?? activeMatch.matchStat.penaltiesMissed[playerId] ?? {};
+
+      activeMatch.matchStat.penaltiesSaved[playerId] =
+        penaltiesSaved && playerId in penaltiesSaved
+          ? penaltiesSaved[playerId]
+          : null ?? activeMatch.matchStat.penaltiesSaved[playerId] ?? {};
+
+      activeMatch.matchStat.saves[playerId] =
+        saves && playerId in saves
+          ? saves[playerId]
+          : null ?? activeMatch.matchStat.saves[playerId] ?? {};
+
+      activeMatch.matchStat.fantasyScores[playerId] =
+        fantasyScores && playerId in fantasyScores
+          ? fantasyScores[playerId]
+          : null ?? activeMatch.matchStat.fantasyScores[playerId] ?? {};
+    }
+  }
+
+  for (const position in activeMatch.awayTeamLineUp.lineup) {
+    if (position === "on") break;
+    for (const playerId of activeMatch.awayTeamLineUp.lineup[position]) {
+      activeMatch.matchStat.minutesPlayed[playerId] =
+        minutesPlayed && playerId in minutesPlayed
+          ? minutesPlayed[playerId]
+          : null ?? activeMatch.matchStat.minutesPlayed[playerId] ?? {};
+
+      activeMatch.matchStat.goalsScored[playerId] =
+        goalsScored && playerId in goalsScored
+          ? goalsScored[playerId]
+          : null ?? activeMatch.matchStat.goalsScored[playerId] ?? {};
+
+      activeMatch.matchStat.assists[playerId] =
+        assists && playerId in assists
+          ? assists[playerId]
+          : null ?? activeMatch.matchStat.assists[playerId] ?? {};
+
+      activeMatch.matchStat.yellows[playerId] =
+        yellows && playerId in yellows
+          ? yellows[playerId]
+          : null ?? activeMatch.matchStat.yellows[playerId] ?? {};
+
+      activeMatch.matchStat.reds[playerId] =
+        reds && playerId in reds
+          ? reds[playerId]
+          : null ?? activeMatch.matchStat.reds[playerId] ?? {};
+
+      activeMatch.matchStat.penaltiesMissed[playerId] =
+        penaltiesMissed && playerId in penaltiesMissed
+          ? penaltiesMissed[playerId]
+          : null ?? activeMatch.matchStat.penaltiesMissed[playerId] ?? {};
+
+      activeMatch.matchStat.penaltiesSaved[playerId] =
+        penaltiesSaved && playerId in penaltiesSaved
+          ? penaltiesSaved[playerId]
+          : null ?? activeMatch.matchStat.penaltiesSaved[playerId] ?? {};
+
+      activeMatch.matchStat.saves[playerId] =
+        saves && playerId in saves
+          ? saves[playerId]
+          : null ?? activeMatch.matchStat.saves[playerId] ?? {};
+
+      activeMatch.matchStat.fantasyScores[playerId] =
+        fantasyScores && playerId in fantasyScores
+          ? fantasyScores[playerId]
+          : null ?? activeMatch.matchStat.fantasyScores[playerId] ?? {};
+    }
+  }
+
+  return activeMatch;
+};
+
 module.exports = {
   generateJWTToken,
   pointDeductor,
+  statUpdater,
 };

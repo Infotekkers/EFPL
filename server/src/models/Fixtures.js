@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const minutesSchema = mongoose.Schema({
   playerId: {
     type: Number,
-    required: [true, "Custom Error - Required Value *:Player ID is required."],
   },
   noOfMinutes: {
     type: Number,
@@ -13,7 +12,6 @@ const minutesSchema = mongoose.Schema({
 const goalsScoredSchema = mongoose.Schema({
   playerId: {
     type: Number,
-    required: [true, "Custom Error - Required Value *:Player ID is required."],
   },
   noOfGoals: {
     type: Number,
@@ -23,7 +21,6 @@ const goalsScoredSchema = mongoose.Schema({
 const assistsSchema = mongoose.Schema({
   playerId: {
     type: Number,
-    required: [true, "Custom Error - Required Value *:Player ID is required."],
   },
   noOfSaves: {
     type: Number,
@@ -33,7 +30,6 @@ const assistsSchema = mongoose.Schema({
 const yellowsSchema = mongoose.Schema({
   playerId: {
     type: Number,
-    required: [true, "Custom Error - Required Value *:Player ID is required."],
   },
   noOfYellows: {
     type: Number,
@@ -43,7 +39,6 @@ const yellowsSchema = mongoose.Schema({
 const redsSchema = mongoose.Schema({
   playerId: {
     type: Number,
-    required: [true, "Custom Error - Required Value *:Player ID is required."],
   },
   noOfReds: {
     type: Number,
@@ -53,7 +48,6 @@ const redsSchema = mongoose.Schema({
 const penaltiesMissedSchema = mongoose.Schema({
   playerId: {
     type: Number,
-    required: [true, "Custom Error - Required Value *:Player ID is required."],
   },
   noOfPenMissed: {
     type: Number,
@@ -63,7 +57,6 @@ const penaltiesMissedSchema = mongoose.Schema({
 const penaltiesSavedSchema = mongoose.Schema({
   playerId: {
     type: Number,
-    required: [true, "Custom Error - Required Value *:Player ID is required."],
   },
   noOfPenSaved: {
     type: Number,
@@ -73,7 +66,6 @@ const penaltiesSavedSchema = mongoose.Schema({
 const savesSchema = mongoose.Schema({
   playerId: {
     type: Number,
-    required: [true, "Custom Error - Required Value *:Player ID is required."],
   },
   noOfSaves: {
     type: Number,
@@ -83,7 +75,6 @@ const savesSchema = mongoose.Schema({
 const fantasyScoresSchema = mongoose.Schema({
   playerId: {
     type: Number,
-    required: [true, "Custom Error - Required Value *:Player ID is required."],
   },
   playerScores: {
     type: Number,

@@ -414,7 +414,7 @@ const addTestFixture = async () => {
         defenders: [201, 202, 203, 204],
         midfielders: [301, 302, 303],
         strikers: [401, 402, 403],
-        bench: [105, 302, 205, 401, 206, 410, 308],
+        bench: [105, 307, 205, 408, 206, 410, 308],
       },
     },
     awayTeamLineUp: {

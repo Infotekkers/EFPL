@@ -1,9 +1,10 @@
 const asyncHandler = require("express-async-handler");
+const statUpdater = require("../utils/helpers").statUpdater;
 
 const FixtureModel = require("../models/Fixtures");
 const TeamModel = require("../models/Teams");
 
-// const MINUTE_COUNTERS = {};
+const MINUTE_COUNTERS = {};
 
 const postFixture = asyncHandler(async function (req, res) {
   const { gameweekId, schedule, homeTeam, awayTeam } = req.body;
@@ -42,34 +43,64 @@ const postFixture = asyncHandler(async function (req, res) {
 });
 
 const startFixture = asyncHandler(async function (req, res) {
-  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+  const matchId = req.params.matchId;
 
-  // if (match?.status === "scheduled") {
-  match.status = "liveFH"; // First half
+  const matchParent = await FixtureModel.findOne({ matchId });
 
-  // Minutes Counter Id saved so it can be cleared when the match is done
-  // MINUTE_COUNTERS[req.params.matchId] = setInterval(async () => {
-  //   console.log("Metch Counter HUH-))");
-  //   const [{ homeTeamLineUp, awayTeamLineUp }] = await FixtureModel.aggregate([
-  //     {
-  //       $match: { matchId: req.params.matchId },
-  //     },
-  //   ]);
+  if (matchParent?.status === "scheduled") {
+    matchParent.status = "liveFH"; // First half
 
-  //   for (const position of homeTeamLineUp.lineup) {
-  //     console.log(position);
-  //   }
-  // }, 1000);
+    // Minutes Counter Id saved so it can be cleared when the match is done
+    MINUTE_COUNTERS[matchId] = { status: "active" };
+    MINUTE_COUNTERS[matchId].intervalId = setInterval(async () => {
+      if (MINUTE_COUNTERS[matchId].status === "active") {
+        console.log("MINUTE COUNTER ->");
+        const match = await FixtureModel.findOne({ matchId }).lean();
 
-  match
-    .save()
-    .then(() => res.status(200).send("Match is live!"))
-    .catch(() => res.status(500).send("Try again!"));
-  // if (!match) {
-  //   res.status(404).send("Match doesn't exist!");
-  // } else {
-  //   res.status(400).send("Match can't be started!");
-  // }
+        const update = { minutesPlayed: {} };
+
+        for (const position in match.homeTeamLineUp.lineup) {
+          if (position === "bench") continue;
+          for (const playerId of match.homeTeamLineUp.lineup[position]) {
+            update.minutesPlayed[playerId] = {
+              playerId,
+              noOfMinutes:
+                match.matchStat.minutesPlayed[playerId].noOfMinutes + 1,
+            };
+          }
+        }
+
+        for (const position in match.awayTeamLineUp.lineup) {
+          if (position === "bench") continue;
+          for (const playerId of match.awayTeamLineUp.lineup[position]) {
+            update.minutesPlayed[playerId] = {
+              playerId,
+              noOfMinutes:
+                match.matchStat.minutesPlayed[playerId].noOfMinutes + 1,
+            };
+          }
+        }
+
+        const result = statUpdater({
+          activeMatch: match,
+          incomingUpdate: update,
+        });
+
+        await FixtureModel.findOneAndUpdate({ matchId }, result, {
+          upsert: false,
+        });
+      }
+    }, 1000);
+
+    matchParent
+      .save()
+      .then(() => res.status(200).send("Match is live!"))
+      .catch(() => res.status(500).send("Try again!"));
+  } else if (!matchParent) {
+    res.status(404).send("Match doesn't exist!");
+  } else {
+    res.status(400).send("Match can't be started!");
+  }
 });
 
 const pauseFixture = asyncHandler(async function (req, res) {
@@ -77,6 +108,9 @@ const pauseFixture = asyncHandler(async function (req, res) {
 
   if (match?.status === "liveFH") {
     match.status = "HT";
+
+    MINUTE_COUNTERS[req.params.matchId].status = "paused";
+
     match
       .save()
       .then(() => res.send("Half Time!"))
@@ -90,6 +124,8 @@ const pauseFixture = asyncHandler(async function (req, res) {
 
 const resumeFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+
+  MINUTE_COUNTERS[req.params.matchId].status = "active";
 
   if (match?.status === "HT") {
     match.status = "liveSH"; // Second half
@@ -109,6 +145,10 @@ const endFixture = asyncHandler(async function (req, res) {
 
   if (match?.status === "liveSH") {
     match.status = "FT";
+
+    MINUTE_COUNTERS[req.params.matchId].status = "ended";
+    clearInterval(MINUTE_COUNTERS[req.params.matchId].intervalId);
+
     match
       .save()
       .then(() => res.send("Full time!"))
@@ -181,75 +221,17 @@ const updateLineup = asyncHandler(async (req, res) => {
 });
 
 const updateStats = asyncHandler(async (req, res) => {
-  const {
-    minutesPlayed,
-    goalsScored,
-    assists,
-    yellows,
-    reds,
-    penaltiesMissed,
-    penaltiesSaved,
-    saves,
-    fantasyScores,
-  } = req.body;
-
   const matchId = req.params.matchId;
 
   const match = await FixtureModel.findOne({ matchId }).lean();
 
   if (match) {
-    for (const position in match.homeTeamLineUp.lineup) {
-      if (position === "on") break;
-      for (const playerId of match.homeTeamLineUp.lineup[position]) {
-        match.matchStat.minutesPlayed[playerId] =
-          minutesPlayed && playerId in minutesPlayed
-            ? minutesPlayed[playerId]
-            : null ?? match.matchStat.minutesPlayed[playerId] ?? {};
+    const result = statUpdater({
+      activeMatch: match,
+      incomingUpdate: req.body,
+    });
 
-        match.matchStat.goalsScored[playerId] =
-          goalsScored && playerId in goalsScored
-            ? goalsScored[playerId]
-            : null ?? match.matchStat.goalsScored[playerId] ?? {};
-
-        match.matchStat.assists[playerId] =
-          assists && playerId in assists
-            ? assists[playerId]
-            : null ?? match.matchStat.assists[playerId] ?? {};
-
-        match.matchStat.yellows[playerId] =
-          yellows && playerId in yellows
-            ? yellows[playerId]
-            : null ?? match.matchStat.yellows[playerId] ?? {};
-
-        match.matchStat.reds[playerId] =
-          reds && playerId in reds
-            ? reds[playerId]
-            : null ?? match.matchStat.reds[playerId] ?? {};
-
-        match.matchStat.penaltiesMissed[playerId] =
-          penaltiesMissed && playerId in penaltiesMissed
-            ? penaltiesMissed[playerId]
-            : null ?? match.matchStat.penaltiesMissed[playerId] ?? {};
-
-        match.matchStat.penaltiesSaved[playerId] =
-          penaltiesSaved && playerId in penaltiesSaved
-            ? penaltiesSaved[playerId]
-            : null ?? match.matchStat.penaltiesSaved[playerId] ?? {};
-
-        match.matchStat.saves[playerId] =
-          saves && playerId in saves
-            ? saves[playerId]
-            : null ?? match.matchStat.saves[playerId] ?? {};
-
-        match.matchStat.fantasyScores[playerId] =
-          fantasyScores && playerId in fantasyScores
-            ? fantasyScores[playerId]
-            : null ?? match.matchStat.fantasyScores[playerId] ?? {};
-
-        console.log(minutesPlayed[playerId], playerId);
-      }
-    }
-    await FixtureModel.findOneAndUpdate({ matchId }, match, { upsert: false });
+    await FixtureModel.findOneAndUpdate({ matchId }, result, { upsert: false });
 
     res.send("Match stats updated!");
   } else if (!match) {
