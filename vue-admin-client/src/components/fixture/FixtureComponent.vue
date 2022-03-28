@@ -135,8 +135,8 @@
 
 <script>
 // Utils
-import router from "../router/index";
-import store from "../store";
+import router from "../../router/index";
+import store from "../../store/index";
 export default {
   name: "FixtureComponent",
   props: {

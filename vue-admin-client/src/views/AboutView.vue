@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import NotificationComponent from "@/components/NotificationComponent";
+import NotificationComponent from "@/components/shared/NotificationComponent";
 export default {
   components: {
     NotificationComponent,

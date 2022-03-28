@@ -1,14 +1,17 @@
 <template>
   <div class="home">
-    <FixturesComponent />
+    <FixturesComponent v-if="1 == 0" />
     <NotificationComponent />
+    <TeamsComponent />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import FixturesComponent from "@/components/FixturesComponent";
-import NotificationComponent from "@/components/NotificationComponent";
+import FixturesComponent from "@/components/fixture/FixturesComponent";
+import NotificationComponent from "@/components/shared/NotificationComponent";
+import TeamsComponent from "@/components/team/TeamsComponent";
+
 import store from "../store/index";
 
 export default {
@@ -16,6 +19,7 @@ export default {
   components: {
     FixturesComponent,
     NotificationComponent,
+    TeamsComponent,
   },
 
   methods: {

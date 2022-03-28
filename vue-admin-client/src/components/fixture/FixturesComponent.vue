@@ -111,11 +111,11 @@
 
 <script>
 // Utils
-import store from "../store/index";
+import store from "../../store/index";
 
 // Components
-import FixtureComponent from "@/components/FixtureComponent";
-import FixtureModalComponent from "@/components/FixtureModalComponent";
+import FixtureComponent from "@/components/fixture/FixtureComponent";
+import FixtureModalComponent from "@/components/fixture/FixtureModalComponent";
 
 export default {
   name: "FixturesComponent",

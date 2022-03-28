@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import FixtureDetail from "../components/FixtureDetailComponent.vue";
+import FixtureDetail from "../components/fixture/FixtureDetailComponent.vue";
 
 const routes = [
   {
