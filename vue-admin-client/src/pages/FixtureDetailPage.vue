@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <pre>{{ $data }}</pre>
-    <pre>{{ players }}</pre>
-    <pre>{{ fixtureDetailData }}</pre>
-  </div>
+  <div></div>
 </template>
 
 <script>
@@ -24,9 +20,7 @@ export default {
     ]),
   },
 
-  data: () => ({
-    a: 1,
-  }),
+  data: () => ({}),
 
   methods: {
     ...mapActions("Fixture", [
