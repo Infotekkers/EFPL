@@ -2,6 +2,7 @@ import axios from "axios";
 import store from "./index";
 
 const baseURL = process.env.VUE_APP_API_BASE_URL;
+
 export default {
   namespaced: true,
   state: {
