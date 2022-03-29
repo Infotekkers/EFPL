@@ -1,18 +1,27 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <FixturesComponent />
+    <NotificationComponent />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import FixturesComponent from "@/components/FixturesComponent";
+import NotificationComponent from "@/components/NotificationComponent";
+import store from "../store/index";
 
 export default {
   name: "HomeView",
   components: {
-    HelloWorld,
+    FixturesComponent,
+    NotificationComponent,
+  },
+
+  methods: {
+    closeNotification() {
+      store.dispatch("Global/setNotificationInfo", { showNotification: false });
+    },
   },
 };
 </script>

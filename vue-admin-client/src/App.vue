@@ -1,15 +1,15 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
+  <!-- <nav> -->
+  <!-- <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
-  </nav>
+  </nav> -->
 
   <!-- eslint-disable-next-line -->
   <router-view />
 </template>
 
 <style>
-#app {
+/* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -28,5 +28,18 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>
+
+<script>
+export default {
+  updated() {
+    console.log("CHKK");
+  },
+  // mounted: function () {
+  //   this.timer = setInterval(() => {
+  //     console.log("check");
+  //   }, 60000);
+  // },
+};
+</script>
