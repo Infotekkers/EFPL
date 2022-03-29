@@ -2,6 +2,7 @@ import axios from "axios";
 import store from "./index";
 
 const baseURL = process.env.VUE_APP_API_BASE_URL;
+axios.defaults.baseURL = baseURL;
 
 export default {
   namespaced: true,
@@ -71,7 +72,7 @@ export default {
     // Fetches all fixtures
     async setAllFixtures(context) {
       axios
-        .get(`${baseURL}/fixtures/`)
+        .get(`/fixtures`)
         .then((response) => {
           if (response.status === 200) {
             context.commit("SET_ALL_FIXTURES", response.data);
@@ -89,7 +90,7 @@ export default {
     // fetches all teams
     async setAllTeams(context) {
       axios
-        .get(`${baseURL}/teams//all`)
+        .get(`/teams/all`)
         .then((response) => {
           context.commit("SET_ALL_TEAMS", response.data);
         })
@@ -132,7 +133,7 @@ export default {
     // Saves new fixture
     async saveNewFixture(context, newFixture) {
       await axios
-        .post(`${baseURL}/fixtures/add`, newFixture)
+        .post(`/fixtures/add`, newFixture)
         .then(async (response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
@@ -160,7 +161,7 @@ export default {
     // Start match
     async startMatch(context, matchId) {
       axios
-        .patch(`${baseURL}/fixtures/start/${matchId}`)
+        .patch(`/fixtures/start/${matchId}`)
         .then((response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
@@ -182,7 +183,7 @@ export default {
     // Pause match
     async pauseMatch(context, matchId) {
       axios
-        .patch(`${baseURL}/fixtures/pause/${matchId}`)
+        .patch(`/fixtures/pause/${matchId}`)
         .then((response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
@@ -204,7 +205,7 @@ export default {
     // Resume match
     async resumeMatch(context, matchId) {
       axios
-        .patch(`${baseURL}/fixtures/resume/${matchId}`)
+        .patch(`/fixtures/resume/${matchId}`)
         .then((response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
@@ -226,7 +227,7 @@ export default {
     // end match
     async endMatch(context, matchId) {
       axios
-        .patch(`${baseURL}/fixtures/end/${matchId}`)
+        .patch(`/fixtures/end/${matchId}`)
         .then((response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
@@ -248,7 +249,7 @@ export default {
     // delete match
     async deleteMatch(context, matchId) {
       axios
-        .delete(`${baseURL}/fixtures/delete/${matchId}`)
+        .delete(`/fixtures/delete/${matchId}`)
         .then((response) => {
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
