@@ -79,7 +79,7 @@ const startFixture = asyncHandler(async function (req, res) {
   });
 
   const awayTeam = await TeamModel.find({
-    teamId: parseInt(matchId.split("|")[0]),
+    teamId: parseInt(matchId.split("|")[1]),
   });
 
   if (matchParent?.status === "scheduled") {
@@ -166,7 +166,7 @@ const pauseFixture = asyncHandler(async function (req, res) {
   });
 
   const awayTeam = await TeamModel.find({
-    teamId: parseInt(req.params.matchId.split("|")[0]),
+    teamId: parseInt(req.params.matchId.split("|")[1]),
   });
 
   if (match?.status === "liveFH") {
@@ -212,7 +212,7 @@ const resumeFixture = asyncHandler(async function (req, res) {
   });
 
   const awayTeam = await TeamModel.find({
-    teamId: parseInt(req.params.matchId.split("|")[0]),
+    teamId: parseInt(req.params.matchId.split("|")[1]),
   });
 
   if (match?.status === "HT") {
@@ -254,7 +254,7 @@ const endFixture = asyncHandler(async function (req, res) {
   });
 
   const awayTeam = await TeamModel.find({
-    teamId: parseInt(req.params.matchId.split("|")[0]),
+    teamId: parseInt(req.params.matchId.split("|")[1]),
   });
 
   if (match?.status === "liveSH") {

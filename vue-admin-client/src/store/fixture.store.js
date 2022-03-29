@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "./index";
+import { getField, updateField } from "vuex-map-fields";
 
 const baseURL = process.env.VUE_APP_API_BASE_URL;
 axios.defaults.baseURL = baseURL;
@@ -21,6 +22,18 @@ export default {
     // Scroller states
     currentHomeTeamIndex: 0,
     currentAwayTeamIndex: 1,
+
+    // FixtureId of fixture in detail state
+    fixtureDetailTrue: "",
+
+    // Fixture detailed info like formation
+    fixtureDetailData: {
+      teams: {},
+      formations: {},
+    },
+
+    // Players arranged according to their EPL teams
+    players: {},
   },
   getters: {
     getIsFixtureLoading: function (state) {
@@ -32,6 +45,7 @@ export default {
     getTempCache: function (state) {
       return state.tempCache;
     },
+    getField,
   },
   mutations: {
     SET_ALL_FIXTURES(state, payload) {
@@ -60,13 +74,23 @@ export default {
     },
 
     // Scroller states
-
     SET_HOME_TEAM_INDEX(state, payload) {
       state.currentHomeTeamIndex = payload;
     },
     SET_AWAY_TEAM_INDEX(state, payload) {
       state.currentAwayTeamIndex = payload;
     },
+
+    SET_FIXTURE_DETAIL_TRUE(state, payload) {
+      state.fixtureDetailTrue = payload;
+    },
+    SET_FIXTURE_DETAIL_DATA(state, payload) {
+      state.fixtureDetailData[payload.type][payload.teamId] = payload.data;
+    },
+    SET_PLAYERS(state, payload) {
+      state.players[payload.teamId] = payload.data;
+    },
+    updateField,
   },
   actions: {
     // Fetches all fixtures
@@ -257,6 +281,96 @@ export default {
             notificationMessage: response.data,
           });
           store.dispatch("Fixture/setAllFixtures");
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
+
+    async loadFixtureDetails({ commit }, matchId) {
+      let url;
+      const homeTeamId = matchId.split("|")[0];
+      const awayTeamId = matchId.split("|")[1];
+
+      // TODO: User team data from store
+      // Get home team
+      url = `/teams/${homeTeamId}`;
+
+      await axios
+        .get(url)
+        .then((res) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: false,
+            notificationType: "success",
+          });
+
+          const payload = {
+            type: "teams",
+            teamId: homeTeamId,
+            data: res.data[0],
+          };
+          commit("SET_FIXTURE_DETAIL_DATA", payload);
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+
+      // Get away team
+      url = `/teams/${awayTeamId}`;
+
+      await axios
+        .get(url)
+        .then((res) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: false,
+            notificationType: "success",
+          });
+
+          const payload = {
+            type: "teams",
+            teamId: awayTeamId,
+            data: res.data[0],
+          };
+          commit("SET_FIXTURE_DETAIL_DATA", payload);
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+
+      // Get players
+      url = `/players/getplayers/homeTeam/${homeTeamId}/awayTeam/${awayTeamId}`;
+
+      await axios
+        .get(url)
+        .then((res) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: false,
+            notificationType: "success",
+          });
+
+          const payloadHomePlayers = {
+            teamId: homeTeamId,
+            data: res.data.homePlayers,
+          };
+          commit("SET_PLAYERS", payloadHomePlayers);
+
+          const payloadAwayPlayers = {
+            teamId: awayTeamId,
+            data: res.data.awayPlayers,
+          };
+          commit("SET_PLAYERS", payloadAwayPlayers);
         })
         .catch((err) => {
           store.dispatch("Global/setNotificationInfo", {
