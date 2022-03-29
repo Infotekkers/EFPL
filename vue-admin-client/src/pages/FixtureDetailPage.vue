@@ -1,29 +1,42 @@
 <template>
   <div>
     <pre>{{ $data }}</pre>
+    <pre>{{ players }}</pre>
+    <pre>{{ fixtureDetailData }}</pre>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import { mapFields } from "vuex-map-fields";
+import { mapActions } from "vuex";
 
 export default {
   name: "FixtureDetailPage",
-  beforeCreate() {
-    // Get fixture id
-    // Get teams w players + jerseys
+  mounted() {
+    this.loadFixtureDetails(this.fixtureDetailId);
   },
 
   computed: {
-    ...mapFields("Fixture", ["fixtureDetailTrue, fixtureDetailData, players"]),
+    ...mapFields("Fixture", [
+      "players",
+      "fixtureDetailData",
+      "fixtureDetailId",
+    ]),
   },
 
   data: () => ({
     a: 1,
   }),
 
-  methods: [...mapActions("Fixture", ["loadFixtureDetails"])],
+  methods: {
+    ...mapActions("Fixture", [
+      "loadFixtureDetails",
+      "saveFixtureLineup",
+      "saveFixtureStats",
+    ]),
+    // Update lineup
+    // Update stats
+  },
 };
 </script>
 

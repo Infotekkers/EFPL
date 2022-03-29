@@ -24,12 +24,14 @@ export default {
     currentAwayTeamIndex: 1,
 
     // FixtureId of fixture in detail state
-    fixtureDetailTrue: "",
+    fixtureDetailId: "10|20",
 
     // Fixture detailed info like formation
     fixtureDetailData: {
       teams: {},
       formations: {},
+      lineups: {},
+      stats: {},
     },
 
     // Players arranged according to their EPL teams
@@ -81,11 +83,13 @@ export default {
       state.currentAwayTeamIndex = payload;
     },
 
-    SET_FIXTURE_DETAIL_TRUE(state, payload) {
-      state.fixtureDetailTrue = payload;
+    SET_FIXTURE_DETAIL_ID(state, payload) {
+      state.fixtureDetailId = payload;
     },
     SET_FIXTURE_DETAIL_DATA(state, payload) {
-      state.fixtureDetailData[payload.type][payload.teamId] = payload.data;
+      if (payload.type === "stats")
+        state.fixtureDetailData.stats = payload.data;
+      else state.fixtureDetailData[payload.type][payload.teamId] = payload.data;
     },
     SET_PLAYERS(state, payload) {
       state.players[payload.teamId] = payload.data;
@@ -371,6 +375,86 @@ export default {
             data: res.data.awayPlayers,
           };
           commit("SET_PLAYERS", payloadAwayPlayers);
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
+
+    async saveFixtureLineup(
+      { commit },
+      matchId,
+      homeTeamLineUp,
+      awayTeamLineUp
+    ) {
+      let url;
+      let payload;
+      const homeTeamId = matchId.split("|")[0];
+      const awayTeamId = matchId.split("|")[1];
+
+      payload = {
+        type: "lineup",
+        teamId: homeTeamId,
+        data: homeTeamLineUp,
+      };
+      commit("SET_FIXTURE_DETAIL", payload);
+
+      payload = {
+        type: "lineup",
+        teamId: awayTeamId,
+        data: awayTeamLineUp,
+      };
+      commit("SET_FIXTURE_DETAIL", payload);
+
+      url = `/fixtures/update/lineup/${matchId}`;
+      payload = {
+        homeTeamLineUp,
+        awayTeamLineUp,
+      };
+
+      await axios
+        .patch(url, payload)
+        .then((res) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "success",
+            notificationMessage: res.data,
+          });
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
+
+    async saveFixtureStats({ commit }, matchId, incomingUpdate) {
+      let url;
+      let payload;
+
+      payload = {
+        type: "stats",
+        data: incomingUpdate,
+      };
+      commit("SET_FIXTURE_DETAIL_DATA", payload);
+
+      url = `/fixtures/update/stats/${matchId}`;
+      payload = incomingUpdate;
+
+      await axios
+        .patch(url, payload)
+        .then((res) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "success",
+            notificationMessage: res.data,
+          });
         })
         .catch((err) => {
           store.dispatch("Global/setNotificationInfo", {
