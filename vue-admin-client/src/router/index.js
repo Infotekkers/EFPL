@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import AdminLoginView from "../views/AdminLoginView.vue";
-import PageNotFoundView from "../views/PageNotFoundView.vue";
-import SettingsView from "../views/SettingsView.vue";
+import AdminLoginComponent from "../components/AdminLoginComponent";
+import PageNotFoundComponent from "../components/PageNotFoundComponent.vue";
+import SettingsComponent from "../components/SettingsComponent.vue";
 const routes = [
   {
     path: "/",
@@ -22,19 +22,19 @@ const routes = [
   {
     path: "/admin/login",
     name: "admin-login",
-    component: AdminLoginView,
+    component: AdminLoginComponent,
   },
   // settings page
   {
     path: "/admin/settings",
     name: "settings",
-    component: SettingsView,
+    component: SettingsComponent,
   },
   // 404 page should always be the last route add routes above this
   {
     path: "/:catchAll(.*)",
     name: "pagenotfound",
-    component: PageNotFoundView,
+    component: PageNotFoundComponent,
   },
 ];
 
