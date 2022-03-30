@@ -395,7 +395,12 @@ const addTestAdmin = async()=>{
     email:"mikealexiv565@gmail.com",
     password:"Strong@Password123"
   });
+  const testAdmin2 = new Admin({
+    email:"testman@gmail.com",
+    password:"StrongerPass@123"
+  })
   await testAdmin.save();
+  await testAdmin2.save();
 }
 
 const addTestGameweek = async () => {
