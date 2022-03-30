@@ -41,6 +41,25 @@
             :value="isEditMode ? getTeam.teamStadium : ''"
           />
         </div>
+        <div class="container-col">
+          <label for="">Stadium Capacity :</label>
+          <input
+            type="text"
+            ref="stadiumCapacity"
+            :value="isEditMode ? getTeam.stadiumCapacity : ''"
+          />
+        </div>
+        <div class="container-col">
+          <label for="">Foundation Year :</label>
+          <input
+            type="number"
+            min="1900"
+            max="2099"
+            step="1"
+            ref="foundedIn"
+            :value="isEditMode ? getTeam.teamStadium : ''"
+          />
+        </div>
       </form>
 
       <div class="buttons">
@@ -72,6 +91,7 @@
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.65);
+  z-index: 2;
 }
 .close {
   position: absolute;
@@ -205,6 +225,8 @@ export default {
       const teamName = this.$refs.teamName.value;
       const teamCity = this.$refs.teamCity.value;
       const teamStadium = this.$refs.teamStadium.value;
+      const stadiumCapacity = this.$refs.stadiumCapacity.value;
+      const foundedIn = this.$refs.foundedIn.value;
       const teamLogo = await this.getBase64();
 
       if (!teamName) {
@@ -223,6 +245,8 @@ export default {
           teamCity,
           teamStadium,
           teamLogo,
+          foundedIn,
+          stadiumCapacity,
           logoName: this.selectedImage.name,
         };
         store.dispatch("Team/saveTeam", teamData);

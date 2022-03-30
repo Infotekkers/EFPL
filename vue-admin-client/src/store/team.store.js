@@ -7,6 +7,7 @@ export default {
   namespaced: true,
   state: {
     allTeams: [],
+    allTeamsUnfiltered: [],
 
     editTeamId: "",
 
@@ -15,6 +16,10 @@ export default {
   getters: {},
   mutations: {
     SET_ALL_TEAMS(state, payload) {
+      state.allTeams = payload;
+      state.allTeamsUnfiltered = payload;
+    },
+    SET_FILTERED_TEAMS(state, payload) {
       state.allTeams = payload;
     },
     SET_EDIT_TEAM_ID(state, payload) {
@@ -33,9 +38,9 @@ export default {
     },
     sortByID() {
       store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
-        return teamOne.teamId.toUpperCase() < teamTwo.teamId.toUpperCase()
+        return teamOne.teamId < teamTwo.teamId
           ? -1
-          : teamOne.teamId.toUpperCase() > teamTwo.teamId.toUpperCase()
+          : teamOne.teamId > teamTwo.teamId
           ? 1
           : 0;
       });
@@ -69,6 +74,28 @@ export default {
           ? 1
           : 0;
       });
+    },
+    sortByFoundedDate() {
+      store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+        return teamOne.foundedIn < teamTwo.foundedIn
+          ? -1
+          : teamOne.foundedIn > teamTwo.foundedIn
+          ? 1
+          : 0;
+      });
+    },
+
+    filterByTerm(context, filterTerm) {
+      // reset previous filter result
+      store.state.Team.allTeams = store.state.Team.allTeamsUnfiltered;
+
+      // apply filter
+      const filteredTeams = store.state.Team.allTeams.filter((team) => {
+        return team.teamCity.includes(filterTerm);
+      });
+
+      // update filtereds
+      context.commit("SET_FILTERED_TEAMS", filteredTeams);
     },
     // fetches all teams
     async setAllTeams(context) {

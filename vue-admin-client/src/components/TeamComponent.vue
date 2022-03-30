@@ -1,17 +1,26 @@
 <template>
-  <div class="container">
-    <div class="number">{{ team.teamId }}</div>
+  <div class="team-container">
+    <div class="team-id-container">{{ team.teamId }}</div>
     <div
-      class="logo"
+      class="team-logo-container"
       :style="{
         'background-image': 'url(' + getTeamLogo + ')',
       }"
     ></div>
 
-    <div class="team">{{ team.teamName }}</div>
-    <div>{{ team.teamCity }}</div>
-    <div>{{ team.teamStadium }}</div>
-    <div class="controls">
+    <div class="team-name-container">{{ team.teamName }}</div>
+    <div class="team-city-container">{{ team.teamCity }}</div>
+    <div class="team-stadium-container">
+      <div>
+        {{ team.teamStadium }}
+      </div>
+      <div class="team-capacity-container">({{ team.stadiumCapacity }})</div>
+    </div>
+    <div class="team-year-container">
+      <span v-if="team.foundedIn">{{ team.foundedIn }}</span>
+      <span v-else>-</span>
+    </div>
+    <div class="team-controls-container">
       <div @click="editTeam">Edit</div>
       <div @click="deleteTeam">Delete</div>
     </div>
@@ -19,24 +28,69 @@
 </template>
 
 <style scoped>
-.container {
+.team-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  margin-top: var(--spacing-large);
 }
-.logo {
+.team-id-container {
+  width: 5%;
+  min-width: 45px;
+}
+.team-logo-container {
+  text-align: start;
+  width: 110px;
   min-width: 100px;
   min-height: 100px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /* background: yellow; */
 }
+
+.team-name-container {
+  width: 20%;
+  min-width: 130px;
+}
+
+.team-city-container {
+  min-width: 100px;
+  width: 17%;
+}
+
+.team-stadium-container {
+  width: 16%;
+}
+.team-capacity-container {
+  font-size: var(--spacing-small);
+}
+.team-year-container {
+  width: 8%;
+}
+.team-controls-container {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+.team-controls-container > div:nth-of-type(1) {
+  margin-right: 8px;
+}
+/*  */
+/* .logo {
+  min-width: 100px;
+  min-height: 100px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; */
+/* background: yellow; */
+/* }
 .controls {
   display: flex;
 }
 .controls > div:nth-of-type(1) {
   margin-right: 8px;
-}
+} */
 </style>
 
 <script>

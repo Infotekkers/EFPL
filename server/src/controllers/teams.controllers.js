@@ -8,46 +8,38 @@ const path = require("path");
 const { makeFile } = require("../utils/helpers");
 
 const addTeam = asyncHandler(async (req, res) => {
-  const { teamName, teamCity, teamStadium, teamLogo, logoName } = req.body;
+  const {
+    teamName,
+    teamCity,
+    teamStadium,
+    teamLogo,
+    logoName,
+    foundedIn,
+    stadiumCapacity,
+  } = req.body;
 
-  // Check base64 format
-  const matches = teamLogo.match(/^data:([A-Za-z-+/]+);base64,(.+)$/);
+  const verifyTeam = await TeamModel.findOne({
+    teamName: req.body.teamName,
+  });
 
-  if (matches.length !== 3) {
-    res.status(422).json("Team Logo is required");
-  } else {
-    // create buffer
-    const imageBuffer = Buffer.from(matches[2], "base64");
-    const itemName = logoName.split(".");
-    const itemFileName = uuidv4() + "." + itemName[itemName.length - 1];
+  if (!verifyTeam) {
+    const teamLogoPath = makeFile(teamLogo, logoName);
 
-    const filePath = path.join(
-      path.resolve("./"),
-      "uploads/teams",
-      itemFileName
-    );
-
-    try {
-      fs.writeFileSync(filePath, imageBuffer, "utf8");
-      const verifyTeam = await TeamModel.findOne({
-        teamName: req.body.teamName,
-      });
-      const teamLogo = "/uploads/teams/" + itemFileName;
-
-      if (!verifyTeam) {
-        await new TeamModel({
-          teamName,
-          teamCity,
-          teamStadium,
-          teamLogo,
-        }).save();
-        res.status(201).send(`${teamName} added Successfully `);
-      } else {
-        res.status(404).send(`${teamName} EXIST.`);
-      }
-    } catch (err) {
-      res.status(422).json("Error Saving image file.");
+    if (teamLogoPath) {
+      await new TeamModel({
+        teamName,
+        teamCity,
+        teamStadium,
+        teamLogo: teamLogoPath,
+        stadiumCapacity,
+        foundedIn,
+      }).save();
+      res.status(201).send(`${teamName} added Successfully `);
+    } else {
+      res.status(422).json("Error saving image. Please try again!");
     }
+  } else {
+    res.status(404).send(`${teamName} EXIST.`);
   }
 });
 

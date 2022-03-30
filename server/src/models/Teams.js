@@ -23,6 +23,12 @@ const teamSchema = mongoose.Schema({
     type: String,
     required: [true, "Custom Error - Required Value *:Team logo is required."],
   },
+  stadiumCapacity: {
+    type: Number,
+  },
+  foundedIn: {
+    type: Number,
+  },
 });
 
 teamSchema.plugin(autoIncrement.plugin, { model: "teams", field: "teamId" });

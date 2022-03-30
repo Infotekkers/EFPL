@@ -1,27 +1,42 @@
 <template>
-  <div class="container">
+  <main class="teams-main-container">
+    <!-- Modal -->
     <TeamModal
       v-show="showModal"
       @closeModal="closeModal"
       :isEditMode="isEditMode"
     />
+    <!-- Modal -->
+
+    <input
+      type="text"
+      class="team-search-bar"
+      @keyup="searchBarFilter"
+      placeholder="Search Term Here..."
+      ref="searchBar"
+    />
+
     <!-- Header -->
-    <div class="header">
+    <div class="teams-header-container">
       <!-- Title -->
-      <div class="title">EFPL - {{ getSeason }} Teams</div>
+      <div class="teams-title">
+        Ethiopian Premier League - {{ getSeason }} Teams
+      </div>
 
       <!-- Add Button -->
-      <div class="add" @click="activateModal">Add New</div>
+      <div class="teams-add-new" @click="activateModal">+</div>
     </div>
     <!-- Header -->
 
     <!-- Sorter Header -->
-    <div class="sorterHeader">
-      <div @click="sortByID">ID</div>
-      <div @click="sortByName">Logo</div>
-      <div @click="sortByName">Team Name</div>
-      <div @click="sortByCity">City</div>
-      <div @click="sortbyStadium">Stadium</div>
+    <div class="teams-sorter-header">
+      <div @click="sortByID" class="teams-id-sorter">ID</div>
+      <div class="teams-logo-sorter">Logo</div>
+      <div @click="sortByName" class="teams-name-sorter">Team Name</div>
+      <div @click="sortByCity" class="teams-city-sorter">City</div>
+      <div @click="sortbyStadium" class="teams-stadium-sorter">Stadium</div>
+      <div @click="sortByFoundedDate" class="teams-founded-sorter">Year</div>
+      <div class="teams-controls-sorter">Controls</div>
     </div>
     <!-- Sorter Header -->
     <div class="teams-container" v-if="getAllTeams.length > 0">
@@ -32,34 +47,88 @@
         @activateModalEdit="activateModalEdit"
       />
     </div>
-  </div>
+
+    <!-- No items -->
+    <div class="no-teams-container" v-else>No Teams</div>
+  </main>
 </template>
 
 <style scoped>
-.container {
-  margin-top: 100px;
+.teams-main-container {
+  /* background: var(--primary-400); */
+  width: 82%;
+  margin-left: 18%;
+  padding: 100px 16px 60px 16px;
 }
-.header {
+.team-search-bar {
+  width: 20%;
+  height: 32px;
+  margin-left: 80%;
+  padding: 0 3px;
+  outline: none;
+}
+.teams-header-container {
+  margin-top: var(--spacing-medium);
+  width: 100%;
   display: flex;
-  /* align-items: center; */
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
+
+  /*  */
+  position: relative;
+  z-index: 1;
 }
-.add {
-  border: 1px solid black;
-  padding: 3px 22px;
+.teams-title {
+  font-size: var(--text-medium);
 }
-.sorterHeader {
-  justify-content: space-between;
-  margin: 60px;
-  display: flex;
-  background: grey;
-  font-size: 20px;
+.teams-add-new {
+  font-size: 36px;
   font-weight: bold;
+  position: absolute;
+  right: 18%;
 }
-.teams-container {
-  text-align: start;
-  margin: 60px;
-  margin-top: 20px;
+.teams-sorter-header {
+  padding: 0 12px;
+  margin: var(--spacing-large) 0;
+  display: flex;
+  justify-content: space-between;
+  background: var(--primary-900);
+  color: var(--primary-100);
+  font-weight: 500;
+  font-size: 20px;
+}
+.teams-id-sorter {
+  width: 5%;
+  min-width: 45px;
+}
+.teams-logo-sorter {
+  width: 110px;
+}
+.teams-name-sorter {
+  width: 20%;
+  min-width: 130px;
+}
+.teams-city-sorter {
+  min-width: 100px;
+  width: 17%;
+}
+.teams-stadium-sorter {
+  width: 16%;
+}
+.teams-founded-sorter {
+  width: 8%;
+}
+.teams-controls-sorter {
+  width: 10%;
+}
+.no-teams-container {
+  margin-top: var(--spacing-xlarge);
+  width: 100%;
+  min-height: 200px;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  font-size: var(--text-medium);
 }
 </style>
 
@@ -84,13 +153,17 @@ export default {
   },
 
   methods: {
+    searchBarFilter() {
+      const searchTerm = this.$refs.searchBar.value;
+      store.dispatch("Team/filterByTerm", searchTerm);
+      this.getAllTeams;
+    },
     // Event Handlers
     activateModal() {
       this.isEditMode = false;
       this.showModal = true;
     },
     activateModalEdit() {
-      console.log("EDit");
       this.isEditMode = true;
       this.showModal = true;
     },
@@ -98,20 +171,20 @@ export default {
       this.showModal = false;
     },
     sortByID() {
-      console.log("Sorting By ID");
       store.dispatch("Team/sortByID");
     },
     sortByName() {
-      console.log("Sorting By Name");
       store.dispatch("Team/sortByName");
     },
     sortByCity() {
-      console.log("City");
       store.dispatch("Team/sortByCity");
     },
     sortbyStadium() {
-      console.log("Sorting by Stadium");
       store.dispatch("Team/sortByStadium");
+    },
+
+    sortByFoundedDate() {
+      store.dispatch("Team/sortByFoundedDate");
     },
   },
 
