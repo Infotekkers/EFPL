@@ -102,7 +102,7 @@ section {
   min-width: 400px;
   width: 450px;
   min-height: 80px;
-  position: fixed;
+  position: absolute;
   z-index: 10;
   top: 80px;
   right: 0px;

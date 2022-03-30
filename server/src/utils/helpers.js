@@ -1,6 +1,8 @@
 const expressAsyncHandler = require("express-async-handler");
 const JWT = require("jsonwebtoken");
 
+const fs = require("fs");
+
 // Function to generate JWT Token
 const generateJWTToken = expressAsyncHandler(async (id) => {
   return JWT.sign({ id }, process.env.JWT_SECRET, {
@@ -33,7 +35,21 @@ const pointDeductor = (activeTeam, incomingTeam) => {
   return [deduction, transfersMade];
 };
 
+// Function to change base64 to file
+const makeFile = async (fileContent, fileName) => {
+  await fs.writeFile(
+    `uploads/a.jpg`,
+    fileContent,
+    { encoding: "base64" },
+    function (err) {
+      if (err) return err;
+      else return `uploads/team/${fileName}`;
+    }
+  );
+};
+
 module.exports = {
   generateJWTToken,
   pointDeductor,
+  makeFile,
 };

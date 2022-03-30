@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import FixtureDetail from "../components/fixture/FixtureDetailComponent.vue";
+import FixtureDetail from "../components/FixtureDetailComponent.vue";
 
 const routes = [
   {
@@ -18,10 +18,24 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
 
+  // Fixture Routes
+  {
+    path: "/fixtures",
+    name: "Fixtures",
+    component: () => import("../components/FixturesComponent.vue"),
+  },
+
   {
     path: "/fixture/detail",
     name: "Fixture Detail",
     component: FixtureDetail,
+  },
+
+  // Team Route
+  {
+    path: "/teams",
+    name: "Teams",
+    component: () => import("../components/TeamsComponent.vue"),
   },
 ];
 

@@ -91,7 +91,7 @@ export default {
     // fetches all teams
     async setAllTeams(context) {
       axios
-        .get(`${baseURL}/teams//all`)
+        .get(`${baseURL}/teams/all`)
         .then((response) => {
           context.commit("SET_ALL_TEAMS", response.data);
         })

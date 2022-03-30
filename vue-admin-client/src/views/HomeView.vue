@@ -1,25 +1,24 @@
 <template>
   <div class="home">
-    <FixturesComponent v-if="1 == 0" />
     <NotificationComponent />
-    <TeamsComponent />
+
+    <HelloWorld />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import FixturesComponent from "@/components/fixture/FixturesComponent";
 import NotificationComponent from "@/components/shared/NotificationComponent";
-import TeamsComponent from "@/components/team/TeamsComponent";
+
+import HelloWorld from "@/components/HelloWorld";
 
 import store from "../store/index";
 
 export default {
   name: "HomeView",
   components: {
-    FixturesComponent,
     NotificationComponent,
-    TeamsComponent,
+
+    HelloWorld,
   },
 
   methods: {
