@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NotificationComponent from "@/components/shared/NotificationComponent";
+import NotificationComponent from "@/components/NotificationComponent";
 
 import HelloWorld from "@/components/HelloWorld";
 

@@ -24,7 +24,10 @@
       </div>
 
       <!-- Add Button -->
-      <div class="teams-add-new" @click="activateModal">+</div>
+      <div class="teams-add-new" @click="activateModal">
+        <div>+</div>
+        Add
+      </div>
     </div>
     <!-- Header -->
 
@@ -32,7 +35,7 @@
     <div class="teams-sorter-header">
       <div @click="sortByID" class="teams-id-sorter">ID</div>
       <div class="teams-logo-sorter">Logo</div>
-      <div @click="sortByName" class="teams-name-sorter">Team Name</div>
+      <div @click="sortByName" class="teams-name-sorter">Team</div>
       <div @click="sortByCity" class="teams-city-sorter">City</div>
       <div @click="sortbyStadium" class="teams-stadium-sorter">Stadium</div>
       <div @click="sortByFoundedDate" class="teams-founded-sorter">Year</div>
@@ -58,7 +61,7 @@
   /* background: var(--primary-400); */
   width: 82%;
   margin-left: 18%;
-  padding: 100px 16px 60px 16px;
+  padding: 100px 24px 60px 16px;
 }
 .team-search-bar {
   width: 20%;
@@ -82,27 +85,39 @@
   font-size: var(--text-medium);
 }
 .teams-add-new {
-  font-size: 36px;
-  font-weight: bold;
+  font-size: 16px;
+  /* font-weight: bold; */
   position: absolute;
-  right: 18%;
+  right: 0%;
+  background: var(--primary-900);
+  padding: 5px 22px 5px 16px;
+  color: var(--neutral-100);
+  display: flex;
+}
+.teams-add-new > div {
+  width: 20px;
+  height: 20px;
+  background: var(--primary-800);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-right: 6px;
 }
 .teams-sorter-header {
   padding: 0 12px;
-  margin: var(--spacing-large) 0;
+  margin: var(--spacing-xlarge) 0 var(--spacing-regular) 0;
   display: flex;
   justify-content: space-between;
-  background: var(--primary-900);
-  color: var(--primary-100);
   font-weight: 500;
-  font-size: 20px;
+  font-size: 15px;
+  color: var(--neutral-700);
 }
 .teams-id-sorter {
   width: 5%;
   min-width: 45px;
 }
 .teams-logo-sorter {
-  width: 110px;
+  width: 60px;
 }
 .teams-name-sorter {
   width: 20%;

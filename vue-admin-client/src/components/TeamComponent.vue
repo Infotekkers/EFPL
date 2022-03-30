@@ -14,7 +14,7 @@
       <div>
         {{ team.teamStadium }}
       </div>
-      <div class="team-capacity-container">({{ team.stadiumCapacity }})</div>
+      <div class="team-capacity-container">{{ team.stadiumCapacity }}</div>
     </div>
     <div class="team-year-container">
       <span v-if="team.foundedIn">{{ team.foundedIn }}</span>
@@ -33,7 +33,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 16px;
-  margin-top: var(--spacing-large);
+  /* margin-top: var(--spacing-large); */
+  min-height: 110px;
+  border-bottom: 2px solid var(--neutral-200);
+  font-size: 18px;
+  color: var(--neutral-900);
+}
+.team-container:nth-of-type(odd) {
+  background: var(--neutral-100);
 }
 .team-id-container {
   width: 5%;
@@ -41,9 +48,9 @@
 }
 .team-logo-container {
   text-align: start;
-  width: 110px;
-  min-width: 100px;
-  min-height: 100px;
+  width: 60px;
+  min-width: 60px;
+  min-height: 60px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -52,6 +59,9 @@
 .team-name-container {
   width: 20%;
   min-width: 130px;
+}
+.team-container-colored {
+  background: var(--primary-100);
 }
 
 .team-city-container {

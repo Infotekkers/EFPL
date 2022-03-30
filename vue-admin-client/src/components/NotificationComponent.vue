@@ -2,6 +2,7 @@
   <!-- Notification Bar -->
 
   <section
+    class="notification-container"
     v-show="showNotification"
     :class="
       notificationType === 'success'
@@ -98,12 +99,12 @@
 </template>
 
 <style scoped>
-section {
+.notification-container {
   min-width: 400px;
   width: 450px;
   min-height: 80px;
-  position: absolute;
-  z-index: 10;
+  position: fixed;
+  z-index: 5;
   top: 80px;
   right: 0px;
   padding: 2px 12px;
@@ -165,7 +166,7 @@ section {
 </style>
 
 <script>
-import store from "../../store/index";
+import store from "../store/index";
 export default {
   name: "NotificationComponent",
 
