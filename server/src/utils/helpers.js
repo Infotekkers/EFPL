@@ -2,6 +2,8 @@ const expressAsyncHandler = require("express-async-handler");
 const JWT = require("jsonwebtoken");
 
 const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
+const path = require("path");
 
 // Function to generate JWT Token
 const generateJWTToken = expressAsyncHandler(async (id) => {
@@ -36,16 +38,30 @@ const pointDeductor = (activeTeam, incomingTeam) => {
 };
 
 // Function to change base64 to file
-const makeFile = async (fileContent, fileName) => {
-  await fs.writeFile(
-    `uploads/a.jpg`,
-    fileContent,
-    { encoding: "base64" },
-    function (err) {
-      if (err) return err;
-      else return `uploads/team/${fileName}`;
+const makeFile = (fileContent, logoName) => {
+  // Check base64 format
+  const matches = fileContent.match(/^data:([A-Za-z-+/]+);base64,(.+)$/);
+  if (matches.length !== 3) {
+    return "";
+  } else {
+    // create buffer
+    const imageBuffer = Buffer.from(matches[2], "base64");
+    const itemName = logoName.split(".");
+    const itemFileName = uuidv4() + "." + itemName[itemName.length - 1];
+
+    const filePath = path.join(
+      path.resolve("./"),
+      "uploads/teams",
+      itemFileName
+    );
+
+    try {
+      fs.writeFileSync(filePath, imageBuffer, "utf-8");
+      return "/uploads/teams/" + itemFileName;
+    } catch (e) {
+      return "";
     }
-  );
+  }
 };
 
 module.exports = {

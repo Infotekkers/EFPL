@@ -49,7 +49,7 @@
             :key="fixture.matchId"
             :fixture="fixture"
             :isTeamLoading="isTeamLoading"
-            @activateModal="activateModalChild"
+            @activateModal="activateModalEdit"
           />
           <!-- Each Fixture  -->
         </div>
@@ -141,7 +141,7 @@ export default {
     },
 
     // Activate modal for Edit Mode -> Edit fixture
-    activateModalChild() {
+    activateModalEdit() {
       this.isEditMode = true;
       this.showModal = true;
     },

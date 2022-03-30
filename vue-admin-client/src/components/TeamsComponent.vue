@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <TeamModal v-show="showModal" @closeModal="closeModal" />
+    <TeamModal
+      v-show="showModal"
+      @closeModal="closeModal"
+      :isEditMode="isEditMode"
+    />
     <!-- Header -->
     <div class="header">
       <!-- Title -->
@@ -16,7 +20,8 @@
       <div @click="sortByID">ID</div>
       <div @click="sortByName">Logo</div>
       <div @click="sortByName">Team Name</div>
-      <div @click="sortByPosition">Position</div>
+      <div @click="sortByCity">City</div>
+      <div @click="sortbyStadium">Stadium</div>
     </div>
     <!-- Sorter Header -->
     <div class="teams-container" v-if="getAllTeams.length > 0">
@@ -24,6 +29,7 @@
         v-for="team in getAllTeams"
         :key="team.teamId"
         :team="team"
+        @activateModalEdit="activateModalEdit"
       />
     </div>
   </div>
@@ -73,12 +79,19 @@ export default {
   data() {
     return {
       showModal: false,
+      isEditMode: false,
     };
   },
 
   methods: {
     // Event Handlers
     activateModal() {
+      this.isEditMode = false;
+      this.showModal = true;
+    },
+    activateModalEdit() {
+      console.log("EDit");
+      this.isEditMode = true;
       this.showModal = true;
     },
     closeModal() {
@@ -86,12 +99,19 @@ export default {
     },
     sortByID() {
       console.log("Sorting By ID");
+      store.dispatch("Team/sortByID");
     },
     sortByName() {
       console.log("Sorting By Name");
+      store.dispatch("Team/sortByName");
     },
-    sortByPosition() {
-      console.log("Sorting by Position");
+    sortByCity() {
+      console.log("City");
+      store.dispatch("Team/sortByCity");
+    },
+    sortbyStadium() {
+      console.log("Sorting by Stadium");
+      store.dispatch("Team/sortByStadium");
     },
   },
 

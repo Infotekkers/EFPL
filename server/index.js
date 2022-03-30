@@ -3,6 +3,8 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 
+const path = require("path");
+
 // Development Supports
 const populate = require("./src/utils/populate"); // eslint-disable-line
 
@@ -33,6 +35,9 @@ app.use(cors());
 // Add Rate Limit
 const rateLimiter = require("./src/config/rate_config");
 app.use(rateLimiter);
+
+// Serve static files
+app.use("/uploads/", express.static(path.join(__dirname, "/uploads")));
 
 // Add Routes to app
 app.use("/teams", teams);

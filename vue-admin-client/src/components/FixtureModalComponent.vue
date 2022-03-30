@@ -424,6 +424,7 @@ export default {
 
     // get home team image
     getHomeTeamImage() {
+      // TODO: Make Server Image
       const homeTeam = this.homeTeams[this.homeTeamIndex].teamName;
       let path;
       try {
@@ -437,6 +438,7 @@ export default {
 
     // get away team image
     getAwayTeamImage() {
+      // TODO: Make Server Image
       const awayTeam = this.awayTeams[this.awayTeamIndex].teamName;
       let path;
       try {
