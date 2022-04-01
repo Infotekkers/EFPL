@@ -85,16 +85,32 @@ export default {
       });
     },
 
+    // TODO:Improve filter
     filterByTerm(context, filterTerm) {
       // reset previous filter result
       store.state.Team.allTeams = store.state.Team.allTeamsUnfiltered;
 
       // apply filter
       const filteredTeams = store.state.Team.allTeams.filter((team) => {
-        return team.teamCity.includes(filterTerm);
+        return (
+          // By city
+          team.teamCity.includes(filterTerm.toLowerCase()) ||
+          team.teamCity.includes(filterTerm.toUpperCase()) ||
+          team.teamCity.includes(filterTerm) ||
+          // by name
+          team.teamName.includes(filterTerm.toLowerCase()) ||
+          team.teamName.includes(filterTerm.toLowerCase()) ||
+          team.teamName.includes(filterTerm) ||
+          // year
+          team.foundedIn.includes(filterTerm) ||
+          // by stadium
+          team.teamStadium.includes(filterTerm.toLowerCase()) ||
+          team.teamStadium.includes(filterTerm.toUpperCase()) ||
+          team.teamStadium.includes(filterTerm)
+        );
       });
 
-      // update filtereds
+      // update filtered
       context.commit("SET_FILTERED_TEAMS", filteredTeams);
     },
     // fetches all teams

@@ -37,12 +37,12 @@
       </div>
       <!-- Title -->
 
+      <div class="filter-container">Filters</div>
+
       <!-- Header - Gameweek controls, add new & gameweek title -->
       <div class="gameweek-controller">
         <!-- Previous Game week button -->
-        <div v-on="showingGameWeek == 1 ? {} : { click: prevGameWeek }">
-          Prev
-        </div>
+        <div @click="prevGameWeek">Prev</div>
 
         <!-- Gameweek counter -->
         <div class="gameweek-controller-main">
@@ -59,9 +59,7 @@
         </div>
 
         <!-- Next game week Button -->
-        <div v-on="showingGameWeek == 30 ? {} : { click: nextGameWeek }">
-          Next
-        </div>
+        <div @click="nextGameWeek">Next</div>
 
         <!-- Add New game week button -->
       </div>
@@ -128,6 +126,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  position: relative;
 }
 .gameweek-title {
   font-size: var(--text-medium);
@@ -135,7 +134,7 @@
 .gameweek-add-new {
   font-size: 16px;
   position: absolute;
-  right: calc(10% - 12px);
+  right: 0;
   background: var(--primary-900);
   padding: 5px 22px 5px 16px;
   color: var(--neutral-100);
@@ -149,6 +148,12 @@
   display: grid;
   place-items: center;
   margin-right: 6px;
+}
+.filter-container {
+  margin-top: 32px;
+  width: 100%;
+  min-height: 60px;
+  background: teal;
 }
 .gameweek-controller {
   margin: var(--spacing-medium) 0 var(--spacing-regular) 0;
@@ -259,12 +264,27 @@ export default {
     // Event Handlers
     prevGameWeek() {
       const currentGW = store.state.Fixture.showingGameWeek;
-      store.dispatch("Fixture/setShowingGameWeek", currentGW - 1);
+
+      const maxGWCount = (store.state.Fixture.allTeams.length - 1) * 2;
+
+      currentGW == 1
+        ? store.dispatch("Fixture/setShowingGameWeek", maxGWCount)
+        : store.dispatch("Fixture/setShowingGameWeek", currentGW - 1);
     },
 
     nextGameWeek() {
       const currentGW = store.state.Fixture.showingGameWeek;
-      store.dispatch("Fixture/setShowingGameWeek", currentGW + 1);
+      const maxGWCount = (store.state.Fixture.allTeams.length - 1) * 2;
+
+      currentGW === maxGWCount
+        ? store.dispatch("Fixture/setShowingGameWeek", 1)
+        : store.dispatch("Fixture/setShowingGameWeek", currentGW + 1);
+    },
+
+    searchBarFilter() {
+      const searchTerm = this.$refs.searchBar.value;
+      store.dispatch("Fixture/filterByTerm", searchTerm);
+      // this.getFixtures;
     },
   },
 

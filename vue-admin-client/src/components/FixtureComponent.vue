@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO:Add Result Display -->
   <main class="fixture-main-container">
     <!-- teams loading -->
     <div v-if="isTeamLoading == true">Loading</div>
@@ -10,9 +11,13 @@
       class="fixture-content-container"
     >
       <!-- Fixture Main Info -->
-      <div class="fixture-info" @click="goToDetailPage">
+      <div
+        class="fixture-info"
+        @click="goToDetailPage"
+        v-if="getTeams.length !== 0"
+      >
         <!-- Home team -->
-        <div class="fixture-container">
+        <div class="fixture-container home-container">
           <!-- Team Name -->
           <div class="fixture-home-team">
             {{ fixture.homeTeam }}
@@ -35,7 +40,7 @@
         <!-- Game Time - formatted -->
 
         <!-- Away Team -->
-        <div class="fixture-container">
+        <div class="fixture-container away-container">
           <!-- Team Logo -->
           <div
             class="fixture-logo"
@@ -74,6 +79,7 @@
 .fixture-main-container {
   width: 100%;
   border-bottom: 2px solid var(--neutral-200);
+  color: var(--neutral-900);
 }
 .fixture-main-container:nth-of-type(odd) {
   background: var(--neutral-100);
@@ -85,27 +91,25 @@
   display: flex;
   align-items: center;
   width: 100%;
-  /* position: relative; */
+  position: relative;
 }
 .fixture-info {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* background: teal; */
 }
 .fixture-container {
   display: flex;
   align-items: center;
-  width: 45%;
-  padding: 12px 0;
+  width: 46%;
+  padding: 8px 0;
 }
-.fixture-container:nth-of-type(odd) {
+.home-container {
   justify-content: flex-end;
-
   padding-right: 20px;
 }
-.fixture-container:nth-of-type(even) {
+.away-container {
   justify-content: flex-start;
   padding-left: 20px;
 }
@@ -129,12 +133,20 @@
   background-repeat: no-repeat;
 }
 .fixture-game-time {
-  width: 10%;
+  width: 8%;
   text-align: center;
 }
 .fixture-controls {
   position: absolute;
   right: 0;
+  display: flex;
+  width: fit-content;
+  margin-left: auto;
+  font-size: 12px;
+  /* margin-left: 100%; */
+}
+.fixture-controls > div {
+  margin-left: 4px;
 }
 /*  */
 </style>
@@ -175,8 +187,11 @@ export default {
       const homeTeam = store.state.Fixture.allTeams.filter((team) => {
         return team.teamName == this.fixture.homeTeam;
       });
-      console.log();
       return `${baseUrl}${homeTeam[0].teamLogo}`;
+    },
+
+    getTeams() {
+      return store.state.Fixture.allTeams;
     },
 
     // get away team image
@@ -186,7 +201,7 @@ export default {
       const awayTeam = store.state.Fixture.allTeams.filter((team) => {
         return team.teamName == this.fixture.awayTeam;
       });
-      console.log();
+
       return `${baseUrl}${awayTeam[0].teamLogo}`;
     },
   },

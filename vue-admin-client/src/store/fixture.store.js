@@ -7,6 +7,7 @@ export default {
   namespaced: true,
   state: {
     allFixtures: [],
+    allFixturesUnfiltered: [],
     allTeams: [],
     homeTeams: [],
     awayTeams: [],
@@ -28,11 +29,15 @@ export default {
   mutations: {
     SET_ALL_FIXTURES(state, payload) {
       state.allFixtures = payload;
+      state.allFixturesUnfiltered = payload;
     },
     SET_ALL_TEAMS(state, payload) {
       state.allTeams = payload;
       state.homeTeams = payload;
       state.awayTeams = payload;
+    },
+    SET_FILTERED_FIXTURES(state, payload) {
+      state.allFixtures = payload;
     },
     SET_HOME_TEAMS(state, payload) {
       state.homeTeams = payload;
@@ -65,6 +70,31 @@ export default {
     },
   },
   actions: {
+    // TODO:Improve filter
+    filterByTerm(context, filterTerm) {
+      // reset previous filter result
+      store.state.Fixture.allFixtures =
+        store.state.Fixture.allFixturesUnfiltered;
+
+      // apply filter
+      const filteredFixtures = store.state.Fixture.allFixtures.filter(
+        (fixture) => {
+          return (
+            // home team
+            fixture.homeTeam.includes(filterTerm.toUpperCase()) ||
+            fixture.homeTeam.includes(filterTerm.toLowerCase()) ||
+            fixture.homeTeam.includes(filterTerm) ||
+            // away team
+            fixture.awayTeam.includes(filterTerm.toUpperCase()) ||
+            fixture.awayTeam.includes(filterTerm.toLowerCase()) ||
+            fixture.awayTeam.includes(filterTerm)
+          );
+        }
+      );
+
+      // update filtered
+      context.commit("SET_FILTERED_FIXTURES", filteredFixtures);
+    },
     // Fetches all fixtures
     async setAllFixtures(context) {
       axios
