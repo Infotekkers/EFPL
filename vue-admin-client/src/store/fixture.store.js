@@ -24,7 +24,7 @@ export default {
     currentAwayTeamIndex: 1,
 
     // FixtureId of fixture in detail state
-    fixtureDetailId: "10|20",
+    fixtureDetailId: "10|15",
 
     // Fixture detailed info like formation
     fixtureDetailData: {
@@ -383,6 +383,9 @@ export default {
             notificationMessage: err.response.data,
           });
         });
+
+      // Get fixture stats
+      // url =
     },
 
     async saveFixtureLineup(
