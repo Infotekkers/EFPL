@@ -40,7 +40,6 @@ export default {
     },
 
     setNotificationInfo(context, notificationInfo) {
-      console.log("Invoked");
       context.commit("SET_NOTIFICATION_INFO", notificationInfo);
     },
   },

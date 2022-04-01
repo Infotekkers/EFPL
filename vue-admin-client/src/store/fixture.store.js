@@ -213,6 +213,7 @@ export default {
           notificationMessage: "No change in Fixture information for update.",
         });
       } else {
+        // TODO:Review
         await axios
           .patch(
             `${baseURL}/fixtures/postpone/${store.state.Fixture.editFixtureId}`,
@@ -231,14 +232,13 @@ export default {
             }
           })
           .catch((err) => {
-            // console.log(err.response);
-            // store.dispatch("Global/setNotificationInfo", {
-            //   showNotification: true,
-            //   notificationType: "error",
-            //   notificationMessage: `${err.response.data}`,
-            //   notificationDuration: 8000,
-            // });
-            err.a = "";
+            console.log(err.response);
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "error",
+              notificationMessage: `${err.response.data}`,
+              notificationDuration: 8000,
+            });
           });
       }
       // await axios

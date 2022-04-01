@@ -121,7 +121,6 @@ export default {
           context.commit("SET_ALL_TEAMS", response.data);
         })
         .catch((err) => {
-          // TODO:Add Notification
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
@@ -131,17 +130,23 @@ export default {
     },
 
     async saveTeam(context, teamData) {
-      console.log(teamData);
       axios
         .post(`${baseURL}/teams/`, teamData)
         .then((response) => {
-          // TODO:Add Notification
-          console.log(response);
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "success",
+            notificationMessage: response.data,
+          });
+
           store.dispatch("Team/setAllTeams");
         })
         .catch((err) => {
-          // TODO:Add Notification
-          console.log(err);
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
         });
     },
 
@@ -149,13 +154,19 @@ export default {
       axios
         .delete(`${baseURL}/teams/${teamId}`)
         .then((response) => {
-          // TODO:Add Notification
-          console.log(response);
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "success",
+            notificationMessage: response.data,
+          });
           store.dispatch("Team/setAllTeams");
         })
         .catch((err) => {
-          // TODO:Add Notification
-          console.log(err);
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
         });
     },
 
@@ -174,16 +185,26 @@ export default {
         axios
           .patch(`${baseURL}/teams/${teamId}`, updatedTeam)
           .then((response) => {
-            // TODO:Add Notification
-            console.log(response);
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: response.data,
+            });
             store.dispatch("Team/setAllTeams");
           })
           .catch((err) => {
-            // TODO:Add Notification
-            console.log(err);
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "error",
+              notificationMessage: err.response.data,
+            });
           });
       } else {
-        console.log("Wef man");
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "warning",
+          notificationMessage: "No changes have been applied.",
+        });
       }
     },
   },

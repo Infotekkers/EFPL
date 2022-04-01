@@ -1,13 +1,25 @@
 <template>
-  <div class="containerr">
-    <div class="close" @click="$emit('closeModal')">X</div>
+  <div class="team-modal-main-container">
+    <!-- Close button -->
+    <div class="team-modal-close" @click="$emit('closeModal')">X</div>
+    <!-- Close button -->
 
-    <div class="content">
-      <div class="image-section">
-        <div class="preview" ref="preview">
-          <div class="preview-close" @click="removeImage">X</div>
+    <div class="team-modal-content">
+      <!-- Logo Area -->
+      <div class="team-modal-image-section">
+        <!-- Logo Preview -->
+        <div class="team-modal-image-preview" ref="preview">
+          <div
+            class="team-modal-image-remove"
+            @click="removeImage"
+            v-if="selectedImage != null"
+          >
+            X
+          </div>
         </div>
+        <!-- Logo Preview -->
 
+        <!-- Team Logo Selector -->
         <input
           type="file"
           class="input-file"
@@ -15,74 +27,98 @@
           @change="teamLogoChange($event)"
         />
       </div>
+      <!-- Team Logo Selector -->
+      <!-- Logo Area -->
 
+      <!-- Team Info Input -->
       <form class="input-form" ref="inputForm">
+        <!-- Team name & city & stadium -->
         <div class="container-col">
-          <label for="">Team Name :</label>
-          <input
-            type="text"
-            ref="teamName"
-            :value="isEditMode ? getTeam.teamName : ''"
-          />
-        </div>
-        <div class="container-col">
-          <label for="">Team City :</label>
-          <input
-            type="text"
-            ref="teamCity"
-            :value="isEditMode ? getTeam.teamCity : ''"
-          />
-        </div>
-        <div class="container-col">
-          <label for="">Team Stadium :</label>
-          <input
-            type="text"
-            ref="teamStadium"
-            :value="isEditMode ? getTeam.teamStadium : ''"
-          />
-        </div>
-        <div class="container-col">
-          <label for="">Stadium Capacity :</label>
-          <input
-            type="text"
-            ref="stadiumCapacity"
-            :value="isEditMode ? getTeam.stadiumCapacity : ''"
-          />
-        </div>
-        <div class="container-col">
-          <label for="">Foundation Year :</label>
-          <input
-            type="number"
-            min="1900"
-            max="2099"
-            step="1"
-            ref="foundedIn"
-            :value="isEditMode ? getTeam.teamStadium : ''"
-          />
-        </div>
-      </form>
+          <!-- Team Name -->
+          <div class="container-col input-container">
+            <label for="">Name</label>
+            <input
+              type="text"
+              ref="teamName"
+              :value="isEditMode ? getTeam.teamName : ''"
+            />
+          </div>
+          <!-- Team Name -->
 
-      <div class="buttons">
-        <div class="cancel" @click="cancelSave">Cancel</div>
-        <div
-          class="save"
-          v-on="isEditMode ? { click: updateTeam } : { click: saveTeam }"
-        >
-          Save
+          <!-- Team City -->
+          <div class="container-col input-container">
+            <label for="">City</label>
+            <input
+              type="text"
+              ref="teamCity"
+              :value="isEditMode ? getTeam.teamCity : ''"
+            />
+          </div>
+          <!-- Team City -->
+
+          <!-- Team Stadium -->
+          <div class="container-col input-container">
+            <label for="">Stadium</label>
+            <input
+              type="text"
+              ref="teamStadium"
+              :value="isEditMode ? getTeam.teamStadium : ''"
+            />
+          </div>
+          <!-- Team Stadium -->
         </div>
-      </div>
+        <!-- Team name & city  & stadium  -->
+
+        <!-- Stadium Capacity & Foundation Year -->
+        <div class="container-col">
+          <!-- Stadium -->
+          <div class="container-col input-container">
+            <label for="">Stadium Capacity </label>
+            <input
+              type="text"
+              ref="stadiumCapacity"
+              :value="isEditMode ? getTeam.stadiumCapacity : ''"
+            />
+          </div>
+          <!-- Stadium -->
+
+          <!-- Year -->
+          <div class="container-col input-container">
+            <label for="">Founded</label>
+            <input
+              class="input-number"
+              type="number"
+              min="1900"
+              max="2099"
+              step="1"
+              ref="foundedIn"
+              :value="isEditMode ? getTeam.foundedIn : ''"
+            />
+          </div>
+          <!-- Year -->
+
+          <div class="team-modal-buttons-container">
+            <div class="team-modal-cancel-button" @click="cancelSave">
+              Cancel
+            </div>
+            <div
+              class="team-modal-save-button"
+              v-on="
+                isEditMode == true ? { click: updateTeam } : { click: saveTeam }
+              "
+            >
+              Save
+            </div>
+          </div>
+        </div>
+        <!-- Stadium Capacity & Foundation Year -->
+      </form>
     </div>
   </div>
 </template>
 
 <style scoped>
-.container-col {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 32px;
-}
-.containerr {
+.team-modal-main-container {
   height: 100vh;
   width: 100%;
   display: grid;
@@ -92,71 +128,118 @@
   left: 0;
   background: rgba(0, 0, 0, 0.65);
   z-index: 2;
-  overflow: hidden !important;
+  overflow: hidden;
+  color: var(--neutral-900);
 }
-.close {
+.team-modal-close {
   position: absolute;
-  top: 100px;
+  top: 40px;
   right: 32px;
+  width: 30px;
+  height: 30px;
+  background: var(--neutral-100);
+  color: var(--primary-900);
+  font-size: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
 }
-.content {
-  width: 60%;
+.team-modal-content {
+  width: 55%;
   min-height: 300px;
-  background: teal;
+  background: var(--neutral-100);
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
+  padding: 30px 16px;
+  position: relative;
 }
-.image-section {
+
+.team-modal-image-section {
   width: 250px;
   height: 300px;
-  background: red;
   display: flex;
   flex-direction: column;
-}
-.preview {
+  justify-content: center;
   position: relative;
-  width: 250px;
-  height: 250px;
-  background: yellow;
+}
+
+.team-modal-image-preview {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  margin-bottom: 24px;
 }
-.show-preview {
-  background: teal;
-}
-.preview-close {
+.team-modal-image-remove {
   position: absolute;
   right: 5px;
   top: 5px;
 }
-.input-file {
-  margin-top: 12px;
-}
 .input-form {
-  margin-left: 16px;
-}
-input[type="text"] {
-  outline: none;
-  height: 32px;
-}
-.buttons {
+  margin-left: 20px;
   display: flex;
+  justify-content: space-around;
+  align-content: flex-start;
+  width: 100%;
+}
+.input-form > .container-col {
   width: 40%;
-  justify-content: flex-end;
-  background: yellow;
 }
-.cancel,
-.save {
-  border: 1px solid black;
-  padding: 3px 22px;
+
+input {
+  outline: none;
+  height: 30px;
+  width: 130%;
+  border: none;
+  padding: 0 3.5px;
 }
-.save {
-  margin-left: 25px;
-  background: green;
+label {
+  margin-bottom: 5px;
+  font-size: 15px;
+  color: var(--neutral-800);
 }
-.cancel {
-  background: red;
+.input-number {
+  width: 195%;
+}
+/* General Class */
+.container-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.container-row {
+  display: flex;
+  flex-direction: row;
+}
+.input-container {
+  margin-top: 26px;
+}
+
+.team-modal-buttons-container {
+  position: absolute;
+  bottom: 22px;
+  display: flex;
+  right: 45px;
+}
+
+.team-modal-cancel-button,
+.team-modal-save-button {
+  padding: 5px 22px;
+  cursor: pointer;
+}
+.team-modal-save-button {
+  background: var(--primary-900);
+  color: var(--neutral-100);
+  font-size: 15px;
+}
+.team-modal-cancel-button {
+  margin-right: 4px;
 }
 </style>
 
@@ -218,8 +301,10 @@ export default {
       this.$refs.preview.style.backgroundImage = ``;
     },
     cancelSave() {
-      this.removeImage();
-      this.$refs.inputForm.reset();
+      if (this.isEditMode == false) {
+        this.removeImage();
+        this.$refs.inputForm.reset();
+      }
       this.$emit("closeModal");
     },
     async saveTeam() {

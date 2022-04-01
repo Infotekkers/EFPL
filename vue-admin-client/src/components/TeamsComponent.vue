@@ -152,7 +152,7 @@ import store from "../store/index";
 
 // Components
 import TeamComponent from "@/components/TeamComponent";
-import TeamModal from "@/components/TeamModal";
+import TeamModal from "@/components/TeamModalComponent";
 export default {
   name: "TeamsComponent",
   components: {
