@@ -1,7 +1,7 @@
 <template>
   <div class="admin-login">
     <h1>Admin Login</h1>
-    <form @submit.prevent>
+    <form @submit.prevent="loginAdmin">
       <label>Email:</label>
       <input required type="email" v-model="loginInfo.email" />
       <label>Password:</label>
@@ -11,11 +11,10 @@
         v-model="loginInfo.password"
         minlength="8"
       />
+      <div class="submit"><button>Login</button></div>
       <button @click="showPassword = !showPassword">show password</button>
-      <div class="submit" @click="loginAdmin"><button>Login</button></div>
     </form>
     <div v-if="isLoading">Loading...</div>
-    <div class="error" :error="error">{{ error }}</div>
   </div>
 </template>
 
@@ -60,14 +59,9 @@ input {
 .submit {
   text-align: center;
 }
-
-.error {
-  color: red;
-}
 </style>
 
 <script>
-// import axios from "axios";
 import store from "../store/index";
 export default {
   data() {
@@ -88,6 +82,7 @@ export default {
     loginAdmin() {
       this.isLoading = true;
       this.$store.dispatch("loginAdmin", this.loginInfo);
+      this.$router.push({ name: "admin" });
       this.isLoading = false;
     },
   },
@@ -99,9 +94,6 @@ export default {
     connectionStatus() {
       return store.state.Global.connection;
     },
-  },
-  created() {
-    this.$store.dispatch("setAdmin");
   },
 };
 </script>

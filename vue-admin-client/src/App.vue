@@ -1,13 +1,19 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-
+    <router-link :to="{ name: 'admin' }" v-if="currentAdmin.email"
+      >Admin</router-link
+    >
     <div v-if="currentAdmin.email">
       {{ currentAdmin.email }}
       <button @click="logOutAdmin">Logout</button>
     </div>
-    <div v-else>Not Logged In</div>
+    <div v-else>
+      Not Logged In
+      <router-link :to="{ name: 'admin-login' }"
+        ><button>Login</button></router-link
+      >
+    </div>
   </nav>
 
   <!-- eslint-disable-next-line -->
@@ -38,13 +44,19 @@ nav a.router-link-exact-active {
 </style>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   computed: {
     ...mapGetters(["currentAdmin"]),
   },
   methods: {
-    ...mapActions(["logOutAdmin"]),
+    logOutAdmin() {
+      this.$store.dispatch("logOutAdmin");
+      this.$router.push({ name: "home" });
+    },
+  },
+  mounted() {
+    this.$store.dispatch("setAdmin");
   },
 };
 </script>
