@@ -1,12 +1,18 @@
 <template>
   <div class="admin-login">
     <h1>Admin Login</h1>
-    <form @submit.prevent="loginAdmin">
+    <form @submit.prevent>
       <label>Email:</label>
-      <input type="email" required v-model="login.email" />
+      <input required type="email" v-model="loginInfo.email" />
       <label>Password:</label>
-      <input type="password" required v-model="login.password" />
-      <div class="submit"><button>Login</button></div>
+      <input
+        :type="showPassword ? 'text' : 'password'"
+        required
+        v-model="loginInfo.password"
+        minlength="8"
+      />
+      <button @click="showPassword = !showPassword">show password</button>
+      <div class="submit" @click="loginAdmin"><button>Login</button></div>
     </form>
     <div v-if="isLoading">Loading...</div>
     <div class="error" :error="error">{{ error }}</div>
@@ -61,12 +67,14 @@ input {
 </style>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import store from "../store/index";
 export default {
   data() {
     return {
-      login: {
+      showPassword: false,
+      loginInfo: {
+        showPassword: true,
         email: "",
         password: "",
       },
@@ -77,29 +85,8 @@ export default {
   name: "AdminLoginView",
 
   methods: {
-    async loginAdmin() {
-      this.isLoading = true;
-      console.log(this.isLoading);
-
-      if (this.connectionStatus) {
-        axios
-          .post(`${this.baseURL}/admin/login`, this.login)
-
-          .then((response) => {
-            if (response.status === 201) {
-              console.log("logged in");
-              // this.$router.push("/admin/settings");
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-            if (error.response.status == 400) {
-              this.error = "Invalid Login Credentials";
-            }
-          });
-      }
-      this.isLoading = false;
-      console.log(this.isLoading);
+    loginAdmin() {
+      this.$store.dispatch("loginAdmin", this.loginInfo);
     },
   },
   computed: {
@@ -110,6 +97,9 @@ export default {
     connectionStatus() {
       return store.state.Global.connection;
     },
+  },
+  created() {
+    this.$store.dispatch("setAdmin");
   },
 };
 </script>

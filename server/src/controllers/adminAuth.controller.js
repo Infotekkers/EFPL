@@ -40,4 +40,9 @@ const login = asyncHandler(async (req, res) => {
     res.status(400).json({ message: "invalid email - password combination" });
   });
 
-  module.exports={login};
+  const getAdmins = asyncHandler(async(req,res)=>{
+    const Admins = await Admin.find();
+    res.status(200).json(Admins)
+  })
+
+  module.exports={login, getAdmins};
