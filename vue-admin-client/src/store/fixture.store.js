@@ -24,7 +24,7 @@ export default {
     currentAwayTeamIndex: 1,
 
     // FixtureId of fixture in detail state
-    fixtureDetailId: "10|15",
+    fixtureDetailId: "3|1",
 
     // Fixture detailed info like formation
     fixtureDetailData: {

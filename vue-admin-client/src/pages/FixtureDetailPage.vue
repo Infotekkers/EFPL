@@ -9,31 +9,25 @@
       @changeActiveTeam="changeActiveTeam"
     />
     <!-- Formation Selector -->
-    <select name="formations" id="formations" @change="changeFormation">
+    <select
+      name="formations"
+      id="formations"
+      @change="changeFormation"
+      ref="formations"
+    >
       <option value="4-3-3">4-3-3</option>
       <option value="4-4-2">4-4-2</option>
       <option value="3-5-2">3-5-2</option>
       <option value="3-4-3">3-4-3</option>
       <option value="5-3-2">5-3-2</option>
       <option value="4-5-1">4-5-1</option>
-      <option value="4-2-3-1">4-2-3-1</option>
-      <option value="4-3-1-2">4-3-1-2</option>
-      <option value="4-1-2-3">4-1-2-3</option>
-      <option value="4-1-3-2">4-1-3-2</option>
-      <option value="4-3-2-1">4-3-2-1</option>
-      <option value="4-4-1-1">4-4-1-1</option>
-      <option value="4-1-2-1-2">4-1-2-1-2</option>
-      <option value="3-4-1-2">3-4-1-2</option>
       <option value="3-6-1">3-6-1</option>
       <option value="4-6-0">4-6-0</option>
       <option value="5-4-1">5-4-1</option>
       <option value="1-6-3">1-6-3</option>
-      <option value="4-2-2-2">4-2-2-2</option>
-      <option value="3-3-1-3">3-3-1-3</option>
-      <option value="3-3-3-1">3-3-3-1</option>
     </select>
-    <FormationSelector />
     <!-- Field -->
+    <Field :activeTeamId="this.activeTeamId" />
     <!-- Bench Selector -->
     <!-- Action Btns -->
   </main>
@@ -43,14 +37,14 @@
 import { mapFields } from "vuex-map-fields";
 import { mapActions } from "vuex";
 import TeamSelector from "../components/FixtureDetailTeamSelector.vue";
-import FormationSelector from "../components/FixtureDetailFormationSelector.vue";
+import Field from "../components/FixtureDetailField.vue";
 
 export default {
   name: "FixtureDetailPage",
 
   components: {
     TeamSelector,
-    FormationSelector,
+    Field,
   },
 
   mounted() {
@@ -90,8 +84,10 @@ export default {
     changeFormation(e) {
       this.fixtureDetailData.formations[this.activeTeamId] = e.target.value;
     },
+
     // Update lineup
     // Update stats
+    // Cache changes
   },
 };
 </script>
