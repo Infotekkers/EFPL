@@ -86,7 +86,9 @@ export default {
 
   methods: {
     loginAdmin() {
+      this.isLoading = true;
       this.$store.dispatch("loginAdmin", this.loginInfo);
+      this.isLoading = false;
     },
   },
   computed: {
