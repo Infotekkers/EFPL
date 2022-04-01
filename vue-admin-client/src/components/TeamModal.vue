@@ -87,11 +87,12 @@
   width: 100%;
   display: grid;
   place-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.65);
   z-index: 2;
+  overflow: hidden !important;
 }
 .close {
   position: absolute;

@@ -42,7 +42,7 @@
       <!-- Header - Gameweek controls, add new & gameweek title -->
       <div class="gameweek-controller">
         <!-- Previous Game week button -->
-        <div @click="prevGameWeek">Prev</div>
+        <div @click="prevGameWeek" class="navigator-button">Prev</div>
 
         <!-- Gameweek counter -->
         <div class="gameweek-controller-main">
@@ -59,7 +59,7 @@
         </div>
 
         <!-- Next game week Button -->
-        <div @click="nextGameWeek">Next</div>
+        <div @click="nextGameWeek" class="navigator-button">Next</div>
 
         <!-- Add New game week button -->
       </div>
@@ -104,13 +104,14 @@
   min-height: 100vh;
   display: grid;
   place-items: center;
+  padding: 100px 24px 60px 16px;
 }
 .gameweek-container {
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 24px 14px 24px 14px;
 }
 .fixture-search-bar {
@@ -168,6 +169,8 @@
 .gameweek-controller-main {
   display: flex;
   align-items: center;
+  font-size: 18px;
+  color: var(--neutral-900);
 }
 .gameweek-complete-verifier {
   margin-right: 6px;
@@ -178,8 +181,15 @@
   padding: 2px 8px;
   cursor: pointer;
 }
+.navigator-button {
+  width: 30%;
+  height: 32px;
+  padding: 8px 40px;
+  display: flex;
+  align-items: center;
+}
 .gameweek-date {
-  margin-top: 12px;
+  margin-top: 42px;
   text-align: center;
   font-size: 20px;
 }
