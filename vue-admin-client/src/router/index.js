@@ -1,11 +1,35 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-
+// Player Routes
+import ALLPLAYERS from "../components/ManagePlayers/AllPlayers";
+import ADDPLAYER from "../components/ManagePlayers/AddPlayer";
+import EDITPLAYERS from "../components/ManagePlayers/EditPlayer";
+import VIEWPLAYERS from "../components/ManagePlayers/viewPlayer";
 const routes = [
   {
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/allplayers",
+    name: "alllayer",
+    component: ALLPLAYERS,
+  },
+  {
+    path: "/addplayer",
+    name: "addplayer",
+    component: ADDPLAYER,
+  },
+  {
+    path: "/editplayer",
+    name: "editplayer",
+    component: EDITPLAYERS,
+  },
+  {
+    path: "/viewPlayer",
+    name: "viewPlayer",
+    component: VIEWPLAYERS,
   },
   {
     path: "/about",
