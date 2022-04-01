@@ -385,7 +385,41 @@ export default {
         });
 
       // Get fixture stats
-      // url =
+      url = `/fixtures/${matchId}`;
+
+      await axios
+        .get(url)
+        .then((res) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: false,
+            notificationType: "success",
+          });
+
+          if (res.data.homeTeamLineUp) {
+            const payload = {
+              type: "lineups",
+              teamId: homeTeamId,
+              data: res.data.homeTeamLineUp.lineup,
+            };
+            commit("SET_FIXTURE_DETAIL_DATA", payload);
+          }
+
+          if (res.data.awayTeamLineUp) {
+            const payload = {
+              type: "lineups",
+              teamId: awayTeamId,
+              data: res.data.awayTeamLineUp.lineup,
+            };
+            commit("SET_FIXTURE_DETAIL_DATA", payload);
+          }
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
     },
 
     async saveFixtureLineup(
