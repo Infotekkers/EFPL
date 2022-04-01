@@ -86,7 +86,6 @@
 }
 .teams-add-new {
   font-size: 16px;
-  /* font-weight: bold; */
   position: absolute;
   right: 0%;
   background: var(--primary-900);

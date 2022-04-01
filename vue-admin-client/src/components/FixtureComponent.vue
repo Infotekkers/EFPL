@@ -1,24 +1,27 @@
 <template>
-  <div class="fixture">
+  <main class="fixture-main-container">
     <!-- teams loading -->
     <div v-if="isTeamLoading == true">Loading</div>
     <!-- teams loading -->
 
     <!-- Container -->
-    <div v-if="fixture && isTeamLoading == false" class="main-container">
+    <div
+      v-if="fixture && isTeamLoading == false"
+      class="fixture-content-container"
+    >
       <!-- Fixture Main Info -->
       <div class="fixture-info" @click="goToDetailPage">
         <!-- Home team -->
         <div class="fixture-container">
           <!-- Team Name -->
-          <div class="homeTeam">
+          <div class="fixture-home-team">
             {{ fixture.homeTeam }}
           </div>
           <!-- Team Name -->
 
           <!-- Team Icon -->
           <div
-            class="logo"
+            class="fixture-logo"
             :style="{
               'background-image': 'url(' + getHomeTeamImage + ')',
             }"
@@ -28,14 +31,14 @@
         <!-- Home team -->
 
         <!-- Game Time - formatted -->
-        <span class="gameTime">{{ formatTime }}</span>
+        <div class="fixture-game-time">{{ formatTime }}</div>
         <!-- Game Time - formatted -->
 
         <!-- Away Team -->
         <div class="fixture-container">
           <!-- Team Logo -->
           <div
-            class="logo"
+            class="fixture-logo"
             :style="{
               'background-image': 'url(' + getAwayTeamImage + ')',
             }"
@@ -43,7 +46,7 @@
           <!-- Team Logo -->
 
           <!-- Team Name -->
-          <div class="awayTeam">{{ fixture.awayTeam }}</div>
+          <div class="fixture-away-team">{{ fixture.awayTeam }}</div>
           <!-- Team Name -->
         </div>
         <!-- Away Team -->
@@ -53,7 +56,7 @@
       <!-- TODO:Filter Controls by match status -->
 
       <!-- Control Center -->
-      <div class="controls">
+      <div class="fixture-controls">
         <div @click="startMatch">Play</div>
         <div @click="pauseMatch">Pause</div>
         <div @click="resumeMatch">Resume</div>
@@ -64,73 +67,76 @@
       <!-- Control Center -->
     </div>
     <!-- Container -->
-  </div>
+  </main>
 </template>
 
 <style scoped>
-.fixture {
-  margin-top: 36px;
+.fixture-main-container {
+  width: 100%;
+  border-bottom: 2px solid var(--neutral-200);
+}
+.fixture-main-container:nth-of-type(odd) {
+  background: var(--neutral-100);
+}
+.fixture-main-container:nth-of-type(1) {
+  margin-top: 16px;
+}
+.fixture-content-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* position: relative; */
+}
+.fixture-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* background: teal; */
 }
 .fixture-container {
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 45%;
+  padding: 12px 0;
 }
 .fixture-container:nth-of-type(odd) {
   justify-content: flex-end;
+
+  padding-right: 20px;
 }
 .fixture-container:nth-of-type(even) {
   justify-content: flex-start;
+  padding-left: 20px;
 }
-.main-container {
-  width: 950px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background: teal;
+.fixture-home-team,
+.fixture-away-team {
+  min-width: 220px;
+  font-size: 18px;
 }
-.fixture-info {
-  width: 750px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background: yellow;
-}
-.logo {
-  width: 40px;
-  height: 40px;
-}
-.fixture-container:nth-of-type(odd) .logo {
-  margin-left: 16px;
-}
-.fixture-container:nth-of-type(even) .logo {
+.fixture-home-team {
+  text-align: end;
   margin-right: 16px;
 }
-.grey {
-  background: grey;
+.fixture-away-team {
+  text-align: start;
+  margin-left: 16px;
 }
-
-.date-info {
+.fixture-logo {
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.fixture-game-time {
+  width: 10%;
   text-align: center;
-  margin-bottom: 4px;
 }
-.homeTeam,
-.awayTeam {
-  font-size: 24px;
+.fixture-controls {
+  position: absolute;
+  right: 0;
 }
-
-.gameTime {
-  margin: 0 24px;
-  border: 1px solid black;
-  padding: 4px 20px;
-}
-.controls {
-  display: flex;
-  flex-direction: row;
-}
-.controls > div {
-  margin-left: 15px;
-}
+/*  */
 </style>
 
 <script>
@@ -164,26 +170,24 @@ export default {
 
     // get home image
     getHomeTeamImage() {
-      let path;
-      try {
-        path = require(`@/assets/teams/${this.fixture.homeTeam}.png`);
-      } catch (err) {
-        path = require("@/assets/teams/NoImage.png");
-      }
-      const placerHolder = require("@/assets/teams/NoImage.png");
-      return this.fixture.homeTeam ? path : placerHolder;
+      const baseUrl = process.env.VUE_APP_API_BASE_URL;
+
+      const homeTeam = store.state.Fixture.allTeams.filter((team) => {
+        return team.teamName == this.fixture.homeTeam;
+      });
+      console.log();
+      return `${baseUrl}${homeTeam[0].teamLogo}`;
     },
 
     // get away team image
     getAwayTeamImage() {
-      let path;
-      try {
-        path = require(`@/assets/teams/${this.fixture.awayTeam}.png`);
-      } catch (err) {
-        path = require("@/assets/teams/NoImage.png");
-      }
-      const placerHolder = require("@/assets/teams/NoImage.png");
-      return this.fixture.awayTeam ? path : placerHolder;
+      const baseUrl = process.env.VUE_APP_API_BASE_URL;
+
+      const awayTeam = store.state.Fixture.allTeams.filter((team) => {
+        return team.teamName == this.fixture.awayTeam;
+      });
+      console.log();
+      return `${baseUrl}${awayTeam[0].teamLogo}`;
     },
   },
 

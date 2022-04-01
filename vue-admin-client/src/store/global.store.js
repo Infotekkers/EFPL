@@ -4,7 +4,7 @@ export default {
     connection: true,
 
     // notification stuff
-    showNotification: true,
+    showNotification: false,
     notificationType: "success",
     notificationMessage: "",
     notificationDuration: 4000,

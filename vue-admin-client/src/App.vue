@@ -5,7 +5,10 @@
   </nav> -->
 
   <!-- eslint-disable-next-line -->
-  <router-view />
+  <section>
+    <router-view />
+    <NotificationComponent />
+  </section>
 </template>
 
 <style>
@@ -13,5 +16,10 @@
 </style>
 
 <script>
-export default {};
+import NotificationComponent from "@/components/NotificationComponent";
+export default {
+  components: {
+    NotificationComponent,
+  },
+};
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <main class="fixtures-main-container">
     <!-- The add and edit modal - has emit handler -->
     <FixtureModalComponent
       v-show="showModal"
@@ -15,42 +15,76 @@
 
     <!-- After Data Loaded -->
     <div v-else class="gameweek-container">
+      <!-- Search Bar -->
+      <input
+        type="text"
+        class="fixture-search-bar"
+        @keyup="searchBarFilter"
+        placeholder="Search Term Here..."
+        ref="searchBar"
+      />
+      <!-- Search Bar -->
+
+      <!-- Title -->
+      <div class="gameweek-main-header">
+        <div class="gameweek-title">
+          Ethiopian Premier League - {{ getSeason }} Fixtures
+        </div>
+        <div class="gameweek-add-new" @click="activateModal">
+          <div>+</div>
+          Add
+        </div>
+      </div>
+      <!-- Title -->
+
       <!-- Header - Gameweek controls, add new & gameweek title -->
-      <div class="gameweek-header">
+      <div class="gameweek-controller">
         <!-- Previous Game week button -->
-        <span v-on="showingGameWeek == 1 ? {} : { click: prevGameWeek }"
-          >Prev</span
-        >
+        <div v-on="showingGameWeek == 1 ? {} : { click: prevGameWeek }">
+          Prev
+        </div>
 
         <!-- Gameweek counter -->
-        <span> Gameweek {{ showingGameWeek }}</span>
+        <div class="gameweek-controller-main">
+          <div
+            class="gameweek-complete-verifier"
+            v-if="isGameWeekComplete === true"
+          >
+            ✅
+          </div>
+          <div class="gameweek-complete-verifier" v-else>❌</div>
+          <div class="gameweek-controller-title">
+            Gameweek {{ showingGameWeek }}
+          </div>
+        </div>
 
         <!-- Next game week Button -->
-        <span v-on="showingGameWeek == 30 ? {} : { click: nextGameWeek }"
-          >Next</span
-        >
+        <div v-on="showingGameWeek == 30 ? {} : { click: nextGameWeek }">
+          Next
+        </div>
 
         <!-- Add New game week button -->
-        <span @click="activateModal">Add New</span>
       </div>
 
       <!-- Content -->
-      <div v-if="currentGWFixtures.length > 0">
+      <div v-if="currentGWFixtures.length > 0" class="all-fixtures">
         <!-- Classify by dates -->
         <div v-for="(fixtureBatch, index) in currentGWFixtures" :key="index">
           <!-- Date of fixture -->
-          <div class="date">
+          <div class="gameweek-date">
             {{ formatDate[index] }}
           </div>
 
           <!-- Each Fixture  -->
-          <FixtureComponent
-            v-for="fixture in fixtureBatch"
-            :key="fixture.matchId"
-            :fixture="fixture"
-            :isTeamLoading="isTeamLoading"
-            @activateModal="activateModalEdit"
-          />
+          <div>
+            <FixtureComponent
+              v-for="fixture in fixtureBatch"
+              :key="fixture.matchId"
+              :fixture="fixture"
+              :isTeamLoading="isTeamLoading"
+              @activateModal="activateModalEdit"
+            />
+          </div>
           <!-- Each Fixture  -->
         </div>
         <!-- Classify by dates -->
@@ -58,54 +92,100 @@
       <!-- Content -->
 
       <!-- If no fixtures -->
-      <div v-else>No Fixtures</div>
+      <div v-else class="gameweek-no-fixtures">No Fixtures</div>
       <!-- If no fixtures -->
     </div>
     <!-- After Data Loaded -->
-  </div>
+  </main>
 </template>
 
 <style scoped>
-.container {
-  width: 100%;
+.fixtures-main-container {
+  width: 82%;
+  margin-left: 18%;
   min-height: 100vh;
   display: grid;
   place-items: center;
 }
-
 .gameweek-container {
-  width: 900px;
-  min-height: 200px;
-  /* background: grey; */
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid black;
-  padding: 12px 12px 24px 12px;
+  padding: 24px 14px 24px 14px;
 }
-.gameweek-header {
-  width: 98%;
-  padding-top: 12px;
-  font-weight: bold;
+.fixture-search-bar {
+  width: 20%;
+  height: 32px;
+  margin-left: 80%;
+  padding: 0 3px;
+  outline: none;
+}
+.gameweek-main-header {
+  margin-top: var(--spacing-medium);
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  /* background: teal; */
-  /* align-items: space-between; */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
-.gameweek-header > span {
+.gameweek-title {
+  font-size: var(--text-medium);
+}
+.gameweek-add-new {
+  font-size: 16px;
+  position: absolute;
+  right: calc(10% - 12px);
+  background: var(--primary-900);
+  padding: 5px 22px 5px 16px;
+  color: var(--neutral-100);
+  display: flex;
+}
+.gameweek-add-new > div {
+  width: 20px;
+  height: 20px;
+  background: var(--primary-800);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-right: 6px;
+}
+.gameweek-controller {
+  margin: var(--spacing-medium) 0 var(--spacing-regular) 0;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--neutral-700);
+  width: 100%;
+}
+
+.gameweek-controller-main {
+  display: flex;
+  align-items: center;
+}
+.gameweek-complete-verifier {
+  margin-right: 6px;
+}
+.gameweek-controller > div:nth-of-type(odd) {
   font-weight: 400;
   border: 1px solid black;
   padding: 2px 8px;
   cursor: pointer;
 }
-.date {
-  margin-top: 32px;
-  margin-bottom: 32px;
-  font-size: 16px;
+.gameweek-date {
+  margin-top: 12px;
   text-align: center;
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 20px;
+}
+.all-fixtures {
+  width: 100%;
+}
+.gameweek-no-fixtures {
+  width: 100%;
+  min-height: 150px;
+  display: grid;
+  place-items: center;
 }
 </style>
 
@@ -153,11 +233,12 @@ export default {
 
       // Dispatch Store Action
       store.dispatch("Fixture/setAllFixtures");
+      this.isFixtureLoading = false;
 
       // TODO: Remove Timer
-      setTimeout(() => {
-        this.isFixtureLoading = false;
-      }, 4000);
+      // setTimeout(() => {
+      //   this.isFixtureLoading = false;
+      // }, 4000);
     },
 
     // Get all teams
@@ -167,10 +248,12 @@ export default {
 
       store.dispatch("Fixture/setAllTeams");
 
-      // TODO: Remove Timer
-      setTimeout(() => {
-        this.isTeamLoading = false;
-      }, 6000);
+      this.isTeamLoading = false;
+
+      // // TODO: Remove Timer
+      // setTimeout(() => {
+      //   this.isTeamLoading = false;
+      // }, 6000);
     },
 
     // Event Handlers
@@ -190,9 +273,27 @@ export default {
       return store.state.Global.connection;
     },
 
+    getSeason() {
+      const date = new Date().getFullYear().toString().split("");
+
+      return date[2] + (date[3] - 1) + "/" + date[2] + date[3];
+    },
+
     // get current gameweek
     showingGameWeek() {
       return store.state.Fixture.showingGameWeek;
+    },
+
+    isGameWeekComplete() {
+      const teamCount = store.state.Fixture.allTeams.length;
+
+      const fixturesCount = store.state.Fixture.allFixtures.filter(
+        (fixture) => {
+          return fixture.gameweekId == this.showingGameWeek;
+        }
+      ).length;
+
+      return teamCount === fixturesCount * 2 ? true : false;
     },
 
     // filter gameweek fixtures by date for display
