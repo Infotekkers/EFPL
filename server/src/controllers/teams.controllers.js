@@ -1,10 +1,6 @@
 const TeamModel = require("../models/Teams");
 const asyncHandler = require("express-async-handler");
 
-const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
-const path = require("path");
-
 const { makeFile } = require("../utils/helpers");
 
 const addTeam = asyncHandler(async (req, res) => {
