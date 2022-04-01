@@ -19,6 +19,22 @@ export default {
     },
   },
   actions: {
+    async getallplayers({ commit }) {
+      await axios
+        .get(`${baseURL}/players/getplayers`)
+        .then((res) => {
+          if (res.status === 200) {
+            commit("SAVE_GRADES", res.data);
+          }
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
     async addPlayer(context, player) {
       await axios
         .post(`${baseURL}/players/addplayer`, player)
