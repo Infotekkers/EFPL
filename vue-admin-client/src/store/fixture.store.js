@@ -402,6 +402,19 @@ export default {
               data: res.data.homeTeamLineUp.lineup,
             };
             commit("SET_FIXTURE_DETAIL_DATA", payload);
+          } else {
+            const payload = {
+              type: "lineups",
+              teamId: homeTeamId,
+              data: {
+                goalkeepers: [],
+                defenders: [],
+                midfielders: [],
+                strikers: [],
+                bench: [],
+              },
+            };
+            commit("SET_FIXTURE_DETAIL_DATA", payload);
           }
 
           if (res.data.awayTeamLineUp) {
@@ -409,6 +422,19 @@ export default {
               type: "lineups",
               teamId: awayTeamId,
               data: res.data.awayTeamLineUp.lineup,
+            };
+            commit("SET_FIXTURE_DETAIL_DATA", payload);
+          } else {
+            const payload = {
+              type: "lineups",
+              teamId: awayTeamId,
+              data: {
+                goalkeepers: [],
+                defenders: [],
+                midfielders: [],
+                strikers: [],
+                bench: [],
+              },
             };
             commit("SET_FIXTURE_DETAIL_DATA", payload);
           }
@@ -434,18 +460,18 @@ export default {
       const awayTeamId = matchId.split("|")[1];
 
       payload = {
-        type: "lineup",
+        type: "lineups",
         teamId: homeTeamId,
         data: homeTeamLineUp,
       };
-      commit("SET_FIXTURE_DETAIL", payload);
+      commit("SET_FIXTURE_DETAIL_DATA", payload);
 
       payload = {
-        type: "lineup",
+        type: "lineups",
         teamId: awayTeamId,
         data: awayTeamLineUp,
       };
-      commit("SET_FIXTURE_DETAIL", payload);
+      commit("SET_FIXTURE_DETAIL_DATA", payload);
 
       url = `/fixtures/update/lineup/${matchId}`;
       payload = {
@@ -500,6 +526,22 @@ export default {
             notificationMessage: err.response.data,
           });
         });
+    },
+
+    setFixtureDetailDataLineup(
+      { commit, state },
+      { teamId, incomingPlayer, position }
+    ) {
+      let updatedLineup = state.fixtureDetailData.lineups[teamId];
+      updatedLineup[position].push(incomingPlayer);
+
+      let payload = {
+        type: "lineups",
+        teamId,
+        data: updatedLineup,
+      };
+
+      commit("SET_FIXTURE_DETAIL_DATA", payload);
     },
   },
 };

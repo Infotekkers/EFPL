@@ -3,42 +3,47 @@
     <div class="main">
       <div class="field">
         <div
-          id="gk"
+          id="goalkeepers"
+          ref="goalkeepers"
           @dragenter.prevent
-          @dragover="lockerPlayerDragOver($event, 'gk')"
-          @drop.prevent="lockerPlayerDrop"
+          @dragover="lockerPlayerDragOver($event, 'goalkeepers')"
+          @drop="lockerPlayerDrop($event, 'goalkeepers')"
         >
           <label>GK</label>
         </div>
         <div
-          id="def"
+          id="defenders"
+          ref="defenders"
           @dragenter.prevent
-          @dragover="lockerPlayerDragOver($event, 'def')"
-          @drop.prevent="lockerPlayerDrop"
+          @dragover="lockerPlayerDragOver($event, 'defenders')"
+          @drop="lockerPlayerDrop($event, 'defenders')"
         >
           <label>DEF</label>
         </div>
         <div
-          id="mid"
+          id="midfielders"
+          ref="midfielders"
           @dragenter.prevent
-          @dragover="lockerPlayerDragOver($event, 'mid')"
-          @drop.prevent="lockerPlayerDrop"
+          @dragover="lockerPlayerDragOver($event, 'midfielders')"
+          @drop="lockerPlayerDrop($event, 'midfielders')"
         >
           <label>MID</label>
         </div>
         <div
-          id="att"
+          id="strikers"
+          ref="strikers"
           @dragenter.prevent
-          @dragover="lockerPlayerDragOver($event, 'att')"
-          @drop.prevent="lockerPlayerDrop"
+          @dragover="lockerPlayerDragOver($event, 'strikers')"
+          @drop="lockerPlayerDrop($event, 'strikers')"
         >
           <label>ATT</label>
         </div>
         <div
           id="bench"
+          ref="bench"
           @dragenter.prevent
           @dragover="lockerPlayerDragOver($event, 'bench')"
-          @drop.prevent="lockerPlayerDrop"
+          @drop="lockerPlayerDrop($event, 'bench')"
         >
           <label>SUBS</label>
         </div>
@@ -46,7 +51,10 @@
       <div class="locker-room">
         <div
           draggable="true"
-          @dragstart="lockerPlayerDragStart($event, player.position)"
+          @dragstart="
+            lockerPlayerDragStart($event, player.position, player.playerId)
+          "
+          @dragend="lockerPlayerDragEnd"
           class="locker-player"
           :key="player.playerId"
           v-for="player in this.players[this.activeTeamId]"
@@ -65,6 +73,7 @@
 
 <script>
 import { mapFields } from "vuex-map-fields";
+import { mapActions } from "vuex";
 
 export default {
   props: {
@@ -78,7 +87,10 @@ export default {
   data: () => ({}),
 
   methods: {
-    lockerPlayerDragStart(e, playerPosition) {
+    ...mapActions("Fixture", ["setFixtureDetailDataLineup"]),
+
+    // Draggable Handlers
+    lockerPlayerDragStart(e, playerPosition, playerId) {
       let lockerPlayerDiv = e.target;
       let fieldPlayerDiv = document.createElement("div");
 
@@ -90,32 +102,59 @@ export default {
       e.dataTransfer.effectAllowed = "move";
       e.dataTransfer.dropEffect = "move";
       e.dataTransfer.setData("text/html", fieldPlayerDiv.outerHTML);
-      e.dataTransfer.setData(`position/${playerPosition}`, "");
+      e.dataTransfer.setData("player/Id", playerId);
+
+      playerPosition = playerPosition.toLowerCase();
+      if (playerPosition === "gk")
+        e.dataTransfer.setData("position/goalkeepers", "");
+      else if (playerPosition === "def")
+        e.dataTransfer.setData("position/defenders", "");
+      else if (playerPosition === "mid")
+        e.dataTransfer.setData("position/midfielders", "");
+      else if (playerPosition === "att")
+        e.dataTransfer.setData("position/strikers", "");
+      else if (playerPosition === "bench")
+        e.dataTransfer.setData("position/bench", "");
+    },
+    lockerPlayerDragEnd(e) {
+      if (e.dataTransfer.dropEffect === "move") e.target.outerHTML = "";
     },
 
-    lockerPlayerDrop(e) {
+    // Droppable handlers
+    lockerPlayerDragOver(e, fieldPosition) {
+      // VALIDATION: Limit players per position to 6
+      if (
+        e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
+        this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
+          .length < 6
+      )
+        e.preventDefault();
+    },
+    lockerPlayerDrop(e, position) {
       let data = e.dataTransfer.getData("text/html");
+      let playerId = e.dataTransfer.getData("player/Id");
       e.dataTransfer.effectAllowed = "move";
       e.dataTransfer.dropEffect = "move";
 
-      // TODO: Validation
-      e.target.innerHTML = data;
-    },
+      let positionalDiv = this.$el.querySelector(`#${position}`);
+      positionalDiv.innerHTML += data;
 
-    lockerPlayerDragOver(e, fieldPosition) {
-      if (e.dataTransfer.types.includes(`position/${fieldPosition}`)) {
-        e.preventDefault();
-      }
+      this.setFixtureDetailDataLineup({
+        teamId: this.activeTeamId,
+        incomingPlayer: playerId,
+        position,
+      });
+      e.preventDefault();
     },
   },
 };
 </script>
 
 <style scoped>
-#gk,
-#def,
-#mid,
-#att,
+#goalkeepers,
+#defenders,
+#midfielders,
+#strikers,
 #bench {
   display: flex;
   flex-direction: row;
@@ -126,14 +165,15 @@ export default {
   height: 25%;
 }
 
-#gk,
-#def,
-#mid,
-#att,
+#goalkeepers label,
+#defenders label,
+#midfielders label,
+#strikers label,
 #bench label {
   font-size: 6vh;
   letter-spacing: 25px;
   opacity: 0.5;
+  position: absolute;
 }
 .field {
   display: flex;
