@@ -112,10 +112,10 @@ const getplayers = asyncHandler(async (req, res) => {
 const getHomeAndAwayPlayers = asyncHandler(async (req, res) => {
   const homePlayers = await PlayerModel.find({
     eplTeamId: req.params.homeTeamId,
-  }).select("playerName eplTeamId position availabilty");
+  }).select("playerName playerId eplTeamId position availabilty");
   const awayPlayers = await PlayerModel.find({
     eplTeamId: req.params.awayTeamId,
-  }).select("playerName eplTeamId position availabilty");
+  }).select("playerName playerId eplTeamId position availabilty");
 
   const result = {
     homePlayers,

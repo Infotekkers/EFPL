@@ -1,92 +1,62 @@
 <template>
   <div>
-    <!-- Show players if lineups have been setup before -->
-    <div class="field" v-if="this.fixtureDetailData.lineups[this.activeTeamId]">
-      <div id="gk">
+    <div class="main">
+      <div class="field">
         <div
-          class="player"
-          :key="playerId"
-          v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
-            .goalkeepers"
+          id="gk"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'gk')"
+          @drop.prevent="lockerPlayerDrop"
         >
-          {{ playerId }}
+          <label>GK</label>
+        </div>
+        <div
+          id="def"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'def')"
+          @drop.prevent="lockerPlayerDrop"
+        >
+          <label>DEF</label>
+        </div>
+        <div
+          id="mid"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'mid')"
+          @drop.prevent="lockerPlayerDrop"
+        >
+          <label>MID</label>
+        </div>
+        <div
+          id="att"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'att')"
+          @drop.prevent="lockerPlayerDrop"
+        >
+          <label>ATT</label>
+        </div>
+        <div
+          id="bench"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'bench')"
+          @drop.prevent="lockerPlayerDrop"
+        >
+          <label>SUBS</label>
         </div>
       </div>
-      <div id="def">
+      <div class="locker-room">
         <div
-          class="player"
-          :key="playerId"
-          v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
-            .defenders"
+          draggable="true"
+          @dragstart="lockerPlayerDragStart($event, player.position)"
+          class="locker-player"
+          :key="player.playerId"
+          v-for="player in this.players[this.activeTeamId]"
         >
-          {{ playerId }}
-        </div>
-      </div>
-      <div id="mid">
-        <div
-          class="player"
-          :key="playerId"
-          v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
-            .midfielders"
-        >
-          {{ playerId }}
-        </div>
-      </div>
-      <div id="att">
-        <div
-          class="player"
-          :key="playerId"
-          v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
-            .strikers"
-        >
-          {{ playerId }}
-        </div>
-      </div>
-    </div>
-
-    <!-- Show placeholder if lineups are not setup -->
-    <div
-      class="field"
-      v-if="
-        typeof this.fixtureDetailData.lineups[this.activeTeamId] === 'undefined'
-      "
-    >
-      <div id="gk">
-        <div class="player">
-          <img src="@/assets/jerseys/placeholdershirt.png" />
-        </div>
-      </div>
-      <div id="def">
-        <div
-          class="player"
-          :key="playerId"
-          v-for="playerId in parseInt(
-            this.fixtureDetailData.formations[this.activeTeamId].split('-')[0]
-          )"
-        >
-          <img src="@/assets/jerseys/placeholdershirt.png" />
-        </div>
-      </div>
-      <div id="mid">
-        <div
-          class="player"
-          :key="playerId"
-          v-for="playerId in parseInt(
-            this.fixtureDetailData.formations[this.activeTeamId].split('-')[1]
-          )"
-        >
-          <img src="@/assets/jerseys/placeholdershirt.png" />
-        </div>
-      </div>
-      <div id="att">
-        <div
-          class="player"
-          :key="playerId"
-          v-for="playerId in parseInt(
-            this.fixtureDetailData.formations[this.activeTeamId].split('-')[2]
-          )"
-        >
-          <img src="@/assets/jerseys/placeholdershirt.png" />
+          <p>
+            {{ player.playerName }}
+          </p>
+          <h5>
+            {{ player.position }}
+          </h5>
         </div>
       </div>
     </div>
@@ -102,7 +72,41 @@ export default {
   },
 
   computed: {
-    ...mapFields("Fixture", ["fixtureDetailData"]),
+    ...mapFields("Fixture", ["fixtureDetailData", "players"]),
+  },
+
+  data: () => ({}),
+
+  methods: {
+    lockerPlayerDragStart(e, playerPosition) {
+      let lockerPlayerDiv = e.target;
+      let fieldPlayerDiv = document.createElement("div");
+
+      fieldPlayerDiv.className = "field-player";
+      // TODO: ADD Jersey
+      fieldPlayerDiv.innerHTML = `<span>🤷‍♂️</span>${lockerPlayerDiv.innerHTML}`;
+
+      // TODO: ADD Drag Image
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.dropEffect = "move";
+      e.dataTransfer.setData("text/html", fieldPlayerDiv.outerHTML);
+      e.dataTransfer.setData(`position/${playerPosition}`, "");
+    },
+
+    lockerPlayerDrop(e) {
+      let data = e.dataTransfer.getData("text/html");
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.dropEffect = "move";
+
+      // TODO: Validation
+      e.target.innerHTML = data;
+    },
+
+    lockerPlayerDragOver(e, fieldPosition) {
+      if (e.dataTransfer.types.includes(`position/${fieldPosition}`)) {
+        e.preventDefault();
+      }
+    },
   },
 };
 </script>
@@ -111,11 +115,56 @@ export default {
 #gk,
 #def,
 #mid,
-#att {
+#att,
+#bench {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 25%;
+}
+
+#gk,
+#def,
+#mid,
+#att,
+#bench label {
+  font-size: 6vh;
+  letter-spacing: 25px;
+  opacity: 0.5;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  background-color: darkkhaki;
+  height: 70vh;
+}
+
+.field-player {
+  position: absolute;
+}
+
+.locker-room {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  overflow-x: auto;
+}
+
+.locker-player {
+  margin: 5px;
+  background-color: whitesmoke;
+}
+
+.locker-player p {
+  overflow-wrap: break-word;
+}
+
+.locker-player h5 {
+  margin: 0;
 }
 
 @media screen and (max-width: 480px) {
@@ -134,6 +183,25 @@ export default {
   img {
     height: 120px;
     width: 120px;
+  }
+}
+@media screen and (min-width: 900px) {
+  .field {
+    height: 70vh;
+    width: 50vw;
+  }
+
+  .locker-room {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 }
 @media screen and (min-width: 1400px) {
