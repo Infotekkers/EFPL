@@ -259,7 +259,6 @@ export default {
         console.log("No File");
       } else {
         const extension = files[0].name.split(".");
-
         // valid format
         if (this.allowedExtensions.includes(extension[extension.length - 1])) {
           this.selectedImage = files[0];
