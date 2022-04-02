@@ -37,33 +37,21 @@
           <!-- Team Name -->
           <div class="container-col input-container">
             <label for="">Name</label>
-            <input
-              type="text"
-              ref="teamName"
-              :value="isEditMode ? getTeam.teamName : ''"
-            />
+            <input type="text" ref="teamName" v-model="teamName" />
           </div>
           <!-- Team Name -->
 
           <!-- Team City -->
           <div class="container-col input-container">
             <label for="">City</label>
-            <input
-              type="text"
-              ref="teamCity"
-              :value="isEditMode ? getTeam.teamCity : ''"
-            />
+            <input type="text" ref="teamCity" v-model="teamCity" />
           </div>
           <!-- Team City -->
 
           <!-- Team Stadium -->
           <div class="container-col input-container">
             <label for="">Stadium</label>
-            <input
-              type="text"
-              ref="teamStadium"
-              :value="isEditMode ? getTeam.teamStadium : ''"
-            />
+            <input type="text" ref="teamStadium" v-model="teamStadium" />
           </div>
           <!-- Team Stadium -->
         </div>
@@ -77,7 +65,7 @@
             <input
               type="text"
               ref="stadiumCapacity"
-              :value="isEditMode ? getTeam.stadiumCapacity : ''"
+              v-model="stadiumCapacity"
             />
           </div>
           <!-- Stadium -->
@@ -92,7 +80,7 @@
               max="2099"
               step="1"
               ref="foundedIn"
-              :value="isEditMode ? getTeam.foundedIn : ''"
+              v-model="foundedIn"
             />
           </div>
           <!-- Year -->
@@ -256,6 +244,11 @@ export default {
       selectedImage: null,
       allowedExtensions: ["jpg", "png", "svg", "jpeg"],
       imageChanged: false,
+      teamName: null,
+      teamCity: null,
+      teamStadium: null,
+      stadiumCapacity: null,
+      foundedIn: null,
     };
   },
   methods: {
@@ -269,7 +262,6 @@ export default {
 
         // valid format
         if (this.allowedExtensions.includes(extension[extension.length - 1])) {
-          console.log(files[0]);
           this.selectedImage = files[0];
           const preview = this.$refs.preview;
 
@@ -284,7 +276,6 @@ export default {
         }
         // invalid format
         else {
-          console.log("Naah");
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
@@ -316,13 +307,29 @@ export default {
       const teamLogo = await this.getBase64();
 
       if (!teamName) {
-        console.log("Team Name is required");
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Team Name is required",
+        });
       } else if (!teamCity) {
-        console.log("Team City is required.");
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Team City is required",
+        });
       } else if (!teamStadium) {
-        console.log("Stadium");
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Team Stadium is required",
+        });
       } else if (!this.selectedImage) {
-        console.log("Image");
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Team Logo is required",
+        });
       } else {
         //   TODO: Optimize image
         // https://www.youtube.com/watch?v=bXf_UdyDzSA
@@ -337,7 +344,7 @@ export default {
         };
         store.dispatch("Team/saveTeam", teamData);
         this.removeImage();
-        this.$refs.inputForm.reset();
+        this.setItem("");
       }
     },
 
@@ -370,6 +377,14 @@ export default {
         reader.onerror = (error) => reject(error);
       });
     },
+
+    setItem(team) {
+      this.teamName = team.teamName;
+      this.teamCity = team.teamCity;
+      this.teamStadium = team.teamStadium;
+      this.stadiumCapacity = team.stadiumCapacity;
+      this.foundedIn = team.foundedIn;
+    },
   },
   computed: {
     getImageChanged() {
@@ -389,9 +404,8 @@ export default {
       );
 
       const showPreview = this.$refs.preview;
-      console.log(showPreview);
       showPreview.style.backgroundImage = `url(${baseURL}${currentTeam[0].teamLogo})`;
-      console.log(currentTeam[0]);
+      this.setItem(currentTeam[0]);
       return currentTeam[0];
     },
   },
