@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 // Player Routes
-import ALLPLAYERS from "../components/ManagePlayers/AllPlayers";
+import PlayersComponent from "../components/ManagePlayers/PlayersComponent";
 import ADDPLAYER from "../components/ManagePlayers/AddPlayer";
-import EDITPLAYERS from "../components/ManagePlayers/EditPlayer";
+import EDITPLAYERS from "../components/ManagePlayers/EditPlayerComponent";
 import VIEWPLAYERS from "../components/ManagePlayers/viewPlayer";
 const routes = [
   {
@@ -14,7 +14,7 @@ const routes = [
   {
     path: "/allplayers",
     name: "alllayer",
-    component: ALLPLAYERS,
+    component: PlayersComponent,
   },
   {
     path: "/addplayer",

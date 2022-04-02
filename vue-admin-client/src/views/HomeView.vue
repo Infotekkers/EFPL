@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <allplayers />
+    <PlayersComponent />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import allplayers from "@/components/ManagePlayers/AllPlayers.vue";
+import PlayersComponent from "@/components/ManagePlayers/PlayersComponent.vue";
 // import addPlayer from "@/components/ManagePlayers/AddPlayer.vue";
 export default {
   name: "HomeView",
   components: {
-    allplayers,
+    PlayersComponent,
     // addPlayer,
   },
 };
