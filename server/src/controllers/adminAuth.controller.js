@@ -35,9 +35,9 @@ const login = asyncHandler(async (req, res) => {
           email: admin.email,
         });
       }
-      res.status(400).json({ message: "invalid email - password combination" });
+      res.status(400).send({ message: "invalid email - password combination" });
     }
-    res.status(400).json({ message: "invalid email - password combination" });
+    res.status(400).send({ message: "invalid email - password combination" });
   });
 
 

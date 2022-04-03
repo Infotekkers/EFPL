@@ -17,7 +17,7 @@
   </nav>
 
   <!-- eslint-disable-next-line -->
-  <router-view />
+  <section><router-view /><NotificationComponent /></section>
 </template>
 
 <style>
@@ -44,8 +44,12 @@ nav a.router-link-exact-active {
 </style>
 
 <script>
+import NotificationComponent from "./components/NotificationComponent.vue";
 import { mapGetters } from "vuex";
 export default {
+  components: {
+    NotificationComponent,
+  },
   computed: {
     ...mapGetters(["currentAdmin"]),
   },

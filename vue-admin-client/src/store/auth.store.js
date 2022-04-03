@@ -1,4 +1,5 @@
-const axios = require("axios");
+import axios from "axios";
+import store from "./index";
 const baseURL = process.env.VUE_APP_API_BASE_URL;
 export default {
   state: {
@@ -25,13 +26,22 @@ export default {
         })
         .then((response) => {
           if (response.status === 201) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: `${response.data.email} successfully logged in`,
+            });
             commit("SET_CURRENT_ADMIN", response.data);
             console.log("logged in");
           }
         })
         .catch((err) => {
           if (err.response.status === 400) {
-            console.log("Invalid Credentials");
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "error",
+              notifcationMessage: `${err.response.data}`,
+            });
           }
         });
     },
