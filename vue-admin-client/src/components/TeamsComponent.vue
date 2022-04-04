@@ -182,6 +182,7 @@ export default {
       this.showModal = true;
     },
     closeModal() {
+      this.isEditMode = false;
       this.showModal = false;
     },
     sortByID() {

@@ -1,7 +1,7 @@
 <template>
   <div class="team-modal-main-container">
     <!-- Close button -->
-    <div class="team-modal-close" @click="$emit('closeModal')">X</div>
+    <div class="team-modal-close" @click="closeModal">X</div>
     <!-- Close button -->
 
     <div class="team-modal-content">
@@ -85,6 +85,7 @@
           </div>
           <!-- Year -->
 
+          <!-- Action Buttons -->
           <div class="team-modal-buttons-container">
             <div class="team-modal-cancel-button" @click="cancelSave">
               Cancel
@@ -159,6 +160,7 @@
   height: 120px;
   margin-left: auto;
   margin-right: auto;
+  background: url("../assets/img/Team_Logo_Placeholder.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -208,7 +210,6 @@ label {
 .input-container {
   margin-top: 26px;
 }
-
 .team-modal-buttons-container {
   position: absolute;
   bottom: 22px;
@@ -252,6 +253,11 @@ export default {
     };
   },
   methods: {
+    closeModal() {
+      this.setItem("");
+      this.removeImage();
+      this.$emit("closeModal");
+    },
     teamLogoChange(e) {
       const files = e.target.files;
       // no file uploaded
@@ -291,10 +297,8 @@ export default {
       this.$refs.preview.style.backgroundImage = ``;
     },
     cancelSave() {
-      if (this.isEditMode == false) {
-        this.removeImage();
-        this.$refs.inputForm.reset();
-      }
+      this.setItem("");
+      this.removeImage();
       this.$emit("closeModal");
     },
     async saveTeam() {
@@ -378,6 +382,7 @@ export default {
     },
 
     setItem(team) {
+      console.log(team);
       this.teamName = team.teamName;
       this.teamCity = team.teamCity;
       this.teamStadium = team.teamStadium;
@@ -404,9 +409,18 @@ export default {
 
       const showPreview = this.$refs.preview;
       showPreview.style.backgroundImage = `url(${baseURL}${currentTeam[0].teamLogo})`;
+      // console.log(currentTeam);
       this.setItem(currentTeam[0]);
       return currentTeam[0];
     },
+  },
+
+  updated() {
+    if (this.isEditMode) {
+      this.getTeam;
+    }
+
+    console.log(this.isEditMode);
   },
 };
 </script>
