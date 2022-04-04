@@ -1,9 +1,9 @@
 <template>
   <!-- Modal -->
-  <div ref="modal" class="modal-show">
+  <main class="fixture-modal-main-container">
     <!-- Top Close Button -->
     <div
-      class="close-button"
+      class="fixture-modal-close"
       v-on="
         isEditMode === true
           ? { click: modalEditCancel }
@@ -15,132 +15,142 @@
     <!-- Top Close Button -->
 
     <!-- Main Section -->
-    <div class="main-section" v-if="homeTeams.length > 0">
-      <!-- Title for add mode-->
-      <div class="title" v-show="isEditMode === false">
-        Add new fixture for Game week {{ currentGameWeek }}
-      </div>
+    <div v-if="homeTeams.length > 0" class="fixture-modal-content-container">
+      <div class="fixture-modal-content">
+        <!-- Content -->
+        <div class="fixture-modal-scroller" v-if="homeTeams">
+          <!-- Home team info -->
+          <div class="fixture-home-team-section">
+            <!-- Previous button -->
+            <!-- Previous button -->
 
-      <!-- Title for edit mode -->
-      <div class="title" v-show="isEditMode === true">
-        Editing fixture for Game week {{ currentGameWeek }}
-      </div>
-      <!-- Title for edit mode -->
+            <div class="fixture-home-team-previous" @click="prevHomeTeam">
+              P
+            </div>
+            <div class="fixture-team-selector">
+              <!-- Image -->
+              <div
+                class="fixture-team-logo"
+                :style="{
+                  'background-image': 'url(' + getHomeTeamImage + ')',
+                }"
+              ></div>
 
-      <!-- Content -->
-      <div class="content-section" v-if="homeTeams">
-        <!-- Home team info -->
-        <div class="homeTeam">
-          <!-- Previous button -->
-          <div class="prev" @click="prevHomeTeam">Prev</div>
-          <!-- Previous button -->
+              <!-- Team title -->
+              <div class="fixture-team-name">
+                {{ homeTeams[homeTeamIndex].teamName }}
+              </div>
+              <!-- Team title -->
+            </div>
 
-          <div class="content">
-            <!-- Image -->
-            <div
-              class="logo"
-              :style="{
-                'background-image': 'url(' + getHomeTeamImage + ')',
-              }"
-            ></div>
-
-            <!-- Team title -->
-            <div class="name">{{ homeTeams[homeTeamIndex].teamName }}</div>
-            <!-- Team title -->
+            <!-- Next Button -->
+            <div class="fixture-home-team-next" @click="nextHomeTeam">N</div>
+            <!-- Next Button -->
           </div>
+          <!-- Home team info -->
 
-          <!-- Next Button -->
-          <div class="next" @click="nextHomeTeam">Next</div>
-          <!-- Next Button -->
-        </div>
-        <!-- Home team info -->
-
-        <!-- Time and Date info -->
-        <div>
-          <!-- Date -->
-          <div class="date">
-            <!-- Label -->
-            <label for="Date">Date <span>(DD/MM/YY)</span> : </label>
-            <div>
-              <div class="date">
-                <input
-                  ref="date"
-                  type="date"
-                  id="birthday"
-                  name="birthday"
-                  :value="new Date().toISOString().split('T')[0]"
-                  :min="new Date().toISOString().split('T')[0]"
-                  :max="
-                    new Date(
-                      new Date().setFullYear(new Date().getFullYear() + 1)
-                    )
-                      .toISOString()
-                      .split('T')[0]
-                  "
-                />
+          <!-- Time and Date info -->
+          <div>
+            <!-- Date -->
+            <div class="fixture-date-container">
+              <!-- Label -->
+              <label for="Date">Date <span>(DD/MM/YY)</span> </label>
+              <div>
+                <div class="date">
+                  <input
+                    ref="date"
+                    type="date"
+                    id="birthday"
+                    name="birthday"
+                    :value="new Date().toISOString().split('T')[0]"
+                    :min="new Date().toISOString().split('T')[0]"
+                    :max="
+                      new Date(
+                        new Date().setFullYear(new Date().getFullYear() + 1)
+                      )
+                        .toISOString()
+                        .split('T')[0]
+                    "
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <!-- Date -->
+            <!-- Date -->
 
-          <!-- Time -->
-          <div class="time">
-            <!-- Label -->
-            <label for="Time">Time :</label>
-            <div>
-              <div class="hour">
-                <select name="hour" id="hour" ref="hour">
-                  <option v-for="n in 13" :key="n" :value="n + 9">
-                    {{ n + 9 }}
-                  </option>
-                </select>
-              </div>
-              <div class="minutes">
-                <select name="minutes" id="minutes" ref="minutes">
-                  <option
-                    v-for="n in ['00', 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]"
-                    :key="n"
-                    :value="n"
-                  >
-                    {{ n }}
-                  </option>
-                </select>
+            <!-- Time -->
+            <div class="fixture-time-container">
+              <!-- Label -->
+              <label for="Time">Time</label>
+              <div>
+                <div class="fixture-time-hour">
+                  <select name="hour" id="hour" ref="hour">
+                    <option v-for="n in 13" :key="n" :value="n + 9">
+                      {{ n + 9 }}
+                    </option>
+                  </select>
+                </div>
+                <div class="fixture-time-minute">
+                  <select name="minutes" id="minutes" ref="minutes">
+                    <option
+                      v-for="n in [
+                        '00',
+                        10,
+                        15,
+                        20,
+                        25,
+                        30,
+                        35,
+                        40,
+                        45,
+                        50,
+                        55,
+                      ]"
+                      :key="n"
+                      :value="n"
+                    >
+                      {{ n }}
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
+            <!-- Time -->
           </div>
-          <!-- Time -->
-        </div>
-        <!-- Time and Date info -->
+          <!-- Time and Date info -->
 
-        <!-- Away Team info -->
-        <div
-          class="awayTeam"
-          :class="awayTeamIndex === homeTeamIndex ? 'disabled' : ''"
-        >
-          <div class="prev" @click="prevAwayTeam">Prev</div>
-          <div class="content">
-            <div
-              class="logo"
-              :style="{
-                'background-image': 'url(' + getAwayTeamImage + ')',
-              }"
-            ></div>
-            <div class="name">
-              {{ awayTeams[awayTeamIndex].teamName }}
+          <!-- Away Team info -->
+          <div
+            class="fixture-away-team-section"
+            :class="awayTeamIndex === homeTeamIndex ? 'disabled' : ''"
+          >
+            <div class="fixture-away-team-previous" @click="prevAwayTeam">
+              P
             </div>
-          </div>
-          <div class="next" @click="nextAwayTeam">Next</div>
-        </div>
-        <!-- Away Team Info -->
 
-        <!-- Buttons Container -->
+            <div class="fixture-team-selector">
+              <div
+                class="fixture-team-logo"
+                :style="{
+                  'background-image': 'url(' + getAwayTeamImage + ')',
+                }"
+              ></div>
+              <div class="fixture-team-name">
+                {{ awayTeams[awayTeamIndex].teamName }}
+              </div>
+            </div>
+            <div class="fixture-away-team-next" @click="nextAwayTeam">N</div>
+          </div>
+          <!-- Away Team Info -->
+
+          <!-- Buttons Container -->
+        </div>
+        <!-- Content -->
       </div>
-      <!-- Content -->
-
       <!-- Buttons -->
-      <div class="buttons-container">
+      <div class="fixture-modal-buttons-container">
         <!-- Cancel button *2 modes -->
         <div
+          class="fixture-modal-cancel-button"
           v-on="
             isEditMode === true
               ? { click: modalEditCancel }
@@ -153,6 +163,7 @@
 
         <!-- Save Button *2 modes -->
         <div
+          class="fixture-modal-save-button"
           v-on="
             isEditMode === true
               ? { click: updateFixture }
@@ -168,127 +179,158 @@
     <!-- Main Section -->
 
     <!-- all teams have matches -->
-    <div v-else class="container">All Teams have matches</div>
+    <div v-else class="fixture-modal-complete">All Teams have matches</div>
     <!-- all teams have matches -->
-  </div>
+  </main>
   <!-- Modal -->
 </template>
 
 <style scoped>
-.container {
-  width: 60%;
-  height: 600px;
-  background: white;
-  margin-left: 20%;
-  text-align: center;
+.fixture-modal-main-container {
+  height: 100vh;
+  width: 100%;
   display: grid;
   place-items: center;
-  font-size: 32px;
-}
-.container-col,
-.container-row {
-  display: flex;
-}
-.form-container {
-  width: 30%;
-}
-.container-col {
-  flex-direction: column;
-}
-.container-row {
-  flex-direction: row;
-}
-.text-input {
-  height: 28px;
-}
-.modal-show {
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.65);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 2;
+  overflow: hidden;
+  color: var(--neutral-900);
 }
-.modal-hide {
-  display: none;
-}
-.close-button {
-  margin-left: 95%;
-  margin-top: 32px;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+.fixture-modal-close {
+  position: absolute;
+  top: 40px;
+  right: 32px;
+  width: 30px;
+  height: 30px;
+  background: var(--neutral-100);
+  color: var(--primary-900);
+  font-size: 20px;
   display: grid;
   place-items: center;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
 }
-.main-section {
+.fixture-modal-content-container {
   width: 60%;
-  margin-left: 20%;
-  background: white;
+  min-height: 300px;
+  background: var(--neutral-100);
+  padding: 42px 0 24px 0;
+}
+.fixture-modal-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 16px;
+  /* position: relative; */
+}
+.fixture-modal-scroller {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.fixture-home-team-section,
+.fixture-away-team-section {
+  width: 280px;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+}
+.fixture-team-selector {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.content-section {
-  width: calc(100% - 120px);
-  height: 450px;
-  background: teal;
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 60px;
+.fixture-team-logo {
+  width: 160px;
+  height: 160px;
+  background: url("../assets/img/Team_Logo_Placeholder.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.title {
-  text-align: center;
-  padding-top: 16px;
-  font-size: 20px;
-  font-weight: bold;
-}
-.homeTeam,
-.awayTeam {
-  width: 300px;
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.time {
-  margin-top: 36px;
-}
-.time > div,
-.date > div {
-  display: flex;
-}
-.logo {
-  width: 190px;
-  height: 190px;
-  object-fit: contain;
-  /* background: aliceblue; */
-}
-.name {
+
+.fixture-team-name {
   margin-top: 30px;
-  font-size: 26px;
+  font-size: 20px;
 }
+
+label {
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: var(--neutral-800);
+}
+label > span {
+  font-size: 10px;
+  margin-left: 3px;
+}
+input,
+select {
+  outline: none;
+  height: 30px;
+  border: none;
+  padding: 0 3.5px;
+}
+.fixture-time-container,
+.fixture-date-container {
+  padding: 0 16px;
+}
+.fixture-time-container {
+  margin-top: 24px;
+}
+.fixture-time-container > div {
+  display: flex;
+}
+.fixture-time-hour,
+.fixture-time-minute {
+  width: 50%;
+}
+.fixture-time-hour > select,
+.fixture-time-minute > select {
+  width: 100%;
+}
+.fixture-modal-buttons-container {
+  display: flex;
+  width: fit-content;
+  margin-right: 5%;
+  margin-left: auto;
+  margin-top: 32px;
+  align-items: center;
+}
+.fixture-modal-save-button {
+  background: var(--primary-900);
+  color: var(--neutral-100);
+  font-size: 15px;
+}
+.fixture-modal-cancel-button {
+  margin-right: 4px;
+}
+
+.fixture-modal-cancel-button,
+.fixture-modal-save-button {
+  padding: 5px 22px;
+  cursor: pointer;
+}
+
+/*  */
+
 .disabled {
   opacity: 0.5;
 }
-.buttons-container {
-  display: flex;
-  flex-direction: row;
-  width: 25%;
-  margin-left: 75%;
-  background: teal;
-  justify-content: space-between;
-}
-.buttons-container > div {
-  border: 1px solid black;
-  padding: 5px 22px;
-}
-.buttons-container > div:nth-of-type(1) {
-  background: red;
-}
-.buttons-container > div:nth-of-type(2) {
-  background: green;
+.fixture-modal-complete {
+  width: 60%;
+  min-height: 300px;
+  background: var(--neutral-100);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
 }
 </style>
 
@@ -424,30 +466,14 @@ export default {
 
     // get home team image
     getHomeTeamImage() {
-      // TODO: Make Server Image
-      const homeTeam = this.homeTeams[this.homeTeamIndex].teamName;
-      let path;
-      try {
-        path = require(`@/assets/teams/${homeTeam}.png`);
-      } catch (err) {
-        path = require("@/assets/teams/NoImage.png");
-      }
-      const placerHolder = require("@/assets/teams/NoImage.png");
-      return homeTeam ? path : placerHolder;
+      const baseURL = process.env.VUE_APP_API_BASE_URL;
+      return baseURL + this.homeTeams[this.homeTeamIndex].teamLogo;
     },
 
     // get away team image
     getAwayTeamImage() {
-      // TODO: Make Server Image
-      const awayTeam = this.awayTeams[this.awayTeamIndex].teamName;
-      let path;
-      try {
-        path = require(`@/assets/teams/${awayTeam}.png`);
-      } catch (err) {
-        path = require("@/assets/teams/NoImage.png");
-      }
-      const placerHolder = require("@/assets/teams/NoImage.png");
-      return awayTeam ? path : placerHolder;
+      const baseURL = process.env.VUE_APP_API_BASE_URL;
+      return baseURL + this.awayTeams[this.awayTeamIndex].teamLogo;
     },
   },
 

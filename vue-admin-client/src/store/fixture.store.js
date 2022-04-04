@@ -221,18 +221,15 @@ export default {
           )
           .then(async (response) => {
             if (response.status === 200) {
-              console.log(response);
               store.dispatch("Global/setNotificationInfo", {
                 showNotification: true,
                 notificationType: "success",
                 notificationMessage: response.data,
               });
               await store.dispatch("Fixture/setAllFixtures");
-              // store.dispatch("Fixture/setHomeTeams");
             }
           })
           .catch((err) => {
-            console.log(err.response);
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "error",

@@ -31,6 +31,7 @@
       <!-- Logo Area -->
 
       <!-- Team Info Input -->
+
       <form class="input-form" ref="inputForm">
         <!-- Team name & city & stadium -->
         <div class="container-col">
@@ -262,6 +263,7 @@ export default {
       const files = e.target.files;
       // no file uploaded
       if (files.length == 0) {
+        // TODO:Handle
         console.log("No File");
       } else {
         const extension = files[0].name.split(".");
@@ -382,7 +384,6 @@ export default {
     },
 
     setItem(team) {
-      console.log(team);
       this.teamName = team.teamName;
       this.teamCity = team.teamCity;
       this.teamStadium = team.teamStadium;
@@ -409,7 +410,6 @@ export default {
 
       const showPreview = this.$refs.preview;
       showPreview.style.backgroundImage = `url(${baseURL}${currentTeam[0].teamLogo})`;
-      // console.log(currentTeam);
       this.setItem(currentTeam[0]);
       return currentTeam[0];
     },
@@ -419,8 +419,6 @@ export default {
     if (this.isEditMode) {
       this.getTeam;
     }
-
-    console.log(this.isEditMode);
   },
 };
 </script>

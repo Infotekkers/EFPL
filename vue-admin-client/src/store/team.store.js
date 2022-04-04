@@ -102,7 +102,7 @@ export default {
           team.teamName.includes(filterTerm.toLowerCase()) ||
           team.teamName.includes(filterTerm) ||
           // year
-          team.foundedIn.includes(filterTerm) ||
+          team.foundedIn.toString().includes(filterTerm) ||
           // by stadium
           team.teamStadium.includes(filterTerm.toLowerCase()) ||
           team.teamStadium.includes(filterTerm.toUpperCase()) ||

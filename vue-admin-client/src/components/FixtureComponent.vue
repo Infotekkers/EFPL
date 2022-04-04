@@ -228,7 +228,6 @@ export default {
     // resume match event handler
     resumeMatch() {
       store.dispatch("Fixture/resumeMatch", this.getMatchKey);
-      console.log("Res");
     },
 
     // Stop match event handler
