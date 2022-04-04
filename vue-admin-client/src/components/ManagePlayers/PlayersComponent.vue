@@ -1,371 +1,183 @@
 <template>
-  <div class="container">
-    <div class="interior">
-      <a class="btn" href="#add-modal">Add Player</a>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Player Name</th>
-          <th>Team</th>
-          <th>Position</th>
-          <th>Price</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="player in getplayers" :key="player.playerId">
-          <td data-column="First Name">{{ player.playerId }}</td>
-          <td data-column="Last Name">{{ player.playerName }}</td>
-          <td data-column="Job Title">{{ player.eplTeamId }}</td>
-          <td data-column="Twitter">{{ player.position }}</td>
-          <td data-column="Twitter">{{ player.price }}</td>
-          <td data-column="Twitter">
-            <div class="btn-group" role="group">
-              <router-link
-                :to="{ name: 'viewPlayer', params: { id: player.playerId } }"
-                class="btn btn-primary"
-                >View
-              </router-link>
-              <router-link
-                :to="{ name: 'editplayer', params: { id: player.playerId } }"
-                class="btn btn-primary"
-                >Edit
-              </router-link>
-              <button
-                class="btn btn-danger"
-                @click="deletePlayer(player.playerId)"
-              >
-                Delete
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div id="add-modal" class="modal-window">
-      <div>
-        <a href="#" title="Close" class="modal-close">Close</a>
-        <form @submit.prevent="addPlayer">
-          <div class="row" id="multiCollapseExample1">
-            <div class="col">
-              <div class="collapse multi-collapse">
-                <div class="card card-body">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="form.playerName"
-                          placeholder="Player Name"
-                        />
-                      </div>
-                    </div>
-                    <!--  col-md-6   -->
+  <main class="players-main-container">
+    <!-- Modal -->
+    <PlayerModal
+      v-show="showModal"
+      @closeModal="closeModal"
+      :isEditMode="isEditMode"
+    />
+    <!-- Modal -->
+    <!-- <input
+      type="text"
+      class="team-search-bar"
+      @keyup="searchBarFilter"
+      placeholder="Search Term Here..."
+      ref="searchBar"
+    /> -->
+    <!-- Header -->
+    <div class="players-header-container">
+      <!-- Title -->
+      <div class="players-title">Ethiopian Premier League - Players</div>
 
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="form.eplTeamId"
-                          placeholder="Team"
-                        />
-                      </div>
-                    </div>
-                    <!--  col-md-6   -->
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="form.position"
-                          placeholder="Player Position"
-                        />
-                      </div>
-                    </div>
-                    <!--  col-md-6   -->
-
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="form.currentPrice"
-                          placeholder="Price"
-                        />
-                      </div>
-                    </div>
-                    <!--  col-md-6   -->
-                  </div>
-                  <hr />
-                  <h2>Availablity</h2>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="form.injuryStatus"
-                          placeholder="injuryStatus"
-                        />
-                      </div>
-                    </div>
-                    <!--  col-md-6   -->
-
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="form.injuryMessage"
-                          placeholder="Injury Detail"
-                        />
-                      </div>
-                    </div>
-                    <!--  col-md-6   -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+      <!-- Add Button -->
+      <div class="players-add-new" @click="activateModal">
+        <div>+</div>
+        Add
       </div>
     </div>
-  </div>
+    <!-- Header -->
+    <!-- Sorter Header -->
+    <!-- <div class="teams-sorter-header">
+      <div @click="sortByID" class="teams-id-sorter">ID</div>
+      <div class="teams-logo-sorter">Logo</div>
+      <div @click="sortByName" class="teams-name-sorter">Team</div>
+      <div @click="sortByCity" class="teams-city-sorter">City</div>
+      <div @click="sortbyStadium" class="teams-stadium-sorter">Stadium</div>
+      <div @click="sortByFoundedDate" class="teams-founded-sorter">Year</div>
+      <div class="teams-controls-sorter">Controls</div>
+    </div> -->
+    <!-- Sorter Header -->
+    <div class="players-container" v-if="getAllPlayers.length > 0">
+      <PlayerComponent
+        v-for="player in getAllPlayers"
+        :key="player.playerId"
+        :player="player"
+        @activateModalEdit="activateModalEdit"
+      />
+    </div>
+
+    <!-- No items -->
+    <div class="no-players-container" v-else>No Players</div>
+  </main>
 </template>
 <script>
 import store from "../../store/index";
 
+import PlayerComponent from "@/components/ManagePlayers/PlayerComponent";
+import PlayerModal from "@/components/ManagePlayers/PlayerModalComponent";
 export default {
   name: "PlayersComponent",
+  components: {
+    PlayerComponent,
+    PlayerModal,
+  },
   data() {
     return {
-      form: {
-        playerName: "",
-        eplTeamId: "",
-        position: "",
-        currentPrice: "",
-        availablity: {
-          injuryStatus: "",
-          injuryMessage: "",
-        },
-      },
+      showModal: false,
+      isEditMode: false,
     };
   },
-  computed: {
-    getplayers() {
-      return store.state.Player.players;
-    },
-  },
   methods: {
-    addPlayer() {
-      store.dispatch("Player/addPlayer", this.form);
+    // Event Handlers
+    activateModal() {
+      this.isEditMode = false;
+      this.showModal = true;
+    },
+    activateModalEdit() {
+      this.isEditMode = true;
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
     },
   },
+  computed: {
+    getAllPlayers() {
+      return store.state.Player.allPlayers;
+    },
+  },
+
   beforeMount() {
-    this.$store.dispatch("Player/getallplayers");
+    store.dispatch("Player/setAllPlayers");
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.modal-window {
-  position: fixed;
-  background-color: rgba(255, 255, 255, 0.25);
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 999;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s;
-  &:target {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-  }
-  & > div {
-    width: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 2em;
-    background: rgb(77, 73, 73);
-  }
-  header {
-    font-weight: bold;
-  }
-  h1 {
-    font-size: 150%;
-    margin: 0 0 15px;
-  }
+<style scoped>
+.players-main-container {
+  /* background: var(--primary-400); */
+  width: 82%;
+  margin-left: 18%;
+  padding: 100px 24px 60px 16px;
 }
-
-.modal-close {
-  color: #aaa;
-  line-height: 50px;
-  font-size: 80%;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  top: 0;
-  width: 70px;
-  text-decoration: none;
-  &:hover {
-    color: black;
-  }
+.player-search-bar {
+  width: 20%;
+  height: 32px;
+  margin-left: 80%;
+  padding: 0 3px;
+  outline: none;
 }
-
-/* Demo Styles */
-
-html,
-body {
-  height: 100%;
-}
-
-html {
-  font-size: 18px;
-  line-height: 1.4;
-}
-
-body {
-  font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
-    Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  font-weight: 600;
-  background-image: linear-gradient(to right, #7f53ac 0, #657ced 100%);
-  color: black;
-}
-
-a {
-  color: inherit;
-}
-
-.container {
-  display: grid;
+.players-header-container {
+  margin-top: var(--spacing-medium);
+  width: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 30vh;
-}
 
-.modal-window {
-  & > div {
-    border-radius: 1rem;
-  }
+  /*  */
+  position: relative;
+  z-index: 1;
 }
-
-.modal-window div:not(:last-of-type) {
-  margin-bottom: 15px;
+.players-title {
+  font-size: var(--text-medium);
 }
-
-small {
-  color: lightgray;
+.players-add-new {
+  font-size: 16px;
+  position: absolute;
+  right: 0%;
+  background: var(--primary-900);
+  padding: 5px 22px 5px 16px;
+  color: var(--neutral-100);
+  display: flex;
 }
-
-.btn {
-  background-color: rgb(72, 20, 196);
-  padding: 1em 1.5em;
-  border-radius: 1rem;
-  text-decoration: none;
-  i {
-    padding-right: 0.3em;
-  }
+.players-add-new > div {
+  width: 20px;
+  height: 20px;
+  background: var(--primary-800);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-right: 6px;
 }
-
-input {
-  border: 2px solid #eeeeee;
-  height: 46px;
-  margin: 10px 0 0 0;
-  padding: 1%;
-  font-size: 1.2em;
-  line-height: 1.5em;
-  color: #333333;
-  letter-spacing: 0.01em;
-  font-style: normal;
-  font-weight: 300;
-  font-family: source-sans-pro;
+.players-sorter-header {
+  padding: 0 12px;
+  margin: var(--spacing-xlarge) 0 var(--spacing-regular) 0;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--neutral-700);
 }
-table {
-  width: 750px;
-  border-collapse: collapse;
+.players-id-sorter {
+  width: 5%;
+  min-width: 45px;
 }
-
-/* Zebra striping */
-tr:nth-of-type(odd) {
-  background: #eee;
+.players-logo-sorter {
+  width: 60px;
 }
-
-th {
-  background: #3498db;
-  color: white;
+.players-name-sorter {
+  width: 20%;
+  min-width: 130px;
+}
+.players-city-sorter {
+  min-width: 100px;
+  width: 17%;
+}
+.players-stadium-sorter {
+  width: 16%;
+}
+.players-founded-sorter {
+  width: 8%;
+}
+.players-controls-sorter {
+  width: 10%;
+}
+.no-players-container {
+  margin-top: var(--spacing-xlarge);
+  width: 100%;
+  min-height: 200px;
+  display: grid;
+  place-items: center;
   font-weight: bold;
-}
-
-td,
-th {
-  padding: 10px;
-  border: 1px solid #ccc;
-  text-align: left;
-  font-size: 18px;
-}
-@media only screen and (max-width: 760px),
-  (min-device-width: 768px) and (max-device-width: 1024px) {
-  table {
-    width: 100%;
-  }
-
-  /* Force table to not be like tables anymore */
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-  }
-
-  /* Hide table headers (but not display: none;, for accessibility) */
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-
-  tr {
-    border: 1px solid #ccc;
-  }
-
-  td {
-    /* Behave  like a "row" */
-    border: none;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    padding-left: 50%;
-  }
-
-  td:before {
-    /* Now like a table header */
-    position: absolute;
-    /* Top/left values mimic padding */
-    top: 6px;
-    left: 6px;
-    width: 45%;
-    padding-right: 10px;
-    white-space: nowrap;
-    /* Label the data */
-    content: attr(data-column);
-
-    color: #000;
-    font-weight: bold;
-  }
+  font-size: var(--text-medium);
 }
 </style>
