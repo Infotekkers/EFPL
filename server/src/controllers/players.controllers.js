@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const PlayerModel = require("../models/Player");
+const { makeFile } = require("../utils/helpers");
 
 const addplayers = asyncHandler(async (req, res) => {
   const {
@@ -7,20 +8,34 @@ const addplayers = asyncHandler(async (req, res) => {
     eplTeamId,
     position,
     currentPrice,
-    score,
     availability,
-    history,
+    playerImage,
+    logoName,
   } = req.body;
-  await new PlayerModel({
-    playerName,
-    position,
-    currentPrice,
-    score,
-    history,
-    availability,
-    eplTeamId,
-  }).save();
-  res.status(201).send(`${playerName} added successfully`);
+
+  const verifyPlayer = await PlayerModel.findOne({
+    playerName:req.body.playerName
+  })
+
+  if(!verifyPlayer){
+    const playerImagePath = makeFile(playerImage, logoName);
+
+    if (playerImagePath){
+      await new PlayerModel({
+        playerName,
+        position,
+        currentPrice,
+        availability,
+        playerImage: playerImagePath,
+        eplTeamId,
+      }).save();
+      res.status(201).send(`${playerName} added successfully`);
+    }  else {
+      res.status(422).json("Error saving image. Please try again!");
+    }
+  } else {
+    res.status(404).send(`${playerName} EXIST.`);
+    }
 });
 // Questions eplTeamId -  what is that
 const updateplayer = asyncHandler(async (req, res) => {
