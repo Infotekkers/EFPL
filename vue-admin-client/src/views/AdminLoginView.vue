@@ -12,8 +12,8 @@
         minlength="8"
       />
       <div class="submit"><button>Login</button></div>
-      <button @click="showPassword = !showPassword">show password</button>
     </form>
+    <button @click="showPassword = !showPassword">show password</button>
     <div v-if="isLoading">Loading...</div>
   </div>
 </template>
