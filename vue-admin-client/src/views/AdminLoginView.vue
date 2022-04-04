@@ -82,6 +82,7 @@ export default {
     loginAdmin() {
       this.isLoading = true;
       this.$store.dispatch("loginAdmin", this.loginInfo);
+      this.$router.replace({ name: "admin" });
       this.isLoading = false;
     },
   },

@@ -50,11 +50,11 @@ export default {
     SET_ADMINS: (state, admins) => (state.admins = admins),
     LOG_OUT: (state) => {
       state.currentAdmin = {};
-      window.localStorage.currentAdmin = JSON.stringify({});
+      window.localStorage.setItem("currentAdmin", JSON.stringify({}));
     },
     SET_CURRENT_ADMIN: (state, admin) => {
       state.currentAdmin = admin;
-      window.localStorage.currentAdmin = JSON.stringify(admin);
+      window.localStorage.setItem("currentAdmin", JSON.stringify(admin));
     },
   },
 };

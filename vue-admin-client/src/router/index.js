@@ -4,6 +4,7 @@ import AdminLoginView from "../views/AdminLoginView.vue";
 import PageNotFoundComponent from "../components/PageNotFoundComponent.vue";
 import SettingsComponent from "../components/AdminSettingsComponent.vue";
 import Admin from "../components/AdminComponent.vue";
+
 const routes = [
   {
     path: "/",
@@ -16,8 +17,10 @@ const routes = [
     component: Admin,
     beforeEnter(to, from, next) {
       // get the currently signed in admin
-      let currentAdmin = JSON.parse(window.localStorage.currentAdmin);
-      if (currentAdmin && currentAdmin.email) {
+      const currentAdmin = JSON.parse(
+        window.localStorage.getItem("currentAdmin")
+      );
+      if (currentAdmin) {
         next();
       } else {
         next("/");
