@@ -50,7 +50,7 @@ export default {
             password: this.password,
           }
         );
-        this.$router.push({ name: "login" });
+        this.$router.push({ name: "admin-login" });
         console.log(response);
       }
     },
