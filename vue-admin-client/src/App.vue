@@ -56,7 +56,6 @@ export default {
   methods: {
     logOutAdmin() {
       this.$store.dispatch("logOutAdmin");
-      this.$router.push({ name: "home" });
     },
   },
   mounted() {
