@@ -178,6 +178,10 @@
     </div>
     <!-- Main Section -->
 
+    <div v-else-if="isGameWeekComplete == false" class="fixture-modal-complete">
+      No Teams Added
+    </div>
+
     <!-- all teams have matches -->
     <div v-else class="fixture-modal-complete">All Teams have matches</div>
     <!-- all teams have matches -->
@@ -259,7 +263,7 @@
 
 .fixture-team-name {
   margin-top: 30px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 label {
@@ -330,7 +334,6 @@ select {
   background: var(--neutral-100);
   display: grid;
   place-items: center;
-  font-size: 24px;
 }
 </style>
 
@@ -352,6 +355,12 @@ export default {
     // gets current gameweek
     currentGameWeek() {
       return store.state.Fixture.showingGameWeek;
+    },
+
+    isTeamComplete() {
+      const teamCount = store.state.Fixture.allTeams.length;
+
+      return teamCount > 0 ? true : false;
     },
 
     // gets all possible home teams

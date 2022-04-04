@@ -1,6 +1,6 @@
 <template>
   <div class="team-container">
-    <div class="team-id-container">{{ team.teamId }}</div>
+    <div class="team-id-container">{{ team.teamId + 1 }}</div>
     <div
       class="team-logo-container"
       :style="{

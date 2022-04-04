@@ -197,10 +197,13 @@
   width: 100%;
 }
 .gameweek-no-fixtures {
+  margin-top: var(--spacing-xlarge);
   width: 100%;
-  min-height: 150px;
+  min-height: 200px;
   display: grid;
   place-items: center;
+  font-weight: bold;
+  font-size: var(--text-medium);
 }
 </style>
 
@@ -275,7 +278,10 @@ export default {
     prevGameWeek() {
       const currentGW = store.state.Fixture.showingGameWeek;
 
-      const maxGWCount = (store.state.Fixture.allTeams.length - 1) * 2;
+      const maxGWCount =
+        store.state.Fixture.allTeams.length > 0
+          ? (store.state.Fixture.allTeams.length - 1) * 2
+          : 1;
 
       currentGW == 1
         ? store.dispatch("Fixture/setShowingGameWeek", maxGWCount)
@@ -284,7 +290,10 @@ export default {
 
     nextGameWeek() {
       const currentGW = store.state.Fixture.showingGameWeek;
-      const maxGWCount = (store.state.Fixture.allTeams.length - 1) * 2;
+      const maxGWCount =
+        store.state.Fixture.allTeams.length > 0
+          ? (store.state.Fixture.allTeams.length - 1) * 2
+          : 1;
 
       currentGW === maxGWCount
         ? store.dispatch("Fixture/setShowingGameWeek", 1)
@@ -323,7 +332,9 @@ export default {
         }
       ).length;
 
-      return teamCount === fixturesCount * 2 ? true : false;
+      return teamCount === fixturesCount * 2 && fixturesCount > 0
+        ? true
+        : false;
     },
 
     // filter gameweek fixtures by date for display
