@@ -15,6 +15,11 @@
     </form>
     <button @click="showPassword = !showPassword">show password</button>
     <div v-if="isLoading">Loading...</div>
+    <p class="forgot-pass">
+      <router-link :to="{ name: 'forgot-password' }"
+        >Forgot Password?</router-link
+      >
+    </p>
   </div>
 </template>
 
@@ -56,19 +61,20 @@ input {
   border-bottom: 1px solid #ddd;
   color: #555;
 }
+.forgot-pass {
+  text-decoration: none;
+}
 .submit {
   text-align: center;
 }
 </style>
 
 <script>
-import store from "../store/index";
 export default {
   data() {
     return {
       showPassword: false,
       loginInfo: {
-        showPassword: true,
         email: "",
         password: "",
       },
@@ -82,17 +88,8 @@ export default {
     loginAdmin() {
       this.isLoading = true;
       this.$store.dispatch("loginAdmin", this.loginInfo);
-      this.$router.replace({ name: "admin" });
-      this.isLoading = false;
-    },
-  },
-  computed: {
-    baseURL() {
-      return process.env.VUE_APP_API_BASE_URL;
-    },
 
-    connectionStatus() {
-      return store.state.Global.connection;
+      this.isLoading = false;
     },
   },
 };

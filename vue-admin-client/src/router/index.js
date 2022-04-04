@@ -4,7 +4,8 @@ import AdminLoginView from "../views/AdminLoginView.vue";
 import PageNotFoundComponent from "../components/PageNotFoundComponent.vue";
 import SettingsComponent from "../components/AdminSettingsComponent.vue";
 import Admin from "../components/AdminComponent.vue";
-
+import ForgotPassword from "../components/ForgotPasswordComponent";
+import ResetPassword from "../components/ResetPasswordComponent";
 const routes = [
   {
     path: "/",
@@ -51,6 +52,20 @@ const routes = [
     path: "/login",
     name: "admin-login",
     component: AdminLoginView,
+  },
+
+  // forgot password page
+  {
+    path: "/forgotpassword",
+    name: "forgot-password",
+    component: ForgotPassword,
+  },
+
+  // reset password
+  {
+    path: "/resetPassword/:token",
+    name: "reset-password",
+    component: ResetPassword,
   },
 
   // 404 page should always be the last route add routes above this

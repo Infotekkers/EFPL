@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../router/index";
 import store from "./index";
 const baseURL = process.env.VUE_APP_API_BASE_URL;
 export default {
@@ -32,6 +33,7 @@ export default {
               notificationMessage: `${response.data.email} successfully logged in`,
             });
             commit("SET_CURRENT_ADMIN", response.data);
+            router.replace({ name: "admin" });
             console.log("logged in");
           }
         })
