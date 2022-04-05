@@ -46,14 +46,13 @@ export default {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "error",
-              notifcationMessage: `${err.response.data}`,
+              notificationMessage: `${err.response.data.message}`,
             });
           }
         });
     },
     // request rest
     async requestReset(context, email) {
-      console.log(email);
       axios
         .post(`${baseURL}/admin/requestReset`, { email: email })
         .then((response) => {
@@ -67,12 +66,12 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err);
-          if (err.response.status === 400) {
+          console.log(err.response.data.message);
+          if (err.response.status === 404) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: true,
-              notifcationMessage: `${err.response.data}`,
+              notificationMessage: `${err.response.data.message}`,
             });
           }
         });
@@ -80,6 +79,7 @@ export default {
     // reset pass
     async resetPassword(context, password) {
       const token = router.currentRoute.value.params.token;
+      console.log(token);
       axios
         .post(`${baseURL}/admin/resetPass/${token}`, {
           password: password,
@@ -96,12 +96,12 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data.message);
           if (err.response.status === 400) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: true,
-              notifcationMessage: `${err.response.data}`,
+              notificationMessage: `${err.response.data.message}`,
             });
           }
         });
