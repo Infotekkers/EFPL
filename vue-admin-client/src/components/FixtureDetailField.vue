@@ -19,7 +19,7 @@
             <div
               draggable="true"
               @dragstart="fieldPlayerDragStart($event, playerId, 'goalkeepers')"
-              @dragend="fieldPlayerDragEnd"
+              @dragend.prevent
               class="field-player"
               :key="playerId"
               v-for="playerId in this.fixtureDetailData.lineups[
@@ -31,7 +31,11 @@
                 {{ this.players[this.activeTeamId][playerId].playerName }}
               </p>
               <h5>
-                {{ this.players[this.activeTeamId][playerId].position }}
+                {{
+                  this.players[this.activeTeamId][
+                    playerId
+                  ].position.toUpperCase()
+                }}
               </h5>
             </div>
           </div>
@@ -62,7 +66,7 @@
             <div
               draggable="true"
               @dragstart="fieldPlayerDragStart($event, playerId, 'defenders')"
-              @dragend="fieldPlayerDragEnd"
+              @dragend.prevent
               class="field-player"
               :key="playerId"
               v-for="playerId in this.fixtureDetailData.lineups[
@@ -74,7 +78,11 @@
                 {{ this.players[this.activeTeamId][playerId].playerName }}
               </p>
               <h5>
-                {{ this.players[this.activeTeamId][playerId].position }}
+                {{
+                  this.players[this.activeTeamId][
+                    playerId
+                  ].position.toUpperCase()
+                }}
               </h5>
             </div>
           </div>
@@ -105,7 +113,7 @@
             <div
               draggable="true"
               @dragstart="fieldPlayerDragStart($event, playerId, 'midfielders')"
-              @dragend="fieldPlayerDragEnd"
+              @dragend.prevent
               class="field-player"
               :key="playerId"
               v-for="playerId in this.fixtureDetailData.lineups[
@@ -117,7 +125,11 @@
                 {{ this.players[this.activeTeamId][playerId].playerName }}
               </p>
               <h5>
-                {{ this.players[this.activeTeamId][playerId].position }}
+                {{
+                  this.players[this.activeTeamId][
+                    playerId
+                  ].position.toUpperCase()
+                }}
               </h5>
             </div>
           </div>
@@ -148,7 +160,7 @@
             <div
               draggable="true"
               @dragstart="fieldPlayerDragStart($event, playerId, 'strikers')"
-              @dragend="fieldPlayerDragEnd"
+              @dragend.prevent
               class="field-player"
               :key="playerId"
               v-for="playerId in this.fixtureDetailData.lineups[
@@ -160,7 +172,11 @@
                 {{ this.players[this.activeTeamId][playerId].playerName }}
               </p>
               <h5>
-                {{ this.players[this.activeTeamId][playerId].position }}
+                {{
+                  this.players[this.activeTeamId][
+                    playerId
+                  ].position.toUpperCase()
+                }}
               </h5>
             </div>
           </div>
@@ -191,7 +207,7 @@
             <div
               draggable="true"
               @dragstart="fieldPlayerDragStart($event, playerId, 'bench')"
-              @dragend="fieldPlayerDragEnd"
+              @dragend.prevent
               class="field-player"
               :key="playerId"
               v-for="playerId in this.fixtureDetailData.lineups[
@@ -203,7 +219,11 @@
                 {{ this.players[this.activeTeamId][playerId].playerName }}
               </p>
               <h5>
-                {{ this.players[this.activeTeamId][playerId].position }}
+                {{
+                  this.players[this.activeTeamId][
+                    playerId
+                  ].position.toUpperCase()
+                }}
               </h5>
             </div>
           </div>
@@ -215,7 +235,7 @@
             @drop="lockerPlayerDrop($event, 'bench')"
             v-else
           >
-            <label>SUBS</label>
+            <label id="bench-label">SUBS</label>
           </div>
           <!-- /////////////////////// BENCH ///////////////////// -->
         </div>
@@ -225,20 +245,21 @@
           @dragover="fieldPlayerDragOver"
           @drop="fieldPlayerDrop"
         >
+          Locker
           <!-- TODO: Filter out selected players-->
           <div
             draggable="true"
             @dragstart="lockerPlayerDragStart($event, player)"
-            @dragend="lockerPlayerDragEnd"
+            @dragend.prevent
             class="locker-player"
             :key="player.playerId"
-            v-for="player in this.players[this.activeTeamId]"
+            v-for="player in this.locker[this.activeTeamId]"
           >
             <p>
               {{ player.playerName }}
             </p>
             <h5>
-              {{ player.position }}
+              {{ player.position.toUpperCase() }}
             </h5>
           </div>
         </div>
@@ -261,6 +282,7 @@ export default {
       "fixtureDetailsLoaded",
       "fixtureDetailData",
       "players",
+      "locker",
     ]),
 
     dataLoaded() {
@@ -271,7 +293,11 @@ export default {
   data: () => ({}),
 
   methods: {
-    ...mapActions("Fixture", ["setFixtureDetailDataLineup"]),
+    ...mapActions("Fixture", [
+      "setFixtureDetailDataLineup",
+      "addPlayerToLocker",
+      "deletePlayerFromLocker",
+    ]),
 
     // Draggable Handlers
     lockerPlayerDragStart(e, player) {
@@ -299,32 +325,14 @@ export default {
         e.dataTransfer.setData("position/midfielders", "");
       else if (player.position === "att")
         e.dataTransfer.setData("position/strikers", "");
-      else if (player.position === "bench")
-        e.dataTransfer.setData("position/bench", "");
-    },
-    lockerPlayerDragEnd(e) {
-      // e.preventDefault();
-      if (e.dataTransfer.dropEffect === "move") e.target.outerHTML = "";
     },
 
     fieldPlayerDragStart(e, playerId, playerPosition) {
-      let fieldPlayerDiv = e.target;
-      let lockerPlayerDiv = document.createElement("div");
-
-      lockerPlayerDiv.className = "locker-player";
-      lockerPlayerDiv.innerHTML =
-        fieldPlayerDiv.childNodes[1].outerHTML +
-        fieldPlayerDiv.childNodes[2].outerHTML;
-
       e.dataTransfer.effectAllowed = "move";
       e.dataTransfer.dropEffect = "move";
-      e.dataTransfer.setData("text/html", lockerPlayerDiv.outerHTML);
       e.dataTransfer.setData("player/Id", playerId);
       e.dataTransfer.setData("player/position", playerPosition);
       e.dataTransfer.setData("field/locker", "");
-    },
-    fieldPlayerDragEnd(e) {
-      if (e.dataTransfer.dropEffect === "move") e.target.outerHTML = "";
     },
 
     // Droppable handlers
@@ -336,20 +344,37 @@ export default {
         lineup.midfielders.length +
         lineup.strikers.length +
         lineup.bench.length;
+      const noOfStarters =
+        lineup.goalkeepers.length +
+        lineup.defenders.length +
+        lineup.midfielders.length +
+        lineup.strikers.length;
+      const goalkeeperExists = Boolean(lineup.goalkeepers.length);
 
-      // VALIDATION 1: Allow drops only form locker to field
-      // VALIDATION 2: Limit players to their position only
-      // VALIDATION 3: Limit players per position to 6
-      // VALIDATION 4: Limit total no of players to 18
-      // TODO: Allow only one for gk
-      // TODO: Allow greater than 6 for bench players
-      // TODO: Allow only 11 starters
+      /* 
+
+        * VALIDATION 1 : For Main Field
+        VALIDATION 1.1: Allow drops only form locker to field
+        VALIDATION 1.2: Limit players to their position only
+        VALIDATION 1.3: Limit players per position to 6
+        VALIDATION 1.4: Limit total no of players to 18
+        VALIDATION 1.5: Limit no of starters to 11
+        VALIDATION 1.6: Allow goalkeepers drop only if there is not a goalkeeper in place already
+
+        * VALIDATION 2: For Bench
+        VALIDATION 2.1: Apply this rule only for the bench position 
+        VALIDATION 2.2: Allow drops only form locker to field
+        VALIDATION 2.3: Limit players per position to 7
+        VALIDATION 2.4: Limit total no of players to 18
+      
+      */
       // console.log(
+      //   fieldPosition === "bench",
       //   e.dataTransfer.types.includes("locker/field"),
-      //   e.dataTransfer.types.includes(`position/${fieldPosition}`),
       //   this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
-      //     .length < 6,
+      //     .length < 8,
       //   noOfPlayers < 18,
+      //   noOfStarters < 12,
       //   e.dataTransfer
       // );
       if (
@@ -357,25 +382,41 @@ export default {
         e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
         this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
           .length < 6 &&
+        noOfPlayers < 18 &&
+        noOfStarters < 11 &&
+        !(
+          goalkeeperExists &&
+          e.dataTransfer.types.includes(`position/goalkeepers`)
+        )
+      )
+        e.preventDefault();
+      else if (
+        fieldPosition === "bench" &&
+        e.dataTransfer.types.includes("locker/field") &&
+        this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
+          .length < 7 &&
         noOfPlayers < 18
       )
         e.preventDefault();
     },
     lockerPlayerDrop(e, position) {
-      let data = e.dataTransfer.getData("text/html");
       let playerId = e.dataTransfer.getData("player/Id");
       e.dataTransfer.effectAllowed = "move";
       e.dataTransfer.dropEffect = "move";
 
-      let positionalDiv = this.$el.querySelector(`#${position}`);
-      positionalDiv.innerHTML += data;
+      this.deletePlayerFromLocker({
+        teamId: this.activeTeamId,
+        playerId,
+      });
 
+      // Save changes
       this.setFixtureDetailDataLineup({
         operation: "add",
         teamId: this.activeTeamId,
         incomingPlayer: playerId,
         position,
       });
+
       e.preventDefault();
     },
 
@@ -383,14 +424,15 @@ export default {
       if (e.dataTransfer.types.includes("field/locker")) e.preventDefault();
     },
     fieldPlayerDrop(e) {
-      let lockerPlayerDiv = e.dataTransfer.getData("text/html");
       let playerId = e.dataTransfer.getData("player/Id");
       let position = e.dataTransfer.getData("player/position");
       e.dataTransfer.effectAllowed = "move";
       e.dataTransfer.dropEffect = "move";
 
-      let lockerRoomDiv = this.$el.querySelector(".locker-room");
-      lockerRoomDiv.innerHTML += lockerPlayerDiv;
+      this.addPlayerToLocker({
+        teamId: this.activeTeamId,
+        playerId,
+      });
 
       // Save changes
       this.setFixtureDetailDataLineup({
@@ -399,6 +441,7 @@ export default {
         incomingPlayer: playerId,
         position,
       });
+
       e.preventDefault();
     },
   },
@@ -456,6 +499,10 @@ dir {
   z-index: 0;
 }
 
+#bench-label {
+  left: 15vw;
+}
+
 .field-player {
   display: flex;
   flex-direction: column;
@@ -491,17 +538,29 @@ dir {
     height: 70px;
     width: 70px;
   }
+
+  #bench-label {
+    left: 22vw;
+  }
 }
 @media screen and (min-width: 480px) and (max-width: 580px) {
   img {
     height: 90px;
     width: 90px;
   }
+
+  #bench-label {
+    left: 25vw;
+  }
 }
 @media screen and (min-width: 580px) {
   img {
     height: 120px;
     width: 120px;
+  }
+
+  #bench-label {
+    left: 33vw;
   }
 }
 @media screen and (min-width: 900px) {
@@ -519,6 +578,10 @@ dir {
   #bench {
     height: 50% !important;
     flex-wrap: wrap;
+  }
+
+  #bench-label {
+    left: 15vw;
   }
 
   .locker-room {

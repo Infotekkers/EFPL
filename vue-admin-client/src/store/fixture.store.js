@@ -534,7 +534,7 @@ export default {
 
       updatedLineup = state.fixtureDetailData.lineups[teamId];
       if (operation === "add")
-        updatedLineup[position].push(parseInt(incomingPlayer));
+        updatedLineup[position].splice(3, 0, parseInt(incomingPlayer));
       else
         updatedLineup[position] = updatedLineup[position].filter(
           (player) => player !== parseInt(incomingPlayer)
@@ -549,19 +549,19 @@ export default {
       commit("SET_FIXTURE_DETAIL_DATA", payload);
     },
 
-    addPlayerToLocker({ commit }, { teamId, player }) {
+    addPlayerToLocker({ commit, state }, { teamId, playerId }) {
       const payload = {
         teamId,
-        playerId: player.playerId,
-        data: player,
+        playerId,
+        data: state.players[teamId][playerId],
       };
       commit("SET_LOCKER_PLAYER", payload);
     },
 
-    deletePlayerFromLocker({ commit }, { teamId, player }) {
+    deletePlayerFromLocker({ commit }, { teamId, playerId }) {
       const payload = {
         teamId,
-        playerId: player.playerId,
+        playerId,
       };
       commit("DELETE_LOCKER_PLAYER", payload);
     },
