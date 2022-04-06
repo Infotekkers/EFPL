@@ -446,30 +446,20 @@ export default {
         });
     },
 
-    async saveFixtureLineup(
-      { commit },
-      matchId,
-      homeTeamLineUp,
-      awayTeamLineUp
-    ) {
+    async saveFixtureLineup({ state }) {
       let url;
       let payload;
+      const matchId = state.fixtureDetailId;
       const homeTeamId = matchId.split("|")[0];
       const awayTeamId = matchId.split("|")[1];
-
-      payload = {
-        type: "lineups",
+      const homeTeamLineUp = {
         teamId: homeTeamId,
-        data: homeTeamLineUp,
+        lineup: state.fixtureDetailData.lineups[homeTeamId],
       };
-      commit("SET_FIXTURE_DETAIL_DATA", payload);
-
-      payload = {
-        type: "lineups",
+      const awayTeamLineUp = {
         teamId: awayTeamId,
-        data: awayTeamLineUp,
+        lineup: state.fixtureDetailData.lineups[awayTeamId],
       };
-      commit("SET_FIXTURE_DETAIL_DATA", payload);
 
       url = `/fixtures/update/lineup/${matchId}`;
       payload = {

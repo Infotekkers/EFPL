@@ -1,7 +1,7 @@
 <template>
   <div>
-    <dir v-if="!dataLoaded">Loading</dir>
-    <dir v-else>
+    <div v-if="!dataLoaded">Loading</div>
+    <div v-else>
       <div class="main">
         <div class="field">
           <!-- /////////////////////// GOALKEEPERS ///////////////////// -->
@@ -263,8 +263,11 @@
             </h5>
           </div>
         </div>
+        <div class="actions">
+          <button @click="saveLineup">Save</button>
+        </div>
       </div>
-    </dir>
+    </div>
   </div>
 </template>
 
@@ -281,6 +284,7 @@ export default {
     ...mapFields("Fixture", [
       "fixtureDetailsLoaded",
       "fixtureDetailData",
+      "fixtureDetailId",
       "players",
       "locker",
     ]),
@@ -297,6 +301,7 @@ export default {
       "setFixtureDetailDataLineup",
       "addPlayerToLocker",
       "deletePlayerFromLocker",
+      "saveFixtureLineup",
     ]),
 
     // Draggable Handlers
@@ -368,15 +373,7 @@ export default {
         VALIDATION 2.4: Limit total no of players to 18
       
       */
-      // console.log(
-      //   fieldPosition === "bench",
-      //   e.dataTransfer.types.includes("locker/field"),
-      //   this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
-      //     .length < 8,
-      //   noOfPlayers < 18,
-      //   noOfStarters < 12,
-      //   e.dataTransfer
-      // );
+
       if (
         e.dataTransfer.types.includes("locker/field") &&
         e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
@@ -443,6 +440,11 @@ export default {
       });
 
       e.preventDefault();
+    },
+
+    // API Callers
+    saveLineup() {
+      this.saveFixtureLineup();
     },
   },
 };
