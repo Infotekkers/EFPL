@@ -314,151 +314,98 @@ export default {
     },
 
     async loadFixtureDetails({ commit }, matchId) {
-      let url;
       const homeTeamId = matchId.split("|")[0];
       const awayTeamId = matchId.split("|")[1];
 
       // TODO: User team data from store
-      // TODO: Set Data Loaded Only when all responses arrive (Await all responses at once)
-      // Get home team
-      url = `/teams/${homeTeamId}`;
+      const reqHomeTeam = axios.get(`/teams/${homeTeamId}`);
+      const reqAwayTeam = axios.get(`/teams/${awayTeamId}`);
+      const reqPlayers = axios.get(
+        `/players/getplayers/homeTeam/${homeTeamId}/awayTeam/${awayTeamId}`
+      );
+      const reqFixtureStats = axios.get(`/fixtures/${matchId}`);
 
       await axios
-        .get(url)
-        .then((res) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: false,
-            notificationType: "success",
-          });
-
-          const payload = {
-            type: "teams",
-            teamId: homeTeamId,
-            data: res.data[0],
-          };
-          commit("SET_FIXTURE_DETAIL_DATA", payload);
-        })
-        .catch((err) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "error",
-            notificationMessage: err.response.data,
-          });
-        });
-
-      // Get away team
-      url = `/teams/${awayTeamId}`;
-
-      await axios
-        .get(url)
-        .then((res) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: false,
-            notificationType: "success",
-          });
-
-          const payload = {
-            type: "teams",
-            teamId: awayTeamId,
-            data: res.data[0],
-          };
-          commit("SET_FIXTURE_DETAIL_DATA", payload);
-        })
-        .catch((err) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "error",
-            notificationMessage: err.response.data,
-          });
-        });
-
-      // Get players
-      url = `/players/getplayers/homeTeam/${homeTeamId}/awayTeam/${awayTeamId}`;
-
-      await axios
-        .get(url)
-        .then((res) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: false,
-            notificationType: "success",
-          });
-
-          const payloadHomePlayers = {
-            teamId: homeTeamId,
-            data: res.data.homePlayers,
-          };
-          commit("SET_PLAYERS", payloadHomePlayers);
-
-          const payloadAwayPlayers = {
-            teamId: awayTeamId,
-            data: res.data.awayPlayers,
-          };
-          commit("SET_PLAYERS", payloadAwayPlayers);
-        })
-        .catch((err) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "error",
-            notificationMessage: err.response.data,
-          });
-        });
-
-      // Get fixture stats
-      url = `/fixtures/${matchId}`;
-
-      await axios
-        .get(url)
-        .then((res) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: false,
-            notificationType: "success",
-          });
-
-          if (res.data.homeTeamLineUp) {
-            const payload = {
-              type: "lineups",
+        .all([reqHomeTeam, reqAwayTeam, reqPlayers, reqFixtureStats])
+        .then(
+          axios.spread((...res) => {
+            // RESPONSE HOME TEAM
+            let payload = {
+              type: "teams",
               teamId: homeTeamId,
-              data: res.data.homeTeamLineUp.lineup,
+              data: res[0].data[0],
             };
             commit("SET_FIXTURE_DETAIL_DATA", payload);
-          } else {
-            const payload = {
-              type: "lineups",
-              teamId: homeTeamId,
-              data: {
-                goalkeepers: [],
-                defenders: [],
-                midfielders: [],
-                strikers: [],
-                bench: [],
-              },
-            };
-            commit("SET_FIXTURE_DETAIL_DATA", payload);
-          }
 
-          if (res.data.awayTeamLineUp) {
-            const payload = {
-              type: "lineups",
+            // RESPONSE AWAY TEAM
+            payload = {
+              type: "teams",
               teamId: awayTeamId,
-              data: res.data.awayTeamLineUp.lineup,
+              data: res[1].data[0],
             };
             commit("SET_FIXTURE_DETAIL_DATA", payload);
-          } else {
-            const payload = {
-              type: "lineups",
-              teamId: awayTeamId,
-              data: {
-                goalkeepers: [],
-                defenders: [],
-                midfielders: [],
-                strikers: [],
-                bench: [],
-              },
+
+            // RESPONSE PLAYERS
+            const payloadHomePlayers = {
+              teamId: homeTeamId,
+              data: res[2].data.homePlayers,
             };
-            commit("SET_FIXTURE_DETAIL_DATA", payload);
-          }
-          commit("SET_FIXTURE_DETAILS_LOADED", true);
-        })
+            commit("SET_PLAYERS", payloadHomePlayers);
+
+            const payloadAwayPlayers = {
+              teamId: awayTeamId,
+              data: res[2].data.awayPlayers,
+            };
+            commit("SET_PLAYERS", payloadAwayPlayers);
+
+            // RESPONSE FIXTURE STATS
+            if (res[3].data.homeTeamLineUp) {
+              const payload = {
+                type: "lineups",
+                teamId: homeTeamId,
+                data: res[3].data.homeTeamLineUp.lineup,
+              };
+              commit("SET_FIXTURE_DETAIL_DATA", payload);
+            } else {
+              const payload = {
+                type: "lineups",
+                teamId: homeTeamId,
+                data: {
+                  goalkeepers: [],
+                  defenders: [],
+                  midfielders: [],
+                  strikers: [],
+                  bench: [],
+                },
+              };
+              commit("SET_FIXTURE_DETAIL_DATA", payload);
+            }
+
+            if (res[3].data.awayTeamLineUp) {
+              const payload = {
+                type: "lineups",
+                teamId: awayTeamId,
+                data: res[3].data.awayTeamLineUp.lineup,
+              };
+              commit("SET_FIXTURE_DETAIL_DATA", payload);
+            } else {
+              const payload = {
+                type: "lineups",
+                teamId: awayTeamId,
+                data: {
+                  goalkeepers: [],
+                  defenders: [],
+                  midfielders: [],
+                  strikers: [],
+                  bench: [],
+                },
+              };
+              commit("SET_FIXTURE_DETAIL_DATA", payload);
+            }
+
+            commit("SET_FIXTURE_DETAILS_LOADED", true);
+          })
+        )
         .catch((err) => {
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
