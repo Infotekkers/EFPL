@@ -196,11 +196,11 @@ export default {
       const playerImage = await this.getBase64();
 
       if (!playerName) {
-        console.log("Team Name is required");
+        console.log("Player Name is required");
       } else if (!eplTeamId) {
-        console.log("Team City is required.");
+        console.log("Player Team is required.");
       } else if (!position) {
-        console.log("Stadium");
+        console.log("position");
       } else if (!currentPrice) {
         console.log("price");
       } else if (!injuryStatus) {
@@ -227,30 +227,30 @@ export default {
         this.$refs.inputForm.reset();
       }
     },
-    // async updatePlayer() {
-    //   const playerName = this.$refs.PlayerName.value;
-    //   const eplTeamId = this.$refs.eplTeamId.value;
-    //   const position = this.$refs.position.value;
-    //   const currentPrice = this.$refs.currentPrice.value;
-    //   const injuryStatus = this.$refs.injuryStatus.value;
-    //   const injuryMessage = this.$refs.injuryMessage.value;
-    //   let playerImage = "";
-    //   if (store.state.Player.imageChanged === true) {
-    //     playerImage = await this.getBase64();
-    //   }
-    //   const updatedPlayer = {
-    //     playerName,
-    //     eplTeamId,
-    //     position,
-    //     playerImage,
-    //     currentPrice,
-    //     injuryStatus,
-    //     injuryMessage,
-    //     logoName: this.selectedImage ? this.selectedImage.name : "",
-    //   };
-    //   const imageStatus = this.imageChanged;
-    //   store.dispatch("Player/updatePlayer", updatedPlayer, imageStatus);
-    // },
+    async updatePlayer() {
+      const playerName = this.$refs.playerName.value;
+      const eplTeamId = this.$refs.eplTeamId.value;
+      const position = this.$refs.position.value;
+      const currentPrice = this.$refs.currentPrice.value;
+      const injuryStatus = this.$refs.injuryStatus.value;
+      const injuryMessage = this.$refs.injuryMessage.value;
+      let playerImage = "";
+      if (store.state.Player.imageChanged === true) {
+        playerImage = await this.getBase64();
+      }
+      const updatedPlayer = {
+        playerName,
+        eplTeamId,
+        position,
+        playerImage,
+        currentPrice,
+        injuryStatus,
+        injuryMessage,
+        logoName: this.selectedImage ? this.selectedImage.name : "",
+      };
+      const imageStatus = this.imageChanged;
+      store.dispatch("Player/updatePlayer", updatedPlayer, imageStatus);
+    },
     // Image processor
     getBase64() {
       return new Promise((resolve, reject) => {
