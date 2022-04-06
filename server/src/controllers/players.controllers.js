@@ -110,12 +110,22 @@ const getplayers = asyncHandler(async (req, res) => {
 });
 
 const getHomeAndAwayPlayers = asyncHandler(async (req, res) => {
-  const homePlayers = await PlayerModel.find({
+  const homePlayersRaw = await PlayerModel.find({
     eplTeamId: req.params.homeTeamId,
   }).select("playerName playerId eplTeamId position availabilty");
-  const awayPlayers = await PlayerModel.find({
+  const awayPlayersRaw = await PlayerModel.find({
     eplTeamId: req.params.awayTeamId,
   }).select("playerName playerId eplTeamId position availabilty");
+
+  const homePlayers = {};
+  homePlayersRaw.forEach((player) => {
+    homePlayers[player.playerId] = player;
+  });
+
+  const awayPlayers = {};
+  awayPlayersRaw.forEach((player) => {
+    awayPlayers[player.playerId] = player;
+  });
 
   const result = {
     homePlayers,

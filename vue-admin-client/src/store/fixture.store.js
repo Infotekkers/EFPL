@@ -24,7 +24,7 @@ export default {
     currentAwayTeamIndex: 1,
 
     // FixtureId of fixture in detail state
-    fixtureDetailId: "3|1",
+    fixtureDetailId: "10|15",
 
     // Fixture detailed info like formation
     fixtureDetailData: {
@@ -36,6 +36,12 @@ export default {
 
     // Players arranged according to their EPL teams
     players: {},
+
+    // Locker room to contain reserved or unselected players of both EPL teams
+    locker: {},
+
+    // Loading indicator
+    fixtureDetailsLoaded: false,
   },
   getters: {
     getIsFixtureLoading: function (state) {
@@ -93,6 +99,18 @@ export default {
     },
     SET_PLAYERS(state, payload) {
       state.players[payload.teamId] = payload.data;
+    },
+    SET_LOCKER(state, payload) {
+      state.locker[payload.teamId] = payload.data;
+    },
+    SET_LOCKER_PLAYER(state, payload) {
+      state.locker[payload.teamId][payload.playerId] = payload.data;
+    },
+    DELETE_LOCKER_PLAYER(state, payload) {
+      delete state.locker[payload.teamId][payload.playerId];
+    },
+    SET_FIXTURE_DETAILS_LOADED(state, payload) {
+      state.fixtureDetailsLoaded = payload;
     },
     updateField,
   },
@@ -301,6 +319,7 @@ export default {
       const awayTeamId = matchId.split("|")[1];
 
       // TODO: User team data from store
+      // TODO: Set Data Loaded Only when all responses arrive (Await all responses at once)
       // Get home team
       url = `/teams/${homeTeamId}`;
 
@@ -438,6 +457,7 @@ export default {
             };
             commit("SET_FIXTURE_DETAIL_DATA", payload);
           }
+          commit("SET_FIXTURE_DETAILS_LOADED", true);
         })
         .catch((err) => {
           store.dispatch("Global/setNotificationInfo", {
@@ -530,10 +550,17 @@ export default {
 
     setFixtureDetailDataLineup(
       { commit, state },
-      { teamId, incomingPlayer, position }
+      { teamId, incomingPlayer, position, operation }
     ) {
-      let updatedLineup = state.fixtureDetailData.lineups[teamId];
-      updatedLineup[position].push(incomingPlayer);
+      let updatedLineup;
+
+      updatedLineup = state.fixtureDetailData.lineups[teamId];
+      if (operation === "add")
+        updatedLineup[position].push(parseInt(incomingPlayer));
+      else
+        updatedLineup[position] = updatedLineup[position].filter(
+          (player) => player !== parseInt(incomingPlayer)
+        );
 
       let payload = {
         type: "lineups",
@@ -542,6 +569,23 @@ export default {
       };
 
       commit("SET_FIXTURE_DETAIL_DATA", payload);
+    },
+
+    addPlayerToLocker({ commit }, { teamId, player }) {
+      const payload = {
+        teamId,
+        playerId: player.playerId,
+        data: player,
+      };
+      commit("SET_LOCKER_PLAYER", payload);
+    },
+
+    deletePlayerFromLocker({ commit }, { teamId, player }) {
+      const payload = {
+        teamId,
+        playerId: player.playerId,
+      };
+      commit("DELETE_LOCKER_PLAYER", payload);
     },
   },
 };
