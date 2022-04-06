@@ -101,7 +101,7 @@ export default {
       state.players[payload.teamId] = payload.data;
     },
     SET_LOCKER(state, payload) {
-      state.locker[payload.teamId] = payload.data;
+      state.locker = payload;
     },
     SET_LOCKER_PLAYER(state, payload) {
       state.locker[payload.teamId][payload.playerId] = payload.data;
@@ -192,7 +192,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.response);
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
@@ -329,11 +328,13 @@ export default {
         .all([reqHomeTeam, reqAwayTeam, reqPlayers, reqFixtureStats])
         .then(
           axios.spread((...res) => {
+            const [resHomeTeam, resAwayTeam, resPlayers, resFixtureStats] = res;
+
             // RESPONSE HOME TEAM
             let payload = {
               type: "teams",
               teamId: homeTeamId,
-              data: res[0].data[0],
+              data: resHomeTeam.data[0],
             };
             commit("SET_FIXTURE_DETAIL_DATA", payload);
 
@@ -341,29 +342,29 @@ export default {
             payload = {
               type: "teams",
               teamId: awayTeamId,
-              data: res[1].data[0],
+              data: resAwayTeam.data[0],
             };
             commit("SET_FIXTURE_DETAIL_DATA", payload);
 
             // RESPONSE PLAYERS
             const payloadHomePlayers = {
               teamId: homeTeamId,
-              data: res[2].data.homePlayers,
+              data: resPlayers.data.homePlayers,
             };
             commit("SET_PLAYERS", payloadHomePlayers);
 
             const payloadAwayPlayers = {
               teamId: awayTeamId,
-              data: res[2].data.awayPlayers,
+              data: resPlayers.data.awayPlayers,
             };
             commit("SET_PLAYERS", payloadAwayPlayers);
 
             // RESPONSE FIXTURE STATS
-            if (res[3].data.homeTeamLineUp) {
+            if (resFixtureStats.data.homeTeamLineUp) {
               const payload = {
                 type: "lineups",
                 teamId: homeTeamId,
-                data: res[3].data.homeTeamLineUp.lineup,
+                data: resFixtureStats.data.homeTeamLineUp.lineup,
               };
               commit("SET_FIXTURE_DETAIL_DATA", payload);
             } else {
@@ -381,11 +382,11 @@ export default {
               commit("SET_FIXTURE_DETAIL_DATA", payload);
             }
 
-            if (res[3].data.awayTeamLineUp) {
+            if (resFixtureStats.data.awayTeamLineUp) {
               const payload = {
                 type: "lineups",
                 teamId: awayTeamId,
-                data: res[3].data.awayTeamLineUp.lineup,
+                data: resFixtureStats.data.awayTeamLineUp.lineup,
               };
               commit("SET_FIXTURE_DETAIL_DATA", payload);
             } else {
@@ -402,6 +403,36 @@ export default {
               };
               commit("SET_FIXTURE_DETAIL_DATA", payload);
             }
+
+            // Using object assign to copy obj so as not to delete the response data
+            payload = {};
+            payload[homeTeamId] = Object.assign(
+              {},
+              resPlayers.data.homePlayers
+            );
+            payload[awayTeamId] = Object.assign(
+              {},
+              resPlayers.data.awayPlayers
+            );
+
+            for (const position in resFixtureStats.data.homeTeamLineUp.lineup) {
+              for (const playerId of resFixtureStats.data.homeTeamLineUp.lineup[
+                position
+              ]) {
+                if (payload[homeTeamId][playerId] !== undefined)
+                  delete payload[homeTeamId][playerId];
+              }
+            }
+
+            for (const position in resFixtureStats.data.awayTeamLineUp.lineup) {
+              for (const playerId of resFixtureStats.data.awayTeamLineUp.lineup[
+                position
+              ]) {
+                if (payload[awayTeamId][playerId] !== undefined)
+                  delete payload[awayTeamId][playerId];
+              }
+            }
+            commit("SET_LOCKER", payload);
 
             commit("SET_FIXTURE_DETAILS_LOADED", true);
           })
