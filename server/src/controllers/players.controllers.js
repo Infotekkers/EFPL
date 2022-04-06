@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const PlayerModel = require("../models/Player");
-const { makeFile } = require("../utils/helpers");
+const { makeFilePlayer } = require("../utils/helpers");
 
 const addplayers = asyncHandler(async (req, res) => {
   const {
@@ -18,7 +18,7 @@ const addplayers = asyncHandler(async (req, res) => {
   })
 
   if(!verifyPlayer){
-    const playerImagePath = makeFile(playerImage, logoName);
+    const playerImagePath = makeFilePlayer(playerImage, logoName);
 
     if (playerImagePath){
       await new PlayerModel({
@@ -41,35 +41,44 @@ const addplayers = asyncHandler(async (req, res) => {
 const updateplayer = asyncHandler(async (req, res) => {
   const {
     playerName,
-    history,
     eplTeamId,
     availablity,
-    playerId,
     position,
+    playerImage,
+    logoName,
     currentPrice,
   } = req.body;
 
-  // const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
-  // if(verifyPlayer){
-  await PlayerModel.updateOne(
-    { playerId: req.body.playerId },
-    {
-      $set: {
-        playerName: playerName,
-        position: position,
-        playerId: playerId,
-        currentPrice: currentPrice,
-        history: history,
-        eplTeamId: eplTeamId,
-        availablity: availablity,
-      },
-    }
-  );
+  const newData = {
+    playerName,
+    eplTeamId,
+    availablity,
+    position,
+    currentPrice
+  }
 
-  res.status(201).send(`Info updated successful`);
-  // } else{
-  //     return res.status(404).send(`player doesn exist`);
-  // }
+  if(playerImage !== ""){
+    const filePath = makeFilePlayer(playerImage, logoName);
+
+    if(filePath !== ""){
+      newData.playerImage = filePath
+    }
+  }
+  console.log(newData);
+
+  const verifyPlayer = await PlayerModel.findOne({ playerId: req.params.playerId});
+
+  if (verifyPlayer) {
+    await PlayerModel.updateOne(
+      { playerId: req.params.playerId },
+      {
+        $set: newData,
+      }
+    );
+    res.status(201).send(` ${playerName} Info updated successful`);
+  } else{
+      return res.status(404).send(`player with ${playerName}exist`);
+  }
 });
 
 const updateScore = asyncHandler(async (req, res) => {

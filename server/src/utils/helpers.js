@@ -39,7 +39,7 @@ const pointDeductor = (activeTeam, incomingTeam) => {
 
 
 // Function to change base64 to file
-const makeFile = (fileContent, logoName) => {
+const makeFilePlayer = (fileContent, logoName) => {
   // Check base64 format
   const matches = fileContent.match(/^data:([A-Za-z-+/]+);base64,(.+)$/);
   if (matches.length !== 3) {
@@ -52,13 +52,13 @@ const makeFile = (fileContent, logoName) => {
 
     const filePath = path.join(
       path.resolve("./"),
-      "uploads/teams",
+      "uploads/players",
       itemFileName
     );
 
     try {
       fs.writeFileSync(filePath, imageBuffer, "utf-8");
-      return "/uploads/teams/" + itemFileName;
+      return "/uploads/players/" + itemFileName;
     } catch (e) {
       return "";
     }
@@ -69,5 +69,5 @@ const makeFile = (fileContent, logoName) => {
 module.exports = {
   generateJWTToken,
   pointDeductor,
-  makeFile,
+  makeFilePlayer,
 };

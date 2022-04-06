@@ -72,6 +72,46 @@ export default {
           });
         });
     },
+    async updatePlayer(context, updatedPlayer) {
+      const playerId = store.state.Player.editPlayerId;
+      console.log("ID", store.state.Player.imageChanged);
+      const verifyChange = store.state.Player.allPlayers.filter((player) => {
+        return (
+          player.playerName == updatedPlayer.playerName &&
+          player.eplTeamId == updatedPlayer.eplTeamId &&
+          player.position == updatedPlayer.position &&
+          player.currentPrice == updatedPlayer.currentPrice &&
+          player.injurystatus == updatedPlayer.injurystatus &&
+          player.inuryMessage == updatedPlayer.injuryMessage
+        );
+      });
+
+      if (!verifyChange.length > 0 || store.state.Player.imageChanged) {
+        axios
+          .patch(`${baseURL}/players/updateplayer/${playerId}`, updatedPlayer)
+          .then((response) => {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: response.data,
+            });
+            store.dispatch("Player/setAllPlayers");
+          })
+          .catch((err) => {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "error",
+              notificationMessage: err.response.data,
+            });
+          });
+      } else {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "warning",
+          notificationMessage: "No changes have been applied.",
+        });
+      }
+    },
     async deletePlayer(context, playerId) {
       axios
         .delete(`${baseURL}/players/deleteplayer/${playerId}`)
