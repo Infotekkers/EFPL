@@ -140,25 +140,32 @@ export default {
       // reset previous filter result
       store.state.Team.allTeams = store.state.Team.allTeamsUnfiltered;
 
+      let filteredTeams;
+
       // apply filter
-      const filteredTeams = store.state.Team.allTeams.filter((team) => {
-        return (
-          // By city
-          team.teamCity.includes(filterTerm.toLowerCase()) ||
-          team.teamCity.includes(filterTerm.toUpperCase()) ||
-          team.teamCity.includes(filterTerm) ||
-          // by name
-          team.teamName.includes(filterTerm.toLowerCase()) ||
-          team.teamName.includes(filterTerm.toLowerCase()) ||
-          team.teamName.includes(filterTerm) ||
-          // year
-          team.foundedIn.toString().includes(filterTerm) ||
-          // by stadium
-          team.teamStadium.includes(filterTerm.toLowerCase()) ||
-          team.teamStadium.includes(filterTerm.toUpperCase()) ||
-          team.teamStadium.includes(filterTerm)
-        );
-      });
+      if (filterTerm != "") {
+        filteredTeams = store.state.Team.allTeams.filter((team) => {
+          return (
+            // By city
+            team.teamCity.includes(filterTerm.toLowerCase()) ||
+            team.teamCity.includes(filterTerm.toUpperCase()) ||
+            team.teamCity.includes(filterTerm) ||
+            // by name
+            team.teamName.includes(filterTerm.toLowerCase()) ||
+            team.teamName.includes(filterTerm.toLowerCase()) ||
+            team.teamName.includes(filterTerm) ||
+            // year
+
+            team.foundedIn.toString().includes(filterTerm) ||
+            // by stadium
+            team.teamStadium.includes(filterTerm.toLowerCase()) ||
+            team.teamStadium.includes(filterTerm.toUpperCase()) ||
+            team.teamStadium.includes(filterTerm)
+          );
+        });
+      } else {
+        filteredTeams = store.state.Team.allTeamsUnfiltered;
+      }
 
       // update filtered
       context.commit("SET_FILTERED_TEAMS", filteredTeams);
@@ -179,7 +186,7 @@ export default {
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
-            notificationMessage: err.response.data,
+            notificationMessage: err,
           });
         });
     },

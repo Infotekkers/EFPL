@@ -51,7 +51,7 @@
   width: 60px;
   min-width: 60px;
   min-height: 60px;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }

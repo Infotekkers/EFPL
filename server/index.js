@@ -54,6 +54,7 @@ app.use("/user", userRouter);
 // populate.addTestGameweek();
 
 populate.populateTeams();
+populate.populatePlayers();
 
 // Add Middleware
 app.use(errorMiddleware);

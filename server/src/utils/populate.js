@@ -13,6 +13,7 @@ const Team = require("../models/Teams");
 // Import Data
 const { teamData } = require("./data/teams.data");
 const { fixtureData } = require("../utils/data/fixture.test.data");
+const { playersData } = require("../utils/data/players.data");
 
 const addTestPlayer = async () => {
   // Test PLAYER
@@ -506,6 +507,54 @@ const populateTeams = async () => {
   }
 };
 
+const populatePlayers = async () => {
+  const players = await axios.get(`${baseURL}${PORT}/players/getplayers`);
+
+  // if no players
+  if (players.data.length === 0) {
+    playersData.forEach(async (team) => {
+      team.forEach(async (player) => {
+        await Player.create(player);
+      });
+    });
+    printConsole(
+      { data: `${playersData.length * playersData[0].length} players added.` },
+      { printLocation: "populate.js:490" },
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  }
+
+  // if incomplete list
+  else if (players.data.length > playersData.length * playersData[0].length) {
+    // clear DB
+    await Team.deleteMany();
+
+    playersData.forEach(async (team) => {
+      team.forEach(async (player) => {
+        await Player.create(player);
+      });
+    });
+    printConsole(
+      {
+        data: `${
+          playersData.length * playersData[0].length
+        } players added properly.`,
+      },
+      { printLocation: "populate.js:490" },
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  }
+  // If already added
+  else {
+    printConsole(
+      { data: "Players already populated" },
+      { printLocation: "populate.js:497" },
+
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  }
+};
+
 const populateFixture = async () => {
   const fixtures = await axios.get(`${baseURL}${PORT}/fixtures/`);
   //  if no fixtures
@@ -541,7 +590,9 @@ module.exports = {
   addTestPlayer,
 
   // Scripts
-  populateGameWeeks,
   populateTeams,
+  populatePlayers,
+
+  populateGameWeeks,
   populateFixture,
 };
