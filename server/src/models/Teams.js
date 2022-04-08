@@ -29,6 +29,9 @@ const teamSchema = mongoose.Schema({
   foundedIn: {
     type: Number,
   },
+  teamCoach: {
+    type: String,
+  },
 });
 
 teamSchema.plugin(autoIncrement.plugin, { model: "teams", field: "teamId" });

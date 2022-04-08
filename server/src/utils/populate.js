@@ -471,11 +471,14 @@ const populateTeams = async () => {
 
   // if no teams
   if (teams.data.length === 0) {
-    teamData.forEach((team) => {
-      axios.post(`${baseURL}${PORT}/teams`, {
-        teamName: team,
-      });
+    teamData.forEach(async (team) => {
+      await Team.create(team);
     });
+    printConsole(
+      { data: `${teamData.length} teams added.` },
+      { printLocation: "populate.js:490" },
+      { bgColor: "bgGreen", textColor: "black" }
+    );
   }
   // If incomplete team
   else if (teams.data.length !== 16) {
@@ -483,10 +486,8 @@ const populateTeams = async () => {
     await Team.deleteMany();
 
     // add all teams
-    teamData.forEach((team) => {
-      axios.post(`${baseURL}${PORT}/teams`, {
-        teamName: team,
-      });
+    teamData.forEach(async (team) => {
+      await Team.create(team);
     });
     printConsole(
       { data: "All Teams added properly" },

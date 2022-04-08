@@ -53,6 +53,8 @@ app.use("/user", userRouter);
 // populate.addTestUser();
 // populate.addTestGameweek();
 
+populate.populateTeams();
+
 // Add Middleware
 app.use(errorMiddleware);
 
