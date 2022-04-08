@@ -1,0 +1,10 @@
+{
+  "header": "This is the about page",
+  "home": "Home",
+  "admin": "Admin",
+  "logout": "LogOut",
+  "Reset": "Reset Password",
+  "select language": "Select Language",
+  "english": "English",
+  "amharic": "Amharic"
+}

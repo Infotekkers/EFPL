@@ -1,9 +1,9 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link :to="{ name: 'admin' }" v-if="currentAdmin.email"
-      >Admin</router-link
-    >
+    <router-link to="/">{{ $t("home") }}</router-link> |
+    <router-link :to="{ name: 'admin' }" v-if="currentAdmin.email">{{
+      $t("admin")
+    }}</router-link>
     <div v-if="currentAdmin.email">
       {{ currentAdmin.email }}
       <button @click="logOutAdmin">Logout</button>
