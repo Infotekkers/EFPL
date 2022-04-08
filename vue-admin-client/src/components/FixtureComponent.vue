@@ -129,7 +129,7 @@
 .fixture-logo {
   width: 40px;
   height: 40px;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 .fixture-game-time {

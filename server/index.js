@@ -55,6 +55,7 @@ app.use("/user", userRouter);
 
 populate.populateTeams();
 populate.populatePlayers();
+populate.populateFixture();
 
 // Add Middleware
 app.use(errorMiddleware);
