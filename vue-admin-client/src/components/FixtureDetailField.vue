@@ -3,6 +3,13 @@
     <div v-if="!dataLoaded">Loading</div>
     <div v-else>
       <div class="main">
+        <PlayerStatModal
+          :showModal="showModal"
+          :playerId="currentPlayerId"
+          :gameweek="showingGameWeek"
+          @close="closeStatsModal"
+          v-if="showModal"
+        />
         <div class="field">
           <!-- /////////////////////// GOALKEEPERS ///////////////////// -->
           <div
@@ -17,6 +24,8 @@
             "
           >
             <div
+              @click="openStatsModal(playerId)"
+              @touch="openStatsModal(playerId)"
               draggable="true"
               @dragstart="fieldPlayerDragStart($event, playerId, 'goalkeepers')"
               @dragend.prevent
@@ -64,6 +73,8 @@
             "
           >
             <div
+              @click="openStatsModal(playerId)"
+              @touch="openStatsModal(playerId)"
               draggable="true"
               @dragstart="fieldPlayerDragStart($event, playerId, 'defenders')"
               @dragend.prevent
@@ -111,6 +122,8 @@
             "
           >
             <div
+              @click="openStatsModal(playerId)"
+              @touch="openStatsModal(playerId)"
               draggable="true"
               @dragstart="fieldPlayerDragStart($event, playerId, 'midfielders')"
               @dragend.prevent
@@ -158,6 +171,8 @@
             "
           >
             <div
+              @click="openStatsModal(playerId)"
+              @touch="openStatsModal(playerId)"
               draggable="true"
               @dragstart="fieldPlayerDragStart($event, playerId, 'strikers')"
               @dragend.prevent
@@ -246,7 +261,6 @@
           @drop="fieldPlayerDrop"
         >
           Locker
-          <!-- TODO: Filter out selected players-->
           <div
             draggable="true"
             @dragstart="lockerPlayerDragStart($event, player)"
@@ -274,10 +288,15 @@
 <script>
 import { mapFields } from "vuex-map-fields";
 import { mapActions } from "vuex";
+import PlayerStatModal from "../components/FixtureDetailPlayerStatModal.vue";
 
 export default {
   props: {
     activeTeamId: String,
+  },
+
+  components: {
+    PlayerStatModal,
   },
 
   computed: {
@@ -287,6 +306,7 @@ export default {
       "fixtureDetailId",
       "players",
       "locker",
+      "showingGameWeek",
     ]),
 
     dataLoaded() {
@@ -294,7 +314,10 @@ export default {
     },
   },
 
-  data: () => ({}),
+  data: () => ({
+    showModal: false,
+    currentPlayerId: "",
+  }),
 
   methods: {
     ...mapActions("Fixture", [
@@ -303,6 +326,15 @@ export default {
       "deletePlayerFromLocker",
       "saveFixtureLineup",
     ]),
+
+    // Modal Handlers
+    openStatsModal(playerId) {
+      this.currentPlayerId = playerId;
+      this.showModal = true;
+    },
+    closeStatsModal() {
+      this.showModal = false;
+    },
 
     // Draggable Handlers
     lockerPlayerDragStart(e, player) {
@@ -444,6 +476,7 @@ export default {
 
     // API Callers
     saveLineup() {
+      // TODO: Check if there are 18 players
       this.saveFixtureLineup();
     },
   },
