@@ -7,7 +7,7 @@
           :showModal="showModal"
           :playerId="currentPlayerId"
           :gameweek="showingGameWeek"
-          @close="closeStatsModal"
+          @closeModal="closeStatsModal"
           v-if="showModal"
         />
         <div class="field">

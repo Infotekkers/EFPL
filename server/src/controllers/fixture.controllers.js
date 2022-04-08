@@ -3,6 +3,7 @@ const statUpdater = require("../utils/helpers").statUpdater;
 
 const FixtureModel = require("../models/Fixtures");
 const TeamModel = require("../models/Teams");
+const Player = require("../models/Player");
 
 const MINUTE_COUNTERS = {};
 
@@ -18,10 +19,12 @@ const postFixture = asyncHandler(async function (req, res) {
     goalsScored: {},
     assists: {},
     yellows: {},
+    cleanSheet: {},
     reds: {},
     penaltiesMissed: {},
     penaltiesSaved: {},
     saves: {},
+    ownGoal: {},
     fantasyScores: {},
   };
 
@@ -359,13 +362,25 @@ const updateStats = asyncHandler(async (req, res) => {
 
   const match = await FixtureModel.findOne({ matchId }).lean();
 
+  const playerId = req.body.playerId;
+
+  const player = await Player.findOne({ playerId }).lean();
+
   if (match) {
-    const result = statUpdater({
+    const { updatedMatch, updatedPlayer } = statUpdater({
       activeMatch: match,
+      activePlayer: player,
       incomingUpdate: req.body,
     });
 
-    await FixtureModel.findOneAndUpdate({ matchId }, result, { upsert: false });
+    console.log(updatedPlayer);
+    await FixtureModel.findOneAndUpdate({ matchId }, updatedMatch, {
+      upsert: false,
+    });
+
+    await Player.findOneAndUpdate({ playerId }, updatedPlayer, {
+      upsert: false,
+    });
 
     res.send("Match stats updated!");
   } else if (!match) {

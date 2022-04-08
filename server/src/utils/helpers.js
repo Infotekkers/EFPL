@@ -34,65 +34,162 @@ const pointDeductor = (activeTeam, incomingTeam) => {
 };
 
 // Function to apply statistical updates to existing teams
-const statUpdater = ({ activeMatch, incomingUpdate }) => {
+const statUpdater = ({ activeMatch, activePlayer, incomingUpdate }) => {
   const {
+    gameweekId,
     minutesPlayed,
-    goalsScored,
+    goals,
     assists,
+    cleanSheet,
     yellows,
     reds,
-    penaltiesMissed,
-    penaltiesSaved,
+    penalitiesMissed,
+    penalitiesSaved,
     saves,
-    fantasyScores,
+    ownGoal,
+    fantasyScore,
   } = incomingUpdate;
+
+  // TODO: Set Fantasy Score
+  activePlayer.score[gameweekId - 1].minutesPlayed = minutesPlayed;
+  activePlayer.score[gameweekId - 1].goals = goals;
+  activePlayer.score[gameweekId - 1].assists = assists;
+  activePlayer.score[gameweekId - 1].cleanSheet = cleanSheet;
+  activePlayer.score[gameweekId - 1].yellows = yellows;
+  activePlayer.score[gameweekId - 1].reds = reds;
+  activePlayer.score[gameweekId - 1].penalitiesMissed = penalitiesMissed;
+  activePlayer.score[gameweekId - 1].penalitiesSaved = penalitiesSaved;
+  activePlayer.score[gameweekId - 1].saves = saves;
+  activePlayer.score[gameweekId - 1].ownGoal = ownGoal;
+  activePlayer.score[gameweekId - 1].fantasyScore = fantasyScore;
+
+  // * Compatability layer to achieve data synchronization with redundant layer in Fixture.MatchStats / Player.score
+  const compatFixture = {
+    minutesPlayed: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        noOfMinutes: minutesPlayed,
+      },
+    },
+    goalsScored: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        noOfGoals: goals,
+      },
+    },
+    assists: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        noOfAssists: assists,
+      },
+    },
+    cleanSheets: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        noOfCleanSheets: cleanSheet,
+      },
+    },
+    yellows: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        noOfYellows: yellows,
+      },
+    },
+    reds: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        noOfReds: reds,
+      },
+    },
+    penaltiesMissed: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        noOfPenMissed: penalitiesMissed,
+      },
+    },
+    penaltiesSaved: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        noOfPenSaved: penalitiesSaved,
+      },
+    },
+    saves: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        noOfSaved: saves,
+      },
+    },
+    ownGoal: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        noOfOwnGoals: ownGoal,
+      },
+    },
+    fantasyScores: {
+      [activePlayer.playerId]: {
+        playerId: activePlayer.playerId,
+        playerScores: fantasyScore,
+      },
+    },
+  };
 
   for (const position in activeMatch.homeTeamLineUp.lineup) {
     if (position === "on") break;
     for (const playerId of activeMatch.homeTeamLineUp.lineup[position]) {
       activeMatch.matchStat.minutesPlayed[playerId] =
-        minutesPlayed && playerId in minutesPlayed
-          ? minutesPlayed[playerId]
+        compatFixture.minutesPlayed && playerId in compatFixture.minutesPlayed
+          ? compatFixture.minutesPlayed[playerId]
           : null ?? activeMatch.matchStat.minutesPlayed[playerId] ?? {};
 
       activeMatch.matchStat.goalsScored[playerId] =
-        goalsScored && playerId in goalsScored
-          ? goalsScored[playerId]
-          : null ?? activeMatch.matchStat.goalsScored[playerId] ?? {};
+        compatFixture.goalsScored && playerId in compatFixture.goalsScored
+          ? compatFixture.goalsScored[playerId]
+          : activeMatch.matchStat.goalsScored[playerId] ?? {};
 
       activeMatch.matchStat.assists[playerId] =
-        assists && playerId in assists
-          ? assists[playerId]
+        compatFixture.assists && playerId in compatFixture.assists
+          ? compatFixture.assists[playerId]
           : null ?? activeMatch.matchStat.assists[playerId] ?? {};
 
+      activeMatch.matchStat.cleanSheet[playerId] =
+        compatFixture.cleanSheet && playerId in compatFixture.cleanSheet
+          ? compatFixture.cleanSheet[playerId]
+          : null ?? activeMatch.matchStat.cleanSheet[playerId] ?? {};
+
       activeMatch.matchStat.yellows[playerId] =
-        yellows && playerId in yellows
-          ? yellows[playerId]
+        compatFixture.yellows && playerId in compatFixture.yellows
+          ? compatFixture.yellows[playerId]
           : null ?? activeMatch.matchStat.yellows[playerId] ?? {};
 
       activeMatch.matchStat.reds[playerId] =
-        reds && playerId in reds
-          ? reds[playerId]
+        compatFixture.reds && playerId in compatFixture.reds
+          ? compatFixture.reds[playerId]
           : null ?? activeMatch.matchStat.reds[playerId] ?? {};
 
       activeMatch.matchStat.penaltiesMissed[playerId] =
-        penaltiesMissed && playerId in penaltiesMissed
-          ? penaltiesMissed[playerId]
+        compatFixture.penaltiesMissed &&
+        playerId in compatFixture.penaltiesMissed
+          ? compatFixture.penaltiesMissed[playerId]
           : null ?? activeMatch.matchStat.penaltiesMissed[playerId] ?? {};
 
       activeMatch.matchStat.penaltiesSaved[playerId] =
-        penaltiesSaved && playerId in penaltiesSaved
-          ? penaltiesSaved[playerId]
+        compatFixture.penaltiesSaved && playerId in compatFixture.penaltiesSaved
+          ? compatFixture.penaltiesSaved[playerId]
           : null ?? activeMatch.matchStat.penaltiesSaved[playerId] ?? {};
 
       activeMatch.matchStat.saves[playerId] =
-        saves && playerId in saves
-          ? saves[playerId]
+        compatFixture.saves && playerId in compatFixture.saves
+          ? compatFixture.saves[playerId]
           : null ?? activeMatch.matchStat.saves[playerId] ?? {};
 
+      activeMatch.matchStat.ownGoal[playerId] =
+        compatFixture.ownGoal && playerId in compatFixture.ownGoal
+          ? compatFixture.ownGoal[playerId]
+          : null ?? activeMatch.matchStat.ownGoal[playerId] ?? {};
+
       activeMatch.matchStat.fantasyScores[playerId] =
-        fantasyScores && playerId in fantasyScores
-          ? fantasyScores[playerId]
+        compatFixture.fantasyScores && playerId in compatFixture.fantasyScores
+          ? compatFixture.fantasyScores[playerId]
           : null ?? activeMatch.matchStat.fantasyScores[playerId] ?? {};
     }
   }
@@ -101,53 +198,64 @@ const statUpdater = ({ activeMatch, incomingUpdate }) => {
     if (position === "on") break;
     for (const playerId of activeMatch.awayTeamLineUp.lineup[position]) {
       activeMatch.matchStat.minutesPlayed[playerId] =
-        minutesPlayed && playerId in minutesPlayed
-          ? minutesPlayed[playerId]
+        compatFixture.minutesPlayed && playerId in compatFixture.minutesPlayed
+          ? compatFixture.minutesPlayed[playerId]
           : null ?? activeMatch.matchStat.minutesPlayed[playerId] ?? {};
 
       activeMatch.matchStat.goalsScored[playerId] =
-        goalsScored && playerId in goalsScored
-          ? goalsScored[playerId]
-          : null ?? activeMatch.matchStat.goalsScored[playerId] ?? {};
+        compatFixture.goalsScored && playerId in compatFixture.goalsScored
+          ? compatFixture.goalsScored[playerId]
+          : activeMatch.matchStat.goalsScored[playerId] ?? {};
 
       activeMatch.matchStat.assists[playerId] =
-        assists && playerId in assists
-          ? assists[playerId]
+        compatFixture.assists && playerId in compatFixture.assists
+          ? compatFixture.assists[playerId]
           : null ?? activeMatch.matchStat.assists[playerId] ?? {};
 
+      activeMatch.matchStat.cleanSheet[playerId] =
+        compatFixture.cleanSheet && playerId in compatFixture.cleanSheet
+          ? compatFixture.cleanSheet[playerId]
+          : null ?? activeMatch.matchStat.cleanSheet[playerId] ?? {};
+
       activeMatch.matchStat.yellows[playerId] =
-        yellows && playerId in yellows
-          ? yellows[playerId]
+        compatFixture.yellows && playerId in compatFixture.yellows
+          ? compatFixture.yellows[playerId]
           : null ?? activeMatch.matchStat.yellows[playerId] ?? {};
 
       activeMatch.matchStat.reds[playerId] =
-        reds && playerId in reds
-          ? reds[playerId]
+        compatFixture.reds && playerId in compatFixture.reds
+          ? compatFixture.reds[playerId]
           : null ?? activeMatch.matchStat.reds[playerId] ?? {};
 
       activeMatch.matchStat.penaltiesMissed[playerId] =
-        penaltiesMissed && playerId in penaltiesMissed
-          ? penaltiesMissed[playerId]
+        compatFixture.penaltiesMissed &&
+        playerId in compatFixture.penaltiesMissed
+          ? compatFixture.penaltiesMissed[playerId]
           : null ?? activeMatch.matchStat.penaltiesMissed[playerId] ?? {};
 
       activeMatch.matchStat.penaltiesSaved[playerId] =
-        penaltiesSaved && playerId in penaltiesSaved
-          ? penaltiesSaved[playerId]
+        compatFixture.penaltiesSaved && playerId in compatFixture.penaltiesSaved
+          ? compatFixture.penaltiesSaved[playerId]
           : null ?? activeMatch.matchStat.penaltiesSaved[playerId] ?? {};
 
       activeMatch.matchStat.saves[playerId] =
-        saves && playerId in saves
-          ? saves[playerId]
+        compatFixture.saves && playerId in compatFixture.saves
+          ? compatFixture.saves[playerId]
           : null ?? activeMatch.matchStat.saves[playerId] ?? {};
 
+      activeMatch.matchStat.ownGoal[playerId] =
+        compatFixture.ownGoal && playerId in compatFixture.ownGoal
+          ? compatFixture.ownGoal[playerId]
+          : null ?? activeMatch.matchStat.ownGoal[playerId] ?? {};
+
       activeMatch.matchStat.fantasyScores[playerId] =
-        fantasyScores && playerId in fantasyScores
-          ? fantasyScores[playerId]
+        compatFixture.fantasyScores && playerId in compatFixture.fantasyScores
+          ? compatFixture.fantasyScores[playerId]
           : null ?? activeMatch.matchStat.fantasyScores[playerId] ?? {};
     }
   }
 
-  return activeMatch;
+  return { updatedMatch: activeMatch, updatedPlayer: activePlayer };
 };
 
 module.exports = {

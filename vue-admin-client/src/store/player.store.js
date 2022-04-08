@@ -69,5 +69,44 @@ export default {
       };
       commit("SET_PLAYER_STAT_BY_TYPE", payload);
     },
+
+    async savePlayerStats({ state, rootState }, { playerId, gameweek }) {
+      let url;
+      let payload;
+
+      payload = {
+        playerId,
+        gameweekId: gameweek,
+        minutesPlayed: state.stats[playerId][gameweek].minutesPlayed,
+        goals: state.stats[playerId][gameweek].goals,
+        assists: state.stats[playerId][gameweek].assists,
+        cleanSheet: state.stats[playerId][gameweek].cleanSheet,
+        yellows: state.stats[playerId][gameweek].yellows,
+        reds: state.stats[playerId][gameweek].reds,
+        penalitiesMissed: state.stats[playerId][gameweek].penalitiesMissed,
+        penalitiesSaved: state.stats[playerId][gameweek].penalitiesSaved,
+        saves: state.stats[playerId][gameweek].saves,
+        ownGoal: state.stats[playerId][gameweek].ownGoal,
+        fantasyScore: state.stats[playerId][gameweek].fantasyScore,
+      };
+
+      url = `/fixtures/update/stats/${rootState.Fixture.fixtureDetailId}`;
+      await axios
+        .patch(url, payload)
+        .then((res) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "success",
+            notificationMessage: res.data,
+          });
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
   },
 };

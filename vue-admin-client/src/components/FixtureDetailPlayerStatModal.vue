@@ -2,7 +2,7 @@
   <div :class="showModal ? 'modal' : 'modal modal-hide'">
     <div class="main">
       <div id="close">
-        <button @click="$emit('close')">X</button>
+        <button @click="$emit('closeModal')">X</button>
       </div>
       <div class="editor">
         {{ player.name }}
@@ -58,8 +58,8 @@
         </div>
       </div>
       <div class="actions">
-        <button @click="$emit('close')">Close</button>
-        <button>Save</button>
+        <button @click="$emit('closeModal')">Close</button>
+        <button @click="saveStats">Save</button>
       </div>
     </div>
   </div>
@@ -91,7 +91,11 @@ export default {
   },
 
   methods: {
-    ...mapActions("Player", ["loadPlayerStats", "updatePlayerStats"]),
+    ...mapActions("Player", [
+      "loadPlayerStats",
+      "updatePlayerStats",
+      "savePlayerStats",
+    ]),
 
     updateStats(statType, operationType) {
       this.updatePlayerStats({
@@ -99,6 +103,13 @@ export default {
         gameweek: this.gameweek,
         statType,
         operationType,
+      });
+    },
+
+    saveStats() {
+      this.savePlayerStats({
+        playerId: this.playerId,
+        gameweek: this.gameweek,
       });
     },
   },

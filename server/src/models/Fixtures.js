@@ -22,7 +22,16 @@ const assistsSchema = mongoose.Schema({
   playerId: {
     type: Number,
   },
-  noOfSaves: {
+  noOfAssists: {
+    type: Number,
+    default: 0,
+  },
+});
+const cleanSheetSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfCleanSheets: {
     type: Number,
     default: 0,
   },
@@ -72,6 +81,15 @@ const savesSchema = mongoose.Schema({
     default: 0,
   },
 });
+const ownGoalSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfOwnGoals: {
+    type: Number,
+    default: 0,
+  },
+});
 const fantasyScoresSchema = mongoose.Schema({
   playerId: {
     type: Number,
@@ -86,11 +104,13 @@ const matchStatSchema = mongoose.Schema({
   minutesPlayed: { type: Map, of: minutesSchema },
   goalsScored: { type: Map, of: goalsScoredSchema },
   assists: { type: Map, of: assistsSchema },
+  cleanSheet: { type: Map, of: cleanSheetSchema },
   yellows: { type: Map, of: yellowsSchema },
   reds: { type: Map, of: redsSchema },
   penaltiesMissed: { type: Map, of: penaltiesMissedSchema },
   penaltiesSaved: { type: Map, of: penaltiesSavedSchema },
   saves: { type: Map, of: savesSchema },
+  ownGoal: { type: Map, of: ownGoalSchema },
   fantasyScores: { type: Map, of: fantasyScoresSchema },
 });
 
