@@ -12,7 +12,6 @@ const Team = require("../models/Teams");
 
 // Import Data
 const { teamData } = require("./data/teams.data");
-const { fixtureData } = require("../utils/data/fixture.test.data");
 const { playersData } = require("../utils/data/players.data");
 const { allPairedMatches } = require("../utils/data/fixture.data");
 
