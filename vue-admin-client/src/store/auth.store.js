@@ -42,13 +42,11 @@ export default {
           }
         })
         .catch((err) => {
-          if (err.response.status === 400) {
-            store.dispatch("Global/setNotificationInfo", {
-              showNotification: true,
-              notificationType: "error",
-              notificationMessage: `${err.response.data.message}`,
-            });
-          }
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: `${err.response.data.message}`,
+          });
         });
     },
     // request rest
