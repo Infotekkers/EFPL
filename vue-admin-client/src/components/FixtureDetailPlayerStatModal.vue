@@ -6,6 +6,56 @@
       </div>
       <div class="editor">
         {{ player.name }}
+        <div class="editor-field">
+          <div id="goals">
+            <span class="editor-field-label">Goals</span>
+            <button @click="updateStats('goals', '-')">-</button>
+            {{ player.stats.goals }}
+            <button @click="updateStats('goals', '+')">+</button>
+          </div>
+          <div id="assists">
+            <span class="editor-field-label">Assists</span>
+            <button @click="updateStats('assists', '-')">-</button>
+            {{ player.stats.assists }}
+            <button @click="updateStats('assists', '+')">+</button>
+          </div>
+          <div id="yellows">
+            <span class="editor-field-label">Yellows</span>
+            <button @click="updateStats('yellows', '-')">-</button>
+            {{ player.stats.yellows }}
+            <button @click="updateStats('yellows', '+')">+</button>
+          </div>
+          <div id="reds">
+            <span class="editor-field-label">Red</span>
+            <button @click="updateStats('reds', '-')">-</button>
+            {{ player.stats.reds }}
+            <button @click="updateStats('reds', '+')">+</button>
+          </div>
+          <div id="penalitiesMissed">
+            <span class="editor-field-label">Penalities Missed</span>
+            <button @click="updateStats('penalitiesMissed', '-')">-</button>
+            {{ player.stats.penalitiesMissed }}
+            <button @click="updateStats('penalitiesMissed', '+')">+</button>
+          </div>
+          <div id="penalitiesSaved">
+            <span class="editor-field-label">Penalities Saved</span>
+            <button @click="updateStats('penalitiesMissed', '-')">-</button>
+            {{ player.stats.penalitiesMissed }}
+            <button @click="updateStats('penalitiesMissed', '+')">+</button>
+          </div>
+          <div id="saves">
+            <span class="editor-field-label">Saves</span>
+            <button @click="updateStats('saves', '-')">-</button>
+            {{ player.stats.saves }}
+            <button @click="updateStats('saves', '+')">+</button>
+          </div>
+          <div id="ownGoal">
+            <span class="editor-field-label">Own Goal</span>
+            <button @click="updateStats('ownGoal', '-')">-</button>
+            {{ player.stats.ownGoal }}
+            <button @click="updateStats('ownGoal', '+')">+</button>
+          </div>
+        </div>
       </div>
       <div class="actions">
         <button @click="$emit('close')">Close</button>
@@ -41,7 +91,16 @@ export default {
   },
 
   methods: {
-    ...mapActions("Player", ["loadPlayerStats"]),
+    ...mapActions("Player", ["loadPlayerStats", "updatePlayerStats"]),
+
+    updateStats(statType, operationType) {
+      this.updatePlayerStats({
+        playerId: this.playerId,
+        gameweek: this.gameweek,
+        statType,
+        operationType,
+      });
+    },
   },
 };
 </script>

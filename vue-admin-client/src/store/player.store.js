@@ -20,6 +20,12 @@ export default {
       state.stats[payload.playerId][payload.gameweek] = payload.data;
       state.names[payload.playerId] = payload.name;
     },
+    SET_PLAYER_STAT_BY_TYPE(state, payload) {
+      if (payload.operationType === "+")
+        state.stats[payload.playerId][payload.gameweek][payload.statType]++;
+      else if (payload.operationType === "-")
+        state.stats[payload.playerId][payload.gameweek][payload.statType]--;
+    },
     updateField,
   },
   actions: {
@@ -47,6 +53,21 @@ export default {
             notificationMessage: err.response.data,
           });
         });
+    },
+
+    updatePlayerStats(
+      { commit },
+      { playerId, gameweek, statType, operationType }
+    ) {
+      let payload;
+
+      payload = {
+        playerId,
+        gameweek,
+        statType,
+        operationType,
+      };
+      commit("SET_PLAYER_STAT_BY_TYPE", payload);
     },
   },
 };
