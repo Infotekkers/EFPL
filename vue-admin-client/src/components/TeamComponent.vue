@@ -1,6 +1,6 @@
 <template>
   <div class="team-container">
-    <div class="team-id-container">{{ team.teamId + 1 }}</div>
+    <div class="team-id-container">{{ team.relative_id }}</div>
     <div
       class="team-logo-container"
       :style="{
@@ -122,21 +122,9 @@ export default {
     },
   },
   computed: {
-    getTeamId() {
-      return this.$.vnode.key;
-    },
     getTeamLogo() {
       const baseUrl = process.env.VUE_APP_API_BASE_URL;
       const team = this.team.teamLogo;
-
-      // let path;
-      // try {
-      //   path = require(`@/assets/teams/${homeTeam}.png`);
-      // } catch (err) {
-      //   path = require("@/assets/teams/NoImage.png");
-      // }
-      // const placerHolder = require("@/assets/teams/NoImage.png");
-      // return homeTeam ? path : placerHolder;
       return baseUrl + team;
     },
   },

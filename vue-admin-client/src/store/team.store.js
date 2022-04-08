@@ -8,9 +8,7 @@ export default {
   state: {
     allTeams: [],
     allTeamsUnfiltered: [],
-
     editTeamId: "",
-
     imageChanged: false,
   },
   getters: {},
@@ -36,53 +34,105 @@ export default {
     setImageChanged(context, status) {
       context.commit("SET_IMAGE_CHANGED_STATUS", status);
     },
-    sortByID() {
-      store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
-        return teamOne.teamId < teamTwo.teamId
-          ? -1
-          : teamOne.teamId > teamTwo.teamId
-          ? 1
-          : 0;
-      });
+    sortByID(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.relative_id) < parseInt(teamTwo.relative_id)
+            ? -1
+            : parseInt(teamOne.relative_id) > parseInt(teamTwo.relative_id)
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.relative_id) > parseInt(teamTwo.relative_id)
+            ? -1
+            : parseInt(teamOne.relative_id) < parseInt(teamTwo.relative_id)
+            ? 1
+            : 0;
+        });
+      }
     },
 
-    sortByName() {
-      store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
-        return teamOne.teamName.toUpperCase() < teamTwo.teamName.toUpperCase()
-          ? -1
-          : teamOne.teamName.toUpperCase() > teamTwo.teamName.toUpperCase()
-          ? 1
-          : 0;
-      });
+    sortByName(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return teamOne.teamName.toUpperCase() < teamTwo.teamName.toUpperCase()
+            ? -1
+            : teamOne.teamName.toUpperCase() > teamTwo.teamName.toUpperCase()
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return teamOne.teamName.toUpperCase() > teamTwo.teamName.toUpperCase()
+            ? -1
+            : teamOne.teamName.toUpperCase() < teamTwo.teamName.toUpperCase()
+            ? 1
+            : 0;
+        });
+      }
     },
-    sortByCity() {
-      store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
-        return teamOne.teamCity.toUpperCase() < teamTwo.teamCity.toUpperCase()
-          ? -1
-          : teamOne.teamName.toUpperCase() > teamTwo.teamName.toUpperCase()
-          ? 1
-          : 0;
-      });
+    sortByCity(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return teamOne.teamCity.toUpperCase() < teamTwo.teamCity.toUpperCase()
+            ? -1
+            : teamOne.teamName.toUpperCase() > teamTwo.teamName.toUpperCase()
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return teamOne.teamCity.toUpperCase() > teamTwo.teamCity.toUpperCase()
+            ? -1
+            : teamOne.teamName.toUpperCase() < teamTwo.teamName.toUpperCase()
+            ? 1
+            : 0;
+        });
+      }
     },
-    sortByStadium() {
-      store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
-        return teamOne.teamStadium.toUpperCase() <
-          teamTwo.teamStadium.toUpperCase()
-          ? -1
-          : teamOne.teamStadium.toUpperCase() >
+    sortByStadium(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return teamOne.teamStadium.toUpperCase() <
             teamTwo.teamStadium.toUpperCase()
-          ? 1
-          : 0;
-      });
+            ? -1
+            : teamOne.teamStadium.toUpperCase() >
+              teamTwo.teamStadium.toUpperCase()
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return teamOne.teamStadium.toUpperCase() >
+            teamTwo.teamStadium.toUpperCase()
+            ? -1
+            : teamOne.teamStadium.toUpperCase() <
+              teamTwo.teamStadium.toUpperCase()
+            ? 1
+            : 0;
+        });
+      }
     },
-    sortByFoundedDate() {
-      store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
-        return teamOne.foundedIn < teamTwo.foundedIn
-          ? -1
-          : teamOne.foundedIn > teamTwo.foundedIn
-          ? 1
-          : 0;
-      });
+    sortByFoundedDate(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return teamOne.foundedIn < teamTwo.foundedIn
+            ? -1
+            : teamOne.foundedIn > teamTwo.foundedIn
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return teamOne.foundedIn > teamTwo.foundedIn
+            ? -1
+            : teamOne.foundedIn < teamTwo.foundedIn
+            ? 1
+            : 0;
+        });
+      }
     },
 
     // TODO:Improve filter
@@ -118,6 +168,11 @@ export default {
       axios
         .get(`${baseURL}/teams/all`)
         .then((response) => {
+          let relative_id_count = 1;
+          response.data.forEach((team) => {
+            team.relative_id = relative_id_count;
+            relative_id_count = relative_id_count + 1;
+          });
           context.commit("SET_ALL_TEAMS", response.data);
         })
         .catch((err) => {
@@ -172,12 +227,12 @@ export default {
 
     async updateTeam(context, updatedTeam) {
       const teamId = store.state.Team.editTeamId;
-      console.log("ID", store.state.Team.imageChanged);
       const verifyChange = store.state.Team.allTeams.filter((team) => {
         return (
           team.teamName == updatedTeam.teamName &&
           team.teamCity == updatedTeam.teamCity &&
-          team.teamStadium == updatedTeam.teamStadium
+          team.teamStadium == updatedTeam.teamStadium &&
+          team.teamCoach == updatedTeam.teamCoach
         );
       });
 

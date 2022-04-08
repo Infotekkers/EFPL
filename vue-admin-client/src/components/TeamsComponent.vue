@@ -33,12 +33,47 @@
 
     <!-- Sorter Header -->
     <div class="teams-sorter-header">
-      <div @click="sortByID" class="teams-id-sorter">ID</div>
+      <!-- ID -->
+      <div class="teams-id-sorter">
+        <span @click="sortByID(-1)">D</span>
+        ID
+        <span @click="sortByID(1)">A</span>
+      </div>
+
+      <!-- ID -->
       <div class="teams-logo-sorter">Logo</div>
-      <div @click="sortByName" class="teams-name-sorter">Team</div>
-      <div @click="sortByCity" class="teams-city-sorter">City</div>
-      <div @click="sortbyStadium" class="teams-stadium-sorter">Stadium</div>
-      <div @click="sortByFoundedDate" class="teams-founded-sorter">Year</div>
+
+      <!-- Name -->
+      <div class="teams-name-sorter">
+        <span @click="sortByName(-1)">D</span>
+        Team
+        <span @click="sortByName(1)">A</span>
+      </div>
+      <!-- Name -->
+
+      <!-- City -->
+      <div class="teams-city-sorter">
+        <span @click="sortByCity(-1)">D</span> City
+        <span @click="sortByCity(1)">A</span>
+      </div>
+      <!-- City -->
+
+      <!-- Stadium -->
+      <div class="teams-stadium-sorter">
+        <span @click="sortbyStadium(-1)">D</span>
+        Stadium
+        <span @click="sortbyStadium(1)">A</span>
+      </div>
+      <!-- Stadium -->
+
+      <!-- Date -->
+      <div class="teams-founded-sorter">
+        <span @click="sortByFoundedDate(-1)">D</span>
+        Year
+        <span @click="sortByFoundedDate(1)">A</span>
+      </div>
+
+      <!-- Date -->
       <div class="teams-controls-sorter">Controls</div>
     </div>
     <!-- Sorter Header -->
@@ -185,21 +220,21 @@ export default {
       this.isEditMode = false;
       this.showModal = false;
     },
-    sortByID() {
-      store.dispatch("Team/sortByID");
+    sortByID(order) {
+      store.dispatch("Team/sortByID", order);
     },
-    sortByName() {
-      store.dispatch("Team/sortByName");
+    sortByName(order) {
+      store.dispatch("Team/sortByName", order);
     },
-    sortByCity() {
-      store.dispatch("Team/sortByCity");
+    sortByCity(order) {
+      store.dispatch("Team/sortByCity", order);
     },
-    sortbyStadium() {
-      store.dispatch("Team/sortByStadium");
+    sortbyStadium(order) {
+      store.dispatch("Team/sortByStadium", order);
     },
 
-    sortByFoundedDate() {
-      store.dispatch("Team/sortByFoundedDate");
+    sortByFoundedDate(order) {
+      store.dispatch("Team/sortByFoundedDate", order);
     },
   },
 

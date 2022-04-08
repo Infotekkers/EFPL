@@ -60,6 +60,12 @@
 
         <!-- Stadium Capacity & Foundation Year -->
         <div class="container-col">
+          <!-- Coach -->
+          <div class="container-col input-container">
+            <label for="">Coach </label>
+            <input type="text" ref="teamCoach" v-model="teamCoach" />
+          </div>
+          <!-- Coach -->
           <!-- Stadium -->
           <div class="container-col input-container">
             <label for="">Stadium Capacity </label>
@@ -162,7 +168,7 @@
   margin-left: auto;
   margin-right: auto;
   background: url("../assets/img/Team_Logo_Placeholder.jpg");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 24px;
@@ -251,6 +257,7 @@ export default {
       teamStadium: null,
       stadiumCapacity: null,
       foundedIn: null,
+      teamCoach: null,
     };
   },
   methods: {
@@ -310,6 +317,7 @@ export default {
       const stadiumCapacity = this.$refs.stadiumCapacity.value;
       const foundedIn = this.$refs.foundedIn.value;
       const teamLogo = await this.getBase64();
+      const teamCoach = this.$refs.teamCoach.value;
 
       if (!teamName) {
         store.dispatch("Global/setNotificationInfo", {
@@ -346,6 +354,7 @@ export default {
           foundedIn,
           stadiumCapacity,
           logoName: this.selectedImage.name,
+          teamCoach,
         };
         store.dispatch("Team/saveTeam", teamData);
         this.removeImage();
@@ -357,6 +366,7 @@ export default {
       const teamName = this.$refs.teamName.value;
       const teamCity = this.$refs.teamCity.value;
       const teamStadium = this.$refs.teamStadium.value;
+      const teamCoach = this.$refs.teamCoach.value;
       let teamLogo = "";
       if (store.state.Team.imageChanged === true) {
         teamLogo = await this.getBase64();
@@ -367,6 +377,7 @@ export default {
         teamCity,
         teamStadium,
         teamLogo,
+        teamCoach,
         logoName: this.selectedImage ? this.selectedImage.name : "",
       };
       const imageStatus = this.imageChanged;
@@ -389,6 +400,7 @@ export default {
       this.teamStadium = team.teamStadium;
       this.stadiumCapacity = team.stadiumCapacity;
       this.foundedIn = team.foundedIn;
+      this.teamCoach = team.teamCoach;
     },
   },
   computed: {
