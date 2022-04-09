@@ -37,7 +37,67 @@
       </div>
       <!-- Title -->
 
-      <div class="filter-container">Filters</div>
+      <div class="filter-container">
+        <div class="filter-item">
+          <label>All</label>
+          <input
+            type="radio"
+            @change="radioFilterChange"
+            value="All"
+            v-model="radioFilter"
+          />
+        </div>
+
+        <div class="filter-item">
+          <label>Scheduled</label>
+          <input
+            type="radio"
+            @change="radioFilterChange"
+            value="scheduled"
+            v-model="radioFilter"
+          />
+        </div>
+
+        <div class="filter-item">
+          <label>First Half</label>
+          <input
+            type="radio"
+            @change="radioFilterChange"
+            v-model="radioFilter"
+            value="liveFH"
+          />
+        </div>
+
+        <div class="filter-item">
+          <label>Half Time</label>
+          <input
+            type="radio"
+            @change="radioFilterChange"
+            v-model="radioFilter"
+            value="HT"
+          />
+        </div>
+
+        <div class="filter-item">
+          <label>Second Half</label>
+          <input
+            type="radio"
+            @change="radioFilterChange"
+            v-model="radioFilter"
+            value="liveSH"
+          />
+        </div>
+
+        <div class="filter-item">
+          <label>Full Time</label>
+          <input
+            type="radio"
+            @change="radioFilterChange"
+            v-model="radioFilter"
+            value="FT"
+          />
+        </div>
+      </div>
 
       <!-- Header - Gameweek controls, add new & gameweek title -->
       <div class="gameweek-controller">
@@ -154,7 +214,22 @@
   margin-top: 32px;
   width: 100%;
   min-height: 60px;
-  background: teal;
+
+  /*  */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 30%;
+}
+.filter-item {
+  display: flex;
+  align-items: center;
+}
+.filter-item > label {
+  font-size: 14px;
+}
+.filter-item > input {
+  margin-left: 5px;
 }
 .gameweek-controller {
   margin: var(--spacing-medium) 0 var(--spacing-regular) 0;
@@ -227,6 +302,7 @@ export default {
       isFixtureLoading: false,
       isTeamLoading: false,
       isEditMode: false,
+      radioFilter: "All",
     };
   },
 
@@ -303,7 +379,11 @@ export default {
     searchBarFilter() {
       const searchTerm = this.$refs.searchBar.value;
       store.dispatch("Fixture/filterByTerm", searchTerm);
-      // this.getFixtures;
+      this.getFixtures;
+    },
+
+    radioFilterChange() {
+      store.dispatch("Fixture/filterByMatchStatus", this.radioFilter);
     },
   },
 
@@ -326,7 +406,7 @@ export default {
     isGameWeekComplete() {
       const teamCount = store.state.Fixture.allTeams.length;
 
-      const fixturesCount = store.state.Fixture.allFixtures.filter(
+      const fixturesCount = store.state.Fixture.allFixturesUnfiltered.filter(
         (fixture) => {
           return fixture.gameweekId == this.showingGameWeek;
         }

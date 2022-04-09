@@ -1,4 +1,5 @@
 const TeamModel = require("../models/Teams");
+const FixtureModel = require("../models/Fixtures");
 const asyncHandler = require("express-async-handler");
 
 const { makeFile } = require("../utils/helpers");
@@ -92,9 +93,24 @@ const updateTeam = asyncHandler(async (req, res) => {
 });
 
 const deleteTeam = asyncHandler(async (req, res) => {
-  const deletedTeam = await TeamModel.deleteOne({ teamId: req.params.teamId });
-  console.log(deletedTeam);
-  res.status(204).send(`Team is removed.`);
+  // get team name
+  const team = await TeamModel.find({ teamId: req.params.teamId });
+  const teamName = team[0].teamName;
+
+  // Delete team
+  await TeamModel.deleteOne({ teamId: req.params.teamId });
+
+  // Delete fixtures for team
+  const deletedFixture = await FixtureModel.find();
+  console.log(req.params.teamId);
+  deletedFixture.forEach(async (fixture) => {
+    if (fixture.matchId.toString().includes(req.params.teamId)) {
+      await FixtureModel.deleteMany({ matchId: fixture.matchId });
+    }
+  });
+
+  // console.log(deletedFixture);
+  res.status(200).json(`${teamName} is removed.`);
 });
 
 module.exports = {

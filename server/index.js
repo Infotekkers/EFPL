@@ -53,7 +53,7 @@ app.use("/user", userRouter);
 // populate.addTestUser();
 // populate.addTestGameweek();
 
-populate.populateTeams();
+// populate.populateTeams();
 populate.populatePlayers();
 populate.populateFixture();
 

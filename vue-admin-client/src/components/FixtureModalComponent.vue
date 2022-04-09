@@ -178,8 +178,12 @@
     </div>
     <!-- Main Section -->
 
-    <div v-else-if="isGameWeekComplete == false" class="fixture-modal-complete">
+    <div v-else-if="isTeamComplete == 0" class="fixture-modal-complete">
       No Teams Added
+    </div>
+
+    <div v-else-if="isTeamComplete % 2 != 0" class="fixture-modal-complete">
+      Team Incomplete - {{ isTeamComplete }}
     </div>
 
     <!-- all teams have matches -->
@@ -256,7 +260,7 @@
   height: 160px;
   background: url("../assets/img/Team_Logo_Placeholder.jpg");
 
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -360,7 +364,7 @@ export default {
     isTeamComplete() {
       const teamCount = store.state.Fixture.allTeams.length;
 
-      return teamCount > 0 ? true : false;
+      return teamCount;
     },
 
     // gets all possible home teams

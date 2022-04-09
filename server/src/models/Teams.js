@@ -39,7 +39,7 @@ teamSchema.plugin(autoIncrement.plugin, { model: "teams", field: "teamId" });
 teamSchema.plugin(autoIncrement.plugin, {
   model: "teams",
   field: "teamId",
-  startAt: 1,
+  startAt: 2,
   incrementBy: 1,
 });
 

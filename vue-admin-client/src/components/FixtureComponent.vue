@@ -10,6 +10,29 @@
       v-if="fixture && isTeamLoading == false"
       class="fixture-content-container"
     >
+      <!-- First Half -->
+      <div class="fixture-live-status" v-if="fixture.status == 'liveFH'">
+        FH
+      </div>
+      <!-- First Half -->
+
+      <!-- Half Time -->
+      <div class="fixture-live-status" v-else-if="fixture.status == 'HT'">
+        HT
+      </div>
+      <!-- Half Time -->
+
+      <!-- Second Half -->
+      <div class="fixture-live-status" v-else-if="fixture.status == 'liveSH'">
+        SH
+      </div>
+      <!-- Second Half -->
+
+      <!-- Full Time -->
+      <div class="fixture-live-status" v-else-if="fixture.status == 'FT'">
+        FT
+      </div>
+      <!-- Full Time -->
       <!-- Fixture Main Info -->
       <div
         class="fixture-info"
@@ -105,6 +128,13 @@
   width: 46%;
   padding: 8px 0;
 }
+.fixture-live-status {
+  height: 100%;
+  width: 50px;
+  position: absolute;
+  display: grid;
+  place-items: center;
+}
 .home-container {
   justify-content: flex-end;
   padding-right: 20px;
@@ -140,9 +170,12 @@
   position: absolute;
   right: 0;
   display: flex;
+  align-items: center;
   width: fit-content;
   margin-left: auto;
   font-size: 12px;
+  height: 100%;
+
   /* margin-left: 100%; */
 }
 .fixture-controls > div {

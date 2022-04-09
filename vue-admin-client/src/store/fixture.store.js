@@ -70,6 +70,20 @@ export default {
     },
   },
   actions: {
+    filterByMatchStatus(context, filterMatchStatus) {
+      // reset previous filter result
+      store.state.Fixture.allFixtures =
+        store.state.Fixture.allFixturesUnfiltered;
+
+      if (filterMatchStatus != "All") {
+        const filteredFixtures = store.state.Fixture.allFixtures.filter(
+          (fixture) => {
+            return fixture.status == filterMatchStatus;
+          }
+        );
+        context.commit("SET_FILTERED_FIXTURES", filteredFixtures);
+      }
+    },
     // TODO:Improve filter
     filterByTerm(context, filterTerm) {
       // reset previous filter result
@@ -238,41 +252,20 @@ export default {
             });
           });
       }
-      // await axios
-      //   .patch(`${baseURL}/fixtures//update/`, newFixture)
-      //   .then(async (response) => {
-      //     if (response.status === 200) {
-      //       store.dispatch("Global/setNotificationInfo", {
-      //         showNotification: true,
-      //         notificationType: "success",
-      //         notificationMessage: `Fixture ${newFixture.homeTeam} vs ${newFixture.awayTeam} added for game week ${newFixture.gameweekId}`,
-      //       });
-      //       await store.dispatch("Fixture/setAllFixtures");
-      //       // store.dispatch("Fixture/setHomeTeams");
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.response);
-      //     store.dispatch("Global/setNotificationInfo", {
-      //       showNotification: true,
-      //       notificationType: "error",
-      //       notificationMessage: `${err.response.data}`,
-      //       notificationDuration: 8000,
-      //     });
-      //   });
     },
 
     // Start match
     async startMatch(context, matchId) {
       axios
         .patch(`${baseURL}/fixtures/start/${matchId}`)
-        .then((response) => {
+        .then(async (response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: response.data,
             });
+            await store.dispatch("Fixture/setAllFixtures");
           }
         })
         .catch((err) => {
@@ -288,13 +281,14 @@ export default {
     async pauseMatch(context, matchId) {
       axios
         .patch(`${baseURL}/fixtures/pause/${matchId}`)
-        .then((response) => {
+        .then(async (response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: response.data,
             });
+            await store.dispatch("Fixture/setAllFixtures");
           }
         })
         .catch((err) => {
@@ -310,13 +304,14 @@ export default {
     async resumeMatch(context, matchId) {
       axios
         .patch(`${baseURL}/fixtures/resume/${matchId}`)
-        .then((response) => {
+        .then(async (response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: response.data,
             });
+            await store.dispatch("Fixture/setAllFixtures");
           }
         })
         .catch((err) => {
@@ -332,13 +327,14 @@ export default {
     async endMatch(context, matchId) {
       axios
         .patch(`${baseURL}/fixtures/end/${matchId}`)
-        .then((response) => {
+        .then(async (response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: response.data,
             });
+            await store.dispatch("Fixture/setAllFixtures");
           }
         })
         .catch((err) => {
