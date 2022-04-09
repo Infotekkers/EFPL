@@ -10,8 +10,8 @@
     />
     <!-- Field -->
     <Field :activeTeamId="this.activeTeamId" />
-    <!-- Bench Selector -->
-    <!-- Action Btns -->
+    <!-- Locker -->
+    <Locker :activeTeamId="this.activeTeamId" />
   </main>
 </template>
 
@@ -20,6 +20,7 @@ import { mapFields } from "vuex-map-fields";
 import { mapActions } from "vuex";
 import TeamSelector from "../components/FixtureDetailTeamSelector.vue";
 import Field from "../components/FixtureDetailField.vue";
+import Locker from "../components/FixtureDetailLocker.vue";
 
 export default {
   name: "FixtureDetailPage",
@@ -27,6 +28,7 @@ export default {
   components: {
     TeamSelector,
     Field,
+    Locker,
   },
 
   mounted() {
@@ -75,7 +77,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// main {
-//   background-color: var(--primary-400);
-// }
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (min-width: 900px) {
+  main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
 </style>

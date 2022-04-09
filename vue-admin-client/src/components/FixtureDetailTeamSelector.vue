@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="main-fixture-detail-team-selector">
     <button @click="$emit('changeActiveTeam', this.homeTeamId)">
       {{ homeTeamName }}
     </button>
@@ -20,4 +20,20 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#main-fixture-detail-team-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#main-fixture-detail-team-selector > * {
+  margin: 10px;
+}
+
+@media screen and (min-width: 900px) {
+  #main-fixture-detail-team-selector {
+    display: flex;
+    flex-direction: column;
+  }
+}
+</style>

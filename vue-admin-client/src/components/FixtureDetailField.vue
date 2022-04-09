@@ -1,282 +1,241 @@
 <template>
-  <div>
-    <div v-if="!dataLoaded">Loading</div>
-    <div v-else>
-      <div class="main">
-        <PlayerStatModal
-          :showModal="showModal"
-          :playerId="currentPlayerId"
-          :gameweek="showingGameWeek"
-          @closeModal="closeStatsModal"
-          v-if="showModal"
-        />
-        <div class="field">
-          <!-- /////////////////////// GOALKEEPERS ///////////////////// -->
-          <div
-            id="goalkeepers"
-            ref="goalkeepers"
-            @dragenter.prevent
-            @dragover="lockerPlayerDragOver($event, 'goalkeepers')"
-            @drop="lockerPlayerDrop($event, 'goalkeepers')"
-            v-if="
-              this.fixtureDetailData.lineups[this.activeTeamId].goalkeepers
-                .length !== 0
-            "
-          >
-            <div
-              @click="openStatsModal(playerId)"
-              @touch="openStatsModal(playerId)"
-              draggable="true"
-              @dragstart="fieldPlayerDragStart($event, playerId, 'goalkeepers')"
-              @dragend.prevent
-              class="field-player"
-              :key="playerId"
-              v-for="playerId in this.fixtureDetailData.lineups[
-                this.activeTeamId
-              ].goalkeepers"
-            >
-              <h1>🤷‍♂️</h1>
-              <p>
-                {{ this.players[this.activeTeamId][playerId].playerName }}
-              </p>
-              <h5>
-                {{
-                  this.players[this.activeTeamId][
-                    playerId
-                  ].position.toUpperCase()
-                }}
-              </h5>
-            </div>
-          </div>
-          <div
-            id="goalkeepers"
-            ref="goalkeepers"
-            @dragenter.prevent
-            @dragover="lockerPlayerDragOver($event, 'goalkeepers')"
-            @drop="lockerPlayerDrop($event, 'goalkeepers')"
-            v-else
-          >
-            <label>GK</label>
-          </div>
-          <!-- /////////////////////// GOALKEEPERS ///////////////////// -->
-
-          <!-- /////////////////////// DEFENDERS ///////////////////// -->
-          <div
-            id="defenders"
-            ref="defenders"
-            @dragenter.prevent
-            @dragover="lockerPlayerDragOver($event, 'defenders')"
-            @drop="lockerPlayerDrop($event, 'defenders')"
-            v-if="
-              this.fixtureDetailData.lineups[this.activeTeamId].defenders
-                .length !== 0
-            "
-          >
-            <div
-              @click="openStatsModal(playerId)"
-              @touch="openStatsModal(playerId)"
-              draggable="true"
-              @dragstart="fieldPlayerDragStart($event, playerId, 'defenders')"
-              @dragend.prevent
-              class="field-player"
-              :key="playerId"
-              v-for="playerId in this.fixtureDetailData.lineups[
-                this.activeTeamId
-              ].defenders"
-            >
-              <h1>🤷‍♂️</h1>
-              <p>
-                {{ this.players[this.activeTeamId][playerId].playerName }}
-              </p>
-              <h5>
-                {{
-                  this.players[this.activeTeamId][
-                    playerId
-                  ].position.toUpperCase()
-                }}
-              </h5>
-            </div>
-          </div>
-          <div
-            id="defenders"
-            ref="defenders"
-            @dragenter.prevent
-            @dragover="lockerPlayerDragOver($event, 'defenders')"
-            @drop="lockerPlayerDrop($event, 'defenders')"
-            v-else
-          >
-            <label>DEF</label>
-          </div>
-          <!-- /////////////////////// DEFENDERS ///////////////////// -->
-
-          <!-- /////////////////////// MIDFIELDERS ///////////////////// -->
-          <div
-            id="midfielders"
-            ref="midfielders"
-            @dragenter.prevent
-            @dragover="lockerPlayerDragOver($event, 'midfielders')"
-            @drop="lockerPlayerDrop($event, 'midfielders')"
-            v-if="
-              this.fixtureDetailData.lineups[this.activeTeamId].midfielders
-                .length !== 0
-            "
-          >
-            <div
-              @click="openStatsModal(playerId)"
-              @touch="openStatsModal(playerId)"
-              draggable="true"
-              @dragstart="fieldPlayerDragStart($event, playerId, 'midfielders')"
-              @dragend.prevent
-              class="field-player"
-              :key="playerId"
-              v-for="playerId in this.fixtureDetailData.lineups[
-                this.activeTeamId
-              ].midfielders"
-            >
-              <h1>🤷‍♂️</h1>
-              <p>
-                {{ this.players[this.activeTeamId][playerId].playerName }}
-              </p>
-              <h5>
-                {{
-                  this.players[this.activeTeamId][
-                    playerId
-                  ].position.toUpperCase()
-                }}
-              </h5>
-            </div>
-          </div>
-          <div
-            id="midfielders"
-            ref="midfielders"
-            @dragenter.prevent
-            @dragover="lockerPlayerDragOver($event, 'midfielders')"
-            @drop="lockerPlayerDrop($event, 'midfielders')"
-            v-else
-          >
-            <label>MID</label>
-          </div>
-          <!-- /////////////////////// MIDFIELDERS ///////////////////// -->
-
-          <!-- /////////////////////// STRIKERS ///////////////////// -->
-          <div
-            id="strikers"
-            ref="strikers"
-            @dragenter.prevent
-            @dragover="lockerPlayerDragOver($event, 'strikers')"
-            @drop="lockerPlayerDrop($event, 'strikers')"
-            v-if="
-              this.fixtureDetailData.lineups[this.activeTeamId].strikers
-                .length !== 0
-            "
-          >
-            <div
-              @click="openStatsModal(playerId)"
-              @touch="openStatsModal(playerId)"
-              draggable="true"
-              @dragstart="fieldPlayerDragStart($event, playerId, 'strikers')"
-              @dragend.prevent
-              class="field-player"
-              :key="playerId"
-              v-for="playerId in this.fixtureDetailData.lineups[
-                this.activeTeamId
-              ].strikers"
-            >
-              <h1>🤷‍♂️</h1>
-              <p>
-                {{ this.players[this.activeTeamId][playerId].playerName }}
-              </p>
-              <h5>
-                {{
-                  this.players[this.activeTeamId][
-                    playerId
-                  ].position.toUpperCase()
-                }}
-              </h5>
-            </div>
-          </div>
-          <div
-            id="strikers"
-            ref="strikers"
-            @dragenter.prevent
-            @dragover="lockerPlayerDragOver($event, 'strikers')"
-            @drop="lockerPlayerDrop($event, 'strikers')"
-            v-else
-          >
-            <label>ATT</label>
-          </div>
-          <!-- /////////////////////// STRIKERS ///////////////////// -->
-
-          <!-- /////////////////////// BENCH ///////////////////// -->
-          <div
-            id="bench"
-            ref="bench"
-            @dragenter.prevent
-            @dragover="lockerPlayerDragOver($event, 'bench')"
-            @drop="lockerPlayerDrop($event, 'bench')"
-            v-if="
-              this.fixtureDetailData.lineups[this.activeTeamId].bench.length !==
-              0
-            "
-          >
-            <div
-              draggable="true"
-              @dragstart="fieldPlayerDragStart($event, playerId, 'bench')"
-              @dragend.prevent
-              class="field-player"
-              :key="playerId"
-              v-for="playerId in this.fixtureDetailData.lineups[
-                this.activeTeamId
-              ].bench"
-            >
-              <h1>🤷‍♂️</h1>
-              <p>
-                {{ this.players[this.activeTeamId][playerId].playerName }}
-              </p>
-              <h5>
-                {{
-                  this.players[this.activeTeamId][
-                    playerId
-                  ].position.toUpperCase()
-                }}
-              </h5>
-            </div>
-          </div>
-          <div
-            id="bench"
-            ref="bench"
-            @dragenter.prevent
-            @dragover="lockerPlayerDragOver($event, 'bench')"
-            @drop="lockerPlayerDrop($event, 'bench')"
-            v-else
-          >
-            <label id="bench-label">SUBS</label>
-          </div>
-          <!-- /////////////////////// BENCH ///////////////////// -->
-        </div>
+  <div v-if="!dataLoaded">Loading</div>
+  <div v-else>
+    <div id="main-fixture-detail-field">
+      <PlayerStatModal
+        :showModal="showModal"
+        :playerId="currentPlayerId"
+        :gameweek="showingGameWeek"
+        @closeModal="closeStatsModal"
+        v-if="showModal"
+      />
+      <div class="field">
+        <!-- /////////////////////// GOALKEEPERS ///////////////////// -->
         <div
-          class="locker-room"
+          id="goalkeepers"
+          ref="goalkeepers"
           @dragenter.prevent
-          @dragover="fieldPlayerDragOver"
-          @drop="fieldPlayerDrop"
+          @dragover="lockerPlayerDragOver($event, 'goalkeepers')"
+          @drop="lockerPlayerDrop($event, 'goalkeepers')"
+          v-if="
+            this.fixtureDetailData.lineups[this.activeTeamId].goalkeepers
+              .length !== 0
+          "
         >
-          Locker
           <div
+            @click="openStatsModal(playerId)"
+            @touch="openStatsModal(playerId)"
             draggable="true"
-            @dragstart="lockerPlayerDragStart($event, player)"
+            @dragstart="fieldPlayerDragStart($event, playerId, 'goalkeepers')"
             @dragend.prevent
-            class="locker-player"
-            :key="player.playerId"
-            v-for="player in this.locker[this.activeTeamId]"
+            class="field-player"
+            :key="playerId"
+            v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
+              .goalkeepers"
           >
+            <h1>🤷‍♂️</h1>
             <p>
-              {{ player.playerName }}
+              {{ this.players[this.activeTeamId][playerId].playerName }}
             </p>
             <h5>
-              {{ player.position.toUpperCase() }}
+              {{
+                this.players[this.activeTeamId][playerId].position.toUpperCase()
+              }}
             </h5>
           </div>
         </div>
+        <div
+          id="goalkeepers"
+          ref="goalkeepers"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'goalkeepers')"
+          @drop="lockerPlayerDrop($event, 'goalkeepers')"
+          v-else
+        >
+          <label>GK</label>
+        </div>
+        <!-- /////////////////////// GOALKEEPERS ///////////////////// -->
+
+        <!-- /////////////////////// DEFENDERS ///////////////////// -->
+        <div
+          id="defenders"
+          ref="defenders"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'defenders')"
+          @drop="lockerPlayerDrop($event, 'defenders')"
+          v-if="
+            this.fixtureDetailData.lineups[this.activeTeamId].defenders
+              .length !== 0
+          "
+        >
+          <div
+            @click="openStatsModal(playerId)"
+            @touch="openStatsModal(playerId)"
+            draggable="true"
+            @dragstart="fieldPlayerDragStart($event, playerId, 'defenders')"
+            @dragend.prevent
+            class="field-player"
+            :key="playerId"
+            v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
+              .defenders"
+          >
+            <h1>🤷‍♂️</h1>
+            <p>
+              {{ this.players[this.activeTeamId][playerId].playerName }}
+            </p>
+            <h5>
+              {{
+                this.players[this.activeTeamId][playerId].position.toUpperCase()
+              }}
+            </h5>
+          </div>
+        </div>
+        <div
+          id="defenders"
+          ref="defenders"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'defenders')"
+          @drop="lockerPlayerDrop($event, 'defenders')"
+          v-else
+        >
+          <label>DEF</label>
+        </div>
+        <!-- /////////////////////// DEFENDERS ///////////////////// -->
+
+        <!-- /////////////////////// MIDFIELDERS ///////////////////// -->
+        <div
+          id="midfielders"
+          ref="midfielders"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'midfielders')"
+          @drop="lockerPlayerDrop($event, 'midfielders')"
+          v-if="
+            this.fixtureDetailData.lineups[this.activeTeamId].midfielders
+              .length !== 0
+          "
+        >
+          <div
+            @click="openStatsModal(playerId)"
+            @touch="openStatsModal(playerId)"
+            draggable="true"
+            @dragstart="fieldPlayerDragStart($event, playerId, 'midfielders')"
+            @dragend.prevent
+            class="field-player"
+            :key="playerId"
+            v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
+              .midfielders"
+          >
+            <h1>🤷‍♂️</h1>
+            <p>
+              {{ this.players[this.activeTeamId][playerId].playerName }}
+            </p>
+            <h5>
+              {{
+                this.players[this.activeTeamId][playerId].position.toUpperCase()
+              }}
+            </h5>
+          </div>
+        </div>
+        <div
+          id="midfielders"
+          ref="midfielders"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'midfielders')"
+          @drop="lockerPlayerDrop($event, 'midfielders')"
+          v-else
+        >
+          <label>MID</label>
+        </div>
+        <!-- /////////////////////// MIDFIELDERS ///////////////////// -->
+
+        <!-- /////////////////////// STRIKERS ///////////////////// -->
+        <div
+          id="strikers"
+          ref="strikers"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'strikers')"
+          @drop="lockerPlayerDrop($event, 'strikers')"
+          v-if="
+            this.fixtureDetailData.lineups[this.activeTeamId].strikers
+              .length !== 0
+          "
+        >
+          <div
+            @click="openStatsModal(playerId)"
+            @touch="openStatsModal(playerId)"
+            draggable="true"
+            @dragstart="fieldPlayerDragStart($event, playerId, 'strikers')"
+            @dragend.prevent
+            class="field-player"
+            :key="playerId"
+            v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
+              .strikers"
+          >
+            <h1>🤷‍♂️</h1>
+            <p>
+              {{ this.players[this.activeTeamId][playerId].playerName }}
+            </p>
+            <h5>
+              {{
+                this.players[this.activeTeamId][playerId].position.toUpperCase()
+              }}
+            </h5>
+          </div>
+        </div>
+        <div
+          id="strikers"
+          ref="strikers"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'strikers')"
+          @drop="lockerPlayerDrop($event, 'strikers')"
+          v-else
+        >
+          <label>ATT</label>
+        </div>
+        <!-- /////////////////////// STRIKERS ///////////////////// -->
+
+        <!-- /////////////////////// BENCH ///////////////////// -->
+        <div
+          id="bench"
+          ref="bench"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'bench')"
+          @drop="lockerPlayerDrop($event, 'bench')"
+          v-if="
+            this.fixtureDetailData.lineups[this.activeTeamId].bench.length !== 0
+          "
+        >
+          <div
+            draggable="true"
+            @dragstart="fieldPlayerDragStart($event, playerId, 'bench')"
+            @dragend.prevent
+            class="field-player"
+            :key="playerId"
+            v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
+              .bench"
+          >
+            <h1>🤷‍♂️</h1>
+            <p>
+              {{ this.players[this.activeTeamId][playerId].playerName }}
+            </p>
+            <h5>
+              {{
+                this.players[this.activeTeamId][playerId].position.toUpperCase()
+              }}
+            </h5>
+          </div>
+        </div>
+        <div
+          id="bench"
+          ref="bench"
+          @dragenter.prevent
+          @dragover="lockerPlayerDragOver($event, 'bench')"
+          @drop="lockerPlayerDrop($event, 'bench')"
+          v-else
+        >
+          <label id="bench-label">SUBS</label>
+        </div>
+        <!-- /////////////////////// BENCH ///////////////////// -->
         <div class="actions">
           <button @click="saveLineup">Save</button>
         </div>
@@ -337,33 +296,6 @@ export default {
     },
 
     // Draggable Handlers
-    lockerPlayerDragStart(e, player) {
-      let lockerPlayerDiv = e.target;
-      let fieldPlayerDiv = document.createElement("div");
-
-      fieldPlayerDiv.className = "field-player";
-      // TODO: ADD Jersey
-      fieldPlayerDiv.innerHTML = `<span>🤷‍♂️</span>${lockerPlayerDiv.innerHTML}`;
-
-      // TODO: ADD Drag Image
-      e.dataTransfer.effectAllowed = "move";
-      e.dataTransfer.dropEffect = "move";
-      e.dataTransfer.setData("text/html", fieldPlayerDiv.outerHTML);
-      e.dataTransfer.setData("player/Id", player.playerId);
-      e.dataTransfer.setData("player/data", player);
-      e.dataTransfer.setData("locker/field", "");
-
-      player.position = player.position.toLowerCase();
-      if (player.position === "gk")
-        e.dataTransfer.setData("position/goalkeepers", "");
-      else if (player.position === "def")
-        e.dataTransfer.setData("position/defenders", "");
-      else if (player.position === "mid")
-        e.dataTransfer.setData("position/midfielders", "");
-      else if (player.position === "att")
-        e.dataTransfer.setData("position/strikers", "");
-    },
-
     fieldPlayerDragStart(e, playerId, playerPosition) {
       e.dataTransfer.effectAllowed = "move";
       e.dataTransfer.dropEffect = "move";
@@ -449,31 +381,6 @@ export default {
       e.preventDefault();
     },
 
-    fieldPlayerDragOver(e) {
-      if (e.dataTransfer.types.includes("field/locker")) e.preventDefault();
-    },
-    fieldPlayerDrop(e) {
-      let playerId = e.dataTransfer.getData("player/Id");
-      let position = e.dataTransfer.getData("player/position");
-      e.dataTransfer.effectAllowed = "move";
-      e.dataTransfer.dropEffect = "move";
-
-      this.addPlayerToLocker({
-        teamId: this.activeTeamId,
-        playerId,
-      });
-
-      // Save changes
-      this.setFixtureDetailDataLineup({
-        operation: "remove",
-        teamId: this.activeTeamId,
-        incomingPlayer: playerId,
-        position,
-      });
-
-      e.preventDefault();
-    },
-
     // API Callers
     saveLineup() {
       // TODO: Check if there are 18 players
@@ -490,15 +397,11 @@ p {
   margin: 0;
 }
 
-dir {
-  padding: 0%;
-}
-
 .field {
   display: flex;
   flex-direction: column;
-  background-color: darkkhaki;
-  height: 70vh;
+  background-color: var(--primary-100);
+  height: 80vh;
 }
 
 #goalkeepers,
@@ -508,18 +411,19 @@ dir {
 #bench {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 25%;
-  margin: 10px 0;
+  height: 20%; /* Neccessary for the labels*/
+  padding: 10px 0;
+  border: 2px solid var(--primary-400);
 }
 
 #bench {
-  flex-wrap: nowrap;
   justify-content: flex-start;
-  overflow-x: auto;
+  background-color: var(--neutral-800);
 }
 
 #goalkeepers label,
@@ -542,30 +446,13 @@ dir {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: azure;
+  background-color: var(--primary-500);
   margin: 0 5px;
   z-index: 1;
 }
 
-.locker-room {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  overflow-x: auto;
-}
-
-.locker-player {
-  margin: 5px;
-  background-color: whitesmoke;
-}
-
-.locker-player p {
-  overflow-wrap: break-word;
-}
-
-.locker-player h5 {
-  margin: 0;
+.actions {
+  align-self: flex-end;
 }
 
 @media screen and (max-width: 480px) {
@@ -599,10 +486,11 @@ dir {
   }
 }
 @media screen and (min-width: 900px) {
-  .main {
+  #main-fixture-detail-field {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    max-width: 600px;
   }
 
   .field {
@@ -617,12 +505,6 @@ dir {
 
   #bench-label {
     left: 15vw;
-  }
-
-  .locker-room {
-    flex-direction: column;
-    overflow-y: auto;
-    max-height: 90vh;
   }
 }
 @media screen and (min-width: 1400px) {
