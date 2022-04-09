@@ -3,8 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import "./assets/css/design-system.css";
-
 import errorHandler from "./error/error.middleware";
 
 const app = createApp(App);

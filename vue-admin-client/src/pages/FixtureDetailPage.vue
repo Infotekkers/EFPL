@@ -30,6 +30,10 @@ export default {
   },
 
   mounted() {
+    if (!this.fixtureDetailId)
+      this.setFixtureDetailId(
+        new URL(window.location.href).searchParams.get("id")
+      );
     this.loadFixtureDetails(this.fixtureDetailId);
     this.homeTeamId = this.fixtureDetailId.split("|")[0];
     this.awayTeamId = this.fixtureDetailId.split("|")[1];
@@ -55,6 +59,7 @@ export default {
       "loadFixtureDetails",
       "saveFixtureLineup",
       "saveFixtureStats",
+      "setFixtureDetailId",
     ]),
 
     // Team Selection
@@ -69,4 +74,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+// main {
+//   background-color: var(--primary-400);
+// }
+</style>

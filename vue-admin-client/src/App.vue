@@ -4,4 +4,6 @@
 
 <script></script>
 
-<style></style>
+<style>
+@import "assets/css/design-system.css";
+</style>
