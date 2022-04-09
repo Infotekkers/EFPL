@@ -74,6 +74,7 @@ export default {
     showModal: Boolean,
     playerId: Number,
     gameweek: Number,
+    activeTeamId: Number,
   },
 
   mounted() {
@@ -90,6 +91,10 @@ export default {
     },
   },
 
+  data: () => ({
+    score: 0,
+  }),
+
   methods: {
     ...mapActions("Player", [
       "loadPlayerStats",
@@ -98,6 +103,11 @@ export default {
     ]),
 
     updateStats(statType, operationType) {
+      if (statType === "goals") {
+        if (operationType === "+") this.score += 1;
+        else if (operationType === "-") this.score -= 1;
+      }
+
       this.updatePlayerStats({
         playerId: this.playerId,
         gameweek: this.gameweek,
@@ -111,6 +121,8 @@ export default {
         playerId: this.playerId,
         gameweek: this.gameweek,
       });
+
+      this.$emit("scoreChanged", this.score);
     },
   },
 };

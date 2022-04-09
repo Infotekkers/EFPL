@@ -3,6 +3,7 @@
     <button @click="$emit('changeActiveTeam', this.homeTeamId)">
       {{ homeTeamName }}
     </button>
+    {{ score }}
     <button @click="$emit('changeActiveTeam', this.awayTeamId)">
       {{ awayTeamName }}
     </button>
@@ -16,6 +17,7 @@ export default {
     awayTeamId: Number,
     homeTeamName: String,
     awayTeamName: String,
+    score: String,
   },
 };
 </script>

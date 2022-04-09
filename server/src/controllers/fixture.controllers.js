@@ -389,6 +389,27 @@ const updateStats = asyncHandler(async (req, res) => {
   }
 });
 
+const updateScore = asyncHandler(async (req, res) => {
+  const matchId = req.params.matchId;
+  const { incomingScore } = req.body;
+
+  const match = await FixtureModel.findOne({ matchId }).lean();
+
+  if (match) {
+    if (!match.score) match.score = "0v0";
+    match.score = incomingScore;
+    await FixtureModel.findOneAndUpdate({ matchId }, match, {
+      upsert: false,
+    });
+
+    res.send("Match stats updated!");
+  } else if (!match) {
+    res.status(404).send("Match doesn't exist!");
+  } else {
+    res.status(400).send("Match with provided matchid doesn't exist.");
+  }
+});
+
 const getAllFixtures = asyncHandler(async function (req, res) {
   const matches = await FixtureModel.find().select("-__v");
 
@@ -425,4 +446,5 @@ module.exports = {
   updateFixture,
   updateLineup,
   updateStats,
+  updateScore,
 };

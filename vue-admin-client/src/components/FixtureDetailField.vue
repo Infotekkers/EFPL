@@ -6,6 +6,8 @@
         :showModal="showModal"
         :playerId="currentPlayerId"
         :gameweek="showingGameWeek"
+        :activeTeamId="activeTeamId"
+        @scoreChanged="scoreChanged"
         @closeModal="closeStatsModal"
         v-if="showModal"
       />
@@ -266,6 +268,7 @@ export default {
       "players",
       "locker",
       "showingGameWeek",
+      "score",
     ]),
 
     dataLoaded() {
@@ -284,6 +287,8 @@ export default {
       "addPlayerToLocker",
       "deletePlayerFromLocker",
       "saveFixtureLineup",
+      "setScore",
+      "saveScore",
     ]),
 
     // Modal Handlers
@@ -385,6 +390,18 @@ export default {
     saveLineup() {
       // TODO: Check if there are 18 players
       this.saveFixtureLineup();
+    },
+
+    // Score Change Handler
+    scoreChanged(e) {
+      const matchId = this.fixtureDetailId;
+      let newScore =
+        this.$store.getters["Fixture/getScore"](matchId).split("v");
+      let teamIndex = matchId.split("|").indexOf(String(this.activeTeamId));
+      newScore[teamIndex] = String(e + parseInt(newScore[teamIndex]));
+      newScore = `${newScore[0]}v${newScore[1]}`;
+      this.setScore({ matchId, incomingScore: newScore });
+      this.saveScore(this.fixtureDetailId);
     },
   },
 };

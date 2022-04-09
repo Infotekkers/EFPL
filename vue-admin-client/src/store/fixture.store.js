@@ -42,6 +42,8 @@ export default {
 
     // Loading indicator
     fixtureDetailsLoaded: false,
+
+    score: { "10|15": "0v0" },
   },
   getters: {
     getIsFixtureLoading: function (state) {
@@ -52,6 +54,9 @@ export default {
     },
     getTempCache: function (state) {
       return state.tempCache;
+    },
+    getScore: (state) => (matchId) => {
+      return state.score[matchId];
     },
     getField,
   },
@@ -111,6 +116,9 @@ export default {
     },
     SET_FIXTURE_DETAILS_LOADED(state, payload) {
       state.fixtureDetailsLoaded = payload;
+    },
+    SET_SCORE(state, payload) {
+      state.score[payload.matchId] = payload.data;
     },
     updateField,
   },
@@ -562,6 +570,43 @@ export default {
         playerId,
       };
       commit("DELETE_LOCKER_PLAYER", payload);
+    },
+
+    setScore({ commit }, { matchId, incomingScore }) {
+      let payload;
+
+      payload = {
+        matchId,
+        data: incomingScore,
+      };
+      console.log(payload);
+      commit("SET_SCORE", payload);
+    },
+
+    async saveScore({ state }, matchId) {
+      let url;
+      let payload;
+
+      url = `/fixtures/update/score/${matchId}`;
+      payload = {
+        score: state.score[matchId],
+      };
+      await axios
+        .patch(url, payload)
+        .then((res) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "success",
+            notificationMessage: res.data,
+          });
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
     },
   },
 };

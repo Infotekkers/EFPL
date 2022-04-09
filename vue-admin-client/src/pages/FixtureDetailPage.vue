@@ -1,16 +1,14 @@
 <template>
   <main>
-    <!-- Team Selection -->
     <TeamSelector
       :homeTeamId="parseInt(this.homeTeamId)"
       :awayTeamId="parseInt(this.awayTeamId)"
       :homeTeamName="this.fixtureDetailData.teams[this.homeTeamId].teamName"
       :awayTeamName="this.fixtureDetailData.teams[this.awayTeamId].teamName"
+      :score="score[this.fixtureDetailId]"
       @changeActiveTeam="changeActiveTeam"
     />
-    <!-- Field -->
     <Field :activeTeamId="this.activeTeamId" />
-    <!-- Locker -->
     <Locker :activeTeamId="this.activeTeamId" />
   </main>
 </template>
@@ -47,6 +45,7 @@ export default {
       "players",
       "fixtureDetailData",
       "fixtureDetailId",
+      "score",
     ]),
   },
 

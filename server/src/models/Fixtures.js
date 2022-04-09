@@ -198,6 +198,7 @@ const fixtureSchema = mongoose.Schema({
     type: lineupSchema,
   },
   matchStat: matchStatSchema,
+  score: { type: String, default: "0v0" },
 });
 
 const Fixture = mongoose.model("fixtures", fixtureSchema);
