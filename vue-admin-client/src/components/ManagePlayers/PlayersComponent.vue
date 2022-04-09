@@ -26,6 +26,29 @@
       </div>
     </div>
     <!-- Header -->
+
+    <!-- Filter Section -->
+    <div class="players-filter-section">
+      <!-- Club -->
+      <div class="club-price-filter">
+        <select name="PlayerClubFilter" id="">
+          <option value="All">All</option>
+        </select>
+      </div>
+
+      <!-- Price -->
+      <div class="player-price-filter">Price</div>
+
+      <!-- Position -->
+      <div class="player-position-filter">
+        <select name="PlayerPositionFilter" id="">
+          <option value="All">All</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Filter Section -->
+
     <!-- Sorter Header -->
     <div class="players-sorter-header">
       <div class="players-id-sorter">
@@ -183,6 +206,18 @@ export default {
   display: grid;
   place-items: center;
   margin-right: 6px;
+}
+.players-filter-section {
+  width: 95%;
+  min-height: 60px;
+
+  background: teal;
+  margin-top: 32px;
+  margin-bottom: 26px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .players-sorter-header {
   padding: 0 12px;
