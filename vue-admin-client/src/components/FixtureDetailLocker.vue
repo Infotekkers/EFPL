@@ -176,6 +176,7 @@ export default {
   .locker-room {
     flex-direction: column;
     overflow-y: auto;
+    height: 90vh;
     max-height: 90vh;
     width: 300px;
   }
