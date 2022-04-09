@@ -60,7 +60,7 @@ playerSchema.plugin(autoIncrement.plugin, {
   model: "players",
   field: "playerId",
   startAt: 100000,
-  incrmentBy: 1,
+  incrementBy: 1,
 });
 
 module.exports = mongoose.model("players", playerSchema);

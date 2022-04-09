@@ -34,12 +34,10 @@ const teamSchema = mongoose.Schema({
   },
 });
 
-teamSchema.plugin(autoIncrement.plugin, { model: "teams", field: "teamId" });
-
 teamSchema.plugin(autoIncrement.plugin, {
   model: "teams",
   field: "teamId",
-  startAt: 2,
+  startAt: 1,
   incrementBy: 1,
 });
 

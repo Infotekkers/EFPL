@@ -539,6 +539,20 @@ const populateFixture = async () => {
           status: "scheduled",
           homeTeam: fixture.homeTeam,
           awayTeam: fixture.awayTeam,
+
+          matchStat: {
+            minutesPlayed: {},
+            goalsScored: {},
+            assists: {},
+            cleanSheet: {},
+            yellows: {},
+            reds: {},
+            penaltiesMissed: {},
+            penaltiesSaved: {},
+            saves: {},
+            ownGoal: {},
+            fantasyScores: {},
+          },
         };
         await Fixture.create(currentFixture);
       });
