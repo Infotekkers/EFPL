@@ -39,9 +39,9 @@
           </div>
           <div id="penalitiesSaved">
             <span class="editor-field-label">Penalities Saved</span>
-            <button @click="updateStats('penalitiesMissed', '-')">-</button>
-            {{ player.stats.penalitiesMissed }}
-            <button @click="updateStats('penalitiesMissed', '+')">+</button>
+            <button @click="updateStats('penalitiesSaved', '-')">-</button>
+            {{ player.stats.penalitiesSaved }}
+            <button @click="updateStats('penalitiesSaved', '+')">+</button>
           </div>
           <div id="saves">
             <span class="editor-field-label">Saves</span>

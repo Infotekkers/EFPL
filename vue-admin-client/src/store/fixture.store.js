@@ -24,7 +24,7 @@ export default {
     currentAwayTeamIndex: 1,
 
     // FixtureId of fixture in detail state
-    fixtureDetailId: "10|15",
+    fixtureDetailId: "",
 
     // Fixture detailed info like formation
     fixtureDetailData: {
@@ -312,9 +312,14 @@ export default {
         });
     },
 
+    setFixtureDetailId({ commit }, matchId) {
+      commit("SET_FIXTURE_DETAIL_ID", matchId);
+    },
+
     async loadFixtureDetails({ commit }, matchId) {
       const homeTeamId = matchId.split("|")[0];
       const awayTeamId = matchId.split("|")[1];
+      console.log(homeTeamId, awayTeamId);
 
       // TODO: User team data from store
       const reqHomeTeam = axios.get(`/teams/${homeTeamId}`);
@@ -438,6 +443,7 @@ export default {
           })
         )
         .catch((err) => {
+          console.log(err);
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",

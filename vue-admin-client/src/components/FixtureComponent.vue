@@ -118,6 +118,7 @@ import router from "../router/index";
 
 // Components
 import store from "../store";
+import { mapActions } from "vuex";
 
 export default {
   name: "FixtureComponent",
@@ -169,7 +170,9 @@ export default {
   },
 
   methods: {
+    ...mapActions("Fixture", ["setFixtureDetailId"]),
     goToDetailPage() {
+      this.setFixtureDetailId(this.fixture.matchId);
       router.push({
         path: "/fixture/detail",
         query: { id: this.fixture.matchId },
