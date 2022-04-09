@@ -119,10 +119,7 @@ export default {
       store.dispatch("Player/sortByName", order);
     },
     searchBarFilter() {
-      store.dispatch(
-        "Player/filterSearchTerm",
-        this.$refs.searchBarFilter.value
-      );
+      store.dispatch("Player/filterSearchTerm", this.$refs.searchBar.value);
     },
   },
   computed: {

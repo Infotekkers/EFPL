@@ -263,8 +263,34 @@ export default {
         });
       }
     },
-    searchBarFilter(context, searchTerm) {
-      console.log(searchTerm);
+    filterSearchTerm(context, searchTerm) {
+      if (searchTerm) {
+        const searchTermCap = searchTerm.toUpperCase();
+        const filteredPlayers = store.state.Player.allPlayers.filter(
+          (player) => {
+            return (
+              player.playerName
+                .toString()
+                .toUpperCase()
+                .includes(searchTermCap) ||
+              player.teamName
+                .toString()
+                .toUpperCase()
+                .includes(searchTermCap) ||
+              player.position
+                .toString()
+                .toUpperCase()
+                .includes(searchTermCap) ||
+              player.currentPrice.toString().includes(searchTerm)
+            );
+          }
+        );
+
+        context.commit("SET_FILTERED_PLAYERS", filteredPlayers);
+      } else {
+        //  reset
+        store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+      }
     },
   },
   getters: {},
