@@ -39,6 +39,10 @@ export default {
         .get(`${baseURL}/players/getplayers`)
         .then((res) => {
           if (res.status === 200) {
+            for (let i = 0; i < res.data.length; i++) {
+              res.data[i].relative_id = i + 1;
+            }
+            console.log(res.data);
             context.commit("SET_ALL_PLAYERS", res.data);
           }
         })

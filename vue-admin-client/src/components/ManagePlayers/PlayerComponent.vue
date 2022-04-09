@@ -1,6 +1,6 @@
 <template>
   <div class="player-container">
-    <div class="player-id-container">{{ player.playerId }}</div>
+    <div class="player-id-container">{{ player.relative_id }}</div>
     <div
       class="player-logo-container"
       :style="{
