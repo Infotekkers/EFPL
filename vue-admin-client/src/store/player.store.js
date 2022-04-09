@@ -8,6 +8,12 @@ export default {
   state: {
     allPlayers: [],
     allPlayersUnfiltered: [],
+    allTeams: [],
+
+    // tracker
+    teamFilterCondition: "",
+    positionFilterCondition: "",
+    priceFilterCondition: [],
 
     eplTeamId: "",
     imageChanged: false,
@@ -26,6 +32,21 @@ export default {
     SET_IMAGE_CHANGED_STATUS(state, payload) {
       state.imageChanged = payload;
     },
+
+    // TODO:USE TEAM Store or MERGE
+    SET_ALL_TEAMS(state, payload) {
+      state.allTeams = payload;
+    },
+
+    SET_TEAM_FILTER(state, payload) {
+      state.teamFilterCondition = payload;
+    },
+    SET_POSITION_FILTER(state, payload) {
+      state.positionFilterCondition = payload;
+    },
+    SET_PRICE_FILTER(state, payload) {
+      state.priceFilterCondition = payload;
+    },
   },
   actions: {
     setEditPlayerId(context, playerId) {
@@ -43,6 +64,7 @@ export default {
 
             // get all teams
             const allTeams = await axios.get(`${baseURL}/teams/all`);
+            context.commit("SET_ALL_TEAMS", allTeams.data);
 
             // console.log(allTeams.data);
             for (let i = 0; i < res.data.length; i++) {
@@ -199,8 +221,8 @@ export default {
     },
 
     sortByPosition(context, order) {
-      // reset
-      store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+      // // reset
+      // store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
       if (order == 1) {
         store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
           return playerOne.position < playerTwo.position
@@ -220,8 +242,8 @@ export default {
       }
     },
     sortbyPrice(context, order) {
-      // reset
-      store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+      // // reset
+      // store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
 
       if (order == 1) {
         store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
@@ -242,8 +264,8 @@ export default {
       }
     },
     sortByName(context, order) {
-      // reset
-      store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+      // // reset
+      // store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
 
       if (order == 1) {
         store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
@@ -285,11 +307,92 @@ export default {
             );
           }
         );
+        for (let i = 0; i < filteredPlayers.length; i++) {
+          filteredPlayers[i].relative_id = i + 1;
+        }
 
         context.commit("SET_FILTERED_PLAYERS", filteredPlayers);
       } else {
         //  reset
         store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+      }
+    },
+
+    filterByPrice(context, values) {
+      // update filter value
+      context.commit("SET_PRICE_FILTER", values);
+    },
+
+    filterByPosition(context, playerPosition) {
+      // update filter value
+      context.commit("SET_POSITION_FILTER", playerPosition);
+    },
+
+    filterByTeam(context, playerTeam) {
+      // update
+      context.commit("SET_TEAM_FILTER", playerTeam);
+    },
+
+    filterAll(context) {
+      // reset
+      store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+
+      // if team filter exists
+      if (store.state.Player.teamFilterCondition) {
+        // If not All
+        if (store.state.Player.teamFilterCondition != "All") {
+          const filteredPlayers = store.state.Player.allPlayers.filter(
+            (player) => {
+              return (
+                player.teamName.toString().toUpperCase() ==
+                store.state.Player.teamFilterCondition.toString().toUpperCase()
+              );
+            }
+          );
+          for (let i = 0; i < filteredPlayers.length; i++) {
+            filteredPlayers[i].relative_id = i + 1;
+          }
+          context.commit("SET_FILTERED_PLAYERS", filteredPlayers);
+        }
+      }
+
+      if (store.state.Player.positionFilterCondition) {
+        if (store.state.Player.positionFilterCondition != "All") {
+          const filteredPlayers = store.state.Player.allPlayers.filter(
+            (player) => {
+              return (
+                player.position.toString().toUpperCase() ==
+                store.state.Player.positionFilterCondition
+                  .toString()
+                  .toUpperCase()
+              );
+            }
+          );
+          for (let i = 0; i < filteredPlayers.length; i++) {
+            filteredPlayers[i].relative_id = i + 1;
+          }
+          context.commit("SET_FILTERED_PLAYERS", filteredPlayers);
+        }
+      }
+
+      if (
+        store.state.Player.priceFilterCondition[0] &&
+        store.state.Player.priceFilterCondition[1]
+      ) {
+        const filteredPlayers = store.state.Player.allPlayers.filter(
+          (player) => {
+            return (
+              parseFloat(player.currentPrice) >
+                parseFloat(store.state.Player.priceFilterCondition[0]) &&
+              parseFloat(player.currentPrice) <
+                parseFloat(store.state.Player.priceFilterCondition[1])
+            );
+          }
+        );
+        for (let i = 0; i < filteredPlayers.length; i++) {
+          filteredPlayers[i].relative_id = i + 1;
+        }
+        context.commit("SET_FILTERED_PLAYERS", filteredPlayers);
       }
     },
   },

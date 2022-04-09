@@ -47,22 +47,61 @@
           <!-- Player City -->
           <div class="container-col input-container">
             <label for="">Team</label>
-            <input
+
+            <select name="PlayerTeam" ref="eplTeamId">
+              <option
+                v-for="team in getTeams"
+                :key="team.teamName"
+                :value="team.teamName"
+                :selected="
+                  isEditMode ? getPlayer.teamName == team.teamName : ''
+                "
+              >
+                {{ team.teamName }}
+              </option>
+            </select>
+            <!-- <input
               type="text"
               ref="eplTeamId"
               :value="isEditMode ? getPlayer.eplTeamId : ''"
-            />
+            /> -->
           </div>
           <!-- Player City -->
 
           <!-- Player Stadium -->
           <div class="container-col input-container">
             <label for="">Position</label>
-            <input
+            <select name="PlayerPosition" ref="position" id="">
+              <option
+                value="GK"
+                :selected="isEditMode ? getPlayer.position == 'GK' : ''"
+              >
+                Goalkeeper
+              </option>
+              <option
+                value="DEF"
+                :selected="isEditMode ? getPlayer.position == 'DEF' : ''"
+              >
+                Defender
+              </option>
+              <option
+                value="MID"
+                :selected="isEditMode ? getPlayer.position == 'MID' : ''"
+              >
+                Midfielder
+              </option>
+              <option
+                value="ATT"
+                :selected="isEditMode ? getPlayer.position == 'ATT' : ''"
+              >
+                Attacker
+              </option>
+            </select>
+            <!-- <input
               type="text"
               ref="position"
               :value="isEditMode ? getPlayer.position : ''"
-            />
+            /> -->
           </div>
           <!-- Player Stadium -->
         </div>
@@ -82,6 +121,7 @@
           <!-- Stadium -->
 
           <!-- Year -->
+          <!-- TODO:MAKE Dropdown -->
           <div class="container-col input-container">
             <label for="">Injury Status</label>
             <input
@@ -136,6 +176,7 @@ export default {
       selectedImage: null,
       allowedExtensions: ["jpg", "png", "svg", "jpeg"],
       imageChanged: false,
+      // selectedTeam: ,
     };
   },
   methods: {
@@ -262,6 +303,10 @@ export default {
     },
   },
   computed: {
+    // TODO:USE TEAM Store or MERGE
+    getTeams() {
+      return store.state.Player.allTeams;
+    },
     getImageChanged() {
       return this.imageChanged;
     },

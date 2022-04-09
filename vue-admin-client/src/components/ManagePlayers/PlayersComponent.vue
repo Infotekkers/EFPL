@@ -31,18 +31,52 @@
     <div class="players-filter-section">
       <!-- Club -->
       <div class="club-price-filter">
-        <select name="PlayerClubFilter" id="">
+        <select
+          name="PlayerTeam"
+          ref="eplTeamId"
+          v-model="selectedPlayerTeam"
+          @change="filterByTeam"
+        >
           <option value="All">All</option>
+          <option
+            v-for="team in getTeams"
+            :key="team.teamName"
+            :value="team.teamName"
+          >
+            {{ team.teamName }}
+          </option>
         </select>
       </div>
 
       <!-- Price -->
-      <div class="player-price-filter">Price</div>
+      <div class="player-price-filter">
+        <MultiRangeSlider
+          baseClassName="multi-range-slider"
+          :min="3.0"
+          :max="19"
+          :step="0.1"
+          :ruler="false"
+          :label="true"
+          :minValue="barMinValue"
+          :maxValue="barMaxValue"
+          @input="UpdateValues"
+        />
+      </div>
 
       <!-- Position -->
       <div class="player-position-filter">
-        <select name="PlayerPositionFilter" id="">
+        <select
+          name="PlayerPositionFilter"
+          id=""
+          v-model="selectedPlayerPosition"
+          @change="filterByPosition"
+          ref="playerPosition"
+        >
           <option value="All">All</option>
+          <option value="GK">Goalkeepers</option>
+          <option value="DEF">Defenders</option>
+          <option value="MID">Midfielders</option>
+          <option value="ATT">Attackers</option>
         </select>
       </div>
     </div>
@@ -100,19 +134,46 @@ import store from "../../store/index";
 
 import PlayerComponent from "@/components/ManagePlayers/PlayerComponent";
 import PlayerModal from "@/components/ManagePlayers/PlayerModalComponent";
+
+// Slider
+import MultiRangeSlider from "multi-range-slider-vue";
+
 export default {
   name: "PlayersComponent",
   components: {
     PlayerComponent,
     PlayerModal,
+    MultiRangeSlider,
   },
   data() {
     return {
       showModal: false,
       isEditMode: false,
+      barMinValue: 3,
+      barMaxValue: 19,
+      selectedPlayerPosition: "All",
+      selectedPlayerTeam: "All",
     };
   },
   methods: {
+    filterByPosition() {
+      store.dispatch("Player/filterByPosition", this.selectedPlayerPosition);
+      store.dispatch("Player/filterAll");
+    },
+    filterByTeam() {
+      store.dispatch("Player/filterByTeam", this.selectedPlayerTeam);
+      store.dispatch("Player/filterAll");
+    },
+    UpdateValues(e) {
+      this.barMinValue = e.minValue;
+      this.barMaxValue = e.maxValue;
+
+      store.dispatch("Player/filterByPrice", [
+        this.barMinValue,
+        this.barMaxValue,
+      ]);
+      store.dispatch("Player/filterAll");
+    },
     // Event Handlers
     activateModal() {
       this.isEditMode = false;
@@ -148,6 +209,9 @@ export default {
   computed: {
     getAllPlayers() {
       return store.state.Player.allPlayers;
+    },
+    getTeams() {
+      return store.state.Player.allTeams;
     },
   },
 
@@ -218,6 +282,13 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.player-price-filter {
+  min-width: 300px;
+}
+.multi-range-slider {
+  box-shadow: none;
+  border: none;
 }
 .players-sorter-header {
   padding: 0 12px;
