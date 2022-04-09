@@ -7,13 +7,13 @@
       :isEditMode="isEditMode"
     />
     <!-- Modal -->
-    <!-- <input
+    <input
       type="text"
       class="team-search-bar"
       @keyup="searchBarFilter"
       placeholder="Search Term Here..."
       ref="searchBar"
-    /> -->
+    />
     <!-- Header -->
     <div class="players-header-container">
       <!-- Title -->
@@ -117,6 +117,12 @@ export default {
     },
     sortByName(order) {
       store.dispatch("Player/sortByName", order);
+    },
+    searchBarFilter() {
+      store.dispatch(
+        "Player/filterSearchTerm",
+        this.$refs.searchBarFilter.value
+      );
     },
   },
   computed: {

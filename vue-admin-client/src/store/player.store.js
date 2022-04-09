@@ -263,6 +263,9 @@ export default {
         });
       }
     },
+    searchBarFilter(context, searchTerm) {
+      console.log(searchTerm);
+    },
   },
   getters: {},
 };
