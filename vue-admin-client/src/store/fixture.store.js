@@ -319,7 +319,6 @@ export default {
     async loadFixtureDetails({ commit }, matchId) {
       const homeTeamId = matchId.split("|")[0];
       const awayTeamId = matchId.split("|")[1];
-      console.log(homeTeamId, awayTeamId);
 
       // TODO: User team data from store
       const reqHomeTeam = axios.get(`/teams/${homeTeamId}`);
@@ -420,21 +419,25 @@ export default {
               resPlayers.data.awayPlayers
             );
 
-            for (const position in resFixtureStats.data.homeTeamLineUp.lineup) {
-              for (const playerId of resFixtureStats.data.homeTeamLineUp.lineup[
-                position
-              ]) {
-                if (payload[homeTeamId][playerId] !== undefined)
-                  delete payload[homeTeamId][playerId];
+            if (resFixtureStats.data.homeTeamLineUp) {
+              for (const position in resFixtureStats.data.homeTeamLineUp
+                .lineup) {
+                for (const playerId of resFixtureStats.data.homeTeamLineUp
+                  .lineup[position]) {
+                  if (payload[homeTeamId][playerId] !== undefined)
+                    delete payload[homeTeamId][playerId];
+                }
               }
             }
 
-            for (const position in resFixtureStats.data.awayTeamLineUp.lineup) {
-              for (const playerId of resFixtureStats.data.awayTeamLineUp.lineup[
-                position
-              ]) {
-                if (payload[awayTeamId][playerId] !== undefined)
-                  delete payload[awayTeamId][playerId];
+            if (resFixtureStats.data.awayTeamLineUp) {
+              for (const position in resFixtureStats.data.awayTeamLineUp
+                .lineup) {
+                for (const playerId of resFixtureStats.data.awayTeamLineUp
+                  .lineup[position]) {
+                  if (payload[awayTeamId][playerId] !== undefined)
+                    delete payload[awayTeamId][playerId];
+                }
               }
             }
             commit("SET_LOCKER", payload);
@@ -443,7 +446,6 @@ export default {
           })
         )
         .catch((err) => {
-          console.log(err);
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",

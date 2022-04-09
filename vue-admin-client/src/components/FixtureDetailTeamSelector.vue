@@ -12,8 +12,8 @@
 <script>
 export default {
   props: {
-    homeTeamId: String,
-    awayTeamId: String,
+    homeTeamId: Number,
+    awayTeamId: Number,
     homeTeamName: String,
     awayTeamName: String,
   },

@@ -373,7 +373,6 @@ const updateStats = asyncHandler(async (req, res) => {
       incomingUpdate: req.body,
     });
 
-    console.log(updatedPlayer);
     await FixtureModel.findOneAndUpdate({ matchId }, updatedMatch, {
       upsert: false,
     });

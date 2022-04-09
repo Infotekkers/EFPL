@@ -292,7 +292,7 @@ import PlayerStatModal from "../components/FixtureDetailPlayerStatModal.vue";
 
 export default {
   props: {
-    activeTeamId: String,
+    activeTeamId: Number,
   },
 
   components: {

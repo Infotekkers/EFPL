@@ -2,8 +2,8 @@
   <main>
     <!-- Team Selection -->
     <TeamSelector
-      :homeTeamId="this.homeTeamId"
-      :awayTeamId="this.awayTeamId"
+      :homeTeamId="parseInt(this.homeTeamId)"
+      :awayTeamId="parseInt(this.awayTeamId)"
       :homeTeamName="this.fixtureDetailData.teams[this.homeTeamId].teamName"
       :awayTeamName="this.fixtureDetailData.teams[this.awayTeamId].teamName"
       @changeActiveTeam="changeActiveTeam"
