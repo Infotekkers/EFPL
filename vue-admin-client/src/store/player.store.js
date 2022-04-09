@@ -37,12 +37,26 @@ export default {
     async setAllPlayers(context) {
       await axios
         .get(`${baseURL}/players/getplayers`)
-        .then((res) => {
+        .then(async (res) => {
           if (res.status === 200) {
+            // TODO:Integrate with Team store
+
+            // get all teams
+            const allTeams = await axios.get(`${baseURL}/teams/all`);
+
+            // console.log(allTeams.data);
             for (let i = 0; i < res.data.length; i++) {
+              const currentTeam = allTeams.data.filter((team) => {
+                return team.teamId == res.data[i].eplTeamId;
+              });
+
+              // add relative ID
               res.data[i].relative_id = i + 1;
+
+              // add team name
+              res.data[i].teamName = currentTeam[0].teamName;
             }
-            console.log(res.data);
+
             context.commit("SET_ALL_PLAYERS", res.data);
           }
         })
@@ -134,6 +148,120 @@ export default {
             notificationMessage: err.response.data,
           });
         });
+    },
+
+    sortByID(context, order) {
+      // reset
+      store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+
+      if (order == 1) {
+        store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+          return parseInt(playerOne.relative_id) <
+            parseInt(playerTwo.relative_id)
+            ? -1
+            : parseInt(playerOne.relative_id) > parseInt(playerTwo.relative_id)
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+          return parseInt(playerOne.relative_id) >
+            parseInt(playerTwo.relative_id)
+            ? -1
+            : parseInt(playerOne.relative_id) < parseInt(playerTwo.relative_id)
+            ? 1
+            : 0;
+        });
+      }
+    },
+
+    sortByTeam(context, order) {
+      // reset
+      store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+
+      if (order == 1) {
+        store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+          return playerOne.teamName < playerTwo.teamName
+            ? -1
+            : playerOne.teamName > playerTwo.teamName
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+          return playerOne.teamName > playerTwo.teamName
+            ? -1
+            : playerOne.teamName < playerTwo.teamName
+            ? 1
+            : 0;
+        });
+      }
+    },
+
+    sortByPosition(context, order) {
+      // reset
+      store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+      if (order == 1) {
+        store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+          return playerOne.position < playerTwo.position
+            ? -1
+            : playerOne.position > playerTwo.position
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+          return playerOne.position > playerTwo.position
+            ? -1
+            : playerOne.position < playerTwo.position
+            ? 1
+            : 0;
+        });
+      }
+    },
+    sortbyPrice(context, order) {
+      // reset
+      store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+
+      if (order == 1) {
+        store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+          return playerOne.currentPrice < playerTwo.currentPrice
+            ? -1
+            : playerOne.currentPrice > playerTwo.currentPrice
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+          return playerOne.currentPrice > playerTwo.currentPrice
+            ? -1
+            : playerOne.currentPrice < playerTwo.currentPrice
+            ? 1
+            : 0;
+        });
+      }
+    },
+    sortByName(context, order) {
+      // reset
+      store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+
+      if (order == 1) {
+        store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+          return playerOne.playerName < playerTwo.playerName
+            ? -1
+            : playerOne.playerName > playerTwo.playerName
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+          return playerOne.playerName > playerTwo.playerName
+            ? -1
+            : playerOne.playerName < playerTwo.playerName
+            ? 1
+            : 0;
+        });
+      }
     },
   },
   getters: {},

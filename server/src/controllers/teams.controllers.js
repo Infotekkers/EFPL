@@ -22,7 +22,8 @@ const getTeams = asyncHandler(async (req, res) => {
 });
 
 const getTeam = asyncHandler(async (req, res) => {
-  const team = await TeamModel.find({ teamId: req.params.id });
+  const team = await TeamModel.find({ teamId: req.params.teamId });
+  console.log(req.params.teamId);
 
   res.status(200).send(team);
 });

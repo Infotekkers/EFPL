@@ -9,7 +9,7 @@
     ></div>
 
     <div class="playercontainer">{{ player.playerName }}</div>
-    <div class="playercontainer">{{ player.eplTeamId }}</div>
+    <div class="playercontainer">{{ player.teamName }}</div>
     <div class="playercontainer">{{ player.position }}</div>
     <div class="playercontainer">{{ player.currentPrice }}</div>
     <div class="playercontainer">{{ player.injuryStatus }}</div>
@@ -80,6 +80,8 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  background: yellow;
 }
 
 .playercontainer {

@@ -27,15 +27,37 @@
     </div>
     <!-- Header -->
     <!-- Sorter Header -->
-    <!-- <div class="teams-sorter-header">
-      <div @click="sortByID" class="teams-id-sorter">ID</div>
-      <div class="teams-logo-sorter">Logo</div>
-      <div @click="sortByName" class="teams-name-sorter">Team</div>
-      <div @click="sortByCity" class="teams-city-sorter">City</div>
-      <div @click="sortbyStadium" class="teams-stadium-sorter">Stadium</div>
-      <div @click="sortByFoundedDate" class="teams-founded-sorter">Year</div>
-      <div class="teams-controls-sorter">Controls</div>
-    </div> -->
+    <div class="players-sorter-header">
+      <div class="players-id-sorter">
+        <span @click="sortByID(-1)">D</span>
+        ID
+        <span @click="sortByID(1)">A</span>
+      </div>
+      <div class="players-logo-sorter">Image</div>
+
+      <div class="players-name-sorter">
+        <span @click="sortByName(-1)">D</span>
+        Name
+        <span @click="sortByName(1)">A</span>
+      </div>
+      <div class="players-team-sorter">
+        <span @click="sortByTeam(-1)">D</span>
+        Team
+        <span @click="sortByTeam(1)">A</span>
+      </div>
+      <div class="players-city-sorter">
+        <span @click="sortByPosition(-1)">D</span>
+        Position
+        <span @click="sortByPosition(1)">A</span>
+      </div>
+      <div class="players-stadium-sorter">
+        <span @click="sortbyPrice(-1)">D</span>
+        Price
+        <span @click="sortbyPrice(1)">A</span>
+      </div>
+
+      <div class="players-controls-sorter">Controls</div>
+    </div>
     <!-- Sorter Header -->
     <div class="players-container" v-if="getAllPlayers.length > 0">
       <PlayerComponent
@@ -80,6 +102,22 @@ export default {
     closeModal() {
       this.showModal = false;
     },
+    sortByID(order) {
+      store.dispatch("Player/sortByID", order);
+    },
+    sortByTeam(order) {
+      store.dispatch("Player/sortByTeam", order);
+    },
+
+    sortByPosition(order) {
+      store.dispatch("Player/sortByPosition", order);
+    },
+    sortbyPrice(order) {
+      store.dispatch("Player/sortbyPrice", order);
+    },
+    sortByName(order) {
+      store.dispatch("Player/sortByName", order);
+    },
   },
   computed: {
     getAllPlayers() {
@@ -116,6 +154,11 @@ export default {
   /*  */
   position: relative;
   z-index: 1;
+}
+.players-sorter-header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 .players-title {
   font-size: var(--text-medium);
