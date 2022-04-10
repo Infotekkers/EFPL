@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .admin-login {
   max-width: 420px;
   margin: 30px auto;

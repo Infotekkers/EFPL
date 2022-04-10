@@ -17,6 +17,15 @@ const errorHandler = (err, vm, info) => {
     });
   } else if (err.message == "Cannot find module") {
     console.log("Module Err");
+  } else if (
+    err.message == "Request failed" &&
+    (err.message.includes("401") || err.message.includes("403"))
+  ) {
+    store.dispatch("Global/setNotificationInfo", {
+      showNotification: true,
+      notificationType: "error",
+      notificationMessage: "No Connection to server.",
+    });
   }
 };
 

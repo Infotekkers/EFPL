@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../services/AxiosTokenInstance";
 import store from "./index";
 
 const baseURL = process.env.VUE_APP_API_BASE_URL;
@@ -111,7 +111,7 @@ export default {
     },
     // Fetches all fixtures
     async setAllFixtures(context) {
-      axios
+      axiosInstance
         .get(`${baseURL}/fixtures/`)
         .then((response) => {
           if (response.status === 200) {
@@ -134,7 +134,7 @@ export default {
 
     // fetches all teams
     async setAllTeams(context) {
-      axios
+      axiosInstance
         .get(`${baseURL}/teams/all`)
         .then((response) => {
           context.commit("SET_ALL_TEAMS", response.data);
@@ -181,7 +181,7 @@ export default {
 
     // Saves new fixture
     async saveNewFixture(context, newFixture) {
-      await axios
+      await axiosInstance
         .post(`${baseURL}/fixtures/add`, newFixture)
         .then(async (response) => {
           if (response.status === 200) {
@@ -228,7 +228,7 @@ export default {
         });
       } else {
         // TODO:Review
-        await axios
+        await axiosInstance
           .patch(
             `${baseURL}/fixtures/postpone/${store.state.Fixture.editFixtureId}`,
             updatedFixture
@@ -256,7 +256,7 @@ export default {
 
     // Start match
     async startMatch(context, matchId) {
-      axios
+      axiosInstance
         .patch(`${baseURL}/fixtures/start/${matchId}`)
         .then(async (response) => {
           if (response.status === 200) {
@@ -279,7 +279,7 @@ export default {
 
     // Pause match
     async pauseMatch(context, matchId) {
-      axios
+      axiosInstance
         .patch(`${baseURL}/fixtures/pause/${matchId}`)
         .then(async (response) => {
           if (response.status === 200) {
@@ -302,7 +302,7 @@ export default {
 
     // Resume match
     async resumeMatch(context, matchId) {
-      axios
+      axiosInstance
         .patch(`${baseURL}/fixtures/resume/${matchId}`)
         .then(async (response) => {
           if (response.status === 200) {
@@ -325,7 +325,7 @@ export default {
 
     // end match
     async endMatch(context, matchId) {
-      axios
+      axiosInstance
         .patch(`${baseURL}/fixtures/end/${matchId}`)
         .then(async (response) => {
           if (response.status === 200) {
@@ -348,7 +348,7 @@ export default {
 
     // delete match
     async deleteMatch(context, matchId) {
-      axios
+      axiosInstance
         .delete(`${baseURL}/fixtures/delete/${matchId}`)
         .then((response) => {
           store.dispatch("Global/setNotificationInfo", {

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../services/AxiosTokenInstance";
 import store from "./index";
 
 const baseURL = process.env.VUE_APP_API_BASE_URL;
@@ -147,20 +147,23 @@ export default {
         filteredTeams = store.state.Team.allTeams.filter((team) => {
           return (
             // By city
-            team.teamCity.includes(filterTerm.toLowerCase()) ||
-            team.teamCity.includes(filterTerm.toUpperCase()) ||
-            team.teamCity.includes(filterTerm) ||
+            team.teamCity
+              .toString()
+              .toUpperCase()
+              .includes(filterTerm.toUpperCase()) ||
             // by name
-            team.teamName.includes(filterTerm.toLowerCase()) ||
-            team.teamName.includes(filterTerm.toLowerCase()) ||
-            team.teamName.includes(filterTerm) ||
+            team.teamName
+              .toString()
+              .toUpperCase()
+              .includes(filterTerm.toUpperCase()) ||
             // year
 
             team.foundedIn.toString().includes(filterTerm) ||
             // by stadium
-            team.teamStadium.includes(filterTerm.toLowerCase()) ||
-            team.teamStadium.includes(filterTerm.toUpperCase()) ||
-            team.teamStadium.includes(filterTerm)
+            team.teamStadium
+              .toString()
+              .toUpperCase()
+              .includes(filterTerm.toUpperCase())
           );
         });
       } else {
@@ -172,7 +175,7 @@ export default {
     },
     // fetches all teams
     async setAllTeams(context) {
-      axios
+      axiosInstance
         .get(`${baseURL}/teams/all`)
         .then((response) => {
           let relative_id_count = 1;
@@ -192,7 +195,7 @@ export default {
     },
 
     async saveTeam(context, teamData) {
-      axios
+      axiosInstance
         .post(`${baseURL}/teams/`, teamData)
         .then((response) => {
           store.dispatch("Global/setNotificationInfo", {
@@ -213,7 +216,7 @@ export default {
     },
 
     async deleteTeam(context, teamId) {
-      axios
+      axiosInstance
         .delete(`${baseURL}/teams/${teamId}`)
         .then((response) => {
           store.dispatch("Global/setNotificationInfo", {
@@ -244,7 +247,7 @@ export default {
       });
 
       if (!verifyChange.length > 0 || store.state.Team.imageChanged) {
-        axios
+        axiosInstance
           .patch(`${baseURL}/teams/${teamId}`, updatedTeam)
           .then((response) => {
             store.dispatch("Global/setNotificationInfo", {
