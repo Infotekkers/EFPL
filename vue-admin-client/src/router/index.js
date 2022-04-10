@@ -6,6 +6,8 @@ import SettingsComponent from "../components/AdminSettingsComponent.vue";
 import Admin from "../components/AdminComponent.vue";
 import ForgotPassword from "../components/ForgotPasswordComponent";
 import ResetPassword from "../components/ResetPasswordComponent";
+import FixtureDetail from "../components/FixtureDetailComponent.vue";
+
 const routes = [
   {
     path: "/",
@@ -73,6 +75,26 @@ const routes = [
     path: "/:catchAll(.*)",
     name: "pagenotfound",
     component: PageNotFoundComponent,
+  },
+
+  // Fixture Routes
+  {
+    path: "/fixtures",
+    name: "Fixtures",
+    component: () => import("../components/FixturesComponent.vue"),
+  },
+
+  {
+    path: "/fixture/detail",
+    name: "Fixture Detail",
+    component: FixtureDetail,
+  },
+
+  // Team Route
+  {
+    path: "/teams",
+    name: "Teams",
+    component: () => import("../components/TeamsComponent.vue"),
   },
 ];
 

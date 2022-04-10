@@ -13,7 +13,30 @@ const postFixture = asyncHandler(async function (req, res) {
 
   const verifyMatch = await FixtureModel.find({ matchId: matchId });
 
-  if (!verifyMatch.length) {
+  const homeTeamHasMatch = await FixtureModel.find({
+    gameweekId: gameweekId,
+    homeTeam: homeTeam,
+  });
+
+  const awayTeamHasMatch = await FixtureModel.find({
+    gameweekId: gameweekId,
+    awayTeam: awayTeam,
+  });
+
+  // If home team already has match
+  if (homeTeamHasMatch.length > 0) {
+    res
+      .status(409)
+      .send(
+        `Team ${homeTeam} already has a match for game week ${gameweekId}.`
+      );
+  } else if (awayTeamHasMatch.length > 0) {
+    res
+      .status(409)
+      .send(
+        `Team ${awayTeam} already has a match for game week ${gameweekId}.`
+      );
+  } else if (!verifyMatch.length) {
     await new FixtureModel({
       gameweekId,
       matchId,
@@ -21,90 +44,244 @@ const postFixture = asyncHandler(async function (req, res) {
       homeTeam,
       awayTeam,
     }).save();
-    res.send("Fixture added!");
+    res.status(200).send("Fixture added!");
   } else {
-    res.send("Fixture already exists in database");
+    res
+      .status(409)
+      .send(
+        `Fixture ${homeTeam} vs ${awayTeam} already exists for game week ${verifyMatch[0].gameweekId}.`
+      );
   }
 });
 
 const startFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
+  const homeTeam = await TeamModel.find({
+    teamId: parseInt(req.params.matchId.split("|")[0]),
+  });
+
+  const awayTeam = await TeamModel.find({
+    teamId: parseInt(req.params.matchId.split("|")[0]),
+  });
+
   if (match?.status === "scheduled") {
     match.status = "liveFH"; // First half
     match
       .save()
-      .then(() => res.send("Match is live!"))
-      .catch(() => res.status(500).send("Try again!"));
+      .then(async () => {
+        res.send(
+          `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} is live!`
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send("Try again!");
+      });
+  } else if (match.status === "FT") {
+    res
+      .status(400)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} has already ended!`
+      );
   } else if (!match) {
-    res.status(404).send("Match doesn't exist!");
+    res
+      .status(404)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} doesn't exist!`
+      );
   } else {
-    res.status(400).send("Match can't be started!");
+    res
+      .status(400)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} is already live!`
+      );
   }
 });
 
 const pauseFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
+  const homeTeam = await TeamModel.find({
+    teamId: parseInt(req.params.matchId.split("|")[0]),
+  });
+
+  const awayTeam = await TeamModel.find({
+    teamId: parseInt(req.params.matchId.split("|")[0]),
+  });
+
   if (match?.status === "liveFH") {
     match.status = "HT";
     match
       .save()
-      .then(() => res.send("Half Time!"))
+      .then(() => {
+        res.send(
+          `Half Time for match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName}!`
+        );
+      })
       .catch(() => res.status(500).send("Try again!"));
   } else if (!match) {
-    res.status(404).send("Match doesn't exist!");
+    res
+      .status(404)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} doesn't exist!`
+      );
+  } else if (match.status === "FT") {
+    res
+      .status(400)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} has already ended!`
+      );
   } else {
-    res.status(400).send("Match hasn't started!");
+    res
+      .status(400)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} is not live yet!`
+      );
   }
 });
 
 const resumeFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
+  const homeTeam = await TeamModel.find({
+    teamId: parseInt(req.params.matchId.split("|")[0]),
+  });
+
+  const awayTeam = await TeamModel.find({
+    teamId: parseInt(req.params.matchId.split("|")[0]),
+  });
+
   if (match?.status === "HT") {
     match.status = "liveSH"; // Second half
     match
       .save()
-      .then(() => res.send("Match resumed!"))
+      .then(() =>
+        res.send(
+          `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} resumed!`
+        )
+      )
       .catch(() => res.status(500).send("Try again!"));
   } else if (!match) {
-    res.status(404).send("Match doesn't exist!");
+    res
+      .status(404)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} doesn't exist!`
+      );
+  } else if (match.status === "FT") {
+    res
+      .status(400)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} has already ended!`
+      );
   } else {
-    res.status(400).send("Match can't be resumed!");
+    res
+      .status(400)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} can not be resumed!`
+      );
   }
 });
 
 const endFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
+  const homeTeam = await TeamModel.find({
+    teamId: parseInt(req.params.matchId.split("|")[0]),
+  });
+
+  const awayTeam = await TeamModel.find({
+    teamId: parseInt(req.params.matchId.split("|")[0]),
+  });
+
   if (match?.status === "liveSH") {
     match.status = "FT";
     match
       .save()
-      .then(() => res.send("Full time!"))
+      .then(() =>
+        res.send(
+          `Full time for match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName}!`
+        )
+      )
       .catch(() => res.status(500).send("Try again!"));
   } else if (!match) {
-    res.status(404).send("Match doesn't exist!");
+    res
+      .status(404)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} doesn't exist!`
+      );
+  } else if (match.status === "FT") {
+    res
+      .status(400)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} has already ended!`
+      );
   } else {
-    res.status(400).send("Match can't be ended!");
+    res
+      .status(400)
+      .send(
+        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} can not be ended!`
+      );
   }
 });
 
 const postponeFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+  const { gameweekId, schedule, homeTeam, awayTeam, matchStatus } = req.body;
 
-  if (match?.status === "scheduled") {
-    match.status = "postponed";
-    match
-      .save()
-      .then(() => res.send("Match postponed!"))
-      .catch(() => res.status(500).send("Try again!"));
+  // Compare old and new match
+  if (match) {
+    if (match.homeTeam === homeTeam && match.awayTeam === awayTeam) {
+      match.gameweekId = gameweekId ?? match.gameweekId;
+      match.schedule = schedule ?? match.schedule;
+      match.status = matchStatus ?? match.status;
+      match.homeTeam = homeTeam ?? match.homeTeam;
+      match.awayTeam = awayTeam ?? match.awayTeam;
+
+      await match.save();
+
+      res
+        .status(200)
+        .send(`Match ${homeTeam} vs ${awayTeam} updated successfully`);
+    } else {
+      const homeTeamNew = await TeamModel.find({
+        teamName: homeTeam,
+      });
+
+      const awayTeamNew = await TeamModel.find({
+        teamName: awayTeam,
+      });
+
+      await match.delete();
+
+      await new FixtureModel({
+        gameweekId: gameweekId,
+        schedule: schedule,
+        matchId: `${homeTeamNew[0].teamId}|${awayTeamNew[0].teamId}`,
+        status: matchStatus ?? "scheduled",
+        homeTeam: homeTeam,
+        awayTeam: awayTeam,
+      }).save();
+
+      res.status(200).send(`Match updated to ${homeTeam} vs ${awayTeam}`);
+    }
   } else if (!match) {
     res.status(404).send("Match doesn't exist!");
   } else {
-    res.status(400).send("Match is ongoing!");
+    res.status(400).send(`Match with Id ${req.params.matchId} doesn't exist.`);
   }
+
+  // if (match?.status === "scheduled") {
+  //   match.status = "postponed";
+  //   match
+  //     .save()
+  //     .then(() => res.send("Match postponed!"))
+  //     .catch(() => res.status(500).send("Try again!"));
+  // } else if (!match) {
+  //   res.status(404).send("Match doesn't exist!");
+  // } else {
+  // res.status(400).send("Match is ongoing!");
+  // }
 });
 
 const updateFixture = asyncHandler(async function (req, res) {
@@ -133,13 +310,15 @@ const updateFixture = asyncHandler(async function (req, res) {
 });
 
 const getAllFixtures = asyncHandler(async function (req, res) {
-  const matches = await FixtureModel.find();
+  const matches = await FixtureModel.find().select("-__v");
 
-  res.send(matches);
+  res.status(200).send(matches);
 });
 
 const getFixture = asyncHandler(async function (req, res) {
-  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+  const match = await FixtureModel.findOne({
+    matchId: req.params.matchId,
+  }).select("-__v");
 
   match
     ? res.send(match)
@@ -147,11 +326,10 @@ const getFixture = asyncHandler(async function (req, res) {
 });
 
 const deleteFixture = asyncHandler(async function (req, res) {
-  await FixtureModel.deleteOne({ matchId: req.params.matchId }).then(() => {
-    return res.send("Match deleted from database.");
-  });
-
-  res.status(400).send("Match with provided matchid doesn't exist");
+  const deleted = await FixtureModel.deleteOne({ matchId: req.params.matchId });
+  deleted
+    ? res.send("Match deleted!")
+    : res.status(400).send("Match with provided matchid doesn't exist");
 });
 
 module.exports = {

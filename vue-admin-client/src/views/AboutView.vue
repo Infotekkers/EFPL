@@ -1,19 +1,19 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
+    <!-- <NotificationComponent
+      message="A global Notification System Message here."
+      type="success"
+      :showNotification="true"
+    /> -->
   </div>
 </template>
 
 <script>
-import axiosToken from "../services/AxiosTokenInstance";
-
+// import NotificationComponent from "@/components/shared/NotificationComponent";
 export default {
-  async beforeMount() {
-    const teams = await axiosToken.get(
-      `${process.env.VUE_APP_API_BASE_URL}/teams/all`
-    );
-
-    console.log(teams);
+  components: {
+    // NotificationComponent,
   },
 };
 </script>

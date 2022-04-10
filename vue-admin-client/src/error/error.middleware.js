@@ -5,7 +5,11 @@ const errorHandler = (err, vm, info) => {
   console.log(message);
 
   if (process.env.VUE_APP_ENV == "development") {
+<<<<<<< HEAD
     // console.log(err);
+=======
+    console.log(err);
+>>>>>>> admin/fixture
   }
 
   if (err.message == "Network Error") {
