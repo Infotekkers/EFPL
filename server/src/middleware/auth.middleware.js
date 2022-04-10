@@ -4,12 +4,12 @@ const asyncHandler = require("express-async-handler");
 const protectRoute = asyncHandler(async (req, res, next) => {
   const token = req.query.token;
   if (!token) {
-    return res.status(403).send("token required for auth");
+    return res.status(403).send("Please Login!");
   }
   try {
     jwt.verify(token, process.env.JWT_SECRET);
   } catch (err) {
-    return res.status(401).send("invalid token");
+    return res.status(401).send("Something wrong. Try logging in again!");
   }
   return next();
 });
