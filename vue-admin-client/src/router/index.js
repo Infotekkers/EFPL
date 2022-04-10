@@ -23,7 +23,8 @@ const routes = [
       const currentAdmin = JSON.parse(
         window.localStorage.getItem("currentAdmin")
       );
-      if (currentAdmin) {
+
+      if (currentAdmin.token) {
         next();
       } else {
         next("/");
@@ -35,6 +36,25 @@ const routes = [
         path: "settings",
         name: "settings",
         component: SettingsComponent,
+      },
+      // Fixture Routes
+      {
+        path: "fixtures",
+        name: "Fixtures",
+        component: () => import("../components/FixturesComponent.vue"),
+      },
+
+      {
+        path: "fixture/detail",
+        name: "Fixture Detail",
+        component: FixtureDetail,
+      },
+
+      // Team Route
+      {
+        path: "teams",
+        name: "Teams",
+        component: () => import("../components/TeamsComponent.vue"),
       },
       // about page
       {
@@ -75,26 +95,6 @@ const routes = [
     path: "/:catchAll(.*)",
     name: "pagenotfound",
     component: PageNotFoundComponent,
-  },
-
-  // Fixture Routes
-  {
-    path: "/fixtures",
-    name: "Fixtures",
-    component: () => import("../components/FixturesComponent.vue"),
-  },
-
-  {
-    path: "/fixture/detail",
-    name: "Fixture Detail",
-    component: FixtureDetail,
-  },
-
-  // Team Route
-  {
-    path: "/teams",
-    name: "Teams",
-    component: () => import("../components/TeamsComponent.vue"),
   },
 ];
 

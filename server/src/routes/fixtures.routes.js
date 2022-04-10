@@ -17,7 +17,7 @@ router.patch(
 );
 router.patch("/update/:matchId", protectRoute, fixtureController.updateFixture);
 
-router.get("/", protectRoute, fixtureController.getAllFixtures);
+router.get("/", fixtureController.getAllFixtures);
 router.get("/:matchId", protectRoute, fixtureController.getFixture);
 
 router.delete(
