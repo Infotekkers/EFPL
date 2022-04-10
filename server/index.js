@@ -49,7 +49,8 @@ app.use("/admin", adminAuthRouter);
 // populate.addTestPlayer();
 // populate.addTestUser();
 // populate.addTestGameweek();
-// populate.addTestAdmin();
+
+populate.addTestAdmin();
 
 // Add Middleware
 app.use(errorMiddleware);

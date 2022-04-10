@@ -43,10 +43,12 @@ const login = asyncHandler(async (req, res) => {
         token: token,
         email: admin.email,
       });
+    } else {
+      res.status(400).send({ message: "invalid email - password combination" });
     }
+  } else {
     res.status(400).send({ message: "invalid email - password combination" });
   }
-  res.status(400).send({ message: "invalid email - password combination" });
 });
 
 // request reset
@@ -64,7 +66,9 @@ const requestReset = asyncHandler(async (req, res) => {
       secretKey,
       { expiresIn: 60 * 60 }
     );
-    const resetUrl = `${process.env.BASE_URL}${8080}/resetPassword/${resetToken}`;
+    const resetUrl = `${
+      process.env.BASE_URL
+    }${8080}/resetPassword/${resetToken}`;
 
     const mailOptions = {
       from: process.env.user,

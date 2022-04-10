@@ -388,20 +388,36 @@ const addTestUser = async () => {
   await testUser.save();
 };
 
+const addTestAdmin = async () => {
+  const admins = await Admin.find();
 
-const addTestAdmin = async()=>{
-  // test admin
-  const testAdmin = new Admin({
-    email:"mikealexiv565@gmail.com",
-    password:"Strong@Password123"
-  });
-  const testAdmin2 = new Admin({
-    email:"testman@gmail.com",
-    password:"StrongerPass@123"
-  })
-  await testAdmin.save();
-  await testAdmin2.save();
-}
+  const newAdmins = [
+    {
+      email: "mikealexiv565@gmail.com",
+      password: "Strong@Password123",
+    },
+    {
+      email: "admin@admin.com",
+      password: "StrongPass@123",
+    },
+  ];
+
+  if (admins.length < 2) {
+    if (admins.length !== 1) {
+      await Admin.deleteMany();
+    }
+
+    newAdmins.forEach(async (admin) => {
+      await Admin.create(admin);
+    });
+  }
+
+  printConsole(
+    { data: "USERNAME:admin@admin.com PASSWORD:StrongPass@123" },
+    { printLocation: "populate.js:218" },
+    { bgColor: "bgYellow" }
+  );
+};
 
 const addTestGameweek = async () => {
   // Test Gameweek
@@ -413,7 +429,6 @@ const addTestGameweek = async () => {
 
   await testGameweek.save();
 };
-
 
 /*
   ===============================================================
