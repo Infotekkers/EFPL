@@ -24,6 +24,7 @@ const userRouter = require("./src/routes/user.routes");
 const fixtures = require("./src/routes/fixtures.routes");
 const gameWeekRoutes = require("./src/routes/gameWeek.routes");
 const adminAuthRouter = require("./src/routes/adminAuth.routes");
+const backupRouter = require("./src/routes/backup.routes");
 
 // Import Middleware
 const errorMiddleware = require("./src/middleware/error.middleware");
@@ -49,6 +50,7 @@ app.use("/eplStats", eplStatsRouter);
 app.use("/fantasyStats", fantasyStatsRouter);
 app.use("/user", userRouter);
 app.use("/admin", adminAuthRouter);
+app.use("/backup", backupRouter);
 
 // Run populate scripts
 // populate.addTestPlayer();
