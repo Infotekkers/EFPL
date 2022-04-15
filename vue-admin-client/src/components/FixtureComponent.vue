@@ -2,7 +2,7 @@
   <!-- TODO:Add Result Display -->
   <main class="fixture-main-container">
     <!-- teams loading -->
-    <div v-if="isTeamLoading == true">Loading</div>
+    <div v-if="isTeamLoading == true">{{ $t("Loading") }}</div>
     <!-- teams loading -->
 
     <!-- Container -->

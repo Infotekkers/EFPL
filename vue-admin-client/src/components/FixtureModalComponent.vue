@@ -58,7 +58,9 @@
             <!-- Date -->
             <div class="fixture-date-container">
               <!-- Label -->
-              <label for="Date">Date <span>(DD/MM/YY)</span> </label>
+              <label for="Date"
+                >{{ $t("Date") }} <span>({{ $t("DD/MM/YY") }})</span>
+              </label>
               <div>
                 <div class="date">
                   <input
@@ -83,7 +85,7 @@
             <!-- Time -->
             <div class="fixture-time-container">
               <!-- Label -->
-              <label for="Time">Time</label>
+              <label for="Time">{{ $t("Time") }}</label>
               <div>
                 <div class="fixture-time-hour">
                   <select
@@ -170,7 +172,7 @@
               : { click: modalCancel }
           "
         >
-          Cancel
+          {{ $t("Cancel") }}
         </div>
         <!-- Cancel button *2 modes -->
 
@@ -183,7 +185,7 @@
               : { click: addNewFixture }
           "
         >
-          Save
+          {{ $t("Save") }}
         </div>
         <!-- Save Button *2 modes -->
       </div>
@@ -193,25 +195,25 @@
 
     <!-- all teams have matches -->
     <div v-else-if="isGameWeekComplete" class="fixture-modal-incomplete">
-      All Teams have games in Game week {{ this.currentGameWeek }}
+      {{ $t("all teams have games in game week") }} {{ this.currentGameWeek }}
     </div>
     <!-- all teams have matches -->
 
     <div v-else-if="getTeamCount == 0" class="fixture-modal-incomplete">
-      No Teams Added
+      {{ $t("no teams added") }}
 
       <div class="fixture-add-new-team" @click="addNewTeam">
         <div>+</div>
-        Add
+        {{ $t("Add") }}
       </div>
     </div>
 
     <div v-else-if="getTeamCount % 2 !== 0" class="fixture-modal-incomplete">
-      Incomplete Team
+      {{ $t("incomplete team") }}
 
       <div class="fixture-add-new-team" @click="addNewTeam">
         <div>+</div>
-        Add
+        {{ $t("Add") }}
       </div>
     </div>
   </main>

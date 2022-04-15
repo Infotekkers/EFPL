@@ -8,10 +8,10 @@
     />
 
     <!-- No Connection -->
-    <div v-if="connectionStatus === false">No connection</div>
+    <div v-if="connectionStatus === false">{{ $t("No Connection") }}</div>
 
     <!-- Loading Data -->
-    <div v-else-if="isFixtureLoading">Loading</div>
+    <div v-else-if="isFixtureLoading">{{ $t("Loading") }}</div>
 
     <!-- After Data Loaded -->
     <div v-else class="gameweek-container">
@@ -28,18 +28,19 @@
       <!-- Title -->
       <div class="gameweek-main-header">
         <div class="gameweek-title">
-          Ethiopian Premier League - {{ getSeason }} Fixtures
+          {{ $t("Ethiopian Premier League") }} - {{ getSeason }}
+          {{ $t("Fixtures") }}
         </div>
         <div class="gameweek-add-new" @click="activateModal">
           <div>+</div>
-          Add
+          {{ $t("Add") }}
         </div>
       </div>
       <!-- Title -->
 
       <div class="filter-container">
         <div class="filter-item">
-          <label>All</label>
+          <label>{{ $t("All") }}</label>
           <input
             type="radio"
             @change="radioFilterChange"
@@ -49,7 +50,7 @@
         </div>
 
         <div class="filter-item">
-          <label>Scheduled</label>
+          <label>{{ $t("Scheduled") }}</label>
           <input
             type="radio"
             @change="radioFilterChange"
@@ -59,7 +60,7 @@
         </div>
 
         <div class="filter-item">
-          <label>First Half</label>
+          <label>{{ $t("First Half") }}</label>
           <input
             type="radio"
             @change="radioFilterChange"
@@ -69,7 +70,7 @@
         </div>
 
         <div class="filter-item">
-          <label>Half Time</label>
+          <label>{{ $t("Half Time") }}</label>
           <input
             type="radio"
             @change="radioFilterChange"
@@ -79,7 +80,7 @@
         </div>
 
         <div class="filter-item">
-          <label>Second Half</label>
+          <label>{{ $t("Second Half") }}</label>
           <input
             type="radio"
             @change="radioFilterChange"
@@ -89,7 +90,7 @@
         </div>
 
         <div class="filter-item">
-          <label>Full Time</label>
+          <label>{{ $t("Full Time") }}</label>
           <input
             type="radio"
             @change="radioFilterChange"
@@ -102,7 +103,9 @@
       <!-- Header - Gameweek controls, add new & gameweek title -->
       <div class="gameweek-controller">
         <!-- Previous Game week button -->
-        <div @click="prevGameWeek" class="navigator-button">Prev</div>
+        <div @click="prevGameWeek" class="navigator-button">
+          {{ $t("Prev") }}
+        </div>
 
         <!-- Gameweek counter -->
         <div class="gameweek-controller-main">
@@ -114,12 +117,14 @@
           </div>
           <div class="gameweek-complete-verifier" v-else>❌</div>
           <div class="gameweek-controller-title">
-            Gameweek {{ showingGameWeek }}
+            {{ $t("Game week") }} {{ showingGameWeek }}
           </div>
         </div>
 
         <!-- Next game week Button -->
-        <div @click="nextGameWeek" class="navigator-button">Next</div>
+        <div @click="nextGameWeek" class="navigator-button">
+          {{ $t("Next") }}
+        </div>
 
         <!-- Add New game week button -->
       </div>
@@ -150,7 +155,9 @@
       <!-- Content -->
 
       <!-- If no fixtures -->
-      <div v-else class="gameweek-no-fixtures">No Fixtures</div>
+      <div v-else class="gameweek-no-fixtures">
+        {{ $t("No") }} {{ $t("Fixtures") }}
+      </div>
       <!-- If no fixtures -->
     </div>
     <!-- After Data Loaded -->

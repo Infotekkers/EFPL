@@ -37,21 +37,21 @@
         <div class="container-col">
           <!-- Team Name -->
           <div class="container-col input-container">
-            <label for="">Name</label>
+            <label for="">{{ $t("Name") }}</label>
             <input type="text" ref="teamName" v-model="teamName" />
           </div>
           <!-- Team Name -->
 
           <!-- Team City -->
           <div class="container-col input-container">
-            <label for="">City</label>
+            <label for="">{{ $t("City") }}</label>
             <input type="text" ref="teamCity" v-model="teamCity" />
           </div>
           <!-- Team City -->
 
           <!-- Team Stadium -->
           <div class="container-col input-container">
-            <label for="">Stadium</label>
+            <label for="">{{ $t("Stadium") }}</label>
             <input type="text" ref="teamStadium" v-model="teamStadium" />
           </div>
           <!-- Team Stadium -->
@@ -62,13 +62,13 @@
         <div class="container-col">
           <!-- Coach -->
           <div class="container-col input-container">
-            <label for="">Coach </label>
+            <label for="">{{ $t("Coach") }} </label>
             <input type="text" ref="teamCoach" v-model="teamCoach" />
           </div>
           <!-- Coach -->
           <!-- Stadium -->
           <div class="container-col input-container">
-            <label for="">Stadium Capacity </label>
+            <label for="">{{ $t("Stadium") }} {{ $t("Capacity") }} </label>
             <input
               type="number"
               ref="stadiumCapacity"
@@ -79,7 +79,7 @@
 
           <!-- Year -->
           <div class="container-col input-container">
-            <label for="">Founded</label>
+            <label for="">{{ $t("Founded") }}</label>
             <input
               class="input-number"
               type="number"
@@ -95,7 +95,7 @@
           <!-- Action Buttons -->
           <div class="team-modal-buttons-container">
             <div class="team-modal-cancel-button" @click="cancelSave">
-              Cancel
+              {{ $t("Cancel") }}
             </div>
             <div
               class="team-modal-save-button"
@@ -103,7 +103,7 @@
                 isEditMode == true ? { click: updateTeam } : { click: saveTeam }
               "
             >
-              Save
+              {{ $t("Save") }}
             </div>
           </div>
         </div>

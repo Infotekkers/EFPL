@@ -20,13 +20,13 @@
     <div class="teams-header-container">
       <!-- Title -->
       <div class="teams-title">
-        Ethiopian Premier League - {{ getSeason }} Teams
+        {{ $t("Ethiopian Premier League") }} - {{ getSeason }} {{ $t("Teams") }}
       </div>
 
       <!-- Add Button -->
       <div class="teams-add-new" @click="activateModal">
         <div>+</div>
-        Add
+        {{ $t("Add") }}
       </div>
     </div>
     <!-- Header -->
@@ -36,24 +36,24 @@
       <!-- ID -->
       <div class="teams-id-sorter">
         <span @click="sortByID(-1)">D</span>
-        ID
+        {{ $t("ID") }}
         <span @click="sortByID(1)">A</span>
       </div>
 
       <!-- ID -->
-      <div class="teams-logo-sorter">Logo</div>
+      <div class="teams-logo-sorter">{{ $t("Logo") }}</div>
 
       <!-- Name -->
       <div class="teams-name-sorter">
         <span @click="sortByName(-1)">D</span>
-        Team
+        {{ $t("Team") }}
         <span @click="sortByName(1)">A</span>
       </div>
       <!-- Name -->
 
       <!-- City -->
       <div class="teams-city-sorter">
-        <span @click="sortByCity(-1)">D</span> City
+        <span @click="sortByCity(-1)">D</span> {{ $t("City") }}
         <span @click="sortByCity(1)">A</span>
       </div>
       <!-- City -->
@@ -61,7 +61,7 @@
       <!-- Stadium -->
       <div class="teams-stadium-sorter">
         <span @click="sortbyStadium(-1)">D</span>
-        Stadium
+        {{ $t("Stadium") }}
         <span @click="sortbyStadium(1)">A</span>
       </div>
       <!-- Stadium -->
@@ -69,12 +69,12 @@
       <!-- Date -->
       <div class="teams-founded-sorter">
         <span @click="sortByFoundedDate(-1)">D</span>
-        Year
+        {{ $t("Year") }}
         <span @click="sortByFoundedDate(1)">A</span>
       </div>
 
       <!-- Date -->
-      <div class="teams-controls-sorter">Controls</div>
+      <div class="teams-controls-sorter">{{ $t("Controls") }}</div>
     </div>
     <!-- Sorter Header -->
     <div class="teams-container" v-if="getAllTeams.length > 0">
@@ -87,7 +87,7 @@
     </div>
 
     <!-- No items -->
-    <div class="no-teams-container" v-else>No Teams</div>
+    <div class="no-teams-container" v-else>{{ $("No") }} {{ $t("Teams") }}</div>
   </main>
 </template>
 
