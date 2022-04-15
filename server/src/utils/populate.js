@@ -605,9 +605,9 @@ const populateFixture = async () => {
 
         if (count > 4 && count <= 6) {
           dayDate.setDate(dayDate.getDate() + 1);
-        } else if (count == 6) {
+        } else if (count === 6) {
           dayDate.setDate(dayDate.getDate() + 2);
-        } else if (count == 7) {
+        } else if (count === 7) {
           dayDate.setDate(dayDate.getDate() + 3);
         }
 
