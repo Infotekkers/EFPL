@@ -1,5 +1,4 @@
 const asyncHandler = require("express-async-handler");
-const fs = require("fs");
 
 const Teams = require("../models/Teams");
 const Players = require("../models/Player");
@@ -7,7 +6,7 @@ const Fixture = require("../models/Fixtures");
 
 const Backup = require("../models/Backup");
 const { moveFile } = require("../utils/helpers");
-//   );
+
 const backup = asyncHandler(async (req, res) => {
   const seasonId = "21/22";
   const currentSeasonTeams = await Teams.find();
@@ -29,7 +28,7 @@ const backup = asyncHandler(async (req, res) => {
     const stadiumCapacity = team.stadiumCapacity;
     const foundedIn = team.foundedIn;
     const teamCoach = team.teamCoach;
-    console.log(teamLogo);
+    const teamId = team.teamId;
 
     const fileName = teamLogo.split("/");
 
@@ -47,8 +46,11 @@ const backup = asyncHandler(async (req, res) => {
       stadiumCapacity,
       foundedIn,
       teamCoach,
+      teamId,
     });
   });
+
+  // TODO:CLEAR Teams
 
   currentSeasonPlayers.forEach(async (player) => {
     const verifyExistence = await Backup.playersBkModel.find({
@@ -65,6 +67,7 @@ const backup = asyncHandler(async (req, res) => {
     const availability = player.availability;
     const score = player.score;
     const history = player.history;
+    const playerId = player.playerId;
 
     // Move logo here
     // const logoMove = await moveFile(
@@ -88,6 +91,7 @@ const backup = asyncHandler(async (req, res) => {
       availability,
       score,
       history,
+      playerId,
     });
   });
 
@@ -129,21 +133,50 @@ const backup = asyncHandler(async (req, res) => {
     });
   });
 
-  res.send(currentSeasonTeams);
-});
-const restore = asyncHandler(async (req, res) => {
-  const season = req.params.id;
-  try {
-    const data = fs.readFileSync(`src/controllers/f/${season}-team.json`);
-    const docs = JSON.parse(data.toString());
-    res.send(docs);
-  } catch (err) {
-    if (err.errno === -4058) {
-      res.status(422).json({ message: `No data for season ${season}` });
-    } else {
-      res.send(err);
-    }
-  }
+  res.status(200).json("Season Data Successfully Exported");
 });
 
-module.exports = { backup, restore };
+const restore = asyncHandler(async (req, res) => {
+  const importSelectedTeams = [1, 2, 3, 4, 5];
+
+  importSelectedTeams.forEach(async (team) => {
+    let currentTeam = await Backup.teamBkModel.find({ teamId: team });
+    currentTeam = currentTeam[0];
+
+    // Move file
+
+    const addNewTeam = {
+      teamName: currentTeam.teamName,
+      teamCity: currentTeam.teamCity,
+      teamStadium: currentTeam.teamStadium,
+      teamLogo: "/uploads/teams/Adama-City.png",
+      stadiumCapacity: currentTeam.stadiumCapacity,
+      foundedIn: currentTeam.foundedIn,
+      teamCoach: currentTeam.teamCoach,
+    };
+
+    console.log(addNewTeam);
+
+    await Teams.create(addNewTeam);
+  });
+
+  res.status(201).json("Done");
+});
+
+const viewTeam = asyncHandler(async (req, res) => {
+  const data = await Backup.teamBkModel
+    .find()
+    .select("teamName teamCity teamLogo teamId");
+
+  res.status(200).json(data);
+});
+
+const viewPlayer = asyncHandler(async (req, res) => {
+  const data = await Backup.playersBkModel
+    .find({ eplTeamId: req.params.teamId })
+    .select("playerName eplTeamId position playerId");
+
+  res.status(200).json(data);
+});
+
+module.exports = { backup, restore, viewTeam, viewPlayer };

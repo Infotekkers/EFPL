@@ -90,6 +90,16 @@ const routes = [
     component: ResetPassword,
   },
 
+  // Season Settings
+  {
+    path: "/admin/settings/season",
+    name: "Season Settings",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../components/SeasonSettingsComponent.vue"
+      ),
+  },
+
   // 404 page should always be the last route add routes above this
   {
     path: "/:catchAll(.*)",

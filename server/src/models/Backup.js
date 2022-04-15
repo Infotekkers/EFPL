@@ -5,10 +5,6 @@ const MONGO_LEGACY_DB_URI = process.env.MONGO_LOCAL_LEGACY_URL;
 // Create Connection
 const bkConnection = mongoose.createConnection(MONGO_LEGACY_DB_URI);
 
-const autoIncrement = require("mongoose-auto-increment");
-
-autoIncrement.initialize(mongoose.connection);
-
 /*
 =======================================
 Teams
@@ -43,13 +39,9 @@ const teamSchema = mongoose.Schema({
   teamCoach: {
     type: String,
   },
-});
-
-teamSchema.plugin(autoIncrement.plugin, {
-  model: "teams",
-  field: "teamId",
-  startAt: 1,
-  incrementBy: 1,
+  teamId: {
+    type: Number,
+  },
 });
 
 /*
@@ -108,13 +100,7 @@ const playerSchema = mongoose.Schema({
   availability: { type: [availabilitySchema] },
   score: { type: [scoreSchema] },
   history: { type: [historySchema] },
-});
-
-playerSchema.plugin(autoIncrement.plugin, {
-  model: "players",
-  field: "playerId",
-  startAt: 100000,
-  incrementBy: 1,
+  playerId: { type: Number },
 });
 
 /*
