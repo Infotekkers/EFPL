@@ -87,7 +87,9 @@
     </div>
 
     <!-- No items -->
-    <div class="no-teams-container" v-else>{{ $("No") }} {{ $t("Teams") }}</div>
+    <div class="no-teams-container" v-else>
+      {{ $t("No") }} {{ $t("Teams") }}
+    </div>
   </main>
 </template>
 

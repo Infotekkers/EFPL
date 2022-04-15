@@ -59,7 +59,11 @@
         <!-- Home team -->
 
         <!-- Game Time - formatted -->
-        <div class="fixture-game-time">{{ formatTime }}</div>
+        <div class="fixture-game-time">
+          <div v-if="fixture.status == 'scheduled'">{{ formatTime }}</div>
+
+          <div v-else class="score-info">0-0</div>
+        </div>
         <!-- Game Time - formatted -->
 
         <!-- Away Team -->
@@ -165,6 +169,11 @@
 .fixture-game-time {
   width: 8%;
   text-align: center;
+}
+.score-info {
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-size: 18px;
 }
 .fixture-controls {
   position: absolute;
@@ -289,12 +298,28 @@ export default {
 
     // Delete match event handler
     deleteMatch() {
-      store.dispatch("Fixture/deleteMatch", this.getMatchKey);
+      if (this.fixture.status == "scheduled") {
+        store.dispatch("Fixture/deleteMatch", this.getMatchKey);
+      } else {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: `Match is already live.`,
+        });
+      }
     },
     // edit match event handler
     editMatch() {
-      store.dispatch("Fixture/setEditFixtureId", this.getMatchKey);
-      this.$emit("activateModal");
+      if (this.fixture.status == "scheduled") {
+        store.dispatch("Fixture/setEditFixtureId", this.getMatchKey);
+        this.$emit("activateModal");
+      } else {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: `Match is already live.`,
+        });
+      }
     },
   },
 };

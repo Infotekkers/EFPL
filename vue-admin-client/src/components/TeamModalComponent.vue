@@ -316,7 +316,10 @@ export default {
       const teamStadium = this.$refs.teamStadium.value;
       const stadiumCapacity = this.$refs.stadiumCapacity.value;
       const foundedIn = this.$refs.foundedIn.value;
-      const teamLogo = await this.getBase64();
+      let teamLogo = "";
+      if (store.state.Team.imageChanged === true) {
+        teamLogo = await this.getBase64();
+      }
       const teamCoach = this.$refs.teamCoach.value;
 
       if (!teamName) {
@@ -388,9 +391,12 @@ export default {
     getBase64() {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.readAsDataURL(this.selectedImage);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
+
+        if (reader) {
+          reader.readAsDataURL(this.selectedImage);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        }
       });
     },
 
