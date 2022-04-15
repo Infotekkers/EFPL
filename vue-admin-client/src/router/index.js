@@ -24,7 +24,7 @@ const routes = [
         window.localStorage.getItem("currentAdmin")
       );
 
-      if (currentAdmin.token) {
+      if (currentAdmin && currentAdmin.token) {
         next();
       } else {
         next("/");

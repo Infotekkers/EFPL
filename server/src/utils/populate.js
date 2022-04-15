@@ -528,6 +528,9 @@ const populatePlayers = async () => {
 };
 
 const populateFixture = async () => {
+  await Fixture.deleteMany();
+  await Gameweek.deleteMany();
+  // all teams and ID
   const teamNameIDPair = {
     "Saint George S.C": "1",
     "Wolaita Dicha S.C": "2",
@@ -546,11 +549,44 @@ const populateFixture = async () => {
     "Jimma Aba Jifar F.C": "15",
     "Sebeta City F.C": "16",
   };
+
+  // get all fixtures
   const fixtures = await axios.get(`${baseURL}${PORT}/fixtures/`);
 
   //  if no fixtures
   if (fixtures.data.length === 0) {
     for (let i = 0; i < allPairedMatches.length; i++) {
+      const multiplier = i + 1;
+
+      const hours = [
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+      ];
+
+      const minutes = [
+        "00",
+        "15",
+        "20",
+        "25",
+        "30",
+        "35",
+        "40",
+        "45",
+        "50",
+        "55",
+      ];
+
       const currentGameWeek = {
         gameWeekNumber: i + 1,
         startTimestamp: Date.now() + 604800 * i,
@@ -558,14 +594,40 @@ const populateFixture = async () => {
       };
       await Gameweek.create(currentGameWeek);
 
+      let count = 1;
+
       allPairedMatches[i].forEach(async (fixture) => {
         const homeTeamID = teamNameIDPair[fixture.homeTeam];
         const awayTeamID = teamNameIDPair[fixture.awayTeam];
 
+        const dayDate = new Date();
+        dayDate.setDate(dayDate.getDate() + multiplier * 7);
+
+        if (count > 4 && count <= 6) {
+          dayDate.setDate(dayDate.getDate() + 1);
+        } else if (count == 6) {
+          dayDate.setDate(dayDate.getDate() + 2);
+        } else if (count == 7) {
+          dayDate.setDate(dayDate.getDate() + 3);
+        }
+
+        const timeDate =
+          hours[Math.floor(Math.random() * hours.length)] +
+          ":" +
+          minutes[Math.floor(Math.random() * minutes.length)] +
+          ":" +
+          "00";
+
+        const SCHEDULE = new Date(
+          dayDate.toISOString().split("T")[0] + "T" + timeDate
+        );
+
+        count = count + 1;
+
         const currentFixture = {
           gameweekId: currentGameWeek.gameWeekNumber,
           matchId: `${homeTeamID}|${awayTeamID}`,
-          schedule: Date.now() + 3600,
+          schedule: SCHEDULE,
 
           // Concern Here what are the possible values
           status: "scheduled",

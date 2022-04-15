@@ -181,6 +181,25 @@
 .fixture-controls > div {
   margin-left: 4px;
 }
+
+/* * Super Small Screen */
+@media screen and (max-width: 400px) {
+  .fixture-main-container {
+    display: none;
+  }
+}
+
+/* Small Screens */
+@media screen and (min-width: 401px) and (max-width: 1400px) {
+  .fixture-content-container {
+    flex-wrap: wrap;
+  }
+  .fixture-controls {
+    position: inherit;
+    margin-bottom: 16px;
+  }
+}
+
 /*  */
 </style>
 

@@ -3,6 +3,7 @@ import router from "../router/index";
 import store from "./index";
 const baseURL = process.env.VUE_APP_API_BASE_URL;
 export default {
+  // namespaced: true,
   state: {
     admins: [],
     currentAdmin: {},
@@ -14,8 +15,11 @@ export default {
   actions: {
     // set current admin
     async setAdmin({ commit }) {
-      let currentAdmin = JSON.parse(window.localStorage.currentAdmin);
-      commit("SET_CURRENT_ADMIN", currentAdmin);
+      let currentAdmin = window.localStorage.currentAdmin;
+
+      if (currentAdmin) {
+        commit("SET_CURRENT_ADMIN", JSON.parse(currentAdmin));
+      }
     },
     // log out admin
     logOutAdmin({ commit }) {
@@ -111,7 +115,7 @@ export default {
     SET_ADMINS: (state, admins) => (state.admins = admins),
     LOG_OUT: (state) => {
       state.currentAdmin = {};
-      window.localStorage.setItem("currentAdmin", JSON.stringify({}));
+      window.localStorage.removeItem("currentAdmin");
     },
     SET_CURRENT_ADMIN: (state, admin) => {
       state.currentAdmin = admin;

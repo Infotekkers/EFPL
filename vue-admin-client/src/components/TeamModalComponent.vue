@@ -70,7 +70,7 @@
           <div class="container-col input-container">
             <label for="">Stadium Capacity </label>
             <input
-              type="text"
+              type="number"
               ref="stadiumCapacity"
               v-model="stadiumCapacity"
             />

@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO:ADD RESULT -->
   <!-- Modal -->
   <main class="fixture-modal-main-container">
     <!-- Top Close Button -->
@@ -15,7 +16,10 @@
     <!-- Top Close Button -->
 
     <!-- Main Section -->
-    <div v-if="homeTeams.length > 0" class="fixture-modal-content-container">
+    <div
+      v-if="isTeamComplete && !isGameWeekComplete"
+      class="fixture-modal-content-container"
+    >
       <div class="fixture-modal-content">
         <!-- Content -->
         <div class="fixture-modal-scroller" v-if="homeTeams">
@@ -60,9 +64,8 @@
                   <input
                     ref="date"
                     type="date"
-                    id="birthday"
-                    name="birthday"
-                    :value="new Date().toISOString().split('T')[0]"
+                    :value="fixtureDate"
+                    @change="changeValue"
                     :min="new Date().toISOString().split('T')[0]"
                     :max="
                       new Date(
@@ -83,14 +86,24 @@
               <label for="Time">Time</label>
               <div>
                 <div class="fixture-time-hour">
-                  <select name="hour" id="hour" ref="hour">
+                  <select
+                    name="hour"
+                    id="hour"
+                    ref="hour"
+                    :value="fixtureHours"
+                  >
                     <option v-for="n in 13" :key="n" :value="n + 9">
                       {{ n + 9 }}
                     </option>
                   </select>
                 </div>
                 <div class="fixture-time-minute">
-                  <select name="minutes" id="minutes" ref="minutes">
+                  <select
+                    name="minutes"
+                    id="minutes"
+                    ref="minutes"
+                    :value="fixtureMinutes"
+                  >
                     <option
                       v-for="n in [
                         '00',
@@ -178,17 +191,29 @@
     </div>
     <!-- Main Section -->
 
-    <div v-else-if="isTeamComplete == 0" class="fixture-modal-complete">
+    <!-- all teams have matches -->
+    <div v-else-if="isGameWeekComplete" class="fixture-modal-incomplete">
+      All Teams have games in Game week {{ this.currentGameWeek }}
+    </div>
+    <!-- all teams have matches -->
+
+    <div v-else-if="getTeamCount == 0" class="fixture-modal-incomplete">
       No Teams Added
+
+      <div class="fixture-add-new-team" @click="addNewTeam">
+        <div>+</div>
+        Add
+      </div>
     </div>
 
-    <div v-else-if="isTeamComplete % 2 != 0" class="fixture-modal-complete">
-      Team Incomplete - {{ isTeamComplete }}
-    </div>
+    <div v-else-if="getTeamCount % 2 !== 0" class="fixture-modal-incomplete">
+      Incomplete Team
 
-    <!-- all teams have matches -->
-    <div v-else class="fixture-modal-complete">All Teams have matches</div>
-    <!-- all teams have matches -->
+      <div class="fixture-add-new-team" @click="addNewTeam">
+        <div>+</div>
+        Add
+      </div>
+    </div>
   </main>
   <!-- Modal -->
 </template>
@@ -332,19 +357,42 @@ select {
 .disabled {
   opacity: 0.5;
 }
-.fixture-modal-complete {
+.fixture-modal-incomplete {
   width: 60%;
   min-height: 300px;
   background: var(--neutral-100);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fixture-add-new-team {
+  font-size: 16px;
+  /* position: absolute; */
+  /* right: 0; */
+  background: var(--primary-900);
+  padding: 5px 22px 5px 16px;
+
+  width: fit-content;
+  color: var(--neutral-100);
+  display: flex;
+  margin-top: 32px;
+}
+.fixture-add-new-team > div {
+  width: 20px;
+  height: 20px;
+  background: var(--primary-800);
+  border-radius: 50%;
   display: grid;
   place-items: center;
+  margin-right: 6px;
 }
 </style>
 
 <script>
 // Utils
 import store from "../store/index";
-
+import router from "../router/index";
 export default {
   name: "FixtureModalComponent",
   props: {
@@ -353,6 +401,13 @@ export default {
   data() {
     return {
       homeIconError: false,
+      fixtureDataChanged: true,
+      loadFromDBDate: true,
+      loadFromDBHour: true,
+      loadFromDBMinute: true,
+      fixtureDate: new Date().toISOString().split("T")[0],
+      fixtureHours: "10",
+      fixtureMinutes: "00",
     };
   },
   computed: {
@@ -361,10 +416,43 @@ export default {
       return store.state.Fixture.showingGameWeek;
     },
 
-    isTeamComplete() {
+    isGameWeekComplete() {
+      if (this.isEditMode) {
+        return false;
+      } else {
+        // get number of teams
+        const teamCount = store.state.Fixture.allTeams.length;
+
+        // count gameweek for current GW
+        const fixtures = JSON.parse(
+          JSON.stringify(store.state.Fixture.allFixturesUnfiltered)
+        );
+
+        const fixturesCount = fixtures.filter((fixture) => {
+          return fixture.gameweekId == this.currentGameWeek;
+        }).length;
+
+        // number of fixtures should be more than 0 and 2 * number of teams
+        return teamCount === fixturesCount * 2 && fixturesCount > 0
+          ? true
+          : false;
+      }
+    },
+
+    getTeamCount() {
       const teamCount = store.state.Fixture.allTeams.length;
 
       return teamCount;
+    },
+
+    isTeamComplete() {
+      if (this.isEditMode) {
+        return true;
+      } else {
+        const teamCount = store.state.Fixture.allTeams.length;
+
+        return teamCount >= 2 && teamCount % 2 == 0;
+      }
     },
 
     // gets all possible home teams
@@ -488,6 +576,25 @@ export default {
       const baseURL = process.env.VUE_APP_API_BASE_URL;
       return baseURL + this.awayTeams[this.awayTeamIndex].teamLogo;
     },
+
+    getFixtureDate() {
+      const homeTeam = this.homeTeams[this.homeTeamIndex].teamName;
+      const awayTeam = this.awayTeams[this.awayTeamIndex].teamName;
+
+      const gw = this.currentGameWeek;
+
+      const fixture = store.state.Fixture.allFixturesUnfiltered.filter(
+        (fixture) => {
+          return (
+            fixture.homeTeam == homeTeam &&
+            fixture.awayTeam == awayTeam &&
+            fixture.gameweekId == gw
+          );
+        }
+      );
+
+      return fixture;
+    },
   },
 
   methods: {
@@ -554,7 +661,10 @@ export default {
     // update fixture event handler - edit mode
     updateFixture() {
       // If same team warn
-      if (this.awayTeamIndex === this.homeTeamIndex) {
+      if (
+        this.awayTeamIndex === this.homeTeamIndex &&
+        this.fixtureDataChanged == false
+      ) {
         store.dispatch("Global/setNotificationInfo", {
           showNotification: true,
           notificationType: "warning",
@@ -623,6 +733,28 @@ export default {
       */
       this.$emit("closeModal");
     },
+
+    addNewTeam() {
+      // pass modal 1 to activate modal auto
+      router.push({
+        path: "/admin/teams",
+        query: { modal: 1 },
+      });
+    },
+  },
+
+  updated() {
+    if (this.isEditMode) {
+      this.fixtureDate = this.getFixtureDate[0].schedule.split("T")[0];
+
+      const time = new Date(this.getFixtureDate[0].schedule);
+      const hours = time.getHours();
+      const minutes =
+        time.getMinutes() == 0 ? "0" + time.getMinutes() : time.getMinutes();
+
+      this.fixtureHours = hours;
+      this.fixtureMinutes = minutes;
+    }
   },
 };
 </script>

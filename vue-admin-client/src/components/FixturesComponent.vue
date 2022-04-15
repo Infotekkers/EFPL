@@ -280,6 +280,62 @@
   font-weight: bold;
   font-size: var(--text-medium);
 }
+
+/* Super Small Screen */
+@media screen and (max-width: 400px) {
+  .fixtures-main-container {
+    display: none;
+  }
+}
+
+/* Small Screens */
+@media screen and (min-width: 401px) and (max-width: 576px) {
+  .gameweek-title {
+    font-size: 22px;
+    transform: translateX(-32px);
+  }
+  .filter-container {
+    padding-right: 10%;
+  }
+  .filter-item {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  .gameweek-title {
+    font-size: 22px;
+    transform: translateX(-32px);
+  }
+  .filter-container {
+    padding-right: 10%;
+  }
+  .filter-item {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+  .gameweek-title {
+    font-size: 22px;
+    transform: translateX(-32px);
+  }
+  .filter-container {
+    padding-right: 10%;
+  }
+  .filter-item {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .filter-container {
+    padding-right: 20vw;
+  }
+  .filter-item {
+    font-size: 18px;
+  }
+}
 </style>
 
 <script>
@@ -404,14 +460,17 @@ export default {
     },
 
     isGameWeekComplete() {
+      // get number of teams
       const teamCount = store.state.Fixture.allTeams.length;
 
+      // count gameweek for current GW
       const fixturesCount = store.state.Fixture.allFixturesUnfiltered.filter(
         (fixture) => {
           return fixture.gameweekId == this.showingGameWeek;
         }
       ).length;
 
+      // number of fixtures should be more than 0 and 2 * number of teams
       return teamCount === fixturesCount * 2 && fixturesCount > 0
         ? true
         : false;

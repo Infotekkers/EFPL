@@ -252,6 +252,12 @@ export default {
 
   beforeMount() {
     store.dispatch("Team/setAllTeams");
+
+    // activate modal if required -> when routed from fixtures page
+    if (this.$route.query.modal == 1) {
+      this.showModal = true;
+      this.$router.replace({ modal: null });
+    }
   },
 };
 </script>
