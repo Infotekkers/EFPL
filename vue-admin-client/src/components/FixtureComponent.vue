@@ -85,8 +85,6 @@
       </div>
       <!-- Fixture Main Info -->
 
-      <!-- TODO:Filter Controls by match status -->
-
       <!-- Control Center -->
       <div class="fixture-controls">
         <div @click="startMatch">

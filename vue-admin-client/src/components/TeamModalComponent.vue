@@ -347,8 +347,6 @@ export default {
           notificationMessage: "Team Logo is required",
         });
       } else {
-        //   TODO: Optimize image
-        // https://www.youtube.com/watch?v=bXf_UdyDzSA
         const teamData = {
           teamName,
           teamCity,

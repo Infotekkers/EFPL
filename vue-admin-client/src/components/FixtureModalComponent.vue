@@ -29,7 +29,11 @@
             <!-- Previous button -->
 
             <div class="fixture-home-team-previous" @click="prevHomeTeam">
-              P
+              <img
+                :src="previousSmallIcon.path"
+                :alt="previousSmallIcon.alt"
+                class="small-icon"
+              />
             </div>
             <div class="fixture-team-selector">
               <!-- Image -->
@@ -48,7 +52,13 @@
             </div>
 
             <!-- Next Button -->
-            <div class="fixture-home-team-next" @click="nextHomeTeam">N</div>
+            <div class="fixture-home-team-next" @click="nextHomeTeam">
+              <img
+                :src="nextSmallIcon.path"
+                :alt="nextSmallIcon.alt"
+                class="small-icon"
+              />
+            </div>
             <!-- Next Button -->
           </div>
           <!-- Home team info -->
@@ -139,7 +149,11 @@
             :class="awayTeamIndex === homeTeamIndex ? 'disabled' : ''"
           >
             <div class="fixture-away-team-previous" @click="prevAwayTeam">
-              P
+              <img
+                :src="previousSmallIcon.path"
+                :alt="previousSmallIcon.alt"
+                class="small-icon"
+              />
             </div>
 
             <div class="fixture-team-selector">
@@ -153,7 +167,13 @@
                 {{ awayTeams[awayTeamIndex].teamName }}
               </div>
             </div>
-            <div class="fixture-away-team-next" @click="nextAwayTeam">N</div>
+            <div class="fixture-away-team-next" @click="nextAwayTeam">
+              <img
+                :src="nextSmallIcon.path"
+                :alt="nextSmallIcon.alt"
+                class="small-icon"
+              />
+            </div>
           </div>
           <!-- Away Team Info -->
 
@@ -203,7 +223,9 @@
       {{ $t("no teams added") }}
 
       <div class="fixture-add-new-team" @click="addNewTeam">
-        <div>+</div>
+        <div>
+          <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
+        </div>
         {{ $t("Add") }}
       </div>
     </div>
@@ -212,7 +234,9 @@
       {{ $t("incomplete team") }}
 
       <div class="fixture-add-new-team" @click="addNewTeam">
-        <div>+</div>
+        <div>
+          <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
+        </div>
         {{ $t("Add") }}
       </div>
     </div>
@@ -221,6 +245,11 @@
 </template>
 
 <style scoped>
+.small-icon {
+  width: 15px;
+  height: 15px;
+}
+
 .fixture-modal-main-container {
   height: 100vh;
   width: 100%;
@@ -262,9 +291,14 @@
   /* position: relative; */
 }
 .fixture-modal-scroller {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 .fixture-home-team-section,
 .fixture-away-team-section {
@@ -395,6 +429,9 @@ select {
 // Utils
 import store from "../store/index";
 import router from "../router/index";
+
+import { nextSmallIcon, previousSmallIcon, addIcon } from "@/utils/Icons";
+
 export default {
   name: "FixtureModalComponent",
   props: {
@@ -410,6 +447,11 @@ export default {
       fixtureDate: new Date().toISOString().split("T")[0],
       fixtureHours: "10",
       fixtureMinutes: "00",
+
+      // Icons
+      nextSmallIcon: nextSmallIcon,
+      previousSmallIcon: previousSmallIcon,
+      addIcon: addIcon,
     };
   },
   computed: {
