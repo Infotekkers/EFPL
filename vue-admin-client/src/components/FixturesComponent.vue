@@ -107,15 +107,15 @@
         <!-- Previous Game week button -->
         <div @click="prevGameWeek" class="navigator-button">
           <div>
-            {{ $t("Prev") }}
-          </div>
-
-          <div>
             <img
               :src="nextLargeIcon.path"
               :alt="nextLargeIcon.alt"
               class="medium-icon"
             />
+          </div>
+
+          <div>
+            {{ $t("Prev") }}
           </div>
         </div>
 

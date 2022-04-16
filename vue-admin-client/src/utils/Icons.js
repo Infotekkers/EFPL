@@ -56,6 +56,16 @@ const deleteIcon = {
   alt: "Delete",
 };
 
+const collapseIcon = {
+  path: require("../assets/icons/collapse-section-icon.svg"),
+  alt: "Collapse",
+};
+
+const expandIcon = {
+  path: require("../assets/icons/expand-section-icon.svg"),
+  alt: "Expand",
+};
+
 module.exports = {
   playIcon,
   pauseIcon,
@@ -73,4 +83,7 @@ module.exports = {
   addIcon,
   editIcon,
   deleteIcon,
+
+  collapseIcon,
+  expandIcon,
 };

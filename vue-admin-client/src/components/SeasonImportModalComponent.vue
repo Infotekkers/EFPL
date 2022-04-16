@@ -4,14 +4,35 @@
     <div class="season-modal-close" @click="closeModal">X</div>
     <!-- Close Button -->
 
-    <h1>Teams</h1>
-    <TeamImportComponent
-      v-for="legacyTeam in getAllLegacyTeams"
-      :key="legacyTeam.teamId"
-      :legacyTeam="legacyTeam"
-    />
+    <!-- Loading -->
+    <div v-if="isLoading" class="loading-container">Loading..</div>
+    <!-- Loading -->
 
-    <div class="season-modal-save-button" @click="startImport">Save</div>
+    <div v-else class="season-modal-container">
+      <!-- Teams Section -->
+      <div v-if="getAllLegacyTeams.length > 0">
+        <h1>Teams</h1>
+        <TeamImportComponent
+          v-for="legacyTeam in getAllLegacyTeams"
+          :key="legacyTeam.teamId"
+          :legacyTeam="legacyTeam"
+        />
+
+        <!-- Save Button -->
+        <div class="season-modal-button-container">
+          <div class="season-modal-cancel-button" @click="closeModal">
+            Cancel
+          </div>
+          <div class="season-modal-save-button" @click="startImport">Save</div>
+        </div>
+        <!-- Save Button -->
+      </div>
+      <!-- Teams Section -->
+
+      <!-- No teams -->
+      <div v-else class="loading-container">No Teams to import</div>
+      <!-- No teams -->
+    </div>
   </main>
 </template>
 
@@ -24,6 +45,11 @@ export default {
   name: "SeasonImportModal",
   components: {
     TeamImportComponent,
+  },
+  data() {
+    return {
+      isLoading: false,
+    };
   },
   props: {
     showModal: Boolean,
@@ -46,6 +72,12 @@ export default {
   beforeMount() {
     store.dispatch("Season/getAllLegacyTeams");
   },
+
+  mounted() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000);
+  },
 };
 </script>
 
@@ -56,10 +88,10 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  background: teal;
+  background: rgba(0, 0, 0, 0.65);
 
   overflow-y: auto;
-  padding: 60px 0;
+  padding: 80px 32px;
 }
 .season-modal-close {
   position: absolute;
@@ -76,24 +108,55 @@ export default {
   font-weight: bold;
   cursor: pointer;
 }
-.team-import-container {
-  margin: 36px 20px;
-  width: 85%;
-  background: yellow;
+h1 {
+  margin-top: 32px;
 }
-.team-import-content {
-  min-height: 70px;
-  width: 100%;
+.loading-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  min-height: 300px;
+  margin-top: 45px;
+
+  background: white;
+
   display: flex;
   align-items: center;
-  padding: 10px 16px;
-  /*  */
-  background: tomato;
+  justify-content: center;
+}
+.season-modal-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  min-height: 300px;
+  margin-top: 45px;
+
+  padding: 0 0 50px 0;
+
+  background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.season-modal-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .season-modal-save-button {
-  border: 1px solid black;
+  margin-left: 8px;
   width: fit-content;
-  margin-left: 32px;
   padding: 5px 22px;
+  background: var(--primary-900);
+  color: var(--neutral-100);
+  font-size: 15px;
+}
+.season-modal-save-button,
+.season-modal-cancel-button {
+  margin-top: 36px;
+
+  padding: 5px 22px;
+  cursor: pointer;
 }
 </style>

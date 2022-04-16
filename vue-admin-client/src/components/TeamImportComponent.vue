@@ -2,26 +2,54 @@
   <!-- Content -->
   <div class="team-import-container">
     <div class="team-import-content">
+      <!-- Checkbox -->
       <input type="checkbox" @change="teamCheckboxClicked" ref="teamCheckbox" />
+      <!-- Checkbox -->
+
+      <!-- Logo -->
       <div
         class="team-import-logo"
         :style="{
           'background-image': 'url(' + getTeamLogo + ')',
         }"
       ></div>
+      <!-- Logo -->
 
+      <!-- TeamName -->
       <div class="team-import-name">{{ legacyTeam.teamName }}</div>
+      <!-- TeamName -->
 
+      <!-- Team City -->
       <div class="team-import-city">{{ legacyTeam.teamCity }}</div>
+      <!-- Team City -->
 
+      <!-- Collapse/Expand Button -->
       <div class="team-import-collapse-player" @click="togglePlayerComponent">
-        <span v-if="showPlayerComponent == false"> S </span>
-        <span v-else-if="showPlayerComponent == true">H</span>
+        <!-- Expand Button -->
+        <span v-if="showPlayerComponent == false">
+          <img
+            :src="expandIcon.path"
+            :alt="expandIcon.alt"
+            class="small-icon"
+          />
+        </span>
+        <!-- Expand Button -->
+
+        <!-- Collapse Button -->
+        <span v-else-if="showPlayerComponent == true">
+          <img
+            :src="collapseIcon.path"
+            :alt="collapseIcon.alt"
+            class="small-icon"
+          />
+        </span>
+        <!-- Collapse Button -->
       </div>
     </div>
     <PlayerImportComponent
       :teamId="legacyTeam.teamId"
       :show="showPlayerComponent"
+      :check="checkPlayers"
     />
   </div>
   <!-- Content -->
@@ -30,6 +58,9 @@
 <script>
 import PlayerImportComponent from "@/components/PlayerImportComponent.vue";
 import store from "@/store";
+
+// Icons
+import { collapseIcon, expandIcon } from "@/utils/Icons";
 export default {
   name: "TeamImportComponent",
   components: {
@@ -38,6 +69,11 @@ export default {
   data() {
     return {
       showPlayerComponent: false,
+      checkPlayers: false,
+
+      // Icons
+      collapseIcon: collapseIcon,
+      expandIcon: expandIcon,
     };
   },
   props: {
@@ -57,6 +93,9 @@ export default {
 
         // add to selection
         store.dispatch("Season/setImportSelectedTeam", this.legacyTeam.teamId);
+
+        // check team players
+        this.checkPlayers = true;
       } else {
         //   remove team
         const filtered = store.state.Season.importSelectedTeams.filter(
@@ -76,7 +115,7 @@ export default {
         store.dispatch("Season/replaceImportSelectedPlayer", filteredPlayers);
       }
 
-      //   add/remove to selection
+      this.checkPlayers = false;
     },
 
     togglePlayerComponent() {
@@ -94,10 +133,24 @@ export default {
 </script>
 
 <style scoped>
+/* Icon */
+.small-icon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
 .team-import-container {
-  margin: 36px 20px;
-  width: 85%;
-  background: yellow;
+  margin: 0px 20px;
+  padding: 8px 0;
+  width: 100%;
+  border-bottom: 2px solid var(--neutral-200);
+  color: var(--neutral-900);
+}
+.team-import-container:nth-of-type(odd) {
+  background: var(--neutral-100);
+}
+.team-import-container:nth-of-type(1) {
+  margin-top: 32px;
 }
 .team-import-content {
   min-height: 70px;
@@ -105,8 +158,6 @@ export default {
   display: flex;
   align-items: center;
   padding: 10px 16px;
-  /*  */
-  background: tomato;
 }
 .team-import-content > input {
   margin-right: 12px;
@@ -114,18 +165,16 @@ export default {
   height: 20px;
 }
 .team-import-logo {
-  width: 55px;
-  height: 55px;
+  width: 40px;
+  height: 40px;
   margin-right: 20px;
-
-  /* background: green; */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 .team-import-name {
+  font-size: 16px;
   margin-right: 30px;
-  background: red;
   min-width: 200px;
 }
 .team-import-city {

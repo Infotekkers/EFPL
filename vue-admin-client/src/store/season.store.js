@@ -10,7 +10,6 @@ export default {
   state: {
     allLegacyTeams: [],
     allLegacyPlayers: [],
-    playersFetched: false,
 
     // selected for import
     importSelectedTeams: [],
@@ -111,29 +110,39 @@ export default {
     },
 
     async initiateImport() {
-      await axiosInstance
-        .post(`${baseURL}/backup/restore`, {
-          importSelectedTeams: store.state.Season.importSelectedTeams,
-          importSelectedPlayers: store.state.Season.importSelectedPlayers,
-        })
-        .then((response) => {
-          if (response.status == 201) {
+      const importSelectedTeams = store.state.Season.importSelectedTeams;
+      const importSelectedPlayers = store.state.Season.importSelectedPlayers;
+      if (importSelectedTeams.length == 0) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "warning",
+          notificationMessage: "No Selection to import.",
+        });
+      } else {
+        await axiosInstance
+          .post(`${baseURL}/backup/restore`, {
+            importSelectedTeams: importSelectedTeams,
+            importSelectedPlayers: importSelectedPlayers,
+          })
+          .then((response) => {
+            if (response.status == 201) {
+              store.dispatch("Global/setNotificationInfo", {
+                showNotification: true,
+                notificationType: "success",
+                notificationMessage: `Season Data Successfully Imported.`,
+              });
+
+              store.dispatch("Season/getAllLegacyTeams");
+            }
+          })
+          .catch((error) => {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
-              notificationType: "success",
-              notificationMessage: `Season Data Successfully Imported.`,
+              notificationType: "error",
+              notificationMessage: error.response.data,
             });
-
-            store.dispatch("Season/getAllLegacyTeams");
-          }
-        })
-        .catch((error) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "error",
-            notificationMessage: error.response.data,
           });
-        });
+      }
     },
 
     async exportSeason() {
