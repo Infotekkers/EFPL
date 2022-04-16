@@ -2,16 +2,16 @@ const asyncHandler = require("express-async-handler");
 
 const Teams = require("../models/Teams");
 const Players = require("../models/Player");
-const Fixture = require("../models/Fixtures");
+// const Fixture = require("../models/Fixtures");
 
 const Backup = require("../models/Backup");
 const { moveFile } = require("../utils/helpers");
 
 const backup = asyncHandler(async (req, res) => {
-  const seasonId = "21/22";
+  // const seasonId = "21/22";
   const currentSeasonTeams = await Teams.find();
   const currentSeasonPlayers = await Players.find();
-  const currentSeasonFixtures = await Fixture.find();
+  // const currentSeasonFixtures = await Fixture.find();
 
   currentSeasonTeams.forEach(async (team) => {
     const verifyExistence = await Backup.teamBkModel.find({
