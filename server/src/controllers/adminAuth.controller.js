@@ -117,8 +117,14 @@ const validateAdmin = asyncHandler(async (req, res) => {
   const token = req.body.token;
 
   try {
-    jwt.verify(token, process.env.JWT_SECRET);
-    res.status(200).json({ messaage: "Validated Successfully" });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const admin = await Admin.findById(decoded.data).select("-password");
+    if(admin){
+      res.status(200).json({messaage:"Validated"})
+    }
+    else{
+      res.status(403).json({messaage:"Something went wrong"})
+    }
   } catch (err) {
     res.status(404).json({ messaage: "Something went wrong" });
   }
