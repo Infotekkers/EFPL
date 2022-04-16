@@ -139,7 +139,10 @@ const backup = asyncHandler(async (req, res) => {
 });
 
 const restore = asyncHandler(async (req, res) => {
-  const { importSelectedTeams, importSelectedPlayers } = req.body;
+  const {
+    importSelectedTeams,
+    //  importSelectedPlayers
+  } = req.body;
 
   importSelectedTeams.forEach(async (team) => {
     let currentTeam = await Backup.teamBkModel.find({ teamId: team });
