@@ -1,16 +1,19 @@
 <template>
-  <main>
+  <main v-if="fixtureDetailsLoaded && !errorLog">
     <TeamSelector
       :homeTeamId="parseInt(this.homeTeamId)"
       :awayTeamId="parseInt(this.awayTeamId)"
       :homeTeamName="this.fixtureDetailData.teams[this.homeTeamId].teamName"
       :awayTeamName="this.fixtureDetailData.teams[this.awayTeamId].teamName"
       :score="score[this.fixtureDetailId]"
+      :status="this.fixtureDetailData.status"
       @changeActiveTeam="changeActiveTeam"
     />
     <Field :activeTeamId="this.activeTeamId" />
     <Locker :activeTeamId="this.activeTeamId" />
   </main>
+  <main v-else-if="errorLog">Encountered an error</main>
+  <main v-else>Loading</main>
 </template>
 
 <script>
@@ -45,6 +48,8 @@ export default {
       "players",
       "fixtureDetailData",
       "fixtureDetailId",
+      "fixtureDetailsLoaded",
+      "errorLog",
       "score",
     ]),
   },

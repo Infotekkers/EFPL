@@ -1,9 +1,10 @@
 <template>
   <div id="main-fixture-detail-team-selector">
+    {{ status }}
     <button @click="$emit('changeActiveTeam', this.homeTeamId)">
       {{ homeTeamName }}
     </button>
-    {{ score }}
+    <div v-if="status !== 'scheduled'">{{ score }}</div>
     <button @click="$emit('changeActiveTeam', this.awayTeamId)">
       {{ awayTeamName }}
     </button>
@@ -18,6 +19,7 @@ export default {
     homeTeamName: String,
     awayTeamName: String,
     score: String,
+    status: String,
   },
 };
 </script>

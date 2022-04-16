@@ -32,6 +32,7 @@ export default {
       formations: {},
       lineups: {},
       stats: {},
+      status: "",
     },
 
     // Players arranged according to their EPL teams
@@ -42,6 +43,9 @@ export default {
 
     // Loading indicator
     fixtureDetailsLoaded: false,
+
+    // Error Log
+    errorLog: "",
 
     score: { "10|15": "0v0" },
   },
@@ -98,8 +102,8 @@ export default {
       state.fixtureDetailId = payload;
     },
     SET_FIXTURE_DETAIL_DATA(state, payload) {
-      if (payload.type === "stats")
-        state.fixtureDetailData.stats = payload.data;
+      if (payload.type === "stats" || payload.type === "status")
+        state.fixtureDetailData[payload.type] = payload.data;
       else state.fixtureDetailData[payload.type][payload.teamId] = payload.data;
     },
     SET_PLAYERS(state, payload) {
@@ -119,6 +123,9 @@ export default {
     },
     SET_SCORE(state, payload) {
       state.score[payload.matchId] = payload.data;
+    },
+    SET_ERROR_LOG(state, payload) {
+      state.errorLog = payload;
     },
     updateField,
   },
@@ -325,7 +332,7 @@ export default {
       commit("SET_FIXTURE_DETAIL_ID", matchId);
     },
 
-    async loadFixtureDetails({ commit }, matchId) {
+    async loadFixtureDetails({ commit, dispatch }, matchId) {
       const homeTeamId = matchId.split("|")[0];
       const awayTeamId = matchId.split("|")[1];
 
@@ -417,6 +424,12 @@ export default {
               commit("SET_FIXTURE_DETAIL_DATA", payload);
             }
 
+            payload = {
+              type: "status",
+              data: resFixtureStats.data.status,
+            };
+            commit("SET_FIXTURE_DETAIL_DATA", payload);
+
             // Using object assign to copy obj so as not to delete the response data
             payload = {};
             payload[homeTeamId] = Object.assign(
@@ -455,7 +468,8 @@ export default {
           })
         )
         .catch((err) => {
-          store.dispatch("Global/setNotificationInfo", {
+          commit("SET_ERROR_LOG", err.response.data);
+          dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
             notificationMessage: err.response.data,
