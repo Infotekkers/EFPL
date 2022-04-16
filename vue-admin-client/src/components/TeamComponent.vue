@@ -49,10 +49,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 16px;
-  /* margin-top: var(--spacing-large); */
   min-height: 110px;
   border-bottom: 2px solid var(--neutral-200);
-  font-size: 18px;
+  font-size: 16px;
   color: var(--neutral-900);
 }
 .team-container:nth-of-type(odd) {
@@ -75,6 +74,7 @@
 .team-name-container {
   width: 20%;
   min-width: 130px;
+  display: flex;
 }
 .team-container-colored {
   background: var(--primary-100);
@@ -83,15 +83,20 @@
 .team-city-container {
   min-width: 100px;
   width: 17%;
+  display: flex;
 }
 
 .team-stadium-container {
-  width: 16%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 18%;
 }
 .team-capacity-container {
   font-size: var(--spacing-small);
 }
 .team-year-container {
+  display: flex;
   width: 8%;
 }
 .team-controls-container {
@@ -103,21 +108,6 @@
 .team-controls-container > div:nth-of-type(1) {
   margin-right: 8px;
 }
-/*  */
-/* .logo {
-  min-width: 100px;
-  min-height: 100px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; */
-/* background: yellow; */
-/* }
-.controls {
-  display: flex;
-}
-.controls > div:nth-of-type(1) {
-  margin-right: 8px;
-} */
 </style>
 
 <script>

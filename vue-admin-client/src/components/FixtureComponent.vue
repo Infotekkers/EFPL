@@ -1,6 +1,6 @@
 <template>
   <!-- TODO:Add Result Display -->
-  <main class="fixture-main-container">
+  <div class="fixture-main-container">
     <!-- teams loading -->
     <div v-if="isTeamLoading == true">{{ $t("Loading") }}</div>
     <!-- teams loading -->
@@ -117,7 +117,7 @@
       <!-- Control Center -->
     </div>
     <!-- Container -->
-  </main>
+  </div>
 </template>
 
 <style scoped>
@@ -143,6 +143,7 @@
 }
 .fixture-main-container:nth-of-type(odd) {
   background: var(--neutral-100);
+  /* background: red; */
 }
 .fixture-main-container:nth-of-type(1) {
   margin-top: 16px;

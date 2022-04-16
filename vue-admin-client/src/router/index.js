@@ -1,23 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import AdminLoginView from "../views/AdminLoginView.vue";
-import PageNotFoundComponent from "../components/PageNotFoundComponent.vue";
-import SettingsComponent from "../components/AdminSettingsComponent.vue";
-import Admin from "../components/AdminComponent.vue";
-import ForgotPassword from "../components/ForgotPasswordComponent";
-import ResetPassword from "../components/ResetPasswordComponent";
-import FixtureDetail from "../components/FixtureDetailComponent.vue";
+import Main from "../views/MainView.vue";
 
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
     path: "/admin",
     name: "admin",
-    component: Admin,
+    component: Main,
     beforeEnter(to, from, next) {
       // get the currently signed in admin
       const currentAdmin = JSON.parse(
@@ -31,41 +19,54 @@ const routes = [
       }
     },
     children: [
-      // settings page
+      // Home
       {
-        path: "settings",
-        name: "settings",
-        component: SettingsComponent,
+        path: "home",
+        name: "Home",
+        component: () => import("../views/HomeView.vue"),
       },
-      // Fixture Routes
+
+      // Fixtures
       {
         path: "fixtures",
         name: "Fixtures",
-        component: () => import("../components/FixturesComponent.vue"),
+        component: () => import("../views/FixturesView.vue"),
+        // component: () => import("../components/FixturesComponent.vue"),
       },
 
-      {
-        path: "fixture/detail",
-        name: "Fixture Detail",
-        component: FixtureDetail,
-      },
-
-      // Team Route
+      // Teams
       {
         path: "teams",
         name: "Teams",
-        component: () => import("../components/TeamsComponent.vue"),
+        component: () => import("../views/TeamsView.vue"),
       },
-      // about page
+
+      // Settings
       {
-        path: "about",
-        name: "about",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+        path: "settings",
+        name: "settings",
+        component: () => import("../views/SettingsView.vue"),
       },
+
+      {
+        path: "players",
+        name: "Players",
+        component: () => import("../views/PlayersView.vue"),
+      },
+
+      /*
+
+      */
+
+      // settings page
+
+      // Fixture Routes
+
+      // {
+      //   path: "fixture/detail",
+      //   name: "Fixture Detail",
+      //   component: FixtureDetail,
+      // },
     ],
   },
 
@@ -73,28 +74,28 @@ const routes = [
   {
     path: "/login",
     name: "admin-login",
-    component: AdminLoginView,
+    component: () => import("../views/AdminLoginView.vue"),
   },
 
   // forgot password page
-  {
-    path: "/forgotpassword",
-    name: "forgot-password",
-    component: ForgotPassword,
-  },
+  // {
+  //   path: "/forgotpassword",
+  //   name: "forgot-password",
+  //   component: ForgotPassword,
+  // },
 
-  // reset password
-  {
-    path: "/resetPassword/:token",
-    name: "reset-password",
-    component: ResetPassword,
-  },
+  // // reset password
+  // {
+  //   path: "/resetPassword/:token",
+  //   name: "reset-password",
+  //   component: ResetPassword,
+  // },
 
   // 404 page should always be the last route add routes above this
   {
     path: "/:catchAll(.*)",
-    name: "pagenotfound",
-    component: PageNotFoundComponent,
+    name: "Page Not Found",
+    component: () => import("../views/PageNotFoundView.vue"),
   },
 ];
 

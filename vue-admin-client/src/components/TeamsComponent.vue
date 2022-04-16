@@ -174,9 +174,7 @@
 }
 .teams-main-container {
   /* background: var(--primary-400); */
-  width: 82%;
-  margin-left: 18%;
-  padding: 100px 24px 60px 16px;
+  width: 100%;
 }
 .team-search-bar {
   width: 20%;
@@ -263,7 +261,7 @@
   width: 17%;
 }
 .teams-stadium-sorter {
-  width: 16%;
+  width: 18%;
 }
 .teams-founded-sorter {
   width: 8%;

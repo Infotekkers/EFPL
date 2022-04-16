@@ -5,28 +5,51 @@
         <span>&#11164;</span>
       </button>
       <div class="sidebar-wrapper">
+        <!-- Home -->
         <div class="sidebar__link">
-          <router-link to="/">Home</router-link>
+          <router-link to="/admin/home">Home</router-link>
         </div>
+
+        <!-- Fixtures -->
         <div class="sidebar__link">
-          <router-link to="/about">About</router-link>
+          <router-link to="/admin/fixtures">Fixtures</router-link>
+        </div>
+
+        <!-- Teams -->
+        <div class="sidebar__link">
+          <router-link to="/admin/teams">Teams</router-link>
+        </div>
+
+        <!-- Players -->
+        <div class="sidebar__link">
+          <router-link to="/admin/players">Players</router-link>
+        </div>
+
+        <!-- settings -->
+        <div class="sidebar__link">
+          <router-link to="/admin/settings">Settings</router-link>
         </div>
       </div>
     </aside>
 
-    <main>
+    <main class="main-wrapper">
       <!-- eslint-disable-next-line -->
-      <router-view />
+      <!-- <router-view /> -->
+      <MainView />
     </main>
   </div>
 </template>
 
 <script>
+import MainView from "@/views/MainView.vue";
 export default {
   data() {
     return {
       sidebar: 1,
     };
+  },
+  components: {
+    MainView,
   },
   methods: {
     toggleSidebar(e) {
@@ -94,6 +117,7 @@ nav a.router-link-exact-active {
 
   aside {
     position: relative;
+    height: 100vh;
     background: var(--neutral-50);
     box-shadow: 1px 0 4px 0 var(--neutral-200);
 
@@ -139,6 +163,8 @@ nav a.router-link-exact-active {
   main {
     background: var(--neutral-100);
     flex-grow: 1;
+    min-height: 100vh;
+    overflow-y: auto;
   }
 }
 </style>

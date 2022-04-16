@@ -1,5 +1,5 @@
 <template>
-  <main class="fixtures-main-container">
+  <div class="fixtures-main-container">
     <!-- The add and edit modal - has emit handler -->
     <FixtureModalComponent
       v-show="showModal"
@@ -183,7 +183,7 @@
       <!-- If no fixtures -->
     </div>
     <!-- After Data Loaded -->
-  </main>
+  </div>
 </template>
 
 <style scoped>
@@ -206,12 +206,12 @@
 }
 
 .fixtures-main-container {
-  width: 82%;
-  margin-left: 18%;
+  /* width: 100%; */
+  /* margin-left: 18%; */
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 100px 24px 60px 16px;
+  /* padding: 100px 24px 60px 16px; */
 }
 .gameweek-container {
   width: 100%;
