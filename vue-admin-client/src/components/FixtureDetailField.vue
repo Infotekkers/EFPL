@@ -34,6 +34,7 @@
             :key="playerId"
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
               .goalkeepers"
+            :data-player-id="playerId"
           >
             <h1>🤷‍♂️</h1>
             <p>
@@ -80,6 +81,7 @@
             :key="playerId"
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
               .defenders"
+            :data-player-id="playerId"
           >
             <h1>🤷‍♂️</h1>
             <p>
@@ -126,6 +128,7 @@
             :key="playerId"
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
               .midfielders"
+            :data-player-id="playerId"
           >
             <h1>🤷‍♂️</h1>
             <p>
@@ -172,6 +175,7 @@
             :key="playerId"
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
               .strikers"
+            :data-player-id="playerId"
           >
             <h1>🤷‍♂️</h1>
             <p>
@@ -215,6 +219,7 @@
             :key="playerId"
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
               .bench"
+            :data-player-id="playerId"
           >
             <h1>🤷‍♂️</h1>
             <p>
@@ -279,6 +284,7 @@ export default {
   data: () => ({
     showModal: false,
     currentPlayerId: "",
+    divPlayerAtHover: null,
   }),
 
   methods: {
@@ -385,33 +391,86 @@ export default {
         e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
         this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
           .length < 7
-      )
+      ) {
+        const div = e.path[1];
+
+        if (this.divPlayerAtHover)
+          this.divPlayerAtHover.classList.remove("field-player-hover-sub");
+
+        if (div.classList.contains("field-player")) {
+          this.divPlayerAtHover = div;
+          e.path[1].classList.add("field-player-hover-sub");
+        }
+
         e.preventDefault();
-      else if (
+      } else if (
         fieldPosition === "bench" &&
         e.dataTransfer.types.includes("field/subs") &&
         e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
         this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
           .length < 8
-      )
+      ) {
+        const div = e.path[1];
+
+        if (this.divPlayerAtHover)
+          this.divPlayerAtHover.classList.remove("field-player-hover-sub");
+
+        if (div.classList.contains("field-player")) {
+          this.divPlayerAtHover = div;
+          e.path[1].classList.add("field-player-hover-sub");
+        }
+
         e.preventDefault();
+      }
     },
-    lockerPlayerDrop(e, position) {
+    lockerPlayerDrop(e, fieldPosition) {
       let playerId = e.dataTransfer.getData("player/Id");
+      let playerPosition = e.dataTransfer.getData("player/position");
       e.dataTransfer.effectAllowed = "move";
       e.dataTransfer.dropEffect = "move";
 
-      this.deletePlayerFromLocker({
-        teamId: this.activeTeamId,
-        playerId,
-      });
+      if (e.dataTransfer.types.includes("field/subs")) {
+        const div = e.path[1];
+
+        if (div.classList.contains("field-player")) {
+          const player2Id = div.dataset.playerId;
+
+          // Send the 2nd player to the 1st player's position
+          this.setFixtureDetailDataLineup({
+            operation: "remove",
+            teamId: this.activeTeamId,
+            incomingPlayer: player2Id,
+            position: fieldPosition,
+          });
+
+          this.setFixtureDetailDataLineup({
+            operation: "add",
+            teamId: this.activeTeamId,
+            incomingPlayer: player2Id,
+            position: playerPosition,
+          });
+
+          // Send the 1st player to field position
+          this.setFixtureDetailDataLineup({
+            operation: "remove",
+            teamId: this.activeTeamId,
+            incomingPlayer: playerId,
+            position: playerPosition,
+          });
+        }
+      } else {
+        this.deletePlayerFromLocker({
+          teamId: this.activeTeamId,
+          playerId,
+        });
+      }
 
       // Save changes
       this.setFixtureDetailDataLineup({
         operation: "add",
         teamId: this.activeTeamId,
         incomingPlayer: playerId,
-        position,
+        position: fieldPosition,
       });
 
       e.preventDefault();
@@ -497,6 +556,10 @@ p {
   background-color: var(--primary-500);
   margin: 0 5px;
   z-index: 1;
+}
+
+.field-player-hover-sub {
+  background-color: var(--warning-200) !important;
 }
 
 .actions {
