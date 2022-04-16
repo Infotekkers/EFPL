@@ -130,10 +130,10 @@
   </main>
 </template>
 <script>
-import store from "../../store/index";
+import store from "../store/index";
 
-import PlayerComponent from "@/components/ManagePlayers/PlayerComponent";
-import PlayerModal from "@/components/ManagePlayers/PlayerModalComponent";
+import PlayerComponent from "@/components/PlayerComponent";
+import PlayerModal from "@/components/PlayerModalComponent";
 
 // Slider
 import MultiRangeSlider from "multi-range-slider-vue";

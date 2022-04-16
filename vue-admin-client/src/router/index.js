@@ -10,7 +10,7 @@ const routes = [
   {
     path: "/players",
     name: "Players",
-    component: () => import("../components/ManagePlayers/PlayersComponent.vue"),
+    component: () => import("../components/PlayersComponent.vue"),
   },
   {
     path: "/about",
