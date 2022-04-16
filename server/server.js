@@ -15,6 +15,8 @@ const PORT = process.env.PORT || 3000;
 //   populateTeams,
 //   // populateFixture,
 // } = require("./src/utils/populate");
+// const { populateGameWeeks,
+// const {populateGameWeeks } = require("./src/utils/populate");
 
 // Run Node app
 app.listen(PORT, async () => {

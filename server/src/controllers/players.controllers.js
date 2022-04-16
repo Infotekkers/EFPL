@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const PlayerModel = require("../models/Player");
+const { makeFilePlayer } = require("../utils/helpers");
 
 const addplayers = asyncHandler(async (req, res) => {
   const {
@@ -7,54 +8,77 @@ const addplayers = asyncHandler(async (req, res) => {
     eplTeamId,
     position,
     currentPrice,
-    score,
     availability,
-    history,
+    playerImage,
+    logoName,
   } = req.body;
-  await new PlayerModel({
-    playerName,
-    position,
-    currentPrice,
-    score,
-    history,
-    availability,
-    eplTeamId,
-  }).save();
-  res.status(201).send(`${playerName} added successfully`);
+
+  const verifyPlayer = await PlayerModel.findOne({
+    playerName:req.body.playerName
+  })
+
+  if(!verifyPlayer){
+    const playerImagePath = makeFilePlayer(playerImage, logoName);
+
+    if (playerImagePath){
+      await new PlayerModel({
+        playerName,
+        position,
+        currentPrice,
+        availability,
+        playerImage: playerImagePath,
+        eplTeamId,
+      }).save();
+      res.status(201).send(`${playerName} added successfully`);
+    }  else {
+      res.status(422).json("Error saving image. Please try again!");
+    }
+  } else {
+    res.status(404).send(`${playerName} EXIST.`);
+    }
 });
 // Questions eplTeamId -  what is that
 const updateplayer = asyncHandler(async (req, res) => {
   const {
     playerName,
-    history,
     eplTeamId,
     availablity,
-    playerId,
     position,
+    playerImage,
+    logoName,
     currentPrice,
   } = req.body;
 
-  // const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
-  // if(verifyPlayer){
-  await PlayerModel.updateOne(
-    { playerId: req.body.playerId },
-    {
-      $set: {
-        playerName: playerName,
-        position: position,
-        playerId: playerId,
-        currentPrice: currentPrice,
-        history: history,
-        eplTeamId: eplTeamId,
-        availablity: availablity,
-      },
-    }
-  );
+  const newData = {
+    playerName,
+    eplTeamId,
+    availablity,
+    position,
+    currentPrice
+  }
 
-  res.status(201).send(`Info updated successful`);
-  // } else{
-  //     return res.status(404).send(`player doesn exist`);
-  // }
+  if(playerImage !== ""){
+    const filePath = makeFilePlayer(playerImage, logoName);
+
+    if(filePath !== ""){
+      newData.playerImage = filePath
+    }
+  }
+  console.log(newData);
+
+  const verifyPlayer = await PlayerModel.findOne({ playerId: req.params.playerId});
+
+  if (verifyPlayer) {
+    await PlayerModel.updateOne(
+      { playerId: req.params.playerId },
+      {
+        $set: newData,
+      }
+    );
+    res.status(201).send(` ${playerName} Info updated successful`);
+  } else{
+      return res.status(404).send(`player with ${playerName}exist`);
+  }
 });
 
 const updateScore = asyncHandler(async (req, res) => {

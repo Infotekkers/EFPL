@@ -65,6 +65,33 @@ const makeFile = (fileContent, logoName) => {
   }
 };
 
+// Function to change base64 to file
+const makeFilePlayer = (fileContent, logoName) => {
+  // Check base64 format
+  const matches = fileContent.match(/^data:([A-Za-z-+/]+);base64,(.+)$/);
+  if (matches.length !== 3) {
+    return "";
+  } else {
+    // create buffer
+    const imageBuffer = Buffer.from(matches[2], "base64");
+    const itemName = logoName.split(".");
+    const itemFileName = uuidv4() + "." + itemName[itemName.length - 1];
+
+    const filePath = path.join(
+      path.resolve("./"),
+      "uploads/players",
+      itemFileName
+    );
+
+    try {
+      fs.writeFileSync(filePath, imageBuffer, "utf-8");
+      return "/uploads/players/" + itemFileName;
+    } catch (e) {
+      return "";
+    }
+  }
+};
+
 const moveFile = async (sourcePath, destinationPath) => {
   try {
     fse.copy(sourcePath, destinationPath, { overwrite: true });
@@ -79,4 +106,5 @@ module.exports = {
   pointDeductor,
   makeFile,
   moveFile,
+  makeFilePlayer,
 };
