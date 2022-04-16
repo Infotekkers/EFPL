@@ -37,7 +37,7 @@ export default {
     // log out admin
     logOutAdmin({ commit }) {
       commit("LOG_OUT");
-      router.push({ name: "home" });
+      router.push({ name: "admin-login" });
     },
     // login admin
     async loginAdmin({ commit }, { email, password }) {
