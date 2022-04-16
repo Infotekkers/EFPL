@@ -173,6 +173,7 @@ export default {
 
     // sets the showing gameweek
     setShowingGameWeek(context, gameWeek) {
+      // TODO: Clear fixture gameweek data
       context.commit("SET_SHOWING_GAMEWEEK", gameWeek);
     },
 

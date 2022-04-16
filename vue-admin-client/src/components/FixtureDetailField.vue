@@ -307,6 +307,21 @@ export default {
       e.dataTransfer.setData("player/Id", playerId);
       e.dataTransfer.setData("player/position", playerPosition);
       e.dataTransfer.setData("field/locker", "");
+
+      // Data for subs between field and bench
+      e.dataTransfer.setData("field/subs", "");
+      if (playerPosition === "bench") {
+        let destination = this.players[this.activeTeamId][playerId].position;
+        destination = destination.toLowerCase();
+        if (destination === "gk")
+          e.dataTransfer.setData("position/goalkeepers", "");
+        else if (destination === "def")
+          e.dataTransfer.setData("position/defenders", "");
+        else if (destination === "mid")
+          e.dataTransfer.setData("position/midfielders", "");
+        else if (destination === "att")
+          e.dataTransfer.setData("position/strikers", "");
+      } else e.dataTransfer.setData("position/bench", "");
     },
 
     // Droppable handlers
@@ -362,6 +377,22 @@ export default {
         this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
           .length < 7 &&
         noOfPlayers < 18
+      )
+        e.preventDefault();
+      // Validation for subs between bench and field
+      else if (
+        e.dataTransfer.types.includes("field/subs") &&
+        e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
+        this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
+          .length < 7
+      )
+        e.preventDefault();
+      else if (
+        fieldPosition === "bench" &&
+        e.dataTransfer.types.includes("field/subs") &&
+        e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
+        this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
+          .length < 8
       )
         e.preventDefault();
     },
