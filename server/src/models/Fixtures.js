@@ -1,5 +1,119 @@
 const mongoose = require("mongoose");
 
+const minutesSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfMinutes: {
+    type: Number,
+    default: 0,
+  },
+});
+const goalsScoredSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfGoals: {
+    type: Number,
+    default: 0,
+  },
+});
+const assistsSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfAssists: {
+    type: Number,
+    default: 0,
+  },
+});
+const cleanSheetSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfCleanSheets: {
+    type: Number,
+    default: 0,
+  },
+});
+const yellowsSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfYellows: {
+    type: Number,
+    default: 0,
+  },
+});
+const redsSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfReds: {
+    type: Number,
+    default: 0,
+  },
+});
+const penaltiesMissedSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfPenMissed: {
+    type: Number,
+    default: 0,
+  },
+});
+const penaltiesSavedSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfPenSaved: {
+    type: Number,
+    default: 0,
+  },
+});
+const savesSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfSaves: {
+    type: Number,
+    default: 0,
+  },
+});
+const ownGoalSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  noOfOwnGoals: {
+    type: Number,
+    default: 0,
+  },
+});
+const fantasyScoresSchema = mongoose.Schema({
+  playerId: {
+    type: Number,
+  },
+  playerScores: {
+    type: Number,
+    default: 0,
+  },
+});
+
+const matchStatSchema = mongoose.Schema({
+  minutesPlayed: { type: Map, of: minutesSchema },
+  goalsScored: { type: Map, of: goalsScoredSchema },
+  assists: { type: Map, of: assistsSchema },
+  cleanSheet: { type: Map, of: cleanSheetSchema },
+  yellows: { type: Map, of: yellowsSchema },
+  reds: { type: Map, of: redsSchema },
+  penaltiesMissed: { type: Map, of: penaltiesMissedSchema },
+  penaltiesSaved: { type: Map, of: penaltiesSavedSchema },
+  saves: { type: Map, of: savesSchema },
+  ownGoal: { type: Map, of: ownGoalSchema },
+  fantasyScores: { type: Map, of: fantasyScoresSchema },
+});
+
 // used within fixtureSchema below
 const lineupSchema = mongoose.Schema({
   teamId: { type: Number, required: true },
@@ -61,7 +175,6 @@ const fixtureSchema = mongoose.Schema({
       "Custom Error - Required Value *:Fixture Schedule ID is required.",
     ],
   },
-
   // Concern Here what are the possible values
   status: { type: String, default: "scheduled" },
   homeTeam: {
@@ -78,13 +191,13 @@ const fixtureSchema = mongoose.Schema({
       "Custom Error - Required Value *:Away Team is required for a fixture.",
     ],
   },
-
   homeTeamLineUp: {
     type: lineupSchema,
   },
   awayTeamLineUp: {
     type: lineupSchema,
   },
+  matchStat: matchStatSchema,
 });
 
 const Fixture = mongoose.model("fixtures", fixtureSchema);
