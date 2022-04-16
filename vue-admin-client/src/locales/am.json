@@ -1,15 +1,21 @@
 {
   "header": "ይህ ስለ እኛ ገጽ ነው።",
+
+  "_comment_navigation": "ለአሰሳ ትርጉሞች",
   "home": "ቤት",
   "admin": "አስተዳዳሪ",
+
+  "_comment_settings": "ምርጫዎች ገጽ ትርጉሞች",
   "Settings": "ምርጫዎች ገጽ",
   "Reset": "የይለፍ ቃል ለውጥ",
   "logout": "ከመተግበሪያን ውጣ",
   "select language": "ቋንቋ ይምረጡ",
   "english": "እንግሊዝኛ",
   "amharic": "አማርኛ",
+  "Import": "አስመጣ",
+  "Export": "ወደ ውጪ ላክ",
 
-  "_comment_misc": "Miscellaneous Translations",
+  "_comment_misc": "የተለያዩ ትርጉሞች",
   "Loading": "በመጫን ላይ",
   "Date": "ቀን",
   "Time": "ሰአት",

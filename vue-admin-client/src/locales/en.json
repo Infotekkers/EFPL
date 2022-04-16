@@ -1,13 +1,19 @@
 {
   "header": "This is the about page",
+
+  "_comment_navigation": "Navigation Translations",
   "home": "Home",
   "admin": "Admin",
+
+  "_comment_settings": "Settings Translations",
   "Settings": "Settings",
   "Reset": "Reset Password",
   "logout": "LogOut",
   "select language": "Select Language",
   "english": "English",
   "amharic": "Amharic",
+  "Import": "Import",
+  "Export": "Export",
 
   "_comment_misc": "Miscellaneous Translations",
   "Loading": "Loading",

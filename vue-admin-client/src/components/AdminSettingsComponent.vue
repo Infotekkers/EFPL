@@ -31,10 +31,10 @@
     </div>
 
     <div>
-      <button @click="initiateImport">Import</button>
+      <button @click="initiateImport">{{ $t("Import") }}</button>
     </div>
     <div>
-      <button @click="exportSeasonData">Export</button>
+      <button @click="exportSeasonData">{{ $t("Export") }}</button>
     </div>
   </main>
 </template>
