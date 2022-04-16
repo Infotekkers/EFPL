@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <main>
+    <SeasonImportModalComponent
+      :showModal="showModal"
+      @closeModal="closeModal"
+    />
     <h1>{{ $t("Settings") }}</h1>
     <div>
       <router-link :to="{ name: 'forgot-password' }"
@@ -25,18 +29,43 @@
         <option value="am">{{ $t("amharic") }}</option>
       </select>
     </div>
-  </div>
+
+    <div>
+      <button @click="initiateImport">Import</button>
+    </div>
+    <div>
+      <button @click="exportSeasonData">Export</button>
+    </div>
+  </main>
 </template>
 
 <script>
+// Components
+import SeasonImportModalComponent from "@/components/SeasonImportModalComponent.vue";
+import store from "@/store";
+
 export default {
+  components: {
+    SeasonImportModalComponent,
+  },
   data() {
     const lang = localStorage.getItem("lang") || "am";
     return {
       lang: lang,
+      showModal: false,
     };
   },
   methods: {
+    closeModal() {
+      this.showModal = false;
+    },
+
+    initiateImport() {
+      this.showModal = true;
+    },
+    exportSeasonData() {
+      store.dispatch("Season/exportSeason");
+    },
     logOutAdmin() {
       this.$store.dispatch("logOutAdmin");
     },

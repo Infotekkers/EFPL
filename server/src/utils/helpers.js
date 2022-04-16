@@ -2,6 +2,7 @@ const expressAsyncHandler = require("express-async-handler");
 const JWT = require("jsonwebtoken");
 
 const fs = require("fs");
+const fse = require("fs-extra");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 
@@ -64,8 +65,18 @@ const makeFile = (fileContent, logoName) => {
   }
 };
 
+const moveFile = async (sourcePath, destinationPath) => {
+  try {
+    fse.copy(sourcePath, destinationPath, { overwrite: true });
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 module.exports = {
   generateJWTToken,
   pointDeductor,
   makeFile,
+  moveFile,
 };

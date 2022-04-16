@@ -1386,6 +1386,1527 @@ const sebeta = [
   },
 ];
 
+const saintGeorge = [
+  // Saint George S.C
+  // Goalkeepers
+  {
+    playerName: "Bahiru Negash",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "GK",
+  },
+  {
+    playerName: "Temesgen Yohannes",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "GK",
+  },
+  {
+    playerName: "Charles Lukwango",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "GK",
+  },
+
+  // Defenders
+  {
+    playerName: "Suleiman Hamid",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Amanuel Terfa",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Mignot Debebe",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Desta Demu",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Saladin Bergicho",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Henock Adugna",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Miraj Sefa",
+    eplTeamId: "1",
+    position: "DEF",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Frimpong Mensu",
+    eplTeamId: "1",
+    position: "DEF",
+    currentPrice: "8.8",
+  },
+
+  // MiDEFielders
+  {
+    playerName: "Gatouch Panom",
+    eplTeamId: "1",
+    position: "MID",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Haider Sherefa",
+    eplTeamId: "1",
+    position: "MID",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Yabsira Tesfaye",
+    eplTeamId: "1",
+    position: "MID",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Kannan Markineh",
+    eplTeamId: "1",
+    position: "MID",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Bereket Wolde",
+    eplTeamId: "1",
+    position: "MID",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Fuad Abdela",
+    eplTeamId: "1",
+    position: "MID",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Abraham Getachew",
+    eplTeamId: "1",
+    position: "MID",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Natnael Zeleke",
+    eplTeamId: "1",
+    position: "MID",
+    currentPrice: "8.8",
+  },
+
+  // Forwards
+  {
+    playerName: "Bulcha Shura",
+    eplTeamId: "1",
+    position: "ATT",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Tegenu Teshome",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Abel Yalew",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Amanuel Gebremichael",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Cherinet Gugssa",
+    eplTeamId: "1",
+    position: "ATT",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Addis Gidey",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Dagmawi Araya",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Alazar",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Esmael Goro-Agoro",
+    eplTeamId: "1",
+    currentPrice: "10.7",
+    position: "ATT",
+  },
+  {
+    playerName: "Misganaw",
+    eplTeamId: "1",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+];
+
+const welaytaDicha = [
+  // "Welayta Dicha",
+  // Goalkeepers
+  {
+    playerName: "Biniam Genetu",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "GK",
+  },
+  {
+    playerName: "Seid Habtamu",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "GK",
+  },
+  {
+    playerName: "Mekbib Degefu",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "GK",
+  },
+
+  // Defenders
+  {
+    playerName: "Ayoub Beketa",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Yared Dawit",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Degu Debebe",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Anagaw Badeg",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Abinet Demissie",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Anteneh Gugsa",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  {
+    playerName: "Mesay Agegnehu",
+    eplTeamId: "2",
+    position: "DEF",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Asnake Moges",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "DEF",
+  },
+  // MidFielders
+  {
+    playerName: "Tsegaye Birhanu",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  {
+    playerName: "Yonas Girmay",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  {
+    playerName: "Idris Seid",
+    eplTeamId: "2",
+    position: "MID",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Mesay Nicole",
+    eplTeamId: "2",
+    position: "MID",
+    currentPrice: "8.8",
+  },
+  {
+    playerName: "Melkamu Bogale",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  {
+    playerName: "Negash Taddese",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  {
+    playerName: "Abebayehu Achiso",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  {
+    playerName: "Tsegaye Abera",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  {
+    playerName: "Finhas Temesgen",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  {
+    playerName: "Amanuel Teshome",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  {
+    playerName: "Azarias Abel",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  {
+    playerName: "Azarias Abel",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  {
+    playerName: "Netsanet Gebremedhin",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "MID",
+  },
+  // Forwards
+  {
+    playerName: "Sintayehu Mengistu",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Yared Darza",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Biniam Fikre",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Eyob Alemayehu",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Chernet Gugsa",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Bereket Wondimu",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+  {
+    playerName: "Izu Azuka",
+    eplTeamId: "2",
+    currentPrice: "8.8",
+    position: "ATT",
+  },
+];
+
+const hawassa = [
+  // Hawassa
+  // Goalkeepers
+  {
+    playerName: "Mensah Nsouhoho",
+    eplTeamId: "3",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Dagim Tefera",
+    eplTeamId: "3",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Alazar Markos",
+    eplTeamId: "3",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Mintesinot Gimbo",
+    eplTeamId: "3",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  // Defenders
+  {
+    playerName: "Zenebe Kedir",
+    eplTeamId: "3",
+    currentPrice: "5.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Mignot Debebe",
+    eplTeamId: "3",
+    currentPrice: "3",
+    position: "DEF",
+  },
+  {
+    playerName: "Addisalem Tesfaye",
+    eplTeamId: "3",
+    currentPrice: "8.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Daniel Deribe",
+    eplTeamId: "3",
+    currentPrice: "11",
+    position: "DEF",
+  },
+  {
+    playerName: "Desta Yohannes",
+    eplTeamId: "3",
+    currentPrice: "14",
+    position: "DEF",
+  },
+  {
+    playerName: "Lawrence Lartey",
+    eplTeamId: "3",
+    currentPrice: "9.6",
+    position: "DEF",
+  },
+  {
+    playerName: "Mintesinot Indrias",
+    eplTeamId: "3",
+    currentPrice: "7",
+    position: "DEF",
+  },
+  {
+    playerName: "Wondmagegn Meareg",
+    eplTeamId: "3",
+    currentPrice: "5.6",
+    position: "DEF",
+  },
+  {
+    playerName: "Tsega'ab Yohnnes",
+    eplTeamId: "3",
+    currentPrice: "4.8",
+    position: "DEF",
+  },
+
+  // Midfielders
+  {
+    playerName: "Ephrem Zekarias",
+    eplTeamId: "3",
+    currentPrice: "4.7",
+    position: "MID",
+  },
+  {
+    playerName: "Gabriel Ahmed",
+    eplTeamId: "3",
+    currentPrice: "4.7",
+    position: "MID",
+  },
+  {
+    playerName: "Zelalem Isaias",
+    eplTeamId: "3",
+    currentPrice: "4.9",
+    position: "MID",
+  },
+  {
+    playerName: "Chernet Awush",
+    eplTeamId: "3",
+    currentPrice: "7.7",
+    position: "MID",
+  },
+  {
+    playerName: "Abayneh Fino",
+    eplTeamId: "3",
+    currentPrice: "6.8",
+    position: "MID",
+  },
+  {
+    playerName: "Birhanu Bekele",
+    eplTeamId: "3",
+    currentPrice: "5.4",
+    position: "MID",
+  },
+  {
+    playerName: "Abenezer Yohannes",
+    eplTeamId: "3",
+    currentPrice: "4.9",
+    position: "MID",
+  },
+  {
+    playerName: "Dawit Tadesse",
+    eplTeamId: "3",
+    currentPrice: "5.7",
+    position: "MID",
+  },
+  {
+    playerName: "Yohannes Segeboo",
+    eplTeamId: "3",
+    currentPrice: "12.5",
+    position: "MID",
+  },
+  {
+    playerName: "Alelegn Azene",
+    eplTeamId: "3",
+    currentPrice: "10",
+    position: "MID",
+  },
+  {
+    playerName: "Henok Dilbi",
+    eplTeamId: "3",
+    currentPrice: "7",
+    position: "MID",
+  },
+  {
+    playerName: "Wondmagegn Hailu",
+    eplTeamId: "3",
+    currentPrice: "15",
+    position: "MID",
+  },
+  // Attackers
+  {
+    playerName: "Habtamu Mekonnen",
+    eplTeamId: "3",
+    currentPrice: "6",
+    position: "ATT",
+  },
+  {
+    playerName: "Mesfin Tafesse",
+    eplTeamId: "3",
+    currentPrice: "4.5",
+    position: "ATT",
+  },
+  {
+    playerName: "Biruk Beyene",
+    eplTeamId: "3",
+    currentPrice: "4.5",
+    position: "ATT",
+  },
+  {
+    playerName: "Tebarek Hefamo",
+    eplTeamId: "3",
+    currentPrice: "4.9",
+    position: "ATT",
+  },
+  {
+    playerName: "Ephrem Ashamo",
+    eplTeamId: "3",
+    currentPrice: "4",
+    position: "ATT",
+  },
+];
+
+const fasilKenema = [
+  // "Fasil Ketema",
+  {
+    playerName: "N'Tji Michel Samaké",
+    eplTeamId: "4",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Tewodros Getnet",
+    eplTeamId: "4",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Yidnekachew Beyene",
+    eplTeamId: "4",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Tewodros Getnet",
+    eplTeamId: "4",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  // Defenders
+  {
+    playerName: "Abdulkerim Mohammed",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "DEF",
+  },
+  {
+    playerName: "Kedir Coulibaly",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "DEF",
+  },
+  {
+    playerName: "Samuel Yohannes",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "DEF",
+  },
+  {
+    playerName: "Seid Hassen",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "DEF",
+  },
+  {
+    playerName: "Aschalew Tamene",
+    eplTeamId: "4",
+    currentPrice: "8",
+    position: "DEF",
+  },
+  {
+    playerName: "Yared Bayeh",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "DEF",
+  },
+  {
+    playerName: "Amsalu Tilahun",
+    eplTeamId: "4",
+    currentPrice: "12",
+    position: "DEF",
+  },
+  {
+    playerName: "Abel Eyayu",
+    eplTeamId: "4",
+    currentPrice: "9.6",
+    position: "DEF",
+  },
+  {
+    playerName: "Daniel Zemede",
+    eplTeamId: "4",
+    currentPrice: "5.6",
+    position: "DEF",
+  },
+  // Midfielders
+  {
+    playerName: "Bereket Desta",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "MID",
+  },
+  {
+    playerName: "Yehun Endeshaw",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "MID",
+  },
+  {
+    playerName: "Surafel Dagnachew",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "MID",
+  },
+  {
+    playerName: "Habtamu Tekeste",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "MID",
+  },
+  {
+    playerName: "Bezabeh Meleyo",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "MID",
+  },
+  {
+    playerName: "Natnael Gebregiorgis",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "MID",
+  },
+  {
+    playerName: "Natnael Masresha",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "MID",
+  },
+  // Attackers
+  {
+    playerName: "Okiki Afolabi",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "ATT",
+  },
+  {
+    playerName: "Fikadu Alemu",
+    eplTeamId: "4",
+    currentPrice: "15",
+    position: "ATT",
+  },
+  {
+    playerName: "Shemeket Gugsa",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "ATT",
+  },
+  {
+    playerName: "Mujib Kassim",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "ATT",
+  },
+  {
+    playerName: "Yidnekachew Beyene",
+    eplTeamId: "4",
+    currentPrice: "4",
+    position: "ATT",
+  },
+];
+
+const sidamaCoffee = [
+  // "Sidama Coffee",
+  // Goalkeepers
+  {
+    playerName: "Fikir Wedessa",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Adugna Tsegaye",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Mesay Ayano",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Leykun Negash",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  // Defenders
+  {
+    playerName: "Fetudin Jemal",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Amanuel Endale",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Mehari Mena",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Shimeles Tegegn",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Girum Assefa",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Yonatan Fisseha",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Girma Bekele",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Git Gatkoch",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Kifle Kia",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Sunday Mutuku",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Lawrence Edward",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "5",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  // Midfielders
+  {
+    playerName: "Yosef Yohannes",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Mikael Hasisa",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Dawit Tefera",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Birhanu Ashamo",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Biniam Lantamo",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Yonas Geremew",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Abebayehu Yohannes",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Yassar Mugerwa",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Abayne Amelo",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  // Attackers
+  {
+    playerName: "Okiki Afolabi",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Habtamu Gezahegn",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Addisu Atula",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Chala Teshita",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Temesgen Bejrond",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Yigezu Bogale",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Mamadou Sidebe",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Yared Kebede",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+];
+
+const wolkite = [
+  // Wolkite  CIty FC
+  // Goalkeepers
+  {
+    playerName: "Jemal Tassew",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "George Desta",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Yohannes Bezabeh",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Sylvain Gbohouo",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  // Defenders
+  {
+    playerName: "Remedan Yesouf",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Mohammed Shafi",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Seyoum Tesfaye",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Tesfaye Negash",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Tesfaye Melaku",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Yibeltal Shibabaw",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Adane Belayneh",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Dagim Nigussie",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Yibeltale Shebabaw",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Tomas Simretu",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "9",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  // Midfielders
+  {
+    playerName: "Asari Al-Mehadi",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Jibril Nassir",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Firew Solomon",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Abdulkerim Worku",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Behailu Teshager",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Yared Tadesse",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Habtamu Shewalem",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Mulugeta Woldegiorgis",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Muhajir Meki",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  // Attackers
+  {
+    playerName: "Ame Mohammed",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Abubeker Sanni",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Ahmed Hussein",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Henok Ayele",
+    eplTeamId: "9",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+];
+
+const adama = [
+  // "Adama City",
+  // Goalkeepers
+  {
+    playerName: "Tarik Getnet",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Daniel Teshome",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Ibsa Abebe",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  // Defenders
+  {
+    playerName: "Akalu Abera",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Jemil Yakob",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Eyob Matewos",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Suleiman Mohammed",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Tafese Serka",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Desta Gichamo",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Amin Nesru",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Amsalu Mengesha",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Tigistu Abera",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  // Midfielders
+  {
+    playerName: "Zerihun Birhanu",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Bekalu Genene",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Tewodros Gebregziahber",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Mujahid Mohammed",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Tsegaye Balcha",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Aklilu Tefera",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Dagim Tareknegn",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Biruk Mengesha",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Desalegn Debash",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Elias Mamo",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Elias Ahmed",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  // Attackers
+  {
+    playerName: "Fisseha Tomas",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Belay Abayneh",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Abdisa Jemal",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Yehualashet Fikadu",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Seife Zakir",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Habtamu Wolde",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Yared Birhanu",
+    eplTeamId: "5",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+];
+
+const arbaMinch = [
+  // Goalkeepers
+  {
+    playerName: "Yesaq Tegegne",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Habtamu Said",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Dais Tamu",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Seid Habtu",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  {
+    playerName: "Bereket Habtamu",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "GK",
+  },
+  // Defenders
+  {
+    playerName: "Biruk Yohannes",
+    eplTeamId: "10",
+    currentPrice: "5.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Yohannes Biruk",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Bereket Wolde-Yohannes",
+    eplTeamId: "10",
+    currentPrice: "5.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Yohannes Bereket",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Yohannes Wolde",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Bereket Wolde-Yohannes",
+    eplTeamId: "10",
+    currentPrice: "5.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Bereket Wolde",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Bereket Yohannes",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Wolde Yohannes",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Yohannes Yihun",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Talaku Yohannes",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Bereket Yihun",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+  {
+    playerName: "Yihun Wolde-Yohannes",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "DEF",
+  },
+
+  // Midfielders
+  {
+    playerName: "Mehal Yohannes",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Yesu Balew",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Mebratu Yohannes",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Yohannes Mebratu",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Yihun Mebratu",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Yohannes Mebratu",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Biruk Mebratu",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Ben Yohannes",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Fasil Susenyos",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Yohannes Meskerem",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Wolde Tatek",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+  {
+    playerName: "Yohannes Kibru",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "MID",
+  },
+
+  // Attackers
+  {
+    playerName: "Fekadu Mekonin",
+    eplTeamId: "10",
+    currentPrice: "8.5",
+    position: "ATT",
+  },
+  {
+    playerName: "Sintayehu Mengistu",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Fekadu Yohannes",
+    eplTeamId: "10",
+    currentPrice: "6.9",
+    position: "ATT",
+  },
+  {
+    playerName: "Mengistu Yohannes",
+    eplTeamId: "10",
+    currentPrice: "7.5",
+    position: "ATT",
+  },
+  {
+    playerName: "Mekonin Fekadu",
+    eplTeamId: "10",
+    currentPrice: "6.0",
+    position: "ATT",
+  },
+  {
+    playerName: "Biruk Mengistu",
+    eplTeamId: "10",
+    currentPrice: "8.0",
+    position: "ATT",
+  },
+];
+
 const playersData = [
   // Bahir Dar Kenema
   bahirDarKenema,
@@ -1410,6 +2931,16 @@ const playersData = [
 
   // Sebeta City
   sebeta,
+
+  // Saint George
+  saintGeorge,
+  welaytaDicha,
+  hawassa,
+  fasilKenema,
+  sidamaCoffee,
+  wolkite,
+  adama,
+  arbaMinch,
 ];
 
 module.exports = { playersData };
