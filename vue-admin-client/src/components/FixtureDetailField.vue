@@ -385,12 +385,13 @@ export default {
         noOfPlayers < 18
       )
         e.preventDefault();
-      // Validation for subs between bench and field
+      // ** Validation for subs between bench and field
       else if (
         e.dataTransfer.types.includes("field/subs") &&
         e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
         this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
-          .length < 7
+          .length < 6 &&
+        e.path[1].classList.contains("field-player")
       ) {
         const div = e.path[1];
 
@@ -408,7 +409,8 @@ export default {
         e.dataTransfer.types.includes("field/subs") &&
         e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
         this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
-          .length < 8
+          .length < 7 &&
+        e.path[1].classList.contains("field-player")
       ) {
         const div = e.path[1];
 
@@ -442,7 +444,6 @@ export default {
             incomingPlayer: player2Id,
             position: fieldPosition,
           });
-
           this.setFixtureDetailDataLineup({
             operation: "add",
             teamId: this.activeTeamId,
@@ -457,21 +458,25 @@ export default {
             incomingPlayer: playerId,
             position: playerPosition,
           });
+          this.setFixtureDetailDataLineup({
+            operation: "add",
+            teamId: this.activeTeamId,
+            incomingPlayer: playerId,
+            position: fieldPosition,
+          });
         }
       } else {
         this.deletePlayerFromLocker({
           teamId: this.activeTeamId,
           playerId,
         });
+        this.setFixtureDetailDataLineup({
+          operation: "add",
+          teamId: this.activeTeamId,
+          incomingPlayer: playerId,
+          position: fieldPosition,
+        });
       }
-
-      // Save changes
-      this.setFixtureDetailDataLineup({
-        operation: "add",
-        teamId: this.activeTeamId,
-        incomingPlayer: playerId,
-        position: fieldPosition,
-      });
 
       e.preventDefault();
     },
