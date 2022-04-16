@@ -21,21 +21,35 @@ const addTeam = asyncHandler(async (req, res) => {
   });
 
   if (!verifyTeam) {
-    const teamLogoPath = makeFile(teamLogo, logoName);
+    // if base64 is sent
+    if (logoName) {
+      const teamLogoPath = makeFile(teamLogo, logoName);
 
-    if (teamLogoPath) {
+      if (teamLogoPath) {
+        await new TeamModel({
+          teamName,
+          teamCity,
+          teamStadium,
+          teamLogo: teamLogoPath,
+          stadiumCapacity,
+          foundedIn,
+          teamCoach,
+        }).save();
+        res.status(201).send(`${teamName} added Successfully `);
+      }
+    }
+    // if path exists
+    else {
       await new TeamModel({
         teamName,
         teamCity,
         teamStadium,
-        teamLogo: teamLogoPath,
+        teamLogo: teamLogo,
         stadiumCapacity,
         foundedIn,
         teamCoach,
       }).save();
       res.status(201).send(`${teamName} added Successfully `);
-    } else {
-      res.status(422).json("Error saving image. Please try again!");
     }
   } else {
     res.status(404).send(`${teamName} EXIST.`);

@@ -1,68 +1,99 @@
 <template>
-  <main class="season-import-modal-container">
-    <h1>Teams</h1>
-    <div class="season-import-teams">
-      <div
-        class="season-import-team-selector"
-        v-for="legacyTeam in allLegacyTeams"
-        :key="legacyTeam.teamId"
-      >
-        <TeamImportComponent :legacyTeam="legacyTeam" />
-      </div>
-    </div>
+  <main class="season-import-modal-container" v-if="showModal">
+    <!-- Close Button -->
+    <div class="season-modal-close" @click="closeModal">X</div>
+    <!-- Close Button -->
 
-    <div @click="importAll">Save</div>
+    <h1>Teams</h1>
+    <TeamImportComponent
+      v-for="legacyTeam in getAllLegacyTeams"
+      :key="legacyTeam.teamId"
+      :legacyTeam="legacyTeam"
+    />
+
+    <div class="season-modal-save-button" @click="startImport">Save</div>
   </main>
 </template>
 
 <script>
-import store from "../store/index";
+// Components
 import TeamImportComponent from "@/components/TeamImportComponent.vue";
+import store from "@/store";
+
 export default {
-  name: "SeasonImportModalComponent",
-  props: {
-    allLegacyTeams: Array,
-    showModal: Boolean,
-  },
+  name: "SeasonImportModal",
   components: {
     TeamImportComponent,
   },
+  props: {
+    showModal: Boolean,
+  },
   methods: {
-    importAll() {
-      store.dispatch("Season/importAll");
+    closeModal() {
+      this.$emit("closeModal");
+    },
+
+    startImport() {
+      store.dispatch("Season/initiateImport");
     },
   },
-  computed: {},
+  computed: {
+    getAllLegacyTeams() {
+      return store.state.Season.allLegacyTeams;
+    },
+  },
+
+  beforeMount() {
+    store.dispatch("Season/getAllLegacyTeams");
+  },
 };
 </script>
 
 <style scoped>
 .season-import-modal-container {
   width: 100%;
-  height: 100vh;
-  background: white;
-
-  position: fixed;
-
-  padding: 50px 32px;
-  overflow-y: auto;
-}
-
-.season-import-teams {
-  width: 80%;
-  min-height: 150px;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
   background: teal;
-  margin: 16px;
-  padding: 16px 4px;
+
+  overflow-y: auto;
+  padding: 60px 0;
 }
-.season-import-team-selector {
-  width: 100%;
-  min-height: 100px;
+.season-modal-close {
+  position: absolute;
+  top: 40px;
+  right: 32px;
+  width: 30px;
+  height: 30px;
+  background: var(--neutral-100);
+  color: var(--primary-900);
+  font-size: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+}
+.team-import-container {
+  margin: 36px 20px;
+  width: 85%;
   background: yellow;
-  margin-top: 32px;
+}
+.team-import-content {
+  min-height: 70px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 32px 22px;
+  align-items: center;
+  padding: 10px 16px;
+  /*  */
+  background: tomato;
+}
+.season-modal-save-button {
+  border: 1px solid black;
+  width: fit-content;
+  margin-left: 32px;
+  padding: 5px 22px;
 }
 </style>

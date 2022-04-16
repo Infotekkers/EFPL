@@ -42,7 +42,7 @@ const backup = asyncHandler(async (req, res) => {
       teamName,
       teamCity,
       teamStadium,
-      teamLogo,
+      teamLogo: `/uploads/legacy/teams/${fileName[fileName.length - 1]}`,
       stadiumCapacity,
       foundedIn,
       teamCoach,
@@ -76,11 +76,13 @@ const backup = asyncHandler(async (req, res) => {
     // );
 
     if (verifyExistence.length > 0) {
-      await Backup.playersBkModel.delete({
-        playerName: player.playerName,
-        eplTeamId: player.eplTeamId,
-        position: player.position,
-      });
+      try {
+        await Backup.playersBkModel.delete({
+          playerName: player.playerName,
+          eplTeamId: player.eplTeamId,
+          position: player.position,
+        });
+      } catch (err) {}
     }
 
     await Backup.playersBkModel.create({
@@ -95,72 +97,79 @@ const backup = asyncHandler(async (req, res) => {
     });
   });
 
-  currentSeasonFixtures.forEach(async (fixture) => {
-    const verifyExistence = await Backup.playersBkModel.find({
-      gameweekId: fixture.gameweekId,
-      matchId: fixture.matchId,
-    });
+  // currentSeasonFixtures.forEach(async (fixture) => {
+  //   const verifyExistence = await Backup.playersBkModel.find({
+  //     gameweekId: fixture.gameweekId,
+  //     matchId: fixture.matchId,
+  //   });
 
-    if (verifyExistence > 0) {
-      await Backup.playersBkModel.delete({
-        gameweekId: fixture.gameweekId,
-        matchId: fixture.matchId,
-      });
-    }
+  //   if (verifyExistence > 0) {
+  //     await Backup.playersBkModel.delete({
+  //       gameweekId: fixture.gameweekId,
+  //       matchId: fixture.matchId,
+  //     });
+  //   }
 
-    const gameweekId = fixture.gameweekId;
-    const matchId = fixture.matchId;
-    const schedule = fixture.schedule;
-    const status = fixture.status;
+  //   const gameweekId = fixture.gameweekId;
+  //   const matchId = fixture.matchId;
+  //   const schedule = fixture.schedule;
+  //   const status = fixture.status;
 
-    const homeTeam = fixture.homeTeam;
-    const awayTeam = fixture.awayTeam;
-    const homeTeamLineUp = fixture.homeTeamLineUp;
-    const awayTeamLineUp = fixture.awayTeamLineUp;
-    const matchStat = fixture.matchStatSchema;
+  //   const homeTeam = fixture.homeTeam;
+  //   const awayTeam = fixture.awayTeam;
+  //   const homeTeamLineUp = fixture.homeTeamLineUp;
+  //   const awayTeamLineUp = fixture.awayTeamLineUp;
+  //   const matchStat = fixture.matchStatSchema;
 
-    await Backup.fixtureBkModel.create({
-      seasonId,
-      gameweekId,
-      matchId,
-      schedule,
-      status,
-      homeTeam,
-      awayTeam,
-      homeTeamLineUp,
-      awayTeamLineUp,
-      matchStat,
-    });
-  });
+  //   await Backup.fixtureBkModel.create({
+  //     seasonId,
+  //     gameweekId,
+  //     matchId,
+  //     schedule,
+  //     status,
+  //     homeTeam,
+  //     awayTeam,
+  //     homeTeamLineUp,
+  //     awayTeamLineUp,
+  //     matchStat,
+  //   });
+  // });
 
   res.status(200).json("Season Data Successfully Exported");
 });
 
 const restore = asyncHandler(async (req, res) => {
-  const importSelectedTeams = [1, 2, 3, 4, 5];
+  const { importSelectedTeams, importSelectedPlayers } = req.body;
 
   importSelectedTeams.forEach(async (team) => {
     let currentTeam = await Backup.teamBkModel.find({ teamId: team });
     currentTeam = currentTeam[0];
 
+    const fileName = currentTeam.teamLogo.split("/");
+
     // Move file
+    await moveFile(
+      "." + currentTeam.teamLogo,
+      `./uploads/teams/${fileName[fileName.length - 1]}`
+    );
 
     const addNewTeam = {
       teamName: currentTeam.teamName,
       teamCity: currentTeam.teamCity,
       teamStadium: currentTeam.teamStadium,
-      teamLogo: "/uploads/teams/Adama-City.png",
+      teamLogo: `/uploads/teams/${fileName[fileName.length - 1]}`,
       stadiumCapacity: currentTeam.stadiumCapacity,
       foundedIn: currentTeam.foundedIn,
       teamCoach: currentTeam.teamCoach,
     };
 
-    console.log(addNewTeam);
-
     await Teams.create(addNewTeam);
   });
 
-  res.status(201).json("Done");
+  // TODO:Import Player
+  // importSelectedPlayers.forEach(async (player) => {});
+
+  res.status(201).json("Import Complete");
 });
 
 const viewTeam = asyncHandler(async (req, res) => {

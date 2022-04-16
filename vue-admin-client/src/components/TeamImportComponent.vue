@@ -1,99 +1,137 @@
 <template>
-  <section>
-    <div class="season-import-team-selector-team-section">
-      <input type="checkbox" @click="addTeamToImportList()" />
-      <div>{{ legacyTeam.teamName }}</div>
-    </div>
-
-    <div
-      class="season-import-team-selector-players-section"
-      :ref="legacyTeam.teamName.split(' ').join('')"
-    >
+  <!-- Content -->
+  <div class="team-import-container">
+    <div class="team-import-content">
+      <input type="checkbox" @change="teamCheckboxClicked" ref="teamCheckbox" />
       <div
-        v-for="player in getAllTeamPlayers"
-        :key="player.playerId"
-        class="season-import-team-selector-player-container"
-      >
-        <input type="checkbox" checked @click="addPlayer" />
-        <h1>{{ player.playerName }}</h1>
+        class="team-import-logo"
+        :style="{
+          'background-image': 'url(' + getTeamLogo + ')',
+        }"
+      ></div>
+
+      <div class="team-import-name">{{ legacyTeam.teamName }}</div>
+
+      <div class="team-import-city">{{ legacyTeam.teamCity }}</div>
+
+      <div class="team-import-collapse-player" @click="togglePlayerComponent">
+        <span v-if="showPlayerComponent == false"> S </span>
+        <span v-else-if="showPlayerComponent == true">H</span>
       </div>
     </div>
-  </section>
+    <PlayerImportComponent
+      :teamId="legacyTeam.teamId"
+      :show="showPlayerComponent"
+    />
+  </div>
+  <!-- Content -->
 </template>
 
-<style scoped>
-.season-import-team-selector-team-section {
-  display: flex;
-  align-items: center;
-}
-.season-import-team-selector-players-section {
-  margin-top: 32px;
-  min-height: 500px;
-  max-height: 500px;
-  overflow-y: scroll;
-  display: none;
-
-  background: pink;
-  padding: 10px;
-}
-.season-import-team-selector-player-container {
-  min-height: 60px;
-  background: tomato;
-  margin-top: 32px;
-  display: flex;
-  align-items: center;
-}
-</style>
-
 <script>
-import store from "../store/index";
+import PlayerImportComponent from "@/components/PlayerImportComponent.vue";
+import store from "@/store";
 export default {
   name: "TeamImportComponent",
-  methods: {
-    addTeamToImportList() {
-      const x = this.legacyTeam.teamName.split(" ").join("");
-      this.$refs[x].style.display == "block"
-        ? (this.$refs[x].style.display = "none")
-        : (this.$refs[x].style.display = "block");
-      // save to list
-
-      store.dispatch("Season/addImportTeam", [
-        this.legacyTeam.teamId,
-        this.legacyTeam.teamName,
-      ]);
-      //   get team players
-
-      store.dispatch("Season/getLegacyPlayerByTeam", this.legacyTeam.teamId);
-    },
+  components: {
+    PlayerImportComponent,
+  },
+  data() {
+    return {
+      showPlayerComponent: false,
+    };
   },
   props: {
+    showModal: Boolean,
     legacyTeam: Object,
   },
-  computed: {
-    getAllTeamPlayers() {
-      //   console.log(legacyTeamId, "A");
-      const allPlayers = store.state.Season.allLegacyPlayers;
+  methods: {
+    teamCheckboxClicked() {
+      this.togglePlayerComponent();
 
-      const selectedPlayers = allPlayers.filter((player) => {
-        return player.eplTeamId == this.legacyTeam.teamId;
-      });
+      if (this.$refs.teamCheckbox.checked) {
+        //   fetch players
+        store.dispatch(
+          "Season/getAllLegacyPlayersByTeam",
+          this.legacyTeam.teamId
+        );
 
-      //   console.log(selectedPlayers);
+        // add to selection
+        store.dispatch("Season/setImportSelectedTeam", this.legacyTeam.teamId);
+      } else {
+        //   remove team
+        const filtered = store.state.Season.importSelectedTeams.filter(
+          (selectedTeam) => {
+            return selectedTeam != this.legacyTeam.teamId;
+          }
+        );
+        store.dispatch("Season/replaceImportSelectedTeam", filtered);
 
-      if (
-        store.state.Season.importSelectedTeams.includes(this.legacyTeam.teamId)
-      ) {
-        selectedPlayers.forEach((player) => {
-          store.dispatch("Season/addImportPlayer", [
-            player.playerId,
-            this.legacyTeam.teamId,
-          ]);
-        });
+        // remove players
+        const filteredPlayers = store.state.Season.importSelectedPlayers.filter(
+          (selectedPlayer) => {
+            return selectedPlayer.teamId != this.legacyTeam.teamId;
+          }
+        );
+
+        store.dispatch("Season/replaceImportSelectedPlayer", filteredPlayers);
       }
 
-      //   return selectedPlayers[0];
-      return selectedPlayers;
+      //   add/remove to selection
+    },
+
+    togglePlayerComponent() {
+      this.showPlayerComponent = !this.showPlayerComponent;
+    },
+  },
+  computed: {
+    getTeamLogo() {
+      const baseUrl = process.env.VUE_APP_API_BASE_URL;
+      const team = this.legacyTeam.teamLogo;
+      return baseUrl + team;
     },
   },
 };
 </script>
+
+<style scoped>
+.team-import-container {
+  margin: 36px 20px;
+  width: 85%;
+  background: yellow;
+}
+.team-import-content {
+  min-height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  /*  */
+  background: tomato;
+}
+.team-import-content > input {
+  margin-right: 12px;
+  width: 20px;
+  height: 20px;
+}
+.team-import-logo {
+  width: 55px;
+  height: 55px;
+  margin-right: 20px;
+
+  /* background: green; */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.team-import-name {
+  margin-right: 30px;
+  background: red;
+  min-width: 200px;
+}
+.team-import-city {
+  min-width: 200px;
+}
+.team-import-collapse-player {
+  margin-left: 300px;
+}
+</style>

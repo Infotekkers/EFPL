@@ -67,7 +67,7 @@ const makeFile = (fileContent, logoName) => {
 
 const moveFile = async (sourcePath, destinationPath) => {
   try {
-    fse.move(sourcePath, destinationPath, { overwrite: true });
+    fse.copy(sourcePath, destinationPath, { overwrite: true });
     return true;
   } catch (e) {
     return false;
