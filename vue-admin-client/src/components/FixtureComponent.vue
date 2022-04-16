@@ -142,7 +142,7 @@
   color: var(--neutral-900);
 }
 .fixture-main-container:nth-of-type(odd) {
-  background: var(--neutral-100);
+  background: var(--neutral-200);
   /* background: red; */
 }
 .fixture-main-container:nth-of-type(1) {

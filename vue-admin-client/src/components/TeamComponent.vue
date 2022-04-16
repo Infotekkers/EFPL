@@ -55,7 +55,7 @@
   color: var(--neutral-900);
 }
 .team-container:nth-of-type(odd) {
-  background: var(--neutral-100);
+  background: var(--neutral-200);
 }
 .team-id-container {
   width: 5%;

@@ -15,7 +15,7 @@ const routes = [
       if (currentAdmin && currentAdmin.token) {
         next();
       } else {
-        next("/");
+        next("/login");
       }
     },
     children: [

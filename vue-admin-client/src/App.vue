@@ -7,27 +7,27 @@
       <div class="sidebar-wrapper">
         <!-- Home -->
         <div class="sidebar__link">
-          <router-link to="/admin/home">Home</router-link>
+          <router-link to="/admin/home">{{ $t("home") }}</router-link>
         </div>
 
         <!-- Fixtures -->
         <div class="sidebar__link">
-          <router-link to="/admin/fixtures">Fixtures</router-link>
+          <router-link to="/admin/fixtures">{{ $t("Fixtures") }}</router-link>
         </div>
 
         <!-- Teams -->
         <div class="sidebar__link">
-          <router-link to="/admin/teams">Teams</router-link>
+          <router-link to="/admin/teams">{{ $t("Teams") }}</router-link>
         </div>
 
         <!-- Players -->
         <div class="sidebar__link">
-          <router-link to="/admin/players">Players</router-link>
+          <router-link to="/admin/players">{{ $t("Players") }}</router-link>
         </div>
 
         <!-- settings -->
         <div class="sidebar__link">
-          <router-link to="/admin/settings">Settings</router-link>
+          <router-link to="/admin/settings">{{ $t("Settings") }}</router-link>
         </div>
       </div>
     </aside>
