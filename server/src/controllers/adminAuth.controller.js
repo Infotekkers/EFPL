@@ -113,4 +113,15 @@ const resetPass = asyncHandler(async (req, res) => {
   res.json({ message: "password reset successfully" });
 });
 
-module.exports = { login, requestReset, resetPass };
+const validateAdmin = asyncHandler(async (req, res) => {
+  const token = req.body.token;
+
+  try {
+    jwt.verify(token, process.env.JWT_SECRET);
+    res.status(200).json({ messaage: "Validated Successfully" });
+  } catch (err) {
+    res.status(404).json({ messaage: "Something went wrong" });
+  }
+});
+
+module.exports = { login, requestReset, resetPass, validateAdmin };

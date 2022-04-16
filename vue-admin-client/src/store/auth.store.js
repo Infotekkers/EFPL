@@ -5,20 +5,33 @@ const baseURL = process.env.VUE_APP_API_BASE_URL;
 export default {
   // namespaced: true,
   state: {
-    admins: [],
     currentAdmin: {},
   },
   getters: {
-    allAdmins: (state) => state.admins,
     currentAdmin: (state) => state.currentAdmin,
   },
   actions: {
     // set current admin
     async setAdmin({ commit }) {
-      let currentAdmin = window.localStorage.currentAdmin;
+      if (window.localStorage.currentAdmin) {
+        let currentAdmin = JSON.parse(window.localStorage.currentAdmin);
+        const token = currentAdmin.token;
 
-      if (currentAdmin) {
-        commit("SET_CURRENT_ADMIN", JSON.parse(currentAdmin));
+        await axios
+          .post(`${baseURL}/admin/validateAdmin`, {
+            token,
+          })
+          .then((response) => {
+            if (response.status.code === 200) {
+              console.log("success");
+              commit("SET_CURRENT_ADMIN", currentAdmin);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            window.localStorage.removeItem("currentAdmin");
+            router.push({ name: "admin-login" });
+          });
       }
     },
     // log out admin
@@ -110,7 +123,6 @@ export default {
     },
   },
   mutations: {
-    SET_ADMINS: (state, admins) => (state.admins = admins),
     LOG_OUT: (state) => {
       state.currentAdmin = {};
       window.localStorage.removeItem("currentAdmin");
