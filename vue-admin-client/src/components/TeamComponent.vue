@@ -21,13 +21,29 @@
       <span v-else>-</span>
     </div>
     <div class="team-controls-container">
-      <div @click="editTeam">Edit</div>
-      <div @click="deleteTeam">Delete</div>
+      <div @click="editTeam">
+        <img :src="editIcon.path" :alt="editIcon.alt" class="small-icon" />
+      </div>
+      <div @click="deleteTeam">
+        <img :src="deleteIcon.path" :alt="deleteIcon.alt" class="small-icon" />
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+/* Icons */
+.extra-small-icon {
+  width: 7px;
+  height: fit-content;
+  object-fit: contain;
+}
+
+.small-icon {
+  width: 15px;
+  height: fit-content;
+  object-fit: contain;
+}
 .team-container {
   display: flex;
   justify-content: space-between;
@@ -82,6 +98,7 @@
   width: 10%;
   display: flex;
   justify-content: space-between;
+  padding: 0 24px;
 }
 .team-controls-container > div:nth-of-type(1) {
   margin-right: 8px;
@@ -105,10 +122,18 @@
 
 <script>
 import store from "../store/index";
+
+import { editIcon, deleteIcon } from "@/utils/Icons";
 export default {
   name: "TeamComponent",
   props: {
     team: Object,
+  },
+  data() {
+    return {
+      editIcon: editIcon,
+      deleteIcon: deleteIcon,
+    };
   },
 
   methods: {

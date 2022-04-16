@@ -89,12 +89,32 @@
 
       <!-- Control Center -->
       <div class="fixture-controls">
-        <div @click="startMatch">Play</div>
-        <div @click="pauseMatch">Pause</div>
-        <div @click="resumeMatch">Resume</div>
-        <div @click="stopMatch">Stop</div>
-        <div @click="editMatch">Edit</div>
-        <div @click="deleteMatch">Delete</div>
+        <div @click="startMatch">
+          <img :src="playIcon.path" :alt="playIcon.alt" class="small-icon" />
+        </div>
+        <div @click="pauseMatch">
+          <img :src="pauseIcon.path" :alt="pauseIcon.alt" class="small-icon" />
+        </div>
+        <div @click="resumeMatch">
+          <img
+            :src="restartIcon.path"
+            :alt="restartIcon.alt"
+            class="small-icon"
+          />
+        </div>
+        <div @click="stopMatch">
+          <img :src="stopIcon.path" :alt="stopIcon.alt" class="small-icon" />
+        </div>
+        <div @click="editMatch">
+          <img :src="editIcon.path" :alt="editIcon.alt" class="small-icon" />
+        </div>
+        <div @click="deleteMatch">
+          <img
+            :src="deleteIcon.path"
+            :alt="deleteIcon.alt"
+            class="small-icon"
+          />
+        </div>
       </div>
       <!-- Control Center -->
     </div>
@@ -103,6 +123,21 @@
 </template>
 
 <style scoped>
+/* Icons */
+.extra-small-icon {
+  width: 7px;
+
+  height: 7px;
+  object-fit: contain;
+}
+
+.small-icon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  margin-left: 3px;
+}
+
 .fixture-main-container {
   width: 100%;
   border-bottom: 2px solid var(--neutral-200);
@@ -184,11 +219,13 @@
   margin-left: auto;
   font-size: 12px;
   height: 100%;
+  /* min-height: 15px; */
 
   /* margin-left: 100%; */
 }
 .fixture-controls > div {
   margin-left: 4px;
+  height: 15px;
 }
 
 /* * Super Small Screen */
@@ -216,12 +253,32 @@
 // Utils
 import router from "../router/index";
 import store from "../store/index";
+
+import {
+  playIcon,
+  pauseIcon,
+  restartIcon,
+  stopIcon,
+  editIcon,
+  deleteIcon,
+} from "@/utils/Icons";
 export default {
   name: "FixtureComponent",
   props: {
     fixture: Object,
     index: Number,
     isTeamLoading: Boolean,
+  },
+
+  data() {
+    return {
+      playIcon: playIcon,
+      pauseIcon: pauseIcon,
+      restartIcon: restartIcon,
+      stopIcon: stopIcon,
+      editIcon: editIcon,
+      deleteIcon: deleteIcon,
+    };
   },
 
   computed: {

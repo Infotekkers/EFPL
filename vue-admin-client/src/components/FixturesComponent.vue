@@ -32,7 +32,9 @@
           {{ $t("Fixtures") }}
         </div>
         <div class="gameweek-add-new" @click="activateModal">
-          <div>+</div>
+          <div>
+            <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
+          </div>
           {{ $t("Add") }}
         </div>
       </div>
@@ -104,7 +106,17 @@
       <div class="gameweek-controller">
         <!-- Previous Game week button -->
         <div @click="prevGameWeek" class="navigator-button">
-          {{ $t("Prev") }}
+          <div>
+            {{ $t("Prev") }}
+          </div>
+
+          <div>
+            <img
+              :src="nextLargeIcon.path"
+              :alt="nextLargeIcon.alt"
+              class="medium-icon"
+            />
+          </div>
         </div>
 
         <!-- Gameweek counter -->
@@ -123,7 +135,17 @@
 
         <!-- Next game week Button -->
         <div @click="nextGameWeek" class="navigator-button">
-          {{ $t("Next") }}
+          <div>
+            {{ $t("Next") }}
+          </div>
+
+          <div>
+            <img
+              :src="previousLargeIcon.path"
+              :alt="previousLargeIcon.alt"
+              class="medium-icon"
+            />
+          </div>
         </div>
 
         <!-- Add New game week button -->
@@ -165,6 +187,24 @@
 </template>
 
 <style scoped>
+/* Icons */
+.extra-small-icon,
+.small-icon,
+.medium-icon {
+  height: fit-content;
+  object-fit: contain;
+}
+
+.extra-small-icon {
+  width: 7px;
+}
+.small-icon {
+  width: 15px;
+}
+.medium-icon {
+  width: 24px;
+}
+
 .fixtures-main-container {
   width: 82%;
   margin-left: 18%;
@@ -265,10 +305,11 @@
 }
 .navigator-button {
   width: 30%;
-  height: 32px;
-  padding: 8px 40px;
+  min-height: 32px;
+  padding: 12px 60px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .gameweek-date {
   margin-top: 42px;
@@ -353,6 +394,18 @@ import store from "../store/index";
 import FixtureComponent from "@/components/FixtureComponent";
 import FixtureModalComponent from "@/components/FixtureModalComponent";
 
+// Icons
+import {
+  addIcon,
+  playIcon,
+  pauseIcon,
+  stopIcon,
+  editIcon,
+  deleteIcon,
+  nextLargeIcon,
+  previousLargeIcon,
+} from "@/utils/Icons";
+
 export default {
   name: "FixturesComponent",
   components: {
@@ -366,6 +419,16 @@ export default {
       isTeamLoading: false,
       isEditMode: false,
       radioFilter: "All",
+
+      // Icons
+      addIcon: addIcon,
+      playIcon: playIcon,
+      pauseIcon: pauseIcon,
+      stopIcon: stopIcon,
+      editIcon: editIcon,
+      deleteIcon: deleteIcon,
+      nextLargeIcon: nextLargeIcon,
+      previousLargeIcon: previousLargeIcon,
     };
   },
 

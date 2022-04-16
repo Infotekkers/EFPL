@@ -25,7 +25,9 @@
 
       <!-- Add Button -->
       <div class="teams-add-new" @click="activateModal">
-        <div>+</div>
+        <div>
+          <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
+        </div>
         {{ $t("Add") }}
       </div>
     </div>
@@ -35,9 +37,23 @@
     <div class="teams-sorter-header">
       <!-- ID -->
       <div class="teams-id-sorter">
-        <span @click="sortByID(-1)">D</span>
-        {{ $t("ID") }}
-        <span @click="sortByID(1)">A</span>
+        <span @click="sortByID(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+        <span class="sorter-content">
+          {{ $t("ID") }}
+        </span>
+        <span @click="sortByID(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
       </div>
 
       <!-- ID -->
@@ -45,32 +61,82 @@
 
       <!-- Name -->
       <div class="teams-name-sorter">
-        <span @click="sortByName(-1)">D</span>
-        {{ $t("Team") }}
-        <span @click="sortByName(1)">A</span>
+        <span @click="sortByName(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+        <span class="sorter-content">
+          {{ $t("Team") }}
+        </span>
+        <span @click="sortByName(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
       </div>
       <!-- Name -->
 
       <!-- City -->
       <div class="teams-city-sorter">
-        <span @click="sortByCity(-1)">D</span> {{ $t("City") }}
-        <span @click="sortByCity(1)">A</span>
+        <span @click="sortByCity(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+        /></span>
+        <span class="sorter-content"> {{ $t("City") }}</span>
+        <span @click="sortByCity(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
       </div>
       <!-- City -->
 
       <!-- Stadium -->
       <div class="teams-stadium-sorter">
-        <span @click="sortbyStadium(-1)">D</span>
-        {{ $t("Stadium") }}
-        <span @click="sortbyStadium(1)">A</span>
+        <span @click="sortbyStadium(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+        <span class="sorter-content"> {{ $t("Stadium") }}</span>
+        <span @click="sortbyStadium(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
       </div>
       <!-- Stadium -->
 
       <!-- Date -->
       <div class="teams-founded-sorter">
-        <span @click="sortByFoundedDate(-1)">D</span>
-        {{ $t("Year") }}
-        <span @click="sortByFoundedDate(1)">A</span>
+        <span @click="sortByFoundedDate(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+        <span class="sorter-content"> {{ $t("Year") }}</span>
+        <span @click="sortByFoundedDate(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
       </div>
 
       <!-- Date -->
@@ -94,6 +160,18 @@
 </template>
 
 <style scoped>
+/* Icons */
+.extra-small-icon {
+  width: 7px;
+  height: fit-content;
+  object-fit: contain;
+}
+
+.small-icon {
+  width: 15px;
+  height: fit-content;
+  object-fit: contain;
+}
 .teams-main-container {
   /* background: var(--primary-400); */
   width: 82%;
@@ -130,6 +208,7 @@
   color: var(--neutral-100);
   display: flex;
 }
+
 .teams-add-new > div {
   width: 20px;
   height: 20px;
@@ -148,9 +227,29 @@
   font-size: 15px;
   color: var(--neutral-700);
 }
+.teams-id-sorter,
+.teams-name-sorter,
+.teams-city-sorter,
+.teams-stadium-sorter,
+.teams-founded-sorter {
+  display: flex;
+  align-items: center;
+}
 .teams-id-sorter {
   width: 5%;
   min-width: 45px;
+}
+.sorter-content {
+  margin-right: 8px;
+  margin-left: 8px;
+}
+.teams-id-sorter > span,
+.teams-name-sorter > span,
+.teams-city-sorter > span,
+.teams-stadium-sorter > span,
+.teams-founded-sorter > span {
+  display: flex;
+  align-items: center;
 }
 .teams-logo-sorter {
   width: 60px;
@@ -186,6 +285,13 @@
 <script>
 // Utils
 import store from "../store/index";
+import {
+  sortUpIcon,
+  sortDownIcon,
+  addIcon,
+  editIcon,
+  deleteIcon,
+} from "@/utils/Icons";
 
 // Components
 import TeamComponent from "@/components/TeamComponent";
@@ -200,6 +306,13 @@ export default {
     return {
       showModal: false,
       isEditMode: false,
+
+      // Icons
+      sortUpIcon: sortUpIcon,
+      sortDownIcon: sortDownIcon,
+      addIcon: addIcon,
+      editIcon: editIcon,
+      deleteIcon: deleteIcon,
     };
   },
 
