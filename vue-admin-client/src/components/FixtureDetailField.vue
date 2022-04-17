@@ -223,6 +223,7 @@
             this.fixtureDetailData.lineups[this.activeTeamId].bench.length !== 0
           "
         >
+          Subs📥📤
           <div
             draggable="true"
             @dragstart="fieldPlayerDragStart($event, playerId, 'bench')"
@@ -561,7 +562,7 @@ p {
   flex-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
   height: 20%; /* Neccessary for the labels*/
@@ -570,12 +571,13 @@ p {
   background-color: var(--success-500);
 }
 
-/* #goalkeepers {
-  box-shadow: inset 0 6px 2px var(--primary-200);
-  border-radius: 10px 0 0 0;
+#goalkeepers {
+  justify-content: center;
+  /* box-shadow: inset 0 6px 2px var(--primary-200);
+  border-radius: 10px 0 0 0; */
 }
 
-#strikers {
+/* #strikers {
   box-shadow: 0 10px 0 hsl(192, 100%, 97%);
   margin-bottom: 10px;
   border-radius: 0 0 10px 0;
@@ -584,6 +586,7 @@ p {
 #bench {
   justify-content: flex-start;
   background-color: white;
+  padding: 5px;
   /* border: 1px solid black; */
 }
 
@@ -624,7 +627,7 @@ p {
 
 .actions {
   align-self: center;
-  margin: 10px;
+  margin: 10px 10px 0 10px;
 }
 
 .actions button {
@@ -708,7 +711,9 @@ p {
 
   #bench {
     height: 42% !important;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 109px);
+    grid-template-rows: repeat(2, 103px);
   }
 
   #bench-label {
