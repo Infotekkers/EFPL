@@ -47,7 +47,7 @@
       </div>
     </div>
     <PlayerImportComponent
-      :teamId="legacyTeam.teamId"
+      :teamName="legacyTeam.teamName"
       :show="showPlayerComponent"
       :check="checkPlayers"
     />
@@ -88,7 +88,7 @@ export default {
         //   fetch players
         store.dispatch(
           "Season/getAllLegacyPlayersByTeam",
-          this.legacyTeam.teamId
+          this.legacyTeam.teamName
         );
 
         // add to selection

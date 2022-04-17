@@ -101,6 +101,9 @@ const playerSchema = mongoose.Schema({
   score: { type: [scoreSchema] },
   history: { type: [historySchema] },
   playerId: { type: Number },
+  playerImage: {
+    type: String,
+  },
 });
 
 /*

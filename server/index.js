@@ -56,11 +56,10 @@ app.use("/backup", backupRouter);
 // populate.addTestGameweek();
 // populate.addTestFixture();
 
-populate.addTestAdmin();
-
-populate.populateTeams();
-populate.populatePlayers();
-populate.populateFixture();
+// populate.addTestAdmin();
+// populate.populateTeams();
+// populate.populatePlayers();
+// populate.populateFixture();
 
 // Add Middleware
 app.use(errorMiddleware);

@@ -43,7 +43,7 @@ import store from "@/store";
 export default {
   name: "PlayerImportComponent",
   props: {
-    teamId: Number,
+    teamName: String,
     show: Boolean,
     check: Boolean,
   },
@@ -58,7 +58,7 @@ export default {
       const allLegacyPlayers = store.state.Season.allLegacyPlayers;
 
       const filteredLegacyPlayers = allLegacyPlayers.filter((player) => {
-        return player.eplTeamId == this.teamId;
+        return player.eplTeamId == this.teamName;
       });
 
       return filteredLegacyPlayers;

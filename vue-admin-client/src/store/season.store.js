@@ -65,7 +65,6 @@ export default {
       await axiosInstance
         .get(`${baseURL}/backup/teams/all`)
         .then((response) => {
-          console.log(response.data);
           if (response.status == 200) {
             context.commit("SET_LEGACY_TEAMS", response.data);
           }

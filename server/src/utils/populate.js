@@ -535,6 +535,8 @@ const populatePlayers = async () => {
   if (players.data.length === 0) {
     playersData.forEach(async (team) => {
       team.forEach(async (player) => {
+        player.playerImage = "";
+        player.score = [];
         await Player.create(player);
       });
     });
@@ -678,10 +680,10 @@ const populateFixture = async () => {
           matchId: `${homeTeamID}|${awayTeamID}`,
           schedule: SCHEDULE,
 
-          // Concern Here what are the possible values
           status: "scheduled",
           homeTeam: fixture.homeTeam,
           awayTeam: fixture.awayTeam,
+          // score: [],
 
           matchStat: {
             minutesPlayed: {},
