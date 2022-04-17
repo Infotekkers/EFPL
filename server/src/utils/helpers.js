@@ -56,6 +56,27 @@ const statUpdater = ({ activeMatch, activePlayer, incomingUpdate }) => {
   } = incomingUpdate;
 
   // TODO: Set Fantasy Score
+  if (!activePlayer.score[gameweekId - 1]) {
+    const score = {
+      gameweekId,
+      price: 0,
+      fantasyScore: 0,
+      minutesPlayed: 0,
+      goals: 0,
+      assists: 0,
+      cleanSheet: 0,
+      yellows: 0,
+      reds: 0,
+      penalitiesMissed: 0,
+      penalitiesSaved: 0,
+      saves: 0,
+      ownGoal: 0,
+      transfersIn: 0,
+      transfersOut: 0,
+      form: 0,
+    };
+    activePlayer.score.push(score);
+  }
   activePlayer.score[gameweekId - 1].minutesPlayed = minutesPlayed;
   activePlayer.score[gameweekId - 1].goals = goals;
   activePlayer.score[gameweekId - 1].assists = assists;
