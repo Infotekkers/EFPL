@@ -8,7 +8,7 @@
     <div>
       <router-link :to="{ name: 'forgot-password' }"
         ><button>
-          <h3>{{ $t("Reset") }}</h3>
+          <h3>{{ $t("Reset Password") }}</h3>
         </button></router-link
       >
     </div>
