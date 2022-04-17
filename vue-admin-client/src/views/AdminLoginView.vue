@@ -1,13 +1,13 @@
 <template>
   <div class="admin-login">
-    <h1>Login</h1>
+    <h1>{{ $t("Login Page") }}</h1>
     <form @submit.prevent="loginAdmin">
       <div class="email">
-        <label>Email:</label>
+        <label>{{ $t("Email") }}:</label>
         <input required type="email" v-model="loginInfo.email" />
       </div>
       <div class="password">
-        <label>Password:</label>
+        <label>{{ $t("Password") }}:</label>
         <input
           :type="showPassword ? 'text' : 'password'"
           required
@@ -15,13 +15,17 @@
           minlength="8"
         />
       </div>
-      <div class="submit"><button>Login</button></div>
+      <div class="submit">
+        <button>{{ $t("Login") }}</button>
+      </div>
     </form>
-    <button @click="showPassword = !showPassword">show password</button>
+    <button @click="showPassword = !showPassword">
+      {{ $t("show password") }}
+    </button>
     <div v-if="isLoading">Loading...</div>
     <p class="forgot-pass">
       <router-link :to="{ name: 'forgot-password' }"
-        >Forgot Password?</router-link
+        >{{ $t("forgot password") }}?</router-link
       >
     </p>
   </div>
@@ -35,18 +39,18 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 25%;
+  width: 50%;
 }
 form {
   text-align: left;
-  padding: 40px;
+  padding: var(--spacing-large);
   border: 1px solid;
   border-radius: 10px;
 }
 label {
   color: var(--neutral-900);
   display: inline-block;
-  margin: 25px 0 15px;
+  margin: var(--spacing-regular) 0 var(--spacing-base);
   font-size: var(--text-xsmall);
   font-weight: bold;
   text-transform: uppercase;
@@ -55,14 +59,14 @@ button {
   background: var(--success-200);
   color: var(--neutral-50);
   border: 0;
-  padding: 10px 20px;
-  margin-top: 20px;
+  padding: var(--spacing-small) var(--spacing-regular);
+  margin-top: var(--spacing-regular);
   border-radius: 20px;
   cursor: pointer;
 }
 input {
   display: block;
-  padding: 10px 6px;
+  padding: var(--spacing-small) var(--spacing-xsmall);
   width: 100%;
   box-sizing: border-box;
   border: none;
@@ -74,6 +78,14 @@ input {
 }
 .submit {
   text-align: center;
+}
+@media screen and (max-width: 768px) {
+  .admin-login {
+    width: 100%;
+  }
+  form {
+    border: none;
+  }
 }
 </style>
 

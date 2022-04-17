@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>Contact Page</h1>
+  <div class="admin-contact">
+    <h1>{{ $t("Contact Page") }}</h1>
 
     <form @submit.prevent="handleSubmit">
       <label>{{ $t("Email") }}:</label>
@@ -50,33 +50,67 @@ export default {
 
 <style scoped>
 @import "../assets/design-system.css";
-input[type="email"],
+.admin-contact {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
+form {
+  text-align: left;
+  padding: var(--spacing-large);
+  border: 1px solid;
+  border-radius: 10px;
+}
 select,
 textarea {
-  width: 60%;
-  padding: 12px;
+  width: 100%;
+  padding: var(--spacing-small);
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
+  margin-top: var(--spacing-xsmall);
+  margin-bottom: var(--spacing-base);
   resize: vertical;
 }
 
 label {
   color: var(--neutral-900);
   display: inline-block;
-  margin: 25px 0 15px;
+  margin: var(--spacing-regular) 0 var(--spacing-base);
   font-size: var(--text-xsmall);
   font-weight: bold;
   text-transform: uppercase;
 }
 button {
-  background-color: #04aa6d;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
+  background: var(--success-200);
+  color: var(--neutral-50);
+  border: 0;
+  padding: var(--spacing-small) var(--spacing-regular);
+  margin-top: var(--spacing-regular);
+  border-radius: 20px;
   cursor: pointer;
+  width: 30%;
+}
+input {
+  display: block;
+  padding: var(--spacing-small) var(--spacing-xsmall);
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid var(--neutral-600);
+  color: var(--neutral-600);
+}
+.submit {
+  text-align: center;
+}
+@media screen and (max-width: 768px) {
+  .admin-contact {
+    width: 100%;
+  }
+  form {
+    border: none;
+  }
 }
 </style>
