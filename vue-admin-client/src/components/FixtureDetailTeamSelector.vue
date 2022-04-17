@@ -42,15 +42,20 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border: 1px solid black;
+  margin: var(--spacing-regular);
 }
 #main-fixture-detail-team-selector > * {
-  margin: 10px;
-  border: 1px solid black;
+  margin: var(--spacing-xsmall);
 }
 
 .team {
   text-align: center;
+  padding: var(--spacing-small);
+  border-radius: 2px;
+}
+
+.team * {
+  margin: var(--spacing-xsmall);
 }
 
 .team-logo {
@@ -68,7 +73,8 @@ export default {
 }
 
 .selected {
-  background-color: greenyellow;
+  background-color: var(--primary-100);
+  box-shadow: inset 0 1px 2px var(--primary-400);
 }
 
 .score {
