@@ -435,39 +435,62 @@ export default {
       commit("SET_FIXTURE_DETAIL_ID", matchId);
     },
 
-    async loadFixtureDetails({ commit }, matchId) {
+    async loadFixtureDetails({ commit, state }, matchId) {
       const homeTeamId = matchId.split("|")[0];
       const awayTeamId = matchId.split("|")[1];
 
       // TODO: User team data from store
       const reqHomeTeam = axiosInstance.get(`/teams/${homeTeamId}`);
       const reqAwayTeam = axiosInstance.get(`/teams/${awayTeamId}`);
+
+      await axios.all([reqHomeTeam, reqAwayTeam]).then(
+        axios.spread((...res) => {
+          const [resHomeTeam, resAwayTeam] = res;
+
+          // RESPONSE HOME TEAM
+          let payload = {
+            type: "teams",
+            teamId: homeTeamId,
+            data: resHomeTeam.data[0],
+          };
+          commit("SET_FIXTURE_DETAIL_DATA", payload);
+
+          // RESPONSE AWAY TEAM
+          payload = {
+            type: "teams",
+            teamId: awayTeamId,
+            data: resAwayTeam.data[0],
+          };
+          commit("SET_FIXTURE_DETAIL_DATA", payload);
+        })
+      );
+
       const reqPlayers = axiosInstance.get(
-        `/players/getplayers/homeTeam/${homeTeamId}/awayTeam/${awayTeamId}`
+        `/players/getplayers/homeTeam/${state.fixtureDetailData.teams[homeTeamId].teamName}/awayTeam/${state.fixtureDetailData.teams[awayTeamId].teamName}`
       );
       const reqFixtureStats = axiosInstance.get(`/fixtures/${matchId}`);
 
       await axios
-        .all([reqHomeTeam, reqAwayTeam, reqPlayers, reqFixtureStats])
+        .all([reqPlayers, reqFixtureStats])
         .then(
           axios.spread((...res) => {
-            const [resHomeTeam, resAwayTeam, resPlayers, resFixtureStats] = res;
+            const [resPlayers, resFixtureStats] = res;
+            let payload;
+            // // RESPONSE HOME TEAM
+            // let payload = {
+            //   type: "teams",
+            //   teamId: homeTeamId,
+            //   data: resHomeTeam.data[0],
+            // };
+            // commit("SET_FIXTURE_DETAIL_DATA", payload);
 
-            // RESPONSE HOME TEAM
-            let payload = {
-              type: "teams",
-              teamId: homeTeamId,
-              data: resHomeTeam.data[0],
-            };
-            commit("SET_FIXTURE_DETAIL_DATA", payload);
-
-            // RESPONSE AWAY TEAM
-            payload = {
-              type: "teams",
-              teamId: awayTeamId,
-              data: resAwayTeam.data[0],
-            };
-            commit("SET_FIXTURE_DETAIL_DATA", payload);
+            // // RESPONSE AWAY TEAM
+            // payload = {
+            //   type: "teams",
+            //   teamId: awayTeamId,
+            //   data: resAwayTeam.data[0],
+            // };
+            // commit("SET_FIXTURE_DETAIL_DATA", payload);
 
             // RESPONSE PLAYERS
             const payloadHomePlayers = {
