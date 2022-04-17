@@ -1,14 +1,26 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-
-  <!-- eslint-disable-next-line -->
-  <router-view />
+  <div class="wrapper">
+    <SideBar />
+    <main>
+      <!-- eslint-disable-next-line -->
+      <router-view />
+    </main>
+  </div>
 </template>
 
+<script>
+import SideBar from "./components/SideBar.vue";
+
+export default {
+  components: {
+    SideBar,
+  },
+};
+</script>
+
 <style>
+@import "./assets/design-system.css";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -28,5 +40,17 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+</style>
+
+<style lang="scss">
+.wrapper {
+  height: 100vh;
+  display: flex;
+
+  main {
+    background: var(--neutral-100);
+    flex-grow: 1;
+  }
 }
 </style>
