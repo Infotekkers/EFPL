@@ -535,6 +535,7 @@ const populatePlayers = async () => {
   if (players.data.length === 0) {
     playersData.forEach(async (team) => {
       team.forEach(async (player) => {
+        player.score = [];
         await Player.create(player);
       });
     });

@@ -38,6 +38,28 @@ export default {
       await axios
         .get(url)
         .then((res) => {
+          console.log(res.data[0]);
+          if (!res.data[0].score[gameweek - 1]) {
+            let score = {
+              gameweekId: gameweek,
+              price: 0,
+              fantasyScore: 0,
+              minutesPlayed: 0,
+              goals: 0,
+              assists: 0,
+              cleanSheet: 0,
+              yellows: 0,
+              reds: 0,
+              penalitiesMissed: 0,
+              penalitiesSaved: 0,
+              saves: 0,
+              ownGoal: 0,
+              transfersIn: 0,
+              transfersOut: 0,
+              form: 0,
+            };
+            res.data[0].score.push(score);
+          }
           payload = {
             playerId,
             gameweek,
@@ -91,6 +113,7 @@ export default {
       };
 
       url = `/fixtures/update/stats/${rootState.Fixture.fixtureDetailId}`;
+      console.log(payload);
       await axios
         .patch(url, payload)
         .then((res) => {
