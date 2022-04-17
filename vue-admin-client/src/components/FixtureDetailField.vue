@@ -527,12 +527,10 @@ export default {
 </script>
 
 <style scoped>
-/* Hide scrollbar for Chrome, Safari and Opera */
 *::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 * {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -547,9 +545,8 @@ p {
 .field {
   display: flex;
   flex-direction: column;
-  /* background-color: var(--primary-100); */
-  /* border: 1px solid black; */
   height: 80vh;
+  overflow: hidden;
 }
 
 #goalkeepers,
@@ -562,7 +559,6 @@ p {
   flex-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
-  justify-content: flex-start;
   align-items: center;
   position: relative;
   height: 20%; /* Neccessary for the labels*/
@@ -571,23 +567,28 @@ p {
   background-color: var(--success-500);
 }
 
-#goalkeepers {
-  justify-content: center;
-  /* box-shadow: inset 0 6px 2px var(--primary-200);
-  border-radius: 10px 0 0 0; */
+#goalkeepers div:first-child,
+#defenders div:first-child,
+#midfielders div:first-child,
+#strikers div:first-child {
+  margin-left: auto;
 }
 
-/* #strikers {
-  box-shadow: 0 10px 0 hsl(192, 100%, 97%);
-  margin-bottom: 10px;
-  border-radius: 0 0 10px 0;
-} */
+#goalkeepers div:last-child,
+#defenders div:last-child,
+#midfielders div:last-child,
+#strikers div:last-child {
+  margin-right: auto;
+}
+
+#goalkeepers {
+  justify-content: center;
+}
 
 #bench {
   justify-content: flex-start;
   background-color: white;
   padding: 5px;
-  /* border: 1px solid black; */
 }
 
 #goalkeepers label,
@@ -638,10 +639,7 @@ p {
   color: white;
   cursor: pointer;
   font-size: var(--text-base);
-
-  /* Primary-900 */
-
-  background: #07385e;
+  background: #07385e; /* Primary-900 */
   box-shadow: 0px 2px 0px #38bdf8;
   border-radius: 2px;
 }
@@ -652,13 +650,11 @@ p {
   height: 50px;
   color: #07385e;
   font-size: var(--text-base);
-
-  /* Primary-200 */
-
-  background: #b5f0ff;
+  background: #b5f0ff; /* Primary-200 */
   box-shadow: 0px 2px 0px #38bdf8;
   border-radius: 2px;
 }
+
 @media screen and (max-width: 480px) {
   img {
     height: 70px;
@@ -702,19 +698,12 @@ p {
     width: 50vw;
   }
 
-  #goalkeepers,
-  #defenders,
-  #midfielders,
-  #strikers,
-  #bench {
-    justify-content: center;
-  }
-
   #bench {
     height: 42% !important;
     display: grid;
     grid-template-columns: repeat(4, 109px);
     grid-template-rows: repeat(2, 103px);
+    justify-content: center;
   }
 
   #bench-label {

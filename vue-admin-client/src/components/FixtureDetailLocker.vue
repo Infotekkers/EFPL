@@ -2,13 +2,13 @@
   <div v-if="!dataLoaded">Loading</div>
   <div v-else>
     <div id="main-fixture-detail-locker">
+      <div id="locker-label">Locker🔒</div>
       <div
         class="locker-room"
         @dragenter.prevent
         @dragover="fieldPlayerDragOver"
         @drop="fieldPlayerDrop"
       >
-        <div id="locker-label">Locker🔒</div>
         <div
           draggable="true"
           @dragstart="lockerPlayerDragStart($event, player)"
@@ -120,9 +120,18 @@ export default {
 </script>
 
 <style scoped>
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 #main-fixture-detail-locker {
-  /* background-color: var(--neutral-100); */
-  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: row;
 }
 
 .locker-room {
@@ -131,6 +140,7 @@ export default {
   flex-wrap: nowrap;
   justify-content: flex-start;
   overflow-x: auto;
+  margin: var(--spacing-xsmall);
 }
 
 #locker-label {
@@ -143,9 +153,9 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: var(--spacing-xsmall);
-  /* background-color: var(--neutral-100); */
-  border: 1px solid black;
+  margin: var(--spacing-2xsmall);
+  background-color: var(--primary-100);
+  border-radius: 2px;
 }
 
 .locker-player p {
@@ -175,6 +185,10 @@ export default {
   }
 }
 @media screen and (min-width: 900px) {
+  #main-fixture-detail-locker {
+    flex-direction: column;
+  }
+
   .locker-room {
     flex-direction: column;
     overflow-y: auto;
