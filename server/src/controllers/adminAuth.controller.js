@@ -113,6 +113,27 @@ const resetPass = asyncHandler(async (req, res) => {
   res.json({ message: "password reset successfully" });
 });
 
+// send email
+const sendEmail = asyncHandler(async (req, res) => {
+  const { receiverEmail, emailBody } = req.body;
+  const mailOptions = {
+    from: `admin`,
+    to: `${receiverEmail}`,
+    subject: `Contact`,
+    text: `${emailBody}`,
+  };
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      res.status(400).json({
+        messaage: "could not send email",
+      });
+      console.log(error);
+    } else {
+      res.status(200).json({ messaage: "Email Sent Successfully" });
+      console.log("email sent: " + info.response);
+    }
+  });
+});
 const validateAdmin = asyncHandler(async (req, res) => {
   const token = req.body.token;
 
@@ -130,4 +151,4 @@ const validateAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { login, requestReset, resetPass, validateAdmin };
+module.exports = { login, requestReset, resetPass, validateAdmin, sendEmail};

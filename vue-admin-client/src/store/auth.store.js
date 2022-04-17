@@ -121,6 +121,35 @@ export default {
           }
         });
     },
+
+    // send email
+    async sendEmail(context, { receiverEmail, emailBody }) {
+      await axios
+        .post(`${baseURL}/admin/sendEmail`, {
+          receiverEmail: receiverEmail,
+          emailBody: emailBody,
+        })
+        .then((response) => {
+          console.log(response.status);
+          if (response.status === 200) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: `successfully sent`,
+            });
+            console.log("sent");
+            router.push({ name: "settings" });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: `Something went wrong`,
+          });
+        });
+    },
   },
   mutations: {
     LOG_OUT: (state) => {

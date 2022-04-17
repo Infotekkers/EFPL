@@ -47,6 +47,12 @@ const routes = [
         name: "settings",
         component: () => import("../views/SettingsView.vue"),
       },
+      // contact
+      {
+        path: "contact",
+        name: "contact",
+        component: () => import("../components/ContactComponent.vue"),
+      },
 
       {
         path: "players",

@@ -29,6 +29,16 @@
         <option value="am">{{ $t("Amharic") }}</option>
       </select>
     </div>
+    <br />
+
+    <div class="contact-page">
+      <router-link :to="{ name: 'contact' }"
+        ><button>
+          <h3>{{ $t("Contact Us") }}</h3>
+        </button></router-link
+      >
+    </div>
+    <br />
 
     <div>
       <button @click="initiateImport">{{ $t("Import") }}</button>
