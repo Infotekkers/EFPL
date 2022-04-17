@@ -66,6 +66,11 @@ const expandIcon = {
   alt: "Expand",
 };
 
+const injuredIcon = {
+  path: require("../assets/icons/injured-icon.svg"),
+  alt: "Injured",
+};
+
 module.exports = {
   playIcon,
   pauseIcon,
@@ -86,4 +91,5 @@ module.exports = {
 
   collapseIcon,
   expandIcon,
+  injuredIcon,
 };

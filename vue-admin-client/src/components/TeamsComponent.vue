@@ -173,7 +173,6 @@
   object-fit: contain;
 }
 .teams-main-container {
-  /* background: var(--primary-400); */
   width: 100%;
 }
 .team-search-bar {

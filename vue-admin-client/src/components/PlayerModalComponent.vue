@@ -10,7 +10,7 @@
         <div class="player-modal-image-preview" ref="preview">
           <div
             class="player-modal-image-remove"
-            @click="removImage"
+            @click="removeImage"
             v-if="selectedImage != null"
           >
             X
@@ -113,7 +113,7 @@
           <div class="container-col input-container">
             <label for="">Price </label>
             <input
-              type="text"
+              type="number"
               ref="currentPrice"
               :value="isEditMode ? getPlayer.currentPrice : ''"
             />
@@ -165,6 +165,7 @@
   </div>
 </template>
 <script>
+// TODO:FIX Form - make by v-model
 import store from "../store/index";
 export default {
   name: "PlayerModal",
@@ -234,25 +235,41 @@ export default {
       const currentPrice = this.$refs.currentPrice.value;
       const injuryStatus = this.$refs.injuryStatus.value;
       const injuryMessage = this.$refs.injuryMessage.value;
-      const playerImage = await this.getBase64();
+      let playerImage = "";
+
+      if (store.state.Player.imageChanged === true) {
+        playerImage = await this.getBase64();
+      }
 
       if (!playerName) {
-        console.log("Player Name is required");
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Player Name is required",
+        });
       } else if (!eplTeamId) {
-        console.log("Player Team is required.");
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Team is required",
+        });
       } else if (!position) {
-        console.log("position");
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Position is required",
+        });
       } else if (!currentPrice) {
-        console.log("price");
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Current Price is required",
+        });
       } else if (!injuryStatus) {
         console.log("status");
       } else if (!injuryMessage) {
         console.log("Messgae");
-      } else if (!this.selectedImage) {
-        console.log("Image");
       } else {
-        //   TODO: Optimize image
-        // https://www.youtube.com/watch?v=bXf_UdyDzSA
         const playerData = {
           playerName,
           eplTeamId,
@@ -261,7 +278,7 @@ export default {
           injuryStatus,
           injuryMessage,
           playerImage,
-          logoName: this.selectedImage.name,
+          logoName: this.selectedImage.name ? this.selectedImage.name : "",
         };
         store.dispatch("Player/savePlayer", playerData);
         this.removeImage();
@@ -296,9 +313,12 @@ export default {
     getBase64() {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.readAsDataURL(this.selectedImage);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
+
+        if (reader) {
+          reader.readAsDataURL(this.selectedImage);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        }
       });
     },
   },
@@ -363,7 +383,7 @@ export default {
 }
 .player-modal-content {
   width: 55%;
-  min-height: 300px;
+  min-height: 350px;
   background: var(--neutral-100);
   display: flex;
   align-items: flex-start;
@@ -386,10 +406,12 @@ export default {
   height: 120px;
   margin-left: auto;
   margin-right: auto;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 24px;
+
+  background: url("../assets/img/Player_Image_Placeholder_60x60.jpg");
 }
 .player-modal-image-remove {
   position: absolute;
@@ -407,7 +429,8 @@ export default {
   width: 40%;
 }
 
-input {
+input,
+select {
   outline: none;
   height: 30px;
   width: 130%;
@@ -438,7 +461,7 @@ label {
 
 .player-modal-buttons-container {
   position: absolute;
-  bottom: 22px;
+  bottom: 10px;
   display: flex;
   right: 45px;
 }

@@ -86,7 +86,7 @@ export default {
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
-            notificationMessage: err.response.data,
+            notificationMessage: err,
           });
         });
     },
@@ -95,13 +95,13 @@ export default {
         .post(`${baseURL}/players/addplayer`, playerData)
         .then(async (res) => {
           if (res.status === 200) {
-            this.$store.dispatch("Global/setNotificationInfo", {
+            store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: `Player ${playerData.playerName} added succesfully`,
             });
 
-            store.dispatch("player/setAllPlayers");
+            store.dispatch("Player/setAllPlayers");
           }
         })
         .catch((err) => {

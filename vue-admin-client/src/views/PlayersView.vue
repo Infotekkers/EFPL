@@ -1,9 +1,14 @@
 <template>
-  <h1>Players</h1>
+  <PlayersComponent />
 </template>
 
 <script>
+// Components
+import PlayersComponent from "@/components/PlayersComponent.vue";
 export default {
   name: "PlayersView",
+  components: {
+    PlayersComponent,
+  },
 };
 </script>

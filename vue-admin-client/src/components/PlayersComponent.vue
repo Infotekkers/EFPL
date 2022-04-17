@@ -17,12 +17,16 @@
     <!-- Header -->
     <div class="players-header-container">
       <!-- Title -->
-      <div class="players-title">Ethiopian Premier League - Players</div>
+      <div class="players-title">
+        {{ $t("Ethiopian Premier League") }} - {{ $t("Players") }}
+      </div>
 
       <!-- Add Button -->
       <div class="players-add-new" @click="activateModal">
-        <div>+</div>
-        Add
+        <div>
+          <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
+        </div>
+        {{ $t("Add") }}
       </div>
     </div>
     <!-- Header -->
@@ -72,11 +76,11 @@
           @change="filterByPosition"
           ref="playerPosition"
         >
-          <option value="All">All</option>
-          <option value="GK">Goalkeepers</option>
-          <option value="DEF">Defenders</option>
-          <option value="MID">Midfielders</option>
-          <option value="ATT">Attackers</option>
+          <option value="All">{{ $t("All") }}</option>
+          <option value="GK">{{ $t("GoalKeepers") }}</option>
+          <option value="DEF">{{ $t("Defenders") }}</option>
+          <option value="MID">{{ $t("Midfielders") }}</option>
+          <option value="ATT">{{ $t("Attackers") }}</option>
         </select>
       </div>
     </div>
@@ -86,34 +90,100 @@
     <!-- Sorter Header -->
     <div class="players-sorter-header">
       <div class="players-id-sorter">
-        <span @click="sortByID(-1)">D</span>
-        ID
-        <span @click="sortByID(1)">A</span>
+        <span @click="sortByID(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+        <span class="sorter-content"> {{ $t("ID") }}</span>
+        <span @click="sortByID(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
       </div>
-      <div class="players-logo-sorter">Image</div>
+      <div class="players-logo-sorter">{{ $t("Image") }}</div>
 
       <div class="players-name-sorter">
-        <span @click="sortByName(-1)">D</span>
-        Name
-        <span @click="sortByName(1)">A</span>
+        <span @click="sortByName(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+        <span class="sorter-content"> {{ $t("Name") }}</span>
+
+        <span @click="sortByName(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
       </div>
       <div class="players-team-sorter">
-        <span @click="sortByTeam(-1)">D</span>
-        Team
-        <span @click="sortByTeam(1)">A</span>
+        <span @click="sortByTeam(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+
+        <span class="sorter-content"> {{ $t("Team") }}</span>
+        <span @click="sortByTeam(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
       </div>
       <div class="players-city-sorter">
-        <span @click="sortByPosition(-1)">D</span>
-        Position
-        <span @click="sortByPosition(1)">A</span>
+        <span @click="sortByPosition(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+
+        <span class="sorter-content"> {{ $t("Position") }}</span>
+        <span @click="sortByPosition(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
       </div>
       <div class="players-stadium-sorter">
-        <span @click="sortbyPrice(-1)">D</span>
-        Price
-        <span @click="sortbyPrice(1)">A</span>
+        <span @click="sortbyPrice(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+
+        <span class="sorter-content"> {{ $t("Price") }}</span>
+        <span @click="sortbyPrice(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
       </div>
 
-      <div class="players-controls-sorter">Controls</div>
+      <div class="players-controls-injury">{{ $t("Injury") }}</div>
+
+      <div class="players-controls-sorter">{{ $t("Controls") }}</div>
     </div>
     <!-- Sorter Header -->
     <div class="players-container" v-if="getAllPlayers.length > 0">
@@ -126,9 +196,12 @@
     </div>
 
     <!-- No items -->
-    <div class="no-players-container" v-else>No Players</div>
+    <div class="no-players-container" v-else>
+      {{ $t("No") }} {{ $t("Players") }}
+    </div>
   </main>
 </template>
+
 <script>
 import store from "../store/index";
 
@@ -137,6 +210,9 @@ import PlayerModal from "@/components/PlayerModalComponent";
 
 // Slider
 import MultiRangeSlider from "multi-range-slider-vue";
+
+// Icons
+import { addIcon, sortUpIcon, sortDownIcon } from "../utils/Icons";
 
 export default {
   name: "PlayersComponent",
@@ -153,6 +229,11 @@ export default {
       barMaxValue: 19,
       selectedPlayerPosition: "All",
       selectedPlayerTeam: "All",
+
+      // Icons
+      addIcon: addIcon,
+      sortUpIcon: sortUpIcon,
+      sortDownIcon: sortDownIcon,
     };
   },
   methods: {
@@ -220,12 +301,23 @@ export default {
   },
 };
 </script>
+
 <style scoped>
+/* Icons */
+.extra-small-icon {
+  width: 8px;
+  height: fit-content;
+  object-fit: contain;
+}
+.small-icon {
+  width: 15px;
+  height: fit-content;
+  object-fit: contain;
+}
+/*  */
+
 .players-main-container {
-  /* background: var(--primary-400); */
-  width: 82%;
-  margin-left: 18%;
-  padding: 100px 24px 60px 16px;
+  width: 100%;
 }
 .player-search-bar {
   width: 20%;
@@ -240,11 +332,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /*  */
   position: relative;
   z-index: 1;
 }
+
 .players-sorter-header {
   display: flex;
   justify-content: space-between;
@@ -272,24 +363,30 @@ export default {
   margin-right: 6px;
 }
 .players-filter-section {
-  width: 95%;
+  width: 100%;
   min-height: 60px;
-
-  background: teal;
   margin-top: 32px;
   margin-bottom: 26px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.player-price-filter {
-  min-width: 300px;
+.players-filter-section select {
+  height: 30px;
+  border: none;
+  outline: none;
 }
+/* Overrides */
 .multi-range-slider {
   box-shadow: none;
   border: none;
 }
+/* Overrides */
+
+.player-price-filter {
+  min-width: 350px;
+}
+
 .players-sorter-header {
   padding: 0 12px;
   margin: var(--spacing-xlarge) 0 var(--spacing-regular) 0;
@@ -299,26 +396,59 @@ export default {
   font-size: 15px;
   color: var(--neutral-700);
 }
-.players-id-sorter {
-  width: 5%;
-  min-width: 45px;
+.players-id-sorter,
+.players-name-sorter,
+.players-city-sorter,
+.players-stadium-sorter,
+.players-founded-sorter,
+.players-team-sorter {
+  display: flex;
+  align-items: center;
 }
+.players-id-sorter > span,
+.players-name-sorter > span,
+.players-city-sorter > span,
+.players-stadium-sorter > span,
+.players-team-sorter > span {
+  display: flex;
+  align-items: center;
+}
+.sorter-content {
+  margin-right: 8px;
+  margin-left: 8px;
+}
+/* ID */
+.players-id-sorter {
+  width: 6%;
+  min-width: 40px;
+}
+/* Image */
 .players-logo-sorter {
   width: 60px;
 }
+/* Name */
 .players-name-sorter {
   width: 20%;
   min-width: 130px;
 }
-.players-city-sorter {
-  min-width: 100px;
-  width: 17%;
-}
+
+/* Price */
 .players-stadium-sorter {
-  width: 16%;
+  width: 6%;
 }
-.players-founded-sorter {
+
+/* Position */
+.players-city-sorter {
+  min-width: 60px;
+  width: 7%;
+}
+.players-controls-injury {
+  min-width: 80px;
   width: 8%;
+}
+.players-team-sorter {
+  min-width: 110px;
+  width: 18%;
 }
 .players-controls-sorter {
   width: 10%;

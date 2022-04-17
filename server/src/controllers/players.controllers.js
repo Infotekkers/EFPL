@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const PlayerModel = require("../models/Player");
+const Teams = require("../models/Teams");
 const { makeFilePlayer } = require("../utils/helpers");
 
 const addplayers = asyncHandler(async (req, res) => {
@@ -14,28 +15,32 @@ const addplayers = asyncHandler(async (req, res) => {
   } = req.body;
 
   const verifyPlayer = await PlayerModel.findOne({
-    playerName:req.body.playerName
-  })
+    playerName: req.body.playerName,
+  });
 
-  if(!verifyPlayer){
+  const teamId = await Teams.findOne({ teamName: eplTeamId });
+
+  const id = teamId.teamId;
+
+  if (!verifyPlayer) {
     const playerImagePath = makeFilePlayer(playerImage, logoName);
 
-    if (playerImagePath){
+    if (playerImagePath) {
       await new PlayerModel({
         playerName,
         position,
         currentPrice,
         availability,
         playerImage: playerImagePath,
-        eplTeamId,
+        eplTeamId: id,
       }).save();
       res.status(201).send(`${playerName} added successfully`);
-    }  else {
+    } else {
       res.status(422).json("Error saving image. Please try again!");
     }
   } else {
     res.status(404).send(`${playerName} EXIST.`);
-    }
+  }
 });
 // Questions eplTeamId -  what is that
 const updateplayer = asyncHandler(async (req, res) => {
@@ -54,19 +59,21 @@ const updateplayer = asyncHandler(async (req, res) => {
     eplTeamId,
     availablity,
     position,
-    currentPrice
-  }
+    currentPrice,
+  };
 
-  if(playerImage !== ""){
+  if (playerImage !== "") {
     const filePath = makeFilePlayer(playerImage, logoName);
 
-    if(filePath !== ""){
-      newData.playerImage = filePath
+    if (filePath !== "") {
+      newData.playerImage = filePath;
     }
   }
   console.log(newData);
 
-  const verifyPlayer = await PlayerModel.findOne({ playerId: req.params.playerId});
+  const verifyPlayer = await PlayerModel.findOne({
+    playerId: req.params.playerId,
+  });
 
   if (verifyPlayer) {
     await PlayerModel.updateOne(
@@ -76,8 +83,8 @@ const updateplayer = asyncHandler(async (req, res) => {
       }
     );
     res.status(201).send(` ${playerName} Info updated successful`);
-  } else{
-      return res.status(404).send(`player with ${playerName}exist`);
+  } else {
+    return res.status(404).send(`player with ${playerName}exist`);
   }
 });
 
@@ -130,6 +137,8 @@ const getplayer = asyncHandler(async (req, res) => {
 
 const getplayers = asyncHandler(async (req, res) => {
   const players = await PlayerModel.find();
+
+  console.log(players);
   res.send(players);
 });
 

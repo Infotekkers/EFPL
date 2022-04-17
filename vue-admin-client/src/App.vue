@@ -36,12 +36,14 @@
       <!-- eslint-disable-next-line -->
       <!-- <router-view /> -->
       <MainView />
+      <NotificationComponent />
     </main>
   </div>
 </template>
 
 <script>
 import MainView from "@/views/MainView.vue";
+import NotificationComponent from "@/components/NotificationComponent.vue";
 export default {
   data() {
     return {
@@ -50,6 +52,7 @@ export default {
   },
   components: {
     MainView,
+    NotificationComponent,
   },
   methods: {
     toggleSidebar(e) {

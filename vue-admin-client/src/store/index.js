@@ -4,9 +4,6 @@ import AuthStore from "./auth.store";
 import FixtureStore from "./fixture.store";
 import TeamsStore from "./team.store";
 import SeasonStore from "./season.store";
-
-// Fixtures Store
-import GlobalStore from "./global.store";
 import PlayerStore from "./player.store";
 
 export default createStore({

@@ -47,28 +47,39 @@ const availabilitySchema = mongoose.Schema({
 // });
 
 const playerSchema = mongoose.Schema({
-  playerName: { 
+  playerName: {
     type: String,
-    required: [true, "Custom Error - required Value *: Player Name is required."]
+    required: [
+      true,
+      "Custom Error - required Value *: Player Name is required.",
+    ],
   },
-  eplTeamId: { 
+  eplTeamId: {
     type: String,
-    required: [true, "Custom Error - required Value *: Player Team is required."]
-   },
-  currentPrice: { 
+    required: [
+      true,
+      "Custom Error - required Value *: Player Team is required.",
+    ],
+  },
+  currentPrice: {
     type: Number,
-    required: [true, "Custom Error - required Value *: Player Price is required."]
-   },
-  position: { 
+    required: [
+      true,
+      "Custom Error - required Value *: Player Price is required.",
+    ],
+  },
+  position: {
     type: String,
-    required: [true, "Custom Error - required Value *: Player Position is required."]
-   },
+    required: [
+      true,
+      "Custom Error - required Value *: Player Position is required.",
+    ],
+  },
   availability: { type: [availabilitySchema] },
 
   playerImage: {
     type: String,
-    required : [true, "Custom Error - required Value *: Player Image is required."]
-  }
+  },
 });
 
 playerSchema.plugin(autoIncrement.plugin, {
