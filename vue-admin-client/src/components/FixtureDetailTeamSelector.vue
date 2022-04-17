@@ -29,9 +29,11 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  border: 1px solid black;
 }
 #main-fixture-detail-team-selector > * {
   margin: 10px;
+  border: 1px solid black;
 }
 
 @media screen and (min-width: 900px) {

@@ -121,7 +121,8 @@ export default {
 
 <style scoped>
 #main-fixture-detail-locker {
-  background-color: var(--success-100);
+  /* background-color: var(--neutral-100); */
+  /* border: 1px solid black; */
 }
 
 .locker-room {
@@ -143,7 +144,8 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   margin: var(--spacing-xsmall);
-  background-color: whitesmoke;
+  /* background-color: var(--neutral-100); */
+  border: 1px solid black;
 }
 
 .locker-player p {

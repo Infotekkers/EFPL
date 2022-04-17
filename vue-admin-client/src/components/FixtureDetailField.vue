@@ -35,6 +35,9 @@
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
               .goalkeepers"
             :data-player-id="playerId"
+            :data-player-position="
+              this.players[this.activeTeamId][playerId].position.toLowerCase()
+            "
           >
             <h1>🤷‍♂️</h1>
             <p>
@@ -82,6 +85,9 @@
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
               .defenders"
             :data-player-id="playerId"
+            :data-player-position="
+              this.players[this.activeTeamId][playerId].position.toLowerCase()
+            "
           >
             <h1>🤷‍♂️</h1>
             <p>
@@ -129,6 +135,9 @@
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
               .midfielders"
             :data-player-id="playerId"
+            :data-player-position="
+              this.players[this.activeTeamId][playerId].position.toLowerCase()
+            "
           >
             <h1>🤷‍♂️</h1>
             <p>
@@ -176,6 +185,9 @@
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
               .strikers"
             :data-player-id="playerId"
+            :data-player-position="
+              this.players[this.activeTeamId][playerId].position.toLowerCase()
+            "
           >
             <h1>🤷‍♂️</h1>
             <p>
@@ -220,6 +232,9 @@
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
               .bench"
             :data-player-id="playerId"
+            :data-player-position="
+              this.players[this.activeTeamId][playerId].position.toLowerCase()
+            "
           >
             <h1>🤷‍♂️</h1>
             <p>
@@ -316,6 +331,11 @@ export default {
 
       // Data for subs between field and bench
       e.dataTransfer.setData("field/subs", "");
+      e.dataTransfer.setData(
+        `player/position/${this.players[this.activeTeamId][playerId].position}`,
+        ""
+      );
+
       if (playerPosition === "bench") {
         let destination = this.players[this.activeTeamId][playerId].position;
         destination = destination.toLowerCase();
@@ -390,7 +410,7 @@ export default {
         e.dataTransfer.types.includes("field/subs") &&
         e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
         this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
-          .length < 6 &&
+          .length <= 6 &&
         e.path[1].classList.contains("field-player")
       ) {
         const div = e.path[1];
@@ -409,8 +429,11 @@ export default {
         e.dataTransfer.types.includes("field/subs") &&
         e.dataTransfer.types.includes(`position/${fieldPosition}`) &&
         this.fixtureDetailData.lineups[this.activeTeamId][fieldPosition]
-          .length < 7 &&
-        e.path[1].classList.contains("field-player")
+          .length <= 7 &&
+        e.path[1].classList.contains("field-player") &&
+        e.dataTransfer.types.includes(
+          `player/position/${e.path[1].dataset.playerPosition}`
+        )
       ) {
         const div = e.path[1];
 
@@ -503,6 +526,17 @@ export default {
 </script>
 
 <style scoped>
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 h1,
 h5,
 p {
@@ -512,7 +546,8 @@ p {
 .field {
   display: flex;
   flex-direction: column;
-  background-color: var(--primary-100);
+  /* background-color: var(--primary-100); */
+  /* border: 1px solid black; */
   height: 80vh;
 }
 
@@ -525,17 +560,31 @@ p {
   flex-direction: row;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   justify-content: center;
   align-items: center;
   position: relative;
   height: 20%; /* Neccessary for the labels*/
   padding: 10px 0;
-  border: 2px solid var(--primary-400);
+  /* border: 1px solid black; */
+  background-color: var(--success-500);
 }
+
+/* #goalkeepers {
+  box-shadow: inset 0 6px 2px var(--primary-200);
+  border-radius: 10px 0 0 0;
+}
+
+#strikers {
+  box-shadow: 0 10px 0 hsl(192, 100%, 97%);
+  margin-bottom: 10px;
+  border-radius: 0 0 10px 0;
+} */
 
 #bench {
   justify-content: flex-start;
-  background-color: var(--neutral-800);
+  background-color: white;
+  /* border: 1px solid black; */
 }
 
 #goalkeepers label,
@@ -558,9 +607,15 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--primary-500);
+  padding: var(--spacing-2xsmall);
+  background-color: var(--primary-100);
+  border-radius: 2px;
   margin: 0 5px;
   z-index: 1;
+  aspect-ratio: 4/3;
+  overflow-wrap: break-word;
+  height: 99px;
+  width: 99px;
 }
 
 .field-player-hover-sub {
@@ -568,9 +623,38 @@ p {
 }
 
 .actions {
-  align-self: flex-end;
+  align-self: center;
+  margin: 10px;
 }
 
+.actions button {
+  border: 0;
+  width: 200px;
+  height: 50px;
+  color: white;
+  cursor: pointer;
+  font-size: var(--text-base);
+
+  /* Primary-900 */
+
+  background: #07385e;
+  box-shadow: 0px 2px 0px #38bdf8;
+  border-radius: 2px;
+}
+
+.actions button:hover {
+  border: 0;
+  width: 200px;
+  height: 50px;
+  color: #07385e;
+  font-size: var(--text-base);
+
+  /* Primary-200 */
+
+  background: #b5f0ff;
+  box-shadow: 0px 2px 0px #38bdf8;
+  border-radius: 2px;
+}
 @media screen and (max-width: 480px) {
   img {
     height: 70px;
@@ -614,13 +698,25 @@ p {
     width: 50vw;
   }
 
+  #goalkeepers,
+  #defenders,
+  #midfielders,
+  #strikers,
   #bench {
-    height: 50% !important;
+    justify-content: center;
+  }
+
+  #bench {
+    height: 42% !important;
     flex-wrap: wrap;
   }
 
   #bench-label {
     left: 15vw;
+  }
+
+  .actions {
+    align-self: flex-end;
   }
 }
 @media screen and (min-width: 1400px) {

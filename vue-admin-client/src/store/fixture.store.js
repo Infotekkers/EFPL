@@ -332,7 +332,7 @@ export default {
       commit("SET_FIXTURE_DETAIL_ID", matchId);
     },
 
-    async loadFixtureDetails({ commit, dispatch }, matchId) {
+    async loadFixtureDetails({ commit }, matchId) {
       const homeTeamId = matchId.split("|")[0];
       const awayTeamId = matchId.split("|")[1];
 
@@ -469,7 +469,7 @@ export default {
         )
         .catch((err) => {
           commit("SET_ERROR_LOG", err.response.data);
-          dispatch("Global/setNotificationInfo", {
+          store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
             notificationMessage: err.response.data,
