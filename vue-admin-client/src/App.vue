@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <SideBar />
+    <SideBar v-show="isAuth" />
     <main>
       <!-- eslint-disable-next-line -->
       <!-- <router-view /> -->
@@ -13,11 +13,34 @@
 <script>
 import MainView from "@/views/MainView.vue";
 import NotificationComponent from "@/components/NotificationComponent.vue";
-import SideBar from "@/components/SideBar.vue";
+import SideBar from "@/components/SideBarComponent.vue";
 
 export default {
   components: {
     SideBar,
+    MainView,
+    NotificationComponent,
+  },
+
+  data() {
+    return {
+      showSidebar: false,
+    };
+  },
+  // TODO:Change
+  computed: {
+    isAuth() {
+      const routeName = this.$route.name;
+
+      if (routeName === "admin-login") {
+        return false;
+      } else {
+        return true;
+      }
+    },
+  },
+  mounted() {
+    console.log();
   },
 };
 </script>
@@ -52,7 +75,7 @@ nav a.router-link-exact-active {
   height: 100vh;
   display: flex;
 
-  <<<<<<< HEAD .collapse-sidebar {
+  .collapse-sidebar {
     padding: var(--spacing-3xsmall) var(--spacing-xsmall);
     font-size: var(--text-base);
     border: none;
@@ -109,7 +132,7 @@ nav a.router-link-exact-active {
     }
   }
 
-  =======>>>>>>>sidebar main {
+  main {
     background: var(--neutral-100);
     flex-grow: 1;
     min-height: 100vh;
