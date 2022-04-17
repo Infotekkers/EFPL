@@ -1,38 +1,7 @@
 <template>
   <div class="wrapper">
-    <aside>
-      <button class="collapse-sidebar">
-        <span>&#11164;</span>
-      </button>
-      <div class="sidebar-wrapper">
-        <!-- Home -->
-        <div class="sidebar__link">
-          <router-link to="/admin/home">{{ $t("home") }}</router-link>
-        </div>
-
-        <!-- Fixtures -->
-        <div class="sidebar__link">
-          <router-link to="/admin/fixtures">{{ $t("Fixtures") }}</router-link>
-        </div>
-
-        <!-- Teams -->
-        <div class="sidebar__link">
-          <router-link to="/admin/teams">{{ $t("Teams") }}</router-link>
-        </div>
-
-        <!-- Players -->
-        <div class="sidebar__link">
-          <router-link to="/admin/players">{{ $t("Players") }}</router-link>
-        </div>
-
-        <!-- settings -->
-        <div class="sidebar__link">
-          <router-link to="/admin/settings">{{ $t("Settings") }}</router-link>
-        </div>
-      </div>
-    </aside>
-
-    <main class="main-wrapper">
+    <SideBar />
+    <main>
       <!-- eslint-disable-next-line -->
       <!-- <router-view /> -->
       <MainView />
@@ -44,35 +13,11 @@
 <script>
 import MainView from "@/views/MainView.vue";
 import NotificationComponent from "@/components/NotificationComponent.vue";
-export default {
-  data() {
-    return {
-      sidebar: 1,
-    };
-  },
-  components: {
-    MainView,
-    NotificationComponent,
-  },
-  methods: {
-    toggleSidebar(e) {
-      const sidebar = document.querySelector(".sidebar-wrapper");
+import SideBar from "@/components/SideBar.vue";
 
-      if (this.sidebar) {
-        sidebar.style.display = "none";
-        e.target.innerHTML = "&#11166;";
-        this.sidebar = 0;
-      } else {
-        sidebar.style.display = "flex";
-        e.target.innerHTML = "&#11164;";
-        this.sidebar = 1;
-      }
-    },
-  },
-  mounted() {
-    const toggle = document.querySelector(".collapse-sidebar");
-    toggle.addEventListener("click", this.toggleSidebar);
-    this.$store.dispatch("setAdmin");
+export default {
+  components: {
+    SideBar,
   },
 };
 </script>
@@ -107,7 +52,7 @@ nav a.router-link-exact-active {
   height: 100vh;
   display: flex;
 
-  .collapse-sidebar {
+  <<<<<<< HEAD .collapse-sidebar {
     padding: var(--spacing-3xsmall) var(--spacing-xsmall);
     font-size: var(--text-base);
     border: none;
@@ -164,7 +109,7 @@ nav a.router-link-exact-active {
     }
   }
 
-  main {
+  =======>>>>>>>sidebar main {
     background: var(--neutral-100);
     flex-grow: 1;
     min-height: 100vh;
