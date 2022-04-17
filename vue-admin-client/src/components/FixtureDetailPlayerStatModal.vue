@@ -1,65 +1,85 @@
 <template>
   <div :class="showModal ? 'modal' : 'modal modal-hide'">
+    <div id="close">
+      <button @click="$emit('closeModal')">X</button>
+    </div>
     <div class="main">
-      <div id="close">
-        <button @click="$emit('closeModal')">X</button>
-      </div>
       <div class="editor">
-        {{ player.name }}
+        <h2>
+          {{ player.name }}
+        </h2>
         <div class="editor-field">
           <div id="goals">
             <span class="editor-field-label">Goals</span>
             <button @click="updateStats('goals', '-')">-</button>
-            {{ player.stats.goals }}
+            <span class="stat-value">
+              {{ player.stats.goals }}
+            </span>
             <button @click="updateStats('goals', '+')">+</button>
           </div>
           <div id="assists">
             <span class="editor-field-label">Assists</span>
             <button @click="updateStats('assists', '-')">-</button>
-            {{ player.stats.assists }}
+            <span class="stat-value">
+              {{ player.stats.assists }}
+            </span>
             <button @click="updateStats('assists', '+')">+</button>
           </div>
           <div id="yellows">
             <span class="editor-field-label">Yellows</span>
             <button @click="updateStats('yellows', '-')">-</button>
-            {{ player.stats.yellows }}
+            <span class="stat-value">
+              {{ player.stats.yellows }}
+            </span>
             <button @click="updateStats('yellows', '+')">+</button>
           </div>
           <div id="reds">
             <span class="editor-field-label">Red</span>
             <button @click="updateStats('reds', '-')">-</button>
-            {{ player.stats.reds }}
+            <span class="stat-value">
+              {{ player.stats.reds }}
+            </span>
             <button @click="updateStats('reds', '+')">+</button>
           </div>
           <div id="penalitiesMissed">
             <span class="editor-field-label">Penalities Missed</span>
             <button @click="updateStats('penalitiesMissed', '-')">-</button>
-            {{ player.stats.penalitiesMissed }}
+            <span class="stat-value">
+              {{ player.stats.penalitiesMissed }}
+            </span>
             <button @click="updateStats('penalitiesMissed', '+')">+</button>
           </div>
           <div id="penalitiesSaved">
             <span class="editor-field-label">Penalities Saved</span>
             <button @click="updateStats('penalitiesSaved', '-')">-</button>
-            {{ player.stats.penalitiesSaved }}
+            <span class="stat-value">
+              {{ player.stats.penalitiesSaved }}
+            </span>
             <button @click="updateStats('penalitiesSaved', '+')">+</button>
           </div>
           <div id="saves">
             <span class="editor-field-label">Saves</span>
             <button @click="updateStats('saves', '-')">-</button>
-            {{ player.stats.saves }}
+            <span class="stat-value">
+              {{ player.stats.saves }}
+            </span>
             <button @click="updateStats('saves', '+')">+</button>
           </div>
           <div id="ownGoal">
             <span class="editor-field-label">Own Goal</span>
             <button @click="updateStats('ownGoal', '-')">-</button>
-            {{ player.stats.ownGoal }}
+            <span class="stat-value">
+              {{ player.stats.ownGoal }}
+            </span>
             <button @click="updateStats('ownGoal', '+')">+</button>
           </div>
         </div>
       </div>
       <div class="actions">
-        <button @click="$emit('closeModal')">Close</button>
-        <button @click="saveStats">Save</button>
+        <button class="action-secondary" @click="$emit('closeModal')">
+          Close
+        </button>
+        <button class="action-primary" @click="saveStats">Save</button>
       </div>
     </div>
   </div>
@@ -147,8 +167,121 @@ export default {
   display: none;
 }
 
+#close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+#close button {
+  padding: 20px;
+  border: 0;
+  border-radius: 100%;
+  aspect-ratio: 3/2;
+  background-color: var(--neutral-200);
+  font-size: var(--text-base);
+  color: var(--primary-900);
+  box-shadow: 0 1px 1px grey;
+  cursor: pointer;
+}
+
 .main {
   background-color: whitesmoke;
   padding: 20px;
+  box-shadow: 0 10px 10px var(--neutral-600);
+}
+
+.editor h2 {
+  font-size: var(--text-regular);
+  font-weight: 700;
+  margin: 10px;
+}
+
+.editor-field > div {
+  display: grid;
+  grid-template-columns: 5fr repeat(3, 1fr);
+  padding: 10px;
+}
+
+.editor-field > div:nth-child(2n) {
+  background-color: var(--neutral-200);
+}
+
+.editor-field > div:nth-child(2n + 1) {
+  background-color: var(--neutral-300);
+}
+
+.editor-field span {
+  text-align: left;
+  margin-right: 5px;
+}
+
+.editor-field button {
+  font-size: var(--text-regular);
+  font-weight: 900;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.editor-field button:first-of-type {
+  color: red;
+}
+.editor-field button:last-of-type {
+  color: green;
+}
+
+.stat-value {
+  align-self: center;
+  text-align: center !important;
+  margin: 0 !important;
+  background-color: var(--neutral-100);
+}
+
+.action-primary {
+  border: 0;
+  width: 200px;
+  height: 50px;
+  color: white;
+  cursor: pointer;
+  font-size: var(--text-base);
+  background: #07385e; /* Primary-900 */
+  box-shadow: 0px 2px 0px #38bdf8;
+  border-radius: 2px;
+  margin: 10px 10px 0 5px;
+}
+
+.action-primary:hover {
+  border: 0;
+  width: 200px;
+  height: 50px;
+  color: #07385e;
+  font-size: var(--text-base);
+  background: #b5f0ff; /* Primary-200 */
+  box-shadow: 0px 2px 0px #38bdf8;
+  border-radius: 2px;
+}
+
+.action-secondary {
+  width: 200px;
+  height: 50px;
+  border: 2px solid #cad3e1;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 2px 0px #b2c0d3);
+  border-radius: 2px;
+  color: var(--primary-900);
+  font-size: var(--text-base);
+  margin: 10px 5px 0 10px;
+}
+
+.action-secondary:hover {
+  width: 200px;
+  height: 50px;
+  background: #ebf2fa;
+  border: 2px solid #cad3e1;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 0px #cad3e1;
+  border-radius: 2px;
+  cursor: pointer;
 }
 </style>
