@@ -78,18 +78,18 @@ const routes = [
   },
 
   // forgot password page
-  // {
-  //   path: "/forgotpassword",
-  //   name: "forgot-password",
-  //   component: ForgotPassword,
-  // },
+  {
+    path: "/forgotpassword",
+    name: "forgot-password",
+    component: () => import("../components/ForgotPasswordComponent.vue"),
+  },
 
-  // // reset password
-  // {
-  //   path: "/resetPassword/:token",
-  //   name: "reset-password",
-  //   component: ResetPassword,
-  // },
+  // reset password
+  {
+    path: "/resetPassword/:token",
+    name: "reset-password",
+    component: () => import("../components/ResetPasswordComponent.vue"),
+  },
 
   // 404 page should always be the last route add routes above this
   {

@@ -72,6 +72,7 @@ export default {
   mounted() {
     const toggle = document.querySelector(".collapse-sidebar");
     toggle.addEventListener("click", this.toggleSidebar);
+    this.$store.dispatch("setAdmin");
   },
 };
 </script>
