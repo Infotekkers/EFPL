@@ -3,6 +3,7 @@
     <TeamSelector
       :homeTeamId="parseInt(this.homeTeamId)"
       :awayTeamId="parseInt(this.awayTeamId)"
+      :activeTeamId="parseInt(this.activeTeamId)"
       :homeTeamName="this.fixtureDetailData.teams[this.homeTeamId].teamName"
       :awayTeamName="this.fixtureDetailData.teams[this.awayTeamId].teamName"
       :score="score[this.fixtureDetailId]"
