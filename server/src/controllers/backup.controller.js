@@ -244,7 +244,6 @@ const viewTeam = asyncHandler(async (req, res) => {
     }
   }
 
-  console.log(typeof data, typeof importedTeams);
   // TODO:HIDE IF Imported
   res.status(200).json(importedTeams);
 });

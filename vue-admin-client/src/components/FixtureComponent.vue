@@ -327,9 +327,9 @@ export default {
   methods: {
     // Route to details page
     goToDetailPage() {
-      this.setFixtureDetailId(this.fixture.matchId);
+      store.dispatch("Fixture/setFixtureDetailId", this.fixture.matchId);
       router.push({
-        path: "/fixture/detail",
+        path: "fixture/detail",
         query: { id: this.fixture.matchId },
       });
     },
