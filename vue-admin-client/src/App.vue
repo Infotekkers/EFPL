@@ -35,13 +35,14 @@
     <main class="main-wrapper">
       <!-- eslint-disable-next-line -->
       <!-- <router-view /> -->
-      <MainView />
+      <AdminLoginView />
     </main>
   </div>
 </template>
 
 <script>
-import MainView from "@/views/MainView.vue";
+import AdminLoginView from "@/views/AdminLoginView.vue";
+
 export default {
   data() {
     return {
@@ -49,7 +50,7 @@ export default {
     };
   },
   components: {
-    MainView,
+    AdminLoginView,
   },
   methods: {
     toggleSidebar(e) {
@@ -69,6 +70,7 @@ export default {
   mounted() {
     const toggle = document.querySelector(".collapse-sidebar");
     toggle.addEventListener("click", this.toggleSidebar);
+    this.$store.dispatch("setAdmin");
   },
 };
 </script>

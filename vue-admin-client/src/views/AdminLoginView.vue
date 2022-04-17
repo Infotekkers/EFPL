@@ -1,16 +1,20 @@
 <template>
   <div class="admin-login">
-    <h1>Admin Login</h1>
+    <h1>Login</h1>
     <form @submit.prevent="loginAdmin">
-      <label>Email:</label>
-      <input required type="email" v-model="loginInfo.email" />
-      <label>Password:</label>
-      <input
-        :type="showPassword ? 'text' : 'password'"
-        required
-        v-model="loginInfo.password"
-        minlength="8"
-      />
+      <div class="email">
+        <label>Email:</label>
+        <input required type="email" v-model="loginInfo.email" />
+      </div>
+      <div class="password">
+        <label>Password:</label>
+        <input
+          :type="showPassword ? 'text' : 'password'"
+          required
+          v-model="loginInfo.password"
+          minlength="8"
+        />
+      </div>
       <div class="submit"><button>Login</button></div>
     </form>
     <button @click="showPassword = !showPassword">show password</button>
@@ -24,28 +28,32 @@
 </template>
 
 <style scoped>
+@import "../assets/design-system.css";
+
 .admin-login {
-  max-width: 420px;
-  margin: 30px auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 25%;
 }
 form {
-  background: white;
   text-align: left;
   padding: 40px;
   border: 1px solid;
   border-radius: 10px;
 }
 label {
-  color: rgb(26, 24, 24);
+  color: var(--neutral-900);
   display: inline-block;
   margin: 25px 0 15px;
-  font-size: 0.6rem;
+  font-size: var(--text-xsmall);
   font-weight: bold;
   text-transform: uppercase;
 }
 button {
-  background: #42b983;
-  color: white;
+  background: var(--success-200);
+  color: var(--neutral-50);
   border: 0;
   padding: 10px 20px;
   margin-top: 20px;
@@ -58,8 +66,8 @@ input {
   width: 100%;
   box-sizing: border-box;
   border: none;
-  border-bottom: 1px solid #ddd;
-  color: #555;
+  border-bottom: 1px solid var(--neutral-600);
+  color: var(--neutral-600);
 }
 .forgot-pass {
   text-decoration: none;
