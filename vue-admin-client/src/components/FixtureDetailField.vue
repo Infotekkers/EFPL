@@ -58,7 +58,9 @@
           @drop="lockerPlayerDrop($event, 'goalkeepers')"
           v-else
         >
-          <label>GK</label>
+          <div>
+            <label>GK</label>
+          </div>
         </div>
         <!-- /////////////////////// GOALKEEPERS ///////////////////// -->
 
@@ -108,7 +110,9 @@
           @drop="lockerPlayerDrop($event, 'defenders')"
           v-else
         >
-          <label>DEF</label>
+          <div>
+            <label>DEF</label>
+          </div>
         </div>
         <!-- /////////////////////// DEFENDERS ///////////////////// -->
 
@@ -158,7 +162,9 @@
           @drop="lockerPlayerDrop($event, 'midfielders')"
           v-else
         >
-          <label>MID</label>
+          <div>
+            <label>MID</label>
+          </div>
         </div>
         <!-- /////////////////////// MIDFIELDERS ///////////////////// -->
 
@@ -208,7 +214,9 @@
           @drop="lockerPlayerDrop($event, 'strikers')"
           v-else
         >
-          <label>ATT</label>
+          <div>
+            <label>ATT</label>
+          </div>
         </div>
         <!-- /////////////////////// STRIKERS ///////////////////// -->
 
@@ -256,7 +264,9 @@
           @drop="lockerPlayerDrop($event, 'bench')"
           v-else
         >
-          <label id="bench-label">SUBS</label>
+          <div>
+            <label id="bench-label">SUBS</label>
+          </div>
         </div>
         <!-- /////////////////////// BENCH ///////////////////// -->
         <div class="actions">
@@ -599,12 +609,12 @@ p {
   font-size: 6vh;
   letter-spacing: 25px;
   opacity: 0.5;
-  position: absolute;
   z-index: 0;
 }
 
 #bench-label {
   left: 15vw;
+  position: absolute;
 }
 
 .field-player {
