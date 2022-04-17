@@ -451,6 +451,7 @@ export default {
 .players-team-sorter > span {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .sorter-content {
   margin-right: 8px;

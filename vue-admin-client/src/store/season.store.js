@@ -108,7 +108,7 @@ export default {
         });
     },
 
-    async initiateImport() {
+    async initiateImport(context) {
       const importSelectedTeams = store.state.Season.importSelectedTeams;
       const importSelectedPlayers = store.state.Season.importSelectedPlayers;
       if (importSelectedTeams.length == 0) {
@@ -130,6 +130,9 @@ export default {
                 notificationType: "success",
                 notificationMessage: `Season Data Successfully Imported.`,
               });
+
+              context.commit("REPLACE_IMPORT_SELECTED_TEAM", []);
+              context.commit("REPLACE_IMPORT_SELECTED_PLAYER", []);
 
               store.dispatch("Season/getAllLegacyTeams");
             }

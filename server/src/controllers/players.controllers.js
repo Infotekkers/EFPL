@@ -199,8 +199,13 @@ const getHomeAndAwayPlayers = asyncHandler(async (req, res) => {
 });
 
 const deletePlayer = asyncHandler(async (req, res) => {
-  const player = await PlayerModel.deleteOne({ playerId: req.params.playerId });
-  res.send(`player ${player.playerName} is removed`);
+  const currentPlayer = await PlayerModel.find({
+    playerId: req.params.playerId,
+  });
+
+  console.log(currentPlayer);
+  await PlayerModel.deleteOne({ playerId: req.params.playerId });
+  res.send(`Player ${currentPlayer[0].playerName} removed`);
 });
 
 module.exports = {
