@@ -393,16 +393,15 @@ const updateScore = asyncHandler(async (req, res) => {
   const matchId = req.params.matchId;
   const { score } = req.body;
 
-  const match = await FixtureModel.findOne({ matchId }).lean();
+  const match = await FixtureModel.findOne({ matchId });
 
   if (match) {
     if (!match.score) match.score = "0v0";
     match.score = score;
-    await FixtureModel.findOneAndUpdate({ matchId }, match, {
-      upsert: false,
-    });
-    console.log(match);
-    res.send("Match stats updated!");
+
+    await match.save();
+
+    res.send("Match score updated!");
   } else if (!match) {
     res.status(404).send("Match doesn't exist!");
   } else {

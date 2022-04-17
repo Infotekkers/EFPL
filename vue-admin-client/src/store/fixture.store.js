@@ -424,6 +424,14 @@ export default {
               commit("SET_FIXTURE_DETAIL_DATA", payload);
             }
 
+            if (resFixtureStats.data.score) {
+              payload = {
+                matchId,
+                data: resFixtureStats.data.score,
+              };
+              commit("SET_SCORE", payload);
+            }
+
             payload = {
               type: "status",
               data: resFixtureStats.data.status,
@@ -594,7 +602,6 @@ export default {
         matchId,
         data: incomingScore,
       };
-      console.log(payload);
       commit("SET_SCORE", payload);
     },
 
