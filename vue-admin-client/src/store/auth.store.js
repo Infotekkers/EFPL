@@ -54,7 +54,7 @@ export default {
               notificationMessage: `${response.data.email} successfully logged in`,
             });
             commit("SET_CURRENT_ADMIN", response.data);
-            router.replace({ name: "admin" });
+            router.replace({ name: "Home" });
             console.log("logged in");
           }
         })
