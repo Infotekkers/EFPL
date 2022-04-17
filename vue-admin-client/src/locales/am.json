@@ -9,6 +9,7 @@
   "Settings": "ምርጫዎች ገጽ",
   "Password": "የይለፍ ቃል ",
   "Reset Password": "የይለፍ ቃል ለውጥ",
+  "Manage Account": "መለያ ያስተዳድሩ",
   "show password": "የይለፍ ቃል አሳይ",
   "forgot password": "የይለፍ ቃል ረስተዋል",
   "Contact Us": "ጥያቄ ካሎት",
@@ -27,6 +28,7 @@
   "Amharic": "አማርኛ",
   "Import": "አስመጣ",
   "Export": "ወደ ውጪ ላክ",
+  "Page Not Found": "ሚፈለገው ገጽ አልተገኘም",
 
   "_comment_misc": "የተለያዩ ትርጉሞች",
   "Loading": "በመጫን ላይ",

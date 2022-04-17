@@ -7,7 +7,7 @@
 
   "_comment_settings": "Settings Translations",
   "Settings": "Settings",
-  "Contact Page":"Contact Page",
+  "Contact Page": "Contact Page",
   "Contact Us": "Contact Us",
   "Email": "Email",
   "select email": "select email",
@@ -17,6 +17,7 @@
   "Dev -2": "Dev -2",
   "Password": "Password",
   "Reset Password": "Reset Password",
+  "Manage Account": "Manage Account",
   "show password": "Show Password",
   "forgot password": "Forgot Password",
   "Login": "Login",
@@ -27,6 +28,7 @@
   "Amharic": "Amharic",
   "Import": "Import",
   "Export": "Export",
+  "Page Not Found": "Page Not Found",
 
   "_comment_misc": "Miscellaneous Translations",
   "Loading": "Loading",

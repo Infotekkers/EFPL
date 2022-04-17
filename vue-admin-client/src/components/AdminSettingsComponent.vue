@@ -5,46 +5,63 @@
       @closeModal="closeModal"
     />
     <h1>{{ $t("Settings") }}</h1>
-    <div>
-      <router-link :to="{ name: 'forgot-password' }"
-        ><button>
-          <h3>{{ $t("Reset Password") }}</h3>
-        </button></router-link
-      >
+    <!-- account settings -->
+    <button class="collapseAcc" @click="toggleAcc()">
+      <span>{{ $t("Manage Account") }}</span>
+    </button>
+    <div v-if="accMenu" class="accMenu">
+      <div>
+        <router-link :to="{ name: 'forgot-password' }"
+          ><button class="accLink-1">
+            <h3>{{ $t("Reset Password") }}</h3>
+          </button></router-link
+        >
+      </div>
+
+      <div>
+        <button class="accLink-2" @click="logOutAdmin">
+          <h3>{{ $t("Logout") }}</h3>
+        </button>
+      </div>
     </div>
 
+    <!-- language settings -->
     <div>
-      <button @click="logOutAdmin">
-        <h3>{{ $t("Logout") }}</h3>
+      <button class="collapseLang" @click="toggleLang()">
+        <span>{{ $t("Select language") }}</span>
       </button>
     </div>
-    <div class="languageSelect">
-      <label
-        ><h2>{{ $t("Select language") }} :</h2></label
-      >
-
-      <select v-model="lang" @change="changeLang($event)">
+    <div v-if="langMenu" class="languageSelect">
+      <select v-model="lang" @change="changeLang($event)" class="lang-selector">
         <option value="en">{{ $t("English") }}</option>
 
         <option value="am">{{ $t("Amharic") }}</option>
       </select>
     </div>
-    <br />
 
+    <!-- contact page  -->
     <div class="contact-page">
       <router-link :to="{ name: 'contact' }"
-        ><button>
-          <h3>{{ $t("Contact Us") }}</h3>
+        ><button class="contactButton">
+          {{ $t("Contact Us") }}
         </button></router-link
       >
     </div>
-    <br />
-
-    <div>
-      <button @click="initiateImport">{{ $t("Import") }}</button>
-    </div>
-    <div>
-      <button @click="exportSeasonData">{{ $t("Export") }}</button>
+    <!-- import export  -->
+    <button class="collapseSeason" @click="toggleSeason()">
+      <span>{{ $t("Import") }} / {{ $t("Export") }}</span>
+    </button>
+    <div v-if="seasonMenu" class="seasonSetting">
+      <div>
+        <button @click="initiateImport" class="import">
+          {{ $t("Import") }}
+        </button>
+      </div>
+      <div>
+        <button @click="exportSeasonData" class="export">
+          {{ $t("Export") }}
+        </button>
+      </div>
     </div>
   </main>
 </template>
@@ -63,9 +80,22 @@ export default {
     return {
       lang: lang,
       showModal: false,
+      accMenu: false,
+      langMenu: false,
+      seasonMenu: false,
     };
   },
   methods: {
+    toggleAcc() {
+      this.accMenu = !this.accMenu;
+    },
+    toggleLang() {
+      this.langMenu = !this.langMenu;
+    },
+    toggleSeason() {
+      this.seasonMenu = !this.seasonMenu;
+    },
+
     closeModal() {
       this.showModal = false;
     },
@@ -87,4 +117,61 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@import "../assets/design-system.css";
+
+.collapseAcc,
+.collapseLang,
+.contactButton,
+.collapseSeason {
+  width: 80%;
+  height: 60px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--neutral-400);
+  color: var(--neutral-900);
+  font-size: var(--text-medium);
+  margin: var(--spacing-regular);
+}
+.collapseAcc:hover,
+.collapseLang:hover,
+.contactButton:hover,
+.collapseSeason:hover,
+.accLink-1:hover,
+.accLink-2:hover,
+.import:hover,
+.export:hover {
+  background: var(--neutral-900);
+  color: var(--neutral-50);
+}
+.accMenu,
+.languageSelect,
+.seasonSetting {
+  margin-top: -20px;
+  height: 60px;
+}
+
+.accLink-1,
+.accLink-2,
+.import,
+.export {
+  width: 80%;
+  height: 30px;
+  background-color: var(--neutral-50);
+  border: none;
+}
+
+.lang-selector {
+  width: 80%;
+  height: 30px;
+  border: none;
+}
+@media screen and (max-width: 768px) {
+  .collapseAcc,
+  .collapseLang,
+  .contactButton,
+  .collapseSeason {
+    width: 100%;
+  }
+}
+</style>
