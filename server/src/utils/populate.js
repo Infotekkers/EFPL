@@ -9,10 +9,12 @@ const User = require("../models/User");
 const Gameweek = require("../models/GameWeek");
 const Fixture = require("../models/Fixtures");
 const Team = require("../models/Teams");
+const Admin = require("../models/Admin");
 
 // Import Data
 const { teamData } = require("./data/teams.data");
-const { fixtureData } = require("../utils/data/fixture.test.data");
+const { playersData } = require("../utils/data/players.data");
+const { allPairedMatches } = require("../utils/data/fixture.data");
 
 const addTestPlayer = async () => {
   // Test PLAYER
@@ -389,6 +391,37 @@ const addTestUser = async () => {
   await testUser.save();
 };
 
+const addTestAdmin = async () => {
+  const admins = await Admin.find();
+
+  const newAdmins = [
+    {
+      email: "mikealexiv565@gmail.com",
+      password: "Strong@Password123",
+    },
+    {
+      email: "admin@admin.com",
+      password: "StrongPass@123",
+    },
+  ];
+
+  if (admins.length < 2) {
+    if (admins.length !== 1) {
+      await Admin.deleteMany();
+    }
+
+    newAdmins.forEach(async (admin) => {
+      await Admin.create(admin);
+    });
+  }
+
+  printConsole(
+    { data: "USERNAME:admin@admin.com PASSWORD:StrongPass@123" },
+    { printLocation: "populate.js:218" },
+    { bgColor: "bgYellow" }
+  );
+};
+
 const addTestGameweek = async () => {
   // Test Gameweek
   const testGameweek = new Gameweek({
@@ -454,95 +487,36 @@ const addTestFixture = async () => {
   Populate
   ===============================================================
 */
-const populateGameWeeks = async () => {
-  // Check game weeks
-  const gameWeeks = await axios.get(`${baseURL}${PORT}/gameWeek/info/all`);
-
-  // if no game week
-  if (gameWeeks.data.length === 0) {
-    let gameWeekDate = 604800;
-    let gameWeekStatus = "Active";
-    for (let i = 1; i <= 30; i++) {
-      gameWeekDate = gameWeekDate + 604800;
-      i === 1 ? (gameWeekStatus = "Active") : (gameWeekStatus = "ToBePlayed");
-      axios.post(`${baseURL}${PORT}/gameWeek/dev/add`, {
-        newGameWeekData: {
-          gameWeekNumber: i,
-          startTimestamp: gameWeekDate,
-          status: gameWeekStatus,
-        },
-      });
-    }
-    printConsole(
-      { data: "All Game weeks added properly" },
-      { printLocation: "populate.js:218" },
-      { textColor: "black" },
-      { bgColor: "bgGreen" }
-    );
-  }
-
-  // if incomplete gameweek
-  else if (gameWeeks.data.length < 30) {
-    await axios.delete(`${baseURL}${PORT}/gameWeek/dev/add`);
-    let gameWeekDate = 604800;
-    let gameWeekStatus = "Active";
-    for (let i = 1; i <= 30; i++) {
-      gameWeekDate = gameWeekDate + 604800;
-      i === 1 ? (gameWeekStatus = "Active") : (gameWeekStatus = "ToBePlayed");
-      axios.post(`${baseURL}${PORT}/gameWeek/dev/add`, {
-        newGameWeekData: {
-          gameWeekNumber: i,
-          startTimestamp: gameWeekDate,
-          status: gameWeekStatus,
-        },
-      });
-    }
-    printConsole(
-      { data: "All Game weeks added properly" },
-      { printLocation: "populate.js:218" },
-      { bgColor: "bgGreen", textColor: "black" }
-    );
-  } else {
-    printConsole(
-      { data: "Gameweek already populated" },
-      { printLocation: "populate.js:218" },
-
-      { bgColor: "bgGreen", textColor: "black" }
-    );
-  }
-
-  // else if(gameWeeks.d)
-};
-
 const populateTeams = async () => {
   // check teams
   const teams = await axios.get(`${baseURL}${PORT}/teams/all`);
 
   // if no teams
   if (teams.data.length === 0) {
-    teamData.forEach((team) => {
-      axios.post(`${baseURL}${PORT}/teams`, {
-        teamName: team,
-      });
-    });
-  }
-  // If incomplete team
-  else if (teams.data.length !== 16) {
-    // clear DB
-    await Team.deleteMany();
-
-    // add all teams
-    teamData.forEach((team) => {
-      axios.post(`${baseURL}${PORT}/teams`, {
-        teamName: team,
-      });
+    teamData.forEach(async (team) => {
+      await Team.create(team);
     });
     printConsole(
-      { data: "All Teams added properly" },
+      { data: `${teamData.length} teams added.` },
       { printLocation: "populate.js:490" },
       { bgColor: "bgGreen", textColor: "black" }
     );
   }
+  // If incomplete team
+  // else if (teams.data.length !== 16) {
+  //   // clear DB
+  //   await Team.deleteMany();
+
+  //   // add all teams
+  //   teamData.forEach(async (team) => {
+  //     await Team.create(team);
+  //   });
+  //   printConsole(
+  //     { data: "All Teams added properly" },
+  //     { printLocation: "populate.js:490" },
+  //     { bgColor: "bgGreen", textColor: "black" }
+  //   );
+  // }
   // If already added
   else {
     printConsole(
@@ -554,26 +528,221 @@ const populateTeams = async () => {
   }
 };
 
-const populateFixture = async () => {
-  const fixtures = await axios.get(`${baseURL}${PORT}/fixtures/`);
-  //  if no fixtures
-  if (fixtures.data.length === 0) {
-    fixtureData.forEach((fixture) => {
-      axios.post(`${baseURL}${PORT}/fixtures/add`, fixture);
-    });
-  }
-  // Incomplete data
-  else if (fixtures.data.length !== 20) {
-    await Fixture.deleteMany();
-    fixtureData.forEach((fixture) => {
-      axios.post(`${baseURL}${PORT}/fixtures/add`, fixture);
+const populatePlayers = async () => {
+  const players = await axios.get(`${baseURL}${PORT}/players/getplayers`);
+
+  // if no players
+  if (players.data.length === 0) {
+    playersData.forEach(async (team) => {
+      team.forEach(async (player) => {
+        await Player.create(player);
+      });
     });
     printConsole(
-      { data: "All Fixtures added properly" },
+      { data: `${playersData.length * playersData[0].length} players added.` },
+      { printLocation: "populate.js:490" },
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  }
+
+  // if incomplete list
+  // else if (players.data.length > playersData.length * playersData[0].length) {
+  //   // clear DB
+  //   await Team.deleteMany();
+
+  //   playersData.forEach(async (team) => {
+  //     team.forEach(async (player) => {
+  //       await Player.create(player);
+  //     });
+  //   });
+  //   printConsole(
+  //     {
+  //       data: `${
+  //         playersData.length * playersData[0].length
+  //       } players added properly.`,
+  //     },
+  //     { printLocation: "populate.js:490" },
+  //     { bgColor: "bgGreen", textColor: "black" }
+  //   );
+  // }
+  // If already added
+  else {
+    printConsole(
+      { data: "Players already populated" },
+      { printLocation: "populate.js:497" },
+
+      { bgColor: "bgGreen", textColor: "black" }
+    );
+  }
+};
+
+const populateFixture = async () => {
+  await Fixture.deleteMany();
+  await Gameweek.deleteMany();
+  // all teams and ID
+  const teamNameIDPair = {
+    "Saint George S.C": "1",
+    "Wolaita Dicha S.C": "2",
+    "Hawassa Kenema S.C": "3",
+    "Fasil Kenema S.C": "4",
+    "Adama City S.C": "5",
+    "Sidama Coffee S.C": "6",
+    "Bahir Dar Kenema S.C": "7",
+    "Ethiopian Coffee S.C": "8",
+    "Wolkite City F.C": "9",
+    "Arba Minch City F.C": "10",
+    "Defence Force S.C": "11",
+    "Hadiya Hossana F.C": "12",
+    "Dire Dawa City S.C": "13",
+    "Addis Ababa City F.C": "14",
+    "Jimma Aba Jifar F.C": "15",
+    "Sebeta City F.C": "16",
+  };
+
+  // get all fixtures
+  const fixtures = await axios.get(`${baseURL}${PORT}/fixtures/`);
+
+  //  if no fixtures
+  if (fixtures.data.length === 0) {
+    for (let i = 0; i < allPairedMatches.length; i++) {
+      const multiplier = i + 1;
+
+      const hours = [
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+      ];
+
+      const minutes = [
+        "00",
+        "15",
+        "20",
+        "25",
+        "30",
+        "35",
+        "40",
+        "45",
+        "50",
+        "55",
+      ];
+
+      const currentGameWeek = {
+        gameWeekNumber: i + 1,
+        startTimestamp: Date.now() + 604800 * i,
+        status: "ToBePlayed",
+      };
+      await Gameweek.create(currentGameWeek);
+
+      let count = 1;
+
+      allPairedMatches[i].forEach(async (fixture) => {
+        const homeTeamID = teamNameIDPair[fixture.homeTeam];
+        const awayTeamID = teamNameIDPair[fixture.awayTeam];
+
+        const dayDate = new Date();
+        dayDate.setDate(dayDate.getDate() + multiplier * 7);
+
+        if (count > 4 && count <= 6) {
+          dayDate.setDate(dayDate.getDate() + 1);
+        } else if (count === 6) {
+          dayDate.setDate(dayDate.getDate() + 2);
+        } else if (count === 7) {
+          dayDate.setDate(dayDate.getDate() + 3);
+        }
+
+        const timeDate =
+          hours[Math.floor(Math.random() * hours.length)] +
+          ":" +
+          minutes[Math.floor(Math.random() * minutes.length)] +
+          ":" +
+          "00";
+
+        const SCHEDULE = new Date(
+          dayDate.toISOString().split("T")[0] + "T" + timeDate
+        );
+
+        count = count + 1;
+
+        const currentFixture = {
+          gameweekId: currentGameWeek.gameWeekNumber,
+          matchId: `${homeTeamID}|${awayTeamID}`,
+          schedule: SCHEDULE,
+
+          // Concern Here what are the possible values
+          status: "scheduled",
+          homeTeam: fixture.homeTeam,
+          awayTeam: fixture.awayTeam,
+
+          matchStat: {
+            minutesPlayed: {},
+            goalsScored: {},
+            assists: {},
+            cleanSheet: {},
+            yellows: {},
+            reds: {},
+            penaltiesMissed: {},
+            penaltiesSaved: {},
+            saves: {},
+            ownGoal: {},
+            fantasyScores: {},
+          },
+        };
+        await Fixture.create(currentFixture);
+      });
+    }
+    printConsole(
+      { data: `${30 * 8} fixtures added.` },
       { printLocation: "populate.js:524" },
       { bgColor: "bgGreen", textColor: "black" }
     );
   }
+  // Incomplete data
+  // else if (fixtures.data.length < 240) {
+  //   await Gameweek.deleteMany();
+  //   await Fixture.deleteMany();
+
+  //   for (let i = 0; i < allPairedMatches.length; i++) {
+  //     const currentGameWeek = {
+  //       gameWeekNumber: i + 1,
+  //       startTimestamp: Date.now() + 604800 * i,
+  //       status: "ToBePlayed",
+  //     };
+  //     await Gameweek.create(currentGameWeek);
+
+  //     allPairedMatches[i].forEach(async (fixture) => {
+  //       const homeTeamID = teamNameIDPair[fixture.homeTeam];
+  //       const awayTeamID = teamNameIDPair[fixture.awayTeam];
+
+  //       const currentFixture = {
+  //         gameweekId: currentGameWeek.gameWeekNumber,
+  //         matchId: `${homeTeamID}|${awayTeamID}`,
+  //         schedule: Date.now() + 3600,
+
+  //         // Concern Here what are the possible values
+  //         status: "scheduled",
+  //         homeTeam: fixture.homeTeam,
+  //         awayTeam: fixture.awayTeam,
+  //       };
+  //       await Fixture.create(currentFixture);
+  //     });
+  //   }
+
+  //   printConsole(
+  //     { data: "All Fixtures added properly" },
+  //     { printLocation: "populate.js:524" },
+  //     { bgColor: "bgGreen", textColor: "black" }
+  //   );
+  // }
   //  complete data
   else {
     printConsole(
@@ -588,9 +757,10 @@ module.exports = {
   addTestGameweek,
   addTestPlayer,
   addTestFixture,
+  addTestAdmin,
 
   // Scripts
-  populateGameWeeks,
   populateTeams,
+  populatePlayers,
   populateFixture,
 };

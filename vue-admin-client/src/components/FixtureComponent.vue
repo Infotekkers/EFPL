@@ -1,141 +1,293 @@
 <template>
-  <div class="fixture">
+  <!-- TODO:Add Result Display -->
+  <div class="fixture-main-container">
+    <!-- teams loading -->
+    <div v-if="isTeamLoading == true">{{ $t("Loading") }}</div>
+    <!-- teams loading -->
+
+    <!-- Container -->
     <div
-      v-if="fixture"
-      :class="index % 2 == 0 ? 'grey' : 'white'"
-      class="main-container"
+      v-if="fixture && isTeamLoading == false"
+      class="fixture-content-container"
     >
-      <div class="fixture-info" @click="goToDetailPage">
+      <!-- First Half -->
+      <div class="fixture-live-status" v-if="fixture.status == 'liveFH'">
+        FH
+      </div>
+      <!-- First Half -->
+
+      <!-- Half Time -->
+      <div class="fixture-live-status" v-else-if="fixture.status == 'HT'">
+        HT
+      </div>
+      <!-- Half Time -->
+
+      <!-- Second Half -->
+      <div class="fixture-live-status" v-else-if="fixture.status == 'liveSH'">
+        SH
+      </div>
+      <!-- Second Half -->
+
+      <!-- Full Time -->
+      <div class="fixture-live-status" v-else-if="fixture.status == 'FT'">
+        FT
+      </div>
+      <!-- Full Time -->
+      <!-- Fixture Main Info -->
+      <div
+        class="fixture-info"
+        @click="goToDetailPage"
+        v-if="getTeams.length !== 0"
+      >
         <!-- Home team -->
-        <div class="fixture-container">
-          <!-- Team -->
-          <div class="homeTeam">{{ fixture.homeTeam }}</div>
-          <!-- Icon -->
+        <div class="fixture-container home-container">
+          <!-- Team Name -->
+          <div class="fixture-home-team">
+            {{ fixture.homeTeam }}
+          </div>
+          <!-- Team Name -->
+
+          <!-- Team Icon -->
           <div
-            class="logo"
+            class="fixture-logo"
             :style="{
               'background-image': 'url(' + getHomeTeamImage + ')',
             }"
           ></div>
+          <!-- Team Icon -->
         </div>
+        <!-- Home team -->
 
-        <!-- Time -->
-        <span class="gameTime">{{ formatTime }}</span>
+        <!-- Game Time - formatted -->
+        <div class="fixture-game-time">
+          <div v-if="fixture.status == 'scheduled'">{{ formatTime }}</div>
+
+          <div v-else class="score-info">0-0</div>
+        </div>
+        <!-- Game Time - formatted -->
 
         <!-- Away Team -->
-        <div class="fixture-container">
+        <div class="fixture-container away-container">
+          <!-- Team Logo -->
           <div
-            class="logo"
+            class="fixture-logo"
             :style="{
               'background-image': 'url(' + getAwayTeamImage + ')',
             }"
           ></div>
-          <div class="awayTeam">{{ fixture.awayTeam }}</div>
+          <!-- Team Logo -->
+
+          <!-- Team Name -->
+          <div class="fixture-away-team">{{ fixture.awayTeam }}</div>
+          <!-- Team Name -->
+        </div>
+        <!-- Away Team -->
+      </div>
+      <!-- Fixture Main Info -->
+
+      <!-- Control Center -->
+      <div class="fixture-controls">
+        <div @click="startMatch">
+          <img :src="playIcon.path" :alt="playIcon.alt" class="small-icon" />
+        </div>
+        <div @click="pauseMatch">
+          <img :src="pauseIcon.path" :alt="pauseIcon.alt" class="small-icon" />
+        </div>
+        <div @click="resumeMatch">
+          <img
+            :src="restartIcon.path"
+            :alt="restartIcon.alt"
+            class="small-icon"
+          />
+        </div>
+        <div @click="stopMatch">
+          <img :src="stopIcon.path" :alt="stopIcon.alt" class="small-icon" />
+        </div>
+        <div @click="editMatch">
+          <img :src="editIcon.path" :alt="editIcon.alt" class="small-icon" />
+        </div>
+        <div @click="deleteMatch">
+          <img
+            :src="deleteIcon.path"
+            :alt="deleteIcon.alt"
+            class="small-icon"
+          />
         </div>
       </div>
-
-      <!-- Controls -->
-      <div class="controls">
-        <div @click="startMatch">Play</div>
-        <div @click="pauseMatch">Pause</div>
-        <div @click="resumeMatch">Resume</div>
-        <div @click="stopMatch">Stop</div>
-        <div @click="editMatch">Edit</div>
-        <div @click="deleteMatch">Delete</div>
-      </div>
+      <!-- Control Center -->
     </div>
+    <!-- Container -->
   </div>
 </template>
 
 <style scoped>
-.fixture {
-  margin-top: 36px;
+/* Icons */
+.extra-small-icon {
+  width: 7px;
+
+  height: 7px;
+  object-fit: contain;
+}
+
+.small-icon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  margin-left: 3px;
+}
+
+.fixture-main-container {
+  width: 100%;
+  border-bottom: 2px solid var(--neutral-200);
+  color: var(--neutral-900);
+  padding-right: 12px;
+}
+.fixture-main-container:nth-of-type(odd) {
+  background: var(--neutral-200);
+  /* background: red; */
+}
+.fixture-main-container:nth-of-type(1) {
+  margin-top: 16px;
+}
+.fixture-content-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+.fixture-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .fixture-container {
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 46%;
+  padding: 8px 0;
 }
-.fixture-container:nth-of-type(odd) {
+.fixture-live-status {
+  height: 100%;
+  width: 50px;
+  position: absolute;
+  display: grid;
+  place-items: center;
+}
+.home-container {
   justify-content: flex-end;
+  padding-right: 20px;
 }
-.fixture-container:nth-of-type(even) {
+.away-container {
   justify-content: flex-start;
+  padding-left: 20px;
 }
-.main-container {
-  width: 950px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background: teal;
+.fixture-home-team,
+.fixture-away-team {
+  min-width: 220px;
+  font-size: 18px;
 }
-.fixture-info {
-  width: 750px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background: yellow;
-}
-.logo {
-  width: 40px;
-  height: 40px;
-}
-.fixture-container:nth-of-type(odd) .logo {
-  margin-left: 16px;
-}
-.fixture-container:nth-of-type(even) .logo {
+.fixture-home-team {
+  text-align: end;
   margin-right: 16px;
 }
-.grey {
-  background: grey;
+.fixture-away-team {
+  text-align: start;
+  margin-left: 16px;
 }
-
-.date-info {
+.fixture-logo {
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.fixture-game-time {
+  width: 8%;
   text-align: center;
-  margin-bottom: 4px;
 }
-.homeTeam,
-.awayTeam {
-  font-size: 24px;
+.score-info {
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-size: 18px;
+}
+.fixture-controls {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin-left: auto;
+  font-size: 12px;
+  height: 100%;
+  /* min-height: 15px; */
+
+  /* margin-left: 100%; */
+}
+.fixture-controls > div {
+  margin-left: 8px;
+  height: 15px;
 }
 
-.gameTime {
-  margin: 0 24px;
-  border: 1px solid black;
-  padding: 4px 20px;
+/* * Super Small Screen */
+@media screen and (max-width: 400px) {
+  .fixture-main-container {
+    display: none;
+  }
 }
-.controls {
-  display: flex;
-  flex-direction: row;
+
+/* Small Screens */
+@media screen and (min-width: 401px) and (max-width: 1400px) {
+  .fixture-content-container {
+    flex-wrap: wrap;
+  }
+  .fixture-controls {
+    position: inherit;
+    margin-bottom: 16px;
+  }
 }
-.controls > div {
-  margin-left: 15px;
-}
+
+/*  */
 </style>
 
 <script>
+// Utils
 import router from "../router/index";
-
-// Components
-import store from "../store";
-import { mapActions } from "vuex";
+import store from "../store/index";
+import {
+  playIcon,
+  pauseIcon,
+  restartIcon,
+  stopIcon,
+  editIcon,
+  deleteIcon,
+} from "@/utils/Icons";
 
 export default {
   name: "FixtureComponent",
-
   props: {
     fixture: Object,
     index: Number,
+    isTeamLoading: Boolean,
+  },
+
+  data() {
+    return {
+      playIcon: playIcon,
+      pauseIcon: pauseIcon,
+      restartIcon: restartIcon,
+      stopIcon: stopIcon,
+      editIcon: editIcon,
+      deleteIcon: deleteIcon,
+    };
   },
 
   computed: {
-    showNotification() {
-      console.log(store.state.Fixture.showNotification);
-      return store.state.Fixture.showNotification;
-    },
+    // Match ID
     getMatchKey() {
       return this.$.vnode.key;
     },
+
+    // Format game time
     formatTime() {
       const value = new Date(this.fixture.schedule);
       let hour =
@@ -145,32 +297,35 @@ export default {
 
       return `${hour}:${minute}`;
     },
-    // image methods
+
+    // get home image
     getHomeTeamImage() {
-      let path;
-      try {
-        path = require(`@/assets/teams/${this.fixture.homeTeam}.png`);
-      } catch (err) {
-        path = require("@/assets/teams/NoImage.png");
-      }
-      const placerHolder = require("@/assets/teams/NoImage.png");
-      return this.fixture.homeTeam ? path : placerHolder;
+      const baseUrl = process.env.VUE_APP_API_BASE_URL;
+
+      const homeTeam = store.state.Fixture.allTeams.filter((team) => {
+        return team.teamName == this.fixture.homeTeam;
+      });
+      return `${baseUrl}${homeTeam[0].teamLogo}`;
     },
 
+    getTeams() {
+      return store.state.Fixture.allTeams;
+    },
+
+    // get away team image
     getAwayTeamImage() {
-      let path;
-      try {
-        path = require(`@/assets/teams/${this.fixture.awayTeam}.png`);
-      } catch (err) {
-        path = require("@/assets/teams/NoImage.png");
-      }
-      const placerHolder = require("@/assets/teams/NoImage.png");
-      return this.fixture.awayTeam ? path : placerHolder;
+      const baseUrl = process.env.VUE_APP_API_BASE_URL;
+
+      const awayTeam = store.state.Fixture.allTeams.filter((team) => {
+        return team.teamName == this.fixture.awayTeam;
+      });
+
+      return `${baseUrl}${awayTeam[0].teamLogo}`;
     },
   },
 
   methods: {
-    ...mapActions("Fixture", ["setFixtureDetailId"]),
+    // Route to details page
     goToDetailPage() {
       this.setFixtureDetailId(this.fixture.matchId);
       router.push({
@@ -179,50 +334,50 @@ export default {
       });
     },
 
+    // Start match event handler
     startMatch() {
       store.dispatch("Fixture/startMatch", this.getMatchKey);
     },
 
+    // pause match event handler
     pauseMatch() {
       store.dispatch("Fixture/pauseMatch", this.getMatchKey);
     },
+
+    // resume match event handler
     resumeMatch() {
       store.dispatch("Fixture/resumeMatch", this.getMatchKey);
-      console.log("Res");
     },
+
+    // Stop match event handler
     stopMatch() {
       store.dispatch("Fixture/endMatch", this.getMatchKey);
     },
+
+    // Delete match event handler
     deleteMatch() {
-      store.dispatch("Fixture/deleteMatch", this.getMatchKey);
+      if (this.fixture.status == "scheduled") {
+        store.dispatch("Fixture/deleteMatch", this.getMatchKey);
+      } else {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: `Match is already live.`,
+        });
+      }
     },
+    // edit match event handler
     editMatch() {
-      // TODO: Hook to api
-      // TODO: Improve response messages
-      const teamIds = this.getMatchKey.split("|");
-
-      const allTeams = store.state.Fixture.allTeams;
-
-      const homeTeam = allTeams.filter((team) => {
-        return team.teamId == parseInt(teamIds[0]);
-      });
-
-      const awayTeam = allTeams.filter((team) => {
-        return team.teamId == parseInt(teamIds[1]);
-      });
-
-      store.dispatch("Fixture/setHomeTeams", [homeTeam, awayTeam]);
-      store.dispatch("Fixture/setHomeTeamIndex", 0);
-
-      console.log(store.state.Fixture.homeTeams);
-
-      store.dispatch("Fixture/setAwayTeams", [homeTeam, awayTeam]);
-      store.dispatch("Fixture/setAwayTeamIndex", 1);
-
-      this.$emit("activateModal");
-
-      // TODO: Hook to api
-      console.log("Editing Match", this.getMatchKey);
+      if (this.fixture.status == "scheduled") {
+        store.dispatch("Fixture/setEditFixtureId", this.getMatchKey);
+        this.$emit("activateModal");
+      } else {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: `Match is already live.`,
+        });
+      }
     },
   },
 };

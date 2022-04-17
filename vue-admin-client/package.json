@@ -13,10 +13,14 @@
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "mobile-drag-drop": "^2.3.0-rc.2",
+    "pnpm": "^6.32.4",
+    "multi-range-slider-vue": "^1.1.4",
     "vue": "^3.2.13",
+    "vue-i18n": "^9.1.9",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0",
-    "vuex-map-fields": "^1.4.1"
+    "vuex-map-fields": "^1.4.1",
+    "webpack": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

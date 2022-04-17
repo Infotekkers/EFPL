@@ -2,6 +2,7 @@
   <!-- Notification Bar -->
 
   <section
+    class="notification-container"
     v-show="showNotification"
     :class="
       notificationType === 'success'
@@ -98,12 +99,12 @@
 </template>
 
 <style scoped>
-section {
+.notification-container {
   min-width: 400px;
   width: 450px;
   min-height: 80px;
   position: fixed;
-  z-index: 10;
+  z-index: 5;
   top: 80px;
   right: 0px;
   padding: 2px 12px;
@@ -193,6 +194,7 @@ export default {
   },
 
   updated() {
+    // Auto duration close
     setTimeout(() => {
       this.closeNotification();
     }, this.notificationDuration);

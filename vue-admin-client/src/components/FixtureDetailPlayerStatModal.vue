@@ -82,7 +82,7 @@ export default {
   },
 
   computed: {
-    ...mapFields("Player", ["stats", "names"]),
+    ...mapFields("PlayerStats", ["stats", "names"]),
     player() {
       return {
         name: this.names[this.playerId],
@@ -96,7 +96,7 @@ export default {
   }),
 
   methods: {
-    ...mapActions("Player", [
+    ...mapActions("PlayerStats", [
       "loadPlayerStats",
       "updatePlayerStats",
       "savePlayerStats",

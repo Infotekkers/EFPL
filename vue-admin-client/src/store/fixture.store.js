@@ -1,14 +1,16 @@
+import axiosInstance from "../services/AxiosTokenInstance";
 import axios from "axios";
 import store from "./index";
 import { getField, updateField } from "vuex-map-fields";
 
 const baseURL = process.env.VUE_APP_API_BASE_URL;
-axios.defaults.baseURL = baseURL;
+axiosInstance.defaults.baseURL = baseURL;
 
 export default {
   namespaced: true,
   state: {
     allFixtures: [],
+    allFixturesUnfiltered: [],
     allTeams: [],
     homeTeams: [],
     awayTeams: [],
@@ -48,17 +50,11 @@ export default {
     errorLog: "",
 
     score: { "10|15": "0v0" },
+
+    // Fixture edit mode
+    editFixtureId: "",
   },
   getters: {
-    getIsFixtureLoading: function (state) {
-      return state.isFixtureLoading;
-    },
-    getAllFixtures: function (state) {
-      return state.allFixtures;
-    },
-    getTempCache: function (state) {
-      return state.tempCache;
-    },
     getScore: (state) => (matchId) => {
       return state.score[matchId];
     },
@@ -67,11 +63,15 @@ export default {
   mutations: {
     SET_ALL_FIXTURES(state, payload) {
       state.allFixtures = payload;
+      state.allFixturesUnfiltered = payload;
     },
     SET_ALL_TEAMS(state, payload) {
       state.allTeams = payload;
       state.homeTeams = payload;
       state.awayTeams = payload;
+    },
+    SET_FILTERED_FIXTURES(state, payload) {
+      state.allFixtures = payload;
     },
     SET_HOME_TEAMS(state, payload) {
       state.homeTeams = payload;
@@ -128,14 +128,61 @@ export default {
       state.errorLog = payload;
     },
     updateField,
+    SET_EDIT_FIXTURE_ID(state, payload) {
+      state.editFixtureId = payload;
+    },
   },
   actions: {
+    filterByMatchStatus(context, filterMatchStatus) {
+      // reset previous filter result
+      store.state.Fixture.allFixtures =
+        store.state.Fixture.allFixturesUnfiltered;
+
+      if (filterMatchStatus != "All") {
+        const filteredFixtures = store.state.Fixture.allFixtures.filter(
+          (fixture) => {
+            return fixture.status == filterMatchStatus;
+          }
+        );
+        context.commit("SET_FILTERED_FIXTURES", filteredFixtures);
+      }
+    },
+    // TODO:Improve filter
+    filterByTerm(context, filterTerm) {
+      // reset previous filter result
+      store.state.Fixture.allFixtures =
+        store.state.Fixture.allFixturesUnfiltered;
+
+      // apply filter
+      const filteredFixtures = store.state.Fixture.allFixtures.filter(
+        (fixture) => {
+          return (
+            // home team
+            fixture.homeTeam.includes(filterTerm.toUpperCase()) ||
+            fixture.homeTeam.includes(filterTerm.toLowerCase()) ||
+            fixture.homeTeam.includes(filterTerm) ||
+            // away team
+            fixture.awayTeam.includes(filterTerm.toUpperCase()) ||
+            fixture.awayTeam.includes(filterTerm.toLowerCase()) ||
+            fixture.awayTeam.includes(filterTerm)
+          );
+        }
+      );
+
+      // update filtered
+      context.commit("SET_FILTERED_FIXTURES", filteredFixtures);
+    },
     // Fetches all fixtures
     async setAllFixtures(context) {
-      axios
-        .get(`/fixtures`)
+      axiosInstance
+        .get(`${baseURL}/fixtures/`)
         .then((response) => {
           if (response.status === 200) {
+            response.data.sort(function (a, b) {
+              var c = new Date(a.schedule);
+              var d = new Date(b.schedule);
+              return c - d;
+            });
             context.commit("SET_ALL_FIXTURES", response.data);
           }
         })
@@ -150,8 +197,8 @@ export default {
 
     // fetches all teams
     async setAllTeams(context) {
-      axios
-        .get(`/teams/all`)
+      axiosInstance
+        .get(`${baseURL}/teams/all`)
         .then((response) => {
           context.commit("SET_ALL_TEAMS", response.data);
         })
@@ -192,10 +239,14 @@ export default {
       context.commit("SET_AWAY_TEAM_INDEX", awayTeamIndex);
     },
 
+    setEditFixtureId(context, matchId) {
+      context.commit("SET_EDIT_FIXTURE_ID", matchId);
+    },
+
     // Saves new fixture
     async saveNewFixture(context, newFixture) {
-      await axios
-        .post(`/fixtures/add`, newFixture)
+      await axiosInstance
+        .post(`${baseURL}/fixtures/add`, newFixture)
         .then(async (response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
@@ -219,17 +270,66 @@ export default {
       // context.commit("SET_NEW_FIXTURE", newFixture);
     },
 
+    async updateFixture(context, updatedFixture) {
+      const allFixtures = store.state.Fixture.allFixtures;
+
+      const verifyChange = allFixtures.filter((fixture) => {
+        return (
+          fixture.gameweekId == updatedFixture.gameweekId &&
+          new Date(fixture.schedule).toString() ==
+            new Date(updatedFixture.schedule).toString() &&
+          fixture.homeTeam === updatedFixture.homeTeam &&
+          fixture.awayTeam === updatedFixture.awayTeam
+        );
+      });
+
+      // If no change in data
+      if (verifyChange.length > 0) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "warning",
+          notificationMessage: "No change in Fixture information for update.",
+        });
+      } else {
+        // TODO:Review
+        await axiosInstance
+          .patch(
+            `${baseURL}/fixtures/postpone/${store.state.Fixture.editFixtureId}`,
+            updatedFixture
+          )
+          .then(async (response) => {
+            if (response.status === 200) {
+              store.dispatch("Global/setNotificationInfo", {
+                showNotification: true,
+                notificationType: "success",
+                notificationMessage: response.data,
+              });
+              await store.dispatch("Fixture/setAllFixtures");
+            }
+          })
+          .catch((err) => {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "error",
+              notificationMessage: `${err.response.data}`,
+              notificationDuration: 8000,
+            });
+          });
+      }
+    },
+
     // Start match
     async startMatch(context, matchId) {
-      axios
-        .patch(`/fixtures/start/${matchId}`)
-        .then((response) => {
+      axiosInstance
+        .patch(`${baseURL}/fixtures/start/${matchId}`)
+        .then(async (response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: response.data,
             });
+            await store.dispatch("Fixture/setAllFixtures");
           }
         })
         .catch((err) => {
@@ -243,15 +343,16 @@ export default {
 
     // Pause match
     async pauseMatch(context, matchId) {
-      axios
-        .patch(`/fixtures/pause/${matchId}`)
-        .then((response) => {
+      axiosInstance
+        .patch(`${baseURL}/fixtures/pause/${matchId}`)
+        .then(async (response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: response.data,
             });
+            await store.dispatch("Fixture/setAllFixtures");
           }
         })
         .catch((err) => {
@@ -265,15 +366,16 @@ export default {
 
     // Resume match
     async resumeMatch(context, matchId) {
-      axios
-        .patch(`/fixtures/resume/${matchId}`)
-        .then((response) => {
+      axiosInstance
+        .patch(`${baseURL}/fixtures/resume/${matchId}`)
+        .then(async (response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: response.data,
             });
+            await store.dispatch("Fixture/setAllFixtures");
           }
         })
         .catch((err) => {
@@ -287,15 +389,16 @@ export default {
 
     // end match
     async endMatch(context, matchId) {
-      axios
-        .patch(`/fixtures/end/${matchId}`)
-        .then((response) => {
+      axiosInstance
+        .patch(`${baseURL}/fixtures/end/${matchId}`)
+        .then(async (response) => {
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: response.data,
             });
+            await store.dispatch("Fixture/setAllFixtures");
           }
         })
         .catch((err) => {
@@ -309,8 +412,8 @@ export default {
 
     // delete match
     async deleteMatch(context, matchId) {
-      axios
-        .delete(`/fixtures/delete/${matchId}`)
+      axiosInstance
+        .delete(`${baseURL}/fixtures/delete/${matchId}`)
         .then((response) => {
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
@@ -337,12 +440,12 @@ export default {
       const awayTeamId = matchId.split("|")[1];
 
       // TODO: User team data from store
-      const reqHomeTeam = axios.get(`/teams/${homeTeamId}`);
-      const reqAwayTeam = axios.get(`/teams/${awayTeamId}`);
-      const reqPlayers = axios.get(
+      const reqHomeTeam = axiosInstance.get(`/teams/${homeTeamId}`);
+      const reqAwayTeam = axiosInstance.get(`/teams/${awayTeamId}`);
+      const reqPlayers = axiosInstance.get(
         `/players/getplayers/homeTeam/${homeTeamId}/awayTeam/${awayTeamId}`
       );
-      const reqFixtureStats = axios.get(`/fixtures/${matchId}`);
+      const reqFixtureStats = axiosInstance.get(`/fixtures/${matchId}`);
 
       await axios
         .all([reqHomeTeam, reqAwayTeam, reqPlayers, reqFixtureStats])
@@ -506,7 +609,7 @@ export default {
         awayTeamLineUp,
       };
 
-      await axios
+      await axiosInstance
         .patch(url, payload)
         .then((res) => {
           store.dispatch("Global/setNotificationInfo", {
@@ -537,7 +640,7 @@ export default {
       url = `/fixtures/update/stats/${matchId}`;
       payload = incomingUpdate;
 
-      await axios
+      await axiosInstance
         .patch(url, payload)
         .then((res) => {
           store.dispatch("Global/setNotificationInfo", {
@@ -613,7 +716,7 @@ export default {
       payload = {
         score: state.score[matchId],
       };
-      await axios
+      await axiosInstance
         .patch(url, payload)
         .then((res) => {
           store.dispatch("Global/setNotificationInfo", {

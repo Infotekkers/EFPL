@@ -1,60 +1,123 @@
 const asyncHandler = require("express-async-handler");
 const PlayerModel = require("../models/Player");
+const Teams = require("../models/Teams");
+const { makeFilePlayer } = require("../utils/helpers");
 
-const addplayers = asyncHandler(async (req, res) => {
+const addPlayer = asyncHandler(async (req, res) => {
   const {
     playerName,
     eplTeamId,
     position,
     currentPrice,
-    score,
     availability,
-    history,
+    playerImage,
+    logoName,
   } = req.body;
-  await new PlayerModel({
+
+  const verifyPlayer = await PlayerModel.findOne({
+    playerName: req.body.playerName,
+  });
+
+  const teamId = await Teams.findOne({ teamName: eplTeamId });
+
+  const id = teamId.teamId;
+
+  console.log({
     playerName,
+    eplTeamId,
     position,
     currentPrice,
-    score,
-    history,
     availability,
-    eplTeamId,
-  }).save();
-  res.status(201).send(`${playerName} added successfully`);
+    playerImage,
+    logoName,
+  });
+
+  // If player does not exist
+  if (!verifyPlayer) {
+    // if image is sent
+    if (logoName) {
+      // save file
+      const playerImagePath = makeFilePlayer(playerImage, logoName);
+
+      // if file is saved
+      if (playerImagePath) {
+        await new PlayerModel({
+          playerName,
+          position,
+          currentPrice,
+          availability,
+          playerImage: playerImagePath,
+          eplTeamId: id,
+        }).save();
+        res.status(201).send(`${playerName} added successfully`);
+      }
+      // if file is not saved
+      else {
+        res.status(422).json("Error saving image. Please try again!");
+      }
+    }
+
+    // if no image
+    else {
+      await new PlayerModel({
+        playerName,
+        position,
+        currentPrice,
+        availability,
+        playerImage: "",
+        eplTeamId: id,
+      }).save();
+      res.status(201).send(`${playerName} added successfully`);
+    }
+  }
+  // if player exists
+  else {
+    res.status(404).send(`${playerName} EXIST.`);
+  }
 });
-// Questions eplTeamId -  what is that
-const updateplayer = asyncHandler(async (req, res) => {
+
+const updatePlayer = asyncHandler(async (req, res) => {
   const {
     playerName,
-    history,
     eplTeamId,
     availablity,
-    playerId,
     position,
+    playerImage,
+    logoName,
     currentPrice,
   } = req.body;
 
-  // const verifyPlayer =  await PlayerModel.findOne({playerId:req.params.playerId})
-  // if(verifyPlayer){
-  await PlayerModel.updateOne(
-    { playerId: req.body.playerId },
-    {
-      $set: {
-        playerName: playerName,
-        position: position,
-        playerId: playerId,
-        currentPrice: currentPrice,
-        history: history,
-        eplTeamId: eplTeamId,
-        availablity: availablity,
-      },
-    }
-  );
+  const newData = {
+    playerName,
+    eplTeamId,
+    availablity,
+    position,
+    currentPrice,
+  };
 
-  res.status(201).send(`Info updated successful`);
-  // } else{
-  //     return res.status(404).send(`player doesn exist`);
-  // }
+  if (playerImage !== "") {
+    const filePath = makeFilePlayer(playerImage, logoName);
+
+    if (filePath !== "") {
+      newData.playerImage = filePath;
+    }
+  }
+
+  const verifyPlayer = await PlayerModel.findOne({
+    playerId: req.params.playerId,
+  });
+
+  if (verifyPlayer) {
+    await PlayerModel.updateOne(
+      { playerId: req.params.playerId },
+      {
+        $set: newData,
+      }
+    );
+    res.status(201).send(` ${playerName} Info updated successful`);
+  } else {
+    return res.status(404).send(`player with ${playerName}exist`);
+  }
 });
 
 const updateScore = asyncHandler(async (req, res) => {
@@ -62,7 +125,7 @@ const updateScore = asyncHandler(async (req, res) => {
   const verifyPlayer = await PlayerModel.findOne({
     playerId: req.params.playerId,
   });
-  console.log(verifyPlayer);
+
   // if(verifyPlayer){
   const scorearray = verifyPlayer.score;
   const Gameweek = scorearray.filter(
@@ -71,7 +134,7 @@ const updateScore = asyncHandler(async (req, res) => {
   const index = scorearray.indexOf(Gameweek[0]);
   scorearray[index] = score;
   verifyPlayer.score = scorearray;
-  console.log(verifyPlayer);
+
   await verifyPlayer.save();
   res.status(201).send(`Score for Gameweek update successful`);
   //  }else{
@@ -99,13 +162,14 @@ const addScore = asyncHandler(async (req, res) => {
   // }
 });
 
-const getplayer = asyncHandler(async (req, res) => {
+const getPlayer = asyncHandler(async (req, res) => {
   const players = await PlayerModel.find({ playerId: req.params.playerId });
   res.send(players);
 });
 
-const getplayers = asyncHandler(async (req, res) => {
+const getPlayers = asyncHandler(async (req, res) => {
   const players = await PlayerModel.find();
+
   res.send(players);
 });
 
@@ -134,18 +198,18 @@ const getHomeAndAwayPlayers = asyncHandler(async (req, res) => {
   res.status(200).send(result);
 });
 
-const deleteplayer = asyncHandler(async (req, res) => {
+const deletePlayer = asyncHandler(async (req, res) => {
   const player = await PlayerModel.deleteOne({ playerId: req.params.playerId });
   res.send(`player ${player.playerName} is removed`);
 });
 
 module.exports = {
-  addplayers,
-  getplayer,
-  getplayers,
+  addPlayer,
+  getPlayer,
+  getPlayers,
   getHomeAndAwayPlayers,
-  updateplayer,
-  deleteplayer,
+  updatePlayer,
+  deletePlayer,
   updateScore,
   addScore,
 };

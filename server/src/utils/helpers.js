@@ -1,6 +1,11 @@
 const expressAsyncHandler = require("express-async-handler");
 const JWT = require("jsonwebtoken");
 
+const fs = require("fs");
+const fse = require("fs-extra");
+const { v4: uuidv4 } = require("uuid");
+const path = require("path");
+
 // Function to generate JWT Token
 const generateJWTToken = expressAsyncHandler(async (id) => {
   return JWT.sign({ id }, process.env.JWT_SECRET, {
@@ -258,8 +263,74 @@ const statUpdater = ({ activeMatch, activePlayer, incomingUpdate }) => {
   return { updatedMatch: activeMatch, updatedPlayer: activePlayer };
 };
 
+// Function to change base64 to file
+const makeFile = (fileContent, logoName) => {
+  // Check base64 format
+  const matches = fileContent.match(/^data:([A-Za-z-+/]+);base64,(.+)$/);
+  if (matches.length !== 3) {
+    return "";
+  } else {
+    // create buffer
+    const imageBuffer = Buffer.from(matches[2], "base64");
+    const itemName = logoName.split(".");
+    const itemFileName = uuidv4() + "." + itemName[itemName.length - 1];
+
+    const filePath = path.join(
+      path.resolve("./"),
+      "uploads/teams",
+      itemFileName
+    );
+
+    try {
+      fs.writeFileSync(filePath, imageBuffer, "utf-8");
+      return "/uploads/teams/" + itemFileName;
+    } catch (e) {
+      return "";
+    }
+  }
+};
+
+// Function to change base64 to file
+const makeFilePlayer = (fileContent, logoName) => {
+  // Check base64 format
+  const matches = fileContent.match(/^data:([A-Za-z-+/]+);base64,(.+)$/);
+  if (matches.length !== 3) {
+    return "";
+  } else {
+    // create buffer
+    const imageBuffer = Buffer.from(matches[2], "base64");
+    const itemName = logoName.split(".");
+    const itemFileName = uuidv4() + "." + itemName[itemName.length - 1];
+
+    const filePath = path.join(
+      path.resolve("./"),
+      "uploads/players",
+      itemFileName
+    );
+
+    try {
+      fs.writeFileSync(filePath, imageBuffer, "utf-8");
+      return "/uploads/players/" + itemFileName;
+    } catch (e) {
+      return "";
+    }
+  }
+};
+
+const moveFile = async (sourcePath, destinationPath) => {
+  try {
+    fse.copy(sourcePath, destinationPath, { overwrite: true });
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 module.exports = {
   generateJWTToken,
   pointDeductor,
   statUpdater,
+  makeFile,
+  moveFile,
+  makeFilePlayer,
 };

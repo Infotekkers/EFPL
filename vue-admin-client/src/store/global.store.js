@@ -18,7 +18,6 @@ export default {
     SET_CONNECTION(state, payload) {
       state.connection = payload;
     },
-
     SET_NOTIFICATION_INFO(state, payload) {
       (state.showNotification = payload.showNotification
         ? payload.showNotification
@@ -38,7 +37,6 @@ export default {
     setConnection(context, connection) {
       context.commit("SET_CONNECTION", connection);
     },
-
     setNotificationInfo(context, notificationInfo) {
       context.commit("SET_NOTIFICATION_INFO", notificationInfo);
     },
