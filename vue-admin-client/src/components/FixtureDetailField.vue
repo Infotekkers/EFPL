@@ -608,7 +608,8 @@ p {
 #bench label {
   font-size: 6vh;
   letter-spacing: 25px;
-  opacity: 0.5;
+  color: var(--success-100);
+  opacity: 0.7;
   z-index: 0;
 }
 
@@ -631,6 +632,7 @@ p {
   height: 99px;
   width: 99px;
   box-shadow: 0 1px 2px var(--primary-500);
+  font-size: var(--text-small);
 }
 
 .field-player-hover-sub {
@@ -704,7 +706,7 @@ p {
   }
 
   .field {
-    height: 90vh;
+    height: 95vh;
     width: 50vw;
   }
 

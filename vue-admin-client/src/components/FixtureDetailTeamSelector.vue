@@ -1,7 +1,7 @@
 <template>
   <div id="main-fixture-detail-team-selector">
     <div class="status">
-      {{ status }}
+      {{ status.toUpperCase() }}
     </div>
     <div
       class="team home-team"
@@ -73,8 +73,8 @@ export default {
 }
 
 .selected {
-  background-color: var(--primary-100);
-  box-shadow: inset 0 1px 2px var(--primary-400);
+  background-color: var(--primary-200);
+  box-shadow: inset 0 1px 2px var(--primary-600);
 }
 
 .score {
