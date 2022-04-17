@@ -247,6 +247,7 @@
 .teams-founded-sorter > span {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .teams-logo-sorter {
   width: 60px;
