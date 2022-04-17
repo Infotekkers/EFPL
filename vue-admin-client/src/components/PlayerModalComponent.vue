@@ -3,7 +3,9 @@
     <!-- Close button -->
     <div class="player-modal-close" @click="$emit('closeModal')">X</div>
     <!-- Close button -->
-    <div class="player-modal-content">
+
+    <!-- Content -->
+    <div v-if="getTeams.length > 0" class="player-modal-content">
       <!-- Logo Area -->
       <div class="player-model-image-section">
         <!-- Logo Preview -->
@@ -35,27 +37,20 @@
         <div class="container-col">
           <!-- Player Name -->
           <div class="container-col input-container">
-            <label for="">Name</label>
-            <input
-              type="text"
-              ref="playerName"
-              :value="isEditMode ? getPlayer.playerName : ''"
-            />
+            <label for="">{{ $t("Name") }}</label>
+            <input type="text" ref="playerName" v-model="playerName" />
           </div>
           <!-- Player Name -->
 
           <!-- Player City -->
           <div class="container-col input-container">
-            <label for="">Team</label>
+            <label for="">{{ $t("Team") }}</label>
 
             <select name="PlayerTeam" ref="eplTeamId">
               <option
                 v-for="team in getTeams"
                 :key="team.teamName"
-                :value="team.teamName"
-                :selected="
-                  isEditMode ? getPlayer.teamName == team.teamName : ''
-                "
+                :v-model="playerTeam"
               >
                 {{ team.teamName }}
               </option>
@@ -70,31 +65,31 @@
 
           <!-- Player Stadium -->
           <div class="container-col input-container">
-            <label for="">Position</label>
+            <label for="">{{ $t("Position") }}</label>
             <select name="PlayerPosition" ref="position" id="">
               <option
                 value="GK"
                 :selected="isEditMode ? getPlayer.position == 'GK' : ''"
               >
-                Goalkeeper
+                {{ $t("GoalKeepers") }}
               </option>
               <option
                 value="DEF"
                 :selected="isEditMode ? getPlayer.position == 'DEF' : ''"
               >
-                Defender
+                {{ $t("Defenders") }}
               </option>
               <option
                 value="MID"
                 :selected="isEditMode ? getPlayer.position == 'MID' : ''"
               >
-                Midfielder
+                {{ $t("Midfielders") }}
               </option>
               <option
                 value="ATT"
                 :selected="isEditMode ? getPlayer.position == 'ATT' : ''"
               >
-                Attacker
+                {{ $t("Attackers") }}
               </option>
             </select>
             <!-- <input
@@ -111,7 +106,7 @@
         <div class="container-col">
           <!-- Stadium -->
           <div class="container-col input-container">
-            <label for="">Price </label>
+            <label for="">{{ $t("Price") }} </label>
             <input
               type="number"
               ref="currentPrice"
@@ -123,7 +118,7 @@
           <!-- Year -->
           <!-- TODO:MAKE Dropdown -->
           <div class="container-col input-container">
-            <label for="">Injury Status</label>
+            <label for="">{{ $t("Injury") }} {{ $t("Status") }}</label>
             <input
               type="text"
               ref="injuryStatus"
@@ -134,7 +129,7 @@
 
           <!-- Year -->
           <div class="container-col input-container">
-            <label for="">Injury Message</label>
+            <label for="">{{ $t("Injury") }} {{ $t("Message") }}</label>
             <input
               type="text"
               ref="injuryMessage"
@@ -145,7 +140,7 @@
 
           <div class="player-modal-buttons-container">
             <div class="player-modal-cancel-button" @click="cancelSave">
-              Cancel
+              {{ $t("Cancel") }}
             </div>
             <div
               class="player-modal-save-button"
@@ -155,18 +150,35 @@
                   : { click: savePlayer }
               "
             >
-              Save
+              {{ $t("Save") }}
             </div>
           </div>
         </div>
         <!-- Stadium Capacity & Foundation Year -->
       </form>
     </div>
+    <!-- Content -->
+
+    <div v-else class="player-modal-no-teams">
+      <div>{{ $t("No") }} {{ $t("Teams") }}</div>
+
+      <div class="no-teams-add-button" @click="addNewTeam">
+        <div>
+          <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
+        </div>
+        {{ $t("Add") }}
+      </div>
+    </div>
   </div>
 </template>
+
 <script>
 // TODO:FIX Form - make by v-model
 import store from "../store/index";
+import router from "../router/index";
+
+// Icons
+import { addIcon } from "@/utils/Icons";
 export default {
   name: "PlayerModal",
   props: {
@@ -177,7 +189,17 @@ export default {
       selectedImage: null,
       allowedExtensions: ["jpg", "png", "svg", "jpeg"],
       imageChanged: false,
-      // selectedTeam: ,
+
+      // models
+      playerName: null,
+      playerTeam: null,
+      playerPosition: null,
+      playerPrice: null,
+      injuryStatus: null,
+      injuryMessage: null,
+
+      // Icons
+      addIcon: addIcon,
     };
   },
   methods: {
@@ -191,7 +213,6 @@ export default {
 
         // valid format
         if (this.allowedExtensions.includes(extension[extension.length - 1])) {
-          console.log(files[0]);
           this.selectedImage = files[0];
           const preview = this.$refs.preview;
 
@@ -206,7 +227,6 @@ export default {
         }
         // invalid format
         else {
-          console.log("Naah");
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
@@ -228,13 +248,21 @@ export default {
       }
       this.$emit("closeModal");
     },
+    addNewTeam() {
+      // pass modal 1 to activate modal auto
+      router.push({
+        path: "/admin/teams",
+        query: { modal: 1 },
+      });
+    },
+
     async savePlayer() {
-      const playerName = this.$refs.playerName.value;
-      const eplTeamId = this.$refs.eplTeamId.value;
-      const position = this.$refs.position.value;
-      const currentPrice = this.$refs.currentPrice.value;
-      const injuryStatus = this.$refs.injuryStatus.value;
-      const injuryMessage = this.$refs.injuryMessage.value;
+      const playerName = this.playerName;
+      const eplTeamId = this.playerTeam;
+      const position = this.playerPosition;
+      const currentPrice = this.playerPrice;
+      const injuryStatus = this.injuryStatus;
+      const injuryMessage = this.injuryMessage;
       let playerImage = "";
 
       if (store.state.Player.imageChanged === true) {
@@ -265,11 +293,15 @@ export default {
           notificationType: "error",
           notificationMessage: "Current Price is required",
         });
-      } else if (!injuryStatus) {
-        console.log("status");
-      } else if (!injuryMessage) {
-        console.log("Messgae");
-      } else {
+      }
+      // else if (!injuryStatus) {
+      //   console.log("status");
+      // }
+      // else if (!injuryMessage) {
+      //   console.log("Messgae");
+      // }
+      //
+      else {
         const playerData = {
           playerName,
           eplTeamId,
@@ -278,8 +310,13 @@ export default {
           injuryStatus,
           injuryMessage,
           playerImage,
-          logoName: this.selectedImage.name ? this.selectedImage.name : "",
         };
+
+        if (this.selectedImage) {
+          playerData.logoName = this.selectedImage.name
+            ? this.selectedImage.name
+            : "";
+        }
         store.dispatch("Player/savePlayer", playerData);
         this.removeImage();
         this.$refs.inputForm.reset();
@@ -321,6 +358,23 @@ export default {
         }
       });
     },
+    setItem(player) {
+      this.playerName = player.playerName;
+      this.playerTeam = player.eplTeamId;
+      this.playerPosition = player.position;
+      this.playerPrice = player.currentPrice;
+      this.injuryStatus = player.availability;
+      this.injuryMessage = player.availability;
+
+      console.log(
+        (this.playerName = player.playerName),
+        (this.playerTeam = player.eplTeamId),
+        (this.playerPosition = player.position),
+        (this.playerPrice = player.currentPrice),
+        (this.injuryStatus = player.availability),
+        (this.injuryMessage = player.availability)
+      );
+    },
   },
   computed: {
     // TODO:USE TEAM Store or MERGE
@@ -342,13 +396,17 @@ export default {
           })
         )
       );
-
       const showPreview = this.$refs.preview;
-      console.log(showPreview);
       showPreview.style.backgroundImage = `url(${baseURL}${currentPlayer[0].playerImage})`;
-      console.log(currentPlayer[0]);
+      this.setItem(currentPlayer[0]);
       return currentPlayer[0];
     },
+  },
+
+  updated() {
+    if (this.isEditMode) {
+      this.getPlayer;
+    }
   },
 };
 </script>
@@ -383,11 +441,11 @@ export default {
 }
 .player-modal-content {
   width: 55%;
-  min-height: 350px;
+  min-height: 380px;
   background: var(--neutral-100);
   display: flex;
-  align-items: flex-start;
-  padding: 30px 16px;
+  align-items: center;
+  padding: 24px 16px 60px 16px;
   position: relative;
 }
 
@@ -411,7 +469,7 @@ export default {
   background-repeat: no-repeat;
   margin-bottom: 24px;
 
-  background: url("../assets/img/Player_Image_Placeholder_60x60.jpg");
+  background: url("../assets/img/Player_Image_Placeholder_120x120.jpg");
 }
 .player-modal-image-remove {
   position: absolute;
@@ -461,7 +519,7 @@ label {
 
 .player-modal-buttons-container {
   position: absolute;
-  bottom: 10px;
+  bottom: 16px;
   display: flex;
   right: 45px;
 }
@@ -478,5 +536,36 @@ label {
 }
 .player-modal-cancel-button {
   margin-right: 4px;
+}
+.player-modal-no-teams {
+  width: 55%;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--neutral-100);
+}
+.no-teams-add-button {
+  font-size: 16px;
+  /* position: absolute; */
+  /* right: 0; */
+  background: var(--primary-900);
+  padding: 5px 22px 5px 16px;
+
+  width: fit-content;
+  color: var(--neutral-100);
+  display: flex;
+  margin-top: 32px;
+}
+.no-teams-add-button > div {
+  width: 20px;
+  height: 20px;
+  background: var(--primary-800);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-right: 6px;
 }
 </style>

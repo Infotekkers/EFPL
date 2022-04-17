@@ -15,18 +15,18 @@
 
     <div>
       <button @click="logOutAdmin">
-        <h3>{{ $t("logout") }}</h3>
+        <h3>{{ $t("Logout") }}</h3>
       </button>
     </div>
     <div class="languageSelect">
       <label
-        ><h2>{{ $t("select language") }} :</h2></label
+        ><h2>{{ $t("Select language") }} :</h2></label
       >
 
       <select v-model="lang" @change="changeLang($event)">
-        <option value="en">{{ $t("english") }}</option>
+        <option value="en">{{ $t("English") }}</option>
 
-        <option value="am">{{ $t("amharic") }}</option>
+        <option value="am">{{ $t("Amharic") }}</option>
       </select>
     </div>
 

@@ -140,6 +140,7 @@
   width: 100%;
   border-bottom: 2px solid var(--neutral-200);
   color: var(--neutral-900);
+  padding-right: 12px;
 }
 .fixture-main-container:nth-of-type(odd) {
   background: var(--neutral-200);
@@ -223,7 +224,7 @@
   /* margin-left: 100%; */
 }
 .fixture-controls > div {
-  margin-left: 4px;
+  margin-left: 8px;
   height: 15px;
 }
 

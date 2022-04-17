@@ -16,7 +16,7 @@
     <!-- Name -->
     <div class="player-container-playerName">{{ player.playerName }}</div>
     <!-- Name -->
-    <div class="player-container-player-teamName">{{ player.teamName }}</div>
+    <div class="player-container-player-teamName">{{ player.eplTeamId }}</div>
     <div class="player-container-player-position">{{ player.position }}</div>
     <div class="player-container-player-price">{{ player.currentPrice }}</div>
     <div class="player-container-player-injuryStatus">
@@ -114,7 +114,7 @@ export default {
   color: var(--neutral-900);
 }
 .player-container:nth-of-type(odd) {
-  background: var(--neutral-100);
+  background: var(--neutral-200);
 }
 
 .player-id-container,

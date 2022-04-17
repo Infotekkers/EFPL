@@ -60,7 +60,7 @@ app.use("/backup", backupRouter);
 populate.addTestAdmin();
 
 populate.populateTeams();
-// populate.populatePlayers();
+populate.populatePlayers();
 populate.populateFixture();
 
 // Add Middleware

@@ -71,6 +71,31 @@ const injuredIcon = {
   alt: "Injured",
 };
 
+const playerIcon = {
+  path: require("../assets/icons/player-icon.svg"),
+  alt: "Players",
+};
+
+const teamIcon = {
+  path: require("../assets/icons/team-icon.svg"),
+  alt: "Teams",
+};
+
+const homeIcon = {
+  path: require("../assets/icons/home-icon.svg"),
+  alt: "Home",
+};
+
+const settingsIcon = {
+  path: require("../assets/icons/settings-icon.svg"),
+  alt: "Settings",
+};
+
+const resetIcon = {
+  path: require("../assets/icons/reset-icon.svg"),
+  alt: "Reset",
+};
+
 module.exports = {
   playIcon,
   pauseIcon,
@@ -92,4 +117,10 @@ module.exports = {
   collapseIcon,
   expandIcon,
   injuredIcon,
+
+  resetIcon,
+  homeIcon,
+  settingsIcon,
+  playerIcon,
+  teamIcon,
 };

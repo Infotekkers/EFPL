@@ -35,13 +35,14 @@
     <div class="players-filter-section">
       <!-- Club -->
       <div class="club-price-filter">
+        {{ $t("Team") }}
         <select
           name="PlayerTeam"
           ref="eplTeamId"
           v-model="selectedPlayerTeam"
           @change="filterByTeam"
         >
-          <option value="All">All</option>
+          <option value="All">{{ $t("All") }}</option>
           <option
             v-for="team in getTeams"
             :key="team.teamName"
@@ -54,6 +55,7 @@
 
       <!-- Price -->
       <div class="player-price-filter">
+        {{ $t("Price") }}
         <MultiRangeSlider
           baseClassName="multi-range-slider"
           :min="3.0"
@@ -69,6 +71,7 @@
 
       <!-- Position -->
       <div class="player-position-filter">
+        {{ $t("Position") }}
         <select
           name="PlayerPositionFilter"
           id=""
@@ -82,6 +85,14 @@
           <option value="MID">{{ $t("Midfielders") }}</option>
           <option value="ATT">{{ $t("Attackers") }}</option>
         </select>
+      </div>
+
+      <!-- Reset -->
+      <div @click="resetFilters" class="reset-filter-button">
+        <img :src="resetIcon.path" :alt="resetIcon.alt" class="small-icon" />
+        <div>
+          {{ $t("Reset Filters") }}
+        </div>
       </div>
     </div>
 
@@ -212,7 +223,7 @@ import PlayerModal from "@/components/PlayerModalComponent";
 import MultiRangeSlider from "multi-range-slider-vue";
 
 // Icons
-import { addIcon, sortUpIcon, sortDownIcon } from "../utils/Icons";
+import { addIcon, sortUpIcon, sortDownIcon, resetIcon } from "../utils/Icons";
 
 export default {
   name: "PlayersComponent",
@@ -234,9 +245,23 @@ export default {
       addIcon: addIcon,
       sortUpIcon: sortUpIcon,
       sortDownIcon: sortDownIcon,
+      resetIcon: resetIcon,
     };
   },
   methods: {
+    resetFilters() {
+      // reset price
+      store.dispatch("Player/filterByPrice", []);
+      this.barMinValue = 3;
+      this.barMaxValue = 19;
+
+      // reset position
+      store.dispatch("Player/filterByPosition", "");
+      (this.selectedPlayerPosition = "All"),
+        // reset team
+        store.dispatch("Player/filterByTeam", "");
+      (this.selectedPlayerTeam = "All"), this.getAllPlayers;
+    },
     filterByPosition() {
       store.dispatch("Player/filterByPosition", this.selectedPlayerPosition);
       store.dispatch("Player/filterAll");
@@ -285,6 +310,7 @@ export default {
     },
     searchBarFilter() {
       store.dispatch("Player/filterSearchTerm", this.$refs.searchBar.value);
+      this.getAllPlayers;
     },
   },
   computed: {
@@ -375,6 +401,7 @@ export default {
   height: 30px;
   border: none;
   outline: none;
+  margin-left: 4px;
 }
 /* Overrides */
 .multi-range-slider {
@@ -385,6 +412,18 @@ export default {
 
 .player-price-filter {
   min-width: 350px;
+}
+.reset-filter-button {
+  font-size: 16px;
+
+  background: var(--primary-900);
+  padding: 5px 22px 5px 16px;
+  color: var(--neutral-100);
+  display: flex;
+  align-items: center;
+}
+.reset-filter-button > img {
+  margin-right: 4px;
 }
 
 .players-sorter-header {

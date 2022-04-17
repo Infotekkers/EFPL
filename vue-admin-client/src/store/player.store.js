@@ -1,4 +1,5 @@
-import axios from "axios";
+import axiosInstance from "@/services/AxiosTokenInstance";
+
 import store from "./index";
 
 const baseURL = process.env.VUE_APP_API_BASE_URL;
@@ -56,27 +57,17 @@ export default {
       context.commit("SET_IMAGE_CHANGED_STATUS", status);
     },
     async setAllPlayers(context) {
-      await axios
+      await axiosInstance
         .get(`${baseURL}/players/getplayers`)
         .then(async (res) => {
           if (res.status === 200) {
-            // TODO:Integrate with Team store
-
             // get all teams
-            const allTeams = await axios.get(`${baseURL}/teams/all`);
+            const allTeams = await axiosInstance.get(`${baseURL}/teams/all`);
             context.commit("SET_ALL_TEAMS", allTeams.data);
 
-            // console.log(allTeams.data);
             for (let i = 0; i < res.data.length; i++) {
-              const currentTeam = allTeams.data.filter((team) => {
-                return team.teamId == res.data[i].eplTeamId;
-              });
-
               // add relative ID
               res.data[i].relative_id = i + 1;
-
-              // add team name
-              res.data[i].teamName = currentTeam[0].teamName;
             }
 
             context.commit("SET_ALL_PLAYERS", res.data);
@@ -86,19 +77,19 @@ export default {
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
-            notificationMessage: err,
+            notificationMessage: err.response.data,
           });
         });
     },
     async savePlayer(context, playerData) {
-      await axios
+      await axiosInstance
         .post(`${baseURL}/players/addplayer`, playerData)
         .then(async (res) => {
-          if (res.status === 200) {
+          if (res.status === 201) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
-              notificationMessage: `Player ${playerData.playerName} added succesfully`,
+              notificationMessage: `Player ${playerData.playerName} added successfully`,
             });
 
             store.dispatch("Player/setAllPlayers");
@@ -114,7 +105,7 @@ export default {
     },
     async updatePlayer(context, updatedPlayer) {
       const playerId = store.state.Player.editPlayerId;
-      console.log("ID", store.state.Player.imageChanged);
+
       const verifyChange = store.state.Player.allPlayers.filter((player) => {
         return (
           player.playerName == updatedPlayer.playerName &&
@@ -127,17 +118,20 @@ export default {
       });
 
       if (!verifyChange.length > 0 || store.state.Player.imageChanged) {
-        axios
+        axiosInstance
           .patch(`${baseURL}/players/updateplayer/${playerId}`, updatedPlayer)
           .then((response) => {
-            store.dispatch("Global/setNotificationInfo", {
-              showNotification: true,
-              notificationType: "success",
-              notificationMessage: response.data,
-            });
-            store.dispatch("Player/setAllPlayers");
+            if (response.status == 201) {
+              store.dispatch("Global/setNotificationInfo", {
+                showNotification: true,
+                notificationType: "success",
+                notificationMessage: response.data,
+              });
+              store.dispatch("Player/setAllPlayers");
+            }
           })
           .catch((err) => {
+            console.log(err);
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "error",
@@ -153,7 +147,7 @@ export default {
       }
     },
     async deletePlayer(context, playerId) {
-      axios
+      axiosInstance
         .delete(`${baseURL}/players/deleteplayer/${playerId}`)
         .then((response) => {
           store.dispatch("Global/setNotificationInfo", {
@@ -203,17 +197,17 @@ export default {
 
       if (order == 1) {
         store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
-          return playerOne.teamName < playerTwo.teamName
+          return playerOne.eplTeamId < playerTwo.eplTeamId
             ? -1
-            : playerOne.teamName > playerTwo.teamName
+            : playerOne.eplTeamId > playerTwo.eplTeamId
             ? 1
             : 0;
         });
       } else {
         store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
-          return playerOne.teamName > playerTwo.teamName
+          return playerOne.eplTeamId > playerTwo.eplTeamId
             ? -1
-            : playerOne.teamName < playerTwo.teamName
+            : playerOne.eplTeamId < playerTwo.eplTeamId
             ? 1
             : 0;
         });
@@ -286,6 +280,8 @@ export default {
       }
     },
     filterSearchTerm(context, searchTerm) {
+      //  reset
+      store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
       if (searchTerm) {
         const searchTermCap = searchTerm.toUpperCase();
         const filteredPlayers = store.state.Player.allPlayers.filter(
@@ -295,7 +291,7 @@ export default {
                 .toString()
                 .toUpperCase()
                 .includes(searchTermCap) ||
-              player.teamName
+              player.eplTeamId
                 .toString()
                 .toUpperCase()
                 .includes(searchTermCap) ||
@@ -344,7 +340,7 @@ export default {
           const filteredPlayers = store.state.Player.allPlayers.filter(
             (player) => {
               return (
-                player.teamName.toString().toUpperCase() ==
+                player.eplTeamId.toString().toUpperCase() ==
                 store.state.Player.teamFilterCondition.toString().toUpperCase()
               );
             }

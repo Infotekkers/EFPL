@@ -29,7 +29,6 @@ function generateMatch() {
 }
 // Generate gameweek macthes
 function generateGameWeekMatches(gameWeekNumber) {
-  //   console.log("Game week", gameWeekNumber);
   let allGwTeams = Array.from(allTeams);
   const allGwMatches = [];
   //   While team not paired

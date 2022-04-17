@@ -7,11 +7,11 @@
 
   "_comment_settings": "ምርጫዎች ገጽ ትርጉሞች",
   "Settings": "ምርጫዎች ገጽ",
-  "Reset": "የይለፍ ቃል ለውጥ",
-  "logout": "ከመተግበሪያን ውጣ",
-  "select language": "ቋንቋ ይምረጡ",
-  "english": "እንግሊዝኛ",
-  "amharic": "አማርኛ",
+  "Reset Password": "የይለፍ ቃል ለውጥ",
+  "Logout": "ከመተግበሪያን ውጣ",
+  "Select language": "ቋንቋ ይምረጡ",
+  "English": "እንግሊዝኛ",
+  "Amharic": "አማርኛ",
   "Import": "አስመጣ",
   "Export": "ወደ ውጪ ላክ",
 
@@ -45,6 +45,9 @@
   "Price": "ዋጋ",
   "Image": "ምስል",
   "Injury": "ጉዳት",
+  "Status": "ሁኔታ",
+  "Message": "መልእክት",
+  "Reset Filters": "ማጣሪያዎች አስወግድ",
 
   "_comment_date": "የቀን ትርጉሞች",
   "Monday": "ሰኞ",

@@ -7,11 +7,11 @@
 
   "_comment_settings": "Settings Translations",
   "Settings": "Settings",
-  "Reset": "Reset Password",
-  "logout": "LogOut",
-  "select language": "Select Language",
-  "english": "English",
-  "amharic": "Amharic",
+  "Reset Password": "Reset",
+  "Logout": "LogOut",
+  "Select language": "Select Language",
+  "English": "English",
+  "Amharic": "Amharic",
   "Import": "Import",
   "Export": "Export",
 
@@ -45,6 +45,9 @@
   "Price": "Price",
   "Image": "Image",
   "Injury": "Injury",
+  "Status": "Status",
+  "Message": "Message",
+  "Reset Filters": "Reset Filters",
 
   "_comment_date": "Date Translations",
   "Monday": "Monday",

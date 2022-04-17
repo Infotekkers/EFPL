@@ -2,12 +2,25 @@ const express = require("express");
 const router = express.Router();
 
 const playersController = require("../controllers/players.controllers");
+const { protectRoute } = require("../middleware/auth.middleware");
 
-router.post("/addplayer", playersController.addplayers);
-router.get("/getplayers", playersController.getplayers);
-router.get("/getplayer/:playerId", playersController.getplayer);
-router.patch("/updateplayer/:playerId", playersController.updateplayer);
-router.delete("/deleteplayer/:playerId", playersController.deleteplayer);
-router.patch("/updatescore/:playerId/:gameweekId", playersController.updateScore);
-router.patch("/addscore/:playerId", playersController.addScore);
+router.post("/addplayer", protectRoute, playersController.addPlayer);
+router.get("/getplayers", protectRoute, playersController.getPlayers);
+router.get("/getplayer/:playerId", protectRoute, playersController.getPlayer);
+router.patch(
+  "/updateplayer/:playerId",
+  protectRoute,
+  playersController.updatePlayer
+);
+router.delete(
+  "/deleteplayer/:playerId",
+  protectRoute,
+  playersController.deletePlayer
+);
+router.patch(
+  "/updatescore/:playerId/:gameweekId",
+  protectRoute,
+  playersController.updateScore
+);
+router.patch("/addscore/:playerId", protectRoute, playersController.addScore);
 module.exports = router;
