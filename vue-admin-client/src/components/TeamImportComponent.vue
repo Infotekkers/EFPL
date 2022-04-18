@@ -108,7 +108,7 @@ export default {
         // remove players
         const filteredPlayers = store.state.Season.importSelectedPlayers.filter(
           (selectedPlayer) => {
-            return selectedPlayer.teamId != this.legacyTeam.teamId;
+            return selectedPlayer.teamId != this.legacyTeam.teamName;
           }
         );
 
@@ -127,6 +127,18 @@ export default {
       const baseUrl = process.env.VUE_APP_API_BASE_URL;
       const team = this.legacyTeam.teamLogo;
       return baseUrl + team;
+    },
+
+    isChecked() {
+      const allSelectedLegacyTeams = store.state.Season.importSelectedTeams;
+
+      const checkStatus = allSelectedLegacyTeams.filter((legacyTeam) => {
+        return legacyTeam.teamName == this.legacyTeam.teamName;
+      });
+
+      console.log(checkStatus);
+
+      return checkStatus.length > 0;
     },
   },
 };

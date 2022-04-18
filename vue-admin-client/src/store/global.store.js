@@ -5,7 +5,7 @@ export default {
 
     // notification stuff
     showNotification: false,
-    notificationType: "success",
+    notificationType: "warning",
     notificationMessage: "",
     notificationDuration: 4000,
   },

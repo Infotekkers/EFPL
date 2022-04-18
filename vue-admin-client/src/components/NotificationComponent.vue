@@ -107,7 +107,7 @@
   z-index: 5;
   top: 80px;
   right: 0px;
-  padding: 2px 12px;
+  padding: 12px 12px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -127,6 +127,7 @@
   width: 75%;
   display: flex;
   align-items: center;
+  text-align: start;
 }
 /* Dynamic Classes */
 .show {
@@ -142,23 +143,23 @@
   background: #fff3cd;
 }
 .success-bg {
-  background: #d4edda;
+  background: var(--success-100);
 }
 .error-fg {
   color: red;
 }
 .warning-fg {
-  color: yellow;
+  color: black;
 }
 .success-fg {
-  color: green;
+  color: var(--success-400);
 }
 
 .error-fill {
   fill: red !important;
 }
 .warning-fill {
-  fill: yellow !important;
+  fill: black !important;
 }
 .success-fill {
   fill: green !important;
@@ -167,8 +168,19 @@
 
 <script>
 import store from "../store/index";
+
+// Icons
+import { successIcon, warningIcon, errorIcon } from "../utils/Icons";
 export default {
   name: "NotificationComponent",
+
+  data() {
+    return {
+      successIcon: successIcon,
+      warningIcon: warningIcon,
+      errorIcon: errorIcon,
+    };
+  },
 
   computed: {
     showNotification() {

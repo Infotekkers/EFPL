@@ -77,6 +77,7 @@ const statUpdater = ({ activeMatch, activePlayer, incomingUpdate }) => {
     };
     activePlayer.score.push(score);
   }
+  console.log(activePlayer);
   activePlayer.score[gameweekId - 1].minutesPlayed = minutesPlayed;
   activePlayer.score[gameweekId - 1].goals = goals;
   activePlayer.score[gameweekId - 1].assists = assists;

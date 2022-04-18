@@ -96,6 +96,21 @@ const resetIcon = {
   alt: "Reset",
 };
 
+const successIcon = {
+  path: require("../assets/icons/success-icon.svg"),
+  alt: "Success",
+};
+
+const warningIcon = {
+  path: require("../assets/icons/warning-icon.svg"),
+  alt: "Warning",
+};
+
+const errorIcon = {
+  path: require("../assets/icons/error-icon.svg"),
+  alt: "Error",
+};
+
 module.exports = {
   playIcon,
   pauseIcon,
@@ -123,4 +138,8 @@ module.exports = {
   settingsIcon,
   playerIcon,
   teamIcon,
+
+  successIcon,
+  warningIcon,
+  errorIcon,
 };

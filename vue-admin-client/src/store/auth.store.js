@@ -48,11 +48,11 @@ export default {
         })
         .then((response) => {
           if (response.status === 201) {
-            store.dispatch("Global/setNotificationInfo", {
-              showNotification: true,
-              notificationType: "success",
-              notificationMessage: `${response.data.email} successfully logged in`,
-            });
+            // store.dispatch("Global/setNotificationInfo", {
+            //   showNotification: true,
+            //   notificationType: "success",
+            //   notificationMessage: `${response.data.email} successfully logged in`,
+            // });
             commit("SET_CURRENT_ADMIN", response.data);
             router.replace({ name: "Home" });
             console.log("logged in");
