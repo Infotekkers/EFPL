@@ -39,6 +39,7 @@
   "Time": "ሰአት",
   "Save": "አስቀምጥ",
   "Cancel": "ሰርዝ",
+  "Close": "ዝጋ",
   "All": "ሁሉም",
   "Teams": "ቡድኖች",
   "Team": "ቡድን",
@@ -96,5 +97,21 @@
   "Logo": "አርማ",
   "Coach": "አሰልጣኝ",
   "Founded": "ተጀመረ",
-  "Capacity": "አቅም"
+  "Capacity": "አቅም",
+
+  "__comment__": "Fixture Detail",
+  "Reserves": "ተጠባባቂ",
+  "GK": "በረኛ",
+  "DEF": "ተከላካይ",
+  "MID": "አማካይ",
+  "ATT": "አጥቂ",
+  "SUBS": "ተቀያሪ",
+  "Goals": "ግቦች",
+  "Assists": "እርዳታዎች",
+  "Yellows": "ቢጫዎች",
+  "Red": "ቀይ",
+  "Penalities Missed": "የተሳቱ ፍፁም ቅጣቶች",
+  "Penalities Saved": "የተመለሱ ፍፁም ቅጣቶች",
+  "Saves": "የዳኑ ኳሶች",
+  "Own Goal": "የራስ ግብ"
 }

@@ -59,7 +59,7 @@
           v-else
         >
           <div>
-            <label>GK</label>
+            <label>{{ $t("GK") }}</label>
           </div>
         </div>
         <!-- /////////////////////// GOALKEEPERS ///////////////////// -->
@@ -111,7 +111,7 @@
           v-else
         >
           <div>
-            <label>DEF</label>
+            <label>{{ $t("DEF") }}</label>
           </div>
         </div>
         <!-- /////////////////////// DEFENDERS ///////////////////// -->
@@ -163,7 +163,7 @@
           v-else
         >
           <div>
-            <label>MID</label>
+            <label>{{ $t("MID") }}</label>
           </div>
         </div>
         <!-- /////////////////////// MIDFIELDERS ///////////////////// -->
@@ -215,7 +215,7 @@
           v-else
         >
           <div>
-            <label>ATT</label>
+            <label>{{ $t("ATT") }}</label>
           </div>
         </div>
         <!-- /////////////////////// STRIKERS ///////////////////// -->
@@ -265,12 +265,12 @@
           v-else
         >
           <div>
-            <label id="bench-label">SUBS</label>
+            <label id="bench-label">{{ $t("SUBS") }}</label>
           </div>
         </div>
         <!-- /////////////////////// BENCH ///////////////////// -->
         <div class="actions">
-          <button @click="saveLineup">Save</button>
+          <button @click="saveLineup">{{ $t("Save") }}</button>
         </div>
       </div>
     </div>

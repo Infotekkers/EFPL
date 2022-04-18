@@ -2,7 +2,7 @@
   <div v-if="!dataLoaded">Loading</div>
   <div v-else>
     <div id="main-fixture-detail-locker">
-      <div id="locker-label">Locker🔒</div>
+      <div id="locker-label">{{ $t("Reserves") }}</div>
       <div
         class="locker-room"
         @dragenter.prevent

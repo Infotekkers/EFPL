@@ -10,7 +10,7 @@
         </h2>
         <div class="editor-field">
           <div id="goals">
-            <span class="editor-field-label">Goals</span>
+            <span class="editor-field-label">{{ $t("Goals") }}</span>
             <button @click="updateStats('goals', '-')">-</button>
             <span class="stat-value">
               {{ player.stats.goals }}
@@ -18,7 +18,7 @@
             <button @click="updateStats('goals', '+')">+</button>
           </div>
           <div id="assists">
-            <span class="editor-field-label">Assists</span>
+            <span class="editor-field-label">{{ $t("Assists") }}</span>
             <button @click="updateStats('assists', '-')">-</button>
             <span class="stat-value">
               {{ player.stats.assists }}
@@ -26,7 +26,7 @@
             <button @click="updateStats('assists', '+')">+</button>
           </div>
           <div id="yellows">
-            <span class="editor-field-label">Yellows</span>
+            <span class="editor-field-label">{{ $t("Yellows") }}</span>
             <button @click="updateStats('yellows', '-')">-</button>
             <span class="stat-value">
               {{ player.stats.yellows }}
@@ -34,7 +34,7 @@
             <button @click="updateStats('yellows', '+')">+</button>
           </div>
           <div id="reds">
-            <span class="editor-field-label">Red</span>
+            <span class="editor-field-label">{{ $t("Red") }}</span>
             <button @click="updateStats('reds', '-')">-</button>
             <span class="stat-value">
               {{ player.stats.reds }}
@@ -42,7 +42,9 @@
             <button @click="updateStats('reds', '+')">+</button>
           </div>
           <div id="penalitiesMissed">
-            <span class="editor-field-label">Penalities Missed</span>
+            <span class="editor-field-label">{{
+              $t("Penalities Missed")
+            }}</span>
             <button @click="updateStats('penalitiesMissed', '-')">-</button>
             <span class="stat-value">
               {{ player.stats.penalitiesMissed }}
@@ -50,7 +52,7 @@
             <button @click="updateStats('penalitiesMissed', '+')">+</button>
           </div>
           <div id="penalitiesSaved">
-            <span class="editor-field-label">Penalities Saved</span>
+            <span class="editor-field-label">{{ $t("Penalities Saved") }}</span>
             <button @click="updateStats('penalitiesSaved', '-')">-</button>
             <span class="stat-value">
               {{ player.stats.penalitiesSaved }}
@@ -58,7 +60,7 @@
             <button @click="updateStats('penalitiesSaved', '+')">+</button>
           </div>
           <div id="saves">
-            <span class="editor-field-label">Saves</span>
+            <span class="editor-field-label">{{ $t("Saves") }}</span>
             <button @click="updateStats('saves', '-')">-</button>
             <span class="stat-value">
               {{ player.stats.saves }}
@@ -66,7 +68,7 @@
             <button @click="updateStats('saves', '+')">+</button>
           </div>
           <div id="ownGoal">
-            <span class="editor-field-label">Own Goal</span>
+            <span class="editor-field-label">{{ $t("Own Goal") }}</span>
             <button @click="updateStats('ownGoal', '-')">-</button>
             <span class="stat-value">
               {{ player.stats.ownGoal }}
@@ -77,9 +79,11 @@
       </div>
       <div class="actions">
         <button class="action-secondary" @click="$emit('closeModal')">
-          Close
+          {{ $t("Close") }}
         </button>
-        <button class="action-primary" @click="saveStats">Save</button>
+        <button class="action-primary" @click="saveStats">
+          {{ $t("Save") }}
+        </button>
       </div>
     </div>
   </div>

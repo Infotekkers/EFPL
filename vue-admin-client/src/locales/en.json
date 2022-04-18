@@ -38,6 +38,7 @@
   "Date": "Date",
   "Time": "Time",
   "Save": "Save",
+  "Close": "Close",
   "Cancel": "Cancel",
   "All": "All",
   "Teams": "Teams",
@@ -96,5 +97,21 @@
   "Logo": "Logo",
   "Coach": "Coach",
   "Founded": "Founded",
-  "Capacity": "Capacity"
+  "Capacity": "Capacity",
+
+  "__comment__": "Fixture Details",
+  "Reserves": "Reserves",
+  "GK": "GK",
+  "DEF": "DEF",
+  "MID": "MID",
+  "ATT": "ATT",
+  "SUBS": "SUB",
+  "Goals": "Goals",
+  "Assists": "Assists",
+  "Yellows": "Yellows",
+  "Red": "Red",
+  "Penalities Missed": "Penalities Missed",
+  "Penalities Saved": "Penalities Saved",
+  "Saves": "Saves",
+  "Own Goal": "Own Goal"
 }
