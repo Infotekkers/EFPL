@@ -88,6 +88,10 @@ const routes = [
     name: "admin-login",
     component: () => import("../views/AdminLoginView.vue"),
   },
+  {
+    path: "/",
+    redirect: "/login",
+  },
 
   // forgot password page
   {
