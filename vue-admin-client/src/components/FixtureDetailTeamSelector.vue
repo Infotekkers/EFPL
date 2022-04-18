@@ -9,7 +9,12 @@
       @click="$emit('changeActiveTeam', this.homeTeamId)"
     >
       {{ homeTeamName }}
-      <div class="team-logo home-team-logo"></div>
+      <div
+        class="team-logo home-team-logo"
+        :style="{
+          'background-image': 'url(' + homeTeamLogo + ')',
+        }"
+      ></div>
     </div>
     <div class="score" v-if="status !== 'scheduled'">{{ score }}</div>
     <div
@@ -17,7 +22,12 @@
       :class="activeTeamId === awayTeamId ? 'selected' : ''"
       @click="$emit('changeActiveTeam', this.awayTeamId)"
     >
-      <div class="team-logo away-team-logo"></div>
+      <div
+        class="team-logo away-team-logo"
+        :style="{
+          'background-image': 'url(' + awayTeamLogo + ')',
+        }"
+      ></div>
       {{ awayTeamName }}
     </div>
   </div>
@@ -31,6 +41,8 @@ export default {
     activeTeamId: Number,
     homeTeamName: String,
     awayTeamName: String,
+    homeTeamLogo: String,
+    awayTeamLogo: String,
     score: String,
     status: String,
   },
@@ -61,15 +73,10 @@ export default {
 .team-logo {
   height: 100px;
   width: 100px;
-  border-radius: 100%;
-}
-
-.home-team-logo {
-  background-color: red;
-}
-
-.away-team-logo {
-  background-color: blue;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: var(--spacing-xsmall) auto;
 }
 
 .selected {

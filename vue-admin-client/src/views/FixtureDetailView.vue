@@ -6,6 +6,8 @@
       :activeTeamId="parseInt(this.activeTeamId)"
       :homeTeamName="this.fixtureDetailData.teams[this.homeTeamId].teamName"
       :awayTeamName="this.fixtureDetailData.teams[this.awayTeamId].teamName"
+      :homeTeamLogo="this.fixtureDetailData.logos[this.homeTeamId]"
+      :awayTeamLogo="this.fixtureDetailData.logos[this.awayTeamId]"
       :score="score[this.fixtureDetailId]"
       :status="this.fixtureDetailData.status"
       @changeActiveTeam="changeActiveTeam"
