@@ -41,6 +41,7 @@ export default {
   },
   mounted() {
     console.log();
+    this.$store.dispatch("setAdmin");
   },
 };
 </script>
