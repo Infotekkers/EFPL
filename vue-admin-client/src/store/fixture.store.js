@@ -34,6 +34,7 @@ export default {
       formations: {},
       lineups: {},
       stats: {},
+      logos: {},
       status: "",
     },
 
@@ -462,6 +463,22 @@ export default {
             data: resAwayTeam.data[0],
           };
           commit("SET_FIXTURE_DETAIL_DATA", payload);
+
+          // SAVING LOGO URLS
+          const baseUrl = process.env.VUE_APP_API_BASE_URL;
+
+          payload = {
+            type: "logos",
+            teamId: homeTeamId,
+            data: `${baseUrl}${resHomeTeam.data[0].teamLogo}`,
+          };
+          commit("SET_FIXTURE_DETAIL_DATA", payload);
+          payload = {
+            type: "logos",
+            teamId: awayTeamId,
+            data: `${baseUrl}${resAwayTeam.data[0].teamLogo}`,
+          };
+          commit("SET_FIXTURE_DETAIL_DATA", payload);
         })
       );
 
@@ -476,21 +493,6 @@ export default {
           axios.spread((...res) => {
             const [resPlayers, resFixtureStats] = res;
             let payload;
-            // // RESPONSE HOME TEAM
-            // let payload = {
-            //   type: "teams",
-            //   teamId: homeTeamId,
-            //   data: resHomeTeam.data[0],
-            // };
-            // commit("SET_FIXTURE_DETAIL_DATA", payload);
-
-            // // RESPONSE AWAY TEAM
-            // payload = {
-            //   type: "teams",
-            //   teamId: awayTeamId,
-            //   data: resAwayTeam.data[0],
-            // };
-            // commit("SET_FIXTURE_DETAIL_DATA", payload);
 
             // RESPONSE PLAYERS
             const payloadHomePlayers = {
