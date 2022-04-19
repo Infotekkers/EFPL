@@ -1,12 +1,24 @@
 <template>
-  <div class="home">
-    <h1>Dash</h1>
-  </div>
+  <div class="home">Dash</div>
 </template>
 
 <script>
+// Components
+// import ConfirmationModalComponent from "@/components/ConfirmModalComponent.vue";
 export default {
   name: "HomeView",
-  components: {},
+  data() {
+    return {
+      showConfirmModal: true,
+    };
+  },
+  components: {
+    // ConfirmationModalComponent,
+  },
+  methods: {
+    saveAction() {
+      console.log("Saving");
+    },
+  },
 };
 </script>

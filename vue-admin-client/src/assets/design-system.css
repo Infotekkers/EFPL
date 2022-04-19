@@ -83,3 +83,91 @@
 
   font-family: "Inter", sans-serif;
 }
+
+/*
+========================================
+========================================
+Modal Styles
+========================================
+========================================
+*/
+
+/* Full Modal Page */
+.main-modal-container {
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 2;
+  overflow: hidden;
+  color: var(--neutral-900);
+}
+
+/* Modal Top Right Close Style */
+.main-modal-close {
+  position: absolute;
+  top: 40px;
+  right: 32px;
+  width: 30px;
+  height: 30px;
+  background: var(--neutral-100);
+  color: var(--primary-900);
+  font-size: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Modal Main Section Style */
+.main-modal-content {
+  background: var(--neutral-100);
+  display: flex;
+  align-items: flex-start;
+  padding: 30px 16px;
+  width: 60%;
+  min-height: 370px;
+  position: relative;
+}
+
+/* Text Inputs */
+.main-text-input,
+.main-select-input {
+  outline: none;
+  height: 30px;
+  width: 130%;
+  border: none;
+  padding: 0 3.5px;
+}
+
+.main-number-input {
+  width: 195%;
+  outline: none;
+  height: 30px;
+  border: none;
+  padding: 0 3.5px;
+}
+
+.main-label {
+  margin-bottom: 5px;
+  font-size: 15px;
+  color: var(--neutral-800);
+}
+
+.main-button,
+.main-button-primary,
+.main-button-secondary {
+  padding: 5px 22px;
+  cursor: pointer;
+}
+
+.main-button-primary {
+  background: var(--primary-900);
+  color: var(--neutral-100);
+  font-size: 15px;
+}

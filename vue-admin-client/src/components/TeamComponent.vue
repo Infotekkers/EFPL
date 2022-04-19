@@ -134,8 +134,11 @@ export default {
     },
     deleteTeam() {
       store.dispatch("Team/deleteTeam", this.team.teamId);
+
+      // refresh all values
       store.dispatch("Fixture/setAllTeams");
       store.dispatch("Fixture/setAllFixtures");
+      store.dispatch("Player/setAllPlayers");
     },
   },
   computed: {

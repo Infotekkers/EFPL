@@ -1,10 +1,10 @@
 <template>
-  <div class="team-modal-main-container">
+  <div class="main-modal-container">
     <!-- Close button -->
-    <div class="team-modal-close" @click="closeModal">X</div>
+    <div class="main-modal-close" @click="closeModal">X</div>
     <!-- Close button -->
 
-    <div class="team-modal-content">
+    <div class="main-modal-content team-modal-content">
       <!-- Logo Area -->
       <div class="team-modal-image-section">
         <!-- Logo Preview -->
@@ -37,22 +37,42 @@
         <div class="container-col">
           <!-- Team Name -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Name") }}</label>
-            <input type="text" ref="teamName" v-model="teamName" />
+            <label for="teamName" class="main-label">{{ $t("Name") }}</label>
+            <input
+              name="teamName"
+              type="text"
+              ref="teamName"
+              v-model="teamName"
+              class="main-text-input"
+            />
           </div>
           <!-- Team Name -->
 
           <!-- Team City -->
           <div class="container-col input-container">
-            <label for="">{{ $t("City") }}</label>
-            <input type="text" ref="teamCity" v-model="teamCity" />
+            <label for="teamCity" class="main-label">{{ $t("City") }}</label>
+            <input
+              name="teamCity"
+              type="text"
+              ref="teamCity"
+              v-model="teamCity"
+              class="main-text-input"
+            />
           </div>
           <!-- Team City -->
 
           <!-- Team Stadium -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Stadium") }}</label>
-            <input type="text" ref="teamStadium" v-model="teamStadium" />
+            <label for="teamStadium" class="main-label">{{
+              $t("Stadium")
+            }}</label>
+            <input
+              name="teamStadium"
+              type="text"
+              ref="teamStadium"
+              v-model="teamStadium"
+              class="main-text-input"
+            />
           </div>
           <!-- Team Stadium -->
         </div>
@@ -62,26 +82,39 @@
         <div class="container-col">
           <!-- Coach -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Coach") }} </label>
-            <input type="text" ref="teamCoach" v-model="teamCoach" />
+            <label for="teamCoach" class="main-label">{{ $t("Coach") }} </label>
+            <input
+              name="teamCoach"
+              type="text"
+              ref="teamCoach"
+              v-model="teamCoach"
+              class="main-text-input"
+            />
           </div>
           <!-- Coach -->
           <!-- Stadium -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Stadium") }} {{ $t("Capacity") }} </label>
+            <label for="stadiumCapacity" class="main-label"
+              >{{ $t("Stadium") }} {{ $t("Capacity") }}
+            </label>
             <input
+              name="stadiumCapacity"
               type="number"
               ref="stadiumCapacity"
               v-model="stadiumCapacity"
+              class="main-text-input"
             />
           </div>
           <!-- Stadium -->
 
           <!-- Year -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Founded") }}</label>
+            <label for="foundedIn" class="main-label">{{
+              $t("Founded")
+            }}</label>
             <input
-              class="input-number"
+              name="foundedIn"
+              class="main-number-input"
               type="number"
               min="1900"
               max="2099"
@@ -94,11 +127,14 @@
 
           <!-- Action Buttons -->
           <div class="team-modal-buttons-container">
-            <div class="team-modal-cancel-button" @click="cancelSave">
+            <div
+              class="main-button team-modal-cancel-button"
+              @click="cancelSave"
+            >
               {{ $t("Cancel") }}
             </div>
             <div
-              class="team-modal-save-button"
+              class="main-button-primary main-button team-modal-save-button"
               v-on="
                 isEditMode == true ? { click: updateTeam } : { click: saveTeam }
               "
@@ -114,44 +150,9 @@
 </template>
 
 <style scoped>
-.team-modal-main-container {
-  height: 100vh;
-  width: 100%;
-  display: grid;
-  place-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.65);
-  z-index: 2;
-  overflow: hidden;
-  color: var(--neutral-900);
-}
-.team-modal-close {
-  position: absolute;
-  top: 40px;
-  right: 32px;
-  width: 30px;
-  height: 30px;
-  background: var(--neutral-100);
-  color: var(--primary-900);
-  font-size: 20px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  font-weight: bold;
-  cursor: pointer;
-}
 .team-modal-content {
-  width: 55%;
-  min-height: 300px;
-  background: var(--neutral-100);
-  display: flex;
-  align-items: flex-start;
-  padding: 30px 16px;
   position: relative;
 }
-
 .team-modal-image-section {
   width: 250px;
   height: 300px;
@@ -160,7 +161,6 @@
   justify-content: center;
   position: relative;
 }
-
 .team-modal-image-preview {
   position: relative;
   width: 120px;
@@ -189,21 +189,6 @@
   width: 40%;
 }
 
-input {
-  outline: none;
-  height: 30px;
-  width: 130%;
-  border: none;
-  padding: 0 3.5px;
-}
-label {
-  margin-bottom: 5px;
-  font-size: 15px;
-  color: var(--neutral-800);
-}
-.input-number {
-  width: 195%;
-}
 /* General Class */
 .container-col {
   display: flex;
@@ -223,17 +208,6 @@ label {
   display: flex;
   right: 45px;
 }
-
-.team-modal-cancel-button,
-.team-modal-save-button {
-  padding: 5px 22px;
-  cursor: pointer;
-}
-.team-modal-save-button {
-  background: var(--primary-900);
-  color: var(--neutral-100);
-  font-size: 15px;
-}
 .team-modal-cancel-button {
   margin-right: 4px;
 }
@@ -242,6 +216,7 @@ label {
 <script>
 // utils
 import store from "../store/index";
+
 export default {
   name: "TeamModal",
   props: {
@@ -250,7 +225,7 @@ export default {
   data() {
     return {
       selectedImage: null,
-      allowedExtensions: ["jpg", "png", "svg", "jpeg"],
+      allowedExtensions: ["jpg", "png", "jpeg"],
       imageChanged: false,
       teamName: null,
       teamCity: null,

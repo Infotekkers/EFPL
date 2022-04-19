@@ -1,11 +1,11 @@
 <template>
-  <div class="player-modal-main-container">
+  <div class="main-modal-container">
     <!-- Close button -->
-    <div class="player-modal-close" @click="$emit('closeModal')">X</div>
+    <div class="main-modal-close" @click="$emit('closeModal')">X</div>
     <!-- Close button -->
 
     <!-- Content -->
-    <div v-if="getTeams.length > 0" class="player-modal-content">
+    <div v-if="getTeams.length > 0" class="main-modal-content">
       <!-- Logo Area -->
       <div class="player-model-image-section">
         <!-- Logo Preview -->
@@ -37,16 +37,22 @@
         <div class="container-col">
           <!-- Player Name -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Name") }}</label>
-            <input type="text" ref="playerName" v-model="playerName" />
+            <label for="playerName" class="main-label">{{ $t("Name") }}</label>
+            <input
+              name="playerName"
+              type="text"
+              ref="playerName"
+              v-model="playerName"
+              class="main-text-input"
+            />
           </div>
           <!-- Player Name -->
 
           <!-- Player City -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Team") }}</label>
+            <label for="PlayerTeam" class="main-label">{{ $t("Team") }}</label>
 
-            <select name="PlayerTeam" ref="eplTeamId">
+            <select name="PlayerTeam" ref="eplTeamId" class="main-select-input">
               <option
                 v-for="team in getTeams"
                 :key="team.teamName"
@@ -55,18 +61,19 @@
                 {{ team.teamName }}
               </option>
             </select>
-            <!-- <input
-              type="text"
-              ref="eplTeamId"
-              :value="isEditMode ? getPlayer.eplTeamId : ''"
-            /> -->
           </div>
           <!-- Player City -->
 
           <!-- Player Stadium -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Position") }}</label>
-            <select name="PlayerPosition" ref="position" id="">
+            <label for="PlayerPosition" class="main-label">{{
+              $t("Position")
+            }}</label>
+            <select
+              name="PlayerPosition"
+              ref="position"
+              class="main-select-input"
+            >
               <option
                 value="GK"
                 :selected="isEditMode ? getPlayer.position == 'GK' : ''"
@@ -92,11 +99,6 @@
                 {{ $t("Attackers") }}
               </option>
             </select>
-            <!-- <input
-              type="text"
-              ref="position"
-              :value="isEditMode ? getPlayer.position : ''"
-            /> -->
           </div>
           <!-- Player Stadium -->
         </div>
@@ -104,46 +106,60 @@
 
         <!-- Stadium Capacity & Foundation Year -->
         <div class="container-col">
-          <!-- Stadium -->
+          <!-- Current Price -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Price") }} </label>
+            <label for="currentPrice" class="main-label"
+              >{{ $t("Price") }}
+            </label>
             <input
+              name="currentPrice"
               type="number"
               ref="currentPrice"
               :value="isEditMode ? getPlayer.currentPrice : ''"
+              class="main-text-input"
             />
           </div>
-          <!-- Stadium -->
+          <!-- Current Price -->
 
-          <!-- Year -->
-          <!-- TODO:MAKE Dropdown -->
+          <!-- Injury Status -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Injury") }} {{ $t("Status") }}</label>
+            <label for="injuryStatus" class="main-label"
+              >{{ $t("Injury") }} {{ $t("Status") }}</label
+            >
             <input
+              name="injuryStatus"
               type="text"
               ref="injuryStatus"
               :value="isEditMode ? getPlayer.injuryStatus : ''"
+              class="main-text-input"
             />
           </div>
-          <!-- Year -->
+          <!-- Injury Status -->
 
           <!-- Year -->
           <div class="container-col input-container">
-            <label for="">{{ $t("Injury") }} {{ $t("Message") }}</label>
+            <label for="injuryMessage" class="main-label"
+              >{{ $t("Injury") }} {{ $t("Message") }}</label
+            >
             <input
+              name="injuryMessage"
               type="text"
               ref="injuryMessage"
               :value="isEditMode ? getPlayer.injuryMessage : ''"
+              class="main-text-input"
             />
           </div>
           <!-- Year -->
 
           <div class="player-modal-buttons-container">
-            <div class="player-modal-cancel-button" @click="cancelSave">
+            <div
+              class="main-button player-modal-cancel-button"
+              @click="cancelSave"
+            >
               {{ $t("Cancel") }}
             </div>
             <div
-              class="player-modal-save-button"
+              class="main-button-primary"
               v-on="
                 isEditMode == true
                   ? { click: updatePlayer }
@@ -159,10 +175,10 @@
     </div>
     <!-- Content -->
 
-    <div v-else class="player-modal-no-teams">
+    <div v-else class="main-modal-content player-modal-no-teams">
       <div>{{ $t("No") }} {{ $t("Teams") }}</div>
 
-      <div class="no-teams-add-button" @click="addNewTeam">
+      <div class="main-button-primary no-teams-add-button" @click="addNewTeam">
         <div>
           <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
         </div>
@@ -411,44 +427,6 @@ export default {
 };
 </script>
 <style scoped>
-.player-modal-main-container {
-  height: 100vh;
-  width: 100%;
-  display: grid;
-  place-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.65);
-  z-index: 2;
-  overflow: hidden;
-  color: var(--neutral-900);
-}
-.player-modal-close {
-  position: absolute;
-  top: 40px;
-  right: 32px;
-  width: 30px;
-  height: 30px;
-  background: var(--neutral-100);
-  color: var(--primary-900);
-  font-size: 20px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  font-weight: bold;
-  cursor: pointer;
-}
-.player-modal-content {
-  width: 55%;
-  min-height: 380px;
-  background: var(--neutral-100);
-  display: flex;
-  align-items: center;
-  padding: 24px 16px 60px 16px;
-  position: relative;
-}
-
 .player-modal-image-section {
   width: 250px;
   height: 300px;
@@ -468,7 +446,6 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 24px;
-
   background: url("../assets/img/Player_Image_Placeholder_120x120.jpg");
 }
 .player-modal-image-remove {
@@ -487,22 +464,6 @@ export default {
   width: 40%;
 }
 
-input,
-select {
-  outline: none;
-  height: 30px;
-  width: 130%;
-  border: none;
-  padding: 0 3.5px;
-}
-label {
-  margin-bottom: 5px;
-  font-size: 15px;
-  color: var(--neutral-800);
-}
-.input-number {
-  width: 195%;
-}
 /* General Class */
 .container-col {
   display: flex;
@@ -524,38 +485,16 @@ label {
   right: 45px;
 }
 
-.player-modal-cancel-button,
-.player-modal-save-button {
-  padding: 5px 22px;
-  cursor: pointer;
-}
-.player-modal-save-button {
-  background: var(--primary-900);
-  color: var(--neutral-100);
-  font-size: 15px;
-}
 .player-modal-cancel-button {
   margin-right: 4px;
 }
 .player-modal-no-teams {
-  width: 55%;
-  min-height: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  background: var(--neutral-100);
 }
 .no-teams-add-button {
-  font-size: 16px;
-  /* position: absolute; */
-  /* right: 0; */
-  background: var(--primary-900);
-  padding: 5px 22px 5px 16px;
-
-  width: fit-content;
-  color: var(--neutral-100);
   display: flex;
   margin-top: 32px;
 }
