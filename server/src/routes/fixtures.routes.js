@@ -6,7 +6,6 @@ const { protectRoute } = require("../middleware/auth.middleware");
 
 router.post("/add", protectRoute, fixtureController.postFixture);
 
-router.patch("/update/:matchId", fixtureController.updateFixture);
 router.patch("/update/lineup/:matchId", fixtureController.updateLineup);
 router.patch("/update/stats/:matchId", fixtureController.updateStats);
 router.patch("/update/score/:matchId", fixtureController.updateScore);
@@ -17,7 +16,7 @@ router.patch("/end/:matchId", protectRoute, fixtureController.endFixture);
 router.patch(
   "/postpone/:matchId",
   protectRoute,
-  fixtureController.postponeFixture
+  fixtureController.updateFixture
 );
 router.patch("/update/:matchId", protectRoute, fixtureController.updateFixture);
 

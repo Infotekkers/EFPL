@@ -301,6 +301,8 @@ const postponeFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
   const { gameweekId, schedule, homeTeam, awayTeam, matchStatus } = req.body;
 
+  console.log(match.status);
+
   // Compare old and new match
   if (match) {
     if (match.homeTeam === homeTeam && match.awayTeam === awayTeam) {
@@ -363,16 +365,22 @@ const updateFixture = asyncHandler(async function (req, res) {
 
   const match = await FixtureModel.findOne({ matchId });
 
-  if (match) {
-    match.gameweekId = gameweekId ?? match.gameweekId;
-    match.matchId = matchId ?? match.matchId;
-    match.schedule = schedule ?? match.schedule;
-    match.status = status ?? match.status;
-    match.homeTeam = homeTeam ?? match.homeTeam;
-    match.awayTeam = awayTeam ?? match.awayTeam;
-    await match.save();
+  console.log(match.status);
 
-    res.send("Match updated!");
+  if (match) {
+    if (match.status === "scheduled") {
+      match.gameweekId = gameweekId ?? match.gameweekId;
+      match.matchId = matchId ?? match.matchId;
+      match.schedule = schedule ?? match.schedule;
+      match.status = status ?? match.status;
+      match.homeTeam = homeTeam ?? match.homeTeam;
+      match.awayTeam = awayTeam ?? match.awayTeam;
+      await match.save();
+
+      res.send("Match updated!");
+    } else {
+      res.status(422).send("Live Match can not be updated");
+    }
   } else if (!match) {
     res.status(404).send("Match doesn't exist!");
   } else {
@@ -469,10 +477,18 @@ const getFixture = asyncHandler(async function (req, res) {
 });
 
 const deleteFixture = asyncHandler(async function (req, res) {
-  const deleted = await FixtureModel.deleteOne({ matchId: req.params.matchId });
-  deleted
-    ? res.send("Match deleted!")
-    : res.status(400).send("Match with provided matchid doesn't exist");
+  const match = await FixtureModel.find({ matchId: req.params.matchId });
+
+  if (match && match.status !== "scheduled") {
+    res.status(422).send("Live match can not be deleted");
+  } else {
+    const deleted = await FixtureModel.deleteOne({
+      matchId: req.params.matchId,
+    });
+    deleted
+      ? res.send("Match deleted!")
+      : res.status(400).send("Match with provided matchid doesn't exist");
+  }
 });
 
 module.exports = {

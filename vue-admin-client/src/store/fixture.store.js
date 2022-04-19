@@ -306,6 +306,12 @@ export default {
                 notificationMessage: response.data,
               });
               await store.dispatch("Fixture/setAllFixtures");
+            } else if (response.status === 422) {
+              store.dispatch("Global/setNotificationInfo", {
+                showNotification: true,
+                notificationType: "warning",
+                notificationMessage: response.data,
+              });
             }
           })
           .catch((err) => {
@@ -416,12 +422,20 @@ export default {
       axiosInstance
         .delete(`${baseURL}/fixtures/delete/${matchId}`)
         .then((response) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "success",
-            notificationMessage: response.data,
-          });
-          store.dispatch("Fixture/setAllFixtures");
+          if (response.status === 200) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: response.data,
+            });
+            store.dispatch("Fixture/setAllFixtures");
+          } else if (response.status === 422) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "warning",
+              notificationMessage: response.data,
+            });
+          }
         })
         .catch((err) => {
           store.dispatch("Global/setNotificationInfo", {
