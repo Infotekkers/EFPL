@@ -136,8 +136,6 @@ export default {
         return legacyTeam.teamName == this.legacyTeam.teamName;
       });
 
-      console.log(checkStatus);
-
       return checkStatus.length > 0;
     },
   },

@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const Fixture = require("../models/Fixtures");
 const PlayerModel = require("../models/Player");
 const Teams = require("../models/Teams");
 const { makeFilePlayer } = require("../utils/helpers");
@@ -87,13 +88,33 @@ const updatePlayer = asyncHandler(async (req, res) => {
     currentPrice,
   } = req.body;
 
-  const newData = {
-    playerName,
-    eplTeamId,
-    availablity,
-    position,
-    currentPrice,
-  };
+  let newData;
+
+  const liveMatch = await Fixture.find({
+    $or: [
+      { status: "liveFH" },
+      { status: "HT" },
+      { status: "liveSH" },
+      { status: "FT" },
+    ],
+  });
+
+  if (liveMatch.length > 0) {
+    newData = {
+      playerName,
+      eplTeamId,
+      availablity,
+      position,
+    };
+  } else {
+    newData = {
+      playerName,
+      eplTeamId,
+      availablity,
+      position,
+      currentPrice,
+    };
+  }
 
   if (playerImage !== "") {
     const filePath = makeFilePlayer(playerImage, logoName);
@@ -163,14 +184,35 @@ const addScore = asyncHandler(async (req, res) => {
 });
 
 const getPlayer = asyncHandler(async (req, res) => {
-  const players = await PlayerModel.find({ playerId: req.params.playerId });
-  res.send(players);
+  const player = await PlayerModel.find({ playerId: req.params.playerId });
+
+  res.send(player);
 });
 
 const getPlayers = asyncHandler(async (req, res) => {
   const players = await PlayerModel.find();
 
-  res.send(players);
+  const findLiveMatch = await Fixture.find({
+    $or: [
+      { status: "liveFH" },
+      { status: "HT" },
+      { status: "liveSH" },
+      { status: "FT" },
+    ],
+  });
+
+  let liveMatch = false;
+
+  if (findLiveMatch.length > 0) {
+    liveMatch = true;
+  }
+
+  const result = {
+    data: players,
+    liveMatch: liveMatch,
+  };
+
+  res.send(result);
 });
 
 const getHomeAndAwayPlayers = asyncHandler(async (req, res) => {

@@ -532,7 +532,7 @@ const populatePlayers = async () => {
   const players = await axios.get(`${baseURL}${PORT}/players/getplayers`);
 
   // if no players
-  if (players.data.length === 0) {
+  if (players.data.data.length === 0) {
     playersData.forEach(async (team) => {
       team.forEach(async (player) => {
         player.score = [];

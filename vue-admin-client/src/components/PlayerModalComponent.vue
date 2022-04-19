@@ -117,6 +117,7 @@
               ref="currentPrice"
               :value="isEditMode ? getPlayer.currentPrice : ''"
               class="main-text-input"
+              :disabled="isEditMode && getLiveMatch == true"
             />
           </div>
           <!-- Current Price -->
@@ -393,7 +394,6 @@ export default {
     },
   },
   computed: {
-    // TODO:USE TEAM Store or MERGE
     getTeams() {
       return store.state.Player.allTeams;
     },
@@ -416,6 +416,10 @@ export default {
       showPreview.style.backgroundImage = `url(${baseURL}${currentPlayer[0].playerImage})`;
       this.setItem(currentPlayer[0]);
       return currentPlayer[0];
+    },
+
+    getLiveMatch() {
+      return store.state.Player.liveMatch;
     },
   },
 

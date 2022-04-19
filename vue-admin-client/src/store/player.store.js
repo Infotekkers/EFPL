@@ -18,6 +18,7 @@ export default {
 
     eplTeamId: "",
     imageChanged: false,
+    liveMatch: false,
   },
   mutations: {
     SET_ALL_PLAYERS(state, payload) {
@@ -34,6 +35,9 @@ export default {
       state.imageChanged = payload;
     },
 
+    SET_LIVE_MATCH_STATUS(state, payload) {
+      state.liveMatch = payload;
+    },
     // TODO:USE TEAM Store or MERGE
     SET_ALL_TEAMS(state, payload) {
       state.allTeams = payload;
@@ -70,7 +74,8 @@ export default {
               res.data[i].relative_id = i + 1;
             }
 
-            context.commit("SET_ALL_PLAYERS", res.data);
+            context.commit("SET_ALL_PLAYERS", res.data.data);
+            context.commit("SET_LIVE_MATCH_STATUS", res.data.liveMatch);
           }
         })
         .catch((err) => {
