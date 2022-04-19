@@ -123,7 +123,7 @@ const deleteTeam = asyncHandler(async (req, res) => {
   // delete player for teams
   await Player.deleteMany({ eplTeamId: teamName });
 
-  res.status(200).json(`${teamName} is removed.`);
+  res.status(200).json(`${teamName} removed.`);
 });
 
 module.exports = {
