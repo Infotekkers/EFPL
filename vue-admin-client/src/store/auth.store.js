@@ -81,14 +81,11 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.response.data.message);
-          if (err.response.status === 404) {
-            store.dispatch("Global/setNotificationInfo", {
-              showNotification: true,
-              notificationType: true,
-              notificationMessage: `${err.response.data.message}`,
-            });
-          }
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: true,
+            notificationMessage: `${err.response.data.message}`,
+          });
         });
     },
     // reset pass

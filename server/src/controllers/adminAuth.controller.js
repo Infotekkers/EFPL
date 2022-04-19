@@ -80,11 +80,11 @@ const requestReset = asyncHandler(async (req, res) => {
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         res.status(400).json({
-          messaage: "could not send reset email",
+          message: "could not send reset email",
         });
         console.log(error);
       } else {
-        res.status(200).json({ messaage: "Email Sent Successfully" });
+        res.status(200).json({ message: "Email Sent Successfully" });
         console.log("email sent: " + info.response);
       }
     });
@@ -125,11 +125,11 @@ const sendEmail = asyncHandler(async (req, res) => {
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       res.status(400).json({
-        messaage: "could not send email",
+        message: "could not send email",
       });
       console.log(error);
     } else {
-      res.status(200).json({ messaage: "Email Sent Successfully" });
+      res.status(200).json({ message: "Email Sent Successfully" });
       console.log("email sent: " + info.response);
     }
   });
@@ -140,15 +140,14 @@ const validateAdmin = asyncHandler(async (req, res) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const admin = await Admin.findById(decoded.data).select("-password");
-    if(admin){
-      res.status(200).json({messaage:"Validated"})
-    }
-    else{
-      res.status(403).json({messaage:"Something went wrong"})
+    if (admin) {
+      res.status(200).json({ message: "Validated" });
+    } else {
+      res.status(403).json({ message: "Something went wrong" });
     }
   } catch (err) {
-    res.status(404).json({ messaage: "Something went wrong" });
+    res.status(404).json({ message: "Something went wrong" });
   }
 });
 
-module.exports = { login, requestReset, resetPass, validateAdmin, sendEmail};
+module.exports = { login, requestReset, resetPass, validateAdmin, sendEmail };
