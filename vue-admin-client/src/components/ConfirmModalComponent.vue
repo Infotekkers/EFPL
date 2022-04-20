@@ -19,7 +19,7 @@
       </div>
       <div class="confirmation-modal-buttons-container">
         <div class="main-button-secondary" @click="cancelAction">Cancel</div>
-        <div class="main-button-primary" @click="saveAction">Save</div>
+        <div class="main-button-primary" @click="mainAction">Save</div>
       </div>
     </div>
     <!-- Content -->
@@ -38,7 +38,13 @@ export default {
   methods: {
     cancelAction() {
       this.closeModal();
-      console.log("Canceling");
+    },
+
+    mainAction() {
+      // imported function
+      this.saveAction();
+
+      this.closeModal();
     },
 
     closeModal() {

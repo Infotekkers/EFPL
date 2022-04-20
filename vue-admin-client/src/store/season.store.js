@@ -10,6 +10,7 @@ export default {
   state: {
     allLegacyTeams: [],
     allLegacyPlayers: [],
+    isSeasonComplete: false,
 
     // selected for import
     importSelectedTeams: [],
@@ -24,6 +25,9 @@ export default {
     // all legacy teams
     SET_LEGACY_TEAMS(state, payload) {
       state.allLegacyTeams = payload;
+    },
+    SET_SEASON_STATUS(state, payload) {
+      state.isSeasonComplete = payload;
     },
 
     SET_ALl_LEGACY_PLAYERS(state, payload) {
@@ -147,9 +151,27 @@ export default {
       }
     },
 
-    async exportSeason() {
+    async getSeasonStatus(context) {
       await axiosInstance
-        .get(`${baseURL}/backup/`)
+        .get(`${baseURL}/backup/verify`)
+        .then((response) => {
+          if (response.status === 200) {
+            context.commit("SET_SEASON_STATUS", response.data);
+          }
+        })
+        .catch((error) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: error.response.data,
+          });
+        });
+    },
+
+    async exportSeason(context, backupType) {
+      console.log(backupType);
+      await axiosInstance
+        .get(`${baseURL}/backup/data/${backupType}`)
         .then((response) => {
           if (response.status == 200) {
             store.dispatch("Global/setNotificationInfo", {

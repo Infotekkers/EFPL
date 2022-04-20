@@ -7,8 +7,34 @@ const Fixture = require("../models/Fixtures");
 const Backup = require("../models/Backup");
 const { moveFile } = require("../utils/helpers");
 
+// check if any live or unplayed match
+const verifySeasonStatus = asyncHandler(async (req, res) => {
+  const liveFixture = await Fixture.find({
+    $or: [
+      { status: "scheduled" },
+      { status: "liveFH" },
+      { status: "HT" },
+      { status: "liveSH" },
+    ],
+  });
+
+  let status = true;
+
+  if (liveFixture.length > 0) {
+    status = false;
+  }
+  res.status(200).send(status);
+});
+
+// export data to legacy db
 const backup = asyncHandler(async (req, res) => {
+  // backup type
+  const backupType = req.params.type;
+
+  // TODO:Make Dynamic
   const seasonId = "21/22";
+
+  // get info from current season
   const currentSeasonTeams = await Teams.find();
   const currentSeasonPlayers = await Players.find();
   const currentSeasonFixtures = await Fixture.find();
@@ -18,8 +44,9 @@ const backup = asyncHandler(async (req, res) => {
     const verifyExistence = await Backup.teamBkModel.find({
       teamName: team.teamName,
     });
+    // delete if team exists
     if (verifyExistence.length > 0) {
-      await Backup.teamBkModel.delete({ teamName: team.teamName });
+      await Backup.teamBkModel.deleteOne({ teamName: team.teamName });
     }
 
     const teamName = team.teamName;
@@ -50,9 +77,6 @@ const backup = asyncHandler(async (req, res) => {
       teamId,
     });
   });
-
-  // Delete teams
-  await Teams.deleteMany();
 
   // backup players
   currentSeasonPlayers.forEach(async (player) => {
@@ -104,9 +128,6 @@ const backup = asyncHandler(async (req, res) => {
     });
   });
 
-  // delete players
-  await Players.deleteMany();
-
   // back up fixture
   currentSeasonFixtures.forEach(async (fixture) => {
     const verifyExistence = await Backup.playersBkModel.find({
@@ -115,7 +136,7 @@ const backup = asyncHandler(async (req, res) => {
     });
 
     if (verifyExistence > 0) {
-      await Backup.playersBkModel.delete({
+      await Backup.playersBkModel.deleteOne({
         gameweekId: fixture.gameweekId,
         matchId: fixture.matchId,
       });
@@ -146,7 +167,18 @@ const backup = asyncHandler(async (req, res) => {
     });
   });
 
-  await Fixture.deleteMany();
+  if (backupType === "complete") {
+    // // Delete teams
+    // await Teams.deleteMany();
+
+    // // delete players
+    // await Players.deleteMany();
+
+    // // delete fixtures
+    // await Fixture.deleteMany();
+    console.log("DELETINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+  }
+
   if (
     currentSeasonTeams.length > 0 ||
     currentSeasonFixtures.length > 0 ||
@@ -160,6 +192,7 @@ const backup = asyncHandler(async (req, res) => {
   }
 });
 
+// import data from legacy db
 const restore = asyncHandler(async (req, res) => {
   const { importSelectedTeams, importSelectedPlayers } = req.body;
 
@@ -229,6 +262,7 @@ const restore = asyncHandler(async (req, res) => {
   res.status(201).json("Import Complete");
 });
 
+// get teams from legacy db
 const viewTeam = asyncHandler(async (req, res) => {
   const data = await Backup.teamBkModel
     .find()
@@ -236,6 +270,7 @@ const viewTeam = asyncHandler(async (req, res) => {
 
   const importedTeams = [];
 
+  // check if team is in season db
   for (let i = 0; i < data.length; i++) {
     const existing = await Teams.find({ teamName: data[i].teamName });
 
@@ -244,10 +279,10 @@ const viewTeam = asyncHandler(async (req, res) => {
     }
   }
 
-  // TODO:HIDE IF Imported
   res.status(200).json(importedTeams);
 });
 
+// get players from legacy db
 const viewPlayer = asyncHandler(async (req, res) => {
   const data = await Backup.playersBkModel
     .find({ eplTeamId: req.params.teamId })
@@ -256,4 +291,4 @@ const viewPlayer = asyncHandler(async (req, res) => {
   res.status(200).json(data);
 });
 
-module.exports = { backup, restore, viewTeam, viewPlayer };
+module.exports = { backup, restore, viewTeam, viewPlayer, verifySeasonStatus };

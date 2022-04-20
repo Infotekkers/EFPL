@@ -4,6 +4,22 @@
       :showModal="showModal"
       @closeModal="closeModal"
     />
+
+    <ConfirmModalComponent
+      :showConfirmModal="showConfirmModal"
+      modalMessage="This action will delete the teams , fixtures and players from the current season. Are you sure you want to continue ?"
+      :boldWords="[
+        'teams',
+        'players',
+        'fixtures',
+        'current',
+        'season',
+        'sure',
+        'continue',
+      ]"
+      :saveAction="exportSeasonDataModal"
+      @closeModal="closeConfirmModal"
+    />
     <h1>{{ $t("Settings") }}</h1>
     <!-- account settings -->
     <button class="collapseAcc" @click="toggleAcc()">
@@ -67,13 +83,17 @@
 </template>
 
 <script>
+// utils
+import store from "@/store";
+
 // Components
 import SeasonImportModalComponent from "@/components/SeasonImportModalComponent.vue";
-import store from "@/store";
+import ConfirmModalComponent from "@/components/ConfirmModalComponent.vue";
 
 export default {
   components: {
     SeasonImportModalComponent,
+    ConfirmModalComponent,
   },
   data() {
     const lang = localStorage.getItem("lang") || "am";
@@ -83,9 +103,15 @@ export default {
       accMenu: false,
       langMenu: false,
       seasonMenu: false,
+
+      //
+      showConfirmModal: false,
     };
   },
   methods: {
+    closeConfirmModal() {
+      this.showConfirmModal = false;
+    },
     toggleAcc() {
       this.accMenu = !this.accMenu;
     },
@@ -103,8 +129,25 @@ export default {
     initiateImport() {
       this.showModal = true;
     },
-    exportSeasonData() {
-      store.dispatch("Season/exportSeason");
+    async exportSeasonData() {
+      // get season data
+      await store.dispatch("Season/getSeasonStatus");
+
+      const isSeasonComplete = store.state.Season.isSeasonComplete;
+
+      console.log(isSeasonComplete);
+
+      if (isSeasonComplete) {
+        this.showConfirmModal = true;
+      } else {
+        store.dispatch("Season/exportSeason", "partial");
+      }
+    },
+
+    exportSeasonDataModal() {
+      store.dispatch("Season/exportSeason", "complete");
+
+      this.closeModal();
     },
     logOutAdmin() {
       this.$store.dispatch("logOutAdmin");
