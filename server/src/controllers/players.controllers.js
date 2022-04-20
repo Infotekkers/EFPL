@@ -81,7 +81,7 @@ const updatePlayer = asyncHandler(async (req, res) => {
   const {
     playerName,
     eplTeamId,
-    availablity,
+    availability,
     position,
     playerImage,
     logoName,
@@ -103,14 +103,14 @@ const updatePlayer = asyncHandler(async (req, res) => {
     newData = {
       playerName,
       eplTeamId,
-      availablity,
+      availability,
       position,
     };
   } else {
     newData = {
       playerName,
       eplTeamId,
-      availablity,
+      availability,
       position,
       currentPrice,
     };

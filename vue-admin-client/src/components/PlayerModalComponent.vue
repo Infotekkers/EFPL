@@ -127,13 +127,35 @@
             <label for="injuryStatus" class="main-label"
               >{{ $t("Injury") }} {{ $t("Status") }}</label
             >
-            <input
-              name="injuryStatus"
-              type="text"
-              ref="injuryStatus"
-              :value="isEditMode ? getPlayer.injuryStatus : ''"
-              class="main-text-input"
-            />
+            <select name="" class="main-select-input" ref="injuryStatus">
+              <option value="" :selected="isEditMode ? injuryStatus == '' : ''">
+                Available
+              </option>
+              <option
+                value="0"
+                :selected="isEditMode ? injuryStatus == '0' : ''"
+              >
+                0%
+              </option>
+              <option
+                value="25"
+                :selected="isEditMode ? injuryStatus == '25' : ''"
+              >
+                25%
+              </option>
+              <option
+                value="50"
+                :selected="isEditMode ? injuryStatus == '50' : ''"
+              >
+                50%
+              </option>
+              <option
+                value="75"
+                :selected="isEditMode ? injuryStatus == '75' : ''"
+              >
+                75%
+              </option>
+            </select>
           </div>
           <!-- Injury Status -->
 
@@ -146,7 +168,7 @@
               name="injuryMessage"
               type="text"
               ref="injuryMessage"
-              :value="isEditMode ? getPlayer.injuryMessage : ''"
+              :value="isEditMode ? injuryMessage : ''"
               class="main-text-input"
             />
           </div>
@@ -310,15 +332,13 @@ export default {
           notificationType: "error",
           notificationMessage: "Current Price is required",
         });
-      }
-      // else if (!injuryStatus) {
-      //   console.log("status");
-      // }
-      // else if (!injuryMessage) {
-      //   console.log("Messgae");
-      // }
-      //
-      else {
+      } else if (!injuryStatus) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Injury Information is required",
+        });
+      } else {
         const playerData = {
           playerName,
           eplTeamId,
@@ -346,6 +366,11 @@ export default {
       const currentPrice = this.$refs.currentPrice.value;
       const injuryStatus = this.$refs.injuryStatus.value;
       const injuryMessage = this.$refs.injuryMessage.value;
+      const availability = {
+        injuryStatus: injuryStatus,
+        injuryMessage: injuryMessage,
+      };
+
       let playerImage = "";
       if (store.state.Player.imageChanged === true) {
         playerImage = await this.getBase64();
@@ -356,11 +381,11 @@ export default {
         position,
         playerImage,
         currentPrice,
-        injuryStatus,
-        injuryMessage,
+        availability,
         logoName: this.selectedImage ? this.selectedImage.name : "",
       };
       const imageStatus = this.imageChanged;
+      console.log(updatedPlayer, imageStatus);
       store.dispatch("Player/updatePlayer", updatedPlayer, imageStatus);
     },
     // Image processor
@@ -380,17 +405,8 @@ export default {
       this.playerTeam = player.eplTeamId;
       this.playerPosition = player.position;
       this.playerPrice = player.currentPrice;
-      this.injuryStatus = player.availability;
-      this.injuryMessage = player.availability;
-
-      console.log(
-        (this.playerName = player.playerName),
-        (this.playerTeam = player.eplTeamId),
-        (this.playerPosition = player.position),
-        (this.playerPrice = player.currentPrice),
-        (this.injuryStatus = player.availability),
-        (this.injuryMessage = player.availability)
-      );
+      this.injuryStatus = player.availability.injuryStatus;
+      this.injuryMessage = player.availability.injuryMessage;
     },
   },
   computed: {
@@ -415,6 +431,7 @@ export default {
       const showPreview = this.$refs.preview;
       showPreview.style.backgroundImage = `url(${baseURL}${currentPlayer[0].playerImage})`;
       this.setItem(currentPlayer[0]);
+      console.log(currentPlayer[0].availability);
       return currentPlayer[0];
     },
 

@@ -117,8 +117,10 @@ export default {
           player.eplTeamId == updatedPlayer.eplTeamId &&
           player.position == updatedPlayer.position &&
           player.currentPrice == updatedPlayer.currentPrice &&
-          player.injurystatus == updatedPlayer.injurystatus &&
-          player.inuryMessage == updatedPlayer.injuryMessage
+          player.availability.injuryStatus ==
+            updatedPlayer.availability.injuryStatus &&
+          player.availability.injuryMessage ==
+            updatedPlayer.availability.injuryMessage
         );
       });
 

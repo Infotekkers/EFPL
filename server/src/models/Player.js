@@ -4,7 +4,7 @@ const autoIncrement = require("mongoose-auto-increment");
 autoIncrement.initialize(mongoose.connection);
 
 const availabilitySchema = mongoose.Schema({
-  injuryStatus: String,
+  injuryStatus: { type: String, default: "" },
   injuryMessage: { type: String, default: "" },
 });
 
@@ -75,7 +75,7 @@ const playerSchema = mongoose.Schema({
       "Custom Error - required Value *: Player Position is required.",
     ],
   },
-  availability: { type: [availabilitySchema] },
+  availability: { type: availabilitySchema },
 
   playerImage: {
     type: String,

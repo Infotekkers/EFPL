@@ -135,8 +135,6 @@ export default {
 
       const isSeasonComplete = store.state.Season.isSeasonComplete;
 
-      console.log(isSeasonComplete);
-
       if (isSeasonComplete) {
         this.showConfirmModal = true;
       } else {

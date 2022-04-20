@@ -20,12 +20,15 @@
     <div class="player-container-player-position">{{ player.position }}</div>
     <div class="player-container-player-price">{{ player.currentPrice }}</div>
     <div class="player-container-player-injuryStatus">
-      <!-- <img
+      <img
         :src="injuredIcon.path"
         :alt="injuredIcon.alt"
-        v-if="player.injuryStatus"
+        v-if="player.availability && player.availability.injuryStatus"
         class="small-icon"
-      /> -->
+      />
+      <div v-if="player.availability && player.availability.injuryStatus">
+        {{ player.availability.injuryStatus }}%
+      </div>
     </div>
 
     <!-- Controls -->
@@ -97,7 +100,7 @@ export default {
   object-fit: contain;
 }
 .small-icon {
-  width: 15px;
+  width: 18px;
   height: fit-content;
   object-fit: contain;
 }
@@ -159,6 +162,13 @@ export default {
 .player-container-player-injuryStatus {
   min-width: 80px;
   width: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.player-container-player-injuryStatus > div {
+  font-size: 12px;
+  margin-top: 2px;
 }
 .player-controls-container {
   width: 5%;
