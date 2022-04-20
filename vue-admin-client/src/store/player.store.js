@@ -69,9 +69,9 @@ export default {
             const allTeams = await axiosInstance.get(`${baseURL}/teams/all`);
             context.commit("SET_ALL_TEAMS", allTeams.data);
 
-            for (let i = 0; i < res.data.length; i++) {
+            for (let i = 0; i < res.data.data.length; i++) {
               // add relative ID
-              res.data[i].relative_id = i + 1;
+              res.data.data[i].relative_id = i + 1;
             }
 
             context.commit("SET_ALL_PLAYERS", res.data.data);

@@ -2,7 +2,9 @@
   <!-- TODO:Add Result Display -->
   <div class="fixture-main-container">
     <!-- teams loading -->
-    <div v-if="isTeamLoading == true">{{ $t("Loading") }}</div>
+    <div v-if="isTeamLoading == true" class="main-spinner-container">
+      <SpinnerComponent />
+    </div>
     <!-- teams loading -->
 
     <!-- Container -->
@@ -62,7 +64,10 @@
         <div class="fixture-game-time">
           <div v-if="fixture.status == 'scheduled'">{{ formatTime }}</div>
 
-          <div v-else class="score-info">0-0</div>
+          <div v-else class="score-info">
+            {{ fixture.score.split("v")[0] }} -
+            {{ fixture.score.split("v")[1] }}
+          </div>
         </div>
         <!-- Game Time - formatted -->
 
@@ -253,6 +258,9 @@
 // Utils
 import router from "../router/index";
 import store from "../store/index";
+
+// Components
+import SpinnerComponent from "@/components/SpinnerComponent.vue";
 import {
   playIcon,
   pauseIcon,
@@ -268,6 +276,10 @@ export default {
     fixture: Object,
     index: Number,
     isTeamLoading: Boolean,
+  },
+
+  components: {
+    SpinnerComponent,
   },
 
   data() {

@@ -143,7 +143,10 @@
       <div class="teams-controls-sorter">{{ $t("Controls") }}</div>
     </div>
     <!-- Sorter Header -->
-    <div class="teams-container" v-if="getAllTeams.length > 0">
+    <div
+      class="teams-container"
+      v-if="getAllTeams.length > 0 && isTeamLoading == false"
+    >
       <TeamComponent
         v-for="team in getAllTeams"
         :key="team.teamId"
@@ -153,8 +156,16 @@
     </div>
 
     <!-- No items -->
-    <div class="no-teams-container" v-else>
+    <div
+      class="no-teams-container"
+      v-else-if="getAllTeams.length == 0 && isTeamLoading == false"
+    >
       {{ $t("No") }} {{ $t("Teams") }}
+    </div>
+
+    <!-- Loading -->
+    <div v-else-if="isTeamLoading == true" class="no-teams-container">
+      <SpinnerComponent />
     </div>
   </main>
 </template>
@@ -294,16 +305,19 @@ import {
 // Components
 import TeamComponent from "@/components/TeamComponent";
 import TeamModal from "@/components/TeamModalComponent";
+import SpinnerComponent from "@/components/SpinnerComponent.vue";
 export default {
   name: "TeamsComponent",
   components: {
     TeamComponent,
     TeamModal,
+    SpinnerComponent,
   },
   data() {
     return {
       showModal: false,
       isEditMode: false,
+      isTeamLoading: true,
 
       // Icons
       sortUpIcon: sortUpIcon,
@@ -364,7 +378,12 @@ export default {
   },
 
   beforeMount() {
+    this.isTeamLoading = true;
     store.dispatch("Team/setAllTeams");
+
+    setTimeout(() => {
+      this.isTeamLoading = false;
+    }, 2000);
 
     // activate modal if required -> when routed from fixtures page
     if (this.$route.query.modal == 1) {

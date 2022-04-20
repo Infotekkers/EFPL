@@ -197,7 +197,11 @@
       <div class="players-controls-sorter">{{ $t("Controls") }}</div>
     </div>
     <!-- Sorter Header -->
-    <div class="players-container" v-if="getAllPlayers.length > 0">
+
+    <div
+      class="players-container"
+      v-if="getAllPlayers.length > 0 && isPlayerLoading == false"
+    >
       <PlayerComponent
         v-for="player in getAllPlayers"
         :key="player.playerId"
@@ -207,17 +211,28 @@
     </div>
 
     <!-- No items -->
-    <div class="no-players-container" v-else>
+    <div
+      class="no-players-container"
+      v-else-if="getAllPlayers.length == 0 && isPlayerLoading == false"
+    >
       {{ $t("No") }} {{ $t("Players") }}
+    </div>
+
+    <!-- Loading -->
+    <div v-else-if="isPlayerLoading === true" class="no-players-container">
+      <SpinnerComponent />
     </div>
   </main>
 </template>
 
 <script>
+// utils
 import store from "../store/index";
 
+// Components
 import PlayerComponent from "@/components/PlayerComponent";
 import PlayerModal from "@/components/PlayerModalComponent";
+import SpinnerComponent from "@/components/SpinnerComponent.vue";
 
 // Slider
 import MultiRangeSlider from "multi-range-slider-vue";
@@ -231,6 +246,7 @@ export default {
     PlayerComponent,
     PlayerModal,
     MultiRangeSlider,
+    SpinnerComponent,
   },
   data() {
     return {
@@ -240,6 +256,7 @@ export default {
       barMaxValue: 19,
       selectedPlayerPosition: "All",
       selectedPlayerTeam: "All",
+      isPlayerLoading: true,
 
       // Icons
       addIcon: addIcon,
@@ -323,7 +340,11 @@ export default {
   },
 
   beforeMount() {
+    this.isPlayerLoading = true;
     store.dispatch("Player/setAllPlayers");
+    setTimeout(() => {
+      this.isPlayerLoading = false;
+    }, 2000);
   },
 };
 </script>

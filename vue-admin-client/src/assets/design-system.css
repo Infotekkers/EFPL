@@ -171,3 +171,9 @@ Modal Styles
   color: var(--neutral-100);
   font-size: 15px;
 }
+
+/* Spinner Style */
+.main-spinner-container {
+  display: grid;
+  place-items: center;
+}

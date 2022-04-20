@@ -11,7 +11,9 @@
     <div v-if="connectionStatus === false">{{ $t("No Connection") }}</div>
 
     <!-- Loading Data -->
-    <div v-else-if="isFixtureLoading">{{ $t("Loading") }}</div>
+    <div v-else-if="isFixtureLoading">
+      <SpinnerComponent />
+    </div>
 
     <!-- After Data Loaded -->
     <div v-else class="gameweek-container">
@@ -393,6 +395,7 @@ import store from "../store/index";
 // Components
 import FixtureComponent from "@/components/FixtureComponent";
 import FixtureModalComponent from "@/components/FixtureModalComponent";
+import SpinnerComponent from "@/components/SpinnerComponent.vue";
 
 // Icons
 import {
@@ -411,6 +414,7 @@ export default {
   components: {
     FixtureComponent,
     FixtureModalComponent,
+    SpinnerComponent,
   },
   data() {
     return {
@@ -453,12 +457,12 @@ export default {
 
       // Dispatch Store Action
       store.dispatch("Fixture/setAllFixtures");
-      this.isFixtureLoading = false;
+      // this.isFixtureLoading = false;
 
       // TODO: Remove Timer
-      // setTimeout(() => {
-      //   this.isFixtureLoading = false;
-      // }, 4000);
+      setTimeout(() => {
+        this.isFixtureLoading = false;
+      }, 2000);
     },
 
     // Get all teams
@@ -468,12 +472,12 @@ export default {
 
       store.dispatch("Fixture/setAllTeams");
 
-      this.isTeamLoading = false;
+      // this.isTeamLoading = false;
 
-      // // TODO: Remove Timer
-      // setTimeout(() => {
-      //   this.isTeamLoading = false;
-      // }, 6000);
+      // TODO: Remove Timer
+      setTimeout(() => {
+        this.isTeamLoading = false;
+      }, 3000);
     },
 
     // Event Handlers

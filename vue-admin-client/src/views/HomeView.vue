@@ -1,10 +1,11 @@
 <template>
   <div class="home">Dash</div>
+  <!-- <SpinnerComponent /> -->
 </template>
 
 <script>
 // Components
-// import ConfirmationModalComponent from "@/components/ConfirmModalComponent.vue";
+// import SpinnerComponent from "@/components/SpinnerComponent.vue";
 export default {
   name: "HomeView",
   data() {
@@ -13,7 +14,7 @@ export default {
     };
   },
   components: {
-    // ConfirmationModalComponent,
+    // SpinnerComponent,
   },
   methods: {
     saveAction() {
