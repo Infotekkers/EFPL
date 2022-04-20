@@ -346,9 +346,38 @@ export default {
       });
     },
 
+    validateLineup() {
+      let validation = false;
+      if (this.fixture.awayTeamLineUp && this.fixture.homeTeamLineUp) {
+        // home team lineup
+        if (
+          this.fixture.homeTeamLineUp.lineup &&
+          this.fixture.awayTeamLineUp.lineup
+        ) {
+          validation = true;
+        } else {
+          validation = false;
+        }
+      } else {
+        validation = false;
+      }
+      return validation;
+    },
     // Start match event handler
     startMatch() {
+      // check lineup
+      // if (this.validateLineup()) {
       store.dispatch("Fixture/startMatch", this.getMatchKey);
+      // }
+
+      // if no lineup
+      // else {
+      // store.dispatch("Global/setNotificationInfo", {
+      //   showNotification: true,
+      //   notificationType: "warning",
+      //   notificationMessage: `Fixture lineup is required before starting it.`,
+      // });
+      // }
     },
 
     // pause match event handler

@@ -77,89 +77,112 @@ const startFixture = asyncHandler(async function (req, res) {
 
   const matchParent = await FixtureModel.findOne({ matchId });
 
-  const homeTeam = await TeamModel.find({
-    teamId: parseInt(matchId.split("|")[0]),
-  });
-
-  const awayTeam = await TeamModel.find({
-    teamId: parseInt(matchId.split("|")[1]),
-  });
-
-  if (matchParent?.status === "scheduled") {
-    matchParent.status = "liveFH"; // First half
-
-    // Minutes Counter Id saved so it can be cleared when the match is done
-    MINUTE_COUNTERS[matchId] = { status: "active" };
-    MINUTE_COUNTERS[matchId].intervalId = setInterval(async () => {
-      if (MINUTE_COUNTERS[matchId].status === "active") {
-        // TODO: Calculate clean sheets
-        console.log("MINUTE COUNTER ->");
-        const match = await FixtureModel.findOne({ matchId }).lean();
-
-        // !! MIGHT RESET MINUTESPLAYED OBJ
-        const update = { minutesPlayed: {} };
-
-        for (const position in match.homeTeamLineUp.lineup) {
-          if (position === "bench") continue;
-          for (const playerId of match.homeTeamLineUp.lineup[position]) {
-            update.minutesPlayed[playerId] = {
-              playerId,
-              noOfMinutes:
-                match.matchStat.minutesPlayed[playerId].noOfMinutes + 1,
-            };
-          }
-        }
-
-        for (const position in match.awayTeamLineUp.lineup) {
-          if (position === "bench") continue;
-          for (const playerId of match.awayTeamLineUp.lineup[position]) {
-            update.minutesPlayed[playerId] = {
-              playerId,
-              noOfMinutes:
-                match.matchStat.minutesPlayed[playerId].noOfMinutes + 1,
-            };
-          }
-        }
-
-        const result = statUpdater({
-          activeMatch: match,
-          incomingUpdate: update,
-        });
-
-        await FixtureModel.findOneAndUpdate({ matchId }, result, {
-          upsert: false,
-        });
-      }
-    }, 1000);
-
-    matchParent
-      .save()
-      .then(() =>
-        res
-          .status(200)
-          .send(
-            `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} is live!`
-          )
-      )
-      .catch(() => res.status(500).send("Try again!"));
-  } else if (!matchParent) {
-    res
-      .status(404)
-      .send(
-        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} doesn't exist!`
-      );
-  } else if (matchParent.status === "FT") {
-    res
-      .status(400)
-      .send(
-        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} has already ended!`
-      );
+  // validate if match has lineup
+  let hasLineup = false;
+  if (matchParent.awayTeamLineUp && matchParent.homeTeamLineUp) {
+    if (
+      matchParent.awayTeamLineUp.lineup &&
+      matchParent.homeTeamLineUp.lineup
+    ) {
+      hasLineup = true;
+    }
   } else {
-    res
-      .status(400)
-      .send(
-        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} is already live! Try using /fixtures/resume instead.`
-      );
+    hasLineup = false;
+  }
+
+  if (hasLineup) {
+    const homeTeam = await TeamModel.find({
+      teamId: parseInt(matchId.split("|")[0]),
+    });
+
+    const awayTeam = await TeamModel.find({
+      teamId: parseInt(matchId.split("|")[1]),
+    });
+
+    if (matchParent?.status === "scheduled") {
+      matchParent.status = "liveFH"; // First half
+
+      // Minutes Counter Id saved so it can be cleared when the match is done
+      MINUTE_COUNTERS[matchId] = { status: "active" };
+      MINUTE_COUNTERS[matchId].intervalId = setInterval(async () => {
+        if (MINUTE_COUNTERS[matchId].status === "active") {
+          // TODO: Calculate clean sheets
+          console.log("MINUTE COUNTER ->");
+          const match = await FixtureModel.findOne({ matchId }).lean();
+
+          // !! MIGHT RESET MINUTESPLAYED OBJ
+          const update = { minutesPlayed: {} };
+
+          for (const position in match.homeTeamLineUp.lineup) {
+            if (position === "bench") continue;
+            for (const playerId of match.homeTeamLineUp.lineup[position]) {
+              update.minutesPlayed[playerId] = {
+                playerId,
+                noOfMinutes:
+                  match.matchStat.minutesPlayed[playerId].noOfMinutes + 1,
+              };
+            }
+          }
+
+          for (const position in match.awayTeamLineUp.lineup) {
+            if (position === "bench") continue;
+            for (const playerId of match.awayTeamLineUp.lineup[position]) {
+              update.minutesPlayed[playerId] = {
+                playerId,
+                noOfMinutes:
+                  match.matchStat.minutesPlayed[playerId].noOfMinutes + 1,
+              };
+            }
+          }
+
+          const result = statUpdater({
+            activeMatch: match,
+            incomingUpdate: update,
+          });
+
+          await FixtureModel.findOneAndUpdate({ matchId }, result, {
+            upsert: false,
+          });
+        }
+      }, 1000);
+
+      matchParent
+        .save()
+        .then(() =>
+          res
+            .status(200)
+            .send(
+              `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} is live!`
+            )
+        )
+        .catch(() => res.status(500).send("Try again!"));
+    }
+    // no match
+    else if (!matchParent) {
+      res
+        .status(404)
+        .send(
+          `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} doesn't exist!`
+        );
+    }
+    // match is live
+    else if (matchParent.status === "FT") {
+      res
+        .status(400)
+        .send(
+          `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} has already ended!`
+        );
+    }
+    // resume
+    else {
+      res
+        .status(400)
+        .send(
+          `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} is already live! Try using /fixtures/resume instead.`
+        );
+    }
+  } else {
+    res.status(422).send("Fixture requires lineup to start.");
   }
 });
 
@@ -301,8 +324,6 @@ const postponeFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
   const { gameweekId, schedule, homeTeam, awayTeam, matchStatus } = req.body;
 
-  console.log(match.status);
-
   // Compare old and new match
   if (match) {
     if (match.homeTeam === homeTeam && match.awayTeam === awayTeam) {
@@ -344,18 +365,6 @@ const postponeFixture = asyncHandler(async function (req, res) {
   } else {
     res.status(400).send(`Match with Id ${req.params.matchId} doesn't exist.`);
   }
-
-  // if (match?.status === "scheduled") {
-  //   match.status = "postponed";
-  //   match
-  //     .save()
-  //     .then(() => res.send("Match postponed!"))
-  //     .catch(() => res.status(500).send("Try again!"));
-  // } else if (!match) {
-  //   res.status(404).send("Match doesn't exist!");
-  // } else {
-  // res.status(400).send("Match is ongoing!");
-  // }
 });
 
 const updateFixture = asyncHandler(async function (req, res) {
@@ -364,8 +373,6 @@ const updateFixture = asyncHandler(async function (req, res) {
   const matchId = req.params.matchId;
 
   const match = await FixtureModel.findOne({ matchId });
-
-  console.log(match.status);
 
   if (match) {
     if (match.status === "scheduled") {

@@ -340,11 +340,19 @@ export default {
           }
         })
         .catch((err) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "error",
-            notificationMessage: err.response.data,
-          });
+          if (err.response.status === 422) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "warning",
+              notificationMessage: err.response.data,
+            });
+          } else {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "error",
+              notificationMessage: err.response.data,
+            });
+          }
         });
     },
 
@@ -429,20 +437,22 @@ export default {
               notificationMessage: response.data,
             });
             store.dispatch("Fixture/setAllFixtures");
-          } else if (response.status === 422) {
-            store.dispatch("Global/setNotificationInfo", {
-              showNotification: true,
-              notificationType: "warning",
-              notificationMessage: response.data,
-            });
           }
         })
         .catch((err) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "error",
-            notificationMessage: err.response.data,
-          });
+          if (err.response.status === 422) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "error",
+              notificationMessage: err.response.data,
+            });
+          } else {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "error",
+              notificationMessage: err.response.data,
+            });
+          }
         });
     },
 
