@@ -1,6 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Main from "../views/MainView.vue";
 
+const redirectIfLoggedIn = (to, from, next) => {
+  // get the currently signed in admin
+  const currentAdmin = JSON.parse(window.localStorage.getItem("currentAdmin"));
+
+  if (currentAdmin && currentAdmin.token) {
+    next("/admin");
+  } else {
+    next();
+  }
+};
+
 const routes = [
   {
     path: "/admin",
@@ -86,6 +97,7 @@ const routes = [
   {
     path: "/login",
     name: "admin-login",
+    beforeEnter: redirectIfLoggedIn,
     component: () => import("../views/AdminLoginView.vue"),
   },
   {
@@ -97,6 +109,7 @@ const routes = [
   {
     path: "/forgotpassword",
     name: "forgot-password",
+    beforeEnter: redirectIfLoggedIn,
     component: () => import("../components/ForgotPasswordComponent.vue"),
   },
 

@@ -24,6 +24,7 @@
 <script>
 import { mapFields } from "vuex-map-fields";
 import { mapActions } from "vuex";
+import Router from "../router/index";
 import TeamSelector from "../components/FixtureDetailTeamSelector.vue";
 import Field from "../components/FixtureDetailField.vue";
 import Locker from "../components/FixtureDetailLocker.vue";
@@ -44,6 +45,11 @@ export default {
       this.setFixtureDetailId(
         new URL(window.location.href).searchParams.get("id")
       );
+    if (!this.fixtureDetailId)
+      Router.push({
+        path: "/admin/fixtures",
+      });
+
     this.loadFixtureDetails(this.fixtureDetailId);
     this.homeTeamId = this.fixtureDetailId.split("|")[0];
     this.awayTeamId = this.fixtureDetailId.split("|")[1];
