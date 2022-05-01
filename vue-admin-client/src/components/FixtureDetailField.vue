@@ -1,5 +1,7 @@
 <template>
-  <div v-if="!dataLoaded">Loading</div>
+  <div v-if="!dataLoaded">
+    <Spinner />
+  </div>
   <div v-else>
     <div id="main-fixture-detail-field">
       <PlayerStatModal
@@ -29,7 +31,9 @@
             @touch="openStatsModal(playerId)"
             draggable="true"
             @dragstart="fieldPlayerDragStart($event, playerId, 'goalkeepers')"
-            @dragend.prevent
+            @dragend.prevent="
+              this.divPlayerAtHover.classList.remove('field-player-hover-sub')
+            "
             class="field-player"
             :key="playerId"
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
@@ -81,7 +85,9 @@
             @touch="openStatsModal(playerId)"
             draggable="true"
             @dragstart="fieldPlayerDragStart($event, playerId, 'defenders')"
-            @dragend.prevent
+            @dragend.prevent="
+              this.divPlayerAtHover.classList.remove('field-player-hover-sub')
+            "
             class="field-player"
             :key="playerId"
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
@@ -133,7 +139,9 @@
             @touch="openStatsModal(playerId)"
             draggable="true"
             @dragstart="fieldPlayerDragStart($event, playerId, 'midfielders')"
-            @dragend.prevent
+            @dragend.prevent="
+              this.divPlayerAtHover.classList.remove('field-player-hover-sub')
+            "
             class="field-player"
             :key="playerId"
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
@@ -185,7 +193,9 @@
             @touch="openStatsModal(playerId)"
             draggable="true"
             @dragstart="fieldPlayerDragStart($event, playerId, 'strikers')"
-            @dragend.prevent
+            @dragend.prevent="
+              this.divPlayerAtHover.classList.remove('field-player-hover-sub')
+            "
             class="field-player"
             :key="playerId"
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
@@ -235,7 +245,9 @@
           <div
             draggable="true"
             @dragstart="fieldPlayerDragStart($event, playerId, 'bench')"
-            @dragend.prevent
+            @dragend.prevent="
+              this.divPlayerAtHover.classList.remove('field-player-hover-sub')
+            "
             class="field-player"
             :key="playerId"
             v-for="playerId in this.fixtureDetailData.lineups[this.activeTeamId]
@@ -281,6 +293,7 @@
 import { mapFields } from "vuex-map-fields";
 import { mapActions } from "vuex";
 import PlayerStatModal from "../components/FixtureDetailPlayerStatModal.vue";
+import Spinner from "../components/SpinnerComponent.vue";
 
 export default {
   props: {
@@ -289,6 +302,7 @@ export default {
 
   components: {
     PlayerStatModal,
+    Spinner,
   },
 
   computed: {
@@ -597,7 +611,7 @@ p {
 
 #bench {
   justify-content: flex-start;
-  background-color: white;
+  background-color: var(--secondary-200);
   padding: 5px;
 }
 
@@ -613,9 +627,10 @@ p {
   z-index: 0;
 }
 
-#bench-label {
-  left: 15vw;
+#bench label {
+  /* left: 15vw; */
   position: absolute;
+  color: var(--secondary-600);
 }
 
 .field-player {
@@ -636,7 +651,7 @@ p {
 }
 
 .field-player-hover-sub {
-  background-color: var(--warning-200) !important;
+  background-color: var(--secondary-300) !important;
 }
 
 .actions {

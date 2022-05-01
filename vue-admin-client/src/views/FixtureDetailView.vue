@@ -16,7 +16,9 @@
     <Locker :activeTeamId="this.activeTeamId" />
   </main>
   <main v-else-if="errorLog">Encountered an error</main>
-  <main v-else>Loading</main>
+  <main v-else>
+    <Spinner id="spinner" />
+  </main>
 </template>
 
 <script>
@@ -25,6 +27,7 @@ import { mapActions } from "vuex";
 import TeamSelector from "../components/FixtureDetailTeamSelector.vue";
 import Field from "../components/FixtureDetailField.vue";
 import Locker from "../components/FixtureDetailLocker.vue";
+import Spinner from "../components/SpinnerComponent.vue";
 
 export default {
   name: "FixtureDetailPage",
@@ -33,6 +36,7 @@ export default {
     TeamSelector,
     Field,
     Locker,
+    Spinner,
   },
 
   mounted() {
@@ -88,6 +92,10 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+#spinner {
+  align-self: center;
 }
 
 @media screen and (min-width: 900px) {
