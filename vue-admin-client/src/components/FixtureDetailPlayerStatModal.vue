@@ -8,6 +8,7 @@
         <h2>
           {{ player.name }}
         </h2>
+        <h4>{{ player.stats.minutesPlayed }} mins</h4>
         <div class="editor-field">
           <div id="goals">
             <span class="editor-field-label">{{ $t("Goals") }}</span>

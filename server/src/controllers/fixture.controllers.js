@@ -77,6 +77,8 @@ const startFixture = asyncHandler(async function (req, res) {
 
   const matchParent = await FixtureModel.findOne({ matchId });
 
+  const gameweekId = matchParent.gameweekId;
+
   // validate if match has lineup
   let hasLineup = false;
   if (matchParent.awayTeamLineUp && matchParent.homeTeamLineUp) {
@@ -99,6 +101,156 @@ const startFixture = asyncHandler(async function (req, res) {
       teamId: parseInt(matchId.split("|")[1]),
     });
 
+    let homePlayers = await Player.find({
+      eplTeamId: homeTeam[0].teamName,
+    });
+    let awayPlayers = await Player.find({
+      eplTeamId: awayTeam[0].teamName,
+    });
+
+    // Initialize match stats
+    for (const player of homePlayers) {
+      const playerId = player.playerId;
+      // Update stats in fixtures model
+      matchParent.matchStat.minutesPlayed.set(String(playerId), {
+        playerId,
+        noOfMinutes: 0,
+      });
+      matchParent.matchStat.goalsScored.set(String(playerId), {
+        playerId,
+        noOfGoals: 0,
+      });
+      matchParent.matchStat.assists.set(String(playerId), {
+        playerId,
+        noOfAssists: 0,
+      });
+      matchParent.matchStat.cleanSheet.set(String(playerId), {
+        playerId,
+        noOfCleanSheets: 0,
+      });
+      matchParent.matchStat.yellows.set(String(playerId), {
+        playerId,
+        noOfYellows: 0,
+      });
+      matchParent.matchStat.reds.set(String(playerId), {
+        playerId,
+        noOfReds: 0,
+      });
+      matchParent.matchStat.penaltiesMissed.set(String(playerId), {
+        playerId,
+        noOfPenMissed: 0,
+      });
+      matchParent.matchStat.penaltiesSaved.set(String(playerId), {
+        playerId,
+        noOfPenSaved: 0,
+      });
+      matchParent.matchStat.saves.set(String(playerId), {
+        playerId,
+        noOfSaves: 0,
+      });
+      matchParent.matchStat.ownGoal.set(String(playerId), {
+        playerId,
+        noOfOwnGoals: 0,
+      });
+      matchParent.matchStat.fantasyScores.set(String(playerId), {
+        playerId,
+        playerScores: 0,
+      });
+
+      // Update stats in player model
+      const gameweekIndex = gameweekId - 1;
+      player.score.push({});
+      player.score[gameweekIndex].gameweekId = gameweekId;
+      player.score[gameweekIndex].minutesPlayed = 0;
+      player.score[gameweekIndex].goals = 0;
+      player.score[gameweekIndex].assists = 0;
+      player.score[gameweekIndex].cleanSheet = 0;
+      player.score[gameweekIndex].yellows = 0;
+      player.score[gameweekIndex].reds = 0;
+      player.score[gameweekIndex].penalitiesMissed = 0;
+      player.score[gameweekIndex].penalitiesSaved = 0;
+      player.score[gameweekIndex].saves = 0;
+      player.score[gameweekIndex].ownGoal = 0;
+      player.score[gameweekIndex].fantasyScore = 0;
+
+      await Player.findOneAndUpdate({ playerId }, player);
+    }
+    for (const player of awayPlayers) {
+      const playerId = player.playerId;
+      // Update stats in fixtures model
+      matchParent.matchStat.minutesPlayed.set(String(playerId), {
+        playerId,
+        noOfMinutes: 0,
+      });
+      matchParent.matchStat.goalsScored.set(String(playerId), {
+        playerId,
+        noOfGoals: 0,
+      });
+      matchParent.matchStat.assists.set(String(playerId), {
+        playerId,
+        noOfAssists: 0,
+      });
+      matchParent.matchStat.cleanSheet.set(String(playerId), {
+        playerId,
+        noOfCleanSheets: 0,
+      });
+      matchParent.matchStat.yellows.set(String(playerId), {
+        playerId,
+        noOfYellows: 0,
+      });
+      matchParent.matchStat.reds.set(String(playerId), {
+        playerId,
+        noOfReds: 0,
+      });
+      matchParent.matchStat.penaltiesMissed.set(String(playerId), {
+        playerId,
+        noOfPenMissed: 0,
+      });
+      matchParent.matchStat.penaltiesSaved.set(String(playerId), {
+        playerId,
+        noOfPenSaved: 0,
+      });
+      matchParent.matchStat.saves.set(String(playerId), {
+        playerId,
+        noOfSaves: 0,
+      });
+      matchParent.matchStat.ownGoal.set(String(playerId), {
+        playerId,
+        noOfOwnGoals: 0,
+      });
+      matchParent.matchStat.fantasyScores.set(String(playerId), {
+        playerId,
+        playerScores: 0,
+      });
+
+      // Update stats in player model
+      const gameweekIndex = gameweekId - 1;
+      player.score.push({});
+      player.score[gameweekIndex].gameweekId = gameweekId;
+      player.score[gameweekIndex].minutesPlayed = 0;
+      player.score[gameweekIndex].goals = 0;
+      player.score[gameweekIndex].assists = 0;
+      player.score[gameweekIndex].cleanSheet = 0;
+      player.score[gameweekIndex].yellows = 0;
+      player.score[gameweekIndex].reds = 0;
+      player.score[gameweekIndex].penalitiesMissed = 0;
+      player.score[gameweekIndex].penalitiesSaved = 0;
+      player.score[gameweekIndex].saves = 0;
+      player.score[gameweekIndex].ownGoal = 0;
+      player.score[gameweekIndex].fantasyScore = 0;
+
+      await Player.findOneAndUpdate({ playerId }, player);
+    }
+
+    await matchParent.save();
+
+    homePlayers = Object.fromEntries(
+      new Map(homePlayers.map((obj) => [String(obj.playerId), obj]))
+    );
+    awayPlayers = Object.fromEntries(
+      new Map(awayPlayers.map((obj) => [String(obj.playerId), obj]))
+    );
+
     if (matchParent?.status === "scheduled") {
       matchParent.status = "liveFH"; // First half
 
@@ -111,38 +263,57 @@ const startFixture = asyncHandler(async function (req, res) {
           const match = await FixtureModel.findOne({ matchId }).lean();
 
           // !! MIGHT RESET MINUTESPLAYED OBJ
-          const update = { minutesPlayed: {} };
+          const update = { minutesPlayed: 0 };
+          const result = {
+            updatedMatch: {},
+            updatedPlayers: [],
+          };
 
           for (const position in match.homeTeamLineUp.lineup) {
             if (position === "bench") continue;
             for (const playerId of match.homeTeamLineUp.lineup[position]) {
-              update.minutesPlayed[playerId] = {
-                playerId,
-                noOfMinutes:
-                  match.matchStat.minutesPlayed[playerId].noOfMinutes + 1,
-              };
+              update.gameweekId = gameweekId;
+              update.minutesPlayed =
+                homePlayers[playerId].get("score")[gameweekId - 1]
+                  .minutesPlayed + 1;
+
+              const { updatedMatch, updatedPlayer } = statUpdater({
+                activeMatch: match,
+                activePlayer: homePlayers[playerId],
+                incomingUpdate: update,
+              });
+
+              result.updatedMatch = updatedMatch;
+              result.updatedPlayers.push(updatedPlayer);
             }
           }
 
           for (const position in match.awayTeamLineUp.lineup) {
             if (position === "bench") continue;
             for (const playerId of match.awayTeamLineUp.lineup[position]) {
-              update.minutesPlayed[playerId] = {
-                playerId,
-                noOfMinutes:
-                  match.matchStat.minutesPlayed[playerId].noOfMinutes + 1,
-              };
+              update.gameweekId = gameweekId;
+              update.minutesPlayed =
+                awayPlayers[playerId].get("score")[gameweekId - 1]
+                  .minutesPlayed + 1;
+
+              const { updatedMatch, updatedPlayer } = statUpdater({
+                activeMatch: match,
+                activePlayer: awayPlayers[playerId],
+                incomingUpdate: update,
+              });
+
+              result.updatedMatch = updatedMatch;
+              result.updatedPlayers.push(updatedPlayer);
             }
           }
 
-          const result = statUpdater({
-            activeMatch: match,
-            incomingUpdate: update,
-          });
-
-          await FixtureModel.findOneAndUpdate({ matchId }, result, {
-            upsert: false,
-          });
+          await FixtureModel.findOneAndUpdate({ matchId }, result.updatedMatch);
+          for (const player of result.updatedPlayers) {
+            await Player.findOneAndUpdate(
+              { playerId: player.playerId },
+              player
+            );
+          }
         }
       }, 1000);
 
