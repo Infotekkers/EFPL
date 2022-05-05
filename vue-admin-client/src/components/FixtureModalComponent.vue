@@ -28,7 +28,12 @@
             <!-- Previous button -->
             <!-- Previous button -->
 
-            <div class="fixture-home-team-previous" @click="prevHomeTeam">
+            <div
+              class="fixture-home-team-previous"
+              v-on="
+                isEditMode === true ? { click: '' } : { click: prevHomeTeam }
+              "
+            >
               <img
                 :src="previousSmallIcon.path"
                 :alt="previousSmallIcon.alt"
@@ -52,7 +57,12 @@
             </div>
 
             <!-- Next Button -->
-            <div class="fixture-home-team-next" @click="nextHomeTeam">
+            <div
+              class="fixture-home-team-next"
+              v-on="
+                isEditMode === true ? { click: '' } : { click: nextHomeTeam }
+              "
+            >
               <img
                 :src="nextSmallIcon.path"
                 :alt="nextSmallIcon.alt"
@@ -104,8 +114,8 @@
                     ref="hour"
                     :value="fixtureHours"
                   >
-                    <option v-for="n in 13" :key="n" :value="n + 9">
-                      {{ n + 9 }}
+                    <option v-for="n in 24" :key="n" :value="n">
+                      {{ n }}
                     </option>
                   </select>
                 </div>
@@ -148,7 +158,12 @@
             class="fixture-away-team-section"
             :class="awayTeamIndex === homeTeamIndex ? 'disabled' : ''"
           >
-            <div class="fixture-away-team-previous" @click="prevAwayTeam">
+            <div
+              class="fixture-away-team-previous"
+              v-on="
+                isEditMode === true ? { click: '' } : { click: prevAwayTeam }
+              "
+            >
               <img
                 :src="previousSmallIcon.path"
                 :alt="previousSmallIcon.alt"
@@ -167,7 +182,12 @@
                 {{ awayTeams[awayTeamIndex].teamName }}
               </div>
             </div>
-            <div class="fixture-away-team-next" @click="nextAwayTeam">
+            <div
+              class="fixture-away-team-next"
+              v-on="
+                isEditMode === true ? { click: '' } : { click: nextAwayTeam }
+              "
+            >
               <img
                 :src="nextSmallIcon.path"
                 :alt="nextSmallIcon.alt"
