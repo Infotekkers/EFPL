@@ -1,4 +1,5 @@
 import 'package:efpl/presentation/core/MainTabView.dart';
+import 'package:efpl/presentation/routes/Routes.dart';
 import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {
@@ -6,12 +7,14 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppRouter _appRouter = AppRouter();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MainTabView(),
+      initialRoute: "/",
+      routes: _appRouter.allRoutes,
     );
   }
 }
