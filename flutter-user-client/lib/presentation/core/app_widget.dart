@@ -1,9 +1,17 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:efpl/presentation/core/MainTabView.dart';
+import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {
+  const AppWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return const Text("Hi");
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MainTabView(),
+    );
   }
 }

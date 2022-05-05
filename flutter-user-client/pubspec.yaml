@@ -1,5 +1,5 @@
 name: efpl
-description: Ethiopian Fantasy Primeier League.
+description: Ethiopian Fantasy Premier League.
 version: 1.0.0+1
 
 environment:
@@ -18,6 +18,8 @@ dependencies:
   injectable: ^1.5.3
   json_annotation: ^4.4.0
   shared_preferences: ^2.0.13
+  material_design_icons_flutter: 5.0.6595
+  flutter_boxicons: ^3.0.0
 
 dev_dependencies:
   bloc_test: ^9.0.3
