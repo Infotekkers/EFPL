@@ -1,5 +1,5 @@
-import 'package:efpl/presentation/authentication/SplashView.dart';
-import 'package:efpl/presentation/core/MainTabView.dart';
+import 'package:efpl/presentation/authentication/splash_view.dart';
+import 'package:efpl/presentation/core/main_tab_view.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {

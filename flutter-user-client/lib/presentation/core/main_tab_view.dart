@@ -1,10 +1,10 @@
-import 'package:efpl/presentation/fixtures/FixturesView.dart';
-import 'package:efpl/presentation/leauges/LeaguesView.dart';
-import 'package:efpl/presentation/points/PointsView.dart';
-import 'package:efpl/presentation/settings/SettingsView.dart';
-import 'package:efpl/presentation/stats/StatsView.dart';
-import 'package:efpl/presentation/team/TeamView.dart';
-import 'package:efpl/presentation/transfers/TransfersView.dart';
+import 'package:efpl/presentation/fixtures/fixtures_view.dart';
+import 'package:efpl/presentation/leauges/leagues_view.dart';
+import 'package:efpl/presentation/points/points_view.dart';
+import 'package:efpl/presentation/settings/settings_view.dart';
+import 'package:efpl/presentation/stats/stats_view.dart';
+import 'package:efpl/presentation/team/team_view.dart';
+import 'package:efpl/presentation/transfers/transfers_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';

@@ -6,7 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 
 Future main() async {
-  // await dotenv.load();
+  await dotenv.load();
   configureInjection(Environment.prod);
-  runApp(AppWidget());
+  runApp(const AppWidget());
 }

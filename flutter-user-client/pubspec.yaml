@@ -37,4 +37,6 @@ dev_dependencies:
   test: ^1.19.1
 
 flutter:
+  assets:
+    - .env
   uses-material-design: true

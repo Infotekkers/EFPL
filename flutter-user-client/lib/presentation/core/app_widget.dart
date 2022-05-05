@@ -1,5 +1,4 @@
-import 'package:efpl/presentation/core/MainTabView.dart';
-import 'package:efpl/presentation/routes/Routes.dart';
+import 'package:efpl/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {
