@@ -17,7 +17,7 @@ class ApiFixtureRepository implements IFixtureRepository {
 
     try {
       var result = await http.get(
-        Uri.parse('$_baseURL/fixtures/$gameWeekId'),
+        Uri.parse('$_baseURL/fixtures/gw/$gameWeekId'),
       );
 
       final allFixtures = <Fixture>[];
@@ -51,7 +51,7 @@ class ApiFixtureRepository implements IFixtureRepository {
     } catch (e) {
       print(e);
       return left(
-        FixtureFailures.noConnection(failedValue: "failedValue"),
+        const FixtureFailures.noConnection(failedValue: "failedValue"),
       );
     }
   }

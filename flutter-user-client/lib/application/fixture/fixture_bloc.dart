@@ -5,11 +5,13 @@ import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/domain/fixture/fixture_failures.dart';
 import 'package:efpl/domain/fixture/i_fixture_facade.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'fixture_event.dart';
 part 'fixture_state.dart';
 part 'fixture_bloc.freezed.dart';
 
+@injectable
 class FixtureBloc extends Bloc<FixtureEvent, FixtureState> {
   final IFixtureRepository _iFixtureRepository;
   FixtureBloc(this._iFixtureRepository) : super(FixtureState.initial()) {

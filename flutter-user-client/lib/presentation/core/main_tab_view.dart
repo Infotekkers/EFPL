@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
@@ -128,7 +129,17 @@ class MainTabView extends StatelessWidget {
             TeamView(),
             PointsView(),
             TransfersView(),
-            FixtureView(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => getIt<FixtureBloc>()
+                    ..add(
+                      const FixtureEvent.loadFixtures(),
+                    ),
+                )
+              ],
+              child: const FixturesView(),
+            ),
             LeaguesView(),
             StatsView(),
             MultiBlocProvider(
