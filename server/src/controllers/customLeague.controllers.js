@@ -33,7 +33,6 @@ const joinCustomLeague = asyncHandler(async function (req, res) {
 
   if (!customLeague) {
     res.status(400).send("Couldn't find a custom league with the provided ID!");
-    return;
   }
 
   if (customLeague.teams.includes(playerId)) {
@@ -55,6 +54,28 @@ const joinCustomLeague = asyncHandler(async function (req, res) {
   await customLeague.save();
 });
 
+const leaveCustomLeague = asyncHandler(async (req, res) => {
+  const { leagueId, playerId } = req.body;
+
+  const customLeague = await CustomLeagueModel.findOne({ leagueId });
+
+  if (!customLeague) {
+    res.status(400).send("Couldn't find a custom league with the provided ID!");
+  }
+
+  if (!customLeague.teams.includes(playerId)) {
+    res.status(400).send("Player is not a member of the custom league!");
+  }
+
+  customLeague.teams = customLeague.teams.filter(
+    (teamId) => teamId !== playerId
+  );
+
+  res.send(`Successfully left ${customLeague.leagueName}!`);
+
+  await customLeague.save();
+});
+
 const clearAllCustomLeagues = asyncHandler(async (req, res) => {
   await CustomLeagueModel.deleteMany({});
 
@@ -65,5 +86,6 @@ module.exports = {
   getAllCustomLeagues,
   createCustomLeague,
   joinCustomLeague,
+  leaveCustomLeague,
   clearAllCustomLeagues,
 };
