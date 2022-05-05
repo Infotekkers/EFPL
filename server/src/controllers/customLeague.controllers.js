@@ -36,6 +36,10 @@ const joinCustomLeague = asyncHandler(async function (req, res) {
     return;
   }
 
+  if (customLeague.teams.includes(playerId)) {
+    res.status(400).send("Player is already a member of the custom league!");
+  }
+
   if (customLeague.leagueType === "Public") {
     customLeague.teams.push(playerId);
     res.send(`Successfully joined ${customLeague.leagueName}!`);
@@ -44,7 +48,7 @@ const joinCustomLeague = asyncHandler(async function (req, res) {
       customLeague.teams.push(playerId);
       res.send(`Successfully joined ${customLeague.leagueName}!`);
     } else {
-      res.send("Incorrect league code!");
+      res.status(400).send("Incorrect league code!");
     }
   }
 
