@@ -39,4 +39,8 @@ dev_dependencies:
 flutter:
   assets:
     - .env
+  fonts:
+    - family: Architect
+      fonts:
+        - asset: fonts/ArchitectsDaughter-Regular.ttf
   uses-material-design: true

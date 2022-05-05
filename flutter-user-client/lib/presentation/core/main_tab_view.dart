@@ -51,11 +51,8 @@ class MainTabView extends StatelessWidget {
           ),
         ),
         appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.white),
-          backgroundColor: (Colors.blue),
           elevation: 8.0,
           bottom: const TabBar(
-            indicatorColor: Colors.white,
             tabs: [
               // My Team
               Tab(
