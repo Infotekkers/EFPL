@@ -28,6 +28,7 @@ const verifySeasonStatus = asyncHandler(async (req, res) => {
 
 // export data to legacy db
 const backup = asyncHandler(async (req, res) => {
+  // TODO:Make Fixtures Deleted with team
   // backup type
   const backupType = req.params.type;
 

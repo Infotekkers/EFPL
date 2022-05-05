@@ -671,6 +671,17 @@ const deleteFixture = asyncHandler(async function (req, res) {
   }
 });
 
+const getAllFixturesOfGameWeek = asyncHandler(async function (req, res) {
+  const gameWeekId = req.params.gameWeekId;
+  const matches = await FixtureModel.find({ gameweekId: gameWeekId }).select(
+    "-_id"
+  );
+
+  setTimeout(() => {
+    res.status(200).send(matches);
+  }, 2000);
+});
+
 module.exports = {
   postFixture,
   startFixture,
@@ -685,4 +696,5 @@ module.exports = {
   updateLineup,
   updateStats,
   updateScore,
+  getAllFixturesOfGameWeek,
 };

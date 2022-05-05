@@ -23,6 +23,8 @@ router.patch("/update/:matchId", protectRoute, fixtureController.updateFixture);
 router.get("/", fixtureController.getAllFixtures);
 router.get("/:matchId", protectRoute, fixtureController.getFixture);
 
+router.get("/gw/:gameWeekId", fixtureController.getAllFixturesOfGameWeek);
+
 router.delete(
   "/delete/:matchId",
   protectRoute,
