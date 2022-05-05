@@ -321,4 +321,4 @@ const teamBkModel = bkConnection.model("teams", teamSchema);
 const playersBkModel = bkConnection.model("players", playerSchema);
 const fixtureBkModel = bkConnection.model("fixtures", fixtureSchema);
 
-module.exports = { teamBkModel, playersBkModel, fixtureBkModel };
+module.exports = { teamBkModel, playersBkModel, fixtureBkModel, bkConnection };
