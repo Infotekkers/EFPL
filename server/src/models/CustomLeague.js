@@ -19,6 +19,8 @@ const customLeagueSchema = mongoose.Schema({
 
 // Increment league Id middleware
 customLeagueSchema.pre("save", async function (next) {
+  if (this.leagueId) next();
+
   const previousDocument = await CustomLeagueModel.find({})
     .sort({ _id: -1 })
     .limit(1);
@@ -33,7 +35,7 @@ customLeagueSchema.pre("save", async function (next) {
 // Generate random leagueCode middleware
 customLeagueSchema.pre("save", async function (next) {
   // Only generate leagueCode if private
-  if (this.leagueType === "Public") {
+  if (this.leagueType === "Public" || this.leagueCode) {
     next();
   }
 
