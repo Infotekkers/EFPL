@@ -1,3 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:efpl/application/util/util_bloc.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
 import 'package:efpl/presentation/leauges/leagues_view.dart';
 import 'package:efpl/presentation/points/points_view.dart';
@@ -6,6 +10,7 @@ import 'package:efpl/presentation/stats/stats_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
 import 'package:efpl/presentation/transfers/transfers_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -16,6 +21,7 @@ class MainTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 7,
+      initialIndex: 6,
       child: Scaffold(
         drawer: Drawer(
           child: ListView(
@@ -114,7 +120,7 @@ class MainTabView extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontSize: 24),
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
             TeamView(),
             PointsView(),
@@ -122,7 +128,14 @@ class MainTabView extends StatelessWidget {
             FixtureView(),
             LeaguesView(),
             StatsView(),
-            SettingsView(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => getIt<UtilBloc>(),
+                )
+              ],
+              child: SettingsView(),
+            )
           ],
         ),
       ),

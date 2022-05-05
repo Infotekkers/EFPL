@@ -1,5 +1,12 @@
+import 'package:efpl/application/util/util_bloc.dart';
+import 'package:efpl/injectable.dart';
+import 'package:efpl/l10n/l10n.dart';
 import 'package:efpl/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
@@ -7,32 +14,52 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppRouter _appRouter = AppRouter();
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // Background Colors
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue,
-        )
-            .copyWith(
-              secondary: Colors.amber,
-            )
-            .copyWith(
-              tertiary: Colors.black,
-            ),
 
-        // text styles
-        textTheme: const TextTheme(
-          headline1: TextStyle(
-            fontSize: 72.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.pink,
-            fontFamily: "Architect",
-          ),
-        ),
+    return BlocProvider(
+      create: (context) =>
+          getIt<UtilBloc>()..add(const UtilEvent.setDefaultLocale()),
+      child: BlocConsumer<UtilBloc, UtilState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          return MaterialApp(
+            locale: state.locale,
+            supportedLocales: L10n.all,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate
+            ],
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              // Background Colors
+              colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.blue,
+              )
+                  .copyWith(
+                    secondary: Colors.amber,
+                  )
+                  .copyWith(
+                    tertiary: Colors.black,
+                  ),
+
+              // text styles
+              textTheme: const TextTheme(
+                headline1: TextStyle(
+                  fontSize: 72.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.pink,
+                  fontFamily: "Architect",
+                ),
+              ),
+            ),
+            initialRoute: "/",
+            routes: _appRouter.allRoutes,
+          );
+        },
       ),
-      initialRoute: "/",
-      routes: _appRouter.allRoutes,
     );
   }
 }

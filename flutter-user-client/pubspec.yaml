@@ -10,6 +10,9 @@ dependencies:
   dartz: ^0.10.1
   flutter:
     sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter
+  intl: ^0.17.0
   flutter_bloc: ^8.0.1
   flutter_dotenv: ^5.0.2
   freezed_annotation: ^1.1.0
@@ -44,3 +47,4 @@ flutter:
       fonts:
         - asset: fonts/ArchitectsDaughter-Regular.ttf
   uses-material-design: true
+  generate: true

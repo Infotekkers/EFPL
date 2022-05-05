@@ -1,17 +1,24 @@
+import 'package:efpl/application/util/util_bloc.dart';
+import 'package:efpl/injectable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final UtilBloc _utilBloc = getIt<UtilBloc>();
+    _utilBloc.add(const UtilEvent.setDefaultLocale());
     return MaterialApp(
       home: Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Center(
-              child: Text("Auth Screen"),
+            Center(
+              child: Text(
+                AppLocalizations.of(context)!.helloWorld,
+              ),
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 15),
@@ -21,9 +28,9 @@ class SplashView extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pushNamed("/home");
                 },
-                child: const Text(
-                  "Login",
-                  style: TextStyle(color: Colors.black),
+                child: Text(
+                  AppLocalizations.of(context)!.login,
+                  style: const TextStyle(color: Colors.black),
                 ),
               ),
             )
