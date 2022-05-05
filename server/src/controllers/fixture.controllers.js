@@ -657,9 +657,11 @@ const getFixture = asyncHandler(async function (req, res) {
 const deleteFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.find({ matchId: req.params.matchId });
 
-  if (match && match.status !== "scheduled") {
+  if (match && match[0].status !== "scheduled") {
     res.status(422).send("Live match can not be deleted");
-  } else {
+  }
+  //
+  else {
     const deleted = await FixtureModel.deleteOne({
       matchId: req.params.matchId,
     });
