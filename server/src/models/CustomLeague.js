@@ -1,42 +1,45 @@
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
 
 const customLeagueSchema = mongoose.Schema({
-  leagueId: { type: Number, required: true },
+  // leagueId: { type: Number, required: true },
+  leagueType: {
+    type: String,
+    required: true,
+    default: "Public",
+    enum: {
+      values: ["Public", "Private"],
+    },
+  },
   leagueName: { type: String, required: true },
-  leagueCode: { type: String, required: true, unique: true },
+  leagueCode: { type: String, unique: true },
   teams: { type: Array, required: true }, // Player team Ids
   adminId: { type: Number, required: true },
   leagueStartGameWeek: { type: Number, required: true },
 });
 
-customLeagueSchema.plugin(autoIncrement.plugin, {
-  model: "Custom Leagues",
-  field: "leagueId",
-  startAt: 100001,
-  incrementBy: 1,
-});
-
 // Generate random leagueCode
-customLeagueSchema.pre("save", () => {
+customLeagueSchema.pre("save", async function (next) {
   function generateLeagueCode() {
-    return validateGeneratedLeagueCode(
-      Math.random().toString(36).substring(2).toUpperCase()
-    );
+    return Math.random().toString(36).substring(2).toUpperCase();
   }
 
-  function validateGeneratedLeagueCode(generatedLeagueCode) {
-    if (!customLeagueSchema.find({ leagueCode: generatedLeagueCode }))
-      return generateLeagueCode;
-
-    generateLeagueCode();
+  async function validateLeagueCode(leagueCodeQuery) {
+    return await CustomLeagueModel.exists({ leagueCode: leagueCodeQuery });
   }
 
-  function getValidatedLeagueCode() {
-    return generateLeagueCode();
+  async function assignLeagueCode() {
+    const leagueCode = generateLeagueCode();
+
+    if (validateLeagueCode(leagueCode)) {
+      return leagueCode;
+    } else {
+      return assignLeagueCode();
+    }
   }
 
-  this.leagueCode = getValidatedLeagueCode();
+  this.leagueCode = await assignLeagueCode();
+  next();
 });
 
-module.exports = mongoose.model("Custom Leagues", customLeagueSchema);
+const CustomLeagueModel = mongoose.model("Custom Leagues", customLeagueSchema);
+module.exports = CustomLeagueModel;
