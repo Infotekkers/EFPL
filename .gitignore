@@ -62,13 +62,15 @@ flutter-user-client/.metadata
 server/node_modules
 server/.env
 server/.vscode
+server/pnpm-lock.yaml
 
 
 ################# Vue ########################################
 .DS_Store
 node_modules
 vue-admin-client/dist
-vue-admin-client.env
+vue-admin-client/.env
+vue-admin-client/pnpm-lock.yaml
 
 vue-admin-client/test/videos/
 vue-admin-client/test/screenshots/

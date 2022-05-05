@@ -3,6 +3,8 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 
+const path = require("path");
+
 // Development Supports
 const populate = require("./src/utils/populate"); // eslint-disable-line
 
@@ -17,10 +19,11 @@ connectToDB();
 const teams = require("./src/routes/team.routes");
 const players = require("./src/routes/players.routes");
 const eplStatsRouter = require("./src/routes/eplStats.routes");
-const fantasyStatsRouter = require("./src/routes/fantasyStat.routes");
 const userRouter = require("./src/routes/user.routes");
 const fixtures = require("./src/routes/fixtures.routes");
 const gameWeekRoutes = require("./src/routes/gameWeek.routes");
+const adminAuthRouter = require("./src/routes/adminAuth.routes");
+const backupRouter = require("./src/routes/backup.routes");
 
 // Import Middleware
 const errorMiddleware = require("./src/middleware/error.middleware");
@@ -34,19 +37,29 @@ app.use(cors());
 const rateLimiter = require("./src/config/rate_config");
 app.use(rateLimiter);
 
+// Serve static files
+app.use("/uploads/", express.static(path.join(__dirname, "/uploads")));
+
 // Add Routes to app
 app.use("/teams", teams);
 app.use("/players", players);
 app.use("/fixtures", fixtures);
 app.use("/gameWeek", gameWeekRoutes);
 app.use("/eplStats", eplStatsRouter);
-app.use("/fantasyStats", fantasyStatsRouter);
 app.use("/user", userRouter);
+app.use("/admin", adminAuthRouter);
+app.use("/backup", backupRouter);
 
 // Run populate scripts
 // populate.addTestPlayer();
 // populate.addTestUser();
 // populate.addTestGameweek();
+// populate.addTestFixture();
+
+// populate.addTestAdmin();
+// populate.populateTeams();
+// populate.populatePlayers();
+// populate.populateFixture();
 
 // Add Middleware
 app.use(errorMiddleware);

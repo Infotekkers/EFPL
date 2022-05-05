@@ -3,12 +3,14 @@ const app = require("../../index");
 const populate = require("../utils/populate");
 const Player = require("../models/Player");
 const mongoose = require("mongoose");
+const { bkConnection } = require("../models/Backup");
 
 const req = supertest(app);
 
 describe("Testing EPL stats ", () => {
   afterAll(() => {
     mongoose.connection.close();
+    bkConnection.close();
   });
 
   test("GET /eplStats/overview", async () => {

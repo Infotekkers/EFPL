@@ -2,19 +2,31 @@ const express = require("express");
 const router = express.Router();
 
 const fixtureController = require("../controllers/fixture.controllers");
+const { protectRoute } = require("../middleware/auth.middleware");
 
-router.post("/add", fixtureController.postFixture);
+router.post("/add", protectRoute, fixtureController.postFixture);
 
-router.patch("/start/:matchId", fixtureController.startFixture);
-router.patch("/pause/:matchId", fixtureController.pauseFixture);
-router.patch("/resume/:matchId", fixtureController.resumeFixture);
-router.patch("/end/:matchId", fixtureController.endFixture);
-router.patch("/postpone/:matchId", fixtureController.postponeFixture);
-router.patch("/update/:matchId", fixtureController.updateFixture);
+router.patch("/update/lineup/:matchId", fixtureController.updateLineup);
+router.patch("/update/stats/:matchId", fixtureController.updateStats);
+router.patch("/update/score/:matchId", fixtureController.updateScore);
+router.patch("/start/:matchId", protectRoute, fixtureController.startFixture);
+router.patch("/pause/:matchId", protectRoute, fixtureController.pauseFixture);
+router.patch("/resume/:matchId", protectRoute, fixtureController.resumeFixture);
+router.patch("/end/:matchId", protectRoute, fixtureController.endFixture);
+router.patch(
+  "/postpone/:matchId",
+  protectRoute,
+  fixtureController.updateFixture
+);
+router.patch("/update/:matchId", protectRoute, fixtureController.updateFixture);
 
 router.get("/", fixtureController.getAllFixtures);
-router.get("/:matchId", fixtureController.getFixture);
+router.get("/:matchId", protectRoute, fixtureController.getFixture);
 
-router.delete("/delete/:matchId", fixtureController.deleteFixture);
+router.delete(
+  "/delete/:matchId",
+  protectRoute,
+  fixtureController.deleteFixture
+);
 
 module.exports = router;
