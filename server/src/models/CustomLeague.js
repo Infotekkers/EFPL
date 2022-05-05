@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const customLeagueSchema = mongoose.Schema({
-  // leagueId: { type: Number, required: true },
+  leagueId: { type: Number },
   leagueType: {
     type: String,
     required: true,
@@ -17,20 +17,36 @@ const customLeagueSchema = mongoose.Schema({
   leagueStartGameWeek: { type: Number, required: true },
 });
 
-// Generate random leagueCode
+// Increment league Id middleware
+customLeagueSchema.pre("save", async function (next) {
+  const previousDocument = await CustomLeagueModel.find({})
+    .sort({ _id: -1 })
+    .limit(1);
+
+  if (previousDocument.length) {
+    this.leagueId = previousDocument[0].leagueId + 1;
+  } else {
+    this.leagueId = 1000001;
+  }
+});
+
+// Generate random leagueCode middleware
 customLeagueSchema.pre("save", async function (next) {
   function generateLeagueCode() {
     return Math.random().toString(36).substring(2).toUpperCase();
   }
 
   async function validateLeagueCode(leagueCodeQuery) {
-    return await CustomLeagueModel.exists({ leagueCode: leagueCodeQuery });
+    return await CustomLeagueModel.exists({
+      leagueCode: leagueCodeQuery,
+    });
   }
 
   async function assignLeagueCode() {
     const leagueCode = generateLeagueCode();
+    const leagueCodeAfterValidation = await validateLeagueCode(leagueCode);
 
-    if (validateLeagueCode(leagueCode)) {
+    if (!leagueCodeAfterValidation) {
       return leagueCode;
     } else {
       return assignLeagueCode();

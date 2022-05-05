@@ -1,8 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const CustomLeagueModel = require("../models/CustomLeague");
 
-const getCustomLeague = asyncHandler(async function (req, res) {});
-
 const getAllCustomLeagues = asyncHandler(async function (req, res) {
   const result = await CustomLeagueModel.find({});
 
@@ -10,22 +8,32 @@ const getAllCustomLeagues = asyncHandler(async function (req, res) {
 });
 
 const createCustomLeague = asyncHandler(async function (req, res) {
-  const { leagueName, adminId } = req.body;
-  let { type } = req.body;
-
-  if (type in ["Public", "Private"] === false) {
-    type = "Public";
-  }
+  const {
+    leagueName,
+    adminId,
+    type = "Public",
+    leagueStartGameWeek = 1,
+  } = req.body;
 
   await new CustomLeagueModel({
     teams: [adminId],
     type,
     leagueName,
     adminId,
-    leagueStartGameWeek: 1,
+    leagueStartGameWeek,
   }).save();
 
   res.send(`Custom league '${leagueName}' created!`);
 });
 
-module.exports = { getCustomLeague, createCustomLeague, getAllCustomLeagues };
+const clear = async (req, res) => {
+  await CustomLeagueModel.deleteMany({});
+
+  res.send("done");
+};
+
+module.exports = {
+  createCustomLeague,
+  getAllCustomLeagues,
+  clear,
+};
