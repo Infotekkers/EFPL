@@ -3,7 +3,7 @@
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
-import 'package:efpl/presentation/leauges/leagues_view.dart';
+import 'package:efpl/presentation/leagues/leagues_view.dart';
 import 'package:efpl/presentation/points/points_view.dart';
 import 'package:efpl/presentation/settings/settings_view.dart';
 import 'package:efpl/presentation/stats/stats_view.dart';
@@ -19,6 +19,9 @@ class MainTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UtilBloc _utilBloc = getIt<UtilBloc>();
+    _utilBloc.add(const UtilEvent.setDefaultLocale());
+
     return DefaultTabController(
       length: 7,
       initialIndex: 6,
@@ -38,7 +41,7 @@ class MainTabView extends StatelessWidget {
                 onTap: () {},
               ),
               ListTile(
-                title: const Text('Watchlist'),
+                title: const Text('Watch List'),
                 onTap: () {},
               ),
               ListTile(

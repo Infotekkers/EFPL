@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
@@ -19,9 +18,7 @@ class AppWidget extends StatelessWidget {
       create: (context) =>
           getIt<UtilBloc>()..add(const UtilEvent.setDefaultLocale()),
       child: BlocConsumer<UtilBloc, UtilState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
             locale: state.locale,

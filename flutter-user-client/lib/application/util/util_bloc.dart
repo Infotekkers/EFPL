@@ -26,8 +26,6 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
           locale: Locale(defaultLocale),
         ),
       );
-
-      print("SP " + defaultLocale);
     });
 
     on<_SetLocale>((event, emit) async {
@@ -36,8 +34,6 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
       prefs.setString("lang", event.newLocale.toString());
 
       emit(UtilState(locale: event.newLocale));
-
-      print("Setting to " + event.newLocale.toString());
     });
 
     on<_ClearLocale>((event, emit) {

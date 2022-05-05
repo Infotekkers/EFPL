@@ -12,10 +12,9 @@ class SettingsView extends StatelessWidget {
     // Get The bloc value from the provider
     final UtilBloc _utilBloc = BlocProvider.of<UtilBloc>(context);
     _utilBloc.add(const UtilEvent.setDefaultLocale());
+
     return BlocConsumer<UtilBloc, UtilState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Column(
           children: [
@@ -42,9 +41,12 @@ class SettingsView extends StatelessWidget {
                           newLocale: Locale("en"),
                         ),
                       );
+
+                _utilBloc.add(const UtilEvent.setDefaultLocale());
               },
-              child:
-                  state.locale == const Locale("en") ? Text("am") : Text("en"),
+              child: state.locale == const Locale("en")
+                  ? const Text("am")
+                  : const Text("en"),
             ),
           ],
         );
