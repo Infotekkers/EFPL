@@ -4,7 +4,7 @@ const autoIncrement = require("mongoose-auto-increment");
 autoIncrement.initialize(mongoose.connection);
 
 const availabilitySchema = mongoose.Schema({
-  injuryStatus: String,
+  injuryStatus: { type: String, default: "" },
   injuryMessage: { type: String, default: "" },
 });
 
@@ -47,20 +47,48 @@ const historySchema = mongoose.Schema({
 });
 
 const playerSchema = mongoose.Schema({
-  playerName: { type: String },
-  eplTeamId: { type: String },
-  currentPrice: { type: Number },
-  position: { type: String },
-  availability: { type: [availabilitySchema] },
-  score: { type: [scoreSchema] },
-  history: { type: [historySchema] },
+  playerName: {
+    type: String,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Name is required.",
+    ],
+  },
+  eplTeamId: {
+    type: String,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Team is required.",
+    ],
+  },
+  currentPrice: {
+    type: Number,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Price is required.",
+    ],
+  },
+  position: {
+    type: String,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Position is required.",
+    ],
+  },
+  availability: { type: availabilitySchema },
+
+  playerImage: {
+    type: String,
+  },
+  score: { type: [scoreSchema], default: [] },
+  history: { type: [historySchema], default: [] },
 });
 
 playerSchema.plugin(autoIncrement.plugin, {
   model: "players",
   field: "playerId",
   startAt: 100000,
-  incrmentBy: 1,
+  incrementBy: 1,
 });
 
 module.exports = mongoose.model("players", playerSchema);

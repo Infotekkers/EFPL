@@ -4,12 +4,13 @@ const app = require("../../index");
 const User = require("../models/User");
 const Gameweek = require("../models/GameWeek");
 const populate = require("../utils/populate");
-
+const { bkConnection } = require("../models/Backup");
 const req = supertest(app);
 
 describe("Testing User ", () => {
   afterAll(() => {
     mongoose.connection.close();
+    bkConnection.close();
   });
 
   test("POST /user/register SUCCESS", async () => {

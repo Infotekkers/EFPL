@@ -2,12 +2,14 @@ const supertest = require("supertest");
 const app = require("../../index");
 const GameWeek = require("../models/GameWeek");
 const mongoose = require("mongoose");
+const { bkConnection } = require("../models/Backup");
 
 const req = supertest(app);
 
 afterAll(async () => {
   await GameWeek.deleteMany();
   mongoose.connection.close();
+  bkConnection.close();
 });
 describe("Testing Game week routes ", () => {
   let gameWeekId;
