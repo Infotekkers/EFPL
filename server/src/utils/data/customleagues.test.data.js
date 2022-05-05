@@ -1,11 +1,17 @@
 const [alissonWonderland, willianDollarBaby] = [
   {
-    leagueName: "alissonwonderland",
+    // Public by default if leagueType is not provided
     adminId: 123,
+    leagueName: "alissonwonderland",
+    leagueStartGameWeek: 1,
+    teams: [123],
   },
   {
-    leagueName: "williandollarybaby",
     adminId: 123,
+    leagueType: "Private",
+    leagueName: "williandollarbaby",
+    leagueStartGameWeek: 1,
+    teams: [123],
   },
 ];
 

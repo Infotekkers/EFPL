@@ -7,15 +7,14 @@ const CustomLeagueModel = require("../models/CustomLeague");
 // Test data import
 const {
   alissonWonderland,
-  // willianDolarBaby,
+  willianDollarBaby,
 } = require("../utils/data/customleagues.test.data");
 
 const req = supertest(app);
 
-describe("Administer league", () => {
+describe("League admin functions", () => {
   afterAll(async () => {
     await CustomLeagueModel.deleteMany({});
-    mongoose.connection.close();
   });
 
   test("POST /customLeagues/create Success: Custom League Created.🟢", async () => {
@@ -92,7 +91,7 @@ describe("Administer league", () => {
     expect(res.text).toBe("Unauthorized!");
   });
 
-  test("DELETE /customLeagues/delete Sucess: Custom League Deleted.🟢", async () => {
+  test("DELETE /customLeagues/delete Success: Custom League Deleted.🟢", async () => {
     const res = await req.delete("/customLeagues/delete").send({
       ...alissonWonderland,
       leagueId: 1000001,
@@ -113,5 +112,94 @@ describe("Administer league", () => {
     expect(res.text).toBe(
       "Couldn't find a custom league with the provided ID!"
     );
+  });
+});
+
+describe("League member functions", () => {
+  beforeAll(async () => {
+    await new CustomLeagueModel(alissonWonderland).save();
+    await new CustomLeagueModel(willianDollarBaby).save();
+  });
+
+  afterAll(async () => {
+    await CustomLeagueModel.deleteMany({});
+    mongoose.connection.close();
+  });
+
+  test("POST /customLeagues/join Success: Join 📢 Public Custom League.🟢", async () => {
+    const res = await req.post("/customLeagues/join").send({
+      leagueId: 1000001, // alissonwonderland
+      playerId: 69420,
+    });
+
+    expect(res.statusCode).toBe(200);
+    expect(res.text).toBe(
+      `Successfully joined ${alissonWonderland.leagueName}!`
+    );
+  });
+
+  test("POST /customLeagues/join Error: Player already a member of Custom League.🔴", async () => {
+    const res = await req.post("/customLeagues/join").send({
+      leagueId: 1000001, // alissonwonderland
+      playerId: 69420,
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.text).toBe("Player is already a member of the custom league!");
+  });
+
+  test("POST /customLeagues/join Error: Custom League doesn't exist.🔴", async () => {
+    const res = await req.post("/customLeagues/join").send({
+      leagueId: 100, // League IDs start from 1000001
+      playerId: 69420,
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.text).toBe(
+      "Couldn't find a custom league with the provided ID!"
+    );
+  });
+
+  test("POST /customLeagues/join Success: Join 🔒 Private Custom League.🟢", async () => {
+    const willianDollarBabyFromDB = await CustomLeagueModel.findOne({
+      leagueId: 1000002,
+    });
+
+    const res = await req.post("/customLeagues/join").send({
+      leagueId: 1000002, // williandollarbaby
+      playerId: 69420,
+      leagueCode: willianDollarBabyFromDB.leagueCode,
+    });
+
+    expect(res.statusCode).toBe(200);
+    expect(res.text).toBe(
+      `Successfully joined ${willianDollarBaby.leagueName}!`
+    );
+  });
+
+  test("POST /customLeagues/join Error: Player already a member of 🔒 Private Custom League.🔴", async () => {
+    const willianDollarBabyFromDB = await CustomLeagueModel.findOne({
+      leagueId: 1000002,
+    });
+
+    const res = await req.post("/customLeagues/join").send({
+      leagueId: 1000002, // williandollarbaby
+      playerId: 69420,
+      leagueCode: willianDollarBabyFromDB.leagueCode,
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.text).toBe("Player is already a member of the custom league!");
+  });
+
+  test("POST /customLeagues/join Error: Incorrect 🔒 Private Custom League Code.🔴", async () => {
+    const res = await req.post("/customLeagues/join").send({
+      leagueId: 1000002, // williandollarbaby
+      playerId: 42069,
+      leagueCode: "williandollarbaby", // Incorrect
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.text).toBe("Incorrect league code!");
   });
 });
