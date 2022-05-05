@@ -32,6 +32,11 @@ customLeagueSchema.pre("save", async function (next) {
 
 // Generate random leagueCode middleware
 customLeagueSchema.pre("save", async function (next) {
+  // Only generate leagueCode if private
+  if (this.leagueType === "Public") {
+    next();
+  }
+
   function generateLeagueCode() {
     return Math.random().toString(36).substring(2).toUpperCase();
   }
