@@ -202,4 +202,38 @@ describe("League member functions", () => {
     expect(res.statusCode).toBe(400);
     expect(res.text).toBe("Incorrect league code!");
   });
+
+  test("POST /customLeagues/leave Success: Leave Custom League.🟢", async () => {
+    const res = await req.post("/customLeagues/leave").send({
+      leagueId: 1000002,
+      playerId: 69420,
+    });
+
+    expect(res.statusCode).toBe(200);
+    expect(res.text).toBe(`Successfully left ${willianDollarBaby.leagueName}!`);
+  });
+
+  test("POST /customLeagues/leave Error: Player not a member of Custom League.🔴", async () => {
+    // Player has left custom league in the previous test
+
+    const res = await req.post("/customLeagues/leave").send({
+      leagueId: 1000002,
+      playerId: 69420,
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.text).toBe("Player is not a member of this custom league!");
+  });
+
+  test("POST /customLeagues/leave Error: Custom League doesn't exist.🔴", async () => {
+    const res = await req.post("/customLeagues/leave").send({
+      leagueId: 100, // League IDs start from 1000001
+      playerId: 69420,
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.text).toBe(
+      "Couldn't find a custom league with the provided ID!"
+    );
+  });
 });
