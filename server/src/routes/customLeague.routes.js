@@ -9,6 +9,7 @@ router.post("/create", customLeagueController.createCustomLeague);
 router.post("/join", customLeagueController.joinCustomLeague);
 router.post("/leave", customLeagueController.leaveCustomLeague);
 
+router.delete("/delete", customLeagueController.deleteCustomLeague);
 router.delete("/reset", customLeagueController.clearAllCustomLeagues);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const customLeagueSchema = mongoose.Schema({
-  leagueId: { type: Number },
+  leagueId: { type: Number, unique: true },
   leagueType: {
     type: String,
     required: true,
@@ -34,8 +34,8 @@ customLeagueSchema.pre("save", async function (next) {
 
 // Generate random leagueCode middleware
 customLeagueSchema.pre("save", async function (next) {
-  // Only generate leagueCode if private
-  if (this.leagueType === "Public" || this.leagueCode) {
+  // Don't generate on update
+  if (this.leagueCode) {
     next();
   }
 

@@ -26,6 +26,25 @@ const createCustomLeague = asyncHandler(async function (req, res) {
   res.send(`Custom league '${leagueName}' created!`);
 });
 
+const deleteCustomLeague = asyncHandler(async function (req, res) {
+  const { leagueId, playerId } = req.body;
+
+  const customLeague = await CustomLeagueModel.findOne({ leagueId });
+
+  if (!customLeague) {
+    res.status(400).send("Couldn't find a custom league with the provided ID!");
+  }
+
+  if (playerId === customLeague.adminId) {
+    await CustomLeagueModel.deleteOne({ leagueId });
+    res.send(
+      `Custom league ${customLeague.leagueName} has successfully been deleted!`
+    );
+  } else {
+    res.status(401).send("Unauthorized!");
+  }
+});
+
 const joinCustomLeague = asyncHandler(async function (req, res) {
   const { playerId, leagueId, leagueCode } = req.body;
 
@@ -64,16 +83,16 @@ const leaveCustomLeague = asyncHandler(async (req, res) => {
   }
 
   if (!customLeague.teams.includes(playerId)) {
-    res.status(400).send("Player is not a member of the custom league!");
+    res.status(400).send("Player is not a member of this custom league!");
   }
 
   customLeague.teams = customLeague.teams.filter(
     (teamId) => teamId !== playerId
   );
 
-  res.send(`Successfully left ${customLeague.leagueName}!`);
-
   await customLeague.save();
+
+  res.send(`Successfully left ${customLeague.leagueName}!`);
 });
 
 const clearAllCustomLeagues = asyncHandler(async (req, res) => {
@@ -85,6 +104,7 @@ const clearAllCustomLeagues = asyncHandler(async (req, res) => {
 module.exports = {
   getAllCustomLeagues,
   createCustomLeague,
+  deleteCustomLeague,
   joinCustomLeague,
   leaveCustomLeague,
   clearAllCustomLeagues,
