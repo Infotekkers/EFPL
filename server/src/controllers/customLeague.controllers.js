@@ -9,15 +9,15 @@ const getAllCustomLeagues = asyncHandler(async function (req, res) {
 
 const createCustomLeague = asyncHandler(async function (req, res) {
   const {
-    leagueName,
     adminId,
-    type = "Public",
+    leagueName,
+    leagueType = "Public",
     leagueStartGameWeek = 1,
   } = req.body;
 
   await new CustomLeagueModel({
     teams: [adminId],
-    type,
+    leagueType,
     leagueName,
     adminId,
     leagueStartGameWeek,
