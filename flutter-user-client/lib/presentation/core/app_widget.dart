@@ -1,6 +1,6 @@
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
-import 'package:efpl/l10n/l10n.dart';
+import 'package:efpl/locale/l10n.dart';
 import 'package:efpl/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
