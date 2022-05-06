@@ -22,6 +22,7 @@ const eplStatsRouter = require("./src/routes/eplStats.routes");
 const userRouter = require("./src/routes/user.routes");
 const fixtures = require("./src/routes/fixtures.routes");
 const gameWeekRoutes = require("./src/routes/gameWeek.routes");
+const customLeagueRoutes = require("./src/routes/customLeague.routes");
 const adminAuthRouter = require("./src/routes/adminAuth.routes");
 const backupRouter = require("./src/routes/backup.routes");
 
@@ -47,6 +48,7 @@ app.use("/fixtures", fixtures);
 app.use("/gameWeek", gameWeekRoutes);
 app.use("/eplStats", eplStatsRouter);
 app.use("/user", userRouter);
+app.use("/customLeagues", customLeagueRoutes);
 app.use("/admin", adminAuthRouter);
 app.use("/backup", backupRouter);
 
