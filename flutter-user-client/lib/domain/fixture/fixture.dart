@@ -16,6 +16,7 @@ abstract class Fixture with _$Fixture {
     required TeamCity homeTeamCity,
     required TeamCoach homeTeamCoach,
     required TeamLogo homeTeamLogo,
+    required Stadium homeTeamStadium,
     required StadiumCapacity homeTeamCapacity,
     //
     required Team awayTeam,
@@ -23,6 +24,7 @@ abstract class Fixture with _$Fixture {
     required TeamCity awayTeamCity,
     required TeamCoach awayTeamCoach,
     required TeamLogo awayTeamLogo,
+    required Stadium awayTeamStadium,
     required StadiumCapacity awayTeamCapacity,
     //
 
@@ -40,6 +42,7 @@ abstract class Fixture with _$Fixture {
         homeTeamCity: TeamCity(value: ""),
         homeTeamCoach: TeamCoach(value: ""),
         homeTeamLogo: TeamLogo(value: ""),
+        homeTeamStadium: Stadium(value: ""),
         homeTeamCapacity: StadiumCapacity(value: 0),
 
         //
@@ -48,6 +51,7 @@ abstract class Fixture with _$Fixture {
         awayTeamCity: TeamCity(value: ""),
         awayTeamCoach: TeamCoach(value: ""),
         awayTeamLogo: TeamLogo(value: ""),
+        awayTeamStadium: Stadium(value: ""),
         awayTeamCapacity: StadiumCapacity(value: 0),
         score: Score(value: ''),
         matchStat: MatchStat(value: const {}),

@@ -21,6 +21,7 @@ abstract class FixtureDTO implements _$FixtureDTO {
     required String homeTeamCity,
     required String homeTeamCoach,
     required String homeTeamLogo,
+    required String homeTeamStadium,
     required int homeTeamCapacity,
     //
     required String awayTeam,
@@ -28,6 +29,7 @@ abstract class FixtureDTO implements _$FixtureDTO {
     required String awayTeamCity,
     required String awayTeamCoach,
     required String awayTeamLogo,
+    required String awayTeamStadium,
     required int awayTeamCapacity,
     //
     required String score,
@@ -57,6 +59,9 @@ abstract class FixtureDTO implements _$FixtureDTO {
         homeTeamLogo: fixture.homeTeamLogo.isValid()
             ? fixture.homeTeamLogo.getOrCrash()
             : '',
+        homeTeamStadium: fixture.homeTeamStadium.isValid()
+            ? fixture.homeTeamStadium.getOrCrash()
+            : '',
         homeTeamCapacity: fixture.homeTeamCapacity.isValid()
             ? fixture.homeTeamCapacity.getOrCrash()
             : '',
@@ -75,6 +80,9 @@ abstract class FixtureDTO implements _$FixtureDTO {
             : '',
         awayTeamLogo: fixture.awayTeamLogo.isValid()
             ? fixture.awayTeamLogo.getOrCrash()
+            : '',
+        awayTeamStadium: fixture.awayTeamStadium.isValid()
+            ? fixture.awayTeamStadium.getOrCrash()
             : '',
         awayTeamCapacity: fixture.awayTeamCapacity.isValid()
             ? fixture.awayTeamCapacity.getOrCrash()
@@ -96,6 +104,7 @@ abstract class FixtureDTO implements _$FixtureDTO {
         homeTeamCity: TeamCity(value: homeTeamCity),
         homeTeamCoach: TeamCoach(value: homeTeamCoach),
         homeTeamLogo: TeamLogo(value: homeTeamLogo),
+        homeTeamStadium: Stadium(value: homeTeamStadium),
         homeTeamCapacity: StadiumCapacity(value: homeTeamCapacity),
         //
         awayTeam: Team(value: awayTeam),
@@ -103,6 +112,7 @@ abstract class FixtureDTO implements _$FixtureDTO {
         awayTeamCity: TeamCity(value: awayTeamCity),
         awayTeamCoach: TeamCoach(value: awayTeamCoach),
         awayTeamLogo: TeamLogo(value: awayTeamLogo),
+        awayTeamStadium: Stadium(value: awayTeamStadium),
         awayTeamCapacity: StadiumCapacity(value: awayTeamCapacity),
         //
         score: Score(value: score),

@@ -14,7 +14,7 @@ Future main() async {
 
   Hive.init(appDocumentDirectory.path);
 
-  // var efplCache = await Hive.openBox('efplCache');
+  var efplCache = await Hive.openBox('efplCache');
   // efplCache.clear();
 
   configureInjection(Environment.prod);

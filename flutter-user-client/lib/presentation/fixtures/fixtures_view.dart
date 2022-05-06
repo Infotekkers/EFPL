@@ -97,7 +97,7 @@ class FixturesView extends StatelessWidget {
                               children: [
                                 Container(
                                   margin:
-                                      const EdgeInsets.fromLTRB(0, 24, 0, 2),
+                                      const EdgeInsets.fromLTRB(0, 24, 0, 1),
                                   child: Text(
                                     date,
                                     style: const TextStyle(

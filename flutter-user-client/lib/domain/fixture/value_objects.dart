@@ -154,6 +154,19 @@ class TeamLogo extends ValueObject {
   const TeamLogo._({required this.value});
 }
 
+class Stadium extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Stadium({required String value}) {
+    return Stadium._(
+      value: validateStadium(stadium: value),
+    );
+  }
+
+  const Stadium._({required this.value});
+}
+
 class StadiumCapacity extends ValueObject {
   @override
   final Either<ValueFailure<String>, int> value;

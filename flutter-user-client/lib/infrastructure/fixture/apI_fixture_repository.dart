@@ -163,6 +163,9 @@ class ApiFixtureRepository implements IFixtureRepository {
                   homeTeamLogo: TeamLogo(
                     value: parsedCachedFixture['homeTeamLogo'],
                   ),
+                  homeTeamStadium: Stadium(
+                    value: parsedCachedFixture['homeTeamStadium'],
+                  ),
                   homeTeamCapacity: StadiumCapacity(
                     value: parsedCachedFixture['homeTeamCapacity'],
                   ),
@@ -180,6 +183,9 @@ class ApiFixtureRepository implements IFixtureRepository {
                   ),
                   awayTeamLogo: TeamLogo(
                     value: parsedCachedFixture['awayTeamLogo'],
+                  ),
+                  awayTeamStadium: Stadium(
+                    value: parsedCachedFixture['awayTeamStadium'],
                   ),
                   awayTeamCapacity: StadiumCapacity(
                     value: parsedCachedFixture['awayTeamCapacity'],

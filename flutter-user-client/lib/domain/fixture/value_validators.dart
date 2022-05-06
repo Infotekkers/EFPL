@@ -121,6 +121,13 @@ Either<ValueFailure<String>, String> validateTeamLogo(
   return right(teamLogo);
 }
 
+Either<ValueFailure<String>, String> validateStadium(
+    {required String stadium}) {
+  // if empty
+
+  return right(stadium);
+}
+
 Either<ValueFailure<String>, int> validateStadiumCapacity(
     {required int capacity}) {
   // if empty

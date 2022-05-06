@@ -18,22 +18,6 @@ class FixtureWidget extends StatelessWidget {
     String formattedDateTime = formatTime(schedule.toString());
     String matchStatus = fixture.status.value.fold((l) => '', (r) => r);
 
-    List homeTeamNameList = fixture.homeTeam.value.fold(
-      (l) => [],
-      (r) => r.split(" "),
-    );
-    homeTeamNameList.removeLast();
-    String homeTeamName = homeTeamNameList.join(" ");
-
-    List awayTeamNameList = fixture.awayTeam.value.fold(
-      (l) => [],
-      (r) => r.split(" "),
-    );
-    awayTeamNameList.removeLast();
-    String awayTeamName = awayTeamNameList.join(" ");
-
-    String _baseURL = dotenv.env["BASE_URL"].toString();
-
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed(
@@ -48,11 +32,9 @@ class FixtureWidget extends StatelessWidget {
           ),
           color: Colors.amber,
         ),
-        // margin: const EdgeInsets.symmetric(vertical: 5),
         padding: const EdgeInsets.symmetric(horizontal: 10),
         width: MediaQuery.of(context).size.width,
         height: 65,
-        // color: Colors.amber,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -70,7 +52,8 @@ class FixtureWidget extends StatelessWidget {
                       Text(
                         getShortName(fixture: fixture, isHome: 1),
                         style: const TextStyle(
-                          fontSize: 15,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       Container(
@@ -113,8 +96,8 @@ class FixtureWidget extends StatelessWidget {
                             (r) => r.split("v").join(" - "),
                           ),
                     style: const TextStyle(
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      fontSize: 15,
                     ),
                   ),
                 ],
@@ -148,7 +131,8 @@ class FixtureWidget extends StatelessWidget {
                       Text(
                         getShortName(fixture: fixture, isHome: 0),
                         style: const TextStyle(
-                          fontSize: 15,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
