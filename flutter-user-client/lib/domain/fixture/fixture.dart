@@ -10,12 +10,24 @@ abstract class Fixture with _$Fixture {
     required MatchId matchId,
     required Schedule schedule,
     required Status status,
+    //
     required Team homeTeam,
-    required Team awayTeam,
     required TeamLineUp homeTeamLineUp,
+    required TeamCity homeTeamCity,
+    required TeamCoach homeTeamCoach,
+    required TeamLogo homeTeamLogo,
+    required StadiumCapacity homeTeamCapacity,
+    //
+    required Team awayTeam,
     required TeamLineUp awayTeamLineUp,
+    required TeamCity awayTeamCity,
+    required TeamCoach awayTeamCoach,
+    required TeamLogo awayTeamLogo,
+    required StadiumCapacity awayTeamCapacity,
+    //
+
     required Score score,
-    required MatchStat matchStat,
+    required MatchStat? matchStat,
   }) = _Fixture;
 
   factory Fixture.initial() => Fixture(
@@ -24,10 +36,20 @@ abstract class Fixture with _$Fixture {
         schedule: Schedule(value: ""),
         status: Status(value: ""),
         homeTeam: Team(value: ""),
+        homeTeamLineUp: TeamLineUp(value: const {}),
+        homeTeamCity: TeamCity(value: ""),
+        homeTeamCoach: TeamCoach(value: ""),
+        homeTeamLogo: TeamLogo(value: ""),
+        homeTeamCapacity: StadiumCapacity(value: 0),
+
+        //
         awayTeam: Team(value: ""),
-        homeTeamLineUp: TeamLineUp(value: const []),
-        awayTeamLineUp: TeamLineUp(value: const []),
+        awayTeamLineUp: TeamLineUp(value: const {}),
+        awayTeamCity: TeamCity(value: ""),
+        awayTeamCoach: TeamCoach(value: ""),
+        awayTeamLogo: TeamLogo(value: ""),
+        awayTeamCapacity: StadiumCapacity(value: 0),
         score: Score(value: ''),
-        matchStat: MatchStat(value: const []),
+        matchStat: MatchStat(value: const {}),
       );
 }

@@ -26,7 +26,7 @@ class FixtureBloc extends Bloc<FixtureEvent, FixtureState> {
         );
 
         // get fixtures
-        final Either<FixtureFailures, List<Fixture>> failureOrSuccess =
+        final Either<dynamic, List<Fixture>> failureOrSuccess =
             await _iFixtureRepository.getFixtureByGameWeekId(
           gameWeekId: state.gameWeekId,
         );
@@ -49,17 +49,22 @@ class FixtureBloc extends Bloc<FixtureEvent, FixtureState> {
     // Increase GameWeek
     on<_increaseGameWeek>((event, emit) async {
       // increase GWN
+      int toSetGameWeek = state.gameWeekId + 1;
+      if (state.gameWeekId == 30) {
+        toSetGameWeek = 1;
+      }
+
       emit(
         state.copyWith(
-          gameWeekId: state.gameWeekId >= 30 ? 1 : state.gameWeekId + 1,
+          gameWeekId: toSetGameWeek,
           isLoading: true,
         ),
       );
 
       // get fixtures
-      final Either<FixtureFailures, List<Fixture>> failureOrSuccess =
+      final Either<dynamic, List<Fixture>> failureOrSuccess =
           await _iFixtureRepository.getFixtureByGameWeekId(
-        gameWeekId: state.gameWeekId >= 30 ? 1 : state.gameWeekId + 1,
+        gameWeekId: toSetGameWeek,
       );
 
       final List<Fixture> allFixtures = failureOrSuccess.fold(
@@ -78,18 +83,23 @@ class FixtureBloc extends Bloc<FixtureEvent, FixtureState> {
 
     // Decrease GameWeek
     on<_decreaseGameWeek>((event, emit) async {
-      // increase GWN
+      // decrease GWN
+      int toSetGameWeek = state.gameWeekId - 1;
+      if (state.gameWeekId == 1) {
+        toSetGameWeek = 30;
+      }
+
       emit(
         state.copyWith(
-          gameWeekId: state.gameWeekId <= 1 ? 30 : state.gameWeekId - 1,
+          gameWeekId: toSetGameWeek,
           isLoading: true,
         ),
       );
 
       // get fixtures
-      final Either<FixtureFailures, List<Fixture>> failureOrSuccess =
+      final Either<dynamic, List<Fixture>> failureOrSuccess =
           await _iFixtureRepository.getFixtureByGameWeekId(
-        gameWeekId: state.gameWeekId >= 30 ? 1 : state.gameWeekId + 1,
+        gameWeekId: toSetGameWeek,
       );
 
       final List<Fixture> allFixtures = failureOrSuccess.fold(

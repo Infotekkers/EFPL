@@ -7,8 +7,7 @@ class FixtureState with _$FixtureState {
     required int gameWeekId,
     required bool showErrorMessages,
     required bool isLoading,
-    required Option<Either<FixtureFailures, List<Fixture>>>
-        fixtureFailureOrSuccess,
+    required Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess,
     required Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess,
   }) = _FixtureState;
 

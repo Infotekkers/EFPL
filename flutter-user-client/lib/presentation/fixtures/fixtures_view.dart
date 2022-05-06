@@ -4,7 +4,9 @@ import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/widgets/fixture_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class FixturesView extends StatelessWidget {
   const FixturesView({Key? key}) : super(key: key);
@@ -20,101 +22,113 @@ class FixturesView extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var allFixtures = [state.allFixtures];
-        if (state.allFixtures.length > 0) {
+        if (state.allFixtures.isNotEmpty) {
           allFixtures = formatByDate(state.allFixtures);
         }
 
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 100, vertical: 12),
-                // margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-                color: Colors.grey,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        _fixtureBloc.add(
-                          const FixtureEvent.decreaseGameWeek(),
-                        );
-                      },
-                      child: const Icon(Icons.arrow_back_ios),
-                    ),
-                    Text("GameWeek  " + state.gameWeekId.toString()),
-                    InkWell(
-                      onTap: () {
-                        _fixtureBloc.add(
-                          const FixtureEvent.increaseGameWeek(),
-                        );
-                      },
-                      child: const Icon(Icons.arrow_forward_ios),
-                    )
-                  ],
-                ),
-              ),
-              state.isLoading == true
-                  ? SizedBox(
-                      height: MediaQuery.of(context).size.height - 60,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          SizedBox(
-                            height: 40,
-                            child: CircularProgressIndicator(),
-                          ),
-                        ],
-                      ),
-                    )
-                  : SizedBox(
-                      height: MediaQuery.of(context).size.height - 60,
-                      child: ListView.builder(
-                        itemCount: allFixtures.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          List<Fixture> fixture = allFixtures[index];
-                          var date = '';
-                          if (fixture.isNotEmpty) {
-                            date = formatMatchDate(fixture[0]);
-                          }
-
-                          return Column(
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.fromLTRB(0, 24, 0, 2),
-                                child: Text(
-                                  date,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Container(
-                                color: Colors.greenAccent,
-                                child: Column(
-                                  children: List.generate(
-                                    fixture.length,
-                                    (index) {
-                                      return FixtureWidget(
-                                        fixture: fixture[index],
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
+        return LiquidPullToRefresh(
+          onRefresh: () async {
+            _fixtureBloc.add(
+              const FixtureEvent.loadFixtures(),
+            );
+          },
+          height: 60,
+          showChildOpacityTransition: false,
+          animSpeedFactor: 2,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 100, vertical: 12),
+                  // margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.grey,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          _fixtureBloc.add(
+                            const FixtureEvent.decreaseGameWeek(),
                           );
                         },
+                        child: const Icon(Icons.arrow_back_ios),
                       ),
-                    ),
-            ],
+                      Text("GameWeek  " + state.gameWeekId.toString()),
+                      InkWell(
+                        onTap: () {
+                          _fixtureBloc.add(
+                            const FixtureEvent.increaseGameWeek(),
+                          );
+                        },
+                        child: const Icon(Icons.arrow_forward_ios),
+                      )
+                    ],
+                  ),
+                ),
+                state.isLoading == true
+                    ? SizedBox(
+                        height: MediaQuery.of(context).size.height - 60,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            SizedBox(
+                              height: 40,
+                              child: CircularProgressIndicator(),
+                            ),
+                          ],
+                        ),
+                      )
+                    : SizedBox(
+                        height: MediaQuery.of(context).size.height - 60,
+                        child: ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: allFixtures.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            List<Fixture> fixture = allFixtures[index];
+                            var date = '';
+                            if (fixture.isNotEmpty) {
+                              date = formatMatchDate(fixture[0]);
+                            }
+
+                            return Column(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(0, 24, 0, 2),
+                                  child: Text(
+                                    date,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Container(
+                                  color: Colors.greenAccent,
+                                  child: Column(
+                                    children: List.generate(
+                                      fixture.length,
+                                      (index) {
+                                        return FixtureWidget(
+                                          fixture: fixture[index],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+              ],
+            ),
           ),
         );
       },

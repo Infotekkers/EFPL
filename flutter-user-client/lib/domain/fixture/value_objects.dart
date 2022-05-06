@@ -76,9 +76,9 @@ class Team extends ValueObject {
 // Team Lineup
 class TeamLineUp extends ValueObject {
   @override
-  final Either<ValueFailure<String>, List> value;
+  final Either<ValueFailure<String>, Map> value;
 
-  factory TeamLineUp({required List value}) {
+  factory TeamLineUp({required Map value}) {
     return TeamLineUp._(
       value: validateTeamLineUp(teamLineUp: value),
     );
@@ -104,13 +104,65 @@ class Score extends ValueObject {
 // Match Stat
 class MatchStat extends ValueObject {
   @override
-  final Either<ValueFailure<String>, List> value;
+  final Either<ValueFailure<String>, Map> value;
 
-  factory MatchStat({required List value}) {
+  factory MatchStat({required Map value}) {
     return MatchStat._(
       value: validateMatchStat(matchStat: value),
     );
   }
 
   const MatchStat._({required this.value});
+}
+
+class TeamCity extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TeamCity({required String value}) {
+    return TeamCity._(
+      value: validateTeamCity(teamCity: value),
+    );
+  }
+
+  const TeamCity._({required this.value});
+}
+
+class TeamCoach extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TeamCoach({required String value}) {
+    return TeamCoach._(
+      value: validateTeamCoach(teamCoach: value),
+    );
+  }
+
+  const TeamCoach._({required this.value});
+}
+
+class TeamLogo extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TeamLogo({required String value}) {
+    return TeamLogo._(
+      value: validateTeamLogo(teamLogo: value),
+    );
+  }
+
+  const TeamLogo._({required this.value});
+}
+
+class StadiumCapacity extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, int> value;
+
+  factory StadiumCapacity({required int value}) {
+    return StadiumCapacity._(
+      value: validateStadiumCapacity(capacity: value),
+    );
+  }
+
+  const StadiumCapacity._({required this.value});
 }

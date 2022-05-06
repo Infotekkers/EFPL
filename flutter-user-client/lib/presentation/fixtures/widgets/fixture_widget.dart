@@ -1,5 +1,8 @@
+import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class FixtureWidget extends StatelessWidget {
   final Fixture fixture;
@@ -10,10 +13,26 @@ class FixtureWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // prep
     var schedule = fixture.schedule.value.fold((l) => 0, (r) => r);
     String formattedDateTime = formatTime(schedule.toString());
     String matchStatus = fixture.status.value.fold((l) => '', (r) => r);
-    String matchId = fixture.matchId.value.fold((l) => '', (r) => r);
+
+    List homeTeamNameList = fixture.homeTeam.value.fold(
+      (l) => [],
+      (r) => r.split(" "),
+    );
+    homeTeamNameList.removeLast();
+    String homeTeamName = homeTeamNameList.join(" ");
+
+    List awayTeamNameList = fixture.awayTeam.value.fold(
+      (l) => [],
+      (r) => r.split(" "),
+    );
+    awayTeamNameList.removeLast();
+    String awayTeamName = awayTeamNameList.join(" ");
+
+    String _baseURL = dotenv.env["BASE_URL"].toString();
 
     return InkWell(
       onTap: () {
@@ -32,7 +51,7 @@ class FixtureWidget extends StatelessWidget {
         // margin: const EdgeInsets.symmetric(vertical: 5),
         padding: const EdgeInsets.symmetric(horizontal: 10),
         width: MediaQuery.of(context).size.width,
-        height: 55,
+        height: 65,
         // color: Colors.amber,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,8 +64,31 @@ class FixtureWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    fixture.homeTeam.value.fold((l) => '', (r) => r),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        getShortName(fixture: fixture, isHome: 1),
+                        style: const TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                        width: 40,
+                        height: 40,
+                        child: CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          imageUrl: getImageUrl(fixture: fixture, isHome: 1),
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.error,
+                            color: Colors.red,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),
@@ -72,7 +114,7 @@ class FixtureWidget extends StatelessWidget {
                           ),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      fontSize: 15,
                     ),
                   ),
                 ],
@@ -85,7 +127,32 @@ class FixtureWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(fixture.awayTeam.value.fold((l) => '', (r) => r)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                        width: 40,
+                        height: 40,
+                        child: CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          imageUrl: getImageUrl(fixture: fixture, isHome: 0),
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.error,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        getShortName(fixture: fixture, isHome: 0),
+                        style: const TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
               height: 50,
@@ -106,4 +173,47 @@ String formatTime(String schedule) {
       date.minute > 9 ? date.minute.toString() : "0" + date.minute.toString();
 
   return hour + " : " + minute;
+}
+
+String getImageUrl({required Fixture fixture, required int isHome}) {
+  String finalPath = dotenv.env["BASE_URL"].toString();
+  if (isHome == 1) {
+    String path = fixture.homeTeamLogo.value.fold(
+      (l) => '',
+      (r) => r.toString(),
+    );
+
+    finalPath = finalPath + path;
+  } else {
+    String path = fixture.awayTeamLogo.value.fold(
+      (l) => '',
+      (r) => r.toString(),
+    );
+    finalPath = finalPath + path;
+  }
+
+  return finalPath;
+}
+
+String getShortName({required Fixture fixture, required int isHome}) {
+  if (isHome == 1) {
+    List nameLong = fixture.homeTeam.value
+        .fold(
+          (l) => '',
+          (r) => r.toString(),
+        )
+        .split(" ");
+
+    nameLong.removeLast();
+    return nameLong.join(" ");
+  } else {
+    List nameLong = fixture.awayTeam.value
+        .fold(
+          (l) => '',
+          (r) => r.toString(),
+        )
+        .split(" ");
+    nameLong.removeLast();
+    return nameLong.join(" ");
+  }
 }

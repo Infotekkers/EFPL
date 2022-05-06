@@ -16,5 +16,13 @@ abstract class HTTPFailures<T> with _$HTTPFailures<T> {
   const factory HTTPFailures.unauthorized({required T failedValue}) =
       Unauthorized<T>;
 
+  const factory HTTPFailures.socketError({required T failedValue}) =
+      SocketError<T>;
+
+  const factory HTTPFailures.handShakeError({required T failedValue}) =
+      HandShakeError<T>;
+
+  const factory HTTPFailures.unexpectedError({required T failedValue}) =
+      UnexpectedError<T>;
   // .... more here
 }

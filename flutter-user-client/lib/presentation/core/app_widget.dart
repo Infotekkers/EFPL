@@ -52,7 +52,7 @@ class AppWidget extends StatelessWidget {
                 ),
               ),
             ),
-            initialRoute: "/",
+            initialRoute: "/home",
             routes: _appRouter.allRoutes,
           );
         },

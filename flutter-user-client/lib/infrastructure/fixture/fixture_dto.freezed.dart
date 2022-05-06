@@ -22,25 +22,41 @@ class _$FixtureDTOTearOff {
   const _$FixtureDTOTearOff();
 
   _FixtureDTO call(
-      {required int gameweekId,
+      {required int gameWeekId,
       required String matchId,
       required String schedule,
       required String status,
       required String homeTeam,
+      required Map<dynamic, dynamic> homeTeamLineUp,
+      required String homeTeamCity,
+      required String homeTeamCoach,
+      required String homeTeamLogo,
+      required int homeTeamCapacity,
       required String awayTeam,
-      required List<dynamic> homeTeamLineUp,
-      required List<dynamic> awayTeamLineUp,
+      required Map<dynamic, dynamic> awayTeamLineUp,
+      required String awayTeamCity,
+      required String awayTeamCoach,
+      required String awayTeamLogo,
+      required int awayTeamCapacity,
       required String score,
-      required List<dynamic> matchStat}) {
+      required dynamic matchStat}) {
     return _FixtureDTO(
-      gameweekId: gameweekId,
+      gameWeekId: gameWeekId,
       matchId: matchId,
       schedule: schedule,
       status: status,
       homeTeam: homeTeam,
-      awayTeam: awayTeam,
       homeTeamLineUp: homeTeamLineUp,
+      homeTeamCity: homeTeamCity,
+      homeTeamCoach: homeTeamCoach,
+      homeTeamLogo: homeTeamLogo,
+      homeTeamCapacity: homeTeamCapacity,
+      awayTeam: awayTeam,
       awayTeamLineUp: awayTeamLineUp,
+      awayTeamCity: awayTeamCity,
+      awayTeamCoach: awayTeamCoach,
+      awayTeamLogo: awayTeamLogo,
+      awayTeamCapacity: awayTeamCapacity,
       score: score,
       matchStat: matchStat,
     );
@@ -56,16 +72,26 @@ const $FixtureDTO = _$FixtureDTOTearOff();
 
 /// @nodoc
 mixin _$FixtureDTO {
-  int get gameweekId => throw _privateConstructorUsedError;
+  int get gameWeekId => throw _privateConstructorUsedError;
   String get matchId => throw _privateConstructorUsedError;
   String get schedule => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError; //
   String get homeTeam => throw _privateConstructorUsedError;
+  Map<dynamic, dynamic> get homeTeamLineUp =>
+      throw _privateConstructorUsedError;
+  String get homeTeamCity => throw _privateConstructorUsedError;
+  String get homeTeamCoach => throw _privateConstructorUsedError;
+  String get homeTeamLogo => throw _privateConstructorUsedError;
+  int get homeTeamCapacity => throw _privateConstructorUsedError; //
   String get awayTeam => throw _privateConstructorUsedError;
-  List<dynamic> get homeTeamLineUp => throw _privateConstructorUsedError;
-  List<dynamic> get awayTeamLineUp => throw _privateConstructorUsedError;
+  Map<dynamic, dynamic> get awayTeamLineUp =>
+      throw _privateConstructorUsedError;
+  String get awayTeamCity => throw _privateConstructorUsedError;
+  String get awayTeamCoach => throw _privateConstructorUsedError;
+  String get awayTeamLogo => throw _privateConstructorUsedError;
+  int get awayTeamCapacity => throw _privateConstructorUsedError; //
   String get score => throw _privateConstructorUsedError;
-  List<dynamic> get matchStat => throw _privateConstructorUsedError;
+  dynamic get matchStat => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -79,16 +105,24 @@ abstract class $FixtureDTOCopyWith<$Res> {
           FixtureDTO value, $Res Function(FixtureDTO) then) =
       _$FixtureDTOCopyWithImpl<$Res>;
   $Res call(
-      {int gameweekId,
+      {int gameWeekId,
       String matchId,
       String schedule,
       String status,
       String homeTeam,
+      Map<dynamic, dynamic> homeTeamLineUp,
+      String homeTeamCity,
+      String homeTeamCoach,
+      String homeTeamLogo,
+      int homeTeamCapacity,
       String awayTeam,
-      List<dynamic> homeTeamLineUp,
-      List<dynamic> awayTeamLineUp,
+      Map<dynamic, dynamic> awayTeamLineUp,
+      String awayTeamCity,
+      String awayTeamCoach,
+      String awayTeamLogo,
+      int awayTeamCapacity,
       String score,
-      List<dynamic> matchStat});
+      dynamic matchStat});
 }
 
 /// @nodoc
@@ -101,21 +135,29 @@ class _$FixtureDTOCopyWithImpl<$Res> implements $FixtureDTOCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? gameweekId = freezed,
+    Object? gameWeekId = freezed,
     Object? matchId = freezed,
     Object? schedule = freezed,
     Object? status = freezed,
     Object? homeTeam = freezed,
-    Object? awayTeam = freezed,
     Object? homeTeamLineUp = freezed,
+    Object? homeTeamCity = freezed,
+    Object? homeTeamCoach = freezed,
+    Object? homeTeamLogo = freezed,
+    Object? homeTeamCapacity = freezed,
+    Object? awayTeam = freezed,
     Object? awayTeamLineUp = freezed,
+    Object? awayTeamCity = freezed,
+    Object? awayTeamCoach = freezed,
+    Object? awayTeamLogo = freezed,
+    Object? awayTeamCapacity = freezed,
     Object? score = freezed,
     Object? matchStat = freezed,
   }) {
     return _then(_value.copyWith(
-      gameweekId: gameweekId == freezed
-          ? _value.gameweekId
-          : gameweekId // ignore: cast_nullable_to_non_nullable
+      gameWeekId: gameWeekId == freezed
+          ? _value.gameWeekId
+          : gameWeekId // ignore: cast_nullable_to_non_nullable
               as int,
       matchId: matchId == freezed
           ? _value.matchId
@@ -133,18 +175,50 @@ class _$FixtureDTOCopyWithImpl<$Res> implements $FixtureDTOCopyWith<$Res> {
           ? _value.homeTeam
           : homeTeam // ignore: cast_nullable_to_non_nullable
               as String,
+      homeTeamLineUp: homeTeamLineUp == freezed
+          ? _value.homeTeamLineUp
+          : homeTeamLineUp // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>,
+      homeTeamCity: homeTeamCity == freezed
+          ? _value.homeTeamCity
+          : homeTeamCity // ignore: cast_nullable_to_non_nullable
+              as String,
+      homeTeamCoach: homeTeamCoach == freezed
+          ? _value.homeTeamCoach
+          : homeTeamCoach // ignore: cast_nullable_to_non_nullable
+              as String,
+      homeTeamLogo: homeTeamLogo == freezed
+          ? _value.homeTeamLogo
+          : homeTeamLogo // ignore: cast_nullable_to_non_nullable
+              as String,
+      homeTeamCapacity: homeTeamCapacity == freezed
+          ? _value.homeTeamCapacity
+          : homeTeamCapacity // ignore: cast_nullable_to_non_nullable
+              as int,
       awayTeam: awayTeam == freezed
           ? _value.awayTeam
           : awayTeam // ignore: cast_nullable_to_non_nullable
               as String,
-      homeTeamLineUp: homeTeamLineUp == freezed
-          ? _value.homeTeamLineUp
-          : homeTeamLineUp // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
       awayTeamLineUp: awayTeamLineUp == freezed
           ? _value.awayTeamLineUp
           : awayTeamLineUp // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as Map<dynamic, dynamic>,
+      awayTeamCity: awayTeamCity == freezed
+          ? _value.awayTeamCity
+          : awayTeamCity // ignore: cast_nullable_to_non_nullable
+              as String,
+      awayTeamCoach: awayTeamCoach == freezed
+          ? _value.awayTeamCoach
+          : awayTeamCoach // ignore: cast_nullable_to_non_nullable
+              as String,
+      awayTeamLogo: awayTeamLogo == freezed
+          ? _value.awayTeamLogo
+          : awayTeamLogo // ignore: cast_nullable_to_non_nullable
+              as String,
+      awayTeamCapacity: awayTeamCapacity == freezed
+          ? _value.awayTeamCapacity
+          : awayTeamCapacity // ignore: cast_nullable_to_non_nullable
+              as int,
       score: score == freezed
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -152,7 +226,7 @@ class _$FixtureDTOCopyWithImpl<$Res> implements $FixtureDTOCopyWith<$Res> {
       matchStat: matchStat == freezed
           ? _value.matchStat
           : matchStat // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as dynamic,
     ));
   }
 }
@@ -164,16 +238,24 @@ abstract class _$FixtureDTOCopyWith<$Res> implements $FixtureDTOCopyWith<$Res> {
       __$FixtureDTOCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int gameweekId,
+      {int gameWeekId,
       String matchId,
       String schedule,
       String status,
       String homeTeam,
+      Map<dynamic, dynamic> homeTeamLineUp,
+      String homeTeamCity,
+      String homeTeamCoach,
+      String homeTeamLogo,
+      int homeTeamCapacity,
       String awayTeam,
-      List<dynamic> homeTeamLineUp,
-      List<dynamic> awayTeamLineUp,
+      Map<dynamic, dynamic> awayTeamLineUp,
+      String awayTeamCity,
+      String awayTeamCoach,
+      String awayTeamLogo,
+      int awayTeamCapacity,
       String score,
-      List<dynamic> matchStat});
+      dynamic matchStat});
 }
 
 /// @nodoc
@@ -188,21 +270,29 @@ class __$FixtureDTOCopyWithImpl<$Res> extends _$FixtureDTOCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? gameweekId = freezed,
+    Object? gameWeekId = freezed,
     Object? matchId = freezed,
     Object? schedule = freezed,
     Object? status = freezed,
     Object? homeTeam = freezed,
-    Object? awayTeam = freezed,
     Object? homeTeamLineUp = freezed,
+    Object? homeTeamCity = freezed,
+    Object? homeTeamCoach = freezed,
+    Object? homeTeamLogo = freezed,
+    Object? homeTeamCapacity = freezed,
+    Object? awayTeam = freezed,
     Object? awayTeamLineUp = freezed,
+    Object? awayTeamCity = freezed,
+    Object? awayTeamCoach = freezed,
+    Object? awayTeamLogo = freezed,
+    Object? awayTeamCapacity = freezed,
     Object? score = freezed,
     Object? matchStat = freezed,
   }) {
     return _then(_FixtureDTO(
-      gameweekId: gameweekId == freezed
-          ? _value.gameweekId
-          : gameweekId // ignore: cast_nullable_to_non_nullable
+      gameWeekId: gameWeekId == freezed
+          ? _value.gameWeekId
+          : gameWeekId // ignore: cast_nullable_to_non_nullable
               as int,
       matchId: matchId == freezed
           ? _value.matchId
@@ -220,18 +310,50 @@ class __$FixtureDTOCopyWithImpl<$Res> extends _$FixtureDTOCopyWithImpl<$Res>
           ? _value.homeTeam
           : homeTeam // ignore: cast_nullable_to_non_nullable
               as String,
+      homeTeamLineUp: homeTeamLineUp == freezed
+          ? _value.homeTeamLineUp
+          : homeTeamLineUp // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>,
+      homeTeamCity: homeTeamCity == freezed
+          ? _value.homeTeamCity
+          : homeTeamCity // ignore: cast_nullable_to_non_nullable
+              as String,
+      homeTeamCoach: homeTeamCoach == freezed
+          ? _value.homeTeamCoach
+          : homeTeamCoach // ignore: cast_nullable_to_non_nullable
+              as String,
+      homeTeamLogo: homeTeamLogo == freezed
+          ? _value.homeTeamLogo
+          : homeTeamLogo // ignore: cast_nullable_to_non_nullable
+              as String,
+      homeTeamCapacity: homeTeamCapacity == freezed
+          ? _value.homeTeamCapacity
+          : homeTeamCapacity // ignore: cast_nullable_to_non_nullable
+              as int,
       awayTeam: awayTeam == freezed
           ? _value.awayTeam
           : awayTeam // ignore: cast_nullable_to_non_nullable
               as String,
-      homeTeamLineUp: homeTeamLineUp == freezed
-          ? _value.homeTeamLineUp
-          : homeTeamLineUp // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
       awayTeamLineUp: awayTeamLineUp == freezed
           ? _value.awayTeamLineUp
           : awayTeamLineUp // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as Map<dynamic, dynamic>,
+      awayTeamCity: awayTeamCity == freezed
+          ? _value.awayTeamCity
+          : awayTeamCity // ignore: cast_nullable_to_non_nullable
+              as String,
+      awayTeamCoach: awayTeamCoach == freezed
+          ? _value.awayTeamCoach
+          : awayTeamCoach // ignore: cast_nullable_to_non_nullable
+              as String,
+      awayTeamLogo: awayTeamLogo == freezed
+          ? _value.awayTeamLogo
+          : awayTeamLogo // ignore: cast_nullable_to_non_nullable
+              as String,
+      awayTeamCapacity: awayTeamCapacity == freezed
+          ? _value.awayTeamCapacity
+          : awayTeamCapacity // ignore: cast_nullable_to_non_nullable
+              as int,
       score: score == freezed
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -239,7 +361,7 @@ class __$FixtureDTOCopyWithImpl<$Res> extends _$FixtureDTOCopyWithImpl<$Res>
       matchStat: matchStat == freezed
           ? _value.matchStat
           : matchStat // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as dynamic,
     ));
   }
 }
@@ -248,14 +370,22 @@ class __$FixtureDTOCopyWithImpl<$Res> extends _$FixtureDTOCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_FixtureDTO extends _FixtureDTO {
   const _$_FixtureDTO(
-      {required this.gameweekId,
+      {required this.gameWeekId,
       required this.matchId,
       required this.schedule,
       required this.status,
       required this.homeTeam,
-      required this.awayTeam,
       required this.homeTeamLineUp,
+      required this.homeTeamCity,
+      required this.homeTeamCoach,
+      required this.homeTeamLogo,
+      required this.homeTeamCapacity,
+      required this.awayTeam,
       required this.awayTeamLineUp,
+      required this.awayTeamCity,
+      required this.awayTeamCoach,
+      required this.awayTeamLogo,
+      required this.awayTeamCapacity,
       required this.score,
       required this.matchStat})
       : super._();
@@ -264,29 +394,45 @@ class _$_FixtureDTO extends _FixtureDTO {
       _$$_FixtureDTOFromJson(json);
 
   @override
-  final int gameweekId;
+  final int gameWeekId;
   @override
   final String matchId;
   @override
   final String schedule;
   @override
   final String status;
-  @override
+  @override //
   final String homeTeam;
   @override
+  final Map<dynamic, dynamic> homeTeamLineUp;
+  @override
+  final String homeTeamCity;
+  @override
+  final String homeTeamCoach;
+  @override
+  final String homeTeamLogo;
+  @override
+  final int homeTeamCapacity;
+  @override //
   final String awayTeam;
   @override
-  final List<dynamic> homeTeamLineUp;
+  final Map<dynamic, dynamic> awayTeamLineUp;
   @override
-  final List<dynamic> awayTeamLineUp;
+  final String awayTeamCity;
   @override
+  final String awayTeamCoach;
+  @override
+  final String awayTeamLogo;
+  @override
+  final int awayTeamCapacity;
+  @override //
   final String score;
   @override
-  final List<dynamic> matchStat;
+  final dynamic matchStat;
 
   @override
   String toString() {
-    return 'FixtureDTO(gameweekId: $gameweekId, matchId: $matchId, schedule: $schedule, status: $status, homeTeam: $homeTeam, awayTeam: $awayTeam, homeTeamLineUp: $homeTeamLineUp, awayTeamLineUp: $awayTeamLineUp, score: $score, matchStat: $matchStat)';
+    return 'FixtureDTO(gameWeekId: $gameWeekId, matchId: $matchId, schedule: $schedule, status: $status, homeTeam: $homeTeam, homeTeamLineUp: $homeTeamLineUp, homeTeamCity: $homeTeamCity, homeTeamCoach: $homeTeamCoach, homeTeamLogo: $homeTeamLogo, homeTeamCapacity: $homeTeamCapacity, awayTeam: $awayTeam, awayTeamLineUp: $awayTeamLineUp, awayTeamCity: $awayTeamCity, awayTeamCoach: $awayTeamCoach, awayTeamLogo: $awayTeamLogo, awayTeamCapacity: $awayTeamCapacity, score: $score, matchStat: $matchStat)';
   }
 
   @override
@@ -295,16 +441,32 @@ class _$_FixtureDTO extends _FixtureDTO {
         (other.runtimeType == runtimeType &&
             other is _FixtureDTO &&
             const DeepCollectionEquality()
-                .equals(other.gameweekId, gameweekId) &&
+                .equals(other.gameWeekId, gameWeekId) &&
             const DeepCollectionEquality().equals(other.matchId, matchId) &&
             const DeepCollectionEquality().equals(other.schedule, schedule) &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality().equals(other.homeTeam, homeTeam) &&
-            const DeepCollectionEquality().equals(other.awayTeam, awayTeam) &&
             const DeepCollectionEquality()
                 .equals(other.homeTeamLineUp, homeTeamLineUp) &&
             const DeepCollectionEquality()
+                .equals(other.homeTeamCity, homeTeamCity) &&
+            const DeepCollectionEquality()
+                .equals(other.homeTeamCoach, homeTeamCoach) &&
+            const DeepCollectionEquality()
+                .equals(other.homeTeamLogo, homeTeamLogo) &&
+            const DeepCollectionEquality()
+                .equals(other.homeTeamCapacity, homeTeamCapacity) &&
+            const DeepCollectionEquality().equals(other.awayTeam, awayTeam) &&
+            const DeepCollectionEquality()
                 .equals(other.awayTeamLineUp, awayTeamLineUp) &&
+            const DeepCollectionEquality()
+                .equals(other.awayTeamCity, awayTeamCity) &&
+            const DeepCollectionEquality()
+                .equals(other.awayTeamCoach, awayTeamCoach) &&
+            const DeepCollectionEquality()
+                .equals(other.awayTeamLogo, awayTeamLogo) &&
+            const DeepCollectionEquality()
+                .equals(other.awayTeamCapacity, awayTeamCapacity) &&
             const DeepCollectionEquality().equals(other.score, score) &&
             const DeepCollectionEquality().equals(other.matchStat, matchStat));
   }
@@ -312,14 +474,22 @@ class _$_FixtureDTO extends _FixtureDTO {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(gameweekId),
+      const DeepCollectionEquality().hash(gameWeekId),
       const DeepCollectionEquality().hash(matchId),
       const DeepCollectionEquality().hash(schedule),
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(homeTeam),
-      const DeepCollectionEquality().hash(awayTeam),
       const DeepCollectionEquality().hash(homeTeamLineUp),
+      const DeepCollectionEquality().hash(homeTeamCity),
+      const DeepCollectionEquality().hash(homeTeamCoach),
+      const DeepCollectionEquality().hash(homeTeamLogo),
+      const DeepCollectionEquality().hash(homeTeamCapacity),
+      const DeepCollectionEquality().hash(awayTeam),
       const DeepCollectionEquality().hash(awayTeamLineUp),
+      const DeepCollectionEquality().hash(awayTeamCity),
+      const DeepCollectionEquality().hash(awayTeamCoach),
+      const DeepCollectionEquality().hash(awayTeamLogo),
+      const DeepCollectionEquality().hash(awayTeamCapacity),
       const DeepCollectionEquality().hash(score),
       const DeepCollectionEquality().hash(matchStat));
 
@@ -336,41 +506,65 @@ class _$_FixtureDTO extends _FixtureDTO {
 
 abstract class _FixtureDTO extends FixtureDTO {
   const factory _FixtureDTO(
-      {required int gameweekId,
+      {required int gameWeekId,
       required String matchId,
       required String schedule,
       required String status,
       required String homeTeam,
+      required Map<dynamic, dynamic> homeTeamLineUp,
+      required String homeTeamCity,
+      required String homeTeamCoach,
+      required String homeTeamLogo,
+      required int homeTeamCapacity,
       required String awayTeam,
-      required List<dynamic> homeTeamLineUp,
-      required List<dynamic> awayTeamLineUp,
+      required Map<dynamic, dynamic> awayTeamLineUp,
+      required String awayTeamCity,
+      required String awayTeamCoach,
+      required String awayTeamLogo,
+      required int awayTeamCapacity,
       required String score,
-      required List<dynamic> matchStat}) = _$_FixtureDTO;
+      required dynamic matchStat}) = _$_FixtureDTO;
   const _FixtureDTO._() : super._();
 
   factory _FixtureDTO.fromJson(Map<String, dynamic> json) =
       _$_FixtureDTO.fromJson;
 
   @override
-  int get gameweekId;
+  int get gameWeekId;
   @override
   String get matchId;
   @override
   String get schedule;
   @override
   String get status;
-  @override
+  @override //
   String get homeTeam;
   @override
+  Map<dynamic, dynamic> get homeTeamLineUp;
+  @override
+  String get homeTeamCity;
+  @override
+  String get homeTeamCoach;
+  @override
+  String get homeTeamLogo;
+  @override
+  int get homeTeamCapacity;
+  @override //
   String get awayTeam;
   @override
-  List<dynamic> get homeTeamLineUp;
+  Map<dynamic, dynamic> get awayTeamLineUp;
   @override
-  List<dynamic> get awayTeamLineUp;
+  String get awayTeamCity;
   @override
+  String get awayTeamCoach;
+  @override
+  String get awayTeamLogo;
+  @override
+  int get awayTeamCapacity;
+  @override //
   String get score;
   @override
-  List<dynamic> get matchStat;
+  dynamic get matchStat;
   @override
   @JsonKey(ignore: true)
   _$FixtureDTOCopyWith<_FixtureDTO> get copyWith =>

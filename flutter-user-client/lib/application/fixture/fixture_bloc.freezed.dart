@@ -583,8 +583,7 @@ class _$FixtureStateTearOff {
       required int gameWeekId,
       required bool showErrorMessages,
       required bool isLoading,
-      required Option<Either<FixtureFailures, List<Fixture>>>
-          fixtureFailureOrSuccess,
+      required Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess,
       required Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess}) {
     return _FixtureState(
       allFixtures: allFixtures,
@@ -606,7 +605,7 @@ mixin _$FixtureState {
   int get gameWeekId => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  Option<Either<FixtureFailures, List<Fixture>>> get fixtureFailureOrSuccess =>
+  Option<Either<dynamic, List<Fixture>>> get fixtureFailureOrSuccess =>
       throw _privateConstructorUsedError;
   Option<Either<ValueFailure, dynamic>> get valueFailureOrSuccess =>
       throw _privateConstructorUsedError;
@@ -626,7 +625,7 @@ abstract class $FixtureStateCopyWith<$Res> {
       int gameWeekId,
       bool showErrorMessages,
       bool isLoading,
-      Option<Either<FixtureFailures, List<Fixture>>> fixtureFailureOrSuccess,
+      Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess,
       Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess});
 }
 
@@ -667,7 +666,7 @@ class _$FixtureStateCopyWithImpl<$Res> implements $FixtureStateCopyWith<$Res> {
       fixtureFailureOrSuccess: fixtureFailureOrSuccess == freezed
           ? _value.fixtureFailureOrSuccess
           : fixtureFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<FixtureFailures, List<Fixture>>>,
+              as Option<Either<dynamic, List<Fixture>>>,
       valueFailureOrSuccess: valueFailureOrSuccess == freezed
           ? _value.valueFailureOrSuccess
           : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -688,7 +687,7 @@ abstract class _$FixtureStateCopyWith<$Res>
       int gameWeekId,
       bool showErrorMessages,
       bool isLoading,
-      Option<Either<FixtureFailures, List<Fixture>>> fixtureFailureOrSuccess,
+      Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess,
       Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess});
 }
 
@@ -731,7 +730,7 @@ class __$FixtureStateCopyWithImpl<$Res> extends _$FixtureStateCopyWithImpl<$Res>
       fixtureFailureOrSuccess: fixtureFailureOrSuccess == freezed
           ? _value.fixtureFailureOrSuccess
           : fixtureFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<FixtureFailures, List<Fixture>>>,
+              as Option<Either<dynamic, List<Fixture>>>,
       valueFailureOrSuccess: valueFailureOrSuccess == freezed
           ? _value.valueFailureOrSuccess
           : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -760,7 +759,7 @@ class _$_FixtureState implements _FixtureState {
   @override
   final bool isLoading;
   @override
-  final Option<Either<FixtureFailures, List<Fixture>>> fixtureFailureOrSuccess;
+  final Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess;
   @override
   final Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess;
 
@@ -809,8 +808,7 @@ abstract class _FixtureState implements FixtureState {
       required int gameWeekId,
       required bool showErrorMessages,
       required bool isLoading,
-      required Option<Either<FixtureFailures, List<Fixture>>>
-          fixtureFailureOrSuccess,
+      required Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess,
       required Option<Either<ValueFailure, dynamic>>
           valueFailureOrSuccess}) = _$_FixtureState;
 
@@ -823,7 +821,7 @@ abstract class _FixtureState implements FixtureState {
   @override
   bool get isLoading;
   @override
-  Option<Either<FixtureFailures, List<Fixture>>> get fixtureFailureOrSuccess;
+  Option<Either<dynamic, List<Fixture>>> get fixtureFailureOrSuccess;
   @override
   Option<Either<ValueFailure, dynamic>> get valueFailureOrSuccess;
   @override

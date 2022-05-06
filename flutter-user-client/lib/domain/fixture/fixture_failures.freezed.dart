@@ -17,20 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$FixtureFailuresTearOff {
   const _$FixtureFailuresTearOff();
 
-  NoConnection<T> noConnection<T>({required String failedValue}) {
-    return NoConnection<T>(
-      failedValue: failedValue,
-    );
-  }
-
-  ServerError<T> serverError<T>({required String failedValue}) {
-    return ServerError<T>(
-      failedValue: failedValue,
-    );
-  }
-
-  UnauthorizedUser<T> unauthorizedUser<T>({required String failedValue}) {
-    return UnauthorizedUser<T>(
+  Empty<T> empty<T>({required String failedValue}) {
+    return Empty<T>(
       failedValue: failedValue,
     );
   }
@@ -45,45 +33,33 @@ mixin _$FixtureFailures<T> {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String failedValue) noConnection,
-    required TResult Function(String failedValue) serverError,
-    required TResult Function(String failedValue) unauthorizedUser,
+    required TResult Function(String failedValue) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String failedValue)? noConnection,
-    TResult Function(String failedValue)? serverError,
-    TResult Function(String failedValue)? unauthorizedUser,
+    TResult Function(String failedValue)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String failedValue)? noConnection,
-    TResult Function(String failedValue)? serverError,
-    TResult Function(String failedValue)? unauthorizedUser,
+    TResult Function(String failedValue)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
-    required TResult Function(ServerError<T> value) serverError,
-    required TResult Function(UnauthorizedUser<T> value) unauthorizedUser,
+    required TResult Function(Empty<T> value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
-    TResult Function(ServerError<T> value)? serverError,
-    TResult Function(UnauthorizedUser<T> value)? unauthorizedUser,
+    TResult Function(Empty<T> value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
-    TResult Function(ServerError<T> value)? serverError,
-    TResult Function(UnauthorizedUser<T> value)? unauthorizedUser,
+    TResult Function(Empty<T> value)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -124,31 +100,29 @@ class _$FixtureFailuresCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-abstract class $NoConnectionCopyWith<T, $Res>
+abstract class $EmptyCopyWith<T, $Res>
     implements $FixtureFailuresCopyWith<T, $Res> {
-  factory $NoConnectionCopyWith(
-          NoConnection<T> value, $Res Function(NoConnection<T>) then) =
-      _$NoConnectionCopyWithImpl<T, $Res>;
+  factory $EmptyCopyWith(Empty<T> value, $Res Function(Empty<T>) then) =
+      _$EmptyCopyWithImpl<T, $Res>;
   @override
   $Res call({String failedValue});
 }
 
 /// @nodoc
-class _$NoConnectionCopyWithImpl<T, $Res>
+class _$EmptyCopyWithImpl<T, $Res>
     extends _$FixtureFailuresCopyWithImpl<T, $Res>
-    implements $NoConnectionCopyWith<T, $Res> {
-  _$NoConnectionCopyWithImpl(
-      NoConnection<T> _value, $Res Function(NoConnection<T>) _then)
-      : super(_value, (v) => _then(v as NoConnection<T>));
+    implements $EmptyCopyWith<T, $Res> {
+  _$EmptyCopyWithImpl(Empty<T> _value, $Res Function(Empty<T>) _then)
+      : super(_value, (v) => _then(v as Empty<T>));
 
   @override
-  NoConnection<T> get _value => super._value as NoConnection<T>;
+  Empty<T> get _value => super._value as Empty<T>;
 
   @override
   $Res call({
     Object? failedValue = freezed,
   }) {
-    return _then(NoConnection<T>(
+    return _then(Empty<T>(
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
@@ -159,22 +133,22 @@ class _$NoConnectionCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$NoConnection<T> implements NoConnection<T> {
-  const _$NoConnection({required this.failedValue});
+class _$Empty<T> implements Empty<T> {
+  const _$Empty({required this.failedValue});
 
   @override
   final String failedValue;
 
   @override
   String toString() {
-    return 'FixtureFailures<$T>.noConnection(failedValue: $failedValue)';
+    return 'FixtureFailures<$T>.empty(failedValue: $failedValue)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is NoConnection<T> &&
+            other is Empty<T> &&
             const DeepCollectionEquality()
                 .equals(other.failedValue, failedValue));
   }
@@ -185,39 +159,33 @@ class _$NoConnection<T> implements NoConnection<T> {
 
   @JsonKey(ignore: true)
   @override
-  $NoConnectionCopyWith<T, NoConnection<T>> get copyWith =>
-      _$NoConnectionCopyWithImpl<T, NoConnection<T>>(this, _$identity);
+  $EmptyCopyWith<T, Empty<T>> get copyWith =>
+      _$EmptyCopyWithImpl<T, Empty<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String failedValue) noConnection,
-    required TResult Function(String failedValue) serverError,
-    required TResult Function(String failedValue) unauthorizedUser,
+    required TResult Function(String failedValue) empty,
   }) {
-    return noConnection(failedValue);
+    return empty(failedValue);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String failedValue)? noConnection,
-    TResult Function(String failedValue)? serverError,
-    TResult Function(String failedValue)? unauthorizedUser,
+    TResult Function(String failedValue)? empty,
   }) {
-    return noConnection?.call(failedValue);
+    return empty?.call(failedValue);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String failedValue)? noConnection,
-    TResult Function(String failedValue)? serverError,
-    TResult Function(String failedValue)? unauthorizedUser,
+    TResult Function(String failedValue)? empty,
     required TResult orElse(),
   }) {
-    if (noConnection != null) {
-      return noConnection(failedValue);
+    if (empty != null) {
+      return empty(failedValue);
     }
     return orElse();
   }
@@ -225,336 +193,39 @@ class _$NoConnection<T> implements NoConnection<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
-    required TResult Function(ServerError<T> value) serverError,
-    required TResult Function(UnauthorizedUser<T> value) unauthorizedUser,
+    required TResult Function(Empty<T> value) empty,
   }) {
-    return noConnection(this);
+    return empty(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
-    TResult Function(ServerError<T> value)? serverError,
-    TResult Function(UnauthorizedUser<T> value)? unauthorizedUser,
+    TResult Function(Empty<T> value)? empty,
   }) {
-    return noConnection?.call(this);
+    return empty?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
-    TResult Function(ServerError<T> value)? serverError,
-    TResult Function(UnauthorizedUser<T> value)? unauthorizedUser,
+    TResult Function(Empty<T> value)? empty,
     required TResult orElse(),
   }) {
-    if (noConnection != null) {
-      return noConnection(this);
+    if (empty != null) {
+      return empty(this);
     }
     return orElse();
   }
 }
 
-abstract class NoConnection<T> implements FixtureFailures<T> {
-  const factory NoConnection({required String failedValue}) = _$NoConnection<T>;
+abstract class Empty<T> implements FixtureFailures<T> {
+  const factory Empty({required String failedValue}) = _$Empty<T>;
 
   @override
   String get failedValue;
   @override
   @JsonKey(ignore: true)
-  $NoConnectionCopyWith<T, NoConnection<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ServerErrorCopyWith<T, $Res>
-    implements $FixtureFailuresCopyWith<T, $Res> {
-  factory $ServerErrorCopyWith(
-          ServerError<T> value, $Res Function(ServerError<T>) then) =
-      _$ServerErrorCopyWithImpl<T, $Res>;
-  @override
-  $Res call({String failedValue});
-}
-
-/// @nodoc
-class _$ServerErrorCopyWithImpl<T, $Res>
-    extends _$FixtureFailuresCopyWithImpl<T, $Res>
-    implements $ServerErrorCopyWith<T, $Res> {
-  _$ServerErrorCopyWithImpl(
-      ServerError<T> _value, $Res Function(ServerError<T>) _then)
-      : super(_value, (v) => _then(v as ServerError<T>));
-
-  @override
-  ServerError<T> get _value => super._value as ServerError<T>;
-
-  @override
-  $Res call({
-    Object? failedValue = freezed,
-  }) {
-    return _then(ServerError<T>(
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ServerError<T> implements ServerError<T> {
-  const _$ServerError({required this.failedValue});
-
-  @override
-  final String failedValue;
-
-  @override
-  String toString() {
-    return 'FixtureFailures<$T>.serverError(failedValue: $failedValue)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ServerError<T> &&
-            const DeepCollectionEquality()
-                .equals(other.failedValue, failedValue));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(failedValue));
-
-  @JsonKey(ignore: true)
-  @override
-  $ServerErrorCopyWith<T, ServerError<T>> get copyWith =>
-      _$ServerErrorCopyWithImpl<T, ServerError<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String failedValue) noConnection,
-    required TResult Function(String failedValue) serverError,
-    required TResult Function(String failedValue) unauthorizedUser,
-  }) {
-    return serverError(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String failedValue)? noConnection,
-    TResult Function(String failedValue)? serverError,
-    TResult Function(String failedValue)? unauthorizedUser,
-  }) {
-    return serverError?.call(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String failedValue)? noConnection,
-    TResult Function(String failedValue)? serverError,
-    TResult Function(String failedValue)? unauthorizedUser,
-    required TResult orElse(),
-  }) {
-    if (serverError != null) {
-      return serverError(failedValue);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
-    required TResult Function(ServerError<T> value) serverError,
-    required TResult Function(UnauthorizedUser<T> value) unauthorizedUser,
-  }) {
-    return serverError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
-    TResult Function(ServerError<T> value)? serverError,
-    TResult Function(UnauthorizedUser<T> value)? unauthorizedUser,
-  }) {
-    return serverError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
-    TResult Function(ServerError<T> value)? serverError,
-    TResult Function(UnauthorizedUser<T> value)? unauthorizedUser,
-    required TResult orElse(),
-  }) {
-    if (serverError != null) {
-      return serverError(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ServerError<T> implements FixtureFailures<T> {
-  const factory ServerError({required String failedValue}) = _$ServerError<T>;
-
-  @override
-  String get failedValue;
-  @override
-  @JsonKey(ignore: true)
-  $ServerErrorCopyWith<T, ServerError<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $UnauthorizedUserCopyWith<T, $Res>
-    implements $FixtureFailuresCopyWith<T, $Res> {
-  factory $UnauthorizedUserCopyWith(
-          UnauthorizedUser<T> value, $Res Function(UnauthorizedUser<T>) then) =
-      _$UnauthorizedUserCopyWithImpl<T, $Res>;
-  @override
-  $Res call({String failedValue});
-}
-
-/// @nodoc
-class _$UnauthorizedUserCopyWithImpl<T, $Res>
-    extends _$FixtureFailuresCopyWithImpl<T, $Res>
-    implements $UnauthorizedUserCopyWith<T, $Res> {
-  _$UnauthorizedUserCopyWithImpl(
-      UnauthorizedUser<T> _value, $Res Function(UnauthorizedUser<T>) _then)
-      : super(_value, (v) => _then(v as UnauthorizedUser<T>));
-
-  @override
-  UnauthorizedUser<T> get _value => super._value as UnauthorizedUser<T>;
-
-  @override
-  $Res call({
-    Object? failedValue = freezed,
-  }) {
-    return _then(UnauthorizedUser<T>(
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$UnauthorizedUser<T> implements UnauthorizedUser<T> {
-  const _$UnauthorizedUser({required this.failedValue});
-
-  @override
-  final String failedValue;
-
-  @override
-  String toString() {
-    return 'FixtureFailures<$T>.unauthorizedUser(failedValue: $failedValue)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is UnauthorizedUser<T> &&
-            const DeepCollectionEquality()
-                .equals(other.failedValue, failedValue));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(failedValue));
-
-  @JsonKey(ignore: true)
-  @override
-  $UnauthorizedUserCopyWith<T, UnauthorizedUser<T>> get copyWith =>
-      _$UnauthorizedUserCopyWithImpl<T, UnauthorizedUser<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String failedValue) noConnection,
-    required TResult Function(String failedValue) serverError,
-    required TResult Function(String failedValue) unauthorizedUser,
-  }) {
-    return unauthorizedUser(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String failedValue)? noConnection,
-    TResult Function(String failedValue)? serverError,
-    TResult Function(String failedValue)? unauthorizedUser,
-  }) {
-    return unauthorizedUser?.call(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String failedValue)? noConnection,
-    TResult Function(String failedValue)? serverError,
-    TResult Function(String failedValue)? unauthorizedUser,
-    required TResult orElse(),
-  }) {
-    if (unauthorizedUser != null) {
-      return unauthorizedUser(failedValue);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
-    required TResult Function(ServerError<T> value) serverError,
-    required TResult Function(UnauthorizedUser<T> value) unauthorizedUser,
-  }) {
-    return unauthorizedUser(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
-    TResult Function(ServerError<T> value)? serverError,
-    TResult Function(UnauthorizedUser<T> value)? unauthorizedUser,
-  }) {
-    return unauthorizedUser?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
-    TResult Function(ServerError<T> value)? serverError,
-    TResult Function(UnauthorizedUser<T> value)? unauthorizedUser,
-    required TResult orElse(),
-  }) {
-    if (unauthorizedUser != null) {
-      return unauthorizedUser(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UnauthorizedUser<T> implements FixtureFailures<T> {
-  const factory UnauthorizedUser({required String failedValue}) =
-      _$UnauthorizedUser<T>;
-
-  @override
-  String get failedValue;
-  @override
-  @JsonKey(ignore: true)
-  $UnauthorizedUserCopyWith<T, UnauthorizedUser<T>> get copyWith =>
+  $EmptyCopyWith<T, Empty<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -70,8 +70,8 @@ Either<ValueFailure<String>, String> validateTeam({required String team}) {
 }
 
 // Function to Validate Status
-Either<ValueFailure<String>, List> validateTeamLineUp(
-    {required List teamLineUp}) {
+Either<ValueFailure<String>, Map> validateTeamLineUp(
+    {required Map teamLineUp}) {
   // if empty
 
   return right(teamLineUp);
@@ -94,9 +94,36 @@ Either<ValueFailure<String>, String> validateScore({required String score}) {
 }
 
 // Function to Validate Score
-Either<ValueFailure<String>, List> validateMatchStat(
-    {required List matchStat}) {
+Either<ValueFailure<String>, Map> validateMatchStat({required Map matchStat}) {
   // if empty
 
   return right(matchStat);
+}
+
+Either<ValueFailure<String>, String> validateTeamCity(
+    {required String teamCity}) {
+  // if empty
+
+  return right(teamCity);
+}
+
+Either<ValueFailure<String>, String> validateTeamCoach(
+    {required String teamCoach}) {
+  // if empty
+
+  return right(teamCoach);
+}
+
+Either<ValueFailure<String>, String> validateTeamLogo(
+    {required String teamLogo}) {
+  // if empty
+
+  return right(teamLogo);
+}
+
+Either<ValueFailure<String>, int> validateStadiumCapacity(
+    {required int capacity}) {
+  // if empty
+
+  return right(capacity);
 }
