@@ -37,6 +37,10 @@ app.use(cors());
 const rateLimiter = require("./src/config/rate_config");
 app.use(rateLimiter);
 
+app.get("/test", (res, req) => {
+  res.send("Live");
+});
+
 // Serve static files
 app.use("/uploads/", express.static(path.join(__dirname, "/uploads")));
 
