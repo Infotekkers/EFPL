@@ -5,9 +5,14 @@ import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/domain/fixture/fixture_failures.dart';
 import 'package:efpl/domain/fixture/i_fixture_facade.dart';
 import 'package:efpl/infrastructure/fixture/fixture_dto.dart';
+import 'package:efpl/injectable.dart';
+import 'package:efpl/services/http_instance.dart';
+import 'package:efpl/services/http_interceptor.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'package:http_interceptor/http/intercepted_client.dart';
 
 class ApiFixtureRepository implements IFixtureRepository {
   @override
@@ -15,9 +20,11 @@ class ApiFixtureRepository implements IFixtureRepository {
       {required int gameWeekId}) async {
     String _baseURL = dotenv.env["BASE_URL"].toString();
 
+    HTTPInstance instance = getIt<HTTPInstance>();
+
     try {
-      var result = await http.get(
-        Uri.parse('$_baseURL/fixtures/gw/$gameWeekId'),
+      var result = await instance.client.get(
+        Uri.parse('$_baseURL/fixtures/gws/$gameWeekId'),
       );
 
       final allFixtures = <Fixture>[];
@@ -25,27 +32,29 @@ class ApiFixtureRepository implements IFixtureRepository {
       final parsed = jsonDecode(result.body) as List<dynamic>;
       final parsedItem = Map.from(parsed[0]);
 
-      for (var fixture in parsed) {
-        var finalParsed = <String, dynamic>{};
+      print(parsed);
 
-        fixture.forEach((key, value) => {
-              if (key == "matchStat")
-                {
-                  // print(value),
-                  finalParsed['matchStat'] = [],
-                }
-              else
-                {
-                  finalParsed[key] = (value),
-                }
-            });
+      // for (var fixture in parsed) {
+      //   var finalParsed = <String, dynamic>{};
 
-        finalParsed['homeTeamLineUp'] = <dynamic>[];
-        finalParsed['awayTeamLineUp'] = <dynamic>[];
+      //   fixture.forEach((key, value) => {
+      //         if (key == "matchStat")
+      //           {
+      //             // print(value),
+      //             finalParsed['matchStat'] = [],
+      //           }
+      //         else
+      //           {
+      //             finalParsed[key] = (value),
+      //           }
+      //       });
 
-        final FixtureDTO fixtureDTO = FixtureDTO.fromJson(finalParsed);
-        allFixtures.add(fixtureDTO.toDomain());
-      }
+      // finalParsed['homeTeamLineUp'] = <dynamic>[];
+      // finalParsed['awayTeamLineUp'] = <dynamic>[];
+
+      // final FixtureDTO fixtureDTO = FixtureDTO.fromJson(finalParsed);
+      // allFixtures.add(fixtureDTO.toDomain());
+      // }
 
       return right(allFixtures);
     } catch (e) {

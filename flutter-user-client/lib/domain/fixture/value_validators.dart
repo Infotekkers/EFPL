@@ -5,6 +5,7 @@ import 'package:efpl/domain/core/value_failures.dart';
 Either<ValueFailure<String>, int> validateGameWeekId(
     {required int gameWeekId}) {
   // if empty
+  // ignore: unnecessary_null_comparison
   if (!(gameWeekId != null)) {
     return left(const ValueFailure.emptyGameWeekId(failedValue: ''));
   } else if (gameWeekId < 0) {
