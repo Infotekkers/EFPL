@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
@@ -23,16 +25,34 @@ class ApiFixtureRepository implements IFixtureRepository {
     HTTPInstance instance = getIt<HTTPInstance>();
 
     try {
-      var result = await instance.client.get(
-        Uri.parse('$_baseURL/fixtures/gws/$gameWeekId'),
-      );
+      var apiResponse = await instance.client
+          .get(
+            Uri.parse('http://192.168.0.5'),
+          )
+          .timeout(
+            const Duration(seconds: 5),
+          );
 
       final allFixtures = <Fixture>[];
 
-      final parsed = jsonDecode(result.body) as List<dynamic>;
-      final parsedItem = Map.from(parsed[0]);
+      // final parsed = jsonDecode(result.body) as List<dynamic>;
+      // final parsedItem = Map.from(parsed[0]);
 
-      print(parsed);
+// success
+      if (apiResponse.statusCode == 200) {
+        print("Success");
+      }
+      // no token
+      else if (apiResponse.statusCode == 403) {
+        print("No Token");
+      }
+
+      // incorrect token
+      else if (apiResponse.statusCode == 401) {
+        print("Invalid Token");
+      } else {
+        print("Else");
+      }
 
       // for (var fixture in parsed) {
       //   var finalParsed = <String, dynamic>{};
@@ -57,11 +77,20 @@ class ApiFixtureRepository implements IFixtureRepository {
       // }
 
       return right(allFixtures);
-    } catch (e) {
-      print(e);
+    }
+    // Timeout Exception
+    on TimeoutException catch (_) {
+      print("Time Out");
       return left(
         const FixtureFailures.noConnection(failedValue: "failedValue"),
       );
     }
+    // Socket Exception
+    on SocketException catch (e) {
+      // print()
+      return left(
+        const FixtureFailures.noConnection(failedValue: "failedValue"),
+      );
+    } on HandshakeException catch (e) {}
   }
 }
