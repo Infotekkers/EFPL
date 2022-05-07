@@ -19,6 +19,7 @@ dependencies:
   get_it: ^7.2.0
   http: ^0.13.4
   http_interceptor: ^1.0.2
+  socket_io_client: ^2.0.0-beta
   injectable: ^1.5.3
   json_annotation: ^4.4.0
   shared_preferences: ^2.0.13
@@ -28,6 +29,7 @@ dependencies:
   flutter_boxicons: ^3.0.0
   cached_network_image: ^3.2.0
   liquid_pull_to_refresh: ^3.0.1
+  tab_container: ^2.0.0
 
 dev_dependencies:
   bloc_test: ^9.0.3

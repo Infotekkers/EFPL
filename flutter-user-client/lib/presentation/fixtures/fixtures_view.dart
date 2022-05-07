@@ -2,6 +2,7 @@ import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/injectable.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/fixtures/widgets/fixture_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -44,7 +45,7 @@ class FixturesView extends StatelessWidget {
                   // margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
                   height: 50,
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.grey,
+                  color: ConstantColors.neutral_200,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -109,17 +110,19 @@ class FixturesView extends StatelessWidget {
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Container(
-                                  color: Colors.greenAccent,
-                                  child: Column(
-                                    children: List.generate(
-                                      fixture.length,
-                                      (index) {
-                                        return FixtureWidget(
+                                Column(
+                                  children: List.generate(
+                                    fixture.length,
+                                    (index) {
+                                      return Container(
+                                        color: index % 2 == 0
+                                            ? ConstantColors.neutral_200
+                                            : (Colors.white),
+                                        child: FixtureWidget(
                                           fixture: fixture[index],
-                                        );
-                                      },
-                                    ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ],
@@ -154,6 +157,12 @@ List<List<Fixture>> formatByDate(List<Fixture> allFixtures) {
       allPossibleDates.add(schedule);
     }
   }
+
+  allPossibleDates.sort((a, b) {
+    var dateOne = b;
+    var dateTwo = a;
+    return -dateOne.compareTo(dateTwo);
+  });
 
   for (var i = 0; i < allPossibleDates.length; i++) {
     List<Fixture> currentDateFixtures = allFixtures.where((fixture) {

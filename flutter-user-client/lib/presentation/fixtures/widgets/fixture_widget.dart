@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -26,11 +29,13 @@ class FixtureWidget extends StatelessWidget {
         );
       },
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
-            bottom: BorderSide(width: 1.0, color: Colors.lightBlue.shade900),
+            bottom: BorderSide(
+              width: 0.5,
+              color: ConstantColors.neutral_200,
+            ),
           ),
-          color: Colors.amber,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 10),
         width: MediaQuery.of(context).size.width,
@@ -49,11 +54,16 @@ class FixtureWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        getShortName(fixture: fixture, isHome: 1),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.37 - 50,
+                        child: Text(
+                          getShortName(fixture: fixture, isHome: 1),
+                          // "Team",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Container(
@@ -77,34 +87,50 @@ class FixtureWidget extends StatelessWidget {
               ),
             ),
 
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 0.5,
-                  color: Colors.black,
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    matchStatus == 'scheduled'
-                        ? formattedDateTime
-                        : fixture.score.value.fold(
-                            (l) => '',
-                            (r) => r.split("v").join(" - "),
-                          ),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+            // Match INFO
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 0.5,
+                      color: Colors.black,
                     ),
                   ),
-                ],
-              ),
-              height: 30,
-              width: MediaQuery.of(context).size.width * 0.15,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        matchStatus == 'scheduled'
+                            ? formattedDateTime
+                            : fixture.score.value.fold(
+                                (l) => '',
+                                (r) => r.split("v").join(" - "),
+                              ),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  height: 25,
+                  width: MediaQuery.of(context).size.width * 0.15,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  getShortStatus(fixture: fixture),
+                  style: const TextStyle(fontSize: 12),
+                )
+              ],
             ),
+
+            // AWAY TEAM
             SizedBox(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -128,11 +154,15 @@ class FixtureWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(
-                        getShortName(fixture: fixture, isHome: 0),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.37 - 50,
+                        child: Text(
+                          getShortName(fixture: fixture, isHome: 0),
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -200,4 +230,22 @@ String getShortName({required Fixture fixture, required int isHome}) {
     nameLong.removeLast();
     return nameLong.join(" ");
   }
+}
+
+String getShortStatus({required Fixture fixture}) {
+  String status = fixture.status.value.fold((l) => '', (r) => r);
+
+  String finalStatus = "Not Live";
+
+  if (status == "liveFH") {
+    finalStatus = "FH";
+  } else if (status == "HT") {
+    finalStatus = "HT";
+  } else if (status == "liveSH") {
+    finalStatus = "SH";
+  } else if (status == "FT") {
+    finalStatus = "FT";
+  }
+
+  return finalStatus;
 }

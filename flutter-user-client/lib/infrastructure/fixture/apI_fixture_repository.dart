@@ -27,7 +27,7 @@ class ApiFixtureRepository implements IFixtureRepository {
             Uri.parse('$_baseURL/fixtures/gw/$gameWeekId'),
           )
           .timeout(
-            const Duration(seconds: 120),
+            const Duration(seconds: 30),
           );
 
       // success
@@ -52,10 +52,6 @@ class ApiFixtureRepository implements IFixtureRepository {
                 }
             },
           );
-
-          if (finalParsedFixture['homeTeamLineUp'] == null) {
-            finalParsedFixture['homeTeamLineUp'] = {};
-          }
 
           if (finalParsedFixture['awayTeamLineUp'] == null) {
             finalParsedFixture['awayTeamLineUp'] = {};
@@ -193,9 +189,6 @@ class ApiFixtureRepository implements IFixtureRepository {
                   score: Score(
                     value: parsedCachedFixture['score'],
                   ),
-                  matchStat: MatchStat(
-                    value: parsedCachedFixture['matchStat'],
-                  ),
                 );
                 allFixtures.add(fixture);
               }
@@ -227,23 +220,298 @@ class ApiFixtureRepository implements IFixtureRepository {
     }
     // Timeout Exception
     on TimeoutException catch (_) {
-      return left(
-        const HTTPFailures.noConnection(failedValue: "failedValue"),
-      );
+      try {
+        var efplCache = await Hive.openBox('efplCache');
+        List? cachedFixtures = efplCache.get("fixtures");
+
+        List<Fixture> allFixtures = [];
+
+        if (cachedFixtures!.isNotEmpty) {
+          for (var cachedFixture in cachedFixtures) {
+            Map<String, dynamic> parsedCachedFixture = <String, dynamic>{};
+            cachedFixture.forEach(
+              (key, value) => {
+                parsedCachedFixture[key] = value,
+              },
+            );
+            parsedCachedFixture['homeTeamLineUp'] = {};
+            parsedCachedFixture['awayTeamLineUp'] = {};
+
+            if (parsedCachedFixture['gameWeekId'] == gameWeekId) {
+              final Fixture fixture = Fixture(
+                gameWeekId: GameWeekId(
+                  value: parsedCachedFixture['gameWeekId'],
+                ),
+                matchId: MatchId(
+                  value: parsedCachedFixture['matchId'],
+                ),
+                schedule: Schedule(
+                  value: parsedCachedFixture['schedule'],
+                ),
+                status: Status(
+                  value: parsedCachedFixture['status'],
+                ),
+                homeTeam: Team(
+                  value: parsedCachedFixture['homeTeam'],
+                ),
+                homeTeamLineUp: TeamLineUp(
+                  value: parsedCachedFixture['homeTeamLineUp'],
+                ),
+                homeTeamCity: TeamCity(
+                  value: parsedCachedFixture['homeTeamCity'],
+                ),
+                homeTeamCoach: TeamCoach(
+                  value: parsedCachedFixture['homeTeamCoach'],
+                ),
+                homeTeamLogo: TeamLogo(
+                  value: parsedCachedFixture['homeTeamLogo'],
+                ),
+                homeTeamStadium: Stadium(
+                  value: parsedCachedFixture['homeTeamStadium'],
+                ),
+                homeTeamCapacity: StadiumCapacity(
+                  value: parsedCachedFixture['homeTeamCapacity'],
+                ),
+                awayTeam: Team(
+                  value: parsedCachedFixture['awayTeam'],
+                ),
+                awayTeamLineUp: TeamLineUp(
+                  value: parsedCachedFixture['awayTeamLineUp'],
+                ),
+                awayTeamCity: TeamCity(
+                  value: parsedCachedFixture['awayTeamCity'],
+                ),
+                awayTeamCoach: TeamCoach(
+                  value: parsedCachedFixture['awayTeamCoach'],
+                ),
+                awayTeamLogo: TeamLogo(
+                  value: parsedCachedFixture['awayTeamLogo'],
+                ),
+                awayTeamStadium: Stadium(
+                  value: parsedCachedFixture['awayTeamStadium'],
+                ),
+                awayTeamCapacity: StadiumCapacity(
+                  value: parsedCachedFixture['awayTeamCapacity'],
+                ),
+                score: Score(
+                  value: parsedCachedFixture['score'],
+                ),
+              );
+              allFixtures.add(fixture);
+            }
+          }
+          return right(allFixtures);
+        } else {
+          return left(
+            const HTTPFailures.unauthorized(failedValue: "Please Login Again!"),
+          );
+        }
+      }
+      //
+      catch (e) {
+        print(e);
+        return left(
+          const HTTPFailures.noConnection(failedValue: "failedValue"),
+        );
+      }
     }
     // Socket Exception
     on SocketException catch (e) {
       print("Socket Error");
-      return left(
-        const HTTPFailures.socketError(failedValue: "failedValue"),
-      );
+      try {
+        var efplCache = await Hive.openBox('efplCache');
+        List? cachedFixtures = efplCache.get("fixtures");
+
+        List<Fixture> allFixtures = [];
+
+        if (cachedFixtures!.isNotEmpty) {
+          for (var cachedFixture in cachedFixtures) {
+            Map<String, dynamic> parsedCachedFixture = <String, dynamic>{};
+            cachedFixture.forEach(
+              (key, value) => {
+                parsedCachedFixture[key] = value,
+              },
+            );
+            parsedCachedFixture['homeTeamLineUp'] = {};
+            parsedCachedFixture['awayTeamLineUp'] = {};
+
+            if (parsedCachedFixture['gameWeekId'] == gameWeekId) {
+              final Fixture fixture = Fixture(
+                gameWeekId: GameWeekId(
+                  value: parsedCachedFixture['gameWeekId'],
+                ),
+                matchId: MatchId(
+                  value: parsedCachedFixture['matchId'],
+                ),
+                schedule: Schedule(
+                  value: parsedCachedFixture['schedule'],
+                ),
+                status: Status(
+                  value: parsedCachedFixture['status'],
+                ),
+                homeTeam: Team(
+                  value: parsedCachedFixture['homeTeam'],
+                ),
+                homeTeamLineUp: TeamLineUp(
+                  value: parsedCachedFixture['homeTeamLineUp'],
+                ),
+                homeTeamCity: TeamCity(
+                  value: parsedCachedFixture['homeTeamCity'],
+                ),
+                homeTeamCoach: TeamCoach(
+                  value: parsedCachedFixture['homeTeamCoach'],
+                ),
+                homeTeamLogo: TeamLogo(
+                  value: parsedCachedFixture['homeTeamLogo'],
+                ),
+                homeTeamStadium: Stadium(
+                  value: parsedCachedFixture['homeTeamStadium'],
+                ),
+                homeTeamCapacity: StadiumCapacity(
+                  value: parsedCachedFixture['homeTeamCapacity'],
+                ),
+                awayTeam: Team(
+                  value: parsedCachedFixture['awayTeam'],
+                ),
+                awayTeamLineUp: TeamLineUp(
+                  value: parsedCachedFixture['awayTeamLineUp'],
+                ),
+                awayTeamCity: TeamCity(
+                  value: parsedCachedFixture['awayTeamCity'],
+                ),
+                awayTeamCoach: TeamCoach(
+                  value: parsedCachedFixture['awayTeamCoach'],
+                ),
+                awayTeamLogo: TeamLogo(
+                  value: parsedCachedFixture['awayTeamLogo'],
+                ),
+                awayTeamStadium: Stadium(
+                  value: parsedCachedFixture['awayTeamStadium'],
+                ),
+                awayTeamCapacity: StadiumCapacity(
+                  value: parsedCachedFixture['awayTeamCapacity'],
+                ),
+                score: Score(
+                  value: parsedCachedFixture['score'],
+                ),
+              );
+              allFixtures.add(fixture);
+            }
+          }
+          return right(allFixtures);
+        } else {
+          return left(
+            const HTTPFailures.unauthorized(failedValue: "Please Login Again!"),
+          );
+        }
+      }
+      //
+      catch (e) {
+        print(e);
+
+        return left(
+          const HTTPFailures.socketError(failedValue: "failedValue"),
+        );
+      }
     }
     //
     on HandshakeException catch (e) {
       print("HandShake Error");
-      return left(
-        const HTTPFailures.handShakeError(failedValue: "failedValue"),
-      );
+      try {
+        var efplCache = await Hive.openBox('efplCache');
+        List? cachedFixtures = efplCache.get("fixtures");
+
+        List<Fixture> allFixtures = [];
+
+        if (cachedFixtures!.isNotEmpty) {
+          for (var cachedFixture in cachedFixtures) {
+            Map<String, dynamic> parsedCachedFixture = <String, dynamic>{};
+            cachedFixture.forEach(
+              (key, value) => {
+                parsedCachedFixture[key] = value,
+              },
+            );
+            parsedCachedFixture['homeTeamLineUp'] = {};
+            parsedCachedFixture['awayTeamLineUp'] = {};
+
+            if (parsedCachedFixture['gameWeekId'] == gameWeekId) {
+              final Fixture fixture = Fixture(
+                gameWeekId: GameWeekId(
+                  value: parsedCachedFixture['gameWeekId'],
+                ),
+                matchId: MatchId(
+                  value: parsedCachedFixture['matchId'],
+                ),
+                schedule: Schedule(
+                  value: parsedCachedFixture['schedule'],
+                ),
+                status: Status(
+                  value: parsedCachedFixture['status'],
+                ),
+                homeTeam: Team(
+                  value: parsedCachedFixture['homeTeam'],
+                ),
+                homeTeamLineUp: TeamLineUp(
+                  value: parsedCachedFixture['homeTeamLineUp'],
+                ),
+                homeTeamCity: TeamCity(
+                  value: parsedCachedFixture['homeTeamCity'],
+                ),
+                homeTeamCoach: TeamCoach(
+                  value: parsedCachedFixture['homeTeamCoach'],
+                ),
+                homeTeamLogo: TeamLogo(
+                  value: parsedCachedFixture['homeTeamLogo'],
+                ),
+                homeTeamStadium: Stadium(
+                  value: parsedCachedFixture['homeTeamStadium'],
+                ),
+                homeTeamCapacity: StadiumCapacity(
+                  value: parsedCachedFixture['homeTeamCapacity'],
+                ),
+                awayTeam: Team(
+                  value: parsedCachedFixture['awayTeam'],
+                ),
+                awayTeamLineUp: TeamLineUp(
+                  value: parsedCachedFixture['awayTeamLineUp'],
+                ),
+                awayTeamCity: TeamCity(
+                  value: parsedCachedFixture['awayTeamCity'],
+                ),
+                awayTeamCoach: TeamCoach(
+                  value: parsedCachedFixture['awayTeamCoach'],
+                ),
+                awayTeamLogo: TeamLogo(
+                  value: parsedCachedFixture['awayTeamLogo'],
+                ),
+                awayTeamStadium: Stadium(
+                  value: parsedCachedFixture['awayTeamStadium'],
+                ),
+                awayTeamCapacity: StadiumCapacity(
+                  value: parsedCachedFixture['awayTeamCapacity'],
+                ),
+                score: Score(
+                  value: parsedCachedFixture['score'],
+                ),
+              );
+              allFixtures.add(fixture);
+            }
+          }
+          return right(allFixtures);
+        } else {
+          return left(
+            const HTTPFailures.unauthorized(failedValue: "Please Login Again!"),
+          );
+        }
+      }
+      //
+      catch (e) {
+        print(e);
+
+        return left(
+          const HTTPFailures.handShakeError(failedValue: "failedValue"),
+        );
+      }
     }
     //
     catch (e) {

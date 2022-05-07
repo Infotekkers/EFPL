@@ -27,7 +27,6 @@ _$_FixtureDTO _$$_FixtureDTOFromJson(Map<String, dynamic> json) =>
       awayTeamStadium: json['awayTeamStadium'] as String,
       awayTeamCapacity: json['awayTeamCapacity'] as int,
       score: json['score'] as String,
-      matchStat: json['matchStat'],
     );
 
 Map<String, dynamic> _$$_FixtureDTOToJson(_$_FixtureDTO instance) =>
@@ -51,5 +50,4 @@ Map<String, dynamic> _$$_FixtureDTOToJson(_$_FixtureDTO instance) =>
       'awayTeamStadium': instance.awayTeamStadium,
       'awayTeamCapacity': instance.awayTeamCapacity,
       'score': instance.score,
-      'matchStat': instance.matchStat,
     };

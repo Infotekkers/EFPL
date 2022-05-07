@@ -36,8 +36,7 @@ class _$FixtureTearOff {
       required TeamLogo awayTeamLogo,
       required Stadium awayTeamStadium,
       required StadiumCapacity awayTeamCapacity,
-      required Score score,
-      required MatchStat? matchStat}) {
+      required Score score}) {
     return _Fixture(
       gameWeekId: gameWeekId,
       matchId: matchId,
@@ -58,7 +57,6 @@ class _$FixtureTearOff {
       awayTeamStadium: awayTeamStadium,
       awayTeamCapacity: awayTeamCapacity,
       score: score,
-      matchStat: matchStat,
     );
   }
 }
@@ -87,7 +85,6 @@ mixin _$Fixture {
   Stadium get awayTeamStadium => throw _privateConstructorUsedError;
   StadiumCapacity get awayTeamCapacity => throw _privateConstructorUsedError; //
   Score get score => throw _privateConstructorUsedError;
-  MatchStat? get matchStat => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FixtureCopyWith<Fixture> get copyWith => throw _privateConstructorUsedError;
@@ -116,8 +113,7 @@ abstract class $FixtureCopyWith<$Res> {
       TeamLogo awayTeamLogo,
       Stadium awayTeamStadium,
       StadiumCapacity awayTeamCapacity,
-      Score score,
-      MatchStat? matchStat});
+      Score score});
 }
 
 /// @nodoc
@@ -149,7 +145,6 @@ class _$FixtureCopyWithImpl<$Res> implements $FixtureCopyWith<$Res> {
     Object? awayTeamStadium = freezed,
     Object? awayTeamCapacity = freezed,
     Object? score = freezed,
-    Object? matchStat = freezed,
   }) {
     return _then(_value.copyWith(
       gameWeekId: gameWeekId == freezed
@@ -228,10 +223,6 @@ class _$FixtureCopyWithImpl<$Res> implements $FixtureCopyWith<$Res> {
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as Score,
-      matchStat: matchStat == freezed
-          ? _value.matchStat
-          : matchStat // ignore: cast_nullable_to_non_nullable
-              as MatchStat?,
     ));
   }
 }
@@ -260,8 +251,7 @@ abstract class _$FixtureCopyWith<$Res> implements $FixtureCopyWith<$Res> {
       TeamLogo awayTeamLogo,
       Stadium awayTeamStadium,
       StadiumCapacity awayTeamCapacity,
-      Score score,
-      MatchStat? matchStat});
+      Score score});
 }
 
 /// @nodoc
@@ -294,7 +284,6 @@ class __$FixtureCopyWithImpl<$Res> extends _$FixtureCopyWithImpl<$Res>
     Object? awayTeamStadium = freezed,
     Object? awayTeamCapacity = freezed,
     Object? score = freezed,
-    Object? matchStat = freezed,
   }) {
     return _then(_Fixture(
       gameWeekId: gameWeekId == freezed
@@ -373,10 +362,6 @@ class __$FixtureCopyWithImpl<$Res> extends _$FixtureCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as Score,
-      matchStat: matchStat == freezed
-          ? _value.matchStat
-          : matchStat // ignore: cast_nullable_to_non_nullable
-              as MatchStat?,
     ));
   }
 }
@@ -403,8 +388,7 @@ class _$_Fixture implements _Fixture {
       required this.awayTeamLogo,
       required this.awayTeamStadium,
       required this.awayTeamCapacity,
-      required this.score,
-      required this.matchStat});
+      required this.score});
 
   @override
   final GameWeekId gameWeekId;
@@ -444,12 +428,10 @@ class _$_Fixture implements _Fixture {
   final StadiumCapacity awayTeamCapacity;
   @override //
   final Score score;
-  @override
-  final MatchStat? matchStat;
 
   @override
   String toString() {
-    return 'Fixture(gameWeekId: $gameWeekId, matchId: $matchId, schedule: $schedule, status: $status, homeTeam: $homeTeam, homeTeamLineUp: $homeTeamLineUp, homeTeamCity: $homeTeamCity, homeTeamCoach: $homeTeamCoach, homeTeamLogo: $homeTeamLogo, homeTeamStadium: $homeTeamStadium, homeTeamCapacity: $homeTeamCapacity, awayTeam: $awayTeam, awayTeamLineUp: $awayTeamLineUp, awayTeamCity: $awayTeamCity, awayTeamCoach: $awayTeamCoach, awayTeamLogo: $awayTeamLogo, awayTeamStadium: $awayTeamStadium, awayTeamCapacity: $awayTeamCapacity, score: $score, matchStat: $matchStat)';
+    return 'Fixture(gameWeekId: $gameWeekId, matchId: $matchId, schedule: $schedule, status: $status, homeTeam: $homeTeam, homeTeamLineUp: $homeTeamLineUp, homeTeamCity: $homeTeamCity, homeTeamCoach: $homeTeamCoach, homeTeamLogo: $homeTeamLogo, homeTeamStadium: $homeTeamStadium, homeTeamCapacity: $homeTeamCapacity, awayTeam: $awayTeam, awayTeamLineUp: $awayTeamLineUp, awayTeamCity: $awayTeamCity, awayTeamCoach: $awayTeamCoach, awayTeamLogo: $awayTeamLogo, awayTeamStadium: $awayTeamStadium, awayTeamCapacity: $awayTeamCapacity, score: $score)';
   }
 
   @override
@@ -488,8 +470,7 @@ class _$_Fixture implements _Fixture {
                 .equals(other.awayTeamStadium, awayTeamStadium) &&
             const DeepCollectionEquality()
                 .equals(other.awayTeamCapacity, awayTeamCapacity) &&
-            const DeepCollectionEquality().equals(other.score, score) &&
-            const DeepCollectionEquality().equals(other.matchStat, matchStat));
+            const DeepCollectionEquality().equals(other.score, score));
   }
 
   @override
@@ -513,8 +494,7 @@ class _$_Fixture implements _Fixture {
         const DeepCollectionEquality().hash(awayTeamLogo),
         const DeepCollectionEquality().hash(awayTeamStadium),
         const DeepCollectionEquality().hash(awayTeamCapacity),
-        const DeepCollectionEquality().hash(score),
-        const DeepCollectionEquality().hash(matchStat)
+        const DeepCollectionEquality().hash(score)
       ]);
 
   @JsonKey(ignore: true)
@@ -543,8 +523,7 @@ abstract class _Fixture implements Fixture {
       required TeamLogo awayTeamLogo,
       required Stadium awayTeamStadium,
       required StadiumCapacity awayTeamCapacity,
-      required Score score,
-      required MatchStat? matchStat}) = _$_Fixture;
+      required Score score}) = _$_Fixture;
 
   @override
   GameWeekId get gameWeekId;
@@ -584,8 +563,6 @@ abstract class _Fixture implements Fixture {
   StadiumCapacity get awayTeamCapacity;
   @override //
   Score get score;
-  @override
-  MatchStat? get matchStat;
   @override
   @JsonKey(ignore: true)
   _$FixtureCopyWith<_Fixture> get copyWith =>

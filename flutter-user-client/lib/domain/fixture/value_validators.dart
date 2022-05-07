@@ -51,9 +51,14 @@ Either<ValueFailure<String>, String> validateSchedule(
 Either<ValueFailure<String>, String> validateStatus({required String status}) {
   // if empty
   if (status.isEmpty) {
-    return left(const ValueFailure.emptyStatus(failedValue: ''));
-  } else if (!(["scheduled", "FH", "HT", "SH", "FT"].contains(status))) {
-    return left(const ValueFailure.invalidStatus(failedValue: ''));
+    return left(
+      const ValueFailure.emptyStatus(failedValue: ''),
+    );
+  } else if (!(["scheduled", "liveFH", "HT", "liveSH", "FT"]
+      .contains(status))) {
+    return left(
+      const ValueFailure.invalidStatus(failedValue: ''),
+    );
   } else {
     return right(status);
   }

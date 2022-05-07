@@ -1,7 +1,14 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
+import 'package:efpl/presentation/colors.dart';
+import 'package:efpl/presentation/fixtures/widgets/fixture_detail_event.dart';
+import 'package:efpl/presentation/fixtures/widgets/fixture_detail_lineup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'package:tab_container/tab_container.dart';
 
 class FixtureDetailView extends StatelessWidget {
   const FixtureDetailView({Key? key}) : super(key: key);
@@ -11,58 +18,39 @@ class FixtureDetailView extends StatelessWidget {
     final Map<String, Fixture> fixture =
         ModalRoute.of(context)?.settings.arguments as Map<String, Fixture>;
 
-    String matchStatus = fixture['fixture']!.status.value.fold(
-          (l) => '',
-          (r) => r.toString(),
-        );
-
-    String matchScore = fixture['fixture']!.score.value.fold(
-          (l) => '',
-          (r) => r.toString(),
-        );
-
-    String city = fixture['fixture']!.homeTeamCity.value.fold(
-          (l) => '',
-          (r) => r.toString(),
-        );
-
-    String stadium = fixture['fixture']!.homeTeamStadium.value.fold(
-          (l) => '',
-          (r) => r.toString(),
-        );
-
-    String capacity = fixture['fixture']!.homeTeamCapacity.value.fold(
-          (l) => '',
-          (r) => r.toString(),
-        );
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
           getMatchAcronym(fixture: fixture),
+          style: const TextStyle(
+            letterSpacing: 0.5,
+            fontFamily: "Architect",
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        backgroundColor: Colors.amber,
-        foregroundColor: Colors.black,
+        backgroundColor: ConstantColors.primary_800,
+        foregroundColor: ConstantColors.neutral_200,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header
+            // HEADER
             Container(
-              height: 200,
+              height: 205,
+              color: ConstantColors.neutral_200,
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Home Team
                   SizedBox(
-                    height: 175,
+                    height: 180,
                     width: MediaQuery.of(context).size.width * 0.30,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: 100,
+                          height: 105,
                           child: CachedNetworkImage(
                             fit: BoxFit.fill,
                             imageUrl: getImageUrl(fixture: fixture, isHome: 1),
@@ -91,39 +79,67 @@ class FixtureDetailView extends StatelessWidget {
 
                   // match Info
                   SizedBox(
-                    height: 150,
+                    height: 165,
                     width: MediaQuery.of(context).size.width * 0.35,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        matchStatus == "scheduled"
-                            ? const Text("SCH")
-                            : Text(matchStatus),
+                        getShortStatus(fixture: fixture) != "Not Live"
+                            ? Text(
+                                getShortStatus(fixture: fixture),
+                              )
+                            : const Text(""),
                         //
                         const SizedBox(
                           height: 8,
                         ),
+
+                        getShortStatus(fixture: fixture) != "Not Live"
+                            ? Text(
+                                fixture['fixture']!.score.value.fold(
+                                      (l) => '',
+                                      (r) =>
+                                          r.toString().split("v").join(" - "),
+                                    ),
+                                style: const TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            : Text(
+                                getFormattedTime(fixture: fixture),
+                                style: const TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                        const SizedBox(
+                          height: 8,
+                        ),
                         Text(
-                          matchScore.split("v").join(" - "),
-                          style: const TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          fixture['fixture']!.homeTeamCity.value.fold(
+                                (l) => '',
+                                (r) => r.toString(),
+                              ),
                         ),
                         const SizedBox(
                           height: 8,
                         ),
-                        Text(city),
-                        const SizedBox(
-                          height: 8,
-                        ),
                         Text(
-                          stadium,
+                          fixture['fixture']!.homeTeamStadium.value.fold(
+                                (l) => '',
+                                (r) => r.toString(),
+                              ),
                           textAlign: TextAlign.center,
                         ),
 
                         Text(
-                          "( " + capacity + " )",
+                          "( " +
+                              fixture['fixture']!.homeTeamCapacity.value.fold(
+                                    (l) => '',
+                                    (r) => r.toString(),
+                                  ) +
+                              " )",
                           style: const TextStyle(fontSize: 10),
                         ),
                       ],
@@ -167,268 +183,46 @@ class FixtureDetailView extends StatelessWidget {
                 ],
               ),
             ),
-            // Score info
-            // TODO:MAke Stat
+
+            // SCORE INFO
             Container(
               height: 80,
-              color: Colors.red,
+              decoration: const BoxDecoration(
+                color: ConstantColors.neutral_200,
+                border: Border(
+                  bottom: BorderSide(
+                    width: 0.5,
+                    color: ConstantColors.primary_800,
+                  ),
+                  top: BorderSide(
+                    width: 0.5,
+                    color: ConstantColors.primary_800,
+                  ),
+                ),
+              ),
             ),
-            // LineUps
-            Container(
-              child: Column(
+
+            // Tab View
+
+            ConstrainedBox(
+              // height: 1060,
+              constraints: const BoxConstraints(
+                minHeight: 40,
+                maxHeight: 1060,
+              ),
+              child: TabContainer(
+                radius: 0,
+                color: ConstantColors.primary_200,
                 children: [
-                  // GKS
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 12),
-                    height: 80,
-                    width: MediaQuery.of(context).size.width,
-                    color: Colors.green,
-                    child: Column(
-                      children: [
-                        const Text(
-                          "GOALKEEPERS",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        )
-                      ],
-                    ),
-                  ),
-
-                  // DEFENDERs
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 12),
-                    height: 170,
-                    width: MediaQuery.of(context).size.width,
-                    color: Colors.purple,
-                    child: Column(
-                      children: [
-                        const Text(
-                          "DEFENDERS",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        )
-                      ],
-                    ),
-                  ),
-                  // MIDFIELDER
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 12),
-                    height: 170,
-                    width: MediaQuery.of(context).size.width,
-                    color: Colors.blue,
-                    child: Column(
-                      children: [
-                        const Text(
-                          "MIDFIELDERS",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        )
-                      ],
-                    ),
-                  ),
-                  // Attackers
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 12),
-                    height: 170,
-                    width: MediaQuery.of(context).size.width,
-                    color: Colors.limeAccent,
-                    child: Column(
-                      children: [
-                        const Text(
-                          "DEFENDERS",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        )
-                      ],
-                    ),
-                  ),
-
-                  // SUBSTITUTES
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 12),
-                    height: 200,
-                    width: MediaQuery.of(context).size.width,
-                    color: Colors.blueGrey,
-                    child: Column(
-                      children: [
-                        const Text(
-                          "SUBSTITUTES",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("data"), Text("data")],
-                        )
-                      ],
-                    ),
-                  )
+                  FixtureDetailLineUp(fixture: fixture),
+                  FixtureDetailEvent(fixture: fixture),
+                ],
+                tabs: const [
+                  'Line Ups',
+                  'Events',
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -475,7 +269,7 @@ String getMatchAcronym({required Map<String, Fixture> fixture}) {
     String awayTeamShort = "";
     awayTeamLong.removeLast();
     for (var awayTeam in awayTeamLong) {
-      if (homeTeamLong.length == 3) {
+      if (awayTeamLong.length == 3) {
         awayTeamShort = awayTeamShort + awayTeam.split("")[0];
       } else if (awayTeamLong.length < 3) {
         if (awayTeamShort.length < 2) {
@@ -540,6 +334,39 @@ String getImageUrl(
         );
     finalPath = finalPath + path;
   }
-
   return finalPath;
+}
+
+String getShortStatus({required Map<String, Fixture> fixture}) {
+  String status = fixture['fixture']!.status.value.fold((l) => '', (r) => r);
+
+  String finalStatus = "Not Live";
+
+  if (status == "liveFH") {
+    finalStatus = "FH";
+  } else if (status == "HT") {
+    finalStatus = "HT";
+  } else if (status == "liveSH") {
+    finalStatus = "SH";
+  } else if (status == "FT") {
+    finalStatus = "FT";
+  }
+
+  return finalStatus;
+}
+
+String getFormattedTime({required Map<dynamic, Fixture> fixture}) {
+  String scheduleString = fixture['fixture']!.schedule.value.fold(
+        (l) => '',
+        (r) => r,
+      );
+
+  final dateTime = DateTime.parse(scheduleString);
+  String hour = dateTime.hour < 10
+      ? "0" + dateTime.hour.toString()
+      : dateTime.hour.toString();
+  String minute = dateTime.minute < 10
+      ? "0" + dateTime.minute.toString()
+      : dateTime.minute.toString();
+  return hour + ":" + minute;
 }

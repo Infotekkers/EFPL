@@ -33,7 +33,6 @@ abstract class FixtureDTO implements _$FixtureDTO {
     required int awayTeamCapacity,
     //
     required String score,
-    required dynamic matchStat,
   }) = _FixtureDTO;
 
   factory FixtureDTO.fromDomain({required Fixture fixture}) => FixtureDTO(
@@ -90,8 +89,6 @@ abstract class FixtureDTO implements _$FixtureDTO {
 
         //
         score: fixture.score.isValid() ? fixture.score.getOrCrash() : '',
-        matchStat:
-            fixture.matchStat!.isValid() ? fixture.matchId.getOrCrash() : '',
       );
 
   Fixture toDomain() => Fixture(
@@ -116,7 +113,6 @@ abstract class FixtureDTO implements _$FixtureDTO {
         awayTeamCapacity: StadiumCapacity(value: awayTeamCapacity),
         //
         score: Score(value: score),
-        matchStat: MatchStat(value: matchStat),
       );
   factory FixtureDTO.fromJson(Map<String, dynamic> json) =>
       _$FixtureDTOFromJson(json);

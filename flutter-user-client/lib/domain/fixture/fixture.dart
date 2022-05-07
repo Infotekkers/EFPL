@@ -29,7 +29,6 @@ abstract class Fixture with _$Fixture {
     //
 
     required Score score,
-    required MatchStat? matchStat,
   }) = _Fixture;
 
   factory Fixture.initial() => Fixture(
@@ -54,6 +53,5 @@ abstract class Fixture with _$Fixture {
         awayTeamStadium: Stadium(value: ""),
         awayTeamCapacity: StadiumCapacity(value: 0),
         score: Score(value: ''),
-        matchStat: MatchStat(value: const {}),
       );
 }

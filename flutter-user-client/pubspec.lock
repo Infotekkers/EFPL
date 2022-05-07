@@ -776,6 +776,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  socket_io_client:
+    dependency: "direct main"
+    description:
+      name: socket_io_client
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0-beta.4-nullsafety.0"
+  socket_io_common:
+    dependency: transitive
+    description:
+      name: socket_io_common
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   source_gen:
     dependency: transitive
     description:
@@ -867,6 +881,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.0+2"
+  tab_container:
+    dependency: "direct main"
+    description:
+      name: tab_container
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   term_glyph:
     dependency: transitive
     description:

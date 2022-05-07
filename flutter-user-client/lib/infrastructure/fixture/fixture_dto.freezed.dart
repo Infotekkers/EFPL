@@ -40,8 +40,7 @@ class _$FixtureDTOTearOff {
       required String awayTeamLogo,
       required String awayTeamStadium,
       required int awayTeamCapacity,
-      required String score,
-      required dynamic matchStat}) {
+      required String score}) {
     return _FixtureDTO(
       gameWeekId: gameWeekId,
       matchId: matchId,
@@ -62,7 +61,6 @@ class _$FixtureDTOTearOff {
       awayTeamStadium: awayTeamStadium,
       awayTeamCapacity: awayTeamCapacity,
       score: score,
-      matchStat: matchStat,
     );
   }
 
@@ -97,7 +95,6 @@ mixin _$FixtureDTO {
   String get awayTeamStadium => throw _privateConstructorUsedError;
   int get awayTeamCapacity => throw _privateConstructorUsedError; //
   String get score => throw _privateConstructorUsedError;
-  dynamic get matchStat => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -129,8 +126,7 @@ abstract class $FixtureDTOCopyWith<$Res> {
       String awayTeamLogo,
       String awayTeamStadium,
       int awayTeamCapacity,
-      String score,
-      dynamic matchStat});
+      String score});
 }
 
 /// @nodoc
@@ -162,7 +158,6 @@ class _$FixtureDTOCopyWithImpl<$Res> implements $FixtureDTOCopyWith<$Res> {
     Object? awayTeamStadium = freezed,
     Object? awayTeamCapacity = freezed,
     Object? score = freezed,
-    Object? matchStat = freezed,
   }) {
     return _then(_value.copyWith(
       gameWeekId: gameWeekId == freezed
@@ -241,10 +236,6 @@ class _$FixtureDTOCopyWithImpl<$Res> implements $FixtureDTOCopyWith<$Res> {
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as String,
-      matchStat: matchStat == freezed
-          ? _value.matchStat
-          : matchStat // ignore: cast_nullable_to_non_nullable
-              as dynamic,
     ));
   }
 }
@@ -274,8 +265,7 @@ abstract class _$FixtureDTOCopyWith<$Res> implements $FixtureDTOCopyWith<$Res> {
       String awayTeamLogo,
       String awayTeamStadium,
       int awayTeamCapacity,
-      String score,
-      dynamic matchStat});
+      String score});
 }
 
 /// @nodoc
@@ -309,7 +299,6 @@ class __$FixtureDTOCopyWithImpl<$Res> extends _$FixtureDTOCopyWithImpl<$Res>
     Object? awayTeamStadium = freezed,
     Object? awayTeamCapacity = freezed,
     Object? score = freezed,
-    Object? matchStat = freezed,
   }) {
     return _then(_FixtureDTO(
       gameWeekId: gameWeekId == freezed
@@ -388,10 +377,6 @@ class __$FixtureDTOCopyWithImpl<$Res> extends _$FixtureDTOCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as String,
-      matchStat: matchStat == freezed
-          ? _value.matchStat
-          : matchStat // ignore: cast_nullable_to_non_nullable
-              as dynamic,
     ));
   }
 }
@@ -418,8 +403,7 @@ class _$_FixtureDTO extends _FixtureDTO {
       required this.awayTeamLogo,
       required this.awayTeamStadium,
       required this.awayTeamCapacity,
-      required this.score,
-      required this.matchStat})
+      required this.score})
       : super._();
 
   factory _$_FixtureDTO.fromJson(Map<String, dynamic> json) =>
@@ -463,12 +447,10 @@ class _$_FixtureDTO extends _FixtureDTO {
   final int awayTeamCapacity;
   @override //
   final String score;
-  @override
-  final dynamic matchStat;
 
   @override
   String toString() {
-    return 'FixtureDTO(gameWeekId: $gameWeekId, matchId: $matchId, schedule: $schedule, status: $status, homeTeam: $homeTeam, homeTeamLineUp: $homeTeamLineUp, homeTeamCity: $homeTeamCity, homeTeamCoach: $homeTeamCoach, homeTeamLogo: $homeTeamLogo, homeTeamStadium: $homeTeamStadium, homeTeamCapacity: $homeTeamCapacity, awayTeam: $awayTeam, awayTeamLineUp: $awayTeamLineUp, awayTeamCity: $awayTeamCity, awayTeamCoach: $awayTeamCoach, awayTeamLogo: $awayTeamLogo, awayTeamStadium: $awayTeamStadium, awayTeamCapacity: $awayTeamCapacity, score: $score, matchStat: $matchStat)';
+    return 'FixtureDTO(gameWeekId: $gameWeekId, matchId: $matchId, schedule: $schedule, status: $status, homeTeam: $homeTeam, homeTeamLineUp: $homeTeamLineUp, homeTeamCity: $homeTeamCity, homeTeamCoach: $homeTeamCoach, homeTeamLogo: $homeTeamLogo, homeTeamStadium: $homeTeamStadium, homeTeamCapacity: $homeTeamCapacity, awayTeam: $awayTeam, awayTeamLineUp: $awayTeamLineUp, awayTeamCity: $awayTeamCity, awayTeamCoach: $awayTeamCoach, awayTeamLogo: $awayTeamLogo, awayTeamStadium: $awayTeamStadium, awayTeamCapacity: $awayTeamCapacity, score: $score)';
   }
 
   @override
@@ -507,8 +489,7 @@ class _$_FixtureDTO extends _FixtureDTO {
                 .equals(other.awayTeamStadium, awayTeamStadium) &&
             const DeepCollectionEquality()
                 .equals(other.awayTeamCapacity, awayTeamCapacity) &&
-            const DeepCollectionEquality().equals(other.score, score) &&
-            const DeepCollectionEquality().equals(other.matchStat, matchStat));
+            const DeepCollectionEquality().equals(other.score, score));
   }
 
   @override
@@ -532,8 +513,7 @@ class _$_FixtureDTO extends _FixtureDTO {
         const DeepCollectionEquality().hash(awayTeamLogo),
         const DeepCollectionEquality().hash(awayTeamStadium),
         const DeepCollectionEquality().hash(awayTeamCapacity),
-        const DeepCollectionEquality().hash(score),
-        const DeepCollectionEquality().hash(matchStat)
+        const DeepCollectionEquality().hash(score)
       ]);
 
   @JsonKey(ignore: true)
@@ -567,8 +547,7 @@ abstract class _FixtureDTO extends FixtureDTO {
       required String awayTeamLogo,
       required String awayTeamStadium,
       required int awayTeamCapacity,
-      required String score,
-      required dynamic matchStat}) = _$_FixtureDTO;
+      required String score}) = _$_FixtureDTO;
   const _FixtureDTO._() : super._();
 
   factory _FixtureDTO.fromJson(Map<String, dynamic> json) =
@@ -612,8 +591,6 @@ abstract class _FixtureDTO extends FixtureDTO {
   int get awayTeamCapacity;
   @override //
   String get score;
-  @override
-  dynamic get matchStat;
   @override
   @JsonKey(ignore: true)
   _$FixtureDTOCopyWith<_FixtureDTO> get copyWith =>

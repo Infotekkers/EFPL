@@ -3,6 +3,7 @@
 import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
 import 'package:efpl/presentation/leagues/leagues_view.dart';
 import 'package:efpl/presentation/points/points_view.dart';
@@ -33,7 +34,7 @@ class MainTabView extends StatelessWidget {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: ConstantColors.primary_800,
                 ),
                 child: Center(child: Text('Drawer Header')),
               ),
@@ -62,13 +63,14 @@ class MainTabView extends StatelessWidget {
         ),
         appBar: AppBar(
           elevation: 8.0,
+          backgroundColor: ConstantColors.primary_900,
           bottom: const TabBar(
             tabs: [
               // My Team
               Tab(
                 icon: Icon(
                   MdiIcons.accountGroup,
-                  color: Colors.white,
+                  color: ConstantColors.neutral_200,
                 ),
               ),
 
@@ -76,7 +78,7 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   MdiIcons.counter,
-                  color: Colors.white,
+                  color: ConstantColors.neutral_200,
                 ),
               ),
               // Transfers
@@ -84,7 +86,7 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   Boxicons.bx_transfer,
-                  color: Colors.white,
+                  color: ConstantColors.neutral_200,
                 ),
               ),
 
@@ -92,21 +94,21 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   MdiIcons.calendarMonth,
-                  color: Colors.white,
+                  color: ConstantColors.neutral_200,
                 ),
               ),
               // My Leagues
               Tab(
                 icon: Icon(
                   MdiIcons.trophy,
-                  color: Colors.white,
+                  color: ConstantColors.neutral_200,
                 ),
               ),
               // Stats
               Tab(
                 icon: Icon(
                   Icons.leaderboard,
-                  color: Colors.white,
+                  color: ConstantColors.neutral_200,
                 ),
               ),
 
@@ -114,14 +116,19 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   Icons.settings,
-                  color: Colors.white,
+                  color: ConstantColors.neutral_200,
                 ),
               ),
             ],
           ),
           title: const Text(
-            'EFPL',
-            style: TextStyle(color: Colors.white, fontSize: 24),
+            'Ethiopian Fantasy PL',
+            style: TextStyle(
+              color: ConstantColors.neutral_200,
+              fontSize: 24,
+              letterSpacing: 1,
+              fontFamily: "Architect",
+            ),
           ),
         ),
         body: TabBarView(
