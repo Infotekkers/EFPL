@@ -1,4 +1,7 @@
+import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
+import 'package:efpl/injectable.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,91 +16,386 @@ class FixtureDetailEvent extends StatelessWidget {
       children: [
         ConstrainedBox(
           constraints: BoxConstraints(
-            minHeight: 56.0,
-            maxHeight: 380,
+            minHeight: 0,
+            // maxHeight: 380,
             minWidth: MediaQuery.of(context).size.width * 0.5,
           ),
           child: DecoratedBox(
-            decoration: const BoxDecoration(color: Colors.red),
+            decoration: const BoxDecoration(),
             child: Column(
               children: [
                 // Assists
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 15),
-                  height: 20,
                   width: MediaQuery.of(context).size.width * 0.5,
-                  child: ListView.builder(
-                      itemCount: commonEvents[0]['assists'].length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          height: 20,
-                          color: Colors.blue,
-                          child: Text(commonEvents[0]['assists'][index]),
-                        );
-                      }),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: 0,
+                      // maxHeight: 100,
+                      minWidth: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(),
+                      child: ListView.builder(
+                        itemCount: commonEvents[0]['assists'].length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            height: 25,
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            color: ConstantColors.neutral_200,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  commonEvents[0]['assists'][index].toString(),
+                                ),
+                                const Text(
+                                  "A",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    backgroundColor: Colors.black,
+                                    fontSize: 16,
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ),
 
                 // penalitiesMissed
                 Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  height: 20,
+                  margin: const EdgeInsets.symmetric(vertical: 15),
                   width: MediaQuery.of(context).size.width * 0.5,
-                  child: ListView.builder(
-                      itemCount: commonEvents[0]['penalitiesMissed'].length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          height: 20,
-                          color: Colors.blue,
-                          child:
-                              Text(commonEvents[0]['penalitiesMissed'][index]),
-                        );
-                      }),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: 0,
+                      // maxHeight: 100,
+                      minWidth: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(),
+                      child: ListView.builder(
+                        itemCount: commonEvents[0]['penalitiesMissed'].length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            height: 25,
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            color: ConstantColors.neutral_200,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  commonEvents[0]['penalitiesMissed'][index]
+                                      .toString(),
+                                ),
+                                const Text(
+                                  "X",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    backgroundColor: Colors.red,
+                                    fontSize: 16,
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ),
 
                 // Yellow Cards
                 Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  height: 20,
+                  margin: const EdgeInsets.symmetric(vertical: 15),
                   width: MediaQuery.of(context).size.width * 0.5,
-                  child: ListView.builder(
-                      itemCount: commonEvents[0]['yellows'].length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          height: 20,
-                          color: Colors.blue,
-                          child: Text(commonEvents[0]['yellows'][index]),
-                        );
-                      }),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: 0,
+                      // maxHeight: 100,
+                      minWidth: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(),
+                      child: ListView.builder(
+                        itemCount: commonEvents[0]['yellows'].length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            height: 25,
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            color: ConstantColors.neutral_200,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  commonEvents[0]['yellows'][index].toString(),
+                                ),
+                                Container(
+                                  height: 20,
+                                  width: 12,
+                                  color: Colors.amber,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ),
 
-                // Yellow Cards
+                // Red Cards
                 Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  height: 20,
+                  margin: const EdgeInsets.symmetric(vertical: 15),
                   width: MediaQuery.of(context).size.width * 0.5,
-                  child: ListView.builder(
-                      itemCount: commonEvents[0]['reds'].length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          height: 20,
-                          color: Colors.blue,
-                          child: Text(commonEvents[0]['reds'][index]),
-                        );
-                      }),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: 0,
+                      // maxHeight: 100,
+                      minWidth: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(),
+                      child: ListView.builder(
+                        itemCount: commonEvents[0]['reds'].length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            height: 25,
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            color: ConstantColors.neutral_200,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  commonEvents[0]['reds'][index].toString(),
+                                ),
+                                Container(
+                                  height: 20,
+                                  width: 12,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
         ),
-        Container(
-          height: 30,
-          width: MediaQuery.of(context).size.width * 0.5,
-          color: Colors.yellow,
-        )
+
+        // Away Team
+        ConstrainedBox(
+          constraints: BoxConstraints(
+            // minHeight: 0,
+            // maxHeight: 380,
+            minWidth: MediaQuery.of(context).size.width * 0.5,
+          ),
+          child: DecoratedBox(
+            decoration: const BoxDecoration(),
+            child: Column(
+              children: [
+                // Assists
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: 0,
+                      // maxHeight: 100,
+                      minWidth: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(),
+                      child: ListView.builder(
+                        itemCount: commonEvents[1]['assists'].length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            height: 25,
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            color: ConstantColors.neutral_200,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  commonEvents[1]['assists'][index].toString(),
+                                ),
+                                const Text(
+                                  "A",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    backgroundColor: Colors.black,
+                                    fontSize: 16,
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+
+                // penalitiesMissed
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: 0,
+                      // maxHeight: 100,
+                      minWidth: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(),
+                      child: ListView.builder(
+                        itemCount: commonEvents[1]['penalitiesMissed'].length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            height: 25,
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            color: ConstantColors.neutral_200,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  commonEvents[1]['penalitiesMissed'][index]
+                                      .toString(),
+                                ),
+                                const Text(
+                                  "X",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    backgroundColor: Colors.red,
+                                    fontSize: 16,
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Yellow Cards
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: 0,
+                      // maxHeight: 100,
+                      minWidth: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(),
+                      child: ListView.builder(
+                        itemCount: commonEvents[1]['yellows'].length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            height: 25,
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            color: ConstantColors.neutral_200,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  commonEvents[1]['yellows'][index].toString(),
+                                ),
+                                Container(
+                                  height: 20,
+                                  width: 12,
+                                  color: Colors.amber,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Red Cards
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: 0,
+                      // maxHeight: 100,
+                      minWidth: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(),
+                      child: ListView.builder(
+                        itemCount: commonEvents[1]['reds'].length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            height: 25,
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            color: ConstantColors.neutral_200,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  commonEvents[1]['reds'][index].toString(),
+                                ),
+                                Container(
+                                  height: 20,
+                                  width: 12,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/domain/fixture/i_fixture_facade.dart';
 import 'package:efpl/infrastructure/fixture/api_fixture_repository.dart';
 import 'package:efpl/injectable.config.dart';
