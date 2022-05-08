@@ -3,6 +3,7 @@ const app = require("../../index");
 
 const mongoose = require("mongoose");
 const CustomLeagueModel = require("../models/CustomLeague");
+const { bkConnection } = require("../models/Backup");
 
 // Test data import
 const {
@@ -15,6 +16,7 @@ const req = supertest(app);
 describe("League admin functions", () => {
   afterAll(async () => {
     await CustomLeagueModel.deleteMany({});
+    bkConnection.close();
   });
 
   test("POST /customLeagues/create Success: Custom League Created.🟢", async () => {
