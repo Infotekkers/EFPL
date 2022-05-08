@@ -38,7 +38,7 @@ export default {
       await axios
         .get(url)
         .then((res) => {
-          console.log(res.data[0]);
+          // If player has no stats for current gameweek add initial stats
           if (!res.data[0].score[gameweek - 1]) {
             let score = {
               gameweekId: gameweek,
@@ -60,6 +60,54 @@ export default {
             };
             res.data[0].score.push(score);
           }
+
+          // if player has uninitialized stat fields initialize them to 0
+          let score = {
+            gameweekId: gameweek,
+            price: 0,
+            fantasyScore: 0,
+            minutesPlayed: 0,
+            goals: 0,
+            assists: 0,
+            cleanSheet: 0,
+            yellows: 0,
+            reds: 0,
+            penalitiesMissed: 0,
+            penalitiesSaved: 0,
+            saves: 0,
+            ownGoal: 0,
+            transfersIn: 0,
+            transfersOut: 0,
+            form: 0,
+          };
+          score.goals = res.data[0].score[gameweek - 1].goals
+            ? res.data[0].score[gameweek - 1].goals
+            : 0;
+          score.assists = res.data[0].score[gameweek - 1].assists
+            ? res.data[0].score[gameweek - 1].assists
+            : 0;
+          score.yellows = res.data[0].score[gameweek - 1].yellows
+            ? res.data[0].score[gameweek - 1].yellows
+            : 0;
+          score.reds = res.data[0].score[gameweek - 1].reds
+            ? res.data[0].score[gameweek - 1].reds
+            : 0;
+          score.penalitiesMissed = res.data[0].score[gameweek - 1]
+            .penalitiesMissed
+            ? res.data[0].score[gameweek - 1].penalitiesMissed
+            : 0;
+          score.penalitiesSaved = res.data[0].score[gameweek - 1]
+            .penalitiesMissed
+            ? res.data[0].score[gameweek - 1].penalitiesMissed
+            : 0;
+          score.saves = res.data[0].score[gameweek - 1].saves
+            ? res.data[0].score[gameweek - 1].saves
+            : 0;
+          score.ownGoal = res.data[0].score[gameweek - 1].ownGoal
+            ? res.data[0].score[gameweek - 1].ownGoal
+            : 0;
+
+          res.data[0].score.splice(gameweek - 1, 1, score);
           payload = {
             playerId,
             gameweek,
