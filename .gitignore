@@ -15,10 +15,10 @@ flutter-user-client/.svn/
 flutter-user-client/.env
 
 # Flutter Output
-flutter-user-client/android
-flutter-user-client/ios
-flutter-user-client/web
-flutter-user-client/windows
+# flutter-user-client/android
+# flutter-user-client/ios
+# flutter-user-client/web
+# flutter-user-client/windows
 
 # IntelliJ related
 flutter-user-client/*.iml

@@ -1,5 +1,5 @@
 name: efpl
-description: Ethiopian Fantasy Primeier League.
+description: Ethiopian Fantasy Premier League.
 version: 1.0.0+1
 
 environment:
@@ -10,14 +10,20 @@ dependencies:
   dartz: ^0.10.1
   flutter:
     sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter
+  intl: ^0.17.0
   flutter_bloc: ^8.0.1
   flutter_dotenv: ^5.0.2
   freezed_annotation: ^1.1.0
   get_it: ^7.2.0
   http: ^0.13.4
+  http_interceptor: ^1.0.2
   injectable: ^1.5.3
   json_annotation: ^4.4.0
   shared_preferences: ^2.0.13
+  material_design_icons_flutter: 5.0.6595
+  flutter_boxicons: ^3.0.0
 
 dev_dependencies:
   bloc_test: ^9.0.3
@@ -35,4 +41,11 @@ dev_dependencies:
   test: ^1.19.1
 
 flutter:
+  assets:
+    - .env
+  fonts:
+    - family: Architect
+      fonts:
+        - asset: fonts/ArchitectsDaughter-Regular.ttf
   uses-material-design: true
+  generate: true

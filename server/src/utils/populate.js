@@ -1,5 +1,4 @@
 const axios = require("axios");
-const PORT = process.env.PORT || 3000;
 const baseURL = process.env.BASE_URL;
 const { printConsole } = require("./development");
 
@@ -489,7 +488,7 @@ const addTestFixture = async () => {
 */
 const populateTeams = async () => {
   // check teams
-  const teams = await axios.get(`${baseURL}${PORT}/teams/all`);
+  const teams = await axios.get(`${baseURL}/teams/all`);
 
   // if no teams
   if (teams.data.length === 0) {
@@ -501,24 +500,7 @@ const populateTeams = async () => {
       { printLocation: "populate.js:490" },
       { bgColor: "bgGreen", textColor: "black" }
     );
-  }
-  // If incomplete team
-  // else if (teams.data.length !== 16) {
-  //   // clear DB
-  //   await Team.deleteMany();
-
-  //   // add all teams
-  //   teamData.forEach(async (team) => {
-  //     await Team.create(team);
-  //   });
-  //   printConsole(
-  //     { data: "All Teams added properly" },
-  //     { printLocation: "populate.js:490" },
-  //     { bgColor: "bgGreen", textColor: "black" }
-  //   );
-  // }
-  // If already added
-  else {
+  } else {
     printConsole(
       { data: "Teams already populated" },
       { printLocation: "populate.js:497" },
@@ -529,7 +511,7 @@ const populateTeams = async () => {
 };
 
 const populatePlayers = async () => {
-  const players = await axios.get(`${baseURL}${PORT}/players/getplayers`);
+  const players = await axios.get(`${baseURL}/players/getplayers`);
 
   // if no players
   if (players.data.data.length === 0) {
@@ -544,30 +526,7 @@ const populatePlayers = async () => {
       { printLocation: "populate.js:490" },
       { bgColor: "bgGreen", textColor: "black" }
     );
-  }
-
-  // if incomplete list
-  // else if (players.data.length > playersData.length * playersData[0].length) {
-  //   // clear DB
-  //   await Team.deleteMany();
-
-  //   playersData.forEach(async (team) => {
-  //     team.forEach(async (player) => {
-  //       await Player.create(player);
-  //     });
-  //   });
-  //   printConsole(
-  //     {
-  //       data: `${
-  //         playersData.length * playersData[0].length
-  //       } players added properly.`,
-  //     },
-  //     { printLocation: "populate.js:490" },
-  //     { bgColor: "bgGreen", textColor: "black" }
-  //   );
-  // }
-  // If already added
-  else {
+  } else {
     printConsole(
       { data: "Players already populated" },
       { printLocation: "populate.js:497" },
@@ -601,7 +560,7 @@ const populateFixture = async () => {
   };
 
   // get all fixtures
-  const fixtures = await axios.get(`${baseURL}${PORT}/fixtures/`);
+  const fixtures = await axios.get(`${baseURL}/fixtures/`);
 
   //  if no fixtures
   if (fixtures.data.length === 0) {
