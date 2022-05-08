@@ -315,7 +315,7 @@ const startFixture = asyncHandler(async function (req, res) {
             );
           }
         }
-      }, 1000);
+      }, 60000);
 
       matchParent
         .save()
