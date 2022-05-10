@@ -4,6 +4,7 @@ import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/injectable.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/transfers/widgets/user_player_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,129 +48,233 @@ class TransfersView extends StatelessWidget {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : SingleChildScrollView(
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    child: Column(
-                      children: [
-                        // Goal Keepers
-                        Container(
-                          height: maxHeight / 6,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.amber,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 120,
-                            vertical: 20,
-                          ),
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
+              : Stack(
+                  children: [
+                    // Main Voew
+                    SingleChildScrollView(
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                        child: Column(
+                          children: [
+                            // Goal Keepers
+                            Container(
+                              height: maxHeight / 6,
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.amber,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 120,
+                                vertical: 20,
+                              ),
+                              child: GridView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                ),
+                                itemCount: allFormattedPlayers[0].length,
+                                itemBuilder: (context, index) {
+                                  return UserPlayerWidget(
+                                    currentUserPlayer: allFormattedPlayers[0]
+                                        [index],
+                                  );
+                                },
+                              ),
                             ),
-                            itemCount: allFormattedPlayers[0].length,
-                            itemBuilder: (context, index) {
-                              return UserPlayerWidget(
-                                currentUserPlayer: allFormattedPlayers[0]
-                                    [index],
-                              );
-                            },
-                          ),
-                        ),
 
-                        // Defenders
-                        Container(
-                          height: maxHeight / 6,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.pink,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 5,
-                            vertical: 20,
-                          ),
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: allFormattedPlayers[1].length > 0
-                                  ? allFormattedPlayers[1].length
-                                  : 1,
+                            // Defenders
+                            Container(
+                              height: maxHeight / 6,
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.pink,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 5,
+                                vertical: 20,
+                              ),
+                              child: GridView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      allFormattedPlayers[1].length > 0
+                                          ? allFormattedPlayers[1].length
+                                          : 1,
+                                ),
+                                itemCount: allFormattedPlayers[1].length,
+                                itemBuilder: (context, index) {
+                                  return UserPlayerWidget(
+                                    currentUserPlayer: allFormattedPlayers[1]
+                                        [index],
+                                  );
+                                },
+                              ),
                             ),
-                            itemCount: allFormattedPlayers[1].length,
-                            itemBuilder: (context, index) {
-                              return UserPlayerWidget(
-                                currentUserPlayer: allFormattedPlayers[1]
-                                    [index],
-                              );
-                            },
-                          ),
-                        ),
 
-                        // Midfielders
-                        Container(
-                          height: maxHeight / 6,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.teal,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 5,
-                            vertical: 20,
-                          ),
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: allFormattedPlayers[2].length > 0
-                                  ? allFormattedPlayers[2].length
-                                  : 1,
+                            // Midfielders
+                            Container(
+                              height: maxHeight / 6,
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.teal,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 5,
+                                vertical: 20,
+                              ),
+                              child: GridView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      allFormattedPlayers[2].length > 0
+                                          ? allFormattedPlayers[2].length
+                                          : 1,
+                                ),
+                                itemCount: allFormattedPlayers[2].length,
+                                itemBuilder: (context, index) {
+                                  return UserPlayerWidget(
+                                    currentUserPlayer: allFormattedPlayers[2]
+                                        [index],
+                                  );
+                                },
+                              ),
                             ),
-                            itemCount: allFormattedPlayers[2].length,
-                            itemBuilder: (context, index) {
-                              return UserPlayerWidget(
-                                currentUserPlayer: allFormattedPlayers[2]
-                                    [index],
-                              );
-                            },
-                          ),
-                        ),
 
-                        // Attackers
-                        Container(
-                          height: maxHeight / 6,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.orange,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 85,
-                            vertical: 20,
-                          ),
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: allFormattedPlayers[3].length > 0
-                                  ? allFormattedPlayers[3].length
-                                  : 1,
+                            // Attackers
+                            Container(
+                              height: maxHeight / 6,
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.orange,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 85,
+                                vertical: 20,
+                              ),
+                              child: GridView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      allFormattedPlayers[3].length > 0
+                                          ? allFormattedPlayers[3].length
+                                          : 1,
+                                ),
+                                itemCount: allFormattedPlayers[3].length,
+                                itemBuilder: (context, index) {
+                                  return UserPlayerWidget(
+                                    currentUserPlayer: allFormattedPlayers[3]
+                                        [index],
+                                  );
+                                },
+                              ),
                             ),
-                            itemCount: allFormattedPlayers[3].length,
-                            itemBuilder: (context, index) {
-                              return UserPlayerWidget(
-                                currentUserPlayer: allFormattedPlayers[3]
-                                    [index],
-                              );
-                            },
-                          ),
-                        ),
 
-                        // Info
-                        Container(
-                          height: maxHeight / 6,
-                          color: Colors.green,
+                            // Info
+                            Container(
+                              height: maxHeight / 6,
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.green,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Deduction : " +
+                                        state.userTeam.deduction.toString(),
+                                  ),
+                                  Text(
+                                    "Free Transfers : " +
+                                        state.userTeam.freeTransfers.toString(),
+                                  ),
+                                  const Text("Bank : "),
+                                  const Text("Deadline : "),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+
+                    state.transfersMade == true
+                        ? Positioned(
+                            width: 120,
+                            height: 50,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // Save Button
+                                InkWell(
+                                  onTap: () {
+                                    print("Saving state to db");
+                                  },
+                                  child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: ConstantColors.primary_900,
+                                      border: Border.all(),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(50),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ConstantColors.primary_900
+                                              .withOpacity(0.5),
+                                          spreadRadius: 5,
+                                          blurRadius: 7,
+                                          offset: const Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.save,
+                                      color: ConstantColors.neutral_200,
+                                    ),
+                                  ),
+                                ),
+
+                                // Cancel Button
+                                InkWell(
+                                  onTap: () {
+                                    _transferBloc.add(
+                                      const TransferEvent.cancelTransfer(),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: ConstantColors.error_200,
+                                      border: Border.all(
+                                          color: ConstantColors.error_200),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(50),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ConstantColors.error_200
+                                              .withOpacity(0.5),
+                                          spreadRadius: 5,
+                                          blurRadius: 7,
+                                          offset: const Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.close,
+                                      color: ConstantColors.neutral_200,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            bottom: 15.0,
+                            right: 15.0,
+                          )
+                        : Container(),
+                  ],
                 ),
         );
       },

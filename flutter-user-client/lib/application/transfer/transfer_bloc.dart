@@ -114,8 +114,8 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             ? 0
             : state.userTeam.freeTransfers - 1,
         deduction: state.userTeam.freeTransfers == 1
-            ? state.userTeam.freeTransfers
-            : state.userTeam.freeTransfers - 4,
+            ? state.userTeam.deduction
+            : state.userTeam.deduction - 4,
         activeChip: state.userTeam.activeChip,
       );
 
@@ -125,7 +125,9 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       emit(
         state.copyWith(
           userTeam: newUserTeam,
-          userTeamCopy: userTeam,
+          userTeamCopy: state.userTeamCopy.allUserPlayers.isNotEmpty
+              ? state.userTeamCopy
+              : userTeam,
           isLoading: false,
           transfersMade: true,
           transfersMadeCount: state.transfersMadeCount + 1,
@@ -134,6 +136,16 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       );
 
       // backup player
+    });
+
+    on<_cancelTransfer>((event, emit) {
+      emit(state.copyWith(
+        userTeam: state.userTeamCopy,
+        transfersMade: false,
+        transfersMadeCount: 0,
+        isLoading: false,
+        transferredInPlayerIds: [],
+      ));
     });
 
     on<_saveUserPlayers>((event, emit) {

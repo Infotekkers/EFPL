@@ -12,10 +12,16 @@ class TransferEvent with _$TransferEvent {
     required PlayerPosition playerPosition,
   }) = _setTransferOutPlayer;
 
+// get list of players in position
   const factory TransferEvent.getPlayersInSelectedPosition() =
       _getPlayersInSelectedPosition;
 
+// temporary transfer
   const factory TransferEvent.transferUserPlayer(
       {required String transferInPlayerId}) = _transferUserPlayer;
+
+// Cancel Transfer
+  const factory TransferEvent.cancelTransfer() = _cancelTransfer;
+
   const factory TransferEvent.saveUserPlayers() = _saveUserPlayers;
 }

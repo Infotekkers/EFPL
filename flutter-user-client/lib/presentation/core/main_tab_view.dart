@@ -137,14 +137,6 @@ class MainTabView extends StatelessWidget {
             SettingsView()
           ],
         ),
-        floatingActionButton: getIt<TransferBloc>().state.transfersMade == true
-            ? FloatingActionButton(
-                onPressed: () {},
-                child: const Center(
-                  child: Icon(Icons.save),
-                ),
-              )
-            : Container(),
       ),
     );
   }
