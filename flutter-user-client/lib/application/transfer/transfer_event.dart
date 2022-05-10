@@ -5,11 +5,11 @@ class TransferEvent with _$TransferEvent {
   const factory TransferEvent.getUserPlayers({required GameWeekId gameWeekId}) =
       _getUserPlayers;
 
-  const factory TransferEvent.setTransferPlayerId(
-      {required String transferPlayerId}) = _setTransferPlayerId;
+  const factory TransferEvent.setSelectedPosition(
+      {required PlayerPosition selectedPlayerPosition}) = _setSelectedPosition;
 
-  const factory TransferEvent.getPlayersInSelectedPosition(
-      {required PlayerPosition playerPosition}) = _getPlayersInSelectedPosition;
+  const factory TransferEvent.getPlayersInSelectedPosition() =
+      _getPlayersInSelectedPosition;
 
   const factory TransferEvent.transferUserPlayer(
       {required String transferPlayerId}) = _transferUserPlayer;

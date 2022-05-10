@@ -1,3 +1,4 @@
+import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';
@@ -27,88 +28,103 @@ class UserPlayerWidget extends StatelessWidget {
             showModalBottomSheet(
               context: context,
               builder: (builder) {
-                return Container(
-                  height: 200,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
-                  color: Colors.amber,
-                  child: Column(
-                    children: [
-                      // Player Name
-                      Text(
-                        currentUserPlayer.playerName.value
-                            .fold((l) => '', (r) => r),
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Architect",
-                          letterSpacing: 0.25,
-                        ),
-                      ),
-
-                      const SizedBox(
-                        height: 10,
-                      ),
-
-                      // Player Information Button
-                      InkWell(
-                        onTap: () {
-                          print("Player Information");
-                        },
-                        child: Row(
+                return BlocProvider.value(
+                  value: getIt<TransferBloc>(),
+                  child: BlocConsumer<TransferBloc, TransferState>(
+                    listener: (context, state) {
+                      // TODO: implement listener
+                    },
+                    builder: (context, state) {
+                      return Container(
+                        height: 200,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 8),
+                        color: Colors.amber,
+                        child: Column(
                           children: [
-                            Container(
-                              child: const Icon(Icons.info),
-                              margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                            Text(state.selectedPlayerPosition.toString()),
+                            // Player Name
+                            Text(
+                              currentUserPlayer.playerName.value
+                                  .fold((l) => '', (r) => r),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Architect",
+                                letterSpacing: 0.25,
+                              ),
                             ),
-                            const Text("Player Information"),
+
+                            const SizedBox(
+                              height: 10,
+                            ),
+
+                            // Player Information Button
+                            InkWell(
+                              onTap: () {
+                                print("Player Information");
+                              },
+                              child: Row(
+                                children: [
+                                  Container(
+                                    child: const Icon(Icons.info),
+                                    margin:
+                                        const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                                  ),
+                                  const Text("Player Information"),
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 10,
+                            ),
+
+                            // Transfer
+                            InkWell(
+                              onTap: () {
+                                // Set player position
+                                _transferBloc.add(
+                                  TransferEvent.setSelectedPosition(
+                                    selectedPlayerPosition:
+                                        currentUserPlayer.playerPosition,
+                                  ),
+                                );
+
+                                // get all players in position
+                                _transferBloc.add(
+                                  const TransferEvent
+                                      .getPlayersInSelectedPosition(),
+                                );
+
+                                Navigator.pushNamed(context, "/transfer");
+                              },
+                              child: Row(
+                                children: [
+                                  Container(
+                                    child: const Icon(Boxicons.bx_transfer),
+                                    margin:
+                                        const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                                  ),
+                                  const Text("Transfer"),
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 15,
+                            ),
+
+                            // TODO:ADD
+                            const Text(
+                              "Upcoming Fixtures",
+                              style: TextStyle(fontSize: 20),
+                            ),
                           ],
                         ),
-                      ),
-
-                      const SizedBox(
-                        height: 10,
-                      ),
-
-                      // Transfer
-                      InkWell(
-                        onTap: () {
-                          _transferBloc.add(
-                            TransferEvent.getPlayersInSelectedPosition(
-                                playerPosition:
-                                    currentUserPlayer.playerPosition),
-                          );
-
-                          _transferBloc.add(
-                            TransferEvent.setTransferPlayerId(
-                              transferPlayerId: currentUserPlayer.playerId,
-                            ),
-                          );
-
-                          Navigator.pushNamed(context, "/transfer");
-                        },
-                        child: Row(
-                          children: [
-                            Container(
-                              child: const Icon(Boxicons.bx_transfer),
-                              margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
-                            ),
-                            const Text("Transfer"),
-                          ],
-                        ),
-                      ),
-
-                      const SizedBox(
-                        height: 15,
-                      ),
-
-                      // TODO:ADD
-                      const Text(
-                        "Upcoming Fixtures",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 );
               },

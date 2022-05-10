@@ -21,7 +21,7 @@ class ApiTransferRepository implements ITransferRepository {
       {required int gameWeekId}) async {
     // TODO:Replace
     // const userID = "6278d568abfa93c09603628a";
-    const userID = "627970e3b106bad35b4dde88";
+    const userID = "627a7798bed9e567269bb8a9";
 
     HTTPInstance instance = getIt<HTTPInstance>();
     var apiResponse = await instance.client
@@ -108,9 +108,9 @@ class ApiTransferRepository implements ITransferRepository {
             var efplCache = await Hive.openBox('efplCache');
             List? cachedPlayers = efplCache.get("players");
 
-            if (cachedPlayers!.isNotEmpty) {
-              efplCache.put("players", allPlayers);
-            }
+            // if (cachedPlayers!.isNotEmpty) {
+            //   efplCache.put("players", allPlayers);
+            // }
           } catch (e) {
             print(e);
           }

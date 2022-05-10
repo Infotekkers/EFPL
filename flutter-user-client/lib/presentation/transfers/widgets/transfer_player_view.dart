@@ -1,5 +1,6 @@
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
+import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/transfers/widgets/player_card_widget.dart';
@@ -16,11 +17,21 @@ class TransferPlayerView extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        List<UserPlayer> allPositionPlayers = state.selectedPlayerReplacements
-            .where(
-              (element) => element.playerId != state.transferPlayerId,
-            )
-            .toList();
+        List<UserPlayer> allPositionPlayers = state.selectedPlayerReplacements;
+        List<UserPlayer> userPlayers = state.userTeam.allUserPlayers;
+
+        // remove players in user team from list
+        List<UserPlayer> allPositionPlayerFiltered = [];
+        for (var i = 0; i < allPositionPlayers.length; i++) {
+          List checkPlayer = userPlayers
+              .where((element) =>
+                  element.playerId == allPositionPlayers[i].playerId)
+              .toList();
+
+          if (checkPlayer.isEmpty) {
+            allPositionPlayerFiltered.add(allPositionPlayers[i]);
+          }
+        }
 
         return Scaffold(
           appBar: AppBar(
@@ -103,12 +114,12 @@ class TransferPlayerView extends StatelessWidget {
 
                         // Players,
                         ListView.builder(
-                            itemCount: allPositionPlayers.length,
+                            itemCount: allPositionPlayerFiltered.length,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
                               return UserPlayerCard(
-                                currentPlayer: allPositionPlayers[index],
+                                currentPlayer: allPositionPlayerFiltered[index],
                               );
                             }),
                       ],

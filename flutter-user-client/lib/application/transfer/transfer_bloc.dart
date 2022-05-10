@@ -53,10 +53,10 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       );
     });
 
-    on<_setTransferPlayerId>((event, emit) {
-      // emit(state.copyWith(
-      //   transferredOutPlayerIds: event.transferPlayerId,
-      // ));
+    on<_setSelectedPosition>((event, emit) {
+      emit(state.copyWith(
+        selectedPlayerPosition: event.selectedPlayerPosition,
+      ));
     });
 
     on<_getPlayersInSelectedPosition>((event, emit) async {
@@ -66,7 +66,8 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
       final Either<dynamic, List<UserPlayer>> failureOrSuccess =
           await _iTransferRepository.getAllPositionPlayers(
-        playerPosition: event.playerPosition.value.fold((l) => "", (r) => r),
+        playerPosition:
+            state.selectedPlayerPosition.value.fold((l) => "", (r) => r),
       );
 
       List<UserPlayer> allSelectedPlayerReplacements =
