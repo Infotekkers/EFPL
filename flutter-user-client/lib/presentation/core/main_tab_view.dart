@@ -1,6 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
@@ -12,7 +9,6 @@ import 'package:efpl/presentation/stats/stats_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
 import 'package:efpl/presentation/transfers/transfers_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -21,12 +17,9 @@ class MainTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UtilBloc _utilBloc = getIt<UtilBloc>();
-    _utilBloc.add(const UtilEvent.setDefaultLocale());
-
     return DefaultTabController(
       length: 7,
-      initialIndex: 6,
+      initialIndex: 2,
       child: Scaffold(
         drawer: Drawer(
           child: ListView(
@@ -64,8 +57,9 @@ class MainTabView extends StatelessWidget {
         appBar: AppBar(
           elevation: 8.0,
           backgroundColor: ConstantColors.primary_900,
-          bottom: const TabBar(
-            tabs: [
+          bottom: TabBar(
+            indicatorColor: ConstantColors.primary_900,
+            tabs: const [
               // My Team
               Tab(
                 icon: Icon(
@@ -131,32 +125,15 @@ class MainTabView extends StatelessWidget {
             ),
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             TeamView(),
             PointsView(),
             TransfersView(),
-            MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => getIt<FixtureBloc>()
-                    ..add(
-                      const FixtureEvent.loadFixtures(),
-                    ),
-                )
-              ],
-              child: const FixturesView(),
-            ),
+            FixturesView(),
             LeaguesView(),
             StatsView(),
-            MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => getIt<UtilBloc>(),
-                )
-              ],
-              child: SettingsView(),
-            )
+            SettingsView()
           ],
         ),
       ),

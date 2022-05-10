@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/value_failures.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/domain/fixture/i_fixture_facade.dart';
-import 'package:efpl/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -12,7 +11,7 @@ part 'fixture_event.dart';
 part 'fixture_state.dart';
 part 'fixture_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class FixtureBloc extends Bloc<FixtureEvent, FixtureState> {
   final IFixtureRepository _iFixtureRepository;
   FixtureBloc(this._iFixtureRepository) : super(FixtureState.initial()) {

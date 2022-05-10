@@ -8,7 +8,7 @@ part 'util_event.dart';
 part 'util_state.dart';
 part 'util_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class UtilBloc extends Bloc<UtilEvent, UtilState> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 

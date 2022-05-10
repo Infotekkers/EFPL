@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
@@ -9,7 +7,6 @@ import 'package:efpl/presentation/fixtures/widgets/fixture_detail_event.dart';
 import 'package:efpl/presentation/fixtures/widgets/fixture_detail_lineup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import 'package:tab_container/tab_container.dart';

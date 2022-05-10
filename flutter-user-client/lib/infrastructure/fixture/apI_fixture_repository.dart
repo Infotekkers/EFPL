@@ -14,13 +14,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 
 class ApiFixtureRepository implements IFixtureRepository {
+  final String _baseURL = dotenv.env["BASE_URL"].toString();
+
   @override
   Future<Either<dynamic, List<Fixture>>> getFixtureByGameWeekId(
       {required int gameWeekId}) async {
-    String _baseURL = dotenv.env["BASE_URL"].toString();
-
     HTTPInstance instance = getIt<HTTPInstance>();
-
     try {
       var apiResponse = await instance.client
           .get(

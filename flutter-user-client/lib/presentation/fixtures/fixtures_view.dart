@@ -5,7 +5,6 @@ import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/fixtures/widgets/fixture_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -16,8 +15,6 @@ class FixturesView extends StatelessWidget {
   Widget build(BuildContext context) {
     // Get The bloc value from the provider
     final FixtureBloc _fixtureBloc = BlocProvider.of<FixtureBloc>(context);
-    final UtilBloc _utilBloc = getIt<UtilBloc>();
-    _utilBloc.add(const UtilEvent.setDefaultLocale());
 
     return BlocConsumer<FixtureBloc, FixtureState>(
       listener: (context, state) {},
@@ -27,12 +24,10 @@ class FixturesView extends StatelessWidget {
           allFixtures = formatByDate(state.allFixtures);
         }
 
+        // print(allFixtures[0]);
+
         return LiquidPullToRefresh(
-          onRefresh: () async {
-            _fixtureBloc.add(
-              const FixtureEvent.loadFixtures(),
-            );
-          },
+          onRefresh: () async {},
           height: 60,
           showChildOpacityTransition: false,
           animSpeedFactor: 2,
@@ -158,11 +153,11 @@ List<List<Fixture>> formatByDate(List<Fixture> allFixtures) {
     }
   }
 
-  allPossibleDates.sort((a, b) {
-    var dateOne = b;
-    var dateTwo = a;
-    return -dateOne.compareTo(dateTwo);
-  });
+  // allPossibleDates.sort((a, b) {
+  //   var dateOne = a;
+  //   var dateTwo = a;
+  //   return -dateOne.compareTo(dateTwo);
+  // });
 
   for (var i = 0; i < allPossibleDates.length; i++) {
     List<Fixture> currentDateFixtures = allFixtures.where((fixture) {

@@ -16,9 +16,9 @@ class SocketApi {
       "autoConnect": false,
     });
     socket.connect();
-    socket.onConnect(
-      (data) => print("Hurray!!"),
-    );
+    // socket.onConnect(
+    //   (data) => ,
+    // );
 
     socket.on(
       "fixtureUpdated",

@@ -1,8 +1,5 @@
-import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
-import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FixtureDetailEvent extends StatelessWidget {
