@@ -53,12 +53,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       );
     });
 
-    on<_setSelectedPosition>((event, emit) {
-      emit(state.copyWith(
-        selectedPlayerPosition: event.selectedPlayerPosition,
-      ));
-    });
-
     on<_getPlayersInSelectedPosition>((event, emit) async {
       emit(state.copyWith(
         isLoading: true,
@@ -81,8 +75,63 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       );
     });
 
+    on<_setTransferOutPlayer>((event, emit) {
+      emit(
+        state.copyWith(
+          transferOutPlayerId: event.transferOutPlayerId,
+          selectedPlayerPosition: event.playerPosition,
+        ),
+      );
+    });
+
     on<_transferUserPlayer>((event, emit) {
-      print(state.userTeam);
+      // start spinner
+      emit(state.copyWith(
+        isLoading: true,
+      ));
+      // copy user team
+      List<UserPlayer> allPlayers = state.selectedPlayerReplacements;
+      List<UserPlayer> allUserPlayers = state.userTeam.allUserPlayers;
+      UserTeam userTeam = state.userTeam;
+
+      // remove player from user team
+      allUserPlayers.removeWhere(
+        (item) => item.playerId == state.transferOutPlayerId,
+      );
+
+      // add new player to user team
+      List playerToAdd = allPlayers
+          .where(
+            (element) => element.playerId == event.transferInPlayerId,
+          )
+          .toList();
+      allUserPlayers.add(playerToAdd[0]);
+
+      UserTeam newUserTeam = UserTeam(
+        gameWeekId: state.userTeam.gameWeekId,
+        allUserPlayers: allUserPlayers,
+        freeTransfers: state.userTeam.freeTransfers == 0
+            ? 0
+            : state.userTeam.freeTransfers - 1,
+        deduction: state.userTeam.freeTransfers == 1
+            ? state.userTeam.freeTransfers
+            : state.userTeam.freeTransfers - 4,
+        activeChip: state.userTeam.activeChip,
+      );
+
+      List newTransferredInPlayersId = state.transferredInPlayerIds;
+      newTransferredInPlayersId.add(event.transferInPlayerId);
+
+      emit(
+        state.copyWith(
+          userTeam: newUserTeam,
+          userTeamCopy: userTeam,
+          isLoading: false,
+          transfersMade: true,
+          transfersMadeCount: state.transfersMadeCount + 1,
+          transferredInPlayerIds: newTransferredInPlayersId,
+        ),
+      );
 
       // backup player
     });

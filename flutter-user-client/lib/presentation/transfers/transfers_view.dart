@@ -1,16 +1,13 @@
-import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
-import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/transfers/widgets/user_player_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class TransfersView extends StatelessWidget {

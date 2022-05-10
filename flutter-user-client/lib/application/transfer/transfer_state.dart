@@ -4,12 +4,24 @@ part of 'transfer_bloc.dart';
 class TransferState with _$TransferState {
   const factory TransferState({
     required UserTeam userTeam,
+    required UserTeam userTeamCopy,
+    //
     required bool isLoading,
+    //
     required bool transfersMade,
-    required List transferredInPlayerIds,
+    required int transfersMadeCount,
+
+    //
+    required String transferOutPlayerId,
     required PlayerPosition selectedPlayerPosition,
-    required List transferredOutPlayerIds,
+
+    //
+    required List transferredInPlayerIds,
+
+    //
     required List<UserPlayer> selectedPlayerReplacements,
+
+    //
     required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
     required Option<Either<dynamic, List<UserPlayer>>>
         replacementPlayersFailureOrSuccess,
@@ -24,11 +36,19 @@ class TransferState with _$TransferState {
           deduction: 0,
           activeChip: "",
         ),
+        userTeamCopy: UserTeam(
+          gameWeekId: GameWeekId(value: 1),
+          allUserPlayers: [],
+          freeTransfers: 0,
+          deduction: 0,
+          activeChip: "",
+        ),
         isLoading: false,
+        transferOutPlayerId: "",
         selectedPlayerPosition: PlayerPosition(value: ""),
         transfersMade: false,
+        transfersMadeCount: 0,
         transferredInPlayerIds: [],
-        transferredOutPlayerIds: [],
         selectedPlayerReplacements: [],
         userTeamFailureOrSuccess: none(),
         replacementPlayersFailureOrSuccess: none(),

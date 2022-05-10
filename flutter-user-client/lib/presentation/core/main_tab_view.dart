@@ -1,3 +1,4 @@
+import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
@@ -136,6 +137,14 @@ class MainTabView extends StatelessWidget {
             SettingsView()
           ],
         ),
+        floatingActionButton: getIt<TransferBloc>().state.transfersMade == true
+            ? FloatingActionButton(
+                onPressed: () {},
+                child: const Center(
+                  child: Icon(Icons.save),
+                ),
+              )
+            : Container(),
       ),
     );
   }

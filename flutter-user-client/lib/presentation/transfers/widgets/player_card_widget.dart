@@ -16,9 +16,15 @@ class UserPlayerCard extends StatelessWidget {
       onTap: () {
         getIt<TransferBloc>().add(
           TransferEvent.transferUserPlayer(
-            transferPlayerId: currentPlayer.playerId,
+            transferInPlayerId: currentPlayer.playerId,
           ),
         );
+
+        // remove transfer page
+        Navigator.pop(context);
+
+        // remove modal sheet
+        Navigator.pop(context);
       },
       child: Container(
         decoration: const BoxDecoration(

@@ -21,8 +21,8 @@ class UserPlayerWidget extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        final _state = state;
         TransferBloc _transferBloc = getIt<TransferBloc>();
+
         return InkWell(
           onTap: () {
             showModalBottomSheet(
@@ -84,10 +84,13 @@ class UserPlayerWidget extends StatelessWidget {
                             // Transfer
                             InkWell(
                               onTap: () {
+                                // se
                                 // Set player position
                                 _transferBloc.add(
-                                  TransferEvent.setSelectedPosition(
-                                    selectedPlayerPosition:
+                                  TransferEvent.setTransferOutPlayer(
+                                    transferOutPlayerId:
+                                        currentUserPlayer.playerId,
+                                    playerPosition:
                                         currentUserPlayer.playerPosition,
                                   ),
                                 );
@@ -132,7 +135,10 @@ class UserPlayerWidget extends StatelessWidget {
           },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 5),
-            color: Colors.purple,
+            color: state.transferredInPlayerIds
+                    .contains(currentUserPlayer.playerId)
+                ? Colors.yellowAccent
+                : Colors.purple,
             child: Center(
               child: Text(
                 currentUserPlayer.playerName.value.fold((l) => '', (r) => r),
