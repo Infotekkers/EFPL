@@ -462,6 +462,48 @@ const endFixture = asyncHandler(async function (req, res) {
     MINUTE_COUNTERS[req.params.matchId].status = "ended";
     clearInterval(MINUTE_COUNTERS[req.params.matchId].intervalId);
 
+    const splitscore = match.score.split("v")
+    const hometeamScore = splitscore[0];
+    const awayteamScore = splitscore[1];
+    const awayteamPoint =  awayTeam.teamPosition.teampoint
+    const hometeamPoint = homeTeam.teamPosition.teampoint
+
+    if(hometeamScore > awayteamScore){
+    const teamPoint = hometeamPoint + 3;
+    const teamPosition = {
+      teampoint: teamPoint
+    }
+
+    await TeamModel.findOneAndUpdate({
+      teamPosition
+    });
+  }else if(hometeamScore === awayteamScore){
+    const Hteampoint =  hometeamPoint + 1;
+    const Ateampoint = awayteamPoint + 1;
+    const HometeamPosition = {
+      teampoint: Hteampoint
+    }
+    const AwayteamPosition = {
+      teampoint: Ateampoint
+    }
+
+    await TeamModel.findOneAndUpdate({
+      HometeamPosition
+    })
+    await TeamModel.findOneAndUpdate({
+      AwayteamPosition
+    })
+  }
+  else{
+    const Ateampoint = awayteamPoint + 3;
+    const teamPosition = {
+      teamPoint: Ateampoint
+    }
+
+    await TeamModel.findOneAndUpdate({
+      teamPosition
+    })
+  }
     match
       .save()
       .then(() =>
