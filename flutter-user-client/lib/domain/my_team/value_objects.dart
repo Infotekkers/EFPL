@@ -53,3 +53,25 @@ class AvailableChips extends ValueObject<List<Chip>> {
         validateAvailabeChips(availableChipsStr, activeChip));
   }
 }
+
+class PositionalContainer extends ValueObject<List<UserPlayer>> {
+  @override
+  final Either<ValueFailure<List<UserPlayer>>, List<UserPlayer>> value;
+
+  const PositionalContainer._(this.value);
+
+  static final positionalRange = {
+    'gk': [1, 1],
+    'def': [3, 5],
+    'mid': [3, 5],
+    'att': [1, 3],
+    'ben': [4, 4]
+  };
+
+  factory PositionalContainer(List<UserPlayer> userPlayers, String position) {
+    return PositionalContainer._(
+        validatePositionalContainer(userPlayers, positionalRange, position));
+  }
+}
+
+class UserPlayer {}

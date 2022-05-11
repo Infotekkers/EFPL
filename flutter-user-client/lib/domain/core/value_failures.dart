@@ -19,4 +19,8 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidChipUsage(
       {required T failedValue,
       required String activeChip}) = InvalidChipUsage<T>;
+  const factory ValueFailure.invalidPosition({
+    required T failedValue,
+    required String position,
+  }) = InvalidPosition<T>;
 }

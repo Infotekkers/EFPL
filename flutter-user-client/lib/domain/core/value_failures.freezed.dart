@@ -52,6 +52,14 @@ class _$ValueFailureTearOff {
       activeChip: activeChip,
     );
   }
+
+  InvalidPosition<T> invalidPosition<T>(
+      {required T failedValue, required String position}) {
+    return InvalidPosition<T>(
+      failedValue: failedValue,
+      position: position,
+    );
+  }
 }
 
 /// @nodoc
@@ -70,6 +78,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(T failedValue) invalid,
     required TResult Function(T failedValue, String activeChip)
         invalidChipUsage,
+    required TResult Function(T failedValue, String position) invalidPosition,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +88,7 @@ mixin _$ValueFailure<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,6 +98,7 @@ mixin _$ValueFailure<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -98,6 +109,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(ExceedingRange<T> value) exceedingRange,
     required TResult Function(Invalid<T> value) invalid,
     required TResult Function(InvalidChipUsage<T> value) invalidChipUsage,
+    required TResult Function(InvalidPosition<T> value) invalidPosition,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -107,6 +119,7 @@ mixin _$ValueFailure<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -116,6 +129,7 @@ mixin _$ValueFailure<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -227,6 +241,7 @@ class _$Empty<T> implements Empty<T> {
     required TResult Function(T failedValue) invalid,
     required TResult Function(T failedValue, String activeChip)
         invalidChipUsage,
+    required TResult Function(T failedValue, String position) invalidPosition,
   }) {
     return empty(failedValue);
   }
@@ -239,6 +254,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
   }) {
     return empty?.call(failedValue);
   }
@@ -251,6 +267,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -267,6 +284,7 @@ class _$Empty<T> implements Empty<T> {
     required TResult Function(ExceedingRange<T> value) exceedingRange,
     required TResult Function(Invalid<T> value) invalid,
     required TResult Function(InvalidChipUsage<T> value) invalidChipUsage,
+    required TResult Function(InvalidPosition<T> value) invalidPosition,
   }) {
     return empty(this);
   }
@@ -279,6 +297,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
   }) {
     return empty?.call(this);
   }
@@ -291,6 +310,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -396,6 +416,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(T failedValue) invalid,
     required TResult Function(T failedValue, String activeChip)
         invalidChipUsage,
+    required TResult Function(T failedValue, String position) invalidPosition,
   }) {
     return exceedingLength(failedValue, max);
   }
@@ -408,6 +429,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
   }) {
     return exceedingLength?.call(failedValue, max);
   }
@@ -420,6 +442,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -436,6 +459,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(ExceedingRange<T> value) exceedingRange,
     required TResult Function(Invalid<T> value) invalid,
     required TResult Function(InvalidChipUsage<T> value) invalidChipUsage,
+    required TResult Function(InvalidPosition<T> value) invalidPosition,
   }) {
     return exceedingLength(this);
   }
@@ -448,6 +472,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
   }) {
     return exceedingLength?.call(this);
   }
@@ -460,6 +485,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -567,6 +593,7 @@ class _$ExceedingRange<T> implements ExceedingRange<T> {
     required TResult Function(T failedValue) invalid,
     required TResult Function(T failedValue, String activeChip)
         invalidChipUsage,
+    required TResult Function(T failedValue, String position) invalidPosition,
   }) {
     return exceedingRange(failedValue, range);
   }
@@ -579,6 +606,7 @@ class _$ExceedingRange<T> implements ExceedingRange<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
   }) {
     return exceedingRange?.call(failedValue, range);
   }
@@ -591,6 +619,7 @@ class _$ExceedingRange<T> implements ExceedingRange<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
     required TResult orElse(),
   }) {
     if (exceedingRange != null) {
@@ -607,6 +636,7 @@ class _$ExceedingRange<T> implements ExceedingRange<T> {
     required TResult Function(ExceedingRange<T> value) exceedingRange,
     required TResult Function(Invalid<T> value) invalid,
     required TResult Function(InvalidChipUsage<T> value) invalidChipUsage,
+    required TResult Function(InvalidPosition<T> value) invalidPosition,
   }) {
     return exceedingRange(this);
   }
@@ -619,6 +649,7 @@ class _$ExceedingRange<T> implements ExceedingRange<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
   }) {
     return exceedingRange?.call(this);
   }
@@ -631,6 +662,7 @@ class _$ExceedingRange<T> implements ExceedingRange<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
     required TResult orElse(),
   }) {
     if (exceedingRange != null) {
@@ -726,6 +758,7 @@ class _$Invalid<T> implements Invalid<T> {
     required TResult Function(T failedValue) invalid,
     required TResult Function(T failedValue, String activeChip)
         invalidChipUsage,
+    required TResult Function(T failedValue, String position) invalidPosition,
   }) {
     return invalid(failedValue);
   }
@@ -738,6 +771,7 @@ class _$Invalid<T> implements Invalid<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
   }) {
     return invalid?.call(failedValue);
   }
@@ -750,6 +784,7 @@ class _$Invalid<T> implements Invalid<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
     required TResult orElse(),
   }) {
     if (invalid != null) {
@@ -766,6 +801,7 @@ class _$Invalid<T> implements Invalid<T> {
     required TResult Function(ExceedingRange<T> value) exceedingRange,
     required TResult Function(Invalid<T> value) invalid,
     required TResult Function(InvalidChipUsage<T> value) invalidChipUsage,
+    required TResult Function(InvalidPosition<T> value) invalidPosition,
   }) {
     return invalid(this);
   }
@@ -778,6 +814,7 @@ class _$Invalid<T> implements Invalid<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
   }) {
     return invalid?.call(this);
   }
@@ -790,6 +827,7 @@ class _$Invalid<T> implements Invalid<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
     required TResult orElse(),
   }) {
     if (invalid != null) {
@@ -897,6 +935,7 @@ class _$InvalidChipUsage<T> implements InvalidChipUsage<T> {
     required TResult Function(T failedValue) invalid,
     required TResult Function(T failedValue, String activeChip)
         invalidChipUsage,
+    required TResult Function(T failedValue, String position) invalidPosition,
   }) {
     return invalidChipUsage(failedValue, activeChip);
   }
@@ -909,6 +948,7 @@ class _$InvalidChipUsage<T> implements InvalidChipUsage<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
   }) {
     return invalidChipUsage?.call(failedValue, activeChip);
   }
@@ -921,6 +961,7 @@ class _$InvalidChipUsage<T> implements InvalidChipUsage<T> {
     TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
     TResult Function(T failedValue)? invalid,
     TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
     required TResult orElse(),
   }) {
     if (invalidChipUsage != null) {
@@ -937,6 +978,7 @@ class _$InvalidChipUsage<T> implements InvalidChipUsage<T> {
     required TResult Function(ExceedingRange<T> value) exceedingRange,
     required TResult Function(Invalid<T> value) invalid,
     required TResult Function(InvalidChipUsage<T> value) invalidChipUsage,
+    required TResult Function(InvalidPosition<T> value) invalidPosition,
   }) {
     return invalidChipUsage(this);
   }
@@ -949,6 +991,7 @@ class _$InvalidChipUsage<T> implements InvalidChipUsage<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
   }) {
     return invalidChipUsage?.call(this);
   }
@@ -961,6 +1004,7 @@ class _$InvalidChipUsage<T> implements InvalidChipUsage<T> {
     TResult Function(ExceedingRange<T> value)? exceedingRange,
     TResult Function(Invalid<T> value)? invalid,
     TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
     required TResult orElse(),
   }) {
     if (invalidChipUsage != null) {
@@ -981,5 +1025,183 @@ abstract class InvalidChipUsage<T> implements ValueFailure<T> {
   @override
   @JsonKey(ignore: true)
   $InvalidChipUsageCopyWith<T, InvalidChipUsage<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InvalidPositionCopyWith<T, $Res>
+    implements $ValueFailureCopyWith<T, $Res> {
+  factory $InvalidPositionCopyWith(
+          InvalidPosition<T> value, $Res Function(InvalidPosition<T>) then) =
+      _$InvalidPositionCopyWithImpl<T, $Res>;
+  @override
+  $Res call({T failedValue, String position});
+}
+
+/// @nodoc
+class _$InvalidPositionCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $InvalidPositionCopyWith<T, $Res> {
+  _$InvalidPositionCopyWithImpl(
+      InvalidPosition<T> _value, $Res Function(InvalidPosition<T>) _then)
+      : super(_value, (v) => _then(v as InvalidPosition<T>));
+
+  @override
+  InvalidPosition<T> get _value => super._value as InvalidPosition<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+    Object? position = freezed,
+  }) {
+    return _then(InvalidPosition<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as T,
+      position: position == freezed
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InvalidPosition<T> implements InvalidPosition<T> {
+  const _$InvalidPosition({required this.failedValue, required this.position});
+
+  @override
+  final T failedValue;
+  @override
+  final String position;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.invalidPosition(failedValue: $failedValue, position: $position)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is InvalidPosition<T> &&
+            const DeepCollectionEquality()
+                .equals(other.failedValue, failedValue) &&
+            const DeepCollectionEquality().equals(other.position, position));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(failedValue),
+      const DeepCollectionEquality().hash(position));
+
+  @JsonKey(ignore: true)
+  @override
+  $InvalidPositionCopyWith<T, InvalidPosition<T>> get copyWith =>
+      _$InvalidPositionCopyWithImpl<T, InvalidPosition<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue) empty,
+    required TResult Function(T failedValue, int max) exceedingLength,
+    required TResult Function(T failedValue, List<dynamic> range)
+        exceedingRange,
+    required TResult Function(T failedValue) invalid,
+    required TResult Function(T failedValue, String activeChip)
+        invalidChipUsage,
+    required TResult Function(T failedValue, String position) invalidPosition,
+  }) {
+    return invalidPosition(failedValue, position);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
+    TResult Function(T failedValue)? invalid,
+    TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
+  }) {
+    return invalidPosition?.call(failedValue, position);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, List<dynamic> range)? exceedingRange,
+    TResult Function(T failedValue)? invalid,
+    TResult Function(T failedValue, String activeChip)? invalidChipUsage,
+    TResult Function(T failedValue, String position)? invalidPosition,
+    required TResult orElse(),
+  }) {
+    if (invalidPosition != null) {
+      return invalidPosition(failedValue, position);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(ExceedingLength<T> value) exceedingLength,
+    required TResult Function(ExceedingRange<T> value) exceedingRange,
+    required TResult Function(Invalid<T> value) invalid,
+    required TResult Function(InvalidChipUsage<T> value) invalidChipUsage,
+    required TResult Function(InvalidPosition<T> value) invalidPosition,
+  }) {
+    return invalidPosition(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(ExceedingRange<T> value)? exceedingRange,
+    TResult Function(Invalid<T> value)? invalid,
+    TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
+  }) {
+    return invalidPosition?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(ExceedingRange<T> value)? exceedingRange,
+    TResult Function(Invalid<T> value)? invalid,
+    TResult Function(InvalidChipUsage<T> value)? invalidChipUsage,
+    TResult Function(InvalidPosition<T> value)? invalidPosition,
+    required TResult orElse(),
+  }) {
+    if (invalidPosition != null) {
+      return invalidPosition(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InvalidPosition<T> implements ValueFailure<T> {
+  const factory InvalidPosition(
+      {required T failedValue,
+      required String position}) = _$InvalidPosition<T>;
+
+  @override
+  T get failedValue;
+  String get position;
+  @override
+  @JsonKey(ignore: true)
+  $InvalidPositionCopyWith<T, InvalidPosition<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

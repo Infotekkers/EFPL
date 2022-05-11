@@ -25,7 +25,8 @@ Either<ValueFailure<String>, String> validateStringNotEmpty(String myTeamStr) {
 Either<ValueFailure<String>, String> validateRange(
     String gameweekStr, List range) {
   int gameweekNumber = int.parse(gameweekStr);
-  if (gameweekNumber >= range[0] && gameweekNumber <= range[-1]) {
+
+  if (gameweekNumber >= range[0] && gameweekNumber <= range[range.length - 1]) {
     return right(gameweekStr);
   } else {
     return left(
@@ -57,5 +58,25 @@ Either<ValueFailure<List<Chip>>, List<Chip>> validateAvailabeChips(
         failedValue: availableChips, activeChip: activeChip));
   } else {
     return right(availableChips);
+  }
+}
+
+Either<ValueFailure<List<UserPlayer>>, List<UserPlayer>>
+    validatePositionalContainer(List<UserPlayer> userPlayers,
+        Map<String, List<int>> positionalRange, String position) {
+  if (positionalRange.containsKey(position) == false) {
+    return left(ValueFailure.invalidPosition(
+        failedValue: userPlayers, position: position));
+  }
+
+  int numberOfPlayers = userPlayers.length;
+  List<int> range = positionalRange[position]!;
+
+  if (numberOfPlayers >= range[0] &&
+      numberOfPlayers <= range[range.length - 1]) {
+    return right(userPlayers);
+  } else {
+    return left(
+        ValueFailure.exceedingRange(failedValue: userPlayers, range: range));
   }
 }
