@@ -1083,6 +1083,7 @@ class _$TransferStateTearOff {
       required bool isLoading,
       required bool transfersMade,
       required int transfersMadeCount,
+      required double remainingInBank,
       required String transferOutPlayerId,
       required PlayerPosition selectedPlayerPosition,
       required List<dynamic> transferredInPlayerIds,
@@ -1097,6 +1098,7 @@ class _$TransferStateTearOff {
       isLoading: isLoading,
       transfersMade: transfersMade,
       transfersMadeCount: transfersMadeCount,
+      remainingInBank: remainingInBank,
       transferOutPlayerId: transferOutPlayerId,
       selectedPlayerPosition: selectedPlayerPosition,
       transferredInPlayerIds: transferredInPlayerIds,
@@ -1117,7 +1119,8 @@ mixin _$TransferState {
   UserTeam get userTeamCopy => throw _privateConstructorUsedError; //
   bool get isLoading => throw _privateConstructorUsedError; //
   bool get transfersMade => throw _privateConstructorUsedError;
-  int get transfersMadeCount => throw _privateConstructorUsedError; //
+  int get transfersMadeCount => throw _privateConstructorUsedError;
+  double get remainingInBank => throw _privateConstructorUsedError; //
   String get transferOutPlayerId => throw _privateConstructorUsedError;
   PlayerPosition get selectedPlayerPosition =>
       throw _privateConstructorUsedError; //
@@ -1149,6 +1152,7 @@ abstract class $TransferStateCopyWith<$Res> {
       bool isLoading,
       bool transfersMade,
       int transfersMadeCount,
+      double remainingInBank,
       String transferOutPlayerId,
       PlayerPosition selectedPlayerPosition,
       List<dynamic> transferredInPlayerIds,
@@ -1178,6 +1182,7 @@ class _$TransferStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? transfersMade = freezed,
     Object? transfersMadeCount = freezed,
+    Object? remainingInBank = freezed,
     Object? transferOutPlayerId = freezed,
     Object? selectedPlayerPosition = freezed,
     Object? transferredInPlayerIds = freezed,
@@ -1207,6 +1212,10 @@ class _$TransferStateCopyWithImpl<$Res>
           ? _value.transfersMadeCount
           : transfersMadeCount // ignore: cast_nullable_to_non_nullable
               as int,
+      remainingInBank: remainingInBank == freezed
+          ? _value.remainingInBank
+          : remainingInBank // ignore: cast_nullable_to_non_nullable
+              as double,
       transferOutPlayerId: transferOutPlayerId == freezed
           ? _value.transferOutPlayerId
           : transferOutPlayerId // ignore: cast_nullable_to_non_nullable
@@ -1267,6 +1276,7 @@ abstract class _$TransferStateCopyWith<$Res>
       bool isLoading,
       bool transfersMade,
       int transfersMadeCount,
+      double remainingInBank,
       String transferOutPlayerId,
       PlayerPosition selectedPlayerPosition,
       List<dynamic> transferredInPlayerIds,
@@ -1300,6 +1310,7 @@ class __$TransferStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? transfersMade = freezed,
     Object? transfersMadeCount = freezed,
+    Object? remainingInBank = freezed,
     Object? transferOutPlayerId = freezed,
     Object? selectedPlayerPosition = freezed,
     Object? transferredInPlayerIds = freezed,
@@ -1329,6 +1340,10 @@ class __$TransferStateCopyWithImpl<$Res>
           ? _value.transfersMadeCount
           : transfersMadeCount // ignore: cast_nullable_to_non_nullable
               as int,
+      remainingInBank: remainingInBank == freezed
+          ? _value.remainingInBank
+          : remainingInBank // ignore: cast_nullable_to_non_nullable
+              as double,
       transferOutPlayerId: transferOutPlayerId == freezed
           ? _value.transferOutPlayerId
           : transferOutPlayerId // ignore: cast_nullable_to_non_nullable
@@ -1371,6 +1386,7 @@ class _$_TransferState implements _TransferState {
       required this.isLoading,
       required this.transfersMade,
       required this.transfersMadeCount,
+      required this.remainingInBank,
       required this.transferOutPlayerId,
       required this.selectedPlayerPosition,
       required this.transferredInPlayerIds,
@@ -1389,6 +1405,8 @@ class _$_TransferState implements _TransferState {
   final bool transfersMade;
   @override
   final int transfersMadeCount;
+  @override
+  final double remainingInBank;
   @override //
   final String transferOutPlayerId;
   @override
@@ -1407,7 +1425,7 @@ class _$_TransferState implements _TransferState {
 
   @override
   String toString() {
-    return 'TransferState(userTeam: $userTeam, userTeamCopy: $userTeamCopy, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIds: $transferredInPlayerIds, selectedPlayerReplacements: $selectedPlayerReplacements, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, replacementPlayersFailureOrSuccess: $replacementPlayersFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess)';
+    return 'TransferState(userTeam: $userTeam, userTeamCopy: $userTeamCopy, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIds: $transferredInPlayerIds, selectedPlayerReplacements: $selectedPlayerReplacements, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, replacementPlayersFailureOrSuccess: $replacementPlayersFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess)';
   }
 
   @override
@@ -1423,6 +1441,8 @@ class _$_TransferState implements _TransferState {
                 .equals(other.transfersMade, transfersMade) &&
             const DeepCollectionEquality()
                 .equals(other.transfersMadeCount, transfersMadeCount) &&
+            const DeepCollectionEquality()
+                .equals(other.remainingInBank, remainingInBank) &&
             const DeepCollectionEquality()
                 .equals(other.transferOutPlayerId, transferOutPlayerId) &&
             const DeepCollectionEquality()
@@ -1448,6 +1468,7 @@ class _$_TransferState implements _TransferState {
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(transfersMade),
       const DeepCollectionEquality().hash(transfersMadeCount),
+      const DeepCollectionEquality().hash(remainingInBank),
       const DeepCollectionEquality().hash(transferOutPlayerId),
       const DeepCollectionEquality().hash(selectedPlayerPosition),
       const DeepCollectionEquality().hash(transferredInPlayerIds),
@@ -1469,6 +1490,7 @@ abstract class _TransferState implements TransferState {
       required bool isLoading,
       required bool transfersMade,
       required int transfersMadeCount,
+      required double remainingInBank,
       required String transferOutPlayerId,
       required PlayerPosition selectedPlayerPosition,
       required List<dynamic> transferredInPlayerIds,
@@ -1489,6 +1511,8 @@ abstract class _TransferState implements TransferState {
   bool get transfersMade;
   @override
   int get transfersMadeCount;
+  @override
+  double get remainingInBank;
   @override //
   String get transferOutPlayerId;
   @override

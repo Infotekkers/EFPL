@@ -37,18 +37,33 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
       final UserTeam userTeam = failureOrSuccess.fold(
           (l) => UserTeam(
-              gameWeekId: GameWeekId(value: 1),
-              allUserPlayers: [],
-              freeTransfers: 0,
-              deduction: 0,
-              activeChip: ''),
+                gameWeekId: GameWeekId(value: 1),
+                allUserPlayers: [],
+                freeTransfers: 0,
+                deduction: 0,
+                activeChip: '',
+                availableChips: [],
+                maxBudget: 0,
+                teamName: "",
+              ),
           (r) => r);
+
+      double playerCostSum = 0.0;
+      for (var element in userTeam.allUserPlayers) {
+        double currentPlayerPrice =
+            element.currentPrice.value.fold((l) => 0, (r) => r);
+
+        playerCostSum = playerCostSum + currentPlayerPrice;
+      }
+
+      print(userTeam.maxBudget);
 
       emit(
         state.copyWith(
           userTeam: userTeam,
           isLoading: false,
           userTeamFailureOrSuccess: some(failureOrSuccess),
+          remainingInBank: userTeam.maxBudget - playerCostSum,
         ),
       );
     });
@@ -99,6 +114,14 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         (item) => item.playerId == state.transferOutPlayerId,
       );
 
+      // no deduction if a temporary player is transferred
+      int deductionValue = state.userTeam.deduction;
+      if (state.userTeam.freeTransfers != 1) {
+        if (!state.transferredInPlayerIds.contains(state.transferOutPlayerId)) {
+          deductionValue = deductionValue - 4;
+        }
+      }
+
       // add new player to user team
       List playerToAdd = allPlayers
           .where(
@@ -107,16 +130,26 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           .toList();
       allUserPlayers.add(playerToAdd[0]);
 
+      // calculate max budget
+      double playerCostSum = 0.0;
+      for (var element in allUserPlayers) {
+        double currentPlayerPrice =
+            element.currentPrice.value.fold((l) => 0, (r) => r);
+
+        playerCostSum = playerCostSum + currentPlayerPrice;
+      }
+
       UserTeam newUserTeam = UserTeam(
         gameWeekId: state.userTeam.gameWeekId,
         allUserPlayers: allUserPlayers,
         freeTransfers: state.userTeam.freeTransfers == 0
             ? 0
             : state.userTeam.freeTransfers - 1,
-        deduction: state.userTeam.freeTransfers == 1
-            ? state.userTeam.deduction
-            : state.userTeam.deduction - 4,
+        deduction: deductionValue,
         activeChip: state.userTeam.activeChip,
+        availableChips: state.userTeam.availableChips,
+        maxBudget: state.userTeam.maxBudget,
+        teamName: state.userTeam.teamName,
       );
 
       List newTransferredInPlayersId = state.transferredInPlayerIds;
@@ -132,6 +165,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           transfersMade: true,
           transfersMadeCount: state.transfersMadeCount + 1,
           transferredInPlayerIds: newTransferredInPlayersId,
+          remainingInBank: state.userTeam.maxBudget - playerCostSum,
         ),
       );
 

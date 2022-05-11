@@ -13,6 +13,9 @@ abstract class UserTeam with _$UserTeam {
     required int freeTransfers,
     required int deduction,
     required String activeChip,
+    required List availableChips,
+    required double maxBudget,
+    required String teamName,
   }) = _UserTeam;
 
   factory UserTeam.initial() => UserTeam(
@@ -21,5 +24,8 @@ abstract class UserTeam with _$UserTeam {
         freeTransfers: 1,
         deduction: 0,
         activeChip: "",
+        availableChips: [],
+        maxBudget: 0,
+        teamName: "",
       );
 }

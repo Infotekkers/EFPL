@@ -10,6 +10,7 @@ class TransferState with _$TransferState {
     //
     required bool transfersMade,
     required int transfersMadeCount,
+    required double remainingInBank,
 
     //
     required String transferOutPlayerId,
@@ -35,6 +36,9 @@ class TransferState with _$TransferState {
           freeTransfers: 0,
           deduction: 0,
           activeChip: "",
+          availableChips: [],
+          maxBudget: 0,
+          teamName: "",
         ),
         userTeamCopy: UserTeam(
           gameWeekId: GameWeekId(value: 1),
@@ -42,8 +46,12 @@ class TransferState with _$TransferState {
           freeTransfers: 0,
           deduction: 0,
           activeChip: "",
+          availableChips: [],
+          maxBudget: 0,
+          teamName: "",
         ),
         isLoading: false,
+        remainingInBank: 0.0,
         transferOutPlayerId: "",
         selectedPlayerPosition: PlayerPosition(value: ""),
         transfersMade: false,

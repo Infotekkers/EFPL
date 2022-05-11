@@ -101,6 +101,8 @@ class UserPlayerWidget extends StatelessWidget {
                                       .getPlayersInSelectedPosition(),
                                 );
 
+                                Navigator.pop(context);
+
                                 Navigator.pushNamed(context, "/transfer");
                               },
                               child: Row(
@@ -140,8 +142,19 @@ class UserPlayerWidget extends StatelessWidget {
                 ? Colors.yellowAccent
                 : Colors.purple,
             child: Center(
-              child: Text(
-                currentUserPlayer.playerName.value.fold((l) => '', (r) => r),
+              child: Column(
+                children: [
+                  Text(
+                    currentUserPlayer.playerName.value
+                        .fold((l) => '', (r) => r),
+                  ),
+                  Text(
+                    currentUserPlayer.currentPrice.value.fold(
+                      (l) => '',
+                      (r) => r.toString(),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

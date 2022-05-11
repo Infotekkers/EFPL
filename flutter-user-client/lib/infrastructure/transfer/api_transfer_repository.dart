@@ -35,10 +35,11 @@ class ApiTransferRepository implements ITransferRepository {
     if (apiResponse.statusCode == 200) {
       List<UserPlayer> allUserPlayers = [];
       final parsedResponseBody = jsonDecode(apiResponse.body);
+      final parseResponseTeam = parsedResponseBody['team'][0];
 
       // if response has players
-      if (parsedResponseBody['players'].length > 0) {
-        List allPlayers = parsedResponseBody['players'];
+      if (parseResponseTeam['players'].length > 0) {
+        List allPlayers = parseResponseTeam['players'];
         for (var i = 0; i < allPlayers.length; i++) {
           final UserPlayerDTO userPlayerDTO =
               UserPlayerDTO.fromJson(allPlayers[i]);
@@ -48,11 +49,16 @@ class ApiTransferRepository implements ITransferRepository {
 
         // Team
         UserTeam userTeam = UserTeam(
-          gameWeekId: GameWeekId(value: parsedResponseBody['gameweekId']),
+          gameWeekId: GameWeekId(value: parseResponseTeam['gameweekId']),
           allUserPlayers: allUserPlayers,
-          freeTransfers: parsedResponseBody['freeTransfers'],
-          deduction: parsedResponseBody['deduction'],
-          activeChip: parsedResponseBody['activeChip'],
+          freeTransfers: parseResponseTeam['freeTransfers'],
+          deduction: parseResponseTeam['deduction'],
+          activeChip: parseResponseTeam['activeChip'],
+          availableChips: parsedResponseBody['availableChips'],
+          maxBudget: double.parse(
+            parsedResponseBody['maxBudget'].toString(),
+          ),
+          teamName: parsedResponseBody['teamName'],
         );
 
         return right(userTeam);

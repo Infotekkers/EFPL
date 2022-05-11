@@ -22,13 +22,19 @@ class _$UserTeamTearOff {
       required List<UserPlayer> allUserPlayers,
       required int freeTransfers,
       required int deduction,
-      required String activeChip}) {
+      required String activeChip,
+      required List<dynamic> availableChips,
+      required double maxBudget,
+      required String teamName}) {
     return _UserTeam(
       gameWeekId: gameWeekId,
       allUserPlayers: allUserPlayers,
       freeTransfers: freeTransfers,
       deduction: deduction,
       activeChip: activeChip,
+      availableChips: availableChips,
+      maxBudget: maxBudget,
+      teamName: teamName,
     );
   }
 }
@@ -43,6 +49,9 @@ mixin _$UserTeam {
   int get freeTransfers => throw _privateConstructorUsedError;
   int get deduction => throw _privateConstructorUsedError;
   String get activeChip => throw _privateConstructorUsedError;
+  List<dynamic> get availableChips => throw _privateConstructorUsedError;
+  double get maxBudget => throw _privateConstructorUsedError;
+  String get teamName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserTeamCopyWith<UserTeam> get copyWith =>
@@ -58,7 +67,10 @@ abstract class $UserTeamCopyWith<$Res> {
       List<UserPlayer> allUserPlayers,
       int freeTransfers,
       int deduction,
-      String activeChip});
+      String activeChip,
+      List<dynamic> availableChips,
+      double maxBudget,
+      String teamName});
 }
 
 /// @nodoc
@@ -76,6 +88,9 @@ class _$UserTeamCopyWithImpl<$Res> implements $UserTeamCopyWith<$Res> {
     Object? freeTransfers = freezed,
     Object? deduction = freezed,
     Object? activeChip = freezed,
+    Object? availableChips = freezed,
+    Object? maxBudget = freezed,
+    Object? teamName = freezed,
   }) {
     return _then(_value.copyWith(
       gameWeekId: gameWeekId == freezed
@@ -98,6 +113,18 @@ class _$UserTeamCopyWithImpl<$Res> implements $UserTeamCopyWith<$Res> {
           ? _value.activeChip
           : activeChip // ignore: cast_nullable_to_non_nullable
               as String,
+      availableChips: availableChips == freezed
+          ? _value.availableChips
+          : availableChips // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      maxBudget: maxBudget == freezed
+          ? _value.maxBudget
+          : maxBudget // ignore: cast_nullable_to_non_nullable
+              as double,
+      teamName: teamName == freezed
+          ? _value.teamName
+          : teamName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -112,7 +139,10 @@ abstract class _$UserTeamCopyWith<$Res> implements $UserTeamCopyWith<$Res> {
       List<UserPlayer> allUserPlayers,
       int freeTransfers,
       int deduction,
-      String activeChip});
+      String activeChip,
+      List<dynamic> availableChips,
+      double maxBudget,
+      String teamName});
 }
 
 /// @nodoc
@@ -131,6 +161,9 @@ class __$UserTeamCopyWithImpl<$Res> extends _$UserTeamCopyWithImpl<$Res>
     Object? freeTransfers = freezed,
     Object? deduction = freezed,
     Object? activeChip = freezed,
+    Object? availableChips = freezed,
+    Object? maxBudget = freezed,
+    Object? teamName = freezed,
   }) {
     return _then(_UserTeam(
       gameWeekId: gameWeekId == freezed
@@ -153,6 +186,18 @@ class __$UserTeamCopyWithImpl<$Res> extends _$UserTeamCopyWithImpl<$Res>
           ? _value.activeChip
           : activeChip // ignore: cast_nullable_to_non_nullable
               as String,
+      availableChips: availableChips == freezed
+          ? _value.availableChips
+          : availableChips // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      maxBudget: maxBudget == freezed
+          ? _value.maxBudget
+          : maxBudget // ignore: cast_nullable_to_non_nullable
+              as double,
+      teamName: teamName == freezed
+          ? _value.teamName
+          : teamName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -165,7 +210,10 @@ class _$_UserTeam implements _UserTeam {
       required this.allUserPlayers,
       required this.freeTransfers,
       required this.deduction,
-      required this.activeChip});
+      required this.activeChip,
+      required this.availableChips,
+      required this.maxBudget,
+      required this.teamName});
 
   @override
   final GameWeekId gameWeekId;
@@ -177,10 +225,16 @@ class _$_UserTeam implements _UserTeam {
   final int deduction;
   @override
   final String activeChip;
+  @override
+  final List<dynamic> availableChips;
+  @override
+  final double maxBudget;
+  @override
+  final String teamName;
 
   @override
   String toString() {
-    return 'UserTeam(gameWeekId: $gameWeekId, allUserPlayers: $allUserPlayers, freeTransfers: $freeTransfers, deduction: $deduction, activeChip: $activeChip)';
+    return 'UserTeam(gameWeekId: $gameWeekId, allUserPlayers: $allUserPlayers, freeTransfers: $freeTransfers, deduction: $deduction, activeChip: $activeChip, availableChips: $availableChips, maxBudget: $maxBudget, teamName: $teamName)';
   }
 
   @override
@@ -196,7 +250,11 @@ class _$_UserTeam implements _UserTeam {
                 .equals(other.freeTransfers, freeTransfers) &&
             const DeepCollectionEquality().equals(other.deduction, deduction) &&
             const DeepCollectionEquality()
-                .equals(other.activeChip, activeChip));
+                .equals(other.activeChip, activeChip) &&
+            const DeepCollectionEquality()
+                .equals(other.availableChips, availableChips) &&
+            const DeepCollectionEquality().equals(other.maxBudget, maxBudget) &&
+            const DeepCollectionEquality().equals(other.teamName, teamName));
   }
 
   @override
@@ -206,7 +264,10 @@ class _$_UserTeam implements _UserTeam {
       const DeepCollectionEquality().hash(allUserPlayers),
       const DeepCollectionEquality().hash(freeTransfers),
       const DeepCollectionEquality().hash(deduction),
-      const DeepCollectionEquality().hash(activeChip));
+      const DeepCollectionEquality().hash(activeChip),
+      const DeepCollectionEquality().hash(availableChips),
+      const DeepCollectionEquality().hash(maxBudget),
+      const DeepCollectionEquality().hash(teamName));
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +281,10 @@ abstract class _UserTeam implements UserTeam {
       required List<UserPlayer> allUserPlayers,
       required int freeTransfers,
       required int deduction,
-      required String activeChip}) = _$_UserTeam;
+      required String activeChip,
+      required List<dynamic> availableChips,
+      required double maxBudget,
+      required String teamName}) = _$_UserTeam;
 
   @override
   GameWeekId get gameWeekId;
@@ -232,6 +296,12 @@ abstract class _UserTeam implements UserTeam {
   int get deduction;
   @override
   String get activeChip;
+  @override
+  List<dynamic> get availableChips;
+  @override
+  double get maxBudget;
+  @override
+  String get teamName;
   @override
   @JsonKey(ignore: true)
   _$UserTeamCopyWith<_UserTeam> get copyWith =>

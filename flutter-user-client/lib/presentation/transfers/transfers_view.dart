@@ -178,6 +178,9 @@ class TransfersView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
+                                    state.remainingInBank.toStringAsFixed(1),
+                                  ),
+                                  Text(
                                     "Deduction : " +
                                         state.userTeam.deduction.toString(),
                                   ),
