@@ -65,7 +65,7 @@ class PositionalContainer extends ValueObject<List<UserPlayer>> {
     'def': [3, 5],
     'mid': [3, 5],
     'att': [1, 3],
-    'ben': [4, 4]
+    'sub': [4, 4]
   };
 
   factory PositionalContainer(List<UserPlayer> userPlayers, String position) {
