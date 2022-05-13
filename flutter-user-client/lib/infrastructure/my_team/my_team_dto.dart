@@ -38,27 +38,26 @@ abstract class MyTeamDto implements _$MyTeamDto {
   }
 
   MyTeam toDomain() {
-    final Map<String, dynamic> organizedPlayers = {
-      'gk': [],
-      'def': [],
-      'mid': [],
-      'att': [],
-      'sub': [],
-    };
-
-    players.forEach((position, players) {
-      organizedPlayers[position] = PositionalContainer(players, position);
-    });
-
     return MyTeam(
       activeChip: Chip(activeChip),
       availableChips: AvailableChips(availableChips, activeChip),
       activeGameweek: Gameweek(activeGameweek),
       teamName: TeamName(teamName),
-      players: organizedPlayers,
+      players: applyPositionalContainer(players),
     );
   }
 
   factory MyTeamDto.fromJson(Map<String, dynamic> json) =>
       _$MyTeamDtoFromJson(json);
+
+  Map<String, PositionalContainer> applyPositionalContainer(
+      Map<String, dynamic> players) {
+    final Map<String, PositionalContainer> organizedPlayers = {};
+
+    players.forEach((position, players) {
+      organizedPlayers[position] = PositionalContainer(players, position);
+    });
+
+    return organizedPlayers;
+  }
 }

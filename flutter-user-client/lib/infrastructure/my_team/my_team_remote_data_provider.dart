@@ -25,31 +25,7 @@ class MyTeamRemoteDataProvider {
       if (response.statusCode == 200) {
         MyTeamDto myTeamDto = MyTeamDto.fromJson(jsonDecode(response.body));
 
-        Map<String, List> playersOrganizedByPosition = {
-          'gk': [],
-          'def': [],
-          'mid': [],
-          'att': [],
-          'sub': [],
-        };
-
-        for (String playerId in myTeamDto.players.keys) {
-          if (myTeamDto.players[playerId].containsKey('position') &&
-              myTeamDto.players[playerId]['multiplier'] > 0) {
-            final position = myTeamDto.players[playerId]['position']
-                .toString()
-                .toLowerCase();
-
-            playersOrganizedByPosition[position]
-                ?.add(myTeamDto.players[playerId]);
-          } else if (myTeamDto.players[playerId].containsKey('position') &&
-              myTeamDto.players[playerId]['multiplier'] == 0) {
-            playersOrganizedByPosition['sub']?.add(myTeamDto.players[playerId]);
-          }
-        }
-
-        myTeamDto = myTeamDto.copyWith(players: playersOrganizedByPosition);
-        // print(myTeamDto);
+        myTeamDto = classifyPlayers(myTeamDto);
 
         return right(myTeamDto.toDomain());
       }
@@ -64,5 +40,30 @@ class MyTeamRemoteDataProvider {
       MyTeam myTeam, String userId) {
     // TODO: implement saveUserTeam
     throw UnimplementedError();
+  }
+
+  MyTeamDto classifyPlayers(MyTeamDto myTeamDto) {
+    Map<String, List> playersOrganizedByPosition = {
+      'gk': [],
+      'def': [],
+      'mid': [],
+      'att': [],
+      'sub': [],
+    };
+
+    for (String playerId in myTeamDto.players.keys) {
+      if (myTeamDto.players[playerId].containsKey('position') &&
+          myTeamDto.players[playerId]['multiplier'] > 0) {
+        final position =
+            myTeamDto.players[playerId]['position'].toString().toLowerCase();
+
+        playersOrganizedByPosition[position]?.add(myTeamDto.players[playerId]);
+      } else if (myTeamDto.players[playerId].containsKey('position') &&
+          myTeamDto.players[playerId]['multiplier'] == 0) {
+        playersOrganizedByPosition['sub']?.add(myTeamDto.players[playerId]);
+      }
+    }
+
+    return myTeamDto.copyWith(players: playersOrganizedByPosition);
   }
 }
