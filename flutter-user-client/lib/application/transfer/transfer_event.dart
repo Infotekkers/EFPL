@@ -23,5 +23,8 @@ class TransferEvent with _$TransferEvent {
 // Cancel Transfer
   const factory TransferEvent.cancelTransfer() = _cancelTransfer;
 
+  const factory TransferEvent.cancelOneTransfer(
+      {required String playerToCancelId}) = _cancelOneTransfer;
+
   const factory TransferEvent.saveUserPlayers() = _saveUserPlayers;
 }

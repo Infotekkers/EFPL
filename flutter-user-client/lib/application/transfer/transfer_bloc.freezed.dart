@@ -46,6 +46,12 @@ class _$TransferEventTearOff {
     return const _cancelTransfer();
   }
 
+  _cancelOneTransfer cancelOneTransfer({required String playerToCancelId}) {
+    return _cancelOneTransfer(
+      playerToCancelId: playerToCancelId,
+    );
+  }
+
   _saveUserPlayers saveUserPlayers() {
     return const _saveUserPlayers();
   }
@@ -65,6 +71,7 @@ mixin _$TransferEvent {
     required TResult Function() getPlayersInSelectedPosition,
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +83,7 @@ mixin _$TransferEvent {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
   }) =>
       throw _privateConstructorUsedError;
@@ -87,6 +95,7 @@ mixin _$TransferEvent {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
     required TResult orElse(),
   }) =>
@@ -99,6 +108,7 @@ mixin _$TransferEvent {
         getPlayersInSelectedPosition,
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
   }) =>
       throw _privateConstructorUsedError;
@@ -110,6 +120,7 @@ mixin _$TransferEvent {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +132,7 @@ mixin _$TransferEvent {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     required TResult orElse(),
   }) =>
@@ -217,6 +229,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function() getPlayersInSelectedPosition,
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
   }) {
     return getUserPlayers(gameWeekId);
@@ -231,6 +244,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
   }) {
     return getUserPlayers?.call(gameWeekId);
@@ -245,6 +259,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -263,6 +278,7 @@ class _$_getUserPlayers implements _getUserPlayers {
         getPlayersInSelectedPosition,
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
   }) {
     return getUserPlayers(this);
@@ -277,6 +293,7 @@ class _$_getUserPlayers implements _getUserPlayers {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
   }) {
     return getUserPlayers?.call(this);
@@ -291,6 +308,7 @@ class _$_getUserPlayers implements _getUserPlayers {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -397,6 +415,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function() getPlayersInSelectedPosition,
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
   }) {
     return setTransferOutPlayer(transferOutPlayerId, playerPosition);
@@ -411,6 +430,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
   }) {
     return setTransferOutPlayer?.call(transferOutPlayerId, playerPosition);
@@ -425,6 +445,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -443,6 +464,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
         getPlayersInSelectedPosition,
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
   }) {
     return setTransferOutPlayer(this);
@@ -457,6 +479,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
   }) {
     return setTransferOutPlayer?.call(this);
@@ -471,6 +494,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -545,6 +569,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function() getPlayersInSelectedPosition,
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
   }) {
     return getPlayersInSelectedPosition();
@@ -559,6 +584,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
   }) {
     return getPlayersInSelectedPosition?.call();
@@ -573,6 +599,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -591,6 +618,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
         getPlayersInSelectedPosition,
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
   }) {
     return getPlayersInSelectedPosition(this);
@@ -605,6 +633,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
   }) {
     return getPlayersInSelectedPosition?.call(this);
@@ -619,6 +648,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -707,6 +737,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function() getPlayersInSelectedPosition,
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
   }) {
     return transferUserPlayer(transferInPlayerId);
@@ -721,6 +752,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
   }) {
     return transferUserPlayer?.call(transferInPlayerId);
@@ -735,6 +767,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -753,6 +786,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
         getPlayersInSelectedPosition,
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
   }) {
     return transferUserPlayer(this);
@@ -767,6 +801,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
   }) {
     return transferUserPlayer?.call(this);
@@ -781,6 +816,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -849,6 +885,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function() getPlayersInSelectedPosition,
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
   }) {
     return cancelTransfer();
@@ -863,6 +900,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
   }) {
     return cancelTransfer?.call();
@@ -877,6 +915,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -895,6 +934,7 @@ class _$_cancelTransfer implements _cancelTransfer {
         getPlayersInSelectedPosition,
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
   }) {
     return cancelTransfer(this);
@@ -909,6 +949,7 @@ class _$_cancelTransfer implements _cancelTransfer {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
   }) {
     return cancelTransfer?.call(this);
@@ -923,6 +964,7 @@ class _$_cancelTransfer implements _cancelTransfer {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -935,6 +977,179 @@ class _$_cancelTransfer implements _cancelTransfer {
 
 abstract class _cancelTransfer implements TransferEvent {
   const factory _cancelTransfer() = _$_cancelTransfer;
+}
+
+/// @nodoc
+abstract class _$cancelOneTransferCopyWith<$Res> {
+  factory _$cancelOneTransferCopyWith(
+          _cancelOneTransfer value, $Res Function(_cancelOneTransfer) then) =
+      __$cancelOneTransferCopyWithImpl<$Res>;
+  $Res call({String playerToCancelId});
+}
+
+/// @nodoc
+class __$cancelOneTransferCopyWithImpl<$Res>
+    extends _$TransferEventCopyWithImpl<$Res>
+    implements _$cancelOneTransferCopyWith<$Res> {
+  __$cancelOneTransferCopyWithImpl(
+      _cancelOneTransfer _value, $Res Function(_cancelOneTransfer) _then)
+      : super(_value, (v) => _then(v as _cancelOneTransfer));
+
+  @override
+  _cancelOneTransfer get _value => super._value as _cancelOneTransfer;
+
+  @override
+  $Res call({
+    Object? playerToCancelId = freezed,
+  }) {
+    return _then(_cancelOneTransfer(
+      playerToCancelId: playerToCancelId == freezed
+          ? _value.playerToCancelId
+          : playerToCancelId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_cancelOneTransfer implements _cancelOneTransfer {
+  const _$_cancelOneTransfer({required this.playerToCancelId});
+
+  @override
+  final String playerToCancelId;
+
+  @override
+  String toString() {
+    return 'TransferEvent.cancelOneTransfer(playerToCancelId: $playerToCancelId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _cancelOneTransfer &&
+            const DeepCollectionEquality()
+                .equals(other.playerToCancelId, playerToCancelId));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(playerToCancelId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$cancelOneTransferCopyWith<_cancelOneTransfer> get copyWith =>
+      __$cancelOneTransferCopyWithImpl<_cancelOneTransfer>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(GameWeekId gameWeekId) getUserPlayers,
+    required TResult Function(
+            String transferOutPlayerId, PlayerPosition playerPosition)
+        setTransferOutPlayer,
+    required TResult Function() getPlayersInSelectedPosition,
+    required TResult Function(String transferInPlayerId) transferUserPlayer,
+    required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
+    required TResult Function() saveUserPlayers,
+  }) {
+    return cancelOneTransfer(playerToCancelId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(GameWeekId gameWeekId)? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function()? saveUserPlayers,
+  }) {
+    return cancelOneTransfer?.call(playerToCancelId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(GameWeekId gameWeekId)? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function()? saveUserPlayers,
+    required TResult orElse(),
+  }) {
+    if (cancelOneTransfer != null) {
+      return cancelOneTransfer(playerToCancelId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_getUserPlayers value) getUserPlayers,
+    required TResult Function(_setTransferOutPlayer value) setTransferOutPlayer,
+    required TResult Function(_getPlayersInSelectedPosition value)
+        getPlayersInSelectedPosition,
+    required TResult Function(_transferUserPlayer value) transferUserPlayer,
+    required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
+    required TResult Function(_saveUserPlayers value) saveUserPlayers,
+  }) {
+    return cancelOneTransfer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+  }) {
+    return cancelOneTransfer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    required TResult orElse(),
+  }) {
+    if (cancelOneTransfer != null) {
+      return cancelOneTransfer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _cancelOneTransfer implements TransferEvent {
+  const factory _cancelOneTransfer({required String playerToCancelId}) =
+      _$_cancelOneTransfer;
+
+  String get playerToCancelId;
+  @JsonKey(ignore: true)
+  _$cancelOneTransferCopyWith<_cancelOneTransfer> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -985,6 +1200,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function() getPlayersInSelectedPosition,
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
   }) {
     return saveUserPlayers();
@@ -999,6 +1215,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
   }) {
     return saveUserPlayers?.call();
@@ -1013,6 +1230,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -1031,6 +1249,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
         getPlayersInSelectedPosition,
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
   }) {
     return saveUserPlayers(this);
@@ -1045,6 +1264,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
   }) {
     return saveUserPlayers?.call(this);
@@ -1059,6 +1279,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
         getPlayersInSelectedPosition,
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     required TResult orElse(),
   }) {
@@ -1079,14 +1300,14 @@ class _$TransferStateTearOff {
 
   _TransferState call(
       {required UserTeam userTeam,
-      required UserTeam userTeamCopy,
       required bool isLoading,
       required bool transfersMade,
       required int transfersMadeCount,
       required double remainingInBank,
       required String transferOutPlayerId,
       required PlayerPosition selectedPlayerPosition,
-      required List<dynamic> transferredInPlayerIds,
+      required List<dynamic> transferredInPlayerIdList,
+      required List<dynamic> swappedPlayerIdsList,
       required List<UserPlayer> selectedPlayerReplacements,
       required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       required Option<Either<dynamic, List<UserPlayer>>>
@@ -1094,14 +1315,14 @@ class _$TransferStateTearOff {
       required Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess}) {
     return _TransferState(
       userTeam: userTeam,
-      userTeamCopy: userTeamCopy,
       isLoading: isLoading,
       transfersMade: transfersMade,
       transfersMadeCount: transfersMadeCount,
       remainingInBank: remainingInBank,
       transferOutPlayerId: transferOutPlayerId,
       selectedPlayerPosition: selectedPlayerPosition,
-      transferredInPlayerIds: transferredInPlayerIds,
+      transferredInPlayerIdList: transferredInPlayerIdList,
+      swappedPlayerIdsList: swappedPlayerIdsList,
       selectedPlayerReplacements: selectedPlayerReplacements,
       userTeamFailureOrSuccess: userTeamFailureOrSuccess,
       replacementPlayersFailureOrSuccess: replacementPlayersFailureOrSuccess,
@@ -1115,21 +1336,29 @@ const $TransferState = _$TransferStateTearOff();
 
 /// @nodoc
 mixin _$TransferState {
-  UserTeam get userTeam => throw _privateConstructorUsedError;
-  UserTeam get userTeamCopy => throw _privateConstructorUsedError; //
-  bool get isLoading => throw _privateConstructorUsedError; //
-  bool get transfersMade => throw _privateConstructorUsedError;
-  int get transfersMadeCount => throw _privateConstructorUsedError;
-  double get remainingInBank => throw _privateConstructorUsedError; //
-  String get transferOutPlayerId => throw _privateConstructorUsedError;
+// list of user players and chips...
+  UserTeam get userTeam =>
+      throw _privateConstructorUsedError; // enable disable loading animation
+  bool get isLoading =>
+      throw _privateConstructorUsedError; // if transfer is made or not to show buttons
+  bool get transfersMade =>
+      throw _privateConstructorUsedError; // number of transfers made
+  int get transfersMadeCount =>
+      throw _privateConstructorUsedError; // amount of money left
+  double get remainingInBank =>
+      throw _privateConstructorUsedError; // id of player to transfer out
+  String get transferOutPlayerId =>
+      throw _privateConstructorUsedError; // position of player to transfer - helps fetch from api
   PlayerPosition get selectedPlayerPosition =>
-      throw _privateConstructorUsedError; //
-  List<dynamic> get transferredInPlayerIds =>
-      throw _privateConstructorUsedError; //
+      throw _privateConstructorUsedError; // ids of all players transferred in
+  List<dynamic> get transferredInPlayerIdList =>
+      throw _privateConstructorUsedError; // keep track of what player is transferred for what player {transferredOut:transferredIn}
+  List<dynamic> get swappedPlayerIdsList =>
+      throw _privateConstructorUsedError; // list of all players in selected position
   List<UserPlayer> get selectedPlayerReplacements =>
-      throw _privateConstructorUsedError; //
+      throw _privateConstructorUsedError; // status of user team fetch
   Option<Either<dynamic, UserTeam>> get userTeamFailureOrSuccess =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // status of all players in position fetch
   Option<Either<dynamic, List<UserPlayer>>>
       get replacementPlayersFailureOrSuccess =>
           throw _privateConstructorUsedError;
@@ -1148,14 +1377,14 @@ abstract class $TransferStateCopyWith<$Res> {
       _$TransferStateCopyWithImpl<$Res>;
   $Res call(
       {UserTeam userTeam,
-      UserTeam userTeamCopy,
       bool isLoading,
       bool transfersMade,
       int transfersMadeCount,
       double remainingInBank,
       String transferOutPlayerId,
       PlayerPosition selectedPlayerPosition,
-      List<dynamic> transferredInPlayerIds,
+      List<dynamic> transferredInPlayerIdList,
+      List<dynamic> swappedPlayerIdsList,
       List<UserPlayer> selectedPlayerReplacements,
       Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       Option<Either<dynamic, List<UserPlayer>>>
@@ -1163,7 +1392,6 @@ abstract class $TransferStateCopyWith<$Res> {
       Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess});
 
   $UserTeamCopyWith<$Res> get userTeam;
-  $UserTeamCopyWith<$Res> get userTeamCopy;
 }
 
 /// @nodoc
@@ -1178,14 +1406,14 @@ class _$TransferStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userTeam = freezed,
-    Object? userTeamCopy = freezed,
     Object? isLoading = freezed,
     Object? transfersMade = freezed,
     Object? transfersMadeCount = freezed,
     Object? remainingInBank = freezed,
     Object? transferOutPlayerId = freezed,
     Object? selectedPlayerPosition = freezed,
-    Object? transferredInPlayerIds = freezed,
+    Object? transferredInPlayerIdList = freezed,
+    Object? swappedPlayerIdsList = freezed,
     Object? selectedPlayerReplacements = freezed,
     Object? userTeamFailureOrSuccess = freezed,
     Object? replacementPlayersFailureOrSuccess = freezed,
@@ -1195,10 +1423,6 @@ class _$TransferStateCopyWithImpl<$Res>
       userTeam: userTeam == freezed
           ? _value.userTeam
           : userTeam // ignore: cast_nullable_to_non_nullable
-              as UserTeam,
-      userTeamCopy: userTeamCopy == freezed
-          ? _value.userTeamCopy
-          : userTeamCopy // ignore: cast_nullable_to_non_nullable
               as UserTeam,
       isLoading: isLoading == freezed
           ? _value.isLoading
@@ -1224,9 +1448,13 @@ class _$TransferStateCopyWithImpl<$Res>
           ? _value.selectedPlayerPosition
           : selectedPlayerPosition // ignore: cast_nullable_to_non_nullable
               as PlayerPosition,
-      transferredInPlayerIds: transferredInPlayerIds == freezed
-          ? _value.transferredInPlayerIds
-          : transferredInPlayerIds // ignore: cast_nullable_to_non_nullable
+      transferredInPlayerIdList: transferredInPlayerIdList == freezed
+          ? _value.transferredInPlayerIdList
+          : transferredInPlayerIdList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      swappedPlayerIdsList: swappedPlayerIdsList == freezed
+          ? _value.swappedPlayerIdsList
+          : swappedPlayerIdsList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
       selectedPlayerReplacements: selectedPlayerReplacements == freezed
           ? _value.selectedPlayerReplacements
@@ -1254,13 +1482,6 @@ class _$TransferStateCopyWithImpl<$Res>
       return _then(_value.copyWith(userTeam: value));
     });
   }
-
-  @override
-  $UserTeamCopyWith<$Res> get userTeamCopy {
-    return $UserTeamCopyWith<$Res>(_value.userTeamCopy, (value) {
-      return _then(_value.copyWith(userTeamCopy: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -1272,14 +1493,14 @@ abstract class _$TransferStateCopyWith<$Res>
   @override
   $Res call(
       {UserTeam userTeam,
-      UserTeam userTeamCopy,
       bool isLoading,
       bool transfersMade,
       int transfersMadeCount,
       double remainingInBank,
       String transferOutPlayerId,
       PlayerPosition selectedPlayerPosition,
-      List<dynamic> transferredInPlayerIds,
+      List<dynamic> transferredInPlayerIdList,
+      List<dynamic> swappedPlayerIdsList,
       List<UserPlayer> selectedPlayerReplacements,
       Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       Option<Either<dynamic, List<UserPlayer>>>
@@ -1288,8 +1509,6 @@ abstract class _$TransferStateCopyWith<$Res>
 
   @override
   $UserTeamCopyWith<$Res> get userTeam;
-  @override
-  $UserTeamCopyWith<$Res> get userTeamCopy;
 }
 
 /// @nodoc
@@ -1306,14 +1525,14 @@ class __$TransferStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userTeam = freezed,
-    Object? userTeamCopy = freezed,
     Object? isLoading = freezed,
     Object? transfersMade = freezed,
     Object? transfersMadeCount = freezed,
     Object? remainingInBank = freezed,
     Object? transferOutPlayerId = freezed,
     Object? selectedPlayerPosition = freezed,
-    Object? transferredInPlayerIds = freezed,
+    Object? transferredInPlayerIdList = freezed,
+    Object? swappedPlayerIdsList = freezed,
     Object? selectedPlayerReplacements = freezed,
     Object? userTeamFailureOrSuccess = freezed,
     Object? replacementPlayersFailureOrSuccess = freezed,
@@ -1323,10 +1542,6 @@ class __$TransferStateCopyWithImpl<$Res>
       userTeam: userTeam == freezed
           ? _value.userTeam
           : userTeam // ignore: cast_nullable_to_non_nullable
-              as UserTeam,
-      userTeamCopy: userTeamCopy == freezed
-          ? _value.userTeamCopy
-          : userTeamCopy // ignore: cast_nullable_to_non_nullable
               as UserTeam,
       isLoading: isLoading == freezed
           ? _value.isLoading
@@ -1352,9 +1567,13 @@ class __$TransferStateCopyWithImpl<$Res>
           ? _value.selectedPlayerPosition
           : selectedPlayerPosition // ignore: cast_nullable_to_non_nullable
               as PlayerPosition,
-      transferredInPlayerIds: transferredInPlayerIds == freezed
-          ? _value.transferredInPlayerIds
-          : transferredInPlayerIds // ignore: cast_nullable_to_non_nullable
+      transferredInPlayerIdList: transferredInPlayerIdList == freezed
+          ? _value.transferredInPlayerIdList
+          : transferredInPlayerIdList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      swappedPlayerIdsList: swappedPlayerIdsList == freezed
+          ? _value.swappedPlayerIdsList
+          : swappedPlayerIdsList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
       selectedPlayerReplacements: selectedPlayerReplacements == freezed
           ? _value.selectedPlayerReplacements
@@ -1382,42 +1601,42 @@ class __$TransferStateCopyWithImpl<$Res>
 class _$_TransferState implements _TransferState {
   const _$_TransferState(
       {required this.userTeam,
-      required this.userTeamCopy,
       required this.isLoading,
       required this.transfersMade,
       required this.transfersMadeCount,
       required this.remainingInBank,
       required this.transferOutPlayerId,
       required this.selectedPlayerPosition,
-      required this.transferredInPlayerIds,
+      required this.transferredInPlayerIdList,
+      required this.swappedPlayerIdsList,
       required this.selectedPlayerReplacements,
       required this.userTeamFailureOrSuccess,
       required this.replacementPlayersFailureOrSuccess,
       required this.valueFailureOrSuccess});
 
-  @override
+  @override // list of user players and chips...
   final UserTeam userTeam;
-  @override
-  final UserTeam userTeamCopy;
-  @override //
+  @override // enable disable loading animation
   final bool isLoading;
-  @override //
+  @override // if transfer is made or not to show buttons
   final bool transfersMade;
-  @override
+  @override // number of transfers made
   final int transfersMadeCount;
-  @override
+  @override // amount of money left
   final double remainingInBank;
-  @override //
+  @override // id of player to transfer out
   final String transferOutPlayerId;
-  @override
+  @override // position of player to transfer - helps fetch from api
   final PlayerPosition selectedPlayerPosition;
-  @override //
-  final List<dynamic> transferredInPlayerIds;
-  @override //
+  @override // ids of all players transferred in
+  final List<dynamic> transferredInPlayerIdList;
+  @override // keep track of what player is transferred for what player {transferredOut:transferredIn}
+  final List<dynamic> swappedPlayerIdsList;
+  @override // list of all players in selected position
   final List<UserPlayer> selectedPlayerReplacements;
-  @override //
+  @override // status of user team fetch
   final Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess;
-  @override
+  @override // status of all players in position fetch
   final Option<Either<dynamic, List<UserPlayer>>>
       replacementPlayersFailureOrSuccess;
   @override
@@ -1425,7 +1644,7 @@ class _$_TransferState implements _TransferState {
 
   @override
   String toString() {
-    return 'TransferState(userTeam: $userTeam, userTeamCopy: $userTeamCopy, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIds: $transferredInPlayerIds, selectedPlayerReplacements: $selectedPlayerReplacements, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, replacementPlayersFailureOrSuccess: $replacementPlayersFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess)';
+    return 'TransferState(userTeam: $userTeam, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIdList: $transferredInPlayerIdList, swappedPlayerIdsList: $swappedPlayerIdsList, selectedPlayerReplacements: $selectedPlayerReplacements, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, replacementPlayersFailureOrSuccess: $replacementPlayersFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess)';
   }
 
   @override
@@ -1434,8 +1653,6 @@ class _$_TransferState implements _TransferState {
         (other.runtimeType == runtimeType &&
             other is _TransferState &&
             const DeepCollectionEquality().equals(other.userTeam, userTeam) &&
-            const DeepCollectionEquality()
-                .equals(other.userTeamCopy, userTeamCopy) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
                 .equals(other.transfersMade, transfersMade) &&
@@ -1447,8 +1664,10 @@ class _$_TransferState implements _TransferState {
                 .equals(other.transferOutPlayerId, transferOutPlayerId) &&
             const DeepCollectionEquality()
                 .equals(other.selectedPlayerPosition, selectedPlayerPosition) &&
+            const DeepCollectionEquality().equals(
+                other.transferredInPlayerIdList, transferredInPlayerIdList) &&
             const DeepCollectionEquality()
-                .equals(other.transferredInPlayerIds, transferredInPlayerIds) &&
+                .equals(other.swappedPlayerIdsList, swappedPlayerIdsList) &&
             const DeepCollectionEquality().equals(
                 other.selectedPlayerReplacements, selectedPlayerReplacements) &&
             const DeepCollectionEquality().equals(
@@ -1464,14 +1683,14 @@ class _$_TransferState implements _TransferState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(userTeam),
-      const DeepCollectionEquality().hash(userTeamCopy),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(transfersMade),
       const DeepCollectionEquality().hash(transfersMadeCount),
       const DeepCollectionEquality().hash(remainingInBank),
       const DeepCollectionEquality().hash(transferOutPlayerId),
       const DeepCollectionEquality().hash(selectedPlayerPosition),
-      const DeepCollectionEquality().hash(transferredInPlayerIds),
+      const DeepCollectionEquality().hash(transferredInPlayerIdList),
+      const DeepCollectionEquality().hash(swappedPlayerIdsList),
       const DeepCollectionEquality().hash(selectedPlayerReplacements),
       const DeepCollectionEquality().hash(userTeamFailureOrSuccess),
       const DeepCollectionEquality().hash(replacementPlayersFailureOrSuccess),
@@ -1486,14 +1705,14 @@ class _$_TransferState implements _TransferState {
 abstract class _TransferState implements TransferState {
   const factory _TransferState(
       {required UserTeam userTeam,
-      required UserTeam userTeamCopy,
       required bool isLoading,
       required bool transfersMade,
       required int transfersMadeCount,
       required double remainingInBank,
       required String transferOutPlayerId,
       required PlayerPosition selectedPlayerPosition,
-      required List<dynamic> transferredInPlayerIds,
+      required List<dynamic> transferredInPlayerIdList,
+      required List<dynamic> swappedPlayerIdsList,
       required List<UserPlayer> selectedPlayerReplacements,
       required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       required Option<Either<dynamic, List<UserPlayer>>>
@@ -1501,29 +1720,29 @@ abstract class _TransferState implements TransferState {
       required Option<Either<ValueFailure, dynamic>>
           valueFailureOrSuccess}) = _$_TransferState;
 
-  @override
+  @override // list of user players and chips...
   UserTeam get userTeam;
-  @override
-  UserTeam get userTeamCopy;
-  @override //
+  @override // enable disable loading animation
   bool get isLoading;
-  @override //
+  @override // if transfer is made or not to show buttons
   bool get transfersMade;
-  @override
+  @override // number of transfers made
   int get transfersMadeCount;
-  @override
+  @override // amount of money left
   double get remainingInBank;
-  @override //
+  @override // id of player to transfer out
   String get transferOutPlayerId;
-  @override
+  @override // position of player to transfer - helps fetch from api
   PlayerPosition get selectedPlayerPosition;
-  @override //
-  List<dynamic> get transferredInPlayerIds;
-  @override //
+  @override // ids of all players transferred in
+  List<dynamic> get transferredInPlayerIdList;
+  @override // keep track of what player is transferred for what player {transferredOut:transferredIn}
+  List<dynamic> get swappedPlayerIdsList;
+  @override // list of all players in selected position
   List<UserPlayer> get selectedPlayerReplacements;
-  @override //
+  @override // status of user team fetch
   Option<Either<dynamic, UserTeam>> get userTeamFailureOrSuccess;
-  @override
+  @override // status of all players in position fetch
   Option<Either<dynamic, List<UserPlayer>>>
       get replacementPlayersFailureOrSuccess;
   @override

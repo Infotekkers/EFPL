@@ -20,7 +20,11 @@ class ApiTransferRepository implements ITransferRepository {
   Future<Either<dynamic, UserTeam>> getUserPlayers(
       {required int gameWeekId}) async {
     // TODO:Replace
-    // const userID = "6278d568abfa93c09603628a";
+
+    // remote id
+    // const userID = "627970e3b106bad35b4dde88";
+
+    // local id
     const userID = "627a7798bed9e567269bb8a9";
 
     HTTPInstance instance = getIt<HTTPInstance>();

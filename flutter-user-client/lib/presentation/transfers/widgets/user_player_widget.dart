@@ -1,7 +1,5 @@
-import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
-import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:efpl/injectable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,26 +82,12 @@ class UserPlayerWidget extends StatelessWidget {
                             // Transfer
                             InkWell(
                               onTap: () {
-                                // se
-                                // Set player position
-                                _transferBloc.add(
-                                  TransferEvent.setTransferOutPlayer(
-                                    transferOutPlayerId:
-                                        currentUserPlayer.playerId,
-                                    playerPosition:
-                                        currentUserPlayer.playerPosition,
-                                  ),
-                                );
-
-                                // get all players in position
-                                _transferBloc.add(
-                                  const TransferEvent
-                                      .getPlayersInSelectedPosition(),
-                                );
-
-                                Navigator.pop(context);
-
-                                Navigator.pushNamed(context, "/transfer");
+                                state.transferredInPlayerIdList
+                                        .contains(currentUserPlayer.playerId)
+                                    ? cancelOnePlayerTransfer(_transferBloc,
+                                        currentUserPlayer, context)
+                                    : transferPlayer(_transferBloc,
+                                        currentUserPlayer, context);
                               },
                               child: Row(
                                 children: [
@@ -112,7 +96,10 @@ class UserPlayerWidget extends StatelessWidget {
                                     margin:
                                         const EdgeInsets.fromLTRB(0, 0, 3, 0),
                                   ),
-                                  const Text("Transfer"),
+                                  state.transferredInPlayerIdList
+                                          .contains(currentUserPlayer.playerId)
+                                      ? const Text("Cancel Transfer")
+                                      : const Text("Transfer")
                                 ],
                               ),
                             ),
@@ -137,7 +124,7 @@ class UserPlayerWidget extends StatelessWidget {
           },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 5),
-            color: state.transferredInPlayerIds
+            color: state.transferredInPlayerIdList
                     .contains(currentUserPlayer.playerId)
                 ? Colors.yellowAccent
                 : Colors.purple,
@@ -147,12 +134,14 @@ class UserPlayerWidget extends StatelessWidget {
                   Text(
                     currentUserPlayer.playerName.value
                         .fold((l) => '', (r) => r),
+                    style: TextStyle(color: Colors.white),
                   ),
                   Text(
                     currentUserPlayer.currentPrice.value.fold(
                       (l) => '',
                       (r) => r.toString(),
                     ),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ],
               ),
@@ -162,4 +151,32 @@ class UserPlayerWidget extends StatelessWidget {
       },
     );
   }
+}
+
+void transferPlayer(_transferBloc, currentUserPlayer, context) {
+  // Set player position
+  _transferBloc.add(
+    TransferEvent.setTransferOutPlayer(
+      transferOutPlayerId: currentUserPlayer.playerId,
+      playerPosition: currentUserPlayer.playerPosition,
+    ),
+  );
+
+  // get all players in position
+  _transferBloc.add(
+    const TransferEvent.getPlayersInSelectedPosition(),
+  );
+
+  Navigator.pop(context);
+
+  Navigator.pushNamed(context, "/transfer");
+}
+
+void cancelOnePlayerTransfer(_transferBloc, currentUserPlayer, context) {
+  _transferBloc.add(
+    TransferEvent.cancelOneTransfer(
+        playerToCancelId: currentUserPlayer.playerId),
+  );
+
+  Navigator.pop(context);
 }

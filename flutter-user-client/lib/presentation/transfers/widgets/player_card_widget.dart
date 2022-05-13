@@ -50,6 +50,7 @@ class UserPlayerCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontFamily: "Architect",
                             letterSpacing: 0.25,
+                            color: Colors.white,
                           ),
                         ),
 
