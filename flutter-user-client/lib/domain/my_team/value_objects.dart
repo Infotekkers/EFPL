@@ -38,7 +38,7 @@ class Chip extends ValueObject<String> {
   const Chip._(this.value);
 
   factory Chip(String chipStr) {
-    return Chip._(validateChip(chipStr).flatMap(validateStringNotEmpty));
+    return Chip._(validateChip(chipStr));
   }
 }
 
@@ -54,9 +54,9 @@ class AvailableChips extends ValueObject<List<Chip>> {
   }
 }
 
-class PositionalContainer extends ValueObject<List<UserPlayer>> {
+class PositionalContainer extends ValueObject<List<dynamic>> {
   @override
-  final Either<ValueFailure<List<UserPlayer>>, List<UserPlayer>> value;
+  final Either<ValueFailure<List<dynamic>>, List<dynamic>> value;
 
   const PositionalContainer._(this.value);
 
@@ -68,7 +68,7 @@ class PositionalContainer extends ValueObject<List<UserPlayer>> {
     'sub': [4, 4]
   };
 
-  factory PositionalContainer(List<UserPlayer> userPlayers, String position) {
+  factory PositionalContainer(List<dynamic> userPlayers, String position) {
     return PositionalContainer._(
         validatePositionalContainer(userPlayers, positionalRange, position));
   }

@@ -26,7 +26,7 @@ class _$MyTeamDtoTearOff {
       required String activeGameweek,
       required List<String> availableChips,
       required String activeChip,
-      required Map<dynamic, dynamic> players}) {
+      required Map<String, dynamic> players}) {
     return _MyTeamDto(
       teamName: teamName,
       activeGameweek: activeGameweek,
@@ -50,7 +50,7 @@ mixin _$MyTeamDto {
   String get activeGameweek => throw _privateConstructorUsedError;
   List<String> get availableChips => throw _privateConstructorUsedError;
   String get activeChip => throw _privateConstructorUsedError;
-  Map<dynamic, dynamic> get players => throw _privateConstructorUsedError;
+  Map<String, dynamic> get players => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,7 +67,7 @@ abstract class $MyTeamDtoCopyWith<$Res> {
       String activeGameweek,
       List<String> availableChips,
       String activeChip,
-      Map<dynamic, dynamic> players});
+      Map<String, dynamic> players});
 }
 
 /// @nodoc
@@ -106,7 +106,7 @@ class _$MyTeamDtoCopyWithImpl<$Res> implements $MyTeamDtoCopyWith<$Res> {
       players: players == freezed
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
-              as Map<dynamic, dynamic>,
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -122,7 +122,7 @@ abstract class _$MyTeamDtoCopyWith<$Res> implements $MyTeamDtoCopyWith<$Res> {
       String activeGameweek,
       List<String> availableChips,
       String activeChip,
-      Map<dynamic, dynamic> players});
+      Map<String, dynamic> players});
 }
 
 /// @nodoc
@@ -162,7 +162,7 @@ class __$MyTeamDtoCopyWithImpl<$Res> extends _$MyTeamDtoCopyWithImpl<$Res>
       players: players == freezed
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
-              as Map<dynamic, dynamic>,
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -190,7 +190,7 @@ class _$_MyTeamDto extends _MyTeamDto {
   @override
   final String activeChip;
   @override
-  final Map<dynamic, dynamic> players;
+  final Map<String, dynamic> players;
 
   @override
   String toString() {
@@ -238,7 +238,7 @@ abstract class _MyTeamDto extends MyTeamDto {
       required String activeGameweek,
       required List<String> availableChips,
       required String activeChip,
-      required Map<dynamic, dynamic> players}) = _$_MyTeamDto;
+      required Map<String, dynamic> players}) = _$_MyTeamDto;
   const _MyTeamDto._() : super._();
 
   factory _MyTeamDto.fromJson(Map<String, dynamic> json) =
@@ -253,7 +253,7 @@ abstract class _MyTeamDto extends MyTeamDto {
   @override
   String get activeChip;
   @override
-  Map<dynamic, dynamic> get players;
+  Map<String, dynamic> get players;
   @override
   @JsonKey(ignore: true)
   _$MyTeamDtoCopyWith<_MyTeamDto> get copyWith =>

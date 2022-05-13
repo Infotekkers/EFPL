@@ -38,7 +38,8 @@ Either<ValueFailure<String>, String> validateChip(String chipStr) {
   if (chipStr == 'WC' ||
       chipStr == 'FH' ||
       chipStr == 'BB' ||
-      chipStr == 'TC') {
+      chipStr == 'TC' ||
+      chipStr == '') {
     return right(chipStr);
   } else {
     return left(ValueFailure.invalid(failedValue: chipStr));
@@ -61,9 +62,10 @@ Either<ValueFailure<List<Chip>>, List<Chip>> validateAvailabeChips(
   }
 }
 
-Either<ValueFailure<List<UserPlayer>>, List<UserPlayer>>
-    validatePositionalContainer(List<UserPlayer> userPlayers,
-        Map<String, List<int>> positionalRange, String position) {
+Either<ValueFailure<List<dynamic>>, List<dynamic>> validatePositionalContainer(
+    List<dynamic> userPlayers,
+    Map<String, List<int>> positionalRange,
+    String position) {
   if (positionalRange.containsKey(position) == false) {
     return left(ValueFailure.invalidPosition(
         failedValue: userPlayers, position: position));

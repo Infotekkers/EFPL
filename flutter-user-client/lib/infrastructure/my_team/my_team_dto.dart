@@ -1,5 +1,6 @@
 import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/value_objects.dart';
+import 'package:efpl/domain/player/player.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'my_team_dto.freezed.dart';
@@ -14,7 +15,7 @@ abstract class MyTeamDto implements _$MyTeamDto {
     required String activeGameweek,
     required List<String> availableChips,
     required String activeChip,
-    required Map players,
+    required Map<String, dynamic> players,
   }) = _MyTeamDto;
 
   factory MyTeamDto.fromDomain(MyTeam myTeam) {
@@ -37,11 +38,24 @@ abstract class MyTeamDto implements _$MyTeamDto {
   }
 
   MyTeam toDomain() {
+    final Map<String, dynamic> organizedPlayers = {
+      'gk': [],
+      'def': [],
+      'mid': [],
+      'att': [],
+      'sub': [],
+    };
+
+    players.forEach((position, players) {
+      organizedPlayers[position] = PositionalContainer(players, position);
+    });
+
     return MyTeam(
       activeChip: Chip(activeChip),
       availableChips: AvailableChips(availableChips, activeChip),
       activeGameweek: Gameweek(activeGameweek),
       teamName: TeamName(teamName),
+      players: organizedPlayers,
     );
   }
 
