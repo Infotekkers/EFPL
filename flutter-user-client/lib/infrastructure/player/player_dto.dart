@@ -11,7 +11,7 @@ abstract class PlayerDto implements _$PlayerDto {
 
   const factory PlayerDto({
     required String name,
-    required String id,
+    required String playerId,
     required String eplTeamId,
     required String position,
     required String multiplier,
@@ -21,7 +21,7 @@ abstract class PlayerDto implements _$PlayerDto {
 
   factory PlayerDto.fromDomain(Player player) => PlayerDto(
         name: player.name.isValid() ? player.name.getOrCrash() : '',
-        id: player.id.isValid() ? player.id.getOrCrash() : '',
+        playerId: player.playerId.isValid() ? player.playerId.getOrCrash() : '',
         eplTeamId:
             player.eplTeamId.isValid() ? player.eplTeamId.getOrCrash() : ' ',
         position:
@@ -33,7 +33,7 @@ abstract class PlayerDto implements _$PlayerDto {
 
   Player toDomain() => Player(
       name: Name(name),
-      id: Id(id),
+      playerId: Id(playerId),
       eplTeamId: EplTeamId(eplTeamId),
       position: Position(position),
       multiplier: Multiplier(multiplier),

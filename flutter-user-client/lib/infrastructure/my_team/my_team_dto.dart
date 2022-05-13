@@ -11,7 +11,7 @@ abstract class MyTeamDto implements _$MyTeamDto {
 
   const factory MyTeamDto({
     required String teamName,
-    required String gameweek,
+    required String activeGameweek,
     required List<String> availableChips,
     required String activeChip,
     required Map players,
@@ -26,7 +26,9 @@ abstract class MyTeamDto implements _$MyTeamDto {
 
     return MyTeamDto(
       teamName: myTeam.teamName.isValid() ? myTeam.teamName.getOrCrash() : '',
-      gameweek: myTeam.gameweek.isValid() ? myTeam.gameweek.getOrCrash() : '',
+      activeGameweek: myTeam.activeGameweek.isValid()
+          ? myTeam.activeGameweek.getOrCrash()
+          : '',
       availableChips: availableChipsStr,
       activeChip:
           myTeam.activeChip.isValid() ? myTeam.activeChip.getOrCrash() : '',
@@ -38,7 +40,7 @@ abstract class MyTeamDto implements _$MyTeamDto {
     return MyTeam(
       activeChip: Chip(activeChip),
       availableChips: AvailableChips(availableChips, activeChip),
-      gameweek: Gameweek(gameweek),
+      activeGameweek: Gameweek(activeGameweek),
       teamName: TeamName(teamName),
     );
   }

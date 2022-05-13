@@ -23,11 +23,12 @@ class MyTeamRepository implements IMyTeamRepository {
   Utility utility = Utility();
 
   @override
-  Future<Either<MyTeamFailure, MyTeam>> getUserTeam(String userId) async {
+  Future<Either<MyTeamFailure, MyTeam>> getUserTeam(
+      String userId, gameweekId) async {
     if (await utility.hasInternetConnection()) {
-      return myTeamRemoteDataProvider.getUserTeam(userId);
+      return myTeamRemoteDataProvider.getUserTeam(userId, gameweekId);
     } else {
-      return myTeamLocalDataProvider.getUserTeam(userId);
+      return myTeamLocalDataProvider.getUserTeam(userId, gameweekId);
     }
   }
 

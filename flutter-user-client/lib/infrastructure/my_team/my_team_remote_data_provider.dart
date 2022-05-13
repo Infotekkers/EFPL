@@ -11,8 +11,10 @@ class MyTeamRemoteDataProvider {
 
   MyTeamRemoteDataProvider();
 
-  Future<Either<MyTeamFailure, MyTeam>> getUserTeam(String userId) async {
-    final Uri url = Uri.parse("$_baseUrl/user/fetchOne/$userId");
+  Future<Either<MyTeamFailure, MyTeam>> getUserTeam(
+      String userId, String gameweekId) async {
+    final Uri url =
+        Uri.parse("$_baseUrl/user/fetchUserTeam/$userId/$gameweekId");
 
     try {
       final response = await client!.get(url);

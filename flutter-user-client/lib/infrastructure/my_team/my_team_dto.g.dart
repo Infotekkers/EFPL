@@ -8,7 +8,7 @@ part of 'my_team_dto.dart';
 
 _$_MyTeamDto _$$_MyTeamDtoFromJson(Map<String, dynamic> json) => _$_MyTeamDto(
       teamName: json['teamName'] as String,
-      gameweek: json['gameweek'] as String,
+      activeGameweek: json['activeGameweek'] as String,
       availableChips: (json['availableChips'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -19,7 +19,7 @@ _$_MyTeamDto _$$_MyTeamDtoFromJson(Map<String, dynamic> json) => _$_MyTeamDto(
 Map<String, dynamic> _$$_MyTeamDtoToJson(_$_MyTeamDto instance) =>
     <String, dynamic>{
       'teamName': instance.teamName,
-      'gameweek': instance.gameweek,
+      'activeGameweek': instance.activeGameweek,
       'availableChips': instance.availableChips,
       'activeChip': instance.activeChip,
       'players': instance.players,

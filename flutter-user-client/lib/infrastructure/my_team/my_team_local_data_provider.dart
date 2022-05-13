@@ -3,7 +3,8 @@ import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/my_team_failures.dart';
 
 class MyTeamLocalDataProvider {
-  Future<Either<MyTeamFailure, MyTeam>> getUserTeam(String userId) {
+  Future<Either<MyTeamFailure, MyTeam>> getUserTeam(
+      String userId, String gameweekId) {
     // TODO: implement getUserTeam
     throw UnimplementedError();
   }

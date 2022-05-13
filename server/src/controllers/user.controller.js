@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Gameweek = require("../models/GameWeek");
+const Player = require("../models/Player");
 const validateTeam = require("../utils/validators").validateTeam;
 const pointDeductor = require("../utils/helpers").pointDeductor;
 const secretKey = process.env.JWT_SECRET;
@@ -107,6 +108,37 @@ const fetchOneUser = asyncHandler(async (req, res) => {
   }
   res.user = user;
   res.json(res.user);
+});
+
+const fetchUserTeam = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).lean();
+  if (user == null) {
+    return res.status(404).json({ messaage: "No user found" });
+  }
+
+  const team = user.team[req.params.gw - 1];
+
+  for (const playerId in team.players) {
+    const player = await Player.findOne(
+      { playerId },
+      {
+        playerName: 1,
+        position: 1,
+      }
+    );
+    team.players[playerId].name = player?.playerName;
+    team.players[playerId].position = player?.position;
+  }
+
+  const response = {
+    teamName: user.teamName,
+    activeGameweek: req.params.gw,
+    availableChips: user.availableChips,
+    activeChip: team.activeChip,
+    players: team.players,
+  };
+
+  res.status(200).json(response);
 });
 
 const updateUser = asyncHandler(async (req, res) => {
@@ -267,6 +299,7 @@ module.exports = {
   login,
   fetchUsers,
   fetchOneUser,
+  fetchUserTeam,
   updateUser,
   deleteUser,
   requestReset,

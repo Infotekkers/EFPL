@@ -7,7 +7,7 @@ part 'my_team.freezed.dart';
 abstract class MyTeam with _$MyTeam {
   const factory MyTeam({
     required TeamName teamName,
-    required Gameweek gameweek,
+    required Gameweek activeGameweek,
     required AvailableChips availableChips,
     required Chip activeChip,
     @Default({'gk': [], 'def': [], 'mid': [], 'att': [], 'sub': []})

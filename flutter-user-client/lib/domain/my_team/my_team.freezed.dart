@@ -19,7 +19,7 @@ class _$MyTeamTearOff {
 
   _MyTeam call(
       {required TeamName teamName,
-      required Gameweek gameweek,
+      required Gameweek activeGameweek,
       required AvailableChips availableChips,
       required Chip activeChip,
       Map<String, dynamic> players = const {
@@ -31,7 +31,7 @@ class _$MyTeamTearOff {
       }}) {
     return _MyTeam(
       teamName: teamName,
-      gameweek: gameweek,
+      activeGameweek: activeGameweek,
       availableChips: availableChips,
       activeChip: activeChip,
       players: players,
@@ -45,7 +45,7 @@ const $MyTeam = _$MyTeamTearOff();
 /// @nodoc
 mixin _$MyTeam {
   TeamName get teamName => throw _privateConstructorUsedError;
-  Gameweek get gameweek => throw _privateConstructorUsedError;
+  Gameweek get activeGameweek => throw _privateConstructorUsedError;
   AvailableChips get availableChips => throw _privateConstructorUsedError;
   Chip get activeChip => throw _privateConstructorUsedError;
   Map<String, dynamic> get players => throw _privateConstructorUsedError;
@@ -60,7 +60,7 @@ abstract class $MyTeamCopyWith<$Res> {
       _$MyTeamCopyWithImpl<$Res>;
   $Res call(
       {TeamName teamName,
-      Gameweek gameweek,
+      Gameweek activeGameweek,
       AvailableChips availableChips,
       Chip activeChip,
       Map<String, dynamic> players});
@@ -77,7 +77,7 @@ class _$MyTeamCopyWithImpl<$Res> implements $MyTeamCopyWith<$Res> {
   @override
   $Res call({
     Object? teamName = freezed,
-    Object? gameweek = freezed,
+    Object? activeGameweek = freezed,
     Object? availableChips = freezed,
     Object? activeChip = freezed,
     Object? players = freezed,
@@ -87,9 +87,9 @@ class _$MyTeamCopyWithImpl<$Res> implements $MyTeamCopyWith<$Res> {
           ? _value.teamName
           : teamName // ignore: cast_nullable_to_non_nullable
               as TeamName,
-      gameweek: gameweek == freezed
-          ? _value.gameweek
-          : gameweek // ignore: cast_nullable_to_non_nullable
+      activeGameweek: activeGameweek == freezed
+          ? _value.activeGameweek
+          : activeGameweek // ignore: cast_nullable_to_non_nullable
               as Gameweek,
       availableChips: availableChips == freezed
           ? _value.availableChips
@@ -114,7 +114,7 @@ abstract class _$MyTeamCopyWith<$Res> implements $MyTeamCopyWith<$Res> {
   @override
   $Res call(
       {TeamName teamName,
-      Gameweek gameweek,
+      Gameweek activeGameweek,
       AvailableChips availableChips,
       Chip activeChip,
       Map<String, dynamic> players});
@@ -132,7 +132,7 @@ class __$MyTeamCopyWithImpl<$Res> extends _$MyTeamCopyWithImpl<$Res>
   @override
   $Res call({
     Object? teamName = freezed,
-    Object? gameweek = freezed,
+    Object? activeGameweek = freezed,
     Object? availableChips = freezed,
     Object? activeChip = freezed,
     Object? players = freezed,
@@ -142,9 +142,9 @@ class __$MyTeamCopyWithImpl<$Res> extends _$MyTeamCopyWithImpl<$Res>
           ? _value.teamName
           : teamName // ignore: cast_nullable_to_non_nullable
               as TeamName,
-      gameweek: gameweek == freezed
-          ? _value.gameweek
-          : gameweek // ignore: cast_nullable_to_non_nullable
+      activeGameweek: activeGameweek == freezed
+          ? _value.activeGameweek
+          : activeGameweek // ignore: cast_nullable_to_non_nullable
               as Gameweek,
       availableChips: availableChips == freezed
           ? _value.availableChips
@@ -167,7 +167,7 @@ class __$MyTeamCopyWithImpl<$Res> extends _$MyTeamCopyWithImpl<$Res>
 class _$_MyTeam implements _MyTeam {
   const _$_MyTeam(
       {required this.teamName,
-      required this.gameweek,
+      required this.activeGameweek,
       required this.availableChips,
       required this.activeChip,
       this.players = const {
@@ -181,7 +181,7 @@ class _$_MyTeam implements _MyTeam {
   @override
   final TeamName teamName;
   @override
-  final Gameweek gameweek;
+  final Gameweek activeGameweek;
   @override
   final AvailableChips availableChips;
   @override
@@ -192,7 +192,7 @@ class _$_MyTeam implements _MyTeam {
 
   @override
   String toString() {
-    return 'MyTeam(teamName: $teamName, gameweek: $gameweek, availableChips: $availableChips, activeChip: $activeChip, players: $players)';
+    return 'MyTeam(teamName: $teamName, activeGameweek: $activeGameweek, availableChips: $availableChips, activeChip: $activeChip, players: $players)';
   }
 
   @override
@@ -201,7 +201,8 @@ class _$_MyTeam implements _MyTeam {
         (other.runtimeType == runtimeType &&
             other is _MyTeam &&
             const DeepCollectionEquality().equals(other.teamName, teamName) &&
-            const DeepCollectionEquality().equals(other.gameweek, gameweek) &&
+            const DeepCollectionEquality()
+                .equals(other.activeGameweek, activeGameweek) &&
             const DeepCollectionEquality()
                 .equals(other.availableChips, availableChips) &&
             const DeepCollectionEquality()
@@ -213,7 +214,7 @@ class _$_MyTeam implements _MyTeam {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(teamName),
-      const DeepCollectionEquality().hash(gameweek),
+      const DeepCollectionEquality().hash(activeGameweek),
       const DeepCollectionEquality().hash(availableChips),
       const DeepCollectionEquality().hash(activeChip),
       const DeepCollectionEquality().hash(players));
@@ -227,7 +228,7 @@ class _$_MyTeam implements _MyTeam {
 abstract class _MyTeam implements MyTeam {
   const factory _MyTeam(
       {required TeamName teamName,
-      required Gameweek gameweek,
+      required Gameweek activeGameweek,
       required AvailableChips availableChips,
       required Chip activeChip,
       Map<String, dynamic> players}) = _$_MyTeam;
@@ -235,7 +236,7 @@ abstract class _MyTeam implements MyTeam {
   @override
   TeamName get teamName;
   @override
-  Gameweek get gameweek;
+  Gameweek get activeGameweek;
   @override
   AvailableChips get availableChips;
   @override

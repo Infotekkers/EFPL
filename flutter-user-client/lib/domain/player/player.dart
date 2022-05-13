@@ -7,7 +7,7 @@ part 'player.freezed.dart';
 abstract class Player with _$Player {
   const factory Player({
     required Name name,
-    required Id id,
+    required Id playerId,
     required EplTeamId eplTeamId,
     required Position position,
     required Multiplier multiplier,

@@ -19,7 +19,7 @@ class _$PlayerTearOff {
 
   _Player call(
       {required Name name,
-      required Id id,
+      required Id playerId,
       required EplTeamId eplTeamId,
       required Position position,
       required Multiplier multiplier,
@@ -27,7 +27,7 @@ class _$PlayerTearOff {
       required IsViceCaptain isViceCaptain}) {
     return _Player(
       name: name,
-      id: id,
+      playerId: playerId,
       eplTeamId: eplTeamId,
       position: position,
       multiplier: multiplier,
@@ -43,7 +43,7 @@ const $Player = _$PlayerTearOff();
 /// @nodoc
 mixin _$Player {
   Name get name => throw _privateConstructorUsedError;
-  Id get id => throw _privateConstructorUsedError;
+  Id get playerId => throw _privateConstructorUsedError;
   EplTeamId get eplTeamId => throw _privateConstructorUsedError;
   Position get position => throw _privateConstructorUsedError;
   Multiplier get multiplier => throw _privateConstructorUsedError;
@@ -60,7 +60,7 @@ abstract class $PlayerCopyWith<$Res> {
       _$PlayerCopyWithImpl<$Res>;
   $Res call(
       {Name name,
-      Id id,
+      Id playerId,
       EplTeamId eplTeamId,
       Position position,
       Multiplier multiplier,
@@ -79,7 +79,7 @@ class _$PlayerCopyWithImpl<$Res> implements $PlayerCopyWith<$Res> {
   @override
   $Res call({
     Object? name = freezed,
-    Object? id = freezed,
+    Object? playerId = freezed,
     Object? eplTeamId = freezed,
     Object? position = freezed,
     Object? multiplier = freezed,
@@ -91,9 +91,9 @@ class _$PlayerCopyWithImpl<$Res> implements $PlayerCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as Name,
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      playerId: playerId == freezed
+          ? _value.playerId
+          : playerId // ignore: cast_nullable_to_non_nullable
               as Id,
       eplTeamId: eplTeamId == freezed
           ? _value.eplTeamId
@@ -126,7 +126,7 @@ abstract class _$PlayerCopyWith<$Res> implements $PlayerCopyWith<$Res> {
   @override
   $Res call(
       {Name name,
-      Id id,
+      Id playerId,
       EplTeamId eplTeamId,
       Position position,
       Multiplier multiplier,
@@ -146,7 +146,7 @@ class __$PlayerCopyWithImpl<$Res> extends _$PlayerCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
-    Object? id = freezed,
+    Object? playerId = freezed,
     Object? eplTeamId = freezed,
     Object? position = freezed,
     Object? multiplier = freezed,
@@ -158,9 +158,9 @@ class __$PlayerCopyWithImpl<$Res> extends _$PlayerCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as Name,
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      playerId: playerId == freezed
+          ? _value.playerId
+          : playerId // ignore: cast_nullable_to_non_nullable
               as Id,
       eplTeamId: eplTeamId == freezed
           ? _value.eplTeamId
@@ -191,7 +191,7 @@ class __$PlayerCopyWithImpl<$Res> extends _$PlayerCopyWithImpl<$Res>
 class _$_Player implements _Player {
   const _$_Player(
       {required this.name,
-      required this.id,
+      required this.playerId,
       required this.eplTeamId,
       required this.position,
       required this.multiplier,
@@ -201,7 +201,7 @@ class _$_Player implements _Player {
   @override
   final Name name;
   @override
-  final Id id;
+  final Id playerId;
   @override
   final EplTeamId eplTeamId;
   @override
@@ -215,7 +215,7 @@ class _$_Player implements _Player {
 
   @override
   String toString() {
-    return 'Player(name: $name, id: $id, eplTeamId: $eplTeamId, position: $position, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain)';
+    return 'Player(name: $name, playerId: $playerId, eplTeamId: $eplTeamId, position: $position, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain)';
   }
 
   @override
@@ -224,7 +224,7 @@ class _$_Player implements _Player {
         (other.runtimeType == runtimeType &&
             other is _Player &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.playerId, playerId) &&
             const DeepCollectionEquality().equals(other.eplTeamId, eplTeamId) &&
             const DeepCollectionEquality().equals(other.position, position) &&
             const DeepCollectionEquality()
@@ -238,7 +238,7 @@ class _$_Player implements _Player {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(playerId),
       const DeepCollectionEquality().hash(eplTeamId),
       const DeepCollectionEquality().hash(position),
       const DeepCollectionEquality().hash(multiplier),
@@ -254,7 +254,7 @@ class _$_Player implements _Player {
 abstract class _Player implements Player {
   const factory _Player(
       {required Name name,
-      required Id id,
+      required Id playerId,
       required EplTeamId eplTeamId,
       required Position position,
       required Multiplier multiplier,
@@ -264,7 +264,7 @@ abstract class _Player implements Player {
   @override
   Name get name;
   @override
-  Id get id;
+  Id get playerId;
   @override
   EplTeamId get eplTeamId;
   @override
