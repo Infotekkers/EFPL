@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/value_failures.dart';
@@ -7,6 +9,7 @@ import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
 part 'transfer_event.dart';
@@ -143,7 +146,8 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             (player) => player.playerId == state.transferOutPlayerId);
 
         // find player to move in
-        UserPlayer playerToTransferIn = state.selectedPlayerReplacements
+        List<UserPlayer> allPlayers = state.selectedPlayerReplacements;
+        UserPlayer playerToTransferIn = allPlayers
             .where(
               (player) => player.playerId == event.transferInPlayerId,
             )
@@ -202,51 +206,79 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       },
     );
 
-    on<_cancelTransfer>((event, emit) {
-      // start spinner
-      emit(state.copyWith(
-        isLoading: true,
-      ));
+    on<_cancelTransfer>((event, emit) async {
+      var efplCache = await Hive.openBox('efplCache');
+      // all players
+      List allPlayers = efplCache.get("allPlayers");
 
-      // reverse user team from map
-      List<UserPlayer> allUserPlayers = state.userTeam.allUserPlayers;
-      List<UserPlayer> allPlayers = state.selectedPlayerReplacements;
-      List swappedPlayerIdsList = state.swappedPlayerIdsList;
+      // all user players
+      List<UserPlayer> allNewUserPlayers = state.userTeam.allUserPlayers;
+
+      // all swapped info
+      List<dynamic> allSwappedPlayersIdsList = state.swappedPlayerIdsList;
+
+      // transfer count
       int transferCount = state.transfersMadeCount;
 
-      // reverse price
-      for (var swappedPair in swappedPlayerIdsList) {
-        String playerToMoveInId = (swappedPair.keys.toList())[0].toString();
-        String playerToCancelId = swappedPair[playerToMoveInId].toString();
+      for (var i = 0; i < allSwappedPlayersIdsList.length; i++) {
+        String playerToTransferInId =
+            allSwappedPlayersIdsList[i].keys.toList()[0].toString();
 
-        int indexOfPlayerToCancel = 0;
-        // find index of player to cancel
-        for (var i = 0; i < allUserPlayers.length; i++) {
-          if (allUserPlayers[i].playerId == playerToCancelId) {
-            indexOfPlayerToCancel = i;
+        String playerToTransferOutId =
+            allSwappedPlayersIdsList[i].values.toList()[0].toString();
+
+        // // find index of player to transfer out
+        int indexOfPlayerToTransferOut = 0;
+        for (var i = 0; i < allNewUserPlayers.length; i++) {
+          if (allNewUserPlayers[i].playerId.toString() ==
+              playerToTransferOutId.toString()) {
+            indexOfPlayerToTransferOut = i;
           }
         }
 
-        // remove player
-        allUserPlayers
-            .removeWhere((player) => player.playerId == playerToCancelId);
-
-        // find player to add
-        UserPlayer playerToMoveIn = allPlayers
-            .where((player) => player.playerId == playerToMoveInId)
+        // remove player to transfer out from user team
+        allNewUserPlayers.removeAt(indexOfPlayerToTransferOut);
+        // find new player to add
+        dynamic playerToTransferInJson = allPlayers
+            .where(
+              (player) => player['playerId'].toString() == playerToTransferInId,
+            )
             .toList()[0];
 
-        // add player
-        allUserPlayers.insert(indexOfPlayerToCancel, playerToMoveIn);
+        // change json to user team
+        UserPlayer playerToTransferIn = UserPlayer(
+          playerId: (playerToTransferInJson['playerId']).toString(),
+          playerName: PlayerName(
+            value: playerToTransferInJson['playerName'],
+          ),
+          currentPrice: PlayerPrice(
+            value: playerToTransferInJson['currentPrice'].toDouble(),
+          ),
+          playerPosition: PlayerPosition(
+            value: playerToTransferInJson['position'],
+          ),
+          eplTeamId: PlayerEplTeam(
+            value: playerToTransferInJson['eplTeamId'],
+          ),
+          multiplier: 1,
+          isCaptain: false,
+          isViceCaptain: false,
+        );
+
+        // add player to user team
+        allNewUserPlayers.insert(
+          indexOfPlayerToTransferOut,
+          playerToTransferIn,
+        );
 
         // reduce transfer count
         transferCount = transferCount - 1;
       }
 
-      // update team
+      // update team players
       UserTeam newUserTeam = UserTeam(
         gameWeekId: state.userTeam.gameWeekId,
-        allUserPlayers: allUserPlayers,
+        allUserPlayers: allNewUserPlayers,
         freeTransfers: 1,
         deduction:
             state.userTeam.deduction == 0 ? 0 : state.userTeam.deduction + 4,
@@ -258,7 +290,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
       // calculate player cost
       double newPlayerCostSum = 0.0;
-      for (var player in allUserPlayers) {
+      for (var player in allNewUserPlayers) {
         double currentPlayerCost = player.currentPrice.value.fold(
           (l) => 0,
           (r) => r,
@@ -279,10 +311,14 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
     });
 
     on<_cancelOneTransfer>(
-      (event, emit) {
+      (event, emit) async {
+        var efplCache = await Hive.openBox('efplCache');
+        // all players
+        List allPlayers = efplCache.get("allPlayers");
         List swappedPlayerIdList = state.swappedPlayerIdsList;
+
         List transferredInPlayerIdList = state.transferredInPlayerIdList;
-        List<UserPlayer> allPlayers = state.selectedPlayerReplacements;
+
         List<UserPlayer> allUserPlayers = state.userTeam.allUserPlayers;
 
         // get swapped info for player to cancel
@@ -301,29 +337,41 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           }
         }
 
-        // remove player
-        allUserPlayers.removeWhere(
-          (player) => player.playerId == event.playerToCancelId,
-        );
+        //  remove player
+        allUserPlayers.removeAt(indexOfPlayerToCancel);
 
-        print("************************************" + " " + playerToAddId);
-
-        for (var element in state.selectedPlayerReplacements) {
-          if (element.playerId == playerToAddId) {
-            print(element);
-          }
-        }
-
-        // get player to add
-        UserPlayer playerToAdd = state.selectedPlayerReplacements
+        // find new player to add
+        dynamic playerToTransferInJson = allPlayers
             .where(
-              (player) =>
-                  player.playerId.toString() == playerToAddId.toString(),
+              (player) => player['playerId'].toString() == playerToAddId,
             )
             .toList()[0];
 
-        // add player
-        allUserPlayers.insert(indexOfPlayerToCancel, playerToAdd);
+        // change json to user team
+        UserPlayer playerToTransferIn = UserPlayer(
+          playerId: (playerToTransferInJson['playerId']).toString(),
+          playerName: PlayerName(
+            value: playerToTransferInJson['playerName'],
+          ),
+          currentPrice: PlayerPrice(
+            value: playerToTransferInJson['currentPrice'].toDouble(),
+          ),
+          playerPosition: PlayerPosition(
+            value: playerToTransferInJson['position'],
+          ),
+          eplTeamId: PlayerEplTeam(
+            value: playerToTransferInJson['eplTeamId'],
+          ),
+          multiplier: 1,
+          isCaptain: false,
+          isViceCaptain: false,
+        );
+
+        // add player to user team
+        allUserPlayers.insert(
+          indexOfPlayerToCancel,
+          playerToTransferIn,
+        );
 
         // create new team
         UserTeam newUserTeam = UserTeam(
@@ -338,7 +386,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           teamName: state.userTeam.teamName,
         );
 
-        // calculate price
+        // calculate cost
         double newPlayersCostSum = 0.0;
         for (var player in allUserPlayers) {
           double currentPlayerCost = player.currentPrice.value.fold(
@@ -350,12 +398,13 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         }
 
         swappedPlayerIdList.removeWhere(
-            (swapped) => swapped.keys.toList()[0].toString() == playerToAddId);
+          (swapped) => swapped.keys.toList()[0].toString() == playerToAddId,
+        );
 
-        transferredInPlayerIdList
-            .removeWhere((element) => element == event.playerToCancelId);
+        transferredInPlayerIdList.removeWhere(
+          (element) => element == event.playerToCancelId,
+        );
 
-        // emit final state
         emit(
           state.copyWith(
             userTeam: newUserTeam,

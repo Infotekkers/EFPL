@@ -79,7 +79,8 @@ class ApiTransferRepository implements ITransferRepository {
       {required String playerPosition}) async {
     HTTPInstance instance = getIt<HTTPInstance>();
     try {
-      List<UserPlayer> allPlayers = [];
+      List allPlayers = [];
+      List<UserPlayer> allPlayersInPosition = [];
       var apiResponse = await instance.client
           .get(
             Uri.parse('$_baseURL/players/position/$playerPosition'),
@@ -111,22 +112,27 @@ class ApiTransferRepository implements ITransferRepository {
             isViceCaptain: false,
           );
 
-          allPlayers.add(userPlayer);
+          String currentPlayerPosition = userPlayer.playerPosition.value.fold(
+            (l) => '',
+            (r) => r,
+          );
+
+          if (currentPlayerPosition == playerPosition) {
+            allPlayersInPosition.add(userPlayer);
+          }
+
+          allPlayers.add(parsedResponseBody[i]);
 
           // add to cache
           try {
             var efplCache = await Hive.openBox('efplCache');
-            List? cachedPlayers = efplCache.get("players");
-
-            // if (cachedPlayers!.isNotEmpty) {
-            //   efplCache.put("players", allPlayers);
-            // }
+            efplCache.put("allPlayers", allPlayers);
           } catch (e) {
             print(e);
           }
         }
       }
-      return right(allPlayers);
+      return right(allPlayersInPosition);
     } catch (e) {
       print(e);
       return left(
