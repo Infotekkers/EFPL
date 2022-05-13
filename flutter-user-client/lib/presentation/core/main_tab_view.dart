@@ -8,7 +8,7 @@ import 'package:efpl/presentation/points/points_view.dart';
 import 'package:efpl/presentation/settings/settings_view.dart';
 import 'package:efpl/presentation/stats/stats_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
-import 'package:efpl/presentation/transfers/transfers_view.dart';
+import 'package:efpl/presentation/transfers/transfers_view_main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';

@@ -45,6 +45,21 @@ class ApiTransferRepository implements ITransferRepository {
       if (parseResponseTeam['players'].length > 0) {
         List allPlayers = parseResponseTeam['players'];
         for (var i = 0; i < allPlayers.length; i++) {
+          Map<String, dynamic> availability = {
+            "injuryStatus": "none",
+            "injuryMessage": "none"
+          };
+
+          if (parseResponseTeam['players'][i]['availability'] != null) {
+            availability['injuryStatus'] =
+                parseResponseTeam['players'][i]['availability']['injuryStatus'];
+
+            availability['injuryMessage'] = parseResponseTeam['players'][i]
+                ['availability']['injuryMessage'];
+          }
+
+          allPlayers[i]['availability'] = availability;
+
           final UserPlayerDTO userPlayerDTO =
               UserPlayerDTO.fromJson(allPlayers[i]);
 
@@ -93,6 +108,16 @@ class ApiTransferRepository implements ITransferRepository {
         List<dynamic> parsedResponseBody = jsonDecode(apiResponse.body);
 
         for (var i = 0; i < parsedResponseBody.length; i++) {
+          Map availability = {"injuryStatus": "", "injuryMessage": ""};
+
+          if (parsedResponseBody[i]['availability'] != null) {
+            availability['injuryStatus'] =
+                parsedResponseBody[i]['availability']['injuryStatus'];
+
+            availability['injuryMessage'] =
+                parsedResponseBody[i]['availability']['injuryMessage'];
+          }
+
           UserPlayer userPlayer = UserPlayer(
             playerId: (parsedResponseBody[i]['playerId']).toString(),
             playerName: PlayerName(
@@ -110,6 +135,7 @@ class ApiTransferRepository implements ITransferRepository {
             multiplier: 1,
             isCaptain: false,
             isViceCaptain: false,
+            availability: PlayerAvailability(value: availability),
           );
 
           String currentPlayerPosition = userPlayer.playerPosition.value.fold(
@@ -142,9 +168,62 @@ class ApiTransferRepository implements ITransferRepository {
   }
 
   @override
-  Future<Either<dynamic, List<UserPlayer>>> saveUserPlayers(
-      {required int gameWeekId}) {
+  Future<Either<dynamic, bool>> saveUserPlayers(
+      {required int gameWeekId, required UserTeam userTeam}) async {
     // TODO: implement saveUserPlayers
-    throw UnimplementedError();
+
+    const userID = "627a7798bed9e567269bb8a9";
+
+    try {
+      HTTPInstance instance = getIt<HTTPInstance>();
+
+      var apiResponse = await instance.client.patch(
+        Uri.parse('$_baseURL/user/team/$userID/$gameWeekId'),
+        body: {
+          "incomingTeam": jsonEncode(
+            userTeamToJson(userTeam: userTeam),
+          ),
+        },
+      ).timeout(
+        const Duration(seconds: 30),
+      );
+
+      if (apiResponse.statusCode == 200) {
+        return right(true);
+      } else {
+        return left(false);
+      }
+    } catch (e) {
+      return left(false);
+    }
   }
+}
+
+Map userTeamToJson({required UserTeam userTeam}) {
+  Map userTeamJson = {};
+
+  // set gameweek id
+  userTeamJson['gameWeekId'] = userTeam.gameWeekId.value.fold(
+    (l) => '',
+    (r) => r,
+  );
+
+  // set free transfers
+  userTeamJson['freeTransfers'] = userTeam.freeTransfers;
+
+  // set deduction
+  userTeamJson['deduction'] = userTeam.deduction;
+
+  // set active chip
+  userTeamJson['activeChip'] = userTeam.activeChip;
+
+  List allPlayerIds = [];
+
+  userTeam.allUserPlayers.forEach((player) {
+    allPlayerIds.add(player.playerId);
+  });
+
+  userTeamJson['allPlayers'] = allPlayerIds;
+
+  return userTeamJson;
 }

@@ -44,17 +44,18 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
       // get team from response
       final UserTeam userTeam = failureOrSuccess.fold(
-          (l) => UserTeam(
-                gameWeekId: GameWeekId(value: 1),
-                allUserPlayers: [],
-                freeTransfers: 0,
-                deduction: 0,
-                activeChip: '',
-                availableChips: [],
-                maxBudget: 0,
-                teamName: "",
-              ),
-          (r) => r);
+        (l) => UserTeam(
+          gameWeekId: GameWeekId(value: 1),
+          allUserPlayers: [],
+          freeTransfers: 0,
+          deduction: 0,
+          activeChip: '',
+          availableChips: [],
+          maxBudget: 0,
+          teamName: "",
+        ),
+        (r) => r,
+      );
 
       // sum cost of all user players
       double playerCostSum = 0.0;
@@ -245,6 +246,16 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             )
             .toList()[0];
 
+        Map availability = {"injuryStatus": "", "injuryMessage": ""};
+
+        if (playerToTransferInJson['availability'] != null) {
+          availability['injuryStatus'] =
+              playerToTransferInJson['availability']['injuryStatus'];
+
+          availability['injuryMessage'] =
+              playerToTransferInJson['availability']['injuryMessage'];
+        }
+
         // change json to user team
         UserPlayer playerToTransferIn = UserPlayer(
           playerId: (playerToTransferInJson['playerId']).toString(),
@@ -263,6 +274,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           multiplier: 1,
           isCaptain: false,
           isViceCaptain: false,
+          availability: PlayerAvailability(value: availability),
         );
 
         // add player to user team
@@ -347,6 +359,16 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             )
             .toList()[0];
 
+        Map availability = {"injuryStatus": "", "injuryMessage": ""};
+
+        if (playerToTransferInJson['availability'] != null) {
+          availability['injuryStatus'] =
+              playerToTransferInJson['availability']['injuryStatus'];
+
+          availability['injuryMessage'] =
+              playerToTransferInJson['availability']['injuryMessage'];
+        }
+
         // change json to user team
         UserPlayer playerToTransferIn = UserPlayer(
           playerId: (playerToTransferInJson['playerId']).toString(),
@@ -365,6 +387,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           multiplier: 1,
           isCaptain: false,
           isViceCaptain: false,
+          availability: PlayerAvailability(value: availability),
         );
 
         // add player to user team
@@ -420,8 +443,94 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       },
     );
 
-    on<_saveUserPlayers>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<_saveUserPlayers>(
+      (event, emit) async {
+        // TODO: implement event handler
+
+        // get team to save
+        UserTeam teamToSave = state.userTeam;
+        List<UserPlayer> allUserPlayers = teamToSave.allUserPlayers;
+
+        // check price
+        double allPlayersCostSum = 0.0;
+        List listOfTeamsFound = [];
+        for (var player in allUserPlayers) {
+          double currentPlayerPrice = player.currentPrice.value.fold(
+            (l) => 0.0,
+            (r) => r,
+          );
+
+          String currentPlayerTeam = player.eplTeamId.value.fold(
+            (l) => '',
+            (r) => r,
+          );
+
+          allPlayersCostSum = allPlayersCostSum + currentPlayerPrice;
+
+          if (!listOfTeamsFound.contains(currentPlayerTeam)) {
+            listOfTeamsFound.add(currentPlayerTeam);
+          }
+        }
+
+        //
+
+        // check team count
+        bool teamCountExceeded = false;
+        String exceededTeamName = "";
+        for (var team in listOfTeamsFound) {
+          List teamCount = allUserPlayers
+              .where(
+                (player) =>
+                    player.eplTeamId.value.fold(
+                      (l) => '',
+                      (r) => r,
+                    ) ==
+                    team,
+              )
+              .toList();
+
+          if (teamCount.length > 3) {
+            teamCountExceeded = true;
+            exceededTeamName = team;
+          }
+        }
+
+        // check team length
+        if (allUserPlayers.length != 15) {
+          print("Lenght Issue");
+        }
+
+        if (allPlayersCostSum > state.userTeam.maxBudget) {
+          print("Excedded");
+        }
+
+        if (teamCountExceeded) {
+          print("object");
+        } else {
+          // if transfer made
+          if (state.transfersMade) {
+            //save team to api from api
+            final Either<dynamic, bool> failureOrSuccess =
+                await _iTransferRepository.saveUserPlayers(
+              userTeam: state.userTeam,
+              gameWeekId: state.userTeam.gameWeekId.value.fold(
+                (l) => 0,
+                (r) => r,
+              ),
+            );
+
+            emit(
+              state.copyWith(
+                isLoading: false,
+                // transfersMade: false,
+                // transfersMadeCount: 0,
+                // transferredInPlayerIdList: [],
+                // swappedPlayerIdsList: [],
+              ),
+            );
+          }
+        }
+      },
+    );
   }
 }

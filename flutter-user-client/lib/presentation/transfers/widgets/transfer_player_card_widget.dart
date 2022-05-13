@@ -17,11 +17,6 @@ class UserPlayerCard extends StatelessWidget {
     final _transferBloc = getIt<TransferBloc>();
     return InkWell(
       onTap: () {
-        // getIt<TransferBloc>().add(
-        //   TransferEvent.transferUserPlayer(
-        //     transferInPlayerId: currentPlayer.playerId,
-        //   ),
-        // );
         showModalBottomSheet(
           context: context,
           builder: (builder) {
@@ -144,6 +139,14 @@ class UserPlayerCard extends StatelessWidget {
                     height: 60,
                     color: Colors.blue,
                     margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+                    child: Center(
+                      child: Text(
+                        currentPlayer.availability.value.fold(
+                          (l) => '',
+                          (r) => r['injuryStatus'].toString(),
+                        ),
+                      ),
+                    ),
                   ),
 
                   // Name

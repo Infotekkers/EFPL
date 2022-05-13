@@ -25,7 +25,8 @@ class _$UserPlayerTearOff {
       required PlayerEplTeam eplTeamId,
       required int multiplier,
       required bool isCaptain,
-      required bool isViceCaptain}) {
+      required bool isViceCaptain,
+      required PlayerAvailability availability}) {
     return _UserPlayer(
       playerId: playerId,
       playerName: playerName,
@@ -35,6 +36,7 @@ class _$UserPlayerTearOff {
       multiplier: multiplier,
       isCaptain: isCaptain,
       isViceCaptain: isViceCaptain,
+      availability: availability,
     );
   }
 }
@@ -52,6 +54,7 @@ mixin _$UserPlayer {
   int get multiplier => throw _privateConstructorUsedError;
   bool get isCaptain => throw _privateConstructorUsedError;
   bool get isViceCaptain => throw _privateConstructorUsedError;
+  PlayerAvailability get availability => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserPlayerCopyWith<UserPlayer> get copyWith =>
@@ -71,7 +74,8 @@ abstract class $UserPlayerCopyWith<$Res> {
       PlayerEplTeam eplTeamId,
       int multiplier,
       bool isCaptain,
-      bool isViceCaptain});
+      bool isViceCaptain,
+      PlayerAvailability availability});
 }
 
 /// @nodoc
@@ -92,6 +96,7 @@ class _$UserPlayerCopyWithImpl<$Res> implements $UserPlayerCopyWith<$Res> {
     Object? multiplier = freezed,
     Object? isCaptain = freezed,
     Object? isViceCaptain = freezed,
+    Object? availability = freezed,
   }) {
     return _then(_value.copyWith(
       playerId: playerId == freezed
@@ -126,6 +131,10 @@ class _$UserPlayerCopyWithImpl<$Res> implements $UserPlayerCopyWith<$Res> {
           ? _value.isViceCaptain
           : isViceCaptain // ignore: cast_nullable_to_non_nullable
               as bool,
+      availability: availability == freezed
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as PlayerAvailability,
     ));
   }
 }
@@ -144,7 +153,8 @@ abstract class _$UserPlayerCopyWith<$Res> implements $UserPlayerCopyWith<$Res> {
       PlayerEplTeam eplTeamId,
       int multiplier,
       bool isCaptain,
-      bool isViceCaptain});
+      bool isViceCaptain,
+      PlayerAvailability availability});
 }
 
 /// @nodoc
@@ -167,6 +177,7 @@ class __$UserPlayerCopyWithImpl<$Res> extends _$UserPlayerCopyWithImpl<$Res>
     Object? multiplier = freezed,
     Object? isCaptain = freezed,
     Object? isViceCaptain = freezed,
+    Object? availability = freezed,
   }) {
     return _then(_UserPlayer(
       playerId: playerId == freezed
@@ -201,6 +212,10 @@ class __$UserPlayerCopyWithImpl<$Res> extends _$UserPlayerCopyWithImpl<$Res>
           ? _value.isViceCaptain
           : isViceCaptain // ignore: cast_nullable_to_non_nullable
               as bool,
+      availability: availability == freezed
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as PlayerAvailability,
     ));
   }
 }
@@ -216,7 +231,8 @@ class _$_UserPlayer implements _UserPlayer {
       required this.eplTeamId,
       required this.multiplier,
       required this.isCaptain,
-      required this.isViceCaptain});
+      required this.isViceCaptain,
+      required this.availability});
 
   @override
   final String playerId;
@@ -234,10 +250,12 @@ class _$_UserPlayer implements _UserPlayer {
   final bool isCaptain;
   @override
   final bool isViceCaptain;
+  @override
+  final PlayerAvailability availability;
 
   @override
   String toString() {
-    return 'UserPlayer(playerId: $playerId, playerName: $playerName, currentPrice: $currentPrice, playerPosition: $playerPosition, eplTeamId: $eplTeamId, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain)';
+    return 'UserPlayer(playerId: $playerId, playerName: $playerName, currentPrice: $currentPrice, playerPosition: $playerPosition, eplTeamId: $eplTeamId, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain, availability: $availability)';
   }
 
   @override
@@ -257,7 +275,9 @@ class _$_UserPlayer implements _UserPlayer {
                 .equals(other.multiplier, multiplier) &&
             const DeepCollectionEquality().equals(other.isCaptain, isCaptain) &&
             const DeepCollectionEquality()
-                .equals(other.isViceCaptain, isViceCaptain));
+                .equals(other.isViceCaptain, isViceCaptain) &&
+            const DeepCollectionEquality()
+                .equals(other.availability, availability));
   }
 
   @override
@@ -270,7 +290,8 @@ class _$_UserPlayer implements _UserPlayer {
       const DeepCollectionEquality().hash(eplTeamId),
       const DeepCollectionEquality().hash(multiplier),
       const DeepCollectionEquality().hash(isCaptain),
-      const DeepCollectionEquality().hash(isViceCaptain));
+      const DeepCollectionEquality().hash(isViceCaptain),
+      const DeepCollectionEquality().hash(availability));
 
   @JsonKey(ignore: true)
   @override
@@ -287,7 +308,8 @@ abstract class _UserPlayer implements UserPlayer {
       required PlayerEplTeam eplTeamId,
       required int multiplier,
       required bool isCaptain,
-      required bool isViceCaptain}) = _$_UserPlayer;
+      required bool isViceCaptain,
+      required PlayerAvailability availability}) = _$_UserPlayer;
 
   @override
   String get playerId;
@@ -305,6 +327,8 @@ abstract class _UserPlayer implements UserPlayer {
   bool get isCaptain;
   @override
   bool get isViceCaptain;
+  @override
+  PlayerAvailability get availability;
   @override
   @JsonKey(ignore: true)
   _$UserPlayerCopyWith<_UserPlayer> get copyWith =>

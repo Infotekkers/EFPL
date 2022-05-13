@@ -8,6 +8,7 @@ import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/transfers/widgets/user_player_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -207,8 +208,21 @@ class TransfersView extends StatelessWidget {
                               children: [
                                 // Save Button
                                 InkWell(
-                                  onTap: () {
-                                    print("Saving state to db");
+                                  onTap: () async {
+                                    // get all players
+                                    var efplCache =
+                                        await Hive.openBox('efplCache');
+                                    List allPlayers =
+                                        efplCache.get("allPlayers");
+
+                                    // navigate
+                                    Navigator.pushNamed(
+                                      context,
+                                      "/transfer/confirm",
+                                      arguments: {
+                                        "allPlayers": allPlayers,
+                                      },
+                                    );
                                   },
                                   child: Container(
                                     width: 50,

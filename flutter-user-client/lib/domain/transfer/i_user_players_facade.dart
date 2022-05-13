@@ -12,7 +12,8 @@ abstract class ITransferRepository {
     required String playerPosition,
   });
 
-  Future<Either<dynamic, List<UserPlayer>>> saveUserPlayers({
+  Future<Either<dynamic, bool>> saveUserPlayers({
     required int gameWeekId,
+    required UserTeam userTeam,
   });
 }

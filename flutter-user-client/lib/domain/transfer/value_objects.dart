@@ -54,3 +54,22 @@ class PlayerEplTeam extends ValueObject {
 
   const PlayerEplTeam._({required this.value});
 }
+
+class PlayerAvailability extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, Map> value;
+
+  factory PlayerAvailability({
+    required Map value,
+  }) {
+    return PlayerAvailability._(
+      value: validatePlayerAvailability(
+        playerAvailability: value,
+      ),
+    );
+  }
+
+  const PlayerAvailability._({
+    required this.value,
+  });
+}

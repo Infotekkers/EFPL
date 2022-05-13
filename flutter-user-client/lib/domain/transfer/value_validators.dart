@@ -20,3 +20,8 @@ Either<ValueFailure<String>, String> validatePlayerEplTeam(
     {required String playerEplTeam}) {
   return right(playerEplTeam);
 }
+
+Either<ValueFailure<String>, Map> validatePlayerAvailability(
+    {required Map playerAvailability}) {
+  return right(playerAvailability);
+}

@@ -19,6 +19,7 @@ abstract class UserPlayerDTO implements _$UserPlayerDTO {
     required int multiplier,
     required bool isCaptain,
     required bool isViceCaptain,
+    required Map availability,
   }) = _UserPlayerDTO;
 
   factory UserPlayerDTO.fromDomain({required UserPlayer userPlayer}) =>
@@ -39,6 +40,9 @@ abstract class UserPlayerDTO implements _$UserPlayerDTO {
         multiplier: userPlayer.multiplier,
         isCaptain: userPlayer.isCaptain,
         isViceCaptain: userPlayer.isViceCaptain,
+        availability: userPlayer.availability.isValid()
+            ? userPlayer.availability.getOrCrash()
+            : {"injuryStatus": "", "injuryMessage": ""},
       );
 
   UserPlayer toDomain() => UserPlayer(
@@ -50,6 +54,11 @@ abstract class UserPlayerDTO implements _$UserPlayerDTO {
         multiplier: multiplier,
         isCaptain: isCaptain,
         isViceCaptain: isViceCaptain,
+        availability: availability == null
+            ? PlayerAvailability(value: availability)
+            : PlayerAvailability(
+                value: {"injuryStatus": "", "injuryMessage": ""},
+              ),
       );
   factory UserPlayerDTO.fromJson(Map<String, dynamic> json) =>
       _$UserPlayerDTOFromJson(json);

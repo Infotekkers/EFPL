@@ -15,6 +15,7 @@ abstract class UserPlayer with _$UserPlayer {
     required int multiplier,
     required bool isCaptain,
     required bool isViceCaptain,
+    required PlayerAvailability availability,
   }) = _UserPlayer;
 
   factory UserPlayer.initial() => UserPlayer(
@@ -26,5 +27,8 @@ abstract class UserPlayer with _$UserPlayer {
         multiplier: 1,
         isCaptain: false,
         isViceCaptain: false,
+        availability: PlayerAvailability(
+          value: const {"injuryStatus": "", "injuryMessage": ""},
+        ),
       );
 }

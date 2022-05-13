@@ -29,7 +29,8 @@ class _$UserPlayerDTOTearOff {
       required String eplTeamId,
       required int multiplier,
       required bool isCaptain,
-      required bool isViceCaptain}) {
+      required bool isViceCaptain,
+      required Map<dynamic, dynamic> availability}) {
     return _UserPlayerDTO(
       playerId: playerId,
       playerName: playerName,
@@ -39,6 +40,7 @@ class _$UserPlayerDTOTearOff {
       multiplier: multiplier,
       isCaptain: isCaptain,
       isViceCaptain: isViceCaptain,
+      availability: availability,
     );
   }
 
@@ -60,6 +62,7 @@ mixin _$UserPlayerDTO {
   int get multiplier => throw _privateConstructorUsedError;
   bool get isCaptain => throw _privateConstructorUsedError;
   bool get isViceCaptain => throw _privateConstructorUsedError;
+  Map<dynamic, dynamic> get availability => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -80,7 +83,8 @@ abstract class $UserPlayerDTOCopyWith<$Res> {
       String eplTeamId,
       int multiplier,
       bool isCaptain,
-      bool isViceCaptain});
+      bool isViceCaptain,
+      Map<dynamic, dynamic> availability});
 }
 
 /// @nodoc
@@ -102,6 +106,7 @@ class _$UserPlayerDTOCopyWithImpl<$Res>
     Object? multiplier = freezed,
     Object? isCaptain = freezed,
     Object? isViceCaptain = freezed,
+    Object? availability = freezed,
   }) {
     return _then(_value.copyWith(
       playerId: playerId == freezed
@@ -136,6 +141,10 @@ class _$UserPlayerDTOCopyWithImpl<$Res>
           ? _value.isViceCaptain
           : isViceCaptain // ignore: cast_nullable_to_non_nullable
               as bool,
+      availability: availability == freezed
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>,
     ));
   }
 }
@@ -155,7 +164,8 @@ abstract class _$UserPlayerDTOCopyWith<$Res>
       String eplTeamId,
       int multiplier,
       bool isCaptain,
-      bool isViceCaptain});
+      bool isViceCaptain,
+      Map<dynamic, dynamic> availability});
 }
 
 /// @nodoc
@@ -179,6 +189,7 @@ class __$UserPlayerDTOCopyWithImpl<$Res>
     Object? multiplier = freezed,
     Object? isCaptain = freezed,
     Object? isViceCaptain = freezed,
+    Object? availability = freezed,
   }) {
     return _then(_UserPlayerDTO(
       playerId: playerId == freezed
@@ -213,6 +224,10 @@ class __$UserPlayerDTOCopyWithImpl<$Res>
           ? _value.isViceCaptain
           : isViceCaptain // ignore: cast_nullable_to_non_nullable
               as bool,
+      availability: availability == freezed
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>,
     ));
   }
 }
@@ -228,7 +243,8 @@ class _$_UserPlayerDTO extends _UserPlayerDTO {
       required this.eplTeamId,
       required this.multiplier,
       required this.isCaptain,
-      required this.isViceCaptain})
+      required this.isViceCaptain,
+      required this.availability})
       : super._();
 
   factory _$_UserPlayerDTO.fromJson(Map<String, dynamic> json) =>
@@ -250,10 +266,12 @@ class _$_UserPlayerDTO extends _UserPlayerDTO {
   final bool isCaptain;
   @override
   final bool isViceCaptain;
+  @override
+  final Map<dynamic, dynamic> availability;
 
   @override
   String toString() {
-    return 'UserPlayerDTO(playerId: $playerId, playerName: $playerName, currentPrice: $currentPrice, position: $position, eplTeamId: $eplTeamId, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain)';
+    return 'UserPlayerDTO(playerId: $playerId, playerName: $playerName, currentPrice: $currentPrice, position: $position, eplTeamId: $eplTeamId, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain, availability: $availability)';
   }
 
   @override
@@ -272,7 +290,9 @@ class _$_UserPlayerDTO extends _UserPlayerDTO {
                 .equals(other.multiplier, multiplier) &&
             const DeepCollectionEquality().equals(other.isCaptain, isCaptain) &&
             const DeepCollectionEquality()
-                .equals(other.isViceCaptain, isViceCaptain));
+                .equals(other.isViceCaptain, isViceCaptain) &&
+            const DeepCollectionEquality()
+                .equals(other.availability, availability));
   }
 
   @override
@@ -285,7 +305,8 @@ class _$_UserPlayerDTO extends _UserPlayerDTO {
       const DeepCollectionEquality().hash(eplTeamId),
       const DeepCollectionEquality().hash(multiplier),
       const DeepCollectionEquality().hash(isCaptain),
-      const DeepCollectionEquality().hash(isViceCaptain));
+      const DeepCollectionEquality().hash(isViceCaptain),
+      const DeepCollectionEquality().hash(availability));
 
   @JsonKey(ignore: true)
   @override
@@ -307,7 +328,8 @@ abstract class _UserPlayerDTO extends UserPlayerDTO {
       required String eplTeamId,
       required int multiplier,
       required bool isCaptain,
-      required bool isViceCaptain}) = _$_UserPlayerDTO;
+      required bool isViceCaptain,
+      required Map<dynamic, dynamic> availability}) = _$_UserPlayerDTO;
   const _UserPlayerDTO._() : super._();
 
   factory _UserPlayerDTO.fromJson(Map<String, dynamic> json) =
@@ -329,6 +351,8 @@ abstract class _UserPlayerDTO extends UserPlayerDTO {
   bool get isCaptain;
   @override
   bool get isViceCaptain;
+  @override
+  Map<dynamic, dynamic> get availability;
   @override
   @JsonKey(ignore: true)
   _$UserPlayerDTOCopyWith<_UserPlayerDTO> get copyWith =>

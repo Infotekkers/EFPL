@@ -16,6 +16,7 @@ _$_UserPlayerDTO _$$_UserPlayerDTOFromJson(Map<String, dynamic> json) =>
       multiplier: json['multiplier'] as int,
       isCaptain: json['isCaptain'] as bool,
       isViceCaptain: json['isViceCaptain'] as bool,
+      availability: json['availability'] as Map<String, dynamic>,
     );
 
 Map<String, dynamic> _$$_UserPlayerDTOToJson(_$_UserPlayerDTO instance) =>
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$_UserPlayerDTOToJson(_$_UserPlayerDTO instance) =>
       'multiplier': instance.multiplier,
       'isCaptain': instance.isCaptain,
       'isViceCaptain': instance.isViceCaptain,
+      'availability': instance.availability,
     };
