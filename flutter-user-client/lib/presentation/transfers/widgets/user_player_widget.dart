@@ -1,9 +1,11 @@
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/injectable.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
+import 'package:hive/hive.dart';
 
 class UserPlayerWidget extends StatelessWidget {
   final UserPlayer currentUserPlayer;
@@ -25,6 +27,12 @@ class UserPlayerWidget extends StatelessWidget {
           onTap: () {
             showModalBottomSheet(
               context: context,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30.0),
+                  topRight: Radius.circular(30.0),
+                ),
+              ),
               builder: (builder) {
                 return BlocProvider.value(
                   value: getIt<TransferBloc>(),
@@ -37,10 +45,8 @@ class UserPlayerWidget extends StatelessWidget {
                         height: 200,
                         padding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 8),
-                        color: Colors.amber,
                         child: Column(
                           children: [
-                            Text(state.selectedPlayerPosition.toString()),
                             // Player Name
                             Text(
                               currentUserPlayer.playerName.value
@@ -126,22 +132,35 @@ class UserPlayerWidget extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 5),
             color: state.transferredInPlayerIdList
                     .contains(currentUserPlayer.playerId)
-                ? Colors.yellowAccent
-                : Colors.purple,
+                ? ConstantColors.warning_300
+                : ConstantColors.primary_900,
             child: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    currentUserPlayer.playerName.value
-                        .fold((l) => '', (r) => r),
-                    style: TextStyle(color: Colors.white),
+                    currentUserPlayer.playerName.value.fold(
+                      (l) => '',
+                      (r) => r.split(" ")[0],
+                    ),
+                    style: TextStyle(
+                      color: state.transferredInPlayerIdList
+                              .contains(currentUserPlayer.playerId)
+                          ? ConstantColors.primary_900
+                          : ConstantColors.neutral_200,
+                    ),
                   ),
                   Text(
                     currentUserPlayer.currentPrice.value.fold(
                       (l) => '',
                       (r) => r.toString(),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: state.transferredInPlayerIdList
+                              .contains(currentUserPlayer.playerId)
+                          ? ConstantColors.primary_900
+                          : ConstantColors.neutral_200,
+                    ),
                   ),
                 ],
               ),
@@ -153,7 +172,7 @@ class UserPlayerWidget extends StatelessWidget {
   }
 }
 
-void transferPlayer(_transferBloc, currentUserPlayer, context) {
+Future<void> transferPlayer(_transferBloc, currentUserPlayer, context) async {
   // Set player position
   _transferBloc.add(
     TransferEvent.setTransferOutPlayer(
@@ -167,9 +186,16 @@ void transferPlayer(_transferBloc, currentUserPlayer, context) {
     const TransferEvent.getPlayersInSelectedPosition(),
   );
 
+  var efplCache = await Hive.openBox('efplCache');
+  List allTeams = efplCache.get("allTeams");
+
   Navigator.pop(context);
 
-  Navigator.pushNamed(context, "/transfer");
+  Navigator.pushNamed(
+    context,
+    "/transfer",
+    arguments: {"allTeams": allTeams},
+  );
 }
 
 void cancelOnePlayerTransfer(_transferBloc, currentUserPlayer, context) {

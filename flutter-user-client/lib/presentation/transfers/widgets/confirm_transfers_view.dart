@@ -29,89 +29,87 @@ class ConfirmTransfersPage extends StatelessWidget {
             title: const Text("Confirm Transfers"),
             backgroundColor: ConstantColors.primary_900,
           ),
-          body: Container(
-            child: Column(
-              children: [
-                // Header
-                Container(
-                  height: 30,
-                  color: Colors.grey,
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: (MediaQuery.of(context).size.width - 10) * 0.7,
-                        child: Text("Transfer"),
-                      ),
-                      Container(
-                        width: (MediaQuery.of(context).size.width - 10) * 0.3,
-                        child: Text("Cost"),
-                      )
-                    ],
-                  ),
+          body: Column(
+            children: [
+              // Header
+              Container(
+                height: 30,
+                color: Colors.grey,
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: (MediaQuery.of(context).size.width - 10) * 0.7,
+                      child: const Text("Transfer"),
+                    ),
+                    SizedBox(
+                      width: (MediaQuery.of(context).size.width - 10) * 0.3,
+                      child: const Text("Cost"),
+                    )
+                  ],
                 ),
+              ),
 
-                // transferred players
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: ListView.builder(
-                    itemCount: allTransferInfo.length,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      bool hasFreeTransfer = false;
+              // transferred players
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: ListView.builder(
+                  itemCount: allTransferInfo.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    bool hasFreeTransfer = false;
 
-                      if (freeTransferCount > 0) {
-                        hasFreeTransfer = true;
-                        freeTransferCount = 0;
-                      }
+                    if (freeTransferCount > 0) {
+                      hasFreeTransfer = true;
+                      freeTransferCount = 0;
+                    }
 
-                      return TransferInfoCard(
-                        transferInfo: allTransferInfo[index],
-                        hasFreeTransfer: hasFreeTransfer,
-                      );
-                    },
-                  ),
+                    return TransferInfoCard(
+                      transferInfo: allTransferInfo[index],
+                      hasFreeTransfer: hasFreeTransfer,
+                    );
+                  },
                 ),
+              ),
 
-                // Wild Card options
-                Container(
-                  height: 60,
-                  width: double.infinity,
-                  color: Colors.purple,
-                  child: const Center(child: Text("Wild Cards")),
+              // Wild Card options
+              Container(
+                height: 60,
+                width: double.infinity,
+                color: Colors.purple,
+                child: const Center(child: Text("Wild Cards")),
+              ),
+
+              // Buttons
+              SizedBox(
+                width: double.infinity,
+                height: 100,
+                child: Column(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        _transferBloc.add(
+                          const TransferEvent.saveUserPlayers(),
+                        );
+
+                        // Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Confirm Transfers" +
+                            " ( " +
+                            state.userTeam.deduction.toString() +
+                            " ) ",
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text("Cancel"),
+                    ),
+                  ],
                 ),
-
-                // Buttons
-                SizedBox(
-                  width: double.infinity,
-                  height: 100,
-                  child: Column(
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          _transferBloc.add(
-                            const TransferEvent.saveUserPlayers(),
-                          );
-
-                          // Navigator.pop(context);
-                        },
-                        child: Text(
-                          "Confirm Transfers" +
-                              " ( " +
-                              state.userTeam.deduction.toString() +
-                              " ) ",
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text("Cancel"),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         );
       },

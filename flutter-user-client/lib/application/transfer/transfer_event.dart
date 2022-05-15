@@ -27,4 +27,10 @@ class TransferEvent with _$TransferEvent {
       {required String playerToCancelId}) = _cancelOneTransfer;
 
   const factory TransferEvent.saveUserPlayers() = _saveUserPlayers;
+
+  const factory TransferEvent.setFilter(
+      {required String filterBy, required String filterValue}) = _setFilter;
+
+  const factory TransferEvent.setSortFilter({required String sortBy}) =
+      _setSortFilter;
 }

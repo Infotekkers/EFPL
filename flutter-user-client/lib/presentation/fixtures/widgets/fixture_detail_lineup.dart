@@ -29,7 +29,7 @@ class FixtureDetailLineUp extends StatelessWidget {
             ),
           )
         : Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
               children: [
                 // GKS

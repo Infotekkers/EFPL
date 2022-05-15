@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/value_failures.dart';
@@ -104,6 +102,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         state.copyWith(
           isLoading: false,
           selectedPlayerReplacements: allSelectedPlayerReplacements,
+          filteredSelectedPlayerReplacements: allSelectedPlayerReplacements,
         ),
       );
     });
@@ -532,5 +531,211 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         }
       },
     );
+
+    on<_setFilter>((event, emit) async {
+      // set loading
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
+
+      // get filter info
+      String filterBy = event.filterBy;
+      String filterValue = event.filterValue;
+
+      // get all players
+      List<UserPlayer> allPlayers = state.selectedPlayerReplacements;
+
+      // check filter by
+      if (filterBy == "team") {
+        if (filterValue == "Select a Team" || filterValue == "") {
+          emit(
+            state.copyWith(
+              isLoading: false,
+              filteredSelectedPlayerReplacements:
+                  state.selectedPlayerReplacements,
+              selectedDropDownTeamValue: "Select a Team",
+            ),
+          );
+        } else {
+          List<UserPlayer> newFilteredPlayers = allPlayers
+              .where(
+                (player) =>
+                    player.eplTeamId.value.fold((l) => '', (r) => r) ==
+                    filterValue,
+              )
+              .toList();
+
+          emit(
+            state.copyWith(
+              isLoading: false,
+              filteredSelectedPlayerReplacements: newFilteredPlayers,
+              selectedDropDownTeamValue: event.filterValue,
+            ),
+          );
+        }
+      } else if (filterBy == "injury status") {
+        if (filterValue == "All" || filterValue == "") {
+          emit(
+            state.copyWith(
+              isLoading: false,
+              filteredSelectedPlayerReplacements:
+                  state.selectedPlayerReplacements,
+              selectedDropDownInjuryStatusValue: "All",
+            ),
+          );
+        }
+        //
+        else if (filterValue == "Available") {
+          List<UserPlayer> allFilteredPlayers = state.selectedPlayerReplacements
+              .where(
+                (player) =>
+                    player.availability.value.fold(
+                      (l) => '',
+                      (r) => r['injuryStatus'],
+                    ) ==
+                    '',
+              )
+              .toList();
+
+          emit(
+            state.copyWith(
+              isLoading: false,
+              filteredSelectedPlayerReplacements: allFilteredPlayers,
+              selectedDropDownInjuryStatusValue: event.filterValue,
+            ),
+          );
+        }
+        //
+        else if (filterValue == "Unavailable") {
+          List<UserPlayer> allFilteredPlayers = state.selectedPlayerReplacements
+              .where(
+                (player) =>
+                    player.availability.value.fold(
+                      (l) => '',
+                      (r) => r['injuryStatus'],
+                    ) !=
+                    '',
+              )
+              .toList();
+
+          emit(
+            state.copyWith(
+              isLoading: false,
+              filteredSelectedPlayerReplacements: allFilteredPlayers,
+              selectedDropDownInjuryStatusValue: event.filterValue,
+            ),
+          );
+        }
+      }
+    });
+
+    on<_setSortFilter>((event, emit) async {
+      // x.sort((a, b) => a['value'].compareTo(b['value']));
+      // set loading
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
+
+      List<UserPlayer> allPlayersFiltered =
+          state.filteredSelectedPlayerReplacements;
+
+      // check sort value
+      if (event.sortBy == "name") {
+        // get state
+        String currentSort = state.playerNameCurrentSortOrder;
+
+        if (currentSort == "" || currentSort == 'd') {
+          allPlayersFiltered.sort(
+            (a, b) => a.playerName.value
+                .fold(
+                  (l) => '',
+                  (r) => r,
+                )
+                .compareTo(
+                  b.playerName.value.fold(
+                    (l) => '',
+                    (r) => r,
+                  ),
+                ),
+          );
+        } else {
+          allPlayersFiltered.sort(
+            (a, b) => b.playerName.value
+                .fold(
+                  (l) => '',
+                  (r) => r,
+                )
+                .compareTo(
+                  a.playerName.value.fold(
+                    (l) => '',
+                    (r) => r,
+                  ),
+                ),
+          );
+        }
+
+        emit(
+          state.copyWith(
+            isLoading: false,
+            filteredSelectedPlayerReplacements: allPlayersFiltered,
+            playerNameCurrentSortOrder:
+                currentSort == "d" || currentSort == "" ? "a" : "d",
+          ),
+        );
+      }
+      //
+      else if (event.sortBy == "price") {
+        String currentSort = state.playerPriceCurrentSortOrder;
+
+        if (currentSort == "" || currentSort == 'd') {
+          allPlayersFiltered.sort(
+            (a, b) => a.currentPrice.value
+                .fold(
+                  (l) => 0.0,
+                  (r) => r,
+                )
+                .compareTo(
+                  b.currentPrice.value.fold(
+                    (l) => 0.0,
+                    (r) => r,
+                  ),
+                ),
+          );
+        }
+        //
+        else {
+          allPlayersFiltered.sort(
+            (a, b) => b.currentPrice.value
+                .fold(
+                  (l) => 0.0,
+                  (r) => r,
+                )
+                .compareTo(
+                  a.currentPrice.value.fold(
+                    (l) => 0.0,
+                    (r) => r,
+                  ),
+                ),
+          );
+        }
+
+        emit(
+          state.copyWith(
+            isLoading: false,
+            filteredSelectedPlayerReplacements: allPlayersFiltered,
+            playerPriceCurrentSortOrder:
+                currentSort == "d" || currentSort == "" ? "a" : "d",
+          ),
+        );
+      }
+      //
+      else if (event.sortBy == "points") {
+        // TODO:ADD SORT BY SCORE
+      }
+    });
   }
 }

@@ -5,7 +5,6 @@ import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/domain/fixture/i_fixture_facade.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 part 'fixture_event.dart';
 part 'fixture_state.dart';
@@ -117,8 +116,6 @@ class FixtureBloc extends Bloc<FixtureEvent, FixtureState> {
     });
 
     // Fixture Changed
-    on<_fixtureChanged>((event, emit) async {
-      print("Changed Event");
-    });
+    on<_fixtureChanged>((event, emit) async {});
   }
 }

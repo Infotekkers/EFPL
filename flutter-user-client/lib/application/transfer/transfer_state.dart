@@ -23,6 +23,14 @@ class TransferState with _$TransferState {
     required List swappedPlayerIdsList,
     // list of all players in selected position
     required List<UserPlayer> selectedPlayerReplacements,
+    required List<UserPlayer> filteredSelectedPlayerReplacements,
+    required String selectedDropDownTeamValue,
+    required String selectedDropDownInjuryStatusValue,
+
+    // sort values
+    required String playerNameCurrentSortOrder,
+    required String playerPriceCurrentSortOrder,
+    required String playerScoreCurrentSortOrder,
     // status of user team fetch
     required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
     // status of all players in position fetch
@@ -50,9 +58,15 @@ class TransferState with _$TransferState {
         transfersMadeCount: 0,
         transferredInPlayerIdList: [],
         selectedPlayerReplacements: [],
+        filteredSelectedPlayerReplacements: [],
         swappedPlayerIdsList: [],
         userTeamFailureOrSuccess: none(),
         replacementPlayersFailureOrSuccess: none(),
         valueFailureOrSuccess: none(),
+        selectedDropDownTeamValue: "Select a Team",
+        selectedDropDownInjuryStatusValue: "All",
+        playerNameCurrentSortOrder: "d",
+        playerPriceCurrentSortOrder: "",
+        playerScoreCurrentSortOrder: "",
       );
 }

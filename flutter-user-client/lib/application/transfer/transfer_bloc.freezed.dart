@@ -55,6 +55,20 @@ class _$TransferEventTearOff {
   _saveUserPlayers saveUserPlayers() {
     return const _saveUserPlayers();
   }
+
+  _setFilter setFilter(
+      {required String filterBy, required String filterValue}) {
+    return _setFilter(
+      filterBy: filterBy,
+      filterValue: filterValue,
+    );
+  }
+
+  _setSortFilter setSortFilter({required String sortBy}) {
+    return _setSortFilter(
+      sortBy: sortBy,
+    );
+  }
 }
 
 /// @nodoc
@@ -73,6 +87,8 @@ mixin _$TransferEvent {
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +101,8 @@ mixin _$TransferEvent {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -97,6 +115,8 @@ mixin _$TransferEvent {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -110,6 +130,8 @@ mixin _$TransferEvent {
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -122,6 +144,8 @@ mixin _$TransferEvent {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -134,6 +158,8 @@ mixin _$TransferEvent {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -231,6 +257,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
   }) {
     return getUserPlayers(gameWeekId);
   }
@@ -246,6 +274,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
   }) {
     return getUserPlayers?.call(gameWeekId);
   }
@@ -261,6 +291,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
     required TResult orElse(),
   }) {
     if (getUserPlayers != null) {
@@ -280,6 +312,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
   }) {
     return getUserPlayers(this);
   }
@@ -295,6 +329,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
   }) {
     return getUserPlayers?.call(this);
   }
@@ -310,6 +346,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
     required TResult orElse(),
   }) {
     if (getUserPlayers != null) {
@@ -417,6 +455,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
   }) {
     return setTransferOutPlayer(transferOutPlayerId, playerPosition);
   }
@@ -432,6 +472,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
   }) {
     return setTransferOutPlayer?.call(transferOutPlayerId, playerPosition);
   }
@@ -447,6 +489,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
     required TResult orElse(),
   }) {
     if (setTransferOutPlayer != null) {
@@ -466,6 +510,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
   }) {
     return setTransferOutPlayer(this);
   }
@@ -481,6 +527,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
   }) {
     return setTransferOutPlayer?.call(this);
   }
@@ -496,6 +544,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
     required TResult orElse(),
   }) {
     if (setTransferOutPlayer != null) {
@@ -571,6 +621,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
   }) {
     return getPlayersInSelectedPosition();
   }
@@ -586,6 +638,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
   }) {
     return getPlayersInSelectedPosition?.call();
   }
@@ -601,6 +655,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
     required TResult orElse(),
   }) {
     if (getPlayersInSelectedPosition != null) {
@@ -620,6 +676,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
   }) {
     return getPlayersInSelectedPosition(this);
   }
@@ -635,6 +693,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
   }) {
     return getPlayersInSelectedPosition?.call(this);
   }
@@ -650,6 +710,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
     required TResult orElse(),
   }) {
     if (getPlayersInSelectedPosition != null) {
@@ -739,6 +801,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
   }) {
     return transferUserPlayer(transferInPlayerId);
   }
@@ -754,6 +818,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
   }) {
     return transferUserPlayer?.call(transferInPlayerId);
   }
@@ -769,6 +835,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
     required TResult orElse(),
   }) {
     if (transferUserPlayer != null) {
@@ -788,6 +856,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
   }) {
     return transferUserPlayer(this);
   }
@@ -803,6 +873,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
   }) {
     return transferUserPlayer?.call(this);
   }
@@ -818,6 +890,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
     required TResult orElse(),
   }) {
     if (transferUserPlayer != null) {
@@ -887,6 +961,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
   }) {
     return cancelTransfer();
   }
@@ -902,6 +978,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
   }) {
     return cancelTransfer?.call();
   }
@@ -917,6 +995,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
     required TResult orElse(),
   }) {
     if (cancelTransfer != null) {
@@ -936,6 +1016,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
   }) {
     return cancelTransfer(this);
   }
@@ -951,6 +1033,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
   }) {
     return cancelTransfer?.call(this);
   }
@@ -966,6 +1050,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
     required TResult orElse(),
   }) {
     if (cancelTransfer != null) {
@@ -1054,6 +1140,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
   }) {
     return cancelOneTransfer(playerToCancelId);
   }
@@ -1069,6 +1157,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
   }) {
     return cancelOneTransfer?.call(playerToCancelId);
   }
@@ -1084,6 +1174,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
     required TResult orElse(),
   }) {
     if (cancelOneTransfer != null) {
@@ -1103,6 +1195,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
   }) {
     return cancelOneTransfer(this);
   }
@@ -1118,6 +1212,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
   }) {
     return cancelOneTransfer?.call(this);
   }
@@ -1133,6 +1229,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
     required TResult orElse(),
   }) {
     if (cancelOneTransfer != null) {
@@ -1202,6 +1300,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
   }) {
     return saveUserPlayers();
   }
@@ -1217,6 +1317,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
   }) {
     return saveUserPlayers?.call();
   }
@@ -1232,6 +1334,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
     required TResult orElse(),
   }) {
     if (saveUserPlayers != null) {
@@ -1251,6 +1355,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
   }) {
     return saveUserPlayers(this);
   }
@@ -1266,6 +1372,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
   }) {
     return saveUserPlayers?.call(this);
   }
@@ -1281,6 +1389,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
     required TResult orElse(),
   }) {
     if (saveUserPlayers != null) {
@@ -1292,6 +1402,383 @@ class _$_saveUserPlayers implements _saveUserPlayers {
 
 abstract class _saveUserPlayers implements TransferEvent {
   const factory _saveUserPlayers() = _$_saveUserPlayers;
+}
+
+/// @nodoc
+abstract class _$setFilterCopyWith<$Res> {
+  factory _$setFilterCopyWith(
+          _setFilter value, $Res Function(_setFilter) then) =
+      __$setFilterCopyWithImpl<$Res>;
+  $Res call({String filterBy, String filterValue});
+}
+
+/// @nodoc
+class __$setFilterCopyWithImpl<$Res> extends _$TransferEventCopyWithImpl<$Res>
+    implements _$setFilterCopyWith<$Res> {
+  __$setFilterCopyWithImpl(_setFilter _value, $Res Function(_setFilter) _then)
+      : super(_value, (v) => _then(v as _setFilter));
+
+  @override
+  _setFilter get _value => super._value as _setFilter;
+
+  @override
+  $Res call({
+    Object? filterBy = freezed,
+    Object? filterValue = freezed,
+  }) {
+    return _then(_setFilter(
+      filterBy: filterBy == freezed
+          ? _value.filterBy
+          : filterBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      filterValue: filterValue == freezed
+          ? _value.filterValue
+          : filterValue // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_setFilter implements _setFilter {
+  const _$_setFilter({required this.filterBy, required this.filterValue});
+
+  @override
+  final String filterBy;
+  @override
+  final String filterValue;
+
+  @override
+  String toString() {
+    return 'TransferEvent.setFilter(filterBy: $filterBy, filterValue: $filterValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _setFilter &&
+            const DeepCollectionEquality().equals(other.filterBy, filterBy) &&
+            const DeepCollectionEquality()
+                .equals(other.filterValue, filterValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(filterBy),
+      const DeepCollectionEquality().hash(filterValue));
+
+  @JsonKey(ignore: true)
+  @override
+  _$setFilterCopyWith<_setFilter> get copyWith =>
+      __$setFilterCopyWithImpl<_setFilter>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(GameWeekId gameWeekId) getUserPlayers,
+    required TResult Function(
+            String transferOutPlayerId, PlayerPosition playerPosition)
+        setTransferOutPlayer,
+    required TResult Function() getPlayersInSelectedPosition,
+    required TResult Function(String transferInPlayerId) transferUserPlayer,
+    required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
+    required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
+  }) {
+    return setFilter(filterBy, filterValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(GameWeekId gameWeekId)? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+  }) {
+    return setFilter?.call(filterBy, filterValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(GameWeekId gameWeekId)? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    required TResult orElse(),
+  }) {
+    if (setFilter != null) {
+      return setFilter(filterBy, filterValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_getUserPlayers value) getUserPlayers,
+    required TResult Function(_setTransferOutPlayer value) setTransferOutPlayer,
+    required TResult Function(_getPlayersInSelectedPosition value)
+        getPlayersInSelectedPosition,
+    required TResult Function(_transferUserPlayer value) transferUserPlayer,
+    required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
+    required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
+  }) {
+    return setFilter(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+  }) {
+    return setFilter?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    required TResult orElse(),
+  }) {
+    if (setFilter != null) {
+      return setFilter(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _setFilter implements TransferEvent {
+  const factory _setFilter(
+      {required String filterBy, required String filterValue}) = _$_setFilter;
+
+  String get filterBy;
+  String get filterValue;
+  @JsonKey(ignore: true)
+  _$setFilterCopyWith<_setFilter> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$setSortFilterCopyWith<$Res> {
+  factory _$setSortFilterCopyWith(
+          _setSortFilter value, $Res Function(_setSortFilter) then) =
+      __$setSortFilterCopyWithImpl<$Res>;
+  $Res call({String sortBy});
+}
+
+/// @nodoc
+class __$setSortFilterCopyWithImpl<$Res>
+    extends _$TransferEventCopyWithImpl<$Res>
+    implements _$setSortFilterCopyWith<$Res> {
+  __$setSortFilterCopyWithImpl(
+      _setSortFilter _value, $Res Function(_setSortFilter) _then)
+      : super(_value, (v) => _then(v as _setSortFilter));
+
+  @override
+  _setSortFilter get _value => super._value as _setSortFilter;
+
+  @override
+  $Res call({
+    Object? sortBy = freezed,
+  }) {
+    return _then(_setSortFilter(
+      sortBy: sortBy == freezed
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_setSortFilter implements _setSortFilter {
+  const _$_setSortFilter({required this.sortBy});
+
+  @override
+  final String sortBy;
+
+  @override
+  String toString() {
+    return 'TransferEvent.setSortFilter(sortBy: $sortBy)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _setSortFilter &&
+            const DeepCollectionEquality().equals(other.sortBy, sortBy));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(sortBy));
+
+  @JsonKey(ignore: true)
+  @override
+  _$setSortFilterCopyWith<_setSortFilter> get copyWith =>
+      __$setSortFilterCopyWithImpl<_setSortFilter>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(GameWeekId gameWeekId) getUserPlayers,
+    required TResult Function(
+            String transferOutPlayerId, PlayerPosition playerPosition)
+        setTransferOutPlayer,
+    required TResult Function() getPlayersInSelectedPosition,
+    required TResult Function(String transferInPlayerId) transferUserPlayer,
+    required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
+    required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
+  }) {
+    return setSortFilter(sortBy);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(GameWeekId gameWeekId)? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+  }) {
+    return setSortFilter?.call(sortBy);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(GameWeekId gameWeekId)? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    required TResult orElse(),
+  }) {
+    if (setSortFilter != null) {
+      return setSortFilter(sortBy);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_getUserPlayers value) getUserPlayers,
+    required TResult Function(_setTransferOutPlayer value) setTransferOutPlayer,
+    required TResult Function(_getPlayersInSelectedPosition value)
+        getPlayersInSelectedPosition,
+    required TResult Function(_transferUserPlayer value) transferUserPlayer,
+    required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
+    required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
+  }) {
+    return setSortFilter(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+  }) {
+    return setSortFilter?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    required TResult orElse(),
+  }) {
+    if (setSortFilter != null) {
+      return setSortFilter(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _setSortFilter implements TransferEvent {
+  const factory _setSortFilter({required String sortBy}) = _$_setSortFilter;
+
+  String get sortBy;
+  @JsonKey(ignore: true)
+  _$setSortFilterCopyWith<_setSortFilter> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1309,6 +1796,12 @@ class _$TransferStateTearOff {
       required List<dynamic> transferredInPlayerIdList,
       required List<dynamic> swappedPlayerIdsList,
       required List<UserPlayer> selectedPlayerReplacements,
+      required List<UserPlayer> filteredSelectedPlayerReplacements,
+      required String selectedDropDownTeamValue,
+      required String selectedDropDownInjuryStatusValue,
+      required String playerNameCurrentSortOrder,
+      required String playerPriceCurrentSortOrder,
+      required String playerScoreCurrentSortOrder,
       required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       required Option<Either<dynamic, List<UserPlayer>>>
           replacementPlayersFailureOrSuccess,
@@ -1324,6 +1817,12 @@ class _$TransferStateTearOff {
       transferredInPlayerIdList: transferredInPlayerIdList,
       swappedPlayerIdsList: swappedPlayerIdsList,
       selectedPlayerReplacements: selectedPlayerReplacements,
+      filteredSelectedPlayerReplacements: filteredSelectedPlayerReplacements,
+      selectedDropDownTeamValue: selectedDropDownTeamValue,
+      selectedDropDownInjuryStatusValue: selectedDropDownInjuryStatusValue,
+      playerNameCurrentSortOrder: playerNameCurrentSortOrder,
+      playerPriceCurrentSortOrder: playerPriceCurrentSortOrder,
+      playerScoreCurrentSortOrder: playerScoreCurrentSortOrder,
       userTeamFailureOrSuccess: userTeamFailureOrSuccess,
       replacementPlayersFailureOrSuccess: replacementPlayersFailureOrSuccess,
       valueFailureOrSuccess: valueFailureOrSuccess,
@@ -1356,6 +1855,15 @@ mixin _$TransferState {
   List<dynamic> get swappedPlayerIdsList =>
       throw _privateConstructorUsedError; // list of all players in selected position
   List<UserPlayer> get selectedPlayerReplacements =>
+      throw _privateConstructorUsedError;
+  List<UserPlayer> get filteredSelectedPlayerReplacements =>
+      throw _privateConstructorUsedError;
+  String get selectedDropDownTeamValue => throw _privateConstructorUsedError;
+  String get selectedDropDownInjuryStatusValue =>
+      throw _privateConstructorUsedError; // sort values
+  String get playerNameCurrentSortOrder => throw _privateConstructorUsedError;
+  String get playerPriceCurrentSortOrder => throw _privateConstructorUsedError;
+  String get playerScoreCurrentSortOrder =>
       throw _privateConstructorUsedError; // status of user team fetch
   Option<Either<dynamic, UserTeam>> get userTeamFailureOrSuccess =>
       throw _privateConstructorUsedError; // status of all players in position fetch
@@ -1386,6 +1894,12 @@ abstract class $TransferStateCopyWith<$Res> {
       List<dynamic> transferredInPlayerIdList,
       List<dynamic> swappedPlayerIdsList,
       List<UserPlayer> selectedPlayerReplacements,
+      List<UserPlayer> filteredSelectedPlayerReplacements,
+      String selectedDropDownTeamValue,
+      String selectedDropDownInjuryStatusValue,
+      String playerNameCurrentSortOrder,
+      String playerPriceCurrentSortOrder,
+      String playerScoreCurrentSortOrder,
       Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       Option<Either<dynamic, List<UserPlayer>>>
           replacementPlayersFailureOrSuccess,
@@ -1415,6 +1929,12 @@ class _$TransferStateCopyWithImpl<$Res>
     Object? transferredInPlayerIdList = freezed,
     Object? swappedPlayerIdsList = freezed,
     Object? selectedPlayerReplacements = freezed,
+    Object? filteredSelectedPlayerReplacements = freezed,
+    Object? selectedDropDownTeamValue = freezed,
+    Object? selectedDropDownInjuryStatusValue = freezed,
+    Object? playerNameCurrentSortOrder = freezed,
+    Object? playerPriceCurrentSortOrder = freezed,
+    Object? playerScoreCurrentSortOrder = freezed,
     Object? userTeamFailureOrSuccess = freezed,
     Object? replacementPlayersFailureOrSuccess = freezed,
     Object? valueFailureOrSuccess = freezed,
@@ -1460,6 +1980,32 @@ class _$TransferStateCopyWithImpl<$Res>
           ? _value.selectedPlayerReplacements
           : selectedPlayerReplacements // ignore: cast_nullable_to_non_nullable
               as List<UserPlayer>,
+      filteredSelectedPlayerReplacements: filteredSelectedPlayerReplacements ==
+              freezed
+          ? _value.filteredSelectedPlayerReplacements
+          : filteredSelectedPlayerReplacements // ignore: cast_nullable_to_non_nullable
+              as List<UserPlayer>,
+      selectedDropDownTeamValue: selectedDropDownTeamValue == freezed
+          ? _value.selectedDropDownTeamValue
+          : selectedDropDownTeamValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedDropDownInjuryStatusValue: selectedDropDownInjuryStatusValue ==
+              freezed
+          ? _value.selectedDropDownInjuryStatusValue
+          : selectedDropDownInjuryStatusValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      playerNameCurrentSortOrder: playerNameCurrentSortOrder == freezed
+          ? _value.playerNameCurrentSortOrder
+          : playerNameCurrentSortOrder // ignore: cast_nullable_to_non_nullable
+              as String,
+      playerPriceCurrentSortOrder: playerPriceCurrentSortOrder == freezed
+          ? _value.playerPriceCurrentSortOrder
+          : playerPriceCurrentSortOrder // ignore: cast_nullable_to_non_nullable
+              as String,
+      playerScoreCurrentSortOrder: playerScoreCurrentSortOrder == freezed
+          ? _value.playerScoreCurrentSortOrder
+          : playerScoreCurrentSortOrder // ignore: cast_nullable_to_non_nullable
+              as String,
       userTeamFailureOrSuccess: userTeamFailureOrSuccess == freezed
           ? _value.userTeamFailureOrSuccess
           : userTeamFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -1502,6 +2048,12 @@ abstract class _$TransferStateCopyWith<$Res>
       List<dynamic> transferredInPlayerIdList,
       List<dynamic> swappedPlayerIdsList,
       List<UserPlayer> selectedPlayerReplacements,
+      List<UserPlayer> filteredSelectedPlayerReplacements,
+      String selectedDropDownTeamValue,
+      String selectedDropDownInjuryStatusValue,
+      String playerNameCurrentSortOrder,
+      String playerPriceCurrentSortOrder,
+      String playerScoreCurrentSortOrder,
       Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       Option<Either<dynamic, List<UserPlayer>>>
           replacementPlayersFailureOrSuccess,
@@ -1534,6 +2086,12 @@ class __$TransferStateCopyWithImpl<$Res>
     Object? transferredInPlayerIdList = freezed,
     Object? swappedPlayerIdsList = freezed,
     Object? selectedPlayerReplacements = freezed,
+    Object? filteredSelectedPlayerReplacements = freezed,
+    Object? selectedDropDownTeamValue = freezed,
+    Object? selectedDropDownInjuryStatusValue = freezed,
+    Object? playerNameCurrentSortOrder = freezed,
+    Object? playerPriceCurrentSortOrder = freezed,
+    Object? playerScoreCurrentSortOrder = freezed,
     Object? userTeamFailureOrSuccess = freezed,
     Object? replacementPlayersFailureOrSuccess = freezed,
     Object? valueFailureOrSuccess = freezed,
@@ -1579,6 +2137,32 @@ class __$TransferStateCopyWithImpl<$Res>
           ? _value.selectedPlayerReplacements
           : selectedPlayerReplacements // ignore: cast_nullable_to_non_nullable
               as List<UserPlayer>,
+      filteredSelectedPlayerReplacements: filteredSelectedPlayerReplacements ==
+              freezed
+          ? _value.filteredSelectedPlayerReplacements
+          : filteredSelectedPlayerReplacements // ignore: cast_nullable_to_non_nullable
+              as List<UserPlayer>,
+      selectedDropDownTeamValue: selectedDropDownTeamValue == freezed
+          ? _value.selectedDropDownTeamValue
+          : selectedDropDownTeamValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedDropDownInjuryStatusValue: selectedDropDownInjuryStatusValue ==
+              freezed
+          ? _value.selectedDropDownInjuryStatusValue
+          : selectedDropDownInjuryStatusValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      playerNameCurrentSortOrder: playerNameCurrentSortOrder == freezed
+          ? _value.playerNameCurrentSortOrder
+          : playerNameCurrentSortOrder // ignore: cast_nullable_to_non_nullable
+              as String,
+      playerPriceCurrentSortOrder: playerPriceCurrentSortOrder == freezed
+          ? _value.playerPriceCurrentSortOrder
+          : playerPriceCurrentSortOrder // ignore: cast_nullable_to_non_nullable
+              as String,
+      playerScoreCurrentSortOrder: playerScoreCurrentSortOrder == freezed
+          ? _value.playerScoreCurrentSortOrder
+          : playerScoreCurrentSortOrder // ignore: cast_nullable_to_non_nullable
+              as String,
       userTeamFailureOrSuccess: userTeamFailureOrSuccess == freezed
           ? _value.userTeamFailureOrSuccess
           : userTeamFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -1610,6 +2194,12 @@ class _$_TransferState implements _TransferState {
       required this.transferredInPlayerIdList,
       required this.swappedPlayerIdsList,
       required this.selectedPlayerReplacements,
+      required this.filteredSelectedPlayerReplacements,
+      required this.selectedDropDownTeamValue,
+      required this.selectedDropDownInjuryStatusValue,
+      required this.playerNameCurrentSortOrder,
+      required this.playerPriceCurrentSortOrder,
+      required this.playerScoreCurrentSortOrder,
       required this.userTeamFailureOrSuccess,
       required this.replacementPlayersFailureOrSuccess,
       required this.valueFailureOrSuccess});
@@ -1634,6 +2224,18 @@ class _$_TransferState implements _TransferState {
   final List<dynamic> swappedPlayerIdsList;
   @override // list of all players in selected position
   final List<UserPlayer> selectedPlayerReplacements;
+  @override
+  final List<UserPlayer> filteredSelectedPlayerReplacements;
+  @override
+  final String selectedDropDownTeamValue;
+  @override
+  final String selectedDropDownInjuryStatusValue;
+  @override // sort values
+  final String playerNameCurrentSortOrder;
+  @override
+  final String playerPriceCurrentSortOrder;
+  @override
+  final String playerScoreCurrentSortOrder;
   @override // status of user team fetch
   final Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess;
   @override // status of all players in position fetch
@@ -1644,7 +2246,7 @@ class _$_TransferState implements _TransferState {
 
   @override
   String toString() {
-    return 'TransferState(userTeam: $userTeam, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIdList: $transferredInPlayerIdList, swappedPlayerIdsList: $swappedPlayerIdsList, selectedPlayerReplacements: $selectedPlayerReplacements, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, replacementPlayersFailureOrSuccess: $replacementPlayersFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess)';
+    return 'TransferState(userTeam: $userTeam, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIdList: $transferredInPlayerIdList, swappedPlayerIdsList: $swappedPlayerIdsList, selectedPlayerReplacements: $selectedPlayerReplacements, filteredSelectedPlayerReplacements: $filteredSelectedPlayerReplacements, selectedDropDownTeamValue: $selectedDropDownTeamValue, selectedDropDownInjuryStatusValue: $selectedDropDownInjuryStatusValue, playerNameCurrentSortOrder: $playerNameCurrentSortOrder, playerPriceCurrentSortOrder: $playerPriceCurrentSortOrder, playerScoreCurrentSortOrder: $playerScoreCurrentSortOrder, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, replacementPlayersFailureOrSuccess: $replacementPlayersFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess)';
   }
 
   @override
@@ -1671,6 +2273,22 @@ class _$_TransferState implements _TransferState {
             const DeepCollectionEquality().equals(
                 other.selectedPlayerReplacements, selectedPlayerReplacements) &&
             const DeepCollectionEquality().equals(
+                other.filteredSelectedPlayerReplacements,
+                filteredSelectedPlayerReplacements) &&
+            const DeepCollectionEquality().equals(
+                other.selectedDropDownTeamValue, selectedDropDownTeamValue) &&
+            const DeepCollectionEquality().equals(
+                other.selectedDropDownInjuryStatusValue,
+                selectedDropDownInjuryStatusValue) &&
+            const DeepCollectionEquality().equals(
+                other.playerNameCurrentSortOrder, playerNameCurrentSortOrder) &&
+            const DeepCollectionEquality().equals(
+                other.playerPriceCurrentSortOrder,
+                playerPriceCurrentSortOrder) &&
+            const DeepCollectionEquality().equals(
+                other.playerScoreCurrentSortOrder,
+                playerScoreCurrentSortOrder) &&
+            const DeepCollectionEquality().equals(
                 other.userTeamFailureOrSuccess, userTeamFailureOrSuccess) &&
             const DeepCollectionEquality().equals(
                 other.replacementPlayersFailureOrSuccess,
@@ -1680,21 +2298,28 @@ class _$_TransferState implements _TransferState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(userTeam),
-      const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(transfersMade),
-      const DeepCollectionEquality().hash(transfersMadeCount),
-      const DeepCollectionEquality().hash(remainingInBank),
-      const DeepCollectionEquality().hash(transferOutPlayerId),
-      const DeepCollectionEquality().hash(selectedPlayerPosition),
-      const DeepCollectionEquality().hash(transferredInPlayerIdList),
-      const DeepCollectionEquality().hash(swappedPlayerIdsList),
-      const DeepCollectionEquality().hash(selectedPlayerReplacements),
-      const DeepCollectionEquality().hash(userTeamFailureOrSuccess),
-      const DeepCollectionEquality().hash(replacementPlayersFailureOrSuccess),
-      const DeepCollectionEquality().hash(valueFailureOrSuccess));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(userTeam),
+        const DeepCollectionEquality().hash(isLoading),
+        const DeepCollectionEquality().hash(transfersMade),
+        const DeepCollectionEquality().hash(transfersMadeCount),
+        const DeepCollectionEquality().hash(remainingInBank),
+        const DeepCollectionEquality().hash(transferOutPlayerId),
+        const DeepCollectionEquality().hash(selectedPlayerPosition),
+        const DeepCollectionEquality().hash(transferredInPlayerIdList),
+        const DeepCollectionEquality().hash(swappedPlayerIdsList),
+        const DeepCollectionEquality().hash(selectedPlayerReplacements),
+        const DeepCollectionEquality().hash(filteredSelectedPlayerReplacements),
+        const DeepCollectionEquality().hash(selectedDropDownTeamValue),
+        const DeepCollectionEquality().hash(selectedDropDownInjuryStatusValue),
+        const DeepCollectionEquality().hash(playerNameCurrentSortOrder),
+        const DeepCollectionEquality().hash(playerPriceCurrentSortOrder),
+        const DeepCollectionEquality().hash(playerScoreCurrentSortOrder),
+        const DeepCollectionEquality().hash(userTeamFailureOrSuccess),
+        const DeepCollectionEquality().hash(replacementPlayersFailureOrSuccess),
+        const DeepCollectionEquality().hash(valueFailureOrSuccess)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -1714,6 +2339,12 @@ abstract class _TransferState implements TransferState {
       required List<dynamic> transferredInPlayerIdList,
       required List<dynamic> swappedPlayerIdsList,
       required List<UserPlayer> selectedPlayerReplacements,
+      required List<UserPlayer> filteredSelectedPlayerReplacements,
+      required String selectedDropDownTeamValue,
+      required String selectedDropDownInjuryStatusValue,
+      required String playerNameCurrentSortOrder,
+      required String playerPriceCurrentSortOrder,
+      required String playerScoreCurrentSortOrder,
       required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       required Option<Either<dynamic, List<UserPlayer>>>
           replacementPlayersFailureOrSuccess,
@@ -1740,6 +2371,18 @@ abstract class _TransferState implements TransferState {
   List<dynamic> get swappedPlayerIdsList;
   @override // list of all players in selected position
   List<UserPlayer> get selectedPlayerReplacements;
+  @override
+  List<UserPlayer> get filteredSelectedPlayerReplacements;
+  @override
+  String get selectedDropDownTeamValue;
+  @override
+  String get selectedDropDownInjuryStatusValue;
+  @override // sort values
+  String get playerNameCurrentSortOrder;
+  @override
+  String get playerPriceCurrentSortOrder;
+  @override
+  String get playerScoreCurrentSortOrder;
   @override // status of user team fetch
   Option<Either<dynamic, UserTeam>> get userTeamFailureOrSuccess;
   @override // status of all players in position fetch

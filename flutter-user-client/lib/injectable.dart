@@ -1,4 +1,3 @@
-import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/fixture/i_fixture_facade.dart';
 import 'package:efpl/domain/transfer/i_user_players_facade.dart';
 import 'package:efpl/infrastructure/fixture/api_fixture_repository.dart';

@@ -9,7 +9,7 @@ class SocketApi {
   // An internal private constructor to access it for only once for static instance of class.
   SocketApi._internal();
 
-  // Factry constructor to retutn same static instance everytime you create any object.
+  // Factory constructor to return same static instance every time you create any object.
   factory SocketApi() {
     var socket = IO.io("http://172.20.10.13:5000", <String, dynamic>{
       "transports": ["websocket"],

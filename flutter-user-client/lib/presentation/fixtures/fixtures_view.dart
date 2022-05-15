@@ -1,7 +1,5 @@
 import 'package:efpl/application/fixture/fixture_bloc.dart';
-import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
-import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/fixtures/widgets/fixture_widget.dart';
 import 'package:flutter/material.dart';
@@ -193,7 +191,6 @@ String formatMatchDate(Fixture fixture) {
   );
 
   final dateInfo = schedule.toString().split("T")[0].split("-");
-  final monthNumber = int.parse(dateInfo[1]);
 
   return monthNames[int.parse(dateInfo[1]) - 1].toString() +
       ' ' +

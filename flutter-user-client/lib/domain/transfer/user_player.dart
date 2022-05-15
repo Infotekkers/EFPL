@@ -1,6 +1,5 @@
 import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
 
 part 'user_player.freezed.dart';
 

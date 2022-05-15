@@ -46,8 +46,8 @@ class ApiTransferRepository implements ITransferRepository {
         List allPlayers = parseResponseTeam['players'];
         for (var i = 0; i < allPlayers.length; i++) {
           Map<String, dynamic> availability = {
-            "injuryStatus": "none",
-            "injuryMessage": "none"
+            "injuryStatus": "",
+            "injuryMessage": ""
           };
 
           if (parseResponseTeam['players'][i]['availability'] != null) {
@@ -158,6 +158,36 @@ class ApiTransferRepository implements ITransferRepository {
           }
         }
       }
+
+      // get all teams with logo path
+      var allTeamsApiResponse = await instance.client
+          .get(
+            Uri.parse('$_baseURL/teams/all'),
+          )
+          .timeout(
+            const Duration(seconds: 30),
+          );
+
+      if (allTeamsApiResponse.statusCode == 200) {
+        List<dynamic> parsedResponseBody = jsonDecode(allTeamsApiResponse.body);
+        List allTeams = [];
+
+        for (var i = 0; i < parsedResponseBody.length; i++) {
+          Map currentTeam = {
+            "teamName": parsedResponseBody[i]['teamName'],
+            "teamLogo": parsedResponseBody[i]['teamLogo'],
+          };
+          allTeams.add(currentTeam);
+        }
+
+        try {
+          var efplCache = await Hive.openBox('efplCache');
+          efplCache.put("allTeams", allTeams);
+        } catch (e) {
+          print(e);
+        }
+      }
+
       return right(allPlayersInPosition);
     } catch (e) {
       print(e);

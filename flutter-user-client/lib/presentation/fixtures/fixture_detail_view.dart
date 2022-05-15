@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
-import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/fixtures/widgets/fixture_detail_event.dart';
 import 'package:efpl/presentation/fixtures/widgets/fixture_detail_lineup.dart';
@@ -18,12 +16,10 @@ class FixtureDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     final Map<String, Fixture> fixture =
         ModalRoute.of(context)?.settings.arguments as Map<String, Fixture>;
-    FixtureBloc _fixtureBloc = getIt<FixtureBloc>();
+    // FixtureBloc _fixtureBloc = getIt<FixtureBloc>();
 
     return LiquidPullToRefresh(
-      onRefresh: () async {
-        print(_fixtureBloc.state);
-      },
+      onRefresh: () async {},
       height: 60,
       showChildOpacityTransition: false,
       animSpeedFactor: 2,

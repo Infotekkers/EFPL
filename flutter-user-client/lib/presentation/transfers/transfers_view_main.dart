@@ -61,7 +61,7 @@ class TransfersView extends StatelessWidget {
                             Container(
                               height: maxHeight / 6,
                               width: MediaQuery.of(context).size.width,
-                              color: Colors.amber,
+                              color: ConstantColors.neutral_300,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 120,
                                 vertical: 20,
@@ -87,7 +87,7 @@ class TransfersView extends StatelessWidget {
                             Container(
                               height: maxHeight / 6,
                               width: MediaQuery.of(context).size.width,
-                              color: Colors.pink,
+                              color: ConstantColors.neutral_100,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 5,
                                 vertical: 20,
@@ -116,7 +116,7 @@ class TransfersView extends StatelessWidget {
                             Container(
                               height: maxHeight / 6,
                               width: MediaQuery.of(context).size.width,
-                              color: Colors.teal,
+                              color: ConstantColors.neutral_300,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 5,
                                 vertical: 20,
@@ -145,7 +145,7 @@ class TransfersView extends StatelessWidget {
                             Container(
                               height: maxHeight / 6,
                               width: MediaQuery.of(context).size.width,
-                              color: Colors.orange,
+                              color: ConstantColors.neutral_100,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 85,
                                 vertical: 20,
@@ -174,7 +174,7 @@ class TransfersView extends StatelessWidget {
                             Container(
                               height: maxHeight / 6,
                               width: MediaQuery.of(context).size.width,
-                              color: Colors.green,
+                              color: ConstantColors.neutral_300,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

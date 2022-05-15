@@ -1,6 +1,3 @@
-import 'package:efpl/application/transfer/transfer_bloc.dart';
-import 'package:efpl/application/util/util_bloc.dart';
-import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
 import 'package:efpl/presentation/leagues/leagues_view.dart';
@@ -58,9 +55,9 @@ class MainTabView extends StatelessWidget {
         appBar: AppBar(
           elevation: 8.0,
           backgroundColor: ConstantColors.primary_900,
-          bottom: TabBar(
+          bottom: const TabBar(
             indicatorColor: ConstantColors.primary_900,
-            tabs: const [
+            tabs: [
               // My Team
               Tab(
                 icon: Icon(
