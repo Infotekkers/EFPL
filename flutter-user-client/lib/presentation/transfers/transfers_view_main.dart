@@ -6,6 +6,7 @@ import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/transfers/widgets/user_player_widget.dart';
+import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -26,11 +27,30 @@ class TransfersView extends StatelessWidget {
 
     return BlocConsumer<TransferBloc, TransferState>(
       listener: (context, state) {
-        // TODO: implement listener
+        state.valueFailureOrSuccess.fold(
+          () => () {},
+          (either) => either.fold(
+            (failure) {
+              CustomSnackBar().showCustomSnackBar(
+                showContext: context,
+                headlineText: "Something went wrong",
+                message: "No Connection.Please try again!",
+                snackBarType: "warning",
+                showDuration: 5,
+              );
+            },
+            (_) => {},
+          ),
+        );
       },
       builder: (context, state) {
         List allFormattedPlayers =
             getAllFormattedPlayers(userTeam: state.userTeam);
+
+        bool isTeamComplete = allFormattedPlayers[0].length != 0 &&
+            allFormattedPlayers[1].length != 0 &&
+            allFormattedPlayers[2].length != 0 &&
+            allFormattedPlayers[3].length != 0;
 
         double maxHeight = MediaQuery.of(context).size.height;
 
@@ -51,281 +71,322 @@ class TransfersView extends StatelessWidget {
                 )
               : Stack(
                   children: [
-                    // Main View
-                    SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          // Goal Keepers
-                          Container(
-                            height: maxHeight / 5,
-                            width: MediaQuery.of(context).size.width,
-                            color: ConstantColors.neutral_300,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 120,
-                              vertical: 10,
-                            ),
-                            child: Stack(
-                              children: [
-                                GridView.builder(
-                                  // shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 0.75,
-                                  ),
-                                  itemCount: allFormattedPlayers[0].length,
-                                  itemBuilder: (context, index) {
-                                    return UserPlayerWidget(
-                                      currentUserPlayer: allFormattedPlayers[0]
-                                          [index],
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          // Defenders
-                          Container(
-                            height: maxHeight / 5,
-                            width: MediaQuery.of(context).size.width,
-                            color: ConstantColors.neutral_100,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                              vertical: 10,
-                            ),
-                            child: GridView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount:
-                                    allFormattedPlayers[1].length > 0
-                                        ? allFormattedPlayers[1].length
-                                        : 1,
-                                childAspectRatio: 0.75,
-                              ),
-                              itemCount: allFormattedPlayers[1].length,
-                              itemBuilder: (context, index) {
-                                return UserPlayerWidget(
-                                  currentUserPlayer: allFormattedPlayers[1]
-                                      [index],
-                                );
-                              },
-                            ),
-                          ),
-
-                          // Midfielders
-                          Container(
-                            height: maxHeight / 5,
-                            width: MediaQuery.of(context).size.width,
-                            color: ConstantColors.neutral_300,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                              vertical: 10,
-                            ),
-                            child: GridView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount:
-                                    allFormattedPlayers[2].length > 0
-                                        ? allFormattedPlayers[2].length
-                                        : 1,
-                                childAspectRatio: 0.75,
-                              ),
-                              itemCount: allFormattedPlayers[2].length,
-                              itemBuilder: (context, index) {
-                                return UserPlayerWidget(
-                                  currentUserPlayer: allFormattedPlayers[2]
-                                      [index],
-                                );
-                              },
-                            ),
-                          ),
-
-                          // Attackers
-                          Container(
-                            height: maxHeight / 5.5,
-                            width: MediaQuery.of(context).size.width,
-                            color: ConstantColors.neutral_100,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 85,
-                              vertical: 10,
-                            ),
+                    isTeamComplete == false
+                        ? Container(
                             child: Center(
-                              child: GridView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount:
-                                      allFormattedPlayers[3].length > 0
-                                          ? allFormattedPlayers[3].length
-                                          : 1,
-                                  childAspectRatio: 0.75,
-                                ),
-                                itemCount: allFormattedPlayers[3].length,
-                                itemBuilder: (context, index) {
-                                  return UserPlayerWidget(
-                                    currentUserPlayer: allFormattedPlayers[3]
-                                        [index],
-                                  );
-                                },
-                              ),
+                              child: Text("No Team"),
                             ),
-                          ),
-
-                          // Info
-                          Container(
-                            height: maxHeight / 5,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 5,
-                            ),
-                            width: MediaQuery.of(context).size.width,
-                            color: ConstantColors.neutral_300,
+                          )
+                        :
+                        // Main View
+                        SingleChildScrollView(
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                // Bank
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.5,
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                  decoration: const BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        width: 0.45,
-                                        color: ConstantColors.primary_900,
-                                      ),
-                                    ),
+                                const SizedBox(
+                                  height: 12,
+                                ),
+                                Text(
+                                  state.userTeam.teamName,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: ConstantColors.neutral_700,
                                   ),
-                                  child: Row(
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                // Goal Keepers
+                                Container(
+                                  height: maxHeight / 5,
+                                  width: MediaQuery.of(context).size.width,
+                                  color: ConstantColors.neutral_300,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 120,
+                                    vertical: 10,
+                                  ),
+                                  child: Stack(
                                     children: [
-                                      // Label
-                                      const Text(
-                                        "Bank : ",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
+                                      GridView.builder(
+                                        // shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          childAspectRatio: 0.75,
                                         ),
-                                      ),
-                                      Text(
-                                        state.remainingInBank
-                                            .toStringAsFixed(1),
-                                        style: TextStyle(
-                                          color: state.remainingInBank < 0.0
-                                              ? ConstantColors.error_300
-                                              : Colors.green,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                        itemCount:
+                                            allFormattedPlayers[0].length,
+                                        itemBuilder: (context, index) {
+                                          return UserPlayerWidget(
+                                            currentUserPlayer:
+                                                allFormattedPlayers[0][index],
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),
                                 ),
 
-                                // Deduction
+                                // Defenders
                                 Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.5,
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                                  decoration: const BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        width: 0.45,
-                                        color: ConstantColors.primary_900,
-                                      ),
-                                    ),
+                                  height: maxHeight / 5,
+                                  width: MediaQuery.of(context).size.width,
+                                  color: ConstantColors.neutral_100,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 10,
                                   ),
-                                  child: Row(
-                                    children: [
-                                      // Label
-                                      const Text(
-                                        "Deduction : ",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        state.userTeam.deduction.toString(),
-                                        style: TextStyle(
-                                          color: state.userTeam.deduction < 0.0
-                                              ? ConstantColors.error_300
-                                              : Colors.green,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )
-                                    ],
+                                  child: GridView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount:
+                                          allFormattedPlayers[1].length > 0
+                                              ? allFormattedPlayers[1].length
+                                              : 1,
+                                      childAspectRatio: 0.75,
+                                    ),
+                                    itemCount: allFormattedPlayers[1].length,
+                                    itemBuilder: (context, index) {
+                                      return UserPlayerWidget(
+                                        currentUserPlayer:
+                                            allFormattedPlayers[1][index],
+                                      );
+                                    },
                                   ),
                                 ),
 
-                                // Free Transfers
+                                // Midfielders
                                 Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.5,
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                                  decoration: const BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        width: 0.45,
-                                        color: ConstantColors.primary_900,
-                                      ),
-                                    ),
+                                  height: maxHeight / 5,
+                                  width: MediaQuery.of(context).size.width,
+                                  color: ConstantColors.neutral_300,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 10,
                                   ),
-                                  child: Row(
-                                    children: [
-                                      const Text(
-                                        "Free Transfers : ",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        state.userTeam.freeTransfers.toString(),
-                                        style: TextStyle(
-                                          color:
-                                              state.userTeam.freeTransfers != 1
-                                                  ? ConstantColors.error_300
-                                                  : Colors.green,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )
-                                    ],
+                                  child: GridView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount:
+                                          allFormattedPlayers[2].length > 0
+                                              ? allFormattedPlayers[2].length
+                                              : 1,
+                                      childAspectRatio: 0.75,
+                                    ),
+                                    itemCount: allFormattedPlayers[2].length,
+                                    itemBuilder: (context, index) {
+                                      return UserPlayerWidget(
+                                        currentUserPlayer:
+                                            allFormattedPlayers[2][index],
+                                      );
+                                    },
                                   ),
                                 ),
 
-                                // Deadline
+                                // Attackers
                                 Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.5,
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                                  child: Row(
+                                  height: maxHeight / 5,
+                                  width: MediaQuery.of(context).size.width,
+                                  color: ConstantColors.neutral_100,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 85,
+                                    vertical: 10,
+                                  ),
+                                  child: Center(
+                                    child: GridView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount:
+                                            allFormattedPlayers[3].length > 0
+                                                ? allFormattedPlayers[3].length
+                                                : 1,
+                                        childAspectRatio: 0.75,
+                                      ),
+                                      itemCount: allFormattedPlayers[3].length,
+                                      itemBuilder: (context, index) {
+                                        return UserPlayerWidget(
+                                          currentUserPlayer:
+                                              allFormattedPlayers[3][index],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+
+                                // Info
+                                Container(
+                                  height: maxHeight / 5,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 5,
+                                  ),
+                                  width: MediaQuery.of(context).size.width,
+                                  color: ConstantColors.neutral_300,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      const Text(
-                                        "Deadline : ",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
+                                      // Bank
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.5,
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 0, 0, 5),
+                                        decoration: const BoxDecoration(
+                                          border: Border(
+                                            bottom: BorderSide(
+                                              width: 0.45,
+                                              color: ConstantColors.primary_900,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            // Label
+                                            const Text(
+                                              "Bank : ",
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              state.remainingInBank
+                                                  .toStringAsFixed(1),
+                                              style: TextStyle(
+                                                color: state.remainingInBank <
+                                                        0.0
+                                                    ? ConstantColors.error_300
+                                                    : Colors.green,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Text(
-                                        formatDeadline(
-                                            state.userTeam.gameWeekDeadline),
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
+
+                                      // Deduction
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.5,
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 5, 0, 5),
+                                        decoration: const BoxDecoration(
+                                          border: Border(
+                                            bottom: BorderSide(
+                                              width: 0.45,
+                                              color: ConstantColors.primary_900,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            // Label
+                                            const Text(
+                                              "Deduction : ",
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              state.userTeam.deduction
+                                                  .toString(),
+                                              style: TextStyle(
+                                                color: state.userTeam
+                                                            .deduction <
+                                                        0.0
+                                                    ? ConstantColors.error_300
+                                                    : Colors.green,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+
+                                      // Free Transfers
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.5,
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 5, 0, 5),
+                                        decoration: const BoxDecoration(
+                                          border: Border(
+                                            bottom: BorderSide(
+                                              width: 0.45,
+                                              color: ConstantColors.primary_900,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            const Text(
+                                              "Free Transfers : ",
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              state.userTeam.freeTransfers
+                                                  .toString(),
+                                              style: TextStyle(
+                                                color: state.userTeam
+                                                            .freeTransfers !=
+                                                        1
+                                                    ? ConstantColors.error_300
+                                                    : Colors.green,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+
+                                      // Deadline
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.5,
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 5, 0, 5),
+                                        child: Row(
+                                          children: [
+                                            const Text(
+                                              "Deadline : ",
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              formatDeadline(state
+                                                  .userTeam.gameWeekDeadline),
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -334,10 +395,6 @@ class TransfersView extends StatelessWidget {
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-
                     state.transfersMade == true
                         ? Positioned(
                             width: 120,
@@ -496,4 +553,5 @@ String formatDeadline(String deadline) {
 
   // const
   return formattedDate;
+  // return "";
 }

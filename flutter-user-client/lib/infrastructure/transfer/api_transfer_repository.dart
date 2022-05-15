@@ -1,14 +1,19 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/http_failures.dart';
+import 'package:efpl/domain/core/storage_failures.dart';
 import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/transfer/i_user_players_facade.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
+import 'package:efpl/domain/transfer/user_players_failures.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:efpl/infrastructure/transfer/user_player_dto.dart';
 import 'package:efpl/injectable.dart';
+import 'package:efpl/services/constants.dart';
 import 'package:efpl/services/http_instance.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
@@ -34,11 +39,13 @@ class ApiTransferRepository implements ITransferRepository {
             Uri.parse('$_baseURL/user/team/$userID/$gameWeekId'),
           )
           .timeout(
-            const Duration(seconds: 30),
+            Duration(seconds: ConstantValues().httpTimeOutDuration),
           );
 
       if (apiResponse.statusCode == 200) {
         List<UserPlayer> allUserPlayers = [];
+        List<dynamic> allUserPlayersJson = [];
+
         final parsedResponseBody = jsonDecode(apiResponse.body);
         final parseResponseTeam = parsedResponseBody['team'][0];
 
@@ -57,7 +64,7 @@ class ApiTransferRepository implements ITransferRepository {
 
             final UserPlayerDTO userPlayerDTO =
                 UserPlayerDTO.fromJson(allPlayers[i]);
-
+            allUserPlayersJson.add(allPlayers[i]);
             allUserPlayers.add(userPlayerDTO.toDomain());
           }
 
@@ -75,6 +82,29 @@ class ApiTransferRepository implements ITransferRepository {
             ),
             teamName: parsedResponseBody['teamName'],
           );
+
+          Map userTeamJson = {
+            "gameWeekId": parseResponseTeam['gameweekId'],
+            "gameWeekDeadline":
+                parsedResponseBody['gameWeekDeadline'].toString(),
+            "allUserPlayers": allUserPlayersJson,
+            "freeTransfers": parseResponseTeam['freeTransfers'],
+            "deduction": parseResponseTeam['deduction'],
+            "activeChip": parseResponseTeam['activeChip'],
+            "availableChips": parsedResponseBody['availableChips'],
+            "maxBudget": double.parse(
+              parsedResponseBody['maxBudget'].toString(),
+            ),
+            "teamName": parsedResponseBody['teamName'],
+          };
+
+          // ADD to cache
+          try {
+            var efplCache = await Hive.openBox('efplCache');
+            efplCache.put("userTeam", userTeamJson);
+          } catch (e) {
+            print(e);
+          }
 
           // get all teams with logo path
           var allTeamsApiResponse = await instance.client
@@ -102,18 +132,110 @@ class ApiTransferRepository implements ITransferRepository {
               var efplCache = await Hive.openBox('efplCache');
               efplCache.put("allTeams", allTeams);
             } catch (e) {
-              print(e);
+              return left(
+                const StorageFailures.hiveError(
+                    failedValue: "Error Caching Info"),
+              );
             }
           }
 
           return right(userTeam);
-        } else {}
+        }
+        // if response has no players
+        else {
+          // TODO: CHECK CACHE
+          return left(
+            const UserPlayerFailure.incompleteTeam(
+                failedValue: "No Team. Please select a team."),
+          );
+        }
       }
-    } catch (e) {}
 
-    return left(
-      const HTTPFailures.unauthenticated(failedValue: "Please Login!"),
-    );
+      // No Token
+      else if (apiResponse.statusCode == 403) {
+        return left(
+          const HTTPFailures.unauthenticated(
+            failedValue: "Please Login!",
+          ),
+        );
+      }
+
+      // incorrect token
+      else if (apiResponse.statusCode == 401) {
+        return left(
+          const HTTPFailures.unauthorized(
+            failedValue: "Invalid Token.",
+          ),
+        );
+      }
+
+      // unexpected error
+      else {
+        // TODO:GET CACHED INFO
+        return left(
+          const HTTPFailures.unexpectedError(
+              failedValue: "Something went wrong. Try again!"),
+        );
+      }
+    }
+
+    // Timeout Exception
+    on TimeoutException catch (_) {
+      // get cache team
+      UserTeam cachedUserTeam =
+          await getUserTeamFromCache(gameWeekId: gameWeekId);
+
+      return left(
+        [
+          cachedUserTeam,
+          const HTTPFailures.noConnection(
+              failedValue: "Could not connect to server. Try refreshing.")
+        ],
+      );
+    }
+    // Socket Exception
+    on SocketException catch (_) {
+      // get cache team
+      UserTeam cachedUserTeam =
+          await getUserTeamFromCache(gameWeekId: gameWeekId);
+
+      return left(
+        [
+          cachedUserTeam,
+          const HTTPFailures.socketError(
+              failedValue: "Could not connect to server. Try refreshing."),
+        ],
+      );
+    }
+
+    // Handshake error
+    on HandshakeException catch (_) {
+      // get cache team
+      UserTeam cachedUserTeam =
+          await getUserTeamFromCache(gameWeekId: gameWeekId);
+
+      return left(
+        [
+          cachedUserTeam,
+          const HTTPFailures.handShakeError(
+              failedValue: "Could not connect to server. Try refreshing."),
+        ],
+      );
+    }
+    // unexpected error
+    catch (e) {
+      // get cache team
+      UserTeam cachedUserTeam =
+          await getUserTeamFromCache(gameWeekId: gameWeekId);
+
+      return left(
+        [
+          cachedUserTeam,
+          const HTTPFailures.unexpectedError(
+              failedValue: "Something went wrong. Try again!"),
+        ],
+      );
+    }
   }
 
   @override
@@ -256,4 +378,65 @@ Map userTeamToJson({required UserTeam userTeam}) {
   userTeamJson['allPlayers'] = allPlayerIds;
 
   return userTeamJson;
+}
+
+Future<UserTeam> getUserTeamFromCache({required int gameWeekId}) async {
+  var efplCache = await Hive.openBox('efplCache');
+  dynamic allUserPlayers = efplCache.get("userTeam");
+
+  if (allUserPlayers['gameWeekId'] == gameWeekId) {
+    List allUserPlayerJson = allUserPlayers['allUserPlayers'];
+    List<UserPlayer> allUserPlayersDomain = [];
+    for (var player in allUserPlayerJson) {
+      final currentPlayerMap = {
+        "playerId": player['playerId'],
+        "multiplier": player['multiplier'],
+        "isCaptain": player['isCaptain'],
+        "isViceCaptain": player['isViceCaptain'],
+        "playerName": player['playerName'],
+        "eplTeamId": player['eplTeamId'],
+        "eplTeamLogo": player['eplTeamLogo'],
+        "currentPrice": player['currentPrice'],
+        "position": player['position'],
+        "availability": {
+          "injuryStatus": player['availability']['injuryStatus'],
+          "injuryMessage": player['availability']['injuryMessage'],
+        },
+        "score": player['score']
+      };
+
+      final UserPlayerDTO userPlayerDTO =
+          UserPlayerDTO.fromJson(currentPlayerMap);
+
+      allUserPlayersDomain.add(userPlayerDTO.toDomain());
+    }
+
+    UserTeam userTeam = UserTeam(
+      gameWeekId: GameWeekId(value: allUserPlayers['gameWeekId']),
+      gameWeekDeadline: allUserPlayers['gameWeekDeadline'].toString(),
+      allUserPlayers: allUserPlayersDomain,
+      freeTransfers: allUserPlayers['freeTransfers'],
+      deduction: allUserPlayers['deduction'],
+      activeChip: allUserPlayers['activeChip'],
+      availableChips: allUserPlayers['availableChips'],
+      maxBudget: double.parse(
+        allUserPlayers['maxBudget'].toString(),
+      ),
+      teamName: allUserPlayers['teamName'],
+    );
+
+    return userTeam;
+  } else {
+    return UserTeam(
+      gameWeekId: GameWeekId(value: 1),
+      gameWeekDeadline: "",
+      allUserPlayers: [],
+      freeTransfers: 0,
+      deduction: 0,
+      activeChip: "",
+      availableChips: [],
+      maxBudget: 0,
+      teamName: "",
+    );
+  }
 }

@@ -42,17 +42,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
       // get team from response
       final UserTeam userTeam = failureOrSuccess.fold(
-        (l) => UserTeam(
-          gameWeekId: GameWeekId(value: 1),
-          gameWeekDeadline: "",
-          allUserPlayers: [],
-          freeTransfers: 0,
-          deduction: 0,
-          activeChip: '',
-          availableChips: [],
-          maxBudget: 0,
-          teamName: "",
-        ),
+        (l) => l[0],
         (r) => r,
       );
 
@@ -70,7 +60,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         state.copyWith(
           userTeam: userTeam,
           isLoading: false,
-          userTeamFailureOrSuccess: some(failureOrSuccess),
+          valueFailureOrSuccess: some(failureOrSuccess),
           remainingInBank: userTeam.maxBudget - playerCostSum,
         ),
       );

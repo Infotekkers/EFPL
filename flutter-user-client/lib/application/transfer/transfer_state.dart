@@ -37,10 +37,7 @@ class TransferState with _$TransferState {
     required double maxPriceSet,
     // status of user team fetch
     required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
-    // status of all players in position fetch
-    required Option<Either<dynamic, List<UserPlayer>>>
-        replacementPlayersFailureOrSuccess,
-    required Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess,
+    required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
   }) = _TransferState;
 
   factory TransferState.initial() => TransferState(
@@ -66,7 +63,6 @@ class TransferState with _$TransferState {
         filteredSelectedPlayerReplacements: [],
         swappedPlayerIdsList: [],
         userTeamFailureOrSuccess: none(),
-        replacementPlayersFailureOrSuccess: none(),
         valueFailureOrSuccess: none(),
         selectedDropDownTeamValue: "Select a Team",
         selectedDropDownInjuryStatusValue: "All",
