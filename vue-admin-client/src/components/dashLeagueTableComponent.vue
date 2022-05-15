@@ -9,12 +9,15 @@
     ></div>
     <div class="team-name-container">{{ team.teamName }}</div>
     <div class="team-point-container">{{ team.teamPosition[0].teamPoint }}</div>
-    <div class="team-point-container">{{ team.teamPosition[0].teamPoint }}</div>
-    <div class="team-point-container">{{ team.teamPosition[0].teamPoint }}</div>
+    <div class="team-point-container">{{ team.teamPosition[0].won }}</div>
+    <div class="team-point-container">{{ team.teamPosition[0].lost }}</div>
+    <div class="team-point-container">{{ team.teamPosition[0].Draw }}</div>
+    <div class="team-point-container">{{ team.teamPosition[0].goalFor }}</div>
     <div class="team-point-container">
-      {{ team.teamPosition[0].teamPoint }}
-
-      <!-- <div class="team-point-container">{{ team.stadiumCapacity }}</div> -->
+      {{ team.teamPosition[0].goalAgainst }}
+    </div>
+    <div class="team-point-container">
+      {{ team.teamPosition[0].goalDifferntial }}
     </div>
     <div class="team-point-container">
       <span v-if="team.foundedIn">{{ team.teamPosition[0].teamPoint }}</span>
@@ -72,6 +75,7 @@ export default {
   text-align: start;
   width: 60px;
   min-width: 60px;
+  padding-right: 10px;
   min-height: 60px;
   background-size: contain;
   background-position: center;
@@ -79,9 +83,11 @@ export default {
 }
 
 .team-name-container {
-  width: 20%;
+  width: 17%;
   min-width: 130px;
   display: flex;
+  margin-right: 40px;
+  margin-left: 30px;
 }
 .team-container-colored {
   background: var(--primary-100);

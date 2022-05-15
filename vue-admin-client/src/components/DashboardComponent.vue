@@ -71,8 +71,30 @@
           </span>
         </div> -->
       <!-- ID -->
+      <!-- //////////////////////////////////////// -->
+      <!-- Logo -->
+      <div class="teams-point-sorter">
+        <span @click="sortByLogo(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+        <span class="sorter-content">
+          {{ $t("Logo") }}
+        </span>
+        <span @click="sortByLogo(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+      </div>
       <!-- Name -->
-      <div class="teams-name-sorter">
+      <!-- Name -->
+      <div class="teams-point-sorter">
         <span @click="sortByName(-1)">
           <img
             :src="sortDownIcon.path"
@@ -112,14 +134,14 @@
       <!-- Played Games -->
       <!-- won -->
       <div class="teams-point-sorter">
-        <span @click="sortByPoint(-1)">
+        <span @click="sortByWon(-1)">
           <img
             :src="sortDownIcon.path"
             :alt="sortDownIcon.alt"
             class="extra-small-icon"
         /></span>
         <span class="sorter-content"> {{ $t("Won") }}</span>
-        <span @click="sortByPoint(1)">
+        <span @click="sortByWon(1)">
           <img
             :src="sortUpIcon.path"
             :alt="sortUpIcon.alt"
@@ -130,14 +152,14 @@
       <!-- Won -->
       <!-- Lost -->
       <div class="teams-point-sorter">
-        <span @click="sortByPoint(-1)">
+        <span @click="sortByLost(-1)">
           <img
             :src="sortDownIcon.path"
             :alt="sortDownIcon.alt"
             class="extra-small-icon"
         /></span>
         <span class="sorter-content"> {{ $t("Lost") }}</span>
-        <span @click="sortByPoint(1)">
+        <span @click="sortByLost(1)">
           <img
             :src="sortUpIcon.path"
             :alt="sortUpIcon.alt"
@@ -148,14 +170,14 @@
       <!-- Lost -->
       <!-- Draw -->
       <div class="teams-point-sorter">
-        <span @click="sortByPoint(-1)">
+        <span @click="sortByDraw(-1)">
           <img
             :src="sortDownIcon.path"
             :alt="sortDownIcon.alt"
             class="extra-small-icon"
         /></span>
         <span class="sorter-content"> {{ $t("Draw") }}</span>
-        <span @click="sortByPoint(1)">
+        <span @click="sortByDraw(1)">
           <img
             :src="sortUpIcon.path"
             :alt="sortUpIcon.alt"
@@ -164,7 +186,61 @@
         </span>
       </div>
       <!-- Draw -->
+      <!-- Goal For -->
+      <div class="teams-point-sorter">
+        <span @click="sortByFor(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+        /></span>
+        <span class="sorter-content"> {{ $t("GF") }}</span>
+        <span @click="sortByFor(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+      </div>
+      <!-- Goal For -->
+      <!-- Goal Against -->
+      <div class="teams-point-sorter">
+        <span @click="sortByAgainst(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+        /></span>
+        <span class="sorter-content"> {{ $t("GA") }}</span>
+        <span @click="sortByAgainst(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+      </div>
+      <!-- Goal Against -->
       <!-- Goal Differnce -->
+      <div class="teams-point-sorter">
+        <span @click="sortByGD(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+        /></span>
+        <span class="sorter-content"> {{ $t("GD") }}</span>
+        <span @click="sortByGD(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+      </div>
+      <!-- Goal Differnce -->
+      <!-- Points -->
       <div class="teams-point-sorter">
         <span @click="sortByPoint(-1)">
           <img
@@ -181,7 +257,7 @@
           />
         </span>
       </div>
-      <!-- Goal Differnce -->
+      <!-- Points -->
     </div>
     <!-- Sorter Header -->
     <div
