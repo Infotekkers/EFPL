@@ -1,0 +1,6485 @@
+[{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8ea"
+  },
+  "playerName": "Ahmed Reshid",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 7.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100000,
+  "__v": 0,
+  "availability": {
+    "injuryStatus": "75",
+    "injuryMessage": "ACL"
+  }
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8ef"
+  },
+  "playerName": "Dereje Mengistu",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 11,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100001,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8e4"
+  },
+  "playerName": "Tsion Meried",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 8,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100002,
+  "__v": 0,
+  "availability": {
+    "injuryStatus": "75",
+    "injuryMessage": "ACL"
+  }
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8eb"
+  },
+  "playerName": "Solomon Wedessa",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100003,
+  "__v": 0,
+  "availability": {
+    "injuryStatus": "25",
+    "injuryMessage": "Torn Ligament"
+  }
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8e7"
+  },
+  "playerName": "Haileyesus Yitayew",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100004,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8ee"
+  },
+  "playerName": "Abel Wudu",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 4.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100005,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8e5"
+  },
+  "playerName": "Sinegiorgis Eshetu",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100006,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8e9"
+  },
+  "playerName": "Menaf Awol",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100007,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8ed"
+  },
+  "playerName": "Salamlak Tegegn",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 4.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100008,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8f1"
+  },
+  "playerName": "Samson Tilahun",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 9.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100009,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8f0"
+  },
+  "playerName": "Getachew Animut",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 10.7,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100010,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8ec"
+  },
+  "playerName": "Samuel Tesfaye",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 6.1,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100011,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8f2"
+  },
+  "playerName": "Bereket Tigabu",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 9,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100012,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8e6"
+  },
+  "playerName": " Harriston Hessou",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 4.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100013,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8e8"
+  },
+  "playerName": "Mikias Girma",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100014,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8f3"
+  },
+  "playerName": "Fitsum Alemu",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 6.4,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100015,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8f4"
+  },
+  "playerName": "Henok Awoke",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100016,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8f5"
+  },
+  "playerName": "Henok Awoke",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 8.2,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100017,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8f6"
+  },
+  "playerName": "Fikremikael Alemu",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 5.5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100018,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8f7"
+  },
+  "playerName": "Afework Hailu",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100019,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8f8"
+  },
+  "playerName": "Girma Dissasa",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 12,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100020,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8f9"
+  },
+  "playerName": "Baye Gizahegn",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100021,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8fa"
+  },
+  "playerName": "Wosenu Ali",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100022,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8fb"
+  },
+  "playerName": "Zinaw Ferede",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100023,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8fc"
+  },
+  "playerName": "Yibeltal Ayele",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 4.5,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100024,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8fd"
+  },
+  "playerName": "Minyelu Wondimu",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 5.5,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100025,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8fe"
+  },
+  "playerName": "Minyelu Wondimu",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 5.5,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100026,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb8ff"
+  },
+  "playerName": "Ali Sulieman",
+  "eplTeamId": "Bahir Dar Kenema S.C",
+  "currentPrice": 12.5,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100027,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb900"
+  },
+  "playerName": "Sintayehu Tamirat",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100028,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb901"
+  },
+  "playerName": "Mohammed Muntari",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 8.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100029,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb902"
+  },
+  "playerName": "Suleiman Hamid",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 8.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100030,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb903"
+  },
+  "playerName": "Tewodros Bekele",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100031,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb904"
+  },
+  "playerName": "Bereket Woldeyohannes",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 4.6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100032,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb905"
+  },
+  "playerName": "Isaac Isinde",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 8.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100033,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb906"
+  },
+  "playerName": "Mikael George",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100034,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb907"
+  },
+  "playerName": "Tsegasew Dimamu",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100035,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb908"
+  },
+  "playerName": "Henok Arficho",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 7.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100036,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb909"
+  },
+  "playerName": "Meskelu Letebo",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 4.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100037,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb90a"
+  },
+  "playerName": "Tesfaye Bekele",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 4.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100038,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb90b"
+  },
+  "playerName": "Dula Mulatu",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 11,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100039,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb90c"
+  },
+  "playerName": "Amanuel Gobena",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 10.12,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100040,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb90d"
+  },
+  "playerName": "Kalusha Alhassan",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 9.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100041,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb90e"
+  },
+  "playerName": "Medhane Birhane",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 9,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100042,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb90f"
+  },
+  "playerName": "Tesfaye Alebachew",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 6.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100043,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb910"
+  },
+  "playerName": "Addis Hintsa",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 4.3,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100044,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb911"
+  },
+  "playerName": "Henok Awoke",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 8.2,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100045,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb912"
+  },
+  "playerName": "Fikremikael Alemu",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 5.5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100046,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb913"
+  },
+  "playerName": "Afework Hailu",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100047,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb914"
+  },
+  "playerName": "Haile Eshetu",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 11.6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100048,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb915"
+  },
+  "playerName": "Dawa Hottesa",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100049,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb916"
+  },
+  "playerName": "Dinkneh Kebede",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 11.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100050,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb917"
+  },
+  "playerName": "Oumed Oukri",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 12.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100051,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb918"
+  },
+  "playerName": "Salifou Fofana",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 8.9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100052,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb919"
+  },
+  "playerName": "Bismarck Appiah",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 5.5,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100053,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb91a"
+  },
+  "playerName": "Tezera Abute",
+  "eplTeamId": "Hadiya Hossana F.C",
+  "currentPrice": 5.5,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100054,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb91b"
+  },
+  "playerName": "Teklemariam Shanko",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 9,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100055,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb91c"
+  },
+  "playerName": "Israel Mesfin",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 6.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100056,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb91d"
+  },
+  "playerName": "Abel Mamo",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 5.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100057,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb91e"
+  },
+  "playerName": "Abebe Tilahun",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 8.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100058,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb91f"
+  },
+  "playerName": "Wondmeneh Dereje",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100059,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb920"
+  },
+  "playerName": "Asrat Tunjo",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 4.6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100060,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb921"
+  },
+  "playerName": "Haile Gebretensay",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 8.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100061,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb922"
+  },
+  "playerName": "Temesgen Castro",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100062,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb923"
+  },
+  "playerName": "Ibrahim Baja",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100063,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb924"
+  },
+  "playerName": "Fuad Nesru",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 7.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100064,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb925"
+  },
+  "playerName": "Zekaria Tuji",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 4.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100065,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb926"
+  },
+  "playerName": "Yabkal Fereja",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 4.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100066,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb927"
+  },
+  "playerName": "Fikreyesus Tewoldebrhan",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 11,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100067,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb928"
+  },
+  "playerName": "Amanuel Yohannes",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 10.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100068,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb929"
+  },
+  "playerName": "Tafese Solomon",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 9.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100069,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb92a"
+  },
+  "playerName": "Alemante Kassa",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 9,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100070,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb92b"
+  },
+  "playerName": "Mikias Mekonnen",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 6.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100071,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb92c"
+  },
+  "playerName": "Addis Fiseha",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 4.3,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100072,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb92d"
+  },
+  "playerName": "William Solomon",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 8.2,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100073,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb92e"
+  },
+  "playerName": "Iyasu Tamiru",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 5.5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100074,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb92f"
+  },
+  "playerName": "Abel Kebede",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100075,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb930"
+  },
+  "playerName": "Abubeker Nassir",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 11.6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100076,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb931"
+  },
+  "playerName": "Endale Debalkie",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100077,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb932"
+  },
+  "playerName": "Alazar Shimeles",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 11.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100078,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb933"
+  },
+  "playerName": "Seife Zakir",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100079,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb934"
+  },
+  "playerName": "Habtamu Tadesse",
+  "eplTeamId": "Ethiopian Coffee S.C",
+  "currentPrice": 8.9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100080,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb935"
+  },
+  "playerName": "Abel Mamo",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100081,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb936"
+  },
+  "playerName": "Tariku Aredo",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 6.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100082,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb937"
+  },
+  "playerName": "Yidnekachew Kidane Beyene",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 5.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100083,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb938"
+  },
+  "playerName": "Abebe Tilahun",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 11.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100084,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb939"
+  },
+  "playerName": "Adisu Tesfaye",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100085,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb93a"
+  },
+  "playerName": "Alemneh Girma",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 4.6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100086,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb93b"
+  },
+  "playerName": "Mintesnot Kebede",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 11.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100087,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb93c"
+  },
+  "playerName": "Shemeles Tegegn",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100088,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb93d"
+  },
+  "playerName": "Tafese Serka",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100089,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb93e"
+  },
+  "playerName": "Semere Aregaw",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 7.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100090,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb93f"
+  },
+  "playerName": "Muluken Desalegn Degu",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 4.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100091,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb940"
+  },
+  "playerName": "Amanuel Teshome",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 11,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100092,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb941"
+  },
+  "playerName": "Behaylu Girma",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 10.11,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "price": 0,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 1,
+      "assists": 1,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "transfersIn": 0,
+      "transfersOut": 0,
+      "form": 0,
+      "_id": {
+        "$oid": "6280bd4f4591cd85f0f35d92"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100093,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb942"
+  },
+  "playerName": "Firew Solomon",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 9.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100094,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb944"
+  },
+  "playerName": "Solomon Melkie",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 6.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100096,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb943"
+  },
+  "playerName": "Samuel Taye",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 9,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100095,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb945"
+  },
+  "playerName": "Tewodros Tafesse",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 4.3,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100097,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb946"
+  },
+  "playerName": "Werkneh Dawit",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 11.2,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100098,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb947"
+  },
+  "playerName": "Samuel Saliso",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 5.5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100099,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb948"
+  },
+  "playerName": "Dawit Mamo",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100100,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb949"
+  },
+  "playerName": "Eklesyas Girma",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 7.6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100101,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb94a"
+  },
+  "playerName": "Fikadu Alemu",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100102,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb94b"
+  },
+  "playerName": "Fitsum Gebremariam",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 6.7,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "price": 0,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 1,
+      "assists": 1,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "transfersIn": 0,
+      "transfersOut": 0,
+      "form": 0,
+      "_id": {
+        "$oid": "6280bd564591cd85f0f37401"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100103,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb94c"
+  },
+  "playerName": "Temesgen Gebrekidan",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 11.1,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100104,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb94d"
+  },
+  "playerName": "Minyilu Wondimu",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 4.9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100105,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb94e"
+  },
+  "playerName": "Ernest Barfo",
+  "eplTeamId": "Defence Force S.C",
+  "currentPrice": 5.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100106,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb94f"
+  },
+  "playerName": "Abiyu Kassaye",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100107,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb950"
+  },
+  "playerName": "Wondwossen Ashenafi",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 6.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100108,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb951"
+  },
+  "playerName": "Mintesinot Yegile",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 5.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100109,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb952"
+  },
+  "playerName": "Firew Getahun",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 5.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100110,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb953"
+  },
+  "playerName": "Yasen Jemal",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 13.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100111,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb954"
+  },
+  "playerName": "Henok Isaias",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100112,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb955"
+  },
+  "playerName": "Daniel Demssie",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 4.6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100113,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb956"
+  },
+  "playerName": "Fikadu Deneke",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 13.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100114,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb957"
+  },
+  "playerName": "Kweku Andoh",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100115,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb958"
+  },
+  "playerName": "Bereket Samuel",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100116,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb959"
+  },
+  "playerName": "Wondwossen Dereje",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 7.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100117,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb95a"
+  },
+  "playerName": "Frezer Kassa",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 4.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100118,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb95b"
+  },
+  "playerName": "Muluken Aydagn",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 4.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100119,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb95c"
+  },
+  "playerName": "Zenebe Kebede",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 13,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100120,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb95d"
+  },
+  "playerName": "Awot Gebremikael",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 10.13,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100121,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb95e"
+  },
+  "playerName": "Biniam Tesomelisan",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 9.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100122,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb95f"
+  },
+  "playerName": "Henok Gemtessa",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 9,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100123,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb960"
+  },
+  "playerName": "Remeden Nassir",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 6.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100124,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb961"
+  },
+  "playerName": "Surafel Getachew",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 4.3,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100125,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb962"
+  },
+  "playerName": "Yared Zewdneh",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 13.2,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100126,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb963"
+  },
+  "playerName": "Minyamer Petros",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 5.5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100127,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb964"
+  },
+  "playerName": "Aschenacki Lucas",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100128,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb965"
+  },
+  "playerName": "Itamunua Kemuine",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 7.6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100129,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb966"
+  },
+  "playerName": "Aschalew Girma",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100130,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb967"
+  },
+  "playerName": "Junias Nandjebo",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 6.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100131,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb968"
+  },
+  "playerName": "Richmond Adongo",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 13.1,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100132,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb969"
+  },
+  "playerName": "Samuel Zerihun",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 4.9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100133,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb96a"
+  },
+  "playerName": "Mudin Mussa",
+  "eplTeamId": "Dire Dawa City S.C",
+  "currentPrice": 5.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100134,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb96b"
+  },
+  "playerName": "Yasen Jemal",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100135,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb96c"
+  },
+  "playerName": "Wondwossen Ashenafi",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 6.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100136,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb96d"
+  },
+  "playerName": "Mintesinot Yegile",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 5.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100137,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb96e"
+  },
+  "playerName": "Firew Getahun",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 5.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100138,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb96f"
+  },
+  "playerName": "Abiyu Kassaye",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 14.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100139,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb970"
+  },
+  "playerName": "Bereket Samuel",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100140,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb971"
+  },
+  "playerName": "Daniel Demssie",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 4.6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100141,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb972"
+  },
+  "playerName": "Fikadu Deneke",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 14.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100142,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb973"
+  },
+  "playerName": "Kweku Andoh",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100143,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb974"
+  },
+  "playerName": "Henok Isaias",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100144,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb975"
+  },
+  "playerName": "Wondwossen Dereje",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 7.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100145,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb976"
+  },
+  "playerName": "Frezer Kassa",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 4.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100146,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb977"
+  },
+  "playerName": "Muluken Aydagn",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 4.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100147,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb978"
+  },
+  "playerName": "Zenebe Kebede",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 14,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100148,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb979"
+  },
+  "playerName": "Awot Gebremikael",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 10.14,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100149,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb97a"
+  },
+  "playerName": "Biniam Tesomelisan",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 9.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100150,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb97b"
+  },
+  "playerName": "Henok Gemtessa",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 9,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100151,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb97c"
+  },
+  "playerName": "Remeden Nassir",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 6.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100152,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb97d"
+  },
+  "playerName": "Surafel Getachew",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 4.3,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100153,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb97e"
+  },
+  "playerName": "Yared Zewdneh",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 14.2,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100154,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb97f"
+  },
+  "playerName": "Minyamer Petros",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 5.5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100155,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb980"
+  },
+  "playerName": "Aschenacki Lucas",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 5,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100156,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb981"
+  },
+  "playerName": "Itamunua Kemuine",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 7.6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100157,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb982"
+  },
+  "playerName": "Aschalew Girma",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100158,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb983"
+  },
+  "playerName": "Junias Nandjebo",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 6.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100159,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb984"
+  },
+  "playerName": "Richmond Adongo",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 14.1,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100160,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb985"
+  },
+  "playerName": "Samuel Zerihun",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 4.9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100161,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb986"
+  },
+  "playerName": "Mudin Mussa",
+  "eplTeamId": "Addis Ababa City F.C",
+  "currentPrice": 5.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100162,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb987"
+  },
+  "playerName": "Jeko Penze",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100163,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb988"
+  },
+  "playerName": "Yohannes Shikur",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 6.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100164,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb989"
+  },
+  "playerName": "Abubeker Nuri",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 5.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100165,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb98a"
+  },
+  "playerName": "Wondmagegn Markos",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 15.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100166,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb98b"
+  },
+  "playerName": "Ibrahim Abdulkadir",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100167,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb98c"
+  },
+  "playerName": "Kedir Heirdin",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 4.6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100168,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb98d"
+  },
+  "playerName": "Ashenafi Bira",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 15.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100169,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb98e"
+  },
+  "playerName": "Amanuel Getachew",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100170,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb98f"
+  },
+  "playerName": "Wubshet Alemayehu",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100171,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb990"
+  },
+  "playerName": "Endalamin Nassir",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 7.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100172,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb991"
+  },
+  "playerName": "Roba Worku",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 4.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100173,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb992"
+  },
+  "playerName": "Alex Amuzu",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 4.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100174,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb993"
+  },
+  "playerName": "Surafel Awol",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 15,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100175,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb994"
+  },
+  "playerName": "Bekam Abdella",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 10.15,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100176,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb995"
+  },
+  "playerName": "Abraham Tamirat",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 9.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100177,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb996"
+  },
+  "playerName": "Habtamu Negusse",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 9,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100178,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb997"
+  },
+  "playerName": "Negatu Gebreselassie",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 6.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100179,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb998"
+  },
+  "playerName": "Tirtaye Demeke",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 4.3,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100180,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb999"
+  },
+  "playerName": "Amanuel Teshome",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 15.2,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100181,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb99a"
+  },
+  "playerName": "Sadik Secho",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 7.6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100182,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb99b"
+  },
+  "playerName": "Bezuayehu Endeshaw",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100183,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb99c"
+  },
+  "playerName": "Temesgen Derese",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 6.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100184,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb99d"
+  },
+  "playerName": "Samson Kolicha",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 15.1,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100185,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb99f"
+  },
+  "playerName": "Rahim Osumanu",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 5.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100186,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9a0"
+  },
+  "playerName": "Mintesinot Alo",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100187,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb99e"
+  },
+  "playerName": "Jeylan Kemal",
+  "eplTeamId": "Jimma Aba Jifar F.C",
+  "currentPrice": 4.9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100188,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9a1"
+  },
+  "playerName": "Fasil Gebremichael",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 6.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100189,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9a2"
+  },
+  "playerName": "Solomon Demissie",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 5.5,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100190,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9a3"
+  },
+  "playerName": "Anteneh Tesfaye",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 16.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100191,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9a4"
+  },
+  "playerName": "Getu Hailemariam",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100192,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9a5"
+  },
+  "playerName": "Daniel Hailu",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 4.6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100193,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9a6"
+  },
+  "playerName": "Biadgelegn Elias",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 16.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100194,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9a7"
+  },
+  "playerName": "Messay Paulos",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100195,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9a8"
+  },
+  "playerName": "Alemayehu Muleta",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 6.5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100196,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9a9"
+  },
+  "playerName": "Abdulhafiz Tofik",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 7.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100197,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9aa"
+  },
+  "playerName": "Addis Tesfaye",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 4.9,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100198,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ab"
+  },
+  "playerName": "Hailemichael Adefres",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 4.7,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100199,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ac"
+  },
+  "playerName": "Mesoud Mohammed",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 16,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100200,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ad"
+  },
+  "playerName": "Fuad Fereja",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 10.16,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100201,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ae"
+  },
+  "playerName": "Dawit Estifanos",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 9.6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100202,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9af"
+  },
+  "playerName": "Taddele Mengesha",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 9,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100203,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9b0"
+  },
+  "playerName": "Osei Mawuli",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 7.6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100204,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9b1"
+  },
+  "playerName": "Duresa Shubisa",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100205,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9b2"
+  },
+  "playerName": "Remedan Muhdin",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 6.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100206,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9b3"
+  },
+  "playerName": "Kalkidan Zelalem",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 16.1,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100207,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9b4"
+  },
+  "playerName": "Israel Eshetu",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 4.9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100208,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9b5"
+  },
+  "playerName": "Fitsum Gebremariam",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 5.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100209,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9b6"
+  },
+  "playerName": "Natnael Ganchula",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 5.3,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100210,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9b7"
+  },
+  "playerName": "Ibrahim Kedir",
+  "eplTeamId": "Sebeta City F.C",
+  "currentPrice": 5,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100211,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9b8"
+  },
+  "playerName": "Bahiru Negash",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100212,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9b9"
+  },
+  "playerName": "Temesgen Yohannes",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100213,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ba"
+  },
+  "playerName": "Charles Lukwango",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100214,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9bb"
+  },
+  "playerName": "Suleiman Hamid",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100215,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9bc"
+  },
+  "playerName": "Amanuel Terfa",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100216,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9bd"
+  },
+  "playerName": "Mignot Debebe",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100217,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9bf"
+  },
+  "playerName": "Saladin Bergicho",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100218,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9be"
+  },
+  "playerName": "Desta Demu",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100219,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9c1"
+  },
+  "playerName": "Miraj Sefa",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100220,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9c0"
+  },
+  "playerName": "Henock Adugna",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100221,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9c2"
+  },
+  "playerName": "Frimpong Mensu",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100222,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9c3"
+  },
+  "playerName": "Gatouch Panom",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100223,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9c4"
+  },
+  "playerName": "Haider Sherefa",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100224,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9c5"
+  },
+  "playerName": "Yabsira Tesfaye",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100225,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9c6"
+  },
+  "playerName": "Kannan Markineh",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100226,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9c8"
+  },
+  "playerName": "Fuad Abdela",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100227,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9c7"
+  },
+  "playerName": "Bereket Wolde",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100228,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9c9"
+  },
+  "playerName": "Abraham Getachew",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100229,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9cb"
+  },
+  "playerName": "Bulcha Shura",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100230,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ca"
+  },
+  "playerName": "Natnael Zeleke",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100231,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9cc"
+  },
+  "playerName": "Tegenu Teshome",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100232,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9cd"
+  },
+  "playerName": "Abel Yalew",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100233,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ce"
+  },
+  "playerName": "Amanuel Gebremichael",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100234,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9cf"
+  },
+  "playerName": "Cherinet Gugssa",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100235,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9d0"
+  },
+  "playerName": "Addis Gidey",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100236,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9d1"
+  },
+  "playerName": "Dagmawi Araya",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100237,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9d2"
+  },
+  "playerName": "Alazar",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100238,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9d3"
+  },
+  "playerName": "Esmael Goro-Agoro",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 10.7,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100239,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9d4"
+  },
+  "playerName": "Misganaw",
+  "eplTeamId": "Saint George S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100240,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9d5"
+  },
+  "playerName": "Biniam Genetu",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100241,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9d6"
+  },
+  "playerName": "Seid Habtamu",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100242,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9d7"
+  },
+  "playerName": "Mekbib Degefu",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100243,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9d8"
+  },
+  "playerName": "Ayoub Beketa",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100244,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9d9"
+  },
+  "playerName": "Yared Dawit",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100245,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9da"
+  },
+  "playerName": "Degu Debebe",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100246,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9db"
+  },
+  "playerName": "Anagaw Badeg",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100247,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9dc"
+  },
+  "playerName": "Abinet Demissie",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100248,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9dd"
+  },
+  "playerName": "Anteneh Gugsa",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100249,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9de"
+  },
+  "playerName": "Mesay Agegnehu",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100250,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9df"
+  },
+  "playerName": "Asnake Moges",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100251,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9e0"
+  },
+  "playerName": "Tsegaye Birhanu",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100252,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9e1"
+  },
+  "playerName": "Yonas Girmay",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100253,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9e2"
+  },
+  "playerName": "Idris Seid",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100254,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9e3"
+  },
+  "playerName": "Mesay Nicole",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100255,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9e4"
+  },
+  "playerName": "Melkamu Bogale",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100256,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9e5"
+  },
+  "playerName": "Negash Taddese",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100257,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9e6"
+  },
+  "playerName": "Abebayehu Achiso",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100258,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9e7"
+  },
+  "playerName": "Tsegaye Abera",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100259,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9e8"
+  },
+  "playerName": "Finhas Temesgen",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100260,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9e9"
+  },
+  "playerName": "Amanuel Teshome",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100261,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ea"
+  },
+  "playerName": "Azarias Abel",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100262,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9eb"
+  },
+  "playerName": "Azarias Abel",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100263,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ec"
+  },
+  "playerName": "Netsanet Gebremedhin",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100264,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ed"
+  },
+  "playerName": "Sintayehu Mengistu",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100265,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ee"
+  },
+  "playerName": "Yared Darza",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100266,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ef"
+  },
+  "playerName": "Biniam Fikre",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100267,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9f0"
+  },
+  "playerName": "Eyob Alemayehu",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100268,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9f1"
+  },
+  "playerName": "Chernet Gugsa",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100269,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9f2"
+  },
+  "playerName": "Bereket Wondimu",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100270,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9f3"
+  },
+  "playerName": "Izu Azuka",
+  "eplTeamId": "Wolaita Dicha S.C",
+  "currentPrice": 8.8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100271,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9f4"
+  },
+  "playerName": "Mensah Nsouhoho",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f061c0"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100272,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9f5"
+  },
+  "playerName": "Dagim Tefera",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f061ce"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100273,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9f6"
+  },
+  "playerName": "Alazar Markos",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f061dc"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100274,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9f7"
+  },
+  "playerName": "Mintesinot Gimbo",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f061ea"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100275,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9f8"
+  },
+  "playerName": "Zenebe Kedir",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 5,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f061f8"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100276,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9f9"
+  },
+  "playerName": "Mignot Debebe",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 3,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06206"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100277,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9fa"
+  },
+  "playerName": "Addisalem Tesfaye",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 8,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06214"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100278,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9fb"
+  },
+  "playerName": "Daniel Deribe",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 11,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06222"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100279,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9fc"
+  },
+  "playerName": "Desta Yohannes",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 14,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06230"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100280,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9fd"
+  },
+  "playerName": "Lawrence Lartey",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 9.6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0623e"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100281,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9fe"
+  },
+  "playerName": "Mintesinot Indrias",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 7,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0624c"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100282,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bb9ff"
+  },
+  "playerName": "Wondmagegn Meareg",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 5.6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0625a"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100283,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba00"
+  },
+  "playerName": "Tsega'ab Yohnnes",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 4.8,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06268"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100284,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba01"
+  },
+  "playerName": "Ephrem Zekarias",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 4.7,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06276"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100285,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba02"
+  },
+  "playerName": "Gabriel Ahmed",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 4.7,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06284"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100286,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba03"
+  },
+  "playerName": "Zelalem Isaias",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 4.9,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06292"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100287,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba04"
+  },
+  "playerName": "Chernet Awush",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 7.7,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f062a0"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100288,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba05"
+  },
+  "playerName": "Abayneh Fino",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 6.8,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f062ae"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100289,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba06"
+  },
+  "playerName": "Birhanu Bekele",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 5.4,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f062bc"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100290,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba07"
+  },
+  "playerName": "Abenezer Yohannes",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 4.9,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f062ca"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100291,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba08"
+  },
+  "playerName": "Dawit Tadesse",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 5.7,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f062d8"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100292,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba09"
+  },
+  "playerName": "Yohannes Segeboo",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 12.5,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f062e6"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100293,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba0a"
+  },
+  "playerName": "Alelegn Azene",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 10,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f062f4"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100294,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba0b"
+  },
+  "playerName": "Henok Dilbi",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 7,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06302"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100295,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba0c"
+  },
+  "playerName": "Wondmagegn Hailu",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 15,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06310"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100296,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba0d"
+  },
+  "playerName": "Habtamu Mekonnen",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0631e"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100297,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba0e"
+  },
+  "playerName": "Mesfin Tafesse",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 4.5,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0632c"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100298,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba0f"
+  },
+  "playerName": "Biruk Beyene",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 4.5,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0633a"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100299,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba10"
+  },
+  "playerName": "Tebarek Hefamo",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 4.9,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06348"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100300,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba11"
+  },
+  "playerName": "Ephrem Ashamo",
+  "eplTeamId": "Hawassa Kenema S.C",
+  "currentPrice": 4,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06356"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100301,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba12"
+  },
+  "playerName": "N'Tji Michel Samaké",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100302,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba13"
+  },
+  "playerName": "Tewodros Getnet",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100303,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba14"
+  },
+  "playerName": "Yidnekachew Beyene",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100304,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba15"
+  },
+  "playerName": "Tewodros Getnet",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100305,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba16"
+  },
+  "playerName": "Abdulkerim Mohammed",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100306,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba17"
+  },
+  "playerName": "Kedir Coulibaly",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100307,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba18"
+  },
+  "playerName": "Samuel Yohannes",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100308,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba19"
+  },
+  "playerName": "Seid Hassen",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100309,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba1a"
+  },
+  "playerName": "Aschalew Tamene",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 8,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100310,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba1b"
+  },
+  "playerName": "Yared Bayeh",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100311,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba1c"
+  },
+  "playerName": "Amsalu Tilahun",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 12,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100312,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba1d"
+  },
+  "playerName": "Abel Eyayu",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 9.6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100313,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba1e"
+  },
+  "playerName": "Daniel Zemede",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 5.6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100314,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba1f"
+  },
+  "playerName": "Bereket Desta",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100315,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba20"
+  },
+  "playerName": "Yehun Endeshaw",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100316,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba21"
+  },
+  "playerName": "Surafel Dagnachew",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100317,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba22"
+  },
+  "playerName": "Habtamu Tekeste",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100318,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba23"
+  },
+  "playerName": "Bezabeh Meleyo",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100319,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba24"
+  },
+  "playerName": "Natnael Gebregiorgis",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100320,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba25"
+  },
+  "playerName": "Natnael Masresha",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100321,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba26"
+  },
+  "playerName": "Okiki Afolabi",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100322,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba27"
+  },
+  "playerName": "Fikadu Alemu",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 15,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100323,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba28"
+  },
+  "playerName": "Shemeket Gugsa",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100324,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba29"
+  },
+  "playerName": "Mujib Kassim",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100325,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba2a"
+  },
+  "playerName": "Yidnekachew Beyene",
+  "eplTeamId": "Fasil Kenema S.C",
+  "currentPrice": 4,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100326,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba2b"
+  },
+  "playerName": "Fikir Wedessa",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f05ff2"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100327,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba2c"
+  },
+  "playerName": "Adugna Tsegaye",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06000"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100328,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba2d"
+  },
+  "playerName": "Mesay Ayano",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0600e"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100329,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba2e"
+  },
+  "playerName": "Leykun Negash",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0601c"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100330,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba2f"
+  },
+  "playerName": "Fetudin Jemal",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0602a"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100331,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba30"
+  },
+  "playerName": "Amanuel Endale",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06038"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100332,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba31"
+  },
+  "playerName": "Mehari Mena",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06046"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100333,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba32"
+  },
+  "playerName": "Shimeles Tegegn",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06054"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100334,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba33"
+  },
+  "playerName": "Girum Assefa",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06062"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100335,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba34"
+  },
+  "playerName": "Yonatan Fisseha",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06070"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100336,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba35"
+  },
+  "playerName": "Girma Bekele",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0607e"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100337,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba36"
+  },
+  "playerName": "Git Gatkoch",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0608c"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100338,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba37"
+  },
+  "playerName": "Kifle Kia",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0609a"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100339,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba38"
+  },
+  "playerName": "Sunday Mutuku",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f060a8"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100340,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba39"
+  },
+  "playerName": "Lawrence Edward",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f060b6"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100341,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba3a"
+  },
+  "playerName": "Henock Maru",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f060c4"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100342,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba3b"
+  },
+  "playerName": "Yosef Yohannes",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f060d2"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100343,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba3c"
+  },
+  "playerName": "Mikael Hasisa",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f060e0"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100344,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba3d"
+  },
+  "playerName": "Dawit Tefera",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f060ee"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100345,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba3e"
+  },
+  "playerName": "Birhanu Ashamo",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f060fc"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100346,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba3f"
+  },
+  "playerName": "Biniam Lantamo",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0610a"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100347,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba40"
+  },
+  "playerName": "Yonas Geremew",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06118"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100348,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba41"
+  },
+  "playerName": "Abebayehu Yohannes",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06126"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100349,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba42"
+  },
+  "playerName": "Yassar Mugerwa",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06134"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100350,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba43"
+  },
+  "playerName": "Abayne Amelo",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06142"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100351,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba44"
+  },
+  "playerName": "Okiki Afolabi",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06150"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100352,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba45"
+  },
+  "playerName": "Habtamu Gezahegn",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0615e"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100353,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba46"
+  },
+  "playerName": "Addisu Atula",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0616c"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100354,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba47"
+  },
+  "playerName": "Chala Teshita",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "minutesPlayed": 75,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f0617a"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100355,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba48"
+  },
+  "playerName": "Temesgen Bejrond",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06188"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100356,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba49"
+  },
+  "playerName": "Yigezu Bogale",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f06196"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100357,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba4a"
+  },
+  "playerName": "Mamadou Sidebe",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f061a4"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100358,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba4b"
+  },
+  "playerName": "Yared Kebede",
+  "eplTeamId": "Sidama Coffee S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 0,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "_id": {
+        "$oid": "6280bc8c4591cd85f0f061b2"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100359,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba4c"
+  },
+  "playerName": "Jemal Tassew",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100360,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba4d"
+  },
+  "playerName": "George Desta",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100361,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba4e"
+  },
+  "playerName": "Yohannes Bezabeh",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100362,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba4f"
+  },
+  "playerName": "Sylvain Gbohouo",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100363,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba50"
+  },
+  "playerName": "Remedan Yesouf",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100364,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba51"
+  },
+  "playerName": "Mohammed Shafi",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100365,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba52"
+  },
+  "playerName": "Seyoum Tesfaye",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100366,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba53"
+  },
+  "playerName": "Tesfaye Negash",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100367,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba54"
+  },
+  "playerName": "Tesfaye Melaku",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100368,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba55"
+  },
+  "playerName": "Yibeltal Shibabaw",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100369,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba56"
+  },
+  "playerName": "Adane Belayneh",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100370,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba57"
+  },
+  "playerName": "Dagim Nigussie",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100371,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba58"
+  },
+  "playerName": "Yibeltale Shebabaw",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100372,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba59"
+  },
+  "playerName": "Tomas Simretu",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100373,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba5a"
+  },
+  "playerName": "Fereja Hailu",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100374,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba5b"
+  },
+  "playerName": "Asari Al-Mehadi",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100375,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba5c"
+  },
+  "playerName": "Jibril Nassir",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100376,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba5d"
+  },
+  "playerName": "Firew Solomon",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100377,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba5e"
+  },
+  "playerName": "Abdulkerim Worku",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100378,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba5f"
+  },
+  "playerName": "Behailu Teshager",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100379,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba60"
+  },
+  "playerName": "Yared Tadesse",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100380,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba61"
+  },
+  "playerName": "Habtamu Shewalem",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100381,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba62"
+  },
+  "playerName": "Mulugeta Woldegiorgis",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100382,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba63"
+  },
+  "playerName": "Muhajir Meki",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100383,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba65"
+  },
+  "playerName": "Abubeker Sanni",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100384,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba64"
+  },
+  "playerName": "Ame Mohammed",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100385,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba66"
+  },
+  "playerName": "Ahmed Hussein",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100386,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba67"
+  },
+  "playerName": "Henok Ayele",
+  "eplTeamId": "Wolkite City F.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100387,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba68"
+  },
+  "playerName": "Tarik Getnet",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100388,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba69"
+  },
+  "playerName": "Daniel Teshome",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100389,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba6a"
+  },
+  "playerName": "Ibsa Abebe",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100390,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba6b"
+  },
+  "playerName": "Akalu Abera",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100391,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba6c"
+  },
+  "playerName": "Jemil Yakob",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100392,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba6d"
+  },
+  "playerName": "Eyob Matewos",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100393,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba6e"
+  },
+  "playerName": "Suleiman Mohammed",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100394,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba6f"
+  },
+  "playerName": "Tafese Serka",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100395,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba70"
+  },
+  "playerName": "Desta Gichamo",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100396,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba72"
+  },
+  "playerName": "Amsalu Mengesha",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100397,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba71"
+  },
+  "playerName": "Amin Nesru",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100398,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7798bed9e567269bba73"
+  },
+  "playerName": "Tigistu Abera",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100399,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba74"
+  },
+  "playerName": "Zerihun Birhanu",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100400,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba75"
+  },
+  "playerName": "Bekalu Genene",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100401,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba76"
+  },
+  "playerName": "Tewodros Gebregziahber",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100402,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba77"
+  },
+  "playerName": "Mujahid Mohammed",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100403,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba78"
+  },
+  "playerName": "Tsegaye Balcha",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100404,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba79"
+  },
+  "playerName": "Aklilu Tefera",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100405,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba7a"
+  },
+  "playerName": "Dagim Tareknegn",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100406,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba7b"
+  },
+  "playerName": "Biruk Mengesha",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100407,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba7c"
+  },
+  "playerName": "Desalegn Debash",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100408,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba7d"
+  },
+  "playerName": "Elias Mamo",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100409,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba7e"
+  },
+  "playerName": "Elias Ahmed",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100410,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba7f"
+  },
+  "playerName": "Fisseha Tomas",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100411,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba80"
+  },
+  "playerName": "Belay Abayneh",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100412,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba81"
+  },
+  "playerName": "Abdisa Jemal",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100413,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba82"
+  },
+  "playerName": "Yehualashet Fikadu",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100414,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba83"
+  },
+  "playerName": "Seife Zakir",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100415,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba84"
+  },
+  "playerName": "Habtamu Wolde",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100416,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba85"
+  },
+  "playerName": "Yared Birhanu",
+  "eplTeamId": "Adama City S.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100417,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba86"
+  },
+  "playerName": "Yesaq Tegegne",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100418,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba87"
+  },
+  "playerName": "Habtamu Said",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100419,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba88"
+  },
+  "playerName": "Dais Tamu",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100420,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba89"
+  },
+  "playerName": "Seid Habtu",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100421,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba8a"
+  },
+  "playerName": "Bereket Habtamu",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "GK",
+  "score": [],
+  "history": [],
+  "playerId": 100422,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba8b"
+  },
+  "playerName": "Biruk Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100423,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba8c"
+  },
+  "playerName": "Yohannes Biruk",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100424,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba8d"
+  },
+  "playerName": "Bereket Wolde-Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100425,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba8e"
+  },
+  "playerName": "Yohannes Bereket",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100426,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba8f"
+  },
+  "playerName": "Yohannes Wolde",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100427,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba90"
+  },
+  "playerName": "Bereket Wolde-Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 5,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100428,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba91"
+  },
+  "playerName": "Bereket Wolde",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100429,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba92"
+  },
+  "playerName": "Bereket Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100430,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba93"
+  },
+  "playerName": "Wolde Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100431,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba94"
+  },
+  "playerName": "Yohannes Yihun",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100432,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba95"
+  },
+  "playerName": "Talaku Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100433,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba96"
+  },
+  "playerName": "Bereket Yihun",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100434,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba97"
+  },
+  "playerName": "Yihun Wolde-Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "DEF",
+  "score": [],
+  "history": [],
+  "playerId": 100435,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba98"
+  },
+  "playerName": "Mehal Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100436,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba99"
+  },
+  "playerName": "Yesu Balew",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100437,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba9a"
+  },
+  "playerName": "Mebratu Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100438,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba9b"
+  },
+  "playerName": "Yohannes Mebratu",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100439,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba9c"
+  },
+  "playerName": "Yihun Mebratu",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [
+    {
+      "gameweekId": 1,
+      "price": 0,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 0,
+      "assists": 1,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "transfersIn": 0,
+      "transfersOut": 0,
+      "form": 0,
+      "_id": {
+        "$oid": "6280bd414591cd85f0f336e5"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100440,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba9d"
+  },
+  "playerName": "Yohannes Mebratu",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100441,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba9e"
+  },
+  "playerName": "Biruk Mebratu",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100442,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bba9f"
+  },
+  "playerName": "Ben Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100443,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bbaa0"
+  },
+  "playerName": "Fasil Susenyos",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100444,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bbaa1"
+  },
+  "playerName": "Yohannes Meskerem",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100445,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bbaa2"
+  },
+  "playerName": "Wolde Tatek",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100446,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bbaa3"
+  },
+  "playerName": "Yohannes Kibru",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "MID",
+  "score": [],
+  "history": [],
+  "playerId": 100447,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bbaa4"
+  },
+  "playerName": "Fekadu Mekonin",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 8.5,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "price": 0,
+      "fantasyScore": 0,
+      "minutesPlayed": 0,
+      "goals": 1,
+      "assists": 1,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "transfersIn": 0,
+      "transfersOut": 0,
+      "form": 0,
+      "_id": {
+        "$oid": "6280bd3c4591cd85f0f32b9f"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100448,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bbaa5"
+  },
+  "playerName": "Sintayehu Mengistu",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [
+    {
+      "gameweekId": 1,
+      "price": 0,
+      "fantasyScore": 8,
+      "minutesPlayed": 0,
+      "goals": 2,
+      "assists": 1,
+      "cleanSheet": 0,
+      "yellows": 0,
+      "reds": 0,
+      "penalitiesMissed": 0,
+      "penalitiesSaved": 0,
+      "saves": 0,
+      "ownGoal": 0,
+      "transfersIn": 0,
+      "transfersOut": 0,
+      "form": 0,
+      "_id": {
+        "$oid": "6280bd354591cd85f0f3154b"
+      }
+    }
+  ],
+  "history": [],
+  "playerId": 100449,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bbaa6"
+  },
+  "playerName": "Fekadu Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6.9,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100450,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bbaa7"
+  },
+  "playerName": "Mengistu Yohannes",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 7.5,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100451,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bbaa8"
+  },
+  "playerName": "Mekonin Fekadu",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 6,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100452,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627a7799bed9e567269bbaa9"
+  },
+  "playerName": "Biruk Mengistu",
+  "eplTeamId": "Arba Minch City F.C",
+  "currentPrice": 8,
+  "position": "ATT",
+  "score": [],
+  "history": [],
+  "playerId": 100453,
+  "__v": 0
+}]
