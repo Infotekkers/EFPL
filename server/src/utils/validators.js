@@ -363,7 +363,3 @@ module.exports = {
 
   constructTeamFromID,
 };
-
-module.exports = {
-  validateTeam,
-};

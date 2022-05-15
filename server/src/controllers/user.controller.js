@@ -355,8 +355,6 @@ const getUserTeam = asyncHandler(async (req, res) => {
       gameWeekDeadline: currentGameWeek.startTimestamp,
     };
 
-    console.log(finalFormat);
-
     res.status(200).send(finalFormat);
   } else {
     res.status(404).send("No Team Info Found");

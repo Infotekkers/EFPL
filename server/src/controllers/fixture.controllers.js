@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const statUpdater = require("../utils/helpers").statUpdater;
+const validator = require("../utils/validators");
 
 const FixtureModel = require("../models/Fixtures");
 const TeamModel = require("../models/Teams");
@@ -673,13 +674,62 @@ const deleteFixture = asyncHandler(async function (req, res) {
 
 const getAllFixturesOfGameWeek = asyncHandler(async function (req, res) {
   const gameWeekId = req.params.gameWeekId;
-  const matches = await FixtureModel.find({ gameweekId: gameWeekId }).select(
-    "-_id"
+  const matches = await FixtureModel.find({ gameweekId: gameWeekId }).select({
+    _id: 0,
+    __v: 0,
+    // matchStat: 0,
+  });
+
+  const matchAndTeamInfo = [];
+
+  for (let i = 0; i < matches.length; i++) {
+    const currMatch = {};
+    const homeTeamInfo = await TeamModel.findOne({
+      teamName: matches[i].homeTeam,
+    }).select({ _id: 0, __v: 0, teamId: 0, teamName: 0, foundedIn: 0 });
+
+    const awayTeamInfo = await TeamModel.findOne({
+      teamName: matches[i].awayTeam,
+    }).select({ _id: 0, __v: 0, teamId: 0, teamName: 0, foundedIn: 0 });
+
+    currMatch.gameWeekId = matches[i].gameweekId;
+    currMatch.matchId = matches[i].matchId;
+    currMatch.schedule = matches[i].schedule;
+    currMatch.status = matches[i].status;
+    currMatch.score = matches[i].score;
+    currMatch.homeTeam = matches[i].homeTeam;
+    currMatch.awayTeam = matches[i].awayTeam;
+
+    currMatch.homeTeamCity = homeTeamInfo.teamCity;
+    currMatch.homeTeamStadium = homeTeamInfo.teamStadium;
+    currMatch.homeTeamLogo = homeTeamInfo.teamLogo;
+    currMatch.homeTeamCapacity = homeTeamInfo.stadiumCapacity;
+    currMatch.homeTeamCoach = homeTeamInfo.teamCoach;
+
+    currMatch.awayTeamCity = awayTeamInfo.teamCity;
+    currMatch.awayTeamStadium = awayTeamInfo.teamStadium;
+    currMatch.awayTeamLogo = awayTeamInfo.teamLogo;
+    currMatch.awayTeamCapacity = awayTeamInfo.stadiumCapacity;
+    currMatch.awayTeamCoach = awayTeamInfo.teamCoach;
+
+    const processFinalLineup = await validator.processTeamIdToData(matches[i]);
+
+    currMatch.homeTeamLineUp = processFinalLineup[0];
+    currMatch.awayTeamLineUp = processFinalLineup[1];
+
+    matchAndTeamInfo.push(currMatch);
+  }
+
+  res.status(200).send(matchAndTeamInfo);
+});
+
+const getFixtureDetail = asyncHandler(async function (req, res) {
+  const matchId = req.params.matchId;
+  const match = await FixtureModel.findOne({ matchId: matchId }).select(
+    "matchStat score homeTeamLineUp awayTeamLineUp status"
   );
 
-  setTimeout(() => {
-    res.status(200).send(matches);
-  }, 2000);
+  res.status(200).send(match);
 });
 
 module.exports = {
@@ -696,5 +746,8 @@ module.exports = {
   updateLineup,
   updateStats,
   updateScore,
+
+  // New
   getAllFixturesOfGameWeek,
+  getFixtureDetail,
 };

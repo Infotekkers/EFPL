@@ -31,4 +31,8 @@ router.delete(
   fixtureController.deleteFixture
 );
 
+router.get("/gw/:gameWeekId", fixtureController.getAllFixturesOfGameWeek);
+
+router.get("/gw/detail/:matchId", fixtureController.getFixtureDetail);
+
 module.exports = router;
