@@ -81,3 +81,24 @@ Either<ValueFailure<Map<String, dynamic>>, Map<String, dynamic>>
         ValueFailure.exceedingRange(failedValue: userPlayers, range: range));
   }
 }
+
+Either<ValueFailure<int>, int> validateRangeOfMultiplier(
+    String playerStr, List range) {
+  int playerNumber = int.parse(playerStr);
+
+  if (playerNumber >= range[0] && playerNumber <= range[range.length - 1]) {
+    return right(playerNumber);
+  } else {
+    return left(
+        ValueFailure.exceedingRange(failedValue: playerNumber, range: range));
+  }
+}
+
+Either<ValueFailure<String>, String> validatePosition(
+    String positionStr, List<String> validPositions) {
+  if (validPositions.contains(positionStr)) {
+    return right(positionStr);
+  } else {
+    return left(ValueFailure.invalid(failedValue: positionStr));
+  }
+}
