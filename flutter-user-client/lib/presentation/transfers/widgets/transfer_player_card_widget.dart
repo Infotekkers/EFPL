@@ -192,24 +192,28 @@ class UserPlayerCard extends StatelessWidget {
 
             // Price
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.1,
-              child: Text(
-                currentPlayer.currentPrice.value.fold(
-                  (l) => '',
-                  (r) => r.toString(),
+              width: MediaQuery.of(context).size.width * 0.17,
+              child: Center(
+                child: Text(
+                  currentPlayer.currentPrice.value.fold(
+                    (l) => '',
+                    (r) => r.toString(),
+                  ),
+                  style: const TextStyle(fontSize: 16),
                 ),
-                style: const TextStyle(fontSize: 16),
               ),
             ),
 
             // Total Points
             // Price
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.15,
-              child: const Text(
-                "Score",
-                style: TextStyle(
-                  fontSize: 16,
+              width: MediaQuery.of(context).size.width * 0.18,
+              child: const Center(
+                child: Text(
+                  "Score",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
             )

@@ -48,7 +48,7 @@ class TransferPlayerView extends StatelessWidget {
           allTeamsNames.add(team['teamName']);
         }
 
-        RangeValues _currentRangeValues = const RangeValues(4.5, 15);
+        RangeValues _currentRangeValues = const RangeValues(3.5, 17);
 
         return Scaffold(
           appBar: AppBar(
@@ -300,17 +300,12 @@ class TransferPlayerView extends StatelessWidget {
                                         0.76,
                                     child: RangeSlider(
                                       values: _currentRangeValues,
-                                      max: 15,
+                                      max: 17,
                                       divisions: 1,
-                                      labels: RangeLabels(
-                                        _currentRangeValues.start
-                                            .round()
-                                            .toString(),
-                                        _currentRangeValues.end
-                                            .round()
-                                            .toString(),
-                                      ),
-                                      onChanged: (RangeValues values) {},
+                                      labels: RangeLabels("4", "17"),
+                                      onChanged: (RangeValues values) {
+                                        print(values);
+                                      },
                                     ),
                                   ),
                                   Container(
@@ -332,7 +327,7 @@ class TransferPlayerView extends StatelessWidget {
                           height: 45,
                           margin: const EdgeInsets.fromLTRB(0, 12, 0, 15),
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          color: Colors.grey,
+                          color: ConstantColors.primary_900,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -347,14 +342,38 @@ class TransferPlayerView extends StatelessWidget {
                                   );
                                 },
                                 child: SizedBox(
-                                  child: const Text(
-                                    "Player",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      letterSpacing: 0.5,
-                                      fontFamily: "Architect",
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      const Text(
+                                        "Player",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          letterSpacing: 0.5,
+                                          fontFamily: "Architect",
+                                          fontWeight: FontWeight.bold,
+                                          color: ConstantColors.neutral_200,
+                                        ),
+                                      ),
+                                      state.playerNameCurrentSortOrder == ""
+                                          ? const SizedBox(
+                                              height: 0,
+                                              width: 0,
+                                            )
+                                          : state.playerNameCurrentSortOrder ==
+                                                  "a"
+                                              ? const Icon(
+                                                  Icons.arrow_drop_up,
+                                                  size: 25,
+                                                  color: ConstantColors
+                                                      .success_300,
+                                                )
+                                              : const Icon(
+                                                  Icons.arrow_drop_down,
+                                                  size: 25,
+                                                  color:
+                                                      ConstantColors.error_300,
+                                                ),
+                                    ],
                                   ),
                                   width:
                                       MediaQuery.of(context).size.width * 0.55,
@@ -371,17 +390,42 @@ class TransferPlayerView extends StatelessWidget {
                                   );
                                 },
                                 child: SizedBox(
-                                  child: const Text(
-                                    "Price",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      // letterSpacing: 0.,
-                                      fontFamily: "Architect",
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        "Price",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          // letterSpacing: 0.,
+                                          fontFamily: "Architect",
+                                          fontWeight: FontWeight.bold,
+                                          color: ConstantColors.neutral_200,
+                                        ),
+                                      ),
+                                      state.playerPriceCurrentSortOrder == ""
+                                          ? const SizedBox(
+                                              height: 0,
+                                              width: 0,
+                                            )
+                                          : state.playerPriceCurrentSortOrder ==
+                                                  "a"
+                                              ? const Icon(
+                                                  Icons.arrow_drop_up,
+                                                  size: 25,
+                                                  color: ConstantColors
+                                                      .success_300,
+                                                )
+                                              : const Icon(
+                                                  Icons.arrow_drop_down,
+                                                  size: 25,
+                                                  color:
+                                                      ConstantColors.error_300,
+                                                ),
+                                    ],
                                   ),
                                   width:
-                                      MediaQuery.of(context).size.width * 0.1,
+                                      MediaQuery.of(context).size.width * 0.17,
                                 ),
                               ),
 
@@ -395,17 +439,42 @@ class TransferPlayerView extends StatelessWidget {
                                   );
                                 },
                                 child: SizedBox(
-                                  child: const Text(
-                                    "Points",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      letterSpacing: 0.5,
-                                      fontFamily: "Architect",
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        "Points",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          letterSpacing: 0.5,
+                                          fontFamily: "Architect",
+                                          fontWeight: FontWeight.bold,
+                                          color: ConstantColors.neutral_200,
+                                        ),
+                                      ),
+                                      state.playerScoreCurrentSortOrder == ""
+                                          ? const SizedBox(
+                                              height: 0,
+                                              width: 0,
+                                            )
+                                          : state.playerScoreCurrentSortOrder ==
+                                                  "a"
+                                              ? const Icon(
+                                                  Icons.arrow_drop_up,
+                                                  size: 25,
+                                                  color: ConstantColors
+                                                      .success_300,
+                                                )
+                                              : const Icon(
+                                                  Icons.arrow_drop_down,
+                                                  size: 25,
+                                                  color:
+                                                      ConstantColors.error_300,
+                                                ),
+                                    ],
                                   ),
                                   width:
-                                      MediaQuery.of(context).size.width * 0.15,
+                                      MediaQuery.of(context).size.width * 0.18,
                                 ),
                               )
                             ],

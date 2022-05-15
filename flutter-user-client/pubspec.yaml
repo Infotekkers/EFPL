@@ -30,6 +30,7 @@ dependencies:
   cached_network_image: ^3.2.0
   liquid_pull_to_refresh: ^3.0.1
   tab_container: ^2.0.0
+  syncfusion_flutter_sliders: ^20.1.55
 
 dev_dependencies:
   bloc_test: ^9.0.3

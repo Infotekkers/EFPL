@@ -632,7 +632,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
     });
 
     on<_setSortFilter>((event, emit) async {
-      // x.sort((a, b) => a['value'].compareTo(b['value']));
       // set loading
       emit(
         state.copyWith(
@@ -684,6 +683,8 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             filteredSelectedPlayerReplacements: allPlayersFiltered,
             playerNameCurrentSortOrder:
                 currentSort == "d" || currentSort == "" ? "a" : "d",
+            playerPriceCurrentSortOrder: "",
+            playerScoreCurrentSortOrder: "",
           ),
         );
       }
@@ -729,6 +730,8 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             filteredSelectedPlayerReplacements: allPlayersFiltered,
             playerPriceCurrentSortOrder:
                 currentSort == "d" || currentSort == "" ? "a" : "d",
+            playerNameCurrentSortOrder: "",
+            playerScoreCurrentSortOrder: "",
           ),
         );
       }
