@@ -44,6 +44,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       final UserTeam userTeam = failureOrSuccess.fold(
         (l) => UserTeam(
           gameWeekId: GameWeekId(value: 1),
+          gameWeekDeadline: "",
           allUserPlayers: [],
           freeTransfers: 0,
           deduction: 0,
@@ -169,6 +170,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         // update user team
         UserTeam newUserTeam = UserTeam(
           gameWeekId: state.userTeam.gameWeekId,
+          gameWeekDeadline: state.userTeam.gameWeekDeadline,
           allUserPlayers: allUserPlayers,
           freeTransfers: state.userTeam.freeTransfers == 1 ? 0 : 0,
           deduction: state.userTeam.freeTransfers == 1
@@ -273,7 +275,10 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           multiplier: 1,
           isCaptain: false,
           isViceCaptain: false,
-          availability: PlayerAvailability(value: availability),
+          availability:
+              PlayerAvailability(value: playerToTransferInJson['availability']),
+          eplTeamLogo: playerToTransferInJson['eplTeamLogo'],
+          score: playerToTransferInJson['score'],
         );
 
         // add player to user team
@@ -289,6 +294,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       // update team players
       UserTeam newUserTeam = UserTeam(
         gameWeekId: state.userTeam.gameWeekId,
+        gameWeekDeadline: state.userTeam.gameWeekDeadline,
         allUserPlayers: allNewUserPlayers,
         freeTransfers: 1,
         deduction:
@@ -386,7 +392,10 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           multiplier: 1,
           isCaptain: false,
           isViceCaptain: false,
-          availability: PlayerAvailability(value: availability),
+          availability:
+              PlayerAvailability(value: playerToTransferInJson['availability']),
+          eplTeamLogo: playerToTransferInJson['eplTeamLogo'],
+          score: playerToTransferInJson['score'],
         );
 
         // add player to user team
@@ -398,6 +407,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         // create new team
         UserTeam newUserTeam = UserTeam(
           gameWeekId: state.userTeam.gameWeekId,
+          gameWeekDeadline: state.userTeam.gameWeekDeadline,
           allUserPlayers: allUserPlayers,
           freeTransfers: state.transfersMadeCount == 0 ? 1 : 0,
           deduction:
@@ -736,9 +746,72 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         );
       }
       //
-      else if (event.sortBy == "points") {
-        // TODO:ADD SORT BY SCORE
+      else if (event.sortBy == "point") {
+        // get state
+        String currentSort = state.playerScoreCurrentSortOrder;
+
+        if (currentSort == "" || currentSort == 'd') {
+          allPlayersFiltered.sort(
+            (a, b) => a.score.compareTo(b.score),
+          );
+        } else {
+          allPlayersFiltered.sort(
+            (a, b) => b.score.compareTo(a.score),
+          );
+        }
+
+        emit(
+          state.copyWith(
+            isLoading: false,
+            filteredSelectedPlayerReplacements: allPlayersFiltered,
+            playerScoreCurrentSortOrder:
+                currentSort == "d" || currentSort == "" ? "a" : "d",
+            playerPriceCurrentSortOrder: "",
+            playerNameCurrentSortOrder: "",
+          ),
+        );
       }
+    });
+
+    on<_setPriceFilter>((event, emit) async {
+      emit(
+        state.copyWith(
+          // isLoading: true,
+          minPriceSet: event.minValue,
+          maxPriceSet: event.maxValue,
+        ),
+      );
+    });
+
+    on<_filterByPrice>((event, emit) async {
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
+      List<UserPlayer> allPriceFilteredPlayers =
+          state.selectedPlayerReplacements
+              .where(
+                (player) =>
+                    player.currentPrice.value.fold(
+                          (l) => 0.0,
+                          (r) => r,
+                        ) <
+                        state.maxPriceSet &&
+                    player.currentPrice.value.fold(
+                          (l) => 0.0,
+                          (r) => r,
+                        ) >
+                        state.minPriceSet,
+              )
+              .toList();
+
+      emit(
+        state.copyWith(
+          isLoading: false,
+          filteredSelectedPlayerReplacements: allPriceFilteredPlayers,
+        ),
+      );
     });
   }
 }

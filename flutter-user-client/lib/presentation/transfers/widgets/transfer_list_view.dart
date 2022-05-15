@@ -7,6 +7,7 @@ import 'package:efpl/presentation/transfers/widgets/transfer_player_card_widget.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class TransferPlayerView extends StatelessWidget {
   const TransferPlayerView({Key? key}) : super(key: key);
@@ -48,10 +49,15 @@ class TransferPlayerView extends StatelessWidget {
           allTeamsNames.add(team['teamName']);
         }
 
-        RangeValues _currentRangeValues = const RangeValues(3.5, 17);
+        RangeValues _currentRangeValues =
+            RangeValues(state.minPriceSet, state.maxPriceSet);
+
+        SfRangeValues _values =
+            SfRangeValues(state.minPriceSet, state.maxPriceSet);
 
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: ConstantColors.primary_900,
             title: Container(
               width: MediaQuery.of(context).size.width * 0.85,
               padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
@@ -282,38 +288,78 @@ class TransferPlayerView extends StatelessWidget {
                             // Bottom Filter
                             Container(
                               height: 50,
-                              color: Colors.pink,
+                              color: ConstantColors.neutral_200,
                               child: Row(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: MediaQuery.of(context).size.width *
                                         0.12,
-                                    color: Colors.grey,
                                     child: Column(
-                                      children: const [
-                                        Text("Min"),
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Text(
+                                          "Min",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        Text(
+                                          state.minPriceSet.toStringAsFixed(1),
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width *
                                         0.76,
-                                    child: RangeSlider(
-                                      values: _currentRangeValues,
-                                      max: 17,
-                                      divisions: 1,
-                                      labels: RangeLabels("4", "17"),
-                                      onChanged: (RangeValues values) {
-                                        print(values);
+                                    child: SfRangeSlider(
+                                      min: 3.5,
+                                      max: 17.0,
+                                      values: _values,
+                                      interval: 0.1,
+                                      activeColor: ConstantColors.primary_900,
+                                      inactiveColor: ConstantColors.primary_400,
+                                      onChangeEnd: (SfRangeValues value) {
+                                        _transferBloc.add(
+                                          const TransferEvent.filterByPrice(),
+                                        );
+                                      },
+                                      onChanged: (SfRangeValues value) {
+                                        _transferBloc.add(
+                                          TransferEvent.setPriceFilter(
+                                            minValue: value.start,
+                                            maxValue: value.end,
+                                          ),
+                                        );
                                       },
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                     width: MediaQuery.of(context).size.width *
                                         0.12,
-                                    color: Colors.grey,
                                     child: Column(
-                                      children: const [Text("Max")],
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Text(
+                                          "Max",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        Text(
+                                          state.maxPriceSet.toStringAsFixed(1),
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -325,7 +371,7 @@ class TransferPlayerView extends StatelessWidget {
                         // Header
                         Container(
                           height: 45,
-                          margin: const EdgeInsets.fromLTRB(0, 12, 0, 15),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           color: ConstantColors.primary_900,
                           child: Row(
@@ -474,7 +520,7 @@ class TransferPlayerView extends StatelessWidget {
                                     ],
                                   ),
                                   width:
-                                      MediaQuery.of(context).size.width * 0.18,
+                                      MediaQuery.of(context).size.width * 0.19,
                                 ),
                               )
                             ],

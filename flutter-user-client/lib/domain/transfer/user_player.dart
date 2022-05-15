@@ -11,10 +11,12 @@ abstract class UserPlayer with _$UserPlayer {
     required PlayerPrice currentPrice,
     required PlayerPosition playerPosition,
     required PlayerEplTeam eplTeamId,
+    required String eplTeamLogo,
     required int multiplier,
     required bool isCaptain,
     required bool isViceCaptain,
     required PlayerAvailability availability,
+    required int score,
   }) = _UserPlayer;
 
   factory UserPlayer.initial() => UserPlayer(
@@ -29,5 +31,7 @@ abstract class UserPlayer with _$UserPlayer {
         availability: PlayerAvailability(
           value: const {"injuryStatus": "", "injuryMessage": ""},
         ),
+        eplTeamLogo: "",
+        score: 0,
       );
 }

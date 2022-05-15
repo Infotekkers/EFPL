@@ -1,9 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/injectable.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class UserPlayerCard extends StatelessWidget {
   final UserPlayer currentPlayer;
@@ -13,6 +16,11 @@ class UserPlayerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _transferBloc = getIt<TransferBloc>();
+    final String _baseURL = dotenv.env["BASE_URL"].toString();
+
+    final String injuryStatus = currentPlayer.availability.value
+        .fold((l) => '', (r) => r['injuryStatus'].toString());
+
     return InkWell(
       onTap: () {
         showModalBottomSheet(
@@ -122,7 +130,7 @@ class UserPlayerCard extends StatelessWidget {
           )),
         ),
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-        height: 60,
+        height: 65,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -133,19 +141,47 @@ class UserPlayerCard extends StatelessWidget {
                 children: [
                   // Icon
                   Container(
-                    width: 50,
-                    height: 60,
-                    color: Colors.blue,
-                    margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-                    child: Center(
-                      child: Text(
-                        currentPlayer.availability.value.fold(
-                          (l) => '',
-                          (r) => r['injuryStatus'].toString(),
-                        ),
-                      ),
-                    ),
-                  ),
+                      width: 50,
+                      height: 60,
+                      margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+                      child: Stack(
+                        children: [
+                          SizedBox(
+                            width: 45,
+                            height: 45,
+                            child: CachedNetworkImage(
+                              imageUrl: _baseURL + currentPlayer.eplTeamLogo,
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            child: Container(
+                              width: 25,
+                              height: 25,
+                              decoration: injuryStatus.isEmpty
+                                  ? const BoxDecoration()
+                                  : BoxDecoration(
+                                      color: int.parse(injuryStatus) < 50
+                                          ? ConstantColors.error_200
+                                          : ConstantColors.warning_200,
+                                      shape: BoxShape.circle,
+                                    ),
+                              child: injuryStatus.isEmpty
+                                  ? Container()
+                                  : const Center(
+                                      child: Text(
+                                        "75%",
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                            ),
+                          )
+                        ],
+                      )),
 
                   // Name
                   SizedBox(
@@ -162,7 +198,9 @@ class UserPlayerCard extends StatelessWidget {
                               (r) => r,
                             ),
                             style: const TextStyle(
-                                fontSize: 16, fontFamily: "Architect"),
+                              fontSize: 18,
+                              fontFamily: "Architect",
+                            ),
                             textAlign: TextAlign.start,
                           ),
                         ),
@@ -208,10 +246,10 @@ class UserPlayerCard extends StatelessWidget {
             // Price
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.18,
-              child: const Center(
+              child: Center(
                 child: Text(
-                  "Score",
-                  style: TextStyle(
+                  currentPlayer.score.toString(),
+                  style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),

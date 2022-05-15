@@ -33,4 +33,9 @@ class TransferEvent with _$TransferEvent {
 
   const factory TransferEvent.setSortFilter({required String sortBy}) =
       _setSortFilter;
+
+  const factory TransferEvent.setPriceFilter(
+      {required double minValue, required double maxValue}) = _setPriceFilter;
+
+  const factory TransferEvent.filterByPrice() = _filterByPrice;
 }

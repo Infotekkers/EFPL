@@ -23,20 +23,24 @@ class _$UserPlayerTearOff {
       required PlayerPrice currentPrice,
       required PlayerPosition playerPosition,
       required PlayerEplTeam eplTeamId,
+      required String eplTeamLogo,
       required int multiplier,
       required bool isCaptain,
       required bool isViceCaptain,
-      required PlayerAvailability availability}) {
+      required PlayerAvailability availability,
+      required int score}) {
     return _UserPlayer(
       playerId: playerId,
       playerName: playerName,
       currentPrice: currentPrice,
       playerPosition: playerPosition,
       eplTeamId: eplTeamId,
+      eplTeamLogo: eplTeamLogo,
       multiplier: multiplier,
       isCaptain: isCaptain,
       isViceCaptain: isViceCaptain,
       availability: availability,
+      score: score,
     );
   }
 }
@@ -51,10 +55,12 @@ mixin _$UserPlayer {
   PlayerPrice get currentPrice => throw _privateConstructorUsedError;
   PlayerPosition get playerPosition => throw _privateConstructorUsedError;
   PlayerEplTeam get eplTeamId => throw _privateConstructorUsedError;
+  String get eplTeamLogo => throw _privateConstructorUsedError;
   int get multiplier => throw _privateConstructorUsedError;
   bool get isCaptain => throw _privateConstructorUsedError;
   bool get isViceCaptain => throw _privateConstructorUsedError;
   PlayerAvailability get availability => throw _privateConstructorUsedError;
+  int get score => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserPlayerCopyWith<UserPlayer> get copyWith =>
@@ -72,10 +78,12 @@ abstract class $UserPlayerCopyWith<$Res> {
       PlayerPrice currentPrice,
       PlayerPosition playerPosition,
       PlayerEplTeam eplTeamId,
+      String eplTeamLogo,
       int multiplier,
       bool isCaptain,
       bool isViceCaptain,
-      PlayerAvailability availability});
+      PlayerAvailability availability,
+      int score});
 }
 
 /// @nodoc
@@ -93,10 +101,12 @@ class _$UserPlayerCopyWithImpl<$Res> implements $UserPlayerCopyWith<$Res> {
     Object? currentPrice = freezed,
     Object? playerPosition = freezed,
     Object? eplTeamId = freezed,
+    Object? eplTeamLogo = freezed,
     Object? multiplier = freezed,
     Object? isCaptain = freezed,
     Object? isViceCaptain = freezed,
     Object? availability = freezed,
+    Object? score = freezed,
   }) {
     return _then(_value.copyWith(
       playerId: playerId == freezed
@@ -119,6 +129,10 @@ class _$UserPlayerCopyWithImpl<$Res> implements $UserPlayerCopyWith<$Res> {
           ? _value.eplTeamId
           : eplTeamId // ignore: cast_nullable_to_non_nullable
               as PlayerEplTeam,
+      eplTeamLogo: eplTeamLogo == freezed
+          ? _value.eplTeamLogo
+          : eplTeamLogo // ignore: cast_nullable_to_non_nullable
+              as String,
       multiplier: multiplier == freezed
           ? _value.multiplier
           : multiplier // ignore: cast_nullable_to_non_nullable
@@ -135,6 +149,10 @@ class _$UserPlayerCopyWithImpl<$Res> implements $UserPlayerCopyWith<$Res> {
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
               as PlayerAvailability,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -151,10 +169,12 @@ abstract class _$UserPlayerCopyWith<$Res> implements $UserPlayerCopyWith<$Res> {
       PlayerPrice currentPrice,
       PlayerPosition playerPosition,
       PlayerEplTeam eplTeamId,
+      String eplTeamLogo,
       int multiplier,
       bool isCaptain,
       bool isViceCaptain,
-      PlayerAvailability availability});
+      PlayerAvailability availability,
+      int score});
 }
 
 /// @nodoc
@@ -174,10 +194,12 @@ class __$UserPlayerCopyWithImpl<$Res> extends _$UserPlayerCopyWithImpl<$Res>
     Object? currentPrice = freezed,
     Object? playerPosition = freezed,
     Object? eplTeamId = freezed,
+    Object? eplTeamLogo = freezed,
     Object? multiplier = freezed,
     Object? isCaptain = freezed,
     Object? isViceCaptain = freezed,
     Object? availability = freezed,
+    Object? score = freezed,
   }) {
     return _then(_UserPlayer(
       playerId: playerId == freezed
@@ -200,6 +222,10 @@ class __$UserPlayerCopyWithImpl<$Res> extends _$UserPlayerCopyWithImpl<$Res>
           ? _value.eplTeamId
           : eplTeamId // ignore: cast_nullable_to_non_nullable
               as PlayerEplTeam,
+      eplTeamLogo: eplTeamLogo == freezed
+          ? _value.eplTeamLogo
+          : eplTeamLogo // ignore: cast_nullable_to_non_nullable
+              as String,
       multiplier: multiplier == freezed
           ? _value.multiplier
           : multiplier // ignore: cast_nullable_to_non_nullable
@@ -216,6 +242,10 @@ class __$UserPlayerCopyWithImpl<$Res> extends _$UserPlayerCopyWithImpl<$Res>
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
               as PlayerAvailability,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -229,10 +259,12 @@ class _$_UserPlayer implements _UserPlayer {
       required this.currentPrice,
       required this.playerPosition,
       required this.eplTeamId,
+      required this.eplTeamLogo,
       required this.multiplier,
       required this.isCaptain,
       required this.isViceCaptain,
-      required this.availability});
+      required this.availability,
+      required this.score});
 
   @override
   final String playerId;
@@ -245,6 +277,8 @@ class _$_UserPlayer implements _UserPlayer {
   @override
   final PlayerEplTeam eplTeamId;
   @override
+  final String eplTeamLogo;
+  @override
   final int multiplier;
   @override
   final bool isCaptain;
@@ -252,10 +286,12 @@ class _$_UserPlayer implements _UserPlayer {
   final bool isViceCaptain;
   @override
   final PlayerAvailability availability;
+  @override
+  final int score;
 
   @override
   String toString() {
-    return 'UserPlayer(playerId: $playerId, playerName: $playerName, currentPrice: $currentPrice, playerPosition: $playerPosition, eplTeamId: $eplTeamId, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain, availability: $availability)';
+    return 'UserPlayer(playerId: $playerId, playerName: $playerName, currentPrice: $currentPrice, playerPosition: $playerPosition, eplTeamId: $eplTeamId, eplTeamLogo: $eplTeamLogo, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain, availability: $availability, score: $score)';
   }
 
   @override
@@ -272,12 +308,15 @@ class _$_UserPlayer implements _UserPlayer {
                 .equals(other.playerPosition, playerPosition) &&
             const DeepCollectionEquality().equals(other.eplTeamId, eplTeamId) &&
             const DeepCollectionEquality()
+                .equals(other.eplTeamLogo, eplTeamLogo) &&
+            const DeepCollectionEquality()
                 .equals(other.multiplier, multiplier) &&
             const DeepCollectionEquality().equals(other.isCaptain, isCaptain) &&
             const DeepCollectionEquality()
                 .equals(other.isViceCaptain, isViceCaptain) &&
             const DeepCollectionEquality()
-                .equals(other.availability, availability));
+                .equals(other.availability, availability) &&
+            const DeepCollectionEquality().equals(other.score, score));
   }
 
   @override
@@ -288,10 +327,12 @@ class _$_UserPlayer implements _UserPlayer {
       const DeepCollectionEquality().hash(currentPrice),
       const DeepCollectionEquality().hash(playerPosition),
       const DeepCollectionEquality().hash(eplTeamId),
+      const DeepCollectionEquality().hash(eplTeamLogo),
       const DeepCollectionEquality().hash(multiplier),
       const DeepCollectionEquality().hash(isCaptain),
       const DeepCollectionEquality().hash(isViceCaptain),
-      const DeepCollectionEquality().hash(availability));
+      const DeepCollectionEquality().hash(availability),
+      const DeepCollectionEquality().hash(score));
 
   @JsonKey(ignore: true)
   @override
@@ -306,10 +347,12 @@ abstract class _UserPlayer implements UserPlayer {
       required PlayerPrice currentPrice,
       required PlayerPosition playerPosition,
       required PlayerEplTeam eplTeamId,
+      required String eplTeamLogo,
       required int multiplier,
       required bool isCaptain,
       required bool isViceCaptain,
-      required PlayerAvailability availability}) = _$_UserPlayer;
+      required PlayerAvailability availability,
+      required int score}) = _$_UserPlayer;
 
   @override
   String get playerId;
@@ -322,6 +365,8 @@ abstract class _UserPlayer implements UserPlayer {
   @override
   PlayerEplTeam get eplTeamId;
   @override
+  String get eplTeamLogo;
+  @override
   int get multiplier;
   @override
   bool get isCaptain;
@@ -329,6 +374,8 @@ abstract class _UserPlayer implements UserPlayer {
   bool get isViceCaptain;
   @override
   PlayerAvailability get availability;
+  @override
+  int get score;
   @override
   @JsonKey(ignore: true)
   _$UserPlayerCopyWith<_UserPlayer> get copyWith =>

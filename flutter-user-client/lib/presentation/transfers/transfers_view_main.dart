@@ -51,105 +51,111 @@ class TransfersView extends StatelessWidget {
                 )
               : Stack(
                   children: [
-                    // Main Voew
+                    // Main View
                     SingleChildScrollView(
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                        child: Column(
-                          children: [
-                            // Goal Keepers
-                            Container(
-                              height: maxHeight / 6,
-                              width: MediaQuery.of(context).size.width,
-                              color: ConstantColors.neutral_300,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 120,
-                                vertical: 20,
-                              ),
-                              child: GridView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                ),
-                                itemCount: allFormattedPlayers[0].length,
-                                itemBuilder: (context, index) {
-                                  return UserPlayerWidget(
-                                    currentUserPlayer: allFormattedPlayers[0]
-                                        [index],
-                                  );
-                                },
-                              ),
+                      child: Column(
+                        children: [
+                          // Goal Keepers
+                          Container(
+                            height: maxHeight / 5,
+                            width: MediaQuery.of(context).size.width,
+                            color: ConstantColors.neutral_300,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 120,
+                              vertical: 10,
                             ),
-
-                            // Defenders
-                            Container(
-                              height: maxHeight / 6,
-                              width: MediaQuery.of(context).size.width,
-                              color: ConstantColors.neutral_100,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 5,
-                                vertical: 20,
-                              ),
-                              child: GridView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount:
-                                      allFormattedPlayers[1].length > 0
-                                          ? allFormattedPlayers[1].length
-                                          : 1,
+                            child: Stack(
+                              children: [
+                                GridView.builder(
+                                  // shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.75,
+                                  ),
+                                  itemCount: allFormattedPlayers[0].length,
+                                  itemBuilder: (context, index) {
+                                    return UserPlayerWidget(
+                                      currentUserPlayer: allFormattedPlayers[0]
+                                          [index],
+                                    );
+                                  },
                                 ),
-                                itemCount: allFormattedPlayers[1].length,
-                                itemBuilder: (context, index) {
-                                  return UserPlayerWidget(
-                                    currentUserPlayer: allFormattedPlayers[1]
-                                        [index],
-                                  );
-                                },
-                              ),
+                              ],
                             ),
+                          ),
 
-                            // Midfielders
-                            Container(
-                              height: maxHeight / 6,
-                              width: MediaQuery.of(context).size.width,
-                              color: ConstantColors.neutral_300,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 5,
-                                vertical: 20,
-                              ),
-                              child: GridView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount:
-                                      allFormattedPlayers[2].length > 0
-                                          ? allFormattedPlayers[2].length
-                                          : 1,
-                                ),
-                                itemCount: allFormattedPlayers[2].length,
-                                itemBuilder: (context, index) {
-                                  return UserPlayerWidget(
-                                    currentUserPlayer: allFormattedPlayers[2]
-                                        [index],
-                                  );
-                                },
-                              ),
+                          // Defenders
+                          Container(
+                            height: maxHeight / 5,
+                            width: MediaQuery.of(context).size.width,
+                            color: ConstantColors.neutral_100,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5,
+                              vertical: 10,
                             ),
-
-                            // Attackers
-                            Container(
-                              height: maxHeight / 6,
-                              width: MediaQuery.of(context).size.width,
-                              color: ConstantColors.neutral_100,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 85,
-                                vertical: 20,
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount:
+                                    allFormattedPlayers[1].length > 0
+                                        ? allFormattedPlayers[1].length
+                                        : 1,
+                                childAspectRatio: 0.75,
                               ),
+                              itemCount: allFormattedPlayers[1].length,
+                              itemBuilder: (context, index) {
+                                return UserPlayerWidget(
+                                  currentUserPlayer: allFormattedPlayers[1]
+                                      [index],
+                                );
+                              },
+                            ),
+                          ),
+
+                          // Midfielders
+                          Container(
+                            height: maxHeight / 5,
+                            width: MediaQuery.of(context).size.width,
+                            color: ConstantColors.neutral_300,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5,
+                              vertical: 10,
+                            ),
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount:
+                                    allFormattedPlayers[2].length > 0
+                                        ? allFormattedPlayers[2].length
+                                        : 1,
+                                childAspectRatio: 0.75,
+                              ),
+                              itemCount: allFormattedPlayers[2].length,
+                              itemBuilder: (context, index) {
+                                return UserPlayerWidget(
+                                  currentUserPlayer: allFormattedPlayers[2]
+                                      [index],
+                                );
+                              },
+                            ),
+                          ),
+
+                          // Attackers
+                          Container(
+                            height: maxHeight / 5.5,
+                            width: MediaQuery.of(context).size.width,
+                            color: ConstantColors.neutral_100,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 85,
+                              vertical: 10,
+                            ),
+                            child: Center(
                               child: GridView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
@@ -159,6 +165,7 @@ class TransfersView extends StatelessWidget {
                                       allFormattedPlayers[3].length > 0
                                           ? allFormattedPlayers[3].length
                                           : 1,
+                                  childAspectRatio: 0.75,
                                 ),
                                 itemCount: allFormattedPlayers[3].length,
                                 itemBuilder: (context, index) {
@@ -169,33 +176,165 @@ class TransfersView extends StatelessWidget {
                                 },
                               ),
                             ),
+                          ),
 
-                            // Info
-                            Container(
-                              height: maxHeight / 6,
-                              width: MediaQuery.of(context).size.width,
-                              color: ConstantColors.neutral_300,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    state.remainingInBank.toStringAsFixed(1),
-                                  ),
-                                  Text(
-                                    "Deduction : " +
-                                        state.userTeam.deduction.toString(),
-                                  ),
-                                  Text(
-                                    "Free Transfers : " +
-                                        state.userTeam.freeTransfers.toString(),
-                                  ),
-                                  const Text("Bank : "),
-                                  const Text("Deadline : "),
-                                ],
-                              ),
+                          // Info
+                          Container(
+                            height: maxHeight / 5,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 5,
                             ),
-                          ],
-                        ),
+                            width: MediaQuery.of(context).size.width,
+                            color: ConstantColors.neutral_300,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                // Bank
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        width: 0.45,
+                                        color: ConstantColors.primary_900,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      // Label
+                                      const Text(
+                                        "Bank : ",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        state.remainingInBank
+                                            .toStringAsFixed(1),
+                                        style: TextStyle(
+                                          color: state.remainingInBank < 0.0
+                                              ? ConstantColors.error_300
+                                              : Colors.green,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                // Deduction
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        width: 0.45,
+                                        color: ConstantColors.primary_900,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      // Label
+                                      const Text(
+                                        "Deduction : ",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        state.userTeam.deduction.toString(),
+                                        style: TextStyle(
+                                          color: state.userTeam.deduction < 0.0
+                                              ? ConstantColors.error_300
+                                              : Colors.green,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+
+                                // Free Transfers
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        width: 0.45,
+                                        color: ConstantColors.primary_900,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      const Text(
+                                        "Free Transfers : ",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        state.userTeam.freeTransfers.toString(),
+                                        style: TextStyle(
+                                          color:
+                                              state.userTeam.freeTransfers != 1
+                                                  ? ConstantColors.error_300
+                                                  : Colors.green,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+
+                                // Deadline
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                  child: Row(
+                                    children: [
+                                      const Text(
+                                        "Deadline : ",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        formatDeadline(
+                                            state.userTeam.gameWeekDeadline),
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
 
@@ -229,7 +368,8 @@ class TransfersView extends StatelessWidget {
                                     height: 50,
                                     decoration: BoxDecoration(
                                       color: ConstantColors.primary_900,
-                                      border: Border.all(),
+                                      border: Border.all(
+                                          color: ConstantColors.primary_900),
                                       borderRadius: const BorderRadius.all(
                                         Radius.circular(50),
                                       ),
@@ -326,4 +466,34 @@ List getAllFormattedPlayers({required UserTeam userTeam}) {
   }
 
   return [allGoalKeepers, allDefender, allMidfielders, allAttackers];
+}
+
+String formatDeadline(String deadline) {
+  DateTime dt = DateTime.fromMillisecondsSinceEpoch(int.parse(deadline));
+
+  const weekDays = ['Mon', "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+  final String formattedDate = weekDays[dt.weekday].toString() +
+      " " +
+      months[dt.month - 1] +
+      ", " +
+      dt.day.toString() +
+      " " +
+      dt.year.toString();
+
+  // const
+  return formattedDate;
 }

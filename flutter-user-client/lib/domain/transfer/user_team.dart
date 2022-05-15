@@ -8,6 +8,7 @@ part 'user_team.freezed.dart';
 abstract class UserTeam with _$UserTeam {
   const factory UserTeam({
     required GameWeekId gameWeekId,
+    required String gameWeekDeadline,
     required List<UserPlayer> allUserPlayers,
     required int freeTransfers,
     required int deduction,
@@ -19,6 +20,7 @@ abstract class UserTeam with _$UserTeam {
 
   factory UserTeam.initial() => UserTeam(
         gameWeekId: GameWeekId(value: 1),
+        gameWeekDeadline: "",
         allUserPlayers: [],
         freeTransfers: 1,
         deduction: 0,

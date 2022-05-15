@@ -31,6 +31,10 @@ class TransferState with _$TransferState {
     required String playerNameCurrentSortOrder,
     required String playerPriceCurrentSortOrder,
     required String playerScoreCurrentSortOrder,
+
+    // price range values
+    required double minPriceSet,
+    required double maxPriceSet,
     // status of user team fetch
     required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
     // status of all players in position fetch
@@ -42,6 +46,7 @@ class TransferState with _$TransferState {
   factory TransferState.initial() => TransferState(
         userTeam: UserTeam(
           gameWeekId: GameWeekId(value: 1),
+          gameWeekDeadline: "",
           allUserPlayers: [],
           freeTransfers: 0,
           deduction: 0,
@@ -65,8 +70,10 @@ class TransferState with _$TransferState {
         valueFailureOrSuccess: none(),
         selectedDropDownTeamValue: "Select a Team",
         selectedDropDownInjuryStatusValue: "All",
-        playerNameCurrentSortOrder: "d",
+        playerNameCurrentSortOrder: "",
         playerPriceCurrentSortOrder: "",
         playerScoreCurrentSortOrder: "",
+        minPriceSet: 3.5,
+        maxPriceSet: 17.0,
       );
 }

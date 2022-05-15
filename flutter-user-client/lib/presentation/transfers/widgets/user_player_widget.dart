@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/injectable.dart';
@@ -5,6 +6,7 @@ import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 
 class UserPlayerWidget extends StatelessWidget {
@@ -16,6 +18,12 @@ class UserPlayerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String _baseURL = dotenv.env["BASE_URL"].toString();
+    final String injuryStatus = currentUserPlayer.availability.value.fold(
+      (l) => '',
+      (r) => r['injuryStatus'].toString(),
+    );
+
     return BlocConsumer<TransferBloc, TransferState>(
       listener: (context, state) {
         // TODO: implement listener
@@ -129,37 +137,88 @@ class UserPlayerWidget extends StatelessWidget {
             );
           },
           child: Container(
+            height: double.infinity,
             margin: const EdgeInsets.symmetric(horizontal: 5),
             color: state.transferredInPlayerIdList
                     .contains(currentUserPlayer.playerId)
-                ? ConstantColors.warning_300
-                : ConstantColors.primary_900,
+                ? ConstantColors.primary_400
+                : ConstantColors.neutral_200.withOpacity(0),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    currentUserPlayer.playerName.value.fold(
-                      (l) => '',
-                      (r) => r.split(" ")[0],
-                    ),
-                    style: TextStyle(
-                      color: state.transferredInPlayerIdList
-                              .contains(currentUserPlayer.playerId)
-                          ? ConstantColors.primary_900
-                          : ConstantColors.neutral_200,
+                  Stack(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: 50,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: _baseURL + currentUserPlayer.eplTeamLogo,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                      injuryStatus.isEmpty
+                          ? Container()
+                          : Positioned(
+                              bottom: 0,
+                              left: 2,
+                              child: Container(
+                                height: 25,
+                                width: 25,
+                                decoration: BoxDecoration(
+                                  color: int.parse(injuryStatus) < 50
+                                      ? ConstantColors.error_200
+                                      : ConstantColors.warning_200,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                    child: Text(
+                                  injuryStatus + "%",
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                  ),
+                                )),
+                              ),
+                            )
+                    ],
+                  ),
+
+                  // Player Name
+                  Container(
+                    color: ConstantColors.primary_900,
+                    width: double.infinity,
+                    height: 30,
+                    child: Center(
+                      child: Text(
+                        currentUserPlayer.playerName.value.fold(
+                          (l) => '',
+                          (r) => r.split(" ")[0],
+                        ),
+                        style: const TextStyle(
+                          color: ConstantColors.neutral_200,
+                        ),
+                      ),
                     ),
                   ),
-                  Text(
-                    currentUserPlayer.currentPrice.value.fold(
-                      (l) => '',
-                      (r) => r.toString(),
-                    ),
-                    style: TextStyle(
-                      color: state.transferredInPlayerIdList
-                              .contains(currentUserPlayer.playerId)
-                          ? ConstantColors.primary_900
-                          : ConstantColors.neutral_200,
+
+                  // Player Price
+                  Container(
+                    height: 25,
+                    width: double.infinity,
+                    color: ConstantColors.primary_900.withOpacity(0.8),
+                    child: Center(
+                      child: Text(
+                        currentUserPlayer.currentPrice.value.fold(
+                          (l) => '',
+                          (r) => r.toString(),
+                        ),
+                        style: const TextStyle(
+                          color: ConstantColors.neutral_200,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -187,14 +246,14 @@ Future<void> transferPlayer(_transferBloc, currentUserPlayer, context) async {
   );
 
   var efplCache = await Hive.openBox('efplCache');
-  List allTeams = efplCache.get("allTeams");
+  List? allTeams = efplCache.get("allTeams");
 
   Navigator.pop(context);
 
   Navigator.pushNamed(
     context,
     "/transfer",
-    arguments: {"allTeams": allTeams},
+    arguments: {"allTeams": allTeams!},
   );
 }
 

@@ -17,6 +17,8 @@ _$_UserPlayerDTO _$$_UserPlayerDTOFromJson(Map<String, dynamic> json) =>
       isCaptain: json['isCaptain'] as bool,
       isViceCaptain: json['isViceCaptain'] as bool,
       availability: json['availability'] as Map<String, dynamic>,
+      eplTeamLogo: json['eplTeamLogo'] as String,
+      score: json['score'] as int,
     );
 
 Map<String, dynamic> _$$_UserPlayerDTOToJson(_$_UserPlayerDTO instance) =>
@@ -30,4 +32,6 @@ Map<String, dynamic> _$$_UserPlayerDTOToJson(_$_UserPlayerDTO instance) =>
       'isCaptain': instance.isCaptain,
       'isViceCaptain': instance.isViceCaptain,
       'availability': instance.availability,
+      'eplTeamLogo': instance.eplTeamLogo,
+      'score': instance.score,
     };

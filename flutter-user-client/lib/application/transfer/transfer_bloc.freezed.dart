@@ -69,6 +69,18 @@ class _$TransferEventTearOff {
       sortBy: sortBy,
     );
   }
+
+  _setPriceFilter setPriceFilter(
+      {required double minValue, required double maxValue}) {
+    return _setPriceFilter(
+      minValue: minValue,
+      maxValue: maxValue,
+    );
+  }
+
+  _filterByPrice filterByPrice() {
+    return const _filterByPrice();
+  }
 }
 
 /// @nodoc
@@ -89,6 +101,8 @@ mixin _$TransferEvent {
     required TResult Function() saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -103,6 +117,8 @@ mixin _$TransferEvent {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -117,6 +133,8 @@ mixin _$TransferEvent {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -132,6 +150,8 @@ mixin _$TransferEvent {
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
     required TResult Function(_setFilter value) setFilter,
     required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -146,6 +166,8 @@ mixin _$TransferEvent {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -160,6 +182,8 @@ mixin _$TransferEvent {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -259,6 +283,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function() saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
   }) {
     return getUserPlayers(gameWeekId);
   }
@@ -276,6 +302,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
   }) {
     return getUserPlayers?.call(gameWeekId);
   }
@@ -293,6 +321,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
     required TResult orElse(),
   }) {
     if (getUserPlayers != null) {
@@ -314,6 +344,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
     required TResult Function(_setFilter value) setFilter,
     required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
   }) {
     return getUserPlayers(this);
   }
@@ -331,6 +363,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
   }) {
     return getUserPlayers?.call(this);
   }
@@ -348,6 +382,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
     required TResult orElse(),
   }) {
     if (getUserPlayers != null) {
@@ -457,6 +493,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function() saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
   }) {
     return setTransferOutPlayer(transferOutPlayerId, playerPosition);
   }
@@ -474,6 +512,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
   }) {
     return setTransferOutPlayer?.call(transferOutPlayerId, playerPosition);
   }
@@ -491,6 +531,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
     required TResult orElse(),
   }) {
     if (setTransferOutPlayer != null) {
@@ -512,6 +554,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
     required TResult Function(_setFilter value) setFilter,
     required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
   }) {
     return setTransferOutPlayer(this);
   }
@@ -529,6 +573,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
   }) {
     return setTransferOutPlayer?.call(this);
   }
@@ -546,6 +592,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
     required TResult orElse(),
   }) {
     if (setTransferOutPlayer != null) {
@@ -623,6 +671,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function() saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
   }) {
     return getPlayersInSelectedPosition();
   }
@@ -640,6 +690,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
   }) {
     return getPlayersInSelectedPosition?.call();
   }
@@ -657,6 +709,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
     required TResult orElse(),
   }) {
     if (getPlayersInSelectedPosition != null) {
@@ -678,6 +732,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
     required TResult Function(_setFilter value) setFilter,
     required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
   }) {
     return getPlayersInSelectedPosition(this);
   }
@@ -695,6 +751,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
   }) {
     return getPlayersInSelectedPosition?.call(this);
   }
@@ -712,6 +770,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
     required TResult orElse(),
   }) {
     if (getPlayersInSelectedPosition != null) {
@@ -803,6 +863,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function() saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
   }) {
     return transferUserPlayer(transferInPlayerId);
   }
@@ -820,6 +882,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
   }) {
     return transferUserPlayer?.call(transferInPlayerId);
   }
@@ -837,6 +901,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
     required TResult orElse(),
   }) {
     if (transferUserPlayer != null) {
@@ -858,6 +924,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
     required TResult Function(_setFilter value) setFilter,
     required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
   }) {
     return transferUserPlayer(this);
   }
@@ -875,6 +943,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
   }) {
     return transferUserPlayer?.call(this);
   }
@@ -892,6 +962,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
     required TResult orElse(),
   }) {
     if (transferUserPlayer != null) {
@@ -963,6 +1035,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function() saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
   }) {
     return cancelTransfer();
   }
@@ -980,6 +1054,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
   }) {
     return cancelTransfer?.call();
   }
@@ -997,6 +1073,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
     required TResult orElse(),
   }) {
     if (cancelTransfer != null) {
@@ -1018,6 +1096,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
     required TResult Function(_setFilter value) setFilter,
     required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
   }) {
     return cancelTransfer(this);
   }
@@ -1035,6 +1115,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
   }) {
     return cancelTransfer?.call(this);
   }
@@ -1052,6 +1134,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
     required TResult orElse(),
   }) {
     if (cancelTransfer != null) {
@@ -1142,6 +1226,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     required TResult Function() saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
   }) {
     return cancelOneTransfer(playerToCancelId);
   }
@@ -1159,6 +1245,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
   }) {
     return cancelOneTransfer?.call(playerToCancelId);
   }
@@ -1176,6 +1264,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
     required TResult orElse(),
   }) {
     if (cancelOneTransfer != null) {
@@ -1197,6 +1287,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
     required TResult Function(_setFilter value) setFilter,
     required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
   }) {
     return cancelOneTransfer(this);
   }
@@ -1214,6 +1306,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
   }) {
     return cancelOneTransfer?.call(this);
   }
@@ -1231,6 +1325,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
     required TResult orElse(),
   }) {
     if (cancelOneTransfer != null) {
@@ -1302,6 +1398,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function() saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
   }) {
     return saveUserPlayers();
   }
@@ -1319,6 +1417,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
   }) {
     return saveUserPlayers?.call();
   }
@@ -1336,6 +1436,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
     required TResult orElse(),
   }) {
     if (saveUserPlayers != null) {
@@ -1357,6 +1459,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
     required TResult Function(_setFilter value) setFilter,
     required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
   }) {
     return saveUserPlayers(this);
   }
@@ -1374,6 +1478,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
   }) {
     return saveUserPlayers?.call(this);
   }
@@ -1391,6 +1497,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
     required TResult orElse(),
   }) {
     if (saveUserPlayers != null) {
@@ -1489,6 +1597,8 @@ class _$_setFilter implements _setFilter {
     required TResult Function() saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
   }) {
     return setFilter(filterBy, filterValue);
   }
@@ -1506,6 +1616,8 @@ class _$_setFilter implements _setFilter {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
   }) {
     return setFilter?.call(filterBy, filterValue);
   }
@@ -1523,6 +1635,8 @@ class _$_setFilter implements _setFilter {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
     required TResult orElse(),
   }) {
     if (setFilter != null) {
@@ -1544,6 +1658,8 @@ class _$_setFilter implements _setFilter {
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
     required TResult Function(_setFilter value) setFilter,
     required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
   }) {
     return setFilter(this);
   }
@@ -1561,6 +1677,8 @@ class _$_setFilter implements _setFilter {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
   }) {
     return setFilter?.call(this);
   }
@@ -1578,6 +1696,8 @@ class _$_setFilter implements _setFilter {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
     required TResult orElse(),
   }) {
     if (setFilter != null) {
@@ -1674,6 +1794,8 @@ class _$_setSortFilter implements _setSortFilter {
     required TResult Function() saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
   }) {
     return setSortFilter(sortBy);
   }
@@ -1691,6 +1813,8 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
   }) {
     return setSortFilter?.call(sortBy);
   }
@@ -1708,6 +1832,8 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function()? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
     required TResult orElse(),
   }) {
     if (setSortFilter != null) {
@@ -1729,6 +1855,8 @@ class _$_setSortFilter implements _setSortFilter {
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
     required TResult Function(_setFilter value) setFilter,
     required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
   }) {
     return setSortFilter(this);
   }
@@ -1746,6 +1874,8 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
   }) {
     return setSortFilter?.call(this);
   }
@@ -1763,6 +1893,8 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
     TResult Function(_setFilter value)? setFilter,
     TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
     required TResult orElse(),
   }) {
     if (setSortFilter != null) {
@@ -1779,6 +1911,379 @@ abstract class _setSortFilter implements TransferEvent {
   @JsonKey(ignore: true)
   _$setSortFilterCopyWith<_setSortFilter> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$setPriceFilterCopyWith<$Res> {
+  factory _$setPriceFilterCopyWith(
+          _setPriceFilter value, $Res Function(_setPriceFilter) then) =
+      __$setPriceFilterCopyWithImpl<$Res>;
+  $Res call({double minValue, double maxValue});
+}
+
+/// @nodoc
+class __$setPriceFilterCopyWithImpl<$Res>
+    extends _$TransferEventCopyWithImpl<$Res>
+    implements _$setPriceFilterCopyWith<$Res> {
+  __$setPriceFilterCopyWithImpl(
+      _setPriceFilter _value, $Res Function(_setPriceFilter) _then)
+      : super(_value, (v) => _then(v as _setPriceFilter));
+
+  @override
+  _setPriceFilter get _value => super._value as _setPriceFilter;
+
+  @override
+  $Res call({
+    Object? minValue = freezed,
+    Object? maxValue = freezed,
+  }) {
+    return _then(_setPriceFilter(
+      minValue: minValue == freezed
+          ? _value.minValue
+          : minValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxValue: maxValue == freezed
+          ? _value.maxValue
+          : maxValue // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_setPriceFilter implements _setPriceFilter {
+  const _$_setPriceFilter({required this.minValue, required this.maxValue});
+
+  @override
+  final double minValue;
+  @override
+  final double maxValue;
+
+  @override
+  String toString() {
+    return 'TransferEvent.setPriceFilter(minValue: $minValue, maxValue: $maxValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _setPriceFilter &&
+            const DeepCollectionEquality().equals(other.minValue, minValue) &&
+            const DeepCollectionEquality().equals(other.maxValue, maxValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(minValue),
+      const DeepCollectionEquality().hash(maxValue));
+
+  @JsonKey(ignore: true)
+  @override
+  _$setPriceFilterCopyWith<_setPriceFilter> get copyWith =>
+      __$setPriceFilterCopyWithImpl<_setPriceFilter>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(GameWeekId gameWeekId) getUserPlayers,
+    required TResult Function(
+            String transferOutPlayerId, PlayerPosition playerPosition)
+        setTransferOutPlayer,
+    required TResult Function() getPlayersInSelectedPosition,
+    required TResult Function(String transferInPlayerId) transferUserPlayer,
+    required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
+    required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
+  }) {
+    return setPriceFilter(minValue, maxValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(GameWeekId gameWeekId)? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
+  }) {
+    return setPriceFilter?.call(minValue, maxValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(GameWeekId gameWeekId)? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
+    required TResult orElse(),
+  }) {
+    if (setPriceFilter != null) {
+      return setPriceFilter(minValue, maxValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_getUserPlayers value) getUserPlayers,
+    required TResult Function(_setTransferOutPlayer value) setTransferOutPlayer,
+    required TResult Function(_getPlayersInSelectedPosition value)
+        getPlayersInSelectedPosition,
+    required TResult Function(_transferUserPlayer value) transferUserPlayer,
+    required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
+    required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
+  }) {
+    return setPriceFilter(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
+  }) {
+    return setPriceFilter?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
+    required TResult orElse(),
+  }) {
+    if (setPriceFilter != null) {
+      return setPriceFilter(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _setPriceFilter implements TransferEvent {
+  const factory _setPriceFilter(
+      {required double minValue, required double maxValue}) = _$_setPriceFilter;
+
+  double get minValue;
+  double get maxValue;
+  @JsonKey(ignore: true)
+  _$setPriceFilterCopyWith<_setPriceFilter> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$filterByPriceCopyWith<$Res> {
+  factory _$filterByPriceCopyWith(
+          _filterByPrice value, $Res Function(_filterByPrice) then) =
+      __$filterByPriceCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$filterByPriceCopyWithImpl<$Res>
+    extends _$TransferEventCopyWithImpl<$Res>
+    implements _$filterByPriceCopyWith<$Res> {
+  __$filterByPriceCopyWithImpl(
+      _filterByPrice _value, $Res Function(_filterByPrice) _then)
+      : super(_value, (v) => _then(v as _filterByPrice));
+
+  @override
+  _filterByPrice get _value => super._value as _filterByPrice;
+}
+
+/// @nodoc
+
+class _$_filterByPrice implements _filterByPrice {
+  const _$_filterByPrice();
+
+  @override
+  String toString() {
+    return 'TransferEvent.filterByPrice()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _filterByPrice);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(GameWeekId gameWeekId) getUserPlayers,
+    required TResult Function(
+            String transferOutPlayerId, PlayerPosition playerPosition)
+        setTransferOutPlayer,
+    required TResult Function() getPlayersInSelectedPosition,
+    required TResult Function(String transferInPlayerId) transferUserPlayer,
+    required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
+    required TResult Function() saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
+  }) {
+    return filterByPrice();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(GameWeekId gameWeekId)? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
+  }) {
+    return filterByPrice?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(GameWeekId gameWeekId)? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function()? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
+    required TResult orElse(),
+  }) {
+    if (filterByPrice != null) {
+      return filterByPrice();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_getUserPlayers value) getUserPlayers,
+    required TResult Function(_setTransferOutPlayer value) setTransferOutPlayer,
+    required TResult Function(_getPlayersInSelectedPosition value)
+        getPlayersInSelectedPosition,
+    required TResult Function(_transferUserPlayer value) transferUserPlayer,
+    required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
+    required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
+  }) {
+    return filterByPrice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
+  }) {
+    return filterByPrice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
+    required TResult orElse(),
+  }) {
+    if (filterByPrice != null) {
+      return filterByPrice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _filterByPrice implements TransferEvent {
+  const factory _filterByPrice() = _$_filterByPrice;
 }
 
 /// @nodoc
@@ -1802,6 +2307,8 @@ class _$TransferStateTearOff {
       required String playerNameCurrentSortOrder,
       required String playerPriceCurrentSortOrder,
       required String playerScoreCurrentSortOrder,
+      required double minPriceSet,
+      required double maxPriceSet,
       required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       required Option<Either<dynamic, List<UserPlayer>>>
           replacementPlayersFailureOrSuccess,
@@ -1823,6 +2330,8 @@ class _$TransferStateTearOff {
       playerNameCurrentSortOrder: playerNameCurrentSortOrder,
       playerPriceCurrentSortOrder: playerPriceCurrentSortOrder,
       playerScoreCurrentSortOrder: playerScoreCurrentSortOrder,
+      minPriceSet: minPriceSet,
+      maxPriceSet: maxPriceSet,
       userTeamFailureOrSuccess: userTeamFailureOrSuccess,
       replacementPlayersFailureOrSuccess: replacementPlayersFailureOrSuccess,
       valueFailureOrSuccess: valueFailureOrSuccess,
@@ -1864,6 +2373,9 @@ mixin _$TransferState {
   String get playerNameCurrentSortOrder => throw _privateConstructorUsedError;
   String get playerPriceCurrentSortOrder => throw _privateConstructorUsedError;
   String get playerScoreCurrentSortOrder =>
+      throw _privateConstructorUsedError; // price range values
+  double get minPriceSet => throw _privateConstructorUsedError;
+  double get maxPriceSet =>
       throw _privateConstructorUsedError; // status of user team fetch
   Option<Either<dynamic, UserTeam>> get userTeamFailureOrSuccess =>
       throw _privateConstructorUsedError; // status of all players in position fetch
@@ -1900,6 +2412,8 @@ abstract class $TransferStateCopyWith<$Res> {
       String playerNameCurrentSortOrder,
       String playerPriceCurrentSortOrder,
       String playerScoreCurrentSortOrder,
+      double minPriceSet,
+      double maxPriceSet,
       Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       Option<Either<dynamic, List<UserPlayer>>>
           replacementPlayersFailureOrSuccess,
@@ -1935,6 +2449,8 @@ class _$TransferStateCopyWithImpl<$Res>
     Object? playerNameCurrentSortOrder = freezed,
     Object? playerPriceCurrentSortOrder = freezed,
     Object? playerScoreCurrentSortOrder = freezed,
+    Object? minPriceSet = freezed,
+    Object? maxPriceSet = freezed,
     Object? userTeamFailureOrSuccess = freezed,
     Object? replacementPlayersFailureOrSuccess = freezed,
     Object? valueFailureOrSuccess = freezed,
@@ -2006,6 +2522,14 @@ class _$TransferStateCopyWithImpl<$Res>
           ? _value.playerScoreCurrentSortOrder
           : playerScoreCurrentSortOrder // ignore: cast_nullable_to_non_nullable
               as String,
+      minPriceSet: minPriceSet == freezed
+          ? _value.minPriceSet
+          : minPriceSet // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxPriceSet: maxPriceSet == freezed
+          ? _value.maxPriceSet
+          : maxPriceSet // ignore: cast_nullable_to_non_nullable
+              as double,
       userTeamFailureOrSuccess: userTeamFailureOrSuccess == freezed
           ? _value.userTeamFailureOrSuccess
           : userTeamFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -2054,6 +2578,8 @@ abstract class _$TransferStateCopyWith<$Res>
       String playerNameCurrentSortOrder,
       String playerPriceCurrentSortOrder,
       String playerScoreCurrentSortOrder,
+      double minPriceSet,
+      double maxPriceSet,
       Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       Option<Either<dynamic, List<UserPlayer>>>
           replacementPlayersFailureOrSuccess,
@@ -2092,6 +2618,8 @@ class __$TransferStateCopyWithImpl<$Res>
     Object? playerNameCurrentSortOrder = freezed,
     Object? playerPriceCurrentSortOrder = freezed,
     Object? playerScoreCurrentSortOrder = freezed,
+    Object? minPriceSet = freezed,
+    Object? maxPriceSet = freezed,
     Object? userTeamFailureOrSuccess = freezed,
     Object? replacementPlayersFailureOrSuccess = freezed,
     Object? valueFailureOrSuccess = freezed,
@@ -2163,6 +2691,14 @@ class __$TransferStateCopyWithImpl<$Res>
           ? _value.playerScoreCurrentSortOrder
           : playerScoreCurrentSortOrder // ignore: cast_nullable_to_non_nullable
               as String,
+      minPriceSet: minPriceSet == freezed
+          ? _value.minPriceSet
+          : minPriceSet // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxPriceSet: maxPriceSet == freezed
+          ? _value.maxPriceSet
+          : maxPriceSet // ignore: cast_nullable_to_non_nullable
+              as double,
       userTeamFailureOrSuccess: userTeamFailureOrSuccess == freezed
           ? _value.userTeamFailureOrSuccess
           : userTeamFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -2200,6 +2736,8 @@ class _$_TransferState implements _TransferState {
       required this.playerNameCurrentSortOrder,
       required this.playerPriceCurrentSortOrder,
       required this.playerScoreCurrentSortOrder,
+      required this.minPriceSet,
+      required this.maxPriceSet,
       required this.userTeamFailureOrSuccess,
       required this.replacementPlayersFailureOrSuccess,
       required this.valueFailureOrSuccess});
@@ -2236,6 +2774,10 @@ class _$_TransferState implements _TransferState {
   final String playerPriceCurrentSortOrder;
   @override
   final String playerScoreCurrentSortOrder;
+  @override // price range values
+  final double minPriceSet;
+  @override
+  final double maxPriceSet;
   @override // status of user team fetch
   final Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess;
   @override // status of all players in position fetch
@@ -2246,7 +2788,7 @@ class _$_TransferState implements _TransferState {
 
   @override
   String toString() {
-    return 'TransferState(userTeam: $userTeam, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIdList: $transferredInPlayerIdList, swappedPlayerIdsList: $swappedPlayerIdsList, selectedPlayerReplacements: $selectedPlayerReplacements, filteredSelectedPlayerReplacements: $filteredSelectedPlayerReplacements, selectedDropDownTeamValue: $selectedDropDownTeamValue, selectedDropDownInjuryStatusValue: $selectedDropDownInjuryStatusValue, playerNameCurrentSortOrder: $playerNameCurrentSortOrder, playerPriceCurrentSortOrder: $playerPriceCurrentSortOrder, playerScoreCurrentSortOrder: $playerScoreCurrentSortOrder, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, replacementPlayersFailureOrSuccess: $replacementPlayersFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess)';
+    return 'TransferState(userTeam: $userTeam, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIdList: $transferredInPlayerIdList, swappedPlayerIdsList: $swappedPlayerIdsList, selectedPlayerReplacements: $selectedPlayerReplacements, filteredSelectedPlayerReplacements: $filteredSelectedPlayerReplacements, selectedDropDownTeamValue: $selectedDropDownTeamValue, selectedDropDownInjuryStatusValue: $selectedDropDownInjuryStatusValue, playerNameCurrentSortOrder: $playerNameCurrentSortOrder, playerPriceCurrentSortOrder: $playerPriceCurrentSortOrder, playerScoreCurrentSortOrder: $playerScoreCurrentSortOrder, minPriceSet: $minPriceSet, maxPriceSet: $maxPriceSet, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, replacementPlayersFailureOrSuccess: $replacementPlayersFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess)';
   }
 
   @override
@@ -2288,6 +2830,10 @@ class _$_TransferState implements _TransferState {
             const DeepCollectionEquality().equals(
                 other.playerScoreCurrentSortOrder,
                 playerScoreCurrentSortOrder) &&
+            const DeepCollectionEquality()
+                .equals(other.minPriceSet, minPriceSet) &&
+            const DeepCollectionEquality()
+                .equals(other.maxPriceSet, maxPriceSet) &&
             const DeepCollectionEquality().equals(
                 other.userTeamFailureOrSuccess, userTeamFailureOrSuccess) &&
             const DeepCollectionEquality().equals(
@@ -2316,6 +2862,8 @@ class _$_TransferState implements _TransferState {
         const DeepCollectionEquality().hash(playerNameCurrentSortOrder),
         const DeepCollectionEquality().hash(playerPriceCurrentSortOrder),
         const DeepCollectionEquality().hash(playerScoreCurrentSortOrder),
+        const DeepCollectionEquality().hash(minPriceSet),
+        const DeepCollectionEquality().hash(maxPriceSet),
         const DeepCollectionEquality().hash(userTeamFailureOrSuccess),
         const DeepCollectionEquality().hash(replacementPlayersFailureOrSuccess),
         const DeepCollectionEquality().hash(valueFailureOrSuccess)
@@ -2345,6 +2893,8 @@ abstract class _TransferState implements TransferState {
       required String playerNameCurrentSortOrder,
       required String playerPriceCurrentSortOrder,
       required String playerScoreCurrentSortOrder,
+      required double minPriceSet,
+      required double maxPriceSet,
       required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       required Option<Either<dynamic, List<UserPlayer>>>
           replacementPlayersFailureOrSuccess,
@@ -2383,6 +2933,10 @@ abstract class _TransferState implements TransferState {
   String get playerPriceCurrentSortOrder;
   @override
   String get playerScoreCurrentSortOrder;
+  @override // price range values
+  double get minPriceSet;
+  @override
+  double get maxPriceSet;
   @override // status of user team fetch
   Option<Either<dynamic, UserTeam>> get userTeamFailureOrSuccess;
   @override // status of all players in position fetch

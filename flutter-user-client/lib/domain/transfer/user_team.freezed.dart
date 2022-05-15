@@ -19,6 +19,7 @@ class _$UserTeamTearOff {
 
   _UserTeam call(
       {required GameWeekId gameWeekId,
+      required String gameWeekDeadline,
       required List<UserPlayer> allUserPlayers,
       required int freeTransfers,
       required int deduction,
@@ -28,6 +29,7 @@ class _$UserTeamTearOff {
       required String teamName}) {
     return _UserTeam(
       gameWeekId: gameWeekId,
+      gameWeekDeadline: gameWeekDeadline,
       allUserPlayers: allUserPlayers,
       freeTransfers: freeTransfers,
       deduction: deduction,
@@ -45,6 +47,7 @@ const $UserTeam = _$UserTeamTearOff();
 /// @nodoc
 mixin _$UserTeam {
   GameWeekId get gameWeekId => throw _privateConstructorUsedError;
+  String get gameWeekDeadline => throw _privateConstructorUsedError;
   List<UserPlayer> get allUserPlayers => throw _privateConstructorUsedError;
   int get freeTransfers => throw _privateConstructorUsedError;
   int get deduction => throw _privateConstructorUsedError;
@@ -64,6 +67,7 @@ abstract class $UserTeamCopyWith<$Res> {
       _$UserTeamCopyWithImpl<$Res>;
   $Res call(
       {GameWeekId gameWeekId,
+      String gameWeekDeadline,
       List<UserPlayer> allUserPlayers,
       int freeTransfers,
       int deduction,
@@ -84,6 +88,7 @@ class _$UserTeamCopyWithImpl<$Res> implements $UserTeamCopyWith<$Res> {
   @override
   $Res call({
     Object? gameWeekId = freezed,
+    Object? gameWeekDeadline = freezed,
     Object? allUserPlayers = freezed,
     Object? freeTransfers = freezed,
     Object? deduction = freezed,
@@ -97,6 +102,10 @@ class _$UserTeamCopyWithImpl<$Res> implements $UserTeamCopyWith<$Res> {
           ? _value.gameWeekId
           : gameWeekId // ignore: cast_nullable_to_non_nullable
               as GameWeekId,
+      gameWeekDeadline: gameWeekDeadline == freezed
+          ? _value.gameWeekDeadline
+          : gameWeekDeadline // ignore: cast_nullable_to_non_nullable
+              as String,
       allUserPlayers: allUserPlayers == freezed
           ? _value.allUserPlayers
           : allUserPlayers // ignore: cast_nullable_to_non_nullable
@@ -136,6 +145,7 @@ abstract class _$UserTeamCopyWith<$Res> implements $UserTeamCopyWith<$Res> {
   @override
   $Res call(
       {GameWeekId gameWeekId,
+      String gameWeekDeadline,
       List<UserPlayer> allUserPlayers,
       int freeTransfers,
       int deduction,
@@ -157,6 +167,7 @@ class __$UserTeamCopyWithImpl<$Res> extends _$UserTeamCopyWithImpl<$Res>
   @override
   $Res call({
     Object? gameWeekId = freezed,
+    Object? gameWeekDeadline = freezed,
     Object? allUserPlayers = freezed,
     Object? freeTransfers = freezed,
     Object? deduction = freezed,
@@ -170,6 +181,10 @@ class __$UserTeamCopyWithImpl<$Res> extends _$UserTeamCopyWithImpl<$Res>
           ? _value.gameWeekId
           : gameWeekId // ignore: cast_nullable_to_non_nullable
               as GameWeekId,
+      gameWeekDeadline: gameWeekDeadline == freezed
+          ? _value.gameWeekDeadline
+          : gameWeekDeadline // ignore: cast_nullable_to_non_nullable
+              as String,
       allUserPlayers: allUserPlayers == freezed
           ? _value.allUserPlayers
           : allUserPlayers // ignore: cast_nullable_to_non_nullable
@@ -207,6 +222,7 @@ class __$UserTeamCopyWithImpl<$Res> extends _$UserTeamCopyWithImpl<$Res>
 class _$_UserTeam implements _UserTeam {
   const _$_UserTeam(
       {required this.gameWeekId,
+      required this.gameWeekDeadline,
       required this.allUserPlayers,
       required this.freeTransfers,
       required this.deduction,
@@ -217,6 +233,8 @@ class _$_UserTeam implements _UserTeam {
 
   @override
   final GameWeekId gameWeekId;
+  @override
+  final String gameWeekDeadline;
   @override
   final List<UserPlayer> allUserPlayers;
   @override
@@ -234,7 +252,7 @@ class _$_UserTeam implements _UserTeam {
 
   @override
   String toString() {
-    return 'UserTeam(gameWeekId: $gameWeekId, allUserPlayers: $allUserPlayers, freeTransfers: $freeTransfers, deduction: $deduction, activeChip: $activeChip, availableChips: $availableChips, maxBudget: $maxBudget, teamName: $teamName)';
+    return 'UserTeam(gameWeekId: $gameWeekId, gameWeekDeadline: $gameWeekDeadline, allUserPlayers: $allUserPlayers, freeTransfers: $freeTransfers, deduction: $deduction, activeChip: $activeChip, availableChips: $availableChips, maxBudget: $maxBudget, teamName: $teamName)';
   }
 
   @override
@@ -244,6 +262,8 @@ class _$_UserTeam implements _UserTeam {
             other is _UserTeam &&
             const DeepCollectionEquality()
                 .equals(other.gameWeekId, gameWeekId) &&
+            const DeepCollectionEquality()
+                .equals(other.gameWeekDeadline, gameWeekDeadline) &&
             const DeepCollectionEquality()
                 .equals(other.allUserPlayers, allUserPlayers) &&
             const DeepCollectionEquality()
@@ -261,6 +281,7 @@ class _$_UserTeam implements _UserTeam {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(gameWeekId),
+      const DeepCollectionEquality().hash(gameWeekDeadline),
       const DeepCollectionEquality().hash(allUserPlayers),
       const DeepCollectionEquality().hash(freeTransfers),
       const DeepCollectionEquality().hash(deduction),
@@ -278,6 +299,7 @@ class _$_UserTeam implements _UserTeam {
 abstract class _UserTeam implements UserTeam {
   const factory _UserTeam(
       {required GameWeekId gameWeekId,
+      required String gameWeekDeadline,
       required List<UserPlayer> allUserPlayers,
       required int freeTransfers,
       required int deduction,
@@ -288,6 +310,8 @@ abstract class _UserTeam implements UserTeam {
 
   @override
   GameWeekId get gameWeekId;
+  @override
+  String get gameWeekDeadline;
   @override
   List<UserPlayer> get allUserPlayers;
   @override

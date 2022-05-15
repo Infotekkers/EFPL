@@ -30,7 +30,9 @@ class _$UserPlayerDTOTearOff {
       required int multiplier,
       required bool isCaptain,
       required bool isViceCaptain,
-      required Map<dynamic, dynamic> availability}) {
+      required Map<dynamic, dynamic> availability,
+      required String eplTeamLogo,
+      required int score}) {
     return _UserPlayerDTO(
       playerId: playerId,
       playerName: playerName,
@@ -41,6 +43,8 @@ class _$UserPlayerDTOTearOff {
       isCaptain: isCaptain,
       isViceCaptain: isViceCaptain,
       availability: availability,
+      eplTeamLogo: eplTeamLogo,
+      score: score,
     );
   }
 
@@ -63,6 +67,8 @@ mixin _$UserPlayerDTO {
   bool get isCaptain => throw _privateConstructorUsedError;
   bool get isViceCaptain => throw _privateConstructorUsedError;
   Map<dynamic, dynamic> get availability => throw _privateConstructorUsedError;
+  String get eplTeamLogo => throw _privateConstructorUsedError;
+  int get score => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -84,7 +90,9 @@ abstract class $UserPlayerDTOCopyWith<$Res> {
       int multiplier,
       bool isCaptain,
       bool isViceCaptain,
-      Map<dynamic, dynamic> availability});
+      Map<dynamic, dynamic> availability,
+      String eplTeamLogo,
+      int score});
 }
 
 /// @nodoc
@@ -107,6 +115,8 @@ class _$UserPlayerDTOCopyWithImpl<$Res>
     Object? isCaptain = freezed,
     Object? isViceCaptain = freezed,
     Object? availability = freezed,
+    Object? eplTeamLogo = freezed,
+    Object? score = freezed,
   }) {
     return _then(_value.copyWith(
       playerId: playerId == freezed
@@ -145,6 +155,14 @@ class _$UserPlayerDTOCopyWithImpl<$Res>
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
+      eplTeamLogo: eplTeamLogo == freezed
+          ? _value.eplTeamLogo
+          : eplTeamLogo // ignore: cast_nullable_to_non_nullable
+              as String,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -165,7 +183,9 @@ abstract class _$UserPlayerDTOCopyWith<$Res>
       int multiplier,
       bool isCaptain,
       bool isViceCaptain,
-      Map<dynamic, dynamic> availability});
+      Map<dynamic, dynamic> availability,
+      String eplTeamLogo,
+      int score});
 }
 
 /// @nodoc
@@ -190,6 +210,8 @@ class __$UserPlayerDTOCopyWithImpl<$Res>
     Object? isCaptain = freezed,
     Object? isViceCaptain = freezed,
     Object? availability = freezed,
+    Object? eplTeamLogo = freezed,
+    Object? score = freezed,
   }) {
     return _then(_UserPlayerDTO(
       playerId: playerId == freezed
@@ -228,6 +250,14 @@ class __$UserPlayerDTOCopyWithImpl<$Res>
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
+      eplTeamLogo: eplTeamLogo == freezed
+          ? _value.eplTeamLogo
+          : eplTeamLogo // ignore: cast_nullable_to_non_nullable
+              as String,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -244,7 +274,9 @@ class _$_UserPlayerDTO extends _UserPlayerDTO {
       required this.multiplier,
       required this.isCaptain,
       required this.isViceCaptain,
-      required this.availability})
+      required this.availability,
+      required this.eplTeamLogo,
+      required this.score})
       : super._();
 
   factory _$_UserPlayerDTO.fromJson(Map<String, dynamic> json) =>
@@ -268,10 +300,14 @@ class _$_UserPlayerDTO extends _UserPlayerDTO {
   final bool isViceCaptain;
   @override
   final Map<dynamic, dynamic> availability;
+  @override
+  final String eplTeamLogo;
+  @override
+  final int score;
 
   @override
   String toString() {
-    return 'UserPlayerDTO(playerId: $playerId, playerName: $playerName, currentPrice: $currentPrice, position: $position, eplTeamId: $eplTeamId, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain, availability: $availability)';
+    return 'UserPlayerDTO(playerId: $playerId, playerName: $playerName, currentPrice: $currentPrice, position: $position, eplTeamId: $eplTeamId, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain, availability: $availability, eplTeamLogo: $eplTeamLogo, score: $score)';
   }
 
   @override
@@ -292,7 +328,10 @@ class _$_UserPlayerDTO extends _UserPlayerDTO {
             const DeepCollectionEquality()
                 .equals(other.isViceCaptain, isViceCaptain) &&
             const DeepCollectionEquality()
-                .equals(other.availability, availability));
+                .equals(other.availability, availability) &&
+            const DeepCollectionEquality()
+                .equals(other.eplTeamLogo, eplTeamLogo) &&
+            const DeepCollectionEquality().equals(other.score, score));
   }
 
   @override
@@ -306,7 +345,9 @@ class _$_UserPlayerDTO extends _UserPlayerDTO {
       const DeepCollectionEquality().hash(multiplier),
       const DeepCollectionEquality().hash(isCaptain),
       const DeepCollectionEquality().hash(isViceCaptain),
-      const DeepCollectionEquality().hash(availability));
+      const DeepCollectionEquality().hash(availability),
+      const DeepCollectionEquality().hash(eplTeamLogo),
+      const DeepCollectionEquality().hash(score));
 
   @JsonKey(ignore: true)
   @override
@@ -329,7 +370,9 @@ abstract class _UserPlayerDTO extends UserPlayerDTO {
       required int multiplier,
       required bool isCaptain,
       required bool isViceCaptain,
-      required Map<dynamic, dynamic> availability}) = _$_UserPlayerDTO;
+      required Map<dynamic, dynamic> availability,
+      required String eplTeamLogo,
+      required int score}) = _$_UserPlayerDTO;
   const _UserPlayerDTO._() : super._();
 
   factory _UserPlayerDTO.fromJson(Map<String, dynamic> json) =
@@ -353,6 +396,10 @@ abstract class _UserPlayerDTO extends UserPlayerDTO {
   bool get isViceCaptain;
   @override
   Map<dynamic, dynamic> get availability;
+  @override
+  String get eplTeamLogo;
+  @override
+  int get score;
   @override
   @JsonKey(ignore: true)
   _$UserPlayerDTOCopyWith<_UserPlayerDTO> get copyWith =>
