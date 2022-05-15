@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/auth/auth_failure.dart';
-
 import 'auth_value_objects.dart';
 
 abstract class IAuthFacade {
@@ -14,5 +13,5 @@ abstract class IAuthFacade {
     required EmailAddress emailAddress,
     required Password password,
   });
-  // Future<void>signInWithGoogle();
+  Future<Either<AuthFailure, Unit>> signInWithGoogle();
 }
