@@ -4,7 +4,7 @@
       <div class="card-single">
         <div>
           <h1 id="customer"></h1>
-          <span>Happy Clients</span>
+          <span>Top Scorer</span>
         </div>
         <div>
           <span class="fas fa-users"></span>
@@ -13,7 +13,7 @@
       <div class="card-single">
         <div>
           <h1 id="project"></h1>
-          <span>Projects Done!</span>
+          <span>Top Assister</span>
         </div>
         <div>
           <span class="fas fa-clipboard"></span>
@@ -22,7 +22,7 @@
       <div class="card-single">
         <div>
           <h1 id="order"></h1>
-          <span>Confirmed Orders</span>
+          <span>Top Saves</span>
         </div>
         <div>
           <span class="fas fa-shopping-bag"></span>
@@ -30,11 +30,8 @@
       </div>
       <div class="card-single">
         <div>
-          <h1>
-            <sup>$</sup>
-            <p id="income"><b>k</b></p>
-          </h1>
-          <span>weekly Income</span>
+          <h1 id="Top Rated"></h1>
+          <span>Top Rated</span>
         </div>
         <div>
           <span class="fab fa-google-wallet"></span>
@@ -302,7 +299,7 @@ export default {
   beforeMount() {
     this.isTeamLoading = true;
     store.dispatch("Team/setAllTeams");
-
+    store.dispatch("Player/sortByPosition");
     setTimeout(() => {
       this.isTeamLoading = false;
     }, 2000);

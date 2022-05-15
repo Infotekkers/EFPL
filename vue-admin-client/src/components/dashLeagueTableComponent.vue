@@ -20,14 +20,6 @@
       <span v-if="team.foundedIn">{{ team.teamPosition[0].teamPoint }}</span>
       <span v-else>-</span>
     </div>
-    <!-- <div class="team-controls-container">
-      <div @click="editTeam">
-        <img :src="editIcon.path" :alt="editIcon.alt" class="small-icon" />
-      </div>
-      <div @click="deleteTeam">
-        <img :src="deleteIcon.path" :alt="deleteIcon.alt" class="small-icon" />
-      </div>
-    </div> -->
   </div>
 </template>
 <script>
