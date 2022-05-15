@@ -27,87 +27,89 @@ class ApiTransferRepository implements ITransferRepository {
     // local id
     const userID = "627a7798bed9e567269bb8a9";
 
-    HTTPInstance instance = getIt<HTTPInstance>();
-    var apiResponse = await instance.client
-        .get(
-          Uri.parse('$_baseURL/user/team/$userID/$gameWeekId'),
-        )
-        .timeout(
-          const Duration(seconds: 30),
-        );
+    try {
+      HTTPInstance instance = getIt<HTTPInstance>();
+      var apiResponse = await instance.client
+          .get(
+            Uri.parse('$_baseURL/user/team/$userID/$gameWeekId'),
+          )
+          .timeout(
+            const Duration(seconds: 30),
+          );
 
-    if (apiResponse.statusCode == 200) {
-      List<UserPlayer> allUserPlayers = [];
-      final parsedResponseBody = jsonDecode(apiResponse.body);
-      final parseResponseTeam = parsedResponseBody['team'][0];
+      if (apiResponse.statusCode == 200) {
+        List<UserPlayer> allUserPlayers = [];
+        final parsedResponseBody = jsonDecode(apiResponse.body);
+        final parseResponseTeam = parsedResponseBody['team'][0];
 
-      // if response has players
-      if (parseResponseTeam['players'].length > 0) {
-        List allPlayers = parseResponseTeam['players'];
-        for (var i = 0; i < allPlayers.length; i++) {
-          Map<String, dynamic> availability = {
-            "injuryStatus": parseResponseTeam['players'][i]['availability']
-                ['injuryStatus'],
-            "injuryMessage": parseResponseTeam['players'][i]['availability']
-                ['injuryMessage']
-          };
-
-          allPlayers[i]['availability'] = availability;
-
-          final UserPlayerDTO userPlayerDTO =
-              UserPlayerDTO.fromJson(allPlayers[i]);
-
-          allUserPlayers.add(userPlayerDTO.toDomain());
-        }
-
-        // Team
-        UserTeam userTeam = UserTeam(
-          gameWeekId: GameWeekId(value: parseResponseTeam['gameweekId']),
-          gameWeekDeadline: parsedResponseBody['gameWeekDeadline'].toString(),
-          allUserPlayers: allUserPlayers,
-          freeTransfers: parseResponseTeam['freeTransfers'],
-          deduction: parseResponseTeam['deduction'],
-          activeChip: parseResponseTeam['activeChip'],
-          availableChips: parsedResponseBody['availableChips'],
-          maxBudget: double.parse(
-            parsedResponseBody['maxBudget'].toString(),
-          ),
-          teamName: parsedResponseBody['teamName'],
-        );
-
-        // get all teams with logo path
-        var allTeamsApiResponse = await instance.client
-            .get(
-              Uri.parse('$_baseURL/teams/all'),
-            )
-            .timeout(
-              const Duration(seconds: 30),
-            );
-
-        if (allTeamsApiResponse.statusCode == 200) {
-          List<dynamic> parsedResponseBody =
-              jsonDecode(allTeamsApiResponse.body);
-          List allTeams = [];
-
-          for (var i = 0; i < parsedResponseBody.length; i++) {
-            Map currentTeam = {
-              "teamName": parsedResponseBody[i]['teamName'],
-              "teamLogo": parsedResponseBody[i]['teamLogo'],
+        // if response has players
+        if (parseResponseTeam['players'].length > 0) {
+          List allPlayers = parseResponseTeam['players'];
+          for (var i = 0; i < allPlayers.length; i++) {
+            Map<String, dynamic> availability = {
+              "injuryStatus": parseResponseTeam['players'][i]['availability']
+                  ['injuryStatus'],
+              "injuryMessage": parseResponseTeam['players'][i]['availability']
+                  ['injuryMessage']
             };
-            allTeams.add(currentTeam);
+
+            allPlayers[i]['availability'] = availability;
+
+            final UserPlayerDTO userPlayerDTO =
+                UserPlayerDTO.fromJson(allPlayers[i]);
+
+            allUserPlayers.add(userPlayerDTO.toDomain());
           }
 
-          try {
-            var efplCache = await Hive.openBox('efplCache');
-            efplCache.put("allTeams", allTeams);
-          } catch (e) {
-            print(e);
-          }
-        }
+          // Team
+          UserTeam userTeam = UserTeam(
+            gameWeekId: GameWeekId(value: parseResponseTeam['gameweekId']),
+            gameWeekDeadline: parsedResponseBody['gameWeekDeadline'].toString(),
+            allUserPlayers: allUserPlayers,
+            freeTransfers: parseResponseTeam['freeTransfers'],
+            deduction: parseResponseTeam['deduction'],
+            activeChip: parseResponseTeam['activeChip'],
+            availableChips: parsedResponseBody['availableChips'],
+            maxBudget: double.parse(
+              parsedResponseBody['maxBudget'].toString(),
+            ),
+            teamName: parsedResponseBody['teamName'],
+          );
 
-        return right(userTeam);
-      } else {}
-    }
+          // get all teams with logo path
+          var allTeamsApiResponse = await instance.client
+              .get(
+                Uri.parse('$_baseURL/teams/all'),
+              )
+              .timeout(
+                const Duration(seconds: 30),
+              );
+
+          if (allTeamsApiResponse.statusCode == 200) {
+            List<dynamic> parsedResponseBody =
+                jsonDecode(allTeamsApiResponse.body);
+            List allTeams = [];
+
+            for (var i = 0; i < parsedResponseBody.length; i++) {
+              Map currentTeam = {
+                "teamName": parsedResponseBody[i]['teamName'],
+                "teamLogo": parsedResponseBody[i]['teamLogo'],
+              };
+              allTeams.add(currentTeam);
+            }
+
+            try {
+              var efplCache = await Hive.openBox('efplCache');
+              efplCache.put("allTeams", allTeams);
+            } catch (e) {
+              print(e);
+            }
+          }
+
+          return right(userTeam);
+        } else {}
+      }
+    } catch (e) {}
 
     return left(
       const HTTPFailures.unauthenticated(failedValue: "Please Login!"),
