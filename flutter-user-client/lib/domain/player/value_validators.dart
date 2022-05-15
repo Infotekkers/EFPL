@@ -21,17 +21,6 @@ Either<ValueFailure<String>, String> validateStringNotEmpty(String playerStr) {
   }
 }
 
-Either<ValueFailure<int>, int> validateRange(String playerStr, List range) {
-  int playerNumber = int.parse(playerStr);
-
-  if (playerNumber >= range[0] && playerNumber <= range[range.length - 1]) {
-    return right(playerNumber);
-  } else {
-    return left(
-        ValueFailure.exceedingRange(failedValue: playerNumber, range: range));
-  }
-}
-
 Either<ValueFailure<String>, String> validatePosition(
     String positionStr, List<String> validPositions) {
   if (validPositions.contains(positionStr)) {

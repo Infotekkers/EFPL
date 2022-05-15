@@ -10,8 +10,9 @@ abstract class Player with _$Player {
     required Id playerId,
     required EplTeamId eplTeamId,
     required Position position,
-    required Multiplier multiplier,
-    required IsCaptain isCaptain,
-    required IsViceCaptain isViceCaptain,
+    required Price currentPrice,
+    required Availability availability,
+    @Default(null) Score? score,
+    @Default(null) History? history,
   }) = _Player;
 }
