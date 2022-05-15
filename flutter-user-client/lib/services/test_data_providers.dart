@@ -2,6 +2,7 @@ import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/value_objects.dart';
 import 'package:efpl/infrastructure/my_team/my_team_local_data_provider.dart';
 import 'package:efpl/infrastructure/my_team/my_team_remote_data_provider.dart';
+import 'package:efpl/infrastructure/player/player_remote_data_provider.dart';
 
 void testDataProviders() async {
   // * MY TEAM: GET USER TEAM
@@ -195,5 +196,8 @@ void testDataProviders() async {
 
   result = await MyTeamLocalDataProvider()
       .getUserTeam('623b101b9a85861e924388dd', '1');
-  print("GET USER TEAM: $result");
+  // print("GET USER TEAM: $result");
+
+  result = await PlayerRemoteDataProvider().getPlayer("101");
+  print("GET PLAYER FULL: $result");
 }

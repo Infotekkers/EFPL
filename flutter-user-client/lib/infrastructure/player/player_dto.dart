@@ -10,24 +10,28 @@ abstract class PlayerDto implements _$PlayerDto {
   const PlayerDto._();
 
   const factory PlayerDto({
-    required String name,
-    required String playerId,
+    required String playerName,
+    required int playerId,
     required String eplTeamId,
     required String position,
-    required String price,
+    required double currentPrice,
     required Map<String, String> availability,
     @Default([]) List<dynamic> score,
     @Default([]) List<dynamic> history,
   }) = _PlayerDto;
 
   factory PlayerDto.fromDomain(Player player) => PlayerDto(
-        name: player.name.isValid() ? player.name.getOrCrash() : '',
-        playerId: player.playerId.isValid() ? player.playerId.getOrCrash() : '',
+        playerName: player.name.isValid() ? player.name.getOrCrash() : '',
+        playerId: player.playerId.isValid()
+            ? int.parse(player.playerId.getOrCrash())
+            : 0,
         eplTeamId:
             player.eplTeamId.isValid() ? player.eplTeamId.getOrCrash() : ' ',
         position:
             player.position.isValid() ? player.position.getOrCrash() : ' ',
-        price: player.position.isValid() ? player.position.getOrCrash() : ' ',
+        currentPrice: player.position.isValid()
+            ? double.parse(player.position.getOrCrash())
+            : 0,
         availability: {},
         score: [],
         history: [],
@@ -42,20 +46,22 @@ abstract class PlayerDto implements _$PlayerDto {
     if (score.isNotEmpty) {
       for (var element in score) {
         scoresVO.add(Score(
-          gameweek: element.gameweek,
-          price: element.price,
-          fantasyScore: element.fantasyScore,
-          minutesPlayed: element.minutesPlayed,
-          goals: element.goals,
-          assists: element.assists,
-          cleansheet: element.cleansheet,
-          yellows: element.yellows,
-          reds: element.reds,
-          penalitiesMissed: element.penalitiesMissed,
-          penalitiesSaved: element.penalitiesSaved,
-          saves: element.saves,
-          ownGoal: element.ownGoal,
-          form: element.form,
+          gameweek: Gameweek(element['gameweekId'].toString()),
+          price: Price(element['price'].toString()),
+          fantasyScore: FantasyScore(element['fantasyScore'].toString()),
+          minutesPlayed: MinutesPlayed(element['minutesPlayed'].toString()),
+          goals: Goals(element['goals'].toString()),
+          assists: Assists(element['assists'].toString()),
+          cleansheet: Cleansheet(element['cleansheet'].toString()),
+          yellows: Yellows(element['yellows'].toString()),
+          reds: Reds(element['reds'].toString()),
+          penalitiesMissed:
+              PenalitiesMissed(element['penalitiesMissed'].toString()),
+          penalitiesSaved:
+              PenalitiesSaved(element['penalitiesSaved'].toString()),
+          saves: Saves(element['saves'].toString()),
+          ownGoal: OwnGoal(element['ownGoal'].toString()),
+          form: Form(element['form'].toString()),
         ));
       }
     }
@@ -64,31 +70,35 @@ abstract class PlayerDto implements _$PlayerDto {
     if (history.isNotEmpty) {
       for (var element in history) {
         historyVO.add(History(
-          startingPrice: element.startingPrice,
-          endingPrice: element.endingPrice,
-          totalFantasyScore: element.totalFantasyScore,
-          totalMinutesPlayed: element.totalMinutesPlayed,
-          totalGoals: element.totalGoals,
-          totalAssists: element.totalAssists,
-          totalCleansheet: element.totalCleansheet,
-          totalYellows: element.totalYellows,
-          totalReds: element.totalReds,
-          totalPenalitiesMissed: element.totalPenalitiesMissed,
-          totalPenalitiesSaved: element.totalPenalitiesSaved,
-          totalSaves: element.totalSaves,
-          totalOwnGoal: element.totalOwnGoal,
-          totalForm: element.totalForm,
+          startingPrice: Price(element['startingPrice'].toString()),
+          endingPrice: Price(element['endingPrice'].toString()),
+          totalFantasyScore:
+              FantasyScore(element['totalFantasyScore'].toString()),
+          totalMinutesPlayed:
+              MinutesPlayed(element['totalMinutesPlayed'].toString()),
+          totalGoals: Goals(element['totalGoals'].toString()),
+          totalAssists: Assists(element['totalAssists'].toString()),
+          totalCleansheet: Cleansheet(element['totalCleansheet'].toString()),
+          totalYellows: Yellows(element['totalYellows'].toString()),
+          totalReds: Reds(element['totalReds'].toString()),
+          totalPenalitiesMissed:
+              PenalitiesMissed(element['totalPenalitiesMissed'].toString()),
+          totalPenalitiesSaved:
+              PenalitiesSaved(element['totalPenalitiesSaved'].toString()),
+          totalSaves: Saves(element['totalSaves'].toString()),
+          totalOwnGoal: OwnGoal(element['totalOwnGoal'].toString()),
+          totalForm: Form(element['totalForm'].toString()),
         ));
       }
     }
 
     return Player(
-      name: Name(name),
-      playerId: Id(playerId),
+      name: Name(playerName),
+      playerId: Id(playerId.toString()),
       eplTeamId: EplTeamId(eplTeamId),
       position: Position(position),
       availability: availabilityVO,
-      currentPrice: Price(price),
+      currentPrice: Price(currentPrice.toString()),
       score: scoresVO,
       history: historyVO,
     );

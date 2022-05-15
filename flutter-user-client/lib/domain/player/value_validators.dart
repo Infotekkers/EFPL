@@ -23,9 +23,22 @@ Either<ValueFailure<String>, String> validateStringNotEmpty(String playerStr) {
 
 Either<ValueFailure<String>, String> validatePosition(
     String positionStr, List<String> validPositions) {
+  positionStr = positionStr.toLowerCase();
   if (validPositions.contains(positionStr)) {
     return right(positionStr);
   } else {
     return left(ValueFailure.invalid(failedValue: positionStr));
+  }
+}
+
+Either<ValueFailure<String>, String> validateRange(
+    String gameweekStr, List range) {
+  int gameweekNumber = int.parse(gameweekStr);
+
+  if (gameweekNumber >= range[0] && gameweekNumber <= range[range.length - 1]) {
+    return right(gameweekStr);
+  } else {
+    return left(
+        ValueFailure.exceedingRange(failedValue: gameweekStr, range: range));
   }
 }

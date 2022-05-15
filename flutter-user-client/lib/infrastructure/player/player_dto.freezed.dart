@@ -22,20 +22,20 @@ class _$PlayerDtoTearOff {
   const _$PlayerDtoTearOff();
 
   _PlayerDto call(
-      {required String name,
-      required String playerId,
+      {required String playerName,
+      required int playerId,
       required String eplTeamId,
       required String position,
-      required String price,
+      required double currentPrice,
       required Map<String, String> availability,
       List<dynamic> score = const [],
       List<dynamic> history = const []}) {
     return _PlayerDto(
-      name: name,
+      playerName: playerName,
       playerId: playerId,
       eplTeamId: eplTeamId,
       position: position,
-      price: price,
+      currentPrice: currentPrice,
       availability: availability,
       score: score,
       history: history,
@@ -52,11 +52,11 @@ const $PlayerDto = _$PlayerDtoTearOff();
 
 /// @nodoc
 mixin _$PlayerDto {
-  String get name => throw _privateConstructorUsedError;
-  String get playerId => throw _privateConstructorUsedError;
+  String get playerName => throw _privateConstructorUsedError;
+  int get playerId => throw _privateConstructorUsedError;
   String get eplTeamId => throw _privateConstructorUsedError;
   String get position => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
+  double get currentPrice => throw _privateConstructorUsedError;
   Map<String, String> get availability => throw _privateConstructorUsedError;
   List<dynamic> get score => throw _privateConstructorUsedError;
   List<dynamic> get history => throw _privateConstructorUsedError;
@@ -72,11 +72,11 @@ abstract class $PlayerDtoCopyWith<$Res> {
   factory $PlayerDtoCopyWith(PlayerDto value, $Res Function(PlayerDto) then) =
       _$PlayerDtoCopyWithImpl<$Res>;
   $Res call(
-      {String name,
-      String playerId,
+      {String playerName,
+      int playerId,
       String eplTeamId,
       String position,
-      String price,
+      double currentPrice,
       Map<String, String> availability,
       List<dynamic> score,
       List<dynamic> history});
@@ -92,24 +92,24 @@ class _$PlayerDtoCopyWithImpl<$Res> implements $PlayerDtoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? name = freezed,
+    Object? playerName = freezed,
     Object? playerId = freezed,
     Object? eplTeamId = freezed,
     Object? position = freezed,
-    Object? price = freezed,
+    Object? currentPrice = freezed,
     Object? availability = freezed,
     Object? score = freezed,
     Object? history = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      playerName: playerName == freezed
+          ? _value.playerName
+          : playerName // ignore: cast_nullable_to_non_nullable
               as String,
       playerId: playerId == freezed
           ? _value.playerId
           : playerId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       eplTeamId: eplTeamId == freezed
           ? _value.eplTeamId
           : eplTeamId // ignore: cast_nullable_to_non_nullable
@@ -118,10 +118,10 @@ class _$PlayerDtoCopyWithImpl<$Res> implements $PlayerDtoCopyWith<$Res> {
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as String,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as String,
+      currentPrice: currentPrice == freezed
+          ? _value.currentPrice
+          : currentPrice // ignore: cast_nullable_to_non_nullable
+              as double,
       availability: availability == freezed
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
@@ -145,11 +145,11 @@ abstract class _$PlayerDtoCopyWith<$Res> implements $PlayerDtoCopyWith<$Res> {
       __$PlayerDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
-      String playerId,
+      {String playerName,
+      int playerId,
       String eplTeamId,
       String position,
-      String price,
+      double currentPrice,
       Map<String, String> availability,
       List<dynamic> score,
       List<dynamic> history});
@@ -166,24 +166,24 @@ class __$PlayerDtoCopyWithImpl<$Res> extends _$PlayerDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? name = freezed,
+    Object? playerName = freezed,
     Object? playerId = freezed,
     Object? eplTeamId = freezed,
     Object? position = freezed,
-    Object? price = freezed,
+    Object? currentPrice = freezed,
     Object? availability = freezed,
     Object? score = freezed,
     Object? history = freezed,
   }) {
     return _then(_PlayerDto(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      playerName: playerName == freezed
+          ? _value.playerName
+          : playerName // ignore: cast_nullable_to_non_nullable
               as String,
       playerId: playerId == freezed
           ? _value.playerId
           : playerId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       eplTeamId: eplTeamId == freezed
           ? _value.eplTeamId
           : eplTeamId // ignore: cast_nullable_to_non_nullable
@@ -192,10 +192,10 @@ class __$PlayerDtoCopyWithImpl<$Res> extends _$PlayerDtoCopyWithImpl<$Res>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as String,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as String,
+      currentPrice: currentPrice == freezed
+          ? _value.currentPrice
+          : currentPrice // ignore: cast_nullable_to_non_nullable
+              as double,
       availability: availability == freezed
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
@@ -216,11 +216,11 @@ class __$PlayerDtoCopyWithImpl<$Res> extends _$PlayerDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PlayerDto extends _PlayerDto {
   const _$_PlayerDto(
-      {required this.name,
+      {required this.playerName,
       required this.playerId,
       required this.eplTeamId,
       required this.position,
-      required this.price,
+      required this.currentPrice,
       required this.availability,
       this.score = const [],
       this.history = const []})
@@ -230,15 +230,15 @@ class _$_PlayerDto extends _PlayerDto {
       _$$_PlayerDtoFromJson(json);
 
   @override
-  final String name;
+  final String playerName;
   @override
-  final String playerId;
+  final int playerId;
   @override
   final String eplTeamId;
   @override
   final String position;
   @override
-  final String price;
+  final double currentPrice;
   @override
   final Map<String, String> availability;
   @JsonKey()
@@ -250,7 +250,7 @@ class _$_PlayerDto extends _PlayerDto {
 
   @override
   String toString() {
-    return 'PlayerDto(name: $name, playerId: $playerId, eplTeamId: $eplTeamId, position: $position, price: $price, availability: $availability, score: $score, history: $history)';
+    return 'PlayerDto(playerName: $playerName, playerId: $playerId, eplTeamId: $eplTeamId, position: $position, currentPrice: $currentPrice, availability: $availability, score: $score, history: $history)';
   }
 
   @override
@@ -258,11 +258,13 @@ class _$_PlayerDto extends _PlayerDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _PlayerDto &&
-            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality()
+                .equals(other.playerName, playerName) &&
             const DeepCollectionEquality().equals(other.playerId, playerId) &&
             const DeepCollectionEquality().equals(other.eplTeamId, eplTeamId) &&
             const DeepCollectionEquality().equals(other.position, position) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality()
+                .equals(other.currentPrice, currentPrice) &&
             const DeepCollectionEquality()
                 .equals(other.availability, availability) &&
             const DeepCollectionEquality().equals(other.score, score) &&
@@ -272,11 +274,11 @@ class _$_PlayerDto extends _PlayerDto {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(playerName),
       const DeepCollectionEquality().hash(playerId),
       const DeepCollectionEquality().hash(eplTeamId),
       const DeepCollectionEquality().hash(position),
-      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(currentPrice),
       const DeepCollectionEquality().hash(availability),
       const DeepCollectionEquality().hash(score),
       const DeepCollectionEquality().hash(history));
@@ -294,11 +296,11 @@ class _$_PlayerDto extends _PlayerDto {
 
 abstract class _PlayerDto extends PlayerDto {
   const factory _PlayerDto(
-      {required String name,
-      required String playerId,
+      {required String playerName,
+      required int playerId,
       required String eplTeamId,
       required String position,
-      required String price,
+      required double currentPrice,
       required Map<String, String> availability,
       List<dynamic> score,
       List<dynamic> history}) = _$_PlayerDto;
@@ -308,15 +310,15 @@ abstract class _PlayerDto extends PlayerDto {
       _$_PlayerDto.fromJson;
 
   @override
-  String get name;
+  String get playerName;
   @override
-  String get playerId;
+  int get playerId;
   @override
   String get eplTeamId;
   @override
   String get position;
   @override
-  String get price;
+  double get currentPrice;
   @override
   Map<String, String> get availability;
   @override

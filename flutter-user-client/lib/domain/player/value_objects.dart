@@ -101,6 +101,20 @@ class InjuryMessage extends ValueObject<String> {
 }
 
 // * SCORE VOs
+class Gameweek extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  static final range = [1, 30];
+
+  const Gameweek._(this.value);
+
+  factory Gameweek(String gameweekStr) {
+    return Gameweek._(
+        validateRange(gameweekStr, range).flatMap(validateStringNotEmpty));
+  }
+}
+
 class Goals extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
