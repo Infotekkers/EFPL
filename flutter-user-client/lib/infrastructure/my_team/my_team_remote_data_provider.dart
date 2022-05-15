@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/my_team_failures.dart';
@@ -52,7 +51,6 @@ class MyTeamRemoteDataProvider {
       final response = await client!.put(url,
           body: outgoingJson, headers: {"Content-Type": "application/json"});
 
-      print(response.body);
       if (response.statusCode == 200) {
         return right(unit);
       }

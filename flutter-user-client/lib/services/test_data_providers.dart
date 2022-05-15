@@ -1,5 +1,6 @@
 import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/value_objects.dart';
+import 'package:efpl/infrastructure/my_team/my_team_local_data_provider.dart';
 import 'package:efpl/infrastructure/my_team/my_team_remote_data_provider.dart';
 
 void testDataProviders() async {
@@ -184,7 +185,15 @@ void testDataProviders() async {
           },
         }, 'sub'),
       });
-  result = await MyTeamRemoteDataProvider()
+  // result = await MyTeamRemoteDataProvider()
+  // .saveUserTeam(myTeam, '623b101b9a85861e924388dd');
+  // print("SAVE USER TEAM: $result");
+
+  result = await MyTeamLocalDataProvider()
       .saveUserTeam(myTeam, '623b101b9a85861e924388dd');
   print("SAVE USER TEAM: $result");
+
+  result = await MyTeamLocalDataProvider()
+      .getUserTeam('623b101b9a85861e924388dd', '1');
+  print("GET USER TEAM: $result");
 }

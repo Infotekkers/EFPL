@@ -21,6 +21,10 @@ class _$MyTeamFailureTearOff {
     return const _ServerError();
   }
 
+  _LocalDBError localDBError() {
+    return const _LocalDBError();
+  }
+
   _NetworkError networkError() {
     return const _NetworkError();
   }
@@ -34,18 +38,21 @@ mixin _$MyTeamFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() serverError,
+    required TResult Function() localDBError,
     required TResult Function() networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? serverError,
+    TResult Function()? localDBError,
     TResult Function()? networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? serverError,
+    TResult Function()? localDBError,
     TResult Function()? networkError,
     required TResult orElse(),
   }) =>
@@ -53,18 +60,21 @@ mixin _$MyTeamFailure {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_LocalDBError value) localDBError,
     required TResult Function(_NetworkError value) networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_LocalDBError value)? localDBError,
     TResult Function(_NetworkError value)? networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_LocalDBError value)? localDBError,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) =>
@@ -129,6 +139,7 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() serverError,
+    required TResult Function() localDBError,
     required TResult Function() networkError,
   }) {
     return serverError();
@@ -138,6 +149,7 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? serverError,
+    TResult Function()? localDBError,
     TResult Function()? networkError,
   }) {
     return serverError?.call();
@@ -147,6 +159,7 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? serverError,
+    TResult Function()? localDBError,
     TResult Function()? networkError,
     required TResult orElse(),
   }) {
@@ -160,6 +173,7 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_LocalDBError value) localDBError,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return serverError(this);
@@ -169,6 +183,7 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_LocalDBError value)? localDBError,
     TResult Function(_NetworkError value)? networkError,
   }) {
     return serverError?.call(this);
@@ -178,6 +193,7 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_LocalDBError value)? localDBError,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
@@ -190,6 +206,117 @@ class _$_ServerError implements _ServerError {
 
 abstract class _ServerError implements MyTeamFailure {
   const factory _ServerError() = _$_ServerError;
+}
+
+/// @nodoc
+abstract class _$LocalDBErrorCopyWith<$Res> {
+  factory _$LocalDBErrorCopyWith(
+          _LocalDBError value, $Res Function(_LocalDBError) then) =
+      __$LocalDBErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$LocalDBErrorCopyWithImpl<$Res>
+    extends _$MyTeamFailureCopyWithImpl<$Res>
+    implements _$LocalDBErrorCopyWith<$Res> {
+  __$LocalDBErrorCopyWithImpl(
+      _LocalDBError _value, $Res Function(_LocalDBError) _then)
+      : super(_value, (v) => _then(v as _LocalDBError));
+
+  @override
+  _LocalDBError get _value => super._value as _LocalDBError;
+}
+
+/// @nodoc
+
+class _$_LocalDBError implements _LocalDBError {
+  const _$_LocalDBError();
+
+  @override
+  String toString() {
+    return 'MyTeamFailure.localDBError()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _LocalDBError);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() serverError,
+    required TResult Function() localDBError,
+    required TResult Function() networkError,
+  }) {
+    return localDBError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? serverError,
+    TResult Function()? localDBError,
+    TResult Function()? networkError,
+  }) {
+    return localDBError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? serverError,
+    TResult Function()? localDBError,
+    TResult Function()? networkError,
+    required TResult orElse(),
+  }) {
+    if (localDBError != null) {
+      return localDBError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_LocalDBError value) localDBError,
+    required TResult Function(_NetworkError value) networkError,
+  }) {
+    return localDBError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_LocalDBError value)? localDBError,
+    TResult Function(_NetworkError value)? networkError,
+  }) {
+    return localDBError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_LocalDBError value)? localDBError,
+    TResult Function(_NetworkError value)? networkError,
+    required TResult orElse(),
+  }) {
+    if (localDBError != null) {
+      return localDBError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LocalDBError implements MyTeamFailure {
+  const factory _LocalDBError() = _$_LocalDBError;
 }
 
 /// @nodoc
@@ -234,6 +361,7 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() serverError,
+    required TResult Function() localDBError,
     required TResult Function() networkError,
   }) {
     return networkError();
@@ -243,6 +371,7 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? serverError,
+    TResult Function()? localDBError,
     TResult Function()? networkError,
   }) {
     return networkError?.call();
@@ -252,6 +381,7 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? serverError,
+    TResult Function()? localDBError,
     TResult Function()? networkError,
     required TResult orElse(),
   }) {
@@ -265,6 +395,7 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_LocalDBError value) localDBError,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return networkError(this);
@@ -274,6 +405,7 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_LocalDBError value)? localDBError,
     TResult Function(_NetworkError value)? networkError,
   }) {
     return networkError?.call(this);
@@ -283,6 +415,7 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_LocalDBError value)? localDBError,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
