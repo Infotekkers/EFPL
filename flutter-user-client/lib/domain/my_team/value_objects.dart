@@ -54,9 +54,9 @@ class AvailableChips extends ValueObject<List<Chip>> {
   }
 }
 
-class PositionalContainer extends ValueObject<List<dynamic>> {
+class PositionalContainer extends ValueObject<Map<String, dynamic>> {
   @override
-  final Either<ValueFailure<List<dynamic>>, List<dynamic>> value;
+  final Either<ValueFailure<Map<String, dynamic>>, Map<String, dynamic>> value;
 
   const PositionalContainer._(this.value);
 
@@ -68,7 +68,8 @@ class PositionalContainer extends ValueObject<List<dynamic>> {
     'sub': [4, 4]
   };
 
-  factory PositionalContainer(List<dynamic> userPlayers, String position) {
+  factory PositionalContainer(
+      Map<String, dynamic> userPlayers, String position) {
     return PositionalContainer._(
         validatePositionalContainer(userPlayers, positionalRange, position));
   }

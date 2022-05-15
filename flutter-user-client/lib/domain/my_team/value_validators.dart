@@ -62,10 +62,9 @@ Either<ValueFailure<List<Chip>>, List<Chip>> validateAvailabeChips(
   }
 }
 
-Either<ValueFailure<List<dynamic>>, List<dynamic>> validatePositionalContainer(
-    List<dynamic> userPlayers,
-    Map<String, List<int>> positionalRange,
-    String position) {
+Either<ValueFailure<Map<String, dynamic>>, Map<String, dynamic>>
+    validatePositionalContainer(Map<String, dynamic> userPlayers,
+        Map<String, List<int>> positionalRange, String position) {
   if (positionalRange.containsKey(position) == false) {
     return left(ValueFailure.invalidPosition(
         failedValue: userPlayers, position: position));

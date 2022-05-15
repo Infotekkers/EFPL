@@ -37,9 +37,29 @@ class MyTeamRemoteDataProvider {
   }
 
   Future<Either<MyTeamFailure, Unit>> saveUserTeam(
-      MyTeam myTeam, String userId) {
-    // TODO: implement saveUserTeam
-    throw UnimplementedError();
+      MyTeam myTeam, String userId) async {
+    final Uri url = Uri.parse("$_baseUrl/user/transfer");
+
+    MyTeamDto myTeamDto = MyTeamDto.fromDomain(myTeam);
+    myTeamDto = declassifyPlayers(myTeamDto);
+
+    final outgoingJson = jsonEncode({
+      "userId": userId,
+      "incomingTeam": myTeamDto.toJson(),
+    });
+
+    try {
+      final response = await client!.put(url,
+          body: outgoingJson, headers: {"Content-Type": "application/json"});
+
+      print(response.body);
+      if (response.statusCode == 200) {
+        return right(unit);
+      }
+      return left(const MyTeamFailure.serverError());
+    } catch (e) {
+      return left(const MyTeamFailure.networkError());
+    }
   }
 
   MyTeamDto classifyPlayers(MyTeamDto myTeamDto) {
@@ -65,5 +85,17 @@ class MyTeamRemoteDataProvider {
     }
 
     return myTeamDto.copyWith(players: playersOrganizedByPosition);
+  }
+
+  MyTeamDto declassifyPlayers(MyTeamDto myTeamDto) {
+    Map<String, dynamic> mixedPlayers = {};
+
+    for (String position in myTeamDto.players.keys) {
+      for (String playerId in myTeamDto.players[position].keys) {
+        mixedPlayers[playerId] = myTeamDto.players[position][playerId];
+      }
+    }
+
+    return myTeamDto.copyWith(players: mixedPlayers);
   }
 }

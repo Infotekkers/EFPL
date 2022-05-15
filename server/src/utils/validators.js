@@ -79,7 +79,10 @@ const validateTeam = (team, availableChips) => {
     ];
 
   // Valid active chip
-  if (availableChips.includes(team.activeChip) !== true)
+  if (
+    availableChips.includes(team.activeChip) !== true &&
+    team.activeChip !== ""
+  )
     return [false, { message: `Invalid active chip: ${team.activeChip}` }];
 
   // Overbudget

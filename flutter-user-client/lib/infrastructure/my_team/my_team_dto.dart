@@ -25,6 +25,12 @@ abstract class MyTeamDto implements _$MyTeamDto {
       availableChipsStr.add(chip.getOrCrash());
     }
 
+    Map<String, dynamic> players = {};
+
+    myTeam.players.forEach((position, positionalContainer) {
+      players[position] = positionalContainer.getOrCrash();
+    });
+
     return MyTeamDto(
       teamName: myTeam.teamName.isValid() ? myTeam.teamName.getOrCrash() : '',
       activeGameweek: myTeam.activeGameweek.isValid()
@@ -33,7 +39,7 @@ abstract class MyTeamDto implements _$MyTeamDto {
       availableChips: availableChipsStr,
       activeChip:
           myTeam.activeChip.isValid() ? myTeam.activeChip.getOrCrash() : '',
-      players: myTeam.players,
+      players: players,
     );
   }
 
