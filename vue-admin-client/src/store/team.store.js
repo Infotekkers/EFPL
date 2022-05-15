@@ -53,7 +53,6 @@ export default {
         });
       }
     },
-
     sortByName(context, order) {
       if (order == 1) {
         store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
@@ -68,6 +67,29 @@ export default {
           return teamOne.teamName.toUpperCase() > teamTwo.teamName.toUpperCase()
             ? -1
             : teamOne.teamName.toUpperCase() < teamTwo.teamName.toUpperCase()
+            ? 1
+            : 0;
+        });
+      }
+    },
+    sortByPoint(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].teamPoint) <
+            parseInt(teamTwo.teamPosition[0].teamPoint)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].teamPoint) >
+              parseInt(teamTwo.teamPosition[0].teamPoint)
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].teamPoint) >
+            parseInt(teamTwo.teamPosition[0].teamPoint)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].teamPoint) <
+              parseInt(teamTwo.teamPosition[0].teamPoint)
             ? 1
             : 0;
         });
