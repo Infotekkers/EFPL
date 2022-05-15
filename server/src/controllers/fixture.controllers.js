@@ -469,24 +469,49 @@ const endFixture = asyncHandler(async function (req, res) {
     console.log(awayteamPosition);
     const awayteamPoint = awayteamPosition[0].teamPoint;
     const hometeamPoint = hometeamPosition[0].teamPoint;
-
     if(hometeamScore > awayteamScore){
     const teamPoint = hometeamPoint + 3;
-    console.log(teamPoint);
-    
+    const hometeamGoalDce  = hometeamScore - awayteamScore;    
     homeTeam.teamPosition[0].teamPoint = teamPoint;
+    homeTeam.teamPosition[0].won += 1;
+    awayTeam.teamPosition[0].lost += 1;
+    homeTeam.teamPosition[0].goalDifferntial += hometeamGoalDce;
+    homeTeam.teamPosition[0].goalFor = hometeamScore;
+    homeTeam.teamPosition[0].goalAgainst = awayteamScore;
+    awayTeam.teamPosition[0].lost += 1;
+
       await homeTeam.save();
   }else if(hometeamScore === awayteamScore){
     const Hteampoint =  hometeamPoint + 1;
     const Ateampoint = awayteamPoint + 1;
-   homeTeam.teamPosition[0].teamPoint = Hteampoint;
-   awayTeam.teamPosition[0].teamPoint = Ateampoint;
+    const hometeamGoalDce  = hometeamScore - awayteamScore;    
+    homeTeam.teamPosition[0].teamPoint = Hteampoint;    
+    homeTeam.teamPosition[0].Draw += 1;
+    homeTeam.teamPosition[0].goalDifferntial += hometeamGoalDce;
+    homeTeam.teamPosition[0].goalFor = hometeamScore;
+    homeTeam.teamPosition[0].goalAgainst = awayteamScore;
+    
+
+    const awayteamGoalDce  = awayteamScore - hometeamScore;   
+    awayTeam.teamPosition[0].teamPoint = Ateampoint;
+    awayTeam.teamPosition[0].Draw += 1;
+    awayTeam.teamPosition[0].goalDifferntial += awayteamGoalDce;
+    awayTeam.teamPosition[0].goalFor = awayteamScore;
+    awayTeam.teamPosition[0].goalAgainst = hometeamScore;
+
     await homeTeam.save();
     await awayTeam.save();
   }
   else{
     const Ateampoint = awayteamPoint + 3;
+
+    const awayteamGoalDce  = hometeamScore - awayteamScore;    
     awayTeam.teamPosition[0].teamPoint = Ateampoint;
+    awayTeam.teamPosition[0].won += 1;
+    homeTeam.teamPosition[0].lost += 1;
+    awayTeam.teamPosition[0].goalDifferntial += awayteamGoalDce;
+    awayTeam.teamPosition[0].goalFor = hometeamScore;
+    awayTeam.teamPosition[0].goalAgainst = awayteamScore;
     await awayTeam.save();
   }
     match
