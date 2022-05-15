@@ -36,9 +36,7 @@ const teamSchema = mongoose.Schema({
   teamCoach: {
     type: String,
   },
-  teamPosition : {
-    type: Map, of: teamPosition 
-  },
+  teamPosition: { type: [teamPosition], default: [] },
   
 });
 
