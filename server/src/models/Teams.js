@@ -6,6 +6,24 @@ const teamPosition = mongoose.Schema({
   teamPoint: { 
     type: Number
   },
+  won:{
+    type:Number
+  },
+  lost:{
+    type:Number
+  },
+  Draw:{
+    type:Number
+  },
+  goalDifferntial: {
+
+  },
+  goalAgainst:{
+
+  },
+  goalFor: {
+    
+  }
 });
 const teamSchema = mongoose.Schema({
   teamName: {

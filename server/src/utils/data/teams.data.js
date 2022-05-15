@@ -11,6 +11,12 @@ const teamData = [
     teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -23,9 +29,15 @@ const teamData = [
     stadiumCapacity: 30000,
     teamCoach: "Tsegaye Kidane-mariyam",
     teamLogo: "/uploads/teams/Wolaita-dicha.png",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -38,9 +50,15 @@ const teamData = [
     stadiumCapacity: 15000,
     teamCoach: "Mulugeta Mihret",
     teamLogo: "/uploads/teams/Hawassa-Ketema.jpg",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -53,9 +71,15 @@ const teamData = [
     stadiumCapacity: 20000,
     teamCoach: "Seyoum Kebede",
     teamLogo: "/uploads/teams/Fasil-Kenema.png",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -68,9 +92,15 @@ const teamData = [
     stadiumCapacity: 4000,
     teamCoach: "Zeray Mulu",
     teamLogo: "/uploads/teams/Adama-City.png",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -83,9 +113,15 @@ const teamData = [
     stadiumCapacity: 25000,
     teamCoach: "Gebremedin Haile",
     teamLogo: "/uploads/teams/Sidama-Coffee.jpg",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -98,9 +134,15 @@ const teamData = [
     stadiumCapacity: 60000,
     teamCoach: "Fasil Tekalegn",
     teamLogo: "/uploads/teams/Bahir-Dar.png",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -113,9 +155,15 @@ const teamData = [
     stadiumCapacity: 35000,
     teamCoach: "Kassaye Arage",
     teamLogo: "/uploads/teams/Ethiopian-Coffee.jpg",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -128,9 +176,15 @@ const teamData = [
     stadiumCapacity: 5000,
     teamCoach: "Paulos Getachew",
     teamLogo: "/uploads/teams/Wolkite-City.png",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -143,9 +197,15 @@ const teamData = [
     stadiumCapacity: 5000,
     teamCoach: "Mesay Teferi",
     teamLogo: "/uploads/teams/Arba-Minch.jpg",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -159,9 +219,15 @@ const teamData = [
     stadiumCapacity: 35000,
     teamCoach: "Yohannes Sahle",
     teamLogo: "/uploads/teams/Defense-Force.png",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -174,9 +240,15 @@ const teamData = [
     stadiumCapacity: 5000,
     teamCoach: "Ashenafi Bekele",
     teamLogo: "/uploads/teams/Hadiya-Hossana.png",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -189,9 +261,15 @@ const teamData = [
     stadiumCapacity: 18000,
     teamCoach: "Zemariam Woldegiorgis",
     teamLogo: "/uploads/teams/Dire-Dawa.png",
-     teamPosition: 
+    teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -204,9 +282,15 @@ const teamData = [
     stadiumCapacity: 5000,
     teamCoach: "",
     teamLogo: "/uploads/teams/Addis-Ababa.png",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 
@@ -219,9 +303,15 @@ const teamData = [
     stadiumCapacity: 15000,
     teamCoach: "Zemariam Damtew",
     teamLogo: "/uploads/teams/Jimma-Aba.png",
-    teamPosition: 
+   teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
     
   },
@@ -235,9 +325,15 @@ const teamData = [
     stadiumCapacity: 5000,
     teamCoach: "Abraham Mebratu",
     teamLogo: "/uploads/teams/Sebeta-City.png",
-   teamPosition: 
+  teamPosition: 
         {
           teamPoint: 0,
+          won:0,
+          lost:0,
+          Draw:0,
+          goalDifferntial:0,
+          goalAgainst:0,
+          goalFor:0,
         }
   },
 ];
