@@ -199,7 +199,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             userTeam: newUserTeam,
             isLoading: false,
             transfersMade: true,
-            transfersMadeCount: state.transfersMadeCount - 1,
+            transfersMadeCount: state.transfersMadeCount + 1,
             remainingInBank: state.userTeam.maxBudget - playerCostSum,
             transferredInPlayerIdList: newTransferredInPlayerIdList,
             swappedPlayerIdsList: newSwapperPlayersIdsList,
@@ -296,7 +296,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         gameWeekId: state.userTeam.gameWeekId,
         gameWeekDeadline: state.userTeam.gameWeekDeadline,
         allUserPlayers: allNewUserPlayers,
-        freeTransfers: 1,
+        freeTransfers: transferCount == 0 ? 1 : 0,
         deduction:
             state.userTeam.deduction == 0 ? 0 : state.userTeam.deduction + 4,
         activeChip: state.userTeam.activeChip,
@@ -332,6 +332,8 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         var efplCache = await Hive.openBox('efplCache');
         // all players
         List allPlayers = efplCache.get("allPlayers");
+
+        print(state.transfersMadeCount);
         List swappedPlayerIdList = state.swappedPlayerIdsList;
 
         List transferredInPlayerIdList = state.transferredInPlayerIdList;
@@ -409,7 +411,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           gameWeekId: state.userTeam.gameWeekId,
           gameWeekDeadline: state.userTeam.gameWeekDeadline,
           allUserPlayers: allUserPlayers,
-          freeTransfers: state.transfersMadeCount == 0 ? 1 : 0,
+          freeTransfers: state.transfersMadeCount - 1 == 0 ? 1 : 0,
           deduction:
               state.userTeam.deduction == 0 ? 0 : state.userTeam.deduction + 4,
           activeChip: state.userTeam.activeChip,
@@ -442,8 +444,9 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             userTeam: newUserTeam,
             isLoading: false,
             transfersMade: state.transfersMadeCount == 0 ? false : true,
-            transfersMadeCount:
-                state.transfersMadeCount > 0 ? state.transfersMadeCount - 1 : 0,
+            transfersMadeCount: state.transfersMadeCount <= 0
+                ? 0
+                : state.transfersMadeCount - 1,
             remainingInBank: state.userTeam.maxBudget - newPlayersCostSum,
             transferredInPlayerIdList: transferredInPlayerIdList,
             swappedPlayerIdsList: swappedPlayerIdList,
@@ -531,10 +534,10 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             emit(
               state.copyWith(
                 isLoading: false,
-                // transfersMade: false,
-                // transfersMadeCount: 0,
-                // transferredInPlayerIdList: [],
-                // swappedPlayerIdsList: [],
+                transfersMade: false,
+                transfersMadeCount: 0,
+                transferredInPlayerIdList: [],
+                swappedPlayerIdsList: [],
               ),
             );
           }
