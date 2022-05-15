@@ -41,230 +41,400 @@
         </div>
       </div>
     </div>
-    <div class="recent-grid">
-      <div class="projects">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="heading">Recent Projects</h3>
-            <button>See all <span class="fas fa-arrow-right"></span></button>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table width="100%">
-                <thead>
-                  <tr>
-                    <td>Project Title</td>
-                    <td>Department</td>
-                    <td>Status</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>UI/UX Design</td>
-                    <td>UI Team</td>
-                    <td><span class="status purple"></span>review</td>
-                  </tr>
-                  <tr>
-                    <td>Web Dev</td>
-                    <td>Frontend</td>
-                    <td><span class="status pink"></span>pending</td>
-                  </tr>
-                  <tr>
-                    <td>Ushop App</td>
-                    <td>Mobile Team</td>
-                    <td><span class="status orange"></span>active</td>
-                  </tr>
-                  <tr>
-                    <td>UI/UX Design</td>
-                    <td>UI Team</td>
-                    <td><span class="status purple"></span>review</td>
-                  </tr>
-                  <tr>
-                    <td>Web Dev</td>
-                    <td>Frontend</td>
-                    <td><span class="status pink"></span>pending</td>
-                  </tr>
-                  <tr>
-                    <td>Ushop App</td>
-                    <td>Mobile Team</td>
-                    <td><span class="status orange"></span>active</td>
-                  </tr>
-                  <tr>
-                    <td>UI/UX Design</td>
-                    <td>UI Team</td>
-                    <td><span class="status purple"></span>review</td>
-                  </tr>
-                  <tr>
-                    <td>Web Dev</td>
-                    <td>Frontend</td>
-                    <td><span class="status pink"></span>pending</td>
-                  </tr>
-                  <tr>
-                    <td>Ushop App</td>
-                    <td>Mobile Team</td>
-                    <td><span class="status orange"></span>active</td>
-                  </tr>
-                  <tr>
-                    <td>UI/UX Design</td>
-                    <td>UI Team</td>
-                    <td><span class="status purple"></span>review</td>
-                  </tr>
-                  <tr>
-                    <td>Web Dev</td>
-                    <td>Frontend</td>
-                    <td><span class="status pink"></span>pending</td>
-                  </tr>
-                  <tr>
-                    <td>Ushop App</td>
-                    <td>Mobile Team</td>
-                    <td><span class="status orange"></span>active</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="customers">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="heading">New customer</h3>
-            <button>Sell all<span class="fas fa-arrow-right"></span></button>
-          </div>
-
-          <div class="card-body">
-            <div class="customer">
-              <div class="info">
-                <img
-                  src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                  alt=""
-                />
-                <div>
-                  <h4>lion Emusky</h4>
-                  <small>CEO @ TLS</small>
-                </div>
-              </div>
-              <div class="contact">
-                <span class="fas fa-user-circle"></span>
-                <span class="fas fa-comment"></span>
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-
-            <div class="customer">
-              <div class="info">
-                <img
-                  src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                  alt=""
-                />
-                <div>
-                  <h4>Ion Emusky</h4>
-                  <small>C0O @ AFK</small>
-                </div>
-              </div>
-              <div class="contact">
-                <span class="fas fa-user-circle"></span>
-                <span class="fas fa-comment"></span>
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-
-            <div class="customer">
-              <div class="info">
-                <img
-                  src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                  alt=""
-                />
-                <div>
-                  <h4>El-lion musky</h4>
-                  <small>CEO @ FOMO</small>
-                </div>
-              </div>
-              <div class="contact">
-                <span class="fas fa-user-circle"></span>
-                <span class="fas fa-comment"></span>
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-
-            <div class="customer">
-              <div class="info">
-                <img
-                  src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                  alt=""
-                />
-                <div>
-                  <h4>John Bezos</h4>
-                  <small>CEO @ Mazon</small>
-                </div>
-              </div>
-              <div class="contact">
-                <span class="fas fa-user-circle"></span>
-                <span class="fas fa-comment"></span>
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-
-            <div class="customer">
-              <div class="info">
-                <img
-                  src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                  alt=""
-                />
-                <div>
-                  <h4>Beelz Gai8</h4>
-                  <small>CEO @ Mycroft</small>
-                </div>
-              </div>
-              <div class="contact">
-                <span class="fas fa-user-circle"></span>
-                <span class="fas fa-comment"></span>
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-
-            <div class="customer">
-              <div class="info">
-                <img
-                  src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                  alt=""
-                />
-                <div>
-                  <h4>Jeam Krook</h4>
-                  <small>CEO @ Penapple</small>
-                </div>
-              </div>
-              <div class="contact">
-                <span class="fas fa-user-circle"></span>
-                <span class="fas fa-comment"></span>
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-
-            <div class="customer">
-              <div class="info">
-                <img
-                  src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                  alt=""
-                />
-                <div>
-                  <h4>Cris Coya</h4>
-                  <small>CEO @ PenCode</small>
-                </div>
-              </div>
-              <div class="contact">
-                <span class="fas fa-user-circle"></span>
-                <span class="fas fa-comment"></span>
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- Header -->
+    <div class="teams-header-container">
+      <!-- Title -->
+      <div class="teams-title">
+        {{ $t("Ethiopian Premier League") }} - {{ getSeason }}
+        {{ $t("Teams") }}
       </div>
     </div>
+    <!-- Header -->
+
+    <!-- Sorter Header -->
+    <div class="teams-sorter-header">
+      <!-- ID -->
+      <!-- <div class="teams-id-sorter">
+          <span @click="sortByID(-1)">
+            <img
+              :src="sortDownIcon.path"
+              :alt="sortDownIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+          <span class="sorter-content">
+            {{ $t("ID") }}
+          </span>
+          <span @click="sortByID(1)">
+            <img
+              :src="sortUpIcon.path"
+              :alt="sortUpIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+        </div> -->
+      <!-- ID -->
+      <!-- Name -->
+      <div class="teams-name-sorter">
+        <span @click="sortByName(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+        <span class="sorter-content">
+          {{ $t("Team") }}
+        </span>
+        <span @click="sortByName(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+      </div>
+      <!-- Name -->
+      <!-- Played Games -->
+      <div class="teams-point-sorter">
+        <span @click="sortByPoint(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+        /></span>
+        <span class="sorter-content"> {{ $t("Played Game") }}</span>
+        <span @click="sortByPoint(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+      </div>
+      <!-- Played Games -->
+      <!-- won -->
+      <div class="teams-point-sorter">
+        <span @click="sortByPoint(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+        /></span>
+        <span class="sorter-content"> {{ $t("Won") }}</span>
+        <span @click="sortByPoint(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+      </div>
+      <!-- Won -->
+      <!-- Lost -->
+      <div class="teams-point-sorter">
+        <span @click="sortByPoint(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+        /></span>
+        <span class="sorter-content"> {{ $t("Lost") }}</span>
+        <span @click="sortByPoint(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+      </div>
+      <!-- Lost -->
+      <!-- Draw -->
+      <div class="teams-point-sorter">
+        <span @click="sortByPoint(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+        /></span>
+        <span class="sorter-content"> {{ $t("Draw") }}</span>
+        <span @click="sortByPoint(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+      </div>
+      <!-- Draw -->
+      <!-- Goal Differnce -->
+      <div class="teams-point-sorter">
+        <span @click="sortByPoint(-1)">
+          <img
+            :src="sortDownIcon.path"
+            :alt="sortDownIcon.alt"
+            class="extra-small-icon"
+        /></span>
+        <span class="sorter-content"> {{ $t("Point") }}</span>
+        <span @click="sortByPoint(1)">
+          <img
+            :src="sortUpIcon.path"
+            :alt="sortUpIcon.alt"
+            class="extra-small-icon"
+          />
+        </span>
+      </div>
+      <!-- Goal Differnce -->
+    </div>
+    <!-- Sorter Header -->
+    <div
+      class="teams-container"
+      v-if="getAllTeams.length > 0 && isTeamLoading == false"
+    >
+      <DashLeagueTableComponent
+        v-for="team in getAllTeams"
+        :key="team.teamId"
+        :team="team"
+        @activateModalEdit="activateModalEdit"
+      />
+    </div>
+
+    <!-- No items -->
+    <div
+      class="no-teams-container"
+      v-else-if="getAllTeams.length == 0 && isTeamLoading == false"
+    >
+      {{ $t("No") }} {{ $t("Teams") }}
+    </div>
+    <div v-else-if="isTeamLoading == true" class="no-teams-container">
+      <SpinnerComponent />
+    </div>
+    <!-- Loading -->
   </main>
 </template>
+<script>
+// Utils
+import store from "../store/index";
+import {
+  sortUpIcon,
+  sortDownIcon,
+  addIcon,
+  editIcon,
+  deleteIcon,
+} from "@/utils/Icons";
+
+// Components
+// import TeamComponent from "@/components/TeamComponent";
+import DashLeagueTableComponent from "@/components/dashLeagueTableComponent";
+import SpinnerComponent from "@/components/SpinnerComponent.vue";
+export default {
+  name: "TeamsComponent",
+  components: {
+    DashLeagueTableComponent,
+    SpinnerComponent,
+  },
+  data() {
+    return {
+      showModal: false,
+      isEditMode: false,
+      isTeamLoading: true,
+
+      // Icons
+      sortUpIcon: sortUpIcon,
+      sortDownIcon: sortDownIcon,
+      addIcon: addIcon,
+      editIcon: editIcon,
+      deleteIcon: deleteIcon,
+    };
+  },
+
+  methods: {
+    searchBarFilter() {
+      const searchTerm = this.$refs.searchBar.value;
+      store.dispatch("Team/filterByTerm", searchTerm);
+      this.getAllTeams;
+    },
+    // Event Handlers
+    activateModal() {
+      this.isEditMode = false;
+      this.showModal = true;
+    },
+    activateModalEdit() {
+      this.isEditMode = true;
+      this.showModal = true;
+    },
+    closeModal() {
+      this.isEditMode = false;
+      this.showModal = false;
+    },
+    sortByID(order) {
+      store.dispatch("Team/sortByID", order);
+    },
+    sortByName(order) {
+      store.dispatch("Team/sortByName", order);
+    },
+    sortByCity(order) {
+      store.dispatch("Team/sortByCity", order);
+    },
+    sortbyStadium(order) {
+      store.dispatch("Team/sortByStadium", order);
+    },
+    sortByPoint(order) {
+      store.dispatch("Team/sortByPoint", order);
+    },
+    sortByFoundedDate(order) {
+      store.dispatch("Team/sortByFoundedDate", order);
+    },
+  },
+
+  computed: {
+    getSeason() {
+      const date = new Date().getFullYear().toString().split("");
+
+      return date[2] + (date[3] - 1) + "/" + date[2] + date[3];
+    },
+
+    getAllTeams() {
+      return store.state.Team.allTeams;
+    },
+  },
+
+  beforeMount() {
+    this.isTeamLoading = true;
+    store.dispatch("Team/setAllTeams");
+
+    setTimeout(() => {
+      this.isTeamLoading = false;
+    }, 2000);
+
+    // activate modal if required -> when routed from fixtures page
+    if (this.$route.query.modal == 1) {
+      this.showModal = true;
+      this.$router.replace({ modal: null });
+    }
+  },
+};
+</script>
 <style scoped>
+/* Icons */
+.extra-small-icon {
+  width: 7px;
+  height: fit-content;
+  object-fit: contain;
+}
+
+.small-icon {
+  width: 15px;
+  height: fit-content;
+  object-fit: contain;
+}
+.teams-main-container {
+  width: 100%;
+}
+.team-search-bar {
+  width: 20%;
+  height: 32px;
+  margin-left: 80%;
+  padding: 0 3px;
+  outline: none;
+}
+.teams-header-container {
+  margin-top: var(--spacing-medium);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /*  */
+  position: relative;
+  z-index: 1;
+}
+.teams-title {
+  font-size: var(--text-medium);
+}
+.teams-add-new {
+  font-size: 16px;
+  position: absolute;
+  right: 0%;
+  background: var(--primary-900);
+  padding: 5px 22px 5px 16px;
+  color: var(--neutral-100);
+  display: flex;
+}
+
+.teams-add-new > div {
+  width: 20px;
+  height: 20px;
+  background: var(--primary-800);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-right: 6px;
+}
+.teams-sorter-header {
+  padding: 0 12px;
+  margin: var(--spacing-xlarge) 0 var(--spacing-regular) 0;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--neutral-700);
+}
+.teams-id-sorter,
+.teams-name-sorter,
+.teams-point-sorter,
+.teams-stadium-sorter,
+.teams-founded-sorter {
+  display: flex;
+  align-items: center;
+}
+.teams-id-sorter {
+  width: 5%;
+  min-width: 45px;
+}
+.sorter-content {
+  margin-right: 8px;
+  margin-left: 8px;
+}
+.teams-id-sorter > span,
+.teams-name-sorter > span,
+.teams-city-sorter > span,
+.teams-stadium-sorter > span,
+.teams-founded-sorter > span {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.teams-logo-sorter {
+  width: 60px;
+}
+.teams-name-sorter {
+  width: 20%;
+  min-width: 130px;
+}
+.teams-point-sorter {
+  min-width: 100px;
+  width: 17%;
+}
+.teams-stadium-sorter {
+  width: 18%;
+}
+.teams-founded-sorter {
+  width: 8%;
+}
+.teams-controls-sorter {
+  width: 10%;
+}
+.no-teams-container {
+  margin-top: var(--spacing-xlarge);
+  width: 100%;
+  min-height: 200px;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  font-size: var(--text-medium);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -919,7 +1089,7 @@ body.light .heading {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1.2rem;
   margin-top: 1rem;
-  padding: 10px;
+  padding: 30px;
   overflow: hidden;
   height: auto;
 }
@@ -997,555 +1167,5 @@ sup,
 b {
   background: var(--moon);
   -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-@property --num {
-  syntax: "<integer>";
-  initial-value: 0;
-  inherits: false;
-}
-
-#customer,
-#project,
-#order,
-#income {
-  counter-reset: num var(--num);
-}
-
-#customer {
-  animation: customer 5s forwards ease-in;
-}
-
-#project {
-  animation: project 10s forwards ease-in-out;
-}
-
-#order {
-  animation: order 12s forwards ease-in-out;
-}
-
-#income {
-  display: inline;
-  animation: income 15s forwards ease-in;
-}
-
-#income::before,
-#customer::before,
-#project::before,
-#order::before {
-  content: counter(num);
-  background: var(--moon);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-.card-single:hover #income,
-.card-single:hover #customer,
-.card-single:hover #project,
-.card-single:hover #order {
-  animation-play-state: paused;
-}
-
-@keyframes income {
-  from {
-    --num: 0;
-  }
-
-  to {
-    --num: 600;
-  }
-}
-
-@keyframes customer {
-  from {
-    --num: 0;
-  }
-
-  to {
-    --num: 1334;
-  }
-}
-
-@keyframes project {
-  from {
-    --num: 0;
-  }
-
-  to {
-    --num: 6969;
-  }
-}
-
-@keyframes order {
-  from {
-    --num: 0;
-  }
-
-  to {
-    --num: 5124;
-  }
-}
-
-/* =========COUNTER=========== */
-
-.card-header,
-.card-body {
-  padding: 1rem;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--dark-text);
-  text-transform: uppercase;
-  transition: var(--transition) !important;
-}
-
-.card-header .heading {
-  color: var(--off-white);
-}
-
-.card-header button {
-  background: var(--main-color);
-  border-radius: 10px;
-  color: var(--off-white);
-  font-size: 0.8rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--main-color);
-}
-
-.card-header button:hover {
-  background: transparent;
-  color: var(--off-white);
-  border: 1px solid #fff;
-}
-
-.card-header button:hover span {
-  transform: translatex(5px);
-}
-
-.card-header button span {
-  transform: translatey(2px);
-}
-
-table {
-  border-collapse: collapse;
-}
-
-thead tr {
-  border-top: 1px solid var(--new-content);
-  border-bottom: 1px solid var(--new-content);
-}
-
-thead td {
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-}
-
-td {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  color: var(--off-white);
-}
-
-td .status {
-  display: inline-block;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  margin-right: 1rem;
-}
-
-tr td:last-child {
-  display: flex;
-  align-items: center;
-}
-
-.status.purple {
-  background: var(--purple);
-}
-
-.status.pink {
-  background: var(--pink);
-}
-
-.status.orange {
-  background: var(--orange);
-}
-
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.customer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0.7rem;
-}
-
-.info {
-  display: flex;
-  align-items: center;
-}
-
-.info img {
-  border-radius: 50%;
-  margin-right: 1rem;
-}
-
-.info h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 1px;
-}
-
-.info small {
-  font-weight: 600;
-  color: var(--text-grey);
-}
-
-.contact span {
-  font-size: 1.2rem;
-  display: inline-block;
-  margin-left: 0.5rem;
-  background: var(--pink);
-  -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-@keyframes anime {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-@media only screen and (max-width: 1200px) {
-  .sidebar {
-    width: 70px;
-  }
-
-  .sidebar {
-    width: 70px;
-  }
-
-  .sidebar .sidebar-brand,
-  .sidebar li {
-    padding-left: 1rem;
-    text-align: center;
-  }
-  .sidebar li a {
-    margin-bottom: 2rem !important;
-  }
-
-  .sidebar li a {
-    padding-left: 0rem;
-  }
-
-  .light .sidebar li a span {
-    font-size: 2rem;
-    background: var(--pink);
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-
-  .light .sidebar:hover li a span {
-    font-size: 1.5rem;
-    filter: brightness(140%);
-    background: var(--orange);
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-
-  .sidebar .sidebar-brand h2 span:last-child,
-  .sidebar li a span:last-child {
-    display: none;
-  }
-
-  .main-content {
-    margin-left: 70px;
-  }
-
-  .main-content header {
-    width: calc(100% - 70px);
-    left: 70px;
-  }
-
-  .sidebar {
-    width: 70px;
-  }
-
-  .sidebar:hover {
-    width: 345px;
-    z-index: 200;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-  }
-
-  .sidebar:hover .sidebar-brand,
-  .sidebar:hover li {
-    padding-left: 2rem;
-    text-align: left;
-  }
-
-  .sidebar:hover li a {
-    padding-left: 1rem;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  .sidebar:hover .sidebar-brand h2 span:last-child,
-  .sidebar:hover li a span:last-child {
-    display: inline;
-  }
-
-  .sidebar:hover .sidebar-brand h2 span:first-child {
-    transform: translatey(5px);
-  }
-}
-
-@media only screen and (max-width: 1050px) {
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .recent-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dis-wrap,
-  .dis-warn {
-    top: 5.3rem;
-    left: 50%;
-  }
-
-  .display {
-    font: 600 1.5rem rajdhani;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  .cards .card-single {
-    height: 150px;
-  }
-
-  .recent-grid {
-    grid-template-columns: 100%;
-  }
-
-  .search {
-    display: none;
-  }
-
-  .sidebar {
-    left: -100% !important;
-    margin-top: 4.5em;
-    height: 95.7%;
-    transition: all 400ms;
-  }
-
-  header h2 {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-left: 2rem;
-  }
-
-  header label {
-    border: 1px solid var(--off-white);
-    display: flex;
-    padding-right: 0rem;
-    margin-right: 1rem;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    color: #fff;
-    align-items: center;
-    justify-content: center !important;
-    position: fixed;
-    left: 10px;
-  }
-
-  .light header label {
-    color: #f00170;
-    border: 1px solid #00ffff;
-  }
-
-  header label span {
-    text-align: center;
-    padding: 0rem;
-  }
-
-  header label:checked span::before {
-    display: none;
-  }
-
-  .main-content {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  header {
-    width: 100% !important;
-    left: 0 !important;
-  }
-
-  #nav-toggle:checked + .sidebar {
-    left: 0 !important;
-    z-index: 100;
-    width: 50%;
-    transition: var(--transition);
-  }
-
-  #nav-toggle:checked + .sidebar .sidebar-brand,
-  #nav-toggle:checked + .sidebar li {
-    padding-left: 2rem;
-    text-align: left;
-    transition: var(--transition);
-  }
-
-  #nav-toggle:checked + .sidebar li a {
-    padding-left: 1rem;
-  }
-
-  #nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
-  #nav-toggle:checked + .sidebar li a span:last-child {
-    display: inline;
-  }
-
-  #nav-toggle:checked ~ .main-content {
-    margin-left: 0 !important;
-  }
-
-  header {
-    margin-bottom: 0;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  header label {
-    display: none !important;
-  }
-}
-
-p #Layer_1 {
-  height: 40px;
-  width: 40px;
-  transform: translateY(10px);
-  padding: 0;
-  animation: scaled 1s linear infinite;
-}
-@keyframes scaled {
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-footer {
-  display: flex;
-  width: 100%;
-  align-content: flex-end;
-  color: #fff;
-  margin-bottom: 1rem;
-}
-
-footer p {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  font-size: 1.5rem;
-  text-align: center;
-  overflow: hidden;
-}
-footer p span {
-  border-left: 3px solid #fff;
-  padding-left: 9px;
-}
-
-body.light footer p {
-  background: linear-gradient(196deg, #0ff, #ff004c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font: 600 2rem teko;
-  text-transform: uppercase;
-}
-
-@media only screen and (max-width: 560px) {
-  main {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 64px;
-  }
-
-  .recent-grid {
-    padding: 0;
-  }
-
-  header {
-    padding: 10px 15px;
-  }
-
-  #nav-toggle:checked + .sidebar {
-    left: 0 !important;
-    width: 300px;
-    z-index: 200;
-    background: var(--main-color);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-  }
-
-  .sidebar-menu a:active {
-    background: #fff;
-    color: var(--icon-color);
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-radius: 30px 0 0 30px;
-  }
-
-  body.light .switch {
-    top: 80px;
-  }
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--main-color);
-  border-radius: 10px;
-}
-
-body.light::-webkit-scrollbar {
-  background-color: var(--dark-BG);
-  width: 8px;
-}
-
-body.light::-webkit-scrollbar-thumb {
-  background: #13001a;
-  border-radius: 10px;
 }
 </style>
