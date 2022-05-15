@@ -26,7 +26,7 @@ class SplashView extends StatelessWidget {
               color: Colors.blue,
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed("/home");
+                  Navigator.of(context).pushNamed("/login");
                 },
                 child: Text(
                   AppLocalizations.of(context)!.login,
