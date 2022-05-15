@@ -124,7 +124,6 @@ class UserPlayerWidget extends StatelessWidget {
                               height: 15,
                             ),
 
-                            // TODO:ADD
                             const Text(
                               "Upcoming Fixtures",
                               textAlign: TextAlign.center,
