@@ -28,7 +28,8 @@ class _$UserPlayerTearOff {
       required bool isCaptain,
       required bool isViceCaptain,
       required PlayerAvailability availability,
-      required int score}) {
+      required int score,
+      required List<dynamic> upComingFixtures}) {
     return _UserPlayer(
       playerId: playerId,
       playerName: playerName,
@@ -41,6 +42,7 @@ class _$UserPlayerTearOff {
       isViceCaptain: isViceCaptain,
       availability: availability,
       score: score,
+      upComingFixtures: upComingFixtures,
     );
   }
 }
@@ -61,6 +63,7 @@ mixin _$UserPlayer {
   bool get isViceCaptain => throw _privateConstructorUsedError;
   PlayerAvailability get availability => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
+  List<dynamic> get upComingFixtures => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserPlayerCopyWith<UserPlayer> get copyWith =>
@@ -83,7 +86,8 @@ abstract class $UserPlayerCopyWith<$Res> {
       bool isCaptain,
       bool isViceCaptain,
       PlayerAvailability availability,
-      int score});
+      int score,
+      List<dynamic> upComingFixtures});
 }
 
 /// @nodoc
@@ -107,6 +111,7 @@ class _$UserPlayerCopyWithImpl<$Res> implements $UserPlayerCopyWith<$Res> {
     Object? isViceCaptain = freezed,
     Object? availability = freezed,
     Object? score = freezed,
+    Object? upComingFixtures = freezed,
   }) {
     return _then(_value.copyWith(
       playerId: playerId == freezed
@@ -153,6 +158,10 @@ class _$UserPlayerCopyWithImpl<$Res> implements $UserPlayerCopyWith<$Res> {
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
+      upComingFixtures: upComingFixtures == freezed
+          ? _value.upComingFixtures
+          : upComingFixtures // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -174,7 +183,8 @@ abstract class _$UserPlayerCopyWith<$Res> implements $UserPlayerCopyWith<$Res> {
       bool isCaptain,
       bool isViceCaptain,
       PlayerAvailability availability,
-      int score});
+      int score,
+      List<dynamic> upComingFixtures});
 }
 
 /// @nodoc
@@ -200,6 +210,7 @@ class __$UserPlayerCopyWithImpl<$Res> extends _$UserPlayerCopyWithImpl<$Res>
     Object? isViceCaptain = freezed,
     Object? availability = freezed,
     Object? score = freezed,
+    Object? upComingFixtures = freezed,
   }) {
     return _then(_UserPlayer(
       playerId: playerId == freezed
@@ -246,6 +257,10 @@ class __$UserPlayerCopyWithImpl<$Res> extends _$UserPlayerCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
+      upComingFixtures: upComingFixtures == freezed
+          ? _value.upComingFixtures
+          : upComingFixtures // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -264,7 +279,8 @@ class _$_UserPlayer implements _UserPlayer {
       required this.isCaptain,
       required this.isViceCaptain,
       required this.availability,
-      required this.score});
+      required this.score,
+      required this.upComingFixtures});
 
   @override
   final String playerId;
@@ -288,10 +304,12 @@ class _$_UserPlayer implements _UserPlayer {
   final PlayerAvailability availability;
   @override
   final int score;
+  @override
+  final List<dynamic> upComingFixtures;
 
   @override
   String toString() {
-    return 'UserPlayer(playerId: $playerId, playerName: $playerName, currentPrice: $currentPrice, playerPosition: $playerPosition, eplTeamId: $eplTeamId, eplTeamLogo: $eplTeamLogo, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain, availability: $availability, score: $score)';
+    return 'UserPlayer(playerId: $playerId, playerName: $playerName, currentPrice: $currentPrice, playerPosition: $playerPosition, eplTeamId: $eplTeamId, eplTeamLogo: $eplTeamLogo, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain, availability: $availability, score: $score, upComingFixtures: $upComingFixtures)';
   }
 
   @override
@@ -316,7 +334,9 @@ class _$_UserPlayer implements _UserPlayer {
                 .equals(other.isViceCaptain, isViceCaptain) &&
             const DeepCollectionEquality()
                 .equals(other.availability, availability) &&
-            const DeepCollectionEquality().equals(other.score, score));
+            const DeepCollectionEquality().equals(other.score, score) &&
+            const DeepCollectionEquality()
+                .equals(other.upComingFixtures, upComingFixtures));
   }
 
   @override
@@ -332,7 +352,8 @@ class _$_UserPlayer implements _UserPlayer {
       const DeepCollectionEquality().hash(isCaptain),
       const DeepCollectionEquality().hash(isViceCaptain),
       const DeepCollectionEquality().hash(availability),
-      const DeepCollectionEquality().hash(score));
+      const DeepCollectionEquality().hash(score),
+      const DeepCollectionEquality().hash(upComingFixtures));
 
   @JsonKey(ignore: true)
   @override
@@ -352,7 +373,8 @@ abstract class _UserPlayer implements UserPlayer {
       required bool isCaptain,
       required bool isViceCaptain,
       required PlayerAvailability availability,
-      required int score}) = _$_UserPlayer;
+      required int score,
+      required List<dynamic> upComingFixtures}) = _$_UserPlayer;
 
   @override
   String get playerId;
@@ -376,6 +398,8 @@ abstract class _UserPlayer implements UserPlayer {
   PlayerAvailability get availability;
   @override
   int get score;
+  @override
+  List<dynamic> get upComingFixtures;
   @override
   @JsonKey(ignore: true)
   _$UserPlayerCopyWith<_UserPlayer> get copyWith =>

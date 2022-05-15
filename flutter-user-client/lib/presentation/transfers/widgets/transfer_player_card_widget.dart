@@ -24,6 +24,12 @@ class UserPlayerCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         showModalBottomSheet(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
+            ),
+          ),
           context: context,
           builder: (builder) {
             return BlocProvider.value(
@@ -34,13 +40,13 @@ class UserPlayerCard extends StatelessWidget {
                 },
                 builder: (context, state) {
                   return Container(
-                    height: 200,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
-                    color: Colors.amber,
+                    height: 235,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 8,
+                    ),
                     child: Column(
                       children: [
-                        Text(state.selectedPlayerPosition.toString()),
                         // Player Name
                         Text(
                           currentPlayer.playerName.value
@@ -51,7 +57,6 @@ class UserPlayerCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontFamily: "Architect",
                             letterSpacing: 0.25,
-                            color: Colors.white,
                           ),
                         ),
 
@@ -107,10 +112,63 @@ class UserPlayerCard extends StatelessWidget {
                           height: 15,
                         ),
 
-                        // TODO:ADD
+                        // Upcoming Fixtures
                         const Text(
                           "Upcoming Fixtures",
-                          style: TextStyle(fontSize: 20),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Architect",
+                            letterSpacing: 0.25,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: double.infinity,
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 6,
+                              childAspectRatio: 2.8,
+                            ),
+                            itemCount: 6,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                width: 40,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: ConstantColors.primary_900,
+                                    width: 0.55,
+                                  ),
+                                  color: isHomeTeam(
+                                            currentPlayer
+                                                .upComingFixtures[index],
+                                          ) ==
+                                          1
+                                      ? ConstantColors.success_300
+                                      : ConstantColors.error_300,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    getFixtureTeamAcronym(
+                                      currentPlayer.upComingFixtures[index],
+                                    ),
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -260,4 +318,44 @@ class UserPlayerCard extends StatelessWidget {
       ),
     );
   }
+}
+
+String getFixtureTeamAcronym(String fixtureTeam) {
+  List nameList = fixtureTeam.split(" ");
+  String acronym = "";
+
+  nameList.length == 1
+      ? acronym = acronym +
+          nameList[0].split("")[0] +
+          nameList[0].split("")[1] +
+          nameList[0].split("")[2] +
+          " ( " +
+          fixtureTeam.split("+-")[1] +
+          " ) "
+      : nameList.length == 2
+          ? acronym = acronym +
+              nameList[0].split("")[0] +
+              nameList[0].split("")[1] +
+              nameList[1].split("")[0] +
+              " ( " +
+              fixtureTeam.split("+-")[1] +
+              " ) "
+          : acronym = acronym +
+              nameList[0].split("")[0] +
+              nameList[1].split("")[0] +
+              nameList[2].split("")[0] +
+              " ( " +
+              fixtureTeam.split("+-")[1] +
+              " ) ";
+  return acronym;
+}
+
+int isHomeTeam(String fixtureTeam) {
+  int isHomeValue = 0;
+
+  if (fixtureTeam.split("+-").last == "H") {
+    isHomeValue = 1;
+  }
+
+  return isHomeValue;
 }

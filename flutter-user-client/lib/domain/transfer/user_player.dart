@@ -17,6 +17,7 @@ abstract class UserPlayer with _$UserPlayer {
     required bool isViceCaptain,
     required PlayerAvailability availability,
     required int score,
+    required List upComingFixtures,
   }) = _UserPlayer;
 
   factory UserPlayer.initial() => UserPlayer(
@@ -33,5 +34,6 @@ abstract class UserPlayer with _$UserPlayer {
         ),
         eplTeamLogo: "",
         score: 0,
+        upComingFixtures: [],
       );
 }

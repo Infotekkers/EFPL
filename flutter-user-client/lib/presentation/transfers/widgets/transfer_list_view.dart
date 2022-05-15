@@ -25,15 +25,65 @@ class TransferPlayerView extends StatelessWidget {
             either.fold(
               (failure) {
                 failure[1].maybeMap(
+                  // Connection issues
                   noConnection: (_) {
                     CustomSnackBar().showCustomSnackBar(
                       showContext: context,
                       headlineText: "No Connection!",
-                      message: "Could not contact server. Showing cached data.",
+                      message:
+                          "Could not contact server. Showing cached team data.",
                       snackBarType: "warning",
                     );
                   },
-                  orElse: () {},
+                  socketError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact server. Showing cached team data.",
+                      snackBarType: "warning",
+                    );
+                  },
+                  handShakeError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact server. Showing cached team data.",
+                      snackBarType: "warning",
+                    );
+                  },
+
+                  // token issues
+                  unauthorized: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Login to EFPL!",
+                      message: "Please login to use EFPL.",
+                      snackBarType: "error",
+                    );
+                    Navigator.pushNamed(context, "/");
+                  },
+                  unauthenticated: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Login to EFPL!",
+                      message: "Please login to use EFPL.",
+                      snackBarType: "error",
+                    );
+                    Navigator.pushNamed(context, "/");
+                  },
+
+                  // Value failures
+
+                  orElse: () {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Something went wrong.",
+                      message: "Something went wrong. Try again!",
+                      snackBarType: "error",
+                    );
+                  },
                 );
               },
               (_) {},

@@ -270,6 +270,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
               PlayerAvailability(value: playerToTransferInJson['availability']),
           eplTeamLogo: playerToTransferInJson['eplTeamLogo'],
           score: playerToTransferInJson['score'],
+          upComingFixtures: playerToTransferInJson['upComingFixtures'],
         );
 
         // add player to user team
@@ -369,27 +370,27 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
         // change json to user team
         UserPlayer playerToTransferIn = UserPlayer(
-          playerId: (playerToTransferInJson['playerId']).toString(),
-          playerName: PlayerName(
-            value: playerToTransferInJson['playerName'],
-          ),
-          currentPrice: PlayerPrice(
-            value: playerToTransferInJson['currentPrice'].toDouble(),
-          ),
-          playerPosition: PlayerPosition(
-            value: playerToTransferInJson['position'],
-          ),
-          eplTeamId: PlayerEplTeam(
-            value: playerToTransferInJson['eplTeamId'],
-          ),
-          multiplier: 1,
-          isCaptain: false,
-          isViceCaptain: false,
-          availability:
-              PlayerAvailability(value: playerToTransferInJson['availability']),
-          eplTeamLogo: playerToTransferInJson['eplTeamLogo'],
-          score: playerToTransferInJson['score'],
-        );
+            playerId: (playerToTransferInJson['playerId']).toString(),
+            playerName: PlayerName(
+              value: playerToTransferInJson['playerName'],
+            ),
+            currentPrice: PlayerPrice(
+              value: playerToTransferInJson['currentPrice'].toDouble(),
+            ),
+            playerPosition: PlayerPosition(
+              value: playerToTransferInJson['position'],
+            ),
+            eplTeamId: PlayerEplTeam(
+              value: playerToTransferInJson['eplTeamId'],
+            ),
+            multiplier: 1,
+            isCaptain: false,
+            isViceCaptain: false,
+            availability: PlayerAvailability(
+                value: playerToTransferInJson['availability']),
+            eplTeamLogo: playerToTransferInJson['eplTeamLogo'],
+            score: playerToTransferInJson['score'],
+            upComingFixtures: playerToTransferInJson['upComingFixtures']);
 
         // add player to user team
         allUserPlayers.insert(

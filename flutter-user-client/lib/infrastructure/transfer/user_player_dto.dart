@@ -22,6 +22,7 @@ abstract class UserPlayerDTO implements _$UserPlayerDTO {
     required Map availability,
     required String eplTeamLogo,
     required int score,
+    required List upComingFixtures,
   }) = _UserPlayerDTO;
 
   factory UserPlayerDTO.fromDomain({required UserPlayer userPlayer}) =>
@@ -47,6 +48,7 @@ abstract class UserPlayerDTO implements _$UserPlayerDTO {
             : {"injuryStatus": "", "injuryMessage": ""},
         score: userPlayer.score,
         eplTeamLogo: userPlayer.eplTeamLogo,
+        upComingFixtures: userPlayer.upComingFixtures,
       );
 
   UserPlayer toDomain() => UserPlayer(
@@ -61,6 +63,7 @@ abstract class UserPlayerDTO implements _$UserPlayerDTO {
         availability: PlayerAvailability(value: availability),
         score: score,
         eplTeamLogo: eplTeamLogo,
+        upComingFixtures: upComingFixtures,
       );
   factory UserPlayerDTO.fromJson(Map<String, dynamic> json) =>
       _$UserPlayerDTOFromJson(json);

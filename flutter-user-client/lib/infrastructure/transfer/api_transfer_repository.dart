@@ -304,6 +304,7 @@ class ApiTransferRepository implements ITransferRepository {
             availability: PlayerAvailability(value: availability),
             eplTeamLogo: parsedResponseBody[i]['eplTeamLogo'],
             score: parsedResponseBody[i]['score'] ?? 0,
+            upComingFixtures: parsedResponseBody[i]['upComingFixtures'] ?? [],
           );
 
           String currentPlayerPosition = userPlayer.playerPosition.value.fold(
@@ -329,6 +330,45 @@ class ApiTransferRepository implements ITransferRepository {
             );
           }
         }
+      }
+
+      // No Token
+      else if (apiResponse.statusCode == 403) {
+        List<UserPlayer> cachedUserPlayers =
+            await getUserPlayerFromCache(playerPosition: playerPosition);
+        return left(
+          [
+            cachedUserPlayers,
+            const HTTPFailures.unauthenticated(
+              failedValue: "Please Login!",
+            ),
+          ],
+        );
+      }
+
+      // No Token
+      else if (apiResponse.statusCode == 401) {
+        List<UserPlayer> cachedUserPlayers =
+            await getUserPlayerFromCache(playerPosition: playerPosition);
+        return left(
+          [
+            cachedUserPlayers,
+            const HTTPFailures.unauthorized(
+              failedValue: "Please Login!",
+            ),
+          ],
+        );
+      } else {
+        List<UserPlayer> cachedUserPlayers =
+            await getUserPlayerFromCache(playerPosition: playerPosition);
+        return left(
+          [
+            cachedUserPlayers,
+            const HTTPFailures.unexpectedError(
+              failedValue: "Something went wrong",
+            ),
+          ],
+        );
       }
 
       return right(allPlayersInPosition);
@@ -463,7 +503,8 @@ Future<UserTeam> getUserTeamFromCache({required int gameWeekId}) async {
           "injuryStatus": player['availability']['injuryStatus'],
           "injuryMessage": player['availability']['injuryMessage'],
         },
-        "score": player['score']
+        "score": player['score'],
+        "upComingFixtures": player['upComingFixtures'] ?? [],
       };
 
       final UserPlayerDTO userPlayerDTO =
@@ -526,6 +567,7 @@ Future<List<UserPlayer>> getUserPlayerFromCache(
         "multiplier": 0,
         "isCaptain": false,
         "isViceCaptain": false,
+        "upComingFixtures": player['upComingFixtures'] ?? [],
       };
 
       final UserPlayerDTO userPlayerDTO =

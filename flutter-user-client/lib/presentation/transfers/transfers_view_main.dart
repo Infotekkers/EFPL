@@ -85,7 +85,12 @@ class TransfersView extends StatelessWidget {
                   // Value failures
 
                   orElse: () {
-                    print("else");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Something went wrong.",
+                      message: "Something went wrong. Try again!",
+                      snackBarType: "error",
+                    );
                   },
                 );
               },

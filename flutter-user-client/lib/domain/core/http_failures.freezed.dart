@@ -17,12 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$HTTPFailuresTearOff {
   const _$HTTPFailuresTearOff();
 
-  NoConnection<T> noConnection<T>({required T failedValue}) {
-    return NoConnection<T>(
-      failedValue: failedValue,
-    );
-  }
-
   Unauthenticated<T> unauthenticated<T>({required T failedValue}) {
     return Unauthenticated<T>(
       failedValue: failedValue,
@@ -31,6 +25,12 @@ class _$HTTPFailuresTearOff {
 
   Unauthorized<T> unauthorized<T>({required T failedValue}) {
     return Unauthorized<T>(
+      failedValue: failedValue,
+    );
+  }
+
+  NoConnection<T> noConnection<T>({required T failedValue}) {
+    return NoConnection<T>(
       failedValue: failedValue,
     );
   }
@@ -63,9 +63,9 @@ mixin _$HTTPFailures<T> {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) unauthenticated,
     required TResult Function(T failedValue) unauthorized,
+    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) socketError,
     required TResult Function(T failedValue) handShakeError,
     required TResult Function(T failedValue) unexpectedError,
@@ -73,9 +73,9 @@ mixin _$HTTPFailures<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -83,9 +83,9 @@ mixin _$HTTPFailures<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -94,9 +94,9 @@ mixin _$HTTPFailures<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(Unauthenticated<T> value) unauthenticated,
     required TResult Function(Unauthorized<T> value) unauthorized,
+    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(SocketError<T> value) socketError,
     required TResult Function(HandShakeError<T> value) handShakeError,
     required TResult Function(UnexpectedError<T> value) unexpectedError,
@@ -104,9 +104,9 @@ mixin _$HTTPFailures<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -114,9 +114,9 @@ mixin _$HTTPFailures<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -157,169 +157,6 @@ class _$HTTPFailuresCopyWithImpl<T, $Res>
               as T,
     ));
   }
-}
-
-/// @nodoc
-abstract class $NoConnectionCopyWith<T, $Res>
-    implements $HTTPFailuresCopyWith<T, $Res> {
-  factory $NoConnectionCopyWith(
-          NoConnection<T> value, $Res Function(NoConnection<T>) then) =
-      _$NoConnectionCopyWithImpl<T, $Res>;
-  @override
-  $Res call({T failedValue});
-}
-
-/// @nodoc
-class _$NoConnectionCopyWithImpl<T, $Res>
-    extends _$HTTPFailuresCopyWithImpl<T, $Res>
-    implements $NoConnectionCopyWith<T, $Res> {
-  _$NoConnectionCopyWithImpl(
-      NoConnection<T> _value, $Res Function(NoConnection<T>) _then)
-      : super(_value, (v) => _then(v as NoConnection<T>));
-
-  @override
-  NoConnection<T> get _value => super._value as NoConnection<T>;
-
-  @override
-  $Res call({
-    Object? failedValue = freezed,
-  }) {
-    return _then(NoConnection<T>(
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$NoConnection<T> implements NoConnection<T> {
-  const _$NoConnection({required this.failedValue});
-
-  @override
-  final T failedValue;
-
-  @override
-  String toString() {
-    return 'HTTPFailures<$T>.noConnection(failedValue: $failedValue)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is NoConnection<T> &&
-            const DeepCollectionEquality()
-                .equals(other.failedValue, failedValue));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(failedValue));
-
-  @JsonKey(ignore: true)
-  @override
-  $NoConnectionCopyWith<T, NoConnection<T>> get copyWith =>
-      _$NoConnectionCopyWithImpl<T, NoConnection<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) noConnection,
-    required TResult Function(T failedValue) unauthenticated,
-    required TResult Function(T failedValue) unauthorized,
-    required TResult Function(T failedValue) socketError,
-    required TResult Function(T failedValue) handShakeError,
-    required TResult Function(T failedValue) unexpectedError,
-  }) {
-    return noConnection(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
-  }) {
-    return noConnection?.call(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
-    required TResult orElse(),
-  }) {
-    if (noConnection != null) {
-      return noConnection(failedValue);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
-    required TResult Function(Unauthenticated<T> value) unauthenticated,
-    required TResult Function(Unauthorized<T> value) unauthorized,
-    required TResult Function(SocketError<T> value) socketError,
-    required TResult Function(HandShakeError<T> value) handShakeError,
-    required TResult Function(UnexpectedError<T> value) unexpectedError,
-  }) {
-    return noConnection(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
-    TResult Function(Unauthenticated<T> value)? unauthenticated,
-    TResult Function(Unauthorized<T> value)? unauthorized,
-    TResult Function(SocketError<T> value)? socketError,
-    TResult Function(HandShakeError<T> value)? handShakeError,
-    TResult Function(UnexpectedError<T> value)? unexpectedError,
-  }) {
-    return noConnection?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
-    TResult Function(Unauthenticated<T> value)? unauthenticated,
-    TResult Function(Unauthorized<T> value)? unauthorized,
-    TResult Function(SocketError<T> value)? socketError,
-    TResult Function(HandShakeError<T> value)? handShakeError,
-    TResult Function(UnexpectedError<T> value)? unexpectedError,
-    required TResult orElse(),
-  }) {
-    if (noConnection != null) {
-      return noConnection(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class NoConnection<T> implements HTTPFailures<T> {
-  const factory NoConnection({required T failedValue}) = _$NoConnection<T>;
-
-  @override
-  T get failedValue;
-  @override
-  @JsonKey(ignore: true)
-  $NoConnectionCopyWith<T, NoConnection<T>> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -390,9 +227,9 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) unauthenticated,
     required TResult Function(T failedValue) unauthorized,
+    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) socketError,
     required TResult Function(T failedValue) handShakeError,
     required TResult Function(T failedValue) unexpectedError,
@@ -403,9 +240,9 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -416,9 +253,9 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -433,9 +270,9 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(Unauthenticated<T> value) unauthenticated,
     required TResult Function(Unauthorized<T> value) unauthorized,
+    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(SocketError<T> value) socketError,
     required TResult Function(HandShakeError<T> value) handShakeError,
     required TResult Function(UnexpectedError<T> value) unexpectedError,
@@ -446,9 +283,9 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -459,9 +296,9 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -554,9 +391,9 @@ class _$Unauthorized<T> implements Unauthorized<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) unauthenticated,
     required TResult Function(T failedValue) unauthorized,
+    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) socketError,
     required TResult Function(T failedValue) handShakeError,
     required TResult Function(T failedValue) unexpectedError,
@@ -567,9 +404,9 @@ class _$Unauthorized<T> implements Unauthorized<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -580,9 +417,9 @@ class _$Unauthorized<T> implements Unauthorized<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -597,9 +434,9 @@ class _$Unauthorized<T> implements Unauthorized<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(Unauthenticated<T> value) unauthenticated,
     required TResult Function(Unauthorized<T> value) unauthorized,
+    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(SocketError<T> value) socketError,
     required TResult Function(HandShakeError<T> value) handShakeError,
     required TResult Function(UnexpectedError<T> value) unexpectedError,
@@ -610,9 +447,9 @@ class _$Unauthorized<T> implements Unauthorized<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -623,9 +460,9 @@ class _$Unauthorized<T> implements Unauthorized<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -646,6 +483,169 @@ abstract class Unauthorized<T> implements HTTPFailures<T> {
   @override
   @JsonKey(ignore: true)
   $UnauthorizedCopyWith<T, Unauthorized<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NoConnectionCopyWith<T, $Res>
+    implements $HTTPFailuresCopyWith<T, $Res> {
+  factory $NoConnectionCopyWith(
+          NoConnection<T> value, $Res Function(NoConnection<T>) then) =
+      _$NoConnectionCopyWithImpl<T, $Res>;
+  @override
+  $Res call({T failedValue});
+}
+
+/// @nodoc
+class _$NoConnectionCopyWithImpl<T, $Res>
+    extends _$HTTPFailuresCopyWithImpl<T, $Res>
+    implements $NoConnectionCopyWith<T, $Res> {
+  _$NoConnectionCopyWithImpl(
+      NoConnection<T> _value, $Res Function(NoConnection<T>) _then)
+      : super(_value, (v) => _then(v as NoConnection<T>));
+
+  @override
+  NoConnection<T> get _value => super._value as NoConnection<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+  }) {
+    return _then(NoConnection<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as T,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$NoConnection<T> implements NoConnection<T> {
+  const _$NoConnection({required this.failedValue});
+
+  @override
+  final T failedValue;
+
+  @override
+  String toString() {
+    return 'HTTPFailures<$T>.noConnection(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NoConnection<T> &&
+            const DeepCollectionEquality()
+                .equals(other.failedValue, failedValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(failedValue));
+
+  @JsonKey(ignore: true)
+  @override
+  $NoConnectionCopyWith<T, NoConnection<T>> get copyWith =>
+      _$NoConnectionCopyWithImpl<T, NoConnection<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue) unauthenticated,
+    required TResult Function(T failedValue) unauthorized,
+    required TResult Function(T failedValue) noConnection,
+    required TResult Function(T failedValue) socketError,
+    required TResult Function(T failedValue) handShakeError,
+    required TResult Function(T failedValue) unexpectedError,
+  }) {
+    return noConnection(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(T failedValue)? unauthenticated,
+    TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
+    TResult Function(T failedValue)? socketError,
+    TResult Function(T failedValue)? handShakeError,
+    TResult Function(T failedValue)? unexpectedError,
+  }) {
+    return noConnection?.call(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue)? unauthenticated,
+    TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
+    TResult Function(T failedValue)? socketError,
+    TResult Function(T failedValue)? handShakeError,
+    TResult Function(T failedValue)? unexpectedError,
+    required TResult orElse(),
+  }) {
+    if (noConnection != null) {
+      return noConnection(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Unauthenticated<T> value) unauthenticated,
+    required TResult Function(Unauthorized<T> value) unauthorized,
+    required TResult Function(NoConnection<T> value) noConnection,
+    required TResult Function(SocketError<T> value) socketError,
+    required TResult Function(HandShakeError<T> value) handShakeError,
+    required TResult Function(UnexpectedError<T> value) unexpectedError,
+  }) {
+    return noConnection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Unauthenticated<T> value)? unauthenticated,
+    TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
+    TResult Function(SocketError<T> value)? socketError,
+    TResult Function(HandShakeError<T> value)? handShakeError,
+    TResult Function(UnexpectedError<T> value)? unexpectedError,
+  }) {
+    return noConnection?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unauthenticated<T> value)? unauthenticated,
+    TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
+    TResult Function(SocketError<T> value)? socketError,
+    TResult Function(HandShakeError<T> value)? handShakeError,
+    TResult Function(UnexpectedError<T> value)? unexpectedError,
+    required TResult orElse(),
+  }) {
+    if (noConnection != null) {
+      return noConnection(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NoConnection<T> implements HTTPFailures<T> {
+  const factory NoConnection({required T failedValue}) = _$NoConnection<T>;
+
+  @override
+  T get failedValue;
+  @override
+  @JsonKey(ignore: true)
+  $NoConnectionCopyWith<T, NoConnection<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -717,9 +717,9 @@ class _$SocketError<T> implements SocketError<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) unauthenticated,
     required TResult Function(T failedValue) unauthorized,
+    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) socketError,
     required TResult Function(T failedValue) handShakeError,
     required TResult Function(T failedValue) unexpectedError,
@@ -730,9 +730,9 @@ class _$SocketError<T> implements SocketError<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -743,9 +743,9 @@ class _$SocketError<T> implements SocketError<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -760,9 +760,9 @@ class _$SocketError<T> implements SocketError<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(Unauthenticated<T> value) unauthenticated,
     required TResult Function(Unauthorized<T> value) unauthorized,
+    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(SocketError<T> value) socketError,
     required TResult Function(HandShakeError<T> value) handShakeError,
     required TResult Function(UnexpectedError<T> value) unexpectedError,
@@ -773,9 +773,9 @@ class _$SocketError<T> implements SocketError<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -786,9 +786,9 @@ class _$SocketError<T> implements SocketError<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -880,9 +880,9 @@ class _$HandShakeError<T> implements HandShakeError<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) unauthenticated,
     required TResult Function(T failedValue) unauthorized,
+    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) socketError,
     required TResult Function(T failedValue) handShakeError,
     required TResult Function(T failedValue) unexpectedError,
@@ -893,9 +893,9 @@ class _$HandShakeError<T> implements HandShakeError<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -906,9 +906,9 @@ class _$HandShakeError<T> implements HandShakeError<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -923,9 +923,9 @@ class _$HandShakeError<T> implements HandShakeError<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(Unauthenticated<T> value) unauthenticated,
     required TResult Function(Unauthorized<T> value) unauthorized,
+    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(SocketError<T> value) socketError,
     required TResult Function(HandShakeError<T> value) handShakeError,
     required TResult Function(UnexpectedError<T> value) unexpectedError,
@@ -936,9 +936,9 @@ class _$HandShakeError<T> implements HandShakeError<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -949,9 +949,9 @@ class _$HandShakeError<T> implements HandShakeError<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -1043,9 +1043,9 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) unauthenticated,
     required TResult Function(T failedValue) unauthorized,
+    required TResult Function(T failedValue) noConnection,
     required TResult Function(T failedValue) socketError,
     required TResult Function(T failedValue) handShakeError,
     required TResult Function(T failedValue) unexpectedError,
@@ -1056,9 +1056,9 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -1069,9 +1069,9 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? unauthenticated,
     TResult Function(T failedValue)? unauthorized,
+    TResult Function(T failedValue)? noConnection,
     TResult Function(T failedValue)? socketError,
     TResult Function(T failedValue)? handShakeError,
     TResult Function(T failedValue)? unexpectedError,
@@ -1086,9 +1086,9 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(Unauthenticated<T> value) unauthenticated,
     required TResult Function(Unauthorized<T> value) unauthorized,
+    required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(SocketError<T> value) socketError,
     required TResult Function(HandShakeError<T> value) handShakeError,
     required TResult Function(UnexpectedError<T> value) unexpectedError,
@@ -1099,9 +1099,9 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
@@ -1112,9 +1112,9 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(Unauthenticated<T> value)? unauthenticated,
     TResult Function(Unauthorized<T> value)? unauthorized,
+    TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(SocketError<T> value)? socketError,
     TResult Function(HandShakeError<T> value)? handShakeError,
     TResult Function(UnexpectedError<T> value)? unexpectedError,
