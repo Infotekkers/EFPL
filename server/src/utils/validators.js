@@ -1,3 +1,5 @@
+const Player = require("../models/Player");
+
 // TODO: Check if multipliers are valid
 const validateTeam = (team, availableChips) => {
   let teamBudget = 0;
@@ -99,6 +101,267 @@ const validateTeam = (team, availableChips) => {
     return [false, { message: "Vice-captain is not unique!" }];
 
   return [true];
+};
+
+// new
+const processTeamIdToData = async (match) => {
+  const finalBothLineups = [{}, {}];
+  const gameWeekId = match.gameweekId;
+  // Convert Player ID to name & position
+  if (match.homeTeamLineUp) {
+    const processedHomeTeamLineUp = {};
+    const lineUp = match.homeTeamLineUp.lineup;
+
+    // process GK
+    for (let i = 0; i < lineUp.goalkeepers.length; i++) {
+      const currPlayer = await Player.findOne({
+        playerId: lineUp.goalkeepers[i],
+      }).select("playerName position playerId -_id score");
+
+      // get player stat
+      const allCurrPlayerStat = currPlayer.score;
+      const currPlayerStat = allCurrPlayerStat.filter((stat) => {
+        return stat.gameweekId === gameWeekId;
+      });
+
+      const finalPlayerInfo = {
+        playerId: currPlayer.playerId,
+        playerName: currPlayer.playerName,
+        position: currPlayer.position,
+        playerStat: currPlayerStat,
+      };
+
+      processedHomeTeamLineUp.goalkeepers = [finalPlayerInfo];
+    }
+
+    // process def
+    const allDefs = [];
+    for (let i = 0; i < lineUp.defenders.length; i++) {
+      const currPlayer = await Player.findOne({
+        playerId: lineUp.defenders[i],
+      }).select("playerName position playerId -_id score");
+
+      // get player stat
+      const allCurrPlayerStat = currPlayer.score;
+      const currPlayerStat = allCurrPlayerStat.filter((stat) => {
+        return stat.gameweekId === gameWeekId;
+      });
+
+      const finalPlayerInfo = {
+        playerId: currPlayer.playerId,
+        playerName: currPlayer.playerName,
+        position: currPlayer.position,
+        playerStat: currPlayerStat,
+      };
+
+      allDefs.push(finalPlayerInfo);
+    }
+    processedHomeTeamLineUp.defenders = allDefs;
+
+    // process mid
+    const allMid = [];
+    for (let i = 0; i < lineUp.midfielders.length; i++) {
+      const currPlayer = await Player.findOne({
+        playerId: lineUp.midfielders[i],
+      }).select("playerName position playerId -_id score");
+
+      // get player stat
+      const allCurrPlayerStat = currPlayer.score;
+      const currPlayerStat = allCurrPlayerStat.filter((stat) => {
+        return stat.gameweekId === gameWeekId;
+      });
+
+      const finalPlayerInfo = {
+        playerId: currPlayer.playerId,
+        playerName: currPlayer.playerName,
+        position: currPlayer.position,
+        playerStat: currPlayerStat,
+      };
+
+      allMid.push(finalPlayerInfo);
+    }
+    processedHomeTeamLineUp.midfielders = allMid;
+
+    // process att
+    const allAtt = [];
+    for (let i = 0; i < lineUp.strikers.length; i++) {
+      const currPlayer = await Player.findOne({
+        playerId: lineUp.strikers[i],
+      }).select("playerName position playerId -_id score");
+
+      const allCurrPlayerStat = currPlayer.score;
+      const currPlayerStat = allCurrPlayerStat.filter((stat) => {
+        return stat.gameweekId === gameWeekId;
+      });
+
+      const finalPlayerInfo = {
+        playerId: currPlayer.playerId,
+        playerName: currPlayer.playerName,
+        position: currPlayer.position,
+        playerStat: currPlayerStat,
+      };
+
+      allAtt.push(finalPlayerInfo);
+    }
+    processedHomeTeamLineUp.strikers = allAtt;
+
+    // process bench
+    const allBen = [];
+    for (let i = 0; i < lineUp.bench.length; i++) {
+      const currPlayer = await Player.findOne({
+        playerId: lineUp.bench[i],
+      }).select("playerName position playerId -_id score");
+
+      const allCurrPlayerStat = currPlayer.score;
+      const currPlayerStat = allCurrPlayerStat.filter((stat) => {
+        return stat.gameweekId === gameWeekId;
+      });
+
+      const finalPlayerInfo = {
+        playerId: currPlayer.playerId,
+        playerName: currPlayer.playerName,
+        position: currPlayer.position,
+        playerStat: currPlayerStat,
+      };
+
+      allBen.push(finalPlayerInfo);
+    }
+    processedHomeTeamLineUp.bench = allBen;
+
+    finalBothLineups[0] = processedHomeTeamLineUp;
+  }
+
+  if (match.awayTeamLineUp) {
+    const processedAwayTeamLineUp = {};
+    const lineUp = match.awayTeamLineUp.lineup;
+
+    // process GK
+    for (let i = 0; i < lineUp.goalkeepers.length; i++) {
+      const currPlayer = await Player.findOne({
+        playerId: lineUp.goalkeepers[i],
+      }).select("playerName position playerId -_id score");
+
+      const allCurrPlayerStat = currPlayer.score;
+      const currPlayerStat = allCurrPlayerStat.filter((stat) => {
+        return stat.gameweekId === gameWeekId;
+      });
+
+      const finalPlayerInfo = {
+        playerId: currPlayer.playerId,
+        playerName: currPlayer.playerName,
+        position: currPlayer.position,
+        playerStat: currPlayerStat,
+      };
+
+      processedAwayTeamLineUp.goalkeepers = [finalPlayerInfo];
+    }
+
+    // process def
+    const allDefs = [];
+    for (let i = 0; i < lineUp.defenders.length; i++) {
+      const currPlayer = await Player.findOne({
+        playerId: lineUp.defenders[i],
+      }).select("playerName position playerId -_id score");
+
+      const allCurrPlayerStat = currPlayer.score;
+      const currPlayerStat = allCurrPlayerStat.filter((stat) => {
+        return stat.gameweekId === gameWeekId;
+      });
+
+      const finalPlayerInfo = {
+        playerId: currPlayer.playerId,
+        playerName: currPlayer.playerName,
+        position: currPlayer.position,
+        playerStat: currPlayerStat,
+      };
+
+      allDefs.push(finalPlayerInfo);
+    }
+    processedAwayTeamLineUp.defenders = allDefs;
+
+    // process mid
+    const allMid = [];
+    for (let i = 0; i < lineUp.midfielders.length; i++) {
+      const currPlayer = await Player.findOne({
+        playerId: lineUp.midfielders[i],
+      }).select("playerName position playerId -_id score");
+
+      const allCurrPlayerStat = currPlayer.score;
+      const currPlayerStat = allCurrPlayerStat.filter((stat) => {
+        return stat.gameweekId === gameWeekId;
+      });
+
+      const finalPlayerInfo = {
+        playerId: currPlayer.playerId,
+        playerName: currPlayer.playerName,
+        position: currPlayer.position,
+        playerStat: currPlayerStat,
+      };
+
+      allMid.push(finalPlayerInfo);
+    }
+    processedAwayTeamLineUp.midfielders = allMid;
+
+    // process att
+    const allAtt = [];
+    for (let i = 0; i < lineUp.strikers.length; i++) {
+      const currPlayer = await Player.findOne({
+        playerId: lineUp.strikers[i],
+      }).select("playerName position playerId -_id score");
+      const allCurrPlayerStat = currPlayer.score;
+      const currPlayerStat = allCurrPlayerStat.filter((stat) => {
+        return stat.gameweekId === gameWeekId;
+      });
+
+      const finalPlayerInfo = {
+        playerId: currPlayer.playerId,
+        playerName: currPlayer.playerName,
+        position: currPlayer.position,
+        playerStat: currPlayerStat,
+      };
+
+      allAtt.push(finalPlayerInfo);
+    }
+    processedAwayTeamLineUp.strikers = allAtt;
+
+    // process bench
+    const allBen = [];
+    for (let i = 0; i < lineUp.bench.length; i++) {
+      const currPlayer = await Player.findOne({
+        playerId: lineUp.bench[i],
+      }).select("playerName position playerId -_id score");
+
+      const allCurrPlayerStat = currPlayer.score;
+      const currPlayerStat = allCurrPlayerStat.filter((stat) => {
+        return stat.gameweekId === gameWeekId;
+      });
+
+      const finalPlayerInfo = {
+        playerId: currPlayer.playerId,
+        playerName: currPlayer.playerName,
+        position: currPlayer.position,
+        playerStat: currPlayerStat,
+      };
+
+      allBen.push(finalPlayerInfo);
+    }
+    processedAwayTeamLineUp.bench = allBen;
+
+    finalBothLineups[1] = processedAwayTeamLineUp;
+  }
+
+  return finalBothLineups;
+};
+
+// new
+const constructTeamFromID = async (incomingTeam) => {
+  console.log(incomingTeam);
+};
+module.exports = {
+  validateTeam,
+  processTeamIdToData,
+
+  constructTeamFromID,
 };
 
 module.exports = {

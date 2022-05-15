@@ -233,6 +233,21 @@ const moveFile = async (sourcePath, destinationPath) => {
   }
 };
 
+// Function to calculate score
+const sumEplPlayerScore = (scoreArr) => {
+  let finalSum = 0;
+
+  if (scoreArr.length <= 0) {
+    return finalSum;
+  } else {
+    scoreArr.forEach((score) => {
+      finalSum = finalSum + score.fantasyScore;
+    });
+  }
+
+  return finalSum;
+};
+
 module.exports = {
   generateJWTToken,
   pointDeductor,
@@ -240,4 +255,6 @@ module.exports = {
   makeFile,
   moveFile,
   makeFilePlayer,
+  // new
+  sumEplPlayerScore,
 };

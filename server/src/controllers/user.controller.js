@@ -4,8 +4,12 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Gameweek = require("../models/GameWeek");
+const Player = require("../models/Player");
+const Team = require("../models/Teams");
+const Fixture = require("../models/Fixtures");
 const validateTeam = require("../utils/validators").validateTeam;
 const pointDeductor = require("../utils/helpers").pointDeductor;
+const sumEplPlayerScore = require("../utils/helpers").sumEplPlayerScore;
 const secretKey = process.env.JWT_SECRET;
 
 const transporter = nodemailer.createTransport({
@@ -262,6 +266,111 @@ const transfer = asyncHandler(async (req, res) => {
   }
 });
 
+const getUserTeam = asyncHandler(async (req, res) => {
+  const userId = req.params.userId;
+  const gameWeekId = req.params.gameWeekId;
+
+  const currentGameWeek = await Gameweek.findOne({
+    gameWeekNumber: gameWeekId,
+  }).select("-_id,-gameWeekNumber");
+
+  // TODO:get user id from token
+  if (gameWeekId && userId) {
+    const user = await User.findOne({ _id: userId }).select(
+      "-userName -password -email -fantasyLeagues -__v -_id -country "
+    );
+    const userTeam = user.team[gameWeekId - 1];
+    const allUserPlayers = userTeam.players;
+
+    const allUserPlayersList = [];
+
+    const allTeams = await Team.find();
+
+    for (let i = 0; i < allUserPlayers.length; i++) {
+      const playerInfo = {
+        playerId: allUserPlayers[i].playerId,
+        multiplier: parseInt(allUserPlayers[i].multiplier),
+        isCaptain: allUserPlayers[i].isCaptain,
+        isViceCaptain: allUserPlayers[i].isViceCaptain,
+      };
+
+      const currPlayer = await Player.findOne({
+        playerId: allUserPlayers[i].playerId,
+      });
+
+      const currentTeamFixture = await Fixture.find({
+        $or: [
+          { homeTeam: currPlayer.eplTeamId },
+          { awayTeam: currPlayer.eplTeamId },
+        ],
+
+        gameweekId: { $gt: gameWeekId },
+      })
+        .select("homeTeam awayTeam")
+        .limit(8);
+
+      const upComingFixture = [];
+
+      for (let i = 0; i < currentTeamFixture.length; i++) {
+        if (
+          currentTeamFixture[i].homeTeam.toString() ===
+          currPlayer.eplTeamId.toString()
+        ) {
+          upComingFixture.push(
+            currentTeamFixture[i].awayTeam.toString() + "+-" + "H"
+          );
+        } else {
+          upComingFixture.push(
+            currentTeamFixture[i].homeTeam.toString() + "+-" + "A"
+          );
+        }
+      }
+
+      const currentTeam = allTeams.filter(
+        (team) => team.teamName.toString() === currPlayer.eplTeamId.toString()
+      );
+      playerInfo.playerName = currPlayer.playerName.toString().trim();
+      playerInfo.eplTeamId = currPlayer.eplTeamId.toString().trim();
+      playerInfo.eplTeamLogo = currentTeam[0].teamLogo;
+      playerInfo.currentPrice = parseFloat(currPlayer.currentPrice);
+      playerInfo.position = currPlayer.position.toString().trim();
+      playerInfo.availability = currPlayer.availability
+        ? currPlayer.availability
+        : { injuryStatus: "", injuryMessage: "" };
+      playerInfo.score = sumEplPlayerScore(currPlayer.score, gameWeekId);
+      playerInfo.upComingFixtures = upComingFixture;
+
+      allUserPlayersList.push(playerInfo);
+    }
+
+    userTeam.players = allUserPlayersList;
+    user.team = userTeam;
+
+    const finalFormat = {
+      teamName: user.teamName,
+      favouriteEplTeamId: user.favouriteEplTeamId,
+      availableChips: user.availableChips,
+      team: user.team,
+      maxBudget: user.maxBudget,
+      gameWeekDeadline: currentGameWeek.startTimestamp,
+    };
+
+    console.log(finalFormat);
+
+    res.status(200).send(finalFormat);
+  } else {
+    res.status(404).send("No Team Info Found");
+  }
+});
+
+const test = asyncHandler(async (req, res) => {
+  let { incomingTeam } = req.body;
+  incomingTeam = JSON.parse(incomingTeam);
+
+  console.log(incomingTeam);
+  res.send("Done");
+});
+
 module.exports = {
   register,
   login,
@@ -272,4 +381,8 @@ module.exports = {
   requestReset,
   resetPass,
   transfer,
+
+  // New
+  getUserTeam,
+  test,
 };

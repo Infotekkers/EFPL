@@ -1,7 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const Fixture = require("../models/Fixtures");
+const GameWeek = require("../models/GameWeek");
 const PlayerModel = require("../models/Player");
 const Teams = require("../models/Teams");
+const sumEplPlayerScore = require("../utils/helpers").sumEplPlayerScore;
 const { makeFilePlayer } = require("../utils/helpers");
 
 const addPlayer = asyncHandler(async (req, res) => {
@@ -250,6 +252,73 @@ const deletePlayer = asyncHandler(async (req, res) => {
   res.send(`Player ${currentPlayer[0].playerName} removed`);
 });
 
+const getPlayersByPosition = asyncHandler(async (req, res) => {
+  // const position = req.params.position.toUpperCase();
+
+  const allPlayersInPosition = await PlayerModel.find().select(
+    "-_id -__v -history"
+  );
+
+  const allPlayersInPositionFormatted = [];
+
+  const allTeams = await Teams.find();
+  const gameweek = await GameWeek.findOne({ status: "active" }).select(
+    "gameWeekNumber"
+  );
+
+  for (let i = 0; i < allPlayersInPosition.length; i++) {
+    const currentTeam = allTeams.filter(
+      (team) => team.teamName === allPlayersInPosition[i].eplTeamId
+    );
+
+    const currentTeamFixture = await Fixture.find({
+      $or: [
+        { homeTeam: allPlayersInPosition[i].eplTeamId },
+        { awayTeam: allPlayersInPosition[i].eplTeamId },
+      ],
+
+      gameweekId: { $gt: gameweek.gameWeekNumber + 1 },
+    })
+      .select("homeTeam awayTeam")
+      .limit(8);
+
+    const upComingFixture = [];
+
+    for (let i = 0; i < currentTeamFixture.length; i++) {
+      if (
+        currentTeamFixture[i].homeTeam.toString() ===
+        allPlayersInPosition[i].eplTeamId.toString()
+      ) {
+        upComingFixture.push(
+          currentTeamFixture[i].awayTeam.toString() + "+-" + "H"
+        );
+      } else {
+        upComingFixture.push(
+          currentTeamFixture[i].homeTeam.toString() + "+-" + "A"
+        );
+      }
+    }
+
+    const currentPlayerInfo = {
+      playerName: allPlayersInPosition[i].playerName,
+      eplTeamId: allPlayersInPosition[i].eplTeamId,
+      eplTeamLogo: currentTeam[0].teamLogo,
+      currentPrice: allPlayersInPosition[i].currentPrice,
+      position: allPlayersInPosition[i].position,
+      playerId: allPlayersInPosition[i].playerId,
+      score: sumEplPlayerScore(allPlayersInPosition[i].score),
+      availability: allPlayersInPosition[i].availability
+        ? allPlayersInPosition[i].availability
+        : { injuryStatus: "", injuryMessage: "" },
+
+      upComingFixtures: upComingFixture,
+    };
+
+    allPlayersInPositionFormatted.push(currentPlayerInfo);
+  }
+
+  res.status(200).send(allPlayersInPositionFormatted);
+});
 module.exports = {
   addPlayer,
   getPlayer,
@@ -259,4 +328,7 @@ module.exports = {
   deletePlayer,
   updateScore,
   addScore,
+
+  // New
+  getPlayersByPosition,
 };

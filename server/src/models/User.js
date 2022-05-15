@@ -48,10 +48,7 @@ const teamSchema = mongoose.Schema({
   activeChip: { type: String, default: "" },
   freeTransfers: { type: Number, default: 1 },
   deduction: { type: Number, default: 0 },
-  players: {
-    type: Map,
-    of: playerSchema,
-  },
+  players: [],
 });
 
 const userSchema = mongoose.Schema({
@@ -85,6 +82,7 @@ const userSchema = mongoose.Schema({
   },
   country: String,
   favouriteEplTeamId: { type: String, default: "" },
+  maxBudget: { type: Number, default: 100.0 },
   availableChips: { type: [String], default: ["BB", "WC", "TC", "FH"] },
   fantasyLeagues: { type: [fantasyLeaguesSchema], default: [] },
   team: [teamSchema],
