@@ -24,6 +24,7 @@ dependencies:
   shared_preferences: ^2.0.13
   material_design_icons_flutter: 5.0.6595
   flutter_boxicons: ^3.0.0
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   bloc_test: ^9.0.3
@@ -43,6 +44,7 @@ dev_dependencies:
 flutter:
   assets:
     - .env
+    - assets/icons/
   fonts:
     - family: Architect
       fonts:
