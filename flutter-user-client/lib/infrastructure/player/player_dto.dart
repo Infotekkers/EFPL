@@ -14,9 +14,10 @@ abstract class PlayerDto implements _$PlayerDto {
     required String playerId,
     required String eplTeamId,
     required String position,
-    required String multiplier,
-    required bool isCaptain,
-    required bool isViceCaptain,
+    required String price,
+    required Map<String, String> availability,
+    @Default([]) List<dynamic> score,
+    @Default([]) List<dynamic> history,
   }) = _PlayerDto;
 
   factory PlayerDto.fromDomain(Player player) => PlayerDto(
@@ -26,19 +27,72 @@ abstract class PlayerDto implements _$PlayerDto {
             player.eplTeamId.isValid() ? player.eplTeamId.getOrCrash() : ' ',
         position:
             player.position.isValid() ? player.position.getOrCrash() : ' ',
-        multiplier: player.multiplier.getOrCrash().toString(),
-        isCaptain: player.isCaptain.getOrCrash(),
-        isViceCaptain: player.isViceCaptain.getOrCrash(),
+        price: player.position.isValid() ? player.position.getOrCrash() : ' ',
+        availability: {},
+        score: [],
+        history: [],
       );
 
-  Player toDomain() => Player(
+  Player toDomain() {
+    Availability availabilityVO = Availability(
+      injuryStatus: InjuryStatus(availability['injuryStatus'] ?? '0'),
+    );
+
+    List<Score> scoresVO = [];
+    if (score.isNotEmpty) {
+      for (var element in score) {
+        scoresVO.add(Score(
+          gameweek: element.gameweek,
+          price: element.price,
+          fantasyScore: element.fantasyScore,
+          minutesPlayed: element.minutesPlayed,
+          goals: element.goals,
+          assists: element.assists,
+          cleansheet: element.cleansheet,
+          yellows: element.yellows,
+          reds: element.reds,
+          penalitiesMissed: element.penalitiesMissed,
+          penalitiesSaved: element.penalitiesSaved,
+          saves: element.saves,
+          ownGoal: element.ownGoal,
+          form: element.form,
+        ));
+      }
+    }
+
+    List<History> historyVO = [];
+    if (history.isNotEmpty) {
+      for (var element in history) {
+        historyVO.add(History(
+          startingPrice: element.startingPrice,
+          endingPrice: element.endingPrice,
+          totalFantasyScore: element.totalFantasyScore,
+          totalMinutesPlayed: element.totalMinutesPlayed,
+          totalGoals: element.totalGoals,
+          totalAssists: element.totalAssists,
+          totalCleansheet: element.totalCleansheet,
+          totalYellows: element.totalYellows,
+          totalReds: element.totalReds,
+          totalPenalitiesMissed: element.totalPenalitiesMissed,
+          totalPenalitiesSaved: element.totalPenalitiesSaved,
+          totalSaves: element.totalSaves,
+          totalOwnGoal: element.totalOwnGoal,
+          totalForm: element.totalForm,
+        ));
+      }
+    }
+
+    return Player(
       name: Name(name),
       playerId: Id(playerId),
       eplTeamId: EplTeamId(eplTeamId),
       position: Position(position),
-      multiplier: Multiplier(multiplier),
-      isCaptain: IsCaptain(isCaptain),
-      isViceCaptain: IsViceCaptain(isViceCaptain));
+      availability: availabilityVO,
+      currentPrice: Price(price),
+      score: scoresVO,
+      history: historyVO,
+    );
+  }
 
   factory PlayerDto.fromJson(Map<String, dynamic> json) =>
       _$PlayerDtoFromJson(json);

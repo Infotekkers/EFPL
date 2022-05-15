@@ -275,8 +275,10 @@ class Score {
   PenalitiesMissed? penalitiesMissed;
   PenalitiesSaved? penalitiesSaved;
   Saves? saves;
+  OwnGoal? ownGoal;
   TransfersIn? transfersIn;
   TransfersOut? transfersOut;
+  Form? form;
 
   Score({
     required this.gameweek,
@@ -291,13 +293,16 @@ class Score {
     this.penalitiesMissed,
     this.penalitiesSaved,
     this.saves,
+    this.ownGoal,
     this.transfersIn,
     this.transfersOut,
+    this.form,
   });
 }
 
 class History {
-  Price? totalPrice;
+  Price? startingPrice;
+  Price? endingPrice;
   FantasyScore? totalFantasyScore;
   MinutesPlayed? totalMinutesPlayed;
   Goals? totalGoals;
@@ -308,11 +313,14 @@ class History {
   PenalitiesMissed? totalPenalitiesMissed;
   PenalitiesSaved? totalPenalitiesSaved;
   Saves? totalSaves;
+  OwnGoal? totalOwnGoal;
   TransfersIn? totalTransfersIn;
   TransfersOut? totalTransfersOut;
+  Form? totalForm;
 
   History({
-    this.totalPrice,
+    this.startingPrice,
+    this.endingPrice,
     this.totalFantasyScore,
     this.totalMinutesPlayed,
     this.totalGoals,
@@ -323,7 +331,9 @@ class History {
     this.totalPenalitiesMissed,
     this.totalPenalitiesSaved,
     this.totalSaves,
+    this.totalOwnGoal,
     this.totalTransfersIn,
     this.totalTransfersOut,
+    this.totalForm,
   });
 }

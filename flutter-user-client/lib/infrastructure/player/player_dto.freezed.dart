@@ -26,17 +26,19 @@ class _$PlayerDtoTearOff {
       required String playerId,
       required String eplTeamId,
       required String position,
-      required String multiplier,
-      required bool isCaptain,
-      required bool isViceCaptain}) {
+      required String price,
+      required Map<String, String> availability,
+      List<dynamic> score = const [],
+      List<dynamic> history = const []}) {
     return _PlayerDto(
       name: name,
       playerId: playerId,
       eplTeamId: eplTeamId,
       position: position,
-      multiplier: multiplier,
-      isCaptain: isCaptain,
-      isViceCaptain: isViceCaptain,
+      price: price,
+      availability: availability,
+      score: score,
+      history: history,
     );
   }
 
@@ -54,9 +56,10 @@ mixin _$PlayerDto {
   String get playerId => throw _privateConstructorUsedError;
   String get eplTeamId => throw _privateConstructorUsedError;
   String get position => throw _privateConstructorUsedError;
-  String get multiplier => throw _privateConstructorUsedError;
-  bool get isCaptain => throw _privateConstructorUsedError;
-  bool get isViceCaptain => throw _privateConstructorUsedError;
+  String get price => throw _privateConstructorUsedError;
+  Map<String, String> get availability => throw _privateConstructorUsedError;
+  List<dynamic> get score => throw _privateConstructorUsedError;
+  List<dynamic> get history => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -73,9 +76,10 @@ abstract class $PlayerDtoCopyWith<$Res> {
       String playerId,
       String eplTeamId,
       String position,
-      String multiplier,
-      bool isCaptain,
-      bool isViceCaptain});
+      String price,
+      Map<String, String> availability,
+      List<dynamic> score,
+      List<dynamic> history});
 }
 
 /// @nodoc
@@ -92,9 +96,10 @@ class _$PlayerDtoCopyWithImpl<$Res> implements $PlayerDtoCopyWith<$Res> {
     Object? playerId = freezed,
     Object? eplTeamId = freezed,
     Object? position = freezed,
-    Object? multiplier = freezed,
-    Object? isCaptain = freezed,
-    Object? isViceCaptain = freezed,
+    Object? price = freezed,
+    Object? availability = freezed,
+    Object? score = freezed,
+    Object? history = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -113,18 +118,22 @@ class _$PlayerDtoCopyWithImpl<$Res> implements $PlayerDtoCopyWith<$Res> {
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as String,
-      multiplier: multiplier == freezed
-          ? _value.multiplier
-          : multiplier // ignore: cast_nullable_to_non_nullable
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
               as String,
-      isCaptain: isCaptain == freezed
-          ? _value.isCaptain
-          : isCaptain // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isViceCaptain: isViceCaptain == freezed
-          ? _value.isViceCaptain
-          : isViceCaptain // ignore: cast_nullable_to_non_nullable
-              as bool,
+      availability: availability == freezed
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      history: history == freezed
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -140,9 +149,10 @@ abstract class _$PlayerDtoCopyWith<$Res> implements $PlayerDtoCopyWith<$Res> {
       String playerId,
       String eplTeamId,
       String position,
-      String multiplier,
-      bool isCaptain,
-      bool isViceCaptain});
+      String price,
+      Map<String, String> availability,
+      List<dynamic> score,
+      List<dynamic> history});
 }
 
 /// @nodoc
@@ -160,9 +170,10 @@ class __$PlayerDtoCopyWithImpl<$Res> extends _$PlayerDtoCopyWithImpl<$Res>
     Object? playerId = freezed,
     Object? eplTeamId = freezed,
     Object? position = freezed,
-    Object? multiplier = freezed,
-    Object? isCaptain = freezed,
-    Object? isViceCaptain = freezed,
+    Object? price = freezed,
+    Object? availability = freezed,
+    Object? score = freezed,
+    Object? history = freezed,
   }) {
     return _then(_PlayerDto(
       name: name == freezed
@@ -181,18 +192,22 @@ class __$PlayerDtoCopyWithImpl<$Res> extends _$PlayerDtoCopyWithImpl<$Res>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as String,
-      multiplier: multiplier == freezed
-          ? _value.multiplier
-          : multiplier // ignore: cast_nullable_to_non_nullable
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
               as String,
-      isCaptain: isCaptain == freezed
-          ? _value.isCaptain
-          : isCaptain // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isViceCaptain: isViceCaptain == freezed
-          ? _value.isViceCaptain
-          : isViceCaptain // ignore: cast_nullable_to_non_nullable
-              as bool,
+      availability: availability == freezed
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      history: history == freezed
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -205,9 +220,10 @@ class _$_PlayerDto extends _PlayerDto {
       required this.playerId,
       required this.eplTeamId,
       required this.position,
-      required this.multiplier,
-      required this.isCaptain,
-      required this.isViceCaptain})
+      required this.price,
+      required this.availability,
+      this.score = const [],
+      this.history = const []})
       : super._();
 
   factory _$_PlayerDto.fromJson(Map<String, dynamic> json) =>
@@ -222,15 +238,19 @@ class _$_PlayerDto extends _PlayerDto {
   @override
   final String position;
   @override
-  final String multiplier;
+  final String price;
   @override
-  final bool isCaptain;
+  final Map<String, String> availability;
+  @JsonKey()
   @override
-  final bool isViceCaptain;
+  final List<dynamic> score;
+  @JsonKey()
+  @override
+  final List<dynamic> history;
 
   @override
   String toString() {
-    return 'PlayerDto(name: $name, playerId: $playerId, eplTeamId: $eplTeamId, position: $position, multiplier: $multiplier, isCaptain: $isCaptain, isViceCaptain: $isViceCaptain)';
+    return 'PlayerDto(name: $name, playerId: $playerId, eplTeamId: $eplTeamId, position: $position, price: $price, availability: $availability, score: $score, history: $history)';
   }
 
   @override
@@ -242,11 +262,11 @@ class _$_PlayerDto extends _PlayerDto {
             const DeepCollectionEquality().equals(other.playerId, playerId) &&
             const DeepCollectionEquality().equals(other.eplTeamId, eplTeamId) &&
             const DeepCollectionEquality().equals(other.position, position) &&
+            const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality()
-                .equals(other.multiplier, multiplier) &&
-            const DeepCollectionEquality().equals(other.isCaptain, isCaptain) &&
-            const DeepCollectionEquality()
-                .equals(other.isViceCaptain, isViceCaptain));
+                .equals(other.availability, availability) &&
+            const DeepCollectionEquality().equals(other.score, score) &&
+            const DeepCollectionEquality().equals(other.history, history));
   }
 
   @override
@@ -256,9 +276,10 @@ class _$_PlayerDto extends _PlayerDto {
       const DeepCollectionEquality().hash(playerId),
       const DeepCollectionEquality().hash(eplTeamId),
       const DeepCollectionEquality().hash(position),
-      const DeepCollectionEquality().hash(multiplier),
-      const DeepCollectionEquality().hash(isCaptain),
-      const DeepCollectionEquality().hash(isViceCaptain));
+      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(availability),
+      const DeepCollectionEquality().hash(score),
+      const DeepCollectionEquality().hash(history));
 
   @JsonKey(ignore: true)
   @override
@@ -277,9 +298,10 @@ abstract class _PlayerDto extends PlayerDto {
       required String playerId,
       required String eplTeamId,
       required String position,
-      required String multiplier,
-      required bool isCaptain,
-      required bool isViceCaptain}) = _$_PlayerDto;
+      required String price,
+      required Map<String, String> availability,
+      List<dynamic> score,
+      List<dynamic> history}) = _$_PlayerDto;
   const _PlayerDto._() : super._();
 
   factory _PlayerDto.fromJson(Map<String, dynamic> json) =
@@ -294,11 +316,13 @@ abstract class _PlayerDto extends PlayerDto {
   @override
   String get position;
   @override
-  String get multiplier;
+  String get price;
   @override
-  bool get isCaptain;
+  Map<String, String> get availability;
   @override
-  bool get isViceCaptain;
+  List<dynamic> get score;
+  @override
+  List<dynamic> get history;
   @override
   @JsonKey(ignore: true)
   _$PlayerDtoCopyWith<_PlayerDto> get copyWith =>

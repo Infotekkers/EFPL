@@ -24,8 +24,8 @@ class _$PlayerTearOff {
       required Position position,
       required Price currentPrice,
       required Availability availability,
-      Score? score = null,
-      History? history = null}) {
+      List<Score> score = const [],
+      List<History> history = const []}) {
     return _Player(
       name: name,
       playerId: playerId,
@@ -50,8 +50,8 @@ mixin _$Player {
   Position get position => throw _privateConstructorUsedError;
   Price get currentPrice => throw _privateConstructorUsedError;
   Availability get availability => throw _privateConstructorUsedError;
-  Score? get score => throw _privateConstructorUsedError;
-  History? get history => throw _privateConstructorUsedError;
+  List<Score> get score => throw _privateConstructorUsedError;
+  List<History> get history => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlayerCopyWith<Player> get copyWith => throw _privateConstructorUsedError;
@@ -68,8 +68,8 @@ abstract class $PlayerCopyWith<$Res> {
       Position position,
       Price currentPrice,
       Availability availability,
-      Score? score,
-      History? history});
+      List<Score> score,
+      List<History> history});
 }
 
 /// @nodoc
@@ -119,11 +119,11 @@ class _$PlayerCopyWithImpl<$Res> implements $PlayerCopyWith<$Res> {
       score: score == freezed
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as Score?,
+              as List<Score>,
       history: history == freezed
           ? _value.history
           : history // ignore: cast_nullable_to_non_nullable
-              as History?,
+              as List<History>,
     ));
   }
 }
@@ -140,8 +140,8 @@ abstract class _$PlayerCopyWith<$Res> implements $PlayerCopyWith<$Res> {
       Position position,
       Price currentPrice,
       Availability availability,
-      Score? score,
-      History? history});
+      List<Score> score,
+      List<History> history});
 }
 
 /// @nodoc
@@ -192,11 +192,11 @@ class __$PlayerCopyWithImpl<$Res> extends _$PlayerCopyWithImpl<$Res>
       score: score == freezed
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as Score?,
+              as List<Score>,
       history: history == freezed
           ? _value.history
           : history // ignore: cast_nullable_to_non_nullable
-              as History?,
+              as List<History>,
     ));
   }
 }
@@ -211,8 +211,8 @@ class _$_Player implements _Player {
       required this.position,
       required this.currentPrice,
       required this.availability,
-      this.score = null,
-      this.history = null});
+      this.score = const [],
+      this.history = const []});
 
   @override
   final Name name;
@@ -228,10 +228,10 @@ class _$_Player implements _Player {
   final Availability availability;
   @JsonKey()
   @override
-  final Score? score;
+  final List<Score> score;
   @JsonKey()
   @override
-  final History? history;
+  final List<History> history;
 
   @override
   String toString() {
@@ -281,8 +281,8 @@ abstract class _Player implements Player {
       required Position position,
       required Price currentPrice,
       required Availability availability,
-      Score? score,
-      History? history}) = _$_Player;
+      List<Score> score,
+      List<History> history}) = _$_Player;
 
   @override
   Name get name;
@@ -297,9 +297,9 @@ abstract class _Player implements Player {
   @override
   Availability get availability;
   @override
-  Score? get score;
+  List<Score> get score;
   @override
-  History? get history;
+  List<History> get history;
   @override
   @JsonKey(ignore: true)
   _$PlayerCopyWith<_Player> get copyWith => throw _privateConstructorUsedError;

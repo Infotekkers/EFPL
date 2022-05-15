@@ -5,13 +5,13 @@ import 'package:efpl/infrastructure/my_team/my_team_repository.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/testing.dart';
+// import 'package:http/testing.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+// import 'package:mockito/mockito.dart';
 
 @GenerateMocks([http.Client])
 void main() async {
-  final String _baseUrl = "${dotenv.env["API"]}";
+  // final String _baseUrl = "${dotenv.env["API"]}";
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();

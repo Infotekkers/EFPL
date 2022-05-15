@@ -1,6 +1,5 @@
 import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/value_objects.dart';
-import 'package:efpl/domain/player/player.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'my_team_dto.freezed.dart';
