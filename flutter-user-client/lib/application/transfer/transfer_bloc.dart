@@ -84,7 +84,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
       // get list of all players from response
       List<UserPlayer> allSelectedPlayerReplacements = failureOrSuccess.fold(
-        (l) => [],
+        (l) => l[0],
         (r) => r,
       );
 
@@ -92,6 +92,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       emit(
         state.copyWith(
           isLoading: false,
+          valueFailureOrSuccess: some(failureOrSuccess),
           selectedPlayerReplacements: allSelectedPlayerReplacements,
           filteredSelectedPlayerReplacements: allSelectedPlayerReplacements,
         ),

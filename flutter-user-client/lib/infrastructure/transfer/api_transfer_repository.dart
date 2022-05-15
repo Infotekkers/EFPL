@@ -42,6 +42,7 @@ class ApiTransferRepository implements ITransferRepository {
             Duration(seconds: ConstantValues().httpTimeOutDuration),
           );
 
+      // success
       if (apiResponse.statusCode == 200) {
         List<UserPlayer> allUserPlayers = [];
         List<dynamic> allUserPlayersJson = [];
@@ -133,8 +134,11 @@ class ApiTransferRepository implements ITransferRepository {
               efplCache.put("allTeams", allTeams);
             } catch (e) {
               return left(
-                const StorageFailures.hiveError(
-                    failedValue: "Error Caching Info"),
+                [
+                  userTeam,
+                  const StorageFailures.hiveError(
+                      failedValue: "Error Caching Info")
+                ],
               );
             }
           }
@@ -143,42 +147,54 @@ class ApiTransferRepository implements ITransferRepository {
         }
         // if response has no players
         else {
-          // TODO: CHECK CACHE
-          return left(
+          UserTeam cachedUserTeam =
+              await getUserTeamFromCache(gameWeekId: gameWeekId);
+          return left([
+            cachedUserTeam,
             const UserPlayerFailure.incompleteTeam(
-                failedValue: "No Team. Please select a team."),
-          );
+                failedValue: "No Team. Please select a team.")
+          ]);
         }
       }
 
       // No Token
       else if (apiResponse.statusCode == 403) {
-        return left(
+        UserTeam cachedUserTeam =
+            await getUserTeamFromCache(gameWeekId: gameWeekId);
+        return left([
+          cachedUserTeam,
           const HTTPFailures.unauthenticated(
             failedValue: "Please Login!",
           ),
-        );
+        ]);
       }
 
       // incorrect token
       else if (apiResponse.statusCode == 401) {
+        UserTeam cachedUserTeam =
+            await getUserTeamFromCache(gameWeekId: gameWeekId);
+
         return left(
-          const HTTPFailures.unauthorized(
-            failedValue: "Invalid Token.",
-          ),
+          [
+            cachedUserTeam,
+            const HTTPFailures.unauthorized(
+              failedValue: "Invalid Token.",
+            ),
+          ],
         );
       }
 
       // unexpected error
       else {
-        // TODO:GET CACHED INFO
-        return left(
+        UserTeam cachedUserTeam =
+            await getUserTeamFromCache(gameWeekId: gameWeekId);
+        return left([
+          cachedUserTeam,
           const HTTPFailures.unexpectedError(
-              failedValue: "Something went wrong. Try again!"),
-        );
+              failedValue: "Something went wrong. Try again!")
+        ]);
       }
     }
-
     // Timeout Exception
     on TimeoutException catch (_) {
       // get cache team
@@ -250,9 +266,10 @@ class ApiTransferRepository implements ITransferRepository {
             Uri.parse('$_baseURL/players/position/$playerPosition'),
           )
           .timeout(
-            const Duration(seconds: 30),
+            Duration(seconds: ConstantValues().httpTimeOutDuration),
           );
 
+      // success scenario
       if (apiResponse.statusCode == 200) {
         List<dynamic> parsedResponseBody = jsonDecode(apiResponse.body);
 
@@ -305,16 +322,60 @@ class ApiTransferRepository implements ITransferRepository {
             var efplCache = await Hive.openBox('efplCache');
             efplCache.put("allPlayers", allPlayers);
           } catch (e) {
-            print(e);
+            return left(
+              const StorageFailures.hiveError(
+                failedValue: "Error Caching Info",
+              ),
+            );
           }
         }
       }
 
       return right(allPlayersInPosition);
-    } catch (e) {
-      print(e);
+    } // Timeout Exception
+    on TimeoutException catch (_) {
+      List<UserPlayer> cachedPlayers =
+          await getUserPlayerFromCache(playerPosition: playerPosition);
+
       return left(
-        const HTTPFailures.noConnection(failedValue: ""),
+        [
+          cachedPlayers,
+          const HTTPFailures.noConnection(
+              failedValue: "Could not connect to server. Try refreshing.")
+        ],
+      );
+    }
+
+    // Socket Exception
+    on SocketException catch (_) {
+      return left(
+        [
+          // cachedUserTeam,
+          const HTTPFailures.socketError(
+              failedValue: "Could not connect to server. Try refreshing."),
+        ],
+      );
+    }
+
+    // Handshake error
+    on HandshakeException catch (_) {
+      return left(
+        [
+          // cachedUserTeam,
+          const HTTPFailures.handShakeError(
+              failedValue: "Could not connect to server. Try refreshing."),
+        ],
+      );
+    }
+
+    // unexpected error
+    catch (e) {
+      return left(
+        [
+          // cachedUserTeam,
+          const HTTPFailures.unexpectedError(
+              failedValue: "Something went wrong. Try again!"),
+        ],
       );
     }
   }
@@ -371,9 +432,9 @@ Map userTeamToJson({required UserTeam userTeam}) {
 
   List allPlayerIds = [];
 
-  userTeam.allUserPlayers.forEach((player) {
+  for (var player in userTeam.allUserPlayers) {
     allPlayerIds.add(player.playerId);
-  });
+  }
 
   userTeamJson['allPlayers'] = allPlayerIds;
 
@@ -439,4 +500,39 @@ Future<UserTeam> getUserTeamFromCache({required int gameWeekId}) async {
       teamName: "",
     );
   }
+}
+
+Future<List<UserPlayer>> getUserPlayerFromCache(
+    {required String playerPosition}) async {
+  var efplCache = await Hive.openBox('efplCache');
+  List allPlayers = efplCache.get("allPlayers");
+
+  List<UserPlayer> allUserPlayers = [];
+
+  for (var player in allPlayers) {
+    if (player['position'] == playerPosition) {
+      final currentPlayerMap = {
+        "playerId": (player['playerId']).toString(),
+        "playerName": player['playerName'],
+        "eplTeamId": player['eplTeamId'],
+        "eplTeamLogo": player['eplTeamLogo'],
+        "currentPrice": player['currentPrice'],
+        "position": player['position'],
+        "availability": {
+          "injuryStatus": (player['availability']['injuryStatus']).toString(),
+          "injuryMessage": (player['availability']['injuryMessage']).toString(),
+        },
+        "score": player['score'] ?? 0,
+        "multiplier": 0,
+        "isCaptain": false,
+        "isViceCaptain": false,
+      };
+
+      final UserPlayerDTO userPlayerDTO =
+          UserPlayerDTO.fromJson(currentPlayerMap);
+
+      allUserPlayers.add(userPlayerDTO.toDomain());
+    }
+  }
+  return allUserPlayers;
 }

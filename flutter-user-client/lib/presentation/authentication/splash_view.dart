@@ -6,8 +6,11 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> splashScreenScaffoldScreen =
+        GlobalKey<ScaffoldState>();
     return MaterialApp(
       home: Scaffold(
+        key: splashScreenScaffoldScreen,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

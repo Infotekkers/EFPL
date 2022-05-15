@@ -28,19 +28,70 @@ class TransfersView extends StatelessWidget {
     return BlocConsumer<TransferBloc, TransferState>(
       listener: (context, state) {
         state.valueFailureOrSuccess.fold(
-          () => () {},
-          (either) => either.fold(
-            (failure) {
-              CustomSnackBar().showCustomSnackBar(
-                showContext: context,
-                headlineText: "Something went wrong",
-                message: "No Connection.Please try again!",
-                snackBarType: "warning",
-                showDuration: 5,
-              );
-            },
-            (_) => {},
-          ),
+          () {},
+          (either) {
+            either.fold(
+              (failure) {
+                failure[1].maybeMap(
+                  // Connection issues
+                  noConnection: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact server. Showing cached team data.",
+                      snackBarType: "warning",
+                    );
+                  },
+                  socketError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact server. Showing cached team data.",
+                      snackBarType: "warning",
+                    );
+                  },
+                  handShakeError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact server. Showing cached team data.",
+                      snackBarType: "warning",
+                    );
+                  },
+
+                  // token issues
+                  unauthorized: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Login to EFPL!",
+                      message: "Please login to use EFPL.",
+                      snackBarType: "error",
+                    );
+                    Navigator.pushNamed(context, "/");
+                  },
+                  unauthenticated: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Login to EFPL!",
+                      message: "Please login to use EFPL.",
+                      snackBarType: "error",
+                    );
+                    Navigator.pushNamed(context, "/");
+                  },
+
+                  // Value failures
+
+                  orElse: () {
+                    print("else");
+                  },
+                );
+              },
+              (_) {},
+            );
+          },
         );
       },
       builder: (context, state) {
@@ -72,10 +123,8 @@ class TransfersView extends StatelessWidget {
               : Stack(
                   children: [
                     isTeamComplete == false
-                        ? Container(
-                            child: Center(
-                              child: Text("No Team"),
-                            ),
+                        ? const Center(
+                            child: Text("No Team"),
                           )
                         :
                         // Main View

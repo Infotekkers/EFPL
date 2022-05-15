@@ -9,6 +9,7 @@ class CustomSnackBar {
     required String snackBarType,
     int showDuration = 5,
   }) {
+    ScaffoldMessenger.of(showContext).removeCurrentSnackBar();
     return ScaffoldMessenger.of(showContext).showSnackBar(
       SnackBar(
         duration: Duration(seconds: showDuration),
