@@ -448,14 +448,13 @@ const resumeFixture = asyncHandler(async function (req, res) {
 const endFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
-  const homeTeam = await TeamModel.find({
+  const homeTeam = await TeamModel.findOne({
     teamId: parseInt(req.params.matchId.split("|")[0]),
   });
 
-  const awayTeam = await TeamModel.find({
+  const awayTeam = await TeamModel.findOne({
     teamId: parseInt(req.params.matchId.split("|")[1]),
   });
-
   if (match?.status === "liveSH") {
     match.status = "FT";
 
@@ -465,44 +464,30 @@ const endFixture = asyncHandler(async function (req, res) {
     const splitscore = match.score.split("v")
     const hometeamScore = splitscore[0];
     const awayteamScore = splitscore[1];
-    const awayteamPoint =  awayTeam.teamPosition.teampoint
-    const hometeamPoint = homeTeam.teamPosition.teampoint
+    const awayteamPosition =  awayTeam.teamPosition;
+    const hometeamPosition = homeTeam.teamPosition;
+    console.log(awayteamPosition);
+    const awayteamPoint = awayteamPosition[0].teamPoint;
+    const hometeamPoint = hometeamPosition[0].teamPoint;
 
     if(hometeamScore > awayteamScore){
     const teamPoint = hometeamPoint + 3;
-    const teamPosition = {
-      teampoint: teamPoint
-    }
-
-    await TeamModel.findOneAndUpdate({
-      teamPosition
-    });
+    console.log(teamPoint);
+    
+    homeTeam.teamPosition[0].teamPoint = teamPoint;
+      await homeTeam.save();
   }else if(hometeamScore === awayteamScore){
     const Hteampoint =  hometeamPoint + 1;
     const Ateampoint = awayteamPoint + 1;
-    const HometeamPosition = {
-      teampoint: Hteampoint
-    }
-    const AwayteamPosition = {
-      teampoint: Ateampoint
-    }
-
-    await TeamModel.findOneAndUpdate({
-      HometeamPosition
-    })
-    await TeamModel.findOneAndUpdate({
-      AwayteamPosition
-    })
+   homeTeam.teamPosition[0].teamPoint = Hteampoint;
+   awayTeam.teamPosition[0].teamPoint = Ateampoint;
+    await homeTeam.save();
+    await awayTeam.save();
   }
   else{
     const Ateampoint = awayteamPoint + 3;
-    const teamPosition = {
-      teamPoint: Ateampoint
-    }
-
-    await TeamModel.findOneAndUpdate({
-      teamPosition
-    })
+    awayTeam.teamPosition[0].teamPoint = Ateampoint;
+    await awayTeam.save();
   }
     match
       .save()
