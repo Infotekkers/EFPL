@@ -147,40 +147,40 @@ const updateScore = asyncHandler(async (req, res) => {
     playerId: req.params.playerId,
   });
 
-  // if(verifyPlayer){
-  const scorearray = verifyPlayer.score;
-  const Gameweek = scorearray.filter(
-    (s) => s.gameweekId === req.params.gameweekId
-  );
-  const index = scorearray.indexOf(Gameweek[0]);
-  scorearray[index] = score;
-  verifyPlayer.score = scorearray;
+  if (verifyPlayer) {
+    const scorearray = verifyPlayer.score;
+    const Gameweek = scorearray.filter(
+      (s) => s.gameweekId === req.params.gameweekId
+    );
+    const index = scorearray.indexOf(Gameweek[0]);
+    scorearray[index] = score;
+    verifyPlayer.score = scorearray;
 
-  await verifyPlayer.save();
-  res.status(201).send(`Score for Gameweek update successful`);
-  //  }else{
-  //     res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
-  // }
+    await verifyPlayer.save();
+    res.status(201).send(`Score for Gameweek update successful`);
+  } else {
+    res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
+  }
 });
 
 const addScore = asyncHandler(async (req, res) => {
   const { score } = req.body;
-  //   const verifyPlayer = await PlayerModel.findOne({
-  //     playerId: req.params.playerId,
-  //   });
-  // if(verifyPlayer){
-  await PlayerModel.updateMany(
-    { playerId: req.params.playerId },
-    {
-      $push: {
-        score: score,
-      },
-    }
-  );
-  res.status(201).send(`Score added successfully`);
-  // }else{
-  //     res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
-  // }
+  const verifyPlayer = await PlayerModel.findOne({
+    playerId: req.params.playerId,
+  });
+  if (verifyPlayer) {
+    await PlayerModel.updateMany(
+      { playerId: req.params.playerId },
+      {
+        $push: {
+          score: score,
+        },
+      }
+    );
+    res.status(201).send(`Score added successfully`);
+  } else {
+    res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
+  }
 });
 
 const getPlayer = asyncHandler(async (req, res) => {
