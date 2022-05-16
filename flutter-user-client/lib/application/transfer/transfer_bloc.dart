@@ -509,7 +509,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         }
 
         if (teamCountExceeded) {
-          print("object");
+          print("Team Count Exceeded");
         } else {
           // if transfer made
           if (state.transfersMade) {
@@ -523,15 +523,15 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
               ),
             );
 
-            emit(
-              state.copyWith(
-                isLoading: false,
-                transfersMade: false,
-                transfersMadeCount: 0,
-                transferredInPlayerIdList: [],
-                swappedPlayerIdsList: [],
-              ),
-            );
+            // emit(
+            //   state.copyWith(
+            //     isLoading: false,
+            //     transfersMade: false,
+            //     transfersMadeCount: 0,
+            //     transferredInPlayerIdList: [],
+            //     swappedPlayerIdsList: [],
+            //   ),
+            // );
           }
         }
       },

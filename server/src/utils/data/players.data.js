@@ -5,6 +5,10 @@ const bahirDarKenema = [
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 8,
     position: "GK",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Sinegiorgis Eshetu",
@@ -25,6 +29,10 @@ const bahirDarKenema = [
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 7,
     position: "DEF",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Hip Flexor",
+    },
   },
   {
     playerName: "Mikias Girma",
@@ -43,6 +51,10 @@ const bahirDarKenema = [
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 7.5,
     position: "DEF",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "Ankle sprains",
+    },
   },
   {
     playerName: "Solomon Wedessa",
@@ -61,6 +73,10 @@ const bahirDarKenema = [
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 4.9,
     position: "DEF",
+    availability: {
+      injuryStatus: "25",
+      injuryMessage: "Shoulder dislocations",
+    },
   },
   {
     playerName: "Abel Wudu",
@@ -75,11 +91,15 @@ const bahirDarKenema = [
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 11,
     position: "MID",
+    availability: {
+      injuryStatus: "25",
+      injuryMessage: "Shoulder dislocations",
+    },
   },
   {
     playerName: "Getachew Animut",
     eplTeamId: "Bahir Dar Kenema S.C",
-    currentPrice: 10.7,
+    currentPrice: 10.5,
     position: "MID",
   },
   {
@@ -91,8 +111,12 @@ const bahirDarKenema = [
   {
     playerName: "Bereket Tigabu",
     eplTeamId: "Bahir Dar Kenema S.C",
-    currentPrice: 9,
+    currentPrice: 5,
     position: "MID",
+    availability: {
+      injuryStatus: "25",
+      injuryMessage: "Shoulder dislocations",
+    },
   },
   {
     playerName: "Fitsum Alemu",
@@ -105,9 +129,13 @@ const bahirDarKenema = [
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 6,
     position: "MID",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Shoulder dislocations",
+    },
   },
   {
-    //   (Captain)(Captain)
+    //   (Captain)
     playerName: "Henok Awoke",
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 8.2,
@@ -133,6 +161,10 @@ const bahirDarKenema = [
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 12.0,
     position: "ATT",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Acromioclavicular sprains",
+    },
   },
   {
     playerName: "Baye Gizahegn",
@@ -166,6 +198,10 @@ const bahirDarKenema = [
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 5.5,
     position: "ATT",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "Acromioclavicular sprains",
+    },
   },
   {
     playerName: "Minyelu Wondimu",
@@ -188,6 +224,10 @@ const hadiyaHosana = [
     eplTeamId: "Hadiya Hossana F.C",
     currentPrice: 6,
     position: "GK",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Acromioclavicular sprains",
+    },
   },
   {
     playerName: "Mohammed Muntari",
@@ -202,6 +242,10 @@ const hadiyaHosana = [
     eplTeamId: "Hadiya Hossana F.C",
     currentPrice: 8.9,
     position: "DEF",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Acromioclavicular sprains",
+    },
   },
   {
     playerName: "Tewodros Bekele",
@@ -239,12 +283,20 @@ const hadiyaHosana = [
     eplTeamId: "Hadiya Hossana F.C",
     currentPrice: 7.7,
     position: "DEF",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Hip pointers",
+    },
   },
   {
     playerName: "Meskelu Letebo",
     eplTeamId: "Hadiya Hossana F.C",
     currentPrice: 4.9,
     position: "DEF",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Hip pointers",
+    },
   },
   {
     playerName: "Tesfaye Bekele",
@@ -259,11 +311,15 @@ const hadiyaHosana = [
     eplTeamId: "Hadiya Hossana F.C",
     currentPrice: 11,
     position: "MID",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Hip pointers",
+    },
   },
   {
     playerName: "Amanuel Gobena",
     eplTeamId: "Hadiya Hossana F.C",
-    currentPrice: 10.12,
+    currentPrice: 10.5,
     position: "MID",
   },
   {
@@ -309,6 +365,10 @@ const hadiyaHosana = [
     eplTeamId: "Hadiya Hossana F.C",
     currentPrice: 5.0,
     position: "MID",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Hip pointers",
+    },
   },
 
   // ATT
@@ -356,6 +416,10 @@ const hadiyaHosana = [
     eplTeamId: "Hadiya Hossana F.C",
     currentPrice: 5.5,
     position: "ATT",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Hip pointers",
+    },
   },
 ];
 
@@ -372,6 +436,10 @@ const ethiopianCoffee = [
     eplTeamId: "Ethiopian Coffee S.C",
     currentPrice: 6.5,
     position: "GK",
+    availability: {
+      injuryStatus: "0",
+      injuryMessage: "Hip pointers",
+    },
   },
   {
     playerName: "Abel Mamo",
@@ -386,6 +454,10 @@ const ethiopianCoffee = [
     eplTeamId: "Ethiopian Coffee S.C",
     currentPrice: 8.9,
     position: "DEF",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Hip pointers",
+    },
   },
   {
     playerName: "Wondmeneh Dereje",
@@ -410,6 +482,10 @@ const ethiopianCoffee = [
     eplTeamId: "Ethiopian Coffee S.C",
     currentPrice: 6.5,
     position: "DEF",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "Hip pointers",
+    },
   },
   {
     playerName: "Ibrahim Baja",
@@ -510,8 +586,12 @@ const ethiopianCoffee = [
   {
     playerName: "Alazar Shimeles",
     eplTeamId: "Ethiopian Coffee S.C",
-    currentPrice: 11.7,
+    currentPrice: 5.7,
     position: "ATT",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "Quad",
+    },
   },
 
   {
@@ -731,7 +811,7 @@ const direDawa = [
   {
     playerName: "Yasen Jemal",
     eplTeamId: "Dire Dawa City S.C",
-    currentPrice: 13.9,
+    currentPrice: 11.9,
     position: "DEF",
   },
   {
@@ -749,7 +829,7 @@ const direDawa = [
   {
     playerName: "Fikadu Deneke",
     eplTeamId: "Dire Dawa City S.C",
-    currentPrice: 13.9,
+    currentPrice: 12,
     position: "DEF",
   },
   {
@@ -787,14 +867,14 @@ const direDawa = [
   {
     playerName: "Zenebe Kebede",
     eplTeamId: "Dire Dawa City S.C",
-    currentPrice: 13,
+    currentPrice: 12.2,
     position: "MID",
   },
   {
     //   Captain
     playerName: "Awot Gebremikael",
     eplTeamId: "Dire Dawa City S.C",
-    currentPrice: 10.13,
+    currentPrice: 10.2,
     position: "MID",
   },
   {
@@ -824,7 +904,7 @@ const direDawa = [
   {
     playerName: "Yared Zewdneh",
     eplTeamId: "Dire Dawa City S.C",
-    currentPrice: 13.2,
+    currentPrice: 11.2,
     position: "MID",
   },
 
@@ -864,7 +944,7 @@ const direDawa = [
   {
     playerName: "Richmond Adongo",
     eplTeamId: "Dire Dawa City S.C",
-    currentPrice: 13.1,
+    currentPrice: 12.3,
     position: "ATT",
   },
 
@@ -886,10 +966,13 @@ const addisAbaba = [
   // GK
   {
     playerName: "Yasen Jemal",
-
     eplTeamId: "Addis Ababa City F.C",
     currentPrice: 6,
     position: "GK",
+    availability: {
+      injuryStatus: "0",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Wondwossen Ashenafi",
@@ -914,13 +997,17 @@ const addisAbaba = [
   {
     playerName: "Abiyu Kassaye",
     eplTeamId: "Addis Ababa City F.C",
-    currentPrice: 14.9,
+    currentPrice: 7.5,
     position: "DEF",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Bereket Samuel",
     eplTeamId: "Addis Ababa City F.C",
-    currentPrice: 9,
+    currentPrice: 5.5,
     position: "DEF",
   },
   {
@@ -932,7 +1019,7 @@ const addisAbaba = [
   {
     playerName: "Fikadu Deneke",
     eplTeamId: "Addis Ababa City F.C",
-    currentPrice: 14.9,
+    currentPrice: 8.9,
     position: "DEF",
   },
   {
@@ -943,10 +1030,13 @@ const addisAbaba = [
   },
   {
     playerName: "Henok Isaias",
-
     eplTeamId: "Addis Ababa City F.C",
     currentPrice: 6.5,
     position: "DEF",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "Wrist and hand injuries",
+    },
   },
   {
     playerName: "Wondwossen Dereje",
@@ -971,14 +1061,14 @@ const addisAbaba = [
   {
     playerName: "Zenebe Kebede",
     eplTeamId: "Addis Ababa City F.C",
-    currentPrice: 14,
+    currentPrice: 11.5,
     position: "MID",
   },
   {
     //   Captain
     playerName: "Awot Gebremikael",
     eplTeamId: "Addis Ababa City F.C",
-    currentPrice: 10.14,
+    currentPrice: 10.3,
     position: "MID",
   },
   {
@@ -1008,7 +1098,7 @@ const addisAbaba = [
   {
     playerName: "Yared Zewdneh",
     eplTeamId: "Addis Ababa City F.C",
-    currentPrice: 14.2,
+    currentPrice: 11.2,
     position: "MID",
   },
 
@@ -1031,6 +1121,10 @@ const addisAbaba = [
     eplTeamId: "Addis Ababa City F.C",
     currentPrice: 7.6,
     position: "ATT",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Aschalew Girma",
@@ -1048,7 +1142,7 @@ const addisAbaba = [
   {
     playerName: "Richmond Adongo",
     eplTeamId: "Addis Ababa City F.C",
-    currentPrice: 14.1,
+    currentPrice: 12,
     position: "ATT",
   },
 
@@ -1073,6 +1167,10 @@ const jimma = [
     eplTeamId: "Jimma Aba Jifar F.C",
     currentPrice: 6,
     position: "GK",
+    availability: {
+      injuryStatus: "0",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Yohannes Shikur",
@@ -1091,7 +1189,7 @@ const jimma = [
   {
     playerName: "Wondmagegn Markos",
     eplTeamId: "Jimma Aba Jifar F.C",
-    currentPrice: 15.9,
+    currentPrice: 11.3,
     position: "DEF",
   },
   {
@@ -1109,7 +1207,7 @@ const jimma = [
   {
     playerName: "Ashenafi Bira",
     eplTeamId: "Jimma Aba Jifar F.C",
-    currentPrice: 15.9,
+    currentPrice: 11.9,
     position: "DEF",
   },
   {
@@ -1147,14 +1245,14 @@ const jimma = [
   {
     playerName: "Surafel Awol",
     eplTeamId: "Jimma Aba Jifar F.C",
-    currentPrice: 15,
+    currentPrice: 10.5,
     position: "MID",
   },
   {
     //   Captain
     playerName: "Bekam Abdella",
     eplTeamId: "Jimma Aba Jifar F.C",
-    currentPrice: 10.15,
+    currentPrice: 9.4,
     position: "MID",
   },
   {
@@ -1184,7 +1282,7 @@ const jimma = [
   {
     playerName: "Amanuel Teshome",
     eplTeamId: "Jimma Aba Jifar F.C",
-    currentPrice: 15.2,
+    currentPrice: 10.5,
     position: "MID",
   },
 
@@ -1211,7 +1309,7 @@ const jimma = [
   {
     playerName: "Samson Kolicha",
     eplTeamId: "Jimma Aba Jifar F.C",
-    currentPrice: 15.1,
+    currentPrice: 10.8,
     position: "ATT",
   },
 
@@ -1254,7 +1352,7 @@ const sebeta = [
   {
     playerName: "Anteneh Tesfaye",
     eplTeamId: "Sebeta City F.C",
-    currentPrice: 16.9,
+    currentPrice: 9.9,
     position: "DEF",
   },
   {
@@ -1268,11 +1366,15 @@ const sebeta = [
     eplTeamId: "Sebeta City F.C",
     currentPrice: 4.6,
     position: "DEF",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Biadgelegn Elias",
     eplTeamId: "Sebeta City F.C",
-    currentPrice: 16.9,
+    currentPrice: 12.8,
     position: "DEF",
   },
   {
@@ -1310,14 +1412,14 @@ const sebeta = [
   {
     playerName: "Mesoud Mohammed",
     eplTeamId: "Sebeta City F.C",
-    currentPrice: 16,
+    currentPrice: 10,
     position: "MID",
   },
   {
     //   Captain
     playerName: "Fuad Fereja",
     eplTeamId: "Sebeta City F.C",
-    currentPrice: 10.16,
+    currentPrice: 10.6,
     position: "MID",
   },
   {
@@ -1331,6 +1433,10 @@ const sebeta = [
     eplTeamId: "Sebeta City F.C",
     currentPrice: 9,
     position: "MID",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "ACL",
+    },
   },
 
   // ATT
@@ -1345,6 +1451,10 @@ const sebeta = [
     eplTeamId: "Sebeta City F.C",
     currentPrice: 9.0,
     position: "ATT",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "Ankle sprains",
+    },
   },
   {
     playerName: "Remedan Muhdin",
@@ -1356,7 +1466,7 @@ const sebeta = [
   {
     playerName: "Kalkidan Zelalem",
     eplTeamId: "Sebeta City F.C",
-    currentPrice: 16.1,
+    currentPrice: 12,
     position: "ATT",
   },
 
@@ -1398,13 +1508,13 @@ const saintGeorge = [
   {
     playerName: "Temesgen Yohannes",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "5.6",
     position: "GK",
   },
   {
     playerName: "Charles Lukwango",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "3.8",
     position: "GK",
   },
 
@@ -1418,44 +1528,44 @@ const saintGeorge = [
   {
     playerName: "Amanuel Terfa",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "8.9",
     position: "DEF",
   },
   {
     playerName: "Mignot Debebe",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: 8.8,
     position: "DEF",
   },
   {
     playerName: "Desta Demu",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "6.8",
     position: "DEF",
   },
   {
     playerName: "Saladin Bergicho",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "7.5",
     position: "DEF",
   },
   {
     playerName: "Henock Adugna",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "5.0",
     position: "DEF",
   },
   {
     playerName: "Miraj Sefa",
     eplTeamId: "Saint George S.C",
     position: "DEF",
-    currentPrice: "8.8",
+    currentPrice: "7.0",
   },
   {
     playerName: "Frimpong Mensu",
     eplTeamId: "Saint George S.C",
     position: "DEF",
-    currentPrice: "8.8",
+    currentPrice: "8.0",
   },
 
   // MiDEFielders
@@ -1463,49 +1573,49 @@ const saintGeorge = [
     playerName: "Gatouch Panom",
     eplTeamId: "Saint George S.C",
     position: "MID",
-    currentPrice: "8.8",
+    currentPrice: "10.8",
   },
   {
     playerName: "Haider Sherefa",
     eplTeamId: "Saint George S.C",
     position: "MID",
-    currentPrice: "8.8",
+    currentPrice: "9.6",
   },
   {
     playerName: "Yabsira Tesfaye",
     eplTeamId: "Saint George S.C",
     position: "MID",
-    currentPrice: "8.8",
+    currentPrice: "7.4",
   },
   {
     playerName: "Kannan Markineh",
     eplTeamId: "Saint George S.C",
     position: "MID",
-    currentPrice: "8.8",
+    currentPrice: "5.8",
   },
   {
     playerName: "Bereket Wolde",
     eplTeamId: "Saint George S.C",
     position: "MID",
-    currentPrice: "8.8",
+    currentPrice: "6.8",
   },
   {
     playerName: "Fuad Abdela",
     eplTeamId: "Saint George S.C",
     position: "MID",
-    currentPrice: "8.8",
+    currentPrice: "9.8",
   },
   {
     playerName: "Abraham Getachew",
     eplTeamId: "Saint George S.C",
     position: "MID",
-    currentPrice: "8.8",
+    currentPrice: "6.0",
   },
   {
     playerName: "Natnael Zeleke",
     eplTeamId: "Saint George S.C",
     position: "MID",
-    currentPrice: "8.8",
+    currentPrice: "5.5",
   },
 
   // Forwards
@@ -1513,55 +1623,67 @@ const saintGeorge = [
     playerName: "Bulcha Shura",
     eplTeamId: "Saint George S.C",
     position: "ATT",
-    currentPrice: "8.8",
+    currentPrice: "11.0",
+    availability: {
+      injuryStatus: "0",
+      injuryMessage: "Hip pointers",
+    },
   },
   {
     playerName: "Tegenu Teshome",
     eplTeamId: "Saint George S.C",
     currentPrice: "8.8",
     position: "ATT",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "Shoulder dislocations",
+    },
   },
   {
     playerName: "Abel Yalew",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "7.8",
     position: "ATT",
   },
   {
     playerName: "Amanuel Gebremichael",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "9.0",
     position: "ATT",
   },
   {
     playerName: "Cherinet Gugssa",
     eplTeamId: "Saint George S.C",
     position: "ATT",
-    currentPrice: "8.8",
+    currentPrice: "6.5",
   },
   {
     playerName: "Addis Gidey",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "5.0",
     position: "ATT",
   },
   {
     playerName: "Dagmawi Araya",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "8.3",
     position: "ATT",
   },
   {
     playerName: "Alazar",
     eplTeamId: "Saint George S.C",
-    currentPrice: "8.8",
+    currentPrice: "8.5",
     position: "ATT",
   },
   {
     playerName: "Esmael Goro-Agoro",
     eplTeamId: "Saint George S.C",
-    currentPrice: "10.7",
+    currentPrice: "6.7",
     position: "ATT",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Misganaw",
@@ -1579,6 +1701,10 @@ const welaytaDicha = [
     eplTeamId: "Wolaita Dicha S.C",
     currentPrice: "8.8",
     position: "GK",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Seid Habtamu",
@@ -1790,20 +1916,20 @@ const hawassa = [
   {
     playerName: "Mintesinot Gimbo",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "6.0",
+    currentPrice: "6.9",
     position: "GK",
   },
   // Defenders
   {
     playerName: "Zenebe Kedir",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "5.0",
+    currentPrice: "8.0",
     position: "DEF",
   },
   {
     playerName: "Mignot Debebe",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "3",
+    currentPrice: "3.8",
     position: "DEF",
   },
   {
@@ -1821,7 +1947,7 @@ const hawassa = [
   {
     playerName: "Desta Yohannes",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "14",
+    currentPrice: "9",
     position: "DEF",
   },
   {
@@ -1859,13 +1985,13 @@ const hawassa = [
   {
     playerName: "Gabriel Ahmed",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "4.7",
+    currentPrice: "7.7",
     position: "MID",
   },
   {
     playerName: "Zelalem Isaias",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "4.9",
+    currentPrice: "8.9",
     position: "MID",
   },
   {
@@ -1877,7 +2003,7 @@ const hawassa = [
   {
     playerName: "Abayneh Fino",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "6.8",
+    currentPrice: "11.8",
     position: "MID",
   },
   {
@@ -1885,6 +2011,10 @@ const hawassa = [
     eplTeamId: "Hawassa Kenema S.C",
     currentPrice: "5.4",
     position: "MID",
+    availability: {
+      injuryStatus: "25",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Abenezer Yohannes",
@@ -1901,7 +2031,7 @@ const hawassa = [
   {
     playerName: "Yohannes Segeboo",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "12.5",
+    currentPrice: "6.7",
     position: "MID",
   },
   {
@@ -1919,15 +2049,19 @@ const hawassa = [
   {
     playerName: "Wondmagegn Hailu",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "15",
+    currentPrice: "6.0",
     position: "MID",
   },
   // Attackers
   {
     playerName: "Habtamu Mekonnen",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "6",
+    currentPrice: "8",
     position: "ATT",
+    availability: {
+      injuryStatus: "50",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Mesfin Tafesse",
@@ -1938,13 +2072,13 @@ const hawassa = [
   {
     playerName: "Biruk Beyene",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "4.5",
+    currentPrice: "7.5",
     position: "ATT",
   },
   {
     playerName: "Tebarek Hefamo",
     eplTeamId: "Hawassa Kenema S.C",
-    currentPrice: "4.9",
+    currentPrice: "6.9",
     position: "ATT",
   },
   {
@@ -2089,7 +2223,7 @@ const fasilKenema = [
   {
     playerName: "Fikadu Alemu",
     eplTeamId: "Fasil Kenema S.C",
-    currentPrice: "15",
+    currentPrice: "11",
     position: "ATT",
   },
   {
@@ -2460,6 +2594,10 @@ const wolkite = [
     eplTeamId: "Wolkite City F.C",
     currentPrice: "6.0",
     position: "MID",
+    availability: {
+      injuryStatus: "75",
+      injuryMessage: "ACL",
+    },
   },
   {
     playerName: "Muhajir Meki",
@@ -2471,19 +2609,19 @@ const wolkite = [
   {
     playerName: "Ame Mohammed",
     eplTeamId: "Wolkite City F.C",
-    currentPrice: "6.0",
+    currentPrice: "11.0",
     position: "ATT",
   },
   {
     playerName: "Abubeker Sanni",
     eplTeamId: "Wolkite City F.C",
-    currentPrice: "6.0",
+    currentPrice: "8.0",
     position: "ATT",
   },
   {
     playerName: "Ahmed Hussein",
     eplTeamId: "Wolkite City F.C",
-    currentPrice: "6.0",
+    currentPrice: "9.0",
     position: "ATT",
   },
   {
@@ -2491,6 +2629,10 @@ const wolkite = [
     eplTeamId: "Wolkite City F.C",
     currentPrice: "6.0",
     position: "ATT",
+    availability: {
+      injuryStatus: "25",
+      injuryMessage: "Hip Flexor",
+    },
   },
 ];
 

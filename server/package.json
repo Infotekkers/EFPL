@@ -30,7 +30,9 @@
     "uuidv4": "^6.2.13",
     "validator": "^13.7.0",
     "colors": "^1.4.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "socket.io": "^3.0.2",
+    "http": "0.0.1-security"
   },
   "devDependencies": {
     "colors": "^1.4.0",

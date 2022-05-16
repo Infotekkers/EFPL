@@ -18,8 +18,12 @@ import 'package:efpl/services/http_instance.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 
+String userID = "627a7798bed9e567269bb8a9";
+
 class ApiTransferRepository implements ITransferRepository {
   final String _baseURL = dotenv.env["BASE_URL"].toString();
+
+  // local id
 
   @override
   Future<Either<dynamic, UserTeam>> getUserPlayers(
@@ -28,9 +32,6 @@ class ApiTransferRepository implements ITransferRepository {
 
     // remote id
     // const userID = "627970e3b106bad35b4dde88";
-
-    // local id
-    const userID = "627a7798bed9e567269bb8a9";
 
     try {
       HTTPInstance instance = getIt<HTTPInstance>();
@@ -323,6 +324,7 @@ class ApiTransferRepository implements ITransferRepository {
             var efplCache = await Hive.openBox('efplCache');
             efplCache.put("allPlayers", allPlayers);
           } catch (e) {
+            print(e);
             return left(
               const StorageFailures.hiveError(
                 failedValue: "Error Caching Info",
@@ -330,6 +332,7 @@ class ApiTransferRepository implements ITransferRepository {
             );
           }
         }
+        return right(allPlayersInPosition);
       }
 
       // No Token
@@ -358,7 +361,10 @@ class ApiTransferRepository implements ITransferRepository {
             ),
           ],
         );
-      } else {
+      }
+
+      //
+      else {
         List<UserPlayer> cachedUserPlayers =
             await getUserPlayerFromCache(playerPosition: playerPosition);
         return left(
@@ -370,9 +376,8 @@ class ApiTransferRepository implements ITransferRepository {
           ],
         );
       }
-
-      return right(allPlayersInPosition);
-    } // Timeout Exception
+    }
+    // Timeout Exception
     on TimeoutException catch (_) {
       List<UserPlayer> cachedPlayers =
           await getUserPlayerFromCache(playerPosition: playerPosition);
@@ -388,9 +393,11 @@ class ApiTransferRepository implements ITransferRepository {
 
     // Socket Exception
     on SocketException catch (_) {
+      List<UserPlayer> cachedPlayers =
+          await getUserPlayerFromCache(playerPosition: playerPosition);
       return left(
         [
-          // cachedUserTeam,
+          cachedPlayers,
           const HTTPFailures.socketError(
               failedValue: "Could not connect to server. Try refreshing."),
         ],
@@ -399,9 +406,11 @@ class ApiTransferRepository implements ITransferRepository {
 
     // Handshake error
     on HandshakeException catch (_) {
+      List<UserPlayer> cachedPlayers =
+          await getUserPlayerFromCache(playerPosition: playerPosition);
       return left(
         [
-          // cachedUserTeam,
+          cachedPlayers,
           const HTTPFailures.handShakeError(
               failedValue: "Could not connect to server. Try refreshing."),
         ],
@@ -410,9 +419,12 @@ class ApiTransferRepository implements ITransferRepository {
 
     // unexpected error
     catch (e) {
+      print(e);
+      List<UserPlayer> cachedPlayers =
+          await getUserPlayerFromCache(playerPosition: playerPosition);
       return left(
         [
-          // cachedUserTeam,
+          cachedPlayers,
           const HTTPFailures.unexpectedError(
               failedValue: "Something went wrong. Try again!"),
         ],
@@ -427,33 +439,46 @@ class ApiTransferRepository implements ITransferRepository {
 
     const userID = "627a7798bed9e567269bb8a9";
 
-    try {
-      HTTPInstance instance = getIt<HTTPInstance>();
+    print(userTeamToJson(userTeam: userTeam));
 
-      var apiResponse = await instance.client.patch(
-        Uri.parse('$_baseURL/user/team/$userID/$gameWeekId'),
-        body: {
-          "incomingTeam": jsonEncode(
-            userTeamToJson(userTeam: userTeam),
-          ),
-        },
-      ).timeout(
-        const Duration(seconds: 30),
-      );
+    // try {
+    //   HTTPInstance instance = getIt<HTTPInstance>();
 
-      if (apiResponse.statusCode == 200) {
-        return right(true);
-      } else {
-        return left(false);
-      }
-    } catch (e) {
-      return left(false);
-    }
+    //   var apiResponse = await instance.client.patch(
+    //     Uri.parse('$_baseURL/user/team/$userID/$gameWeekId'),
+    //     body: {
+    //       "incomingTeam": jsonEncode(
+    //         userTeamToJson(userTeam: userTeam),
+    //       ),
+    //     },
+    //   ).timeout(
+    //     const Duration(seconds: 30),
+    //   );
+
+    //   if (apiResponse.statusCode == 200) {
+    //     return right(true);
+    //   } else {
+    //     return left(false);
+    //   }
+    // } catch (e) {
+    //   return left(false);
+    // }
+    return right(false);
   }
 }
 
 Map userTeamToJson({required UserTeam userTeam}) {
   Map userTeamJson = {};
+  Map incomingTeam = {};
+
+  userTeamJson['userId'] = userID;
+
+  incomingTeam['activeChip'] = "";
+
+  incomingTeam['gameweekId'] =
+      userTeam.gameWeekId.value.fold((l) => 1, (r) => r);
+
+  userTeamJson['incomingTeam'] = incomingTeam;
 
   // set gameweek id
   userTeamJson['gameWeekId'] = userTeam.gameWeekId.value.fold(
@@ -546,11 +571,11 @@ Future<UserTeam> getUserTeamFromCache({required int gameWeekId}) async {
 Future<List<UserPlayer>> getUserPlayerFromCache(
     {required String playerPosition}) async {
   var efplCache = await Hive.openBox('efplCache');
-  List allPlayers = efplCache.get("allPlayers");
+  List? allPlayers = efplCache.get("allPlayers");
 
   List<UserPlayer> allUserPlayers = [];
 
-  for (var player in allPlayers) {
+  for (var player in allPlayers!) {
     if (player['position'] == playerPosition) {
       final currentPlayerMap = {
         "playerId": (player['playerId']).toString(),

@@ -83,7 +83,8 @@ const login = asyncHandler(async (req, res) => {
         },
         secretKey,
         {
-          expiresIn: "1h",
+          // TODO:Update
+          expiresIn: "365d",
         }
       );
 

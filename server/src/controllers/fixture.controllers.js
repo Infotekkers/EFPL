@@ -556,6 +556,9 @@ const updateFixture = asyncHandler(async function (req, res) {
       match.awayTeam = awayTeam ?? match.awayTeam;
       await match.save();
 
+      const io = require("../../server");
+      io.emit("fixtureUpdated");
+
       res.send("Match updated!");
     } else {
       res.status(422).send("Live Match can not be updated");
