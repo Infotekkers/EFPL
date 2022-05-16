@@ -1,6 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/value_failures.dart';
 
+Either<ValueFailure<String>, String> validateNotEmpty(String input) {
+  if (input.isNotEmpty) {
+    return right(input);
+  } else {
+    return left(ValueFailure.empty(failedValue: input));
+  }
+}
+
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
   const emailRegex =
       r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
@@ -18,5 +26,21 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
     return right(input);
   } else {
     return left(ValueFailure.shortPassword(failedValue: input));
+  }
+}
+
+Either<ValueFailure<String>, String> validateUserName(String input) {
+  if (input.length <= 15) {
+    return right(input);
+  } else {
+    return left(ValueFailure.exceedingLength(failedValue: input));
+  }
+}
+
+Either<ValueFailure<String>, String> validateTeamName(String input) {
+  if (input.length <= 15) {
+    return right(input);
+  } else {
+    return left(ValueFailure.exceedingLength(failedValue: input));
   }
 }
