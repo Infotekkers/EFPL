@@ -4,7 +4,7 @@ import 'package:efpl/domain/auth/user.dart';
 
 import 'auth_value_objects.dart';
 
-abstract class IAuthFacade {
+abstract class IAuthRepository {
   // get currently signed in user
   Future<Option<User>> getSignedInUser();
 
@@ -20,6 +20,6 @@ abstract class IAuthFacade {
     required Password password,
   });
 
-  // logout
+  // sign out user
   Future<void> signOut();
 }

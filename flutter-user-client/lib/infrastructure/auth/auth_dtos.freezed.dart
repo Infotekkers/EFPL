@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'user.dart';
+part of 'auth_dtos.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,16 +14,16 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$UserTearOff {
-  const _$UserTearOff();
+class _$UserDtoTearOff {
+  const _$UserDtoTearOff();
 
-  _User call(
-      {required EmailAddress emailAddress,
-      required UserName userName,
-      required TeamName teamName,
-      required Country country,
-      required FavoriteEplTeam favoriteEplTeam}) {
-    return _User(
+  _UserDto call(
+      {required String emailAddress,
+      required String userName,
+      required String teamName,
+      required String country,
+      required String favoriteEplTeam}) {
+    return _UserDto(
       emailAddress: emailAddress,
       userName: userName,
       teamName: teamName,
@@ -34,40 +34,39 @@ class _$UserTearOff {
 }
 
 /// @nodoc
-const $User = _$UserTearOff();
+const $UserDto = _$UserDtoTearOff();
 
 /// @nodoc
-mixin _$User {
-// required UniqueId id,
-  EmailAddress get emailAddress => throw _privateConstructorUsedError;
-  UserName get userName => throw _privateConstructorUsedError;
-  TeamName get teamName => throw _privateConstructorUsedError;
-  Country get country => throw _privateConstructorUsedError;
-  FavoriteEplTeam get favoriteEplTeam => throw _privateConstructorUsedError;
+mixin _$UserDto {
+  String get emailAddress => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
+  String get teamName => throw _privateConstructorUsedError;
+  String get country => throw _privateConstructorUsedError;
+  String get favoriteEplTeam => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+  $UserDtoCopyWith<UserDto> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res>;
+abstract class $UserDtoCopyWith<$Res> {
+  factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
+      _$UserDtoCopyWithImpl<$Res>;
   $Res call(
-      {EmailAddress emailAddress,
-      UserName userName,
-      TeamName teamName,
-      Country country,
-      FavoriteEplTeam favoriteEplTeam});
+      {String emailAddress,
+      String userName,
+      String teamName,
+      String country,
+      String favoriteEplTeam});
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
+  _$UserDtoCopyWithImpl(this._value, this._then);
 
-  final User _value;
+  final UserDto _value;
   // ignore: unused_field
-  final $Res Function(User) _then;
+  final $Res Function(UserDto) _then;
 
   @override
   $Res call({
@@ -81,48 +80,48 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       emailAddress: emailAddress == freezed
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+              as String,
       userName: userName == freezed
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as UserName,
+              as String,
       teamName: teamName == freezed
           ? _value.teamName
           : teamName // ignore: cast_nullable_to_non_nullable
-              as TeamName,
+              as String,
       country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
-              as Country,
+              as String,
       favoriteEplTeam: favoriteEplTeam == freezed
           ? _value.favoriteEplTeam
           : favoriteEplTeam // ignore: cast_nullable_to_non_nullable
-              as FavoriteEplTeam,
+              as String,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$UserCopyWith(_User value, $Res Function(_User) then) =
-      __$UserCopyWithImpl<$Res>;
+abstract class _$UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
+  factory _$UserDtoCopyWith(_UserDto value, $Res Function(_UserDto) then) =
+      __$UserDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {EmailAddress emailAddress,
-      UserName userName,
-      TeamName teamName,
-      Country country,
-      FavoriteEplTeam favoriteEplTeam});
+      {String emailAddress,
+      String userName,
+      String teamName,
+      String country,
+      String favoriteEplTeam});
 }
 
 /// @nodoc
-class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
-    implements _$UserCopyWith<$Res> {
-  __$UserCopyWithImpl(_User _value, $Res Function(_User) _then)
-      : super(_value, (v) => _then(v as _User));
+class __$UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
+    implements _$UserDtoCopyWith<$Res> {
+  __$UserDtoCopyWithImpl(_UserDto _value, $Res Function(_UserDto) _then)
+      : super(_value, (v) => _then(v as _UserDto));
 
   @override
-  _User get _value => super._value as _User;
+  _UserDto get _value => super._value as _UserDto;
 
   @override
   $Res call({
@@ -132,62 +131,63 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? country = freezed,
     Object? favoriteEplTeam = freezed,
   }) {
-    return _then(_User(
+    return _then(_UserDto(
       emailAddress: emailAddress == freezed
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+              as String,
       userName: userName == freezed
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as UserName,
+              as String,
       teamName: teamName == freezed
           ? _value.teamName
           : teamName // ignore: cast_nullable_to_non_nullable
-              as TeamName,
+              as String,
       country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
-              as Country,
+              as String,
       favoriteEplTeam: favoriteEplTeam == freezed
           ? _value.favoriteEplTeam
           : favoriteEplTeam // ignore: cast_nullable_to_non_nullable
-              as FavoriteEplTeam,
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_User implements _User {
-  const _$_User(
+class _$_UserDto extends _UserDto {
+  const _$_UserDto(
       {required this.emailAddress,
       required this.userName,
       required this.teamName,
       required this.country,
-      required this.favoriteEplTeam});
+      required this.favoriteEplTeam})
+      : super._();
 
-  @override // required UniqueId id,
-  final EmailAddress emailAddress;
   @override
-  final UserName userName;
+  final String emailAddress;
   @override
-  final TeamName teamName;
+  final String userName;
   @override
-  final Country country;
+  final String teamName;
   @override
-  final FavoriteEplTeam favoriteEplTeam;
+  final String country;
+  @override
+  final String favoriteEplTeam;
 
   @override
   String toString() {
-    return 'User(emailAddress: $emailAddress, userName: $userName, teamName: $teamName, country: $country, favoriteEplTeam: $favoriteEplTeam)';
+    return 'UserDto(emailAddress: $emailAddress, userName: $userName, teamName: $teamName, country: $country, favoriteEplTeam: $favoriteEplTeam)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _User &&
+            other is _UserDto &&
             const DeepCollectionEquality()
                 .equals(other.emailAddress, emailAddress) &&
             const DeepCollectionEquality().equals(other.userName, userName) &&
@@ -208,29 +208,31 @@ class _$_User implements _User {
 
   @JsonKey(ignore: true)
   @override
-  _$UserCopyWith<_User> get copyWith =>
-      __$UserCopyWithImpl<_User>(this, _$identity);
+  _$UserDtoCopyWith<_UserDto> get copyWith =>
+      __$UserDtoCopyWithImpl<_UserDto>(this, _$identity);
 }
 
-abstract class _User implements User {
-  const factory _User(
-      {required EmailAddress emailAddress,
-      required UserName userName,
-      required TeamName teamName,
-      required Country country,
-      required FavoriteEplTeam favoriteEplTeam}) = _$_User;
+abstract class _UserDto extends UserDto {
+  const factory _UserDto(
+      {required String emailAddress,
+      required String userName,
+      required String teamName,
+      required String country,
+      required String favoriteEplTeam}) = _$_UserDto;
+  const _UserDto._() : super._();
 
-  @override // required UniqueId id,
-  EmailAddress get emailAddress;
   @override
-  UserName get userName;
+  String get emailAddress;
   @override
-  TeamName get teamName;
+  String get userName;
   @override
-  Country get country;
+  String get teamName;
   @override
-  FavoriteEplTeam get favoriteEplTeam;
+  String get country;
+  @override
+  String get favoriteEplTeam;
   @override
   @JsonKey(ignore: true)
-  _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;
+  _$UserDtoCopyWith<_UserDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }

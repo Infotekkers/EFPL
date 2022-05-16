@@ -38,20 +38,20 @@ abstract class ValueObject<T> {
   String toString() => 'Value($value)';
 }
 
-// Uniquee Id
-class UniqueId extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-  factory UniqueId() {
-    return UniqueId._(
-      right(const Uuid().v1()),
-    );
-  }
-  factory UniqueId.fromUniqueString(String uniqueId) {
-    assert(uniqueId != null);
-    return UniqueId._(
-      right(uniqueId),
-    );
-  }
-  const UniqueId._(this.value);
-}
+// // Uniquee Id
+// class UniqueId extends ValueObject<String> {
+//   @override
+//   final Either<ValueFailure<String>, String> value;
+//   factory UniqueId() {
+//     return UniqueId._(
+//       right(const Uuid().v1()),
+//     );
+//   }
+//   factory UniqueId.fromUniqueString(String uniqueId) {
+//     assert(uniqueId != null);
+//     return UniqueId._(
+//       right(uniqueId),
+//     );
+//   }
+//   const UniqueId._(this.value);
+// }

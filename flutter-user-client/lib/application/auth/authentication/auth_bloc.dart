@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:efpl/domain/auth/i_auth_facade.dart';
+import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
@@ -11,12 +11,12 @@ part 'auth_bloc.freezed.dart';
 
 @injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final IAuthFacade _authFacade;
+  final IAuthRepository _authRepository;
 
-  AuthBloc(this._authFacade) : super(const AuthState.intial()) {
+  AuthBloc(this._authRepository) : super(const AuthState.intial()) {
     on<AuthCheckRequested>(
       (event, emit) async {
-        final userOption = await _authFacade.getSignedInUser();
+        final userOption = await _authRepository.getSignedInUser();
         emit(
           userOption.fold(
             () => const AuthState.unauthenticated(),
@@ -26,7 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
     );
     on<SignedOut>((event, emit) async {
-      await _authFacade.signOut();
+      await _authRepository.signOut();
       emit(
         const AuthState.unauthenticated(),
       );
