@@ -8,7 +8,8 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/my_team/myteam_bloc.dart' as _i10;
-import 'application/util/util_bloc.dart' as _i11;
+import 'application/player/player_bloc.dart' as _i11;
+import 'application/util/util_bloc.dart' as _i12;
 import 'domain/my_team/i_my_team_repository.dart' as _i3;
 import 'domain/player/i_player_repository.dart' as _i7;
 import 'infrastructure/my_team/my_team_local_data_provider.dart' as _i5;
@@ -29,6 +30,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i8.PlayerRepository(get<_i9.PlayerRemoteDataProvider>()));
   gh.factory<_i10.MyTeamBloc>(
       () => _i10.MyTeamBloc(get<_i3.IMyTeamRepository>()));
-  gh.factory<_i11.UtilBloc>(() => _i11.UtilBloc());
+  gh.factory<_i11.PlayerBloc>(
+      () => _i11.PlayerBloc(get<_i7.IPlayerRepository>()));
+  gh.factory<_i12.UtilBloc>(() => _i12.UtilBloc());
   return get;
 }
