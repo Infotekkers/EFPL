@@ -24,14 +24,16 @@ class _$MyTeamEventTearOff {
     );
   }
 
-  _TransferOptionsRequested transferOptionsRequested(PlayerId playerId) {
+  _TransferOptionsRequested transferOptionsRequested(
+      MyTeamPlayer player, MyTeam myTeam) {
     return _TransferOptionsRequested(
-      playerId,
+      player,
+      myTeam,
     );
   }
 
   _TransferConfirmed transferConfirmed(
-      PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam) {
+      String playerOne, String playerTwo, MyTeam myTeam) {
     return _TransferConfirmed(
       playerOne,
       playerTwo,
@@ -55,9 +57,9 @@ mixin _$MyTeamEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String gameweekId) loadMyTeam,
-    required TResult Function(PlayerId playerId) transferOptionsRequested,
-    required TResult Function(
-            PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)
+    required TResult Function(MyTeamPlayer player, MyTeam myTeam)
+        transferOptionsRequested,
+    required TResult Function(String playerOne, String playerTwo, MyTeam myTeam)
         transferConfirmed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) =>
@@ -65,8 +67,9 @@ mixin _$MyTeamEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId, String gameweekId)? loadMyTeam,
-    TResult Function(PlayerId playerId)? transferOptionsRequested,
-    TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
+    TResult Function(MyTeamPlayer player, MyTeam myTeam)?
+        transferOptionsRequested,
+    TResult Function(String playerOne, String playerTwo, MyTeam myTeam)?
         transferConfirmed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) =>
@@ -74,8 +77,9 @@ mixin _$MyTeamEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String gameweekId)? loadMyTeam,
-    TResult Function(PlayerId playerId)? transferOptionsRequested,
-    TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
+    TResult Function(MyTeamPlayer player, MyTeam myTeam)?
+        transferOptionsRequested,
+    TResult Function(String playerOne, String playerTwo, MyTeam myTeam)?
         transferConfirmed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
@@ -201,9 +205,9 @@ class _$_LoadMyTeam implements _LoadMyTeam {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String gameweekId) loadMyTeam,
-    required TResult Function(PlayerId playerId) transferOptionsRequested,
-    required TResult Function(
-            PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)
+    required TResult Function(MyTeamPlayer player, MyTeam myTeam)
+        transferOptionsRequested,
+    required TResult Function(String playerOne, String playerTwo, MyTeam myTeam)
         transferConfirmed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
@@ -214,8 +218,9 @@ class _$_LoadMyTeam implements _LoadMyTeam {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId, String gameweekId)? loadMyTeam,
-    TResult Function(PlayerId playerId)? transferOptionsRequested,
-    TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
+    TResult Function(MyTeamPlayer player, MyTeam myTeam)?
+        transferOptionsRequested,
+    TResult Function(String playerOne, String playerTwo, MyTeam myTeam)?
         transferConfirmed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
@@ -226,8 +231,9 @@ class _$_LoadMyTeam implements _LoadMyTeam {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String gameweekId)? loadMyTeam,
-    TResult Function(PlayerId playerId)? transferOptionsRequested,
-    TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
+    TResult Function(MyTeamPlayer player, MyTeam myTeam)?
+        transferOptionsRequested,
+    TResult Function(String playerOne, String playerTwo, MyTeam myTeam)?
         transferConfirmed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
@@ -292,7 +298,10 @@ abstract class _$TransferOptionsRequestedCopyWith<$Res> {
   factory _$TransferOptionsRequestedCopyWith(_TransferOptionsRequested value,
           $Res Function(_TransferOptionsRequested) then) =
       __$TransferOptionsRequestedCopyWithImpl<$Res>;
-  $Res call({PlayerId playerId});
+  $Res call({MyTeamPlayer player, MyTeam myTeam});
+
+  $MyTeamPlayerCopyWith<$Res> get player;
+  $MyTeamCopyWith<$Res> get myTeam;
 }
 
 /// @nodoc
@@ -309,28 +318,49 @@ class __$TransferOptionsRequestedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? playerId = freezed,
+    Object? player = freezed,
+    Object? myTeam = freezed,
   }) {
     return _then(_TransferOptionsRequested(
-      playerId == freezed
-          ? _value.playerId
-          : playerId // ignore: cast_nullable_to_non_nullable
-              as PlayerId,
+      player == freezed
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as MyTeamPlayer,
+      myTeam == freezed
+          ? _value.myTeam
+          : myTeam // ignore: cast_nullable_to_non_nullable
+              as MyTeam,
     ));
+  }
+
+  @override
+  $MyTeamPlayerCopyWith<$Res> get player {
+    return $MyTeamPlayerCopyWith<$Res>(_value.player, (value) {
+      return _then(_value.copyWith(player: value));
+    });
+  }
+
+  @override
+  $MyTeamCopyWith<$Res> get myTeam {
+    return $MyTeamCopyWith<$Res>(_value.myTeam, (value) {
+      return _then(_value.copyWith(myTeam: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_TransferOptionsRequested implements _TransferOptionsRequested {
-  const _$_TransferOptionsRequested(this.playerId);
+  const _$_TransferOptionsRequested(this.player, this.myTeam);
 
   @override
-  final PlayerId playerId;
+  final MyTeamPlayer player;
+  @override
+  final MyTeam myTeam;
 
   @override
   String toString() {
-    return 'MyTeamEvent.transferOptionsRequested(playerId: $playerId)';
+    return 'MyTeamEvent.transferOptionsRequested(player: $player, myTeam: $myTeam)';
   }
 
   @override
@@ -338,12 +368,15 @@ class _$_TransferOptionsRequested implements _TransferOptionsRequested {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _TransferOptionsRequested &&
-            const DeepCollectionEquality().equals(other.playerId, playerId));
+            const DeepCollectionEquality().equals(other.player, player) &&
+            const DeepCollectionEquality().equals(other.myTeam, myTeam));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(playerId));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(player),
+      const DeepCollectionEquality().hash(myTeam));
 
   @JsonKey(ignore: true)
   @override
@@ -355,39 +388,41 @@ class _$_TransferOptionsRequested implements _TransferOptionsRequested {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String gameweekId) loadMyTeam,
-    required TResult Function(PlayerId playerId) transferOptionsRequested,
-    required TResult Function(
-            PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)
+    required TResult Function(MyTeamPlayer player, MyTeam myTeam)
+        transferOptionsRequested,
+    required TResult Function(String playerOne, String playerTwo, MyTeam myTeam)
         transferConfirmed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
-    return transferOptionsRequested(playerId);
+    return transferOptionsRequested(player, myTeam);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId, String gameweekId)? loadMyTeam,
-    TResult Function(PlayerId playerId)? transferOptionsRequested,
-    TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
+    TResult Function(MyTeamPlayer player, MyTeam myTeam)?
+        transferOptionsRequested,
+    TResult Function(String playerOne, String playerTwo, MyTeam myTeam)?
         transferConfirmed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
-    return transferOptionsRequested?.call(playerId);
+    return transferOptionsRequested?.call(player, myTeam);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String gameweekId)? loadMyTeam,
-    TResult Function(PlayerId playerId)? transferOptionsRequested,
-    TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
+    TResult Function(MyTeamPlayer player, MyTeam myTeam)?
+        transferOptionsRequested,
+    TResult Function(String playerOne, String playerTwo, MyTeam myTeam)?
         transferConfirmed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
     if (transferOptionsRequested != null) {
-      return transferOptionsRequested(playerId);
+      return transferOptionsRequested(player, myTeam);
     }
     return orElse();
   }
@@ -432,10 +467,11 @@ class _$_TransferOptionsRequested implements _TransferOptionsRequested {
 }
 
 abstract class _TransferOptionsRequested implements MyTeamEvent {
-  const factory _TransferOptionsRequested(PlayerId playerId) =
+  const factory _TransferOptionsRequested(MyTeamPlayer player, MyTeam myTeam) =
       _$_TransferOptionsRequested;
 
-  PlayerId get playerId;
+  MyTeamPlayer get player;
+  MyTeam get myTeam;
   @JsonKey(ignore: true)
   _$TransferOptionsRequestedCopyWith<_TransferOptionsRequested> get copyWith =>
       throw _privateConstructorUsedError;
@@ -446,7 +482,7 @@ abstract class _$TransferConfirmedCopyWith<$Res> {
   factory _$TransferConfirmedCopyWith(
           _TransferConfirmed value, $Res Function(_TransferConfirmed) then) =
       __$TransferConfirmedCopyWithImpl<$Res>;
-  $Res call({PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam});
+  $Res call({String playerOne, String playerTwo, MyTeam myTeam});
 
   $MyTeamCopyWith<$Res> get myTeam;
 }
@@ -472,11 +508,11 @@ class __$TransferConfirmedCopyWithImpl<$Res>
       playerOne == freezed
           ? _value.playerOne
           : playerOne // ignore: cast_nullable_to_non_nullable
-              as PlayerId,
+              as String,
       playerTwo == freezed
           ? _value.playerTwo
           : playerTwo // ignore: cast_nullable_to_non_nullable
-              as PlayerId,
+              as String,
       myTeam == freezed
           ? _value.myTeam
           : myTeam // ignore: cast_nullable_to_non_nullable
@@ -498,9 +534,9 @@ class _$_TransferConfirmed implements _TransferConfirmed {
   const _$_TransferConfirmed(this.playerOne, this.playerTwo, this.myTeam);
 
   @override
-  final PlayerId playerOne;
+  final String playerOne;
   @override
-  final PlayerId playerTwo;
+  final String playerTwo;
   @override
   final MyTeam myTeam;
 
@@ -535,9 +571,9 @@ class _$_TransferConfirmed implements _TransferConfirmed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String gameweekId) loadMyTeam,
-    required TResult Function(PlayerId playerId) transferOptionsRequested,
-    required TResult Function(
-            PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)
+    required TResult Function(MyTeamPlayer player, MyTeam myTeam)
+        transferOptionsRequested,
+    required TResult Function(String playerOne, String playerTwo, MyTeam myTeam)
         transferConfirmed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
@@ -548,8 +584,9 @@ class _$_TransferConfirmed implements _TransferConfirmed {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId, String gameweekId)? loadMyTeam,
-    TResult Function(PlayerId playerId)? transferOptionsRequested,
-    TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
+    TResult Function(MyTeamPlayer player, MyTeam myTeam)?
+        transferOptionsRequested,
+    TResult Function(String playerOne, String playerTwo, MyTeam myTeam)?
         transferConfirmed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
@@ -560,8 +597,9 @@ class _$_TransferConfirmed implements _TransferConfirmed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String gameweekId)? loadMyTeam,
-    TResult Function(PlayerId playerId)? transferOptionsRequested,
-    TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
+    TResult Function(MyTeamPlayer player, MyTeam myTeam)?
+        transferOptionsRequested,
+    TResult Function(String playerOne, String playerTwo, MyTeam myTeam)?
         transferConfirmed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
@@ -613,11 +651,10 @@ class _$_TransferConfirmed implements _TransferConfirmed {
 
 abstract class _TransferConfirmed implements MyTeamEvent {
   const factory _TransferConfirmed(
-          PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam) =
-      _$_TransferConfirmed;
+      String playerOne, String playerTwo, MyTeam myTeam) = _$_TransferConfirmed;
 
-  PlayerId get playerOne;
-  PlayerId get playerTwo;
+  String get playerOne;
+  String get playerTwo;
   MyTeam get myTeam;
   @JsonKey(ignore: true)
   _$TransferConfirmedCopyWith<_TransferConfirmed> get copyWith =>
@@ -708,9 +745,9 @@ class _$_SaveMyTeam implements _SaveMyTeam {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String gameweekId) loadMyTeam,
-    required TResult Function(PlayerId playerId) transferOptionsRequested,
-    required TResult Function(
-            PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)
+    required TResult Function(MyTeamPlayer player, MyTeam myTeam)
+        transferOptionsRequested,
+    required TResult Function(String playerOne, String playerTwo, MyTeam myTeam)
         transferConfirmed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
@@ -721,8 +758,9 @@ class _$_SaveMyTeam implements _SaveMyTeam {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId, String gameweekId)? loadMyTeam,
-    TResult Function(PlayerId playerId)? transferOptionsRequested,
-    TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
+    TResult Function(MyTeamPlayer player, MyTeam myTeam)?
+        transferOptionsRequested,
+    TResult Function(String playerOne, String playerTwo, MyTeam myTeam)?
         transferConfirmed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
@@ -733,8 +771,9 @@ class _$_SaveMyTeam implements _SaveMyTeam {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String gameweekId)? loadMyTeam,
-    TResult Function(PlayerId playerId)? transferOptionsRequested,
-    TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
+    TResult Function(MyTeamPlayer player, MyTeam myTeam)?
+        transferOptionsRequested,
+    TResult Function(String playerOne, String playerTwo, MyTeam myTeam)?
         transferConfirmed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),

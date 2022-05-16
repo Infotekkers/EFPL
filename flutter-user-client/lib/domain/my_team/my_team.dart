@@ -14,3 +14,16 @@ abstract class MyTeam with _$MyTeam {
         Map<String, dynamic> players,
   }) = _MyTeam;
 }
+
+@freezed
+abstract class MyTeamPlayer with _$MyTeamPlayer {
+  const factory MyTeamPlayer({
+    required PlayerName playerName,
+    required PlayerId playerId,
+    required EplTeamId eplTeamId,
+    required Position position,
+    required Multiplier multiplier,
+    required IsCaptain isCaptain,
+    required IsViceCaptain isViceCaptain,
+  }) = _MyTeamPlayer;
+}

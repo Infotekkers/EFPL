@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PlayerEventTearOff {
   const _$PlayerEventTearOff();
 
-  _GetPlayer getPlayer(PlayerId playerId) {
+  _GetPlayer getPlayer(String playerId) {
     return _GetPlayer(
       playerId,
     );
@@ -29,21 +29,21 @@ const $PlayerEvent = _$PlayerEventTearOff();
 
 /// @nodoc
 mixin _$PlayerEvent {
-  PlayerId get playerId => throw _privateConstructorUsedError;
+  String get playerId => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PlayerId playerId) getPlayer,
+    required TResult Function(String playerId) getPlayer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(PlayerId playerId)? getPlayer,
+    TResult Function(String playerId)? getPlayer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PlayerId playerId)? getPlayer,
+    TResult Function(String playerId)? getPlayer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -74,7 +74,7 @@ abstract class $PlayerEventCopyWith<$Res> {
   factory $PlayerEventCopyWith(
           PlayerEvent value, $Res Function(PlayerEvent) then) =
       _$PlayerEventCopyWithImpl<$Res>;
-  $Res call({PlayerId playerId});
+  $Res call({String playerId});
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class _$PlayerEventCopyWithImpl<$Res> implements $PlayerEventCopyWith<$Res> {
       playerId: playerId == freezed
           ? _value.playerId
           : playerId // ignore: cast_nullable_to_non_nullable
-              as PlayerId,
+              as String,
     ));
   }
 }
@@ -104,7 +104,7 @@ abstract class _$GetPlayerCopyWith<$Res> implements $PlayerEventCopyWith<$Res> {
           _GetPlayer value, $Res Function(_GetPlayer) then) =
       __$GetPlayerCopyWithImpl<$Res>;
   @override
-  $Res call({PlayerId playerId});
+  $Res call({String playerId});
 }
 
 /// @nodoc
@@ -124,7 +124,7 @@ class __$GetPlayerCopyWithImpl<$Res> extends _$PlayerEventCopyWithImpl<$Res>
       playerId == freezed
           ? _value.playerId
           : playerId // ignore: cast_nullable_to_non_nullable
-              as PlayerId,
+              as String,
     ));
   }
 }
@@ -135,7 +135,7 @@ class _$_GetPlayer implements _GetPlayer {
   const _$_GetPlayer(this.playerId);
 
   @override
-  final PlayerId playerId;
+  final String playerId;
 
   @override
   String toString() {
@@ -162,7 +162,7 @@ class _$_GetPlayer implements _GetPlayer {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PlayerId playerId) getPlayer,
+    required TResult Function(String playerId) getPlayer,
   }) {
     return getPlayer(playerId);
   }
@@ -170,7 +170,7 @@ class _$_GetPlayer implements _GetPlayer {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(PlayerId playerId)? getPlayer,
+    TResult Function(String playerId)? getPlayer,
   }) {
     return getPlayer?.call(playerId);
   }
@@ -178,7 +178,7 @@ class _$_GetPlayer implements _GetPlayer {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PlayerId playerId)? getPlayer,
+    TResult Function(String playerId)? getPlayer,
     required TResult orElse(),
   }) {
     if (getPlayer != null) {
@@ -217,10 +217,10 @@ class _$_GetPlayer implements _GetPlayer {
 }
 
 abstract class _GetPlayer implements PlayerEvent {
-  const factory _GetPlayer(PlayerId playerId) = _$_GetPlayer;
+  const factory _GetPlayer(String playerId) = _$_GetPlayer;
 
   @override
-  PlayerId get playerId;
+  String get playerId;
   @override
   @JsonKey(ignore: true)
   _$GetPlayerCopyWith<_GetPlayer> get copyWith =>

@@ -4,11 +4,10 @@ part of 'myteam_bloc.dart';
 abstract class MyTeamEvent with _$MyTeamEvent {
   const factory MyTeamEvent.loadMyTeam(String userId, String gameweekId) =
       _LoadMyTeam;
-  const factory MyTeamEvent.transferOptionsRequested(PlayerId playerId) =
-      _TransferOptionsRequested;
+  const factory MyTeamEvent.transferOptionsRequested(
+      MyTeamPlayer player, MyTeam myTeam) = _TransferOptionsRequested;
   const factory MyTeamEvent.transferConfirmed(
-          PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam) =
-      _TransferConfirmed;
+      String playerOne, String playerTwo, MyTeam myTeam) = _TransferConfirmed;
   const factory MyTeamEvent.saveMyTeam(MyTeam myTeam, String userId) =
       _SaveMyTeam;
 }

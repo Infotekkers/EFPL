@@ -21,8 +21,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   void _onGetPlayer(_GetPlayer e, Emitter<PlayerState> emit) async {
     emit(const PlayerState.loadInProgress());
 
-    final failureOrSuccess =
-        await iPlayerRepository.getPlayer(e.playerId.getOrCrash());
+    final failureOrSuccess = await iPlayerRepository.getPlayer(e.playerId);
 
     failureOrSuccess.fold(
       (failure) => emit(
