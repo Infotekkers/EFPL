@@ -16,14 +16,10 @@ class SocketApi {
       "autoConnect": false,
     });
     socket.connect();
-    // socket.onConnect(
-    //   (data) => ,
-    // );
 
     socket.on(
       "fixtureUpdated",
       (data) => {
-        print("Socket Update"),
         getIt<FixtureBloc>().add(
           const FixtureEvent.loadFixtures(),
         ),
@@ -32,7 +28,4 @@ class SocketApi {
 
     return _socketApi;
   }
-
-  // All socket related functions.
-  void addOnEvent() {}
 }
