@@ -25,26 +25,16 @@ class SignInForm extends StatelessWidget {
                     CustomSnackBar().showCustomSnackBar(
                       showContext: context,
                       headlineText: "No Connection!",
-                      message:
-                          "Could not contact server. Showing cached team data.",
+                      message: "Could not contact server.",
                       snackBarType: "warning",
                     );
                   },
-                  socketError: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact server. Showing cached team data.",
-                      snackBarType: "warning",
-                    );
-                  },
+
                   handShakeError: (_) {
                     CustomSnackBar().showCustomSnackBar(
                       showContext: context,
                       headlineText: "No Connection!",
-                      message:
-                          "Could not contact server. Showing cached team data.",
+                      message: "Could not contact server. ",
                       snackBarType: "warning",
                     );
                   },
