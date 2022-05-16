@@ -39,6 +39,7 @@ abstract class UserDto implements _$UserDto {
     );
   }
 
-  // from JSON
-  // to JSON
+  // json converter
+  factory UserDto.fromJson(Map<String, dynamic> json) =>
+      _$UserDtoFromJson(json);
 }
