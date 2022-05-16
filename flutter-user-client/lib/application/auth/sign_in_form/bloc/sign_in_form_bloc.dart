@@ -48,17 +48,21 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         final isEmailValid = state.emailAddress.isValid();
         final isPassValid = state.password.isValid();
         if (isEmailValid && isPassValid) {
-          state.copyWith(
-            isSubmitting: true,
-            authFailureOrSuccessOption: none(),
+          emit(
+            state.copyWith(
+              isSubmitting: true,
+              authFailureOrSuccessOption: none(),
+            ),
           );
           final failureOrSuccess = await _authFacade.signInUser(
             emailAddress: state.emailAddress,
             password: state.password,
           );
-          state.copyWith(
-            isSubmitting: false,
-            authFailureOrSuccessOption: some(failureOrSuccess),
+          emit(
+            state.copyWith(
+              isSubmitting: false,
+              authFailureOrSuccessOption: some(failureOrSuccess),
+            ),
           );
         }
       },
