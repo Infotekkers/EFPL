@@ -1,4 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:efpl/domain/auth/auth_failure.dart';
+import 'package:efpl/domain/core/value_failures.dart';
+import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,9 +16,98 @@ class SignInForm extends StatelessWidget {
       listener: (context, state) {
         state.authFailureOrSuccessOption.fold(
           () {},
-          (either) => either.fold((failure) => {}, (_) {
-            // todo
-          }),
+          (either) {
+            either.fold(
+              (failure) {
+                failure[1].maybeMap(
+                  // Connection issues
+                  noConnection: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact server. Showing cached team data.",
+                      snackBarType: "warning",
+                    );
+                  },
+                  socketError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact server. Showing cached team data.",
+                      snackBarType: "warning",
+                    );
+                  },
+                  handShakeError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact server. Showing cached team data.",
+                      snackBarType: "warning",
+                    );
+                  },
+
+                  // token issues
+                  unauthorized: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Login to EFPL!",
+                      message: "Please login to use EFPL.",
+                      snackBarType: "error",
+                    );
+                    Navigator.pushNamed(context, "/");
+                  },
+                  unauthenticated: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Login to EFPL!",
+                      message: "Please login to use EFPL.",
+                      snackBarType: "error",
+                    );
+                    Navigator.pushNamed(context, "/");
+                  },
+
+                  // Value failures
+                  CancelledByUser: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Cancellation!",
+                      message: "Process Cancelled by USer",
+                      snackBarType: "warning",
+                    );
+                  },
+                  EmailAlreadyInUse: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Credential Issue",
+                      message: "Email Alrady In Use",
+                      snackBarType: "warning",
+                    );
+                  },
+                  InvalidEmailPasswordCombination: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Credentials Issue",
+                      message: "Invalid Email - Password combination",
+                      snackBarType: "warning",
+                    );
+                  },
+
+                  orElse: () {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Something went wrong.",
+                      message: "Something went wrong. Try again!",
+                      snackBarType: "error",
+                    );
+                  },
+                );
+              },
+              (_) {},
+            );
+          },
         );
       },
       builder: (context, state) {
