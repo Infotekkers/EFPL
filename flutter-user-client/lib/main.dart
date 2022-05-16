@@ -11,6 +11,6 @@ Future main() async {
   await Hive.initFlutter();
   await Hive.openBox("myTeamCache");
   configureInjection(Environment.prod);
-  testDataProviders();
+  // testDataProviders();
   runApp(const AppWidget());
 }
