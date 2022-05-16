@@ -244,6 +244,12 @@ class _$PlayerStateTearOff {
       player,
     );
   }
+
+  _LoadFailure loadFailure(PlayerFailure playerFailure) {
+    return _LoadFailure(
+      playerFailure,
+    );
+  }
 }
 
 /// @nodoc
@@ -256,6 +262,7 @@ mixin _$PlayerState {
     required TResult Function() initial,
     required TResult Function() loadInProgress,
     required TResult Function(Player player) loadSuccess,
+    required TResult Function(PlayerFailure playerFailure) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -263,6 +270,7 @@ mixin _$PlayerState {
     TResult Function()? initial,
     TResult Function()? loadInProgress,
     TResult Function(Player player)? loadSuccess,
+    TResult Function(PlayerFailure playerFailure)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -270,6 +278,7 @@ mixin _$PlayerState {
     TResult Function()? initial,
     TResult Function()? loadInProgress,
     TResult Function(Player player)? loadSuccess,
+    TResult Function(PlayerFailure playerFailure)? loadFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -278,6 +287,7 @@ mixin _$PlayerState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
     required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(_LoadFailure value) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -285,6 +295,7 @@ mixin _$PlayerState {
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -292,6 +303,7 @@ mixin _$PlayerState {
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -354,6 +366,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loadInProgress,
     required TResult Function(Player player) loadSuccess,
+    required TResult Function(PlayerFailure playerFailure) loadFailure,
   }) {
     return initial();
   }
@@ -364,6 +377,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loadInProgress,
     TResult Function(Player player)? loadSuccess,
+    TResult Function(PlayerFailure playerFailure)? loadFailure,
   }) {
     return initial?.call();
   }
@@ -374,6 +388,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loadInProgress,
     TResult Function(Player player)? loadSuccess,
+    TResult Function(PlayerFailure playerFailure)? loadFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -388,6 +403,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
     required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return initial(this);
   }
@@ -398,6 +414,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
   }) {
     return initial?.call(this);
   }
@@ -408,6 +425,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -465,6 +483,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     required TResult Function() initial,
     required TResult Function() loadInProgress,
     required TResult Function(Player player) loadSuccess,
+    required TResult Function(PlayerFailure playerFailure) loadFailure,
   }) {
     return loadInProgress();
   }
@@ -475,6 +494,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function()? initial,
     TResult Function()? loadInProgress,
     TResult Function(Player player)? loadSuccess,
+    TResult Function(PlayerFailure playerFailure)? loadFailure,
   }) {
     return loadInProgress?.call();
   }
@@ -485,6 +505,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function()? initial,
     TResult Function()? loadInProgress,
     TResult Function(Player player)? loadSuccess,
+    TResult Function(PlayerFailure playerFailure)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -499,6 +520,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
     required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadInProgress(this);
   }
@@ -509,6 +531,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
   }) {
     return loadInProgress?.call(this);
   }
@@ -519,6 +542,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -608,6 +632,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     required TResult Function() initial,
     required TResult Function() loadInProgress,
     required TResult Function(Player player) loadSuccess,
+    required TResult Function(PlayerFailure playerFailure) loadFailure,
   }) {
     return loadSuccess(player);
   }
@@ -618,6 +643,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function()? initial,
     TResult Function()? loadInProgress,
     TResult Function(Player player)? loadSuccess,
+    TResult Function(PlayerFailure playerFailure)? loadFailure,
   }) {
     return loadSuccess?.call(player);
   }
@@ -628,6 +654,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function()? initial,
     TResult Function()? loadInProgress,
     TResult Function(Player player)? loadSuccess,
+    TResult Function(PlayerFailure playerFailure)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -642,6 +669,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
     required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadSuccess(this);
   }
@@ -652,6 +680,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
   }) {
     return loadSuccess?.call(this);
   }
@@ -662,6 +691,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -677,5 +707,160 @@ abstract class _LoadSuccess implements PlayerState {
   Player get player;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$LoadFailureCopyWith<$Res> {
+  factory _$LoadFailureCopyWith(
+          _LoadFailure value, $Res Function(_LoadFailure) then) =
+      __$LoadFailureCopyWithImpl<$Res>;
+  $Res call({PlayerFailure playerFailure});
+
+  $PlayerFailureCopyWith<$Res> get playerFailure;
+}
+
+/// @nodoc
+class __$LoadFailureCopyWithImpl<$Res> extends _$PlayerStateCopyWithImpl<$Res>
+    implements _$LoadFailureCopyWith<$Res> {
+  __$LoadFailureCopyWithImpl(
+      _LoadFailure _value, $Res Function(_LoadFailure) _then)
+      : super(_value, (v) => _then(v as _LoadFailure));
+
+  @override
+  _LoadFailure get _value => super._value as _LoadFailure;
+
+  @override
+  $Res call({
+    Object? playerFailure = freezed,
+  }) {
+    return _then(_LoadFailure(
+      playerFailure == freezed
+          ? _value.playerFailure
+          : playerFailure // ignore: cast_nullable_to_non_nullable
+              as PlayerFailure,
+    ));
+  }
+
+  @override
+  $PlayerFailureCopyWith<$Res> get playerFailure {
+    return $PlayerFailureCopyWith<$Res>(_value.playerFailure, (value) {
+      return _then(_value.copyWith(playerFailure: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_LoadFailure implements _LoadFailure {
+  const _$_LoadFailure(this.playerFailure);
+
+  @override
+  final PlayerFailure playerFailure;
+
+  @override
+  String toString() {
+    return 'PlayerState.loadFailure(playerFailure: $playerFailure)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _LoadFailure &&
+            const DeepCollectionEquality()
+                .equals(other.playerFailure, playerFailure));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(playerFailure));
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoadFailureCopyWith<_LoadFailure> get copyWith =>
+      __$LoadFailureCopyWithImpl<_LoadFailure>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadInProgress,
+    required TResult Function(Player player) loadSuccess,
+    required TResult Function(PlayerFailure playerFailure) loadFailure,
+  }) {
+    return loadFailure(playerFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadInProgress,
+    TResult Function(Player player)? loadSuccess,
+    TResult Function(PlayerFailure playerFailure)? loadFailure,
+  }) {
+    return loadFailure?.call(playerFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadInProgress,
+    TResult Function(Player player)? loadSuccess,
+    TResult Function(PlayerFailure playerFailure)? loadFailure,
+    required TResult orElse(),
+  }) {
+    if (loadFailure != null) {
+      return loadFailure(playerFailure);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoadInProgress value) loadInProgress,
+    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(_LoadFailure value) loadFailure,
+  }) {
+    return loadFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadInProgress value)? loadInProgress,
+    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
+  }) {
+    return loadFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadInProgress value)? loadInProgress,
+    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
+    required TResult orElse(),
+  }) {
+    if (loadFailure != null) {
+      return loadFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadFailure implements PlayerState {
+  const factory _LoadFailure(PlayerFailure playerFailure) = _$_LoadFailure;
+
+  PlayerFailure get playerFailure;
+  @JsonKey(ignore: true)
+  _$LoadFailureCopyWith<_LoadFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
