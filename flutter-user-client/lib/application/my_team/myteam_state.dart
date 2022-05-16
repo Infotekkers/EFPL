@@ -10,4 +10,5 @@ abstract class MyTeamState with _$MyTeamState {
   const factory MyTeamState.transferOptionsLoaded(
       List<PlayerId> validTransfers) = _TransferOptionsLoaded;
   const factory MyTeamState.transferApproved(MyTeam myTeam) = _TransferApproved;
+  const factory MyTeamState.saved() = _Saved;
 }

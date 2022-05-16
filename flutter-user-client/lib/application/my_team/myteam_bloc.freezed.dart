@@ -17,9 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$MyTeamEventTearOff {
   const _$MyTeamEventTearOff();
 
-  _LoadMyTeam loadMyTeam(String userId) {
+  _LoadMyTeam loadMyTeam(String userId, String gameweekId) {
     return _LoadMyTeam(
       userId,
+      gameweekId,
     );
   }
 
@@ -38,9 +39,10 @@ class _$MyTeamEventTearOff {
     );
   }
 
-  _SaveMyTeam saveMyTeam(MyTeam myTeam) {
+  _SaveMyTeam saveMyTeam(MyTeam myTeam, String userId) {
     return _SaveMyTeam(
       myTeam,
+      userId,
     );
   }
 }
@@ -52,30 +54,30 @@ const $MyTeamEvent = _$MyTeamEventTearOff();
 mixin _$MyTeamEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadMyTeam,
+    required TResult Function(String userId, String gameweekId) loadMyTeam,
     required TResult Function(PlayerId playerId) transferOptionsRequested,
     required TResult Function(
             PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)
         transferConfirmed,
-    required TResult Function(MyTeam myTeam) saveMyTeam,
+    required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userId)? loadMyTeam,
+    TResult Function(String userId, String gameweekId)? loadMyTeam,
     TResult Function(PlayerId playerId)? transferOptionsRequested,
     TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
         transferConfirmed,
-    TResult Function(MyTeam myTeam)? saveMyTeam,
+    TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadMyTeam,
+    TResult Function(String userId, String gameweekId)? loadMyTeam,
     TResult Function(PlayerId playerId)? transferOptionsRequested,
     TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
         transferConfirmed,
-    TResult Function(MyTeam myTeam)? saveMyTeam,
+    TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,7 +130,7 @@ abstract class _$LoadMyTeamCopyWith<$Res> {
   factory _$LoadMyTeamCopyWith(
           _LoadMyTeam value, $Res Function(_LoadMyTeam) then) =
       __$LoadMyTeamCopyWithImpl<$Res>;
-  $Res call({String userId});
+  $Res call({String userId, String gameweekId});
 }
 
 /// @nodoc
@@ -144,11 +146,16 @@ class __$LoadMyTeamCopyWithImpl<$Res> extends _$MyTeamEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = freezed,
+    Object? gameweekId = freezed,
   }) {
     return _then(_LoadMyTeam(
       userId == freezed
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      gameweekId == freezed
+          ? _value.gameweekId
+          : gameweekId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -157,14 +164,16 @@ class __$LoadMyTeamCopyWithImpl<$Res> extends _$MyTeamEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadMyTeam implements _LoadMyTeam {
-  const _$_LoadMyTeam(this.userId);
+  const _$_LoadMyTeam(this.userId, this.gameweekId);
 
   @override
   final String userId;
+  @override
+  final String gameweekId;
 
   @override
   String toString() {
-    return 'MyTeamEvent.loadMyTeam(userId: $userId)';
+    return 'MyTeamEvent.loadMyTeam(userId: $userId, gameweekId: $gameweekId)';
   }
 
   @override
@@ -172,12 +181,16 @@ class _$_LoadMyTeam implements _LoadMyTeam {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _LoadMyTeam &&
-            const DeepCollectionEquality().equals(other.userId, userId));
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality()
+                .equals(other.gameweekId, gameweekId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(userId));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(gameweekId));
 
   @JsonKey(ignore: true)
   @override
@@ -187,40 +200,40 @@ class _$_LoadMyTeam implements _LoadMyTeam {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadMyTeam,
+    required TResult Function(String userId, String gameweekId) loadMyTeam,
     required TResult Function(PlayerId playerId) transferOptionsRequested,
     required TResult Function(
             PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)
         transferConfirmed,
-    required TResult Function(MyTeam myTeam) saveMyTeam,
+    required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
-    return loadMyTeam(userId);
+    return loadMyTeam(userId, gameweekId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userId)? loadMyTeam,
+    TResult Function(String userId, String gameweekId)? loadMyTeam,
     TResult Function(PlayerId playerId)? transferOptionsRequested,
     TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
         transferConfirmed,
-    TResult Function(MyTeam myTeam)? saveMyTeam,
+    TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
-    return loadMyTeam?.call(userId);
+    return loadMyTeam?.call(userId, gameweekId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadMyTeam,
+    TResult Function(String userId, String gameweekId)? loadMyTeam,
     TResult Function(PlayerId playerId)? transferOptionsRequested,
     TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
         transferConfirmed,
-    TResult Function(MyTeam myTeam)? saveMyTeam,
+    TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
     if (loadMyTeam != null) {
-      return loadMyTeam(userId);
+      return loadMyTeam(userId, gameweekId);
     }
     return orElse();
   }
@@ -265,9 +278,10 @@ class _$_LoadMyTeam implements _LoadMyTeam {
 }
 
 abstract class _LoadMyTeam implements MyTeamEvent {
-  const factory _LoadMyTeam(String userId) = _$_LoadMyTeam;
+  const factory _LoadMyTeam(String userId, String gameweekId) = _$_LoadMyTeam;
 
   String get userId;
+  String get gameweekId;
   @JsonKey(ignore: true)
   _$LoadMyTeamCopyWith<_LoadMyTeam> get copyWith =>
       throw _privateConstructorUsedError;
@@ -340,12 +354,12 @@ class _$_TransferOptionsRequested implements _TransferOptionsRequested {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadMyTeam,
+    required TResult Function(String userId, String gameweekId) loadMyTeam,
     required TResult Function(PlayerId playerId) transferOptionsRequested,
     required TResult Function(
             PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)
         transferConfirmed,
-    required TResult Function(MyTeam myTeam) saveMyTeam,
+    required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
     return transferOptionsRequested(playerId);
   }
@@ -353,11 +367,11 @@ class _$_TransferOptionsRequested implements _TransferOptionsRequested {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userId)? loadMyTeam,
+    TResult Function(String userId, String gameweekId)? loadMyTeam,
     TResult Function(PlayerId playerId)? transferOptionsRequested,
     TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
         transferConfirmed,
-    TResult Function(MyTeam myTeam)? saveMyTeam,
+    TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
     return transferOptionsRequested?.call(playerId);
   }
@@ -365,11 +379,11 @@ class _$_TransferOptionsRequested implements _TransferOptionsRequested {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadMyTeam,
+    TResult Function(String userId, String gameweekId)? loadMyTeam,
     TResult Function(PlayerId playerId)? transferOptionsRequested,
     TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
         transferConfirmed,
-    TResult Function(MyTeam myTeam)? saveMyTeam,
+    TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
     if (transferOptionsRequested != null) {
@@ -520,12 +534,12 @@ class _$_TransferConfirmed implements _TransferConfirmed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadMyTeam,
+    required TResult Function(String userId, String gameweekId) loadMyTeam,
     required TResult Function(PlayerId playerId) transferOptionsRequested,
     required TResult Function(
             PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)
         transferConfirmed,
-    required TResult Function(MyTeam myTeam) saveMyTeam,
+    required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
     return transferConfirmed(playerOne, playerTwo, myTeam);
   }
@@ -533,11 +547,11 @@ class _$_TransferConfirmed implements _TransferConfirmed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userId)? loadMyTeam,
+    TResult Function(String userId, String gameweekId)? loadMyTeam,
     TResult Function(PlayerId playerId)? transferOptionsRequested,
     TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
         transferConfirmed,
-    TResult Function(MyTeam myTeam)? saveMyTeam,
+    TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
     return transferConfirmed?.call(playerOne, playerTwo, myTeam);
   }
@@ -545,11 +559,11 @@ class _$_TransferConfirmed implements _TransferConfirmed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadMyTeam,
+    TResult Function(String userId, String gameweekId)? loadMyTeam,
     TResult Function(PlayerId playerId)? transferOptionsRequested,
     TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
         transferConfirmed,
-    TResult Function(MyTeam myTeam)? saveMyTeam,
+    TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
     if (transferConfirmed != null) {
@@ -615,7 +629,7 @@ abstract class _$SaveMyTeamCopyWith<$Res> {
   factory _$SaveMyTeamCopyWith(
           _SaveMyTeam value, $Res Function(_SaveMyTeam) then) =
       __$SaveMyTeamCopyWithImpl<$Res>;
-  $Res call({MyTeam myTeam});
+  $Res call({MyTeam myTeam, String userId});
 
   $MyTeamCopyWith<$Res> get myTeam;
 }
@@ -633,12 +647,17 @@ class __$SaveMyTeamCopyWithImpl<$Res> extends _$MyTeamEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? myTeam = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_SaveMyTeam(
       myTeam == freezed
           ? _value.myTeam
           : myTeam // ignore: cast_nullable_to_non_nullable
               as MyTeam,
+      userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -653,14 +672,16 @@ class __$SaveMyTeamCopyWithImpl<$Res> extends _$MyTeamEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SaveMyTeam implements _SaveMyTeam {
-  const _$_SaveMyTeam(this.myTeam);
+  const _$_SaveMyTeam(this.myTeam, this.userId);
 
   @override
   final MyTeam myTeam;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'MyTeamEvent.saveMyTeam(myTeam: $myTeam)';
+    return 'MyTeamEvent.saveMyTeam(myTeam: $myTeam, userId: $userId)';
   }
 
   @override
@@ -668,12 +689,15 @@ class _$_SaveMyTeam implements _SaveMyTeam {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SaveMyTeam &&
-            const DeepCollectionEquality().equals(other.myTeam, myTeam));
+            const DeepCollectionEquality().equals(other.myTeam, myTeam) &&
+            const DeepCollectionEquality().equals(other.userId, userId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(myTeam));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(myTeam),
+      const DeepCollectionEquality().hash(userId));
 
   @JsonKey(ignore: true)
   @override
@@ -683,40 +707,40 @@ class _$_SaveMyTeam implements _SaveMyTeam {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadMyTeam,
+    required TResult Function(String userId, String gameweekId) loadMyTeam,
     required TResult Function(PlayerId playerId) transferOptionsRequested,
     required TResult Function(
             PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)
         transferConfirmed,
-    required TResult Function(MyTeam myTeam) saveMyTeam,
+    required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
-    return saveMyTeam(myTeam);
+    return saveMyTeam(myTeam, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userId)? loadMyTeam,
+    TResult Function(String userId, String gameweekId)? loadMyTeam,
     TResult Function(PlayerId playerId)? transferOptionsRequested,
     TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
         transferConfirmed,
-    TResult Function(MyTeam myTeam)? saveMyTeam,
+    TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
-    return saveMyTeam?.call(myTeam);
+    return saveMyTeam?.call(myTeam, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadMyTeam,
+    TResult Function(String userId, String gameweekId)? loadMyTeam,
     TResult Function(PlayerId playerId)? transferOptionsRequested,
     TResult Function(PlayerId playerOne, PlayerId playerTwo, MyTeam myTeam)?
         transferConfirmed,
-    TResult Function(MyTeam myTeam)? saveMyTeam,
+    TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
     if (saveMyTeam != null) {
-      return saveMyTeam(myTeam);
+      return saveMyTeam(myTeam, userId);
     }
     return orElse();
   }
@@ -761,9 +785,10 @@ class _$_SaveMyTeam implements _SaveMyTeam {
 }
 
 abstract class _SaveMyTeam implements MyTeamEvent {
-  const factory _SaveMyTeam(MyTeam myTeam) = _$_SaveMyTeam;
+  const factory _SaveMyTeam(MyTeam myTeam, String userId) = _$_SaveMyTeam;
 
   MyTeam get myTeam;
+  String get userId;
   @JsonKey(ignore: true)
   _$SaveMyTeamCopyWith<_SaveMyTeam> get copyWith =>
       throw _privateConstructorUsedError;
@@ -804,6 +829,10 @@ class _$MyTeamStateTearOff {
       myTeam,
     );
   }
+
+  _Saved saved() {
+    return const _Saved();
+  }
 }
 
 /// @nodoc
@@ -820,6 +849,7 @@ mixin _$MyTeamState {
     required TResult Function(List<PlayerId> validTransfers)
         transferOptionsLoaded,
     required TResult Function(MyTeam myTeam) transferApproved,
+    required TResult Function() saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -830,6 +860,7 @@ mixin _$MyTeamState {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -840,6 +871,7 @@ mixin _$MyTeamState {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -852,6 +884,7 @@ mixin _$MyTeamState {
     required TResult Function(_TransferOptionsLoaded value)
         transferOptionsLoaded,
     required TResult Function(_TransferApproved value) transferApproved,
+    required TResult Function(_Saved value) saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -862,6 +895,7 @@ mixin _$MyTeamState {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -872,6 +906,7 @@ mixin _$MyTeamState {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -938,6 +973,7 @@ class _$_Initial implements _Initial {
     required TResult Function(List<PlayerId> validTransfers)
         transferOptionsLoaded,
     required TResult Function(MyTeam myTeam) transferApproved,
+    required TResult Function() saved,
   }) {
     return initial();
   }
@@ -951,6 +987,7 @@ class _$_Initial implements _Initial {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
   }) {
     return initial?.call();
   }
@@ -964,6 +1001,7 @@ class _$_Initial implements _Initial {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -982,6 +1020,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_TransferOptionsLoaded value)
         transferOptionsLoaded,
     required TResult Function(_TransferApproved value) transferApproved,
+    required TResult Function(_Saved value) saved,
   }) {
     return initial(this);
   }
@@ -995,6 +1034,7 @@ class _$_Initial implements _Initial {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
   }) {
     return initial?.call(this);
   }
@@ -1008,6 +1048,7 @@ class _$_Initial implements _Initial {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1066,6 +1107,7 @@ class _$_Loading implements _Loading {
     required TResult Function(List<PlayerId> validTransfers)
         transferOptionsLoaded,
     required TResult Function(MyTeam myTeam) transferApproved,
+    required TResult Function() saved,
   }) {
     return loadInProgress();
   }
@@ -1079,6 +1121,7 @@ class _$_Loading implements _Loading {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
   }) {
     return loadInProgress?.call();
   }
@@ -1092,6 +1135,7 @@ class _$_Loading implements _Loading {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -1110,6 +1154,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_TransferOptionsLoaded value)
         transferOptionsLoaded,
     required TResult Function(_TransferApproved value) transferApproved,
+    required TResult Function(_Saved value) saved,
   }) {
     return loadInProgress(this);
   }
@@ -1123,6 +1168,7 @@ class _$_Loading implements _Loading {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
   }) {
     return loadInProgress?.call(this);
   }
@@ -1136,6 +1182,7 @@ class _$_Loading implements _Loading {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -1229,6 +1276,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     required TResult Function(List<PlayerId> validTransfers)
         transferOptionsLoaded,
     required TResult Function(MyTeam myTeam) transferApproved,
+    required TResult Function() saved,
   }) {
     return loadSuccess(myTeam);
   }
@@ -1242,6 +1290,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
   }) {
     return loadSuccess?.call(myTeam);
   }
@@ -1255,6 +1304,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -1273,6 +1323,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     required TResult Function(_TransferOptionsLoaded value)
         transferOptionsLoaded,
     required TResult Function(_TransferApproved value) transferApproved,
+    required TResult Function(_Saved value) saved,
   }) {
     return loadSuccess(this);
   }
@@ -1286,6 +1337,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
   }) {
     return loadSuccess?.call(this);
   }
@@ -1299,6 +1351,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -1398,6 +1451,7 @@ class _$_LoadFailure implements _LoadFailure {
     required TResult Function(List<PlayerId> validTransfers)
         transferOptionsLoaded,
     required TResult Function(MyTeam myTeam) transferApproved,
+    required TResult Function() saved,
   }) {
     return loadFailure(myTeamFailure);
   }
@@ -1411,6 +1465,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
   }) {
     return loadFailure?.call(myTeamFailure);
   }
@@ -1424,6 +1479,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
@@ -1442,6 +1498,7 @@ class _$_LoadFailure implements _LoadFailure {
     required TResult Function(_TransferOptionsLoaded value)
         transferOptionsLoaded,
     required TResult Function(_TransferApproved value) transferApproved,
+    required TResult Function(_Saved value) saved,
   }) {
     return loadFailure(this);
   }
@@ -1455,6 +1512,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
   }) {
     return loadFailure?.call(this);
   }
@@ -1468,6 +1526,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
@@ -1560,6 +1619,7 @@ class _$_TransferOptionsLoaded implements _TransferOptionsLoaded {
     required TResult Function(List<PlayerId> validTransfers)
         transferOptionsLoaded,
     required TResult Function(MyTeam myTeam) transferApproved,
+    required TResult Function() saved,
   }) {
     return transferOptionsLoaded(validTransfers);
   }
@@ -1573,6 +1633,7 @@ class _$_TransferOptionsLoaded implements _TransferOptionsLoaded {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
   }) {
     return transferOptionsLoaded?.call(validTransfers);
   }
@@ -1586,6 +1647,7 @@ class _$_TransferOptionsLoaded implements _TransferOptionsLoaded {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
     required TResult orElse(),
   }) {
     if (transferOptionsLoaded != null) {
@@ -1604,6 +1666,7 @@ class _$_TransferOptionsLoaded implements _TransferOptionsLoaded {
     required TResult Function(_TransferOptionsLoaded value)
         transferOptionsLoaded,
     required TResult Function(_TransferApproved value) transferApproved,
+    required TResult Function(_Saved value) saved,
   }) {
     return transferOptionsLoaded(this);
   }
@@ -1617,6 +1680,7 @@ class _$_TransferOptionsLoaded implements _TransferOptionsLoaded {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
   }) {
     return transferOptionsLoaded?.call(this);
   }
@@ -1630,6 +1694,7 @@ class _$_TransferOptionsLoaded implements _TransferOptionsLoaded {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
     required TResult orElse(),
   }) {
     if (transferOptionsLoaded != null) {
@@ -1730,6 +1795,7 @@ class _$_TransferApproved implements _TransferApproved {
     required TResult Function(List<PlayerId> validTransfers)
         transferOptionsLoaded,
     required TResult Function(MyTeam myTeam) transferApproved,
+    required TResult Function() saved,
   }) {
     return transferApproved(myTeam);
   }
@@ -1743,6 +1809,7 @@ class _$_TransferApproved implements _TransferApproved {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
   }) {
     return transferApproved?.call(myTeam);
   }
@@ -1756,6 +1823,7 @@ class _$_TransferApproved implements _TransferApproved {
     TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
     TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
     TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
     required TResult orElse(),
   }) {
     if (transferApproved != null) {
@@ -1774,6 +1842,7 @@ class _$_TransferApproved implements _TransferApproved {
     required TResult Function(_TransferOptionsLoaded value)
         transferOptionsLoaded,
     required TResult Function(_TransferApproved value) transferApproved,
+    required TResult Function(_Saved value) saved,
   }) {
     return transferApproved(this);
   }
@@ -1787,6 +1856,7 @@ class _$_TransferApproved implements _TransferApproved {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
   }) {
     return transferApproved?.call(this);
   }
@@ -1800,6 +1870,7 @@ class _$_TransferApproved implements _TransferApproved {
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
     TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
     required TResult orElse(),
   }) {
     if (transferApproved != null) {
@@ -1816,4 +1887,138 @@ abstract class _TransferApproved implements MyTeamState {
   @JsonKey(ignore: true)
   _$TransferApprovedCopyWith<_TransferApproved> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$SavedCopyWith<$Res> {
+  factory _$SavedCopyWith(_Saved value, $Res Function(_Saved) then) =
+      __$SavedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SavedCopyWithImpl<$Res> extends _$MyTeamStateCopyWithImpl<$Res>
+    implements _$SavedCopyWith<$Res> {
+  __$SavedCopyWithImpl(_Saved _value, $Res Function(_Saved) _then)
+      : super(_value, (v) => _then(v as _Saved));
+
+  @override
+  _Saved get _value => super._value as _Saved;
+}
+
+/// @nodoc
+
+class _$_Saved implements _Saved {
+  const _$_Saved();
+
+  @override
+  String toString() {
+    return 'MyTeamState.saved()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Saved);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadInProgress,
+    required TResult Function(MyTeam myTeam) loadSuccess,
+    required TResult Function(MyTeamFailure myTeamFailure) loadFailure,
+    required TResult Function(List<PlayerId> validTransfers)
+        transferOptionsLoaded,
+    required TResult Function(MyTeam myTeam) transferApproved,
+    required TResult Function() saved,
+  }) {
+    return saved();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadInProgress,
+    TResult Function(MyTeam myTeam)? loadSuccess,
+    TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
+    TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
+    TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
+  }) {
+    return saved?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadInProgress,
+    TResult Function(MyTeam myTeam)? loadSuccess,
+    TResult Function(MyTeamFailure myTeamFailure)? loadFailure,
+    TResult Function(List<PlayerId> validTransfers)? transferOptionsLoaded,
+    TResult Function(MyTeam myTeam)? transferApproved,
+    TResult Function()? saved,
+    required TResult orElse(),
+  }) {
+    if (saved != null) {
+      return saved();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loadInProgress,
+    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(_LoadFailure value) loadFailure,
+    required TResult Function(_TransferOptionsLoaded value)
+        transferOptionsLoaded,
+    required TResult Function(_TransferApproved value) transferApproved,
+    required TResult Function(_Saved value) saved,
+  }) {
+    return saved(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loadInProgress,
+    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
+    TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
+    TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
+  }) {
+    return saved?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loadInProgress,
+    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_LoadFailure value)? loadFailure,
+    TResult Function(_TransferOptionsLoaded value)? transferOptionsLoaded,
+    TResult Function(_TransferApproved value)? transferApproved,
+    TResult Function(_Saved value)? saved,
+    required TResult orElse(),
+  }) {
+    if (saved != null) {
+      return saved(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Saved implements MyTeamState {
+  const factory _Saved() = _$_Saved;
 }
