@@ -7,7 +7,11 @@ abstract class MyTeamEvent with _$MyTeamEvent {
   const factory MyTeamEvent.transferOptionsRequested(
       MyTeamPlayer player, MyTeam myTeam) = _TransferOptionsRequested;
   const factory MyTeamEvent.transferConfirmed(
-      String playerOne, String playerTwo, MyTeam myTeam) = _TransferConfirmed;
+      String playerOne,
+      String playerOneFieldPos,
+      String playerTwo,
+      String playerTwoFieldPos,
+      MyTeam myTeam) = _TransferConfirmed;
   const factory MyTeamEvent.saveMyTeam(MyTeam myTeam, String userId) =
       _SaveMyTeam;
 }

@@ -40,9 +40,38 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
   }
 
   void _onTransferOptionsRequested(
-      _TransferOptionsRequested e, Emitter<MyTeamState> emit) {}
+      _TransferOptionsRequested e, Emitter<MyTeamState> emit) {
+    final positionalRange = {
+      'gk': [1, 1],
+      'def': [3, 5],
+      'mid': [3, 5],
+      'att': [1, 3],
+      'sub': [4, 4]
+    };
 
-  void _onTransferConfirmed(_TransferConfirmed e, Emitter<MyTeamState> emit) {}
+    final validPositions = [e.player.position.getOrCrash()];
+
+    for (String position in e.myTeam.players.keys) {
+      if (e.myTeam.players[position].length < positionalRange[position]?[1] &&
+          position != e.player.position.getOrCrash()) {
+        validPositions.add(position);
+      }
+    }
+
+    emit(MyTeamState.transferOptionsLoaded(validPositions));
+  }
+
+  void _onTransferConfirmed(_TransferConfirmed e, Emitter<MyTeamState> emit) {
+    final playerOne =
+        e.myTeam.players[e.playerOneFieldPos].userPlayers.remove(e.playerOne);
+    final playerTwo =
+        e.myTeam.players[e.playerTwoFieldPos].userPlayers.remove(e.playerTwo);
+
+    e.myTeam.players[e.playerOneFieldPos].userPlayers[e.playerTwo] = playerTwo;
+    e.myTeam.players[e.playerTwoFieldPos].userPlayers[e.playerOne] = playerOne;
+
+    emit(MyTeamState.transferApproved(e.myTeam));
+  }
 
   void _onSaveMyTeam(_SaveMyTeam e, Emitter<MyTeamState> emit) async {
     emit(const MyTeamState.loadInProgress());
