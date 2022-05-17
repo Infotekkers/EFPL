@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/errors.dart';
 import 'package:efpl/domain/core/value_failures.dart';
 import 'package:flutter/foundation.dart';
-import 'package:uuid/uuid.dart';
 
 @immutable
 abstract class ValueObject<T> {

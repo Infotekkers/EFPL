@@ -1,7 +1,4 @@
-// import 'package:dartz/dartz.dart';
-// import 'package:efpl/domain/auth/auth_failure.dart';
-// import 'package:efpl/domain/core/value_failures.dart';
-// import 'package:efpl/services/snack_bar.dart';
+import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,60 +16,59 @@ class SignInForm extends StatelessWidget {
           (either) {
             either.fold(
               (failure) {
-                // failure[1].maybeMap(
-                //   // Connection issues
-                //   noConnection: (_) {
-                //     CustomSnackBar().showCustomSnackBar(
-                //       showContext: context,
-                //       headlineText: "No Connection!",
-                //       message: "Could not contact server.",
-                //       snackBarType: "warning",
-                //     );
-                //   },
+                failure.maybeMap(
+                  // connection errors
+                  networkError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Network Error",
+                      message: "Please check your connection",
+                      snackBarType: "warning",
+                    );
+                  },
+                  serverError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Server Error",
+                      message: "Please check your connection",
+                      snackBarType: "warning",
+                    );
+                  },
+                  // Value failures
+                  cancelledByUser: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Cancellation!",
+                      message: "Process Cancelled by USer",
+                      snackBarType: "warning",
+                    );
+                  },
+                  emailAlreadyInUse: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Credential Issue",
+                      message: "Email Alrady In Use",
+                      snackBarType: "warning",
+                    );
+                  },
+                  invalidEmailPasswordCombination: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Credentials Issue",
+                      message: "Invalid Email - Password combination",
+                      snackBarType: "warning",
+                    );
+                  },
 
-                //   handShakeError: (_) {
-                //     CustomSnackBar().showCustomSnackBar(
-                //       showContext: context,
-                //       headlineText: "No Connection!",
-                //       message: "Could not contact server. ",
-                //       snackBarType: "warning",
-                //     );
-                //   },
-                //   // Value failures
-                //   CancelledByUser: (_) {
-                //     CustomSnackBar().showCustomSnackBar(
-                //       showContext: context,
-                //       headlineText: "Cancellation!",
-                //       message: "Process Cancelled by USer",
-                //       snackBarType: "warning",
-                //     );
-                //   },
-                //   EmailAlreadyInUse: (_) {
-                //     CustomSnackBar().showCustomSnackBar(
-                //       showContext: context,
-                //       headlineText: "Credential Issue",
-                //       message: "Email Alrady In Use",
-                //       snackBarType: "warning",
-                //     );
-                //   },
-                //   InvalidEmailPasswordCombination: (_) {
-                //     CustomSnackBar().showCustomSnackBar(
-                //       showContext: context,
-                //       headlineText: "Credentials Issue",
-                //       message: "Invalid Email - Password combination",
-                //       snackBarType: "warning",
-                //     );
-                //   },
-
-                //   orElse: () {
-                //     CustomSnackBar().showCustomSnackBar(
-                //       showContext: context,
-                //       headlineText: "Something went wrong.",
-                //       message: "Something went wrong. Try again!",
-                //       snackBarType: "error",
-                //     );
-                //   },
-                // );
+                  orElse: () {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Something went wrong.",
+                      message: "Something went wrong. Try again!",
+                      snackBarType: "error",
+                    );
+                  },
+                );
               },
               (_) {},
             );
@@ -91,35 +87,37 @@ class SignInForm extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               TextFormField(
+                key: const ValueKey("loginPageUserName"),
+                keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email),
                   labelText: 'Email',
                 ),
                 autocorrect: false,
-                onChanged: (value) => context
-                    .read<SignInFormBloc>()
+                onChanged: (value) => BlocProvider.of<SignInFormBloc>(context)
                     .add(SignInFormEvent.emailChanged(value)),
                 validator: (_) => context
                     .read<SignInFormBloc>()
                     .state
-                    .emailAddress
+                    .email
                     .value
                     .fold(
                         (f) => f.maybeMap(
                             invalidEmail: (_) => 'Invalid Email',
                             orElse: () => null),
-                        (r) => null),
+                        (_) => null),
               ),
               const SizedBox(height: 8),
               TextFormField(
+                key: const ValueKey("loginPagePassword"),
+
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
+                  prefixIcon: Icon(Icons.lock),
                   labelText: 'Password',
                 ),
                 autocorrect: false,
-                obscureText: true,
-                onChanged: (value) => context
-                    .read<SignInFormBloc>()
+                // obscureText: true,
+                onChanged: (value) => BlocProvider.of<SignInFormBloc>(context)
                     .add(SignInFormEvent.passwordChanged(value)),
                 validator: (_) => context
                     .read<SignInFormBloc>()
@@ -131,7 +129,7 @@ class SignInForm extends StatelessWidget {
                             shortPassword: (_) =>
                                 'Password must be 8 characters and include at least one uppercase, one lowercase, a symbol and a number',
                             orElse: () => null),
-                        (r) => null),
+                        (_) => null),
               ),
               Row(
                 children: [
@@ -139,11 +137,12 @@ class SignInForm extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: TextButton(
-                      onPressed: () {
-                        context.read<SignInFormBloc>().add(
-                              const SignInFormEvent.signInUserPressed(),
-                            );
-                      },
+                      onPressed: state.isSubmitting
+                          ? null
+                          : () {
+                              BlocProvider.of<SignInFormBloc>(context).add(
+                                  const SignInFormEvent.signInUserPressed());
+                            },
                       child: const Text('Sign In'),
                     ),
                   ),

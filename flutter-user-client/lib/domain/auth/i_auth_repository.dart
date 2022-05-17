@@ -10,16 +10,21 @@ abstract class IAuthRepository {
 
   // register user
   Future<Either<AuthFailure, Unit>> registerUser({
-    required EmailAddress emailAddress,
+    required User user,
     required Password password,
   });
 
   // sign in user
-  Future<Either<AuthFailure, Unit>> signInUser({
-    required EmailAddress emailAddress,
+  Future<Either<AuthFailure, User>> signInUser({
+    required User user,
     required Password password,
   });
 
   // sign out user
   Future<void> signOut();
+
+  // request password reset
+  Future<Either<AuthFailure, Unit>> requestReset({
+    required EmailAddress email,
+  });
 }

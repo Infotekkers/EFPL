@@ -8,12 +8,9 @@ import '../core/value_validators.dart';
 class EmailAddress extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
-
-  factory EmailAddress(String input) {
-    // ignore: unnecessary_null_comparison
-    assert(input != null);
+  factory EmailAddress(String emailStr) {
     return EmailAddress._(
-      validateEmailAddress(input),
+      validateEmailAddress(emailStr),
     );
   }
 
@@ -25,11 +22,9 @@ class Password extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory Password(String input) {
-    // ignore: unnecessary_null_comparison
-    assert(input != null);
+  factory Password(String passStr) {
     return Password._(
-      validatePassword(input),
+      validatePassword(passStr),
     );
   }
 
@@ -41,11 +36,9 @@ class UserName extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory UserName(String input) {
-    // ignore: unnecessary_null_comparison
-    assert(input != null);
+  factory UserName(String userNameStr) {
     return UserName._(
-      validateUserName(input),
+      validateUserName(userNameStr),
     );
   }
 
@@ -57,11 +50,9 @@ class TeamName extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory TeamName(String input) {
-    // ignore: unnecessary_null_comparison
-    assert(input != null);
+  factory TeamName(String teamNameStr) {
     return TeamName._(
-      validateTeamName(input),
+      validateTeamName(teamNameStr),
     );
   }
 
@@ -73,11 +64,9 @@ class Country extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory Country(String input) {
-    // ignore: unnecessary_null_comparison
-    assert(input != null);
+  factory Country(String countryStr) {
     return Country._(
-      validateNotEmpty(input),
+      validateNotEmpty(countryStr),
     );
   }
 
@@ -89,11 +78,9 @@ class FavoriteEplTeam extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory FavoriteEplTeam(String input) {
-    // ignore: unnecessary_null_comparison
-    assert(input != null);
+  factory FavoriteEplTeam(String favTeamStr) {
     return FavoriteEplTeam._(
-      validateNotEmpty(input),
+      validateNotEmpty(favTeamStr),
     );
   }
 

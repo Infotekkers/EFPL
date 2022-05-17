@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/auth/auth_failure.dart';
 import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
+import 'package:efpl/domain/auth/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
@@ -24,7 +25,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       (event, emit) async {
         emit(
           state.copyWith(
-            emailAddress: EmailAddress(event.emailStr),
+            email: EmailAddress(event.emailStr),
             authFailureOrSuccessOption: none(),
           ),
         );
@@ -45,7 +46,8 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     // Sign In User
     on<SignInUserPressed>(
       (event, emit) async {
-        final isEmailValid = state.emailAddress.isValid();
+        Either<AuthFailure, User>? failureOrSuccess;
+        final isEmailValid = state.email.isValid();
         final isPassValid = state.password.isValid();
         if (isEmailValid && isPassValid) {
           emit(
@@ -54,10 +56,12 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
               authFailureOrSuccessOption: none(),
             ),
           );
-          final failureOrSuccess = await _authRepository.signInUser(
-            emailAddress: state.emailAddress,
+          final User user = User.initial();
+          failureOrSuccess = await _authRepository.signInUser(
+            user: user.copyWith(email: state.email),
             password: state.password,
           );
+
           emit(
             state.copyWith(
               isSubmitting: false,

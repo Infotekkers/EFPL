@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 class AppRouter {
   Map<String, Widget Function(BuildContext)> allRoutes = {
-    "/": (context) => const SplashView(),
+    "/": (context) => const SignInPage(),
     "/home": (context) => const MainTabView(),
-    "/login": (context) => const SignInPage(),
+    // "/login": (context) => const SignInPage(),
   };
 }

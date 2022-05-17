@@ -17,6 +17,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const register = asyncHandler(async (req, res) => {
+ 
   // check for prexisting email
   const emailExists = await User.findOne({ email: req.body.email });
   // check for used team name
@@ -62,12 +63,15 @@ const register = asyncHandler(async (req, res) => {
 const login = asyncHandler(async (req, res) => {
   // check if email exists
   const user = await User.findOne({ email: req.body.email });
+
+
   // check if password valid
   if (user) {
     const passwordCheck = await bcrypt.compare(
       req.body.password,
       user.password
     );
+
     if (passwordCheck) {
       // fetch id
       const userId = await user._id;
@@ -90,9 +94,15 @@ const login = asyncHandler(async (req, res) => {
         email: user.email,
       });
     }
-    res.status(400).json({ message: "invalid email - password combination" });
+    else{
+      res.status(400).json({ message: "invalid email - password combination" });
+
+    }
   }
-  res.status(400).json({ message: "invalid email - password combination" });
+  else{
+    res.status(400).json({ message: "invalid email - password combination" });
+
+  }
 });
 
 const fetchUsers = asyncHandler(async (req, res) => {
@@ -261,7 +271,21 @@ const transfer = asyncHandler(async (req, res) => {
     res.status(412).json(errorType);
   }
 });
+const validateUser= asyncHandler(async (req, res) => {
+  const token = req.body.token;
 
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const admin = await User.findById(decoded.data).select("-password");
+    if (admin) {
+      res.status(200).json({ message: "Validated" });
+    } else {
+      res.status(403).json({ message: "Something went wrong" });
+    }
+  } catch (err) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
+});
 module.exports = {
   register,
   login,
@@ -272,4 +296,5 @@ module.exports = {
   requestReset,
   resetPass,
   transfer,
+  validateUser,
 };
