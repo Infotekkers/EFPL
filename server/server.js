@@ -17,13 +17,7 @@ const io = new Server(server, {
   },
 });
 
-io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
-
-  socket.on("Bang", () => {
-    console.log("Bang");
-  });
-});
+io.on("connection", (socket) => {});
 
 server.listen(PORT, () => {
   printConsole(

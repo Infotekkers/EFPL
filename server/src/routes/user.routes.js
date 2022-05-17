@@ -13,7 +13,7 @@ router.post("/resetPass/:token", userController.resetPass);
 router.put("/transfer", userController.transfer);
 
 // new
-router.get("/team/:userId/:gameWeekId", userController.getUserTeam);
+router.get("/team", userController.getUserTeam);
 router.patch("/team/:userId/:gameWeekId", userController.test);
 
 module.exports = router;

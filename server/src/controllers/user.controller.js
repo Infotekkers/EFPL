@@ -268,97 +268,136 @@ const transfer = asyncHandler(async (req, res) => {
 });
 
 const getUserTeam = asyncHandler(async (req, res) => {
-  const userId = req.params.userId;
-  const gameWeekId = req.params.gameWeekId;
+  console.log("Here");
+  try {
+    // get user id from token
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
 
-  const currentGameWeek = await Gameweek.findOne({
-    gameWeekNumber: gameWeekId,
-  }).select("-_id,-gameWeekNumber");
+    // get active game week
+    const gameWeek = await Gameweek.find({ status: "active" });
+    const gameWeekId = gameWeek[gameWeek.length - 1].gameWeekNumber;
 
-  // TODO:get user id from token
-  if (gameWeekId && userId) {
-    const user = await User.findOne({ _id: userId }).select(
-      "-userName -password -email -fantasyLeagues -__v -_id -country "
-    );
-    const userTeam = user.team[gameWeekId - 1];
-    const allUserPlayers = userTeam.players;
+    const currentGameWeek = await Gameweek.findOne({
+      gameWeekNumber: gameWeekId,
+    })
+      .select("-_id,-gameWeekNumber")
+      .sort("gameWeekNumber");
 
-    const allUserPlayersList = [];
-
-    const allTeams = await Team.find();
-
-    for (let i = 0; i < allUserPlayers.length; i++) {
-      const playerInfo = {
-        playerId: allUserPlayers[i].playerId,
-        multiplier: parseInt(allUserPlayers[i].multiplier),
-        isCaptain: allUserPlayers[i].isCaptain,
-        isViceCaptain: allUserPlayers[i].isViceCaptain,
-      };
-
-      const currPlayer = await Player.findOne({
-        playerId: allUserPlayers[i].playerId,
-      });
-
-      const currentTeamFixture = await Fixture.find({
-        $or: [
-          { homeTeam: currPlayer.eplTeamId },
-          { awayTeam: currPlayer.eplTeamId },
-        ],
-
-        gameweekId: { $gt: gameWeekId },
-      })
-        .select("homeTeam awayTeam")
-        .limit(8);
-
-      const upComingFixture = [];
-
-      for (let i = 0; i < currentTeamFixture.length; i++) {
-        if (
-          currentTeamFixture[i].homeTeam.toString() ===
-          currPlayer.eplTeamId.toString()
-        ) {
-          upComingFixture.push(
-            currentTeamFixture[i].awayTeam.toString() + "+-" + "H"
-          );
-        } else {
-          upComingFixture.push(
-            currentTeamFixture[i].homeTeam.toString() + "+-" + "A"
-          );
-        }
-      }
-
-      const currentTeam = allTeams.filter(
-        (team) => team.teamName.toString() === currPlayer.eplTeamId.toString()
+    // TODO:get user id from token
+    if (gameWeekId && userId) {
+      const user = await User.findOne({ _id: userId }).select(
+        "-userName -password -email -fantasyLeagues -__v -_id -country "
       );
-      playerInfo.playerName = currPlayer.playerName.toString().trim();
-      playerInfo.eplTeamId = currPlayer.eplTeamId.toString().trim();
-      playerInfo.eplTeamLogo = currentTeam[0].teamLogo;
-      playerInfo.currentPrice = parseFloat(currPlayer.currentPrice);
-      playerInfo.position = currPlayer.position.toString().trim();
-      playerInfo.availability = currPlayer.availability
-        ? currPlayer.availability
-        : { injuryStatus: "", injuryMessage: "" };
-      playerInfo.score = sumEplPlayerScore(currPlayer.score, gameWeekId);
-      playerInfo.upComingFixtures = upComingFixture;
 
-      allUserPlayersList.push(playerInfo);
+      // get user's gw team
+      let userTeam = user.team[gameWeekId - 1];
+
+      // if no team && gw 1
+      if (!userTeam && gameWeekId === 1) {
+        console.log("No Team Found");
+        res.status(404).send("No Team Found");
+      } else {
+        // if no team this gw copy from past
+        if (!userTeam) {
+          userTeam = user.team[gameWeekId - 2];
+          userTeam.gameweekId = gameWeekId;
+          userTeam.freeTransfers = userTeam.freeTransfers >= 1 ? 2 : 1;
+          userTeam.deduction = 0;
+        }
+
+        const allUserPlayers = userTeam.players;
+
+        const allUserPlayersList = {};
+
+        const allTeams = await Team.find();
+
+        allUserPlayers.forEach((player, value) => {
+          const playerInfo = {
+            playerId: player.playerId,
+            multiplier: parseInt(player.multiplier),
+            isCaptain: player.isCaptain,
+            isViceCaptain: player.isViceCaptain,
+          };
+          console.log(playerInfo);
+        });
+        for (let i = 0; i < allUserPlayers.length; i++) {
+          const playerInfo = {
+            playerId: allUserPlayers[i].playerId,
+            multiplier: parseInt(allUserPlayers[i].multiplier),
+            isCaptain: allUserPlayers[i].isCaptain,
+            isViceCaptain: allUserPlayers[i].isViceCaptain,
+          };
+
+          const currPlayer = await Player.findOne({
+            playerId: allUserPlayers[i].playerId,
+          });
+
+          const currentTeamFixture = await Fixture.find({
+            $or: [
+              { homeTeam: currPlayer.eplTeamId },
+              { awayTeam: currPlayer.eplTeamId },
+            ],
+
+            gameweekId: { $gt: gameWeekId },
+          })
+            .select("homeTeam awayTeam")
+            .limit(8);
+
+          const upComingFixture = [];
+
+          for (let i = 0; i < currentTeamFixture.length; i++) {
+            if (
+              currentTeamFixture[i].homeTeam.toString() ===
+              currPlayer.eplTeamId.toString()
+            ) {
+              upComingFixture.push(
+                currentTeamFixture[i].awayTeam.toString() + "+-" + "H"
+              );
+            } else {
+              upComingFixture.push(
+                currentTeamFixture[i].homeTeam.toString() + "+-" + "A"
+              );
+            }
+          }
+
+          const currentTeam = allTeams.filter(
+            (team) =>
+              team.teamName.toString() === currPlayer.eplTeamId.toString()
+          );
+          playerInfo.playerName = currPlayer.playerName.toString().trim();
+          playerInfo.eplTeamId = currPlayer.eplTeamId.toString().trim();
+          playerInfo.eplTeamLogo = currentTeam[0].teamLogo;
+          playerInfo.currentPrice = parseFloat(currPlayer.currentPrice);
+          playerInfo.position = currPlayer.position.toString().trim();
+          playerInfo.availability = currPlayer.availability
+            ? currPlayer.availability
+            : { injuryStatus: "", injuryMessage: "" };
+          playerInfo.score = sumEplPlayerScore(currPlayer.score, gameWeekId);
+          playerInfo.upComingFixtures = upComingFixture;
+
+          allUserPlayersList.currPlayer.playerId = playerInfo;
+        }
+
+        userTeam.players = allUserPlayersList;
+        user.team = userTeam;
+
+        const finalFormat = {
+          teamName: user.teamName,
+          favouriteEplTeamId: user.favouriteEplTeamId,
+          availableChips: user.availableChips,
+          team: user.team,
+          maxBudget: user.maxBudget,
+          gameWeekDeadline: currentGameWeek.startTimestamp,
+        };
+
+        res.status(200).send(finalFormat);
+      }
     }
-
-    userTeam.players = allUserPlayersList;
-    user.team = userTeam;
-
-    const finalFormat = {
-      teamName: user.teamName,
-      favouriteEplTeamId: user.favouriteEplTeamId,
-      availableChips: user.availableChips,
-      team: user.team,
-      maxBudget: user.maxBudget,
-      gameWeekDeadline: currentGameWeek.startTimestamp,
-    };
-
-    res.status(200).send(finalFormat);
-  } else {
-    res.status(404).send("No Team Info Found");
+  } catch (e) {
+    // error verifying token
+    console.log(e);
+    res.status(401).send("Error Decoding token");
   }
 });
 

@@ -48,7 +48,10 @@ const teamSchema = mongoose.Schema({
   activeChip: { type: String, default: "" },
   freeTransfers: { type: Number, default: 1 },
   deduction: { type: Number, default: 0 },
-  players: [],
+  players: {
+    type: Map,
+    of: playerSchema,
+  },
 });
 
 const userSchema = mongoose.Schema({
