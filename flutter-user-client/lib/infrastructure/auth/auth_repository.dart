@@ -58,10 +58,25 @@ class AuthRepository implements IAuthRepository {
 
   //  requestReset
   @override
-  Future<Either<AuthFailure, Unit>> requestReset(
-      {required EmailAddress email}) {
-    // TODO: implement requestReset
-    throw UnimplementedError();
+  Future<Either<AuthFailure, User>> requestReset({required User user}) async {
+    final Uri url = Uri.parse("$_baseUrl/requestReset");
+
+    final UserDto userDtoOut = UserDto.fromDomain(user);
+    final outGoingJson = userDtoOut.toJson();
+    try {
+      final response = await client!.post(url, body: outGoingJson);
+      if (response.statusCode == 200) {
+        final UserDto userDtoIn =
+            UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+        return right(userDtoIn.toDomain());
+      } else if (response.statusCode == 400) {
+        return left(const AuthFailure.emailNotFound());
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    } catch (err) {
+      return left(const AuthFailure.networkError());
+    }
   }
 
   // signOut

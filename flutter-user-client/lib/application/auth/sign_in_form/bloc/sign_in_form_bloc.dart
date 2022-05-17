@@ -61,14 +61,14 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
             user: user.copyWith(email: state.email),
             password: state.password,
           );
-
-          emit(
-            state.copyWith(
-              isSubmitting: false,
-              authFailureOrSuccessOption: some(failureOrSuccess),
-            ),
-          );
         }
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            showErrorMessages: true,
+            authFailureOrSuccessOption: some(failureOrSuccess!),
+          ),
+        );
       },
     );
   }

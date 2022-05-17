@@ -15,7 +15,7 @@ class SignInPage extends StatelessWidget {
     _utilBloc.add(const UtilEvent.setDefaultLocale());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('This is the Login Pageh'),
+        title: const Text('This is the Login Page'),
       ),
       body: BlocProvider(
         create: (context) => getIt<SignInFormBloc>(),

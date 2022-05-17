@@ -24,7 +24,7 @@ abstract class IAuthRepository {
   Future<void> signOut();
 
   // request password reset
-  Future<Either<AuthFailure, Unit>> requestReset({
-    required EmailAddress email,
+  Future<Either<AuthFailure, User>> requestReset({
+    required User user,
   });
 }

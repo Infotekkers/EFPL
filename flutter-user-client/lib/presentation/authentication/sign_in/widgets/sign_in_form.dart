@@ -1,3 +1,6 @@
+import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
+import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
+import 'package:efpl/presentation/core/main_tab_view.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -150,7 +153,12 @@ class SignInForm extends StatelessWidget {
                 ],
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RequestResetPage()));
+                },
                 child: const Text(
                   'Forgott Password?',
                   style: TextStyle(
