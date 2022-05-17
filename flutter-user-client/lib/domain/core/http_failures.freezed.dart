@@ -17,37 +17,37 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$HTTPFailuresTearOff {
   const _$HTTPFailuresTearOff();
 
-  Unauthenticated<T> unauthenticated<T>({required T failedValue}) {
+  Unauthenticated<T> unauthenticated<T>({required String failedValue}) {
     return Unauthenticated<T>(
       failedValue: failedValue,
     );
   }
 
-  Unauthorized<T> unauthorized<T>({required T failedValue}) {
+  Unauthorized<T> unauthorized<T>({required String failedValue}) {
     return Unauthorized<T>(
       failedValue: failedValue,
     );
   }
 
-  NoConnection<T> noConnection<T>({required T failedValue}) {
+  NoConnection<T> noConnection<T>({required String failedValue}) {
     return NoConnection<T>(
       failedValue: failedValue,
     );
   }
 
-  SocketError<T> socketError<T>({required T failedValue}) {
+  SocketError<T> socketError<T>({required String failedValue}) {
     return SocketError<T>(
       failedValue: failedValue,
     );
   }
 
-  HandShakeError<T> handShakeError<T>({required T failedValue}) {
+  HandShakeError<T> handShakeError<T>({required String failedValue}) {
     return HandShakeError<T>(
       failedValue: failedValue,
     );
   }
 
-  UnexpectedError<T> unexpectedError<T>({required T failedValue}) {
+  UnexpectedError<T> unexpectedError<T>({required String failedValue}) {
     return UnexpectedError<T>(
       failedValue: failedValue,
     );
@@ -59,36 +59,36 @@ const $HTTPFailures = _$HTTPFailuresTearOff();
 
 /// @nodoc
 mixin _$HTTPFailures<T> {
-  T get failedValue => throw _privateConstructorUsedError;
+  String get failedValue => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) unauthenticated,
-    required TResult Function(T failedValue) unauthorized,
-    required TResult Function(T failedValue) noConnection,
-    required TResult Function(T failedValue) socketError,
-    required TResult Function(T failedValue) handShakeError,
-    required TResult Function(T failedValue) unexpectedError,
+    required TResult Function(String failedValue) unauthenticated,
+    required TResult Function(String failedValue) unauthorized,
+    required TResult Function(String failedValue) noConnection,
+    required TResult Function(String failedValue) socketError,
+    required TResult Function(String failedValue) handShakeError,
+    required TResult Function(String failedValue) unexpectedError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,7 +134,7 @@ abstract class $HTTPFailuresCopyWith<T, $Res> {
   factory $HTTPFailuresCopyWith(
           HTTPFailures<T> value, $Res Function(HTTPFailures<T>) then) =
       _$HTTPFailuresCopyWithImpl<T, $Res>;
-  $Res call({T failedValue});
+  $Res call({String failedValue});
 }
 
 /// @nodoc
@@ -154,7 +154,7 @@ class _$HTTPFailuresCopyWithImpl<T, $Res>
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
+              as String,
     ));
   }
 }
@@ -166,7 +166,7 @@ abstract class $UnauthenticatedCopyWith<T, $Res>
           Unauthenticated<T> value, $Res Function(Unauthenticated<T>) then) =
       _$UnauthenticatedCopyWithImpl<T, $Res>;
   @override
-  $Res call({T failedValue});
+  $Res call({String failedValue});
 }
 
 /// @nodoc
@@ -188,7 +188,7 @@ class _$UnauthenticatedCopyWithImpl<T, $Res>
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
+              as String,
     ));
   }
 }
@@ -199,7 +199,7 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
   const _$Unauthenticated({required this.failedValue});
 
   @override
-  final T failedValue;
+  final String failedValue;
 
   @override
   String toString() {
@@ -227,12 +227,12 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) unauthenticated,
-    required TResult Function(T failedValue) unauthorized,
-    required TResult Function(T failedValue) noConnection,
-    required TResult Function(T failedValue) socketError,
-    required TResult Function(T failedValue) handShakeError,
-    required TResult Function(T failedValue) unexpectedError,
+    required TResult Function(String failedValue) unauthenticated,
+    required TResult Function(String failedValue) unauthorized,
+    required TResult Function(String failedValue) noConnection,
+    required TResult Function(String failedValue) socketError,
+    required TResult Function(String failedValue) handShakeError,
+    required TResult Function(String failedValue) unexpectedError,
   }) {
     return unauthenticated(failedValue);
   }
@@ -240,12 +240,12 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
   }) {
     return unauthenticated?.call(failedValue);
   }
@@ -253,12 +253,12 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -312,11 +312,11 @@ class _$Unauthenticated<T> implements Unauthenticated<T> {
 }
 
 abstract class Unauthenticated<T> implements HTTPFailures<T> {
-  const factory Unauthenticated({required T failedValue}) =
+  const factory Unauthenticated({required String failedValue}) =
       _$Unauthenticated<T>;
 
   @override
-  T get failedValue;
+  String get failedValue;
   @override
   @JsonKey(ignore: true)
   $UnauthenticatedCopyWith<T, Unauthenticated<T>> get copyWith =>
@@ -330,7 +330,7 @@ abstract class $UnauthorizedCopyWith<T, $Res>
           Unauthorized<T> value, $Res Function(Unauthorized<T>) then) =
       _$UnauthorizedCopyWithImpl<T, $Res>;
   @override
-  $Res call({T failedValue});
+  $Res call({String failedValue});
 }
 
 /// @nodoc
@@ -352,7 +352,7 @@ class _$UnauthorizedCopyWithImpl<T, $Res>
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
+              as String,
     ));
   }
 }
@@ -363,7 +363,7 @@ class _$Unauthorized<T> implements Unauthorized<T> {
   const _$Unauthorized({required this.failedValue});
 
   @override
-  final T failedValue;
+  final String failedValue;
 
   @override
   String toString() {
@@ -391,12 +391,12 @@ class _$Unauthorized<T> implements Unauthorized<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) unauthenticated,
-    required TResult Function(T failedValue) unauthorized,
-    required TResult Function(T failedValue) noConnection,
-    required TResult Function(T failedValue) socketError,
-    required TResult Function(T failedValue) handShakeError,
-    required TResult Function(T failedValue) unexpectedError,
+    required TResult Function(String failedValue) unauthenticated,
+    required TResult Function(String failedValue) unauthorized,
+    required TResult Function(String failedValue) noConnection,
+    required TResult Function(String failedValue) socketError,
+    required TResult Function(String failedValue) handShakeError,
+    required TResult Function(String failedValue) unexpectedError,
   }) {
     return unauthorized(failedValue);
   }
@@ -404,12 +404,12 @@ class _$Unauthorized<T> implements Unauthorized<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
   }) {
     return unauthorized?.call(failedValue);
   }
@@ -417,12 +417,12 @@ class _$Unauthorized<T> implements Unauthorized<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
     required TResult orElse(),
   }) {
     if (unauthorized != null) {
@@ -476,10 +476,10 @@ class _$Unauthorized<T> implements Unauthorized<T> {
 }
 
 abstract class Unauthorized<T> implements HTTPFailures<T> {
-  const factory Unauthorized({required T failedValue}) = _$Unauthorized<T>;
+  const factory Unauthorized({required String failedValue}) = _$Unauthorized<T>;
 
   @override
-  T get failedValue;
+  String get failedValue;
   @override
   @JsonKey(ignore: true)
   $UnauthorizedCopyWith<T, Unauthorized<T>> get copyWith =>
@@ -493,7 +493,7 @@ abstract class $NoConnectionCopyWith<T, $Res>
           NoConnection<T> value, $Res Function(NoConnection<T>) then) =
       _$NoConnectionCopyWithImpl<T, $Res>;
   @override
-  $Res call({T failedValue});
+  $Res call({String failedValue});
 }
 
 /// @nodoc
@@ -515,7 +515,7 @@ class _$NoConnectionCopyWithImpl<T, $Res>
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
+              as String,
     ));
   }
 }
@@ -526,7 +526,7 @@ class _$NoConnection<T> implements NoConnection<T> {
   const _$NoConnection({required this.failedValue});
 
   @override
-  final T failedValue;
+  final String failedValue;
 
   @override
   String toString() {
@@ -554,12 +554,12 @@ class _$NoConnection<T> implements NoConnection<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) unauthenticated,
-    required TResult Function(T failedValue) unauthorized,
-    required TResult Function(T failedValue) noConnection,
-    required TResult Function(T failedValue) socketError,
-    required TResult Function(T failedValue) handShakeError,
-    required TResult Function(T failedValue) unexpectedError,
+    required TResult Function(String failedValue) unauthenticated,
+    required TResult Function(String failedValue) unauthorized,
+    required TResult Function(String failedValue) noConnection,
+    required TResult Function(String failedValue) socketError,
+    required TResult Function(String failedValue) handShakeError,
+    required TResult Function(String failedValue) unexpectedError,
   }) {
     return noConnection(failedValue);
   }
@@ -567,12 +567,12 @@ class _$NoConnection<T> implements NoConnection<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
   }) {
     return noConnection?.call(failedValue);
   }
@@ -580,12 +580,12 @@ class _$NoConnection<T> implements NoConnection<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
     required TResult orElse(),
   }) {
     if (noConnection != null) {
@@ -639,10 +639,10 @@ class _$NoConnection<T> implements NoConnection<T> {
 }
 
 abstract class NoConnection<T> implements HTTPFailures<T> {
-  const factory NoConnection({required T failedValue}) = _$NoConnection<T>;
+  const factory NoConnection({required String failedValue}) = _$NoConnection<T>;
 
   @override
-  T get failedValue;
+  String get failedValue;
   @override
   @JsonKey(ignore: true)
   $NoConnectionCopyWith<T, NoConnection<T>> get copyWith =>
@@ -656,7 +656,7 @@ abstract class $SocketErrorCopyWith<T, $Res>
           SocketError<T> value, $Res Function(SocketError<T>) then) =
       _$SocketErrorCopyWithImpl<T, $Res>;
   @override
-  $Res call({T failedValue});
+  $Res call({String failedValue});
 }
 
 /// @nodoc
@@ -678,7 +678,7 @@ class _$SocketErrorCopyWithImpl<T, $Res>
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
+              as String,
     ));
   }
 }
@@ -689,7 +689,7 @@ class _$SocketError<T> implements SocketError<T> {
   const _$SocketError({required this.failedValue});
 
   @override
-  final T failedValue;
+  final String failedValue;
 
   @override
   String toString() {
@@ -717,12 +717,12 @@ class _$SocketError<T> implements SocketError<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) unauthenticated,
-    required TResult Function(T failedValue) unauthorized,
-    required TResult Function(T failedValue) noConnection,
-    required TResult Function(T failedValue) socketError,
-    required TResult Function(T failedValue) handShakeError,
-    required TResult Function(T failedValue) unexpectedError,
+    required TResult Function(String failedValue) unauthenticated,
+    required TResult Function(String failedValue) unauthorized,
+    required TResult Function(String failedValue) noConnection,
+    required TResult Function(String failedValue) socketError,
+    required TResult Function(String failedValue) handShakeError,
+    required TResult Function(String failedValue) unexpectedError,
   }) {
     return socketError(failedValue);
   }
@@ -730,12 +730,12 @@ class _$SocketError<T> implements SocketError<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
   }) {
     return socketError?.call(failedValue);
   }
@@ -743,12 +743,12 @@ class _$SocketError<T> implements SocketError<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
     required TResult orElse(),
   }) {
     if (socketError != null) {
@@ -802,10 +802,10 @@ class _$SocketError<T> implements SocketError<T> {
 }
 
 abstract class SocketError<T> implements HTTPFailures<T> {
-  const factory SocketError({required T failedValue}) = _$SocketError<T>;
+  const factory SocketError({required String failedValue}) = _$SocketError<T>;
 
   @override
-  T get failedValue;
+  String get failedValue;
   @override
   @JsonKey(ignore: true)
   $SocketErrorCopyWith<T, SocketError<T>> get copyWith =>
@@ -819,7 +819,7 @@ abstract class $HandShakeErrorCopyWith<T, $Res>
           HandShakeError<T> value, $Res Function(HandShakeError<T>) then) =
       _$HandShakeErrorCopyWithImpl<T, $Res>;
   @override
-  $Res call({T failedValue});
+  $Res call({String failedValue});
 }
 
 /// @nodoc
@@ -841,7 +841,7 @@ class _$HandShakeErrorCopyWithImpl<T, $Res>
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
+              as String,
     ));
   }
 }
@@ -852,7 +852,7 @@ class _$HandShakeError<T> implements HandShakeError<T> {
   const _$HandShakeError({required this.failedValue});
 
   @override
-  final T failedValue;
+  final String failedValue;
 
   @override
   String toString() {
@@ -880,12 +880,12 @@ class _$HandShakeError<T> implements HandShakeError<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) unauthenticated,
-    required TResult Function(T failedValue) unauthorized,
-    required TResult Function(T failedValue) noConnection,
-    required TResult Function(T failedValue) socketError,
-    required TResult Function(T failedValue) handShakeError,
-    required TResult Function(T failedValue) unexpectedError,
+    required TResult Function(String failedValue) unauthenticated,
+    required TResult Function(String failedValue) unauthorized,
+    required TResult Function(String failedValue) noConnection,
+    required TResult Function(String failedValue) socketError,
+    required TResult Function(String failedValue) handShakeError,
+    required TResult Function(String failedValue) unexpectedError,
   }) {
     return handShakeError(failedValue);
   }
@@ -893,12 +893,12 @@ class _$HandShakeError<T> implements HandShakeError<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
   }) {
     return handShakeError?.call(failedValue);
   }
@@ -906,12 +906,12 @@ class _$HandShakeError<T> implements HandShakeError<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
     required TResult orElse(),
   }) {
     if (handShakeError != null) {
@@ -965,10 +965,11 @@ class _$HandShakeError<T> implements HandShakeError<T> {
 }
 
 abstract class HandShakeError<T> implements HTTPFailures<T> {
-  const factory HandShakeError({required T failedValue}) = _$HandShakeError<T>;
+  const factory HandShakeError({required String failedValue}) =
+      _$HandShakeError<T>;
 
   @override
-  T get failedValue;
+  String get failedValue;
   @override
   @JsonKey(ignore: true)
   $HandShakeErrorCopyWith<T, HandShakeError<T>> get copyWith =>
@@ -982,7 +983,7 @@ abstract class $UnexpectedErrorCopyWith<T, $Res>
           UnexpectedError<T> value, $Res Function(UnexpectedError<T>) then) =
       _$UnexpectedErrorCopyWithImpl<T, $Res>;
   @override
-  $Res call({T failedValue});
+  $Res call({String failedValue});
 }
 
 /// @nodoc
@@ -1004,7 +1005,7 @@ class _$UnexpectedErrorCopyWithImpl<T, $Res>
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
+              as String,
     ));
   }
 }
@@ -1015,7 +1016,7 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
   const _$UnexpectedError({required this.failedValue});
 
   @override
-  final T failedValue;
+  final String failedValue;
 
   @override
   String toString() {
@@ -1043,12 +1044,12 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) unauthenticated,
-    required TResult Function(T failedValue) unauthorized,
-    required TResult Function(T failedValue) noConnection,
-    required TResult Function(T failedValue) socketError,
-    required TResult Function(T failedValue) handShakeError,
-    required TResult Function(T failedValue) unexpectedError,
+    required TResult Function(String failedValue) unauthenticated,
+    required TResult Function(String failedValue) unauthorized,
+    required TResult Function(String failedValue) noConnection,
+    required TResult Function(String failedValue) socketError,
+    required TResult Function(String failedValue) handShakeError,
+    required TResult Function(String failedValue) unexpectedError,
   }) {
     return unexpectedError(failedValue);
   }
@@ -1056,12 +1057,12 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
   }) {
     return unexpectedError?.call(failedValue);
   }
@@ -1069,12 +1070,12 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? unauthenticated,
-    TResult Function(T failedValue)? unauthorized,
-    TResult Function(T failedValue)? noConnection,
-    TResult Function(T failedValue)? socketError,
-    TResult Function(T failedValue)? handShakeError,
-    TResult Function(T failedValue)? unexpectedError,
+    TResult Function(String failedValue)? unauthenticated,
+    TResult Function(String failedValue)? unauthorized,
+    TResult Function(String failedValue)? noConnection,
+    TResult Function(String failedValue)? socketError,
+    TResult Function(String failedValue)? handShakeError,
+    TResult Function(String failedValue)? unexpectedError,
     required TResult orElse(),
   }) {
     if (unexpectedError != null) {
@@ -1128,11 +1129,11 @@ class _$UnexpectedError<T> implements UnexpectedError<T> {
 }
 
 abstract class UnexpectedError<T> implements HTTPFailures<T> {
-  const factory UnexpectedError({required T failedValue}) =
+  const factory UnexpectedError({required String failedValue}) =
       _$UnexpectedError<T>;
 
   @override
-  T get failedValue;
+  String get failedValue;
   @override
   @JsonKey(ignore: true)
   $UnexpectedErrorCopyWith<T, UnexpectedError<T>> get copyWith =>

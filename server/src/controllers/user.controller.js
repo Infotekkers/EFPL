@@ -286,9 +286,11 @@ const getUserTeam = asyncHandler(async (req, res) => {
 
     // TODO:get user id from token
     if (gameWeekId && userId) {
-      const user = await User.findOne({ _id: userId }).select(
-        "-userName -password -email -fantasyLeagues -__v -_id -country "
-      );
+      const user = await User.findOne({ _id: userId })
+        .select(
+          "-userName -password -email -fantasyLeagues -__v -_id -country "
+        )
+        .lean();
 
       // get user's gw team
       let userTeam = user.team[gameWeekId - 1];
@@ -312,27 +314,20 @@ const getUserTeam = asyncHandler(async (req, res) => {
 
         const allTeams = await Team.find();
 
-        allUserPlayers.forEach((player, value) => {
+        for (const key in allUserPlayers) {
           const playerInfo = {
-            playerId: player.playerId,
-            multiplier: parseInt(player.multiplier),
-            isCaptain: player.isCaptain,
-            isViceCaptain: player.isViceCaptain,
-          };
-          console.log(playerInfo);
-        });
-        for (let i = 0; i < allUserPlayers.length; i++) {
-          const playerInfo = {
-            playerId: allUserPlayers[i].playerId,
-            multiplier: parseInt(allUserPlayers[i].multiplier),
-            isCaptain: allUserPlayers[i].isCaptain,
-            isViceCaptain: allUserPlayers[i].isViceCaptain,
+            playerId: allUserPlayers[key].playerId,
+            multiplier: parseInt(allUserPlayers[key].multiplier),
+            isCaptain: allUserPlayers[key].isCaptain,
+            isViceCaptain: allUserPlayers[key].isViceCaptain,
           };
 
+          // get more info on player
           const currPlayer = await Player.findOne({
-            playerId: allUserPlayers[i].playerId,
+            playerId: allUserPlayers[key].playerId,
           });
 
+          // get players upcoming fixtures
           const currentTeamFixture = await Fixture.find({
             $or: [
               { homeTeam: currPlayer.eplTeamId },
@@ -365,6 +360,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
             (team) =>
               team.teamName.toString() === currPlayer.eplTeamId.toString()
           );
+
           playerInfo.playerName = currPlayer.playerName.toString().trim();
           playerInfo.eplTeamId = currPlayer.eplTeamId.toString().trim();
           playerInfo.eplTeamLogo = currentTeam[0].teamLogo;
@@ -376,8 +372,9 @@ const getUserTeam = asyncHandler(async (req, res) => {
           playerInfo.score = sumEplPlayerScore(currPlayer.score, gameWeekId);
           playerInfo.upComingFixtures = upComingFixture;
 
-          allUserPlayersList.currPlayer.playerId = playerInfo;
+          allUserPlayersList[`${key}`] = playerInfo;
         }
+        console.log(allUserPlayersList);
 
         userTeam.players = allUserPlayersList;
         user.team = userTeam;

@@ -5,6 +5,7 @@ import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/authentication/splash_view.dart';
 import 'package:efpl/presentation/core/main_tab_view.dart';
 import 'package:efpl/presentation/fixtures/fixture_detail_view.dart';
+import 'package:efpl/presentation/transfers/intial_transfer_view.dart';
 import 'package:efpl/presentation/transfers/widgets/confirm_transfers_view.dart';
 import 'package:efpl/presentation/transfers/widgets/transfer_list_view.dart';
 
@@ -19,9 +20,7 @@ class AppRouter {
 
   final TransferBloc _transferBloc = getIt<TransferBloc>()
     ..add(
-      TransferEvent.getUserPlayers(
-        gameWeekId: GameWeekId(value: 1),
-      ),
+      const TransferEvent.getUserPlayers(),
     );
   Map<String, Widget Function(BuildContext)> allRoutes = {
     "/": (context) => const SplashView(),
@@ -45,6 +44,14 @@ class AppRouter {
             ),
           ],
           child: const FixtureDetailView(),
+        ),
+    "/transfer/initial": (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: getIt<TransferBloc>(),
+            ),
+          ],
+          child: const InitialTransferPage(),
         ),
     "/transfer": (context) => MultiBlocProvider(
           providers: [

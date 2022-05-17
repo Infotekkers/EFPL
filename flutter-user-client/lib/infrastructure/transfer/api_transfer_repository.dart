@@ -8,7 +8,7 @@ import 'package:efpl/domain/core/storage_failures.dart';
 import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/transfer/i_user_players_facade.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
-import 'package:efpl/domain/transfer/user_players_failures.dart';
+import 'package:efpl/domain/transfer/transfer_failures.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:efpl/infrastructure/transfer/user_player_dto.dart';
@@ -26,18 +26,12 @@ class ApiTransferRepository implements ITransferRepository {
   // local id
 
   @override
-  Future<Either<dynamic, UserTeam>> getUserPlayers(
-      {required int gameWeekId}) async {
-    // TODO:Replace
-
-    // remote id
-    // const userID = "627970e3b106bad35b4dde88";
-
+  Future<Either<dynamic, UserTeam>> getUserPlayers() async {
     try {
       HTTPInstance instance = getIt<HTTPInstance>();
       var apiResponse = await instance.client
           .get(
-            Uri.parse('$_baseURL/user/team/$userID/$gameWeekId'),
+            Uri.parse('$_baseURL/user/team'),
           )
           .timeout(
             Duration(seconds: ConstantValues().httpTimeOutDuration),
@@ -48,8 +42,12 @@ class ApiTransferRepository implements ITransferRepository {
         List<UserPlayer> allUserPlayers = [];
         List<dynamic> allUserPlayersJson = [];
 
+        print(apiResponse.body);
+
         final parsedResponseBody = jsonDecode(apiResponse.body);
         final parseResponseTeam = parsedResponseBody['team'][0];
+
+        print(parsedResponseBody['team'][0].runtimeType);
 
         // if response has players
         if (parseResponseTeam['players'].length > 0) {
@@ -137,7 +135,7 @@ class ApiTransferRepository implements ITransferRepository {
               return left(
                 [
                   userTeam,
-                  const StorageFailures.hiveError(
+                  const TransferFailure.hiveError(
                       failedValue: "Error Caching Info")
                 ],
               );
@@ -148,20 +146,38 @@ class ApiTransferRepository implements ITransferRepository {
         }
         // if response has no players
         else {
-          UserTeam cachedUserTeam =
-              await getUserTeamFromCache(gameWeekId: gameWeekId);
+          UserTeam cachedUserTeam = await getUserTeamFromCache();
           return left([
             cachedUserTeam,
-            const UserPlayerFailure.incompleteTeam(
+            const TransferFailure.incompleteTeam(
                 failedValue: "No Team. Please select a team.")
           ]);
         }
       }
 
+      // no user team
+      else if (apiResponse.statusCode == 404) {
+        return left([
+          UserTeam(
+            gameWeekId: GameWeekId(value: 1),
+            gameWeekDeadline: "",
+            allUserPlayers: [],
+            freeTransfers: 0,
+            deduction: 0,
+            activeChip: "",
+            availableChips: [],
+            maxBudget: 0,
+            teamName: "",
+          ),
+          const TransferFailure.noTeamSelected(
+            failedValue: "No Initial Team",
+          ),
+        ]);
+      }
+
       // No Token
       else if (apiResponse.statusCode == 403) {
-        UserTeam cachedUserTeam =
-            await getUserTeamFromCache(gameWeekId: gameWeekId);
+        UserTeam cachedUserTeam = await getUserTeamFromCache();
         return left([
           cachedUserTeam,
           const HTTPFailures.unauthenticated(
@@ -172,8 +188,7 @@ class ApiTransferRepository implements ITransferRepository {
 
       // incorrect token
       else if (apiResponse.statusCode == 401) {
-        UserTeam cachedUserTeam =
-            await getUserTeamFromCache(gameWeekId: gameWeekId);
+        UserTeam cachedUserTeam = await getUserTeamFromCache();
 
         return left(
           [
@@ -187,8 +202,7 @@ class ApiTransferRepository implements ITransferRepository {
 
       // unexpected error
       else {
-        UserTeam cachedUserTeam =
-            await getUserTeamFromCache(gameWeekId: gameWeekId);
+        UserTeam cachedUserTeam = await getUserTeamFromCache();
         return left([
           cachedUserTeam,
           const HTTPFailures.unexpectedError(
@@ -199,8 +213,7 @@ class ApiTransferRepository implements ITransferRepository {
     // Timeout Exception
     on TimeoutException catch (_) {
       // get cache team
-      UserTeam cachedUserTeam =
-          await getUserTeamFromCache(gameWeekId: gameWeekId);
+      UserTeam cachedUserTeam = await getUserTeamFromCache();
 
       return left(
         [
@@ -213,8 +226,7 @@ class ApiTransferRepository implements ITransferRepository {
     // Socket Exception
     on SocketException catch (_) {
       // get cache team
-      UserTeam cachedUserTeam =
-          await getUserTeamFromCache(gameWeekId: gameWeekId);
+      UserTeam cachedUserTeam = await getUserTeamFromCache();
 
       return left(
         [
@@ -228,8 +240,7 @@ class ApiTransferRepository implements ITransferRepository {
     // Handshake error
     on HandshakeException catch (_) {
       // get cache team
-      UserTeam cachedUserTeam =
-          await getUserTeamFromCache(gameWeekId: gameWeekId);
+      UserTeam cachedUserTeam = await getUserTeamFromCache();
 
       return left(
         [
@@ -242,8 +253,7 @@ class ApiTransferRepository implements ITransferRepository {
     // unexpected error
     catch (e) {
       // get cache team
-      UserTeam cachedUserTeam =
-          await getUserTeamFromCache(gameWeekId: gameWeekId);
+      UserTeam cachedUserTeam = await getUserTeamFromCache();
 
       return left(
         [
@@ -326,7 +336,7 @@ class ApiTransferRepository implements ITransferRepository {
           } catch (e) {
             print(e);
             return left(
-              const StorageFailures.hiveError(
+              const TransferFailure.hiveError(
                 failedValue: "Error Caching Info",
               ),
             );
@@ -506,66 +516,52 @@ Map userTeamToJson({required UserTeam userTeam}) {
   return userTeamJson;
 }
 
-Future<UserTeam> getUserTeamFromCache({required int gameWeekId}) async {
+Future<UserTeam> getUserTeamFromCache() async {
   var efplCache = await Hive.openBox('efplCache');
   dynamic allUserPlayers = efplCache.get("userTeam");
 
-  if (allUserPlayers['gameWeekId'] == gameWeekId) {
-    List allUserPlayerJson = allUserPlayers['allUserPlayers'];
-    List<UserPlayer> allUserPlayersDomain = [];
-    for (var player in allUserPlayerJson) {
-      final currentPlayerMap = {
-        "playerId": player['playerId'],
-        "multiplier": player['multiplier'],
-        "isCaptain": player['isCaptain'],
-        "isViceCaptain": player['isViceCaptain'],
-        "playerName": player['playerName'],
-        "eplTeamId": player['eplTeamId'],
-        "eplTeamLogo": player['eplTeamLogo'],
-        "currentPrice": player['currentPrice'],
-        "position": player['position'],
-        "availability": {
-          "injuryStatus": player['availability']['injuryStatus'],
-          "injuryMessage": player['availability']['injuryMessage'],
-        },
-        "score": player['score'],
-        "upComingFixtures": player['upComingFixtures'] ?? [],
-      };
+  List allUserPlayerJson = allUserPlayers['allUserPlayers'];
+  List<UserPlayer> allUserPlayersDomain = [];
+  for (var player in allUserPlayerJson) {
+    final currentPlayerMap = {
+      "playerId": player['playerId'],
+      "multiplier": player['multiplier'],
+      "isCaptain": player['isCaptain'],
+      "isViceCaptain": player['isViceCaptain'],
+      "playerName": player['playerName'],
+      "eplTeamId": player['eplTeamId'],
+      "eplTeamLogo": player['eplTeamLogo'],
+      "currentPrice": player['currentPrice'],
+      "position": player['position'],
+      "availability": {
+        "injuryStatus": player['availability']['injuryStatus'],
+        "injuryMessage": player['availability']['injuryMessage'],
+      },
+      "score": player['score'],
+      "upComingFixtures": player['upComingFixtures'] ?? [],
+    };
 
-      final UserPlayerDTO userPlayerDTO =
-          UserPlayerDTO.fromJson(currentPlayerMap);
+    final UserPlayerDTO userPlayerDTO =
+        UserPlayerDTO.fromJson(currentPlayerMap);
 
-      allUserPlayersDomain.add(userPlayerDTO.toDomain());
-    }
-
-    UserTeam userTeam = UserTeam(
-      gameWeekId: GameWeekId(value: allUserPlayers['gameWeekId']),
-      gameWeekDeadline: allUserPlayers['gameWeekDeadline'].toString(),
-      allUserPlayers: allUserPlayersDomain,
-      freeTransfers: allUserPlayers['freeTransfers'],
-      deduction: allUserPlayers['deduction'],
-      activeChip: allUserPlayers['activeChip'],
-      availableChips: allUserPlayers['availableChips'],
-      maxBudget: double.parse(
-        allUserPlayers['maxBudget'].toString(),
-      ),
-      teamName: allUserPlayers['teamName'],
-    );
-
-    return userTeam;
-  } else {
-    return UserTeam(
-      gameWeekId: GameWeekId(value: 1),
-      gameWeekDeadline: "",
-      allUserPlayers: [],
-      freeTransfers: 0,
-      deduction: 0,
-      activeChip: "",
-      availableChips: [],
-      maxBudget: 0,
-      teamName: "",
-    );
+    allUserPlayersDomain.add(userPlayerDTO.toDomain());
   }
+
+  UserTeam userTeam = UserTeam(
+    gameWeekId: GameWeekId(value: allUserPlayers['gameWeekId']),
+    gameWeekDeadline: allUserPlayers['gameWeekDeadline'].toString(),
+    allUserPlayers: allUserPlayersDomain,
+    freeTransfers: allUserPlayers['freeTransfers'],
+    deduction: allUserPlayers['deduction'],
+    activeChip: allUserPlayers['activeChip'],
+    availableChips: allUserPlayers['availableChips'],
+    maxBudget: double.parse(
+      allUserPlayers['maxBudget'].toString(),
+    ),
+    teamName: allUserPlayers['teamName'],
+  );
+
+  return userTeam;
 }
 
 Future<List<UserPlayer>> getUserPlayerFromCache(

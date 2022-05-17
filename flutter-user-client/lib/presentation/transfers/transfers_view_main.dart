@@ -33,6 +33,18 @@ class TransfersView extends StatelessWidget {
             either.fold(
               (failure) {
                 failure[1].maybeMap(
+                  // Value failures
+                  noTeamSelected: (_) {
+                    // TODO:Snackbar
+                    Navigator.pushNamed(context, "/transfer/initial");
+                  },
+                  exceededPrice: (_) {
+                    print("Price Issue");
+                  },
+                  exceededTeamCount: (_) {},
+                  incompleteTeam: (_) {},
+                  deadlinePassed: (_) {},
+
                   // Connection issues
                   noConnection: (_) {
                     CustomSnackBar().showCustomSnackBar(
@@ -81,8 +93,14 @@ class TransfersView extends StatelessWidget {
                     );
                     Navigator.pushNamed(context, "/");
                   },
-
-                  // Value failures
+                  unexpectedError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Login to EFPL!",
+                      message: "Please login to use EFPL.",
+                      snackBarType: "error",
+                    );
+                  },
 
                   orElse: () {
                     CustomSnackBar().showCustomSnackBar(
@@ -113,9 +131,7 @@ class TransfersView extends StatelessWidget {
         return LiquidPullToRefresh(
           onRefresh: () async {
             _transferBloc.add(
-              TransferEvent.getUserPlayers(
-                gameWeekId: GameWeekId(value: 1),
-              ),
+              const TransferEvent.getUserPlayers(),
             );
           },
           height: 60,
@@ -139,13 +155,29 @@ class TransfersView extends StatelessWidget {
                                 const SizedBox(
                                   height: 12,
                                 ),
-                                Text(
-                                  state.userTeam.teamName,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: ConstantColors.neutral_700,
-                                  ),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      state.userTeam.teamName,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: ConstantColors.neutral_700,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      state.userTeam.gameWeekId.value.fold(
+                                        (l) => 'GW 1',
+                                        (r) => "GW " + r.toString(),
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -405,7 +437,7 @@ class TransfersView extends StatelessWidget {
                                                   .toString(),
                                               style: TextStyle(
                                                 color: state.userTeam
-                                                            .freeTransfers !=
+                                                            .freeTransfers <
                                                         1
                                                     ? ConstantColors.error_300
                                                     : Colors.green,

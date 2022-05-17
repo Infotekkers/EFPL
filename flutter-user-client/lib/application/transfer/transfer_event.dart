@@ -3,8 +3,7 @@ part of 'transfer_bloc.dart';
 @freezed
 class TransferEvent with _$TransferEvent {
   // gets users players
-  const factory TransferEvent.getUserPlayers({required GameWeekId gameWeekId}) =
-      _getUserPlayers;
+  const factory TransferEvent.getUserPlayers() = _getUserPlayers;
 
 // sets transfer player when clicked on a user player to transfer
   const factory TransferEvent.setTransferOutPlayer({

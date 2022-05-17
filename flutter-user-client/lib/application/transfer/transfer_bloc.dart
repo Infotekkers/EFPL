@@ -33,12 +33,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
       // get team from api
       final Either<dynamic, UserTeam> failureOrSuccess =
-          await _iTransferRepository.getUserPlayers(
-        gameWeekId: event.gameWeekId.value.fold(
-          (l) => 1,
-          (r) => r,
-        ),
-      );
+          await _iTransferRepository.getUserPlayers();
 
       // get team from response
       final UserTeam userTeam = failureOrSuccess.fold(
