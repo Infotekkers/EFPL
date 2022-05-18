@@ -35,71 +35,45 @@ class TransfersView extends StatelessWidget {
                 failure[1].maybeMap(
                   // Value failures
                   noTeamSelected: (_) {
-                    // TODO:Snackbar
-                    Navigator.pushNamed(context, "/transfer/initial");
+                    print("NO Team Selected");
                   },
                   exceededPrice: (_) {
-                    print("Price Issue");
+                    print("exceededPrice");
                   },
-                  exceededTeamCount: (_) {},
-                  incompleteTeam: (_) {},
-                  deadlinePassed: (_) {},
+                  exceededTeamCount: (_) {
+                    print("exceededTeamCount");
+                  },
+                  incompleteTeam: (_) {
+                    print("incompleteTeam");
+                  },
+                  deadlinePassed: (_) {
+                    print("deadlinePassed");
+                  },
 
                   // Connection issues
                   noConnection: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact server. Showing cached team data.",
-                      snackBarType: "warning",
-                    );
+                    print("No Connection");
                   },
                   socketError: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact server. Showing cached team data.",
-                      snackBarType: "warning",
-                    );
+                    print("Socket Error");
                   },
                   handShakeError: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact server. Showing cached team data.",
-                      snackBarType: "warning",
-                    );
+                    print("Handshake Error");
                   },
 
                   // token issues
                   unauthorized: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Login to EFPL!",
-                      message: "Please login to use EFPL.",
-                      snackBarType: "error",
-                    );
-                    Navigator.pushNamed(context, "/");
+                    print("Unauthorized");
                   },
                   unauthenticated: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Login to EFPL!",
-                      message: "Please login to use EFPL.",
-                      snackBarType: "error",
-                    );
-                    Navigator.pushNamed(context, "/");
+                    print("UnAuthenticated");
                   },
                   unexpectedError: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Login to EFPL!",
-                      message: "Please login to use EFPL.",
-                      snackBarType: "error",
-                    );
+                    print("UnExpected Error");
+                  },
+
+                  hiveError: (_) {
+                    print("Hive Error");
                   },
 
                   orElse: () {

@@ -24,6 +24,7 @@ dependencies:
   json_annotation: ^4.4.0
   shared_preferences: ^2.0.13
   hive: ^2.1.0
+  hive_flutter: ^1.1.0
   path_provider: ^2.0.9
   material_design_icons_flutter: 5.0.6595
   flutter_boxicons: ^3.0.0
@@ -55,6 +56,6 @@ flutter:
   fonts:
     - family: Architect
       fonts:
-        - asset: fonts/ArchitectsDaughter-Regular.ttf
+        - asset: assets/fonts/ArchitectsDaughter-Regular.ttf
   uses-material-design: true
   generate: true

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
 class UserPlayerWidget extends StatelessWidget {
@@ -204,15 +205,19 @@ class UserPlayerWidget extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: CachedNetworkImage(
-                          imageUrl: _baseURL + currentUserPlayer.eplTeamLogo,
-                          fit: BoxFit.fitHeight,
+                      Center(
+                        child: Container(
+                          // width: double.infinity,
+                          width: 50,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: SvgPicture.asset(
+                            "assets/icons/shirt.svg",
+                            width: 50,
+                            height: 50,
+                          ),
                         ),
                       ),
                       injuryStatus.isEmpty

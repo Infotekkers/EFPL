@@ -3,19 +3,13 @@ import 'package:efpl/presentation/core/app_widget.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
-import 'package:path_provider/path_provider.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
-
-  final appDocumentDirectory = await getApplicationDocumentsDirectory();
-
-  Hive.init(appDocumentDirectory.path);
-
-  // var efplCache = await Hive.openBox('efplCache');
-  // efplCache.clear();
+  await Hive.initFlutter();
+  await Hive.openBox("transferCache");
 
   configureInjection(Environment.prod);
   runApp(const AppWidget());

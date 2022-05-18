@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:efpl/domain/core/value_failures.dart';
 import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/transfer/i_user_players_facade.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
@@ -43,6 +42,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
       // sum cost of all user players
       double playerCostSum = 0.0;
+
       for (var element in userTeam.allUserPlayers) {
         double currentPlayerPrice =
             element.currentPrice.value.fold((l) => 0, (r) => r);
