@@ -46,6 +46,7 @@ dev_dependencies:
 flutter:
   assets:
     - .env
+    - assets/images/
   fonts:
     - family: Architect
       fonts:

@@ -33,9 +33,12 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
       (failure) => emit(
         MyTeamState.loadFailure(failure),
       ),
-      (myTeam) => emit(
-        MyTeamState.loadSuccess(myTeam),
-      ),
+      (myTeam) {
+        print(myTeam.players);
+        emit(
+          MyTeamState.loadSuccess(myTeam),
+        );
+      },
     );
   }
 

@@ -5,7 +5,9 @@ import 'package:efpl/domain/my_team/my_team_failures.dart';
 import 'package:efpl/infrastructure/my_team/my_team_dto.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 
+@injectable
 class MyTeamRemoteDataProvider {
   http.Client? client = http.Client();
 
@@ -61,12 +63,12 @@ class MyTeamRemoteDataProvider {
   }
 
   MyTeamDto classifyPlayers(MyTeamDto myTeamDto) {
-    Map<String, List> playersOrganizedByPosition = {
-      'gk': [],
-      'def': [],
-      'mid': [],
-      'att': [],
-      'sub': [],
+    Map<String, Map<String, dynamic>> playersOrganizedByPosition = {
+      'gk': {},
+      'def': {},
+      'mid': {},
+      'att': {},
+      'sub': {},
     };
 
     for (String playerId in myTeamDto.players.keys) {
@@ -75,10 +77,12 @@ class MyTeamRemoteDataProvider {
         final position =
             myTeamDto.players[playerId]['position'].toString().toLowerCase();
 
-        playersOrganizedByPosition[position]?.add(myTeamDto.players[playerId]);
+        playersOrganizedByPosition[position]![playerId] =
+            myTeamDto.players[playerId];
       } else if (myTeamDto.players[playerId].containsKey('position') &&
           myTeamDto.players[playerId]['multiplier'] == 0) {
-        playersOrganizedByPosition['sub']?.add(myTeamDto.players[playerId]);
+        playersOrganizedByPosition['sub']![playerId] =
+            myTeamDto.players[playerId];
       }
     }
 

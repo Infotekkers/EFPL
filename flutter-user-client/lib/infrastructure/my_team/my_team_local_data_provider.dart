@@ -3,7 +3,9 @@ import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/my_team_failures.dart';
 import 'package:efpl/infrastructure/my_team/my_team_dto.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class MyTeamLocalDataProvider {
   Box myTeamCache = Hive.box('myTeamCache');
 
