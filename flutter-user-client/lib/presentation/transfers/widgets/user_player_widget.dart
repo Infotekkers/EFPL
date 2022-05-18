@@ -313,7 +313,10 @@ Future<void> transferPlayer(_transferBloc, currentUserPlayer, context) async {
   Navigator.pushNamed(
     context,
     "/transfer",
-    arguments: {"allTeams": allTeams!},
+    arguments: {
+      "allTeams": allTeams!,
+      "currentPlayerId": currentUserPlayer.playerId
+    },
   );
 }
 

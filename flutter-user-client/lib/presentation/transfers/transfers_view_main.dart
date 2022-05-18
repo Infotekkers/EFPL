@@ -1,8 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
+import 'package:efpl/infrastructure/transfer/transfer_local_data_provider.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/transfers/widgets/user_player_widget.dart';
@@ -465,19 +467,10 @@ class TransfersView extends StatelessWidget {
                                 // Save Button
                                 InkWell(
                                   onTap: () async {
-                                    // get all players
-                                    var efplCache =
-                                        await Hive.openBox('efplCache');
-                                    List allPlayers =
-                                        efplCache.get("allPlayers");
-
-                                    // navigate
-                                    Navigator.pushNamed(
-                                      context,
-                                      "/transfer/confirm",
-                                      arguments: {
-                                        "allPlayers": allPlayers,
-                                      },
+                                    _transferBloc.add(
+                                      TransferEvent.validateTeam(
+                                        context: context,
+                                      ),
                                     );
                                   },
                                   child: Container(
@@ -486,7 +479,8 @@ class TransfersView extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       color: ConstantColors.primary_900,
                                       border: Border.all(
-                                          color: ConstantColors.primary_900),
+                                        color: ConstantColors.primary_900,
+                                      ),
                                       borderRadius: const BorderRadius.all(
                                         Radius.circular(50),
                                       ),
@@ -496,8 +490,10 @@ class TransfersView extends StatelessWidget {
                                               .withOpacity(0.5),
                                           spreadRadius: 5,
                                           blurRadius: 7,
-                                          offset: const Offset(0,
-                                              3), // changes position of shadow
+                                          offset: const Offset(
+                                            0,
+                                            3,
+                                          ), // changes position of shadow
                                         ),
                                       ],
                                     ),

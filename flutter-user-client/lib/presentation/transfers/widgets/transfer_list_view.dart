@@ -113,6 +113,21 @@ class TransferPlayerView extends StatelessWidget {
 
         final args = ModalRoute.of(context)!.settings.arguments as Map;
 
+        print(args['currentPlayerId']);
+
+        String currentTransferredPlayerId = args['currentPlayerId'];
+        List currentPlayerFilter = state.selectedPlayerReplacements
+            .where((player) =>
+                player.playerId.toString() == currentTransferredPlayerId)
+            .toList();
+        double currentPlayerPrice = 0.0;
+
+        if (currentPlayerFilter.isNotEmpty) {
+          UserPlayer currentPlayer = currentPlayerFilter[0];
+          currentPlayerPrice = currentPlayerPrice +
+              currentPlayer.currentPrice.value.fold((l) => 0.0, (r) => r);
+        }
+
         List allTeams = args['allTeams'];
         List<String> allTeamsNames = ["Select a Team"];
 
@@ -147,7 +162,8 @@ class TransferPlayerView extends StatelessWidget {
                       ),
                       const SizedBox(height: 0.25),
                       Text(
-                        state.remainingInBank.toStringAsFixed(1),
+                        (state.remainingInBank + currentPlayerPrice)
+                            .toStringAsFixed(1),
                         style: TextStyle(
                           color: state.remainingInBank > 0
                               ? Colors.green
@@ -165,11 +181,9 @@ class TransferPlayerView extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 )
               : allPositionPlayerFiltered.isEmpty
-                  ? Container(
-                      child: Center(
-                        child: Text(
-                          "No Players",
-                        ),
+                  ? const Center(
+                      child: const Text(
+                        "No Players",
                       ),
                     )
                   : SingleChildScrollView(

@@ -37,4 +37,9 @@ class TransferEvent with _$TransferEvent {
       {required double minValue, required double maxValue}) = _setPriceFilter;
 
   const factory TransferEvent.filterByPrice() = _filterByPrice;
+
+  const factory TransferEvent.setChip({required String chipName}) = _setChip;
+
+  const factory TransferEvent.validateTeam({required BuildContext context}) =
+      _validateTeam;
 }

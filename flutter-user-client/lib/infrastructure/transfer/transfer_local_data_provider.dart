@@ -57,12 +57,6 @@ class TransferLocalDataProvider {
     }
   }
 
-  Future<Either<dynamic, bool>> saveAllPositionPlayers(
-      {required List<UserPlayer> allPositionalPlayers}) async {
-    await Hive.openBox("efplCache");
-    return left([]);
-  }
-
   Future<Either<dynamic, UserTeam>> getUserTeam() async {
     try {
       dynamic allUserPlayers = transfersCache.get("userTeam");
@@ -146,6 +140,53 @@ class TransferLocalDataProvider {
     }
   }
 
+  Future<Either<dynamic, List>> getAllPlayers() async {
+    try {
+      List allPlayers = [];
+      List allPlayersGK = transfersCache.get("allPlayersInPosition-GK");
+      List allPlayersDEF = transfersCache.get("allPlayersInPosition-DEF");
+      List allPlayersMID = transfersCache.get("allPlayersInPosition-MID");
+      List allPlayersATT = transfersCache.get("allPlayersInPosition-ATT");
+
+      for (var gk in allPlayersGK) {
+        allPlayers.add(gk);
+      }
+
+      for (var def in allPlayersDEF) {
+        allPlayers.add(def);
+      }
+
+      for (var mid in allPlayersMID) {
+        allPlayers.add(mid);
+      }
+
+      for (var att in allPlayersATT) {
+        allPlayers.add(att);
+      }
+
+      return right(allPlayersGK);
+    } catch (e) {
+      return left(
+        [
+          [],
+          const TransferFailure.hiveError(failedValue: "Hive Error"),
+        ],
+      );
+    }
+  }
+
+  Future<Either<dynamic, List>> getAllTeams() async {
+    try {
+      List allTeams = await transfersCache.get("allTeams");
+      return right(allTeams);
+    } catch (e) {
+      return left([
+        [],
+        const TransferFailure.hiveError(failedValue: "Hive Error"),
+      ]);
+    }
+  }
+
   void saveUserTeam({required Map userTeam}) async {
     try {
       await transfersCache.put("userTeam", userTeam);
@@ -171,11 +212,5 @@ class TransferLocalDataProvider {
     } catch (e) {
       print(e);
     }
-  }
-
-  Future<Either<dynamic, bool>> saveUserPlayers(
-      {required int gameWeekId, required UserTeam userTeam}) async {
-    await Hive.openBox("efplCache");
-    return left([]);
   }
 }

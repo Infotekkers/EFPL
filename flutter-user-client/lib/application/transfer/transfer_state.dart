@@ -26,6 +26,7 @@ class TransferState with _$TransferState {
     required List<UserPlayer> filteredSelectedPlayerReplacements,
     required String selectedDropDownTeamValue,
     required String selectedDropDownInjuryStatusValue,
+    required bool isTeamValidated,
 
     // sort values
     required String playerNameCurrentSortOrder,
@@ -70,6 +71,7 @@ class TransferState with _$TransferState {
         playerPriceCurrentSortOrder: "",
         playerScoreCurrentSortOrder: "",
         minPriceSet: 3.5,
-        maxPriceSet: 17.0,
+        maxPriceSet: 14.0,
+        isTeamValidated: false,
       );
 }

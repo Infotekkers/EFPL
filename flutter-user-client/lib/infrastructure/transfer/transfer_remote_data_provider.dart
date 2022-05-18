@@ -488,36 +488,34 @@ class TransferRemoteDataProvider {
     }
   }
 
-  Future<Either<dynamic, bool>> saveUserPlayers(
-      {required int gameWeekId, required UserTeam userTeam}) async {
-    // TODO: implement saveUserPlayers
+  Future<Either<dynamic, bool>> saveUserPlayers({required Map userTeam}) async {
+    try {
+      var apiResponse =
+          await instance.client.patch(Uri.parse('$_baseURL/user/test'), body: {
+        "incomingTeam": jsonEncode(userTeam),
+      }).timeout(
+        Duration(seconds: ConstantValues().httpTimeOutDuration),
+      );
 
-    const userID = "627a7798bed9e567269bb8a9";
+      if (apiResponse.statusCode == 200) {
+        return right(true);
+      }
 
-    print(userTeamToJson(userTeam: userTeam));
+      // token issue
+      else if (apiResponse.statusCode == 401) {
+      }
 
-    // try {
-    //   HTTPInstance instance = getIt<HTTPInstance>();
+      // token issue
+      else if (apiResponse.statusCode == 403) {
+      }
 
-    //   var apiResponse = await instance.client.patch(
-    //     Uri.parse('$_baseURL/user/team/$userID/$gameWeekId'),
-    //     body: {
-    //       "incomingTeam": jsonEncode(
-    //         userTeamToJson(userTeam: userTeam),
-    //       ),
-    //     },
-    //   ).timeout(
-    //     const Duration(seconds: 30),
-    //   );
+      // token issue
+      else if (apiResponse.statusCode == 404) {
+      } else {}
+    } catch (e) {
+      print(e);
+    }
 
-    //   if (apiResponse.statusCode == 200) {
-    //     return right(true);
-    //   } else {
-    //     return left(false);
-    //   }
-    // } catch (e) {
-    //   return left(false);
-    // }
     return right(false);
   }
 }
