@@ -11,10 +11,50 @@ class TransferLocalDataProvider {
 
   TransferLocalDataProvider();
 
-  Future<Either<dynamic, List<UserPlayer>>> getAllPositionPlayers(
+  Future<Either<dynamic, List<UserPlayer>>> getAllPlayersInPosition(
       {required String playerPosition}) async {
-    await Hive.openBox("efplCache");
-    return left([]);
+    try {
+      List allPlayers =
+          transfersCache.get('allPlayersInPosition-$playerPosition');
+
+      List<UserPlayer> allUserPlayers = [];
+
+      for (var player in allPlayers) {
+        if (player['position'] == playerPosition) {
+          final currentPlayerMap = {
+            "playerId": (player['playerId']).toString(),
+            "playerName": player['playerName'],
+            "eplTeamId": player['eplTeamId'],
+            "eplTeamLogo": player['eplTeamLogo'],
+            "currentPrice": player['currentPrice'],
+            "position": player['position'],
+            "availability": {
+              "injuryStatus":
+                  (player['availability']['injuryStatus']).toString(),
+              "injuryMessage":
+                  (player['availability']['injuryMessage']).toString(),
+            },
+            "score": player['score'] ?? 0,
+            "multiplier": 0,
+            "isCaptain": false,
+            "isViceCaptain": false,
+            "upComingFixtures": player['upComingFixtures'] ?? [],
+          };
+
+          final UserPlayerDTO userPlayerDTO =
+              UserPlayerDTO.fromJson(currentPlayerMap);
+
+          allUserPlayers.add(userPlayerDTO.toDomain());
+        }
+      }
+      return right(allUserPlayers);
+    } catch (e) {
+      print(e);
+      return left([
+        <UserPlayer>[],
+        const TransferFailure.hiveError(failedValue: "Hive Error")
+      ]);
+    }
   }
 
   Future<Either<dynamic, bool>> saveAllPositionPlayers(
@@ -117,6 +157,17 @@ class TransferLocalDataProvider {
   void saveAllTeamsAndLogo({required List allTeams}) async {
     try {
       await transfersCache.put("allTeams", allTeams);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void saveAllPlayersInPosition(
+      {required List allPlayersInPosition,
+      required String playersPosition}) async {
+    try {
+      await transfersCache.put(
+          'allPlayersInPosition-$playersPosition', allPlayersInPosition);
     } catch (e) {
       print(e);
     }

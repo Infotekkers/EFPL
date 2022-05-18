@@ -20,15 +20,14 @@ class ApiTransferRepository implements ITransferRepository {
   final TransferLocalDataProvider _transferLocalDataProvider =
       TransferLocalDataProvider();
 
+  // handle all players in position
   @override
   Future<Either<dynamic, List<UserPlayer>>> getAllPositionPlayers(
       {required String playerPosition}) async {
     if (await utility.hasInternetConnection()) {
-      // return _transferRemoteDataProvider.getAllPositionPlayers(
-      //   playerPosition: playerPosition,
-      // );
-
-      return right([]);
+      return _transferRemoteDataProvider.getAllPositionPlayers(
+        playerPosition: playerPosition,
+      );
     } else {
       // return transferLocalDataProvider.getAllPositionPlayers(
       //     playerPosition: playerPosition);
@@ -38,6 +37,7 @@ class ApiTransferRepository implements ITransferRepository {
     }
   }
 
+  // handle user team data
   @override
   Future<Either<dynamic, UserTeam>> getUserPlayers() async {
     if (await utility.hasInternetConnection()) {

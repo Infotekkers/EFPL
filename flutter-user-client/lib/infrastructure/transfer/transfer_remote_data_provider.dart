@@ -91,28 +91,19 @@ class TransferRemoteDataProvider {
           allPlayers.add(parsedResponseBody[i]);
 
           // add to cache
-          try {
-            var efplCache = await Hive.openBox('efplCache');
-            efplCache.put("allPlayers", allPlayers);
-          } catch (e) {
-            print(e);
-            return left(
-              const TransferFailure.hiveError(
-                failedValue: "Error Caching Info",
-              ),
-            );
-          }
+          _transferLocalDataProvider.saveAllPlayersInPosition(
+            allPlayersInPosition: allPlayers,
+            playersPosition: playerPosition,
+          );
         }
         return right(allPlayersInPosition);
       }
 
       // No Token
       else if (apiResponse.statusCode == 403) {
-        List<UserPlayer> cachedUserPlayers =
-            await getUserPlayerFromCache(playerPosition: playerPosition);
         return left(
           [
-            cachedUserPlayers,
+            [],
             const TransferFailure.unauthenticated(
               failedValue: "Please Login!",
             ),
@@ -122,11 +113,9 @@ class TransferRemoteDataProvider {
 
       // No Token
       else if (apiResponse.statusCode == 401) {
-        List<UserPlayer> cachedUserPlayers =
-            await getUserPlayerFromCache(playerPosition: playerPosition);
         return left(
           [
-            cachedUserPlayers,
+            [],
             const TransferFailure.unauthorized(
               failedValue: "Please Login!",
             ),
@@ -136,12 +125,10 @@ class TransferRemoteDataProvider {
 
       //
       else {
-        List<UserPlayer> cachedUserPlayers =
-            await getUserPlayerFromCache(playerPosition: playerPosition);
         return left(
           [
-            cachedUserPlayers,
-            const HTTPFailures.unexpectedError(
+            [],
+            const TransferFailure.unexpectedError(
               failedValue: "Something went wrong",
             ),
           ],
@@ -150,13 +137,18 @@ class TransferRemoteDataProvider {
     }
     // Timeout Exception
     on TimeoutException catch (_) {
-      List<UserPlayer> cachedPlayers =
-          await getUserPlayerFromCache(playerPosition: playerPosition);
+      Either<dynamic, List<UserPlayer>> cacheCall =
+          await _transferLocalDataProvider.getAllPlayersInPosition(
+              playerPosition: playerPosition);
 
+      List<UserPlayer> cachedPlayers = cacheCall.fold(
+        (l) => l[0],
+        (r) => r,
+      );
       return left(
         [
           cachedPlayers,
-          const HTTPFailures.noConnection(
+          const TransferFailure.noConnection(
               failedValue: "Could not connect to server. Try refreshing.")
         ],
       );
@@ -164,12 +156,18 @@ class TransferRemoteDataProvider {
 
     // Socket Exception
     on SocketException catch (_) {
-      List<UserPlayer> cachedPlayers =
-          await getUserPlayerFromCache(playerPosition: playerPosition);
+      Either<dynamic, List<UserPlayer>> cacheCall =
+          await _transferLocalDataProvider.getAllPlayersInPosition(
+              playerPosition: playerPosition);
+
+      List<UserPlayer> cachedPlayers = cacheCall.fold(
+        (l) => l[0],
+        (r) => r,
+      );
       return left(
         [
           cachedPlayers,
-          const HTTPFailures.socketError(
+          const TransferFailure.socketError(
               failedValue: "Could not connect to server. Try refreshing."),
         ],
       );
@@ -177,12 +175,18 @@ class TransferRemoteDataProvider {
 
     // Handshake error
     on HandshakeException catch (_) {
-      List<UserPlayer> cachedPlayers =
-          await getUserPlayerFromCache(playerPosition: playerPosition);
+      Either<dynamic, List<UserPlayer>> cacheCall =
+          await _transferLocalDataProvider.getAllPlayersInPosition(
+              playerPosition: playerPosition);
+
+      List<UserPlayer> cachedPlayers = cacheCall.fold(
+        (l) => l[0],
+        (r) => r,
+      );
       return left(
         [
           cachedPlayers,
-          const HTTPFailures.handShakeError(
+          const TransferFailure.handShakeError(
               failedValue: "Could not connect to server. Try refreshing."),
         ],
       );
@@ -191,18 +195,25 @@ class TransferRemoteDataProvider {
     // unexpected error
     catch (e) {
       print(e);
-      List<UserPlayer> cachedPlayers =
-          await getUserPlayerFromCache(playerPosition: playerPosition);
+      Either<dynamic, List<UserPlayer>> cacheCall =
+          await _transferLocalDataProvider.getAllPlayersInPosition(
+              playerPosition: playerPosition);
+
+      List<UserPlayer> cachedPlayers = cacheCall.fold(
+        (l) => l[0],
+        (r) => r,
+      );
       return left(
         [
           cachedPlayers,
-          const HTTPFailures.unexpectedError(
+          const TransferFailure.unexpectedError(
               failedValue: "Something went wrong. Try again!"),
         ],
       );
     }
   }
 
+  //  get user team from server
   Future<Either<dynamic, UserTeam>> getUserPlayers() async {
     try {
       // make api call
@@ -352,7 +363,7 @@ class TransferRemoteDataProvider {
             maxBudget: 0,
             teamName: "",
           ),
-          const HTTPFailures.unauthenticated(
+          const TransferFailure.unauthenticated(
             failedValue: "Please Login!",
           ),
         ]);
@@ -373,7 +384,7 @@ class TransferRemoteDataProvider {
               maxBudget: 0,
               teamName: "",
             ),
-            const HTTPFailures.unauthorized(
+            const TransferFailure.unauthorized(
               failedValue: "Invalid Token.",
             ),
           ],
