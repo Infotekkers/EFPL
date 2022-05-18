@@ -187,6 +187,18 @@ class TransferLocalDataProvider {
     }
   }
 
+  Future<Either<dynamic, Map>> getChangedUserTeam() async {
+    try {
+      Map allTeams = await transfersCache.get("changedUserTeam");
+      return right(allTeams);
+    } catch (e) {
+      return left([
+        [],
+        const TransferFailure.hiveError(failedValue: "Hive Error"),
+      ]);
+    }
+  }
+
   void saveUserTeam({required Map userTeam}) async {
     try {
       await transfersCache.put("userTeam", userTeam);
@@ -209,6 +221,14 @@ class TransferLocalDataProvider {
     try {
       await transfersCache.put(
           'allPlayersInPosition-$playersPosition', allPlayersInPosition);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void saveUserTeamChanges({required Map changedUserTeam}) async {
+    try {
+      await transfersCache.put("changedUserTeam", changedUserTeam);
     } catch (e) {
       print(e);
     }

@@ -26,7 +26,6 @@ class TransferState with _$TransferState {
     required List<UserPlayer> filteredSelectedPlayerReplacements,
     required String selectedDropDownTeamValue,
     required String selectedDropDownInjuryStatusValue,
-    required bool isTeamValidated,
 
     // sort values
     required String playerNameCurrentSortOrder,
@@ -39,6 +38,8 @@ class TransferState with _$TransferState {
     // status of user team fetch
     required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
     required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
+    required double priceExceededBy,
+    required String countExceededTeam,
   }) = _TransferState;
 
   factory TransferState.initial() => TransferState(
@@ -71,7 +72,8 @@ class TransferState with _$TransferState {
         playerPriceCurrentSortOrder: "",
         playerScoreCurrentSortOrder: "",
         minPriceSet: 3.5,
-        maxPriceSet: 14.0,
-        isTeamValidated: false,
+        maxPriceSet: 15.0,
+        priceExceededBy: 0.0,
+        countExceededTeam: "",
       );
 }

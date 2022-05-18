@@ -2839,14 +2839,15 @@ class _$TransferStateTearOff {
       required List<UserPlayer> filteredSelectedPlayerReplacements,
       required String selectedDropDownTeamValue,
       required String selectedDropDownInjuryStatusValue,
-      required bool isTeamValidated,
       required String playerNameCurrentSortOrder,
       required String playerPriceCurrentSortOrder,
       required String playerScoreCurrentSortOrder,
       required double minPriceSet,
       required double maxPriceSet,
       required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
-      required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) {
+      required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
+      required double priceExceededBy,
+      required String countExceededTeam}) {
     return _TransferState(
       userTeam: userTeam,
       isLoading: isLoading,
@@ -2861,7 +2862,6 @@ class _$TransferStateTearOff {
       filteredSelectedPlayerReplacements: filteredSelectedPlayerReplacements,
       selectedDropDownTeamValue: selectedDropDownTeamValue,
       selectedDropDownInjuryStatusValue: selectedDropDownInjuryStatusValue,
-      isTeamValidated: isTeamValidated,
       playerNameCurrentSortOrder: playerNameCurrentSortOrder,
       playerPriceCurrentSortOrder: playerPriceCurrentSortOrder,
       playerScoreCurrentSortOrder: playerScoreCurrentSortOrder,
@@ -2869,6 +2869,8 @@ class _$TransferStateTearOff {
       maxPriceSet: maxPriceSet,
       userTeamFailureOrSuccess: userTeamFailureOrSuccess,
       valueFailureOrSuccess: valueFailureOrSuccess,
+      priceExceededBy: priceExceededBy,
+      countExceededTeam: countExceededTeam,
     );
   }
 }
@@ -2903,8 +2905,7 @@ mixin _$TransferState {
       throw _privateConstructorUsedError;
   String get selectedDropDownTeamValue => throw _privateConstructorUsedError;
   String get selectedDropDownInjuryStatusValue =>
-      throw _privateConstructorUsedError;
-  bool get isTeamValidated => throw _privateConstructorUsedError; // sort values
+      throw _privateConstructorUsedError; // sort values
   String get playerNameCurrentSortOrder => throw _privateConstructorUsedError;
   String get playerPriceCurrentSortOrder => throw _privateConstructorUsedError;
   String get playerScoreCurrentSortOrder =>
@@ -2916,6 +2917,8 @@ mixin _$TransferState {
       throw _privateConstructorUsedError;
   Option<Either<dynamic, dynamic>> get valueFailureOrSuccess =>
       throw _privateConstructorUsedError;
+  double get priceExceededBy => throw _privateConstructorUsedError;
+  String get countExceededTeam => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransferStateCopyWith<TransferState> get copyWith =>
@@ -2941,14 +2944,15 @@ abstract class $TransferStateCopyWith<$Res> {
       List<UserPlayer> filteredSelectedPlayerReplacements,
       String selectedDropDownTeamValue,
       String selectedDropDownInjuryStatusValue,
-      bool isTeamValidated,
       String playerNameCurrentSortOrder,
       String playerPriceCurrentSortOrder,
       String playerScoreCurrentSortOrder,
       double minPriceSet,
       double maxPriceSet,
       Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
-      Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
+      Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
+      double priceExceededBy,
+      String countExceededTeam});
 
   $UserTeamCopyWith<$Res> get userTeam;
 }
@@ -2977,7 +2981,6 @@ class _$TransferStateCopyWithImpl<$Res>
     Object? filteredSelectedPlayerReplacements = freezed,
     Object? selectedDropDownTeamValue = freezed,
     Object? selectedDropDownInjuryStatusValue = freezed,
-    Object? isTeamValidated = freezed,
     Object? playerNameCurrentSortOrder = freezed,
     Object? playerPriceCurrentSortOrder = freezed,
     Object? playerScoreCurrentSortOrder = freezed,
@@ -2985,6 +2988,8 @@ class _$TransferStateCopyWithImpl<$Res>
     Object? maxPriceSet = freezed,
     Object? userTeamFailureOrSuccess = freezed,
     Object? valueFailureOrSuccess = freezed,
+    Object? priceExceededBy = freezed,
+    Object? countExceededTeam = freezed,
   }) {
     return _then(_value.copyWith(
       userTeam: userTeam == freezed
@@ -3041,10 +3046,6 @@ class _$TransferStateCopyWithImpl<$Res>
           ? _value.selectedDropDownInjuryStatusValue
           : selectedDropDownInjuryStatusValue // ignore: cast_nullable_to_non_nullable
               as String,
-      isTeamValidated: isTeamValidated == freezed
-          ? _value.isTeamValidated
-          : isTeamValidated // ignore: cast_nullable_to_non_nullable
-              as bool,
       playerNameCurrentSortOrder: playerNameCurrentSortOrder == freezed
           ? _value.playerNameCurrentSortOrder
           : playerNameCurrentSortOrder // ignore: cast_nullable_to_non_nullable
@@ -3073,6 +3074,14 @@ class _$TransferStateCopyWithImpl<$Res>
           ? _value.valueFailureOrSuccess
           : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Option<Either<dynamic, dynamic>>,
+      priceExceededBy: priceExceededBy == freezed
+          ? _value.priceExceededBy
+          : priceExceededBy // ignore: cast_nullable_to_non_nullable
+              as double,
+      countExceededTeam: countExceededTeam == freezed
+          ? _value.countExceededTeam
+          : countExceededTeam // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -3105,14 +3114,15 @@ abstract class _$TransferStateCopyWith<$Res>
       List<UserPlayer> filteredSelectedPlayerReplacements,
       String selectedDropDownTeamValue,
       String selectedDropDownInjuryStatusValue,
-      bool isTeamValidated,
       String playerNameCurrentSortOrder,
       String playerPriceCurrentSortOrder,
       String playerScoreCurrentSortOrder,
       double minPriceSet,
       double maxPriceSet,
       Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
-      Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
+      Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
+      double priceExceededBy,
+      String countExceededTeam});
 
   @override
   $UserTeamCopyWith<$Res> get userTeam;
@@ -3144,7 +3154,6 @@ class __$TransferStateCopyWithImpl<$Res>
     Object? filteredSelectedPlayerReplacements = freezed,
     Object? selectedDropDownTeamValue = freezed,
     Object? selectedDropDownInjuryStatusValue = freezed,
-    Object? isTeamValidated = freezed,
     Object? playerNameCurrentSortOrder = freezed,
     Object? playerPriceCurrentSortOrder = freezed,
     Object? playerScoreCurrentSortOrder = freezed,
@@ -3152,6 +3161,8 @@ class __$TransferStateCopyWithImpl<$Res>
     Object? maxPriceSet = freezed,
     Object? userTeamFailureOrSuccess = freezed,
     Object? valueFailureOrSuccess = freezed,
+    Object? priceExceededBy = freezed,
+    Object? countExceededTeam = freezed,
   }) {
     return _then(_TransferState(
       userTeam: userTeam == freezed
@@ -3208,10 +3219,6 @@ class __$TransferStateCopyWithImpl<$Res>
           ? _value.selectedDropDownInjuryStatusValue
           : selectedDropDownInjuryStatusValue // ignore: cast_nullable_to_non_nullable
               as String,
-      isTeamValidated: isTeamValidated == freezed
-          ? _value.isTeamValidated
-          : isTeamValidated // ignore: cast_nullable_to_non_nullable
-              as bool,
       playerNameCurrentSortOrder: playerNameCurrentSortOrder == freezed
           ? _value.playerNameCurrentSortOrder
           : playerNameCurrentSortOrder // ignore: cast_nullable_to_non_nullable
@@ -3240,6 +3247,14 @@ class __$TransferStateCopyWithImpl<$Res>
           ? _value.valueFailureOrSuccess
           : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Option<Either<dynamic, dynamic>>,
+      priceExceededBy: priceExceededBy == freezed
+          ? _value.priceExceededBy
+          : priceExceededBy // ignore: cast_nullable_to_non_nullable
+              as double,
+      countExceededTeam: countExceededTeam == freezed
+          ? _value.countExceededTeam
+          : countExceededTeam // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -3261,14 +3276,15 @@ class _$_TransferState implements _TransferState {
       required this.filteredSelectedPlayerReplacements,
       required this.selectedDropDownTeamValue,
       required this.selectedDropDownInjuryStatusValue,
-      required this.isTeamValidated,
       required this.playerNameCurrentSortOrder,
       required this.playerPriceCurrentSortOrder,
       required this.playerScoreCurrentSortOrder,
       required this.minPriceSet,
       required this.maxPriceSet,
       required this.userTeamFailureOrSuccess,
-      required this.valueFailureOrSuccess});
+      required this.valueFailureOrSuccess,
+      required this.priceExceededBy,
+      required this.countExceededTeam});
 
   @override // list of user players and chips...
   final UserTeam userTeam;
@@ -3296,8 +3312,6 @@ class _$_TransferState implements _TransferState {
   final String selectedDropDownTeamValue;
   @override
   final String selectedDropDownInjuryStatusValue;
-  @override
-  final bool isTeamValidated;
   @override // sort values
   final String playerNameCurrentSortOrder;
   @override
@@ -3312,10 +3326,14 @@ class _$_TransferState implements _TransferState {
   final Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess;
   @override
   final Option<Either<dynamic, dynamic>> valueFailureOrSuccess;
+  @override
+  final double priceExceededBy;
+  @override
+  final String countExceededTeam;
 
   @override
   String toString() {
-    return 'TransferState(userTeam: $userTeam, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIdList: $transferredInPlayerIdList, swappedPlayerIdsList: $swappedPlayerIdsList, selectedPlayerReplacements: $selectedPlayerReplacements, filteredSelectedPlayerReplacements: $filteredSelectedPlayerReplacements, selectedDropDownTeamValue: $selectedDropDownTeamValue, selectedDropDownInjuryStatusValue: $selectedDropDownInjuryStatusValue, isTeamValidated: $isTeamValidated, playerNameCurrentSortOrder: $playerNameCurrentSortOrder, playerPriceCurrentSortOrder: $playerPriceCurrentSortOrder, playerScoreCurrentSortOrder: $playerScoreCurrentSortOrder, minPriceSet: $minPriceSet, maxPriceSet: $maxPriceSet, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess)';
+    return 'TransferState(userTeam: $userTeam, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIdList: $transferredInPlayerIdList, swappedPlayerIdsList: $swappedPlayerIdsList, selectedPlayerReplacements: $selectedPlayerReplacements, filteredSelectedPlayerReplacements: $filteredSelectedPlayerReplacements, selectedDropDownTeamValue: $selectedDropDownTeamValue, selectedDropDownInjuryStatusValue: $selectedDropDownInjuryStatusValue, playerNameCurrentSortOrder: $playerNameCurrentSortOrder, playerPriceCurrentSortOrder: $playerPriceCurrentSortOrder, playerScoreCurrentSortOrder: $playerScoreCurrentSortOrder, minPriceSet: $minPriceSet, maxPriceSet: $maxPriceSet, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess, priceExceededBy: $priceExceededBy, countExceededTeam: $countExceededTeam)';
   }
 
   @override
@@ -3349,8 +3367,6 @@ class _$_TransferState implements _TransferState {
             const DeepCollectionEquality().equals(
                 other.selectedDropDownInjuryStatusValue,
                 selectedDropDownInjuryStatusValue) &&
-            const DeepCollectionEquality()
-                .equals(other.isTeamValidated, isTeamValidated) &&
             const DeepCollectionEquality().equals(
                 other.playerNameCurrentSortOrder, playerNameCurrentSortOrder) &&
             const DeepCollectionEquality().equals(
@@ -3366,7 +3382,11 @@ class _$_TransferState implements _TransferState {
             const DeepCollectionEquality().equals(
                 other.userTeamFailureOrSuccess, userTeamFailureOrSuccess) &&
             const DeepCollectionEquality()
-                .equals(other.valueFailureOrSuccess, valueFailureOrSuccess));
+                .equals(other.valueFailureOrSuccess, valueFailureOrSuccess) &&
+            const DeepCollectionEquality()
+                .equals(other.priceExceededBy, priceExceededBy) &&
+            const DeepCollectionEquality()
+                .equals(other.countExceededTeam, countExceededTeam));
   }
 
   @override
@@ -3385,14 +3405,15 @@ class _$_TransferState implements _TransferState {
         const DeepCollectionEquality().hash(filteredSelectedPlayerReplacements),
         const DeepCollectionEquality().hash(selectedDropDownTeamValue),
         const DeepCollectionEquality().hash(selectedDropDownInjuryStatusValue),
-        const DeepCollectionEquality().hash(isTeamValidated),
         const DeepCollectionEquality().hash(playerNameCurrentSortOrder),
         const DeepCollectionEquality().hash(playerPriceCurrentSortOrder),
         const DeepCollectionEquality().hash(playerScoreCurrentSortOrder),
         const DeepCollectionEquality().hash(minPriceSet),
         const DeepCollectionEquality().hash(maxPriceSet),
         const DeepCollectionEquality().hash(userTeamFailureOrSuccess),
-        const DeepCollectionEquality().hash(valueFailureOrSuccess)
+        const DeepCollectionEquality().hash(valueFailureOrSuccess),
+        const DeepCollectionEquality().hash(priceExceededBy),
+        const DeepCollectionEquality().hash(countExceededTeam)
       ]);
 
   @JsonKey(ignore: true)
@@ -3403,28 +3424,28 @@ class _$_TransferState implements _TransferState {
 
 abstract class _TransferState implements TransferState {
   const factory _TransferState(
-          {required UserTeam userTeam,
-          required bool isLoading,
-          required bool transfersMade,
-          required int transfersMadeCount,
-          required double remainingInBank,
-          required String transferOutPlayerId,
-          required PlayerPosition selectedPlayerPosition,
-          required List<dynamic> transferredInPlayerIdList,
-          required List<dynamic> swappedPlayerIdsList,
-          required List<UserPlayer> selectedPlayerReplacements,
-          required List<UserPlayer> filteredSelectedPlayerReplacements,
-          required String selectedDropDownTeamValue,
-          required String selectedDropDownInjuryStatusValue,
-          required bool isTeamValidated,
-          required String playerNameCurrentSortOrder,
-          required String playerPriceCurrentSortOrder,
-          required String playerScoreCurrentSortOrder,
-          required double minPriceSet,
-          required double maxPriceSet,
-          required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
-          required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) =
-      _$_TransferState;
+      {required UserTeam userTeam,
+      required bool isLoading,
+      required bool transfersMade,
+      required int transfersMadeCount,
+      required double remainingInBank,
+      required String transferOutPlayerId,
+      required PlayerPosition selectedPlayerPosition,
+      required List<dynamic> transferredInPlayerIdList,
+      required List<dynamic> swappedPlayerIdsList,
+      required List<UserPlayer> selectedPlayerReplacements,
+      required List<UserPlayer> filteredSelectedPlayerReplacements,
+      required String selectedDropDownTeamValue,
+      required String selectedDropDownInjuryStatusValue,
+      required String playerNameCurrentSortOrder,
+      required String playerPriceCurrentSortOrder,
+      required String playerScoreCurrentSortOrder,
+      required double minPriceSet,
+      required double maxPriceSet,
+      required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
+      required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
+      required double priceExceededBy,
+      required String countExceededTeam}) = _$_TransferState;
 
   @override // list of user players and chips...
   UserTeam get userTeam;
@@ -3452,8 +3473,6 @@ abstract class _TransferState implements TransferState {
   String get selectedDropDownTeamValue;
   @override
   String get selectedDropDownInjuryStatusValue;
-  @override
-  bool get isTeamValidated;
   @override // sort values
   String get playerNameCurrentSortOrder;
   @override
@@ -3468,6 +3487,10 @@ abstract class _TransferState implements TransferState {
   Option<Either<dynamic, UserTeam>> get userTeamFailureOrSuccess;
   @override
   Option<Either<dynamic, dynamic>> get valueFailureOrSuccess;
+  @override
+  double get priceExceededBy;
+  @override
+  String get countExceededTeam;
   @override
   @JsonKey(ignore: true)
   _$TransferStateCopyWith<_TransferState> get copyWith =>

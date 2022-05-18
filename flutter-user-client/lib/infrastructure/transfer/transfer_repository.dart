@@ -76,13 +76,13 @@ class ApiTransferRepository implements ITransferRepository {
     };
 
     //
-
     if (await utility.hasInternetConnection()) {
-      _transferRemoteDataProvider.saveUserPlayers(userTeam: userTeamJson);
-
-      return left([]);
+      await _transferRemoteDataProvider.saveUserPlayers(userTeam: userTeamJson);
+      return right(true);
     } else {
-      return left([]);
+      _transferLocalDataProvider.saveUserTeamChanges(
+          changedUserTeam: userTeamJson);
+      return right(true);
     }
   }
 }

@@ -14,7 +14,6 @@ router.put("/transfer", userController.transfer);
 
 // new
 router.get("/team", userController.getUserTeam);
-router.patch("/team/:userId/:gameWeekId", userController.test);
-router.patch("/test", userController.test);
+router.patch("/team/", userController.transfer);
 
 module.exports = router;

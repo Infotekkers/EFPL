@@ -182,7 +182,7 @@ class TransferPlayerView extends StatelessWidget {
                 )
               : allPositionPlayerFiltered.isEmpty
                   ? const Center(
-                      child: const Text(
+                      child: Text(
                         "No Players",
                       ),
                     )
@@ -429,7 +429,7 @@ class TransferPlayerView extends StatelessWidget {
                                                 0.76,
                                         child: SfRangeSlider(
                                           min: 3.5,
-                                          max: 17.0,
+                                          max: 15.0,
                                           values: _values,
                                           interval: 0.1,
                                           activeColor:

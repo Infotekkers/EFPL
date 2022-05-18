@@ -1,17 +1,13 @@
-import 'package:dartz/dartz.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
-import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
-import 'package:efpl/infrastructure/transfer/transfer_local_data_provider.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/transfers/widgets/user_player_widget.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -37,16 +33,42 @@ class TransfersView extends StatelessWidget {
                 failure[1].maybeMap(
                   // Value failures
                   noTeamSelected: (_) {
-                    print("NO Team Selected");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Price Limit Exceeded!",
+                      message:
+                          "The team you have selected exceeds the limit. Please select a team again.",
+                      snackBarType: "warning",
+                    );
+
+                    Navigator.popAndPushNamed(context, "/transfer/initial");
                   },
                   exceededPrice: (_) {
-                    print("exceededPrice");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Price Limit Exceeded!",
+                      message:
+                          "The team you have selected exceeds the limit by ${state.priceExceededBy.toStringAsFixed(1)}. Please select a team again.",
+                      snackBarType: "warning",
+                    );
                   },
                   exceededTeamCount: (_) {
-                    print("exceededTeamCount");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Players from Team!",
+                      message:
+                          "You have selected more than 3 players from ${state.countExceededTeam}. Please select a team again.",
+                      snackBarType: "warning",
+                    );
                   },
                   incompleteTeam: (_) {
-                    print("incompleteTeam");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Incomplete Team!",
+                      message:
+                          "The Team you have selected is incomplete. Try again!",
+                      snackBarType: "error",
+                    );
                   },
                   deadlinePassed: (_) {
                     print("deadlinePassed");
@@ -54,28 +76,66 @@ class TransfersView extends StatelessWidget {
 
                   // Connection issues
                   noConnection: (_) {
-                    print("No Connection");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact the server. Please check your connection!",
+                      snackBarType: "warning",
+                    );
                   },
                   socketError: (_) {
-                    print("Socket Error");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact the server. Please check your connection!",
+                      snackBarType: "warning",
+                    );
                   },
                   handShakeError: (_) {
-                    print("Handshake Error");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact the server. Please check your connection!",
+                      snackBarType: "warning",
+                    );
                   },
 
                   // token issues
                   unauthorized: (_) {
-                    print("Unauthorized");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Please Login!",
+                      message: "Could not verify. Please login and try again!",
+                      snackBarType: "warning",
+                    );
                   },
                   unauthenticated: (_) {
-                    print("UnAuthenticated");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Please Login!",
+                      message: "Could not verify. Please login and try again!",
+                      snackBarType: "warning",
+                    );
                   },
                   unexpectedError: (_) {
-                    print("UnExpected Error");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Something went wrong!",
+                      message: "Something went wrong. Please try again!",
+                      snackBarType: "warning",
+                    );
                   },
 
                   hiveError: (_) {
-                    print("Hive Error");
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Caching Disabled!",
+                      message: "Something went wrong. Please try again!",
+                      snackBarType: "warning",
+                    );
                   },
 
                   orElse: () {

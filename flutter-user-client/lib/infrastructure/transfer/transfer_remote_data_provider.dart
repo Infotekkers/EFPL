@@ -3,20 +3,17 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:efpl/domain/core/http_failures.dart';
 import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/transfer/transfer_failures.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:efpl/infrastructure/transfer/transfer_local_data_provider.dart';
-import 'package:efpl/infrastructure/transfer/transfer_repository.dart';
 import 'package:efpl/infrastructure/transfer/user_player_dto.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/services/constants.dart';
 import 'package:efpl/services/http_instance.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hive/hive.dart';
 
 class TransferRemoteDataProvider {
   HTTPInstance instance = getIt<HTTPInstance>();
@@ -100,23 +97,22 @@ class TransferRemoteDataProvider {
       }
 
       // No Token
-      else if (apiResponse.statusCode == 403) {
-        return left(
-          [
-            [],
-            const TransferFailure.unauthenticated(
-              failedValue: "Please Login!",
-            ),
-          ],
-        );
-      }
-
-      // No Token
       else if (apiResponse.statusCode == 401) {
         return left(
           [
             [],
             const TransferFailure.unauthorized(
+              failedValue: "Please Login!",
+            ),
+          ],
+        );
+      }
+      // No Token
+      else if (apiResponse.statusCode == 403) {
+        return left(
+          [
+            [],
+            const TransferFailure.unauthenticated(
               failedValue: "Please Login!",
             ),
           ],
@@ -491,29 +487,111 @@ class TransferRemoteDataProvider {
   Future<Either<dynamic, bool>> saveUserPlayers({required Map userTeam}) async {
     try {
       var apiResponse =
-          await instance.client.patch(Uri.parse('$_baseURL/user/test'), body: {
+          await instance.client.patch(Uri.parse('$_baseURL/user/team'), body: {
         "incomingTeam": jsonEncode(userTeam),
       }).timeout(
         Duration(seconds: ConstantValues().httpTimeOutDuration),
       );
 
+      // success
       if (apiResponse.statusCode == 200) {
         return right(true);
       }
-
       // token issue
       else if (apiResponse.statusCode == 401) {
+        return left(
+          [
+            false,
+            const TransferFailure.unauthorized(
+              failedValue: "Please Login!",
+            ),
+          ],
+        );
       }
-
       // token issue
       else if (apiResponse.statusCode == 403) {
+        return left(
+          [
+            false,
+            const TransferFailure.unauthenticated(
+              failedValue: "Please Login!",
+            ),
+          ],
+        );
       }
-
-      // token issue
+      // 404
       else if (apiResponse.statusCode == 404) {
-      } else {}
-    } catch (e) {
+        return left(
+          [
+            [],
+            const TransferFailure.unexpectedError(
+              failedValue: "Something went wrong",
+            ),
+          ],
+        );
+      }
+      // unexpected
+      else {
+        return left(
+          [
+            [],
+            const TransferFailure.unexpectedError(
+              failedValue: "Something went wrong",
+            ),
+          ],
+        );
+      }
+    }
+    // Timeout Exception
+    on TimeoutException catch (_) {
+      //  cache
+      _transferLocalDataProvider.saveUserTeamChanges(changedUserTeam: userTeam);
+      return left(
+        [
+          true,
+          const TransferFailure.noConnection(
+              failedValue: "Could not connect to server. Try refreshing.")
+        ],
+      );
+    }
+    // Socket Exception
+    on SocketException catch (_) {
+      //  cache
+      _transferLocalDataProvider.saveUserTeamChanges(changedUserTeam: userTeam);
+      return left(
+        [
+          true,
+          const TransferFailure.socketError(
+              failedValue: "Could not connect to server. Try refreshing."),
+        ],
+      );
+    }
+
+    // Handshake error
+    on HandshakeException catch (_) {
+      //  cache
+      _transferLocalDataProvider.saveUserTeamChanges(changedUserTeam: userTeam);
+      return left(
+        [
+          true,
+          const TransferFailure.handShakeError(
+              failedValue: "Could not connect to server. Try refreshing."),
+        ],
+      );
+    }
+    // unexpected error
+    catch (e) {
       print(e);
+      //  cache
+      _transferLocalDataProvider.saveUserTeamChanges(changedUserTeam: userTeam);
+
+      return left(
+        [
+          true,
+          const TransferFailure.unexpectedError(
+              failedValue: "Something went wrong. Try again!"),
+        ],
+      );
     }
 
     return right(false);

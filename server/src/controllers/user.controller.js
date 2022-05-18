@@ -213,7 +213,12 @@ const transfer = asyncHandler(async (req, res) => {
 
   // Fetch active gameweek
   let activeGameweek = await Gameweek.findOne({ status: "Active" }).exec();
-  activeGameweek = activeGameweek.gameWeekNumber;
+
+  if (activeGameweek) {
+    activeGameweek = activeGameweek.gameWeekNumber;
+  } else {
+    activeGameweek = 1;
+  }
 
   // Fetch User Details
   const user = await User.findById(userId).exec();
@@ -260,6 +265,8 @@ const transfer = asyncHandler(async (req, res) => {
         await User.findByIdAndUpdate(userId, { $push: { team: activeTeam } });
       }
     }
+
+    console.log("Here");
 
     res.status(200).json({ message: "Successfuly saved team" });
   } else {
@@ -402,14 +409,6 @@ const getUserTeam = asyncHandler(async (req, res) => {
   }
 });
 
-const test = asyncHandler(async (req, res) => {
-  let { incomingTeam } = req.body;
-  incomingTeam = JSON.parse(incomingTeam);
-
-  console.log(incomingTeam.incomingTeam);
-  res.send("Done");
-});
-
 module.exports = {
   register,
   login,
@@ -423,5 +422,4 @@ module.exports = {
 
   // New
   getUserTeam,
-  test,
 };

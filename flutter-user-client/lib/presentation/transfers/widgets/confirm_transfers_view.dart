@@ -267,7 +267,7 @@ class ConfirmTransfersPage extends StatelessWidget {
                               const TransferEvent.saveUserPlayers(),
                             );
 
-                            // Navigator.pop(context);
+                            Navigator.pop(context);
                           },
                           child: Text(
                             "Confirm Transfers ( " +

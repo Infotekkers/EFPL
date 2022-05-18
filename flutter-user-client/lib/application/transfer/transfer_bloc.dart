@@ -540,15 +540,15 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
               userTeam: state.userTeam,
             );
 
-            // emit(
-            //   state.copyWith(
-            //     isLoading: false,
-            //     transfersMade: false,
-            //     transfersMadeCount: 0,
-            //     transferredInPlayerIdList: [],
-            //     swappedPlayerIdsList: [],
-            //   ),
-            // );
+            emit(
+              state.copyWith(
+                isLoading: false,
+                transfersMade: false,
+                transfersMadeCount: 0,
+                transferredInPlayerIdList: [],
+                swappedPlayerIdsList: [],
+              ),
+            );
           }
         }
       },
@@ -879,6 +879,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       );
 
       bool teamCountExceeded = false;
+      String exceededTeam = '';
       for (var team in allTeams) {
         List teamCount = allUserPlayers
             .where((player) =>
@@ -888,6 +889,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
         if (teamCount.length > 3) {
           teamCountExceeded = true;
+          exceededTeam = team['teamName'];
         }
       }
 
@@ -902,6 +904,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
         emit(state.copyWith(
           valueFailureOrSuccess: some(valueFailureOrSuccess),
+          priceExceededBy: allPlayersSum - state.userTeam.maxBudget,
         ));
       }
       // team count
@@ -915,6 +918,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
         emit(state.copyWith(
           valueFailureOrSuccess: some(valueFailureOrSuccess),
+          countExceededTeam: exceededTeam,
         ));
       }
 
@@ -933,9 +937,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       }
       // validated
       else {
-        emit(
-          state.copyWith(isLoading: false),
-        );
         // get all players
         Either<dynamic, List> allPlayersCall =
             await TransferLocalDataProvider().getAllPlayers();
@@ -950,6 +951,9 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           },
         );
       }
+      emit(
+        state.copyWith(isLoading: false),
+      );
     });
   }
 }
