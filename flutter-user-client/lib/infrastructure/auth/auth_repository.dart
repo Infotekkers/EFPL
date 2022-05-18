@@ -69,12 +69,13 @@ class AuthRepository implements IAuthRepository {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
         return right(userDtoIn.toDomain());
-      } else if (response.statusCode == 400) {
+      } else if (response.statusCode == 404) {
         return left(const AuthFailure.emailNotFound());
       } else {
         return left(const AuthFailure.serverError());
       }
     } catch (err) {
+      print(err);
       return left(const AuthFailure.networkError());
     }
   }

@@ -162,34 +162,42 @@ const deleteUser = asyncHandler(async (req, res) => {
 const requestReset = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
-  // generate reset token
-  const resetToken = jwt.sign(
-    {
-      data: email,
-    },
-    secretKey,
-    { expiresIn: 60 * 60 }
-  );
-  const resetUrl = `http://localhost:5000/user1/resetPass/${resetToken}`;
+  // check if email exists
+  const user = await User.findOne({ email: { $eq: email } });
 
-  const mailOptions = {
-    from: process.env.user,
-    to: "mikealexiv565@gmail.com",
-    subject: "Reset Email via Node",
-    text: `${resetUrl}`,
-  };
+if(user){
+// generate reset token
+const resetToken = jwt.sign(
+  {
+    data: email,
+  },
+  secretKey,
+  { expiresIn: 60 * 60 }
+);
+const resetUrl = `http://localhost:5000/user1/resetPass/${resetToken}`;
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      res.status(400).json({
-        messaage: "could not send reset email",
-      });
-      console.log(error);
-    } else {
-      res.status(200).json({ messaage: "Email Sent Successfully" });
-      console.log("email sent: " + info.response);
-    }
-  });
+const mailOptions = {
+  from: process.env.user,
+  to: "mikealexiv565@gmail.com",
+  subject: "Reset Email via Node",
+  text: `${resetUrl}`,
+};
+
+transporter.sendMail(mailOptions, function (error, info) {
+  if (error) {
+    res.status(400).json({
+      messaage: "could not send reset email",
+    });
+    console.log(error);
+  } else {
+    res.status(200).json({ messaage: "Email Sent Successfully" });
+    console.log("email sent: " + info.response);
+  }
+});
+  }else{
+    res.status(404).send({message:"email not found"});
+  }
+  
 });
 
 const resetPass = asyncHandler(async (req, res) => {

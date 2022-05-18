@@ -47,13 +47,13 @@ class RequestResetFormBloc
         failureOrSuccess = await _authRepository.requestReset(
           user: user.copyWith(email: state.email),
         );
-        emit(
-          state.copyWith(
-            isSubmitting: false,
-            authFailureOrSuccessOption: some(failureOrSuccess),
-          ),
-        );
       }
+      emit(
+        state.copyWith(
+          isSubmitting: false,
+          authFailureOrSuccessOption: some(failureOrSuccess!),
+        ),
+      );
     });
   }
 }
