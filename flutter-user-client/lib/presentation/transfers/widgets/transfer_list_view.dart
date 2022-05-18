@@ -110,11 +110,7 @@ class TransferPlayerView extends StatelessWidget {
         }
 
         // get args
-
         final args = ModalRoute.of(context)!.settings.arguments as Map;
-
-        print(args['currentPlayerId']);
-
         String currentTransferredPlayerId = args['currentPlayerId'];
         List currentPlayerFilter = state.selectedPlayerReplacements
             .where((player) =>
