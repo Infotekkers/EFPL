@@ -5,7 +5,7 @@ abstract class MyTeamEvent with _$MyTeamEvent {
   const factory MyTeamEvent.loadMyTeam(String userId, String gameweekId) =
       _LoadMyTeam;
   const factory MyTeamEvent.transferOptionsRequested(
-      MyTeamPlayer player, MyTeam myTeam) = _TransferOptionsRequested;
+      int playerId, String position) = _TransferOptionsRequested;
   const factory MyTeamEvent.transferConfirmed(
       String playerOne,
       String playerOneFieldPos,

@@ -33,12 +33,9 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
       (failure) => emit(
         MyTeamState.loadFailure(failure),
       ),
-      (myTeam) {
-        print(myTeam.players);
-        emit(
-          MyTeamState.loadSuccess(myTeam),
-        );
-      },
+      (myTeam) => emit(
+        MyTeamState.loadSuccess(myTeam),
+      ),
     );
   }
 
@@ -52,16 +49,21 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
       'sub': [4, 4]
     };
 
-    final validPositions = [e.player.position.getOrCrash()];
+    final myTeam =
+        state.maybeMap(loadSuccess: (s) => s.myTeam, orElse: () => null)!;
 
-    for (String position in e.myTeam.players.keys) {
-      if (e.myTeam.players[position].length < positionalRange[position]?[1] &&
-          position != e.player.position.getOrCrash()) {
+    final validPositions = [e.position];
+
+    for (String position in myTeam.players.keys) {
+      if (myTeam.players[position].getOrCrash().keys.toList().length <
+              positionalRange[position]?[1] &&
+          position != e.position) {
         validPositions.add(position);
       }
     }
+    print(validPositions);
 
-    emit(MyTeamState.transferOptionsLoaded(validPositions));
+    emit(MyTeamState.transferOptionsLoaded(validPositions, myTeam));
   }
 
   void _onTransferConfirmed(_TransferConfirmed e, Emitter<MyTeamState> emit) {
