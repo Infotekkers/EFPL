@@ -66,7 +66,7 @@ class Country extends ValueObject<String> {
 
   factory Country(String countryStr) {
     return Country._(
-      validateNotEmpty(countryStr),
+      validateTeamName(countryStr),
     );
   }
 
@@ -80,7 +80,7 @@ class FavoriteEplTeam extends ValueObject<String> {
 
   factory FavoriteEplTeam(String favTeamStr) {
     return FavoriteEplTeam._(
-      validateNotEmpty(favTeamStr),
+      validateTeamName(favTeamStr),
     );
   }
 

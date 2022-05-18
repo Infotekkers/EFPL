@@ -40,6 +40,10 @@ class _$AuthFailureTearOff {
   EmailNotFound emailNotFound() {
     return const EmailNotFound();
   }
+
+  PassordsDontMatch passwordDontMatch() {
+    return const PassordsDontMatch();
+  }
 }
 
 /// @nodoc
@@ -55,6 +59,7 @@ mixin _$AuthFailure {
     required TResult Function() emailAlreadyInUse,
     required TResult Function() invalidEmailPasswordCombination,
     required TResult Function() emailNotFound,
+    required TResult Function() passwordDontMatch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +70,7 @@ mixin _$AuthFailure {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +81,7 @@ mixin _$AuthFailure {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -87,6 +94,7 @@ mixin _$AuthFailure {
     required TResult Function(InvalidEmailPasswordCombination value)
         invalidEmailPasswordCombination,
     required TResult Function(EmailNotFound value) emailNotFound,
+    required TResult Function(PassordsDontMatch value) passwordDontMatch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -98,6 +106,7 @@ mixin _$AuthFailure {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -109,6 +118,7 @@ mixin _$AuthFailure {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -151,12 +161,20 @@ class _$CancelledByUserCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CancelledByUser implements CancelledByUser {
+class _$CancelledByUser
+    with DiagnosticableTreeMixin
+    implements CancelledByUser {
   const _$CancelledByUser();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AuthFailure.cancelledByUser()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AuthFailure.cancelledByUser'));
   }
 
   @override
@@ -177,6 +195,7 @@ class _$CancelledByUser implements CancelledByUser {
     required TResult Function() emailAlreadyInUse,
     required TResult Function() invalidEmailPasswordCombination,
     required TResult Function() emailNotFound,
+    required TResult Function() passwordDontMatch,
   }) {
     return cancelledByUser();
   }
@@ -190,6 +209,7 @@ class _$CancelledByUser implements CancelledByUser {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
   }) {
     return cancelledByUser?.call();
   }
@@ -203,6 +223,7 @@ class _$CancelledByUser implements CancelledByUser {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (cancelledByUser != null) {
@@ -221,6 +242,7 @@ class _$CancelledByUser implements CancelledByUser {
     required TResult Function(InvalidEmailPasswordCombination value)
         invalidEmailPasswordCombination,
     required TResult Function(EmailNotFound value) emailNotFound,
+    required TResult Function(PassordsDontMatch value) passwordDontMatch,
   }) {
     return cancelledByUser(this);
   }
@@ -235,6 +257,7 @@ class _$CancelledByUser implements CancelledByUser {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
   }) {
     return cancelledByUser?.call(this);
   }
@@ -249,6 +272,7 @@ class _$CancelledByUser implements CancelledByUser {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (cancelledByUser != null) {
@@ -282,12 +306,18 @@ class _$ServerErrorCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ServerError implements ServerError {
+class _$ServerError with DiagnosticableTreeMixin implements ServerError {
   const _$ServerError();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AuthFailure.serverError()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AuthFailure.serverError'));
   }
 
   @override
@@ -308,6 +338,7 @@ class _$ServerError implements ServerError {
     required TResult Function() emailAlreadyInUse,
     required TResult Function() invalidEmailPasswordCombination,
     required TResult Function() emailNotFound,
+    required TResult Function() passwordDontMatch,
   }) {
     return serverError();
   }
@@ -321,6 +352,7 @@ class _$ServerError implements ServerError {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
   }) {
     return serverError?.call();
   }
@@ -334,6 +366,7 @@ class _$ServerError implements ServerError {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -352,6 +385,7 @@ class _$ServerError implements ServerError {
     required TResult Function(InvalidEmailPasswordCombination value)
         invalidEmailPasswordCombination,
     required TResult Function(EmailNotFound value) emailNotFound,
+    required TResult Function(PassordsDontMatch value) passwordDontMatch,
   }) {
     return serverError(this);
   }
@@ -366,6 +400,7 @@ class _$ServerError implements ServerError {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
   }) {
     return serverError?.call(this);
   }
@@ -380,6 +415,7 @@ class _$ServerError implements ServerError {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -413,12 +449,18 @@ class _$NetworkErrorCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NetworkError implements NetworkError {
+class _$NetworkError with DiagnosticableTreeMixin implements NetworkError {
   const _$NetworkError();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AuthFailure.networkError()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AuthFailure.networkError'));
   }
 
   @override
@@ -439,6 +481,7 @@ class _$NetworkError implements NetworkError {
     required TResult Function() emailAlreadyInUse,
     required TResult Function() invalidEmailPasswordCombination,
     required TResult Function() emailNotFound,
+    required TResult Function() passwordDontMatch,
   }) {
     return networkError();
   }
@@ -452,6 +495,7 @@ class _$NetworkError implements NetworkError {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
   }) {
     return networkError?.call();
   }
@@ -465,6 +509,7 @@ class _$NetworkError implements NetworkError {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (networkError != null) {
@@ -483,6 +528,7 @@ class _$NetworkError implements NetworkError {
     required TResult Function(InvalidEmailPasswordCombination value)
         invalidEmailPasswordCombination,
     required TResult Function(EmailNotFound value) emailNotFound,
+    required TResult Function(PassordsDontMatch value) passwordDontMatch,
   }) {
     return networkError(this);
   }
@@ -497,6 +543,7 @@ class _$NetworkError implements NetworkError {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
   }) {
     return networkError?.call(this);
   }
@@ -511,6 +558,7 @@ class _$NetworkError implements NetworkError {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (networkError != null) {
@@ -545,12 +593,21 @@ class _$EmailAlreadyInUseCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$EmailAlreadyInUse implements EmailAlreadyInUse {
+class _$EmailAlreadyInUse
+    with DiagnosticableTreeMixin
+    implements EmailAlreadyInUse {
   const _$EmailAlreadyInUse();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AuthFailure.emailAlreadyInUse()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'AuthFailure.emailAlreadyInUse'));
   }
 
   @override
@@ -571,6 +628,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     required TResult Function() emailAlreadyInUse,
     required TResult Function() invalidEmailPasswordCombination,
     required TResult Function() emailNotFound,
+    required TResult Function() passwordDontMatch,
   }) {
     return emailAlreadyInUse();
   }
@@ -584,6 +642,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
   }) {
     return emailAlreadyInUse?.call();
   }
@@ -597,6 +656,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -615,6 +675,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     required TResult Function(InvalidEmailPasswordCombination value)
         invalidEmailPasswordCombination,
     required TResult Function(EmailNotFound value) emailNotFound,
+    required TResult Function(PassordsDontMatch value) passwordDontMatch,
   }) {
     return emailAlreadyInUse(this);
   }
@@ -629,6 +690,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
   }) {
     return emailAlreadyInUse?.call(this);
   }
@@ -643,6 +705,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -681,12 +744,20 @@ class _$InvalidEmailPasswordCombinationCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InvalidEmailPasswordCombination
+    with DiagnosticableTreeMixin
     implements InvalidEmailPasswordCombination {
   const _$InvalidEmailPasswordCombination();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AuthFailure.invalidEmailPasswordCombination()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty(
+        'type', 'AuthFailure.invalidEmailPasswordCombination'));
   }
 
   @override
@@ -708,6 +779,7 @@ class _$InvalidEmailPasswordCombination
     required TResult Function() emailAlreadyInUse,
     required TResult Function() invalidEmailPasswordCombination,
     required TResult Function() emailNotFound,
+    required TResult Function() passwordDontMatch,
   }) {
     return invalidEmailPasswordCombination();
   }
@@ -721,6 +793,7 @@ class _$InvalidEmailPasswordCombination
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
   }) {
     return invalidEmailPasswordCombination?.call();
   }
@@ -734,6 +807,7 @@ class _$InvalidEmailPasswordCombination
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (invalidEmailPasswordCombination != null) {
@@ -752,6 +826,7 @@ class _$InvalidEmailPasswordCombination
     required TResult Function(InvalidEmailPasswordCombination value)
         invalidEmailPasswordCombination,
     required TResult Function(EmailNotFound value) emailNotFound,
+    required TResult Function(PassordsDontMatch value) passwordDontMatch,
   }) {
     return invalidEmailPasswordCombination(this);
   }
@@ -766,6 +841,7 @@ class _$InvalidEmailPasswordCombination
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
   }) {
     return invalidEmailPasswordCombination?.call(this);
   }
@@ -780,6 +856,7 @@ class _$InvalidEmailPasswordCombination
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (invalidEmailPasswordCombination != null) {
@@ -814,12 +891,18 @@ class _$EmailNotFoundCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$EmailNotFound implements EmailNotFound {
+class _$EmailNotFound with DiagnosticableTreeMixin implements EmailNotFound {
   const _$EmailNotFound();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AuthFailure.emailNotFound()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AuthFailure.emailNotFound'));
   }
 
   @override
@@ -840,6 +923,7 @@ class _$EmailNotFound implements EmailNotFound {
     required TResult Function() emailAlreadyInUse,
     required TResult Function() invalidEmailPasswordCombination,
     required TResult Function() emailNotFound,
+    required TResult Function() passwordDontMatch,
   }) {
     return emailNotFound();
   }
@@ -853,6 +937,7 @@ class _$EmailNotFound implements EmailNotFound {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
   }) {
     return emailNotFound?.call();
   }
@@ -866,6 +951,7 @@ class _$EmailNotFound implements EmailNotFound {
     TResult Function()? emailAlreadyInUse,
     TResult Function()? invalidEmailPasswordCombination,
     TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (emailNotFound != null) {
@@ -884,6 +970,7 @@ class _$EmailNotFound implements EmailNotFound {
     required TResult Function(InvalidEmailPasswordCombination value)
         invalidEmailPasswordCombination,
     required TResult Function(EmailNotFound value) emailNotFound,
+    required TResult Function(PassordsDontMatch value) passwordDontMatch,
   }) {
     return emailNotFound(this);
   }
@@ -898,6 +985,7 @@ class _$EmailNotFound implements EmailNotFound {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
   }) {
     return emailNotFound?.call(this);
   }
@@ -912,6 +1000,7 @@ class _$EmailNotFound implements EmailNotFound {
     TResult Function(InvalidEmailPasswordCombination value)?
         invalidEmailPasswordCombination,
     TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
     required TResult orElse(),
   }) {
     if (emailNotFound != null) {
@@ -923,4 +1012,151 @@ class _$EmailNotFound implements EmailNotFound {
 
 abstract class EmailNotFound implements AuthFailure {
   const factory EmailNotFound() = _$EmailNotFound;
+}
+
+/// @nodoc
+abstract class $PassordsDontMatchCopyWith<$Res> {
+  factory $PassordsDontMatchCopyWith(
+          PassordsDontMatch value, $Res Function(PassordsDontMatch) then) =
+      _$PassordsDontMatchCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$PassordsDontMatchCopyWithImpl<$Res>
+    extends _$AuthFailureCopyWithImpl<$Res>
+    implements $PassordsDontMatchCopyWith<$Res> {
+  _$PassordsDontMatchCopyWithImpl(
+      PassordsDontMatch _value, $Res Function(PassordsDontMatch) _then)
+      : super(_value, (v) => _then(v as PassordsDontMatch));
+
+  @override
+  PassordsDontMatch get _value => super._value as PassordsDontMatch;
+}
+
+/// @nodoc
+
+class _$PassordsDontMatch
+    with DiagnosticableTreeMixin
+    implements PassordsDontMatch {
+  const _$PassordsDontMatch();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AuthFailure.passwordDontMatch()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'AuthFailure.passwordDontMatch'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is PassordsDontMatch);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() cancelledByUser,
+    required TResult Function() serverError,
+    required TResult Function() networkError,
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() invalidEmailPasswordCombination,
+    required TResult Function() emailNotFound,
+    required TResult Function() passwordDontMatch,
+  }) {
+    return passwordDontMatch();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? cancelledByUser,
+    TResult Function()? serverError,
+    TResult Function()? networkError,
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? invalidEmailPasswordCombination,
+    TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
+  }) {
+    return passwordDontMatch?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cancelledByUser,
+    TResult Function()? serverError,
+    TResult Function()? networkError,
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? invalidEmailPasswordCombination,
+    TResult Function()? emailNotFound,
+    TResult Function()? passwordDontMatch,
+    required TResult orElse(),
+  }) {
+    if (passwordDontMatch != null) {
+      return passwordDontMatch();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CancelledByUser value) cancelledByUser,
+    required TResult Function(ServerError value) serverError,
+    required TResult Function(NetworkError value) networkError,
+    required TResult Function(EmailAlreadyInUse value) emailAlreadyInUse,
+    required TResult Function(InvalidEmailPasswordCombination value)
+        invalidEmailPasswordCombination,
+    required TResult Function(EmailNotFound value) emailNotFound,
+    required TResult Function(PassordsDontMatch value) passwordDontMatch,
+  }) {
+    return passwordDontMatch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(CancelledByUser value)? cancelledByUser,
+    TResult Function(ServerError value)? serverError,
+    TResult Function(NetworkError value)? networkError,
+    TResult Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult Function(InvalidEmailPasswordCombination value)?
+        invalidEmailPasswordCombination,
+    TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
+  }) {
+    return passwordDontMatch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CancelledByUser value)? cancelledByUser,
+    TResult Function(ServerError value)? serverError,
+    TResult Function(NetworkError value)? networkError,
+    TResult Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult Function(InvalidEmailPasswordCombination value)?
+        invalidEmailPasswordCombination,
+    TResult Function(EmailNotFound value)? emailNotFound,
+    TResult Function(PassordsDontMatch value)? passwordDontMatch,
+    required TResult orElse(),
+  }) {
+    if (passwordDontMatch != null) {
+      return passwordDontMatch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PassordsDontMatch implements AuthFailure {
+  const factory PassordsDontMatch() = _$PassordsDontMatch;
 }

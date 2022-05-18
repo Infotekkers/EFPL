@@ -21,9 +21,19 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 class _$UserDtoTearOff {
   const _$UserDtoTearOff();
 
-  _UserDto call({required String email, String password = ""}) {
+  _UserDto call(
+      {required String email,
+      required String userName,
+      required String teamName,
+      required String country,
+      required String favoriteEplTeamId,
+      String password = ""}) {
     return _UserDto(
       email: email,
+      userName: userName,
+      teamName: teamName,
+      country: country,
+      favoriteEplTeamId: favoriteEplTeamId,
       password: password,
     );
   }
@@ -38,11 +48,11 @@ const $UserDto = _$UserDtoTearOff();
 
 /// @nodoc
 mixin _$UserDto {
-  String get email =>
-      throw _privateConstructorUsedError; // required String userName,
-// required String teamName,
-// required String country,
-// required String favoriteEplTeam,
+  String get email => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
+  String get teamName => throw _privateConstructorUsedError;
+  String get country => throw _privateConstructorUsedError;
+  String get favoriteEplTeamId => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,7 +64,13 @@ mixin _$UserDto {
 abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
       _$UserDtoCopyWithImpl<$Res>;
-  $Res call({String email, String password});
+  $Res call(
+      {String email,
+      String userName,
+      String teamName,
+      String country,
+      String favoriteEplTeamId,
+      String password});
 }
 
 /// @nodoc
@@ -68,12 +84,32 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
   @override
   $Res call({
     Object? email = freezed,
+    Object? userName = freezed,
+    Object? teamName = freezed,
+    Object? country = freezed,
+    Object? favoriteEplTeamId = freezed,
     Object? password = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      teamName: teamName == freezed
+          ? _value.teamName
+          : teamName // ignore: cast_nullable_to_non_nullable
+              as String,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      favoriteEplTeamId: favoriteEplTeamId == freezed
+          ? _value.favoriteEplTeamId
+          : favoriteEplTeamId // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -88,7 +124,13 @@ abstract class _$UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
   factory _$UserDtoCopyWith(_UserDto value, $Res Function(_UserDto) then) =
       __$UserDtoCopyWithImpl<$Res>;
   @override
-  $Res call({String email, String password});
+  $Res call(
+      {String email,
+      String userName,
+      String teamName,
+      String country,
+      String favoriteEplTeamId,
+      String password});
 }
 
 /// @nodoc
@@ -103,12 +145,32 @@ class __$UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? email = freezed,
+    Object? userName = freezed,
+    Object? teamName = freezed,
+    Object? country = freezed,
+    Object? favoriteEplTeamId = freezed,
     Object? password = freezed,
   }) {
     return _then(_UserDto(
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      teamName: teamName == freezed
+          ? _value.teamName
+          : teamName // ignore: cast_nullable_to_non_nullable
+              as String,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      favoriteEplTeamId: favoriteEplTeamId == freezed
+          ? _value.favoriteEplTeamId
+          : favoriteEplTeamId // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -121,23 +183,35 @@ class __$UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserDto extends _UserDto {
-  const _$_UserDto({required this.email, this.password = ""}) : super._();
+  const _$_UserDto(
+      {required this.email,
+      required this.userName,
+      required this.teamName,
+      required this.country,
+      required this.favoriteEplTeamId,
+      this.password = ""})
+      : super._();
 
   factory _$_UserDto.fromJson(Map<String, dynamic> json) =>
       _$$_UserDtoFromJson(json);
 
   @override
   final String email;
+  @override
+  final String userName;
+  @override
+  final String teamName;
+  @override
+  final String country;
+  @override
+  final String favoriteEplTeamId;
   @JsonKey()
-  @override // required String userName,
-// required String teamName,
-// required String country,
-// required String favoriteEplTeam,
+  @override
   final String password;
 
   @override
   String toString() {
-    return 'UserDto(email: $email, password: $password)';
+    return 'UserDto(email: $email, userName: $userName, teamName: $teamName, country: $country, favoriteEplTeamId: $favoriteEplTeamId, password: $password)';
   }
 
   @override
@@ -146,6 +220,11 @@ class _$_UserDto extends _UserDto {
         (other.runtimeType == runtimeType &&
             other is _UserDto &&
             const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.userName, userName) &&
+            const DeepCollectionEquality().equals(other.teamName, teamName) &&
+            const DeepCollectionEquality().equals(other.country, country) &&
+            const DeepCollectionEquality()
+                .equals(other.favoriteEplTeamId, favoriteEplTeamId) &&
             const DeepCollectionEquality().equals(other.password, password));
   }
 
@@ -153,6 +232,10 @@ class _$_UserDto extends _UserDto {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(userName),
+      const DeepCollectionEquality().hash(teamName),
+      const DeepCollectionEquality().hash(country),
+      const DeepCollectionEquality().hash(favoriteEplTeamId),
       const DeepCollectionEquality().hash(password));
 
   @JsonKey(ignore: true)
@@ -167,17 +250,28 @@ class _$_UserDto extends _UserDto {
 }
 
 abstract class _UserDto extends UserDto {
-  const factory _UserDto({required String email, String password}) = _$_UserDto;
+  const factory _UserDto(
+      {required String email,
+      required String userName,
+      required String teamName,
+      required String country,
+      required String favoriteEplTeamId,
+      String password}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
 
   @override
   String get email;
-  @override // required String userName,
-// required String teamName,
-// required String country,
-// required String favoriteEplTeam,
+  @override
+  String get userName;
+  @override
+  String get teamName;
+  @override
+  String get country;
+  @override
+  String get favoriteEplTeamId;
+  @override
   String get password;
   @override
   @JsonKey(ignore: true)

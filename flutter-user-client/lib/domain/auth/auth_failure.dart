@@ -11,4 +11,5 @@ abstract class AuthFailure with _$AuthFailure {
   const factory AuthFailure.invalidEmailPasswordCombination() =
       InvalidEmailPasswordCombination;
   const factory AuthFailure.emailNotFound() = EmailNotFound;
+  const factory AuthFailure.passwordDontMatch() = PassordsDontMatch;
 }

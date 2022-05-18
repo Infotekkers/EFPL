@@ -20,9 +20,8 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, User>> signInUser(
       {required User user, required Password password}) async {
     final Uri url = Uri.parse("$_baseUrl/login");
-
     final UserDto userDtoOut = UserDto.fromDomain(user);
-
+    print(userDtoOut.email);
     final outGoingJson =
         userDtoOut.copyWith(password: password.getOrCrash()).toJson();
     try {
@@ -38,16 +37,37 @@ class AuthRepository implements IAuthRepository {
         return left(const AuthFailure.serverError());
       }
     } catch (err) {
+      print(err);
       return left(const AuthFailure.networkError());
     }
   }
 
   //  registerUser
   @override
-  Future<Either<AuthFailure, Unit>> registerUser(
-      {required User user, required Password password}) {
-    // TODO: implement registerUser
-    throw UnimplementedError();
+  Future<Either<AuthFailure, User>> registerUser(
+      {required User user, required Password password}) async {
+    final Uri url = Uri.parse("$_baseUrl/register");
+
+    final UserDto userDtoOut = UserDto.fromDomain(user);
+
+    final outGoingJson =
+        userDtoOut.copyWith(password: password.getOrCrash()).toJson();
+    try {
+      final response = await client!.post(url, body: outGoingJson);
+      if (response.statusCode == 201) {
+        final UserDto userDtoIn =
+            UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+        // ignore: avoid_print
+        print('success');
+        return right(userDtoIn.toDomain());
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    } catch (err) {
+      // ignore: avoid_print
+      print(err);
+      return left(const AuthFailure.networkError());
+    }
   }
 
   // getSignedInUser
@@ -66,10 +86,12 @@ class AuthRepository implements IAuthRepository {
     final outGoingJson = userDtoOut.toJson();
     try {
       final response = await client!.post(url, body: outGoingJson);
+      // ignore: avoid_print
       print(response.body);
       if (response.statusCode == 200) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+        // ignore: avoid_print
         print('success');
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 404) {
@@ -78,9 +100,6 @@ class AuthRepository implements IAuthRepository {
         return left(const AuthFailure.serverError());
       }
     } catch (err) {
-      print('object');
-
-      print(err);
       return left(const AuthFailure.networkError());
     }
   }

@@ -8,18 +8,18 @@ abstract class User with _$User {
   const factory User({
     // required UniqueId id,
     required EmailAddress email,
-    // required UserName userName,
-    // required TeamName teamName,
-    // required Country country,
-    // required FavoriteEplTeam favoriteEplTeam,
+    required UserName userName,
+    required TeamName teamName,
+    required Country country,
+    required FavoriteEplTeam favoriteEplTeamId,
   }) = _User;
 
   factory User.initial() => User(
         // id: UniqueId(),
         email: EmailAddress(""),
-        // userName: UserName(""),
-        // teamName: TeamName(""),
-        // country: Country(""),
-        // favoriteEplTeam: FavoriteEplTeam(""),
+        userName: UserName(""),
+        teamName: TeamName(""),
+        country: Country(""),
+        favoriteEplTeamId: FavoriteEplTeam(""),
       );
 }

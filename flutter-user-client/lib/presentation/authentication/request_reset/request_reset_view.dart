@@ -1,4 +1,4 @@
-import 'package:efpl/application/auth/request_reset_form/bloc/request_reset_form_bloc.dart';
+import 'package:efpl/application/auth/request_reset_form/request_reset_form_bloc.dart';
 import 'package:efpl/presentation/authentication/request_reset/widgets/request_reset_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -9,7 +9,7 @@ abstract class IAuthRepository {
   Future<Option<User>> getSignedInUser();
 
   // register user
-  Future<Either<AuthFailure, Unit>> registerUser({
+  Future<Either<AuthFailure, User>> registerUser({
     required User user,
     required Password password,
   });
