@@ -113,7 +113,7 @@ const fetchUsers = asyncHandler(async (req, res) => {
 const fetchOneUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user == null) {
-    return res.status(404).json({ messaage: "No user found" });
+    return res.status(404).json({ message: "No user found" });
   }
   res.user = user;
   res.json(res.user);
@@ -122,7 +122,7 @@ const fetchOneUser = asyncHandler(async (req, res) => {
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user == null) {
-    return res.status(404).json({ messaage: "No user found" });
+    return res.status(404).json({ message: "No user found" });
   }
   res.user = user;
 
@@ -151,12 +151,12 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   const user = await User.findById(req.params.id);
   if (user == null) {
-    return res.status(404).json({ messaage: "No user found" });
+    return res.status(404).json({ message: "No user found" });
   }
   res.user = user;
   // delete user
   await res.user.remove();
-  res.json({ messaage: `user ${user.userName} removed` });
+  res.json({ message: `user ${user.userName} removed` });
 });
 
 const requestReset = asyncHandler(async (req, res) => {
@@ -174,11 +174,13 @@ const resetToken = jwt.sign(
   secretKey,
   { expiresIn: 60 * 60 }
 );
-const resetUrl = `http://localhost:5000/user1/resetPass/${resetToken}`;
+const resetUrl = `${
+      process.env.BASE_URL_WITHOUT_PORT
+    }${8080}/passwordReset/${resetToken}`;;
 
 const mailOptions = {
   from: process.env.user,
-  to: "mikealexiv565@gmail.com",
+  to: email,
   subject: "Reset Email via Node",
   text: `${resetUrl}`,
 };
@@ -186,11 +188,11 @@ const mailOptions = {
 transporter.sendMail(mailOptions, function (error, info) {
   if (error) {
     res.status(400).json({
-      messaage: "could not send reset email",
+      message: "could not send reset email",
     });
     console.log(error);
   } else {
-    res.status(200).json({ messaage: "Email Sent Successfully" });
+    res.status(200).json({ message: "Email Sent Successfully" });
     console.log("email sent: " + info.response);
   }
 });

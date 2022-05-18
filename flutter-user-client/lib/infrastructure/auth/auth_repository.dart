@@ -30,6 +30,7 @@ class AuthRepository implements IAuthRepository {
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+        print('success');
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 400) {
         return left(const AuthFailure.invalidEmailPasswordCombination());
@@ -65,9 +66,11 @@ class AuthRepository implements IAuthRepository {
     final outGoingJson = userDtoOut.toJson();
     try {
       final response = await client!.post(url, body: outGoingJson);
+      print(response.body);
       if (response.statusCode == 200) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+        print('success');
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 404) {
         return left(const AuthFailure.emailNotFound());
@@ -75,6 +78,8 @@ class AuthRepository implements IAuthRepository {
         return left(const AuthFailure.serverError());
       }
     } catch (err) {
+      print('object');
+
       print(err);
       return left(const AuthFailure.networkError());
     }
