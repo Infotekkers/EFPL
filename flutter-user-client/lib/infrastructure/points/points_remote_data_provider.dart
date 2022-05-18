@@ -153,9 +153,11 @@ class PointsInfoRemoteDataProvider {
     }
     // Timeout Exception
     on TimeoutException catch (_) {
-      _pointsInfoLocalDataProvider.getCachedPointInfo(gameWeekId: gameWeekId);
-      return left([
-        const PointsInfo(
+      Either<dynamic, PointsInfo> cacheCall = await _pointsInfoLocalDataProvider
+          .getCachedPointInfo(gameWeekId: gameWeekId);
+
+      PointsInfo pointsInfo = cacheCall.fold(
+        (l) => const PointsInfo(
           allPlayers: [],
           gameWeekId: 1,
           teamName: '',
@@ -163,6 +165,10 @@ class PointsInfoRemoteDataProvider {
           deduction: 0,
           maxActiveCount: 2,
         ),
+        (r) => r,
+      );
+      return left([
+        pointsInfo,
         const PointFailure.noConnection(
             failedValue: "Could not connect to server. Try refreshing.")
       ]);
@@ -170,9 +176,23 @@ class PointsInfoRemoteDataProvider {
 
     // Socket Exception
     on SocketException catch (_) {
+      Either<dynamic, PointsInfo> cacheCall = await _pointsInfoLocalDataProvider
+          .getCachedPointInfo(gameWeekId: gameWeekId);
+
+      PointsInfo pointsInfo = cacheCall.fold(
+        (l) => const PointsInfo(
+          allPlayers: [],
+          gameWeekId: 1,
+          teamName: '',
+          activeChip: '',
+          deduction: 0,
+          maxActiveCount: 2,
+        ),
+        (r) => r,
+      );
       return left(
         [
-          [],
+          pointsInfo,
           const PointFailure.socketError(
               failedValue: "Could not connect to server. Try refreshing."),
         ],
@@ -181,9 +201,23 @@ class PointsInfoRemoteDataProvider {
 
     // Handshake error
     on HandshakeException catch (_) {
+      Either<dynamic, PointsInfo> cacheCall = await _pointsInfoLocalDataProvider
+          .getCachedPointInfo(gameWeekId: gameWeekId);
+
+      PointsInfo pointsInfo = cacheCall.fold(
+        (l) => const PointsInfo(
+          allPlayers: [],
+          gameWeekId: 1,
+          teamName: '',
+          activeChip: '',
+          deduction: 0,
+          maxActiveCount: 2,
+        ),
+        (r) => r,
+      );
       return left(
         [
-          [],
+          pointsInfo,
           const PointFailure.handShakeError(
               failedValue: "Could not connect to server. Try refreshing."),
         ],
@@ -193,16 +227,23 @@ class PointsInfoRemoteDataProvider {
     // unexpected error
     catch (e) {
       print(e);
+      Either<dynamic, PointsInfo> cacheCall = await _pointsInfoLocalDataProvider
+          .getCachedPointInfo(gameWeekId: gameWeekId);
+
+      PointsInfo pointsInfo = cacheCall.fold(
+        (l) => const PointsInfo(
+          allPlayers: [],
+          gameWeekId: 1,
+          teamName: '',
+          activeChip: '',
+          deduction: 0,
+          maxActiveCount: 2,
+        ),
+        (r) => r,
+      );
       return left(
         [
-          const PointsInfo(
-            allPlayers: [],
-            gameWeekId: 0,
-            activeChip: '',
-            deduction: 0,
-            maxActiveCount: 1,
-            teamName: '',
-          ),
+          pointsInfo,
           const PointFailure.unexpectedError(
               failedValue: "Something went wrong. Try again!"),
         ],
