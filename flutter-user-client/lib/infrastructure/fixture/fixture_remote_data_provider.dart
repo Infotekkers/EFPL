@@ -125,7 +125,7 @@ class FixtureRemoteDataProvider {
     }
     // Timeout Exception
     on TimeoutException catch (_) {
-      print("TimeOut");
+      // print("TimeOut");
       // get cache
       Either<dynamic, List<Fixture>> allCachedFixtureCall =
           await _fixtureLocalDataProvider.getFixtureByGameWeekId(

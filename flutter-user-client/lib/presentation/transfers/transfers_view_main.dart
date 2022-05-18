@@ -188,9 +188,12 @@ class TransfersView extends StatelessWidget {
                         SingleChildScrollView(
                             child: Column(
                               children: [
+                                // Spacer
                                 const SizedBox(
                                   height: 12,
                                 ),
+
+                                // header
                                 Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -215,9 +218,12 @@ class TransfersView extends StatelessWidget {
                                     )
                                   ],
                                 ),
+
+                                // spacer
                                 const SizedBox(
                                   height: 20,
                                 ),
+
                                 // Goal Keepers
                                 Container(
                                   height: maxHeight / 5,

@@ -1,5 +1,5 @@
 class ConstantValues {
   final int httpTimeOutDuration;
 
-  ConstantValues({this.httpTimeOutDuration = 2});
+  ConstantValues({this.httpTimeOutDuration = 1});
 }

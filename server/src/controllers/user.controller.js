@@ -165,6 +165,8 @@ const requestReset = asyncHandler(async (req, res) => {
     secretKey,
     { expiresIn: 60 * 60 }
   );
+
+  // TODO:make from base url
   const resetUrl = `http://localhost:5000/user1/resetPass/${resetToken}`;
 
   const mailOptions = {
@@ -410,6 +412,97 @@ const getUserTeam = asyncHandler(async (req, res) => {
   }
 });
 
+const getUserPoints = asyncHandler(async (req, res) => {
+  const gwId = req.params.gameWeekId;
+
+  // const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+  // const userId = token.data;
+
+  // TODO:Replace
+  const userId = "62853c9caf9fd3a46ec4582f";
+
+  // get the gw number from frontend
+  let gameWeekId = gwId;
+
+  // get current active gw
+  const activeGw = await Gameweek.find({ status: "active" });
+  if (gwId.toString() === "0") {
+    if (activeGw) {
+      gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber;
+    } else {
+      gameWeekId = 1;
+    }
+  } else if (gameWeekId > activeGw[activeGw.length - 1].gameWeekNumber) {
+    console.log("Here");
+    gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber + 1;
+  }
+
+  // get user team
+  const user = await User.findOne({ _id: userId })
+    .select("-_id -password -country")
+    .lean();
+  const userTeam = user.team[gameWeekId - 1];
+  const userPlayers = userTeam.players;
+
+  const allPlayersInfo = [];
+  const finalFormat = {
+    gameWeekId: gameWeekId,
+    activeChip: userTeam.activeChip,
+    deduction: userTeam.deduction,
+    maxActiveCount: activeGw[activeGw.length - 1].gameWeekNumber + 1,
+    teamName: user.teamName,
+  };
+
+  for (const key in userPlayers) {
+    const currentPlayer = userPlayers[key];
+
+    // get player
+    const playerInfo = await Player.findOne({
+      playerId: currentPlayer.playerId,
+    }).lean();
+
+    const currentPlayerAllScore = playerInfo.score ? playerInfo.score : [];
+
+    const currentPlayerCurrentGwScore = currentPlayerAllScore.filter(
+      (scoreInfo) => scoreInfo.gameweekId.toString() === gameWeekId.toString()
+    );
+
+    const currentPlayerTeamFixture = await Fixture.findOne({
+      eplTeamId: playerInfo.eplTeamId,
+      gameweekId: gameWeekId,
+    });
+
+    //
+    const currentPlayerInfo = {
+      playerId: currentPlayer.playerId,
+      playerName: playerInfo.playerName,
+      playerPosition: playerInfo.position,
+      eplTeamId: playerInfo.eplTeamId,
+      multiplier: currentPlayer.multiplier,
+      isCaptain: currentPlayer.isCaptain,
+      isViceCaptain: currentPlayer.isViceCaptain,
+      score: currentPlayerCurrentGwScore,
+      // availability: currentPlayer.availability
+      //   ? currentPlayer.availability
+      //   : { injuryStatus: "", injuryMessage: "" },
+      fixtureStatus: currentPlayerTeamFixture.status,
+      fixtureScore: currentPlayerTeamFixture.score,
+      fixtureTeams:
+        currentPlayerTeamFixture.homeTeam +
+        " v " +
+        currentPlayerTeamFixture.awayTeam,
+    };
+
+    allPlayersInfo.push(currentPlayerInfo);
+  }
+
+  finalFormat.allPlayers = allPlayersInfo;
+
+  // get all players
+
+  res.status(200).send(finalFormat);
+});
+
 module.exports = {
   register,
   login,
@@ -423,4 +516,5 @@ module.exports = {
 
   // New
   getUserTeam,
+  getUserPoints,
 };
