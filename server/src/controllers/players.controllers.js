@@ -262,9 +262,14 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
   const allPlayersInPositionFormatted = [];
 
   const allTeams = await Teams.find();
-  const gameweek = await GameWeek.findOne({ status: "active" }).select(
+  const gameWeek = await GameWeek.findOne({ status: "active" }).select(
     "gameWeekNumber"
   );
+
+  let nextGameWeekNumber = 1;
+  if (gameWeek) {
+    nextGameWeekNumber = gameWeek.gameWeekNumber;
+  }
 
   for (let i = 0; i < allPlayersInPosition.length; i++) {
     const currentTeam = allTeams.filter(
@@ -277,7 +282,7 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
         { awayTeam: allPlayersInPosition[i].eplTeamId },
       ],
 
-      gameweekId: { $gt: gameweek.gameWeekNumber + 1 },
+      gameweekId: { $gt: nextGameWeekNumber },
     })
       .select("homeTeam awayTeam")
       .limit(8);
@@ -319,6 +324,7 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
 
   res.status(200).send(allPlayersInPositionFormatted);
 });
+
 module.exports = {
   addPlayer,
   getPlayer,

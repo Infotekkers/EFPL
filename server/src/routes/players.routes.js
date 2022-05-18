@@ -30,4 +30,5 @@ router.get(
 
 // New
 router.get("/position/:position", playersController.getPlayersByPosition);
+
 module.exports = router;

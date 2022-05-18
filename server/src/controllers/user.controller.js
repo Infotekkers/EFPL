@@ -84,7 +84,7 @@ const login = asyncHandler(async (req, res) => {
         secretKey,
         {
           // TODO:Update
-          expiresIn: "365d",
+          expiresIn: "4h",
         }
       );
 
@@ -101,7 +101,7 @@ const login = asyncHandler(async (req, res) => {
 });
 
 const fetchUsers = asyncHandler(async (req, res) => {
-  const users = await User.find();
+  const users = await User.find().select("-password -_id -__v");
   res.json(users);
 });
 
@@ -268,7 +268,6 @@ const transfer = asyncHandler(async (req, res) => {
 });
 
 const getUserTeam = asyncHandler(async (req, res) => {
-  console.log("Here");
   try {
     // get user id from token
     const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
@@ -276,7 +275,13 @@ const getUserTeam = asyncHandler(async (req, res) => {
 
     // get active game week
     const gameWeek = await Gameweek.find({ status: "active" });
-    const gameWeekId = gameWeek[gameWeek.length - 1].gameWeekNumber;
+
+    // if there is no active gw
+    let gameWeekId = 1;
+
+    if (gameWeek.length > 0) {
+      gameWeekId = gameWeek[gameWeek.length - 1].gameWeekNumber;
+    }
 
     const currentGameWeek = await Gameweek.findOne({
       gameWeekNumber: gameWeekId,
@@ -310,7 +315,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
 
         const allUserPlayers = userTeam.players;
 
-        const allUserPlayersList = {};
+        const allUserPlayersList = [];
 
         const allTeams = await Team.find();
 
@@ -372,9 +377,8 @@ const getUserTeam = asyncHandler(async (req, res) => {
           playerInfo.score = sumEplPlayerScore(currPlayer.score, gameWeekId);
           playerInfo.upComingFixtures = upComingFixture;
 
-          allUserPlayersList[`${key}`] = playerInfo;
+          allUserPlayersList.push(playerInfo);
         }
-        console.log(allUserPlayersList);
 
         userTeam.players = allUserPlayersList;
         user.team = userTeam;
@@ -402,7 +406,7 @@ const test = asyncHandler(async (req, res) => {
   let { incomingTeam } = req.body;
   incomingTeam = JSON.parse(incomingTeam);
 
-  console.log(incomingTeam);
+  console.log(incomingTeam.incomingTeam);
   res.send("Done");
 });
 
