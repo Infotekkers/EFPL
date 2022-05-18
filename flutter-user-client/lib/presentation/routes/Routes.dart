@@ -13,11 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
+  // ignore: unused_field
   final FixtureBloc _fixtureBloc = getIt<FixtureBloc>()
     ..add(
       const FixtureEvent.loadFixtures(),
     );
 
+  // ignore: unused_field
   final TransferBloc _transferBloc = getIt<TransferBloc>()
     ..add(
       const TransferEvent.getUserPlayers(),

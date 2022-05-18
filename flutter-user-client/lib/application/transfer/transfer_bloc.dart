@@ -117,7 +117,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
         // find player to move out
         List<UserPlayer> allUserPlayers = state.userTeam.allUserPlayers;
-        UserPlayer playerToTransferOut = allUserPlayers
+        allUserPlayers
             .where(
               (player) => player.playerId == state.transferOutPlayerId,
             )
@@ -161,8 +161,10 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           gameWeekId: state.userTeam.gameWeekId,
           gameWeekDeadline: state.userTeam.gameWeekDeadline,
           allUserPlayers: allUserPlayers,
-          freeTransfers: state.userTeam.freeTransfers == 1 ? 0 : 0,
-          deduction: state.userTeam.freeTransfers == 1
+          freeTransfers: state.userTeam.freeTransfers > 0
+              ? state.userTeam.freeTransfers - 1
+              : 0,
+          deduction: state.userTeam.freeTransfers >= 1
               ? state.userTeam.deduction
               : state.userTeam.deduction - 4,
           activeChip: state.userTeam.activeChip,
@@ -286,7 +288,8 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         gameWeekId: state.userTeam.gameWeekId,
         gameWeekDeadline: state.userTeam.gameWeekDeadline,
         allUserPlayers: allNewUserPlayers,
-        freeTransfers: transferCount == 0 ? 1 : 0,
+        freeTransfers:
+            transferCount == 0 ? state.userTeam.freeTransfers - 1 : 0,
         deduction:
             state.userTeam.deduction == 0 ? 0 : state.userTeam.deduction + 4,
         activeChip: state.userTeam.activeChip,
@@ -446,8 +449,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
     on<_saveUserPlayers>(
       (event, emit) async {
-        // TODO: implement event handler
-
         // get team to save
         UserTeam teamToSave = state.userTeam;
         List<UserPlayer> allUserPlayers = teamToSave.allUserPlayers;
@@ -507,6 +508,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
           emit(state.copyWith(
             valueFailureOrSuccess: some(valueFailureOrSuccess),
+            countExceededTeam: exceededTeamName,
           ));
         } else if (allPlayersCostSum > state.userTeam.maxBudget) {
           Either<dynamic, dynamic> valueFailureOrSuccess = left(
@@ -535,8 +537,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           // if transfer made
           if (state.transfersMade) {
             //save team to api from api
-            final Either<dynamic, bool> failureOrSuccess =
-                await _iTransferRepository.saveUserPlayers(
+            await _iTransferRepository.saveUserPlayers(
               userTeam: state.userTeam,
             );
 

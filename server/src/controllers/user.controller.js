@@ -209,7 +209,8 @@ const resetPass = asyncHandler(async (req, res) => {
 
 const transfer = asyncHandler(async (req, res) => {
   // Destructure request body
-  const { userId, incomingTeam } = req.body;
+  const { data } = req.body;
+  const { userId, incomingTeam } = JSON.parse(data);
 
   // Fetch active gameweek
   let activeGameweek = await Gameweek.findOne({ status: "Active" }).exec();
@@ -229,6 +230,8 @@ const transfer = asyncHandler(async (req, res) => {
     incomingTeam,
     user.availableChips
   );
+
+  console.log(errorType);
 
   // Save team || Send err
   if (isTeamValid === true) {
@@ -265,8 +268,6 @@ const transfer = asyncHandler(async (req, res) => {
         await User.findByIdAndUpdate(userId, { $push: { team: activeTeam } });
       }
     }
-
-    console.log("Here");
 
     res.status(200).json({ message: "Successfuly saved team" });
   } else {

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/injectable.dart';
@@ -19,7 +18,6 @@ class UserPlayerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String _baseURL = dotenv.env["BASE_URL"].toString();
     final String injuryStatus = currentUserPlayer.availability.value.fold(
       (l) => '',
       (r) => r['injuryStatus'].toString(),

@@ -2844,7 +2844,6 @@ class _$TransferStateTearOff {
       required String playerScoreCurrentSortOrder,
       required double minPriceSet,
       required double maxPriceSet,
-      required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
       required double priceExceededBy,
       required String countExceededTeam}) {
@@ -2867,7 +2866,6 @@ class _$TransferStateTearOff {
       playerScoreCurrentSortOrder: playerScoreCurrentSortOrder,
       minPriceSet: minPriceSet,
       maxPriceSet: maxPriceSet,
-      userTeamFailureOrSuccess: userTeamFailureOrSuccess,
       valueFailureOrSuccess: valueFailureOrSuccess,
       priceExceededBy: priceExceededBy,
       countExceededTeam: countExceededTeam,
@@ -2911,10 +2909,7 @@ mixin _$TransferState {
   String get playerScoreCurrentSortOrder =>
       throw _privateConstructorUsedError; // price range values
   double get minPriceSet => throw _privateConstructorUsedError;
-  double get maxPriceSet =>
-      throw _privateConstructorUsedError; // status of user team fetch
-  Option<Either<dynamic, UserTeam>> get userTeamFailureOrSuccess =>
-      throw _privateConstructorUsedError;
+  double get maxPriceSet => throw _privateConstructorUsedError;
   Option<Either<dynamic, dynamic>> get valueFailureOrSuccess =>
       throw _privateConstructorUsedError;
   double get priceExceededBy => throw _privateConstructorUsedError;
@@ -2949,7 +2944,6 @@ abstract class $TransferStateCopyWith<$Res> {
       String playerScoreCurrentSortOrder,
       double minPriceSet,
       double maxPriceSet,
-      Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
       double priceExceededBy,
       String countExceededTeam});
@@ -2986,7 +2980,6 @@ class _$TransferStateCopyWithImpl<$Res>
     Object? playerScoreCurrentSortOrder = freezed,
     Object? minPriceSet = freezed,
     Object? maxPriceSet = freezed,
-    Object? userTeamFailureOrSuccess = freezed,
     Object? valueFailureOrSuccess = freezed,
     Object? priceExceededBy = freezed,
     Object? countExceededTeam = freezed,
@@ -3066,10 +3059,6 @@ class _$TransferStateCopyWithImpl<$Res>
           ? _value.maxPriceSet
           : maxPriceSet // ignore: cast_nullable_to_non_nullable
               as double,
-      userTeamFailureOrSuccess: userTeamFailureOrSuccess == freezed
-          ? _value.userTeamFailureOrSuccess
-          : userTeamFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<dynamic, UserTeam>>,
       valueFailureOrSuccess: valueFailureOrSuccess == freezed
           ? _value.valueFailureOrSuccess
           : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -3119,7 +3108,6 @@ abstract class _$TransferStateCopyWith<$Res>
       String playerScoreCurrentSortOrder,
       double minPriceSet,
       double maxPriceSet,
-      Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
       double priceExceededBy,
       String countExceededTeam});
@@ -3159,7 +3147,6 @@ class __$TransferStateCopyWithImpl<$Res>
     Object? playerScoreCurrentSortOrder = freezed,
     Object? minPriceSet = freezed,
     Object? maxPriceSet = freezed,
-    Object? userTeamFailureOrSuccess = freezed,
     Object? valueFailureOrSuccess = freezed,
     Object? priceExceededBy = freezed,
     Object? countExceededTeam = freezed,
@@ -3239,10 +3226,6 @@ class __$TransferStateCopyWithImpl<$Res>
           ? _value.maxPriceSet
           : maxPriceSet // ignore: cast_nullable_to_non_nullable
               as double,
-      userTeamFailureOrSuccess: userTeamFailureOrSuccess == freezed
-          ? _value.userTeamFailureOrSuccess
-          : userTeamFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<dynamic, UserTeam>>,
       valueFailureOrSuccess: valueFailureOrSuccess == freezed
           ? _value.valueFailureOrSuccess
           : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -3281,7 +3264,6 @@ class _$_TransferState implements _TransferState {
       required this.playerScoreCurrentSortOrder,
       required this.minPriceSet,
       required this.maxPriceSet,
-      required this.userTeamFailureOrSuccess,
       required this.valueFailureOrSuccess,
       required this.priceExceededBy,
       required this.countExceededTeam});
@@ -3322,8 +3304,6 @@ class _$_TransferState implements _TransferState {
   final double minPriceSet;
   @override
   final double maxPriceSet;
-  @override // status of user team fetch
-  final Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess;
   @override
   final Option<Either<dynamic, dynamic>> valueFailureOrSuccess;
   @override
@@ -3333,7 +3313,7 @@ class _$_TransferState implements _TransferState {
 
   @override
   String toString() {
-    return 'TransferState(userTeam: $userTeam, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIdList: $transferredInPlayerIdList, swappedPlayerIdsList: $swappedPlayerIdsList, selectedPlayerReplacements: $selectedPlayerReplacements, filteredSelectedPlayerReplacements: $filteredSelectedPlayerReplacements, selectedDropDownTeamValue: $selectedDropDownTeamValue, selectedDropDownInjuryStatusValue: $selectedDropDownInjuryStatusValue, playerNameCurrentSortOrder: $playerNameCurrentSortOrder, playerPriceCurrentSortOrder: $playerPriceCurrentSortOrder, playerScoreCurrentSortOrder: $playerScoreCurrentSortOrder, minPriceSet: $minPriceSet, maxPriceSet: $maxPriceSet, userTeamFailureOrSuccess: $userTeamFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess, priceExceededBy: $priceExceededBy, countExceededTeam: $countExceededTeam)';
+    return 'TransferState(userTeam: $userTeam, isLoading: $isLoading, transfersMade: $transfersMade, transfersMadeCount: $transfersMadeCount, remainingInBank: $remainingInBank, transferOutPlayerId: $transferOutPlayerId, selectedPlayerPosition: $selectedPlayerPosition, transferredInPlayerIdList: $transferredInPlayerIdList, swappedPlayerIdsList: $swappedPlayerIdsList, selectedPlayerReplacements: $selectedPlayerReplacements, filteredSelectedPlayerReplacements: $filteredSelectedPlayerReplacements, selectedDropDownTeamValue: $selectedDropDownTeamValue, selectedDropDownInjuryStatusValue: $selectedDropDownInjuryStatusValue, playerNameCurrentSortOrder: $playerNameCurrentSortOrder, playerPriceCurrentSortOrder: $playerPriceCurrentSortOrder, playerScoreCurrentSortOrder: $playerScoreCurrentSortOrder, minPriceSet: $minPriceSet, maxPriceSet: $maxPriceSet, valueFailureOrSuccess: $valueFailureOrSuccess, priceExceededBy: $priceExceededBy, countExceededTeam: $countExceededTeam)';
   }
 
   @override
@@ -3379,8 +3359,6 @@ class _$_TransferState implements _TransferState {
                 .equals(other.minPriceSet, minPriceSet) &&
             const DeepCollectionEquality()
                 .equals(other.maxPriceSet, maxPriceSet) &&
-            const DeepCollectionEquality().equals(
-                other.userTeamFailureOrSuccess, userTeamFailureOrSuccess) &&
             const DeepCollectionEquality()
                 .equals(other.valueFailureOrSuccess, valueFailureOrSuccess) &&
             const DeepCollectionEquality()
@@ -3410,7 +3388,6 @@ class _$_TransferState implements _TransferState {
         const DeepCollectionEquality().hash(playerScoreCurrentSortOrder),
         const DeepCollectionEquality().hash(minPriceSet),
         const DeepCollectionEquality().hash(maxPriceSet),
-        const DeepCollectionEquality().hash(userTeamFailureOrSuccess),
         const DeepCollectionEquality().hash(valueFailureOrSuccess),
         const DeepCollectionEquality().hash(priceExceededBy),
         const DeepCollectionEquality().hash(countExceededTeam)
@@ -3442,7 +3419,6 @@ abstract class _TransferState implements TransferState {
       required String playerScoreCurrentSortOrder,
       required double minPriceSet,
       required double maxPriceSet,
-      required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
       required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
       required double priceExceededBy,
       required String countExceededTeam}) = _$_TransferState;
@@ -3483,8 +3459,6 @@ abstract class _TransferState implements TransferState {
   double get minPriceSet;
   @override
   double get maxPriceSet;
-  @override // status of user team fetch
-  Option<Either<dynamic, UserTeam>> get userTeamFailureOrSuccess;
   @override
   Option<Either<dynamic, dynamic>> get valueFailureOrSuccess;
   @override

@@ -2,6 +2,7 @@ import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/fixtures/widgets/fixture_widget.dart';
+import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -15,117 +16,196 @@ class FixturesView extends StatelessWidget {
     final FixtureBloc _fixtureBloc = BlocProvider.of<FixtureBloc>(context);
 
     return BlocConsumer<FixtureBloc, FixtureState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        state.valueFailureOrSuccess.fold(
+          () {},
+          (either) {
+            either.fold(
+              (failure) {
+                failure[1].maybeMap(
+                  // Connection issues
+                  noConnection: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact the server. Please check your connection!",
+                      snackBarType: "warning",
+                    );
+                  },
+                  socketError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact the server. Please check your connection!",
+                      snackBarType: "warning",
+                    );
+                  },
+                  handShakeError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact the server. Please check your connection!",
+                      snackBarType: "warning",
+                    );
+                  },
+
+                  // token issues
+                  unauthorized: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Please Login!",
+                      message: "Could not verify. Please login and try again!",
+                      snackBarType: "warning",
+                    );
+                  },
+                  unauthenticated: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Please Login!",
+                      message: "Could not verify. Please login and try again!",
+                      snackBarType: "warning",
+                    );
+                  },
+                  unexpectedError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Something went wrong!",
+                      message: "Something went wrong. Please try again!",
+                      snackBarType: "warning",
+                    );
+                  },
+
+                  hiveError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Caching Disabled!",
+                      message: "Something went wrong. Please try again!",
+                      snackBarType: "warning",
+                    );
+                  },
+
+                  orElse: () {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "Something went wrong.",
+                      message: "Something went wrong. Try again!",
+                      snackBarType: "error",
+                    );
+                  },
+                );
+              },
+              (_) {},
+            );
+          },
+        );
+      },
       builder: (context, state) {
         var allFixtures = [state.allFixtures];
         if (state.allFixtures.isNotEmpty) {
           allFixtures = formatByDate(state.allFixtures);
         }
 
-        // print(allFixtures[0]);
-
         return LiquidPullToRefresh(
           onRefresh: () async {},
           height: 60,
           showChildOpacityTransition: false,
           animSpeedFactor: 2,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 100, vertical: 12),
-                  // margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  color: ConstantColors.neutral_200,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          color: ConstantColors.primary_900,
+          child: state.isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
+                  child: Column(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          _fixtureBloc.add(
-                            const FixtureEvent.decreaseGameWeek(),
-                          );
-                        },
-                        child: const Icon(Icons.arrow_back_ios),
+                      // Gw controller
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 100, vertical: 12),
+                        // margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        color: ConstantColors.neutral_200,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                _fixtureBloc.add(
+                                  const FixtureEvent.decreaseGameWeek(),
+                                );
+                              },
+                              child: const Icon(Icons.arrow_back_ios),
+                            ),
+                            Text("GameWeek  " + state.gameWeekId.toString()),
+                            InkWell(
+                              onTap: () {
+                                _fixtureBloc.add(
+                                  const FixtureEvent.increaseGameWeek(),
+                                );
+                              },
+                              child: const Icon(Icons.arrow_forward_ios),
+                            )
+                          ],
+                        ),
                       ),
-                      Text("GameWeek  " + state.gameWeekId.toString()),
-                      InkWell(
-                        onTap: () {
-                          _fixtureBloc.add(
-                            const FixtureEvent.increaseGameWeek(),
-                          );
-                        },
-                        child: const Icon(Icons.arrow_forward_ios),
-                      )
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height - 60,
+                        child: state.allFixtures.length < 2
+                            ? Container(
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 250, 0, 0),
+                                child: const Text("No Fixtures"))
+                            : ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: allFixtures.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  List<Fixture> fixture = allFixtures[index];
+                                  var date = '';
+                                  if (fixture.isNotEmpty) {
+                                    date = formatMatchDate(fixture[0]);
+                                  }
+
+                                  return Column(
+                                    children: [
+                                      Container(
+                                        margin: const EdgeInsets.fromLTRB(
+                                            0, 24, 0, 1),
+                                        child: Text(
+                                          date,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Column(
+                                        children: List.generate(
+                                          fixture.length,
+                                          (index) {
+                                            return Container(
+                                              color: index % 2 == 0
+                                                  ? ConstantColors.neutral_200
+                                                  : (Colors.white),
+                                              child: FixtureWidget(
+                                                fixture: fixture[index],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                      ),
                     ],
                   ),
                 ),
-                state.isLoading == true
-                    ? SizedBox(
-                        height: MediaQuery.of(context).size.height - 60,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            SizedBox(
-                              height: 40,
-                              child: CircularProgressIndicator(),
-                            ),
-                          ],
-                        ),
-                      )
-                    : SizedBox(
-                        height: MediaQuery.of(context).size.height - 60,
-                        child: ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: allFixtures.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            List<Fixture> fixture = allFixtures[index];
-                            var date = '';
-                            if (fixture.isNotEmpty) {
-                              date = formatMatchDate(fixture[0]);
-                            }
-
-                            return Column(
-                              children: [
-                                Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 24, 0, 1),
-                                  child: Text(
-                                    date,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Column(
-                                  children: List.generate(
-                                    fixture.length,
-                                    (index) {
-                                      return Container(
-                                        color: index % 2 == 0
-                                            ? ConstantColors.neutral_200
-                                            : (Colors.white),
-                                        child: FixtureWidget(
-                                          fixture: fixture[index],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-              ],
-            ),
-          ),
         );
       },
     );
@@ -146,16 +226,10 @@ List<List<Fixture>> formatByDate(List<Fixture> allFixtures) {
 
     schedule = schedule.toString().split("T")[0];
 
-    if (!allPossibleDates.contains(schedule)) {
+    if (allPossibleDates.contains(schedule) == false) {
       allPossibleDates.add(schedule);
     }
   }
-
-  // allPossibleDates.sort((a, b) {
-  //   var dateOne = a;
-  //   var dateTwo = a;
-  //   return -dateOne.compareTo(dateTwo);
-  // });
 
   for (var i = 0; i < allPossibleDates.length; i++) {
     List<Fixture> currentDateFixtures = allFixtures.where((fixture) {

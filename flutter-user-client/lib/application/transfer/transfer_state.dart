@@ -35,8 +35,6 @@ class TransferState with _$TransferState {
     // price range values
     required double minPriceSet,
     required double maxPriceSet,
-    // status of user team fetch
-    required Option<Either<dynamic, UserTeam>> userTeamFailureOrSuccess,
     required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
     required double priceExceededBy,
     required String countExceededTeam,
@@ -64,7 +62,6 @@ class TransferState with _$TransferState {
         selectedPlayerReplacements: [],
         filteredSelectedPlayerReplacements: [],
         swappedPlayerIdsList: [],
-        userTeamFailureOrSuccess: none(),
         valueFailureOrSuccess: none(),
         selectedDropDownTeamValue: "Select a Team",
         selectedDropDownInjuryStatusValue: "All",

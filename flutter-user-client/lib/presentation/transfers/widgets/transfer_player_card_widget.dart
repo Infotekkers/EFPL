@@ -15,6 +15,7 @@ class UserPlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final _transferBloc = getIt<TransferBloc>();
     final String _baseURL = dotenv.env["BASE_URL"].toString();
 

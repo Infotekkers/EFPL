@@ -488,7 +488,7 @@ class TransferRemoteDataProvider {
     try {
       var apiResponse =
           await instance.client.patch(Uri.parse('$_baseURL/user/team'), body: {
-        "incomingTeam": jsonEncode(userTeam),
+        "data": jsonEncode(userTeam),
       }).timeout(
         Duration(seconds: ConstantValues().httpTimeOutDuration),
       );
@@ -593,7 +593,5 @@ class TransferRemoteDataProvider {
         ],
       );
     }
-
-    return right(false);
   }
 }

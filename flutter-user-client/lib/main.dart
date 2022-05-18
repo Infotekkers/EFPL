@@ -9,7 +9,9 @@ import 'package:injectable/injectable.dart';
 Future main() async {
   await dotenv.load(fileName: ".env");
   await Hive.initFlutter();
+
   await Hive.openBox("transferCache");
+  await Hive.openBox("fixtureCache");
 
   configureInjection(Environment.prod);
   runApp(const AppWidget());

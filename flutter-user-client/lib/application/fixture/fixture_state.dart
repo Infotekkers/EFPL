@@ -7,16 +7,14 @@ class FixtureState with _$FixtureState {
     required int gameWeekId,
     required bool showErrorMessages,
     required bool isLoading,
-    required Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess,
-    required Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess,
+    required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
   }) = _FixtureState;
 
   factory FixtureState.initial() => FixtureState(
         allFixtures: [],
-        gameWeekId: 1,
+        gameWeekId: 0,
         isLoading: false,
         showErrorMessages: false,
-        fixtureFailureOrSuccess: none(),
         valueFailureOrSuccess: none(),
       );
 }

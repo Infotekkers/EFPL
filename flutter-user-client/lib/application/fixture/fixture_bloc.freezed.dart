@@ -583,14 +583,12 @@ class _$FixtureStateTearOff {
       required int gameWeekId,
       required bool showErrorMessages,
       required bool isLoading,
-      required Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess,
-      required Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess}) {
+      required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) {
     return _FixtureState(
       allFixtures: allFixtures,
       gameWeekId: gameWeekId,
       showErrorMessages: showErrorMessages,
       isLoading: isLoading,
-      fixtureFailureOrSuccess: fixtureFailureOrSuccess,
       valueFailureOrSuccess: valueFailureOrSuccess,
     );
   }
@@ -605,9 +603,7 @@ mixin _$FixtureState {
   int get gameWeekId => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  Option<Either<dynamic, List<Fixture>>> get fixtureFailureOrSuccess =>
-      throw _privateConstructorUsedError;
-  Option<Either<ValueFailure, dynamic>> get valueFailureOrSuccess =>
+  Option<Either<dynamic, dynamic>> get valueFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -625,8 +621,7 @@ abstract class $FixtureStateCopyWith<$Res> {
       int gameWeekId,
       bool showErrorMessages,
       bool isLoading,
-      Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess,
-      Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess});
+      Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
 }
 
 /// @nodoc
@@ -643,7 +638,6 @@ class _$FixtureStateCopyWithImpl<$Res> implements $FixtureStateCopyWith<$Res> {
     Object? gameWeekId = freezed,
     Object? showErrorMessages = freezed,
     Object? isLoading = freezed,
-    Object? fixtureFailureOrSuccess = freezed,
     Object? valueFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
@@ -663,14 +657,10 @@ class _$FixtureStateCopyWithImpl<$Res> implements $FixtureStateCopyWith<$Res> {
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      fixtureFailureOrSuccess: fixtureFailureOrSuccess == freezed
-          ? _value.fixtureFailureOrSuccess
-          : fixtureFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<dynamic, List<Fixture>>>,
       valueFailureOrSuccess: valueFailureOrSuccess == freezed
           ? _value.valueFailureOrSuccess
           : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ValueFailure, dynamic>>,
+              as Option<Either<dynamic, dynamic>>,
     ));
   }
 }
@@ -687,8 +677,7 @@ abstract class _$FixtureStateCopyWith<$Res>
       int gameWeekId,
       bool showErrorMessages,
       bool isLoading,
-      Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess,
-      Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess});
+      Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
 }
 
 /// @nodoc
@@ -707,7 +696,6 @@ class __$FixtureStateCopyWithImpl<$Res> extends _$FixtureStateCopyWithImpl<$Res>
     Object? gameWeekId = freezed,
     Object? showErrorMessages = freezed,
     Object? isLoading = freezed,
-    Object? fixtureFailureOrSuccess = freezed,
     Object? valueFailureOrSuccess = freezed,
   }) {
     return _then(_FixtureState(
@@ -727,14 +715,10 @@ class __$FixtureStateCopyWithImpl<$Res> extends _$FixtureStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      fixtureFailureOrSuccess: fixtureFailureOrSuccess == freezed
-          ? _value.fixtureFailureOrSuccess
-          : fixtureFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<dynamic, List<Fixture>>>,
       valueFailureOrSuccess: valueFailureOrSuccess == freezed
           ? _value.valueFailureOrSuccess
           : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ValueFailure, dynamic>>,
+              as Option<Either<dynamic, dynamic>>,
     ));
   }
 }
@@ -747,7 +731,6 @@ class _$_FixtureState implements _FixtureState {
       required this.gameWeekId,
       required this.showErrorMessages,
       required this.isLoading,
-      required this.fixtureFailureOrSuccess,
       required this.valueFailureOrSuccess});
 
   @override
@@ -759,13 +742,11 @@ class _$_FixtureState implements _FixtureState {
   @override
   final bool isLoading;
   @override
-  final Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess;
-  @override
-  final Option<Either<ValueFailure, dynamic>> valueFailureOrSuccess;
+  final Option<Either<dynamic, dynamic>> valueFailureOrSuccess;
 
   @override
   String toString() {
-    return 'FixtureState(allFixtures: $allFixtures, gameWeekId: $gameWeekId, showErrorMessages: $showErrorMessages, isLoading: $isLoading, fixtureFailureOrSuccess: $fixtureFailureOrSuccess, valueFailureOrSuccess: $valueFailureOrSuccess)';
+    return 'FixtureState(allFixtures: $allFixtures, gameWeekId: $gameWeekId, showErrorMessages: $showErrorMessages, isLoading: $isLoading, valueFailureOrSuccess: $valueFailureOrSuccess)';
   }
 
   @override
@@ -780,8 +761,6 @@ class _$_FixtureState implements _FixtureState {
             const DeepCollectionEquality()
                 .equals(other.showErrorMessages, showErrorMessages) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
-            const DeepCollectionEquality().equals(
-                other.fixtureFailureOrSuccess, fixtureFailureOrSuccess) &&
             const DeepCollectionEquality()
                 .equals(other.valueFailureOrSuccess, valueFailureOrSuccess));
   }
@@ -793,7 +772,6 @@ class _$_FixtureState implements _FixtureState {
       const DeepCollectionEquality().hash(gameWeekId),
       const DeepCollectionEquality().hash(showErrorMessages),
       const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(fixtureFailureOrSuccess),
       const DeepCollectionEquality().hash(valueFailureOrSuccess));
 
   @JsonKey(ignore: true)
@@ -804,13 +782,12 @@ class _$_FixtureState implements _FixtureState {
 
 abstract class _FixtureState implements FixtureState {
   const factory _FixtureState(
-      {required List<Fixture> allFixtures,
-      required int gameWeekId,
-      required bool showErrorMessages,
-      required bool isLoading,
-      required Option<Either<dynamic, List<Fixture>>> fixtureFailureOrSuccess,
-      required Option<Either<ValueFailure, dynamic>>
-          valueFailureOrSuccess}) = _$_FixtureState;
+          {required List<Fixture> allFixtures,
+          required int gameWeekId,
+          required bool showErrorMessages,
+          required bool isLoading,
+          required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) =
+      _$_FixtureState;
 
   @override
   List<Fixture> get allFixtures;
@@ -821,9 +798,7 @@ abstract class _FixtureState implements FixtureState {
   @override
   bool get isLoading;
   @override
-  Option<Either<dynamic, List<Fixture>>> get fixtureFailureOrSuccess;
-  @override
-  Option<Either<ValueFailure, dynamic>> get valueFailureOrSuccess;
+  Option<Either<dynamic, dynamic>> get valueFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$FixtureStateCopyWith<_FixtureState> get copyWith =>

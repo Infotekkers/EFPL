@@ -99,7 +99,7 @@ class CustomSnackBar {
                     color: snackBarType == "success"
                         ? Colors.green
                         : snackBarType == "warning"
-                            ? Color.fromARGB(255, 183, 140, 9)
+                            ? const Color.fromARGB(255, 183, 140, 9)
                             : Colors.red,
                   ),
                   Positioned(

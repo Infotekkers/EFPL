@@ -5,6 +5,7 @@ const validator = require("../utils/validators");
 const FixtureModel = require("../models/Fixtures");
 const TeamModel = require("../models/Teams");
 const Player = require("../models/Player");
+const GameWeek = require("../models/GameWeek");
 
 const MINUTE_COUNTERS = {};
 
@@ -676,12 +677,27 @@ const deleteFixture = asyncHandler(async function (req, res) {
 });
 
 const getAllFixturesOfGameWeek = asyncHandler(async function (req, res) {
-  const gameWeekId = req.params.gameWeekId;
-  const matches = await FixtureModel.find({ gameweekId: gameWeekId }).select({
-    _id: 0,
-    __v: 0,
-    // matchStat: 0,
-  });
+  const gwId = req.params.gameWeekId;
+
+  let gameWeekId = 1;
+
+  if (gwId.toString() === "0") {
+    const activeGw = await GameWeek.find({ status: "active" });
+
+    if (activeGw.length > 0) {
+      gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber;
+    }
+  } else {
+    gameWeekId = gwId;
+  }
+
+  const matches = await FixtureModel.find({ gameweekId: gameWeekId })
+    .select({
+      _id: 0,
+      __v: 0,
+      // matchStat: 0,
+    })
+    .sort("schedule");
 
   const matchAndTeamInfo = [];
 
