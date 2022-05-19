@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'league_table.freezed.dart';
+
 @freezed
 abstract class LeagueTable with _$LeagueTable {
   const factory LeagueTable({
