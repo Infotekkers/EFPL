@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:efpl/domain/league_table/value_object.dart';
 
 part 'league_table.freezed.dart';
 
