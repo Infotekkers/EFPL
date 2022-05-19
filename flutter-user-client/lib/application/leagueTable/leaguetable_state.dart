@@ -1,6 +1,11 @@
 part of 'leaguetable_bloc.dart';
 
-@immutable
-abstract class LeaguetableState {}
-
-class LeaguetableInitial extends LeaguetableState {}
+@freezed
+abstract class LeagueTableState with _$LeagueTableState {
+  const factory LeagueTableState.initial() = _Initial;
+  const factory LeagueTableState.loadInProgress() = _Loading;
+  const factory LeagueTableState.loadSuccess(LeagueTable leagueTable) =
+      _LoadSuccess;
+  const factory LeagueTableState.loadFailure(
+      LeagueTableFailure leagueTableFailure) = _LoadFailure;
+}

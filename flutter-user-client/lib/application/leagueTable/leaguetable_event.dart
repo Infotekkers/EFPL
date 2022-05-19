@@ -1,4 +1,7 @@
 part of 'leaguetable_bloc.dart';
 
-@immutable
-abstract class LeaguetableEvent {}
+@freezed
+abstract class LeagueTableEvent with _$LeagueTableEvent {
+  const factory LeagueTableEvent.loadLeagueTable(String teamId) =
+      _LoadLeagueTable;
+}
