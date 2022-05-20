@@ -4,5 +4,5 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/league_table/league_table_failure.dart';
 
 abstract class ILeagueTableRepository {
-  Future<Either<LeagueTableFailure, LeagueTable>> getTeam(String teamId);
+  Future<Either<LeagueTableFailure, LeagueTable>> getTeams();
 }
