@@ -303,7 +303,7 @@ Future<void> transferPlayer(_transferBloc, currentUserPlayer, context) async {
     const TransferEvent.getPlayersInSelectedPosition(),
   );
 
-  var efplCache = await Hive.openBox('efplCache');
+  var efplCache = await Hive.openBox('transferCache');
   List? allTeams = efplCache.get("allTeams");
 
   Navigator.pop(context);
@@ -312,7 +312,7 @@ Future<void> transferPlayer(_transferBloc, currentUserPlayer, context) async {
     context,
     "/transfer",
     arguments: {
-      "allTeams": allTeams!,
+      "allTeams": allTeams,
       "currentPlayerId": currentUserPlayer.playerId
     },
   );

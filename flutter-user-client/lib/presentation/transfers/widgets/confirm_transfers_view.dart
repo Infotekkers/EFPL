@@ -333,6 +333,7 @@ List formatSwappedPlayers(TransferState state, List allPlayers) {
     String playerToTransferInId = swappedPair.values.toList()[0];
 
     // get player
+    print(allPlayers);
     dynamic playerToTransferOut = allPlayers
         .where(
             (player) => player['playerId'].toString() == playerToTransferOutId)

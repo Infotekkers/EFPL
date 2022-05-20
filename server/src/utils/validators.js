@@ -1,12 +1,58 @@
 const Player = require("../models/Player");
 
 // TODO: Check if multipliers are valid
-const validateTeam = (team, availableChips) => {
+const validateTeam = async (team, availableChips) => {
   let teamBudget = 0;
+
   let isCaptainUnique = false;
   let isViceCaptainUnique = false;
   const eplTeamPlayerCounter = {};
   const positionCounter = { gk: 0, def: 0, mid: 0, att: 0, starters: 0 };
+
+  // SET STARTER TEAM 4-3-3
+  let gkCount = 0;
+  let defCount = 0;
+  let midCount = 0;
+  let attCount = 0;
+  let isCaptainSet = false;
+  let isViceCaptainSet = false;
+  for (const playerId in team.players) {
+    const currentPlayer = await Player.findOne({ playerId: playerId })
+      .lean()
+      .select("position -_id");
+
+    // GK
+    if (currentPlayer.position === "GK" && gkCount < 1) {
+      team.players[playerId].multiplier = 1;
+      gkCount = gkCount + 1;
+    }
+    // DEF
+    else if (currentPlayer.position === "DEF" && defCount < 4) {
+      team.players[playerId].multiplier = 1;
+      defCount = defCount + 1;
+    }
+    // MID
+    else if (currentPlayer.position === "MID" && midCount < 3) {
+      team.players[playerId].multiplier = 1;
+      midCount = midCount + 1;
+
+      if (!isCaptainSet) {
+        team.players[playerId].isCaptain = true;
+        isCaptainSet = true;
+      }
+    }
+
+    // ATT
+    else if (currentPlayer.position === "ATT" && attCount < 3) {
+      team.players[playerId].multiplier = 1;
+      attCount = attCount + 1;
+
+      if (!isViceCaptainSet) {
+        team.players[playerId].isViceCaptain = true;
+        isViceCaptainSet = true;
+      }
+    }
+  }
 
   // 15 players
   if (Object.keys(team.players).length !== 15)
@@ -35,10 +81,14 @@ const validateTeam = (team, availableChips) => {
       ];
     else eplTeamPlayerCounter[team.players[playerId].eplTeamId] += 1;
 
-    if (playerId[0] === "1") positionCounter.gk += 1;
-    else if (playerId[0] === "2") positionCounter.def += 1;
-    else if (playerId[0] === "3") positionCounter.mid += 1;
-    else if (playerId[0] === "4") positionCounter.att += 1;
+    const currentPlayer = await Player.findOne({ playerId: playerId })
+      .lean()
+      .select("position -_id");
+
+    if (currentPlayer.position === "GK") positionCounter.gk += 1;
+    else if (currentPlayer.position === "DEF") positionCounter.def += 1;
+    else if (currentPlayer.position === "MID") positionCounter.mid += 1;
+    else if (currentPlayer.position === "ATT") positionCounter.att += 1;
 
     if (team.players[playerId].multiplier > 0) positionCounter.starters += 1;
   }
@@ -81,7 +131,7 @@ const validateTeam = (team, availableChips) => {
     ];
 
   // Valid active chip
-  if (availableChips.includes(team.activeChip) !== true)
+  if (availableChips.includes(team.activeChip) !== true && team.activeChip)
     return [false, { message: `Invalid active chip: ${team.activeChip}` }];
 
   // Overbudget
@@ -354,12 +404,8 @@ const processTeamIdToData = async (match) => {
 };
 
 // new
-const constructTeamFromID = async (incomingTeam) => {
-  console.log(incomingTeam);
-};
+
 module.exports = {
   validateTeam,
   processTeamIdToData,
-
-  constructTeamFromID,
 };

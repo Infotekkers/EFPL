@@ -212,7 +212,10 @@ const resetPass = asyncHandler(async (req, res) => {
 const transfer = asyncHandler(async (req, res) => {
   // Destructure request body
   const { data } = req.body;
-  const { userId, incomingTeam } = JSON.parse(data);
+  // const { userId, incomingTeam } = JSON.parse(data);
+
+  const { incomingTeam } = JSON.parse(data);
+  const userId = "62853c9caf9fd3a46ec4582f";
 
   // Fetch active gameweek
   let activeGameweek = await Gameweek.findOne({ status: "Active" }).exec();
@@ -228,12 +231,12 @@ const transfer = asyncHandler(async (req, res) => {
   let activeTeam = user.team[activeGameweek - 1];
 
   // Validate team
-  const [isTeamValid, errorType] = validateTeam(
+  const [isTeamValid, errorType] = await validateTeam(
     incomingTeam,
     user.availableChips
   );
 
-  console.log(errorType);
+  console.log(isTeamValid);
 
   // Save team || Send err
   if (isTeamValid === true) {
@@ -281,7 +284,9 @@ const getUserTeam = asyncHandler(async (req, res) => {
   try {
     // get user id from token
     const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
-    const userId = token.data;
+    // const userId = token.data;
+
+    const userId = "62853c9caf9fd3a46ec4582f";
 
     // get active game week
     const gameWeek = await Gameweek.find({ status: "active" });
@@ -417,8 +422,6 @@ const getUserTeam = asyncHandler(async (req, res) => {
 const getUserPoints = asyncHandler(async (req, res) => {
   const gwId = req.params.gameWeekId;
 
-  console.log("HERE");
-
   // const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
   // const userId = token.data;
 
@@ -437,11 +440,8 @@ const getUserPoints = asyncHandler(async (req, res) => {
       gameWeekId = 1;
     }
   } else if (gameWeekId > activeGw[activeGw.length - 1].gameWeekNumber) {
-    console.log("Here");
     gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber + 1;
   }
-
-  console.log(gameWeekId);
 
   // get user team
   const user = await User.findOne({ _id: userId })

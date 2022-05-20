@@ -143,10 +143,21 @@ class TransferLocalDataProvider {
   Future<Either<dynamic, List>> getAllPlayers() async {
     try {
       List allPlayers = [];
-      List allPlayersGK = transfersCache.get("allPlayersInPosition-GK");
-      List allPlayersDEF = transfersCache.get("allPlayersInPosition-DEF");
-      List allPlayersMID = transfersCache.get("allPlayersInPosition-MID");
-      List allPlayersATT = transfersCache.get("allPlayersInPosition-ATT");
+
+      dynamic allGkCheck = await transfersCache.get("allPlayersInPosition-GK");
+      List allPlayersGK = allGkCheck ?? [];
+
+      dynamic allDefCheck =
+          await transfersCache.get("allPlayersInPosition-DEF");
+      List allPlayersDEF = allDefCheck ?? [];
+
+      dynamic allMidCheck =
+          await transfersCache.get("allPlayersInPosition-MID");
+      List allPlayersMID = allMidCheck ?? [];
+
+      dynamic allAttCheck =
+          await transfersCache.get("allPlayersInPosition-ATT");
+      List allPlayersATT = allAttCheck ?? [];
 
       for (var gk in allPlayersGK) {
         allPlayers.add(gk);
@@ -164,8 +175,11 @@ class TransferLocalDataProvider {
         allPlayers.add(att);
       }
 
+      print("Here");
+
       return right(allPlayersGK);
     } catch (e) {
+      print(e);
       return left(
         [
           [],
