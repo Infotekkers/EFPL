@@ -263,7 +263,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           eplTeamId: PlayerEplTeam(
             value: playerToTransferInJson['eplTeamId'],
           ),
-          multiplier: 1,
+          multiplier: 0,
           isCaptain: false,
           isViceCaptain: false,
           availability:
@@ -383,7 +383,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             eplTeamId: PlayerEplTeam(
               value: playerToTransferInJson['eplTeamId'],
             ),
-            multiplier: 1,
+            multiplier: 0,
             isCaptain: false,
             isViceCaptain: false,
             availability: PlayerAvailability(
@@ -541,15 +541,15 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
               userTeam: state.userTeam,
             );
 
-            emit(
-              state.copyWith(
-                isLoading: false,
-                transfersMade: false,
-                transfersMadeCount: 0,
-                transferredInPlayerIdList: [],
-                swappedPlayerIdsList: [],
-              ),
-            );
+            // emit(
+            //   state.copyWith(
+            //     isLoading: false,
+            //     transfersMade: false,
+            //     transfersMadeCount: 0,
+            //     transferredInPlayerIdList: [],
+            //     swappedPlayerIdsList: [],
+            //   ),
+            // );
           }
         }
       },

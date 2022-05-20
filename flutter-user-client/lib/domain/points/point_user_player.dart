@@ -25,7 +25,7 @@ abstract class PointUserPlayer with _$PointUserPlayer {
         playerName: PlayerName(value: ""),
         playerPosition: PlayerPosition(value: ""),
         eplTeamId: PlayerEplTeam(value: ""),
-        multiplier: 1,
+        multiplier: 0,
         isCaptain: false,
         isViceCaptain: false,
         // availability: PlayerAvailability(

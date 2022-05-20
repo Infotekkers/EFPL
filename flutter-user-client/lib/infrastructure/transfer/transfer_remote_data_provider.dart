@@ -67,7 +67,7 @@ class TransferRemoteDataProvider {
             eplTeamId: PlayerEplTeam(
               value: parsedResponseBody[i]['eplTeamId'],
             ),
-            multiplier: 1,
+            multiplier: 0,
             isCaptain: false,
             isViceCaptain: false,
             availability: PlayerAvailability(value: availability),
@@ -495,6 +495,7 @@ class TransferRemoteDataProvider {
 
       // success
       if (apiResponse.statusCode == 200) {
+        print(apiResponse.body);
         return right(true);
       }
       // token issue

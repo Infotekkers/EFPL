@@ -57,8 +57,8 @@ class ApiTransferRepository implements ITransferRepository {
           "eplTeamId": playerJson["eplTeamId"],
           "price": playerJson['currentPrice'],
           "multiplier": 0,
-          "isCaptain": playerJson['isCaptain'],
-          "isViceCaptain": playerJson['isViceCaptain']
+          "isCaptain": false,
+          "isViceCaptain": false
         };
 
         // add to main json

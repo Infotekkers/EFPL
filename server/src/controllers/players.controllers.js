@@ -25,16 +25,6 @@ const addPlayer = asyncHandler(async (req, res) => {
 
   const id = teamId.teamId;
 
-  console.log({
-    playerName,
-    eplTeamId,
-    position,
-    currentPrice,
-    availability,
-    playerImage,
-    logoName,
-  });
-
   // If player does not exist
   if (!verifyPlayer) {
     // if image is sent
