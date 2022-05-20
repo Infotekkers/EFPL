@@ -64,6 +64,10 @@ const postFixture = asyncHandler(async function (req, res) {
       awayTeam,
       matchStat,
     }).save();
+
+    const io = require("../../server");
+    io.emit("fixtureUpdated");
+
     res.status(200).send("Fixture added!");
   } else {
     res
@@ -329,6 +333,9 @@ const startFixture = asyncHandler(async function (req, res) {
             )
         )
         .catch(() => res.status(500).send("Try again!"));
+
+      const io = require("../../server");
+      io.emit("fixtureUpdated");
     }
     // no match
     else if (!matchParent) {
@@ -383,6 +390,9 @@ const pauseFixture = asyncHandler(async function (req, res) {
         );
       })
       .catch(() => res.status(500).send("Try again!"));
+
+    const io = require("../../server");
+    io.emit("fixtureUpdated");
   } else if (!match) {
     res
       .status(404)
@@ -426,6 +436,9 @@ const resumeFixture = asyncHandler(async function (req, res) {
         )
       )
       .catch(() => res.status(500).send("Try again!"));
+
+    const io = require("../../server");
+    io.emit("fixtureUpdated");
   } else if (!match) {
     res
       .status(404)
@@ -472,6 +485,9 @@ const endFixture = asyncHandler(async function (req, res) {
         )
       )
       .catch(() => res.status(500).send("Try again!"));
+
+    const io = require("../../server");
+    io.emit("fixtureUpdated");
   } else if (!match) {
     res
       .status(404)
@@ -507,6 +523,9 @@ const postponeFixture = asyncHandler(async function (req, res) {
       match.awayTeam = awayTeam ?? match.awayTeam;
 
       await match.save();
+
+      const io = require("../../server");
+      io.emit("fixtureUpdated");
 
       res
         .status(200)
@@ -583,6 +602,11 @@ const updateLineup = asyncHandler(async (req, res) => {
     match.awayTeamLineUp = awayTeamLineUp ?? match.awayTeamLineUp;
     await match.save();
 
+    const io = require("../../server");
+
+    // TODO:Handle in frontend
+    io.emit("fixtureLineUpUpdated");
+
     res.send("Match lineup updated!");
   } else if (!match) {
     res.status(404).send("Match doesn't exist!");
@@ -615,6 +639,11 @@ const updateStats = asyncHandler(async (req, res) => {
       upsert: false,
     });
 
+    const io = require("../../server");
+
+    // TODO:Handle on Frontend
+    io.emit("fixtureStatUpdated");
+
     res.send("Match stats updated!");
   } else if (!match) {
     res.status(404).send("Match doesn't exist!");
@@ -634,6 +663,11 @@ const updateScore = asyncHandler(async (req, res) => {
     match.score = score;
 
     await match.save();
+
+    const io = require("../../server");
+
+    //  TODO:Handle on Frontend
+    io.emit("fixtureScoreUpdated");
 
     res.send("Match score updated!");
   } else if (!match) {
@@ -670,6 +704,8 @@ const deleteFixture = asyncHandler(async function (req, res) {
     const deleted = await FixtureModel.deleteOne({
       matchId: req.params.matchId,
     });
+    const io = require("../../server");
+    io.emit("fixtureUpdated");
     deleted
       ? res.send("Match deleted!")
       : res.status(400).send("Match with provided matchid doesn't exist");

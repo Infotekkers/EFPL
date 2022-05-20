@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/points/i_points_facade.dart';
+import 'package:efpl/domain/points/point_user_player.dart';
 import 'package:efpl/domain/points/points.dart';
+import 'package:efpl/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 part 'points_event.dart';
 part 'points_state.dart';
@@ -18,6 +20,7 @@ class PointsBloc extends Bloc<PointsEvent, PointsState> {
       : super(
           PointsState.initial(),
         ) {
+    // get points
     on<_getPointsInfo>(
       (event, emit) async {
         emit(
@@ -33,9 +36,23 @@ class PointsBloc extends Bloc<PointsEvent, PointsState> {
           (r) => r,
         );
 
+        // calculate score
+        int pointSum = 0;
+        for (var playerInfo in pointsInfo.allPlayers) {
+          if (playerInfo.score.isNotEmpty) {
+            pointSum = pointSum +
+                (playerInfo.multiplier *
+                    int.parse(
+                      playerInfo.score[0]['fantasyScore'].toString(),
+                    ));
+          }
+        }
+
         emit(
           state.copyWith(
             isLoading: false,
+            allPlayersPointSum: pointSum,
+            gameWeekId: pointsInfo.gameWeekId,
             pointsInfo: pointsInfo,
             valueFailureOrSuccess: some(eitherPointsInfo),
           ),
@@ -45,31 +62,21 @@ class PointsBloc extends Bloc<PointsEvent, PointsState> {
 
     // Increase GameWeek
     on<_increaseGameWeek>((event, emit) async {
-      print(state.pointsInfo.maxActiveCount);
       // increase GWN
-      int toSetGameWeek = state.pointsInfo.gameWeekId + 1;
-      if (state.pointsInfo.gameWeekId > state.pointsInfo.maxActiveCount) {
+      int toSetGameWeek = state.gameWeekId + 1;
+      if (state.gameWeekId > state.pointsInfo.maxActiveCount - 1) {
         toSetGameWeek = 1;
       }
 
-      PointsInfo pointsInfo = PointsInfo(
-        allPlayers: state.pointsInfo.allPlayers,
-        gameWeekId: toSetGameWeek,
-        activeChip: state.pointsInfo.activeChip,
-        deduction: state.pointsInfo.deduction,
-        maxActiveCount: state.pointsInfo.maxActiveCount,
-        teamName: state.pointsInfo.teamName,
-      );
-
       emit(
         state.copyWith(
-          pointsInfo: pointsInfo,
+          gameWeekId: toSetGameWeek,
           isLoading: true,
         ),
       );
 
-      Either<dynamic, PointsInfo> eitherPointsInfo =
-          await _iPointInfoRepository.getPointByGameWeekId(gameWeekId: 0);
+      Either<dynamic, PointsInfo> eitherPointsInfo = await _iPointInfoRepository
+          .getPointByGameWeekId(gameWeekId: state.gameWeekId);
 
       final PointsInfo pointsInfoNew = eitherPointsInfo.fold(
         (l) => l[0],
@@ -88,29 +95,20 @@ class PointsBloc extends Bloc<PointsEvent, PointsState> {
     // Increase GameWeek
     on<_decreaseGameWeek>((event, emit) async {
       // increase GWN
-      int toSetGameWeek = state.pointsInfo.gameWeekId + 1;
-      if (state.pointsInfo.gameWeekId == 1) {
+      int toSetGameWeek = state.gameWeekId - 1;
+      if (state.gameWeekId == 1) {
         toSetGameWeek = state.pointsInfo.maxActiveCount;
       }
 
-      PointsInfo pointsInfo = PointsInfo(
-        allPlayers: state.pointsInfo.allPlayers,
-        gameWeekId: toSetGameWeek,
-        activeChip: state.pointsInfo.activeChip,
-        deduction: state.pointsInfo.deduction,
-        maxActiveCount: state.pointsInfo.maxActiveCount,
-        teamName: state.pointsInfo.teamName,
-      );
-
       emit(
         state.copyWith(
-          pointsInfo: pointsInfo,
+          gameWeekId: toSetGameWeek,
           isLoading: true,
         ),
       );
 
-      Either<dynamic, PointsInfo> eitherPointsInfo =
-          await _iPointInfoRepository.getPointByGameWeekId(gameWeekId: 0);
+      Either<dynamic, PointsInfo> eitherPointsInfo = await _iPointInfoRepository
+          .getPointByGameWeekId(gameWeekId: state.gameWeekId);
 
       // get team from response
       final PointsInfo pointsInfoNew = eitherPointsInfo.fold(

@@ -52,6 +52,10 @@ const addPlayer = asyncHandler(async (req, res) => {
           playerImage: playerImagePath,
           eplTeamId: id,
         }).save();
+
+        const io = require("../../server");
+        io.emit("playerUpdated");
+
         res.status(201).send(`${playerName} added successfully`);
       }
       // if file is not saved
@@ -137,6 +141,10 @@ const updatePlayer = asyncHandler(async (req, res) => {
         $set: newData,
       }
     );
+
+    const io = require("../../server");
+    io.emit("playerUpdated");
+
     res.status(201).send(` ${playerName} Info updated successful`);
   } else {
     return res.status(404).send(`player with ${playerName}exist`);
@@ -159,6 +167,10 @@ const updateScore = asyncHandler(async (req, res) => {
     verifyPlayer.score = scorearray;
 
     await verifyPlayer.save();
+
+    const io = require("../../server");
+    io.emit("playerUpdated");
+
     res.status(201).send(`Score for Gameweek update successful`);
   } else {
     res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
@@ -179,6 +191,9 @@ const addScore = asyncHandler(async (req, res) => {
         },
       }
     );
+    const io = require("../../server");
+    io.emit("playerUpdated");
+
     res.status(201).send(`Score added successfully`);
   } else {
     res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
@@ -247,7 +262,8 @@ const deletePlayer = asyncHandler(async (req, res) => {
     playerId: req.params.playerId,
   });
 
-  console.log(currentPlayer);
+  const io = require("../../server");
+  io.emit("playerUpdated");
   await PlayerModel.deleteOne({ playerId: req.params.playerId });
   res.send(`Player ${currentPlayer[0].playerName} removed`);
 });

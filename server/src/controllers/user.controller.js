@@ -299,6 +299,8 @@ const getUserTeam = asyncHandler(async (req, res) => {
       .select("-_id,-gameWeekNumber")
       .sort("gameWeekNumber");
 
+    gameWeekId = gameWeekId + 1;
+
     // TODO:get user id from token
     if (gameWeekId && userId) {
       const user = await User.findOne({ _id: userId })
@@ -415,6 +417,8 @@ const getUserTeam = asyncHandler(async (req, res) => {
 const getUserPoints = asyncHandler(async (req, res) => {
   const gwId = req.params.gameWeekId;
 
+  console.log("HERE");
+
   // const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
   // const userId = token.data;
 
@@ -437,6 +441,8 @@ const getUserPoints = asyncHandler(async (req, res) => {
     gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber + 1;
   }
 
+  console.log(gameWeekId);
+
   // get user team
   const user = await User.findOne({ _id: userId })
     .select("-_id -password -country")
@@ -449,7 +455,7 @@ const getUserPoints = asyncHandler(async (req, res) => {
     gameWeekId: gameWeekId,
     activeChip: userTeam.activeChip,
     deduction: userTeam.deduction,
-    maxActiveCount: activeGw[activeGw.length - 1].gameWeekNumber + 1,
+    maxActiveCount: activeGw[activeGw.length - 1].gameWeekNumber,
     teamName: user.teamName,
   };
 
@@ -497,8 +503,6 @@ const getUserPoints = asyncHandler(async (req, res) => {
   }
 
   finalFormat.allPlayers = allPlayersInfo;
-
-  // get all players
 
   res.status(200).send(finalFormat);
 });

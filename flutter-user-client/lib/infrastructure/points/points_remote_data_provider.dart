@@ -68,7 +68,7 @@ class PointsInfoRemoteDataProvider {
 
         PointsInfo pointsInfo = PointsInfo(
           allPlayers: allPlayersDomain,
-          gameWeekId: parsedBody['gameWeekId'],
+          gameWeekId: int.parse(parsedBody['gameWeekId'].toString()),
           activeChip: parsedBody['activeChip'],
           deduction: int.parse(parsedBody['deduction'].toString()),
           maxActiveCount: int.parse(parsedBody['maxActiveCount'].toString()),

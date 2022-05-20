@@ -434,10 +434,14 @@ class _$PointsStateTearOff {
   const _$PointsStateTearOff();
 
   _PointsState call(
-      {required PointsInfo pointsInfo,
+      {required int gameWeekId,
+      required int allPlayersPointSum,
+      required PointsInfo pointsInfo,
       required bool isLoading,
       required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) {
     return _PointsState(
+      gameWeekId: gameWeekId,
+      allPlayersPointSum: allPlayersPointSum,
       pointsInfo: pointsInfo,
       isLoading: isLoading,
       valueFailureOrSuccess: valueFailureOrSuccess,
@@ -450,6 +454,8 @@ const $PointsState = _$PointsStateTearOff();
 
 /// @nodoc
 mixin _$PointsState {
+  int get gameWeekId => throw _privateConstructorUsedError;
+  int get allPlayersPointSum => throw _privateConstructorUsedError;
   PointsInfo get pointsInfo => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<dynamic, dynamic>> get valueFailureOrSuccess =>
@@ -466,7 +472,9 @@ abstract class $PointsStateCopyWith<$Res> {
           PointsState value, $Res Function(PointsState) then) =
       _$PointsStateCopyWithImpl<$Res>;
   $Res call(
-      {PointsInfo pointsInfo,
+      {int gameWeekId,
+      int allPlayersPointSum,
+      PointsInfo pointsInfo,
       bool isLoading,
       Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
 
@@ -483,11 +491,21 @@ class _$PointsStateCopyWithImpl<$Res> implements $PointsStateCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? gameWeekId = freezed,
+    Object? allPlayersPointSum = freezed,
     Object? pointsInfo = freezed,
     Object? isLoading = freezed,
     Object? valueFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
+      gameWeekId: gameWeekId == freezed
+          ? _value.gameWeekId
+          : gameWeekId // ignore: cast_nullable_to_non_nullable
+              as int,
+      allPlayersPointSum: allPlayersPointSum == freezed
+          ? _value.allPlayersPointSum
+          : allPlayersPointSum // ignore: cast_nullable_to_non_nullable
+              as int,
       pointsInfo: pointsInfo == freezed
           ? _value.pointsInfo
           : pointsInfo // ignore: cast_nullable_to_non_nullable
@@ -519,7 +537,9 @@ abstract class _$PointsStateCopyWith<$Res>
       __$PointsStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {PointsInfo pointsInfo,
+      {int gameWeekId,
+      int allPlayersPointSum,
+      PointsInfo pointsInfo,
       bool isLoading,
       Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
 
@@ -539,11 +559,21 @@ class __$PointsStateCopyWithImpl<$Res> extends _$PointsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? gameWeekId = freezed,
+    Object? allPlayersPointSum = freezed,
     Object? pointsInfo = freezed,
     Object? isLoading = freezed,
     Object? valueFailureOrSuccess = freezed,
   }) {
     return _then(_PointsState(
+      gameWeekId: gameWeekId == freezed
+          ? _value.gameWeekId
+          : gameWeekId // ignore: cast_nullable_to_non_nullable
+              as int,
+      allPlayersPointSum: allPlayersPointSum == freezed
+          ? _value.allPlayersPointSum
+          : allPlayersPointSum // ignore: cast_nullable_to_non_nullable
+              as int,
       pointsInfo: pointsInfo == freezed
           ? _value.pointsInfo
           : pointsInfo // ignore: cast_nullable_to_non_nullable
@@ -564,10 +594,16 @@ class __$PointsStateCopyWithImpl<$Res> extends _$PointsStateCopyWithImpl<$Res>
 
 class _$_PointsState implements _PointsState {
   const _$_PointsState(
-      {required this.pointsInfo,
+      {required this.gameWeekId,
+      required this.allPlayersPointSum,
+      required this.pointsInfo,
       required this.isLoading,
       required this.valueFailureOrSuccess});
 
+  @override
+  final int gameWeekId;
+  @override
+  final int allPlayersPointSum;
   @override
   final PointsInfo pointsInfo;
   @override
@@ -577,7 +613,7 @@ class _$_PointsState implements _PointsState {
 
   @override
   String toString() {
-    return 'PointsState(pointsInfo: $pointsInfo, isLoading: $isLoading, valueFailureOrSuccess: $valueFailureOrSuccess)';
+    return 'PointsState(gameWeekId: $gameWeekId, allPlayersPointSum: $allPlayersPointSum, pointsInfo: $pointsInfo, isLoading: $isLoading, valueFailureOrSuccess: $valueFailureOrSuccess)';
   }
 
   @override
@@ -585,6 +621,10 @@ class _$_PointsState implements _PointsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _PointsState &&
+            const DeepCollectionEquality()
+                .equals(other.gameWeekId, gameWeekId) &&
+            const DeepCollectionEquality()
+                .equals(other.allPlayersPointSum, allPlayersPointSum) &&
             const DeepCollectionEquality()
                 .equals(other.pointsInfo, pointsInfo) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
@@ -595,6 +635,8 @@ class _$_PointsState implements _PointsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(gameWeekId),
+      const DeepCollectionEquality().hash(allPlayersPointSum),
       const DeepCollectionEquality().hash(pointsInfo),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(valueFailureOrSuccess));
@@ -607,11 +649,17 @@ class _$_PointsState implements _PointsState {
 
 abstract class _PointsState implements PointsState {
   const factory _PointsState(
-          {required PointsInfo pointsInfo,
+          {required int gameWeekId,
+          required int allPlayersPointSum,
+          required PointsInfo pointsInfo,
           required bool isLoading,
           required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) =
       _$_PointsState;
 
+  @override
+  int get gameWeekId;
+  @override
+  int get allPlayersPointSum;
   @override
   PointsInfo get pointsInfo;
   @override
