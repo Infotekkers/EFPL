@@ -212,7 +212,9 @@ const resetPass = asyncHandler(async (req, res) => {
 const transfer = asyncHandler(async (req, res) => {
   // Destructure request body
   const { data } = req.body;
-  const { userId, incomingTeam } = JSON.parse(data);
+  // const { userId, incomingTeam } = JSON.parse(data);
+  const { incomingTeam } = JSON.parse(data);
+  const userId = "6287bced338450844ef3e283";
 
   // Fetch active gameweek
   let activeGameweek = await Gameweek.findOne({ status: "Active" }).exec();
@@ -280,8 +282,10 @@ const transfer = asyncHandler(async (req, res) => {
 const getUserTeam = asyncHandler(async (req, res) => {
   try {
     // get user id from token
-    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
-    const userId = token.data;
+    // const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+
+    const userId = "6287bced338450844ef3e283";
+    // const userId = token.data;
 
     // get active game week
     const gameWeek = await Gameweek.find({ status: "active" });
@@ -423,7 +427,7 @@ const getUserPoints = asyncHandler(async (req, res) => {
   // const userId = token.data;
 
   // TODO:Replace
-  const userId = "62853c9caf9fd3a46ec4582f";
+  const userId = "6287bced338450844ef3e283";
 
   // get the gw number from frontend
   let gameWeekId = gwId;
