@@ -15,17 +15,30 @@ class LeagueTableRemoteDataProvider {
 
   LeagueTableRemoteDataProvider();
 
-  Future<Either<LeagueTableFailure, LeagueTable>> getTeams() async {
+  Future<Either<LeagueTableFailure, List<LeagueTable>>> getTeams() async {
     final Uri url = Uri.parse("$_baseUrl/teams/all");
 
     try {
       final response = await client!.get(url);
 
       if (response.statusCode == 200) {
-        LeagueTableDto leagueTableDto =
-            LeagueTableDto.fromJson(jsonDecode(response.body));
+        final leagueTable = <LeagueTable>[];
+        final leagueTableDtoJson = [];
 
-        return right(leagueTableDto.toDomain());
+        final parsedResponseBody = jsonDecode(response.body) as List<dynamic>;
+
+        for (var leagueTableJson in parsedResponseBody) {
+          Map<String, dynamic> FinalParsedLeagueTable = <String, dynamic>{};
+          leagueTableDtoJson.add(FinalParsedLeagueTable);
+
+          final LeagueTableDto leagueTableDto =
+              LeagueTableDto.fromJson(FinalParsedLeagueTable);
+          leagueTable.add(leagueTableDto.toDomain());
+        }
+        // LeagueTableDto leagueTableDto =
+        //     LeagueTableDto.fromJson(jsonDecode(response.body));
+
+        return right(leagueTable);
       }
 
       return left(const LeagueTableFailure.serverError());

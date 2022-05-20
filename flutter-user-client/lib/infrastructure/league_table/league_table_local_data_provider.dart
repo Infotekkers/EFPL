@@ -8,12 +8,15 @@ import 'package:efpl/infrastructure/league_table/league_table_dto.dart';
 
 @injectable
 class LeagueTableLocalDataProvider {
-  Box leagueTableCache = Hive.box('myTeamCache');
+  Box leagueTableCache = Hive.box('leagueTableCache');
 
-  Future<Either<LeagueTableFailure, LeagueTable>> getTeams() async {
+  Future<Either<LeagueTableFailure, List<LeagueTable>>> getTeams() async {
     try {
+      List<LeagueTable> leagueTables = [];
       var leagueTable = await leagueTableCache.get('leagueTable');
-      return right(LeagueTableDto.fromJson(leagueTable).toDomain());
+      leagueTable.forEach((table) =>
+          {leagueTables.add(LeagueTableDto.fromJson(table).toDomain())});
+      return right(leagueTables);
     } catch (e) {
       return left(const LeagueTableFailure.localDBError());
     }

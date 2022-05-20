@@ -23,7 +23,7 @@ class LeagueTableRepository implements ILeagueTableRepository {
   Utility utility = Utility();
 
   @override
-  Future<Either<LeagueTableFailure, LeagueTable>> getTeams() async {
+  Future<Either<LeagueTableFailure, List<LeagueTable>>> getTeams() async {
     if (await utility.hasInternetConnection()) {
       return leagueTableRemoteDataProvider.getTeams();
     } else {
