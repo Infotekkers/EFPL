@@ -26,14 +26,16 @@ class _$UserDtoTearOff {
       required String userName,
       required String teamName,
       required String country,
-      required String favoriteEplTeamId,
+      required String favouriteEplTeam,
+      required String token,
       String password = ""}) {
     return _UserDto(
       email: email,
       userName: userName,
       teamName: teamName,
       country: country,
-      favoriteEplTeamId: favoriteEplTeamId,
+      favouriteEplTeam: favouriteEplTeam,
+      token: token,
       password: password,
     );
   }
@@ -52,7 +54,8 @@ mixin _$UserDto {
   String get userName => throw _privateConstructorUsedError;
   String get teamName => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
-  String get favoriteEplTeamId => throw _privateConstructorUsedError;
+  String get favouriteEplTeam => throw _privateConstructorUsedError;
+  String get token => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -69,7 +72,8 @@ abstract class $UserDtoCopyWith<$Res> {
       String userName,
       String teamName,
       String country,
-      String favoriteEplTeamId,
+      String favouriteEplTeam,
+      String token,
       String password});
 }
 
@@ -87,7 +91,8 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
     Object? userName = freezed,
     Object? teamName = freezed,
     Object? country = freezed,
-    Object? favoriteEplTeamId = freezed,
+    Object? favouriteEplTeam = freezed,
+    Object? token = freezed,
     Object? password = freezed,
   }) {
     return _then(_value.copyWith(
@@ -107,9 +112,13 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
-      favoriteEplTeamId: favoriteEplTeamId == freezed
-          ? _value.favoriteEplTeamId
-          : favoriteEplTeamId // ignore: cast_nullable_to_non_nullable
+      favouriteEplTeam: favouriteEplTeam == freezed
+          ? _value.favouriteEplTeam
+          : favouriteEplTeam // ignore: cast_nullable_to_non_nullable
+              as String,
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -129,7 +138,8 @@ abstract class _$UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       String userName,
       String teamName,
       String country,
-      String favoriteEplTeamId,
+      String favouriteEplTeam,
+      String token,
       String password});
 }
 
@@ -148,7 +158,8 @@ class __$UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
     Object? userName = freezed,
     Object? teamName = freezed,
     Object? country = freezed,
-    Object? favoriteEplTeamId = freezed,
+    Object? favouriteEplTeam = freezed,
+    Object? token = freezed,
     Object? password = freezed,
   }) {
     return _then(_UserDto(
@@ -168,9 +179,13 @@ class __$UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
-      favoriteEplTeamId: favoriteEplTeamId == freezed
-          ? _value.favoriteEplTeamId
-          : favoriteEplTeamId // ignore: cast_nullable_to_non_nullable
+      favouriteEplTeam: favouriteEplTeam == freezed
+          ? _value.favouriteEplTeam
+          : favouriteEplTeam // ignore: cast_nullable_to_non_nullable
+              as String,
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -188,7 +203,8 @@ class _$_UserDto extends _UserDto {
       required this.userName,
       required this.teamName,
       required this.country,
-      required this.favoriteEplTeamId,
+      required this.favouriteEplTeam,
+      required this.token,
       this.password = ""})
       : super._();
 
@@ -204,14 +220,16 @@ class _$_UserDto extends _UserDto {
   @override
   final String country;
   @override
-  final String favoriteEplTeamId;
+  final String favouriteEplTeam;
+  @override
+  final String token;
   @JsonKey()
   @override
   final String password;
 
   @override
   String toString() {
-    return 'UserDto(email: $email, userName: $userName, teamName: $teamName, country: $country, favoriteEplTeamId: $favoriteEplTeamId, password: $password)';
+    return 'UserDto(email: $email, userName: $userName, teamName: $teamName, country: $country, favouriteEplTeam: $favouriteEplTeam, token: $token, password: $password)';
   }
 
   @override
@@ -224,7 +242,8 @@ class _$_UserDto extends _UserDto {
             const DeepCollectionEquality().equals(other.teamName, teamName) &&
             const DeepCollectionEquality().equals(other.country, country) &&
             const DeepCollectionEquality()
-                .equals(other.favoriteEplTeamId, favoriteEplTeamId) &&
+                .equals(other.favouriteEplTeam, favouriteEplTeam) &&
+            const DeepCollectionEquality().equals(other.token, token) &&
             const DeepCollectionEquality().equals(other.password, password));
   }
 
@@ -235,7 +254,8 @@ class _$_UserDto extends _UserDto {
       const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(teamName),
       const DeepCollectionEquality().hash(country),
-      const DeepCollectionEquality().hash(favoriteEplTeamId),
+      const DeepCollectionEquality().hash(favouriteEplTeam),
+      const DeepCollectionEquality().hash(token),
       const DeepCollectionEquality().hash(password));
 
   @JsonKey(ignore: true)
@@ -255,7 +275,8 @@ abstract class _UserDto extends UserDto {
       required String userName,
       required String teamName,
       required String country,
-      required String favoriteEplTeamId,
+      required String favouriteEplTeam,
+      required String token,
       String password}) = _$_UserDto;
   const _UserDto._() : super._();
 
@@ -270,7 +291,9 @@ abstract class _UserDto extends UserDto {
   @override
   String get country;
   @override
-  String get favoriteEplTeamId;
+  String get favouriteEplTeam;
+  @override
+  String get token;
   @override
   String get password;
   @override

@@ -11,7 +11,8 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       userName: json['userName'] as String,
       teamName: json['teamName'] as String,
       country: json['country'] as String,
-      favoriteEplTeamId: json['favoriteEplTeamId'] as String,
+      favouriteEplTeam: json['favouriteEplTeam'] as String,
+      token: json['token'] as String,
       password: json['password'] as String? ?? "",
     );
 
@@ -21,6 +22,7 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'userName': instance.userName,
       'teamName': instance.teamName,
       'country': instance.country,
-      'favoriteEplTeamId': instance.favoriteEplTeamId,
+      'favouriteEplTeam': instance.favouriteEplTeam,
+      'token': instance.token,
       'password': instance.password,
     };

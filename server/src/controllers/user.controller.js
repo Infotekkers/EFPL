@@ -33,7 +33,7 @@ const register = asyncHandler(async (req, res) => {
     email: req.body.email,
     teamName: req.body.teamName,
     country: req.body.country,
-    favoriteEplTeamId: req.body.favoriteEplTeamId,
+    favouriteEplTeam: req.body.favoriteEplTeam,
   });
   // save user to db
   await user.save();
@@ -63,8 +63,7 @@ const register = asyncHandler(async (req, res) => {
 const login = asyncHandler(async (req, res) => {
   // check if email exists
   const user = await User.findOne({ email: req.body.email });
-
-
+ 
   // check if password valid
   if (user) {
     const passwordCheck = await bcrypt.compare(
@@ -90,9 +89,13 @@ const login = asyncHandler(async (req, res) => {
       // return token  with user
       res.status(201).json({
         token: token,
-        name: user.userName,
+        userName: user.userName,
         email: user.email,
+        country: user.country,
+        favouriteEplTeam: user.favouriteEplTeam,
+        teamName: user.teamName,
       });
+      
     }
     else{
       res.status(400).json({ message: "invalid email - password combination" });
@@ -127,8 +130,8 @@ const updateUser = asyncHandler(async (req, res) => {
   res.user = user;
 
   // change favorite team
-  if (req.body.favoriteEplTeamId != null) {
-    res.user.favoriteEplTeamId = req.body.favoriteEplTeamId;
+  if (req.body.favouriteEplTeam != null) {
+    res.user.favoriteEplTeam = req.body.favoriteEplTeam;
   }
   // change userName
   if (req.body.userName != null) {

@@ -1532,7 +1532,7 @@ class _$RegisterFormStateTearOff {
       required UserName userName,
       required TeamName teamName,
       required Country country,
-      required FavoriteEplTeam favoriteEplTeamId,
+      required FavoriteEplTeam favouriteEplTeam,
       required bool showErrorMessages,
       required bool isSubmitting,
       required Option<Either<AuthFailure, User>> authFailureOrSuccessOption}) {
@@ -1543,7 +1543,7 @@ class _$RegisterFormStateTearOff {
       userName: userName,
       teamName: teamName,
       country: country,
-      favoriteEplTeamId: favoriteEplTeamId,
+      favouriteEplTeam: favouriteEplTeam,
       showErrorMessages: showErrorMessages,
       isSubmitting: isSubmitting,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
@@ -1562,7 +1562,7 @@ mixin _$RegisterFormState {
   UserName get userName => throw _privateConstructorUsedError;
   TeamName get teamName => throw _privateConstructorUsedError;
   Country get country => throw _privateConstructorUsedError;
-  FavoriteEplTeam get favoriteEplTeamId => throw _privateConstructorUsedError;
+  FavoriteEplTeam get favouriteEplTeam => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, User>> get authFailureOrSuccessOption =>
@@ -1585,7 +1585,7 @@ abstract class $RegisterFormStateCopyWith<$Res> {
       UserName userName,
       TeamName teamName,
       Country country,
-      FavoriteEplTeam favoriteEplTeamId,
+      FavoriteEplTeam favouriteEplTeam,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, User>> authFailureOrSuccessOption});
@@ -1608,7 +1608,7 @@ class _$RegisterFormStateCopyWithImpl<$Res>
     Object? userName = freezed,
     Object? teamName = freezed,
     Object? country = freezed,
-    Object? favoriteEplTeamId = freezed,
+    Object? favouriteEplTeam = freezed,
     Object? showErrorMessages = freezed,
     Object? isSubmitting = freezed,
     Object? authFailureOrSuccessOption = freezed,
@@ -1638,9 +1638,9 @@ class _$RegisterFormStateCopyWithImpl<$Res>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as Country,
-      favoriteEplTeamId: favoriteEplTeamId == freezed
-          ? _value.favoriteEplTeamId
-          : favoriteEplTeamId // ignore: cast_nullable_to_non_nullable
+      favouriteEplTeam: favouriteEplTeam == freezed
+          ? _value.favouriteEplTeam
+          : favouriteEplTeam // ignore: cast_nullable_to_non_nullable
               as FavoriteEplTeam,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
@@ -1672,7 +1672,7 @@ abstract class _$RegisterFormStateCopyWith<$Res>
       UserName userName,
       TeamName teamName,
       Country country,
-      FavoriteEplTeam favoriteEplTeamId,
+      FavoriteEplTeam favouriteEplTeam,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, User>> authFailureOrSuccessOption});
@@ -1697,7 +1697,7 @@ class __$RegisterFormStateCopyWithImpl<$Res>
     Object? userName = freezed,
     Object? teamName = freezed,
     Object? country = freezed,
-    Object? favoriteEplTeamId = freezed,
+    Object? favouriteEplTeam = freezed,
     Object? showErrorMessages = freezed,
     Object? isSubmitting = freezed,
     Object? authFailureOrSuccessOption = freezed,
@@ -1727,9 +1727,9 @@ class __$RegisterFormStateCopyWithImpl<$Res>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as Country,
-      favoriteEplTeamId: favoriteEplTeamId == freezed
-          ? _value.favoriteEplTeamId
-          : favoriteEplTeamId // ignore: cast_nullable_to_non_nullable
+      favouriteEplTeam: favouriteEplTeam == freezed
+          ? _value.favouriteEplTeam
+          : favouriteEplTeam // ignore: cast_nullable_to_non_nullable
               as FavoriteEplTeam,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
@@ -1757,7 +1757,7 @@ class _$_RegisterFormState implements _RegisterFormState {
       required this.userName,
       required this.teamName,
       required this.country,
-      required this.favoriteEplTeamId,
+      required this.favouriteEplTeam,
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.authFailureOrSuccessOption});
@@ -1775,7 +1775,7 @@ class _$_RegisterFormState implements _RegisterFormState {
   @override
   final Country country;
   @override
-  final FavoriteEplTeam favoriteEplTeamId;
+  final FavoriteEplTeam favouriteEplTeam;
   @override
   final bool showErrorMessages;
   @override
@@ -1785,7 +1785,7 @@ class _$_RegisterFormState implements _RegisterFormState {
 
   @override
   String toString() {
-    return 'RegisterFormState(email: $email, password: $password, confirmPassword: $confirmPassword, userName: $userName, teamName: $teamName, country: $country, favoriteEplTeamId: $favoriteEplTeamId, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'RegisterFormState(email: $email, password: $password, confirmPassword: $confirmPassword, userName: $userName, teamName: $teamName, country: $country, favouriteEplTeam: $favouriteEplTeam, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -1801,7 +1801,7 @@ class _$_RegisterFormState implements _RegisterFormState {
             const DeepCollectionEquality().equals(other.teamName, teamName) &&
             const DeepCollectionEquality().equals(other.country, country) &&
             const DeepCollectionEquality()
-                .equals(other.favoriteEplTeamId, favoriteEplTeamId) &&
+                .equals(other.favouriteEplTeam, favouriteEplTeam) &&
             const DeepCollectionEquality()
                 .equals(other.showErrorMessages, showErrorMessages) &&
             const DeepCollectionEquality()
@@ -1819,7 +1819,7 @@ class _$_RegisterFormState implements _RegisterFormState {
       const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(teamName),
       const DeepCollectionEquality().hash(country),
-      const DeepCollectionEquality().hash(favoriteEplTeamId),
+      const DeepCollectionEquality().hash(favouriteEplTeam),
       const DeepCollectionEquality().hash(showErrorMessages),
       const DeepCollectionEquality().hash(isSubmitting),
       const DeepCollectionEquality().hash(authFailureOrSuccessOption));
@@ -1838,7 +1838,7 @@ abstract class _RegisterFormState implements RegisterFormState {
       required UserName userName,
       required TeamName teamName,
       required Country country,
-      required FavoriteEplTeam favoriteEplTeamId,
+      required FavoriteEplTeam favouriteEplTeam,
       required bool showErrorMessages,
       required bool isSubmitting,
       required Option<Either<AuthFailure, User>>
@@ -1857,7 +1857,7 @@ abstract class _RegisterFormState implements RegisterFormState {
   @override
   Country get country;
   @override
-  FavoriteEplTeam get favoriteEplTeamId;
+  FavoriteEplTeam get favouriteEplTeam;
   @override
   bool get showErrorMessages;
   @override

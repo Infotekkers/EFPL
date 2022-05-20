@@ -21,7 +21,6 @@ class AuthRepository implements IAuthRepository {
       {required User user, required Password password}) async {
     final Uri url = Uri.parse("$_baseUrl/login");
     final UserDto userDtoOut = UserDto.fromDomain(user);
-    print(userDtoOut.email);
     final outGoingJson =
         userDtoOut.copyWith(password: password.getOrCrash()).toJson();
     try {

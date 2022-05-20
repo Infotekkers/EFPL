@@ -1,5 +1,6 @@
 import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/auth/user.dart';
+import 'package:efpl/domain/core/core_value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'auth_dtos.freezed.dart';
@@ -14,7 +15,8 @@ abstract class UserDto implements _$UserDto {
     required String userName,
     required String teamName,
     required String country,
-    required String favoriteEplTeamId,
+    required String favouriteEplTeam,
+    required String token,
     @Default("") String password,
   }) = _UserDto;
 
@@ -24,8 +26,9 @@ abstract class UserDto implements _$UserDto {
         userName: user.userName.isValid() ? user.userName.getOrCrash() : "",
         teamName: user.teamName.isValid() ? user.teamName.getOrCrash() : "",
         country: user.country.isValid() ? user.country.getOrCrash() : "",
-        favoriteEplTeamId: user.favoriteEplTeamId.isValid()
-            ? user.favoriteEplTeamId.getOrCrash()
+        token: user.token.isValid() ? user.token.getOrCrash() : "",
+        favouriteEplTeam: user.favouriteEplTeam.isValid()
+            ? user.favouriteEplTeam.getOrCrash()
             : "",
         password: password?.isValid() == true ? password!.getOrCrash() : "",
       );
@@ -37,7 +40,8 @@ abstract class UserDto implements _$UserDto {
       userName: UserName(userName),
       teamName: TeamName(teamName),
       country: Country(country),
-      favoriteEplTeamId: FavoriteEplTeam(favoriteEplTeamId),
+      favouriteEplTeam: FavoriteEplTeam(favouriteEplTeam),
+      token: Token(token),
     );
   }
 

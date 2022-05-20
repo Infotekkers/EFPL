@@ -52,7 +52,7 @@ class TeamName extends ValueObject<String> {
 
   factory TeamName(String teamNameStr) {
     return TeamName._(
-      validateTeamName(teamNameStr),
+      validateUserName(teamNameStr),
     );
   }
 
@@ -66,7 +66,7 @@ class Country extends ValueObject<String> {
 
   factory Country(String countryStr) {
     return Country._(
-      validateTeamName(countryStr),
+      validateUserName(countryStr),
     );
   }
 
@@ -80,7 +80,7 @@ class FavoriteEplTeam extends ValueObject<String> {
 
   factory FavoriteEplTeam(String favTeamStr) {
     return FavoriteEplTeam._(
-      validateTeamName(favTeamStr),
+      validateUserName(favTeamStr),
     );
   }
 

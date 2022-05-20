@@ -96,7 +96,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
         (event, emit) async {
           emit(
             state.copyWith(
-              favoriteEplTeamId: FavoriteEplTeam(event.favoriteEplTeamStr),
+              favouriteEplTeam: FavoriteEplTeam(event.favoriteEplTeamStr),
               authFailureOrSuccessOption: none(),
             ),
           );
@@ -113,7 +113,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
           final isCountryValid = state.confirmPassword.isValid();
           final isUserName = state.userName.isValid();
           final isTeamNameValid = state.teamName.isValid();
-          final isFavoriteEplTeamValid = state.favoriteEplTeamId.isValid();
+          final isFavoriteEplTeamValid = state.favouriteEplTeam.isValid();
 
           if (isEmailValid &&
               isPassValid &&
@@ -135,7 +135,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                 userName: state.userName,
                 teamName: state.teamName,
                 country: state.country,
-                favoriteEplTeamId: state.favoriteEplTeamId,
+                favouriteEplTeam: state.favouriteEplTeam,
               ),
               password: state.password,
             );

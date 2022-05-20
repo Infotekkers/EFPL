@@ -30,17 +30,11 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
 }
 
 Either<ValueFailure<String>, String> validateUserName(String input) {
-  if (input.length <= 15) {
-    return right(input);
-  } else {
-    return left(ValueFailure.exceedingLength(failedValue: input));
-  }
-}
+  const nameRegex = r'''([A-Z][a-z]{1,})\w+\s+([A-Z][a-z]{0,})\w''';
 
-Either<ValueFailure<String>, String> validateTeamName(String input) {
-  if (input.length <= 15) {
+  if (RegExp(nameRegex).hasMatch(input)) {
     return right(input);
   } else {
-    return left(ValueFailure.exceedingLength(failedValue: input));
+    return left(ValueFailure.invalidUserName(failedValue: input));
   }
 }
