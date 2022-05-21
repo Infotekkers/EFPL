@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:efpl/domain/my_team/i_my_team_repository.dart';
 import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/my_team_failures.dart';
+import 'package:efpl/domain/my_team/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -40,9 +41,11 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
   void _onTransferOptionsRequested(
       _TransferOptionsRequested e, Emitter<MyTeamState> emit) {
     final myTeam = state.maybeMap(
-        loadSuccess: (s) => s.myTeam,
-        transferOptionsLoaded: (s) => s.myTeam,
-        orElse: () => null)!;
+      loadSuccess: (s) => s.myTeam,
+      transferOptionsLoaded: (s) => s.myTeam,
+      transferApproved: (s) => s.myTeam,
+      orElse: () => null,
+    )!;
 
     List<int> validOptions = [];
 
@@ -57,7 +60,8 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
         }
       }
 
-      emit(MyTeamState.transferOptionsLoaded(validOptions, myTeam));
+      emit(MyTeamState.transferOptionsLoaded(
+          validOptions, myTeam, e.playerId, e.position, e.isSub));
     } else {
       if (e.isSub) {
         const maxLimitPerPosition = {
@@ -93,20 +97,77 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
         }
       }
 
-      emit(MyTeamState.transferOptionsLoaded(validOptions, myTeam));
+      emit(MyTeamState.transferOptionsLoaded(
+          validOptions, myTeam, e.playerId, e.position, e.isSub));
     }
   }
 
   void _onTransferConfirmed(_TransferConfirmed e, Emitter<MyTeamState> emit) {
-    final playerOne =
-        e.myTeam.players[e.playerOneFieldPos].userPlayers.remove(e.playerOne);
-    final playerTwo =
-        e.myTeam.players[e.playerTwoFieldPos].userPlayers.remove(e.playerTwo);
+    final myTeam = state.maybeMap(
+        loadSuccess: (s) => s.myTeam,
+        transferOptionsLoaded: (s) => s.myTeam,
+        orElse: () => null)!;
 
-    e.myTeam.players[e.playerOneFieldPos].userPlayers[e.playerTwo] = playerTwo;
-    e.myTeam.players[e.playerTwoFieldPos].userPlayers[e.playerOne] = playerOne;
+    // FIRST SELECTED PLAYER AND FIELD POSITION
+    final playerOneId = state.maybeMap(
+        transferOptionsLoaded: (s) => s.playerId, orElse: () => null)!;
 
-    emit(MyTeamState.transferApproved(e.myTeam));
+    final playerOneFieldPosition = state.maybeMap(
+        transferOptionsLoaded: (s) => s.isSub ? 'sub' : s.position,
+        orElse: () => null)!;
+
+    final playerOneActualPosition = state.maybeMap(
+        transferOptionsLoaded: (s) => s.position, orElse: () => null)!;
+
+    // SECOND SELECTED PLAYER AND FIELD POSITION
+    final playerTwoId = e.toBeTransferredIn;
+
+    final playerTwoFieldPosition = e.isSub ? 'sub' : e.position;
+
+    final playerTwoActualPosition = e.position;
+
+    // POSITIONAL CONTAINER CONTAINING PLAYER 1 & 2
+    final userPlayersOneOut =
+        myTeam.players[playerOneFieldPosition].getOrCrash();
+
+    final userPlayersTwoOut =
+        myTeam.players[playerTwoFieldPosition].getOrCrash();
+
+    // REMOVE PLAYERS FROM POSITIONAL CONTAINER
+    final playerOne = userPlayersOneOut.remove(playerOneId.toString());
+    final playerTwo = userPlayersTwoOut.remove(playerTwoId.toString());
+
+    //
+    if (playerOneFieldPosition == 'sub') {
+      final userPlayerIn = myTeam.players[playerOneActualPosition].getOrCrash();
+
+      playerOne['multiplier'] = playerTwo['multiplier'];
+      playerTwo['multiplier'] = 0;
+
+      userPlayersOneOut[playerTwoId.toString()] = playerTwo;
+      userPlayerIn[playerOneId.toString()] = playerOne;
+
+      myTeam.players[playerOneActualPosition] =
+          PositionalContainer(userPlayerIn, playerOneActualPosition);
+    } else {
+      final userPlayerIn = myTeam.players[playerTwoActualPosition].getOrCrash();
+
+      playerTwo['multiplier'] = playerOne['multiplier'];
+      playerOne['multiplier'] = 0;
+
+      userPlayersTwoOut[playerOneId.toString()] = playerOne;
+      userPlayerIn[playerTwoId.toString()] = playerTwo;
+
+      myTeam.players[playerTwoActualPosition] =
+          PositionalContainer(userPlayerIn, playerTwoActualPosition);
+    }
+
+    myTeam.players[playerOneFieldPosition] =
+        PositionalContainer(userPlayersOneOut, playerOneFieldPosition);
+    myTeam.players[playerTwoFieldPosition] =
+        PositionalContainer(userPlayersTwoOut, playerTwoFieldPosition);
+
+    emit(MyTeamState.transferApproved(myTeam));
   }
 
   void _onSaveMyTeam(_SaveMyTeam e, Emitter<MyTeamState> emit) async {

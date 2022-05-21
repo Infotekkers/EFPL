@@ -5,12 +5,14 @@ class PositionalContainerWidget extends StatelessWidget {
   final String position;
   final Map<String, dynamic> players;
   final List? validOptions;
+  final int toBeTransferredOut;
 
   const PositionalContainerWidget({
     Key? key,
     required this.position,
     required this.players,
     this.validOptions,
+    this.toBeTransferredOut = 0,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,10 @@ class PositionalContainerWidget extends StatelessWidget {
             price: players[playerIds[index]]['price'],
             isCaptain: players[playerIds[index]]['isCaptain'],
             isViceCaptain: players[playerIds[index]]['isViceCaptain'],
+            toBeTransferredOut:
+                int.parse(playerIds[index]) == toBeTransferredOut
+                    ? true
+                    : false,
             isTransferable: validOptions != null
                 ? validOptions!.contains(int.parse(playerIds[index]))
                     ? true

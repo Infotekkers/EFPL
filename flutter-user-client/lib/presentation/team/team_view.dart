@@ -14,6 +14,6 @@ class TeamView extends StatelessWidget {
         value: getIt<MyTeamBloc>()
           ..add(const MyTeamEvent.loadMyTeam("623b101b9a85861e924388dd", "1")),
       )
-    ], child: TeamViewBody());
+    ], child: const TeamViewBody());
   }
 }

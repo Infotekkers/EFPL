@@ -8,7 +8,12 @@ abstract class MyTeamState with _$MyTeamState {
   const factory MyTeamState.loadFailure(MyTeamFailure myTeamFailure) =
       _LoadFailure;
   const factory MyTeamState.transferOptionsLoaded(
-      List<int> validOptions, MyTeam myTeam) = _TransferOptionsLoaded;
+    List<int> validOptions,
+    MyTeam myTeam,
+    int playerId,
+    String position,
+    bool isSub,
+  ) = _TransferOptionsLoaded;
   const factory MyTeamState.transferApproved(MyTeam myTeam) = _TransferApproved;
   const factory MyTeamState.saved() = _Saved;
 }

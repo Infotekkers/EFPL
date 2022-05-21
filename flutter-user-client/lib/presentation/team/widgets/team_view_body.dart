@@ -28,7 +28,7 @@ class TeamViewBody extends StatelessWidget {
         loadInProgress: (_) => const BouncingBallLoadingIndicator(),
         loadSuccess: (state) => _buildMyTeam(state),
         saved: (_) => Container(),
-        transferApproved: (_) => Container(),
+        transferApproved: (_) => _buildMyTeam(state),
         transferOptionsLoaded: (_) => _highlightMyTeam(state),
       ),
     );
@@ -68,26 +68,31 @@ class TeamViewBody extends StatelessWidget {
           position: 'gk',
           players: state.myTeam.players['gk'].getOrCrash(),
           validOptions: state.validOptions,
+          toBeTransferredOut: state.playerId,
         ),
         PositionalContainerWidget(
           position: 'def',
           players: state.myTeam.players['def'].getOrCrash(),
           validOptions: state.validOptions,
+          toBeTransferredOut: state.playerId,
         ),
         PositionalContainerWidget(
           position: 'mid',
           players: state.myTeam.players['mid'].getOrCrash(),
           validOptions: state.validOptions,
+          toBeTransferredOut: state.playerId,
         ),
         PositionalContainerWidget(
           position: 'att',
           players: state.myTeam.players['att'].getOrCrash(),
           validOptions: state.validOptions,
+          toBeTransferredOut: state.playerId,
         ),
         PositionalContainerWidget(
           position: 'sub',
           players: state.myTeam.players['sub'].getOrCrash(),
           validOptions: state.validOptions,
+          toBeTransferredOut: state.playerId,
         ),
       ],
     );

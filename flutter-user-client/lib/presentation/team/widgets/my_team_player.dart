@@ -12,6 +12,7 @@ class MyTeamPlayer extends StatelessWidget {
   final bool isCaptain;
   final bool isViceCaptain;
   final bool isTransferable;
+  final bool toBeTransferredOut;
 
   const MyTeamPlayer({
     Key? key,
@@ -24,16 +25,29 @@ class MyTeamPlayer extends StatelessWidget {
     required this.isCaptain,
     required this.isViceCaptain,
     required this.isTransferable,
+    required this.toBeTransferredOut,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(
-        color: isTransferable ? Colors.green[300] : Colors.white,
+        color: isTransferable
+            ? Colors.green[300]
+            : toBeTransferredOut
+                ? Colors.grey
+                : Colors.white,
         child: Column(
           children: [
             GestureDetector(
-              onTap: () =>
-                  showBottomModal(context, multiplier == 0 ? true : false),
+              onTap: () {
+                if (toBeTransferredOut) {
+                } else if (isTransferable) {
+                  BlocProvider.of<MyTeamBloc>(context).add(
+                      MyTeamEvent.transferConfirmed(
+                          playerId, position, multiplier == 0 ? true : false));
+                } else {
+                  showBottomModal(context, multiplier == 0 ? true : false);
+                }
+              },
               child: Column(
                 children: [
                   Image.asset(
@@ -66,7 +80,6 @@ class MyTeamPlayer extends StatelessWidget {
       );
 
   Future<dynamic> showBottomModal(BuildContext context, bool isSub) {
-    print("$playerId $isTransferable");
     final MyTeamBloc myTeamBloc = BlocProvider.of<MyTeamBloc>(context);
 
     return showModalBottomSheet(
