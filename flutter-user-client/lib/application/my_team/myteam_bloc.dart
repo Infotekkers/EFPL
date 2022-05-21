@@ -143,6 +143,12 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
     if (playerOneFieldPosition == 'sub') {
       final userPlayerIn = myTeam.players[playerOneActualPosition].getOrCrash();
 
+      if (playerTwo['multiplier'] > 1 || playerTwo['isViceCaptain']) {
+        playerOne['isCaptain'] = playerTwo['isCaptain'];
+        playerOne['isViceCaptain'] = playerTwo['isViceCaptain'];
+        playerTwo['isCaptain'] = false;
+        playerTwo['isViceCaptain'] = false;
+      }
       playerOne['multiplier'] = playerTwo['multiplier'];
       playerTwo['multiplier'] = 0;
 
@@ -154,6 +160,12 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
     } else {
       final userPlayerIn = myTeam.players[playerTwoActualPosition].getOrCrash();
 
+      if (playerOne['multiplier'] > 1 || playerOne['isViceCaptain']) {
+        playerTwo['isCaptain'] = playerOne['isCaptain'];
+        playerTwo['isViceCaptain'] = playerOne['isViceCaptain'];
+        playerOne['isCaptain'] = false;
+        playerOne['isViceCaptain'] = false;
+      }
       playerTwo['multiplier'] = playerOne['multiplier'];
       playerOne['multiplier'] = 0;
 
