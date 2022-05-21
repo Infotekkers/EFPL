@@ -2,8 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:efpl/domain/my_team/i_my_team_repository.dart';
 import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/my_team_failures.dart';
-import 'package:efpl/domain/my_team/value_objects.dart';
-import 'package:efpl/domain/player/player.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,7 +10,7 @@ part 'myteam_state.dart';
 
 part 'myteam_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
   final IMyTeamRepository iMyTeamRepository;
 
@@ -41,8 +39,10 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
 
   void _onTransferOptionsRequested(
       _TransferOptionsRequested e, Emitter<MyTeamState> emit) {
-    final myTeam =
-        state.maybeMap(loadSuccess: (s) => s.myTeam, orElse: () => null)!;
+    final myTeam = state.maybeMap(
+        loadSuccess: (s) => s.myTeam,
+        transferOptionsLoaded: (s) => s.myTeam,
+        orElse: () => null)!;
 
     List<int> validOptions = [];
 

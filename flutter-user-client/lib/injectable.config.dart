@@ -34,7 +34,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i9.UtilBloc>(() => _i9.UtilBloc());
   gh.lazySingleton<_i10.IMyTeamRepository>(() => _i11.MyTeamRepository(
       get<_i6.MyTeamLocalDataProvider>(), get<_i7.MyTeamRemoteDataProvider>()));
-  gh.factory<_i12.MyTeamBloc>(
+  gh.lazySingleton<_i12.MyTeamBloc>(
       () => _i12.MyTeamBloc(get<_i10.IMyTeamRepository>()));
   return get;
 }

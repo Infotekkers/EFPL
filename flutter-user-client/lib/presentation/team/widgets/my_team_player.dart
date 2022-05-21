@@ -11,6 +11,7 @@ class MyTeamPlayer extends StatelessWidget {
   final int price;
   final bool isCaptain;
   final bool isViceCaptain;
+  final bool isTransferable;
 
   const MyTeamPlayer({
     Key? key,
@@ -22,45 +23,50 @@ class MyTeamPlayer extends StatelessWidget {
     required this.price,
     required this.isCaptain,
     required this.isViceCaptain,
+    required this.isTransferable,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          GestureDetector(
-            onTap: () =>
-                showBottomModal(context, multiplier == 0 ? true : false),
-            child: Column(
-              children: [
-                Image.asset(
-                  "assets/images/shirt_placeholder.png",
-                  width: 60,
-                  height: 60,
-                ),
-                SizedBox(
-                  height: 60,
-                  width: 80,
-                  child: Card(
-                    child: Column(
-                      children: [
-                        Text(name.split(" ")[0]),
-                        Text(position.toUpperCase()),
-                        isCaptain
-                            ? const Text("C")
-                            : isViceCaptain
-                                ? const Text("V")
-                                : const Text(""),
-                      ],
+  Widget build(BuildContext context) => Container(
+        color: isTransferable ? Colors.green[300] : Colors.white,
+        child: Column(
+          children: [
+            GestureDetector(
+              onTap: () =>
+                  showBottomModal(context, multiplier == 0 ? true : false),
+              child: Column(
+                children: [
+                  Image.asset(
+                    "assets/images/shirt_placeholder.png",
+                    width: 60,
+                    height: 60,
+                  ),
+                  SizedBox(
+                    height: 60,
+                    width: 80,
+                    child: Card(
+                      child: Column(
+                        children: [
+                          Text(name.split(" ")[0]),
+                          Text(position.toUpperCase()),
+                          isCaptain
+                              ? const Text("C")
+                              : isViceCaptain
+                                  ? const Text("V")
+                                  : const Text(""),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
 
   Future<dynamic> showBottomModal(BuildContext context, bool isSub) {
+    print("$playerId $isTransferable");
     final MyTeamBloc myTeamBloc = BlocProvider.of<MyTeamBloc>(context);
 
     return showModalBottomSheet(

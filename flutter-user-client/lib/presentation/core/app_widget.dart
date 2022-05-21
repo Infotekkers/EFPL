@@ -52,7 +52,7 @@ class AppWidget extends StatelessWidget {
                 ),
               ),
             ),
-            initialRoute: "/team",
+            initialRoute: "/",
             routes: _appRouter.allRoutes,
           );
         },
