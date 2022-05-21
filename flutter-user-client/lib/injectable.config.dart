@@ -31,7 +31,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i7.MyTeamRemoteDataProvider());
   gh.factory<_i8.PlayerBloc>(
       () => _i8.PlayerBloc(get<_i3.IPlayerRepository>()));
-  gh.factory<_i9.UtilBloc>(() => _i9.UtilBloc());
+  gh.lazySingleton<_i9.UtilBloc>(() => _i9.UtilBloc());
   gh.lazySingleton<_i10.IMyTeamRepository>(() => _i11.MyTeamRepository(
       get<_i6.MyTeamLocalDataProvider>(), get<_i7.MyTeamRemoteDataProvider>()));
   gh.factory<_i12.MyTeamBloc>(

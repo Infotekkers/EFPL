@@ -28,7 +28,8 @@ class MyTeamPlayer extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         children: [
           GestureDetector(
-            onTap: () => showBottomModal(context),
+            onTap: () =>
+                showBottomModal(context, multiplier == 0 ? true : false),
             child: Column(
               children: [
                 Image.asset(
@@ -43,7 +44,7 @@ class MyTeamPlayer extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(name.split(" ")[0]),
-                        Text(position),
+                        Text(position.toUpperCase()),
                         isCaptain
                             ? const Text("C")
                             : isViceCaptain
@@ -59,7 +60,7 @@ class MyTeamPlayer extends StatelessWidget {
         ],
       );
 
-  Future<dynamic> showBottomModal(BuildContext context) {
+  Future<dynamic> showBottomModal(BuildContext context, bool isSub) {
     final MyTeamBloc myTeamBloc = BlocProvider.of<MyTeamBloc>(context);
 
     return showModalBottomSheet(
@@ -88,8 +89,11 @@ class MyTeamPlayer extends StatelessWidget {
                 ],
               ),
               GestureDetector(
-                onTap: () => myTeamBloc.add(
-                    MyTeamEvent.transferOptionsRequested(playerId, position)),
+                onTap: () {
+                  myTeamBloc.add(MyTeamEvent.transferOptionsRequested(
+                      playerId, position, isSub));
+                  Navigator.pop(context);
+                },
                 child: Row(
                   children: const [
                     Icon(Icons.compare_arrows),

@@ -72,10 +72,12 @@ class MyTeamRemoteDataProvider {
     };
 
     for (String playerId in myTeamDto.players.keys) {
+      myTeamDto.players[playerId]['position'] =
+          myTeamDto.players[playerId]['position'].toString().toLowerCase();
+
       if (myTeamDto.players[playerId].containsKey('position') &&
           myTeamDto.players[playerId]['multiplier'] > 0) {
-        final position =
-            myTeamDto.players[playerId]['position'].toString().toLowerCase();
+        final position = myTeamDto.players[playerId]['position'];
 
         playersOrganizedByPosition[position]![playerId] =
             myTeamDto.players[playerId];

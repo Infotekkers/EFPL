@@ -41,29 +41,60 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
 
   void _onTransferOptionsRequested(
       _TransferOptionsRequested e, Emitter<MyTeamState> emit) {
-    final positionalRange = {
-      'gk': [1, 1],
-      'def': [3, 5],
-      'mid': [3, 5],
-      'att': [1, 3],
-      'sub': [4, 4]
-    };
-
     final myTeam =
         state.maybeMap(loadSuccess: (s) => s.myTeam, orElse: () => null)!;
 
-    final validPositions = [e.position];
+    List<int> validOptions = [];
 
-    for (String position in myTeam.players.keys) {
-      if (myTeam.players[position].getOrCrash().keys.toList().length <
-              positionalRange[position]?[1] &&
-          position != e.position) {
-        validPositions.add(position);
+    if (e.position.toLowerCase() == 'gk') {
+      for (String position in ['gk', 'sub']) {
+        for (String playerId in myTeam.players[position].getOrCrash().keys) {
+          if (myTeam.players[position].getOrCrash()[playerId]['position'] ==
+                  'gk' &&
+              int.parse(playerId) != e.playerId) {
+            validOptions.add(int.parse(playerId));
+          }
+        }
       }
-    }
-    print(validPositions);
 
-    emit(MyTeamState.transferOptionsLoaded(validPositions, myTeam));
+      emit(MyTeamState.transferOptionsLoaded(validOptions, myTeam));
+    } else {
+      if (e.isSub) {
+        const maxLimitPerPosition = {
+          'def': 5,
+          'mid': 5,
+          '3': 5,
+        };
+
+        if (myTeam.players[e.position].getOrCrash().keys.toList().length <
+            maxLimitPerPosition[e.position]) {
+          for (String position in ['def', 'mid', 'att']) {
+            for (String playerId
+                in myTeam.players[position].getOrCrash().keys) {
+              if (int.parse(playerId) != e.playerId) {
+                validOptions.add(int.parse(playerId));
+              }
+            }
+          }
+        } else {
+          // Every player in player's position not on sub
+          for (String playerId
+              in myTeam.players[e.position].getOrCrash().keys) {
+            validOptions.add(int.parse(playerId));
+          }
+        }
+      } else {
+        // Every player on sub except goalkeeper
+        for (String playerId in myTeam.players['sub'].getOrCrash().keys) {
+          if (myTeam.players['sub'].getOrCrash()[playerId]['position'] !=
+              'gk') {
+            validOptions.add(int.parse(playerId));
+          }
+        }
+      }
+
+      emit(MyTeamState.transferOptionsLoaded(validOptions, myTeam));
+    }
   }
 
   void _onTransferConfirmed(_TransferConfirmed e, Emitter<MyTeamState> emit) {

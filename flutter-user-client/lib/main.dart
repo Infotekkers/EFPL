@@ -13,16 +13,5 @@ Future main() async {
   await Hive.initFlutter();
   await Hive.openBox("myTeamCache");
   configureInjection(Environment.prod);
-  // testDataProviders();
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("My Team"),
-        ),
-        body: const TeamView(),
-      ),
-    ),
-  );
-  // runApp(const AppWidget());
+  runApp(const AppWidget());
 }
