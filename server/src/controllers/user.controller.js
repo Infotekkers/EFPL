@@ -20,11 +20,8 @@ const register = asyncHandler(async (req, res) => {
  
   // check for prexisting email
   const emailExists = await User.findOne({ email: req.body.email });
-  // check for used team name
-  // const teamNameExists = await User.findOne({ teamName: req.body.teamName });
-
   if (emailExists) return res.status(400).send("Email in Use");
-  // if (teamNameExists) return res.status(400).send("Team Name in Use");
+ 
 
   // create user
   const user = new User({

@@ -1,3 +1,4 @@
+import 'package:efpl/presentation/authentication/register/register_view.dart';
 import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
 import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
 import 'package:efpl/presentation/core/main_tab_view.dart';
@@ -151,6 +152,15 @@ class SignInForm extends StatelessWidget {
                   ),
                   const Text(''),
                 ],
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RegisterPage()));
+                },
+                child: const Text('Register Here!'),
               ),
               ElevatedButton(
                 onPressed: () {

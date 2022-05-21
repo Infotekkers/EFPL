@@ -1535,7 +1535,8 @@ class _$RegisterFormStateTearOff {
       required FavoriteEplTeam favouriteEplTeam,
       required bool showErrorMessages,
       required bool isSubmitting,
-      required Option<Either<AuthFailure, User>> authFailureOrSuccessOption}) {
+      required Option<Either<AuthFailure, User>> authFailureOrSuccessOption,
+      required Option<Either<AuthFailure, Password>> isMatch}) {
     return _RegisterFormState(
       email: email,
       password: password,
@@ -1547,6 +1548,7 @@ class _$RegisterFormStateTearOff {
       showErrorMessages: showErrorMessages,
       isSubmitting: isSubmitting,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
+      isMatch: isMatch,
     );
   }
 }
@@ -1566,6 +1568,8 @@ mixin _$RegisterFormState {
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, User>> get authFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
+  Option<Either<AuthFailure, Password>> get isMatch =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1588,7 +1592,8 @@ abstract class $RegisterFormStateCopyWith<$Res> {
       FavoriteEplTeam favouriteEplTeam,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthFailure, User>> authFailureOrSuccessOption});
+      Option<Either<AuthFailure, User>> authFailureOrSuccessOption,
+      Option<Either<AuthFailure, Password>> isMatch});
 }
 
 /// @nodoc
@@ -1612,6 +1617,7 @@ class _$RegisterFormStateCopyWithImpl<$Res>
     Object? showErrorMessages = freezed,
     Object? isSubmitting = freezed,
     Object? authFailureOrSuccessOption = freezed,
+    Object? isMatch = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed
@@ -1654,6 +1660,10 @@ class _$RegisterFormStateCopyWithImpl<$Res>
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<AuthFailure, User>>,
+      isMatch: isMatch == freezed
+          ? _value.isMatch
+          : isMatch // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AuthFailure, Password>>,
     ));
   }
 }
@@ -1675,7 +1685,8 @@ abstract class _$RegisterFormStateCopyWith<$Res>
       FavoriteEplTeam favouriteEplTeam,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthFailure, User>> authFailureOrSuccessOption});
+      Option<Either<AuthFailure, User>> authFailureOrSuccessOption,
+      Option<Either<AuthFailure, Password>> isMatch});
 }
 
 /// @nodoc
@@ -1701,6 +1712,7 @@ class __$RegisterFormStateCopyWithImpl<$Res>
     Object? showErrorMessages = freezed,
     Object? isSubmitting = freezed,
     Object? authFailureOrSuccessOption = freezed,
+    Object? isMatch = freezed,
   }) {
     return _then(_RegisterFormState(
       email: email == freezed
@@ -1743,6 +1755,10 @@ class __$RegisterFormStateCopyWithImpl<$Res>
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<AuthFailure, User>>,
+      isMatch: isMatch == freezed
+          ? _value.isMatch
+          : isMatch // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AuthFailure, Password>>,
     ));
   }
 }
@@ -1760,7 +1776,8 @@ class _$_RegisterFormState implements _RegisterFormState {
       required this.favouriteEplTeam,
       required this.showErrorMessages,
       required this.isSubmitting,
-      required this.authFailureOrSuccessOption});
+      required this.authFailureOrSuccessOption,
+      required this.isMatch});
 
   @override
   final EmailAddress email;
@@ -1782,10 +1799,12 @@ class _$_RegisterFormState implements _RegisterFormState {
   final bool isSubmitting;
   @override
   final Option<Either<AuthFailure, User>> authFailureOrSuccessOption;
+  @override
+  final Option<Either<AuthFailure, Password>> isMatch;
 
   @override
   String toString() {
-    return 'RegisterFormState(email: $email, password: $password, confirmPassword: $confirmPassword, userName: $userName, teamName: $teamName, country: $country, favouriteEplTeam: $favouriteEplTeam, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'RegisterFormState(email: $email, password: $password, confirmPassword: $confirmPassword, userName: $userName, teamName: $teamName, country: $country, favouriteEplTeam: $favouriteEplTeam, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption, isMatch: $isMatch)';
   }
 
   @override
@@ -1807,7 +1826,8 @@ class _$_RegisterFormState implements _RegisterFormState {
             const DeepCollectionEquality()
                 .equals(other.isSubmitting, isSubmitting) &&
             const DeepCollectionEquality().equals(
-                other.authFailureOrSuccessOption, authFailureOrSuccessOption));
+                other.authFailureOrSuccessOption, authFailureOrSuccessOption) &&
+            const DeepCollectionEquality().equals(other.isMatch, isMatch));
   }
 
   @override
@@ -1822,7 +1842,8 @@ class _$_RegisterFormState implements _RegisterFormState {
       const DeepCollectionEquality().hash(favouriteEplTeam),
       const DeepCollectionEquality().hash(showErrorMessages),
       const DeepCollectionEquality().hash(isSubmitting),
-      const DeepCollectionEquality().hash(authFailureOrSuccessOption));
+      const DeepCollectionEquality().hash(authFailureOrSuccessOption),
+      const DeepCollectionEquality().hash(isMatch));
 
   @JsonKey(ignore: true)
   @override
@@ -1832,17 +1853,18 @@ class _$_RegisterFormState implements _RegisterFormState {
 
 abstract class _RegisterFormState implements RegisterFormState {
   const factory _RegisterFormState(
-      {required EmailAddress email,
-      required Password password,
-      required Password confirmPassword,
-      required UserName userName,
-      required TeamName teamName,
-      required Country country,
-      required FavoriteEplTeam favouriteEplTeam,
-      required bool showErrorMessages,
-      required bool isSubmitting,
-      required Option<Either<AuthFailure, User>>
-          authFailureOrSuccessOption}) = _$_RegisterFormState;
+          {required EmailAddress email,
+          required Password password,
+          required Password confirmPassword,
+          required UserName userName,
+          required TeamName teamName,
+          required Country country,
+          required FavoriteEplTeam favouriteEplTeam,
+          required bool showErrorMessages,
+          required bool isSubmitting,
+          required Option<Either<AuthFailure, User>> authFailureOrSuccessOption,
+          required Option<Either<AuthFailure, Password>> isMatch}) =
+      _$_RegisterFormState;
 
   @override
   EmailAddress get email;
@@ -1864,6 +1886,8 @@ abstract class _RegisterFormState implements RegisterFormState {
   bool get isSubmitting;
   @override
   Option<Either<AuthFailure, User>> get authFailureOrSuccessOption;
+  @override
+  Option<Either<AuthFailure, Password>> get isMatch;
   @override
   @JsonKey(ignore: true)
   _$RegisterFormStateCopyWith<_RegisterFormState> get copyWith =>

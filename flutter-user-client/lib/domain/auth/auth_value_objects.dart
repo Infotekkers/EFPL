@@ -38,7 +38,7 @@ class UserName extends ValueObject<String> {
 
   factory UserName(String userNameStr) {
     return UserName._(
-      validateUserName(userNameStr),
+      validateName(userNameStr),
     );
   }
 
@@ -52,7 +52,7 @@ class TeamName extends ValueObject<String> {
 
   factory TeamName(String teamNameStr) {
     return TeamName._(
-      validateUserName(teamNameStr),
+      validateName(teamNameStr),
     );
   }
 
@@ -65,9 +65,7 @@ class Country extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory Country(String countryStr) {
-    return Country._(
-      validateUserName(countryStr),
-    );
+    return Country._(validateNotEmpty(countryStr));
   }
 
   const Country._(this.value);
@@ -79,9 +77,7 @@ class FavoriteEplTeam extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory FavoriteEplTeam(String favTeamStr) {
-    return FavoriteEplTeam._(
-      validateUserName(favTeamStr),
-    );
+    return FavoriteEplTeam._(validateNotEmpty(favTeamStr));
   }
 
   const FavoriteEplTeam._(this.value);

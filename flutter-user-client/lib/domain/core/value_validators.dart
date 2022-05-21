@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:efpl/domain/auth/auth_failure.dart';
+import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/core/value_failures.dart';
 
 Either<ValueFailure<String>, String> validateNotEmpty(String input) {
@@ -29,12 +31,18 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
   }
 }
 
-Either<ValueFailure<String>, String> validateUserName(String input) {
-  const nameRegex = r'''([A-Z][a-z]{1,})\w+\s+([A-Z][a-z]{0,})\w''';
+Either<AuthFailure, Password> passWordMatch(Password input1, Password input2) {
+  if (input2 == input1) {
+    return right(input2);
+  } else {
+    return left(const AuthFailure.passwordDontMatch());
+  }
+}
 
-  if (RegExp(nameRegex).hasMatch(input)) {
+Either<ValueFailure<String>, String> validateName(String input) {
+  if (input.isNotEmpty) {
     return right(input);
   } else {
-    return left(ValueFailure.invalidUserName(failedValue: input));
+    return left(ValueFailure.invalidName(failedValue: input));
   }
 }

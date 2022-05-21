@@ -46,7 +46,6 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, User>> registerUser(
       {required User user, required Password password}) async {
     final Uri url = Uri.parse("$_baseUrl/register");
-
     final UserDto userDtoOut = UserDto.fromDomain(user);
 
     final outGoingJson =
@@ -59,6 +58,8 @@ class AuthRepository implements IAuthRepository {
         // ignore: avoid_print
         print('success');
         return right(userDtoIn.toDomain());
+      } else if (response.statusCode == 400) {
+        return left(const AuthFailure.emailAlreadyInUse());
       } else {
         return left(const AuthFailure.serverError());
       }
