@@ -26,15 +26,15 @@ class TeamViewBody extends StatelessWidget {
         initial: (_) => Container(),
         loadFailure: (_) => Container(),
         loadInProgress: (_) => const BouncingBallLoadingIndicator(),
-        loadSuccess: (state) => _buildMyTeam(state),
+        loadSuccess: (state) => _buildMyTeam(state, context),
         saved: (_) => Container(),
-        transferApproved: (_) => _buildMyTeam(state),
-        transferOptionsLoaded: (_) => _highlightMyTeam(state),
+        transferApproved: (_) => _buildMyTeam(state, context, changed: true),
+        transferOptionsLoaded: (_) => _highlightMyTeam(state, context),
       ),
     );
   }
 
-  _buildMyTeam(state) {
+  _buildMyTeam(state, context, {changed = false}) {
     return Column(
       children: [
         PositionalContainerWidget(
@@ -57,11 +57,12 @@ class TeamViewBody extends StatelessWidget {
           position: 'sub',
           players: state.myTeam.players['sub'].getOrCrash(),
         ),
+        _buildSaveBtn(changed, context, state)
       ],
     );
   }
 
-  _highlightMyTeam(state) {
+  _highlightMyTeam(state, context) {
     return Column(
       children: [
         PositionalContainerWidget(
@@ -94,7 +95,20 @@ class TeamViewBody extends StatelessWidget {
           validOptions: state.validOptions,
           toBeTransferredOut: state.playerId,
         ),
+        _buildSaveBtn(false, context, state)
       ],
+    );
+  }
+
+  ElevatedButton _buildSaveBtn(changed, context, state) {
+    return ElevatedButton(
+      onPressed: () => changed
+          ? BlocProvider.of<MyTeamBloc>(context).add(
+              MyTeamEvent.saveMyTeam(state.myTeam, '623b101b9a85861e924388dd'))
+          : null,
+      style: ElevatedButton.styleFrom(
+          primary: changed ? Colors.blue[400] : Colors.grey),
+      child: const Text("Save"),
     );
   }
 }

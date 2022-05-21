@@ -104,9 +104,11 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
 
   void _onTransferConfirmed(_TransferConfirmed e, Emitter<MyTeamState> emit) {
     final myTeam = state.maybeMap(
-        loadSuccess: (s) => s.myTeam,
-        transferOptionsLoaded: (s) => s.myTeam,
-        orElse: () => null)!;
+      loadSuccess: (s) => s.myTeam,
+      transferOptionsLoaded: (s) => s.myTeam,
+      transferApproved: (s) => s.myTeam,
+      orElse: () => null,
+    )!;
 
     // FIRST SELECTED PLAYER AND FIELD POSITION
     final playerOneId = state.maybeMap(
@@ -172,7 +174,6 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
 
   void _onSaveMyTeam(_SaveMyTeam e, Emitter<MyTeamState> emit) async {
     emit(const MyTeamState.loadInProgress());
-
     final failureOrSuccess =
         await iMyTeamRepository.saveUserTeam(e.myTeam, e.userId);
 

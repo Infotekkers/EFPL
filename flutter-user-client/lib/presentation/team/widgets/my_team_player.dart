@@ -53,7 +53,7 @@ class MyTeamPlayer extends StatelessWidget {
                   Image.asset(
                     "assets/images/shirt_placeholder.png",
                     width: 60,
-                    height: 60,
+                    height: 50,
                   ),
                   SizedBox(
                     height: 60,
