@@ -14,7 +14,32 @@ class FixtureDetailLineUp extends StatelessWidget {
     Map homeTeamLineUpInfo =
         fixture.homeTeamLineUp.value.fold((l) => {}, (r) => r);
 
+    Map awayTeamLineUpInfo =
+        fixture.homeTeamLineUp.value.fold((l) => {}, (r) => r);
+
+    bool isLineUpIn = false;
+
+    if (homeTeamLineUpInfo.isNotEmpty &&
+        homeTeamLineUpInfo['defenders'].isNotEmpty &&
+        homeTeamLineUpInfo['midfielders'].isNotEmpty &&
+        homeTeamLineUpInfo['strikers'].isNotEmpty &&
+        homeTeamLineUpInfo['bench'].isNotEmpty) {
+      isLineUpIn = true;
+    }
+
+    if (awayTeamLineUpInfo.isNotEmpty &&
+        awayTeamLineUpInfo['defenders'].isNotEmpty &&
+        awayTeamLineUpInfo['midfielders'].isNotEmpty &&
+        awayTeamLineUpInfo['strikers'].isNotEmpty &&
+        awayTeamLineUpInfo['bench'].isNotEmpty) {
+      isLineUpIn = true;
+    }
+
     List<int> allPlayerCount = [0, 0, 0, 0, 0];
+
+    if (isLineUpIn == true) {
+      allPlayerCount = getPlayerCount(fixture: fixture);
+    }
     Map<dynamic, dynamic> homeTeamLineUp =
         fixture.homeTeamLineUp.value.fold((l) => {}, (r) => r);
 
@@ -29,7 +54,7 @@ class FixtureDetailLineUp extends StatelessWidget {
         },
         builder: (context, state) {
           return Container(
-            child: homeTeamLineUp.isEmpty && awayTeamLineUp.isEmpty
+            child: isLineUpIn == false
                 ? const SizedBox(
                     height: 350,
                     child: Center(
@@ -59,51 +84,47 @@ class FixtureDetailLineUp extends StatelessWidget {
                             ),
                           ),
                           width: MediaQuery.of(context).size.width,
-                          child: SingleChildScrollView(
-                            physics: NeverScrollableScrollPhysics(),
-                            child: Column(
-                              children: [
-                                const Text(
-                                  "GOALKEEPERS",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.center,
+                          child: Column(
+                            children: [
+                              const Text(
+                                "GOALKEEPERS",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                const SizedBox(
-                                  height: 12,
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              SizedBox(
+                                height: 16,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: allPlayerCount[0],
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          homeTeamLineUp['goalkeepers'][index]
+                                                  ['playerName']
+                                              .toString(),
+                                        ),
+                                        Text(
+                                          awayTeamLineUp['goalkeepers'][index]
+                                                  ['playerName']
+                                              .toString(),
+                                        )
+                                      ],
+                                    );
+                                  },
                                 ),
-                                SizedBox(
-                                  height: 16,
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount: allPlayerCount[0],
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            homeTeamLineUp['goalkeepers'][index]
-                                                    ['playerName']
-                                                .toString(),
-                                          ),
-                                          Text(
-                                            awayTeamLineUp['goalkeepers'][index]
-                                                    ['playerName']
-                                                .toString(),
-                                          )
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
 

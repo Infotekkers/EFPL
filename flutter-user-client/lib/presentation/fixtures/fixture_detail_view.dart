@@ -56,195 +56,192 @@ class FixtureDetailView extends StatelessWidget {
             ),
 
             // BODY
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  // HEADER
-                  Container(
-                    height: 205,
-                    color: ConstantColors.neutral_200,
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Home Team
-                        SizedBox(
-                          height: 180,
-                          width: MediaQuery.of(context).size.width * 0.30,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 105,
-                                child: CachedNetworkImage(
-                                  fit: BoxFit.fill,
-                                  imageUrl: getImageUrl(
-                                      fixture: currentFixture, isHome: 1),
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(
-                                    Icons.error,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                getShortName(
+            body: Column(
+              children: [
+                // HEADER
+                Container(
+                  height: 200,
+                  color: ConstantColors.neutral_200,
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Home Team
+                      SizedBox(
+                        height: 180,
+                        width: MediaQuery.of(context).size.width * 0.30,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 105,
+                              child: CachedNetworkImage(
+                                fit: BoxFit.fill,
+                                imageUrl: getImageUrl(
                                     fixture: currentFixture, isHome: 1),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(
+                                  Icons.error,
+                                  color: Colors.red,
                                 ),
-                                textAlign: TextAlign.center,
                               ),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              getShortName(fixture: currentFixture, isHome: 1),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
+                      ),
 
-                        // match Info
-                        SizedBox(
-                          height: 165,
-                          width: MediaQuery.of(context).size.width * 0.35,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              getShortStatus(fixture: currentFixture) !=
-                                      "Not Live"
-                                  ? Text(
-                                      getShortStatus(fixture: currentFixture),
-                                    )
-                                  : const Text(""),
-                              //
-                              const SizedBox(
-                                height: 8,
-                              ),
+                      // match Info
+                      SizedBox(
+                        height: 165,
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            getShortStatus(fixture: currentFixture) !=
+                                    "Not Live"
+                                ? Text(
+                                    getShortStatus(fixture: currentFixture),
+                                  )
+                                : const Text(""),
+                            //
+                            const SizedBox(
+                              height: 8,
+                            ),
 
-                              getShortStatus(fixture: currentFixture) !=
-                                      "Not Live"
-                                  ? Text(
-                                      currentFixture.score.value.fold(
-                                        (l) => '',
-                                        (r) =>
-                                            r.toString().split("v").join(" - "),
-                                      ),
-                                      style: const TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )
-                                  : Text(
-                                      getFormattedTime(fixture: currentFixture),
-                                      style: const TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                currentFixture.homeTeamCity.value.fold(
-                                  (l) => '',
-                                  (r) => r.toString(),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                currentFixture.homeTeamStadium.value.fold(
-                                  (l) => '',
-                                  (r) => r.toString(),
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-
-                              Text(
-                                "( " +
-                                    currentFixture.homeTeamCapacity.value.fold(
+                            getShortStatus(fixture: currentFixture) !=
+                                    "Not Live"
+                                ? Text(
+                                    currentFixture.score.value.fold(
                                       (l) => '',
-                                      (r) => r.toString(),
-                                    ) +
-                                    " )",
-                                style: const TextStyle(fontSize: 10),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 175,
-                          width: MediaQuery.of(context).size.width * 0.30,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 100,
-                                child: CachedNetworkImage(
-                                  fit: BoxFit.fill,
-                                  imageUrl: getImageUrl(
-                                      fixture: currentFixture, isHome: 0),
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(
-                                    Icons.error,
-                                    color: Colors.red,
+                                      (r) =>
+                                          r.toString().split("v").join(" - "),
+                                    ),
+                                    style: const TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                : Text(
+                                    getFormattedTime(fixture: currentFixture),
+                                    style: const TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              currentFixture.homeTeamCity.value.fold(
+                                (l) => '',
+                                (r) => r.toString(),
                               ),
-                              const SizedBox(
-                                height: 10,
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              currentFixture.homeTeamStadium.value.fold(
+                                (l) => '',
+                                (r) => r.toString(),
                               ),
-                              Text(
-                                getShortName(
-                                    fixture: currentFixture, isHome: 0),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                              textAlign: TextAlign.center,
+                            ),
 
-                  // SCORE INFO
-                  Container(
-                    height: 80,
-                    decoration: const BoxDecoration(
-                      color: ConstantColors.neutral_200,
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 0.5,
-                          color: ConstantColors.primary_800,
+                            Text(
+                              "( " +
+                                  currentFixture.homeTeamCapacity.value.fold(
+                                    (l) => '',
+                                    (r) => r.toString(),
+                                  ) +
+                                  " )",
+                              style: const TextStyle(fontSize: 10),
+                            ),
+                          ],
                         ),
-                        top: BorderSide(
-                          width: 0.5,
-                          color: ConstantColors.primary_800,
+                      ),
+
+                      SizedBox(
+                        height: 175,
+                        width: MediaQuery.of(context).size.width * 0.30,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 100,
+                              child: CachedNetworkImage(
+                                fit: BoxFit.fill,
+                                imageUrl: getImageUrl(
+                                    fixture: currentFixture, isHome: 0),
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(
+                                  Icons.error,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              getShortName(fixture: currentFixture, isHome: 0),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // SCORE INFO
+                Container(
+                  height: 80,
+                  decoration: const BoxDecoration(
+                    color: ConstantColors.neutral_200,
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 0.5,
+                        color: ConstantColors.primary_800,
+                      ),
+                      top: BorderSide(
+                        width: 0.5,
+                        color: ConstantColors.primary_800,
                       ),
                     ),
                   ),
+                ),
 
-                  // Tab View
+                // Tab View
 
-                  TabContainer(
+                SizedBox(
+                  height: MediaQuery.of(context).size.height - 390,
+                  child: TabContainer(
                     radius: 0,
                     color: ConstantColors.primary_200,
                     children: [
-                      Container(
-                          child: SingleChildScrollView(
-                              child: FixtureDetailLineUp(
-                                  fixture: currentFixture))),
+                      SingleChildScrollView(
+                          child: FixtureDetailLineUp(fixture: currentFixture)),
                       FixtureDetailEvent(fixture: currentFixture),
                     ],
                     tabs: const [
@@ -252,8 +249,8 @@ class FixtureDetailView extends StatelessWidget {
                       'Events',
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },
