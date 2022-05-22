@@ -124,10 +124,12 @@ const fetchUserTeam = asyncHandler(async (req, res) => {
       {
         playerName: 1,
         position: 1,
+        availability: 1,
       }
     );
     team.players[playerId].name = player?.playerName;
     team.players[playerId].position = player?.position;
+    team.players[playerId].availability = player?.availability;
   }
 
   const response = {

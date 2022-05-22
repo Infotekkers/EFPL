@@ -13,6 +13,7 @@ class MyTeamPlayer extends StatelessWidget {
   final bool isViceCaptain;
   final bool isTransferable;
   final bool toBeTransferredOut;
+  final Map availability;
 
   const MyTeamPlayer({
     Key? key,
@@ -26,6 +27,7 @@ class MyTeamPlayer extends StatelessWidget {
     required this.isViceCaptain,
     required this.isTransferable,
     required this.toBeTransferredOut,
+    required this.availability,
   }) : super(key: key);
 
   @override
@@ -84,6 +86,13 @@ class MyTeamPlayer extends StatelessWidget {
                               : null,
                     ),
                   ),
+                  Positioned(
+                    left: 35,
+                    top: 0,
+                    child: availability['injuryStatus'] == '100'
+                        ? Container()
+                        : _buildAvailabilityIndicator(),
+                  )
                 ],
               ),
               _buildInfoBox(),
@@ -91,6 +100,26 @@ class MyTeamPlayer extends StatelessWidget {
           ),
         ),
       );
+
+  _buildAvailabilityIndicator() {
+    return Card(
+      elevation: 2,
+      color: Colors.red,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: SizedBox(
+        height: 20,
+        width: 20,
+        child: Center(
+          child: Text(
+            availability['injuryStatus'],
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
 
   _buildInfoBox() {
     return SizedBox(

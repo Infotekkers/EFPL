@@ -35,6 +35,7 @@ class PositionalContainerWidget extends StatelessWidget {
             price: players[playerIds[index]]['price'],
             isCaptain: players[playerIds[index]]['isCaptain'],
             isViceCaptain: players[playerIds[index]]['isViceCaptain'],
+            availability: players[playerIds[index]]['availability'],
             toBeTransferredOut:
                 int.parse(playerIds[index]) == toBeTransferredOut
                     ? true
