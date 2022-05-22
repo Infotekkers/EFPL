@@ -11,7 +11,10 @@ class FixtureDetailLineUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<int> allPlayerCount = getPlayerCount(fixture: fixture);
+    Map homeTeamLineUpInfo =
+        fixture.homeTeamLineUp.value.fold((l) => {}, (r) => r);
+
+    List<int> allPlayerCount = [0, 0, 0, 0, 0];
     Map<dynamic, dynamic> homeTeamLineUp =
         fixture.homeTeamLineUp.value.fold((l) => {}, (r) => r);
 
@@ -56,47 +59,51 @@ class FixtureDetailLineUp extends StatelessWidget {
                             ),
                           ),
                           width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            children: [
-                              const Text(
-                                "GOALKEEPERS",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                          child: SingleChildScrollView(
+                            physics: NeverScrollableScrollPhysics(),
+                            child: Column(
+                              children: [
+                                const Text(
+                                  "GOALKEEPERS",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              SizedBox(
-                                height: 16,
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: allPlayerCount[0],
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          homeTeamLineUp['goalkeepers'][index]
-                                                  ['playerName']
-                                              .toString(),
-                                        ),
-                                        Text(
-                                          awayTeamLineUp['goalkeepers'][index]
-                                                  ['playerName']
-                                              .toString(),
-                                        )
-                                      ],
-                                    );
-                                  },
+                                const SizedBox(
+                                  height: 12,
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 16,
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: allPlayerCount[0],
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            homeTeamLineUp['goalkeepers'][index]
+                                                    ['playerName']
+                                                .toString(),
+                                          ),
+                                          Text(
+                                            awayTeamLineUp['goalkeepers'][index]
+                                                    ['playerName']
+                                                .toString(),
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
 

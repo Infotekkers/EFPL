@@ -54,8 +54,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         playerCostSum = playerCostSum + currentPlayerPrice;
       }
 
-      print(failureOrSuccess);
-
       // emit final state
       emit(
         state.copyWith(
@@ -607,9 +605,9 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           // if transfer made
           if (state.transfersMade) {
             //save team to api from api
-            // await _iTransferRepository.saveUserPlayers(
-            //   userTeam: state.userTeam,
-            // );
+            await _iTransferRepository.saveUserPlayers(
+              userTeam: state.userTeam,
+            );
 
             emit(
               state.copyWith(
@@ -624,6 +622,12 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             getIt<TransferBloc>().add(
               const TransferEvent.getUserPlayers(),
             );
+
+            if (state.isInitialSelection == true) {
+              getIt<TransferBloc>().add(
+                const TransferEvent.setInitialSelection(valueToSet: false),
+              );
+            }
           }
         }
       },
@@ -1029,6 +1033,12 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       emit(
         state.copyWith(isLoading: false),
       );
+    });
+
+    on<_setInitialSelection>((event, emit) async {
+      emit(state.copyWith(
+        isInitialSelection: event.valueToSet,
+      ));
     });
   }
 }

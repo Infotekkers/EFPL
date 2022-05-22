@@ -269,9 +269,9 @@ class ConfirmTransfersPage extends StatelessWidget {
 
                             Navigator.pop(context);
 
-                            // Navigator.pop(context);
-
-                            // Navigator.pushNamed(context, "/");
+                            if (state.isInitialSelection == true) {
+                              Navigator.pushNamed(context, "/home");
+                            }
                           },
                           child: Text(
                             "Confirm Transfers ( " +

@@ -45,4 +45,7 @@ class TransferEvent with _$TransferEvent {
 
   const factory TransferEvent.validateTeam({required BuildContext context}) =
       _validateTeam;
+
+  const factory TransferEvent.setInitialSelection({required bool valueToSet}) =
+      _setInitialSelection;
 }

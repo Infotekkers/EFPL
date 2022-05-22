@@ -38,6 +38,7 @@ class TransferState with _$TransferState {
     required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
     required double priceExceededBy,
     required String countExceededTeam,
+    required bool isInitialSelection,
   }) = _TransferState;
 
   factory TransferState.initial() => TransferState(
@@ -72,5 +73,6 @@ class TransferState with _$TransferState {
         maxPriceSet: 15.0,
         priceExceededBy: 0.0,
         countExceededTeam: "",
+        isInitialSelection: false,
       );
 }

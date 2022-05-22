@@ -40,7 +40,11 @@ class TransfersView extends StatelessWidget {
                       snackBarType: "warning",
                     );
 
-                    print("Here Man");
+                    getIt<TransferBloc>().add(
+                      const TransferEvent.setInitialSelection(
+                        valueToSet: true,
+                      ),
+                    );
                     Navigator.popAndPushNamed(context, "/transfer/initial");
                   },
                   exceededPrice: (_) {

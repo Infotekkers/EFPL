@@ -40,8 +40,6 @@ class FixtureDetailView extends StatelessWidget {
                   matchId)
               .toList()[0];
 
-          print(currentFixture);
-
           return Scaffold(
             // APP BAR
             appBar: AppBar(
@@ -239,24 +237,20 @@ class FixtureDetailView extends StatelessWidget {
 
                   // Tab View
 
-                  ConstrainedBox(
-                    // height: 1060,
-                    constraints: const BoxConstraints(
-                      minHeight: 40,
-                      maxHeight: 1050,
-                    ),
-                    child: TabContainer(
-                      radius: 0,
-                      color: ConstantColors.primary_200,
-                      children: [
-                        FixtureDetailLineUp(fixture: currentFixture),
-                        FixtureDetailEvent(fixture: currentFixture),
-                      ],
-                      tabs: const [
-                        'Line Ups',
-                        'Events',
-                      ],
-                    ),
+                  TabContainer(
+                    radius: 0,
+                    color: ConstantColors.primary_200,
+                    children: [
+                      Container(
+                          child: SingleChildScrollView(
+                              child: FixtureDetailLineUp(
+                                  fixture: currentFixture))),
+                      FixtureDetailEvent(fixture: currentFixture),
+                    ],
+                    tabs: const [
+                      'Line Ups',
+                      'Events',
+                    ],
                   ),
                 ],
               ),

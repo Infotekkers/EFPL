@@ -242,7 +242,7 @@ class TransferRemoteDataProvider {
 
             final UserPlayerDTO userPlayerDTO =
                 UserPlayerDTO.fromJson(allPlayers[i]);
-            print("CHECK ME");
+
             allUserPlayersJson.add(allPlayers[i]);
             allUserPlayers.add(userPlayerDTO.toDomain());
           }
