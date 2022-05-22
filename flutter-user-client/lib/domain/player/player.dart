@@ -19,9 +19,9 @@ abstract class Player with _$Player {
 
 class Availability {
   InjuryStatus injuryStatus;
-  InjuryMessage? injuryMessage;
+  InjuryMessage injuryMessage;
 
-  Availability({required this.injuryStatus, this.injuryMessage});
+  Availability({required this.injuryStatus, required this.injuryMessage});
 }
 
 class Score {

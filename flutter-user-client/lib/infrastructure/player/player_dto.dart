@@ -39,8 +39,9 @@ abstract class PlayerDto implements _$PlayerDto {
 
   Player toDomain() {
     Availability availabilityVO = Availability(
-      injuryStatus: InjuryStatus(availability['injuryStatus'] ?? '0'),
-    );
+        injuryStatus: InjuryStatus(availability['injuryStatus'] ?? '100'),
+        injuryMessage:
+            InjuryMessage(availability['injuryMessage'] ?? 'Fit to play'));
 
     List<Score> scoresVO = [];
     if (score.isNotEmpty) {

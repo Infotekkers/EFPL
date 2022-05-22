@@ -18,9 +18,7 @@ class PlayerOverview extends StatelessWidget {
             Text(state.player.name.getOrCrash()),
             Text(state.player.position.getOrCrash()),
             Text(state.player.currentPrice.getOrCrash()),
-            Text(state.player.availability.injuryMessage?.getOrCrash() ??
-                "Healthy"),
-            Text(state.player.name.getOrCrash()),
+            Text(state.player.availability.injuryMessage.getOrCrash()),
           ],
         ),
         loadFailure: (state) => const Text("FAIL"),
