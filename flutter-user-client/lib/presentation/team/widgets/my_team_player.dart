@@ -29,7 +29,15 @@ class MyTeamPlayer extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => Material(
+        elevation: isTransferable
+            ? 5
+            : toBeTransferredOut
+                ? 5
+                : 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         color: isTransferable
             ? Colors.green[300]
             : toBeTransferredOut
@@ -78,29 +86,33 @@ class MyTeamPlayer extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 50,
-                width: 80,
-                child: Card(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(name.split(" ")[0]),
-                      Text(
-                        position.toUpperCase(),
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.blueGrey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              _buildInfoBox(),
             ],
           ),
         ),
       );
+
+  _buildInfoBox() {
+    return SizedBox(
+      height: 50,
+      width: 80,
+      child: Card(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(name.split(" ")[0]),
+            Text(
+              position.toUpperCase(),
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.blueGrey,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   _buildCaptainBadge(power) {
     return SizedBox(
