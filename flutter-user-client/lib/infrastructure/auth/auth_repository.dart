@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/auth/auth_failure.dart';
@@ -47,11 +48,15 @@ class AuthRepository implements IAuthRepository {
       {required User user, required Password password}) async {
     final Uri url = Uri.parse("$_baseUrl/register");
     final UserDto userDtoOut = UserDto.fromDomain(user);
+    print(user);
 
     final outGoingJson =
         userDtoOut.copyWith(password: password.getOrCrash()).toJson();
     try {
+      print(outGoingJson);
       final response = await client!.post(url, body: outGoingJson);
+      print('e');
+      print(response.body);
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);

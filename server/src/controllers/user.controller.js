@@ -17,6 +17,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const register = asyncHandler(async (req, res) => {
+  console.log(req.body);
  
   // check for prexisting email
   const emailExists = await User.findOne({ email: req.body.email });
@@ -30,7 +31,7 @@ const register = asyncHandler(async (req, res) => {
     email: req.body.email,
     teamName: req.body.teamName,
     country: req.body.country,
-    favouriteEplTeam: req.body.favoriteEplTeam,
+    favouriteEplTeam: req.body.favouriteEplTeam,
   });
   // save user to db
   await user.save();
@@ -48,12 +49,15 @@ const register = asyncHandler(async (req, res) => {
       expiresIn: "1h",
     }
   );
-
+    
   // return token  with user
   res.status(201).json({
     token: token,
-    name: user.userName,
+    userName: user.userName,
     email: user.email,
+    country: user.country,
+    favouriteEplTeam: user.favouriteEplTeam,
+    teamName: user.teamName,
   });
 });
 
@@ -126,9 +130,9 @@ const updateUser = asyncHandler(async (req, res) => {
   }
   res.user = user;
 
-  // change favorite team
+  // change favourite team
   if (req.body.favouriteEplTeam != null) {
-    res.user.favoriteEplTeam = req.body.favoriteEplTeam;
+    res.user.favouriteEplTeam = req.body.favouriteEplTeam;
   }
   // change userName
   if (req.body.userName != null) {

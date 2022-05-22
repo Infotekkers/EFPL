@@ -135,6 +135,17 @@ class SignInForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
+              DropdownButton(
+                items: <String>['1', '2', '2'].map((String value) {
+                  return DropdownMenuItem<String>(
+                    child: Text(value),
+                    value: value,
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  print(value);
+                },
+              ),
               Row(
                 children: [
                   const Text(''),

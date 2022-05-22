@@ -86,7 +86,7 @@ const userSchema = mongoose.Schema({
   country: String,
   favouriteEplTeam: {
     type:String,
-    required:[true,"Custom Error - Required Value *:Team name is required,"],
+    // required:[true,"Custom Error - Required Value *:favEplTeam is required,"],
   },
   availableChips: { type: [String], default: ["BB", "WC", "TC", "FH"] },
   fantasyLeagues: { type: [fantasyLeaguesSchema], default: [] },

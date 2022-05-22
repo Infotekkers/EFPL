@@ -27,4 +27,6 @@ abstract class IAuthRepository {
   Future<Either<AuthFailure, User>> requestReset({
     required User user,
   });
+
+  // Future<void> getTeams();
 }

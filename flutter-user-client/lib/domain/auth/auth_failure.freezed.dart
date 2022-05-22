@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AuthFailureTearOff {
   const _$AuthFailureTearOff();
 
+  EmptyError emptyError() {
+    return const EmptyError();
+  }
+
   CancelledByUser cancelledByUser() {
     return const CancelledByUser();
   }
@@ -53,6 +57,7 @@ const $AuthFailure = _$AuthFailureTearOff();
 mixin _$AuthFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() emptyError,
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() networkError,
@@ -64,6 +69,7 @@ mixin _$AuthFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -75,6 +81,7 @@ mixin _$AuthFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -87,6 +94,7 @@ mixin _$AuthFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyError value) emptyError,
     required TResult Function(CancelledByUser value) cancelledByUser,
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
@@ -99,6 +107,7 @@ mixin _$AuthFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -111,6 +120,7 @@ mixin _$AuthFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -138,6 +148,154 @@ class _$AuthFailureCopyWithImpl<$Res> implements $AuthFailureCopyWith<$Res> {
   final AuthFailure _value;
   // ignore: unused_field
   final $Res Function(AuthFailure) _then;
+}
+
+/// @nodoc
+abstract class $EmptyErrorCopyWith<$Res> {
+  factory $EmptyErrorCopyWith(
+          EmptyError value, $Res Function(EmptyError) then) =
+      _$EmptyErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$EmptyErrorCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
+    implements $EmptyErrorCopyWith<$Res> {
+  _$EmptyErrorCopyWithImpl(EmptyError _value, $Res Function(EmptyError) _then)
+      : super(_value, (v) => _then(v as EmptyError));
+
+  @override
+  EmptyError get _value => super._value as EmptyError;
+}
+
+/// @nodoc
+
+class _$EmptyError with DiagnosticableTreeMixin implements EmptyError {
+  const _$EmptyError();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AuthFailure.emptyError()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AuthFailure.emptyError'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is EmptyError);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() emptyError,
+    required TResult Function() cancelledByUser,
+    required TResult Function() serverError,
+    required TResult Function() networkError,
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() invalidEmailPasswordCombination,
+    required TResult Function() passwordDontMatch,
+    required TResult Function() emailNotFound,
+  }) {
+    return emptyError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptyError,
+    TResult Function()? cancelledByUser,
+    TResult Function()? serverError,
+    TResult Function()? networkError,
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? invalidEmailPasswordCombination,
+    TResult Function()? passwordDontMatch,
+    TResult Function()? emailNotFound,
+  }) {
+    return emptyError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyError,
+    TResult Function()? cancelledByUser,
+    TResult Function()? serverError,
+    TResult Function()? networkError,
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? invalidEmailPasswordCombination,
+    TResult Function()? passwordDontMatch,
+    TResult Function()? emailNotFound,
+    required TResult orElse(),
+  }) {
+    if (emptyError != null) {
+      return emptyError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmptyError value) emptyError,
+    required TResult Function(CancelledByUser value) cancelledByUser,
+    required TResult Function(ServerError value) serverError,
+    required TResult Function(NetworkError value) networkError,
+    required TResult Function(EmailAlreadyInUse value) emailAlreadyInUse,
+    required TResult Function(InvalidEmailPasswordCombination value)
+        invalidEmailPasswordCombination,
+    required TResult Function(PasswordDontMatch value) passwordDontMatch,
+    required TResult Function(EmailNotFound value) emailNotFound,
+  }) {
+    return emptyError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
+    TResult Function(CancelledByUser value)? cancelledByUser,
+    TResult Function(ServerError value)? serverError,
+    TResult Function(NetworkError value)? networkError,
+    TResult Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult Function(InvalidEmailPasswordCombination value)?
+        invalidEmailPasswordCombination,
+    TResult Function(PasswordDontMatch value)? passwordDontMatch,
+    TResult Function(EmailNotFound value)? emailNotFound,
+  }) {
+    return emptyError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
+    TResult Function(CancelledByUser value)? cancelledByUser,
+    TResult Function(ServerError value)? serverError,
+    TResult Function(NetworkError value)? networkError,
+    TResult Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult Function(InvalidEmailPasswordCombination value)?
+        invalidEmailPasswordCombination,
+    TResult Function(PasswordDontMatch value)? passwordDontMatch,
+    TResult Function(EmailNotFound value)? emailNotFound,
+    required TResult orElse(),
+  }) {
+    if (emptyError != null) {
+      return emptyError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EmptyError implements AuthFailure {
+  const factory EmptyError() = _$EmptyError;
 }
 
 /// @nodoc
@@ -189,6 +347,7 @@ class _$CancelledByUser
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() emptyError,
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() networkError,
@@ -203,6 +362,7 @@ class _$CancelledByUser
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -217,6 +377,7 @@ class _$CancelledByUser
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -235,6 +396,7 @@ class _$CancelledByUser
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyError value) emptyError,
     required TResult Function(CancelledByUser value) cancelledByUser,
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
@@ -250,6 +412,7 @@ class _$CancelledByUser
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -265,6 +428,7 @@ class _$CancelledByUser
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -332,6 +496,7 @@ class _$ServerError with DiagnosticableTreeMixin implements ServerError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() emptyError,
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() networkError,
@@ -346,6 +511,7 @@ class _$ServerError with DiagnosticableTreeMixin implements ServerError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -360,6 +526,7 @@ class _$ServerError with DiagnosticableTreeMixin implements ServerError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -378,6 +545,7 @@ class _$ServerError with DiagnosticableTreeMixin implements ServerError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyError value) emptyError,
     required TResult Function(CancelledByUser value) cancelledByUser,
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
@@ -393,6 +561,7 @@ class _$ServerError with DiagnosticableTreeMixin implements ServerError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -408,6 +577,7 @@ class _$ServerError with DiagnosticableTreeMixin implements ServerError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -475,6 +645,7 @@ class _$NetworkError with DiagnosticableTreeMixin implements NetworkError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() emptyError,
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() networkError,
@@ -489,6 +660,7 @@ class _$NetworkError with DiagnosticableTreeMixin implements NetworkError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -503,6 +675,7 @@ class _$NetworkError with DiagnosticableTreeMixin implements NetworkError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -521,6 +694,7 @@ class _$NetworkError with DiagnosticableTreeMixin implements NetworkError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyError value) emptyError,
     required TResult Function(CancelledByUser value) cancelledByUser,
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
@@ -536,6 +710,7 @@ class _$NetworkError with DiagnosticableTreeMixin implements NetworkError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -551,6 +726,7 @@ class _$NetworkError with DiagnosticableTreeMixin implements NetworkError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -622,6 +798,7 @@ class _$EmailAlreadyInUse
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() emptyError,
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() networkError,
@@ -636,6 +813,7 @@ class _$EmailAlreadyInUse
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -650,6 +828,7 @@ class _$EmailAlreadyInUse
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -668,6 +847,7 @@ class _$EmailAlreadyInUse
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyError value) emptyError,
     required TResult Function(CancelledByUser value) cancelledByUser,
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
@@ -683,6 +863,7 @@ class _$EmailAlreadyInUse
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -698,6 +879,7 @@ class _$EmailAlreadyInUse
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -773,6 +955,7 @@ class _$InvalidEmailPasswordCombination
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() emptyError,
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() networkError,
@@ -787,6 +970,7 @@ class _$InvalidEmailPasswordCombination
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -801,6 +985,7 @@ class _$InvalidEmailPasswordCombination
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -819,6 +1004,7 @@ class _$InvalidEmailPasswordCombination
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyError value) emptyError,
     required TResult Function(CancelledByUser value) cancelledByUser,
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
@@ -834,6 +1020,7 @@ class _$InvalidEmailPasswordCombination
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -849,6 +1036,7 @@ class _$InvalidEmailPasswordCombination
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -921,6 +1109,7 @@ class _$PasswordDontMatch
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() emptyError,
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() networkError,
@@ -935,6 +1124,7 @@ class _$PasswordDontMatch
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -949,6 +1139,7 @@ class _$PasswordDontMatch
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -967,6 +1158,7 @@ class _$PasswordDontMatch
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyError value) emptyError,
     required TResult Function(CancelledByUser value) cancelledByUser,
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
@@ -982,6 +1174,7 @@ class _$PasswordDontMatch
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -997,6 +1190,7 @@ class _$PasswordDontMatch
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -1064,6 +1258,7 @@ class _$EmailNotFound with DiagnosticableTreeMixin implements EmailNotFound {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() emptyError,
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() networkError,
@@ -1078,6 +1273,7 @@ class _$EmailNotFound with DiagnosticableTreeMixin implements EmailNotFound {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -1092,6 +1288,7 @@ class _$EmailNotFound with DiagnosticableTreeMixin implements EmailNotFound {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyError,
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? networkError,
@@ -1110,6 +1307,7 @@ class _$EmailNotFound with DiagnosticableTreeMixin implements EmailNotFound {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyError value) emptyError,
     required TResult Function(CancelledByUser value) cancelledByUser,
     required TResult Function(ServerError value) serverError,
     required TResult Function(NetworkError value) networkError,
@@ -1125,6 +1323,7 @@ class _$EmailNotFound with DiagnosticableTreeMixin implements EmailNotFound {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,
@@ -1140,6 +1339,7 @@ class _$EmailNotFound with DiagnosticableTreeMixin implements EmailNotFound {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyError value)? emptyError,
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(NetworkError value)? networkError,

@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,6 +55,14 @@ class RegisterForm extends StatelessWidget {
                       snackBarType: "warning",
                     );
                   },
+                  emptyError: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: 'Empty Field',
+                      message: "Please fill in required fields",
+                      snackBarType: "error",
+                    );
+                  },
 
                   orElse: () {
                     CustomSnackBar().showCustomSnackBar(
@@ -67,25 +79,25 @@ class RegisterForm extends StatelessWidget {
           },
         );
 
-        state.isMatch.fold(
-          () => {},
-          (either) => either.fold(
-            (f) {
-              f.maybeMap(
-                  passwordDontMatch: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Credential Issue",
-                      message: "Passwords don't Match",
-                      snackBarType: "warning",
-                      showDuration: 1,
-                    );
-                  },
-                  orElse: () {});
-            },
-            (_) {},
-          ),
-        );
+        // state.isMatch.fold(
+        //   () => {},
+        //   (either) => either.fold(
+        //     (f) {
+        //       f.maybeMap(
+        //           passwordDontMatch: (_) {
+        //             CustomSnackBar().showCustomSnackBar(
+        //               showContext: context,
+        //               headlineText: "Credential Issue",
+        //               message: "Passwords don't Match",
+        //               snackBarType: "warning",
+        //               showDuration: 1,
+        //             );
+        //           },
+        //           orElse: () {});
+        //     },
+        //     (_) {},
+        //   ),
+        // );
       },
       builder: (context, state) {
         return Form(
@@ -202,19 +214,55 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-              // the two dropdowns go here
+              SizedBox(
+                height: 10,
+              ),
+              DropdownButton<String>(
+                  // value: state.favouriteEplTeam.value.fold(
+                  //     (f) => f.maybeMap(empty: (_) => 'e', orElse: () => null),
+                  //     (r) => null),
+                  // value: "Saint George S.C",
+                  isExpanded: true,
+                  hint: const Text("Select Favorite Team"),
+                  items: [
+                    "Saint George S.C",
+                    "Wolaita Dicha S.C",
+                    "Hawassa Kenema S.C",
+                    "Jimma Aba Jifar F.C",
+                    "Sidama Coffee S.C",
+                    "Addis Ababa City F.C",
+                    "Sebeta City F.C",
+                    "Adama City S.C",
+                    "Fasil Kenema S.C",
+                    "Arba Minch City F.C",
+                    "Dire Dawa City S.C",
+                    "Defence Force S.C",
+                    "Wolkite City F.C",
+                    "Ethiopian Coffee S.C",
+                    "Hadiya Hossana F.C",
+                    "Bahir Dar Kenema S.C"
+                  ].map((String value) {
+                    return DropdownMenuItem<String>(
+                        child: Text(value), value: value);
+                  }).toList(),
+                  onChanged: (value) =>
+                      BlocProvider.of<RegisterFormBloc>(context).add(
+                          RegisterFormEvent.favoriteEplTeamChanged(value!))),
+              const SizedBox(
+                height: 10,
+              ),
               Row(
                 children: [
                   const Text(''),
                   TextButton(
-                      onPressed: state.isSubmitting
-                          ? null
-                          : () {
-                              BlocProvider.of<RegisterFormBloc>(context).add(
-                                  const RegisterFormEvent
-                                      .registerUserPressed());
-                            },
-                      child: const Text('Register'))
+                    onPressed: state.isSubmitting
+                        ? null
+                        : () {
+                            BlocProvider.of<RegisterFormBloc>(context).add(
+                                const RegisterFormEvent.registerUserPressed());
+                          },
+                    child: const Text('Register'),
+                  ),
                 ],
               )
             ],
