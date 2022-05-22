@@ -74,7 +74,14 @@ class RegisterForm extends StatelessWidget {
                   },
                 );
               },
-              (_) {},
+              (_) {
+                CustomSnackBar().showCustomSnackBar(
+                  showContext: context,
+                  headlineText: "Success!",
+                  message: "Successfully Registered",
+                  snackBarType: "success",
+                );
+              },
             );
           },
         );
@@ -132,6 +139,7 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
+              const SizedBox(height: 8),
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
@@ -152,6 +160,7 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
+              const SizedBox(height: 8),
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
@@ -172,6 +181,7 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
+              const SizedBox(height: 8),
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
@@ -193,6 +203,7 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
+              const SizedBox(height: 8),
               TextFormField(
                 // keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
@@ -214,57 +225,74 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(height: 8),
+              DropdownButton<String>(
+                value: state.favouriteEplTeam.value.fold(
+                    (f) => f.maybeMap(empty: (_) => 'e', orElse: () => null),
+                    (r) => r),
+                // value: "Saint George S.C",
+                isExpanded: true,
+                items: [
+                  "Saint George S.C",
+                  "Wolaita Dicha S.C",
+                  "Hawassa Kenema S.C",
+                  "Jimma Aba Jifar F.C",
+                  "Sidama Coffee S.C",
+                  "Addis Ababa City F.C",
+                  "Sebeta City F.C",
+                  "Adama City S.C",
+                  "Fasil Kenema S.C",
+                  "Arba Minch City F.C",
+                  "Dire Dawa City S.C",
+                  "Defence Force S.C",
+                  "Wolkite City F.C",
+                  "Ethiopian Coffee S.C",
+                  "Hadiya Hossana F.C",
+                  "Bahir Dar Kenema S.C"
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                      child: Text(value), value: value);
+                }).toList(),
+                onChanged: (value) =>
+                    BlocProvider.of<RegisterFormBloc>(context).add(
+                  RegisterFormEvent.favoriteEplTeamChanged(value!),
+                ),
               ),
               DropdownButton<String>(
-                  // value: state.favouriteEplTeam.value.fold(
-                  //     (f) => f.maybeMap(empty: (_) => 'e', orElse: () => null),
-                  //     (r) => null),
+                  value: state.country.value.fold(
+                      (f) => f.maybeMap(empty: (_) => 'e', orElse: () => null),
+                      (r) => r),
                   // value: "Saint George S.C",
                   isExpanded: true,
-                  hint: const Text("Select Favorite Team"),
                   items: [
-                    "Saint George S.C",
-                    "Wolaita Dicha S.C",
-                    "Hawassa Kenema S.C",
-                    "Jimma Aba Jifar F.C",
-                    "Sidama Coffee S.C",
-                    "Addis Ababa City F.C",
-                    "Sebeta City F.C",
-                    "Adama City S.C",
-                    "Fasil Kenema S.C",
-                    "Arba Minch City F.C",
-                    "Dire Dawa City S.C",
-                    "Defence Force S.C",
-                    "Wolkite City F.C",
-                    "Ethiopian Coffee S.C",
-                    "Hadiya Hossana F.C",
-                    "Bahir Dar Kenema S.C"
+                    "Ethiopia",
+                    "United Kingdom",
+                    "United States Of America",
                   ].map((String value) {
                     return DropdownMenuItem<String>(
                         child: Text(value), value: value);
                   }).toList(),
                   onChanged: (value) =>
-                      BlocProvider.of<RegisterFormBloc>(context).add(
-                          RegisterFormEvent.favoriteEplTeamChanged(value!))),
+                      BlocProvider.of<RegisterFormBloc>(context)
+                          .add(RegisterFormEvent.countryChanged(value!))),
               const SizedBox(
                 height: 10,
               ),
-              Row(
-                children: [
-                  const Text(''),
-                  TextButton(
-                    onPressed: state.isSubmitting
-                        ? null
-                        : () {
-                            BlocProvider.of<RegisterFormBloc>(context).add(
-                                const RegisterFormEvent.registerUserPressed());
-                          },
-                    child: const Text('Register'),
-                  ),
-                ],
-              )
+              // ElevatedButton(
+              //     onPressed: () {
+              //       print(state.favouriteEplTeam);
+              //     },
+              //     child: Text('e')),
+              // const Text(''),
+              ElevatedButton(
+                onPressed: state.isSubmitting
+                    ? null
+                    : () {
+                        BlocProvider.of<RegisterFormBloc>(context)
+                            .add(const RegisterFormEvent.registerUserPressed());
+                      },
+                child: const Text('Register'),
+              ),
             ],
           ),
         );

@@ -29,7 +29,7 @@ class AuthRepository implements IAuthRepository {
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        print('success');
+        print(response.body);
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 400) {
         return left(const AuthFailure.invalidEmailPasswordCombination());

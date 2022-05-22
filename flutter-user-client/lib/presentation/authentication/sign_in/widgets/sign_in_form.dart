@@ -74,7 +74,13 @@ class SignInForm extends StatelessWidget {
                   },
                 );
               },
-              (_) {},
+              (_) {
+                CustomSnackBar().showCustomSnackBar(
+                    showContext: context,
+                    headlineText: "Success!",
+                    message: "Successfully Logged In",
+                    snackBarType: "success");
+              },
             );
           },
         );
@@ -114,13 +120,12 @@ class SignInForm extends StatelessWidget {
               const SizedBox(height: 8),
               TextFormField(
                 key: const ValueKey("loginPagePassword"),
-
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.lock),
                   labelText: 'Password',
                 ),
                 autocorrect: false,
-                // obscureText: true,
+                obscureText: true,
                 onChanged: (value) => BlocProvider.of<SignInFormBloc>(context)
                     .add(SignInFormEvent.passwordChanged(value)),
                 validator: (_) => context
@@ -135,35 +140,32 @@ class SignInForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-              DropdownButton(
-                items: <String>['1', '2', '2'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    child: Text(value),
-                    value: value,
-                  );
-                }).toList(),
-                onChanged: (String? value) {
-                  print(value);
-                },
+              // DropdownButton(
+              //   items: <String>['1', '2', '2'].map((String value) {
+              //     return DropdownMenuItem<String>(
+              //       child: Text(value),
+              //       value: value,
+              //     );
+              //   }).toList(),
+              //   onChanged: (String? value) {
+              //     print(value);
+              //   },
+              // ),
+              const SizedBox(
+                height: 6,
               ),
-              Row(
-                children: [
-                  const Text(''),
-                  Expanded(
-                    flex: 2,
-                    child: TextButton(
-                      onPressed: state.isSubmitting
-                          ? null
-                          : () {
-                              BlocProvider.of<SignInFormBloc>(context).add(
-                                  const SignInFormEvent.signInUserPressed());
-                            },
-                      child: const Text('Sign In'),
-                    ),
-                  ),
-                  const Text(''),
-                ],
+
+              ElevatedButton(
+                onPressed: state.isSubmitting
+                    ? null
+                    : () {
+                        BlocProvider.of<SignInFormBloc>(context)
+                            .add(const SignInFormEvent.signInUserPressed());
+                      },
+                child: const Text('Sign In'),
               ),
+
+              const SizedBox(height: 6),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -173,6 +175,7 @@ class SignInForm extends StatelessWidget {
                 },
                 child: const Text('Register Here!'),
               ),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
