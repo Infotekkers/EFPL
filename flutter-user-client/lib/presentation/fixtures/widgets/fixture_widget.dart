@@ -22,7 +22,12 @@ class FixtureWidget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed(
           "/fixtureDetails",
-          arguments: {"fixture": fixture},
+          arguments: {
+            "matchId": fixture.matchId.value.fold(
+              (l) => '',
+              (r) => r,
+            )
+          },
         );
       },
       child: Container(

@@ -22,7 +22,7 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
       try {
         prefs.getString("lang")!.isEmpty ? 'en' : prefs.getString("lang")!;
       } catch (e) {
-        print(e);
+        // print(e);
       }
 
       emit(
