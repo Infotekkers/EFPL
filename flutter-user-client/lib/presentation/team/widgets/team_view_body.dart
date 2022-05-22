@@ -136,8 +136,8 @@ class TeamViewBody extends StatelessWidget {
                         state.myTeam, '623b101b9a85861e924388dd'))
                 : null,
             style: OutlinedButton.styleFrom(
-              primary: Colors.white,
-              backgroundColor: changed ? Colors.blue[400] : Colors.grey,
+              primary: changed ? Colors.white : Colors.grey[500],
+              backgroundColor: changed ? Colors.blue[400] : Colors.grey[50],
             ),
             child: const Text("Save"),
           ),
