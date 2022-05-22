@@ -6,7 +6,9 @@ import 'package:efpl/domain/player/player_failures.dart';
 import 'package:efpl/infrastructure/player/player_dto.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 
+@injectable
 class PlayerRemoteDataProvider {
   http.Client? client = http.Client();
 

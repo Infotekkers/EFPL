@@ -1,5 +1,6 @@
 import 'package:efpl/presentation/authentication/splash_view.dart';
 import 'package:efpl/presentation/core/main_tab_view.dart';
+import 'package:efpl/presentation/player/player_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
 import 'package:flutter/material.dart';
 
@@ -8,5 +9,6 @@ class AppRouter {
     "/": (context) => const SplashView(),
     "/home": (context) => const MainTabView(),
     "/team": (context) => const TeamView(),
+    "/player": (context) => const PlayerView(),
   };
 }

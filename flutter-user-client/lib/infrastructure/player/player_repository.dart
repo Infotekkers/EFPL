@@ -19,10 +19,10 @@ class PlayerRepository implements IPlayerRepository {
 
   @override
   Future<Either<PlayerFailure, Player>> getPlayer(String playerId) async {
-    if (await utility.hasInternetConnection()) {
-      return playerRemoteDataProvider.getPlayer(playerId);
-    } else {
-      return left(const PlayerFailure.networkError());
-    }
+    // if (await utility.hasInternetConnection()) {
+    return playerRemoteDataProvider.getPlayer(playerId);
+    // } else {
+    //   return left(const PlayerFailure.networkError());
+    // }
   }
 }

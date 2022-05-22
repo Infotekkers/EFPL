@@ -100,12 +100,16 @@ class MyTeamPlayer extends StatelessWidget {
               Center(
                 child: Text(name),
               ),
-              Row(
-                children: const [
-                  Icon(Icons.info),
-                  SizedBox(width: 5),
-                  Text("Player Information"),
-                ],
+              GestureDetector(
+                onTap: () => Navigator.of(context)
+                    .pushNamed("/player", arguments: playerId),
+                child: Row(
+                  children: const [
+                    Icon(Icons.info),
+                    SizedBox(width: 5),
+                    Text("Player Information"),
+                  ],
+                ),
               ),
               GestureDetector(
                 onTap: () {
