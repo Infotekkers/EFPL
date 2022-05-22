@@ -30,6 +30,10 @@ class TeamViewBody extends StatelessWidget {
         saved: (_) => Container(),
         transferApproved: (_) => _buildMyTeam(state, context, changed: true),
         transferOptionsLoaded: (_) => _highlightMyTeam(state, context),
+        captainChangeSuccess: (_) =>
+            _buildMyTeam(state, context, changed: true),
+        viceCaptainChangeSuccess: (_) =>
+            _buildMyTeam(state, context, changed: true),
       ),
     );
   }

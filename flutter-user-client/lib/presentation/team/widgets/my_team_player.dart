@@ -91,7 +91,7 @@ class MyTeamPlayer extends StatelessWidget {
         ),
       ),
       builder: (_) => SizedBox(
-        height: 150,
+        height: 250,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
           child: Column(
@@ -121,7 +121,33 @@ class MyTeamPlayer extends StatelessWidget {
                   children: const [
                     Icon(Icons.compare_arrows),
                     SizedBox(width: 5),
-                    Text("Transfer"),
+                    Text("Switch Player"),
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  myTeamBloc.add(MyTeamEvent.captainChanged(playerId));
+                  Navigator.pop(context);
+                },
+                child: Row(
+                  children: const [
+                    Icon(Icons.copyright),
+                    SizedBox(width: 5),
+                    Text("Make Captain"),
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  myTeamBloc.add(MyTeamEvent.viceCaptainChanged(playerId));
+                  Navigator.pop(context);
+                },
+                child: Row(
+                  children: const [
+                    Icon(Icons.arrow_drop_up_rounded),
+                    SizedBox(width: 5),
+                    Text("Make Vice-Captain"),
                   ],
                 ),
               ),

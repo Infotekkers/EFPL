@@ -19,6 +19,8 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
     on<_LoadMyTeam>(_onLoadMyTeam);
     on<_TransferOptionsRequested>(_onTransferOptionsRequested);
     on<_TransferConfirmed>(_onTransferConfirmed);
+    on<_CaptainChanged>(_onCaptainChanged);
+    on<_ViceCaptainChanged>(_onViceCaptainChanged);
     on<_SaveMyTeam>(_onSaveMyTeam);
   }
 
@@ -40,12 +42,7 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
 
   void _onTransferOptionsRequested(
       _TransferOptionsRequested e, Emitter<MyTeamState> emit) {
-    final myTeam = state.maybeMap(
-      loadSuccess: (s) => s.myTeam,
-      transferOptionsLoaded: (s) => s.myTeam,
-      transferApproved: (s) => s.myTeam,
-      orElse: () => null,
-    )!;
+    final myTeam = _getMyTeam(state);
 
     List<int> validOptions = [];
 
@@ -103,12 +100,7 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
   }
 
   void _onTransferConfirmed(_TransferConfirmed e, Emitter<MyTeamState> emit) {
-    final myTeam = state.maybeMap(
-      loadSuccess: (s) => s.myTeam,
-      transferOptionsLoaded: (s) => s.myTeam,
-      transferApproved: (s) => s.myTeam,
-      orElse: () => null,
-    )!;
+    final myTeam = _getMyTeam(state);
 
     // FIRST SELECTED PLAYER AND FIELD POSITION
     final playerOneId = state.maybeMap(
@@ -184,6 +176,96 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
     emit(MyTeamState.transferApproved(myTeam));
   }
 
+  void _onCaptainChanged(_CaptainChanged e, Emitter<MyTeamState> emit) {
+    final myTeam = _getMyTeam(state);
+    Map<String, String> oldCaptain = {
+      'position': "",
+      "id": "",
+    };
+    bool isCaptainElectViceCaptain = false;
+
+    for (String position in myTeam.players.keys) {
+      for (String playerId in myTeam.players[position].getOrCrash().keys) {
+        final isCaptain =
+            myTeam.players[position].getOrCrash()[playerId]['isCaptain'];
+        final isViceCaptain =
+            myTeam.players[position].getOrCrash()[playerId]['isViceCaptain'];
+
+        if (isCaptain) {
+          myTeam.players[position].getOrCrash()[playerId]['isCaptain'] = false;
+          myTeam.players[position].getOrCrash()[playerId]['multiplier'] -= 1;
+          oldCaptain['position'] = position;
+          oldCaptain['id'] = playerId;
+        }
+
+        if (playerId == e.playerId.toString()) {
+          myTeam.players[position].getOrCrash()[playerId]['isCaptain'] = true;
+          myTeam.players[position].getOrCrash()[playerId]['multiplier'] += 1;
+        }
+        if (playerId == e.playerId.toString() && isViceCaptain) {
+          myTeam.players[position].getOrCrash()[playerId]['isViceCaptain'] =
+              false;
+          isCaptainElectViceCaptain = true;
+        }
+      }
+    }
+
+    // If Vice captain is gonna be captain
+    if (isCaptainElectViceCaptain) {
+      // Make Old captain vice captain
+      myTeam.players[oldCaptain['position']].getOrCrash()[oldCaptain['id']]
+          ['isViceCaptain'] = true;
+    }
+
+    emit(MyTeamState.captainChangeSuccess(myTeam));
+  }
+
+  void _onViceCaptainChanged(_ViceCaptainChanged e, Emitter<MyTeamState> emit) {
+    final myTeam = _getMyTeam(state);
+    Map<String, String> oldViceCaptain = {
+      'position': "",
+      "id": "",
+    };
+    bool isViceCaptainElectCaptain = false;
+
+    for (String position in myTeam.players.keys) {
+      for (String playerId in myTeam.players[position].getOrCrash().keys) {
+        final isCaptain =
+            myTeam.players[position].getOrCrash()[playerId]['isCaptain'];
+        final isViceCaptain =
+            myTeam.players[position].getOrCrash()[playerId]['isViceCaptain'];
+
+        if (isViceCaptain) {
+          myTeam.players[position].getOrCrash()[playerId]['isViceCaptain'] =
+              false;
+          oldViceCaptain['position'] = position;
+          oldViceCaptain['id'] = playerId;
+        }
+
+        if (playerId == e.playerId.toString()) {
+          myTeam.players[position].getOrCrash()[playerId]['isViceCaptain'] =
+              true;
+        }
+        if (playerId == e.playerId.toString() && isCaptain) {
+          myTeam.players[position].getOrCrash()[playerId]['isCaptain'] = false;
+          myTeam.players[position].getOrCrash()[playerId]['multiplier'] -= 1;
+          isViceCaptainElectCaptain = true;
+        }
+      }
+    }
+
+    // If Vice captain is gonna be captain
+    if (isViceCaptainElectCaptain) {
+      // Make Old captain vice captain
+      myTeam.players[oldViceCaptain['position']]
+          .getOrCrash()[oldViceCaptain['id']]['isCaptain'] = true;
+      myTeam.players[oldViceCaptain['position']]
+          .getOrCrash()[oldViceCaptain['id']]['multiplier'] += 1;
+    }
+
+    emit(MyTeamState.viceCaptainChangeSuccess(myTeam));
+  }
+
   void _onSaveMyTeam(_SaveMyTeam e, Emitter<MyTeamState> emit) async {
     emit(const MyTeamState.loadInProgress());
     final failureOrSuccess =
@@ -195,5 +277,16 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
       ),
       (myTeam) => emit(const MyTeamState.saved()),
     );
+  }
+
+  _getMyTeam(state) {
+    return state.maybeMap(
+      loadSuccess: (s) => s.myTeam,
+      transferOptionsLoaded: (s) => s.myTeam,
+      transferApproved: (s) => s.myTeam,
+      captainChangeSuccess: (s) => s.myTeam,
+      viceCaptainChangeSuccess: (s) => s.myTeam,
+      orElse: () => null,
+    )!;
   }
 }

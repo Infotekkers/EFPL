@@ -15,5 +15,9 @@ abstract class MyTeamState with _$MyTeamState {
     bool isSub,
   ) = _TransferOptionsLoaded;
   const factory MyTeamState.transferApproved(MyTeam myTeam) = _TransferApproved;
+  const factory MyTeamState.captainChangeSuccess(MyTeam myTeam) =
+      _CaptainChangeSuccess;
+  const factory MyTeamState.viceCaptainChangeSuccess(MyTeam myTeam) =
+      _ViceCaptainSuccess;
   const factory MyTeamState.saved() = _Saved;
 }
