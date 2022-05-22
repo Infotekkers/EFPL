@@ -29,7 +29,7 @@ class AppWidget extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate
             ],
-            title: 'Flutter Demo',
+            title: 'EFPL',
             theme: ThemeData(
               // Background Colors
               colorScheme: ColorScheme.fromSwatch(
@@ -52,7 +52,7 @@ class AppWidget extends StatelessWidget {
                 ),
               ),
             ),
-            initialRoute: "/team",
+            initialRoute: "/",
             routes: _appRouter.allRoutes,
           );
         },

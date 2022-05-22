@@ -33,51 +33,87 @@ class MyTeamPlayer extends StatelessWidget {
         color: isTransferable
             ? Colors.green[300]
             : toBeTransferredOut
-                ? Colors.grey
-                : Colors.white,
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                if (toBeTransferredOut) {
-                } else if (isTransferable) {
-                  BlocProvider.of<MyTeamBloc>(context).add(
-                      MyTeamEvent.transferConfirmed(
-                          playerId, position, multiplier == 0 ? true : false));
-                } else {
-                  showBottomModal(context, multiplier == 0 ? true : false);
-                }
-              },
-              child: Column(
+                ? Colors.amber[800]
+                : null,
+        child: GestureDetector(
+          onTap: () {
+            if (toBeTransferredOut) {
+            } else if (isTransferable) {
+              BlocProvider.of<MyTeamBloc>(context).add(
+                  MyTeamEvent.transferConfirmed(
+                      playerId, position, multiplier == 0 ? true : false));
+            } else {
+              showBottomModal(context, multiplier == 0 ? true : false);
+            }
+          },
+          onLongPress: () {
+            BlocProvider.of<MyTeamBloc>(context).add(
+                MyTeamEvent.transferOptionsRequested(
+                    playerId, position, multiplier == 0 ? true : false));
+          },
+          child: Column(
+            children: [
+              Stack(
                 children: [
                   Image.asset(
                     "assets/images/shirt_placeholder.png",
                     width: 60,
                     height: 50,
                   ),
-                  SizedBox(
-                    height: 60,
-                    width: 80,
+                  Positioned(
+                    left: 35,
+                    top: 30,
                     child: Card(
-                      child: Column(
-                        children: [
-                          Text(name.split(" ")[0]),
-                          Text(position.toUpperCase()),
-                          isCaptain
-                              ? const Text("C")
-                              : isViceCaptain
-                                  ? const Text("V")
-                                  : const Text(""),
-                        ],
+                      elevation: 1,
+                      color: Colors.grey[400],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
                       ),
+                      child: isCaptain
+                          ? _buildCaptainBadge("C")
+                          : isViceCaptain
+                              ? _buildCaptainBadge("V")
+                              : null,
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
+              SizedBox(
+                height: 50,
+                width: 80,
+                child: Card(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(name.split(" ")[0]),
+                      Text(
+                        position.toUpperCase(),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.blueGrey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       );
+
+  _buildCaptainBadge(power) {
+    return SizedBox(
+      width: 20,
+      height: 15,
+      child: Center(
+        child: Text(
+          power,
+          style: TextStyle(color: Colors.grey[50]),
+        ),
+      ),
+    );
+  }
 
   Future<dynamic> showBottomModal(BuildContext context, bool isSub) {
     final MyTeamBloc myTeamBloc = BlocProvider.of<MyTeamBloc>(context);
@@ -126,10 +162,12 @@ class MyTeamPlayer extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  myTeamBloc.add(MyTeamEvent.captainChanged(playerId));
-                  Navigator.pop(context);
-                },
+                onTap: multiplier > 0
+                    ? () {
+                        myTeamBloc.add(MyTeamEvent.captainChanged(playerId));
+                        Navigator.pop(context);
+                      }
+                    : () {},
                 child: Row(
                   children: const [
                     Icon(Icons.copyright),
@@ -139,10 +177,13 @@ class MyTeamPlayer extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  myTeamBloc.add(MyTeamEvent.viceCaptainChanged(playerId));
-                  Navigator.pop(context);
-                },
+                onTap: multiplier > 0
+                    ? () {
+                        myTeamBloc
+                            .add(MyTeamEvent.viceCaptainChanged(playerId));
+                        Navigator.pop(context);
+                      }
+                    : (() {}),
                 child: Row(
                   children: const [
                     Icon(Icons.arrow_drop_up_rounded),

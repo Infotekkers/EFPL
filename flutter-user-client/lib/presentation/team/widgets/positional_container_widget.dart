@@ -20,7 +20,8 @@ class PositionalContainerWidget extends StatelessWidget {
     List<String> playerIds = players.keys.toList();
 
     return Expanded(
-      child: Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
         child: ListView.builder(
           itemCount: playerIds.length,
           scrollDirection: Axis.horizontal,

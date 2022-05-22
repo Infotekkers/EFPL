@@ -39,80 +39,110 @@ class TeamViewBody extends StatelessWidget {
   }
 
   _buildMyTeam(state, context, {changed = false}) {
-    return Column(
-      children: [
-        PositionalContainerWidget(
-          position: 'gk',
-          players: state.myTeam.players['gk'].getOrCrash(),
-        ),
-        PositionalContainerWidget(
-          position: 'def',
-          players: state.myTeam.players['def'].getOrCrash(),
-        ),
-        PositionalContainerWidget(
-          position: 'mid',
-          players: state.myTeam.players['mid'].getOrCrash(),
-        ),
-        PositionalContainerWidget(
-          position: 'att',
-          players: state.myTeam.players['att'].getOrCrash(),
-        ),
-        PositionalContainerWidget(
-          position: 'sub',
-          players: state.myTeam.players['sub'].getOrCrash(),
-        ),
-        _buildSaveBtn(changed, context, state)
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          PositionalContainerWidget(
+            position: 'gk',
+            players: state.myTeam.players['gk'].getOrCrash(),
+          ),
+          PositionalContainerWidget(
+            position: 'def',
+            players: state.myTeam.players['def'].getOrCrash(),
+          ),
+          PositionalContainerWidget(
+            position: 'mid',
+            players: state.myTeam.players['mid'].getOrCrash(),
+          ),
+          PositionalContainerWidget(
+            position: 'att',
+            players: state.myTeam.players['att'].getOrCrash(),
+          ),
+          PositionalContainerWidget(
+            position: 'sub',
+            players: state.myTeam.players['sub'].getOrCrash(),
+          ),
+          _buildActionBtns(changed, context, state)
+        ],
+      ),
     );
   }
 
   _highlightMyTeam(state, context) {
-    return Column(
-      children: [
-        PositionalContainerWidget(
-          position: 'gk',
-          players: state.myTeam.players['gk'].getOrCrash(),
-          validOptions: state.validOptions,
-          toBeTransferredOut: state.playerId,
-        ),
-        PositionalContainerWidget(
-          position: 'def',
-          players: state.myTeam.players['def'].getOrCrash(),
-          validOptions: state.validOptions,
-          toBeTransferredOut: state.playerId,
-        ),
-        PositionalContainerWidget(
-          position: 'mid',
-          players: state.myTeam.players['mid'].getOrCrash(),
-          validOptions: state.validOptions,
-          toBeTransferredOut: state.playerId,
-        ),
-        PositionalContainerWidget(
-          position: 'att',
-          players: state.myTeam.players['att'].getOrCrash(),
-          validOptions: state.validOptions,
-          toBeTransferredOut: state.playerId,
-        ),
-        PositionalContainerWidget(
-          position: 'sub',
-          players: state.myTeam.players['sub'].getOrCrash(),
-          validOptions: state.validOptions,
-          toBeTransferredOut: state.playerId,
-        ),
-        _buildSaveBtn(false, context, state)
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          PositionalContainerWidget(
+            position: 'gk',
+            players: state.myTeam.players['gk'].getOrCrash(),
+            validOptions: state.validOptions,
+            toBeTransferredOut: state.playerId,
+          ),
+          PositionalContainerWidget(
+            position: 'def',
+            players: state.myTeam.players['def'].getOrCrash(),
+            validOptions: state.validOptions,
+            toBeTransferredOut: state.playerId,
+          ),
+          PositionalContainerWidget(
+            position: 'mid',
+            players: state.myTeam.players['mid'].getOrCrash(),
+            validOptions: state.validOptions,
+            toBeTransferredOut: state.playerId,
+          ),
+          PositionalContainerWidget(
+            position: 'att',
+            players: state.myTeam.players['att'].getOrCrash(),
+            validOptions: state.validOptions,
+            toBeTransferredOut: state.playerId,
+          ),
+          PositionalContainerWidget(
+            position: 'sub',
+            players: state.myTeam.players['sub'].getOrCrash(),
+            validOptions: state.validOptions,
+            toBeTransferredOut: state.playerId,
+          ),
+          _buildActionBtns(false, context, state)
+        ],
+      ),
     );
   }
 
-  ElevatedButton _buildSaveBtn(changed, context, state) {
-    return ElevatedButton(
-      onPressed: () => changed
-          ? BlocProvider.of<MyTeamBloc>(context).add(
-              MyTeamEvent.saveMyTeam(state.myTeam, '623b101b9a85861e924388dd'))
-          : null,
-      style: ElevatedButton.styleFrom(
-          primary: changed ? Colors.blue[400] : Colors.grey),
-      child: const Text("Save"),
+  _buildActionBtns(changed, context, state) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: 50.0,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          TextButton(
+            onPressed: () => changed
+                ? BlocProvider.of<MyTeamBloc>(context).add(
+                    const MyTeamEvent.loadMyTeam(
+                        "623b101b9a85861e924388dd", "1"))
+                : null,
+            style: TextButton.styleFrom(
+                primary: changed ? Colors.red[400] : Colors.grey),
+            child: const Text("Cancel"),
+          ),
+          OutlinedButton(
+            onPressed: () => changed
+                ? BlocProvider.of<MyTeamBloc>(context).add(
+                    MyTeamEvent.saveMyTeam(
+                        state.myTeam, '623b101b9a85861e924388dd'))
+                : null,
+            style: OutlinedButton.styleFrom(
+              primary: Colors.white,
+              backgroundColor: changed ? Colors.blue[400] : Colors.grey,
+            ),
+            child: const Text("Save"),
+          ),
+        ],
+      ),
     );
   }
 }
