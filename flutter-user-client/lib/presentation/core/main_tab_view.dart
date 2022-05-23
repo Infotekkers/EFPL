@@ -6,7 +6,7 @@ import 'package:efpl/presentation/fixtures/fixtures_view.dart';
 import 'package:efpl/presentation/leagues/leagues_view.dart';
 import 'package:efpl/presentation/points/points_view.dart';
 import 'package:efpl/presentation/settings/settings_view.dart';
-import 'package:efpl/presentation/stats/stats_view.dart';
+import 'package:efpl/presentation/stats/epl_stats_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
 import 'package:efpl/presentation/transfers/transfers_view.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +130,7 @@ class MainTabView extends StatelessWidget {
             TransfersView(),
             FixtureView(),
             LeaguesView(),
-            StatsView(),
+            EPLStatsView(),
             MultiBlocProvider(
               providers: [
                 BlocProvider(
