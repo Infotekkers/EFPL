@@ -1,5 +1,7 @@
 import 'package:efpl/domain/fixture/i_fixture_facade.dart';
+import 'package:efpl/domain/points/i_points_facade.dart';
 import 'package:efpl/domain/transfer/i_user_players_facade.dart';
+import 'package:efpl/infrastructure/points/points_repository.dart';
 import 'package:efpl/infrastructure/transfer/transfer_repository.dart';
 
 import 'package:efpl/injectable.config.dart';
@@ -18,6 +20,7 @@ void configureInjection(String env) {
   // Facades
   getIt.registerSingleton<IFixtureRepository>(ApiFixtureRepository());
   getIt.registerSingleton<ITransferRepository>(ApiTransferRepository());
+  getIt.registerSingleton<IPointInfoRepository>(ApiPointsInfoRepository());
 
   // getIt.registerSingleton<HTTPInstance>(HTTPInstance());
   getIt.registerSingleton<SocketApi>(SocketApi());

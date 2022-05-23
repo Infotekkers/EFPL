@@ -36,9 +36,10 @@ class FixtureRemoteDataProvider {
           );
 
       // success
+      print("Status is " + apiResponse.statusCode.toString());
       if (apiResponse.statusCode == 200) {
         // to store all fixtures
-        final allFixtures = <Fixture>[];
+        final List<Fixture> allFixtures = <Fixture>[];
         final allFixtureJson = [];
 
         // parsing body

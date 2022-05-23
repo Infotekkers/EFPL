@@ -1,4 +1,5 @@
 import 'package:efpl/application/fixture/fixture_bloc.dart';
+import 'package:efpl/application/points/points_bloc.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 
 import 'package:efpl/injectable.dart';
@@ -24,6 +25,11 @@ class AppRouter {
       const TransferEvent.getUserPlayers(),
     );
 
+  final PointsBloc _pointsBloc = getIt<PointsBloc>()
+    ..add(
+      const PointsEvent.getPointsInfo(),
+    );
+
   Map<String, Widget Function(BuildContext)> allRoutes = {
     "/": (context) => const SplashView(),
     "/home": (context) => MultiBlocProvider(
@@ -36,6 +42,10 @@ class AppRouter {
             BlocProvider.value(
               value: getIt<TransferBloc>(),
             ),
+
+            BlocProvider.value(
+              value: getIt<PointsBloc>(),
+            )
           ],
           child: const MainTabView(),
         ),
