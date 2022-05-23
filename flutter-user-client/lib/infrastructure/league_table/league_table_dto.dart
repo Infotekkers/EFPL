@@ -28,6 +28,7 @@ abstract class LeagueTableDto implements _$LeagueTableDto {
 
   LeagueTable toDomain() {
     return LeagueTable(
-        teamName: TeamName(teamName), teamLogo: TeamLogo(teamLogo));
+        teamName: TeamName(value: teamName),
+        teamLogo: TeamLogo(value: teamLogo));
   }
 }

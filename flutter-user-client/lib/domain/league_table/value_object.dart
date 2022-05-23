@@ -1,27 +1,28 @@
-import 'package:efpl/domain/core/value_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/value_objects.dart';
+import 'package:efpl/domain/core/value_failures.dart';
 import 'package:efpl/domain/league_table/value_validators.dart';
 
 class TeamName extends ValueObject {
   @override
   final Either<ValueFailure<String>, String> value;
 
-
   factory TeamName({required String value}) {
     return TeamName._(value: validateTeamName(teamName: value));
   }
+
+  const TeamName._({required this.value});
 }
 
 class TeamLogo extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  const TeamLogo._(this.value);
-
-  factory TeamLogo(String teamLogoStr) {
-    return TeamLogo._(validateStringNotEmpty(teamLogoStr));
+  factory TeamLogo({required String value}) {
+    return TeamLogo._(value: validateTeamLogo(teamLogo: value));
   }
+
+  const TeamLogo._({required this.value});
 }
 
 class TeamPoint extends ValueObject<String> {

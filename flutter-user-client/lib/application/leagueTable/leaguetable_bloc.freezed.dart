@@ -17,10 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$LeagueTableEventTearOff {
   const _$LeagueTableEventTearOff();
 
-  _LoadLeagueTable loadLeagueTable(String teamId) {
-    return _LoadLeagueTable(
-      teamId,
-    );
+  _LoadLeagueTable loadLeagueTable() {
+    return const _LoadLeagueTable();
   }
 }
 
@@ -29,21 +27,19 @@ const $LeagueTableEvent = _$LeagueTableEventTearOff();
 
 /// @nodoc
 mixin _$LeagueTableEvent {
-  String get teamId => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String teamId) loadLeagueTable,
+    required TResult Function() loadLeagueTable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String teamId)? loadLeagueTable,
+    TResult Function()? loadLeagueTable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String teamId)? loadLeagueTable,
+    TResult Function()? loadLeagueTable,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,10 +59,6 @@ mixin _$LeagueTableEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $LeagueTableEventCopyWith<LeagueTableEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -74,7 +66,6 @@ abstract class $LeagueTableEventCopyWith<$Res> {
   factory $LeagueTableEventCopyWith(
           LeagueTableEvent value, $Res Function(LeagueTableEvent) then) =
       _$LeagueTableEventCopyWithImpl<$Res>;
-  $Res call({String teamId});
 }
 
 /// @nodoc
@@ -85,28 +76,13 @@ class _$LeagueTableEventCopyWithImpl<$Res>
   final LeagueTableEvent _value;
   // ignore: unused_field
   final $Res Function(LeagueTableEvent) _then;
-
-  @override
-  $Res call({
-    Object? teamId = freezed,
-  }) {
-    return _then(_value.copyWith(
-      teamId: teamId == freezed
-          ? _value.teamId
-          : teamId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$LoadLeagueTableCopyWith<$Res>
-    implements $LeagueTableEventCopyWith<$Res> {
+abstract class _$LoadLeagueTableCopyWith<$Res> {
   factory _$LoadLeagueTableCopyWith(
           _LoadLeagueTable value, $Res Function(_LoadLeagueTable) then) =
       __$LoadLeagueTableCopyWithImpl<$Res>;
-  @override
-  $Res call({String teamId});
 }
 
 /// @nodoc
@@ -119,18 +95,6 @@ class __$LoadLeagueTableCopyWithImpl<$Res>
 
   @override
   _LoadLeagueTable get _value => super._value as _LoadLeagueTable;
-
-  @override
-  $Res call({
-    Object? teamId = freezed,
-  }) {
-    return _then(_LoadLeagueTable(
-      teamId == freezed
-          ? _value.teamId
-          : teamId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
@@ -138,65 +102,53 @@ class __$LoadLeagueTableCopyWithImpl<$Res>
 class _$_LoadLeagueTable
     with DiagnosticableTreeMixin
     implements _LoadLeagueTable {
-  const _$_LoadLeagueTable(this.teamId);
-
-  @override
-  final String teamId;
+  const _$_LoadLeagueTable();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LeagueTableEvent.loadLeagueTable(teamId: $teamId)';
+    return 'LeagueTableEvent.loadLeagueTable()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'LeagueTableEvent.loadLeagueTable'))
-      ..add(DiagnosticsProperty('teamId', teamId));
+        .add(DiagnosticsProperty('type', 'LeagueTableEvent.loadLeagueTable'));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _LoadLeagueTable &&
-            const DeepCollectionEquality().equals(other.teamId, teamId));
+        (other.runtimeType == runtimeType && other is _LoadLeagueTable);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(teamId));
-
-  @JsonKey(ignore: true)
-  @override
-  _$LoadLeagueTableCopyWith<_LoadLeagueTable> get copyWith =>
-      __$LoadLeagueTableCopyWithImpl<_LoadLeagueTable>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String teamId) loadLeagueTable,
+    required TResult Function() loadLeagueTable,
   }) {
-    return loadLeagueTable(teamId);
+    return loadLeagueTable();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String teamId)? loadLeagueTable,
+    TResult Function()? loadLeagueTable,
   }) {
-    return loadLeagueTable?.call(teamId);
+    return loadLeagueTable?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String teamId)? loadLeagueTable,
+    TResult Function()? loadLeagueTable,
     required TResult orElse(),
   }) {
     if (loadLeagueTable != null) {
-      return loadLeagueTable(teamId);
+      return loadLeagueTable();
     }
     return orElse();
   }
@@ -231,14 +183,7 @@ class _$_LoadLeagueTable
 }
 
 abstract class _LoadLeagueTable implements LeagueTableEvent {
-  const factory _LoadLeagueTable(String teamId) = _$_LoadLeagueTable;
-
-  @override
-  String get teamId;
-  @override
-  @JsonKey(ignore: true)
-  _$LoadLeagueTableCopyWith<_LoadLeagueTable> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _LoadLeagueTable() = _$_LoadLeagueTable;
 }
 
 /// @nodoc
@@ -253,7 +198,7 @@ class _$LeagueTableStateTearOff {
     return const _Loading();
   }
 
-  _LoadSuccess loadSuccess(LeagueTable leagueTable) {
+  _LoadSuccess loadSuccess(List<LeagueTable> leagueTable) {
     return _LoadSuccess(
       leagueTable,
     );
@@ -275,7 +220,7 @@ mixin _$LeagueTableState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(LeagueTable leagueTable) loadSuccess,
+    required TResult Function(List<LeagueTable> leagueTable) loadSuccess,
     required TResult Function(LeagueTableFailure leagueTableFailure)
         loadFailure,
   }) =>
@@ -284,7 +229,7 @@ mixin _$LeagueTableState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(LeagueTable leagueTable)? loadSuccess,
+    TResult Function(List<LeagueTable> leagueTable)? loadSuccess,
     TResult Function(LeagueTableFailure leagueTableFailure)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -292,7 +237,7 @@ mixin _$LeagueTableState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(LeagueTable leagueTable)? loadSuccess,
+    TResult Function(List<LeagueTable> leagueTable)? loadSuccess,
     TResult Function(LeagueTableFailure leagueTableFailure)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -387,7 +332,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(LeagueTable leagueTable) loadSuccess,
+    required TResult Function(List<LeagueTable> leagueTable) loadSuccess,
     required TResult Function(LeagueTableFailure leagueTableFailure)
         loadFailure,
   }) {
@@ -399,7 +344,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(LeagueTable leagueTable)? loadSuccess,
+    TResult Function(List<LeagueTable> leagueTable)? loadSuccess,
     TResult Function(LeagueTableFailure leagueTableFailure)? loadFailure,
   }) {
     return initial?.call();
@@ -410,7 +355,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(LeagueTable leagueTable)? loadSuccess,
+    TResult Function(List<LeagueTable> leagueTable)? loadSuccess,
     TResult Function(LeagueTableFailure leagueTableFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -509,7 +454,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(LeagueTable leagueTable) loadSuccess,
+    required TResult Function(List<LeagueTable> leagueTable) loadSuccess,
     required TResult Function(LeagueTableFailure leagueTableFailure)
         loadFailure,
   }) {
@@ -521,7 +466,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(LeagueTable leagueTable)? loadSuccess,
+    TResult Function(List<LeagueTable> leagueTable)? loadSuccess,
     TResult Function(LeagueTableFailure leagueTableFailure)? loadFailure,
   }) {
     return loadInProgress?.call();
@@ -532,7 +477,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(LeagueTable leagueTable)? loadSuccess,
+    TResult Function(List<LeagueTable> leagueTable)? loadSuccess,
     TResult Function(LeagueTableFailure leagueTableFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -589,9 +534,7 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({LeagueTable leagueTable});
-
-  $LeagueTableCopyWith<$Res> get leagueTable;
+  $Res call({List<LeagueTable> leagueTable});
 }
 
 /// @nodoc
@@ -613,15 +556,8 @@ class __$LoadSuccessCopyWithImpl<$Res>
       leagueTable == freezed
           ? _value.leagueTable
           : leagueTable // ignore: cast_nullable_to_non_nullable
-              as LeagueTable,
+              as List<LeagueTable>,
     ));
-  }
-
-  @override
-  $LeagueTableCopyWith<$Res> get leagueTable {
-    return $LeagueTableCopyWith<$Res>(_value.leagueTable, (value) {
-      return _then(_value.copyWith(leagueTable: value));
-    });
   }
 }
 
@@ -631,7 +567,7 @@ class _$_LoadSuccess with DiagnosticableTreeMixin implements _LoadSuccess {
   const _$_LoadSuccess(this.leagueTable);
 
   @override
-  final LeagueTable leagueTable;
+  final List<LeagueTable> leagueTable;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -669,7 +605,7 @@ class _$_LoadSuccess with DiagnosticableTreeMixin implements _LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(LeagueTable leagueTable) loadSuccess,
+    required TResult Function(List<LeagueTable> leagueTable) loadSuccess,
     required TResult Function(LeagueTableFailure leagueTableFailure)
         loadFailure,
   }) {
@@ -681,7 +617,7 @@ class _$_LoadSuccess with DiagnosticableTreeMixin implements _LoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(LeagueTable leagueTable)? loadSuccess,
+    TResult Function(List<LeagueTable> leagueTable)? loadSuccess,
     TResult Function(LeagueTableFailure leagueTableFailure)? loadFailure,
   }) {
     return loadSuccess?.call(leagueTable);
@@ -692,7 +628,7 @@ class _$_LoadSuccess with DiagnosticableTreeMixin implements _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(LeagueTable leagueTable)? loadSuccess,
+    TResult Function(List<LeagueTable> leagueTable)? loadSuccess,
     TResult Function(LeagueTableFailure leagueTableFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -741,9 +677,9 @@ class _$_LoadSuccess with DiagnosticableTreeMixin implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements LeagueTableState {
-  const factory _LoadSuccess(LeagueTable leagueTable) = _$_LoadSuccess;
+  const factory _LoadSuccess(List<LeagueTable> leagueTable) = _$_LoadSuccess;
 
-  LeagueTable get leagueTable;
+  List<LeagueTable> get leagueTable;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -835,7 +771,7 @@ class _$_LoadFailure with DiagnosticableTreeMixin implements _LoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(LeagueTable leagueTable) loadSuccess,
+    required TResult Function(List<LeagueTable> leagueTable) loadSuccess,
     required TResult Function(LeagueTableFailure leagueTableFailure)
         loadFailure,
   }) {
@@ -847,7 +783,7 @@ class _$_LoadFailure with DiagnosticableTreeMixin implements _LoadFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(LeagueTable leagueTable)? loadSuccess,
+    TResult Function(List<LeagueTable> leagueTable)? loadSuccess,
     TResult Function(LeagueTableFailure leagueTableFailure)? loadFailure,
   }) {
     return loadFailure?.call(leagueTableFailure);
@@ -858,7 +794,7 @@ class _$_LoadFailure with DiagnosticableTreeMixin implements _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(LeagueTable leagueTable)? loadSuccess,
+    TResult Function(List<LeagueTable> leagueTable)? loadSuccess,
     TResult Function(LeagueTableFailure leagueTableFailure)? loadFailure,
     required TResult orElse(),
   }) {

@@ -24,20 +24,21 @@ class LeagueTableLocalDataProvider {
 
       for (var cachedLeagueTable in cachedLeagueTables) {
         Map<String, dynamic> parsedCachedleagueTable = <String, dynamic>{};
-         cachedLeagueTable.forEach(
+        cachedLeagueTable.forEach(
           (key, value) => {
             parsedCachedleagueTable[key] = value,
           },
         );
         final LeagueTable leagueTable = LeagueTable(
-          teamName: TeamName(
-            value: parsedCachedleagueTable['teamName'],
-          ),
-          teamLogo: TeamLogo(
-            value:parsedCachedleagueTable['teamLogo'],
-          )
-        )
+            teamName: TeamName(
+              value: parsedCachedleagueTable['teamName'],
+            ),
+            teamLogo: TeamLogo(
+              value: parsedCachedleagueTable['teamLogo'],
+            ));
+        leagueTables.add(leagueTable);
       }
+      return right(leagueTables);
     } catch (e) {
       return left(const LeagueTableFailure.localDBError());
     }
