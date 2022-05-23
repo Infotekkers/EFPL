@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/core_value_objects.dart';
 import 'package:efpl/domain/core/value_failures.dart';
-import 'package:efpl/domain/stats/value_validators.dart';
+import 'package:efpl/domain/epl_stats/value_validators.dart';
 
 class PlayerName extends ValueObject {
   @override
