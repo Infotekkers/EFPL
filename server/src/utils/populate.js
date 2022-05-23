@@ -620,7 +620,26 @@ const populatePlayers = async () => {
   if (players.data.data.length === 0) {
     playersData.forEach(async (team) => {
       team.forEach(async (player) => {
-        player.score = [];
+        player.score = [
+          {
+            gameweekId: "1",
+            price: "8",
+            fantasyScore: 0,
+            minutesPlayed: 0,
+            goals: 0,
+            assists: 0,
+            cleanSheet: 0,
+            yellows: 0,
+            reds: 0,
+            penalitiesMissed: 0,
+            penalitiesSaved: 0,
+            saves: 0,
+            ownGoal: 0,
+            transfersIn: 0,
+            transfersOut: 0,
+            form: 0,
+          },
+        ];
         await Player.create(player);
       });
     });

@@ -772,6 +772,8 @@ const getAllFixturesOfGameWeek = asyncHandler(async function (req, res) {
     currMatch.homeTeamLineUp = processFinalLineup[0];
     currMatch.awayTeamLineUp = processFinalLineup[1];
 
+    console.log(matchAndTeamInfo);
+
     matchAndTeamInfo.push(currMatch);
   }
 
