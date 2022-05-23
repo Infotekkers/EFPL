@@ -12,6 +12,17 @@ class LeagueTableViewBody extends StatelessWidget {
             initial: (_) => Container(),
             loadFailure: (_) => Container(),
             loadInProgress: (_) => const BouncingBallLoadingIndicator(),
-            loadSuccess: (state) => Column(children: [])));
+            loadSuccess: (state) => Column(children: [
+                  Container(
+                    child: Row(
+                      children: const [Text("POS")],
+                    ),
+                  ),
+                  Expanded(
+                      child: ListView.builder(
+                          itemCount: state.leagueTable.length,
+                          itemBuilder: ((context, index) =>
+                              Text(index.toString()))))
+                ])));
   }
 }
