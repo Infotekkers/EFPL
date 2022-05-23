@@ -52,16 +52,23 @@ app.use("/customLeagues", customLeagueRoutes);
 app.use("/admin", adminAuthRouter);
 app.use("/backup", backupRouter);
 
+app.get("/test", (req, res) => {
+  console.log("requested");
+  res.json({
+    playerName: "Barok",
+  });
+});
+
 // Run populate scripts
 // populate.addTestPlayer();
 // populate.addTestUser();
 // populate.addTestGameweek();
 // populate.addTestFixture();
 
-populate.addTestAdmin();
-populate.populateTeams();
-populate.populatePlayers();
-populate.populateFixture();
+// populate.addTestAdmin();
+// populate.populateTeams();
+// populate.populatePlayers();
+// populate.populateFixture();
 
 // Add Middleware
 app.use(errorMiddleware);

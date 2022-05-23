@@ -9,7 +9,9 @@ part 'epl_stats_dto.g.dart';
 abstract class EPLStatsDto implements _$EPLStatsDto {
   const EPLStatsDto._();
 
-  const factory EPLStatsDto({required String playerName}) = _EPLStatsDto;
+  const factory EPLStatsDto({
+    required String playerName,
+  }) = _EPLStatsDto;
 
   factory EPLStatsDto.fromDomain(EPLStats eplStats) {
     return EPLStatsDto(playerName: eplStats.name.getOrCrash());

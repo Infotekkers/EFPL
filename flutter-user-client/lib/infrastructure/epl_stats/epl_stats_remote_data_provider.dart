@@ -17,7 +17,8 @@ class EPLStatsRemoteDataProvider {
   EPLStatsRemoteDataProvider();
 
   Future<Either<EPLStatsFailure, EPLStats>> getEPLStats() async {
-    final Uri url = Uri.parse("$_baseUrl/eplStats/goals");
+    // final Uri url = Uri.parse("$_baseUrl/eplStats/goals");
+    final Uri url = Uri.parse("$_baseUrl/test");
 
     try {
       final response = await client!.get(url);
@@ -31,6 +32,7 @@ class EPLStatsRemoteDataProvider {
 
       return left(const EPLStatsFailure.serverError());
     } catch (e) {
+      print(e);
       return left(const EPLStatsFailure.networkError());
     }
   }

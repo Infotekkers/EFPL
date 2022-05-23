@@ -48,6 +48,7 @@ const overview = asyncHandler(async (_, res) => {
 });
 
 const goals = asyncHandler(async (_, res) => {
+  console.log("requested");
   const result = await Player.aggregate([
     //   Fetch score
     { $unwind: "$score" },
