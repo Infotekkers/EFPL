@@ -3,14 +3,13 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/value_objects.dart';
 import 'package:efpl/domain/league_table/value_validators.dart';
 
-class TeamName extends ValueObject<String> {
+class TeamName extends ValueObject {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  const TeamName._(this.value);
 
-  factory TeamName(String teamNameStr) {
-    return TeamName._(validateStringNotEmpty(teamNameStr));
+  factory TeamName({required String value}) {
+    return TeamName._(value: validateTeamName(teamName: value));
   }
 }
 

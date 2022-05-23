@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:efpl/domain/league_table/value_object.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:efpl/domain/league_table/league_table.dart';
@@ -12,11 +13,31 @@ class LeagueTableLocalDataProvider {
 
   Future<Either<LeagueTableFailure, List<LeagueTable>>> getTeams() async {
     try {
-      List<LeagueTable> leagueTables = [];
-      var leagueTable = await leagueTableCache.get('leagueTable');
-      leagueTable.forEach((table) =>
-          {leagueTables.add(LeagueTableDto.fromJson(table).toDomain())});
-      return right(leagueTables);
+      // List<LeagueTable> leagueTables = [];
+      // var leagueTable = await leagueTableCache.get('leagueTable');
+      // leagueTable.forEach((table) =>
+      //     {leagueTables.add(LeagueTableDto.fromJson(table).toDomain())});
+      // return right(leagueTables);
+      List cachedLeagueTables = await leagueTableCache.get('leagueTable');
+
+      List<LeagueTable> leagueTables = <LeagueTable>[];
+
+      for (var cachedLeagueTable in cachedLeagueTables) {
+        Map<String, dynamic> parsedCachedleagueTable = <String, dynamic>{};
+         cachedLeagueTable.forEach(
+          (key, value) => {
+            parsedCachedleagueTable[key] = value,
+          },
+        );
+        final LeagueTable leagueTable = LeagueTable(
+          teamName: TeamName(
+            value: parsedCachedleagueTable['teamName'],
+          ),
+          teamLogo: TeamLogo(
+            value:parsedCachedleagueTable['teamLogo'],
+          )
+        )
+      }
     } catch (e) {
       return left(const LeagueTableFailure.localDBError());
     }

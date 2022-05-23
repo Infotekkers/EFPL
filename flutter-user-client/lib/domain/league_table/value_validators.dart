@@ -20,3 +20,13 @@ Either<ValueFailure<String>, String> validateStringNotEmpty(String myTeamStr) {
     return left(ValueFailure.empty(failedValue: myTeamStr));
   }
 }
+
+Either<ValueFailure<String>, String> validateTeamName(
+    {required String teamName}) {
+  return right(teamName);
+}
+
+Either<ValueFailure<String>, String> validateTeamLogo(
+    {required String teamLogo}) {
+  return right(teamLogo);
+}
