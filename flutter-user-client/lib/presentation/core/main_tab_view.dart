@@ -37,9 +37,10 @@ class MainTabView extends StatelessWidget {
                 child: Center(child: Text('Drawer Header')),
               ),
               ListTile(
-                title: const Text('EPL Table'),
-                onTap: () {},
-              ),
+                  title: const Text('EPL Table'),
+                  onTap: () {
+                    Navigator.pushNamed(context, "/EPLeagueTable");
+                  }),
               ListTile(
                 title: const Text('Watch List'),
                 onTap: () {},

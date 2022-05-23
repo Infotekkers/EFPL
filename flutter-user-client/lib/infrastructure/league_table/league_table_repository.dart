@@ -8,26 +8,20 @@ import 'package:efpl/services/utility.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: ILeagueTableRepository)
-class LeagueTableRepository implements ILeagueTableRepository {
-  final LeagueTableLocalDataProvider _leagueTableLocalDataProvider;
-  final LeagueTableRemoteDataProvider _leagueTableRemoteDataProvider;
-
-  LeagueTableRepository(
-      this._leagueTableLocalDataProvider, this._leagueTableRemoteDataProvider);
-
-  LeagueTableLocalDataProvider get leagueTableLocalDataProvider =>
-      _leagueTableLocalDataProvider;
-  LeagueTableRemoteDataProvider get leagueTableRemoteDataProvider =>
-      _leagueTableRemoteDataProvider;
-
+class APILeagueTableRepository implements ILeagueTableRepository {
   Utility utility = Utility();
+  final LeagueTableRemoteDataProvider _leagueTableRemoteDataProvider =
+      LeagueTableRemoteDataProvider();
+
+  final LeagueTableLocalDataProvider _leagueTableLocalDataProvider =
+      LeagueTableLocalDataProvider();
 
   @override
   Future<Either<LeagueTableFailure, List<LeagueTable>>> getTeams() async {
     if (await utility.hasInternetConnection()) {
-      return leagueTableRemoteDataProvider.getTeams();
+      return _leagueTableRemoteDataProvider.getTeams();
     } else {
-      return leagueTableLocalDataProvider.getTeams();
+      return _leagueTableLocalDataProvider.getTeams();
     }
   }
 }
