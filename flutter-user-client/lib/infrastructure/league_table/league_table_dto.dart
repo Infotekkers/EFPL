@@ -14,13 +14,14 @@ abstract class LeagueTableDto implements _$LeagueTableDto {
   const factory LeagueTableDto({
     required String teamName,
     required String teamLogo,
-    required int teamPoint,
-    required int won,
-    required int lost,
-    required int Draw,
-    required int goalsFor,
-    required int goalsAgainst,
-    required int goalDifferntial,
+    required List<dynamic> teamPosition,
+    // required int teamPoint,
+    // required int won,
+    // required int lost,
+    // required int Draw,
+    // required int goalsFor,
+    // required int goalsAgainst,
+    // required int goalDifferntial,
   }) = _LeagueTableDto;
 
   factory LeagueTableDto.fromJson(Map<String, dynamic> json) =>
@@ -29,6 +30,15 @@ abstract class LeagueTableDto implements _$LeagueTableDto {
   LeagueTable toDomain() {
     return LeagueTable(
         teamName: TeamName(value: teamName),
-        teamLogo: TeamLogo(value: teamLogo));
+        teamLogo: TeamLogo(value: teamLogo),
+        teamPosition: []
+        // teamPoint: TeamPoint(value: teamPoint),
+        // won: TeamWon(value: won),
+        // lost: TeamLost(value: lost),
+        // Draw: TeamDraw(value: Draw),
+        // goalFor: TeamGoalFor(value: goalsFor),
+        // goalAgainst: TeamGoalAgainst(value: goalsAgainst),
+        // goalDifferntial: TeamGoalDifferntial(value: goalDifferntial),
+        );
   }
 }

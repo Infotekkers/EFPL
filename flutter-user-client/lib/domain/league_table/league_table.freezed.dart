@@ -17,10 +17,14 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$LeagueTableTearOff {
   const _$LeagueTableTearOff();
 
-  _LeagueTable call({required TeamName teamName, required TeamLogo teamLogo}) {
+  _LeagueTable call(
+      {required TeamName teamName,
+      required TeamLogo teamLogo,
+      required List<dynamic> teamPosition}) {
     return _LeagueTable(
       teamName: teamName,
       teamLogo: teamLogo,
+      teamPosition: teamPosition,
     );
   }
 }
@@ -32,6 +36,7 @@ const $LeagueTable = _$LeagueTableTearOff();
 mixin _$LeagueTable {
   TeamName get teamName => throw _privateConstructorUsedError;
   TeamLogo get teamLogo => throw _privateConstructorUsedError;
+  List<dynamic> get teamPosition => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LeagueTableCopyWith<LeagueTable> get copyWith =>
@@ -43,7 +48,7 @@ abstract class $LeagueTableCopyWith<$Res> {
   factory $LeagueTableCopyWith(
           LeagueTable value, $Res Function(LeagueTable) then) =
       _$LeagueTableCopyWithImpl<$Res>;
-  $Res call({TeamName teamName, TeamLogo teamLogo});
+  $Res call({TeamName teamName, TeamLogo teamLogo, List<dynamic> teamPosition});
 }
 
 /// @nodoc
@@ -58,6 +63,7 @@ class _$LeagueTableCopyWithImpl<$Res> implements $LeagueTableCopyWith<$Res> {
   $Res call({
     Object? teamName = freezed,
     Object? teamLogo = freezed,
+    Object? teamPosition = freezed,
   }) {
     return _then(_value.copyWith(
       teamName: teamName == freezed
@@ -68,6 +74,10 @@ class _$LeagueTableCopyWithImpl<$Res> implements $LeagueTableCopyWith<$Res> {
           ? _value.teamLogo
           : teamLogo // ignore: cast_nullable_to_non_nullable
               as TeamLogo,
+      teamPosition: teamPosition == freezed
+          ? _value.teamPosition
+          : teamPosition // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -79,7 +89,7 @@ abstract class _$LeagueTableCopyWith<$Res>
           _LeagueTable value, $Res Function(_LeagueTable) then) =
       __$LeagueTableCopyWithImpl<$Res>;
   @override
-  $Res call({TeamName teamName, TeamLogo teamLogo});
+  $Res call({TeamName teamName, TeamLogo teamLogo, List<dynamic> teamPosition});
 }
 
 /// @nodoc
@@ -96,6 +106,7 @@ class __$LeagueTableCopyWithImpl<$Res> extends _$LeagueTableCopyWithImpl<$Res>
   $Res call({
     Object? teamName = freezed,
     Object? teamLogo = freezed,
+    Object? teamPosition = freezed,
   }) {
     return _then(_LeagueTable(
       teamName: teamName == freezed
@@ -106,6 +117,10 @@ class __$LeagueTableCopyWithImpl<$Res> extends _$LeagueTableCopyWithImpl<$Res>
           ? _value.teamLogo
           : teamLogo // ignore: cast_nullable_to_non_nullable
               as TeamLogo,
+      teamPosition: teamPosition == freezed
+          ? _value.teamPosition
+          : teamPosition // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -113,16 +128,21 @@ class __$LeagueTableCopyWithImpl<$Res> extends _$LeagueTableCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LeagueTable implements _LeagueTable {
-  const _$_LeagueTable({required this.teamName, required this.teamLogo});
+  const _$_LeagueTable(
+      {required this.teamName,
+      required this.teamLogo,
+      required this.teamPosition});
 
   @override
   final TeamName teamName;
   @override
   final TeamLogo teamLogo;
+  @override
+  final List<dynamic> teamPosition;
 
   @override
   String toString() {
-    return 'LeagueTable(teamName: $teamName, teamLogo: $teamLogo)';
+    return 'LeagueTable(teamName: $teamName, teamLogo: $teamLogo, teamPosition: $teamPosition)';
   }
 
   @override
@@ -131,14 +151,17 @@ class _$_LeagueTable implements _LeagueTable {
         (other.runtimeType == runtimeType &&
             other is _LeagueTable &&
             const DeepCollectionEquality().equals(other.teamName, teamName) &&
-            const DeepCollectionEquality().equals(other.teamLogo, teamLogo));
+            const DeepCollectionEquality().equals(other.teamLogo, teamLogo) &&
+            const DeepCollectionEquality()
+                .equals(other.teamPosition, teamPosition));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(teamName),
-      const DeepCollectionEquality().hash(teamLogo));
+      const DeepCollectionEquality().hash(teamLogo),
+      const DeepCollectionEquality().hash(teamPosition));
 
   @JsonKey(ignore: true)
   @override
@@ -149,12 +172,15 @@ class _$_LeagueTable implements _LeagueTable {
 abstract class _LeagueTable implements LeagueTable {
   const factory _LeagueTable(
       {required TeamName teamName,
-      required TeamLogo teamLogo}) = _$_LeagueTable;
+      required TeamLogo teamLogo,
+      required List<dynamic> teamPosition}) = _$_LeagueTable;
 
   @override
   TeamName get teamName;
   @override
   TeamLogo get teamLogo;
+  @override
+  List<dynamic> get teamPosition;
   @override
   @JsonKey(ignore: true)
   _$LeagueTableCopyWith<_LeagueTable> get copyWith =>

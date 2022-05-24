@@ -25,80 +25,92 @@ class TeamLogo extends ValueObject<String> {
   const TeamLogo._({required this.value});
 }
 
-class TeamPoint extends ValueObject<String> {
+class TeamPosition extends ValueObject {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<String>, Map> value;
 
-  const TeamPoint._(this.value);
-
-  factory TeamPoint(String teamPointStr) {
-    return TeamPoint._(validateStringNotEmpty(teamPointStr));
+  factory TeamPosition({required Map value}) {
+    return TeamPosition._(value: validateTeamPosition(teamPosition: value));
   }
+
+  const TeamPosition._({required this.value});
 }
 
-class TeamWon extends ValueObject<String> {
+class TeamPoint extends ValueObject {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<String>, int> value;
 
-  const TeamWon._(this.value);
-
-  factory TeamWon(String teamWonStr) {
-    return TeamWon._(validateStringNotEmpty(teamWonStr));
+  factory TeamPoint({required int value}) {
+    return TeamPoint._(value: validateTeamPoint(teamPoint: value));
   }
+
+  const TeamPoint._({required this.value});
 }
 
-class TeamLost extends ValueObject<String> {
+class TeamWon extends ValueObject {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<String>, int> value;
 
-  const TeamLost._(this.value);
-
-  factory TeamLost(String teamLostStr) {
-    return TeamLost._(validateStringNotEmpty(teamLostStr));
+  factory TeamWon({required int value}) {
+    return TeamWon._(value: validateTeamWon(won: value));
   }
+
+  const TeamWon._({required this.value});
 }
 
-class TeamDraw extends ValueObject<String> {
+class TeamLost extends ValueObject {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<String>, int> value;
 
-  const TeamDraw._(this.value);
-
-  factory TeamDraw(String teamDrawStr) {
-    return TeamDraw._(validateStringNotEmpty(teamDrawStr));
+  factory TeamLost({required int value}) {
+    return TeamLost._(value: validateTeamLost(lost: value));
   }
+
+  const TeamLost._({required this.value});
 }
 
-class TeamGoalDifferntial extends ValueObject<String> {
+class TeamDraw extends ValueObject {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<String>, int> value;
 
-  const TeamGoalDifferntial._(this.value);
+  factory TeamDraw({required int value}) {
+    return TeamDraw._(value: validateTeamDraw(Draw: value));
+  }
 
-  factory TeamGoalDifferntial(String teamGoalDifferntialStr) {
+  const TeamDraw._({required this.value});
+}
+
+class TeamGoalDifferntial extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, int> value;
+
+  factory TeamGoalDifferntial({required int value}) {
     return TeamGoalDifferntial._(
-        validateStringNotEmpty(teamGoalDifferntialStr));
+        value: validateTeamGoalDifferntial(goalDifferntial: value));
   }
+
+  const TeamGoalDifferntial._({required this.value});
 }
 
-class TeamGoalAgainst extends ValueObject<String> {
+class TeamGoalAgainst extends ValueObject {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<String>, int> value;
 
-  const TeamGoalAgainst._(this.value);
-
-  factory TeamGoalAgainst(String teamGoalAgainstStr) {
-    return TeamGoalAgainst._(validateStringNotEmpty(teamGoalAgainstStr));
+  factory TeamGoalAgainst({required int value}) {
+    return TeamGoalAgainst._(
+        value: validateTeamGoalAgainst(goalAgainst: value));
   }
+
+  const TeamGoalAgainst._({required this.value});
 }
 
-class TeamGoalFor extends ValueObject<String> {
+class TeamGoalFor extends ValueObject {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<String>, int> value;
 
-  const TeamGoalFor._(this.value);
-
-  factory TeamGoalFor(String teamGoalForStr) {
-    return TeamGoalFor._(validateStringNotEmpty(teamGoalForStr));
+  factory TeamGoalFor({required int value}) {
+    return TeamGoalFor._(value: validateTeamGoalFor(goalFor: value));
   }
+
+  const TeamGoalFor._({required this.value});
 }

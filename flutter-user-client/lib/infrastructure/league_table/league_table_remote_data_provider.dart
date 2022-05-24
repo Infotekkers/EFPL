@@ -20,29 +20,31 @@ class LeagueTableRemoteDataProvider {
 
     try {
       final response = await client!.get(url);
-
+      print("response ${response.statusCode}");
       if (response.statusCode == 200) {
         final leagueTable = <LeagueTable>[];
         final leagueTableDtoJson = [];
 
         final parsedResponseBody = jsonDecode(response.body) as List<dynamic>;
-
         for (var leagueTableJson in parsedResponseBody) {
-          Map<String, dynamic> FinalParsedLeagueTable = <String, dynamic>{};
-          leagueTableDtoJson.add(FinalParsedLeagueTable);
-
+          print("leagueTableJson $leagueTableJson");
+          Map<String, dynamic> finalParsedLeagueTable = <String, dynamic>{};
+          leagueTableDtoJson.add(leagueTableJson);
           final LeagueTableDto leagueTableDto =
-              LeagueTableDto.fromJson(FinalParsedLeagueTable);
+              LeagueTableDto.fromJson(leagueTableJson);
+          print("middle");
+
           leagueTable.add(leagueTableDto.toDomain());
         }
         // LeagueTableDto leagueTableDto =
         //     LeagueTableDto.fromJson(jsonDecode(response.body));
-
+        print("last $leagueTable");
         return right(leagueTable);
       }
 
       return left(const LeagueTableFailure.serverError());
     } catch (e) {
+      print(e.toString());
       return left(const LeagueTableFailure.networkError());
     }
   }
