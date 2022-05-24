@@ -47,6 +47,7 @@ flutter:
   assets:
     - .env
     - assets/icons/
+    - assets/images/
   fonts:
     - family: Architect
       fonts:
