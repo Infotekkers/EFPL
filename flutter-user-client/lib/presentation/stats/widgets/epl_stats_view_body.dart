@@ -14,9 +14,10 @@ class EPLStatsViewBody extends StatelessWidget {
         loadInProgress: (_) => const Center(
           child: Text('Loading'),
         ),
-        loadSuccess: (state) => Center(
+        loadSuccess: (state) => const Center(
           child: Text(
-            state.eplStats.name.getOrCrash(),
+            // state.eplStats.name.getOrCrash(),
+            "Success",
           ),
         ),
         loadFailure: (_) => const Center(

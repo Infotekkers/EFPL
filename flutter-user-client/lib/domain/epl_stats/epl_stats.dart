@@ -7,5 +7,6 @@ part 'epl_stats.freezed.dart';
 abstract class EPLStats with _$EPLStats {
   const factory EPLStats({
     required PlayerName name,
+    required StatCount stat,
   }) = _EPLStat;
 }

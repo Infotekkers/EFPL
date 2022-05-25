@@ -5,3 +5,7 @@ Either<ValueFailure<String>, String> validatePlayerName(
     {required String playerName}) {
   return right(playerName);
 }
+
+Either<ValueFailure<String>, int> validateStatCount({required int statCount}) {
+  return right(statCount);
+}

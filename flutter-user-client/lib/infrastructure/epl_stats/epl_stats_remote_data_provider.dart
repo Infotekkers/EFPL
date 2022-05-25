@@ -12,11 +12,11 @@ import 'package:injectable/injectable.dart';
 class EPLStatsRemoteDataProvider {
   http.Client? client = http.Client();
 
-  static final String _baseUrl = "${dotenv.env["API"]}";
+  final String _baseUrl = "${dotenv.env["API"]}";
 
   EPLStatsRemoteDataProvider();
 
-  Future<Either<EPLStatsFailure, EPLStats>> getEPLStats() async {
+  Future<Either<EPLStatsFailure, List<EPLStats>>> getEPLStats() async {
     // final Uri url = Uri.parse("$_baseUrl/eplStats/goals");
     final Uri url = Uri.parse("$_baseUrl/test");
 
@@ -24,10 +24,18 @@ class EPLStatsRemoteDataProvider {
       final response = await client!.get(url);
 
       if (response.statusCode == 200) {
-        EPLStatsDto eplStatsDto =
-            EPLStatsDto.fromJson(jsonDecode(response.body));
+        final allStats = <EPLStats>[];
 
-        return right(eplStatsDto.toDomain());
+        final parsedResponseBody = jsonDecode(response.body);
+
+        for (var stat in parsedResponseBody) {
+          final EPLStatsDto eplStatDto = EPLStatsDto.fromJson(stat);
+          allStats.add(eplStatDto.toDomain());
+        }
+
+        print(allStats);
+
+        return right(allStats);
       }
 
       return left(const EPLStatsFailure.serverError());

@@ -11,14 +11,18 @@ abstract class EPLStatsDto implements _$EPLStatsDto {
 
   const factory EPLStatsDto({
     required String playerName,
+    required int stat,
   }) = _EPLStatsDto;
 
   factory EPLStatsDto.fromDomain(EPLStats eplStats) {
-    return EPLStatsDto(playerName: eplStats.name.getOrCrash());
+    return EPLStatsDto(
+        playerName: eplStats.name.getOrCrash(),
+        stat: eplStats.stat.getOrCrash());
   }
 
   EPLStats toDomain() {
-    return EPLStats(name: PlayerName(value: playerName));
+    return EPLStats(
+        name: PlayerName(value: playerName), stat: StatCount(value: stat));
   }
 
   factory EPLStatsDto.fromJson(Map<String, dynamic> json) =>

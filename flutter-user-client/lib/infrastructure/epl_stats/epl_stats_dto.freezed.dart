@@ -21,9 +21,10 @@ EPLStatsDto _$EPLStatsDtoFromJson(Map<String, dynamic> json) {
 class _$EPLStatsDtoTearOff {
   const _$EPLStatsDtoTearOff();
 
-  _EPLStatsDto call({required String playerName}) {
+  _EPLStatsDto call({required String playerName, required int stat}) {
     return _EPLStatsDto(
       playerName: playerName,
+      stat: stat,
     );
   }
 
@@ -38,6 +39,7 @@ const $EPLStatsDto = _$EPLStatsDtoTearOff();
 /// @nodoc
 mixin _$EPLStatsDto {
   String get playerName => throw _privateConstructorUsedError;
+  int get stat => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +52,7 @@ abstract class $EPLStatsDtoCopyWith<$Res> {
   factory $EPLStatsDtoCopyWith(
           EPLStatsDto value, $Res Function(EPLStatsDto) then) =
       _$EPLStatsDtoCopyWithImpl<$Res>;
-  $Res call({String playerName});
+  $Res call({String playerName, int stat});
 }
 
 /// @nodoc
@@ -64,12 +66,17 @@ class _$EPLStatsDtoCopyWithImpl<$Res> implements $EPLStatsDtoCopyWith<$Res> {
   @override
   $Res call({
     Object? playerName = freezed,
+    Object? stat = freezed,
   }) {
     return _then(_value.copyWith(
       playerName: playerName == freezed
           ? _value.playerName
           : playerName // ignore: cast_nullable_to_non_nullable
               as String,
+      stat: stat == freezed
+          ? _value.stat
+          : stat // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -81,7 +88,7 @@ abstract class _$EPLStatsDtoCopyWith<$Res>
           _EPLStatsDto value, $Res Function(_EPLStatsDto) then) =
       __$EPLStatsDtoCopyWithImpl<$Res>;
   @override
-  $Res call({String playerName});
+  $Res call({String playerName, int stat});
 }
 
 /// @nodoc
@@ -97,12 +104,17 @@ class __$EPLStatsDtoCopyWithImpl<$Res> extends _$EPLStatsDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? playerName = freezed,
+    Object? stat = freezed,
   }) {
     return _then(_EPLStatsDto(
       playerName: playerName == freezed
           ? _value.playerName
           : playerName // ignore: cast_nullable_to_non_nullable
               as String,
+      stat: stat == freezed
+          ? _value.stat
+          : stat // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -110,17 +122,20 @@ class __$EPLStatsDtoCopyWithImpl<$Res> extends _$EPLStatsDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_EPLStatsDto extends _EPLStatsDto {
-  const _$_EPLStatsDto({required this.playerName}) : super._();
+  const _$_EPLStatsDto({required this.playerName, required this.stat})
+      : super._();
 
   factory _$_EPLStatsDto.fromJson(Map<String, dynamic> json) =>
       _$$_EPLStatsDtoFromJson(json);
 
   @override
   final String playerName;
+  @override
+  final int stat;
 
   @override
   String toString() {
-    return 'EPLStatsDto(playerName: $playerName)';
+    return 'EPLStatsDto(playerName: $playerName, stat: $stat)';
   }
 
   @override
@@ -129,12 +144,15 @@ class _$_EPLStatsDto extends _EPLStatsDto {
         (other.runtimeType == runtimeType &&
             other is _EPLStatsDto &&
             const DeepCollectionEquality()
-                .equals(other.playerName, playerName));
+                .equals(other.playerName, playerName) &&
+            const DeepCollectionEquality().equals(other.stat, stat));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(playerName));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(playerName),
+      const DeepCollectionEquality().hash(stat));
 
   @JsonKey(ignore: true)
   @override
@@ -148,7 +166,8 @@ class _$_EPLStatsDto extends _EPLStatsDto {
 }
 
 abstract class _EPLStatsDto extends EPLStatsDto {
-  const factory _EPLStatsDto({required String playerName}) = _$_EPLStatsDto;
+  const factory _EPLStatsDto({required String playerName, required int stat}) =
+      _$_EPLStatsDto;
   const _EPLStatsDto._() : super._();
 
   factory _EPLStatsDto.fromJson(Map<String, dynamic> json) =
@@ -156,6 +175,8 @@ abstract class _EPLStatsDto extends EPLStatsDto {
 
   @override
   String get playerName;
+  @override
+  int get stat;
   @override
   @JsonKey(ignore: true)
   _$EPLStatsDtoCopyWith<_EPLStatsDto> get copyWith =>
