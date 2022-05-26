@@ -19,5 +19,9 @@ abstract class MyTeamState with _$MyTeamState {
       _CaptainChangeSuccess;
   const factory MyTeamState.viceCaptainChangeSuccess(MyTeam myTeam) =
       _ViceCaptainSuccess;
+  const factory MyTeamState.chipPlayedSuccess(MyTeam myTeam) =
+      _ChipPlayedSuccess;
+  const factory MyTeamState.chipPlayedFailure(MyTeam myTeam) =
+      _ChipPlayedFailure;
   const factory MyTeamState.saved() = _Saved;
 }

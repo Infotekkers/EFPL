@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:efpl/domain/core/value_failures.dart';
 import 'package:efpl/domain/my_team/i_my_team_repository.dart';
 import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/my_team_failures.dart';
@@ -21,6 +22,7 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
     on<_TransferConfirmed>(_onTransferConfirmed);
     on<_CaptainChanged>(_onCaptainChanged);
     on<_ViceCaptainChanged>(_onViceCaptainChanged);
+    on<_ChipPlayed>(_onChipPlayed);
     on<_SaveMyTeam>(_onSaveMyTeam);
   }
 
@@ -266,6 +268,37 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
     emit(MyTeamState.viceCaptainChangeSuccess(myTeam));
   }
 
+  void _onChipPlayed(_ChipPlayed e, Emitter<MyTeamState> emit) {
+    final myTeam = _getMyTeam(state);
+
+    if (myTeam.activeChip is ValueFailure &&
+        myTeam.availableChips.contains(e.chip)) {
+      myTeam.activeChip = e.chip;
+      myTeam.availableChips.remove(e.chip);
+
+      if (e.chip.getOrCrash() == 'BB') {
+        for (String playerId in myTeam.players['sub'].getOrCrash().keys) {
+          myTeam.players['sub'].getOrCrash()[playerId]['multiplier'] = 1;
+        }
+      } else if (e.chip.getOrCrash() == 'TC') {
+        for (String position in myTeam.players.keys) {
+          for (String playerId in myTeam.players[position].getOrCrash().keys) {
+            final isCaptain =
+                myTeam.players[position].getOrCrash()[playerId]['isCaptain'];
+
+            if (isCaptain) {
+              myTeam.players[position].getOrCrash()[playerId]['multiplier'] = 3;
+            }
+          }
+        }
+      }
+
+      emit(MyTeamState.chipPlayedSuccess(myTeam));
+    } else {
+      emit(MyTeamState.chipPlayedFailure(myTeam));
+    }
+  }
+
   void _onSaveMyTeam(_SaveMyTeam e, Emitter<MyTeamState> emit) async {
     emit(const MyTeamState.loadInProgress());
     final failureOrSuccess =
@@ -286,6 +319,8 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
       transferApproved: (s) => s.myTeam,
       captainChangeSuccess: (s) => s.myTeam,
       viceCaptainChangeSuccess: (s) => s.myTeam,
+      chipPlayedSuccess: (s) => s.myTeam,
+      chipPlayedFailure: (s) => s.myTeam,
       orElse: () => null,
     )!;
   }
