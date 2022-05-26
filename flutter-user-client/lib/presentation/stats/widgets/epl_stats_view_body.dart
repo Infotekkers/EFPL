@@ -14,10 +14,18 @@ class EPLStatsViewBody extends StatelessWidget {
         loadInProgress: (_) => const Center(
           child: Text('Loading'),
         ),
-        loadSuccess: (state) => const Center(
-          child: Text(
-            // state.eplStats.name.getOrCrash(),
-            "Success",
+        loadSuccess: (state) => Center(
+          child: ListView.builder(
+            itemCount: state.eplStats.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("${state.eplStats[index].name.getOrCrash()}"),
+                  Text("${state.eplStats[index].amount.getOrCrash()}"),
+                ],
+              );
+            },
           ),
         ),
         loadFailure: (_) => const Center(

@@ -52,16 +52,6 @@ app.use("/customLeagues", customLeagueRoutes);
 app.use("/admin", adminAuthRouter);
 app.use("/backup", backupRouter);
 
-app.get("/test", (req, res) => {
-  console.log("requested");
-  const result = [
-    { playerName: "Barok", stat: 10 },
-    { playerName: "Ronaldo", stat: 2 },
-  ];
-
-  res.json(result);
-});
-
 // Run populate scripts
 // populate.addTestPlayer();
 // populate.addTestUser();

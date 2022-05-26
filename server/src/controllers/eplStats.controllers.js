@@ -47,147 +47,33 @@ const overview = asyncHandler(async (_, res) => {
   res.status(200).json(result);
 });
 
-const goals = asyncHandler(async (_, res) => {
-  console.log("requested");
+const getTopPlayersByStat = asyncHandler(async (req, res) => {
+  const { statType } = req.params;
+
   const result = await Player.aggregate([
-    //   Fetch score
     { $unwind: "$score" },
-    //  Sum up goals across gameweeks
     {
       $group: {
         _id: "$_id",
         name: { $first: "$playerName" },
-        goals: { $sum: "$score.goals" },
+        image: { $first: "$playerImage" },
+        amount: { $sum: `$score.${statType}` },
       },
     },
-    // Sort in ascending order
-    { $sort: { goals: -1, name: 1 } },
-  ]).limit(10);
-
-  res.status(200).json(result);
-});
-
-const assists = asyncHandler(async (_, res) => {
-  const result = await Player.aggregate([
-    //   Fetch score
-    { $unwind: "$score" },
-    //  Sum up assists across gameweeks
-    {
-      $group: {
-        _id: "$_id",
-        name: { $first: "$playerName" },
-        assists: { $sum: "$score.assists" },
-      },
-    },
-    // Sort in descending order then ascending order of name
-    { $sort: { assists: -1, name: 1 } },
-  ]).limit(10);
-
-  res.status(200).json(result);
-});
-
-const cleanSheets = asyncHandler(async (_, res) => {
-  const result = await Player.aggregate([
-    //   Fetch score
-    { $unwind: "$score" },
-    //  Sum up clean sheets across gameweeks
-    {
-      $group: {
-        _id: "$_id",
-        name: { $first: "$playerName" },
-        cleanSheets: { $sum: "$score.cleanSheets" },
-      },
-    },
-    // Sort in descending order then ascending order of name
-    { $sort: { cleanSheets: -1, name: 1 } },
-  ]).limit(10);
-
-  res.status(200).json(result);
-});
-
-const reds = asyncHandler(async (_, res) => {
-  const result = await Player.aggregate([
-    //   Fetch score
-    { $unwind: "$score" },
-    //  Sum up reds across gameweeks
-    {
-      $group: {
-        _id: "$_id",
-        name: { $first: "$playerName" },
-        reds: { $sum: "$score.reds" },
-      },
-    },
-    // Sort in descending order then ascending order of name
-    { $sort: { reds: -1, name: 1 } },
-  ]).limit(10);
-
-  res.status(200).json(result);
-});
-
-const yellows = asyncHandler(async (_, res) => {
-  const result = await Player.aggregate([
-    //   Fetch score
-    { $unwind: "$score" },
-    //  Sum up yellows across gameweeks
-    {
-      $group: {
-        _id: "$_id",
-        name: { $first: "$playerName" },
-        yellows: { $sum: "$score.yellows" },
-      },
-    },
-    // Sort in descending order then ascending order of name
-    { $sort: { yellows: -1, name: 1 } },
-  ]).limit(10);
-
-  res.status(200).json(result);
-});
-
-const saves = asyncHandler(async (_, res) => {
-  const result = await Player.aggregate([
-    //   Fetch score
-    { $unwind: "$score" },
-    //  Sum up saves across gameweeks
-    {
-      $group: {
-        _id: "$_id",
-        name: { $first: "$playerName" },
-        saves: { $sum: "$score.saves" },
-      },
-    },
-    // Sort in descending order then ascending order of name
-    { $sort: { saves: -1, name: 1 } },
-  ]).limit(10);
-
-  res.status(200).json(result);
-});
-
-const minutesPlayed = asyncHandler(async (_, res) => {
-  const result = await Player.aggregate([
-    //   Fetch score
-    { $unwind: "$score" },
-    //  Sum up minutes played across gameweeks
-    {
-      $group: {
-        _id: "$_id",
-        name: { $first: "$playerName" },
-        minutesPlayed: { $sum: "$score.minutesPlayed" },
-      },
-    },
-    // Sort in descending order then ascending order of name
-    { $sort: { minutesPlayed: -1, name: 1 } },
-  ]).limit(10);
+    { $sort: { amount: -1, name: 1 } },
+  ]).limit(5);
 
   res.status(200).json(result);
 });
 
 module.exports = {
   overview,
-  goals,
-  assists,
-  cleanSheets,
-  reds,
-  yellows,
-  saves,
-  minutesPlayed,
+  getTopPlayersByStat,
+  // goals,
+  // assists,
+  // cleanSheets,
+  // reds,
+  // yellows,
+  // saves,
+  // minutesPlayed,
 };

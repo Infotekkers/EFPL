@@ -17,10 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$EPLStatsTearOff {
   const _$EPLStatsTearOff();
 
-  _EPLStat call({required PlayerName name, required StatCount stat}) {
+  _EPLStat call({required PlayerName name, required StatCount amount}) {
     return _EPLStat(
       name: name,
-      stat: stat,
+      amount: amount,
     );
   }
 }
@@ -31,7 +31,7 @@ const $EPLStats = _$EPLStatsTearOff();
 /// @nodoc
 mixin _$EPLStats {
   PlayerName get name => throw _privateConstructorUsedError;
-  StatCount get stat => throw _privateConstructorUsedError;
+  StatCount get amount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EPLStatsCopyWith<EPLStats> get copyWith =>
@@ -42,7 +42,7 @@ mixin _$EPLStats {
 abstract class $EPLStatsCopyWith<$Res> {
   factory $EPLStatsCopyWith(EPLStats value, $Res Function(EPLStats) then) =
       _$EPLStatsCopyWithImpl<$Res>;
-  $Res call({PlayerName name, StatCount stat});
+  $Res call({PlayerName name, StatCount amount});
 }
 
 /// @nodoc
@@ -56,16 +56,16 @@ class _$EPLStatsCopyWithImpl<$Res> implements $EPLStatsCopyWith<$Res> {
   @override
   $Res call({
     Object? name = freezed,
-    Object? stat = freezed,
+    Object? amount = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as PlayerName,
-      stat: stat == freezed
-          ? _value.stat
-          : stat // ignore: cast_nullable_to_non_nullable
+      amount: amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
               as StatCount,
     ));
   }
@@ -76,7 +76,7 @@ abstract class _$EPLStatCopyWith<$Res> implements $EPLStatsCopyWith<$Res> {
   factory _$EPLStatCopyWith(_EPLStat value, $Res Function(_EPLStat) then) =
       __$EPLStatCopyWithImpl<$Res>;
   @override
-  $Res call({PlayerName name, StatCount stat});
+  $Res call({PlayerName name, StatCount amount});
 }
 
 /// @nodoc
@@ -91,16 +91,16 @@ class __$EPLStatCopyWithImpl<$Res> extends _$EPLStatsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
-    Object? stat = freezed,
+    Object? amount = freezed,
   }) {
     return _then(_EPLStat(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as PlayerName,
-      stat: stat == freezed
-          ? _value.stat
-          : stat // ignore: cast_nullable_to_non_nullable
+      amount: amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
               as StatCount,
     ));
   }
@@ -109,16 +109,16 @@ class __$EPLStatCopyWithImpl<$Res> extends _$EPLStatsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_EPLStat implements _EPLStat {
-  const _$_EPLStat({required this.name, required this.stat});
+  const _$_EPLStat({required this.name, required this.amount});
 
   @override
   final PlayerName name;
   @override
-  final StatCount stat;
+  final StatCount amount;
 
   @override
   String toString() {
-    return 'EPLStats(name: $name, stat: $stat)';
+    return 'EPLStats(name: $name, amount: $amount)';
   }
 
   @override
@@ -127,14 +127,14 @@ class _$_EPLStat implements _EPLStat {
         (other.runtimeType == runtimeType &&
             other is _EPLStat &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.stat, stat));
+            const DeepCollectionEquality().equals(other.amount, amount));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(stat));
+      const DeepCollectionEquality().hash(amount));
 
   @JsonKey(ignore: true)
   @override
@@ -143,13 +143,13 @@ class _$_EPLStat implements _EPLStat {
 }
 
 abstract class _EPLStat implements EPLStats {
-  const factory _EPLStat({required PlayerName name, required StatCount stat}) =
-      _$_EPLStat;
+  const factory _EPLStat(
+      {required PlayerName name, required StatCount amount}) = _$_EPLStat;
 
   @override
   PlayerName get name;
   @override
-  StatCount get stat;
+  StatCount get amount;
   @override
   @JsonKey(ignore: true)
   _$EPLStatCopyWith<_EPLStat> get copyWith =>
