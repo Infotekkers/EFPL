@@ -57,8 +57,10 @@ class _$TransferEventTearOff {
     );
   }
 
-  _saveUserPlayers saveUserPlayers() {
-    return const _saveUserPlayers();
+  _saveUserPlayers saveUserPlayers({required int gameWeekId}) {
+    return _saveUserPlayers(
+      gameWeekId: gameWeekId,
+    );
   }
 
   _setFilter setFilter(
@@ -123,7 +125,7 @@ mixin _$TransferEvent {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -143,7 +145,7 @@ mixin _$TransferEvent {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -163,7 +165,7 @@ mixin _$TransferEvent {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -308,7 +310,7 @@ class _$_getUserPlayers implements _getUserPlayers {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -331,7 +333,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -354,7 +356,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -540,7 +542,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -563,7 +565,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -586,7 +588,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -746,7 +748,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -769,7 +771,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -792,7 +794,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -966,7 +968,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -989,7 +991,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -1012,7 +1014,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -1194,7 +1196,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -1217,7 +1219,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -1240,7 +1242,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -1394,7 +1396,7 @@ class _$_cancelTransfer implements _cancelTransfer {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -1417,7 +1419,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -1440,7 +1442,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -1613,7 +1615,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -1636,7 +1638,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -1659,7 +1661,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -1767,6 +1769,7 @@ abstract class _$saveUserPlayersCopyWith<$Res> {
   factory _$saveUserPlayersCopyWith(
           _saveUserPlayers value, $Res Function(_saveUserPlayers) then) =
       __$saveUserPlayersCopyWithImpl<$Res>;
+  $Res call({int gameWeekId});
 }
 
 /// @nodoc
@@ -1779,26 +1782,50 @@ class __$saveUserPlayersCopyWithImpl<$Res>
 
   @override
   _saveUserPlayers get _value => super._value as _saveUserPlayers;
+
+  @override
+  $Res call({
+    Object? gameWeekId = freezed,
+  }) {
+    return _then(_saveUserPlayers(
+      gameWeekId: gameWeekId == freezed
+          ? _value.gameWeekId
+          : gameWeekId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_saveUserPlayers implements _saveUserPlayers {
-  const _$_saveUserPlayers();
+  const _$_saveUserPlayers({required this.gameWeekId});
+
+  @override
+  final int gameWeekId;
 
   @override
   String toString() {
-    return 'TransferEvent.saveUserPlayers()';
+    return 'TransferEvent.saveUserPlayers(gameWeekId: $gameWeekId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _saveUserPlayers);
+        (other.runtimeType == runtimeType &&
+            other is _saveUserPlayers &&
+            const DeepCollectionEquality()
+                .equals(other.gameWeekId, gameWeekId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(gameWeekId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$saveUserPlayersCopyWith<_saveUserPlayers> get copyWith =>
+      __$saveUserPlayersCopyWithImpl<_saveUserPlayers>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1813,7 +1840,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -1822,7 +1849,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
   }) {
-    return saveUserPlayers();
+    return saveUserPlayers(gameWeekId);
   }
 
   @override
@@ -1836,7 +1863,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -1845,7 +1872,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
   }) {
-    return saveUserPlayers?.call();
+    return saveUserPlayers?.call(gameWeekId);
   }
 
   @override
@@ -1859,7 +1886,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -1870,7 +1897,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult orElse(),
   }) {
     if (saveUserPlayers != null) {
-      return saveUserPlayers();
+      return saveUserPlayers(gameWeekId);
     }
     return orElse();
   }
@@ -1953,7 +1980,13 @@ class _$_saveUserPlayers implements _saveUserPlayers {
 }
 
 abstract class _saveUserPlayers implements TransferEvent {
-  const factory _saveUserPlayers() = _$_saveUserPlayers;
+  const factory _saveUserPlayers({required int gameWeekId}) =
+      _$_saveUserPlayers;
+
+  int get gameWeekId;
+  @JsonKey(ignore: true)
+  _$saveUserPlayersCopyWith<_saveUserPlayers> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2040,7 +2073,7 @@ class _$_setFilter implements _setFilter {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -2063,7 +2096,7 @@ class _$_setFilter implements _setFilter {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -2086,7 +2119,7 @@ class _$_setFilter implements _setFilter {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -2265,7 +2298,7 @@ class _$_setSortFilter implements _setSortFilter {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -2288,7 +2321,7 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -2311,7 +2344,7 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -2498,7 +2531,7 @@ class _$_setPriceFilter implements _setPriceFilter {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -2521,7 +2554,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -2544,7 +2577,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -2699,7 +2732,7 @@ class _$_filterByPrice implements _filterByPrice {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -2722,7 +2755,7 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -2745,7 +2778,7 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -2914,7 +2947,7 @@ class _$_setChip implements _setChip {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -2937,7 +2970,7 @@ class _$_setChip implements _setChip {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -2960,7 +2993,7 @@ class _$_setChip implements _setChip {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -3137,7 +3170,7 @@ class _$_validateTeam implements _validateTeam {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -3160,7 +3193,7 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -3183,7 +3216,7 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -3363,7 +3396,7 @@ class _$_setInitialSelection implements _setInitialSelection {
         transferUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
-    required TResult Function() saveUserPlayers,
+    required TResult Function(int gameWeekId) saveUserPlayers,
     required TResult Function(String filterBy, String filterValue) setFilter,
     required TResult Function(String sortBy) setSortFilter,
     required TResult Function(double minValue, double maxValue) setPriceFilter,
@@ -3386,7 +3419,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,
@@ -3409,7 +3442,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
-    TResult Function()? saveUserPlayers,
+    TResult Function(int gameWeekId)? saveUserPlayers,
     TResult Function(String filterBy, String filterValue)? setFilter,
     TResult Function(String sortBy)? setSortFilter,
     TResult Function(double minValue, double maxValue)? setPriceFilter,

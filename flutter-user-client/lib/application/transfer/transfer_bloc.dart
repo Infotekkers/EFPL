@@ -607,6 +607,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             //save team to api from api
             await _iTransferRepository.saveUserPlayers(
               userTeam: state.userTeam,
+              gameWeekId: event.gameWeekId,
             );
 
             emit(
@@ -619,9 +620,9 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
               ),
             );
 
-            getIt<TransferBloc>().add(
-              const TransferEvent.getUserPlayers(),
-            );
+            // getIt<TransferBloc>().add(
+            //   const TransferEvent.getUserPlayers(),
+            // );
 
             if (state.isInitialSelection == true) {
               getIt<TransferBloc>().add(

@@ -26,6 +26,11 @@ class PlayerWidget extends StatelessWidget {
             width: 55,
             height: 55,
           ),
+          // Container(
+          //   width: 55,
+          //   height: 55,
+          //   child: Text(teamName),
+          // ),
 
           // PLAYER NAME
           Container(

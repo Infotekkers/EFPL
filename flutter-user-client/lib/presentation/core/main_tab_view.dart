@@ -17,7 +17,7 @@ class MainTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 7,
-      initialIndex: 1,
+      initialIndex: 2,
       child: Scaffold(
         drawer: Drawer(
           child: ListView(

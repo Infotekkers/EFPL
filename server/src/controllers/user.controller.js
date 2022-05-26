@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const register = asyncHandler(async (req, res) => {
-  // check for prexisting email
+  // check for preexisting email
   const emailExists = await User.findOne({ email: req.body.email });
   // check for used team name
   const teamNameExists = await User.findOne({ teamName: req.body.teamName });
@@ -214,20 +214,22 @@ const transfer = asyncHandler(async (req, res) => {
   const { data } = req.body;
   // const { userId, incomingTeam } = JSON.parse(data);
   const { incomingTeam } = JSON.parse(data);
-  const userId = "628b728e0a6125289346b457";
+  const userId = "628bd0e0aa8247d6b2292745";
 
   // Fetch active gameweek
-  let activeGameweek = await Gameweek.findOne({ status: "Active" }).exec();
+  let activeGameweek = await Gameweek.findOne({ status: "active" }).exec();
 
   if (activeGameweek) {
     activeGameweek = activeGameweek.gameWeekNumber;
   } else {
-    activeGameweek = 1;
+    activeGameweek = 0;
   }
+
+  // activeGameweek = activeGameweek + 1;
 
   // Fetch User Details
   const user = await User.findById(userId).exec();
-  let activeTeam = user.team[activeGameweek - 1];
+  const activeTeam = user.team[activeGameweek + 1];
 
   // // Validate team
   const [isTeamValid, errorType] = await validateTeam(
@@ -257,8 +259,12 @@ const transfer = asyncHandler(async (req, res) => {
       await User.findByIdAndUpdate(userId, { availableChips: remainingChips });
     }
 
+    console.log(activeTeam);
+    console.log("****************");
+
     // Save deduction and incomingTeam to DB
-    activeTeam = incomingTeam;
+    activeTeam.players = incomingTeam.players;
+    console.log(activeTeam);
     activeTeam.deduction = deduction;
 
     // Update team with deduction for the current gameweek
@@ -268,7 +274,7 @@ const transfer = asyncHandler(async (req, res) => {
     if (incomingTeam.activeChip !== "FH") {
       // Update team with 0 deduction for the upcoming gameweeks
       activeTeam.deduction = 0;
-      for (let gw = activeGameweek + 2; gw < 31; gw++) {
+      for (let gw = activeGameweek + 1; gw < 31; gw++) {
         activeTeam.gameweekId = gw;
         await User.findByIdAndUpdate(userId, { $push: { team: activeTeam } });
       }
@@ -287,7 +293,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
     // const userId = token.data;
 
     // TODO:MAKE TOKEN BASED
-    const userId = "628b728e0a6125289346b457";
+    const userId = "628bd0e0aa8247d6b2292745";
 
     // get active game week
     const gameWeek = await Gameweek.find({ status: "active" });
@@ -296,8 +302,11 @@ const getUserTeam = asyncHandler(async (req, res) => {
     let gameWeekId = 1;
 
     if (gameWeek.length > 0) {
-      gameWeekId = gameWeek[gameWeek.length - 1].gameWeekNumber + 1;
+      gameWeekId = gameWeek[gameWeek.length - 1].gameWeekNumber;
     }
+
+    // make gw one next to active
+    gameWeekId = gameWeekId + 1;
 
     // get timestamp from here
     const currentGameWeek = await Gameweek.findOne({
@@ -427,20 +436,27 @@ const getUserPoints = asyncHandler(async (req, res) => {
   // const userId = token.data;
 
   // TODO:Replace
-  const userId = "628b728e0a6125289346b457";
+  const userId = "628bd0e0aa8247d6b2292745";
 
   // get the gw number from frontend
   let gameWeekId = gwId;
 
   // get current active gw
   const activeGw = await Gameweek.find({ status: "active" });
+
+  // if zero send active gw info
   if (gwId.toString() === "0") {
+    // if active gw exists
     if (activeGw) {
       gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber;
-    } else {
+    }
+    // if no active gws
+    else {
       gameWeekId = 1;
     }
-  } else if (gameWeekId > activeGw[activeGw.length - 1].gameWeekNumber) {
+  }
+  // if info requested by gw & is after active reset to active
+  else if (gameWeekId > activeGw[activeGw.length - 1].gameWeekNumber) {
     gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber + 1;
   }
 
@@ -448,6 +464,8 @@ const getUserPoints = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id: userId })
     .select("-_id -password -country")
     .lean();
+
+  // get user team
   const userTeam = user.team[gameWeekId - 1];
   const userPlayers = userTeam.players;
 
@@ -461,18 +479,18 @@ const getUserPoints = asyncHandler(async (req, res) => {
   };
 
   for (const key in userPlayers) {
+    // get current player from key
     const currentPlayer = userPlayers[key];
 
-    // get player
+    // get player info of current player
     const playerInfo = await Player.findOne({
       playerId: currentPlayer.playerId,
     }).lean();
 
-    const currentPlayerAllScore = playerInfo.score ? playerInfo.score : [];
+    console.log(playerInfo.playerName);
 
-    currentPlayerAllScore.forEach((x) => {
-      console.log(x);
-    });
+    // get player score
+    const currentPlayerAllScore = playerInfo.score ? playerInfo.score : [];
 
     const currentPlayerCurrentGwScore = currentPlayerAllScore.filter(
       (scoreInfo) => scoreInfo.gameweekId.toString() === gameWeekId.toString()
@@ -483,7 +501,6 @@ const getUserPoints = asyncHandler(async (req, res) => {
       gameweekId: gameWeekId,
     });
 
-    //
     const currentPlayerInfo = {
       playerId: currentPlayer.playerId,
       playerName: playerInfo.playerName,
@@ -493,9 +510,6 @@ const getUserPoints = asyncHandler(async (req, res) => {
       isCaptain: currentPlayer.isCaptain,
       isViceCaptain: currentPlayer.isViceCaptain,
       score: currentPlayerCurrentGwScore,
-      // availability: currentPlayer.availability
-      //   ? currentPlayer.availability
-      //   : { injuryStatus: "", injuryMessage: "" },
       fixtureStatus: currentPlayerTeamFixture.status,
       fixtureScore: currentPlayerTeamFixture.score,
       fixtureTeams:

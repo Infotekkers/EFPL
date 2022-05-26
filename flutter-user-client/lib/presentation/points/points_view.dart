@@ -1,5 +1,6 @@
 import 'package:efpl/application/points/points_bloc.dart';
 import 'package:efpl/domain/points/point_user_player.dart';
+import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/core/player_card.dart';
@@ -499,7 +500,7 @@ List<List<PointUserPlayer>> formatPlayersByPosition(
 // Function to show modal
 void showCustomModal(
     {required BuildContext showContext, required String playerId}) {
-  final scoreMap = {
+  final Map scoreMap = {
     "GK": {
       "goal": 5,
       "assist": 4,
@@ -545,6 +546,7 @@ void showCustomModal(
                 (l) => '',
                 (r) => r,
               );
+
               return Container(
                 height: 300,
                 padding: const EdgeInsets.symmetric(
@@ -700,10 +702,14 @@ void showCustomModal(
                             // MINUTES PLAYED
                             PlayerStatDisplay(
                               statisticName: "Minutes Played",
-                              statisticValue: currentPlayer.score.isNotEmpty
+                              statisticValue: currentPlayer.score.isNotEmpty &&
+                                      currentPlayer.score[0]['minutesPlayed'] !=
+                                          0
                                   ? currentPlayer.score[0]['minutesPlayed']
                                   : 0,
-                              statisticPoint: currentPlayer.score.isNotEmpty
+                              statisticPoint: currentPlayer.score.isNotEmpty &&
+                                      currentPlayer.score[0]['minutesPlayed'] !=
+                                          0
                                   ? currentPlayer.score[0]['minutesPlayed'] > 45
                                       ? 2
                                       : 1
@@ -712,49 +718,94 @@ void showCustomModal(
 
                             // GOALS SCORED
                             currentPlayer.score.isNotEmpty &&
-                                    currentPlayer.score[0]['minutesPlayed'] > 0
+                                    currentPlayer.score[0]['minutesPlayed'] >
+                                        0 &&
+                                    currentPlayer.score[0]['goals'] > 0
                                 ? PlayerStatDisplay(
                                     statisticName: "Goals",
                                     statisticValue: currentPlayer.score[0]
                                         ['goals'],
-                                    statisticPoint: scoreMap[
-                                        currentPlayerPosition]!['goals']!,
+                                    statisticPoint:
+                                        (scoreMap[currentPlayerPosition]![
+                                                    'goal']! *
+                                                currentPlayer.score[0]['goals'])
+                                            .toInt(),
                                   )
                                 : Container(),
 
                             // ASSISTS
                             currentPlayer.score.isNotEmpty &&
-                                    currentPlayer.score[0]['minutesPlayed'] > 0
+                                    currentPlayer.score[0]['minutesPlayed'] >
+                                        0 &&
+                                    currentPlayer.score[0]['assists'] > 0
                                 ? PlayerStatDisplay(
                                     statisticName: "Assists",
                                     statisticValue: currentPlayer.score[0]
                                         ['assists'],
-                                    statisticPoint: scoreMap[
-                                        currentPlayerPosition]!['assists']!,
+                                    statisticPoint:
+                                        (scoreMap[currentPlayerPosition]![
+                                                    'assist']! *
+                                                currentPlayer.score[0]
+                                                    ['assists'])
+                                            .toInt(),
                                   )
                                 : Container(),
 
                             // YELLOW CARD
                             currentPlayer.score.isNotEmpty &&
-                                    currentPlayer.score[0]['minutesPlayed'] > 0
+                                    currentPlayer.score[0]['minutesPlayed'] >
+                                        0 &&
+                                    currentPlayer.score[0]['yellows'] > 0
                                 ? PlayerStatDisplay(
                                     statisticName: "Yellows",
                                     statisticValue: currentPlayer.score[0]
                                         ['yellows'],
-                                    statisticPoint: scoreMap[
-                                        currentPlayerPosition]!['yellows']!,
+                                    statisticPoint:
+                                        currentPlayer.score[0]['yellows'] * -1,
                                   )
                                 : Container(),
 
                             // RED CARDS
                             currentPlayer.score.isNotEmpty &&
-                                    currentPlayer.score[0]['minutesPlayed'] > 0
+                                    currentPlayer.score[0]['minutesPlayed'] >
+                                        0 &&
+                                    currentPlayer.score[0]['reds'] > 0
                                 ? PlayerStatDisplay(
                                     statisticName: "Reds",
                                     statisticValue: currentPlayer.score[0]
                                         ['reds'],
-                                    statisticPoint: scoreMap[
-                                        currentPlayerPosition]!['reds']!,
+                                    statisticPoint:
+                                        currentPlayer.score[0]['reds'] * -3,
+                                  )
+                                : Container(),
+
+                            // PEN Missed
+                            currentPlayer.score.isNotEmpty &&
+                                    currentPlayer.score[0]['minutesPlayed'] >
+                                        0 &&
+                                    currentPlayer.score[0]['penalitiesMissed'] >
+                                        0
+                                ? PlayerStatDisplay(
+                                    statisticName: "Penalty Missed",
+                                    statisticValue: currentPlayer.score[0]
+                                        ['penalitiesMissed'],
+                                    statisticPoint: currentPlayer.score[0]
+                                            ['penalitiesMissed'] *
+                                        -3,
+                                  )
+                                : Container(),
+
+                            // own goal
+                            currentPlayer.score.isNotEmpty &&
+                                    currentPlayer.score[0]['minutesPlayed'] >
+                                        0 &&
+                                    currentPlayer.score[0]['ownGoal'] > 0
+                                ? PlayerStatDisplay(
+                                    statisticName: "Own Goal",
+                                    statisticValue: currentPlayer.score[0]
+                                        ['ownGoal'],
+                                    statisticPoint:
+                                        currentPlayer.score[0]['ownGoal'] * -2,
                                   )
                                 : Container(),
 
@@ -767,7 +818,8 @@ void showCustomModal(
                             currentPlayer.score.isNotEmpty &&
                                     currentPlayer.score[0]['minutesPlayed'] >
                                         0 &&
-                                    currentPlayerPosition == "GK"
+                                    currentPlayerPosition == "GK" &&
+                                    currentPlayer.score[0]['saves'] > 0
                                 ? PlayerStatDisplay(
                                     statisticName: "Saves",
                                     statisticValue: currentPlayer.score[0]
@@ -781,7 +833,9 @@ void showCustomModal(
                             currentPlayer.score.isNotEmpty &&
                                     currentPlayer.score[0]['minutesPlayed'] >
                                         0 &&
-                                    currentPlayerPosition == "GK"
+                                    currentPlayerPosition == "GK" &&
+                                    currentPlayer.score[0]['penalitiesSaved'] >
+                                        0
                                 ? PlayerStatDisplay(
                                     statisticName: "Penalty Saved",
                                     statisticValue: currentPlayer.score[0]
@@ -802,7 +856,8 @@ void showCustomModal(
                                         0 &&
                                     (currentPlayerPosition == "GK" ||
                                         currentPlayerPosition == "DEF" ||
-                                        currentPlayerPosition == "MID")
+                                        currentPlayerPosition == "MID") &&
+                                    currentPlayer.score[0]['cleanSheet'] > 0
                                 ? PlayerStatDisplay(
                                     statisticName: "Clean Sheet",
                                     statisticValue: currentPlayer.score[0]
@@ -812,6 +867,73 @@ void showCustomModal(
                                         3,
                                   )
                                 : Container(),
+
+                            /* 
+                              =======================================================================
+                              SUM
+                              =======================================================================
+                            */
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
+                              height: 30,
+                              width: MediaQuery.of(context).size.width,
+                              color:
+                                  ConstantColors.neutral_300.withOpacity(0.15),
+                              child: Row(
+                                children: [
+                                  // STATISTICS
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                            0.5 -
+                                        10,
+                                    child: const Text(
+                                      "Sum",
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.25,
+                                      ),
+                                    ),
+                                  ),
+
+                                  // VALUE
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                            0.25 -
+                                        10,
+                                    child: const Text(
+                                      "",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.25,
+                                      ),
+                                    ),
+                                  ),
+
+                                  // POINTS
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                            0.25 -
+                                        10,
+                                    child: Text(
+                                      getSumPoints(
+                                        currentPlayer: currentPlayer,
+                                        scoreMap: scoreMap,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.25,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -845,4 +967,62 @@ void showCustomModal(
           ),
         );
       });
+}
+
+String getSumPoints(
+    {required PointUserPlayer currentPlayer, required Map scoreMap}) {
+  double pointSum = 0.0;
+
+  String playerPosition = currentPlayer.playerPosition.value.fold(
+    (l) => 'DEF',
+    (r) => r,
+  );
+
+  if (currentPlayer.score.isNotEmpty) {
+    // minutes played
+    if (currentPlayer.score[0]['minutesPlayed'] > 0 &&
+        currentPlayer.score[0]['minutesPlayed'] < 45) {
+      pointSum = pointSum + 1;
+    } else if (currentPlayer.score[0]['minutesPlayed'] > 45) {
+      pointSum = pointSum + 2;
+    }
+
+    // Goals
+    pointSum = pointSum +
+        currentPlayer.score[0]['goals'] * scoreMap[playerPosition]['goal'];
+
+    // Assists
+    pointSum = pointSum +
+        currentPlayer.score[0]['assists'] * scoreMap[playerPosition]['assist'];
+
+    // yellow
+    pointSum = pointSum + currentPlayer.score[0]['yellows'] * -1;
+
+    // reds
+    pointSum = pointSum + currentPlayer.score[0]['reds'] * -3;
+
+    // Clean sheet
+    if ((playerPosition == "GK" ||
+        playerPosition == "DEF" ||
+        playerPosition == "MID")) {
+      pointSum = pointSum + currentPlayer.score[0]['cleanSheet'] * 3;
+    }
+
+    // Pen Saved
+    if (playerPosition == "GK") {
+      pointSum = pointSum + currentPlayer.score[0]['penalitiesSaved'] * 3;
+    }
+
+    // Saves
+    if (playerPosition == "GK") {
+      pointSum = pointSum + currentPlayer.score[0]['saves'] * 3;
+    }
+
+    // pen missed
+    pointSum = pointSum + currentPlayer.score[0]['penalitiesMissed'] * -3;
+
+    // own goal
+    pointSum = pointSum + currentPlayer.score[0]['ownGoal'] * -2;
+  }
+  return pointSum.toStringAsFixed(0);
 }

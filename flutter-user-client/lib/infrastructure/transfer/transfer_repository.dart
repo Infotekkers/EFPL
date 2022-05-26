@@ -45,7 +45,7 @@ class ApiTransferRepository implements ITransferRepository {
 
   @override
   Future<Either<dynamic, bool>> saveUserPlayers(
-      {required UserTeam userTeam}) async {
+      {required UserTeam userTeam, required int gameWeekId}) async {
     // convert user team to json
     final userTeamPlayers = {};
     for (var userPlayer in userTeam.allUserPlayers) {
@@ -70,7 +70,7 @@ class ApiTransferRepository implements ITransferRepository {
       "userId": "627a7798bed9e567269bb8a9",
       "incomingTeam": {
         "activeChip": userTeam.activeChip,
-        "gameweekId": 1,
+        "gameweekId": gameWeekId,
         "players": userTeamPlayers,
       }
     };

@@ -264,7 +264,13 @@ class ConfirmTransfersPage extends StatelessWidget {
                         child: TextButton(
                           onPressed: () {
                             _transferBloc.add(
-                              const TransferEvent.saveUserPlayers(),
+                              TransferEvent.saveUserPlayers(
+                                gameWeekId:
+                                    state.userTeam.gameWeekId.value.fold(
+                                  (l) => 1,
+                                  (r) => r,
+                                ),
+                              ),
                             );
 
                             Navigator.pop(context);

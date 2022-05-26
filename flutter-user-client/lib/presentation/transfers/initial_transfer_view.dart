@@ -248,7 +248,13 @@ class InitialTransferPage extends StatelessWidget {
                                       description: playerPrice == 0
                                           ? ' '
                                           : playerPrice.toStringAsFixed(1),
-                                      teamName: "shirt.svg",
+                                      teamName: allFormattedPlayers[0][index]
+                                          .eplTeamId
+                                          .value
+                                          .fold(
+                                            (l) => '  ',
+                                            (r) => r.toString().split(" ")[0],
+                                          ),
                                     ),
                                   );
                                 },
@@ -344,7 +350,13 @@ class InitialTransferPage extends StatelessWidget {
                                       description: playerPrice == 0
                                           ? ' '
                                           : playerPrice.toStringAsFixed(1),
-                                      teamName: "shirt.svg",
+                                      teamName: allFormattedPlayers[1][index]
+                                          .eplTeamId
+                                          .value
+                                          .fold(
+                                            (l) => '   ',
+                                            (r) => r.toString().split(" ")[0],
+                                          ),
                                     ),
                                   );
                                 },
@@ -441,7 +453,13 @@ class InitialTransferPage extends StatelessWidget {
                                       description: playerPrice == 0
                                           ? ' '
                                           : playerPrice.toStringAsFixed(1),
-                                      teamName: "shirt.svg",
+                                      teamName: allFormattedPlayers[2][index]
+                                          .eplTeamId
+                                          .value
+                                          .fold(
+                                            (l) => '   ',
+                                            (r) => r.toString().split(" ")[0],
+                                          ),
                                     ),
                                   );
                                 },
@@ -537,7 +555,13 @@ class InitialTransferPage extends StatelessWidget {
                                       description: playerPrice == 0
                                           ? ' '
                                           : playerPrice.toStringAsFixed(1),
-                                      teamName: "shirt.svg",
+                                      teamName: allFormattedPlayers[3][index]
+                                          .eplTeamId
+                                          .value
+                                          .fold(
+                                            (l) => '   ',
+                                            (r) => r.toString().split(" ")[0],
+                                          ),
                                     ),
                                   );
                                 },
@@ -654,7 +678,7 @@ List getAllFormattedPlayers({required UserTeam userTeam}) {
         playerName: PlayerName(value: '         '),
         currentPrice: PlayerPrice(value: 0),
         playerPosition: PlayerPosition(value: "GK"),
-        eplTeamId: PlayerEplTeam(value: ''),
+        eplTeamId: PlayerEplTeam(value: '         '),
         eplTeamLogo: '',
         multiplier: 0,
         isCaptain: false,
@@ -675,7 +699,7 @@ List getAllFormattedPlayers({required UserTeam userTeam}) {
         playerName: PlayerName(value: '         '),
         currentPrice: PlayerPrice(value: 0),
         playerPosition: PlayerPosition(value: "DEF"),
-        eplTeamId: PlayerEplTeam(value: ''),
+        eplTeamId: PlayerEplTeam(value: '         '),
         eplTeamLogo: '',
         multiplier: 0,
         isCaptain: false,

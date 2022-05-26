@@ -1,11 +1,8 @@
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/points/point_user_player.dart';
-import 'package:efpl/domain/transfer/user_player.dart';
-import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
@@ -23,8 +20,6 @@ class PointsPlayerWidget extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        TransferBloc _transferBloc = getIt<TransferBloc>();
-
         return InkWell(
           child: Container(
             height: double.infinity,
