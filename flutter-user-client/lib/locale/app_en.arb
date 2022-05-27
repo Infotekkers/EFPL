@@ -24,5 +24,7 @@
   "fixtures": "Fixtures",
   "league": "League",
   "stats": "Stats",
-  "currentLanguage": "Language"
+  "currentLanguage": "Language",
+  "title_fixture": "FIXTURE TRANSLATIONS",
+  "gameWeek": "GameWeek"
 }

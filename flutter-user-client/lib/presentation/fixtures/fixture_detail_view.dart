@@ -15,7 +15,7 @@ import 'package:tab_container/tab_container.dart';
 // TODO:ADD SUBBED PLAYER INFO
 // TODO:IMPROVE EVENTS LAYOUT
 // TODO:ADD NO SCORE INDICATOR FOR SCOREBOARD
-// TODO:ADD NO EVENT INDICATOR FOR EVENTS
+
 class FixtureDetailView extends StatelessWidget {
   const FixtureDetailView({Key? key}) : super(key: key);
 
@@ -257,106 +257,117 @@ class FixtureDetailView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      // Home Scorers
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 5,
-                        ),
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: ListView.builder(
-                          itemCount: allHomePlayersWhoScored.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            List<int> _items = List.generate(
-                              allHomePlayersWhoScored[index]['playerStat'][0]
-                                  ['goals'],
-                              (i) => i,
-                            );
-                            return Container(
+                  child: allHomePlayersWhoScored.isEmpty &&
+                          allAwayPlayersWhoScored.isEmpty
+                      ? const Center(
+                          child: Icon(
+                            FontAwesome.soccer_ball,
+                            size: 30,
+                          ),
+                        )
+                      : Row(
+                          children: [
+                            // Home Scorers
+                            Container(
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 5),
-                              child: Wrap(
-                                children: [
-                                  Text(
-                                    allHomePlayersWhoScored[index]
-                                        ['playerName'],
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  Wrap(
-                                    direction: Axis.horizontal,
-                                    children: _items
-                                        .map(
-                                          (i) => const Padding(
-                                            padding:
-                                                EdgeInsets.fromLTRB(3, 0, 0, 0),
-                                            child: Icon(
-                                              FontAwesome.soccer_ball,
-                                              size: 15,
-                                            ),
-                                          ),
+                                vertical: 5,
+                              ),
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: ListView.builder(
+                                itemCount: allHomePlayersWhoScored.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  List<int> _items = List.generate(
+                                    allHomePlayersWhoScored[index]['playerStat']
+                                        [0]['goals'],
+                                    (i) => i,
+                                  );
+                                  return Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 5),
+                                    child: Wrap(
+                                      children: [
+                                        Text(
+                                          allHomePlayersWhoScored[index]
+                                              ['playerName'],
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Wrap(
+                                          direction: Axis.horizontal,
+                                          children: _items
+                                              .map(
+                                                (i) => const Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      3, 0, 0, 0),
+                                                  child: Icon(
+                                                    FontAwesome.soccer_ball,
+                                                    size: 15,
+                                                  ),
+                                                ),
+                                              )
+                                              .toList(),
                                         )
-                                        .toList(),
-                                  )
-                                ],
+                                      ],
+                                    ),
+                                  );
+                                },
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                      // Away Scorers
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: ListView.builder(
-                          itemCount: allAwayPlayersWhoScored.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            List<int> _items = List.generate(
-                              allAwayPlayersWhoScored[index]['playerStat'][0]
-                                  ['goals'],
-                              (i) => i,
-                            );
-                            return Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              margin: const EdgeInsets.symmetric(vertical: 6),
-                              child: Container(
-                                padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
-                                child: Wrap(
-                                  children: [
-                                    Text(
-                                      allAwayPlayersWhoScored[index]
-                                          ['playerName'],
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Wrap(
-                                      direction: Axis.horizontal,
-                                      children: _items
-                                          .map(
-                                            (i) => const Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  3, 0, 0, 0),
-                                              child: Icon(
-                                                FontAwesome.soccer_ball,
-                                                size: 15,
-                                              ),
-                                            ),
+                            ),
+                            // Away Scorers
+                            Container(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: ListView.builder(
+                                itemCount: allAwayPlayersWhoScored.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  List<int> _items = List.generate(
+                                    allAwayPlayersWhoScored[index]['playerStat']
+                                        [0]['goals'],
+                                    (i) => i,
+                                  );
+                                  return Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    margin:
+                                        const EdgeInsets.symmetric(vertical: 6),
+                                    child: Container(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          40, 0, 0, 0),
+                                      child: Wrap(
+                                        children: [
+                                          Text(
+                                            allAwayPlayersWhoScored[index]
+                                                ['playerName'],
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Wrap(
+                                            direction: Axis.horizontal,
+                                            children: _items
+                                                .map(
+                                                  (i) => const Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            3, 0, 0, 0),
+                                                    child: Icon(
+                                                      FontAwesome.soccer_ball,
+                                                      size: 15,
+                                                    ),
+                                                  ),
+                                                )
+                                                .toList(),
                                           )
-                                          .toList(),
-                                    )
-                                  ],
-                                ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
-                            );
-                          },
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
                 ),
 
                 // Tab View

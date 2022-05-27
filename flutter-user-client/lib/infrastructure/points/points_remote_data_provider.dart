@@ -28,7 +28,6 @@ class PointsInfoRemoteDataProvider {
   Future<Either<dynamic, PointsInfo>> getPointsInfoByGameWeekId(
       {required int gameWeekId}) async {
     try {
-      print(Uri.parse("$_baseURL/user/point/$gameWeekId"));
       // make api call
       var apiResponse = await instance.client
           .get(Uri.parse("$_baseURL/user/point/$gameWeekId"))

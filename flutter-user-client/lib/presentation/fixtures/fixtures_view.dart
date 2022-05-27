@@ -7,6 +7,7 @@ import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FixturesView extends StatelessWidget {
   const FixturesView({Key? key}) : super(key: key);
@@ -143,7 +144,9 @@ class FixturesView extends StatelessWidget {
                               },
                               child: const Icon(Icons.arrow_back_ios),
                             ),
-                            Text("GameWeek  " + state.gameWeekId.toString()),
+                            Text(AppLocalizations.of(context)!.gameWeek +
+                                " " +
+                                state.gameWeekId.toString()),
                             InkWell(
                               onTap: () {
                                 _fixtureBloc.add(
