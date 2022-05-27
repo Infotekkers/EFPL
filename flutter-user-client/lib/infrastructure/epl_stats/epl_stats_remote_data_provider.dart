@@ -16,8 +16,9 @@ class EPLStatsRemoteDataProvider {
 
   EPLStatsRemoteDataProvider();
 
-  Future<Either<EPLStatsFailure, List<EPLStats>>> getEPLStats() async {
-    final Uri url = Uri.parse("$_baseUrl/eplStats/assists");
+  Future<Either<EPLStatsFailure, List<EPLStats>>> getEPLStats(
+      String _statType) async {
+    final Uri url = Uri.parse("$_baseUrl/eplStats/$_statType");
     // final Uri url = Uri.parse("$_baseUrl/test");
 
     try {

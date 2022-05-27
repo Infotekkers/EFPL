@@ -15,7 +15,8 @@ class EPLStatsRepository implements IEPLStatsRepository {
       _eplStatsRemoteDataProvider;
 
   @override
-  Future<Either<EPLStatsFailure, List<EPLStats>>> getEPLStats() {
-    return eplStatsRemoteDataProvider.getEPLStats();
+  Future<Either<EPLStatsFailure, List<EPLStats>>> getEPLStats(
+      {required String statType}) {
+    return eplStatsRemoteDataProvider.getEPLStats(statType);
   }
 }

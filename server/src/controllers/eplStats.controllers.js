@@ -56,6 +56,8 @@ const getTopPlayersByStat = asyncHandler(async (req, res) => {
       $group: {
         _id: "$_id",
         name: { $first: "$playerName" },
+        position: { $first: "$position" },
+        teamId: { $first: "$eplTeamId" },
         image: { $first: "$playerImage" },
         amount: { $sum: `$score.${statType}` },
       },

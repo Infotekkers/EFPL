@@ -3,5 +3,6 @@ import 'package:efpl/domain/epl_stats/epl_stats.dart';
 import 'package:efpl/domain/epl_stats/epl_stats_failure.dart';
 
 abstract class IEPLStatsRepository {
-  Future<Either<EPLStatsFailure, List<EPLStats>>> getEPLStats();
+  Future<Either<EPLStatsFailure, List<EPLStats>>> getEPLStats(
+      {required String statType});
 }

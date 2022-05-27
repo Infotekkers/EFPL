@@ -17,8 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$EPLStatsEventTearOff {
   const _$EPLStatsEventTearOff();
 
-  _GetEPLStats getEPLStats() {
-    return const _GetEPLStats();
+  _GetEPLStats getEPLStats({required String statType}) {
+    return _GetEPLStats(
+      statType: statType,
+    );
   }
 }
 
@@ -27,19 +29,21 @@ const $EPLStatsEvent = _$EPLStatsEventTearOff();
 
 /// @nodoc
 mixin _$EPLStatsEvent {
+  String get statType => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getEPLStats,
+    required TResult Function(String statType) getEPLStats,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getEPLStats,
+    TResult Function(String statType)? getEPLStats,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getEPLStats,
+    TResult Function(String statType)? getEPLStats,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +63,10 @@ mixin _$EPLStatsEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $EPLStatsEventCopyWith<EPLStatsEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -66,6 +74,7 @@ abstract class $EPLStatsEventCopyWith<$Res> {
   factory $EPLStatsEventCopyWith(
           EPLStatsEvent value, $Res Function(EPLStatsEvent) then) =
       _$EPLStatsEventCopyWithImpl<$Res>;
+  $Res call({String statType});
 }
 
 /// @nodoc
@@ -76,13 +85,28 @@ class _$EPLStatsEventCopyWithImpl<$Res>
   final EPLStatsEvent _value;
   // ignore: unused_field
   final $Res Function(EPLStatsEvent) _then;
+
+  @override
+  $Res call({
+    Object? statType = freezed,
+  }) {
+    return _then(_value.copyWith(
+      statType: statType == freezed
+          ? _value.statType
+          : statType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$GetEPLStatsCopyWith<$Res> {
+abstract class _$GetEPLStatsCopyWith<$Res>
+    implements $EPLStatsEventCopyWith<$Res> {
   factory _$GetEPLStatsCopyWith(
           _GetEPLStats value, $Res Function(_GetEPLStats) then) =
       __$GetEPLStatsCopyWithImpl<$Res>;
+  @override
+  $Res call({String statType});
 }
 
 /// @nodoc
@@ -94,51 +118,74 @@ class __$GetEPLStatsCopyWithImpl<$Res> extends _$EPLStatsEventCopyWithImpl<$Res>
 
   @override
   _GetEPLStats get _value => super._value as _GetEPLStats;
+
+  @override
+  $Res call({
+    Object? statType = freezed,
+  }) {
+    return _then(_GetEPLStats(
+      statType: statType == freezed
+          ? _value.statType
+          : statType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GetEPLStats implements _GetEPLStats {
-  const _$_GetEPLStats();
+  const _$_GetEPLStats({required this.statType});
+
+  @override
+  final String statType;
 
   @override
   String toString() {
-    return 'EPLStatsEvent.getEPLStats()';
+    return 'EPLStatsEvent.getEPLStats(statType: $statType)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _GetEPLStats);
+        (other.runtimeType == runtimeType &&
+            other is _GetEPLStats &&
+            const DeepCollectionEquality().equals(other.statType, statType));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(statType));
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetEPLStatsCopyWith<_GetEPLStats> get copyWith =>
+      __$GetEPLStatsCopyWithImpl<_GetEPLStats>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getEPLStats,
+    required TResult Function(String statType) getEPLStats,
   }) {
-    return getEPLStats();
+    return getEPLStats(statType);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getEPLStats,
+    TResult Function(String statType)? getEPLStats,
   }) {
-    return getEPLStats?.call();
+    return getEPLStats?.call(statType);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getEPLStats,
+    TResult Function(String statType)? getEPLStats,
     required TResult orElse(),
   }) {
     if (getEPLStats != null) {
-      return getEPLStats();
+      return getEPLStats(statType);
     }
     return orElse();
   }
@@ -173,7 +220,14 @@ class _$_GetEPLStats implements _GetEPLStats {
 }
 
 abstract class _GetEPLStats implements EPLStatsEvent {
-  const factory _GetEPLStats() = _$_GetEPLStats;
+  const factory _GetEPLStats({required String statType}) = _$_GetEPLStats;
+
+  @override
+  String get statType;
+  @override
+  @JsonKey(ignore: true)
+  _$GetEPLStatsCopyWith<_GetEPLStats> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

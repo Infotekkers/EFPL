@@ -15,17 +15,26 @@ class EPLStatsViewBody extends StatelessWidget {
           child: Text('Loading'),
         ),
         loadSuccess: (state) => Center(
-          child: ListView.builder(
-            itemCount: state.eplStats.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("${state.eplStats[index].name.getOrCrash()}"),
-                  Text("${state.eplStats[index].amount.getOrCrash()}"),
-                ],
-              );
-            },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListView.builder(
+                  itemCount: state.eplStats.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("${state.eplStats[index].name.getOrCrash()}"),
+                        Text("${state.eplStats[index].amount.getOrCrash()}"),
+                      ],
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
         loadFailure: (_) => const Center(
