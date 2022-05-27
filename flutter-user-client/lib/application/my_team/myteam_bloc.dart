@@ -269,12 +269,12 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
   }
 
   void _onChipPlayed(_ChipPlayed e, Emitter<MyTeamState> emit) {
-    final myTeam = _getMyTeam(state);
+    var myTeam = _getMyTeam(state);
 
-    if (myTeam.activeChip is ValueFailure &&
-        myTeam.availableChips.contains(e.chip)) {
-      myTeam.activeChip = e.chip;
-      myTeam.availableChips.remove(e.chip);
+    if (myTeam.activeChip.getOrCrash() == '' &&
+        myTeam.availableChips.getOrCrash().contains(e.chip)) {
+      myTeam = myTeam.copyWith(activeChip: e.chip);
+      myTeam.availableChips.getOrCrash().remove(e.chip);
 
       if (e.chip.getOrCrash() == 'BB') {
         for (String playerId in myTeam.players['sub'].getOrCrash().keys) {
@@ -292,6 +292,7 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
           }
         }
       }
+      print(myTeam);
 
       emit(MyTeamState.chipPlayedSuccess(myTeam));
     } else {

@@ -54,10 +54,9 @@ class _$MyTeamEventTearOff {
     );
   }
 
-  _ChipPlayed chipPlayed(Chip chip, AvailableChips availableChips) {
+  _ChipPlayed chipPlayed(Chip chip) {
     return _ChipPlayed(
       chip,
-      availableChips,
     );
   }
 
@@ -84,8 +83,7 @@ mixin _$MyTeamEvent {
         transferConfirmed,
     required TResult Function(int playerId) captainChanged,
     required TResult Function(int playerId) viceCaptainChanged,
-    required TResult Function(Chip chip, AvailableChips availableChips)
-        chipPlayed,
+    required TResult Function(Chip chip) chipPlayed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) =>
       throw _privateConstructorUsedError;
@@ -98,7 +96,7 @@ mixin _$MyTeamEvent {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) =>
       throw _privateConstructorUsedError;
@@ -111,7 +109,7 @@ mixin _$MyTeamEvent {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) =>
@@ -252,8 +250,7 @@ class _$_LoadMyTeam implements _LoadMyTeam {
         transferConfirmed,
     required TResult Function(int playerId) captainChanged,
     required TResult Function(int playerId) viceCaptainChanged,
-    required TResult Function(Chip chip, AvailableChips availableChips)
-        chipPlayed,
+    required TResult Function(Chip chip) chipPlayed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
     return loadMyTeam(userId, gameweekId);
@@ -269,7 +266,7 @@ class _$_LoadMyTeam implements _LoadMyTeam {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
     return loadMyTeam?.call(userId, gameweekId);
@@ -285,7 +282,7 @@ class _$_LoadMyTeam implements _LoadMyTeam {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
@@ -447,8 +444,7 @@ class _$_TransferOptionsRequested implements _TransferOptionsRequested {
         transferConfirmed,
     required TResult Function(int playerId) captainChanged,
     required TResult Function(int playerId) viceCaptainChanged,
-    required TResult Function(Chip chip, AvailableChips availableChips)
-        chipPlayed,
+    required TResult Function(Chip chip) chipPlayed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
     return transferOptionsRequested(playerId, position, isSub);
@@ -464,7 +460,7 @@ class _$_TransferOptionsRequested implements _TransferOptionsRequested {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
     return transferOptionsRequested?.call(playerId, position, isSub);
@@ -480,7 +476,7 @@ class _$_TransferOptionsRequested implements _TransferOptionsRequested {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
@@ -643,8 +639,7 @@ class _$_TransferConfirmed implements _TransferConfirmed {
         transferConfirmed,
     required TResult Function(int playerId) captainChanged,
     required TResult Function(int playerId) viceCaptainChanged,
-    required TResult Function(Chip chip, AvailableChips availableChips)
-        chipPlayed,
+    required TResult Function(Chip chip) chipPlayed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
     return transferConfirmed(toBeTransferredIn, position, isSub);
@@ -660,7 +655,7 @@ class _$_TransferConfirmed implements _TransferConfirmed {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
     return transferConfirmed?.call(toBeTransferredIn, position, isSub);
@@ -676,7 +671,7 @@ class _$_TransferConfirmed implements _TransferConfirmed {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
@@ -820,8 +815,7 @@ class _$_CaptainChanged implements _CaptainChanged {
         transferConfirmed,
     required TResult Function(int playerId) captainChanged,
     required TResult Function(int playerId) viceCaptainChanged,
-    required TResult Function(Chip chip, AvailableChips availableChips)
-        chipPlayed,
+    required TResult Function(Chip chip) chipPlayed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
     return captainChanged(playerId);
@@ -837,7 +831,7 @@ class _$_CaptainChanged implements _CaptainChanged {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
     return captainChanged?.call(playerId);
@@ -853,7 +847,7 @@ class _$_CaptainChanged implements _CaptainChanged {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
@@ -993,8 +987,7 @@ class _$_ViceCaptainChanged implements _ViceCaptainChanged {
         transferConfirmed,
     required TResult Function(int playerId) captainChanged,
     required TResult Function(int playerId) viceCaptainChanged,
-    required TResult Function(Chip chip, AvailableChips availableChips)
-        chipPlayed,
+    required TResult Function(Chip chip) chipPlayed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
     return viceCaptainChanged(playerId);
@@ -1010,7 +1003,7 @@ class _$_ViceCaptainChanged implements _ViceCaptainChanged {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
     return viceCaptainChanged?.call(playerId);
@@ -1026,7 +1019,7 @@ class _$_ViceCaptainChanged implements _ViceCaptainChanged {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
@@ -1098,7 +1091,7 @@ abstract class _$ChipPlayedCopyWith<$Res> {
   factory _$ChipPlayedCopyWith(
           _ChipPlayed value, $Res Function(_ChipPlayed) then) =
       __$ChipPlayedCopyWithImpl<$Res>;
-  $Res call({Chip chip, AvailableChips availableChips});
+  $Res call({Chip chip});
 }
 
 /// @nodoc
@@ -1114,17 +1107,12 @@ class __$ChipPlayedCopyWithImpl<$Res> extends _$MyTeamEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? chip = freezed,
-    Object? availableChips = freezed,
   }) {
     return _then(_ChipPlayed(
       chip == freezed
           ? _value.chip
           : chip // ignore: cast_nullable_to_non_nullable
               as Chip,
-      availableChips == freezed
-          ? _value.availableChips
-          : availableChips // ignore: cast_nullable_to_non_nullable
-              as AvailableChips,
     ));
   }
 }
@@ -1132,16 +1120,14 @@ class __$ChipPlayedCopyWithImpl<$Res> extends _$MyTeamEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ChipPlayed implements _ChipPlayed {
-  const _$_ChipPlayed(this.chip, this.availableChips);
+  const _$_ChipPlayed(this.chip);
 
   @override
   final Chip chip;
-  @override
-  final AvailableChips availableChips;
 
   @override
   String toString() {
-    return 'MyTeamEvent.chipPlayed(chip: $chip, availableChips: $availableChips)';
+    return 'MyTeamEvent.chipPlayed(chip: $chip)';
   }
 
   @override
@@ -1149,16 +1135,12 @@ class _$_ChipPlayed implements _ChipPlayed {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ChipPlayed &&
-            const DeepCollectionEquality().equals(other.chip, chip) &&
-            const DeepCollectionEquality()
-                .equals(other.availableChips, availableChips));
+            const DeepCollectionEquality().equals(other.chip, chip));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(chip),
-      const DeepCollectionEquality().hash(availableChips));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(chip));
 
   @JsonKey(ignore: true)
   @override
@@ -1176,11 +1158,10 @@ class _$_ChipPlayed implements _ChipPlayed {
         transferConfirmed,
     required TResult Function(int playerId) captainChanged,
     required TResult Function(int playerId) viceCaptainChanged,
-    required TResult Function(Chip chip, AvailableChips availableChips)
-        chipPlayed,
+    required TResult Function(Chip chip) chipPlayed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
-    return chipPlayed(chip, availableChips);
+    return chipPlayed(chip);
   }
 
   @override
@@ -1193,10 +1174,10 @@ class _$_ChipPlayed implements _ChipPlayed {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
-    return chipPlayed?.call(chip, availableChips);
+    return chipPlayed?.call(chip);
   }
 
   @override
@@ -1209,12 +1190,12 @@ class _$_ChipPlayed implements _ChipPlayed {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {
     if (chipPlayed != null) {
-      return chipPlayed(chip, availableChips);
+      return chipPlayed(chip);
     }
     return orElse();
   }
@@ -1268,11 +1249,9 @@ class _$_ChipPlayed implements _ChipPlayed {
 }
 
 abstract class _ChipPlayed implements MyTeamEvent {
-  const factory _ChipPlayed(Chip chip, AvailableChips availableChips) =
-      _$_ChipPlayed;
+  const factory _ChipPlayed(Chip chip) = _$_ChipPlayed;
 
   Chip get chip;
-  AvailableChips get availableChips;
   @JsonKey(ignore: true)
   _$ChipPlayedCopyWith<_ChipPlayed> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1369,8 +1348,7 @@ class _$_SaveMyTeam implements _SaveMyTeam {
         transferConfirmed,
     required TResult Function(int playerId) captainChanged,
     required TResult Function(int playerId) viceCaptainChanged,
-    required TResult Function(Chip chip, AvailableChips availableChips)
-        chipPlayed,
+    required TResult Function(Chip chip) chipPlayed,
     required TResult Function(MyTeam myTeam, String userId) saveMyTeam,
   }) {
     return saveMyTeam(myTeam, userId);
@@ -1386,7 +1364,7 @@ class _$_SaveMyTeam implements _SaveMyTeam {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
   }) {
     return saveMyTeam?.call(myTeam, userId);
@@ -1402,7 +1380,7 @@ class _$_SaveMyTeam implements _SaveMyTeam {
         transferConfirmed,
     TResult Function(int playerId)? captainChanged,
     TResult Function(int playerId)? viceCaptainChanged,
-    TResult Function(Chip chip, AvailableChips availableChips)? chipPlayed,
+    TResult Function(Chip chip)? chipPlayed,
     TResult Function(MyTeam myTeam, String userId)? saveMyTeam,
     required TResult orElse(),
   }) {

@@ -11,8 +11,7 @@ abstract class MyTeamEvent with _$MyTeamEvent {
   const factory MyTeamEvent.captainChanged(int playerId) = _CaptainChanged;
   const factory MyTeamEvent.viceCaptainChanged(int playerId) =
       _ViceCaptainChanged;
-  const factory MyTeamEvent.chipPlayed(
-      Chip chip, AvailableChips availableChips) = _ChipPlayed;
+  const factory MyTeamEvent.chipPlayed(Chip chip) = _ChipPlayed;
   const factory MyTeamEvent.saveMyTeam(MyTeam myTeam, String userId) =
       _SaveMyTeam;
 }

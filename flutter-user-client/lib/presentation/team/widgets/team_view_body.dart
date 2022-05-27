@@ -1,5 +1,6 @@
 import 'package:efpl/application/my_team/myteam_bloc.dart';
 import 'package:efpl/presentation/core/widgets/bouncing_ball_loading_indicator.dart';
+import 'package:efpl/presentation/team/widgets/chips_dialog.dart';
 import 'package:efpl/presentation/team/widgets/positional_container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,52 +27,83 @@ class TeamViewBody extends StatelessWidget {
         initial: (_) => Container(),
         loadFailure: (_) => Container(),
         loadInProgress: (_) => const BouncingBallLoadingIndicator(),
-        loadSuccess: (state) => _buildMyTeam(state, context),
+        loadSuccess: (state) => _buildView(state, context),
         saved: (_) => Container(),
-        transferApproved: (_) => _buildMyTeam(state, context, changed: true),
-        transferOptionsLoaded: (_) => _highlightMyTeam(state, context),
-        captainChangeSuccess: (_) =>
-            _buildMyTeam(state, context, changed: true),
+        transferApproved: (state) => _buildView(state, context, changed: true),
+        transferOptionsLoaded: (state) =>
+            _buildView(state, context, highlight: true),
+        captainChangeSuccess: (syaye) =>
+            _buildView(state, context, changed: true),
         viceCaptainChangeSuccess: (_) =>
-            _buildMyTeam(state, context, changed: true),
+            _buildView(state, context, changed: true),
+        chipPlayedSuccess: (state) => _buildView(state, context,
+            changed: true,
+            informational: state.myTeam.activeChip.getOrCrash() +
+                "selected. Save team to confirm"),
+        chipPlayedFailure: (state) => _buildView(state, context),
       ),
     );
   }
 
-  _buildMyTeam(state, context, {changed = false}) {
+  _buildView(state, context,
+      {changed = false, highlight = false, informational = ""}) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
+      child: Stack(
         children: [
-          PositionalContainerWidget(
-            position: 'gk',
-            players: state.myTeam.players['gk'].getOrCrash(),
+          Column(
+            children: [
+              highlight ? _highlightMyTeam(state) : _buildMyTeam(state),
+              _buildActionBtns(changed, context, state),
+            ],
           ),
-          PositionalContainerWidget(
-            position: 'def',
-            players: state.myTeam.players['def'].getOrCrash(),
+          ElevatedButton(
+            onPressed: () => showDialog(
+              context: context,
+              builder: (_) => BlocProvider.value(
+                value: BlocProvider.of<MyTeamBloc>(context),
+                child: ChipsDialog(availableChips: state.myTeam.availableChips),
+              ),
+            ),
+            child: const Icon(Icons.child_care_sharp),
           ),
-          PositionalContainerWidget(
-            position: 'mid',
-            players: state.myTeam.players['mid'].getOrCrash(),
-          ),
-          PositionalContainerWidget(
-            position: 'att',
-            players: state.myTeam.players['att'].getOrCrash(),
-          ),
-          PositionalContainerWidget(
-            position: 'sub',
-            players: state.myTeam.players['sub'].getOrCrash(),
-          ),
-          _buildActionBtns(changed, context, state)
+          Positioned(child: Text(informational)),
         ],
       ),
     );
   }
 
-  _highlightMyTeam(state, context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+  _buildMyTeam(state) {
+    return Expanded(
+      child: Column(
+        children: [
+          PositionalContainerWidget(
+            position: 'gk',
+            players: state.myTeam.players['gk'].getOrCrash(),
+          ),
+          PositionalContainerWidget(
+            position: 'def',
+            players: state.myTeam.players['def'].getOrCrash(),
+          ),
+          PositionalContainerWidget(
+            position: 'mid',
+            players: state.myTeam.players['mid'].getOrCrash(),
+          ),
+          PositionalContainerWidget(
+            position: 'att',
+            players: state.myTeam.players['att'].getOrCrash(),
+          ),
+          PositionalContainerWidget(
+            position: 'sub',
+            players: state.myTeam.players['sub'].getOrCrash(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _highlightMyTeam(state) {
+    return Expanded(
       child: Column(
         children: [
           PositionalContainerWidget(
@@ -104,7 +136,6 @@ class TeamViewBody extends StatelessWidget {
             validOptions: state.validOptions,
             toBeTransferredOut: state.playerId,
           ),
-          _buildActionBtns(false, context, state)
         ],
       ),
     );
