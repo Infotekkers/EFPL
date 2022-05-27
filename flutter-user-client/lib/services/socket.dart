@@ -26,6 +26,15 @@ class SocketApi {
       },
     );
 
+    socket.on(
+      "fixtureLineUpUpdated",
+      (data) => {
+        getIt<FixtureBloc>().add(
+          const FixtureEvent.loadFixtures(),
+        ),
+      },
+    );
+
     return _socketApi;
   }
 }

@@ -13,7 +13,6 @@ import 'package:tab_container/tab_container.dart';
 // TODO:ADD PULL TO REFRESH
 // TODO:ADD SUBBED PLAYER INFO
 // TODO:ADD EVENTS
-// TODO:ADD SCOREBOARD
 // TODO:MAKE SOCKET BASED
 class FixtureDetailView extends StatelessWidget {
   const FixtureDetailView({Key? key}) : super(key: key);
@@ -293,7 +292,6 @@ class FixtureDetailView extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       width: MediaQuery.of(context).size.width * 0.5,
-                      // color: Colors.pink,
                       child: ListView.builder(
                         itemCount: allAwayPlayersWhoScored.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -303,32 +301,36 @@ class FixtureDetailView extends StatelessWidget {
                             (i) => i,
                           );
                           return Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 5),
-                            child: Wrap(
-                              children: [
-                                Text(
-                                  allAwayPlayersWhoScored[index]['playerName'],
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Wrap(
-                                  direction: Axis.horizontal,
-                                  children: _items
-                                      .map(
-                                        (i) => const Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(3, 0, 0, 0),
-                                          child: Icon(
-                                            FontAwesome.soccer_ball,
-                                            size: 15,
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            child: Container(
+                              padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
+                              child: Wrap(
+                                children: [
+                                  Text(
+                                    allAwayPlayersWhoScored[index]
+                                        ['playerName'],
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  Wrap(
+                                    direction: Axis.horizontal,
+                                    children: _items
+                                        .map(
+                                          (i) => const Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(3, 0, 0, 0),
+                                            child: Icon(
+                                              FontAwesome.soccer_ball,
+                                              size: 15,
+                                            ),
                                           ),
-                                        ),
-                                      )
-                                      .toList(),
-                                )
-                              ],
+                                        )
+                                        .toList(),
+                                  )
+                                ],
+                              ),
                             ),
                           );
                         },
