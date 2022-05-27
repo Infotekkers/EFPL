@@ -21,16 +21,16 @@ class PlayerWidget extends StatelessWidget {
       child: Column(
         children: [
           // SHIRT
-          SvgPicture.asset(
-            "assets/icons/$teamName",
-            width: 55,
-            height: 55,
-          ),
-          // Container(
+          // SvgPicture.asset(
+          //   "assets/icons/shirt.svg",
           //   width: 55,
           //   height: 55,
-          //   child: Text(teamName),
           // ),
+          Container(
+            width: 55,
+            height: 55,
+            child: Text(teamName),
+          ),
 
           // PLAYER NAME
           Container(

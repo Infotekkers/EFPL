@@ -230,6 +230,7 @@ class TransferRemoteDataProvider {
         // if response has players
 
         if (parseResponseTeam['players'].length > 0) {
+          print(apiResponse.statusCode);
           List allPlayers = parseResponseTeam['players'];
           for (var i = 0; i < allPlayers.length; i++) {
             Map<String, dynamic> availability = {
@@ -325,9 +326,29 @@ class TransferRemoteDataProvider {
 
         // if response has no players
         else {
-          print(parsedResponseBody['teamName']);
-          Either<dynamic, UserTeam> cacheCall =
-              await _transferLocalDataProvider.getUserTeam();
+          var allTeamsApiResponse = await instance.client
+              .get(
+                Uri.parse('$_baseURL/teams/all'),
+              )
+              .timeout(
+                Duration(seconds: ConstantValues().httpTimeOutDuration),
+              );
+
+          if (allTeamsApiResponse.statusCode == 200) {
+            List<dynamic> parsedResponseBody =
+                jsonDecode(allTeamsApiResponse.body);
+            List allTeams = [];
+
+            for (var i = 0; i < parsedResponseBody.length; i++) {
+              Map currentTeam = {
+                "teamName": parsedResponseBody[i]['teamName'].toString(),
+                "teamLogo": parsedResponseBody[i]['teamLogo'].toString(),
+              };
+              allTeams.add(currentTeam);
+            }
+            // Add to cache
+            _transferLocalDataProvider.saveAllTeamsAndLogo(allTeams: allTeams);
+          }
 
           return left([
             UserTeam(
