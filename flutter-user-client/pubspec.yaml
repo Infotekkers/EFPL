@@ -28,6 +28,7 @@ dependencies:
   path_provider: ^2.0.9
   material_design_icons_flutter: 5.0.6595
   flutter_boxicons: ^3.0.0
+  fluttericon: ^2.0.0
   cached_network_image: ^3.2.0
   liquid_pull_to_refresh: ^3.0.1
   tab_container: ^2.0.0
