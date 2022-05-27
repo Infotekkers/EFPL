@@ -30,6 +30,7 @@ class StatTable extends StatefulWidget {
 }
 
 class _StatTableState extends State<StatTable> {
+  // ignore: unused_field
   int _currentSortColumn = 0;
   bool _isAscending = true;
 
@@ -41,7 +42,7 @@ class _StatTableState extends State<StatTable> {
         SliverFillRemaining(
           hasScrollBody: false,
           child: DataTable(
-            columnSpacing: 20,
+            columnSpacing: 4,
             sortAscending: false,
             columns: [
               DataColumn(

@@ -52,7 +52,7 @@ class AppWidget extends StatelessWidget {
                 ),
               ),
             ),
-            initialRoute: "/player",
+            initialRoute: "/",
             routes: _appRouter.allRoutes,
           );
         },
