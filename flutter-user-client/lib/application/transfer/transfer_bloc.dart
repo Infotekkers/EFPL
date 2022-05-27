@@ -620,9 +620,9 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
               ),
             );
 
-            // getIt<TransferBloc>().add(
-            //   const TransferEvent.getUserPlayers(),
-            // );
+            getIt<TransferBloc>().add(
+              const TransferEvent.getUserPlayers(),
+            );
 
             if (state.isInitialSelection == true) {
               getIt<TransferBloc>().add(

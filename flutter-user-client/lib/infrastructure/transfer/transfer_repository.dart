@@ -22,25 +22,25 @@ class ApiTransferRepository implements ITransferRepository {
   @override
   Future<Either<dynamic, List<UserPlayer>>> getAllPositionPlayers(
       {required String playerPosition}) async {
-    if (await utility.hasInternetConnection()) {
-      return _transferRemoteDataProvider.getAllPositionPlayers(
-        playerPosition: playerPosition,
-      );
-    } else {
-      return _transferLocalDataProvider.getAllPlayersInPosition(
-        playerPosition: playerPosition,
-      );
-    }
+    // if (await utility.hasInternetConnection()) {
+    return _transferRemoteDataProvider.getAllPositionPlayers(
+      playerPosition: playerPosition,
+    );
+    // } else {
+    //   return _transferLocalDataProvider.getAllPlayersInPosition(
+    //     playerPosition: playerPosition,
+    //   );
+    // }
   }
 
   // handle user team data
   @override
   Future<Either<dynamic, UserTeam>> getUserPlayers() async {
-    if (await utility.hasInternetConnection()) {
-      return _transferRemoteDataProvider.getUserPlayers();
-    } else {
-      return _transferLocalDataProvider.getUserTeam();
-    }
+    // if (await utility.hasInternetConnection()) {
+    return _transferRemoteDataProvider.getUserPlayers();
+    // } else {
+    //   return _transferLocalDataProvider.getUserTeam();
+    // }
   }
 
   @override
@@ -76,13 +76,13 @@ class ApiTransferRepository implements ITransferRepository {
     };
 
     //
-    if (await utility.hasInternetConnection()) {
-      await _transferRemoteDataProvider.saveUserPlayers(userTeam: userTeamJson);
-      return right(true);
-    } else {
-      _transferLocalDataProvider.saveUserTeamChanges(
-          changedUserTeam: userTeamJson);
-      return right(true);
-    }
+    // if (await utility.hasInternetConnection()) {
+    await _transferRemoteDataProvider.saveUserPlayers(userTeam: userTeamJson);
+    return right(true);
+    // } else {
+    //   _transferLocalDataProvider.saveUserTeamChanges(
+    //       changedUserTeam: userTeamJson);
+    //   return right(true);
+    // }
   }
 }

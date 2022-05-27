@@ -32,7 +32,14 @@ class PointsBloc extends Bloc<PointsEvent, PointsState> {
 
         // get team from response
         final PointsInfo pointsInfo = eitherPointsInfo.fold(
-          (l) => l[0],
+          (l) => PointsInfo(
+            allPlayers: [],
+            gameWeekId: 0,
+            teamName: '',
+            activeChip: '',
+            deduction: 0,
+            maxActiveCount: 1,
+          ),
           (r) => r,
         );
 

@@ -18,12 +18,12 @@ class ApiPointsInfoRepository implements IPointInfoRepository {
   @override
   Future<Either<dynamic, PointsInfo>> getPointByGameWeekId(
       {required int gameWeekId}) async {
-    if (await utility.hasInternetConnection()) {
-      return await _pointsInfoRemoteDataProvider.getPointsInfoByGameWeekId(
-          gameWeekId: gameWeekId);
-    } else {
-      _pointsInfoLocalDataProvider.getCachedPointInfo(gameWeekId: gameWeekId);
-      return left([]);
-    }
+    // if (await utility.hasInternetConnection()) {
+    return await _pointsInfoRemoteDataProvider.getPointsInfoByGameWeekId(
+        gameWeekId: gameWeekId);
+    // } else {
+    //   _pointsInfoLocalDataProvider.getCachedPointInfo(gameWeekId: gameWeekId);
+    //   return left([]);
+    // }
   }
 }

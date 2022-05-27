@@ -3,11 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/points/point_user_player.dart';
 import 'package:efpl/domain/points/points.dart';
 import 'package:efpl/domain/points/points_failures.dart';
-import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/infrastructure/points/points_player_dto.dart';
 import 'package:efpl/infrastructure/points/points_local_data_provider.dart';
 import 'package:efpl/injectable.dart';
@@ -27,6 +25,7 @@ class PointsInfoRemoteDataProvider {
 
   Future<Either<dynamic, PointsInfo>> getPointsInfoByGameWeekId(
       {required int gameWeekId}) async {
+    print(gameWeekId);
     try {
       // make api call
       var apiResponse = await instance.client
@@ -35,6 +34,7 @@ class PointsInfoRemoteDataProvider {
             Duration(seconds: ConstantValues().httpTimeOutDuration),
           );
 
+      print(apiResponse.statusCode);
       // success
       if (apiResponse.statusCode == 200) {
         dynamic parsedBody = jsonDecode(apiResponse.body);
