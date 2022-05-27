@@ -228,6 +228,7 @@ class TransferRemoteDataProvider {
         final parseResponseTeam = parsedResponseBody['team'];
 
         // if response has players
+
         if (parseResponseTeam['players'].length > 0) {
           List allPlayers = parseResponseTeam['players'];
           for (var i = 0; i < allPlayers.length; i++) {
@@ -321,24 +322,35 @@ class TransferRemoteDataProvider {
 
           return right(userTeam);
         }
+
         // if response has no players
         else {
+          print(parsedResponseBody['teamName']);
           Either<dynamic, UserTeam> cacheCall =
               await _transferLocalDataProvider.getUserTeam();
-          UserTeam cachedUserTeam = cacheCall.fold(
-            (l) => l[0],
-            (r) => r,
-          );
+
           return left([
-            cachedUserTeam,
-            const TransferFailure.incompleteTeam(
+            UserTeam(
+              gameWeekId: GameWeekId(value: 1),
+              gameWeekDeadline:
+                  parsedResponseBody['gameWeekDeadline'].toString(),
+              allUserPlayers: [],
+              freeTransfers: 0,
+              deduction: 0,
+              activeChip: '',
+              availableChips: parsedResponseBody['availableChips'],
+              maxBudget:
+                  double.parse(parsedResponseBody['maxBudget'].toString()),
+              teamName: parsedResponseBody['teamName'],
+            ),
+            const TransferFailure.noTeamSelected(
                 failedValue: "No Team. Please select a team.")
           ]);
         }
       }
 
       // no user team
-      if (apiResponse.statusCode == 404) {
+      else if (apiResponse.statusCode == 404) {
         Map parseResponseBody = jsonDecode(apiResponse.body);
 
         // get all teams with logo path
@@ -624,7 +636,7 @@ class TransferRemoteDataProvider {
     }
     // unexpected error
     catch (e) {
-      print(e);
+      // print(e);
       //  cache
       _transferLocalDataProvider.saveUserTeamChanges(changedUserTeam: userTeam);
 

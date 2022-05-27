@@ -73,6 +73,13 @@ class TransfersView extends StatelessWidget {
                           "The Team you have selected is incomplete. Try again!",
                       snackBarType: "error",
                     );
+
+                    getIt<TransferBloc>().add(
+                      const TransferEvent.setInitialSelection(
+                        valueToSet: true,
+                      ),
+                    );
+                    Navigator.popAndPushNamed(context, "/transfer/initial");
                   },
                   deadlinePassed: (_) {
                     print("deadlinePassed");

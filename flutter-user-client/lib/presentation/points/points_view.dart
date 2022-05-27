@@ -58,407 +58,421 @@ class PointsView extends StatelessWidget {
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : LiquidPullToRefresh(
-                onRefresh: () async {
-                  _pointsBloc.add(
-                    const PointsEvent.getPointsInfo(),
-                  );
-                },
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // TEAM INFO
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // TEAM NAME
-                            Text(
-                              state.pointsInfo.teamName,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.25,
-                              ),
-                            ),
-
-                            const SizedBox(
-                              height: 5,
-                            ),
-
-                            // Game Week Number
-                            Text(
-                              "GW " + state.gameWeekId.toString(),
-                            )
-                          ],
-                        ),
-                      ),
-
-                      // GAMEWEEK CONTROLLER
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 12),
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                _pointsBloc.add(
-                                  const PointsEvent.decreaseGameWeek(),
-                                );
-                              },
-                              child: const Icon(Icons.arrow_back_ios),
-                            ),
-                            Text("GameWeek  " + state.gameWeekId.toString()),
-                            InkWell(
-                              onTap: () {
-                                _pointsBloc.add(
-                                  const PointsEvent.increaseGameWeek(),
-                                );
-                              },
-                              child: const Icon(Icons.arrow_forward_ios),
-                            )
-                          ],
-                        ),
-                      ),
-
-                      // TOP BOX
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        color: ConstantColors.neutral_200,
-                        height: 170,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // POINTS BOARD
-                            Container(
-                              width: 110,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                color: ConstantColors.primary_900,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: ConstantColors.primary_900
-                                        .withOpacity(0.08),
-                                    spreadRadius: 5,
-                                    blurRadius: 7,
-                                    offset: const Offset(
-                                        0, 3), // changes position of shadow
+            : state.pointsInfo.allPlayers.isEmpty
+                ? const Center(
+                    child: Text("No Team"),
+                  )
+                : LiquidPullToRefresh(
+                    onRefresh: () async {
+                      _pointsBloc.add(
+                        const PointsEvent.getPointsInfo(),
+                      );
+                    },
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          // TEAM INFO
+                          SizedBox(
+                            height: 60,
+                            width: double.infinity,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // TEAM NAME
+                                Text(
+                                  state.pointsInfo.teamName,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 0.25,
                                   ),
-                                ],
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    state.allPlayersPointSum.toString() +
-                                        " Pts",
-                                    style: const TextStyle(
-                                      color: Colors.green,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 2,
-                                  ),
-                                  activeChip == ""
-                                      ? Container()
-                                      : Text(
-                                          activeChip,
-                                          style: const TextStyle(
-                                            color: ConstantColors.neutral_200,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 15.0,
-                                            letterSpacing: 0.35,
-                                          ),
-                                        ),
-                                ],
-                              ),
-                            ),
+                                ),
 
-                            const SizedBox(
-                              width: 45,
-                            ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
 
-                            // GOALKEEPER
-                            ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: allFormattedPlayers[0].length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return InkWell(
+                                // Game Week Number
+                                Text(
+                                  "GW " + state.gameWeekId.toString(),
+                                )
+                              ],
+                            ),
+                          ),
+
+                          // GAMEWEEK CONTROLLER
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 100, vertical: 12),
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
                                   onTap: () {
-                                    showCustomModal(
-                                      showContext: context,
-                                      playerId: allFormattedPlayers[0][index]
-                                          .playerId,
+                                    _pointsBloc.add(
+                                      const PointsEvent.decreaseGameWeek(),
                                     );
                                   },
-                                  child: PlayerWidget(
-                                    playerName: allFormattedPlayers[0][index]
-                                        .playerName
-                                        .value
-                                        .fold(
-                                          (l) => '',
-                                          (r) => r,
-                                        ),
-                                    description: allFormattedPlayers[0][index]
-                                            .score
-                                            .isNotEmpty
-                                        ? (allFormattedPlayers[0][index]
-                                            .score[0]['fantasyScore']
-                                            .toString())
-                                        : '0',
-                                    teamName: "shirt.svg",
-                                  ),
-                                );
-                              },
+                                  child: const Icon(Icons.arrow_back_ios),
+                                ),
+                                Text(
+                                    "GameWeek  " + state.gameWeekId.toString()),
+                                InkWell(
+                                  onTap: () {
+                                    _pointsBloc.add(
+                                      const PointsEvent.increaseGameWeek(),
+                                    );
+                                  },
+                                  child: const Icon(Icons.arrow_forward_ios),
+                                )
+                              ],
                             ),
+                          ),
 
-                            const SizedBox(
-                              width: 45,
-                            ),
-
-                            // DEDUCTION
-                            Container(
-                              width: 100,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                color: ConstantColors.primary_900,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: ConstantColors.primary_900
-                                        .withOpacity(0.08),
-                                    spreadRadius: 5,
-                                    blurRadius: 7,
-                                    offset: const Offset(
-                                        0, 3), // changes position of shadow
+                          // TOP BOX
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            color: ConstantColors.neutral_200,
+                            height: 170,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // POINTS BOARD
+                                Container(
+                                  width: 110,
+                                  height: 70,
+                                  decoration: BoxDecoration(
+                                    color: ConstantColors.primary_900,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: ConstantColors.primary_900
+                                            .withOpacity(0.08),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: const Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  // DEDUCTION INFO
-                                  state.pointsInfo.deduction == 0
-                                      ? const Text(
-                                          "0",
-                                          style: TextStyle(
-                                            color: Colors.green,
-                                            fontSize: 17.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        )
-                                      : Text(
-                                          (state.pointsInfo.deduction / 4)
-                                                  .toStringAsFixed(0) +
-                                              " ( -" +
-                                              state.pointsInfo.deduction
-                                                  .toString() +
-                                              " )",
-                                          style: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w600,
-                                            letterSpacing: 0.25,
-                                          ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        state.allPlayersPointSum.toString() +
+                                            " Pts",
+                                        style: const TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
                                         ),
-                                  const SizedBox(
-                                    height: 2,
+                                      ),
+                                      const SizedBox(
+                                        height: 2,
+                                      ),
+                                      activeChip == ""
+                                          ? Container()
+                                          : Text(
+                                              activeChip,
+                                              style: const TextStyle(
+                                                color:
+                                                    ConstantColors.neutral_200,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 15.0,
+                                                letterSpacing: 0.35,
+                                              ),
+                                            ),
+                                    ],
                                   ),
-                                  const Text(
-                                    "Transfers",
-                                    style: TextStyle(
-                                      color: ConstantColors.neutral_200,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.35,
+                                ),
+
+                                const SizedBox(
+                                  width: 45,
+                                ),
+
+                                // GOALKEEPER
+                                ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: allFormattedPlayers[0].length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        showCustomModal(
+                                          showContext: context,
+                                          playerId: allFormattedPlayers[0]
+                                                  [index]
+                                              .playerId,
+                                        );
+                                      },
+                                      child: PlayerWidget(
+                                        playerName: allFormattedPlayers[0]
+                                                [index]
+                                            .playerName
+                                            .value
+                                            .fold(
+                                              (l) => '',
+                                              (r) => r,
+                                            ),
+                                        description: allFormattedPlayers[0]
+                                                    [index]
+                                                .score
+                                                .isNotEmpty
+                                            ? (allFormattedPlayers[0][index]
+                                                .score[0]['fantasyScore']
+                                                .toString())
+                                            : '0',
+                                        teamName: "shirt.svg",
+                                      ),
+                                    );
+                                  },
+                                ),
+
+                                const SizedBox(
+                                  width: 45,
+                                ),
+
+                                // DEDUCTION
+                                Container(
+                                  width: 100,
+                                  height: 70,
+                                  decoration: BoxDecoration(
+                                    color: ConstantColors.primary_900,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: ConstantColors.primary_900
+                                            .withOpacity(0.08),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: const Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      // DEDUCTION INFO
+                                      state.pointsInfo.deduction == 0
+                                          ? const Text(
+                                              "0",
+                                              style: TextStyle(
+                                                color: Colors.green,
+                                                fontSize: 17.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )
+                                          : Text(
+                                              (state.pointsInfo.deduction / 4)
+                                                      .toStringAsFixed(0) +
+                                                  " ( -" +
+                                                  state.pointsInfo.deduction
+                                                      .toString() +
+                                                  " )",
+                                              style: const TextStyle(
+                                                color: Colors.red,
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.w600,
+                                                letterSpacing: 0.25,
+                                              ),
+                                            ),
+                                      const SizedBox(
+                                        height: 2,
+                                      ),
+                                      const Text(
+                                        "Transfers",
+                                        style: TextStyle(
+                                          color: ConstantColors.neutral_200,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.35,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          // DEFENDERS
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            height: 170,
+                            child: Center(
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: allFormattedPlayers[1].length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      final currentPlayerId =
+                                          allFormattedPlayers[1][index]
+                                              .playerId;
+                                      showCustomModal(
+                                        showContext: context,
+                                        playerId: currentPlayerId,
+                                      );
+                                    },
+                                    child: PlayerWidget(
+                                      playerName: allFormattedPlayers[1][index]
+                                          .playerName
+                                          .value
+                                          .fold(
+                                            (l) => '',
+                                            (r) => r,
+                                          ),
+                                      description: allFormattedPlayers[1][index]
+                                              .score
+                                              .isNotEmpty
+                                          ? (allFormattedPlayers[1][index]
+                                              .score[0]['fantasyScore']
+                                              .toString())
+                                          : '0',
+                                      teamName: "shirt.svg",
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      // DEFENDERS
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        height: 170,
-                        child: Center(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: allFormattedPlayers[1].length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () {
-                                  final currentPlayerId =
-                                      allFormattedPlayers[1][index].playerId;
-                                  showCustomModal(
-                                    showContext: context,
-                                    playerId: currentPlayerId,
                                   );
                                 },
-                                child: PlayerWidget(
-                                  playerName: allFormattedPlayers[1][index]
-                                      .playerName
-                                      .value
-                                      .fold(
-                                        (l) => '',
-                                        (r) => r,
-                                      ),
-                                  description: allFormattedPlayers[1][index]
-                                          .score
-                                          .isNotEmpty
-                                      ? (allFormattedPlayers[1][index]
-                                          .score[0]['fantasyScore']
-                                          .toString())
-                                      : '0',
-                                  teamName: "shirt.svg",
-                                ),
-                              );
-                            },
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
 
-                      // MIDFIELDERS
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        color: ConstantColors.neutral_200,
-                        height: 170,
-                        child: Center(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: allFormattedPlayers[2].length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () {
-                                  showCustomModal(
-                                      showContext: context,
-                                      playerId: allFormattedPlayers[2][index]
-                                          .playerId);
+                          // MIDFIELDERS
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            color: ConstantColors.neutral_200,
+                            height: 170,
+                            child: Center(
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: allFormattedPlayers[2].length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      showCustomModal(
+                                          showContext: context,
+                                          playerId: allFormattedPlayers[2]
+                                                  [index]
+                                              .playerId);
+                                    },
+                                    child: PlayerWidget(
+                                      playerName: allFormattedPlayers[2][index]
+                                          .playerName
+                                          .value
+                                          .fold(
+                                            (l) => '',
+                                            (r) => r,
+                                          ),
+                                      description: allFormattedPlayers[2][index]
+                                              .score
+                                              .isNotEmpty
+                                          ? (allFormattedPlayers[2][index]
+                                              .score[0]['fantasyScore']
+                                              .toString())
+                                          : '0',
+                                      teamName: "shirt.svg",
+                                    ),
+                                  );
                                 },
-                                child: PlayerWidget(
-                                  playerName: allFormattedPlayers[2][index]
-                                      .playerName
-                                      .value
-                                      .fold(
-                                        (l) => '',
-                                        (r) => r,
-                                      ),
-                                  description: allFormattedPlayers[2][index]
-                                          .score
-                                          .isNotEmpty
-                                      ? (allFormattedPlayers[2][index]
-                                          .score[0]['fantasyScore']
-                                          .toString())
-                                      : '0',
-                                  teamName: "shirt.svg",
-                                ),
-                              );
-                            },
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
 
-                      // ATTACKERS
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        height: 170,
-                        child: Center(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: allFormattedPlayers[3].length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () {
-                                  showCustomModal(
-                                      showContext: context,
-                                      playerId: allFormattedPlayers[3][index]
-                                          .playerId);
+                          // ATTACKERS
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            height: 170,
+                            child: Center(
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: allFormattedPlayers[3].length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      showCustomModal(
+                                          showContext: context,
+                                          playerId: allFormattedPlayers[3]
+                                                  [index]
+                                              .playerId);
+                                    },
+                                    child: PlayerWidget(
+                                      playerName: allFormattedPlayers[3][index]
+                                          .playerName
+                                          .value
+                                          .fold(
+                                            (l) => '',
+                                            (r) => r,
+                                          ),
+                                      description: allFormattedPlayers[3][index]
+                                              .score
+                                              .isNotEmpty
+                                          ? (allFormattedPlayers[3][index]
+                                              .score[0]['fantasyScore']
+                                              .toString())
+                                          : '0',
+                                      teamName: "shirt.svg",
+                                    ),
+                                  );
                                 },
-                                child: PlayerWidget(
-                                  playerName: allFormattedPlayers[3][index]
-                                      .playerName
-                                      .value
-                                      .fold(
-                                        (l) => '',
-                                        (r) => r,
-                                      ),
-                                  description: allFormattedPlayers[3][index]
-                                          .score
-                                          .isNotEmpty
-                                      ? (allFormattedPlayers[3][index]
-                                          .score[0]['fantasyScore']
-                                          .toString())
-                                      : '0',
-                                  teamName: "shirt.svg",
-                                ),
-                              );
-                            },
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
 
-                      // SUBS
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        color: ConstantColors.neutral_200,
-                        height: 170,
-                        child: Center(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: allFormattedPlayers[4].length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () {
-                                  showCustomModal(
-                                      showContext: context,
-                                      playerId: allFormattedPlayers[4][index]
-                                          .playerId);
+                          // SUBS
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            color: ConstantColors.neutral_200,
+                            height: 170,
+                            child: Center(
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: allFormattedPlayers[4].length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      showCustomModal(
+                                          showContext: context,
+                                          playerId: allFormattedPlayers[4]
+                                                  [index]
+                                              .playerId);
+                                    },
+                                    child: PlayerWidget(
+                                      playerName: allFormattedPlayers[4][index]
+                                          .playerName
+                                          .value
+                                          .fold(
+                                            (l) => '',
+                                            (r) => r,
+                                          ),
+                                      description: allFormattedPlayers[4][index]
+                                              .score
+                                              .isNotEmpty
+                                          ? (allFormattedPlayers[4][index]
+                                              .score[0]['fantasyScore']
+                                              .toString())
+                                          : '0',
+                                      teamName: "shirt.svg",
+                                    ),
+                                  );
                                 },
-                                child: PlayerWidget(
-                                  playerName: allFormattedPlayers[4][index]
-                                      .playerName
-                                      .value
-                                      .fold(
-                                        (l) => '',
-                                        (r) => r,
-                                      ),
-                                  description: allFormattedPlayers[4][index]
-                                          .score
-                                          .isNotEmpty
-                                      ? (allFormattedPlayers[4][index]
-                                          .score[0]['fantasyScore']
-                                          .toString())
-                                      : '0',
-                                  teamName: "shirt.svg",
-                                ),
-                              );
-                            },
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              );
+                    ),
+                  );
       },
     );
   }

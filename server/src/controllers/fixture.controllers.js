@@ -265,7 +265,6 @@ const startFixture = asyncHandler(async function (req, res) {
       MINUTE_COUNTERS[matchId].intervalId = setInterval(async () => {
         if (MINUTE_COUNTERS[matchId].status === "active") {
           // TODO: Calculate clean sheets
-          console.log("MINUTE COUNTER ->");
           const match = await FixtureModel.findOne({ matchId }).lean();
 
           // !! MIGHT RESET MINUTESPLAYED OBJ
@@ -771,8 +770,6 @@ const getAllFixturesOfGameWeek = asyncHandler(async function (req, res) {
 
     currMatch.homeTeamLineUp = processFinalLineup[0];
     currMatch.awayTeamLineUp = processFinalLineup[1];
-
-    console.log(matchAndTeamInfo);
 
     matchAndTeamInfo.push(currMatch);
   }

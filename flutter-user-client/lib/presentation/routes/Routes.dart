@@ -26,10 +26,10 @@ class AppRouter {
       const TransferEvent.getUserPlayers(),
     );
 
-  final PointsBloc _pointsBloc = getIt<PointsBloc>()
-    ..add(
-      const PointsEvent.getPointsInfo(),
-    );
+  // final PointsBloc _pointsBloc = getIt<PointsBloc>()
+  //   ..add(
+  //     const PointsEvent.getPointsInfo(),
+  //   );
 
   final UtilBloc _utilBloc = getIt<UtilBloc>()
     ..add(

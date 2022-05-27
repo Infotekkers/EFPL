@@ -261,9 +261,9 @@ const deletePlayer = asyncHandler(async (req, res) => {
 const getPlayersByPosition = asyncHandler(async (req, res) => {
   // const position = req.params.position.toUpperCase();
 
-  const allPlayersInPosition = await PlayerModel.find().select(
-    "-_id -__v -history"
-  );
+  const allPlayersInPosition = await PlayerModel.find()
+    .select("-_id -__v -history")
+    .sort("playerName");
 
   const allPlayersInPositionFormatted = [];
 

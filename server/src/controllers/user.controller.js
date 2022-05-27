@@ -181,10 +181,8 @@ const requestReset = asyncHandler(async (req, res) => {
       res.status(400).json({
         messaage: "could not send reset email",
       });
-      console.log(error);
     } else {
       res.status(200).json({ messaage: "Email Sent Successfully" });
-      console.log("email sent: " + info.response);
     }
   });
 });
@@ -202,7 +200,6 @@ const resetPass = asyncHandler(async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(newPass, salt);
   const updateValue = { password: hashedPassword };
-  console.log(updateValue);
 
   // update item
   await User.updateOne({ email }, { $set: updateValue });
@@ -259,12 +256,8 @@ const transfer = asyncHandler(async (req, res) => {
       await User.findByIdAndUpdate(userId, { availableChips: remainingChips });
     }
 
-    console.log(activeTeam);
-    console.log("****************");
-
     // Save deduction and incomingTeam to DB
     activeTeam.players = incomingTeam.players;
-    console.log(activeTeam);
     activeTeam.deduction = deduction;
 
     // Update team with deduction for the current gameweek
@@ -323,7 +316,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
         .lean();
 
       // get user's gw team
-      const userTeam = user.team[gameWeekId - 1];
+      const userTeam = user.team ? user.team[gameWeekId - 1] : { players: [] };
 
       // if user team exists
       if (userTeam) {
@@ -423,8 +416,8 @@ const getUserTeam = asyncHandler(async (req, res) => {
       }
     }
   } catch (e) {
-    // error verifying token
     console.log(e);
+    // error verifying token
     res.status(401).send("Error Decoding token");
   }
 });
@@ -457,7 +450,7 @@ const getUserPoints = asyncHandler(async (req, res) => {
   }
   // if info requested by gw & is after active reset to active
   else if (gameWeekId > activeGw[activeGw.length - 1].gameWeekNumber) {
-    gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber + 1;
+    gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber;
   }
 
   // get user team
@@ -466,7 +459,8 @@ const getUserPoints = asyncHandler(async (req, res) => {
     .lean();
 
   // get user team
-  const userTeam = user.team[gameWeekId - 1];
+  const userTeam = user.team ? user.team[gameWeekId - 1] : [];
+
   const userPlayers = userTeam.players;
 
   const allPlayersInfo = [];
@@ -488,7 +482,6 @@ const getUserPoints = asyncHandler(async (req, res) => {
     }).lean();
 
     console.log(playerInfo.playerName);
-
     // get player score
     const currentPlayerAllScore = playerInfo.score ? playerInfo.score : [];
 
