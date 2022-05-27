@@ -53,7 +53,7 @@ abstract class PlayerDto implements _$PlayerDto {
           minutesPlayed: MinutesPlayed(element['minutesPlayed'].toString()),
           goals: Goals(element['goals'].toString()),
           assists: Assists(element['assists'].toString()),
-          cleansheet: Cleansheet(element['cleansheet'].toString()),
+          cleansheet: Cleansheet(element['cleanSheet'].toString()),
           yellows: Yellows(element['yellows'].toString()),
           reds: Reds(element['reds'].toString()),
           penalitiesMissed:
