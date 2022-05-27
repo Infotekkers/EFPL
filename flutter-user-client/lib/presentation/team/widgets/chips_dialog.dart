@@ -11,9 +11,14 @@ class ChipsDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text("Chips"),
-      content: Column(
+      content: Wrap(
+        direction: Axis.vertical,
+        spacing: 10.0,
         children: [
-          Row(
+          Wrap(
+            direction: Axis.horizontal,
+            spacing: 4.0,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: () {
@@ -30,7 +35,10 @@ class ChipsDialog extends StatelessWidget {
               const Text("Triple Captain")
             ],
           ),
-          Row(
+          Wrap(
+            direction: Axis.horizontal,
+            spacing: 4.0,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: () {
@@ -47,7 +55,10 @@ class ChipsDialog extends StatelessWidget {
               const Text("Bench Boost")
             ],
           ),
-          Row(
+          Wrap(
+            direction: Axis.horizontal,
+            spacing: 4.0,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: () {
@@ -64,7 +75,10 @@ class ChipsDialog extends StatelessWidget {
               const Text("Free Hit")
             ],
           ),
-          Row(
+          Wrap(
+            direction: Axis.horizontal,
+            spacing: 4.0,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: () {

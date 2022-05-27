@@ -292,7 +292,6 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
           }
         }
       }
-      print(myTeam);
 
       emit(MyTeamState.chipPlayedSuccess(myTeam));
     } else {
