@@ -12,14 +12,13 @@ class EPLStatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BlocProvider(
-          create: (context) =>
-              getIt<EPLStatsBloc>()..add(const EPLStatsEvent.getEplStats()),
-          child: const EPLStatsViewBody(),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: BlocProvider(
+        create: (context) =>
+            getIt<EPLStatsBloc>()..add(const EPLStatsEvent.getEplStats()),
+        child: const EPLStatsViewBody(),
+      ),
     );
   }
 }

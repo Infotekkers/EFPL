@@ -22,8 +22,8 @@ class EPLStatsBloc extends Bloc<EPLStatsEvent, EPLStatsState> {
       final failureOrSuccess = await ieplStatsRepository.getEPLStats();
 
       failureOrSuccess.fold(
-        (failure) => {emit(EPLStatsState.loadFailure(failure))},
-        (eplStats) => {emit(EPLStatsState.loadSuccess(eplStats))},
+        (failure) => emit(EPLStatsState.loadFailure(failure)),
+        (eplStats) => emit(EPLStatsState.loadSuccess(eplStats)),
       );
     });
   }
