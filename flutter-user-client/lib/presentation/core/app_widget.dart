@@ -2,6 +2,7 @@ import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/locale/l10n.dart';
 import 'package:efpl/presentation/routes/routes.dart';
+import 'package:efpl/services/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,28 +31,7 @@ class AppWidget extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate
             ],
             title: 'EFPL',
-            theme: ThemeData(
-              // Background Colors
-              colorScheme: ColorScheme.fromSwatch(
-                primarySwatch: Colors.blue,
-              )
-                  .copyWith(
-                    secondary: Colors.amber,
-                  )
-                  .copyWith(
-                    tertiary: Colors.black,
-                  ),
-
-              // text styles
-              textTheme: const TextTheme(
-                headline1: TextStyle(
-                  fontSize: 72.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.pink,
-                  fontFamily: "Architect",
-                ),
-              ),
-            ),
+            theme: EfplTheme().buildLightTheme(),
             initialRoute: "/",
             routes: _appRouter.allRoutes,
           );
