@@ -8,7 +8,7 @@ class BouncingBallLoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scale: 0.4,
+      scale: 0.2,
       child: Center(
         child: Image.asset("assets/images/efpl_ball_mobile.gif"),
       ),

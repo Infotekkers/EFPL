@@ -57,25 +57,29 @@ class TeamViewBody extends StatelessWidget {
               _buildActionBtns(changed, context, state),
             ],
           ),
-          ElevatedButton(
-            onPressed: () => state.myTeam.activeChip.getOrCrash() == ''
-                ? showDialog(
-                    context: context,
-                    builder: (_) => BlocProvider.value(
-                      value: BlocProvider.of<MyTeamBloc>(context),
-                      child: ChipsDialog(
-                        availableChips: state.myTeam.availableChips,
+          Positioned(
+            top: 16,
+            right: 16,
+            child: ElevatedButton(
+              onPressed: () => state.myTeam.activeChip.getOrCrash() == ''
+                  ? showDialog(
+                      context: context,
+                      builder: (_) => BlocProvider.value(
+                        value: BlocProvider.of<MyTeamBloc>(context),
+                        child: ChipsDialog(
+                          availableChips: state.myTeam.availableChips,
+                        ),
                       ),
-                    ),
-                  )
-                : null,
-            child: const Icon(Icons.child_care_sharp),
-            style: ElevatedButton.styleFrom(
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(24.0),
-              primary: state.myTeam.activeChip.getOrCrash() == ''
-                  ? Colors.blue[400]
-                  : Colors.grey[50],
+                    )
+                  : null,
+              child: const Icon(Icons.child_care_sharp),
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(24.0),
+                primary: state.myTeam.activeChip.getOrCrash() == ''
+                    ? Colors.blue[400]
+                    : Colors.grey[50],
+              ),
             ),
           ),
           informational != ''
