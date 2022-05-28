@@ -16,7 +16,7 @@ class EPLStatsRemoteDataProvider {
 
   EPLStatsRemoteDataProvider();
 
-  Future<Either<EPLStatsFailure, List<EPLStats>>> getEPLStats() async {
+  Future<Either<EPLStatsFailure, EPLStats>> getEPLStats() async {
     final Uri url = Uri.parse("$_baseUrl/eplStats/topPlayers");
     // final Uri url = Uri.parse("$_baseUrl/test");
 
@@ -24,16 +24,10 @@ class EPLStatsRemoteDataProvider {
       final response = await client!.get(url);
 
       if (response.statusCode == 200) {
-        final allStats = <EPLStats>[];
-
         final parsedResponseBody = jsonDecode(response.body);
+        final EPLStatsDto eplStatDto = EPLStatsDto.fromJson(parsedResponseBody);
 
-        for (var stat in parsedResponseBody) {
-          final EPLStatsDto eplStatDto = EPLStatsDto.fromJson(stat);
-          allStats.add(eplStatDto.toDomain());
-        }
-
-        return right(allStats);
+        return right(eplStatDto.toDomain());
       }
 
       return left(const EPLStatsFailure.serverError());

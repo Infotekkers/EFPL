@@ -188,7 +188,7 @@ class _$EPLStatsStateTearOff {
     return const _LoadInProgress();
   }
 
-  _LoadSuccess loadSuccess(List<EPLStats> eplStats) {
+  _LoadSuccess loadSuccess(EPLStats eplStats) {
     return _LoadSuccess(
       eplStats,
     );
@@ -210,7 +210,7 @@ mixin _$EPLStatsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<EPLStats> eplStats) loadSuccess,
+    required TResult Function(EPLStats eplStats) loadSuccess,
     required TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)
         loadFailure,
   }) =>
@@ -219,7 +219,7 @@ mixin _$EPLStatsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<EPLStats> eplStats)? loadSuccess,
+    TResult Function(EPLStats eplStats)? loadSuccess,
     TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -227,7 +227,7 @@ mixin _$EPLStatsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<EPLStats> eplStats)? loadSuccess,
+    TResult Function(EPLStats eplStats)? loadSuccess,
     TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -316,7 +316,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<EPLStats> eplStats) loadSuccess,
+    required TResult Function(EPLStats eplStats) loadSuccess,
     required TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)
         loadFailure,
   }) {
@@ -328,7 +328,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<EPLStats> eplStats)? loadSuccess,
+    TResult Function(EPLStats eplStats)? loadSuccess,
     TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)? loadFailure,
   }) {
     return initial?.call();
@@ -339,7 +339,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<EPLStats> eplStats)? loadSuccess,
+    TResult Function(EPLStats eplStats)? loadSuccess,
     TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -434,7 +434,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<EPLStats> eplStats) loadSuccess,
+    required TResult Function(EPLStats eplStats) loadSuccess,
     required TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)
         loadFailure,
   }) {
@@ -446,7 +446,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<EPLStats> eplStats)? loadSuccess,
+    TResult Function(EPLStats eplStats)? loadSuccess,
     TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)? loadFailure,
   }) {
     return loadInProgress?.call();
@@ -457,7 +457,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<EPLStats> eplStats)? loadSuccess,
+    TResult Function(EPLStats eplStats)? loadSuccess,
     TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -514,7 +514,9 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({List<EPLStats> eplStats});
+  $Res call({EPLStats eplStats});
+
+  $EPLStatsCopyWith<$Res> get eplStats;
 }
 
 /// @nodoc
@@ -535,8 +537,15 @@ class __$LoadSuccessCopyWithImpl<$Res> extends _$EPLStatsStateCopyWithImpl<$Res>
       eplStats == freezed
           ? _value.eplStats
           : eplStats // ignore: cast_nullable_to_non_nullable
-              as List<EPLStats>,
+              as EPLStats,
     ));
+  }
+
+  @override
+  $EPLStatsCopyWith<$Res> get eplStats {
+    return $EPLStatsCopyWith<$Res>(_value.eplStats, (value) {
+      return _then(_value.copyWith(eplStats: value));
+    });
   }
 }
 
@@ -546,7 +555,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   const _$_LoadSuccess(this.eplStats);
 
   @override
-  final List<EPLStats> eplStats;
+  final EPLStats eplStats;
 
   @override
   String toString() {
@@ -575,7 +584,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<EPLStats> eplStats) loadSuccess,
+    required TResult Function(EPLStats eplStats) loadSuccess,
     required TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)
         loadFailure,
   }) {
@@ -587,7 +596,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<EPLStats> eplStats)? loadSuccess,
+    TResult Function(EPLStats eplStats)? loadSuccess,
     TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)? loadFailure,
   }) {
     return loadSuccess?.call(eplStats);
@@ -598,7 +607,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<EPLStats> eplStats)? loadSuccess,
+    TResult Function(EPLStats eplStats)? loadSuccess,
     TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -647,9 +656,9 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements EPLStatsState {
-  const factory _LoadSuccess(List<EPLStats> eplStats) = _$_LoadSuccess;
+  const factory _LoadSuccess(EPLStats eplStats) = _$_LoadSuccess;
 
-  List<EPLStats> get eplStats;
+  EPLStats get eplStats;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -732,7 +741,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<EPLStats> eplStats) loadSuccess,
+    required TResult Function(EPLStats eplStats) loadSuccess,
     required TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)
         loadFailure,
   }) {
@@ -744,7 +753,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<EPLStats> eplStats)? loadSuccess,
+    TResult Function(EPLStats eplStats)? loadSuccess,
     TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)? loadFailure,
   }) {
     return loadFailure?.call(eplStatsFailure);
@@ -755,7 +764,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<EPLStats> eplStats)? loadSuccess,
+    TResult Function(EPLStats eplStats)? loadSuccess,
     TResult Function(EPLStatsFailure<dynamic> eplStatsFailure)? loadFailure,
     required TResult orElse(),
   }) {
