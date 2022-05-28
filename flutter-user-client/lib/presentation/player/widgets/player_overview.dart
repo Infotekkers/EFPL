@@ -10,9 +10,10 @@ class PlayerOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle boldFacts = const TextStyle(
-      fontWeight: FontWeight.bold,
-    );
+    TextStyle boldFacts = TextStyle(
+        fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue[100]);
+    TextStyle primaryFacts = const TextStyle(color: Colors.white);
+    TextStyle name = const TextStyle(fontSize: 24, color: Colors.white);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -41,9 +42,28 @@ class PlayerOverview extends StatelessWidget {
                 ),
               ],
             ),
-            Text(state.player.name.getOrCrash()),
-            Text(state.player.eplTeamId.getOrCrash()),
-            Text(state.player.availability.injuryMessage.getOrCrash()),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                state.player.name.getOrCrash(),
+                style: name,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                state.player.eplTeamId.getOrCrash(),
+                style: primaryFacts,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Injury: " +
+                    state.player.availability.injuryMessage.getOrCrash(),
+                style: primaryFacts,
+              ),
+            ),
           ],
         ),
       ),
