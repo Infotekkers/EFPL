@@ -24,6 +24,7 @@ class _$PlayerTearOff {
       required Position position,
       required Price currentPrice,
       required Availability availability,
+      required Image image,
       List<Score> score = const [],
       List<History> history = const []}) {
     return _Player(
@@ -33,6 +34,7 @@ class _$PlayerTearOff {
       position: position,
       currentPrice: currentPrice,
       availability: availability,
+      image: image,
       score: score,
       history: history,
     );
@@ -50,6 +52,7 @@ mixin _$Player {
   Position get position => throw _privateConstructorUsedError;
   Price get currentPrice => throw _privateConstructorUsedError;
   Availability get availability => throw _privateConstructorUsedError;
+  Image get image => throw _privateConstructorUsedError;
   List<Score> get score => throw _privateConstructorUsedError;
   List<History> get history => throw _privateConstructorUsedError;
 
@@ -68,6 +71,7 @@ abstract class $PlayerCopyWith<$Res> {
       Position position,
       Price currentPrice,
       Availability availability,
+      Image image,
       List<Score> score,
       List<History> history});
 }
@@ -88,6 +92,7 @@ class _$PlayerCopyWithImpl<$Res> implements $PlayerCopyWith<$Res> {
     Object? position = freezed,
     Object? currentPrice = freezed,
     Object? availability = freezed,
+    Object? image = freezed,
     Object? score = freezed,
     Object? history = freezed,
   }) {
@@ -116,6 +121,10 @@ class _$PlayerCopyWithImpl<$Res> implements $PlayerCopyWith<$Res> {
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
               as Availability,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as Image,
       score: score == freezed
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -140,6 +149,7 @@ abstract class _$PlayerCopyWith<$Res> implements $PlayerCopyWith<$Res> {
       Position position,
       Price currentPrice,
       Availability availability,
+      Image image,
       List<Score> score,
       List<History> history});
 }
@@ -161,6 +171,7 @@ class __$PlayerCopyWithImpl<$Res> extends _$PlayerCopyWithImpl<$Res>
     Object? position = freezed,
     Object? currentPrice = freezed,
     Object? availability = freezed,
+    Object? image = freezed,
     Object? score = freezed,
     Object? history = freezed,
   }) {
@@ -189,6 +200,10 @@ class __$PlayerCopyWithImpl<$Res> extends _$PlayerCopyWithImpl<$Res>
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
               as Availability,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as Image,
       score: score == freezed
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -211,6 +226,7 @@ class _$_Player implements _Player {
       required this.position,
       required this.currentPrice,
       required this.availability,
+      required this.image,
       this.score = const [],
       this.history = const []});
 
@@ -226,6 +242,8 @@ class _$_Player implements _Player {
   final Price currentPrice;
   @override
   final Availability availability;
+  @override
+  final Image image;
   @JsonKey()
   @override
   final List<Score> score;
@@ -235,7 +253,7 @@ class _$_Player implements _Player {
 
   @override
   String toString() {
-    return 'Player(name: $name, playerId: $playerId, eplTeamId: $eplTeamId, position: $position, currentPrice: $currentPrice, availability: $availability, score: $score, history: $history)';
+    return 'Player(name: $name, playerId: $playerId, eplTeamId: $eplTeamId, position: $position, currentPrice: $currentPrice, availability: $availability, image: $image, score: $score, history: $history)';
   }
 
   @override
@@ -251,6 +269,7 @@ class _$_Player implements _Player {
                 .equals(other.currentPrice, currentPrice) &&
             const DeepCollectionEquality()
                 .equals(other.availability, availability) &&
+            const DeepCollectionEquality().equals(other.image, image) &&
             const DeepCollectionEquality().equals(other.score, score) &&
             const DeepCollectionEquality().equals(other.history, history));
   }
@@ -264,6 +283,7 @@ class _$_Player implements _Player {
       const DeepCollectionEquality().hash(position),
       const DeepCollectionEquality().hash(currentPrice),
       const DeepCollectionEquality().hash(availability),
+      const DeepCollectionEquality().hash(image),
       const DeepCollectionEquality().hash(score),
       const DeepCollectionEquality().hash(history));
 
@@ -281,6 +301,7 @@ abstract class _Player implements Player {
       required Position position,
       required Price currentPrice,
       required Availability availability,
+      required Image image,
       List<Score> score,
       List<History> history}) = _$_Player;
 
@@ -296,6 +317,8 @@ abstract class _Player implements Player {
   Price get currentPrice;
   @override
   Availability get availability;
+  @override
+  Image get image;
   @override
   List<Score> get score;
   @override

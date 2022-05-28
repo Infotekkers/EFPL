@@ -12,7 +12,11 @@ _$_PlayerDto _$$_PlayerDtoFromJson(Map<String, dynamic> json) => _$_PlayerDto(
       eplTeamId: json['eplTeamId'] as String,
       position: json['position'] as String,
       currentPrice: (json['currentPrice'] as num).toDouble(),
-      availability: Map<String, String>.from(json['availability'] as Map),
+      teamLogoUrl: json['teamLogoUrl'] as String? ?? "",
+      availability: (json['availability'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, e as String),
+          ) ??
+          const {"injuryStatus": "100", "injuryMessage": "fit to play"},
       score: json['score'] as List<dynamic>? ?? const [],
       history: json['history'] as List<dynamic>? ?? const [],
     );
@@ -24,6 +28,7 @@ Map<String, dynamic> _$$_PlayerDtoToJson(_$_PlayerDto instance) =>
       'eplTeamId': instance.eplTeamId,
       'position': instance.position,
       'currentPrice': instance.currentPrice,
+      'teamLogoUrl': instance.teamLogoUrl,
       'availability': instance.availability,
       'score': instance.score,
       'history': instance.history,

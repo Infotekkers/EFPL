@@ -184,7 +184,13 @@ const addScore = asyncHandler(async (req, res) => {
 });
 
 const getPlayer = asyncHandler(async (req, res) => {
-  const player = await PlayerModel.find({ playerId: req.params.playerId });
+  const player = await PlayerModel.find({
+    playerId: req.params.playerId,
+  }).lean();
+
+  const team = await Teams.find({ teamName: player[0].eplTeamId });
+
+  player[0].teamLogoUrl = team[0]?.teamLogo;
 
   res.send(player);
 });

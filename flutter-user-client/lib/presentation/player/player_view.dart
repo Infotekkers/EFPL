@@ -13,7 +13,7 @@ class PlayerView extends StatelessWidget {
 
     return BlocProvider(
       create: (context) =>
-          getIt<PlayerBloc>()..add(PlayerEvent.getPlayer(101.toString())),
+          getIt<PlayerBloc>()..add(PlayerEvent.getPlayer(100454.toString())),
       child: const PlayerTab(),
     );
   }

@@ -15,9 +15,17 @@ abstract class PlayerDto implements _$PlayerDto {
     required String eplTeamId,
     required String position,
     required double currentPrice,
-    required Map<String, String> availability,
-    @Default([]) List<dynamic> score,
-    @Default([]) List<dynamic> history,
+    @Default("")
+        String teamLogoUrl,
+    @Default({
+      "injuryStatus": "100",
+      "injuryMessage": "fit to play",
+    })
+        Map<String, String> availability,
+    @Default([])
+        List<dynamic> score,
+    @Default([])
+        List<dynamic> history,
   }) = _PlayerDto;
 
   factory PlayerDto.fromDomain(Player player) => PlayerDto(
@@ -98,6 +106,7 @@ abstract class PlayerDto implements _$PlayerDto {
       playerId: Id(playerId.toString()),
       eplTeamId: EplTeamId(eplTeamId),
       position: Position(position),
+      image: Image(teamLogoUrl),
       availability: availabilityVO,
       currentPrice: Price(currentPrice.toString()),
       score: scoresVO,

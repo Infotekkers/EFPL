@@ -12,6 +12,7 @@ abstract class Player with _$Player {
     required Position position,
     required Price currentPrice,
     required Availability availability,
+    required Image image,
     @Default([]) List<Score> score,
     @Default([]) List<History> history,
   }) = _Player;

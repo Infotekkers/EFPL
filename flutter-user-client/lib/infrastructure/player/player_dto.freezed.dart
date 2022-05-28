@@ -27,7 +27,11 @@ class _$PlayerDtoTearOff {
       required String eplTeamId,
       required String position,
       required double currentPrice,
-      required Map<String, String> availability,
+      String teamLogoUrl = "",
+      Map<String, String> availability = const {
+        "injuryStatus": "100",
+        "injuryMessage": "fit to play"
+      },
       List<dynamic> score = const [],
       List<dynamic> history = const []}) {
     return _PlayerDto(
@@ -36,6 +40,7 @@ class _$PlayerDtoTearOff {
       eplTeamId: eplTeamId,
       position: position,
       currentPrice: currentPrice,
+      teamLogoUrl: teamLogoUrl,
       availability: availability,
       score: score,
       history: history,
@@ -57,6 +62,7 @@ mixin _$PlayerDto {
   String get eplTeamId => throw _privateConstructorUsedError;
   String get position => throw _privateConstructorUsedError;
   double get currentPrice => throw _privateConstructorUsedError;
+  String get teamLogoUrl => throw _privateConstructorUsedError;
   Map<String, String> get availability => throw _privateConstructorUsedError;
   List<dynamic> get score => throw _privateConstructorUsedError;
   List<dynamic> get history => throw _privateConstructorUsedError;
@@ -77,6 +83,7 @@ abstract class $PlayerDtoCopyWith<$Res> {
       String eplTeamId,
       String position,
       double currentPrice,
+      String teamLogoUrl,
       Map<String, String> availability,
       List<dynamic> score,
       List<dynamic> history});
@@ -97,6 +104,7 @@ class _$PlayerDtoCopyWithImpl<$Res> implements $PlayerDtoCopyWith<$Res> {
     Object? eplTeamId = freezed,
     Object? position = freezed,
     Object? currentPrice = freezed,
+    Object? teamLogoUrl = freezed,
     Object? availability = freezed,
     Object? score = freezed,
     Object? history = freezed,
@@ -122,6 +130,10 @@ class _$PlayerDtoCopyWithImpl<$Res> implements $PlayerDtoCopyWith<$Res> {
           ? _value.currentPrice
           : currentPrice // ignore: cast_nullable_to_non_nullable
               as double,
+      teamLogoUrl: teamLogoUrl == freezed
+          ? _value.teamLogoUrl
+          : teamLogoUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       availability: availability == freezed
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
@@ -150,6 +162,7 @@ abstract class _$PlayerDtoCopyWith<$Res> implements $PlayerDtoCopyWith<$Res> {
       String eplTeamId,
       String position,
       double currentPrice,
+      String teamLogoUrl,
       Map<String, String> availability,
       List<dynamic> score,
       List<dynamic> history});
@@ -171,6 +184,7 @@ class __$PlayerDtoCopyWithImpl<$Res> extends _$PlayerDtoCopyWithImpl<$Res>
     Object? eplTeamId = freezed,
     Object? position = freezed,
     Object? currentPrice = freezed,
+    Object? teamLogoUrl = freezed,
     Object? availability = freezed,
     Object? score = freezed,
     Object? history = freezed,
@@ -196,6 +210,10 @@ class __$PlayerDtoCopyWithImpl<$Res> extends _$PlayerDtoCopyWithImpl<$Res>
           ? _value.currentPrice
           : currentPrice // ignore: cast_nullable_to_non_nullable
               as double,
+      teamLogoUrl: teamLogoUrl == freezed
+          ? _value.teamLogoUrl
+          : teamLogoUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       availability: availability == freezed
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
@@ -221,7 +239,11 @@ class _$_PlayerDto extends _PlayerDto {
       required this.eplTeamId,
       required this.position,
       required this.currentPrice,
-      required this.availability,
+      this.teamLogoUrl = "",
+      this.availability = const {
+        "injuryStatus": "100",
+        "injuryMessage": "fit to play"
+      },
       this.score = const [],
       this.history = const []})
       : super._();
@@ -239,6 +261,10 @@ class _$_PlayerDto extends _PlayerDto {
   final String position;
   @override
   final double currentPrice;
+  @JsonKey()
+  @override
+  final String teamLogoUrl;
+  @JsonKey()
   @override
   final Map<String, String> availability;
   @JsonKey()
@@ -250,7 +276,7 @@ class _$_PlayerDto extends _PlayerDto {
 
   @override
   String toString() {
-    return 'PlayerDto(playerName: $playerName, playerId: $playerId, eplTeamId: $eplTeamId, position: $position, currentPrice: $currentPrice, availability: $availability, score: $score, history: $history)';
+    return 'PlayerDto(playerName: $playerName, playerId: $playerId, eplTeamId: $eplTeamId, position: $position, currentPrice: $currentPrice, teamLogoUrl: $teamLogoUrl, availability: $availability, score: $score, history: $history)';
   }
 
   @override
@@ -266,6 +292,8 @@ class _$_PlayerDto extends _PlayerDto {
             const DeepCollectionEquality()
                 .equals(other.currentPrice, currentPrice) &&
             const DeepCollectionEquality()
+                .equals(other.teamLogoUrl, teamLogoUrl) &&
+            const DeepCollectionEquality()
                 .equals(other.availability, availability) &&
             const DeepCollectionEquality().equals(other.score, score) &&
             const DeepCollectionEquality().equals(other.history, history));
@@ -279,6 +307,7 @@ class _$_PlayerDto extends _PlayerDto {
       const DeepCollectionEquality().hash(eplTeamId),
       const DeepCollectionEquality().hash(position),
       const DeepCollectionEquality().hash(currentPrice),
+      const DeepCollectionEquality().hash(teamLogoUrl),
       const DeepCollectionEquality().hash(availability),
       const DeepCollectionEquality().hash(score),
       const DeepCollectionEquality().hash(history));
@@ -301,7 +330,8 @@ abstract class _PlayerDto extends PlayerDto {
       required String eplTeamId,
       required String position,
       required double currentPrice,
-      required Map<String, String> availability,
+      String teamLogoUrl,
+      Map<String, String> availability,
       List<dynamic> score,
       List<dynamic> history}) = _$_PlayerDto;
   const _PlayerDto._() : super._();
@@ -319,6 +349,8 @@ abstract class _PlayerDto extends PlayerDto {
   String get position;
   @override
   double get currentPrice;
+  @override
+  String get teamLogoUrl;
   @override
   Map<String, String> get availability;
   @override
