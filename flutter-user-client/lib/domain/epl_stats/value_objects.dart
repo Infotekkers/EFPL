@@ -4,24 +4,93 @@ import 'package:efpl/domain/core/value_failures.dart';
 import 'package:efpl/domain/epl_stats/value_validators.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PlayerName extends ValueObject {
+class TopScorers extends ValueObject {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<String>, List> value;
 
-  factory PlayerName({required String value}) {
-    return PlayerName._(value: validatePlayerName(playerName: value));
+  factory TopScorers({required List value}) {
+    return TopScorers._(
+      value: validateTopScorers(topScorers: value),
+    );
   }
 
-  const PlayerName._({required this.value});
+  const TopScorers._({required this.value});
 }
 
-class StatCount extends ValueObject {
+class MostAssists extends ValueObject {
   @override
-  final Either<ValueFailure<String>, int> value;
+  final Either<ValueFailure<String>, List> value;
 
-  factory StatCount({required int value}) {
-    return StatCount._(value: validateStatCount(statCount: value));
+  factory MostAssists({required List value}) {
+    return MostAssists._(
+      value: validateMostAssists(mostAssists: value),
+    );
   }
 
-  const StatCount._({required this.value});
+  const MostAssists._({required this.value});
+}
+
+class MostCleanSheets extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, List> value;
+
+  factory MostCleanSheets({required List value}) {
+    return MostCleanSheets._(
+      value: validateMostCleanSheets(mostCleanSheets: value),
+    );
+  }
+
+  const MostCleanSheets._({required this.value});
+}
+
+class MostReds extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, List> value;
+
+  factory MostReds({required List value}) {
+    return MostReds._(
+      value: validateMostReds(mostReds: value),
+    );
+  }
+
+  const MostReds._({required this.value});
+}
+
+class MostYellows extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, List> value;
+
+  factory MostYellows({required List value}) {
+    return MostYellows._(
+      value: validateMostYellows(mostYellows: value),
+    );
+  }
+
+  const MostYellows._({required this.value});
+}
+
+class MostSaves extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, List> value;
+
+  factory MostSaves({required List value}) {
+    return MostSaves._(
+      value: validateMostSaves(mostSaves: value),
+    );
+  }
+
+  const MostSaves._({required this.value});
+}
+
+class MostMinutesPlayed extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, List> value;
+
+  factory MostMinutesPlayed({required List value}) {
+    return MostMinutesPlayed._(
+      value: validateMostMinutesPlayed(mostMinutesPlayed: value),
+    );
+  }
+
+  const MostMinutesPlayed._({required this.value});
 }

@@ -17,10 +17,22 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$EPLStatsTearOff {
   const _$EPLStatsTearOff();
 
-  _EPLStat call({required PlayerName name, required StatCount amount}) {
+  _EPLStat call(
+      {required TopScorers topScorers,
+      required MostAssists mostAssists,
+      required MostCleanSheets mostCleanSheets,
+      required MostReds mostReds,
+      required MostYellows mostYellows,
+      required MostSaves mostSaves,
+      required MostMinutesPlayed mostMinutesPlayed}) {
     return _EPLStat(
-      name: name,
-      amount: amount,
+      topScorers: topScorers,
+      mostAssists: mostAssists,
+      mostCleanSheets: mostCleanSheets,
+      mostReds: mostReds,
+      mostYellows: mostYellows,
+      mostSaves: mostSaves,
+      mostMinutesPlayed: mostMinutesPlayed,
     );
   }
 }
@@ -30,8 +42,13 @@ const $EPLStats = _$EPLStatsTearOff();
 
 /// @nodoc
 mixin _$EPLStats {
-  PlayerName get name => throw _privateConstructorUsedError;
-  StatCount get amount => throw _privateConstructorUsedError;
+  TopScorers get topScorers => throw _privateConstructorUsedError;
+  MostAssists get mostAssists => throw _privateConstructorUsedError;
+  MostCleanSheets get mostCleanSheets => throw _privateConstructorUsedError;
+  MostReds get mostReds => throw _privateConstructorUsedError;
+  MostYellows get mostYellows => throw _privateConstructorUsedError;
+  MostSaves get mostSaves => throw _privateConstructorUsedError;
+  MostMinutesPlayed get mostMinutesPlayed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EPLStatsCopyWith<EPLStats> get copyWith =>
@@ -42,7 +59,14 @@ mixin _$EPLStats {
 abstract class $EPLStatsCopyWith<$Res> {
   factory $EPLStatsCopyWith(EPLStats value, $Res Function(EPLStats) then) =
       _$EPLStatsCopyWithImpl<$Res>;
-  $Res call({PlayerName name, StatCount amount});
+  $Res call(
+      {TopScorers topScorers,
+      MostAssists mostAssists,
+      MostCleanSheets mostCleanSheets,
+      MostReds mostReds,
+      MostYellows mostYellows,
+      MostSaves mostSaves,
+      MostMinutesPlayed mostMinutesPlayed});
 }
 
 /// @nodoc
@@ -55,18 +79,43 @@ class _$EPLStatsCopyWithImpl<$Res> implements $EPLStatsCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? name = freezed,
-    Object? amount = freezed,
+    Object? topScorers = freezed,
+    Object? mostAssists = freezed,
+    Object? mostCleanSheets = freezed,
+    Object? mostReds = freezed,
+    Object? mostYellows = freezed,
+    Object? mostSaves = freezed,
+    Object? mostMinutesPlayed = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as PlayerName,
-      amount: amount == freezed
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as StatCount,
+      topScorers: topScorers == freezed
+          ? _value.topScorers
+          : topScorers // ignore: cast_nullable_to_non_nullable
+              as TopScorers,
+      mostAssists: mostAssists == freezed
+          ? _value.mostAssists
+          : mostAssists // ignore: cast_nullable_to_non_nullable
+              as MostAssists,
+      mostCleanSheets: mostCleanSheets == freezed
+          ? _value.mostCleanSheets
+          : mostCleanSheets // ignore: cast_nullable_to_non_nullable
+              as MostCleanSheets,
+      mostReds: mostReds == freezed
+          ? _value.mostReds
+          : mostReds // ignore: cast_nullable_to_non_nullable
+              as MostReds,
+      mostYellows: mostYellows == freezed
+          ? _value.mostYellows
+          : mostYellows // ignore: cast_nullable_to_non_nullable
+              as MostYellows,
+      mostSaves: mostSaves == freezed
+          ? _value.mostSaves
+          : mostSaves // ignore: cast_nullable_to_non_nullable
+              as MostSaves,
+      mostMinutesPlayed: mostMinutesPlayed == freezed
+          ? _value.mostMinutesPlayed
+          : mostMinutesPlayed // ignore: cast_nullable_to_non_nullable
+              as MostMinutesPlayed,
     ));
   }
 }
@@ -76,7 +125,14 @@ abstract class _$EPLStatCopyWith<$Res> implements $EPLStatsCopyWith<$Res> {
   factory _$EPLStatCopyWith(_EPLStat value, $Res Function(_EPLStat) then) =
       __$EPLStatCopyWithImpl<$Res>;
   @override
-  $Res call({PlayerName name, StatCount amount});
+  $Res call(
+      {TopScorers topScorers,
+      MostAssists mostAssists,
+      MostCleanSheets mostCleanSheets,
+      MostReds mostReds,
+      MostYellows mostYellows,
+      MostSaves mostSaves,
+      MostMinutesPlayed mostMinutesPlayed});
 }
 
 /// @nodoc
@@ -90,18 +146,43 @@ class __$EPLStatCopyWithImpl<$Res> extends _$EPLStatsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? name = freezed,
-    Object? amount = freezed,
+    Object? topScorers = freezed,
+    Object? mostAssists = freezed,
+    Object? mostCleanSheets = freezed,
+    Object? mostReds = freezed,
+    Object? mostYellows = freezed,
+    Object? mostSaves = freezed,
+    Object? mostMinutesPlayed = freezed,
   }) {
     return _then(_EPLStat(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as PlayerName,
-      amount: amount == freezed
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as StatCount,
+      topScorers: topScorers == freezed
+          ? _value.topScorers
+          : topScorers // ignore: cast_nullable_to_non_nullable
+              as TopScorers,
+      mostAssists: mostAssists == freezed
+          ? _value.mostAssists
+          : mostAssists // ignore: cast_nullable_to_non_nullable
+              as MostAssists,
+      mostCleanSheets: mostCleanSheets == freezed
+          ? _value.mostCleanSheets
+          : mostCleanSheets // ignore: cast_nullable_to_non_nullable
+              as MostCleanSheets,
+      mostReds: mostReds == freezed
+          ? _value.mostReds
+          : mostReds // ignore: cast_nullable_to_non_nullable
+              as MostReds,
+      mostYellows: mostYellows == freezed
+          ? _value.mostYellows
+          : mostYellows // ignore: cast_nullable_to_non_nullable
+              as MostYellows,
+      mostSaves: mostSaves == freezed
+          ? _value.mostSaves
+          : mostSaves // ignore: cast_nullable_to_non_nullable
+              as MostSaves,
+      mostMinutesPlayed: mostMinutesPlayed == freezed
+          ? _value.mostMinutesPlayed
+          : mostMinutesPlayed // ignore: cast_nullable_to_non_nullable
+              as MostMinutesPlayed,
     ));
   }
 }
@@ -109,16 +190,33 @@ class __$EPLStatCopyWithImpl<$Res> extends _$EPLStatsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_EPLStat implements _EPLStat {
-  const _$_EPLStat({required this.name, required this.amount});
+  const _$_EPLStat(
+      {required this.topScorers,
+      required this.mostAssists,
+      required this.mostCleanSheets,
+      required this.mostReds,
+      required this.mostYellows,
+      required this.mostSaves,
+      required this.mostMinutesPlayed});
 
   @override
-  final PlayerName name;
+  final TopScorers topScorers;
   @override
-  final StatCount amount;
+  final MostAssists mostAssists;
+  @override
+  final MostCleanSheets mostCleanSheets;
+  @override
+  final MostReds mostReds;
+  @override
+  final MostYellows mostYellows;
+  @override
+  final MostSaves mostSaves;
+  @override
+  final MostMinutesPlayed mostMinutesPlayed;
 
   @override
   String toString() {
-    return 'EPLStats(name: $name, amount: $amount)';
+    return 'EPLStats(topScorers: $topScorers, mostAssists: $mostAssists, mostCleanSheets: $mostCleanSheets, mostReds: $mostReds, mostYellows: $mostYellows, mostSaves: $mostSaves, mostMinutesPlayed: $mostMinutesPlayed)';
   }
 
   @override
@@ -126,15 +224,30 @@ class _$_EPLStat implements _EPLStat {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _EPLStat &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.amount, amount));
+            const DeepCollectionEquality()
+                .equals(other.topScorers, topScorers) &&
+            const DeepCollectionEquality()
+                .equals(other.mostAssists, mostAssists) &&
+            const DeepCollectionEquality()
+                .equals(other.mostCleanSheets, mostCleanSheets) &&
+            const DeepCollectionEquality().equals(other.mostReds, mostReds) &&
+            const DeepCollectionEquality()
+                .equals(other.mostYellows, mostYellows) &&
+            const DeepCollectionEquality().equals(other.mostSaves, mostSaves) &&
+            const DeepCollectionEquality()
+                .equals(other.mostMinutesPlayed, mostMinutesPlayed));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(amount));
+      const DeepCollectionEquality().hash(topScorers),
+      const DeepCollectionEquality().hash(mostAssists),
+      const DeepCollectionEquality().hash(mostCleanSheets),
+      const DeepCollectionEquality().hash(mostReds),
+      const DeepCollectionEquality().hash(mostYellows),
+      const DeepCollectionEquality().hash(mostSaves),
+      const DeepCollectionEquality().hash(mostMinutesPlayed));
 
   @JsonKey(ignore: true)
   @override
@@ -144,12 +257,28 @@ class _$_EPLStat implements _EPLStat {
 
 abstract class _EPLStat implements EPLStats {
   const factory _EPLStat(
-      {required PlayerName name, required StatCount amount}) = _$_EPLStat;
+      {required TopScorers topScorers,
+      required MostAssists mostAssists,
+      required MostCleanSheets mostCleanSheets,
+      required MostReds mostReds,
+      required MostYellows mostYellows,
+      required MostSaves mostSaves,
+      required MostMinutesPlayed mostMinutesPlayed}) = _$_EPLStat;
 
   @override
-  PlayerName get name;
+  TopScorers get topScorers;
   @override
-  StatCount get amount;
+  MostAssists get mostAssists;
+  @override
+  MostCleanSheets get mostCleanSheets;
+  @override
+  MostReds get mostReds;
+  @override
+  MostYellows get mostYellows;
+  @override
+  MostSaves get mostSaves;
+  @override
+  MostMinutesPlayed get mostMinutesPlayed;
   @override
   @JsonKey(ignore: true)
   _$EPLStatCopyWith<_EPLStat> get copyWith =>

@@ -16,9 +16,8 @@ class EPLStatsRemoteDataProvider {
 
   EPLStatsRemoteDataProvider();
 
-  Future<Either<EPLStatsFailure, List<EPLStats>>> getEPLStats(
-      String _statType) async {
-    final Uri url = Uri.parse("$_baseUrl/eplStats/$_statType");
+  Future<Either<EPLStatsFailure, List<EPLStats>>> getEPLStats() async {
+    final Uri url = Uri.parse("$_baseUrl/eplStats/topPlayers");
     // final Uri url = Uri.parse("$_baseUrl/test");
 
     try {
@@ -33,8 +32,6 @@ class EPLStatsRemoteDataProvider {
           final EPLStatsDto eplStatDto = EPLStatsDto.fromJson(stat);
           allStats.add(eplStatDto.toDomain());
         }
-
-        print(allStats);
 
         return right(allStats);
       }

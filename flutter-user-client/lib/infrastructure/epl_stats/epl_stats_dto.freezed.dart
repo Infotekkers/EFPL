@@ -21,10 +21,22 @@ EPLStatsDto _$EPLStatsDtoFromJson(Map<String, dynamic> json) {
 class _$EPLStatsDtoTearOff {
   const _$EPLStatsDtoTearOff();
 
-  _EPLStatsDto call({required String name, required int amount}) {
+  _EPLStatsDto call(
+      {required List<dynamic> topScorers,
+      required List<dynamic> mostAssists,
+      required List<dynamic> mostCleanSheets,
+      required List<dynamic> mostReds,
+      required List<dynamic> mostYellows,
+      required List<dynamic> mostSaves,
+      required List<dynamic> mostMinutesPlayed}) {
     return _EPLStatsDto(
-      name: name,
-      amount: amount,
+      topScorers: topScorers,
+      mostAssists: mostAssists,
+      mostCleanSheets: mostCleanSheets,
+      mostReds: mostReds,
+      mostYellows: mostYellows,
+      mostSaves: mostSaves,
+      mostMinutesPlayed: mostMinutesPlayed,
     );
   }
 
@@ -38,8 +50,13 @@ const $EPLStatsDto = _$EPLStatsDtoTearOff();
 
 /// @nodoc
 mixin _$EPLStatsDto {
-  String get name => throw _privateConstructorUsedError;
-  int get amount => throw _privateConstructorUsedError;
+  List<dynamic> get topScorers => throw _privateConstructorUsedError;
+  List<dynamic> get mostAssists => throw _privateConstructorUsedError;
+  List<dynamic> get mostCleanSheets => throw _privateConstructorUsedError;
+  List<dynamic> get mostReds => throw _privateConstructorUsedError;
+  List<dynamic> get mostYellows => throw _privateConstructorUsedError;
+  List<dynamic> get mostSaves => throw _privateConstructorUsedError;
+  List<dynamic> get mostMinutesPlayed => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +69,14 @@ abstract class $EPLStatsDtoCopyWith<$Res> {
   factory $EPLStatsDtoCopyWith(
           EPLStatsDto value, $Res Function(EPLStatsDto) then) =
       _$EPLStatsDtoCopyWithImpl<$Res>;
-  $Res call({String name, int amount});
+  $Res call(
+      {List<dynamic> topScorers,
+      List<dynamic> mostAssists,
+      List<dynamic> mostCleanSheets,
+      List<dynamic> mostReds,
+      List<dynamic> mostYellows,
+      List<dynamic> mostSaves,
+      List<dynamic> mostMinutesPlayed});
 }
 
 /// @nodoc
@@ -65,18 +89,43 @@ class _$EPLStatsDtoCopyWithImpl<$Res> implements $EPLStatsDtoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? name = freezed,
-    Object? amount = freezed,
+    Object? topScorers = freezed,
+    Object? mostAssists = freezed,
+    Object? mostCleanSheets = freezed,
+    Object? mostReds = freezed,
+    Object? mostYellows = freezed,
+    Object? mostSaves = freezed,
+    Object? mostMinutesPlayed = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      amount: amount == freezed
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as int,
+      topScorers: topScorers == freezed
+          ? _value.topScorers
+          : topScorers // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostAssists: mostAssists == freezed
+          ? _value.mostAssists
+          : mostAssists // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostCleanSheets: mostCleanSheets == freezed
+          ? _value.mostCleanSheets
+          : mostCleanSheets // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostReds: mostReds == freezed
+          ? _value.mostReds
+          : mostReds // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostYellows: mostYellows == freezed
+          ? _value.mostYellows
+          : mostYellows // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostSaves: mostSaves == freezed
+          ? _value.mostSaves
+          : mostSaves // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostMinutesPlayed: mostMinutesPlayed == freezed
+          ? _value.mostMinutesPlayed
+          : mostMinutesPlayed // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -88,7 +137,14 @@ abstract class _$EPLStatsDtoCopyWith<$Res>
           _EPLStatsDto value, $Res Function(_EPLStatsDto) then) =
       __$EPLStatsDtoCopyWithImpl<$Res>;
   @override
-  $Res call({String name, int amount});
+  $Res call(
+      {List<dynamic> topScorers,
+      List<dynamic> mostAssists,
+      List<dynamic> mostCleanSheets,
+      List<dynamic> mostReds,
+      List<dynamic> mostYellows,
+      List<dynamic> mostSaves,
+      List<dynamic> mostMinutesPlayed});
 }
 
 /// @nodoc
@@ -103,18 +159,43 @@ class __$EPLStatsDtoCopyWithImpl<$Res> extends _$EPLStatsDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? name = freezed,
-    Object? amount = freezed,
+    Object? topScorers = freezed,
+    Object? mostAssists = freezed,
+    Object? mostCleanSheets = freezed,
+    Object? mostReds = freezed,
+    Object? mostYellows = freezed,
+    Object? mostSaves = freezed,
+    Object? mostMinutesPlayed = freezed,
   }) {
     return _then(_EPLStatsDto(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      amount: amount == freezed
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as int,
+      topScorers: topScorers == freezed
+          ? _value.topScorers
+          : topScorers // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostAssists: mostAssists == freezed
+          ? _value.mostAssists
+          : mostAssists // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostCleanSheets: mostCleanSheets == freezed
+          ? _value.mostCleanSheets
+          : mostCleanSheets // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostReds: mostReds == freezed
+          ? _value.mostReds
+          : mostReds // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostYellows: mostYellows == freezed
+          ? _value.mostYellows
+          : mostYellows // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostSaves: mostSaves == freezed
+          ? _value.mostSaves
+          : mostSaves // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      mostMinutesPlayed: mostMinutesPlayed == freezed
+          ? _value.mostMinutesPlayed
+          : mostMinutesPlayed // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -122,19 +203,37 @@ class __$EPLStatsDtoCopyWithImpl<$Res> extends _$EPLStatsDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_EPLStatsDto extends _EPLStatsDto {
-  const _$_EPLStatsDto({required this.name, required this.amount}) : super._();
+  const _$_EPLStatsDto(
+      {required this.topScorers,
+      required this.mostAssists,
+      required this.mostCleanSheets,
+      required this.mostReds,
+      required this.mostYellows,
+      required this.mostSaves,
+      required this.mostMinutesPlayed})
+      : super._();
 
   factory _$_EPLStatsDto.fromJson(Map<String, dynamic> json) =>
       _$$_EPLStatsDtoFromJson(json);
 
   @override
-  final String name;
+  final List<dynamic> topScorers;
   @override
-  final int amount;
+  final List<dynamic> mostAssists;
+  @override
+  final List<dynamic> mostCleanSheets;
+  @override
+  final List<dynamic> mostReds;
+  @override
+  final List<dynamic> mostYellows;
+  @override
+  final List<dynamic> mostSaves;
+  @override
+  final List<dynamic> mostMinutesPlayed;
 
   @override
   String toString() {
-    return 'EPLStatsDto(name: $name, amount: $amount)';
+    return 'EPLStatsDto(topScorers: $topScorers, mostAssists: $mostAssists, mostCleanSheets: $mostCleanSheets, mostReds: $mostReds, mostYellows: $mostYellows, mostSaves: $mostSaves, mostMinutesPlayed: $mostMinutesPlayed)';
   }
 
   @override
@@ -142,15 +241,30 @@ class _$_EPLStatsDto extends _EPLStatsDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _EPLStatsDto &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.amount, amount));
+            const DeepCollectionEquality()
+                .equals(other.topScorers, topScorers) &&
+            const DeepCollectionEquality()
+                .equals(other.mostAssists, mostAssists) &&
+            const DeepCollectionEquality()
+                .equals(other.mostCleanSheets, mostCleanSheets) &&
+            const DeepCollectionEquality().equals(other.mostReds, mostReds) &&
+            const DeepCollectionEquality()
+                .equals(other.mostYellows, mostYellows) &&
+            const DeepCollectionEquality().equals(other.mostSaves, mostSaves) &&
+            const DeepCollectionEquality()
+                .equals(other.mostMinutesPlayed, mostMinutesPlayed));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(amount));
+      const DeepCollectionEquality().hash(topScorers),
+      const DeepCollectionEquality().hash(mostAssists),
+      const DeepCollectionEquality().hash(mostCleanSheets),
+      const DeepCollectionEquality().hash(mostReds),
+      const DeepCollectionEquality().hash(mostYellows),
+      const DeepCollectionEquality().hash(mostSaves),
+      const DeepCollectionEquality().hash(mostMinutesPlayed));
 
   @JsonKey(ignore: true)
   @override
@@ -164,17 +278,33 @@ class _$_EPLStatsDto extends _EPLStatsDto {
 }
 
 abstract class _EPLStatsDto extends EPLStatsDto {
-  const factory _EPLStatsDto({required String name, required int amount}) =
-      _$_EPLStatsDto;
+  const factory _EPLStatsDto(
+      {required List<dynamic> topScorers,
+      required List<dynamic> mostAssists,
+      required List<dynamic> mostCleanSheets,
+      required List<dynamic> mostReds,
+      required List<dynamic> mostYellows,
+      required List<dynamic> mostSaves,
+      required List<dynamic> mostMinutesPlayed}) = _$_EPLStatsDto;
   const _EPLStatsDto._() : super._();
 
   factory _EPLStatsDto.fromJson(Map<String, dynamic> json) =
       _$_EPLStatsDto.fromJson;
 
   @override
-  String get name;
+  List<dynamic> get topScorers;
   @override
-  int get amount;
+  List<dynamic> get mostAssists;
+  @override
+  List<dynamic> get mostCleanSheets;
+  @override
+  List<dynamic> get mostReds;
+  @override
+  List<dynamic> get mostYellows;
+  @override
+  List<dynamic> get mostSaves;
+  @override
+  List<dynamic> get mostMinutesPlayed;
   @override
   @JsonKey(ignore: true)
   _$EPLStatsDtoCopyWith<_EPLStatsDto> get copyWith =>
