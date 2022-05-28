@@ -207,10 +207,175 @@ const resetPass = asyncHandler(async (req, res) => {
 });
 
 const transfer = asyncHandler(async (req, res) => {
+  console.log("Here");
   // Destructure request body
   const { data } = req.body;
   // const { userId, incomingTeam } = JSON.parse(data);
-  const { incomingTeam } = JSON.parse(data);
+  // const { incomingTeam } = JSON.parse(data);
+
+  const incomingTeam = {
+    activeChip: "",
+    gameweekId: 1,
+    players: {
+      100014: {
+        playerId: "100014",
+        eplTeamId: "Bahir Dar Kenema S.C",
+        price: 5,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100018: {
+        playerId: "100018",
+        eplTeamId: "Bahir Dar Kenema S.C",
+        price: 5.5,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100019: {
+        playerId: "100019",
+        eplTeamId: "Bahir Dar Kenema S.C",
+        price: 5,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100103: {
+        playerId: "100103",
+        eplTeamId: "Defence Force S.C",
+        price: 6.7,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100105: {
+        playerId: "100105",
+        eplTeamId: "Defence Force S.C",
+        price: 4.9,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100106: {
+        playerId: "100106",
+        eplTeamId: "Defence Force S.C",
+        price: 5.7,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100140: {
+        playerId: "100140",
+        eplTeamId: "Addis Ababa City F.C",
+        price: 5.5,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100141: {
+        playerId: "100141",
+        eplTeamId: "Addis Ababa City F.C",
+        price: 4.6,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100146: {
+        playerId: "100146",
+        eplTeamId: "Addis Ababa City F.C",
+        price: 4.9,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100388: {
+        playerId: "100388",
+        eplTeamId: "Adama City S.C",
+        price: 6,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100389: {
+        playerId: "100389",
+        eplTeamId: "Adama City S.C",
+        price: 6,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100390: {
+        playerId: "100390",
+        eplTeamId: "Adama City S.C",
+        price: 6,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100430: {
+        playerId: "100430",
+        eplTeamId: "Arba Minch City F.C",
+        price: 6,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100442: {
+        playerId: "100442",
+        eplTeamId: "Arba Minch City F.C",
+        price: 6,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+      100443: {
+        playerId: "100443",
+        eplTeamId: "Arba Minch City F.C",
+        price: 6,
+        multiplier: 0,
+        isCaptain: false,
+        isViceCaptain: false,
+      },
+    },
+  };
+
+  // create starter team if none => multiplier == 1
+  const incomingPlayers = incomingTeam.players;
+  const countMap = {
+    GK: 0,
+    DEF: 0,
+    MID: 0,
+    ATT: 0,
+  };
+  for (const key in incomingPlayers) {
+    // get player position
+    const currentPlayer = await Player.findOne({
+      playerId: incomingPlayers[key].playerId,
+    }).select("position -_id");
+
+    // goalkeeper
+    if (currentPlayer.position === "GK" && countMap.GK === 0) {
+      incomingPlayers[key].multiplier = 1;
+      countMap.GK = countMap.GK + 1;
+    }
+    // defender
+    else if (currentPlayer.position === "DEF" && countMap.DEF < 4) {
+      incomingPlayers[key].multiplier = 1;
+      countMap.DEF = countMap.DEF + 1;
+    }
+    // mid
+    else if (currentPlayer.position === "MID" && countMap.MID < 3) {
+      incomingPlayers[key].multiplier = 1;
+      countMap.MID = countMap.MID + 1;
+    }
+    // att
+    else if (currentPlayer.position === "ATT" && countMap.ATT < 3) {
+      incomingPlayers[key].multiplier = 1;
+      countMap.ATT = countMap.ATT + 1;
+    }
+  }
+
   const userId = "6290e13c063cd6d5eaa9d836";
 
   // Fetch active gameweek
@@ -503,65 +668,75 @@ const getUserPoints = asyncHandler(async (req, res) => {
     .lean();
 
   // get user team
-  const userTeam = user.team ? user.team[gameWeekId - 1] : [];
 
-  const userPlayers = userTeam.players;
-
-  console.log(userTeam);
-
-  const allPlayersInfo = [];
-  const finalFormat = {
-    gameWeekId: gameWeekId,
-    activeChip: userTeam.activeChip,
-    deduction: userTeam.deduction,
-    maxActiveCount: activeGw[activeGw.length - 1].gameWeekNumber,
-    teamName: user.teamName,
-  };
-
-  for (const key in userPlayers) {
-    // get current player from key
-    const currentPlayer = userPlayers[key];
-
-    // get player info of current player
-    const playerInfo = await Player.findOne({
-      playerId: currentPlayer.playerId,
-    }).lean();
-
-    // get player score
-    const currentPlayerAllScore = playerInfo.score ? playerInfo.score : [];
-
-    const currentPlayerCurrentGwScore = currentPlayerAllScore.filter(
-      (scoreInfo) => scoreInfo.gameweekId.toString() === gameWeekId.toString()
-    );
-
-    const currentPlayerTeamFixture = await Fixture.findOne({
-      eplTeamId: playerInfo.eplTeamId,
-      gameweekId: gameWeekId,
-    });
-
-    const currentPlayerInfo = {
-      playerId: currentPlayer.playerId,
-      playerName: playerInfo.playerName,
-      playerPosition: playerInfo.position,
-      eplTeamId: playerInfo.eplTeamId,
-      multiplier: currentPlayer.multiplier,
-      isCaptain: currentPlayer.isCaptain,
-      isViceCaptain: currentPlayer.isViceCaptain,
-      score: currentPlayerCurrentGwScore,
-      fixtureStatus: currentPlayerTeamFixture.status,
-      fixtureScore: currentPlayerTeamFixture.score,
-      fixtureTeams:
-        currentPlayerTeamFixture.homeTeam +
-        " v " +
-        currentPlayerTeamFixture.awayTeam,
+  if (user.team && user.team[gameWeekId - 1]) {
+    const userTeam = user.team[gameWeekId - 1];
+    const userPlayers = userTeam.players;
+    const allPlayersInfo = [];
+    const finalFormat = {
+      gameWeekId: gameWeekId,
+      activeChip: userTeam.activeChip,
+      deduction: userTeam.deduction,
+      maxActiveCount: activeGw[activeGw.length - 1].gameWeekNumber,
+      teamName: user.teamName,
     };
 
-    allPlayersInfo.push(currentPlayerInfo);
+    for (const key in userPlayers) {
+      // get current player from key
+      const currentPlayer = userPlayers[key];
+
+      // get player info of current player
+      const playerInfo = await Player.findOne({
+        playerId: currentPlayer.playerId,
+      }).lean();
+
+      // get player score
+      const currentPlayerAllScore = playerInfo.score ? playerInfo.score : [];
+
+      const currentPlayerCurrentGwScore = currentPlayerAllScore.filter(
+        (scoreInfo) => scoreInfo.gameweekId.toString() === gameWeekId.toString()
+      );
+
+      const currentPlayerTeamFixture = await Fixture.findOne({
+        eplTeamId: playerInfo.eplTeamId,
+        gameweekId: gameWeekId,
+      });
+
+      const currentPlayerInfo = {
+        playerId: currentPlayer.playerId,
+        playerName: playerInfo.playerName,
+        playerPosition: playerInfo.position,
+        eplTeamId: playerInfo.eplTeamId,
+        multiplier: currentPlayer.multiplier,
+        isCaptain: currentPlayer.isCaptain,
+        isViceCaptain: currentPlayer.isViceCaptain,
+        score: currentPlayerCurrentGwScore,
+        fixtureStatus: currentPlayerTeamFixture.status,
+        fixtureScore: currentPlayerTeamFixture.score,
+        fixtureTeams:
+          currentPlayerTeamFixture.homeTeam +
+          " v " +
+          currentPlayerTeamFixture.awayTeam,
+      };
+
+      allPlayersInfo.push(currentPlayerInfo);
+    }
+
+    finalFormat.allPlayers = allPlayersInfo;
+
+    res.status(200).send(finalFormat);
+  } else {
+    const finalFormat = {
+      gameWeekId: gameWeekId,
+      activeChip: "",
+      deduction: 0,
+      maxActiveCount: activeGw[activeGw.length - 1].gameWeekNumber,
+      teamName: user.teamName,
+      allPlayers: [],
+    };
+
+    res.status(404).send(finalFormat);
   }
-
-  finalFormat.allPlayers = allPlayersInfo;
-
-  res.status(200).send(finalFormat);
 });
 
 module.exports = {

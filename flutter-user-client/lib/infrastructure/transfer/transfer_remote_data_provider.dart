@@ -219,6 +219,8 @@ class TransferRemoteDataProvider {
             Duration(seconds: ConstantValues().httpTimeOutDuration),
           );
 
+      print(apiResponse.statusCode);
+
       // success
       if (apiResponse.statusCode == 200) {
         List<UserPlayer> allUserPlayers = [];
@@ -230,7 +232,6 @@ class TransferRemoteDataProvider {
         // if response has players
 
         if (parseResponseTeam['players'].length > 0) {
-          print(apiResponse.statusCode);
           List allPlayers = parseResponseTeam['players'];
           for (var i = 0; i < allPlayers.length; i++) {
             Map<String, dynamic> availability = {

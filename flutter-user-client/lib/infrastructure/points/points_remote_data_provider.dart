@@ -25,7 +25,6 @@ class PointsInfoRemoteDataProvider {
 
   Future<Either<dynamic, PointsInfo>> getPointsInfoByGameWeekId(
       {required int gameWeekId}) async {
-    print(gameWeekId);
     try {
       // make api call
       var apiResponse = await instance.client
@@ -34,7 +33,6 @@ class PointsInfoRemoteDataProvider {
             Duration(seconds: ConstantValues().httpTimeOutDuration),
           );
 
-      print(apiResponse.statusCode);
       // success
       if (apiResponse.statusCode == 200) {
         dynamic parsedBody = jsonDecode(apiResponse.body);

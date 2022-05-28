@@ -18,13 +18,13 @@ class ApiFixtureRepository implements IFixtureRepository {
   @override
   Future<Either<dynamic, List<Fixture>>> getFixtureByGameWeekId(
       {required int gameWeekId}) async {
-    if (await utility.hasInternetConnection()) {
-      return _fixtureRemoteDataProvider.getFixtureByGameWeekId(
-          gameWeekId: gameWeekId);
-    } else {
-      return _fixtureLocalDataProvider.getFixtureByGameWeekId(
-        gameWeekId: gameWeekId,
-      );
-    }
+    // if (await utility.hasInternetConnection()) {
+    return _fixtureRemoteDataProvider.getFixtureByGameWeekId(
+        gameWeekId: gameWeekId);
+    // } else {
+    //   return _fixtureLocalDataProvider.getFixtureByGameWeekId(
+    //     gameWeekId: gameWeekId,
+    //   );
+    // }
   }
 }

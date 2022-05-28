@@ -481,6 +481,9 @@ class PointsView extends StatelessWidget {
 // Function to classify players by position
 List<List<PointUserPlayer>> formatPlayersByPosition(
     {required List<PointUserPlayer> allPlayers}) {
+  // allPlayers.forEach((element) {
+  //   print(element);
+  // });
   List<PointUserPlayer> allBench =
       allPlayers.where((player) => player.multiplier == 0).toList();
 
@@ -489,6 +492,8 @@ List<List<PointUserPlayer>> formatPlayersByPosition(
           player.multiplier == 1 &&
           player.playerPosition.value.fold((l) => '', (r) => r) == 'GK')
       .toList();
+
+  print(allGK);
 
   List<PointUserPlayer> allDEF = allPlayers
       .where((player) =>
