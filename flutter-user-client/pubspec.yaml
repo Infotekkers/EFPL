@@ -27,6 +27,7 @@ dependencies:
   json_annotation: ^4.4.0
   material_design_icons_flutter: 5.0.6595
   shared_preferences: ^2.0.13
+  transparent_image: ^2.0.0
 
 dev_dependencies:
   bloc_test: ^9.0.3

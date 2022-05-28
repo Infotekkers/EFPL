@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class PlayerOverview extends StatelessWidget {
   final dynamic state;
@@ -29,8 +30,10 @@ class PlayerOverview extends StatelessWidget {
                 ),
                 Transform.scale(
                   scale: 0.7,
-                  child:
-                      Image.network(_baseUrl + state.player.image.getOrCrash()),
+                  child: FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage,
+                    image: _baseUrl + state.player.image.getOrCrash(),
+                  ),
                 ),
                 Text(
                   state.player.currentPrice.getOrCrash() + "M",

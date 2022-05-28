@@ -8,7 +8,7 @@ class PlayerStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StatTable(score: state.player.score);
+    return StatTable(score: List.from(state.player.score.reversed));
   }
 }
 
