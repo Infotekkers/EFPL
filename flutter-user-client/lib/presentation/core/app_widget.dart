@@ -32,7 +32,7 @@ class AppWidget extends StatelessWidget {
             ],
             title: 'EFPL',
             theme: EfplTheme().buildLightTheme(),
-            initialRoute: "/player",
+            initialRoute: "/",
             routes: _appRouter.allRoutes,
           );
         },
