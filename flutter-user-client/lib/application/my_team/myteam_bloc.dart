@@ -304,12 +304,15 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
     final failureOrSuccess =
         await iMyTeamRepository.saveUserTeam(e.myTeam, e.userId);
 
-    failureOrSuccess.fold(
-      (failure) => emit(
-        MyTeamState.loadFailure(failure),
-      ),
-      (myTeam) => emit(const MyTeamState.saved()),
-    );
+    if (failureOrSuccess.fold(
+      (failure) => false,
+      (success) => true,
+    )) {
+      emit(MyTeamState.saved(e.myTeam));
+    } else {
+      emit(MyTeamState.loadFailure(failureOrSuccess.foldLeft(
+          const MyTeamFailure.localDBError(), (failure, r) => failure)));
+    }
   }
 
   _getMyTeam(state) {

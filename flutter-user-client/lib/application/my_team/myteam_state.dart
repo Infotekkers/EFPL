@@ -23,5 +23,5 @@ abstract class MyTeamState with _$MyTeamState {
       _ChipPlayedSuccess;
   const factory MyTeamState.chipPlayedFailure(MyTeam myTeam) =
       _ChipPlayedFailure;
-  const factory MyTeamState.saved() = _Saved;
+  const factory MyTeamState.saved(MyTeam myTeam) = _Saved;
 }

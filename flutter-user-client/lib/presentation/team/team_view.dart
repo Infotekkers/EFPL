@@ -9,11 +9,17 @@ class TeamView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider.value(
-        value: getIt<MyTeamBloc>()
-          ..add(const MyTeamEvent.loadMyTeam("623b101b9a85861e924388dd", "1")),
-      )
-    ], child: const TeamViewBody());
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider.value(
+            value: getIt<MyTeamBloc>()
+              ..add(const MyTeamEvent.loadMyTeam(
+                  "623b101b9a85861e924388dd", "1")),
+          )
+        ],
+        child: Container(
+          color: Colors.blue[50],
+          child: const TeamViewBody(),
+        ));
   }
 }

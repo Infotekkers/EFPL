@@ -1,5 +1,6 @@
 import 'package:efpl/application/my_team/myteam_bloc.dart';
 import 'package:efpl/presentation/core/widgets/bouncing_ball_loading_indicator.dart';
+import 'package:efpl/presentation/core/widgets/no_connection_widget.dart';
 import 'package:efpl/presentation/team/widgets/chips_dialog.dart';
 import 'package:efpl/presentation/team/widgets/positional_container_widget.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +26,36 @@ class TeamViewBody extends StatelessWidget {
       },
       builder: (context, state) => state.map(
         initial: (_) => Container(),
-        loadFailure: (_) => Container(),
+        loadFailure: (_) => Transform.scale(
+          scale: 0.8,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const NoConnectionWidget(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                child: OutlinedButton(
+                  onPressed: () => BlocProvider.of<MyTeamBloc>(context).add(
+                      const MyTeamEvent.loadMyTeam(
+                          "623b101b9a85861e924388dd", "1")),
+                  style: OutlinedButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Colors.blue[400],
+                  ),
+                  child: const Text("Retry"),
+                ),
+              ),
+            ],
+          ),
+        ),
         loadInProgress: (_) => const BouncingBallLoadingIndicator(),
         loadSuccess: (state) => _buildView(state, context),
-        saved: (_) => Container(),
+        saved: (_) => _buildView(state, context),
         transferApproved: (state) => _buildView(state, context, changed: true),
         transferOptionsLoaded: (state) =>
             _buildView(state, context, highlight: true),
-        captainChangeSuccess: (syaye) =>
+        captainChangeSuccess: (state) =>
             _buildView(state, context, changed: true),
         viceCaptainChangeSuccess: (_) =>
             _buildView(state, context, changed: true),
