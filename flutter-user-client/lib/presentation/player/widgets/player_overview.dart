@@ -1,27 +1,48 @@
-import 'package:efpl/application/player/player_bloc.dart';
-import 'package:efpl/presentation/core/widgets/bouncing_ball_loading_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PlayerOverview extends StatelessWidget {
-  const PlayerOverview({Key? key}) : super(key: key);
+  final dynamic state;
+  static final String _baseUrl = "${dotenv.env["API"]}";
+
+  const PlayerOverview({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PlayerBloc, PlayerState>(
-      listener: (_, state) {},
-      builder: (context, state) => state.map(
-        initial: (_) => Container(),
-        loadInProgress: (_) => const BouncingBallLoadingIndicator(),
-        loadSuccess: (state) => Column(
+    TextStyle boldFacts = const TextStyle(
+      fontWeight: FontWeight.bold,
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        color: Colors.blue[500],
+        elevation: 8.0,
+        child: Column(
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  state.player.position.getOrCrash().toUpperCase(),
+                  style: boldFacts,
+                ),
+                Transform.scale(
+                  scale: 0.7,
+                  child:
+                      Image.network(_baseUrl + state.player.image.getOrCrash()),
+                ),
+                Text(
+                  state.player.currentPrice.getOrCrash() + "M",
+                  style: boldFacts,
+                ),
+              ],
+            ),
             Text(state.player.name.getOrCrash()),
-            Text(state.player.position.getOrCrash()),
-            Text(state.player.currentPrice.getOrCrash()),
+            Text(state.player.eplTeamId.getOrCrash()),
             Text(state.player.availability.injuryMessage.getOrCrash()),
           ],
         ),
-        loadFailure: (state) => const Text("FAIL"),
       ),
     );
   }
