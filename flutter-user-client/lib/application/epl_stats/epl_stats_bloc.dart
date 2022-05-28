@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/epl_stats/epl_stats.dart';
 import 'package:efpl/domain/epl_stats/epl_stats_failure.dart';
 import 'package:efpl/domain/epl_stats/i_epl_stats_repository.dart';
@@ -16,18 +17,6 @@ class EPLStatsBloc extends Bloc<EPLStatsEvent, EPLStatsState> {
 
   EPLStatsBloc(this.ieplStatsRepository)
       : super(const EPLStatsState.initial()) {
-    on<_GetEPLStats>(_onGetEPLStats);
-  }
-
-  void _onGetEPLStats(_GetEPLStats e, Emitter<EPLStatsState> emit) async {
-    emit(const EPLStatsState.loadInProgress());
-
-    final failureOrSuccess =
-        await ieplStatsRepository.getEPLStats(statType: e.statType);
-
-    failureOrSuccess.fold(
-      (failure) => emit(EPLStatsState.loadFailure(failure)),
-      (eplStats) => emit(EPLStatsState.loadSuccess(eplStats)),
-    );
+    on<_GetEPLStats>((event, emit) async {});
   }
 }

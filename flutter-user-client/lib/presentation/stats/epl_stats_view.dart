@@ -15,28 +15,8 @@ class EPLStatsView extends StatelessWidget {
     return Column(
       children: [
         BlocProvider(
-          create: (context) => getIt<EPLStatsBloc>()
-            ..add(const EPLStatsEvent.getEPLStats(statType: 'goals')),
-          child: const EPLStatsViewBody(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<EPLStatsBloc>()
-            ..add(const EPLStatsEvent.getEPLStats(statType: 'assists')),
-          child: const EPLStatsViewBody(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<EPLStatsBloc>()
-            ..add(const EPLStatsEvent.getEPLStats(statType: 'cleansheets')),
-          child: const EPLStatsViewBody(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<EPLStatsBloc>()
-            ..add(const EPLStatsEvent.getEPLStats(statType: 'yellows')),
-          child: const EPLStatsViewBody(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<EPLStatsBloc>()
-            ..add(const EPLStatsEvent.getEPLStats(statType: 'reds')),
+          create: (context) =>
+              getIt<EPLStatsBloc>()..add(const EPLStatsEvent.getEplStats()),
           child: const EPLStatsViewBody(),
         ),
       ],
