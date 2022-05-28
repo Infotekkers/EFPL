@@ -70,7 +70,7 @@ class ChipsDialog extends StatelessWidget {
                     Navigator.pop(context);
                   }
                 },
-                child: const Icon(Icons.adjust_sharp),
+                child: const Icon(Icons.av_timer),
               ),
               const Text("Free Hit")
             ],
@@ -90,7 +90,7 @@ class ChipsDialog extends StatelessWidget {
                     Navigator.pop(context);
                   }
                 },
-                child: const Icon(Icons.adjust_sharp),
+                child: const Icon(Icons.fast_rewind),
               ),
               const Text("Wildcard")
             ],

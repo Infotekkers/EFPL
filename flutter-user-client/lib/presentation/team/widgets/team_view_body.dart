@@ -62,7 +62,7 @@ class TeamViewBody extends StatelessWidget {
         chipPlayedSuccess: (state) => _buildView(state, context,
             changed: true,
             informational: state.myTeam.activeChip.getOrCrash() +
-                "selected. Save team to confirm"),
+                " Chip about to be activated. Confirm?"),
         chipPlayedFailure: (state) => _buildView(state, context),
       ),
     );
@@ -101,14 +101,32 @@ class TeamViewBody extends StatelessWidget {
                 padding: const EdgeInsets.all(24.0),
                 primary: state.myTeam.activeChip.getOrCrash() == ''
                     ? Colors.blue[400]
-                    : Colors.grey[50],
+                    : Colors.grey[300],
+                onPrimary: state.myTeam.activeChip.getOrCrash() == ''
+                    ? Colors.white
+                    : Colors.grey[700],
               ),
             ),
           ),
           informational != ''
               ? Positioned(
-                  left: 20,
-                  child: Text(informational),
+                  bottom: 8,
+                  left: 8,
+                  child: Container(
+                    padding: const EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green[400],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      informational,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 )
               : Container(),
         ],
