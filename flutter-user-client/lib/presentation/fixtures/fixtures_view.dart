@@ -1,3 +1,4 @@
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,7 @@ class FixtureView extends StatelessWidget {
 
     return Center(
       child: Text(
-        AppLocalizations.of(context)!.fixtures,
-        style: Theme.of(context).textTheme.headline1,
+        "Fixture",
       ),
     );
   }
