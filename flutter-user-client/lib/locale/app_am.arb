@@ -10,5 +10,7 @@
   "fixtures": "መርሐግብር",
   "league": "ሊግ",
   "stats": "ስታትስቲክስ",
-  "currentLanguage": "ቋንቋ"
+  "currentLanguage": "ቋንቋ",
+  "title_fixture": "FIXTURE TRANSLATIONS",
+  "gameWeek": "ሳምንት"
 }

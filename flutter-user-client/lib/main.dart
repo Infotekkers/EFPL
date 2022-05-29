@@ -12,6 +12,10 @@ Future main() async {
   await dotenv.load(fileName: "../.env");
   await Hive.initFlutter();
   await Hive.openBox("myTeamCache");
+  await Hive.openBox("transferCache");
+  await Hive.openBox("fixtureCache");
+  await Hive.openBox("pointsCache");
+
   configureInjection(Environment.prod);
   runApp(const AppWidget());
 }

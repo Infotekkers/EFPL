@@ -27,4 +27,8 @@ router.get(
   "/getplayers/homeTeam/:homeTeamId/awayTeam/:awayTeamId",
   playersController.getHomeAndAwayPlayers
 );
+
+// New
+router.get("/position/:position", playersController.getPlayersByPosition);
+
 module.exports = router;

@@ -38,6 +38,10 @@ app.use(cors());
 const rateLimiter = require("./src/config/rate_config");
 app.use(rateLimiter);
 
+app.get("/test", (res, req) => {
+  res.send("Live");
+});
+
 // Serve static files
 app.use("/uploads/", express.static(path.join(__dirname, "/uploads")));
 
@@ -58,10 +62,10 @@ app.use("/backup", backupRouter);
 // populate.addTestGameweek();
 // populate.addTestFixture();
 
-populate.addTestAdmin();
-populate.populateTeams();
-populate.populatePlayers();
-populate.populateFixture();
+// populate.addTestAdmin();
+// populate.populateTeams();
+// populate.populatePlayers();
+// populate.populateFixture();
 
 // Add Middleware
 app.use(errorMiddleware);
