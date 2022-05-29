@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
