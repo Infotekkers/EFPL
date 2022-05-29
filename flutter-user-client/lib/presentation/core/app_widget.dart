@@ -1,4 +1,4 @@
-import 'package:efpl/application/auth/auth/auth_bloc.dart';
+import 'package:efpl/application/auth/authentication/auth_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/locale/l10n.dart';

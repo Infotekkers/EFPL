@@ -6,9 +6,11 @@ import 'package:efpl/domain/auth/auth_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/domain/auth/user.dart';
+import 'package:efpl/domain/core/core_value_objects.dart';
 import 'package:efpl/infrastructure/auth/auth_dtos.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http_interceptor/http_interceptor.dart';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 
@@ -86,7 +88,7 @@ class AuthRepository implements IAuthRepository {
       print(value);
       final UserDto userDtoIn =
           UserDto.fromJson(jsonDecode(value!) as Map<String, dynamic>);
-
+      print(userDtoIn.token);
       return optionOf(userDtoIn.toDomain());
     } catch (err) {
       return none();
@@ -115,6 +117,7 @@ class AuthRepository implements IAuthRepository {
     try {
       const storage = FlutterSecureStorage();
       await storage.delete(key: 'user');
+      print(storage);
       return right(unit);
     } catch (err) {
       print(err);
@@ -146,6 +149,20 @@ class AuthRepository implements IAuthRepository {
       }
     } catch (err) {
       return left(const AuthFailure.networkError());
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> checkToken({required Token token}) async {
+    final Uri url = Uri.parse("$_baseUrl/validateUser");
+    try {
+      // final token = Token(
+      //     "");
+      final response = await client!.post(url, body: token);
+      print(response.body);
+      return right(unit);
+    } catch (err) {
+      return left(const AuthFailure.serverError());
     }
   }
 }

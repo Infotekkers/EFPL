@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:efpl/application/auth/auth/auth_bloc.dart';
+import 'package:efpl/application/auth/authentication/auth_bloc.dart';
+import 'package:efpl/application/auth/authorisation/authorisation_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
+import 'package:efpl/domain/auth/i_auth_repository.dart';
+import 'package:efpl/domain/core/core_value_objects.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
 import 'package:efpl/presentation/leagues/leagues_view.dart';
@@ -60,9 +63,15 @@ class MainTabView extends StatelessWidget {
               ListTile(
                 title: const Text('LogOut'),
                 onTap: () {
-                  BlocProvider.of<AuthBloc>(context)
-                      .add(const AuthEvent.signedOut());
+                  getIt<IAuthRepository>().removeUser();
                   Navigator.popAndPushNamed(context, "/sign-in");
+                },
+              ),
+              ListTile(
+                title: const Text('check token'),
+                onTap: () {
+                  BlocProvider.of<AuthorisationBloc>(context).add(
+                      const AuthorisationEvent.authorisationCheckRequested());
                 },
               )
             ],
