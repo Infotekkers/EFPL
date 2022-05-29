@@ -85,30 +85,12 @@ class RegisterForm extends StatelessWidget {
             );
           },
         );
-
-        // state.isMatch.fold(
-        //   () => {},
-        //   (either) => either.fold(
-        //     (f) {
-        //       f.maybeMap(
-        //           passwordDontMatch: (_) {
-        //             CustomSnackBar().showCustomSnackBar(
-        //               showContext: context,
-        //               headlineText: "Credential Issue",
-        //               message: "Passwords don't Match",
-        //               snackBarType: "warning",
-        //               showDuration: 1,
-        //             );
-        //           },
-        //           orElse: () {});
-        //     },
-        //     (_) {},
-        //   ),
-        // );
       },
       builder: (context, state) {
         return Form(
-          autovalidateMode: AutovalidateMode.always,
+          autovalidateMode: state.showErrorMessages
+              ? AutovalidateMode.always
+              : AutovalidateMode.disabled,
           child: ListView(
             children: [
               const Text(
