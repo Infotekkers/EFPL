@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
@@ -56,6 +57,14 @@ class MainTabView extends StatelessWidget {
                 title: const Text('Settings'),
                 onTap: () {},
               ),
+              ListTile(
+                title: const Text('LogOut'),
+                onTap: () {
+                  BlocProvider.of<AuthBloc>(context)
+                      .add(const AuthEvent.signedOut());
+                  Navigator.popAndPushNamed(context, "/sign-in");
+                },
+              )
             ],
           ),
         ),

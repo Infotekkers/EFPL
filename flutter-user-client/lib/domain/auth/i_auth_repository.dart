@@ -21,7 +21,7 @@ abstract class IAuthRepository {
   });
 
   // sign out user
-  Future<void> signOut();
+  Future<Either<AuthFailure, Unit>> removeUser();
 
   // request password reset
   Future<Either<AuthFailure, User>> requestReset({

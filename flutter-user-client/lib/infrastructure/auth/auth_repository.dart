@@ -89,11 +89,37 @@ class AuthRepository implements IAuthRepository {
 
       return optionOf(userDtoIn.toDomain());
     } catch (err) {
-      print(err);
       return none();
     }
+  }
 
-    // throw UnimplementedError();
+// set user
+  @override
+  Future<Either<AuthFailure, Unit>> setSignedInUser(
+      {required User user}) async {
+    try {
+      final storage = new FlutterSecureStorage();
+
+      final UserDto userDtoOut = UserDto.fromDomain(user);
+
+      storage.write(key: 'user', value: jsonEncode(userDtoOut.toJson()));
+
+      return right(unit);
+    } catch (err) {
+      return left(const AuthFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> removeUser() async {
+    try {
+      const storage = FlutterSecureStorage();
+      await storage.delete(key: 'user');
+      return right(unit);
+    } catch (err) {
+      print(err);
+      return left(const AuthFailure.serverError());
+    }
   }
 
   //  requestReset
@@ -120,29 +146,6 @@ class AuthRepository implements IAuthRepository {
       }
     } catch (err) {
       return left(const AuthFailure.networkError());
-    }
-  }
-
-  // signOut
-  @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<AuthFailure, Unit>> setSignedInUser(
-      {required User user}) async {
-    try {
-      final storage = new FlutterSecureStorage();
-
-      final UserDto userDtoOut = UserDto.fromDomain(user);
-
-      storage.write(key: 'user', value: jsonEncode(userDtoOut.toJson()));
-
-      return right(unit);
-    } catch (err) {
-      return left(const AuthFailure.serverError());
     }
   }
 }
