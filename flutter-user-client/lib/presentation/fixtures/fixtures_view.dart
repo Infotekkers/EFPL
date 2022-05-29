@@ -123,95 +123,98 @@ class FixturesView extends StatelessWidget {
           child: state.isLoading
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // Gw controller
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 12),
-                        // margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        color: ConstantColors.neutral_200,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                _fixtureBloc.add(
-                                  const FixtureEvent.decreaseGameWeek(),
-                                );
-                              },
-                              child: const Icon(Icons.arrow_back_ios),
-                            ),
-                            Text(AppLocalizations.of(context)!.gameWeek +
-                                " " +
-                                state.gameWeekId.toString()),
-                            InkWell(
-                              onTap: () {
-                                _fixtureBloc.add(
-                                  const FixtureEvent.increaseGameWeek(),
-                                );
-                              },
-                              child: const Icon(Icons.arrow_forward_ios),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height - 60,
-                        child: state.allFixtures.length < 2
-                            ? Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 250, 0, 0),
-                                child: const Text("No Fixtures"))
-                            : ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: allFixtures.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  List<Fixture> fixture = allFixtures[index];
-                                  var date = '';
-                                  if (fixture.isNotEmpty) {
-                                    date = formatMatchDate(fixture[0]);
-                                  }
-
-                                  return Column(
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.fromLTRB(
-                                            0, 24, 0, 1),
-                                        child: Text(
-                                          date,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      Column(
-                                        children: List.generate(
-                                          fixture.length,
-                                          (index) {
-                                            return Container(
-                                              color: index % 2 == 0
-                                                  ? ConstantColors.neutral_200
-                                                  : (Colors.white),
-                                              child: FixtureWidget(
-                                                fixture: fixture[index],
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ],
+                  child: Container(
+                    color: Colors.blue[50],
+                    child: Column(
+                      children: [
+                        // Gw controller
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 100, vertical: 12),
+                          // margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  _fixtureBloc.add(
+                                    const FixtureEvent.decreaseGameWeek(),
                                   );
                                 },
+                                child: const Icon(Icons.arrow_back_ios),
                               ),
-                      ),
-                    ],
+                              Text(AppLocalizations.of(context)!.gameWeek +
+                                  " " +
+                                  state.gameWeekId.toString()),
+                              InkWell(
+                                onTap: () {
+                                  _fixtureBloc.add(
+                                    const FixtureEvent.increaseGameWeek(),
+                                  );
+                                },
+                                child: const Icon(Icons.arrow_forward_ios),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height - 60,
+                          child: state.allFixtures.length < 2
+                              ? Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 250, 0, 0),
+                                  child: const Text("No Fixtures"))
+                              : ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: allFixtures.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    List<Fixture> fixture = allFixtures[index];
+                                    var date = '';
+                                    if (fixture.isNotEmpty) {
+                                      date = formatMatchDate(fixture[0]);
+                                    }
+
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          margin: const EdgeInsets.fromLTRB(
+                                              0, 24, 0, 1),
+                                          child: Text(
+                                            date,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Column(
+                                          children: List.generate(
+                                            fixture.length,
+                                            (index) {
+                                              return Container(
+                                                color: index % 2 == 0
+                                                    ? ConstantColors.neutral_200
+                                                    : (Colors.white),
+                                                child: FixtureWidget(
+                                                  fixture: fixture[index],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
         );

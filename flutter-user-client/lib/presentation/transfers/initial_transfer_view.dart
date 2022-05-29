@@ -137,458 +137,471 @@ class InitialTransferPage extends StatelessWidget {
               child: Stack(
                 children: [
                   // Main Area
-                  Column(
-                    children: [
-                      // TEAM TITLE
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 5),
-                        child: Center(
-                          child: Text(
-                            state.userTeam.teamName,
-                            style: const TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 0.05,
+                  Container(
+                    color: Colors.blue[50],
+                    child: Column(
+                      children: [
+                        // TEAM TITLE
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 5,
+                          ),
+                          child: Center(
+                            child: Text(
+                              state.userTeam.teamName,
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.05,
+                              ),
                             ),
                           ),
                         ),
-                      ),
 
-                      // BUDGET
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 5),
-                        child: Center(
-                          child: Text(
-                            state.remainingInBank.toStringAsFixed(1),
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 0.05,
-                              color: state.remainingInBank < 0
-                                  ? Colors.red
-                                  : Colors.green,
+                        // BUDGET
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 5),
+                          child: Center(
+                            child: Text(
+                              state.remainingInBank.toStringAsFixed(1),
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.05,
+                                color: state.remainingInBank < 0
+                                    ? Colors.red
+                                    : Colors.green,
+                              ),
                             ),
                           ),
                         ),
-                      ),
 
-                      // SPACER
-                      const SizedBox(
-                        height: 16,
-                      ),
+                        // SPACER
+                        const SizedBox(
+                          height: 16,
+                        ),
 
-                      /*
-                        =================================================
-                        GOALKEEPERS
-                        =================================================
-                      */
-                      Stack(
-                        children: [
-                          // SELECTION
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
-                            height: 200,
-                            color: ConstantColors.neutral_300,
-                            width: MediaQuery.of(context).size.width,
-                            child: Center(
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: allFormattedPlayers[0].length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  double playerPrice = allFormattedPlayers[0]
-                                          [index]
-                                      .currentPrice
-                                      .value
-                                      .fold(
-                                        (l) => 0.0,
-                                        (r) => r,
-                                      );
-                                  return InkWell(
-                                    onTap: () async {
-                                      _transferBloc.add(
-                                        TransferEvent.setTransferOutPlayer(
-                                          transferOutPlayerId: "",
-                                          playerPosition:
-                                              PlayerPosition(value: "GK"),
-                                        ),
-                                      );
-
-                                      _transferBloc.add(
-                                        const TransferEvent
-                                            .getPlayersInSelectedPosition(),
-                                      );
-
-                                      var efplCache =
-                                          await Hive.openBox('transferCache');
-                                      List? allTeams =
-                                          efplCache.get("allTeams");
-
-                                      Navigator.pushNamed(
-                                        context,
-                                        "/transfer",
-                                        arguments: {
-                                          "allTeams": allTeams,
-                                          "currentPlayerId": '',
-                                          "isInitial": true,
-                                        },
-                                      );
-                                    },
-                                    child: PlayerWidget(
-                                      playerName: allFormattedPlayers[0][index]
-                                          .playerName
-                                          .value
-                                          .fold(
-                                            (l) => '',
-                                            (r) => r,
+                        /*
+                          =================================================
+                          GOALKEEPERS
+                          =================================================
+                        */
+                        Stack(
+                          children: [
+                            // SELECTION
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
+                              height: 200,
+                              color: ConstantColors.neutral_300,
+                              width: MediaQuery.of(context).size.width,
+                              child: Center(
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: allFormattedPlayers[0].length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    double playerPrice = allFormattedPlayers[0]
+                                            [index]
+                                        .currentPrice
+                                        .value
+                                        .fold(
+                                          (l) => 0.0,
+                                          (r) => r,
+                                        );
+                                    return InkWell(
+                                      onTap: () async {
+                                        _transferBloc.add(
+                                          TransferEvent.setTransferOutPlayer(
+                                            transferOutPlayerId: "",
+                                            playerPosition:
+                                                PlayerPosition(value: "GK"),
                                           ),
-                                      description: playerPrice == 0
-                                          ? ' '
-                                          : playerPrice.toStringAsFixed(1),
-                                      teamName: allFormattedPlayers[0][index]
-                                          .eplTeamId
-                                          .value
-                                          .fold(
-                                            (l) => '  ',
-                                            (r) => r.toString().split(" ")[0],
-                                          ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
+                                        );
 
-                          // TITLE
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Center(
-                              child: Text(
-                                "GOALKEEPERS",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.5,
-                                  color: ConstantColors.primary_900
-                                      .withOpacity(0.55),
+                                        _transferBloc.add(
+                                          const TransferEvent
+                                              .getPlayersInSelectedPosition(),
+                                        );
+
+                                        var efplCache =
+                                            await Hive.openBox('transferCache');
+                                        List? allTeams =
+                                            efplCache.get("allTeams");
+
+                                        Navigator.pushNamed(
+                                          context,
+                                          "/transfer",
+                                          arguments: {
+                                            "allTeams": allTeams,
+                                            "currentPlayerId": '',
+                                            "isInitial": true,
+                                          },
+                                        );
+                                      },
+                                      child: PlayerWidget(
+                                        playerName: allFormattedPlayers[0]
+                                                [index]
+                                            .playerName
+                                            .value
+                                            .fold(
+                                              (l) => '',
+                                              (r) => r,
+                                            ),
+                                        description: playerPrice == 0
+                                            ? ' '
+                                            : playerPrice.toStringAsFixed(1),
+                                        teamName: allFormattedPlayers[0][index]
+                                            .eplTeamId
+                                            .value
+                                            .fold(
+                                              (l) => '  ',
+                                              (r) => r.toString().split(" ")[0],
+                                            ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),
-                          )
-                        ],
-                      ),
 
-                      /*
-                        =================================================
-                        DEFENDERS
-                        =================================================
-                      */
-                      Stack(
-                        children: [
-                          // SELECTION
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
-                            height: 200,
-                            width: MediaQuery.of(context).size.width,
-                            child: Center(
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: allFormattedPlayers[1].length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  double playerPrice = allFormattedPlayers[1]
-                                          [index]
-                                      .currentPrice
-                                      .value
-                                      .fold(
-                                        (l) => 0.0,
-                                        (r) => r,
-                                      );
-                                  return InkWell(
-                                    onTap: () async {
-                                      _transferBloc.add(
-                                        TransferEvent.setTransferOutPlayer(
-                                          transferOutPlayerId: "",
-                                          playerPosition:
-                                              PlayerPosition(value: "DEF"),
-                                        ),
-                                      );
-
-                                      _transferBloc.add(
-                                        const TransferEvent
-                                            .getPlayersInSelectedPosition(),
-                                      );
-
-                                      var efplCache =
-                                          await Hive.openBox('transferCache');
-                                      List? allTeams =
-                                          efplCache.get("allTeams");
-
-                                      Navigator.pushNamed(
-                                        context,
-                                        "/transfer",
-                                        arguments: {
-                                          "allTeams": allTeams,
-                                          "currentPlayerId": '',
-                                          "isInitial": true,
-                                        },
-                                      );
-                                    },
-                                    child: PlayerWidget(
-                                      playerName: allFormattedPlayers[1][index]
-                                          .playerName
-                                          .value
-                                          .fold(
-                                            (l) => '',
-                                            (r) => r,
-                                          ),
-                                      description: playerPrice == 0
-                                          ? ' '
-                                          : playerPrice.toStringAsFixed(1),
-                                      teamName: allFormattedPlayers[1][index]
-                                          .eplTeamId
-                                          .value
-                                          .fold(
-                                            (l) => '   ',
-                                            (r) => r.toString().split(" ")[0],
-                                          ),
-                                    ),
-                                  );
-                                },
+                            // TITLE
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: Center(
+                                child: Text(
+                                  "GOALKEEPERS",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.5,
+                                    color: ConstantColors.primary_900
+                                        .withOpacity(0.55),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
+                            )
+                          ],
+                        ),
 
-                          // TITLE
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Center(
-                              child: Text(
-                                "DEFENDERS",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.5,
-                                  color: ConstantColors.primary_900
-                                      .withOpacity(0.55),
+                        /*
+                          =================================================
+                          DEFENDERS
+                          =================================================
+                        */
+                        Stack(
+                          children: [
+                            // SELECTION
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
+                              height: 200,
+                              width: MediaQuery.of(context).size.width,
+                              child: Center(
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: allFormattedPlayers[1].length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    double playerPrice = allFormattedPlayers[1]
+                                            [index]
+                                        .currentPrice
+                                        .value
+                                        .fold(
+                                          (l) => 0.0,
+                                          (r) => r,
+                                        );
+                                    return InkWell(
+                                      onTap: () async {
+                                        _transferBloc.add(
+                                          TransferEvent.setTransferOutPlayer(
+                                            transferOutPlayerId: "",
+                                            playerPosition:
+                                                PlayerPosition(value: "DEF"),
+                                          ),
+                                        );
+
+                                        _transferBloc.add(
+                                          const TransferEvent
+                                              .getPlayersInSelectedPosition(),
+                                        );
+
+                                        var efplCache =
+                                            await Hive.openBox('transferCache');
+                                        List? allTeams =
+                                            efplCache.get("allTeams");
+
+                                        Navigator.pushNamed(
+                                          context,
+                                          "/transfer",
+                                          arguments: {
+                                            "allTeams": allTeams,
+                                            "currentPlayerId": '',
+                                            "isInitial": true,
+                                          },
+                                        );
+                                      },
+                                      child: PlayerWidget(
+                                        playerName: allFormattedPlayers[1]
+                                                [index]
+                                            .playerName
+                                            .value
+                                            .fold(
+                                              (l) => '',
+                                              (r) => r,
+                                            ),
+                                        description: playerPrice == 0
+                                            ? ' '
+                                            : playerPrice.toStringAsFixed(1),
+                                        teamName: allFormattedPlayers[1][index]
+                                            .eplTeamId
+                                            .value
+                                            .fold(
+                                              (l) => '   ',
+                                              (r) => r.toString().split(" ")[0],
+                                            ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),
-                          )
-                        ],
-                      ),
 
-                      /*
-                        =================================================
-                        MIDFIELDERS
-                        =================================================
-                      */
-                      Stack(
-                        children: [
-                          // SELECTION
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
-                            height: 200,
-                            color: ConstantColors.neutral_300,
-                            width: MediaQuery.of(context).size.width,
-                            child: Center(
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: allFormattedPlayers[2].length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  double playerPrice = allFormattedPlayers[2]
-                                          [index]
-                                      .currentPrice
-                                      .value
-                                      .fold(
-                                        (l) => 0.0,
-                                        (r) => r,
-                                      );
-                                  return InkWell(
-                                    onTap: () async {
-                                      _transferBloc.add(
-                                        TransferEvent.setTransferOutPlayer(
-                                          transferOutPlayerId: "",
-                                          playerPosition:
-                                              PlayerPosition(value: "MID"),
-                                        ),
-                                      );
-
-                                      _transferBloc.add(
-                                        const TransferEvent
-                                            .getPlayersInSelectedPosition(),
-                                      );
-
-                                      var efplCache =
-                                          await Hive.openBox('transferCache');
-                                      List? allTeams =
-                                          efplCache.get("allTeams");
-
-                                      Navigator.pushNamed(
-                                        context,
-                                        "/transfer",
-                                        arguments: {
-                                          "allTeams": allTeams,
-                                          "currentPlayerId": '',
-                                          "isInitial": true,
-                                        },
-                                      );
-                                    },
-                                    child: PlayerWidget(
-                                      playerName: allFormattedPlayers[2][index]
-                                          .playerName
-                                          .value
-                                          .fold(
-                                            (l) => '',
-                                            (r) => r,
-                                          ),
-                                      description: playerPrice == 0
-                                          ? ' '
-                                          : playerPrice.toStringAsFixed(1),
-                                      teamName: allFormattedPlayers[2][index]
-                                          .eplTeamId
-                                          .value
-                                          .fold(
-                                            (l) => '   ',
-                                            (r) => r.toString().split(" ")[0],
-                                          ),
-                                    ),
-                                  );
-                                },
+                            // TITLE
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: Center(
+                                child: Text(
+                                  "DEFENDERS",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.5,
+                                    color: ConstantColors.primary_900
+                                        .withOpacity(0.55),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
+                            )
+                          ],
+                        ),
 
-                          // TITLE
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Center(
-                              child: Text(
-                                "MIDFIELDERS",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.5,
-                                  color: ConstantColors.primary_900
-                                      .withOpacity(0.55),
+                        /*
+                          =================================================
+                          MIDFIELDERS
+                          =================================================
+                        */
+                        Stack(
+                          children: [
+                            // SELECTION
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
+                              height: 200,
+                              color: ConstantColors.neutral_300,
+                              width: MediaQuery.of(context).size.width,
+                              child: Center(
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: allFormattedPlayers[2].length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    double playerPrice = allFormattedPlayers[2]
+                                            [index]
+                                        .currentPrice
+                                        .value
+                                        .fold(
+                                          (l) => 0.0,
+                                          (r) => r,
+                                        );
+                                    return InkWell(
+                                      onTap: () async {
+                                        _transferBloc.add(
+                                          TransferEvent.setTransferOutPlayer(
+                                            transferOutPlayerId: "",
+                                            playerPosition:
+                                                PlayerPosition(value: "MID"),
+                                          ),
+                                        );
+
+                                        _transferBloc.add(
+                                          const TransferEvent
+                                              .getPlayersInSelectedPosition(),
+                                        );
+
+                                        var efplCache =
+                                            await Hive.openBox('transferCache');
+                                        List? allTeams =
+                                            efplCache.get("allTeams");
+
+                                        Navigator.pushNamed(
+                                          context,
+                                          "/transfer",
+                                          arguments: {
+                                            "allTeams": allTeams,
+                                            "currentPlayerId": '',
+                                            "isInitial": true,
+                                          },
+                                        );
+                                      },
+                                      child: PlayerWidget(
+                                        playerName: allFormattedPlayers[2]
+                                                [index]
+                                            .playerName
+                                            .value
+                                            .fold(
+                                              (l) => '',
+                                              (r) => r,
+                                            ),
+                                        description: playerPrice == 0
+                                            ? ' '
+                                            : playerPrice.toStringAsFixed(1),
+                                        teamName: allFormattedPlayers[2][index]
+                                            .eplTeamId
+                                            .value
+                                            .fold(
+                                              (l) => '   ',
+                                              (r) => r.toString().split(" ")[0],
+                                            ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),
-                          )
-                        ],
-                      ),
 
-                      /*
-                        =================================================
-                        ATTACKERS
-                        =================================================
-                      */
-                      Stack(
-                        children: [
-                          // SELECTION
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
-                            height: 200,
-                            width: MediaQuery.of(context).size.width,
-                            child: Center(
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: allFormattedPlayers[3].length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  double playerPrice = allFormattedPlayers[3]
-                                          [index]
-                                      .currentPrice
-                                      .value
-                                      .fold(
-                                        (l) => 0.0,
-                                        (r) => r,
-                                      );
-                                  return InkWell(
-                                    onTap: () async {
-                                      _transferBloc.add(
-                                        TransferEvent.setTransferOutPlayer(
-                                          transferOutPlayerId: "",
-                                          playerPosition:
-                                              PlayerPosition(value: "ATT"),
-                                        ),
-                                      );
-
-                                      _transferBloc.add(
-                                        const TransferEvent
-                                            .getPlayersInSelectedPosition(),
-                                      );
-
-                                      var efplCache =
-                                          await Hive.openBox('transferCache');
-                                      List? allTeams =
-                                          efplCache.get("allTeams");
-
-                                      Navigator.pushNamed(
-                                        context,
-                                        "/transfer",
-                                        arguments: {
-                                          "allTeams": allTeams,
-                                          "currentPlayerId": '',
-                                          "isInitial": true,
-                                        },
-                                      );
-                                    },
-                                    child: PlayerWidget(
-                                      playerName: allFormattedPlayers[3][index]
-                                          .playerName
-                                          .value
-                                          .fold(
-                                            (l) => '',
-                                            (r) => r,
-                                          ),
-                                      description: playerPrice == 0
-                                          ? ' '
-                                          : playerPrice.toStringAsFixed(1),
-                                      teamName: allFormattedPlayers[3][index]
-                                          .eplTeamId
-                                          .value
-                                          .fold(
-                                            (l) => '   ',
-                                            (r) => r.toString().split(" ")[0],
-                                          ),
-                                    ),
-                                  );
-                                },
+                            // TITLE
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: Center(
+                                child: Text(
+                                  "MIDFIELDERS",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.5,
+                                    color: ConstantColors.primary_900
+                                        .withOpacity(0.55),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
+                            )
+                          ],
+                        ),
 
-                          // TITLE
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Center(
-                              child: Text(
-                                "ATTACKERS",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.5,
-                                  color: ConstantColors.primary_900
-                                      .withOpacity(0.55),
+                        /*
+                          =================================================
+                          ATTACKERS
+                          =================================================
+                        */
+                        Stack(
+                          children: [
+                            // SELECTION
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
+                              height: 200,
+                              width: MediaQuery.of(context).size.width,
+                              child: Center(
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: allFormattedPlayers[3].length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    double playerPrice = allFormattedPlayers[3]
+                                            [index]
+                                        .currentPrice
+                                        .value
+                                        .fold(
+                                          (l) => 0.0,
+                                          (r) => r,
+                                        );
+                                    return InkWell(
+                                      onTap: () async {
+                                        _transferBloc.add(
+                                          TransferEvent.setTransferOutPlayer(
+                                            transferOutPlayerId: "",
+                                            playerPosition:
+                                                PlayerPosition(value: "ATT"),
+                                          ),
+                                        );
+
+                                        _transferBloc.add(
+                                          const TransferEvent
+                                              .getPlayersInSelectedPosition(),
+                                        );
+
+                                        var efplCache =
+                                            await Hive.openBox('transferCache');
+                                        List? allTeams =
+                                            efplCache.get("allTeams");
+
+                                        Navigator.pushNamed(
+                                          context,
+                                          "/transfer",
+                                          arguments: {
+                                            "allTeams": allTeams,
+                                            "currentPlayerId": '',
+                                            "isInitial": true,
+                                          },
+                                        );
+                                      },
+                                      child: PlayerWidget(
+                                        playerName: allFormattedPlayers[3]
+                                                [index]
+                                            .playerName
+                                            .value
+                                            .fold(
+                                              (l) => '',
+                                              (r) => r,
+                                            ),
+                                        description: playerPrice == 0
+                                            ? ' '
+                                            : playerPrice.toStringAsFixed(1),
+                                        teamName: allFormattedPlayers[3][index]
+                                            .eplTeamId
+                                            .value
+                                            .fold(
+                                              (l) => '   ',
+                                              (r) => r.toString().split(" ")[0],
+                                            ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                    ],
+
+                            // TITLE
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: Center(
+                                child: Text(
+                                  "ATTACKERS",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.5,
+                                    color: ConstantColors.primary_900
+                                        .withOpacity(0.55),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
 
                   state.transfersMadeCount < 15

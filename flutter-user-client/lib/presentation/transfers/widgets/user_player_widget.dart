@@ -192,10 +192,13 @@ class UserPlayerWidget extends StatelessWidget {
           child: Container(
             height: double.infinity,
             margin: const EdgeInsets.symmetric(horizontal: 5),
-            color: state.transferredInPlayerIdList
-                    .contains(currentUserPlayer.playerId)
-                ? ConstantColors.primary_400
-                : ConstantColors.neutral_200.withOpacity(0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: state.transferredInPlayerIdList
+                      .contains(currentUserPlayer.playerId)
+                  ? Colors.amber[800]
+                  : Colors.white,
+            ),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -204,7 +207,6 @@ class UserPlayerWidget extends StatelessWidget {
                     children: [
                       Center(
                         child: Container(
-                          // width: double.infinity,
                           width: 50,
                           height: 50,
                           decoration: const BoxDecoration(
@@ -220,22 +222,25 @@ class UserPlayerWidget extends StatelessWidget {
                       injuryStatus == '' || injuryStatus == 'none'
                           ? Container()
                           : Positioned(
-                              bottom: 0,
-                              left: 2,
+                              top: 15,
+                              right: 15,
                               child: Container(
-                                height: 25,
-                                width: 25,
+                                height: 20,
+                                width: 20,
                                 decoration: const BoxDecoration(
-                                  color: ConstantColors.error_200,
+                                  color: Colors.red,
                                   shape: BoxShape.circle,
                                 ),
                                 child: Center(
-                                    child: Text(
-                                  injuryStatus + "%",
-                                  style: const TextStyle(
-                                    fontSize: 10,
+                                  child: Text(
+                                    injuryStatus,
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                )),
+                                ),
                               ),
                             )
                     ],
@@ -243,17 +248,19 @@ class UserPlayerWidget extends StatelessWidget {
 
                   // Player Name
                   Container(
-                    color: ConstantColors.primary_900,
-                    width: double.infinity,
-                    height: 30,
+                    width: 70,
+                    height: 16,
+                    margin: const EdgeInsets.symmetric(vertical: 5),
                     child: Center(
                       child: Text(
                         currentUserPlayer.playerName.value.fold(
                           (l) => '',
                           (r) => r.split(" ")[0],
                         ),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
                         style: const TextStyle(
-                          color: ConstantColors.neutral_200,
+                          color: ConstantColors.primary_900,
                         ),
                       ),
                     ),
@@ -261,17 +268,17 @@ class UserPlayerWidget extends StatelessWidget {
 
                   // Player Price
                   Container(
-                    height: 25,
-                    width: double.infinity,
-                    color: ConstantColors.primary_900.withOpacity(0.8),
+                    height: 15,
+                    width: 70,
                     child: Center(
                       child: Text(
                         currentUserPlayer.currentPrice.value.fold(
                           (l) => '',
                           (r) => r.toString(),
                         ),
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          color: ConstantColors.neutral_200,
+                          color: ConstantColors.primary_900,
                         ),
                       ),
                     ),
