@@ -12,12 +12,11 @@ class PlayerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: IMPORT Player ID
-    // final playerId = ModalRoute.of(context)!.settings.arguments as int;
+    final playerId = ModalRoute.of(context)!.settings.arguments as int;
 
     return BlocProvider(
       create: (context) =>
-          getIt<PlayerBloc>()..add(PlayerEvent.getPlayer(101.toString())),
+          getIt<PlayerBloc>()..add(PlayerEvent.getPlayer(playerId.toString())),
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
