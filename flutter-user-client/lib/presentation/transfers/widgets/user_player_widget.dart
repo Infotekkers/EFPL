@@ -75,7 +75,9 @@ class UserPlayerWidget extends StatelessWidget {
                             // Player Information Button
                             InkWell(
                               onTap: () {
-                                print("Player Information");
+                                Navigator.of(context).pushNamed("/player",
+                                    arguments:
+                                        int.parse(currentUserPlayer.playerId));
                               },
                               child: Row(
                                 children: [

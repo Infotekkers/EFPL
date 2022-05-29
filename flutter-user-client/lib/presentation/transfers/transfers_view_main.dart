@@ -84,15 +84,15 @@ class TransfersView extends StatelessWidget {
                   },
 
                   // Connection issues
-                  noConnection: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact the server. Please check your connection!",
-                      snackBarType: "warning",
-                    );
-                  },
+                  // noConnection: (_) {
+                  //   CustomSnackBar().showCustomSnackBar(
+                  //     showContext: context,
+                  //     headlineText: "No Connection!",
+                  //     message:
+                  //         "Could not contact the server. Please check your connection!",
+                  //     snackBarType: "warning",
+                  //   );
+                  // },
                   socketError: (_) {
                     CustomSnackBar().showCustomSnackBar(
                       showContext: context,
@@ -432,11 +432,12 @@ class TransfersView extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                state.userTeam.deduction
+                                                (state.userTeam.deduction * -1)
                                                     .toString(),
                                                 style: TextStyle(
                                                   color: state.userTeam
-                                                              .deduction <
+                                                                  .deduction *
+                                                              -1 <
                                                           0.0
                                                       ? ConstantColors.error_300
                                                       : Colors.green,

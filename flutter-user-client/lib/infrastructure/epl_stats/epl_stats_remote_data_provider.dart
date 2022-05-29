@@ -28,6 +28,8 @@ class EPLStatsRemoteDataProvider {
         // print(parsedResponseBody);
         final EPLStatsDto eplStatDto = EPLStatsDto.fromJson(parsedResponseBody);
 
+        print(eplStatDto);
+
         return right(eplStatDto.toDomain());
       }
 

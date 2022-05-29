@@ -65,6 +65,10 @@ class AppRouter {
             ),
             BlocProvider.value(
               value: getIt<UtilBloc>(),
+            ),
+
+            BlocProvider.value(
+              value: getIt<EPLStatsBloc>(),
             )
           ],
           child: const MainTabView(),
