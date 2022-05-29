@@ -28,45 +28,50 @@ class AppWidget extends StatelessWidget {
             ..add(
               const AuthEvent.authCheckRequested(),
             ),
-        )
+        ),
       ],
-      child: BlocConsumer<UtilBloc, UtilState>(listener: (context,state){},builder:(context,state){return MaterialApp(
-        locale: state.locale,
-        supportedLocales: L10n.all,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate
-        ],
-        title: 'Flutter Demo',
-        theme: ThemeData(
-            // Background Colors
-            colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.blue,
-            )
-                .copyWith(
-                  secondary: Colors.amber,
+      child: BlocConsumer<UtilBloc, UtilState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return MaterialApp(
+            locale: state.locale,
+            supportedLocales: L10n.all,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate
+            ],
+            title: 'Flutter Demo',
+            theme: ThemeData(
+                // Background Colors
+                colorScheme: ColorScheme.fromSwatch(
+                  primarySwatch: Colors.blue,
                 )
-                .copyWith(
-                  tertiary: Colors.black,
-                ),
+                    .copyWith(
+                      secondary: Colors.amber,
+                    )
+                    .copyWith(
+                      tertiary: Colors.black,
+                    ),
 
-            // text styles
-            textTheme: const TextTheme(
-              headline1: TextStyle(
-                fontSize: 72.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.pink,
-                fontFamily: "Architect",
-              ),
-            ),
-            inputDecorationTheme: InputDecorationTheme(
-                border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ))),
-        initialRoute: "/",
-        routes: _appRouter.allRoutes,
+                // text styles
+                textTheme: const TextTheme(
+                  headline1: TextStyle(
+                    fontSize: 72.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.pink,
+                    fontFamily: "Architect",
+                  ),
+                ),
+                inputDecorationTheme: InputDecorationTheme(
+                    border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ))),
+            initialRoute: "/",
+            routes: _appRouter.allRoutes,
+          );
+        },
       ),
     );
   }
