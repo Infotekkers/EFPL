@@ -24,7 +24,10 @@ class RegisterPage extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.25,
-                color: Colors.pink,
+                child: Image.asset(
+                  'assets/img/King Of Kings 05 - 16x9.jpg',
+                  fit: BoxFit.fill,
+                ),
               ),
 
               // Register Form
