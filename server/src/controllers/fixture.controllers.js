@@ -7,6 +7,8 @@ const TeamModel = require("../models/Teams");
 const Player = require("../models/Player");
 const GameWeek = require("../models/GameWeek");
 
+const translator = require("../locale/translator");
+
 const MINUTE_COUNTERS = {};
 
 const postFixture = asyncHandler(async function (req, res) {
