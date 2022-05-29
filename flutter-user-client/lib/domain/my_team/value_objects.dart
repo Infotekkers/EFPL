@@ -1,6 +1,6 @@
 import 'package:efpl/domain/core/value_failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:efpl/domain/core/core_value_objects.dart';
+import 'package:efpl/domain/core/value_objects.dart';
 import 'package:efpl/domain/my_team/value_validators.dart';
 
 class TeamName extends ValueObject<String> {
