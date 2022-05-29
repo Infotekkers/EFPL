@@ -24,11 +24,23 @@ class _$LeagueTableDtoTearOff {
   _LeagueTableDto call(
       {required String teamName,
       required String teamLogo,
-      required List<dynamic> teamPosition}) {
+      required int teamPoint,
+      required int won,
+      required int lost,
+      required int Draw,
+      required int goalsFor,
+      required int goalsAgainst,
+      required int goalDifferential}) {
     return _LeagueTableDto(
       teamName: teamName,
       teamLogo: teamLogo,
-      teamPosition: teamPosition,
+      teamPoint: teamPoint,
+      won: won,
+      lost: lost,
+      Draw: Draw,
+      goalsFor: goalsFor,
+      goalsAgainst: goalsAgainst,
+      goalDifferential: goalDifferential,
     );
   }
 
@@ -44,7 +56,13 @@ const $LeagueTableDto = _$LeagueTableDtoTearOff();
 mixin _$LeagueTableDto {
   String get teamName => throw _privateConstructorUsedError;
   String get teamLogo => throw _privateConstructorUsedError;
-  List<dynamic> get teamPosition => throw _privateConstructorUsedError;
+  int get teamPoint => throw _privateConstructorUsedError;
+  int get won => throw _privateConstructorUsedError;
+  int get lost => throw _privateConstructorUsedError;
+  int get Draw => throw _privateConstructorUsedError;
+  int get goalsFor => throw _privateConstructorUsedError;
+  int get goalsAgainst => throw _privateConstructorUsedError;
+  int get goalDifferential => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +75,16 @@ abstract class $LeagueTableDtoCopyWith<$Res> {
   factory $LeagueTableDtoCopyWith(
           LeagueTableDto value, $Res Function(LeagueTableDto) then) =
       _$LeagueTableDtoCopyWithImpl<$Res>;
-  $Res call({String teamName, String teamLogo, List<dynamic> teamPosition});
+  $Res call(
+      {String teamName,
+      String teamLogo,
+      int teamPoint,
+      int won,
+      int lost,
+      int Draw,
+      int goalsFor,
+      int goalsAgainst,
+      int goalDifferential});
 }
 
 /// @nodoc
@@ -73,7 +100,13 @@ class _$LeagueTableDtoCopyWithImpl<$Res>
   $Res call({
     Object? teamName = freezed,
     Object? teamLogo = freezed,
-    Object? teamPosition = freezed,
+    Object? teamPoint = freezed,
+    Object? won = freezed,
+    Object? lost = freezed,
+    Object? Draw = freezed,
+    Object? goalsFor = freezed,
+    Object? goalsAgainst = freezed,
+    Object? goalDifferential = freezed,
   }) {
     return _then(_value.copyWith(
       teamName: teamName == freezed
@@ -84,10 +117,34 @@ class _$LeagueTableDtoCopyWithImpl<$Res>
           ? _value.teamLogo
           : teamLogo // ignore: cast_nullable_to_non_nullable
               as String,
-      teamPosition: teamPosition == freezed
-          ? _value.teamPosition
-          : teamPosition // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      teamPoint: teamPoint == freezed
+          ? _value.teamPoint
+          : teamPoint // ignore: cast_nullable_to_non_nullable
+              as int,
+      won: won == freezed
+          ? _value.won
+          : won // ignore: cast_nullable_to_non_nullable
+              as int,
+      lost: lost == freezed
+          ? _value.lost
+          : lost // ignore: cast_nullable_to_non_nullable
+              as int,
+      Draw: Draw == freezed
+          ? _value.Draw
+          : Draw // ignore: cast_nullable_to_non_nullable
+              as int,
+      goalsFor: goalsFor == freezed
+          ? _value.goalsFor
+          : goalsFor // ignore: cast_nullable_to_non_nullable
+              as int,
+      goalsAgainst: goalsAgainst == freezed
+          ? _value.goalsAgainst
+          : goalsAgainst // ignore: cast_nullable_to_non_nullable
+              as int,
+      goalDifferential: goalDifferential == freezed
+          ? _value.goalDifferential
+          : goalDifferential // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -99,7 +156,16 @@ abstract class _$LeagueTableDtoCopyWith<$Res>
           _LeagueTableDto value, $Res Function(_LeagueTableDto) then) =
       __$LeagueTableDtoCopyWithImpl<$Res>;
   @override
-  $Res call({String teamName, String teamLogo, List<dynamic> teamPosition});
+  $Res call(
+      {String teamName,
+      String teamLogo,
+      int teamPoint,
+      int won,
+      int lost,
+      int Draw,
+      int goalsFor,
+      int goalsAgainst,
+      int goalDifferential});
 }
 
 /// @nodoc
@@ -117,7 +183,13 @@ class __$LeagueTableDtoCopyWithImpl<$Res>
   $Res call({
     Object? teamName = freezed,
     Object? teamLogo = freezed,
-    Object? teamPosition = freezed,
+    Object? teamPoint = freezed,
+    Object? won = freezed,
+    Object? lost = freezed,
+    Object? Draw = freezed,
+    Object? goalsFor = freezed,
+    Object? goalsAgainst = freezed,
+    Object? goalDifferential = freezed,
   }) {
     return _then(_LeagueTableDto(
       teamName: teamName == freezed
@@ -128,10 +200,34 @@ class __$LeagueTableDtoCopyWithImpl<$Res>
           ? _value.teamLogo
           : teamLogo // ignore: cast_nullable_to_non_nullable
               as String,
-      teamPosition: teamPosition == freezed
-          ? _value.teamPosition
-          : teamPosition // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      teamPoint: teamPoint == freezed
+          ? _value.teamPoint
+          : teamPoint // ignore: cast_nullable_to_non_nullable
+              as int,
+      won: won == freezed
+          ? _value.won
+          : won // ignore: cast_nullable_to_non_nullable
+              as int,
+      lost: lost == freezed
+          ? _value.lost
+          : lost // ignore: cast_nullable_to_non_nullable
+              as int,
+      Draw: Draw == freezed
+          ? _value.Draw
+          : Draw // ignore: cast_nullable_to_non_nullable
+              as int,
+      goalsFor: goalsFor == freezed
+          ? _value.goalsFor
+          : goalsFor // ignore: cast_nullable_to_non_nullable
+              as int,
+      goalsAgainst: goalsAgainst == freezed
+          ? _value.goalsAgainst
+          : goalsAgainst // ignore: cast_nullable_to_non_nullable
+              as int,
+      goalDifferential: goalDifferential == freezed
+          ? _value.goalDifferential
+          : goalDifferential // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -142,7 +238,13 @@ class _$_LeagueTableDto extends _LeagueTableDto {
   const _$_LeagueTableDto(
       {required this.teamName,
       required this.teamLogo,
-      required this.teamPosition})
+      required this.teamPoint,
+      required this.won,
+      required this.lost,
+      required this.Draw,
+      required this.goalsFor,
+      required this.goalsAgainst,
+      required this.goalDifferential})
       : super._();
 
   factory _$_LeagueTableDto.fromJson(Map<String, dynamic> json) =>
@@ -153,11 +255,23 @@ class _$_LeagueTableDto extends _LeagueTableDto {
   @override
   final String teamLogo;
   @override
-  final List<dynamic> teamPosition;
+  final int teamPoint;
+  @override
+  final int won;
+  @override
+  final int lost;
+  @override
+  final int Draw;
+  @override
+  final int goalsFor;
+  @override
+  final int goalsAgainst;
+  @override
+  final int goalDifferential;
 
   @override
   String toString() {
-    return 'LeagueTableDto(teamName: $teamName, teamLogo: $teamLogo, teamPosition: $teamPosition)';
+    return 'LeagueTableDto(teamName: $teamName, teamLogo: $teamLogo, teamPoint: $teamPoint, won: $won, lost: $lost, Draw: $Draw, goalsFor: $goalsFor, goalsAgainst: $goalsAgainst, goalDifferential: $goalDifferential)';
   }
 
   @override
@@ -167,8 +281,15 @@ class _$_LeagueTableDto extends _LeagueTableDto {
             other is _LeagueTableDto &&
             const DeepCollectionEquality().equals(other.teamName, teamName) &&
             const DeepCollectionEquality().equals(other.teamLogo, teamLogo) &&
+            const DeepCollectionEquality().equals(other.teamPoint, teamPoint) &&
+            const DeepCollectionEquality().equals(other.won, won) &&
+            const DeepCollectionEquality().equals(other.lost, lost) &&
+            const DeepCollectionEquality().equals(other.Draw, Draw) &&
+            const DeepCollectionEquality().equals(other.goalsFor, goalsFor) &&
             const DeepCollectionEquality()
-                .equals(other.teamPosition, teamPosition));
+                .equals(other.goalsAgainst, goalsAgainst) &&
+            const DeepCollectionEquality()
+                .equals(other.goalDifferential, goalDifferential));
   }
 
   @override
@@ -176,7 +297,13 @@ class _$_LeagueTableDto extends _LeagueTableDto {
       runtimeType,
       const DeepCollectionEquality().hash(teamName),
       const DeepCollectionEquality().hash(teamLogo),
-      const DeepCollectionEquality().hash(teamPosition));
+      const DeepCollectionEquality().hash(teamPoint),
+      const DeepCollectionEquality().hash(won),
+      const DeepCollectionEquality().hash(lost),
+      const DeepCollectionEquality().hash(Draw),
+      const DeepCollectionEquality().hash(goalsFor),
+      const DeepCollectionEquality().hash(goalsAgainst),
+      const DeepCollectionEquality().hash(goalDifferential));
 
   @JsonKey(ignore: true)
   @override
@@ -193,7 +320,13 @@ abstract class _LeagueTableDto extends LeagueTableDto {
   const factory _LeagueTableDto(
       {required String teamName,
       required String teamLogo,
-      required List<dynamic> teamPosition}) = _$_LeagueTableDto;
+      required int teamPoint,
+      required int won,
+      required int lost,
+      required int Draw,
+      required int goalsFor,
+      required int goalsAgainst,
+      required int goalDifferential}) = _$_LeagueTableDto;
   const _LeagueTableDto._() : super._();
 
   factory _LeagueTableDto.fromJson(Map<String, dynamic> json) =
@@ -204,7 +337,19 @@ abstract class _LeagueTableDto extends LeagueTableDto {
   @override
   String get teamLogo;
   @override
-  List<dynamic> get teamPosition;
+  int get teamPoint;
+  @override
+  int get won;
+  @override
+  int get lost;
+  @override
+  int get Draw;
+  @override
+  int get goalsFor;
+  @override
+  int get goalsAgainst;
+  @override
+  int get goalDifferential;
   @override
   @JsonKey(ignore: true)
   _$LeagueTableDtoCopyWith<_LeagueTableDto> get copyWith =>

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/value_objects.dart';
 import 'package:efpl/domain/core/value_failures.dart';
 import 'package:efpl/domain/league_table/value_validators.dart';
+import 'package:efpl/infrastructure/league_table/league_table_dto.dart';
 
 class TeamName extends ValueObject {
   @override
@@ -25,16 +26,16 @@ class TeamLogo extends ValueObject<String> {
   const TeamLogo._({required this.value});
 }
 
-class TeamPosition extends ValueObject {
-  @override
-  final Either<ValueFailure<String>, Map> value;
+// class TeamPosition extends ValueObject {
+//   @override
+//   final Either<ValueFailure<String>, TeamPositionData> value;
 
-  factory TeamPosition({required Map value}) {
-    return TeamPosition._(value: validateTeamPosition(teamPosition: value));
-  }
+//   factory TeamPosition({required TeamPositionData value}) {
+//     return TeamPosition._(value: validateTeamPosition(teamPosition: value));
+//   }
 
-  const TeamPosition._({required this.value});
-}
+//   const TeamPosition._({required this.value});
+// }
 
 class TeamPoint extends ValueObject {
   @override
