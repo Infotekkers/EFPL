@@ -4,27 +4,27 @@ const autoIncrement = require("mongoose-auto-increment");
 autoIncrement.initialize(mongoose.connection);
 
 const availabilitySchema = mongoose.Schema({
-  injuryStatus: String,
+  injuryStatus: { type: String, default: "" },
   injuryMessage: { type: String, default: "" },
 });
 
 const scoreSchema = mongoose.Schema({
   gameweekId: { type: Number },
   price: { type: Number },
-  fantasyScore: { type: Number },
-  minutesPlayed: { type: Number },
-  goals: { type: Number },
-  assists: { type: Number },
-  cleanSheet: { type: Number },
-  yellows: { type: Number },
-  reds: { type: Number },
-  penalitiesMissed: { type: Number },
-  penalitiesSaved: { type: Number },
-  saves: { type: Number },
-  ownGoal: { type: Number },
-  transfersIn: { type: Number },
-  transfersOut: { type: Number },
-  form: { type: Number },
+  fantasyScore: { type: Number, default: 0 },
+  minutesPlayed: { type: Number, default: 0 },
+  goals: { type: Number, default: 0 },
+  assists: { type: Number, default: 0 },
+  cleanSheet: { type: Number, default: 0 },
+  yellows: { type: Number, default: 0 },
+  reds: { type: Number, default: 0 },
+  penalitiesMissed: { type: Number, default: 0 },
+  penalitiesSaved: { type: Number, default: 0 },
+  saves: { type: Number, default: 0 },
+  ownGoal: { type: Number, default: 0 },
+  transfersIn: { type: Number, default: 0 },
+  transfersOut: { type: Number, default: 0 },
+  form: { type: Number, default: 0 },
 });
 
 const historySchema = mongoose.Schema({
@@ -47,20 +47,48 @@ const historySchema = mongoose.Schema({
 });
 
 const playerSchema = mongoose.Schema({
-  playerName: { type: String },
-  eplTeamId: { type: String },
-  currentPrice: { type: Number },
-  position: { type: String },
-  availability: { type: [availabilitySchema] },
-  score: { type: [scoreSchema] },
-  history: { type: [historySchema] },
+  playerName: {
+    type: String,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Name is required.",
+    ],
+  },
+  eplTeamId: {
+    type: String,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Team is required.",
+    ],
+  },
+  currentPrice: {
+    type: Number,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Price is required.",
+    ],
+  },
+  position: {
+    type: String,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Position is required.",
+    ],
+  },
+  availability: { type: availabilitySchema },
+
+  playerImage: {
+    type: String,
+  },
+  score: { type: [scoreSchema], default: [] },
+  history: { type: [historySchema], default: [] },
 });
 
 playerSchema.plugin(autoIncrement.plugin, {
   model: "players",
   field: "playerId",
   startAt: 100000,
-  incrmentBy: 1,
+  incrementBy: 1,
 });
 
 module.exports = mongoose.model("players", playerSchema);

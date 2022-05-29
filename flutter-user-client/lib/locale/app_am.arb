@@ -1,0 +1,14 @@
+{
+  "language": "Amharic",
+  "helloWorld": "ሰላም አለም",
+  "hello": "ሰላም {username}",
+  "authentication": "ማረጋገጫ",
+  "login": "ግባ",
+  "team": "ቡድን",
+  "points": "ነጥብ",
+  "transfers": "ማስተላለፍያ",
+  "fixtures": "መርሐግብር",
+  "league": "ሊግ",
+  "stats": "ስታትስቲክስ",
+  "currentLanguage": "ቋንቋ"
+}

@@ -31,7 +31,7 @@
 ### Add .env file
 
 ```
-API=YOUR_EXPRESS_SERVER_ADDRESS:PORT
+VUE_APP_API_BASE_URL=YOUR_EXPRESS_SERVER_ADDRESS:PORT
 ```
 
 ### Install dependencies

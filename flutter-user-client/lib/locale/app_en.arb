@@ -1,0 +1,28 @@
+{
+  "language": "English",
+  "@language": {
+    "description": "The current Language"
+  },
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "A programmer greeting"
+  },
+  "hello": "Hello {username}",
+  "@hello": {
+    "description": "A welcome message",
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "authentication": "Authentication",
+  "login": "login",
+  "team": "Team",
+  "points": "Points",
+  "transfers": "Transfers",
+  "fixtures": "Fixtures",
+  "league": "League",
+  "stats": "Stats",
+  "currentLanguage": "Language"
+}
