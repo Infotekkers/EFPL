@@ -23,9 +23,6 @@ class MainTabView extends StatelessWidget {
     final UtilBloc _utilBloc = getIt<UtilBloc>();
     _utilBloc.add(const UtilEvent.setDefaultLocale());
 
-    final _eplStatsBloc = getIt<EPLStatsBloc>()
-      ..add(const EPLStatsEvent.getEplStats());
-
     return DefaultTabController(
       length: 7,
       initialIndex: 6,
@@ -134,10 +131,7 @@ class MainTabView extends StatelessWidget {
             TransfersView(),
             FixtureView(),
             LeaguesView(),
-            BlocProvider(
-              create: (context) => _eplStatsBloc,
-              child: const EPLStatsView(),
-            ),
+            EPLStatsView(),
             MultiBlocProvider(
               providers: [
                 BlocProvider(
