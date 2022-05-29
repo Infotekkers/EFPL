@@ -131,7 +131,7 @@ class MyTeamPlayer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(name.split(" ")[0]),
+            Text(name.split(" ")[0], overflow: TextOverflow.ellipsis),
             Text(
               position.toUpperCase(),
               style: const TextStyle(
