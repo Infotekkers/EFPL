@@ -64,10 +64,12 @@ class RequestResetForm extends StatelessWidget {
               (_) {
                 CustomSnackBar().showCustomSnackBar(
                   showContext: context,
-                  headlineText: "Success!",
-                  message: "Email Successfully sent",
+                  headlineText: "Success",
+                  message: "Email Successfully Sent",
                   snackBarType: "success",
+                  showDuration: 1,
                 );
+                Navigator.popAndPushNamed(context, '/sign-in');
               },
             );
           },
@@ -75,11 +77,13 @@ class RequestResetForm extends StatelessWidget {
       },
       builder: ((context, state) {
         return Form(
-          autovalidateMode: AutovalidateMode.always,
+          autovalidateMode: state.showErrorMessages
+              ? AutovalidateMode.always
+              : AutovalidateMode.disabled,
           child: Column(
             children: [
               const Text(
-                'Input your email so we can send reset your password',
+                'Input your email so we can send an email to reset your password',
                 // textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,

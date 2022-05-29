@@ -16,7 +16,7 @@ import 'package:http/http.dart' as http;
 
 @LazySingleton(as: IAuthRepository)
 class AuthRepository implements IAuthRepository {
-  static final String _baseUrl = "${dotenv.env["BASE_URL"]}/user";
+  static final String _baseUrl = "${dotenv.env["API"]}/user";
 
   http.Client? client = http.Client();
   // signInUser
@@ -131,14 +131,10 @@ class AuthRepository implements IAuthRepository {
     final outGoingJson = userDtoOut.toJson();
     try {
       final response = await client!.post(url, body: outGoingJson);
-      // ignore: avoid_print
-      print(response.body);
+
       if (response.statusCode == 200) {
-        final UserDto userDtoIn =
-            UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        // ignore: avoid_print
         print('success');
-        return right(userDtoIn.toDomain());
+        return right(user);
       } else if (response.statusCode == 404) {
         return left(const AuthFailure.emailNotFound());
       } else {
