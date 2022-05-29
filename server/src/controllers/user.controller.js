@@ -531,7 +531,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
     // const userId = token.data;
 
     // TODO:MAKE TOKEN BASED
-    const userId = "6290e13c063cd6d5eaa9d836";
+    const userId = "623b101b9a85861e924388dd";
 
     // get active game week
     const gameWeek = await Gameweek.find({ status: "active" });

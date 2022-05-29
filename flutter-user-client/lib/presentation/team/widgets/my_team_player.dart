@@ -1,4 +1,5 @@
 import 'package:efpl/application/my_team/myteam_bloc.dart';
+import 'package:efpl/services/global_vars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -182,10 +183,10 @@ class MyTeamPlayer extends StatelessWidget {
                 onTap: () => Navigator.of(context)
                     .pushNamed("/player", arguments: playerId),
                 child: Row(
-                  children: const [
-                    Icon(Icons.info),
-                    SizedBox(width: 5),
-                    Text("Player Information"),
+                  children: [
+                    const Icon(Icons.info),
+                    const SizedBox(width: 5),
+                    Text(strings(context).playerInfo),
                   ],
                 ),
               ),
@@ -196,10 +197,10 @@ class MyTeamPlayer extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: Row(
-                  children: const [
-                    Icon(Icons.compare_arrows),
-                    SizedBox(width: 5),
-                    Text("Switch Player"),
+                  children: [
+                    const Icon(Icons.compare_arrows),
+                    const SizedBox(width: 5),
+                    Text(strings(context).switchPlayer)
                   ],
                 ),
               ),
@@ -211,10 +212,10 @@ class MyTeamPlayer extends StatelessWidget {
                       }
                     : () {},
                 child: Row(
-                  children: const [
-                    Icon(Icons.copyright),
-                    SizedBox(width: 5),
-                    Text("Make Captain"),
+                  children: [
+                    const Icon(Icons.copyright),
+                    const SizedBox(width: 5),
+                    Text(strings(context).makeCaptain),
                   ],
                 ),
               ),
@@ -227,10 +228,10 @@ class MyTeamPlayer extends StatelessWidget {
                       }
                     : (() {}),
                 child: Row(
-                  children: const [
-                    Icon(Icons.arrow_drop_up_rounded),
-                    SizedBox(width: 5),
-                    Text("Make Vice-Captain"),
+                  children: [
+                    const Icon(Icons.copyright),
+                    const SizedBox(width: 5),
+                    Text(strings(context).makeViceCaptain),
                   ],
                 ),
               ),
