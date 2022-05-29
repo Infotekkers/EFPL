@@ -6,28 +6,33 @@
         <label>{{ $t("Email") }}:</label>
         <input required type="email" v-model="loginInfo.email" />
       </div>
-      <div class="password">
+      <div>
         <label>{{ $t("Password") }}:</label>
-        <input
-          :type="showPassword ? 'text' : 'password'"
-          required
-          v-model="loginInfo.password"
-          minlength="8"
-        />
+        <div class="password">
+          <input
+            :type="showPassword ? 'text' : 'password'"
+            required
+            v-model="loginInfo.password"
+            minlength="8"
+          />
+          <button @click="showPassword = !showPassword">
+            {{ $t("show password") }}
+          </button>
+        </div>
       </div>
-      <div class="submit">
-        <button>{{ $t("Login") }}</button>
+      <div class="action-buttons">
+        <p class="forgot-pass">
+          <router-link :to="{ name: 'forgot-password' }">{{
+            $t("forgot password")
+          }}</router-link>
+        </p>
+        <div class="submit">
+          <button>{{ $t("Login") }}</button>
+        </div>
       </div>
     </form>
-    <button @click="showPassword = !showPassword">
-      {{ $t("show password") }}
-    </button>
+
     <div v-if="isLoading">Loading...</div>
-    <p class="forgot-pass">
-      <router-link :to="{ name: 'forgot-password' }"
-        >{{ $t("forgot password") }}?</router-link
-      >
-    </p>
   </div>
 </template>
 
@@ -39,30 +44,31 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: 90vw;
+  max-width: 600px;
+
+  background: var(--neutral-200);
+  padding: var(--spacing-xlarge);
 }
 form {
   text-align: left;
-  padding: var(--spacing-large);
-  border: 1px solid;
-  border-radius: 10px;
 }
+
+h1 {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--neutral-600);
+  margin-bottom: var(--spacing-base);
+}
+
 label {
-  color: var(--neutral-900);
+  color: var(--neutral-700);
   display: inline-block;
-  margin: var(--spacing-regular) 0 var(--spacing-base);
-  font-size: var(--text-xsmall);
-  font-weight: bold;
-  text-transform: uppercase;
+  margin: var(--spacing-regular) 0 var(--spacing-2xsmall);
+  font-size: var(--text-small);
 }
 button {
-  background: var(--success-200);
-  color: var(--neutral-50);
   border: 0;
-  padding: var(--spacing-small) var(--spacing-regular);
-  margin-top: var(--spacing-regular);
-  border-radius: 20px;
-  cursor: pointer;
 }
 input {
   display: block;
@@ -73,12 +79,51 @@ input {
   border-bottom: 1px solid var(--neutral-600);
   color: var(--neutral-600);
 }
-.forgot-pass {
+
+.forgot-pass a {
   text-decoration: none;
+  color: var(--neutral-700);
+  font-size: var(--text-small);
 }
+
 .submit {
   text-align: center;
 }
+
+.password {
+  position: relative;
+}
+
+.password > button {
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-base);
+  transform: translateY(-50%);
+
+  background: none;
+  color: var(--success-400);
+  padding: 0;
+  margin: 0;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  margin-top: var(--spacing-large);
+}
+
+.action-buttons button {
+  margin-left: var(--spacing-base);
+  font-weight: bold;
+  background: var(--success-200);
+  color: var(--success-900);
+  padding: var(--spacing-small) var(--spacing-xlarge);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .admin-login {
     width: 100%;
