@@ -23,10 +23,16 @@ router.patch("/update/:matchId", protectRoute, fixtureController.updateFixture);
 router.get("/", fixtureController.getAllFixtures);
 router.get("/:matchId", protectRoute, fixtureController.getFixture);
 
+router.get("/gw/:gameWeekId", fixtureController.getAllFixturesOfGameWeek);
+
 router.delete(
   "/delete/:matchId",
   protectRoute,
   fixtureController.deleteFixture
 );
+
+router.get("/gw/:gameWeekId/:lang", fixtureController.getAllFixturesOfGameWeek);
+
+router.get("/gw/detail/:matchId", fixtureController.getFixtureDetail);
 
 module.exports = router;

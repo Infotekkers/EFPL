@@ -8,7 +8,7 @@ part 'util_event.dart';
 part 'util_state.dart';
 part 'util_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class UtilBloc extends Bloc<UtilEvent, UtilState> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -20,9 +20,10 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
       final SharedPreferences prefs = await _prefs;
       String defaultLocale = "en";
       try {
-        String defaultLocale =
-            prefs.getString("lang")!.isEmpty ? 'en' : prefs.getString("lang")!;
-      } catch (e) {}
+        prefs.getString("lang")!.isEmpty ? 'en' : prefs.getString("lang")!;
+      } catch (e) {
+        // print(e);
+      }
 
       emit(
         UtilState(

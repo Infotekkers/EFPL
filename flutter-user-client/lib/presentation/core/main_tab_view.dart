@@ -1,16 +1,12 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:efpl/application/util/util_bloc.dart';
-import 'package:efpl/injectable.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
 import 'package:efpl/presentation/leagues/leagues_view.dart';
 import 'package:efpl/presentation/points/points_view.dart';
 import 'package:efpl/presentation/settings/settings_view.dart';
 import 'package:efpl/presentation/stats/stats_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
-import 'package:efpl/presentation/transfers/transfers_view.dart';
+import 'package:efpl/presentation/transfers/transfers_view_main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -19,12 +15,9 @@ class MainTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UtilBloc _utilBloc = getIt<UtilBloc>();
-    _utilBloc.add(const UtilEvent.setDefaultLocale());
-
     return DefaultTabController(
       length: 7,
-      initialIndex: 6,
+      initialIndex: 2,
       child: Scaffold(
         drawer: Drawer(
           child: ListView(
@@ -32,7 +25,7 @@ class MainTabView extends StatelessWidget {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: ConstantColors.primary_800,
                 ),
                 child: Center(child: Text('Drawer Header')),
               ),
@@ -61,14 +54,21 @@ class MainTabView extends StatelessWidget {
           ),
         ),
         appBar: AppBar(
-          elevation: 8.0,
-          bottom: const TabBar(
-            tabs: [
+          backgroundColor: Colors.blue[50],
+          iconTheme: IconThemeData(color: Colors.blue[900]),
+          elevation: 0,
+          bottom: TabBar(
+            unselectedLabelColor: const Color.fromARGB(255, 144, 201, 248),
+            labelColor: Colors.blue[900],
+            indicator: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              // color: Colors.blue[600],
+            ),
+            tabs: const [
               // My Team
               Tab(
                 icon: Icon(
                   MdiIcons.accountGroup,
-                  color: Colors.white,
                 ),
               ),
 
@@ -76,7 +76,6 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   MdiIcons.counter,
-                  color: Colors.white,
                 ),
               ),
               // Transfers
@@ -84,7 +83,6 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   Boxicons.bx_transfer,
-                  color: Colors.white,
                 ),
               ),
 
@@ -92,21 +90,18 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   MdiIcons.calendarMonth,
-                  color: Colors.white,
                 ),
               ),
               // My Leagues
               Tab(
                 icon: Icon(
                   MdiIcons.trophy,
-                  color: Colors.white,
                 ),
               ),
               // Stats
               Tab(
                 icon: Icon(
                   Icons.leaderboard,
-                  color: Colors.white,
                 ),
               ),
 
@@ -114,32 +109,28 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   Icons.settings,
-                  color: Colors.white,
                 ),
               ),
             ],
           ),
-          title: const Text(
+          title: Text(
             'EFPL',
-            style: TextStyle(color: Colors.white, fontSize: 24),
+            style: TextStyle(
+              color: Colors.blue[900],
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             TeamView(),
             PointsView(),
             TransfersView(),
-            FixtureView(),
+            FixturesView(),
             LeaguesView(),
             StatsView(),
-            MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => getIt<UtilBloc>(),
-                )
-              ],
-              child: SettingsView(),
-            )
+            SettingsView()
           ],
         ),
       ),

@@ -24,5 +24,24 @@
   "fixtures": "Fixtures",
   "league": "League",
   "stats": "Stats",
-  "currentLanguage": "Language"
+  "currentLanguage": "Language",
+  "title_fixture": "FIXTURE TRANSLATIONS",
+  "gameWeek": "GameWeek",
+
+
+  "checkConn": "Check Your Internet Connection",
+  "teamSaved": "Team Saved",
+  "retry": "Retry",
+  "cancel": "Cancel",
+  "save": "Save",
+  "chipConfirmation": " Chip about to be activated. Confirm?",
+
+  "playerInfo": "Player Information",
+  "switchPlayer": "Switch Player",
+  "makeCaptain": "Make Vice-captain",
+  "makeViceCaptain": "Make Vice-captain",
+  "gk": "GK",
+  "def": "DEF",
+  "mid": "MID",
+  "att": "ATT"
 }

@@ -58,8 +58,7 @@ const addTeam = asyncHandler(async (req, res) => {
 });
 
 const getTeams = asyncHandler(async (req, res) => {
-  console.log("Request on the way");
-  const team = await TeamModel.find();
+  const team = await TeamModel.find().sort("teamName");
   res.status(200).send(team);
   
 });

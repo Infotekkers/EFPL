@@ -1,9 +1,9 @@
+import 'package:efpl/application/my_team/myteam_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
-import 'package:efpl/services/snack_bar.dart';
+import 'package:efpl/presentation/team/widgets/team_view_body.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TeamView extends StatelessWidget {
   const TeamView({Key? key}) : super(key: key);
@@ -12,31 +12,18 @@ class TeamView extends StatelessWidget {
   Widget build(BuildContext context) {
     final UtilBloc _utilBloc = getIt<UtilBloc>();
     _utilBloc.add(const UtilEvent.setDefaultLocale());
-    return Center(
-      child: Column(
-        children: [
-          Text(
-            AppLocalizations.of(context)!.team,
-          ),
-          TextButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-            ),
-            onPressed: () {
-              CustomSnackBar().showCustomSnackBar(
-                showContext: context,
-                headlineText: "Custom Snackbar",
-                message: "Flutter snackbar with cool design is showing now!",
-                snackBarType: "warning",
-              );
-            },
-            child: const Text(
-              "Show Me Snackbar",
-              style: TextStyle(color: Colors.white),
-            ),
+
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider.value(
+            value: getIt<MyTeamBloc>()
+              ..add(const MyTeamEvent.loadMyTeam(
+                  "6290e13c063cd6d5eaa9d836", "1")),
           )
         ],
-      ),
-    );
+        child: Container(
+          color: Colors.blue[50],
+          child: const TeamViewBody(),
+        ));
   }
 }

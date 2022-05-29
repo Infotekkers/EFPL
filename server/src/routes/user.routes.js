@@ -6,10 +6,16 @@ router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.get("/fetchAll", userController.fetchUsers);
 router.get("/fetchOne/:id", userController.fetchOneUser);
+router.get("/fetchUserTeam/:id/:gw", userController.fetchUserTeam);
 router.patch("/updateUser/:id", userController.updateUser);
 router.patch("/deleteUser/:id", userController.deleteUser);
 router.post("/requestReset", userController.requestReset);
 router.post("/resetPass/:token", userController.resetPass);
 router.put("/transfer", userController.transfer);
+
+// new
+router.get("/team", userController.getUserTeam);
+router.patch("/team/", userController.transfer);
+router.get("/point/:gameWeekId", userController.getUserPoints);
 
 module.exports = router;
