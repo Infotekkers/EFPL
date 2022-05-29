@@ -1,9 +1,13 @@
 const asyncHandler = require("express-async-handler");
 const statUpdater = require("../utils/helpers").statUpdater;
+const validator = require("../utils/validators");
 
 const FixtureModel = require("../models/Fixtures");
 const TeamModel = require("../models/Teams");
 const Player = require("../models/Player");
+const GameWeek = require("../models/GameWeek");
+
+const translator = require("../locale/translator");
 
 const MINUTE_COUNTERS = {};
 
@@ -62,6 +66,10 @@ const postFixture = asyncHandler(async function (req, res) {
       awayTeam,
       matchStat,
     }).save();
+
+    const io = require("../../server");
+    io.emit("fixtureUpdated");
+
     res.status(200).send("Fixture added!");
   } else {
     res
@@ -259,7 +267,6 @@ const startFixture = asyncHandler(async function (req, res) {
       MINUTE_COUNTERS[matchId].intervalId = setInterval(async () => {
         if (MINUTE_COUNTERS[matchId].status === "active") {
           // TODO: Calculate clean sheets
-          console.log("MINUTE COUNTER ->");
           const match = await FixtureModel.findOne({ matchId }).lean();
 
           // !! MIGHT RESET MINUTESPLAYED OBJ
@@ -327,6 +334,9 @@ const startFixture = asyncHandler(async function (req, res) {
             )
         )
         .catch(() => res.status(500).send("Try again!"));
+
+      const io = require("../../server");
+      io.emit("fixtureUpdated");
     }
     // no match
     else if (!matchParent) {
@@ -381,6 +391,9 @@ const pauseFixture = asyncHandler(async function (req, res) {
         );
       })
       .catch(() => res.status(500).send("Try again!"));
+
+    const io = require("../../server");
+    io.emit("fixtureUpdated");
   } else if (!match) {
     res
       .status(404)
@@ -424,6 +437,9 @@ const resumeFixture = asyncHandler(async function (req, res) {
         )
       )
       .catch(() => res.status(500).send("Try again!"));
+
+    const io = require("../../server");
+    io.emit("fixtureUpdated");
   } else if (!match) {
     res
       .status(404)
@@ -470,6 +486,9 @@ const endFixture = asyncHandler(async function (req, res) {
         )
       )
       .catch(() => res.status(500).send("Try again!"));
+
+    const io = require("../../server");
+    io.emit("fixtureUpdated");
   } else if (!match) {
     res
       .status(404)
@@ -505,6 +524,9 @@ const postponeFixture = asyncHandler(async function (req, res) {
       match.awayTeam = awayTeam ?? match.awayTeam;
 
       await match.save();
+
+      const io = require("../../server");
+      io.emit("fixtureUpdated");
 
       res
         .status(200)
@@ -555,6 +577,9 @@ const updateFixture = asyncHandler(async function (req, res) {
       match.awayTeam = awayTeam ?? match.awayTeam;
       await match.save();
 
+      const io = require("../../server");
+      io.emit("fixtureUpdated");
+
       res.send("Match updated!");
     } else {
       res.status(422).send("Live Match can not be updated");
@@ -577,6 +602,11 @@ const updateLineup = asyncHandler(async (req, res) => {
     match.homeTeamLineUp = homeTeamLineUp ?? match.homeTeamLineUp;
     match.awayTeamLineUp = awayTeamLineUp ?? match.awayTeamLineUp;
     await match.save();
+
+    const io = require("../../server");
+
+    // TODO:Handle in frontend
+    io.emit("fixtureLineUpUpdated");
 
     res.send("Match lineup updated!");
   } else if (!match) {
@@ -610,6 +640,11 @@ const updateStats = asyncHandler(async (req, res) => {
       upsert: false,
     });
 
+    const io = require("../../server");
+
+    // TODO:Handle on Frontend
+    io.emit("fixtureStatUpdated");
+
     res.send("Match stats updated!");
   } else if (!match) {
     res.status(404).send("Match doesn't exist!");
@@ -629,6 +664,11 @@ const updateScore = asyncHandler(async (req, res) => {
     match.score = score;
 
     await match.save();
+
+    const io = require("../../server");
+
+    //  TODO:Handle on Frontend
+    io.emit("fixtureScoreUpdated");
 
     res.send("Match score updated!");
   } else if (!match) {
@@ -665,10 +705,87 @@ const deleteFixture = asyncHandler(async function (req, res) {
     const deleted = await FixtureModel.deleteOne({
       matchId: req.params.matchId,
     });
+    const io = require("../../server");
+    io.emit("fixtureUpdated");
     deleted
       ? res.send("Match deleted!")
       : res.status(400).send("Match with provided matchid doesn't exist");
   }
+});
+
+const getAllFixturesOfGameWeek = asyncHandler(async function (req, res) {
+  const gwId = req.params.gameWeekId;
+
+  let gameWeekId = 1;
+
+  if (gwId.toString() === "0") {
+    const activeGw = await GameWeek.find({ status: "active" });
+
+    if (activeGw.length > 0) {
+      gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber;
+    }
+  } else {
+    gameWeekId = gwId;
+  }
+
+  const matches = await FixtureModel.find({ gameweekId: gameWeekId })
+    .select({
+      _id: 0,
+      __v: 0,
+      // matchStat: 0,
+    })
+    .sort("schedule");
+
+  const matchAndTeamInfo = [];
+
+  for (let i = 0; i < matches.length; i++) {
+    const currMatch = {};
+    const homeTeamInfo = await TeamModel.findOne({
+      teamName: matches[i].homeTeam,
+    }).select({ _id: 0, __v: 0, teamId: 0, teamName: 0, foundedIn: 0 });
+
+    const awayTeamInfo = await TeamModel.findOne({
+      teamName: matches[i].awayTeam,
+    }).select({ _id: 0, __v: 0, teamId: 0, teamName: 0, foundedIn: 0 });
+
+    currMatch.gameWeekId = matches[i].gameweekId;
+    currMatch.matchId = matches[i].matchId;
+    currMatch.schedule = matches[i].schedule;
+    currMatch.status = matches[i].status;
+    currMatch.score = matches[i].score;
+    currMatch.homeTeam = matches[i].homeTeam;
+    currMatch.awayTeam = matches[i].awayTeam;
+
+    currMatch.homeTeamCity = homeTeamInfo.teamCity;
+    currMatch.homeTeamStadium = homeTeamInfo.teamStadium;
+    currMatch.homeTeamLogo = homeTeamInfo.teamLogo;
+    currMatch.homeTeamCapacity = homeTeamInfo.stadiumCapacity;
+    currMatch.homeTeamCoach = homeTeamInfo.teamCoach;
+
+    currMatch.awayTeamCity = awayTeamInfo.teamCity;
+    currMatch.awayTeamStadium = awayTeamInfo.teamStadium;
+    currMatch.awayTeamLogo = awayTeamInfo.teamLogo;
+    currMatch.awayTeamCapacity = awayTeamInfo.stadiumCapacity;
+    currMatch.awayTeamCoach = awayTeamInfo.teamCoach;
+
+    const processFinalLineup = await validator.processTeamIdToData(matches[i]);
+
+    currMatch.homeTeamLineUp = processFinalLineup[0];
+    currMatch.awayTeamLineUp = processFinalLineup[1];
+
+    matchAndTeamInfo.push(currMatch);
+  }
+
+  res.status(200).send(matchAndTeamInfo);
+});
+
+const getFixtureDetail = asyncHandler(async function (req, res) {
+  const matchId = req.params.matchId;
+  const match = await FixtureModel.findOne({ matchId: matchId }).select(
+    "matchStat score homeTeamLineUp awayTeamLineUp status"
+  );
+
+  res.status(200).send(match);
 });
 
 module.exports = {
@@ -685,4 +802,8 @@ module.exports = {
   updateLineup,
   updateStats,
   updateScore,
+
+  // New
+  getAllFixturesOfGameWeek,
+  getFixtureDetail,
 };

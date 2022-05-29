@@ -154,7 +154,13 @@
       </div>
 
       <!-- Content -->
-      <div v-if="currentGWFixtures.length > 0" class="all-fixtures">
+      <div
+        v-if="
+          currentGWFixtures.length > 0 &&
+          allTeams.length >= currentGWFixtures.length / 2
+        "
+        class="all-fixtures"
+      >
         <!-- Classify by dates -->
         <div v-for="(fixtureBatch, index) in currentGWFixtures" :key="index">
           <!-- Date of fixture -->
@@ -576,7 +582,13 @@ export default {
         formattedAndFiltered.push(fix);
       });
 
+      console.log(formattedAndFiltered);
+
       return formattedAndFiltered;
+    },
+
+    allTeams() {
+      return store.state.Fixture.allTeams;
     },
 
     // format date to readable format

@@ -280,110 +280,213 @@ const addTestPlayer = async () => {
 const addTestUser = async () => {
   // Test USER
   const testUser = new User({
-    userName: "Testy",
+    userName: "MaduserYaknow",
     password: "Tester@123456",
     email: "tester@testy.com",
-    teamName: "The Testies",
+    teamName: "Mad Team Ya know",
     country: "ET",
     favouriteEplTeam: "",
     team: [
-      {
-        gameweekId: "1",
-        players: {
-          101: {
-            playerId: "101",
-            eplTeamId: "10",
-            price: "5",
-            multiplier: "1",
-            isCaptain: true,
-          },
-          102: {
-            playerId: "102",
-            eplTeamId: "10",
-            price: "5",
-            multiplier: "1",
-            isViceCaptain: true,
-          },
-          201: {
-            playerId: "201",
-            eplTeamId: "10",
-            price: "5",
-            multiplier: "1",
-          },
-          202: {
-            playerId: "202",
-            eplTeamId: "20",
-            price: "5",
-            multiplier: "1",
-          },
-          203: {
-            playerId: "203",
-            eplTeamId: "20",
-            price: "5",
-            multiplier: "1",
-          },
-          204: {
-            playerId: "204",
-            eplTeamId: "20",
-            price: "5",
-            multiplier: "1",
-          },
-          205: {
-            playerId: "205",
-            eplTeamId: "30",
-            price: "5",
-            multiplier: "1",
-          },
-          301: {
-            playerId: "301",
-            eplTeamId: "30",
-            price: "5",
-            multiplier: "1",
-          },
-          302: {
-            playerId: "302",
-            eplTeamId: "30",
-            price: "5",
-            multiplier: "1",
-          },
-          303: {
-            playerId: "303",
-            eplTeamId: "40",
-            price: "5",
-            multiplier: "1",
-          },
-          304: {
-            playerId: "304",
-            eplTeamId: "40",
-            price: "5",
-            multiplier: "1",
-          },
-          305: {
-            playerId: "305",
-            eplTeamId: "40",
-            price: "5",
-            multiplier: "0",
-          },
-          401: {
-            playerId: "401",
-            eplTeamId: "50",
-            price: "5",
-            multiplier: "0",
-          },
-          402: {
-            playerId: "402",
-            eplTeamId: "50",
-            price: "5",
-            multiplier: "0",
-          },
-          403: {
-            playerId: "403",
-            eplTeamId: "50",
-            price: "5",
-            multiplier: "0",
-          },
-        },
-      },
+      // {
+      //   gameweekId: "1",
+      //   activeChip: "",
+      //   freeTransfers: 1,
+      //   deduction: 0,
+      //   players: {
+      //     101: {
+      //       playerId: "100028",
+      //       eplTeamId: "10",
+      //       price: "5",
+      //       multiplier: "1",
+      //       isCaptain: true,
+      //     },
+      //     102: {
+      //       playerId: "100002",
+      //       eplTeamId: "10",
+      //       price: "5",
+      //       multiplier: "1",
+      //       isViceCaptain: true,
+      //     },
+      //     201: {
+      //       playerId: "100032",
+      //       eplTeamId: "10",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     202: {
+      //       playerId: "100009",
+      //       eplTeamId: "20",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     203: {
+      //       playerId: "100060",
+      //       eplTeamId: "20",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     204: {
+      //       playerId: "100063",
+      //       eplTeamId: "20",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     205: {
+      //       playerId: "100116",
+      //       eplTeamId: "30",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     301: {
+      //       playerId: "100095",
+      //       eplTeamId: "30",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     302: {
+      //       playerId: "100096",
+      //       eplTeamId: "30",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     303: {
+      //       playerId: "100174",
+      //       eplTeamId: "40",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     304: {
+      //       playerId: "100151",
+      //       eplTeamId: "40",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     305: {
+      //       playerId: "100152",
+      //       eplTeamId: "40",
+      //       price: "5",
+      //       multiplier: "0",
+      //     },
+      //     401: {
+      //       playerId: "100184",
+      //       eplTeamId: "50",
+      //       price: "5",
+      //       multiplier: "0",
+      //     },
+      //     402: {
+      //       playerId: "100021",
+      //       eplTeamId: "50",
+      //       price: "5",
+      //       multiplier: "0",
+      //     },
+      //     403: {
+      //       playerId: "100450",
+      //       eplTeamId: "50",
+      //       price: "5",
+      //       multiplier: "0",
+      //     },
+      //   },
+      // },
+      // {
+      //   gameweekId: "2",
+      //   activeChip: "",
+      //   freeTransfers: 1,
+      //   deduction: 0,
+      //   players: {
+      //     101: {
+      //       playerId: "100028",
+      //       eplTeamId: "10",
+      //       price: "5",
+      //       multiplier: "1",
+      //       isCaptain: true,
+      //     },
+      //     102: {
+      //       playerId: "100002",
+      //       eplTeamId: "10",
+      //       price: "5",
+      //       multiplier: "1",
+      //       isViceCaptain: true,
+      //     },
+      //     201: {
+      //       playerId: "100032",
+      //       eplTeamId: "10",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     202: {
+      //       playerId: "100009",
+      //       eplTeamId: "20",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     203: {
+      //       playerId: "100060",
+      //       eplTeamId: "20",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     204: {
+      //       playerId: "100063",
+      //       eplTeamId: "20",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     205: {
+      //       playerId: "100116",
+      //       eplTeamId: "30",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     301: {
+      //       playerId: "100095",
+      //       eplTeamId: "30",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     302: {
+      //       playerId: "100096",
+      //       eplTeamId: "30",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     303: {
+      //       playerId: "100174",
+      //       eplTeamId: "40",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     304: {
+      //       playerId: "100151",
+      //       eplTeamId: "40",
+      //       price: "5",
+      //       multiplier: "1",
+      //     },
+      //     305: {
+      //       playerId: "100152",
+      //       eplTeamId: "40",
+      //       price: "5",
+      //       multiplier: "0",
+      //     },
+      //     401: {
+      //       playerId: "100184",
+      //       eplTeamId: "50",
+      //       price: "5",
+      //       multiplier: "0",
+      //     },
+      //     402: {
+      //       playerId: "100021",
+      //       eplTeamId: "50",
+      //       price: "5",
+      //       multiplier: "0",
+      //     },
+      //     403: {
+      //       playerId: "100450",
+      //       eplTeamId: "50",
+      //       price: "5",
+      //       multiplier: "0",
+      //     },
+      //   },
+      // },
     ],
   });
 
@@ -517,7 +620,26 @@ const populatePlayers = async () => {
   if (players.data.data.length === 0) {
     playersData.forEach(async (team) => {
       team.forEach(async (player) => {
-        player.score = [];
+        player.score = [
+          {
+            gameweekId: "1",
+            price: "8",
+            fantasyScore: 0,
+            minutesPlayed: 0,
+            goals: 0,
+            assists: 0,
+            cleanSheet: 0,
+            yellows: 0,
+            reds: 0,
+            penalitiesMissed: 0,
+            penalitiesSaved: 0,
+            saves: 0,
+            ownGoal: 0,
+            transfersIn: 0,
+            transfersOut: 0,
+            form: 0,
+          },
+        ];
         await Player.create(player);
       });
     });
