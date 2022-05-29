@@ -1,4 +1,4 @@
-import 'package:efpl/application/auth/authentication/auth_bloc.dart';
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/presentation/authentication/register/register_view.dart';
 import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
 import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';

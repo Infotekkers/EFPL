@@ -62,9 +62,7 @@ class AuthRepository implements IAuthRepository {
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        // ignore: avoid_print
-        print(userDtoIn.token);
-        // store token on secure store
+
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 400) {
         return left(const AuthFailure.emailAlreadyInUse());
@@ -85,10 +83,8 @@ class AuthRepository implements IAuthRepository {
 
     try {
       String? value = await storage.read(key: 'user');
-      print(value);
       final UserDto userDtoIn =
           UserDto.fromJson(jsonDecode(value!) as Map<String, dynamic>);
-      print(userDtoIn.token);
       return optionOf(userDtoIn.toDomain());
     } catch (err) {
       return none();
@@ -152,17 +148,26 @@ class AuthRepository implements IAuthRepository {
     }
   }
 
+// authorise token
   @override
   Future<Either<AuthFailure, Unit>> checkToken({required Token token}) async {
+    print('e');
     final Uri url = Uri.parse("$_baseUrl/validateUser");
     try {
-      // final token = Token(
-      //     "");
-      final response = await client!.post(url, body: token);
+      final response =
+          await client!.post(url, body: {"token": token.getOrCrash()});
       print(response.body);
-      return right(unit);
+      if (response.statusCode == 200) {
+        return right(unit);
+      } else if (response.statusCode == 403) {
+        return left(const AuthFailure.emailNotFound());
+      } else if (response.statusCode == 404) {
+        return left(const AuthFailure.emailNotFound());
+      } else {
+        return left(const AuthFailure.serverError());
+      }
     } catch (err) {
-      return left(const AuthFailure.serverError());
+      return left(const AuthFailure.networkError());
     }
   }
 }

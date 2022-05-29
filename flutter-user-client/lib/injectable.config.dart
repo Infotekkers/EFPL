@@ -7,8 +7,7 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/authentication/auth_bloc.dart' as _i9;
-import 'application/auth/authorisation/authorisation_bloc.dart' as _i10;
+import 'application/auth/auth/auth_bloc.dart' as _i9;
 import 'application/auth/register_form/register_form_bloc.dart' as _i5;
 import 'application/auth/request_reset_form/request_reset_form_bloc.dart'
     as _i6;
@@ -32,7 +31,5 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i7.SignInFormBloc(get<_i3.IAuthRepository>()));
   gh.factory<_i8.UtilBloc>(() => _i8.UtilBloc());
   gh.factory<_i9.AuthBloc>(() => _i9.AuthBloc(get<_i3.IAuthRepository>()));
-  gh.factory<_i10.AuthorisationBloc>(
-      () => _i10.AuthorisationBloc(get<_i3.IAuthRepository>()));
   return get;
 }

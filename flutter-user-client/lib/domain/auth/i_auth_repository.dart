@@ -29,6 +29,7 @@ abstract class IAuthRepository {
     required User user,
   });
 
+// authorise token
   Future<Either<AuthFailure, Unit>> checkToken({
     required Token token,
   });

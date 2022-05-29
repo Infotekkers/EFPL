@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:efpl/application/auth/authentication/auth_bloc.dart';
-import 'package:efpl/application/auth/authorisation/authorisation_bloc.dart';
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/domain/core/core_value_objects.dart';
@@ -67,13 +66,12 @@ class MainTabView extends StatelessWidget {
                   Navigator.popAndPushNamed(context, "/sign-in");
                 },
               ),
-              ListTile(
-                title: const Text('check token'),
-                onTap: () {
-                  BlocProvider.of<AuthorisationBloc>(context).add(
-                      const AuthorisationEvent.authorisationCheckRequested());
-                },
-              )
+              // ListTile(
+              //   title: const Text('check token'),
+              //   onTap: () {
+              //     BlocProvider.of<AuthBloc>(context).add(TokenCheckRequested());
+              //   },
+              // ),
             ],
           ),
         ),

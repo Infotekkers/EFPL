@@ -1,4 +1,4 @@
-import 'package:efpl/application/auth/authentication/auth_bloc.dart';
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/authentication/register/register_view.dart';
@@ -19,9 +19,18 @@ class SplashView extends StatelessWidget {
           intial: (_) {},
           authenticated: (_) {
             Navigator.popAndPushNamed(context, "/home");
+            print('authe');
           },
           unauthenticated: (_) {
             Navigator.popAndPushNamed(context, "/sign-in");
+          },
+          unauthorised: (_) {
+            // Navigator.popAndPushNamed(context, "/sign-in");
+            print('unauthorised');
+          },
+          authorised: (_) {
+            // Navigator.popAndPushNamed(context, "/home");
+            // print('authorised');
           },
         )
       },

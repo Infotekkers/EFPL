@@ -1,4 +1,4 @@
-import 'package:efpl/application/auth/authentication/auth_bloc.dart';
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/locale/l10n.dart';
@@ -29,6 +29,12 @@ class AppWidget extends StatelessWidget {
               const AuthEvent.authCheckRequested(),
             ),
         ),
+        // BlocProvider(
+        //   create: (context) => getIt<AuthBloc>()
+        //     ..add(
+        //       const AuthEvent.tokenCheckRequested(),
+        //     ),
+        // )
       ],
       child: BlocConsumer<UtilBloc, UtilState>(
         listener: (context, state) {},
