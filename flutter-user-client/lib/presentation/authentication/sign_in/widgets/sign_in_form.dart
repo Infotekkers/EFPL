@@ -76,11 +76,7 @@ class SignInForm extends StatelessWidget {
                 );
               },
               (_) {
-                CustomSnackBar().showCustomSnackBar(
-                    showContext: context,
-                    headlineText: "Success!",
-                    message: "Successfully Logged In",
-                    snackBarType: "success");
+                Navigator.popAndPushNamed(context, "/home");
               },
             );
           },

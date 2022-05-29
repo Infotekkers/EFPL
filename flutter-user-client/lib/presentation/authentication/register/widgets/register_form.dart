@@ -75,12 +75,7 @@ class RegisterForm extends StatelessWidget {
                 );
               },
               (_) {
-                CustomSnackBar().showCustomSnackBar(
-                  showContext: context,
-                  headlineText: "Success!",
-                  message: "Successfully Registered",
-                  snackBarType: "success",
-                );
+                Navigator.popAndPushNamed(context, "/home");
               },
             );
           },

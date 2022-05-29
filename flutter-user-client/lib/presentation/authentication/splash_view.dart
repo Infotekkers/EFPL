@@ -18,12 +18,10 @@ class SplashView extends StatelessWidget {
         state.map(
           intial: (_) {},
           authenticated: (_) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const MainTabView()));
+            Navigator.popAndPushNamed(context, "/home");
           },
           unauthenticated: (_) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SignInPage()));
+            Navigator.popAndPushNamed(context, "/sign-in");
           },
         )
       },
