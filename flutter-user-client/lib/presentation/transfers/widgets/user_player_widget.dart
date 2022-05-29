@@ -267,7 +267,7 @@ class UserPlayerWidget extends StatelessWidget {
                   ),
 
                   // Player Price
-                  Container(
+                  SizedBox(
                     height: 15,
                     width: 70,
                     child: Center(

@@ -389,15 +389,6 @@ class TransfersView extends StatelessWidget {
                                               0.5,
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 0, 0, 5),
-                                          decoration: const BoxDecoration(
-                                            border: Border(
-                                              bottom: BorderSide(
-                                                width: 0.45,
-                                                color:
-                                                    ConstantColors.primary_900,
-                                              ),
-                                            ),
-                                          ),
                                           child: Row(
                                             children: [
                                               // Label
@@ -432,15 +423,6 @@ class TransfersView extends StatelessWidget {
                                               0.5,
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 5, 0, 5),
-                                          decoration: const BoxDecoration(
-                                            border: Border(
-                                              bottom: BorderSide(
-                                                width: 0.45,
-                                                color:
-                                                    ConstantColors.primary_900,
-                                              ),
-                                            ),
-                                          ),
                                           child: Row(
                                             children: [
                                               // Label
@@ -476,15 +458,6 @@ class TransfersView extends StatelessWidget {
                                               0.5,
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 5, 0, 5),
-                                          decoration: const BoxDecoration(
-                                            border: Border(
-                                              bottom: BorderSide(
-                                                width: 0.45,
-                                                color:
-                                                    ConstantColors.primary_900,
-                                              ),
-                                            ),
-                                          ),
                                           child: Row(
                                             children: [
                                               const Text(
@@ -566,9 +539,9 @@ class TransfersView extends StatelessWidget {
                                     height: 50,
                                     decoration: BoxDecoration(
                                       color: ConstantColors.primary_900,
-                                      border: Border.all(
-                                        color: ConstantColors.primary_900,
-                                      ),
+                                      // border: Border.all(
+                                      //   color: ConstantColors.primary_900,
+                                      // ),
                                       borderRadius: const BorderRadius.all(
                                         Radius.circular(50),
                                       ),
@@ -687,7 +660,8 @@ String formatDeadline(String deadline) {
     "Nov",
     "Dec"
   ];
-  final String formattedDate = weekDays[dt.weekday].toString() +
+
+  final String formattedDate = weekDays[dt.weekday - 1].toString() +
       " " +
       months[dt.month - 1] +
       ", " +
@@ -695,7 +669,6 @@ String formatDeadline(String deadline) {
       " " +
       dt.year.toString();
 
-  // const
   return formattedDate;
   // return "";
 }
