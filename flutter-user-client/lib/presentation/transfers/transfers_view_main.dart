@@ -1,3 +1,4 @@
+import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
@@ -11,16 +12,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
+import '../../application/points/points_bloc.dart';
+
 class TransfersView extends StatelessWidget {
   const TransfersView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final UtilBloc _utilBloc = getIt<UtilBloc>();
-    _utilBloc.add(
-      const UtilEvent.setDefaultLocale(),
-    );
-
     final TransferBloc _transferBloc = BlocProvider.of<TransferBloc>(context);
 
     return BlocConsumer<TransferBloc, TransferState>(

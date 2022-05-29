@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 
 @LazySingleton(as: IAuthRepository)
 class AuthRepository implements IAuthRepository {
-  static final String _baseUrl = "${dotenv.env["BASE_URL"]}/user";
+  static final String _baseUrl = "${dotenv.env["API"]}/user";
 
   http.Client? client = http.Client();
   // signInUser
