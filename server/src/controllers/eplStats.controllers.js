@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Player = require("../models/Player");
+const Teams = require("../models/Teams");
 
 const overview = asyncHandler(async (_, res) => {
   const result = {};
@@ -75,6 +76,14 @@ const getTopPlayersForEachStat = asyncHandler(async (req, res) => {
       $sort: { name: 1 },
     },
   ]);
+
+  for (const player of aggregatedResult) {
+    const teamLogo = await Teams.findOne({ teamName: player.teamId }).select(
+      "teamLogo"
+    );
+
+    player.teamLogo = teamLogo.teamLogo;
+  }
 
   result.topScorers = aggregatedResult
     .sort((a, b) => b.goals - a.goals)

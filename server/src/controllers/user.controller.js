@@ -128,7 +128,7 @@ const fetchUserTeam = asyncHandler(async (req, res) => {
     return res.status(404).json({ messaage: "No user found" });
   }
 
-  const team = user.team[req.params.gw - 1];
+  const team = user.team[req.params.gw];
 
   for (const playerId in team.players) {
     const player = await Player.findOne(
@@ -257,138 +257,21 @@ const resetPass = asyncHandler(async (req, res) => {
 });
 
 const transfer = asyncHandler(async (req, res) => {
-  console.log("Here");
   // Destructure request body
   const { data } = req.body;
   // const { userId, incomingTeam } = JSON.parse(data);
-  const { incomingTeam } = JSON.parse(data);
 
-  // const incomingTeam = {
-  //   activeChip: "",
-  //   gameweekId: 1,
-  //   players: {
-  //     100014: {
-  //       playerId: "100014",
-  //       eplTeamId: "Bahir Dar Kenema S.C",
-  //       price: 5,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100018: {
-  //       playerId: "100018",
-  //       eplTeamId: "Bahir Dar Kenema S.C",
-  //       price: 5.5,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100019: {
-  //       playerId: "100019",
-  //       eplTeamId: "Bahir Dar Kenema S.C",
-  //       price: 5,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100103: {
-  //       playerId: "100103",
-  //       eplTeamId: "Defence Force S.C",
-  //       price: 6.7,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100105: {
-  //       playerId: "100105",
-  //       eplTeamId: "Defence Force S.C",
-  //       price: 4.9,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100106: {
-  //       playerId: "100106",
-  //       eplTeamId: "Defence Force S.C",
-  //       price: 5.7,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100140: {
-  //       playerId: "100140",
-  //       eplTeamId: "Addis Ababa City F.C",
-  //       price: 5.5,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100141: {
-  //       playerId: "100141",
-  //       eplTeamId: "Addis Ababa City F.C",
-  //       price: 4.6,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100146: {
-  //       playerId: "100146",
-  //       eplTeamId: "Addis Ababa City F.C",
-  //       price: 4.9,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100388: {
-  //       playerId: "100388",
-  //       eplTeamId: "Adama City S.C",
-  //       price: 6,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100389: {
-  //       playerId: "100389",
-  //       eplTeamId: "Adama City S.C",
-  //       price: 6,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100390: {
-  //       playerId: "100390",
-  //       eplTeamId: "Adama City S.C",
-  //       price: 6,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100430: {
-  //       playerId: "100430",
-  //       eplTeamId: "Arba Minch City F.C",
-  //       price: 6,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100442: {
-  //       playerId: "100442",
-  //       eplTeamId: "Arba Minch City F.C",
-  //       price: 6,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //     100443: {
-  //       playerId: "100443",
-  //       eplTeamId: "Arba Minch City F.C",
-  //       price: 6,
-  //       multiplier: 0,
-  //       isCaptain: false,
-  //       isViceCaptain: false,
-  //     },
-  //   },
-  // };
+  const { isSetTeam } = data;
+
+  console.log(isSetTeam);
+
+  let incomingTeam;
+
+  if (!isSetTeam) {
+    incomingTeam = JSON.parse(data).incomingTeam;
+  } else {
+    incomingTeam = data.incomingTeam;
+  }
 
   // create starter team if none => multiplier == 1
   const incomingPlayers = incomingTeam.players;
@@ -397,36 +280,51 @@ const transfer = asyncHandler(async (req, res) => {
     DEF: 0,
     MID: 0,
     ATT: 0,
+    isCaptain: 0,
+    isViceCaptain: 0,
   };
-  for (const key in incomingPlayers) {
-    // get player position
-    const currentPlayer = await Player.findOne({
-      playerId: incomingPlayers[key].playerId,
-    }).select("position -_id");
 
-    // goalkeeper
-    if (currentPlayer.position === "GK" && countMap.GK === 0) {
-      incomingPlayers[key].multiplier = 1;
-      countMap.GK = countMap.GK + 1;
-    }
-    // defender
-    else if (currentPlayer.position === "DEF" && countMap.DEF < 4) {
-      incomingPlayers[key].multiplier = 1;
-      countMap.DEF = countMap.DEF + 1;
-    }
-    // mid
-    else if (currentPlayer.position === "MID" && countMap.MID < 3) {
-      incomingPlayers[key].multiplier = 1;
-      countMap.MID = countMap.MID + 1;
-    }
-    // att
-    else if (currentPlayer.position === "ATT" && countMap.ATT < 3) {
-      incomingPlayers[key].multiplier = 1;
-      countMap.ATT = countMap.ATT + 1;
+  if (!isSetTeam) {
+    for (const key in incomingPlayers) {
+      // get player position
+      const currentPlayer = await Player.findOne({
+        playerId: incomingPlayers[key].playerId,
+      }).select("position -_id");
+
+      // goalkeeper
+      if (currentPlayer.position === "GK" && countMap.GK === 0) {
+        incomingPlayers[key].multiplier = 1;
+        countMap.GK = countMap.GK + 1;
+
+        if (!countMap.isCaptain) {
+          incomingPlayers[key].isCaptain = true;
+          countMap.isCaptain = true;
+        }
+      }
+      // defender
+      else if (currentPlayer.position === "DEF" && countMap.DEF < 4) {
+        incomingPlayers[key].multiplier = 1;
+        countMap.DEF = countMap.DEF + 1;
+
+        if (!countMap.isViceCaptain) {
+          incomingPlayers[key].isViceCaptain = true;
+          countMap.isViceCaptain = true;
+        }
+      }
+      // mid
+      else if (currentPlayer.position === "MID" && countMap.MID < 3) {
+        incomingPlayers[key].multiplier = 1;
+        countMap.MID = countMap.MID + 1;
+      }
+      // att
+      else if (currentPlayer.position === "ATT" && countMap.ATT < 3) {
+        incomingPlayers[key].multiplier = 1;
+        countMap.ATT = countMap.ATT + 1;
+      }
     }
   }
 
-  const userId = "6290e13c063cd6d5eaa9d836";
+  const userId = "6293cde1db48842cd25d70d5";
 
   // Fetch active gameweek
   let activeGameweek = await Gameweek.findOne({ status: "active" }).exec();
@@ -442,7 +340,7 @@ const transfer = asyncHandler(async (req, res) => {
   // Fetch User Details
   const user = await User.findById(userId).exec();
 
-  const activeTeam = user.team[activeGameweek - 1];
+  const activeTeam = user.team[activeGameweek - 2];
 
   if (user.team.length > 0) {
     const [isTeamValid, errorType] = await validateTeam(
@@ -457,11 +355,21 @@ const transfer = asyncHandler(async (req, res) => {
       let transfersMade = "";
       if (activeTeam) {
         [deduction, transfersMade] = pointDeductor(activeTeam, incomingTeam);
+
+        console.log(transfersMade);
         // Deduct free transfer
-        activeTeam.freeTransers =
-          activeTeam.freeTransers < transfersMade
-            ? 0
-            : activeTeam.freeTransers - transfersMade;
+        if (activeTeam.freeTransfers > 0 && transfersMade > 1) {
+          if (activeTeam.freeTransfers > transfersMade) {
+            activeTeam.freeTransfers = activeTeam.freeTransfers - transfersMade;
+          } else {
+            activeTeam.freeTransfers = activeTeam.freeTransfers - 1;
+          }
+        }
+        console.log(activeTeam.freeTransfers);
+        // activeTeam.freeTransfers =
+        //   activeTeam.freeTransfers < transfersMade
+        //     ? 0
+        //     : activeTeam.freeTransfers - transfersMade;
       }
 
       // Remove active chips from available chips
@@ -485,6 +393,7 @@ const transfer = asyncHandler(async (req, res) => {
       const currentGwTeam = user.team[activeGameweek];
       currentGwTeam.players = incomingTeam.players;
       currentGwTeam.deduction = deduction;
+      currentGwTeam.freeTransfers = activeTeam.freeTransfers;
       updatedUserTeam.push(currentGwTeam);
 
       // update future teams
@@ -507,6 +416,7 @@ const transfer = asyncHandler(async (req, res) => {
 
           currentTeam = currentNewTeam;
         }
+
         updatedUserTeam.push(currentTeam);
       }
       // update user team
@@ -548,7 +458,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
     // const userId = token.data;
 
     // TODO:MAKE TOKEN BASED
-    const userId = "6290e13c063cd6d5eaa9d836";
+    const userId = "6293cde1db48842cd25d70d5";
 
     // get active game week
     const gameWeek = await Gameweek.find({ status: "active" });
@@ -671,7 +581,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
           maxBudget: user.maxBudget,
           gameWeekDeadline: currentGameWeek.startTimestamp,
         };
-        res.status(404).send(finalFormat);
+        res.status(200).send(finalFormat);
       }
     }
   } catch (e) {
@@ -688,7 +598,7 @@ const getUserPoints = asyncHandler(async (req, res) => {
   // const userId = token.data;
 
   // TODO:Replace
-  const userId = "6290e13c063cd6d5eaa9d836";
+  const userId = "6293cde1db48842cd25d70d5";
 
   // get the gw number from frontend
   let gameWeekId = gwId;
