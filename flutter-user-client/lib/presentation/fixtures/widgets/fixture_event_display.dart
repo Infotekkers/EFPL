@@ -1,4 +1,3 @@
-import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
 
 class FixtureEventDisplay extends StatelessWidget {

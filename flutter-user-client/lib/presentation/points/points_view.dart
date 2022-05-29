@@ -608,8 +608,6 @@ List<List<PointUserPlayer>> formatPlayersByPosition(
           player.playerPosition.value.fold((l) => '', (r) => r) == 'GK')
       .toList();
 
-  print(allGK);
-
   List<PointUserPlayer> allDEF = allPlayers
       .where((player) =>
           player.multiplier == 1 &&

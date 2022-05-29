@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:efpl/domain/core/value_failures.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/domain/fixture/i_fixture_facade.dart';
-import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 

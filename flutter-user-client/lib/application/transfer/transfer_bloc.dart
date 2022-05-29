@@ -10,7 +10,6 @@ import 'package:efpl/infrastructure/transfer/transfer_local_data_provider.dart';
 import 'package:efpl/injectable.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
 part 'transfer_event.dart';

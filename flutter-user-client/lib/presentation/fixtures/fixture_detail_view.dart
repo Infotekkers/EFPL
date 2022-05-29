@@ -12,10 +12,6 @@ import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:tab_container/tab_container.dart';
 
-// TODO:ADD SUBBED PLAYER INFO
-// TODO:IMPROVE EVENTS LAYOUT
-// TODO:ADD NO SCORE INDICATOR FOR SCOREBOARD
-
 class FixtureDetailView extends StatelessWidget {
   const FixtureDetailView({Key? key}) : super(key: key);
 

@@ -1,10 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/domain/points/i_points_facade.dart';
-import 'package:efpl/domain/points/point_user_player.dart';
 import 'package:efpl/domain/points/points.dart';
-import 'package:efpl/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 

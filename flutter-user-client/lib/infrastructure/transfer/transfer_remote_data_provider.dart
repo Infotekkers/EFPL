@@ -219,8 +219,6 @@ class TransferRemoteDataProvider {
             Duration(seconds: ConstantValues().httpTimeOutDuration),
           );
 
-      print(apiResponse.statusCode);
-
       // success
       if (apiResponse.statusCode == 200) {
         List<UserPlayer> allUserPlayers = [];
