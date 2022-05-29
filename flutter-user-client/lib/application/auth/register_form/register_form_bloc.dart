@@ -160,7 +160,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
           state.copyWith(
             isSubmitting: false,
             showErrorMessages: true,
-            authFailureOrSuccessOption: some(failureOrSuccess!),
+            authFailureOrSuccessOption: optionOf(failureOrSuccess),
           ),
         );
       },
