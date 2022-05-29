@@ -124,8 +124,8 @@ class SignInForm extends StatelessWidget {
               TextFormField(
                 key: const ValueKey("loginPagePassword"),
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
-                  // labelText: 'Password',
+                  // prefixIcon: Icon(Icons.lock),
+                  labelText: 'Password',
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.blue,
@@ -196,10 +196,7 @@ class SignInForm extends StatelessWidget {
               // Reset Button
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RequestResetPage()));
+                  Navigator.pushNamed(context, "/request-reset");
                 },
                 child: Text(
                   "Forgot Password ?",

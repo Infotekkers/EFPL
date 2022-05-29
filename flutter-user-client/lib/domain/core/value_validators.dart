@@ -40,7 +40,10 @@ Either<AuthFailure, Password> passWordMatch(Password input1, Password input2) {
 }
 
 Either<ValueFailure<String>, String> validateName(String input) {
-  if (input.isNotEmpty) {
+  const nameRegex =
+      r"""^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$""";
+
+  if (RegExp(nameRegex).hasMatch(input)) {
     return right(input);
   } else {
     return left(ValueFailure.invalidName(failedValue: input));
