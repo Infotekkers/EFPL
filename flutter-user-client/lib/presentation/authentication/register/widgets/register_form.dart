@@ -1,12 +1,9 @@
-import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
+import 'package:efpl/application/auth/register_form/register_form_bloc.dart';
+import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
+import 'package:efpl/services/snack_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../services/snack_bar.dart';
-import '../../../../application/auth/register_form/register_form_bloc.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -86,21 +83,23 @@ class RegisterForm extends StatelessWidget {
           autovalidateMode: state.showErrorMessages
               ? AutovalidateMode.always
               : AutovalidateMode.disabled,
-          child: ListView(
+          child: Column(
             children: [
-              const Text(
-                '👤',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 120),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
+              // Email Input
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
+                  // prefixIcon: Icon(Icons.email),
                   labelText: 'Email',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 0.0,
+                    horizontal: 15.0,
+                  ),
                 ),
                 autocorrect: false,
                 onChanged: (value) => BlocProvider.of<RegisterFormBloc>(context)
@@ -116,12 +115,23 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 15),
+
+              // Username input
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person),
+                  // prefixIcon: Icon(Icons.person),
                   labelText: 'User Name',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 0.0,
+                    horizontal: 15.0,
+                  ),
                 ),
                 autocorrect: false,
                 onChanged: (value) => BlocProvider.of<RegisterFormBloc>(context)
@@ -137,12 +147,24 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-              const SizedBox(height: 8),
+
+              const SizedBox(height: 15),
+
+              // Team Name Input
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.sports_soccer),
+                  // prefixIcon: Icon(Icons.sports_soccer),
                   labelText: 'Team Name',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 0.0,
+                    horizontal: 15.0,
+                  ),
                 ),
                 autocorrect: false,
                 onChanged: (value) => BlocProvider.of<RegisterFormBloc>(context)
@@ -158,12 +180,24 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-              const SizedBox(height: 8),
+
+              const SizedBox(height: 15),
+
+              // Password Input
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
+                  // prefixIcon: Icon(Icons.lock),
                   labelText: 'Password',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 0.0,
+                    horizontal: 15.0,
+                  ),
                 ),
                 autocorrect: false,
                 onChanged: (value) => BlocProvider.of<RegisterFormBloc>(context)
@@ -180,12 +214,24 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-              const SizedBox(height: 8),
+
+              const SizedBox(height: 15),
+
+              // Confirm Password
               TextFormField(
                 // keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
+                  // prefixIcon: Icon(Icons.lock),
                   labelText: 'Confirm Password',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 0.0,
+                    horizontal: 15.0,
+                  ),
                 ),
                 autocorrect: false,
                 onChanged: (value) => BlocProvider.of<RegisterFormBloc>(context)
@@ -202,7 +248,10 @@ class RegisterForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-              const SizedBox(height: 8),
+
+              const SizedBox(height: 15),
+
+              // Drop Down
               DropdownButton<String>(
                 value: state.favouriteEplTeam.value.fold(
                     (f) => f.maybeMap(empty: (_) => 'e', orElse: () => null),
@@ -235,6 +284,9 @@ class RegisterForm extends StatelessWidget {
                   RegisterFormEvent.favoriteEplTeamChanged(value!),
                 ),
               ),
+
+              const SizedBox(height: 15),
+
               DropdownButton<String>(
                   value: state.country.value.fold(
                       (f) => f.maybeMap(empty: (_) => 'e', orElse: () => null),
@@ -252,23 +304,83 @@ class RegisterForm extends StatelessWidget {
                   onChanged: (value) =>
                       BlocProvider.of<RegisterFormBloc>(context)
                           .add(RegisterFormEvent.countryChanged(value!))),
+
               const SizedBox(
-                height: 10,
+                height: 15,
               ),
-              // ElevatedButton(
-              //     onPressed: () {
-              //       print(state.favouriteEplTeam);
-              //     },
-              //     child: Text('e')),
-              // const Text(''),
-              ElevatedButton(
-                onPressed: state.isSubmitting
-                    ? null
-                    : () {
-                        BlocProvider.of<RegisterFormBloc>(context)
-                            .add(const RegisterFormEvent.registerUserPressed());
-                      },
-                child: const Text('Register'),
+
+              // Register Button
+              InkWell(
+                onTap: () {
+                  state.isSubmitting
+                      ? null
+                      : BlocProvider.of<RegisterFormBloc>(context).add(
+                          const RegisterFormEvent.registerUserPressed(),
+                        );
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 40,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5),
+                      topLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                    ),
+                    // color: Colors.amber,
+                    color: Colors.blue,
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 0.25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 36),
+
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignInPage(),
+                    ),
+                  );
+                },
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        // Normal text
+                        TextSpan(
+                          text: "Already have an account?",
+                          style: TextStyle(
+                            color: Colors.grey.withOpacity(0.85),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+
+                        // Redirect
+                        const TextSpan(
+                          text: " Sign In",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

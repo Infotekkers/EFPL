@@ -43,22 +43,24 @@ class SignInPage extends StatelessWidget {
                     ),
                     color: Colors.white,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "Log in",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Sign In",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      SignInForm(),
-                    ],
+                        SizedBox(
+                          height: 25,
+                        ),
+                        SignInForm(),
+                      ],
+                    ),
                   ),
                 ),
               ),
