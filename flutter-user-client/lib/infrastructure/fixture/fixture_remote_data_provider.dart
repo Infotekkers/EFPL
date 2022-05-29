@@ -15,7 +15,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class FixtureRemoteDataProvider {
   HTTPInstance instance = getIt<HTTPInstance>();
 
-  final String _baseURL = dotenv.env["BASE_URL"].toString();
+  final String _baseURL = dotenv.env["API"].toString();
 
   FixtureRemoteDataProvider();
 

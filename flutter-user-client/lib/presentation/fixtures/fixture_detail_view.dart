@@ -480,7 +480,7 @@ String getShortName({required Fixture fixture, required int isHome}) {
 }
 
 String getImageUrl({required Fixture fixture, required int isHome}) {
-  String finalPath = dotenv.env["BASE_URL"].toString();
+  String finalPath = dotenv.env["API"].toString();
   if (isHome == 1) {
     String path = fixture.homeTeamLogo.value.fold(
       (l) => '',

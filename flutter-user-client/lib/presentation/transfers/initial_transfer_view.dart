@@ -194,7 +194,6 @@ class InitialTransferPage extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
                               height: 200,
-                              color: ConstantColors.neutral_300,
                               width: MediaQuery.of(context).size.width,
                               child: Center(
                                 child: ListView.builder(
@@ -403,7 +402,6 @@ class InitialTransferPage extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
                               height: 200,
-                              color: ConstantColors.neutral_300,
                               width: MediaQuery.of(context).size.width,
                               child: Center(
                                 child: ListView.builder(

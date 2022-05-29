@@ -25,7 +25,7 @@ class PlayerWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             // color: Colors.white,
           ),
-          width: 80,
+          width: 70,
           margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
           child: Card(
             elevation: 5,

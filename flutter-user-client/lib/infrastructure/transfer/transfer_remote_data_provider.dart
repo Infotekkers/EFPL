@@ -17,7 +17,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class TransferRemoteDataProvider {
   HTTPInstance instance = getIt<HTTPInstance>();
 
-  final String _baseURL = dotenv.env["BASE_URL"].toString();
+  final String _baseURL = dotenv.env["API"].toString();
 
   TransferRemoteDataProvider();
 
