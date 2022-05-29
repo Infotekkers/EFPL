@@ -329,9 +329,12 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
         : { injuryStatus: "", injuryMessage: "" },
 
       upComingFixtures: upComingFixture,
+      multiplier: allPlayersInPosition[i].multiplier,
     };
 
     allPlayersInPositionFormatted.push(currentPlayerInfo);
+
+    // console.log(currentPlayerInfo);
   }
 
   res.status(200).send(allPlayersInPositionFormatted);

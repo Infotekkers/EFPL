@@ -9,57 +9,14 @@ const validateTeam = async (team, availableChips) => {
   const eplTeamPlayerCounter = {};
   const positionCounter = { gk: 0, def: 0, mid: 0, att: 0, starters: 0 };
 
-  // SET STARTER TEAM 4-3-3
-  let gkCount = 0;
-  let defCount = 0;
-  let midCount = 0;
-  let attCount = 0;
-  let isCaptainSet = false;
-  let isViceCaptainSet = false;
-  for (const playerId in team.players) {
-    const currentPlayer = await Player.findOne({ playerId: playerId })
-      .lean()
-      .select("position -_id");
-
-    // GK
-    if (currentPlayer.position === "GK" && gkCount < 1) {
-      team.players[playerId].multiplier = 1;
-      gkCount = gkCount + 1;
-    }
-    // DEF
-    else if (currentPlayer.position === "DEF" && defCount < 4) {
-      team.players[playerId].multiplier = 1;
-      defCount = defCount + 1;
-    }
-    // MID
-    else if (currentPlayer.position === "MID" && midCount < 3) {
-      team.players[playerId].multiplier = 1;
-      midCount = midCount + 1;
-
-      if (!isCaptainSet) {
-        team.players[playerId].isCaptain = true;
-        isCaptainSet = true;
-      }
-    }
-
-    // ATT
-    else if (currentPlayer.position === "ATT" && attCount < 3) {
-      team.players[playerId].multiplier = 1;
-      attCount = attCount + 1;
-
-      if (!isViceCaptainSet) {
-        team.players[playerId].isViceCaptain = true;
-        isViceCaptainSet = true;
-      }
-    }
-  }
-
   // 15 players
   if (Object.keys(team.players).length !== 15)
     return [false, { message: "Incomplete team!" }];
 
   for (const playerId in team.players) {
     teamBudget += parseInt(team.players[playerId].price);
+
+    // console.log(playerId)
 
     // Unique captain and vice-captain
     if (team.players[playerId].isCaptain) {

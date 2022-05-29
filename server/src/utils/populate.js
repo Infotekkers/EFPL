@@ -278,7 +278,6 @@ const addTestPlayer = async () => {
 };
 
 const addTestUser = async () => {
-
   // Test USER
   const testUser = new User({
     userName: "MaduserYaknow",
@@ -491,11 +490,11 @@ const addTestUser = async () => {
     ],
   });
   const testUser2 = new User({
-    userName:"Test Man 2",
-    password:"SoStrong123!!!",
-    email:"mikealexiv565@gmail.com",
-    teamName:"ChaosServidoras",
-    country:"ET",
+    userName: "Test Man 2",
+    password: "SoStrong123!!!",
+    email: "mikealexiv565@gmail.com",
+    teamName: "ChaosServidoras",
+    country: "ET",
     favouriteEplTeam: "St.George",
     team: [
       {
@@ -596,8 +595,7 @@ const addTestUser = async () => {
         },
       },
     ],
-
-  })
+  });
 
   await testUser.save();
   await testUser2.save();
