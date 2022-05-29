@@ -44,7 +44,7 @@ class MyTeamPlayer extends StatelessWidget {
             ? Colors.green[300]
             : toBeTransferredOut
                 ? Colors.amber[800]
-                : null,
+                : Colors.white,
         child: GestureDetector(
           onTap: () {
             if (toBeTransferredOut) {
@@ -75,7 +75,7 @@ class MyTeamPlayer extends StatelessWidget {
                     top: 30,
                     child: Card(
                       elevation: 1,
-                      color: Colors.grey[400],
+                      color: Colors.blue[400],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),
@@ -126,6 +126,7 @@ class MyTeamPlayer extends StatelessWidget {
       height: 50,
       width: 80,
       child: Card(
+        elevation: 0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

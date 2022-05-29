@@ -29,21 +29,21 @@ class PositionalContainerWidget extends StatelessWidget {
           decoration: position == 'sub'
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xFFE0E0E0),
-                  boxShadow: const [
-                    BoxShadow(
-                      offset: Offset(-20, -20),
-                      blurRadius: 60,
-                      color: Colors.white,
-                      inset: true,
-                    ),
-                    BoxShadow(
-                      offset: Offset(20, 20),
-                      blurRadius: 60,
-                      color: Color.fromARGB(255, 125, 160, 194),
-                      inset: true,
-                    ),
-                  ],
+                  color: Colors.blue[200],
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     offset: const Offset(-20, -20),
+                  //     blurRadius: 60,
+                  //     color: Colors.blue[50]!,
+                  //     inset: true,
+                  //   ),
+                  //   BoxShadow(
+                  //     offset: const Offset(20, 20),
+                  //     blurRadius: 60,
+                  //     color: Color.fromRGBO(85, 130, 167, 1)!,
+                  //     inset: true,
+                  //   ),
+                  // ],
                 )
               : null,
           child: Padding(
@@ -53,7 +53,7 @@ class PositionalContainerWidget extends StatelessWidget {
                 if (position == 'sub' && index == 0) {
                   return const SizedBox(width: 50);
                 }
-                return const SizedBox(width: 2);
+                return const SizedBox(width: 4);
               },
               itemCount: playerIds.length,
               scrollDirection: Axis.horizontal,

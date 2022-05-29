@@ -22,6 +22,7 @@ class AppWidget extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             locale: state.locale,
             supportedLocales: L10n.all,
             localizationsDelegates: const [
@@ -31,7 +32,9 @@ class AppWidget extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate
             ],
             title: 'EFPL',
-            theme: EfplTheme().buildLightTheme(),
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: ThemeMode.light,
             initialRoute: "/",
             routes: _appRouter.allRoutes,
           );

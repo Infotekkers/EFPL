@@ -60,14 +60,21 @@ class MainTabView extends StatelessWidget {
           ),
         ),
         appBar: AppBar(
-          elevation: 8.0,
-          bottom: const TabBar(
-            tabs: [
+          backgroundColor: Colors.blue[50],
+          iconTheme: IconThemeData(color: Colors.blue[900]),
+          elevation: 0,
+          bottom: TabBar(
+            unselectedLabelColor: Color.fromARGB(255, 144, 201, 248),
+            labelColor: Colors.blue[900],
+            indicator: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              // color: Colors.blue[600],
+            ),
+            tabs: const [
               // My Team
               Tab(
                 icon: Icon(
                   MdiIcons.accountGroup,
-                  color: Colors.white,
                 ),
               ),
 
@@ -75,7 +82,6 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   MdiIcons.counter,
-                  color: Colors.white,
                 ),
               ),
               // Transfers
@@ -83,7 +89,6 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   Boxicons.bx_transfer,
-                  color: Colors.white,
                 ),
               ),
 
@@ -91,21 +96,18 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   MdiIcons.calendarMonth,
-                  color: Colors.white,
                 ),
               ),
               // My Leagues
               Tab(
                 icon: Icon(
                   MdiIcons.trophy,
-                  color: Colors.white,
                 ),
               ),
               // Stats
               Tab(
                 icon: Icon(
                   Icons.leaderboard,
-                  color: Colors.white,
                 ),
               ),
 
@@ -113,14 +115,17 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   Icons.settings,
-                  color: Colors.white,
                 ),
               ),
             ],
           ),
-          title: const Text(
+          title: Text(
             'EFPL',
-            style: TextStyle(color: Colors.white, fontSize: 24),
+            style: TextStyle(
+              color: Colors.blue[900],
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         body: TabBarView(

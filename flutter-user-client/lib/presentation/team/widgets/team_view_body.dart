@@ -208,32 +208,35 @@ class TeamViewBody extends StatelessWidget {
         vertical: 8.0,
         horizontal: 50.0,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          TextButton(
-            onPressed: () => changed
-                ? BlocProvider.of<MyTeamBloc>(context).add(
-                    const MyTeamEvent.loadMyTeam(
-                        "623b101b9a85861e924388dd", "1"))
-                : null,
-            style: TextButton.styleFrom(
-                primary: changed ? Colors.red[400] : Colors.grey),
-            child: const Text("Cancel"),
-          ),
-          OutlinedButton(
-            onPressed: () => changed
-                ? BlocProvider.of<MyTeamBloc>(context).add(
-                    MyTeamEvent.saveMyTeam(
-                        state.myTeam, '623b101b9a85861e924388dd'))
-                : null,
-            style: OutlinedButton.styleFrom(
-              primary: changed ? Colors.white : Colors.grey[500],
-              backgroundColor: changed ? Colors.blue[400] : Colors.grey[50],
+      child: Transform.scale(
+        scale: 1.2,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () => changed
+                  ? BlocProvider.of<MyTeamBloc>(context).add(
+                      const MyTeamEvent.loadMyTeam(
+                          "623b101b9a85861e924388dd", "1"))
+                  : null,
+              style: TextButton.styleFrom(
+                  primary: changed ? Colors.red[400] : Colors.grey),
+              child: const Text("Cancel"),
             ),
-            child: const Text("Save"),
-          ),
-        ],
+            OutlinedButton(
+              onPressed: () => changed
+                  ? BlocProvider.of<MyTeamBloc>(context).add(
+                      MyTeamEvent.saveMyTeam(
+                          state.myTeam, '623b101b9a85861e924388dd'))
+                  : null,
+              style: OutlinedButton.styleFrom(
+                primary: changed ? Colors.white : Colors.grey[500],
+                backgroundColor: changed ? Colors.blue[400] : Colors.grey[50],
+              ),
+              child: const Text("Save"),
+            ),
+          ],
+        ),
       ),
     );
   }
