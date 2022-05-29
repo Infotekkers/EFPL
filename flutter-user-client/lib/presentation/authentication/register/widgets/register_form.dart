@@ -348,11 +348,10 @@ class RegisterForm extends StatelessWidget {
 
               InkWell(
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pop(context);
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignInPage(),
-                    ),
+                    "/sign-in",
                   );
                 },
                 child: Center(

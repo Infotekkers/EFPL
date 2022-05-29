@@ -214,12 +214,8 @@ class SignInForm extends StatelessWidget {
 
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterPage(),
-                    ),
-                  );
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, "/register");
                 },
                 child: Center(
                   child: RichText(
