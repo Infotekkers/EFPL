@@ -64,8 +64,9 @@ class FixtureDetailView extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            backgroundColor: ConstantColors.primary_800,
-            foregroundColor: ConstantColors.neutral_200,
+            backgroundColor: Colors.blue[50],
+            foregroundColor: ConstantColors.primary_900,
+            elevation: 0,
           ),
 
           // BODY
@@ -79,261 +80,214 @@ class FixtureDetailView extends StatelessWidget {
             showChildOpacityTransition: false,
             animSpeedFactor: 2,
             color: ConstantColors.primary_900,
-            child: Column(
-              children: [
-                // HEADER
-                Container(
-                  height: 200,
-                  color: ConstantColors.neutral_200,
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Home Team
-                      SizedBox(
-                        height: 180,
-                        width: MediaQuery.of(context).size.width * 0.30,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 105,
-                              child: CachedNetworkImage(
-                                fit: BoxFit.fill,
-                                imageUrl: getImageUrl(
-                                    fixture: currentFixture, isHome: 1),
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(
-                                  Icons.error,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              getShortName(fixture: currentFixture, isHome: 1),
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      // match Info
-                      SizedBox(
-                        height: 165,
-                        width: MediaQuery.of(context).size.width * 0.35,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            getShortStatus(fixture: currentFixture) !=
-                                    "Not Live"
-                                ? Text(
-                                    getShortStatus(fixture: currentFixture),
-                                  )
-                                : const Text(""),
-                            //
-                            const SizedBox(
-                              height: 8,
-                            ),
-
-                            getShortStatus(fixture: currentFixture) !=
-                                    "Not Live"
-                                ? Text(
-                                    currentFixture.score.value.fold(
-                                      (l) => '',
-                                      (r) =>
-                                          r.toString().split("v").join(" - "),
-                                    ),
-                                    style: const TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )
-                                : Text(
-                                    getFormattedTime(fixture: currentFixture),
-                                    style: const TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+            child: Container(
+              color: Colors.blue[50],
+              child: Column(
+                children: [
+                  // HEADER
+                  Container(
+                    height: 200,
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Home Team
+                        SizedBox(
+                          height: 180,
+                          width: MediaQuery.of(context).size.width * 0.30,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 105,
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.fill,
+                                  imageUrl: getImageUrl(
+                                      fixture: currentFixture, isHome: 1),
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(
+                                    Icons.error,
+                                    color: Colors.red,
                                   ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              currentFixture.homeTeamCity.value.fold(
-                                (l) => '',
-                                (r) => r.toString(),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              currentFixture.homeTeamStadium.value.fold(
-                                (l) => '',
-                                (r) => r.toString(),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-
-                            Text(
-                              "( " +
-                                  currentFixture.homeTeamCapacity.value.fold(
-                                    (l) => '',
-                                    (r) => r.toString(),
-                                  ) +
-                                  " )",
-                              style: const TextStyle(fontSize: 10),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      SizedBox(
-                        height: 175,
-                        width: MediaQuery.of(context).size.width * 0.30,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 100,
-                              child: CachedNetworkImage(
-                                fit: BoxFit.fill,
-                                imageUrl: getImageUrl(
-                                    fixture: currentFixture, isHome: 0),
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(
-                                  Icons.error,
-                                  color: Colors.red,
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              getShortName(fixture: currentFixture, isHome: 0),
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
+                              const SizedBox(
+                                height: 10,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                              Text(
+                                getShortName(
+                                    fixture: currentFixture, isHome: 1),
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
 
-                // SCORE INFO
-                Container(
-                  height: 100,
-                  decoration: const BoxDecoration(
-                    color: ConstantColors.neutral_200,
-                    border: Border(
-                      bottom: BorderSide(
-                        width: 0.5,
-                        color: ConstantColors.primary_800,
-                      ),
-                      top: BorderSide(
-                        width: 0.5,
-                        color: ConstantColors.primary_800,
-                      ),
+                        // match Info
+                        SizedBox(
+                          height: 165,
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              getShortStatus(fixture: currentFixture) !=
+                                      "Not Live"
+                                  ? Text(
+                                      getShortStatus(fixture: currentFixture),
+                                    )
+                                  : const Text(""),
+                              //
+                              const SizedBox(
+                                height: 8,
+                              ),
+
+                              getShortStatus(fixture: currentFixture) !=
+                                      "Not Live"
+                                  ? Text(
+                                      currentFixture.score.value.fold(
+                                        (l) => '',
+                                        (r) =>
+                                            r.toString().split("v").join(" - "),
+                                      ),
+                                      style: const TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  : Text(
+                                      getFormattedTime(fixture: currentFixture),
+                                      style: const TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                currentFixture.homeTeamCity.value.fold(
+                                  (l) => '',
+                                  (r) => r.toString(),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                currentFixture.homeTeamStadium.value.fold(
+                                  (l) => '',
+                                  (r) => r.toString(),
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+
+                              Text(
+                                "( " +
+                                    currentFixture.homeTeamCapacity.value.fold(
+                                      (l) => '',
+                                      (r) => r.toString(),
+                                    ) +
+                                    " )",
+                                style: const TextStyle(fontSize: 10),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 175,
+                          width: MediaQuery.of(context).size.width * 0.30,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 100,
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.fill,
+                                  imageUrl: getImageUrl(
+                                      fixture: currentFixture, isHome: 0),
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(
+                                    Icons.error,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                getShortName(
+                                    fixture: currentFixture, isHome: 0),
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  child: allHomePlayersWhoScored.isEmpty &&
-                          allAwayPlayersWhoScored.isEmpty
-                      ? const Center(
-                          child: Icon(
-                            FontAwesome.soccer_ball,
-                            size: 30,
-                          ),
-                        )
-                      : Row(
-                          children: [
-                            // Home Scorers
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 5,
-                              ),
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: ListView.builder(
-                                itemCount: allHomePlayersWhoScored.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  List<int> _items = List.generate(
-                                    allHomePlayersWhoScored[index]['playerStat']
-                                        [0]['goals'],
-                                    (i) => i,
-                                  );
-                                  return Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 5),
-                                    child: Wrap(
-                                      children: [
-                                        Text(
-                                          allHomePlayersWhoScored[index]
-                                              ['playerName'],
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Wrap(
-                                          direction: Axis.horizontal,
-                                          children: _items
-                                              .map(
-                                                (i) => const Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      3, 0, 0, 0),
-                                                  child: Icon(
-                                                    FontAwesome.soccer_ball,
-                                                    size: 15,
-                                                  ),
-                                                ),
-                                              )
-                                              .toList(),
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
+
+                  // SCORE INFO
+                  Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          width: 0.5,
+                          color: ConstantColors.primary_800.withOpacity(0.25),
+                        ),
+                        top: BorderSide(
+                          width: 0.5,
+                          color: ConstantColors.primary_800.withOpacity(0.25),
+                        ),
+                      ),
+                    ),
+                    child: allHomePlayersWhoScored.isEmpty &&
+                            allAwayPlayersWhoScored.isEmpty
+                        ? const Center(
+                            child: Icon(
+                              FontAwesome.soccer_ball,
+                              size: 30,
                             ),
-                            // Away Scorers
-                            Container(
-                              padding: const EdgeInsets.symmetric(vertical: 5),
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: ListView.builder(
-                                itemCount: allAwayPlayersWhoScored.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  List<int> _items = List.generate(
-                                    allAwayPlayersWhoScored[index]['playerStat']
-                                        [0]['goals'],
-                                    (i) => i,
-                                  );
-                                  return Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 6),
-                                    child: Container(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          40, 0, 0, 0),
+                          )
+                        : Row(
+                            children: [
+                              // Home Scorers
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 5,
+                                ),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: ListView.builder(
+                                  itemCount: allHomePlayersWhoScored.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    List<int> _items = List.generate(
+                                      allHomePlayersWhoScored[index]
+                                          ['playerStat'][0]['goals'],
+                                      (i) => i,
+                                    );
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 5),
                                       child: Wrap(
                                         children: [
                                           Text(
-                                            allAwayPlayersWhoScored[index]
+                                            allHomePlayersWhoScored[index]
                                                 ['playerName'],
                                           ),
                                           const SizedBox(
@@ -357,34 +311,89 @@ class FixtureDetailView extends StatelessWidget {
                                           )
                                         ],
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                ),
-
-                // Tab View
-
-                SizedBox(
-                  height: MediaQuery.of(context).size.height - 410,
-                  child: TabContainer(
-                    radius: 0,
-                    color: ConstantColors.primary_200,
-                    children: [
-                      SingleChildScrollView(
-                          child: FixtureDetailLineUp(fixture: currentFixture)),
-                      FixtureDetailEvent(fixture: currentFixture),
-                    ],
-                    tabs: const [
-                      'Line Ups',
-                      'Events',
-                    ],
+                              // Away Scorers
+                              Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: ListView.builder(
+                                  itemCount: allAwayPlayersWhoScored.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    List<int> _items = List.generate(
+                                      allAwayPlayersWhoScored[index]
+                                          ['playerStat'][0]['goals'],
+                                      (i) => i,
+                                    );
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 6),
+                                      child: Container(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            40, 0, 0, 0),
+                                        child: Wrap(
+                                          children: [
+                                            Text(
+                                              allAwayPlayersWhoScored[index]
+                                                  ['playerName'],
+                                            ),
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            Wrap(
+                                              direction: Axis.horizontal,
+                                              children: _items
+                                                  .map(
+                                                    (i) => const Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              3, 0, 0, 0),
+                                                      child: Icon(
+                                                        FontAwesome.soccer_ball,
+                                                        size: 15,
+                                                      ),
+                                                    ),
+                                                  )
+                                                  .toList(),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                   ),
-                ),
-              ],
+
+                  // Tab View
+
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height - 410,
+                    child: TabContainer(
+                      radius: 0,
+                      color: Colors.blue[100],
+                      children: [
+                        SingleChildScrollView(
+                            child:
+                                FixtureDetailLineUp(fixture: currentFixture)),
+                        FixtureDetailEvent(fixture: currentFixture),
+                      ],
+                      tabs: const [
+                        'Line Ups',
+                        'Events',
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
