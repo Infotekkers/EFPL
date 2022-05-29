@@ -57,7 +57,7 @@ const teamSchema = mongoose.Schema({
     type: String,
   },
   teamPosition: {
-    type: [teamPosition]
+    type: teamPosition
   }
 });
 
