@@ -241,7 +241,7 @@ class PointsView extends StatelessWidget {
                                     width: 110,
                                     height: 70,
                                     decoration: BoxDecoration(
-                                      color: ConstantColors.neutral_300,
+                                      color: ConstantColors.primary_900,
                                       boxShadow: [
                                         BoxShadow(
                                           color: ConstantColors.primary_900
@@ -336,7 +336,7 @@ class PointsView extends StatelessWidget {
 
                                   // DEDUCTION
                                   Container(
-                                    width: 100,
+                                    width: 110,
                                     height: 70,
                                     decoration: BoxDecoration(
                                       color: ConstantColors.primary_900,
@@ -1075,11 +1075,15 @@ void showCustomModal(
                       ),
 
                       InkWell(
-                        // TODO:ADD
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            "/player",
+                            arguments: int.parse(currentPlayer.playerId),
+                          );
+                        },
                         child: Container(
                           width: 150,
-                          height: 30,
+                          height: 32,
                           color: ConstantColors.primary_900,
                           child: const Center(
                             child: Text(

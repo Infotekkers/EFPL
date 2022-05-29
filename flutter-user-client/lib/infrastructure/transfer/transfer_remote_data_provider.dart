@@ -37,6 +37,7 @@ class TransferRemoteDataProvider {
             Duration(seconds: ConstantValues().httpTimeOutDuration),
           );
       // success scenario
+
       if (apiResponse.statusCode == 200) {
         List<dynamic> parsedResponseBody = jsonDecode(apiResponse.body);
 
@@ -218,7 +219,6 @@ class TransferRemoteDataProvider {
           .timeout(
             Duration(seconds: ConstantValues().httpTimeOutDuration),
           );
-
       // success
       if (apiResponse.statusCode == 200) {
         List<UserPlayer> allUserPlayers = [];
@@ -230,8 +230,26 @@ class TransferRemoteDataProvider {
         // if response has players
 
         if (parseResponseTeam['players'].length > 0) {
-          List allPlayers = parseResponseTeam['players'];
-          for (var i = 0; i < allPlayers.length; i++) {
+          // List allPlayers = parseResponseTeam['players'];
+          // for (var i = 0; i < allPlayers.length; i++) {
+          //   Map<String, dynamic> availability = {
+          //     "injuryStatus":
+          //         allPlayers[i]['availability']['injuryStatus'] ?? "",
+          //     "injuryMessage":
+          //         allPlayers[i]['availability']['injuryMessage'] ?? ""
+          //   };
+
+          //   allPlayers[i]['availability'] = availability;
+
+          //   final UserPlayerDTO userPlayerDTO =
+          //       UserPlayerDTO.fromJson(allPlayers[i]);
+
+          //   allUserPlayersJson.add(allPlayers[i]);
+          //   allUserPlayers.add(userPlayerDTO.toDomain());
+          // }
+
+          for (var i = 0; i < parseResponseTeam['players'].length; i++) {
+            List allPlayers = parseResponseTeam['players'];
             Map<String, dynamic> availability = {
               "injuryStatus":
                   allPlayers[i]['availability']['injuryStatus'] ?? "",
@@ -243,7 +261,6 @@ class TransferRemoteDataProvider {
 
             final UserPlayerDTO userPlayerDTO =
                 UserPlayerDTO.fromJson(allPlayers[i]);
-
             allUserPlayersJson.add(allPlayers[i]);
             allUserPlayers.add(userPlayerDTO.toDomain());
           }
@@ -478,7 +495,7 @@ class TransferRemoteDataProvider {
             maxBudget: 0,
             teamName: "",
           ),
-          const TransferFailure.unexpectedError(
+          const TransferFailure.noTeamSelected(
               failedValue: "Something went wrong. Try again!")
         ]);
       }
@@ -542,20 +559,21 @@ class TransferRemoteDataProvider {
       print(e);
 
       // get cache team
-      Either<dynamic, UserTeam> cacheCall =
-          await _transferLocalDataProvider.getUserTeam();
-      UserTeam cachedUserTeam = cacheCall.fold(
-        (l) => l[0],
-        (r) => r,
-      );
-
-      return left(
-        [
-          cachedUserTeam,
-          const TransferFailure.unexpectedError(
-              failedValue: "Something went wrong. Try again!"),
-        ],
-      );
+      return left([
+        UserTeam(
+          gameWeekId: GameWeekId(value: 1),
+          gameWeekDeadline: "",
+          allUserPlayers: [],
+          freeTransfers: 0,
+          deduction: 0,
+          activeChip: "",
+          availableChips: [],
+          maxBudget: 100,
+          teamName: "",
+        ),
+        const TransferFailure.noTeamSelected(
+            failedValue: "Something went wrong. Try again!")
+      ]);
     }
   }
 

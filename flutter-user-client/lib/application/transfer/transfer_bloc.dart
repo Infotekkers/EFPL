@@ -180,11 +180,14 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             )
             .toList()[0];
 
+        int playerToMoveOutMultiplier = 1;
+
         // find index of player to move out
         int indexOfPlayerToTransferOut = 0;
         for (var i = 0; i < allUserPlayers.length; i++) {
           if (allUserPlayers[i].playerId == state.transferOutPlayerId) {
             indexOfPlayerToTransferOut = i;
+            playerToMoveOutMultiplier = allUserPlayers[i].multiplier;
           }
         }
 
@@ -199,7 +202,10 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
               (player) => player.playerId == event.transferInPlayerId,
             )
             .toList()[0];
+
         // move in player at index
+        playerToTransferIn =
+            playerToTransferIn.copyWith(multiplier: playerToMoveOutMultiplier);
         allUserPlayers.insert(indexOfPlayerToTransferOut, playerToTransferIn);
 
         // create a map of swaps
@@ -257,9 +263,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
     );
 
     on<_cancelTransfer>((event, emit) async {
-      // all players
-      // List allPlayers = efplCache.get("allPlayers");
-      // List allPlayers =
       Either<dynamic, List<dynamic>> cacheCall =
           await TransferLocalDataProvider().getAllPlayers();
 

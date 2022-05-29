@@ -1,3 +1,4 @@
+import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
@@ -11,16 +12,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
+import '../../application/points/points_bloc.dart';
+
 class TransfersView extends StatelessWidget {
   const TransfersView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final UtilBloc _utilBloc = getIt<UtilBloc>();
-    _utilBloc.add(
-      const UtilEvent.setDefaultLocale(),
-    );
-
     final TransferBloc _transferBloc = BlocProvider.of<TransferBloc>(context);
 
     return BlocConsumer<TransferBloc, TransferState>(
@@ -149,14 +147,14 @@ class TransfersView extends StatelessWidget {
                     );
                   },
 
-                  orElse: () {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Something went wrong.",
-                      message: "Something went wrong. Try again!",
-                      snackBarType: "error",
-                    );
-                  },
+                  // orElse: () {
+                  //   CustomSnackBar().showCustomSnackBar(
+                  //     showContext: context,
+                  //     headlineText: "Something went wrong.",
+                  //     message: "Something went wrong. Try again!",
+                  //     snackBarType: "error",
+                  //   );
+                  // },
                 );
               },
               (_) {},
@@ -434,11 +432,12 @@ class TransfersView extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                state.userTeam.deduction
+                                                (state.userTeam.deduction * -1)
                                                     .toString(),
                                                 style: TextStyle(
                                                   color: state.userTeam
-                                                              .deduction <
+                                                                  .deduction *
+                                                              -1 <
                                                           0.0
                                                       ? ConstantColors.error_300
                                                       : Colors.green,

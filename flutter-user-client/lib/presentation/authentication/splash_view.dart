@@ -1,4 +1,11 @@
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
+import 'package:efpl/application/util/util_bloc.dart';
+import 'package:efpl/injectable.dart';
+import 'package:efpl/presentation/authentication/register/register_view.dart';
+import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
+import 'package:efpl/presentation/core/main_tab_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SplashView extends StatelessWidget {
@@ -6,34 +13,21 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> splashScreenScaffoldScreen =
-        GlobalKey<ScaffoldState>();
-    return MaterialApp(
-      home: Scaffold(
-        key: splashScreenScaffoldScreen,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text(
-                AppLocalizations.of(context)!.helloWorld,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 15),
-              width: 100,
-              color: Colors.blue,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed("/home");
-                },
-                child: Text(
-                  AppLocalizations.of(context)!.login,
-                  style: const TextStyle(color: Colors.black),
-                ),
-              ),
-            )
-          ],
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) => {
+        state.map(
+          intial: (_) {},
+          authenticated: (_) {
+            Navigator.popAndPushNamed(context, "/home");
+          },
+          unauthenticated: (_) {
+            Navigator.popAndPushNamed(context, "/sign-in");
+          },
+        )
+      },
+      child: const Scaffold(
+        body: Center(
+          child: Text('EFPL'),
         ),
       ),
     );

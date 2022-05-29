@@ -159,7 +159,8 @@ class FixturesView extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        Container(
+                          color: ConstantColors.neutral_300,
                           height: MediaQuery.of(context).size.height - 60,
                           child: state.allFixtures.length < 2
                               ? Container(
@@ -199,8 +200,8 @@ class FixturesView extends StatelessWidget {
                                             (index) {
                                               return Container(
                                                 color: index % 2 == 0
-                                                    ? ConstantColors.neutral_200
-                                                    : (Colors.white),
+                                                    ? Colors.white
+                                                    : (Colors.blue[50]),
                                                 child: FixtureWidget(
                                                   fixture: fixture[index],
                                                 ),

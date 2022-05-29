@@ -27,18 +27,15 @@
   "currentLanguage": "Language",
   "title_fixture": "FIXTURE TRANSLATIONS",
   "gameWeek": "GameWeek",
-
-
   "checkConn": "Check Your Internet Connection",
   "teamSaved": "Team Saved",
   "retry": "Retry",
   "cancel": "Cancel",
   "save": "Save",
   "chipConfirmation": " Chip about to be activated. Confirm?",
-
   "playerInfo": "Player Information",
   "switchPlayer": "Switch Player",
-  "makeCaptain": "Make Vice-captain",
+  "makeCaptain": "Make Captain",
   "makeViceCaptain": "Make Vice-captain",
   "gk": "GK",
   "def": "DEF",

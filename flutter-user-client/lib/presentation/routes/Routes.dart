@@ -11,6 +11,11 @@ import 'package:efpl/application/points/points_bloc.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
+import 'package:efpl/presentation/authentication/register/register_view.dart';
+import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
+import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
+import 'package:efpl/application/epl_stats/epl_stats_bloc.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/authentication/splash_view.dart';
 import 'package:efpl/presentation/core/main_tab_view.dart';
 import 'package:efpl/presentation/player/player_view.dart';
@@ -48,6 +53,10 @@ class AppRouter {
     ..add(
       const UtilEvent.setDefaultLocale(),
     );
+
+  final _eplStatsBloc = getIt<EPLStatsBloc>()
+    ..add(const EPLStatsEvent.getEplStats());
+
   Map<String, Widget Function(BuildContext)> allRoutes = {
     "/": (context) => const SplashView(),
     "/EPLeagueTable": (context) => MultiBlocProvider(providers: [
@@ -71,6 +80,10 @@ class AppRouter {
             ),
             BlocProvider.value(
               value: getIt<UtilBloc>(),
+            ),
+
+            BlocProvider.value(
+              value: getIt<EPLStatsBloc>(),
             )
           ],
           child: const MainTabView(),
@@ -107,5 +120,8 @@ class AppRouter {
           ],
           child: const ConfirmTransfersPage(),
         ),
+    "/request-reset": (context) => const RequestResetPage(),
+    "/sign-in": (context) => const SignInPage(),
+    "/register": (context) => const RegisterPage(),
   };
 }

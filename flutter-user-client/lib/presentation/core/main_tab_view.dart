@@ -1,12 +1,20 @@
 import 'package:efpl/presentation/colors.dart';
+// ignore_for_file: prefer_const_constructors
+
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
+import 'package:efpl/application/epl_stats/epl_stats_bloc.dart';
+import 'package:efpl/application/util/util_bloc.dart';
+import 'package:efpl/domain/auth/i_auth_repository.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
 import 'package:efpl/presentation/leagues/leagues_view.dart';
 import 'package:efpl/presentation/points/points_view.dart';
 import 'package:efpl/presentation/settings/settings_view.dart';
-import 'package:efpl/presentation/stats/stats_view.dart';
+import 'package:efpl/presentation/stats/epl_stats_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
 import 'package:efpl/presentation/transfers/transfers_view_main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -35,21 +43,24 @@ class MainTabView extends StatelessWidget {
                     Navigator.of(context).pushNamed("/EPLeagueTable");
                   }),
               ListTile(
-                title: const Text('Watch List'),
-                onTap: () {},
-              ),
-              ListTile(
-                title: const Text('Credit'),
-                onTap: () {},
-              ),
-              ListTile(
                 title: const Text('How To'),
+                onTap: () {},
+              ),
+              ListTile(
+                title: const Text('About Us'),
                 onTap: () {},
               ),
               ListTile(
                 title: const Text('Settings'),
                 onTap: () {},
               ),
+              ListTile(
+                title: const Text('LogOut'),
+                onTap: () {
+                  getIt<IAuthRepository>().removeUser();
+                  Navigator.popAndPushNamed(context, "/sign-in");
+                },
+              )
             ],
           ),
         ),
@@ -122,15 +133,15 @@ class MainTabView extends StatelessWidget {
             ),
           ),
         ),
-        body: const TabBarView(
-          children: [
+        body: TabBarView(
+          children: const [
             TeamView(),
             PointsView(),
             TransfersView(),
             FixturesView(),
             LeaguesView(),
-            StatsView(),
-            SettingsView()
+            EPLStatsView(),
+            SettingsView(),
           ],
         ),
       ),

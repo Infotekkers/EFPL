@@ -31,6 +31,7 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
 
     final failureOrSuccess =
         await iMyTeamRepository.getUserTeam(e.userId, e.gameweekId);
+    print(failureOrSuccess);
 
     failureOrSuccess.fold(
       (failure) => emit(
