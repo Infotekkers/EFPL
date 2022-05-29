@@ -3,9 +3,7 @@ import 'package:efpl/domain/league_table/value_object.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:efpl/domain/league_table/league_table.dart';
-import 'package:efpl/domain/league_table/league_table.dart';
 import 'package:efpl/domain/league_table/league_table_failure.dart';
-import 'package:efpl/infrastructure/league_table/league_table_dto.dart';
 
 @injectable
 class LeagueTableLocalDataProvider {
@@ -13,31 +11,60 @@ class LeagueTableLocalDataProvider {
 
   Future<Either<LeagueTableFailure, List<LeagueTable>>> getTeams() async {
     try {
-      // List<LeagueTable> leagueTables = [];
-      // var leagueTable = await leagueTableCache.get('leagueTable');
-      // leagueTable.forEach((table) =>
-      //     {leagueTables.add(LeagueTableDto.fromJson(table).toDomain())});
-      // return right(leagueTables);
-      List cachedLeagueTables = await leagueTableCache.get('leagueTable');
-
+      var cachedLeagueTables = await leagueTableCache.get('leagueTable');
+      print("sads $cachedLeagueTables");
       List<LeagueTable> leagueTables = <LeagueTable>[];
+      if (cachedLeagueTables != null) {
+        print("ot ull ");
+        for (var cachedLeagueTable in cachedLeagueTables) {
+          print("CL $cachedLeagueTable");
+          Map<String, dynamic> parsedCachedleagueTable = <String, dynamic>{};
+          cachedLeagueTable.forEach(
+            (key, value) => {
+              parsedCachedleagueTable[key] = value,
+            },
+          );
+          final LeagueTable leagueTable = LeagueTable(
+            teamPoint: TeamPoint(
+              value: parsedCachedleagueTable['teamPoint'],
+            ),
+            teamName: TeamName(
+              value: parsedCachedleagueTable['teamName'],
+            ),
+            teamLogo: TeamLogo(
+              value: parsedCachedleagueTable['teamLogo'],
+            ),
+            won: TeamWon(
+              value: parsedCachedleagueTable['won'],
+            ),
+            lost: TeamLost(
+              value: parsedCachedleagueTable['lost'],
+            ),
+            Draw: TeamDraw(
+              value: parsedCachedleagueTable['Draw'],
+            ),
+            goalsFor: TeamGoalFor(
+              value: parsedCachedleagueTable['goalsFor'],
+            ),
+            goalsAgainst: TeamGoalAgainst(
+              value: parsedCachedleagueTable['goalsAgainst'],
+            ),
+            goalDifferential: TeamGoalDifferntial(
+              value: parsedCachedleagueTable['goalDifferential'],
+            ),
+          );
+          leagueTables.add(leagueTable);
+        }
+      }
 
-      for (var cachedLeagueTable in cachedLeagueTables) {
-        Map<String, dynamic> parsedCachedleagueTable = <String, dynamic>{};
-        cachedLeagueTable.forEach(
-          (key, value) => {
-            parsedCachedleagueTable[key] = value,
-          },
-        );
-        final LeagueTable leagueTable = LeagueTable(
-          teamName: TeamName(
-            value: parsedCachedleagueTable['teamName'],
-          ),
-          teamLogo: TeamLogo(
-            value: parsedCachedleagueTable['teamLogo'],
-          ),
-          teamPosition: [],
-          // teamPoint: TeamPoint(
+      return right(leagueTables);
+    } catch (e) {
+      print("err $e");
+      return left(const LeagueTableFailure.localDBError());
+    }
+  }
+}
+ // teamPoint: TeamPoint(
           //   value: parsedCachedleagueTable['teamPoint'],
           // ),
           // won: TeamWon(
@@ -58,12 +85,3 @@ class LeagueTableLocalDataProvider {
           // goalFor: TeamGoalFor(
           //   value: parsedCachedleagueTable['teamGoalFor'],
           // ),
-        );
-        leagueTables.add(leagueTable);
-      }
-      return right(leagueTables);
-    } catch (e) {
-      return left(const LeagueTableFailure.localDBError());
-    }
-  }
-}

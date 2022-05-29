@@ -28,17 +28,24 @@ class LeagueTableRemoteDataProvider {
         final parsedResponseBody = jsonDecode(response.body) as List<dynamic>;
         for (var leagueTableJson in parsedResponseBody) {
           print("leagueTableJson $leagueTableJson");
-          Map<String, dynamic> finalParsedLeagueTable = <String, dynamic>{};
-          leagueTableDtoJson.add(leagueTableJson);
+          var newJson = {
+            "teamName": leagueTableJson['teamName'],
+            "teamLogo": leagueTableJson['teamLogo'],
+            "teamPoint": leagueTableJson['teamPosition']['teamPoint'],
+            "won": leagueTableJson['teamPosition']['won'],
+            "lost": leagueTableJson['teamPosition']['lost'],
+            "Draw": leagueTableJson['teamPosition']['Draw'],
+            "goalsFor": leagueTableJson['teamPosition']['goalsFor'],
+            "goalsAgainst": leagueTableJson['teamPosition']['goalsAgainst'],
+            "goalDifferential": leagueTableJson['teamPosition']
+                ['goalDifferential'],
+          };
+          print("new json $newJson");
           final LeagueTableDto leagueTableDto =
-              LeagueTableDto.fromJson(leagueTableJson);
+              LeagueTableDto.fromJson(newJson);
           print("middle");
-
           leagueTable.add(leagueTableDto.toDomain());
         }
-        // LeagueTableDto leagueTableDto =
-        //     LeagueTableDto.fromJson(jsonDecode(response.body));
-        print("last $leagueTable");
         return right(leagueTable);
       }
 
