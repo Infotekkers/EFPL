@@ -11,6 +11,11 @@ class ChipsDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text("Chips"),
+      titleTextStyle: TextStyle(
+        color: Colors.blue[900],
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+      ),
       content: Wrap(
         direction: Axis.vertical,
         spacing: 10.0,

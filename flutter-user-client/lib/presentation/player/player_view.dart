@@ -20,18 +20,29 @@ class PlayerView extends StatelessWidget {
           getIt<PlayerBloc>()..add(PlayerEvent.getPlayer(101.toString())),
       child: Scaffold(
         appBar: AppBar(
+          elevation: 0,
           title: const Text("Player Information"),
+          iconTheme: IconThemeData(color: Colors.blue[900]),
+          titleTextStyle: TextStyle(
+            color: Colors.blue[900],
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+          backgroundColor: Colors.blue[50],
         ),
         body: BlocConsumer<PlayerBloc, PlayerState>(
           listener: (_, state) {},
           builder: (context, state) => state.map(
             initial: (_) => Container(),
             loadInProgress: (_) => const BouncingBallLoadingIndicator(),
-            loadSuccess: (state) => ListView(
-              children: [
-                PlayerOverview(state: state),
-                PlayerStats(state: state),
-              ],
+            loadSuccess: (state) => Container(
+              color: Colors.blue[50],
+              child: ListView(
+                children: [
+                  PlayerOverview(state: state),
+                  PlayerStats(state: state),
+                ],
+              ),
             ),
             loadFailure: (state) => Transform.scale(
               scale: 0.8,

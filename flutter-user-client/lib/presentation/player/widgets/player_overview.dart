@@ -18,7 +18,7 @@ class PlayerOverview extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
-        color: Colors.blue[500],
+        color: Colors.blue[900],
         elevation: 8.0,
         child: Column(
           children: [
