@@ -76,24 +76,33 @@ class RequestResetForm extends StatelessWidget {
       builder: ((context, state) {
         return Form(
           autovalidateMode: AutovalidateMode.always,
-          child: ListView(
+          child: Column(
             children: [
               const Text(
                 'Input your email so we can send reset your password',
-                textAlign: TextAlign.center,
+                // textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  // fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 15,
               ),
               TextFormField(
                 key: const ValueKey("requestPageUserName"),
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
+                  // prefixIcon: Icon(Icons.email),
                   labelText: 'Email',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 0.0,
+                    horizontal: 15.0,
+                  ),
                 ),
                 autocorrect: false,
                 onChanged: (value) =>
@@ -110,21 +119,45 @@ class RequestResetForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: state.isSubmitting
-                        ? null
-                        : () {
-                            BlocProvider.of<RequestResetFormBloc>(context).add(
-                                const RequestResetFormEvent.requestPressed());
-                          },
-                    child: const Text(
-                      'Request Password Reset',
+
+              const SizedBox(
+                height: 25,
+              ),
+
+              // Reset Button
+              InkWell(
+                onTap: () {
+                  state.isSubmitting
+                      ? null
+                      : BlocProvider.of<RequestResetFormBloc>(context).add(
+                          const RequestResetFormEvent.requestPressed(),
+                        );
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 40,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5),
+                      topLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                    ),
+                    // color: Colors.amber,
+                    color: Colors.blue,
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Reset Password',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 0.25,
+                      ),
                     ),
                   ),
-                ],
-              )
+                ),
+              ),
             ],
           ),
         );

@@ -26,7 +26,6 @@ dependencies:
   flutter_boxicons: ^3.0.0
   flutter_svg: ^1.0.3
   flutter_secure_storage: ^5.0.2
- 
 
 dev_dependencies:
   bloc_test: ^9.0.3
@@ -47,6 +46,7 @@ flutter:
   assets:
     - .env
     - assets/icons/
+    - assets/img/
   fonts:
     - family: Architect
       fonts:
