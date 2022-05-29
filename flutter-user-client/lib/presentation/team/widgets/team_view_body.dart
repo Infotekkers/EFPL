@@ -3,6 +3,7 @@ import 'package:efpl/presentation/core/widgets/bouncing_ball_loading_indicator.d
 import 'package:efpl/presentation/core/widgets/no_connection_widget.dart';
 import 'package:efpl/presentation/team/widgets/chips_dialog.dart';
 import 'package:efpl/presentation/team/widgets/positional_container_widget.dart';
+import 'package:efpl/services/global_vars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,11 +17,11 @@ class TeamViewBody extends StatelessWidget {
         state.maybeMap(
             loadFailure: (state) {
               ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Check Your Connection")));
+                  SnackBar(content: Text(strings(context).checkConn)));
             },
             saved: (state) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text("Team Saved")));
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(strings(context).teamSaved)));
             },
             orElse: () {})
       },
@@ -43,7 +44,7 @@ class TeamViewBody extends StatelessWidget {
                     primary: Colors.white,
                     backgroundColor: Colors.blue[400],
                   ),
-                  child: const Text("Retry"),
+                  child: Text(strings(context).retry),
                 ),
               ),
             ],
@@ -62,7 +63,7 @@ class TeamViewBody extends StatelessWidget {
         chipPlayedSuccess: (state) => _buildView(state, context,
             changed: true,
             informational: state.myTeam.activeChip.getOrCrash() +
-                " Chip about to be activated. Confirm?"),
+                strings(context).chipConfirmation),
         chipPlayedFailure: (state) => _buildView(state, context),
       ),
     );
@@ -221,7 +222,7 @@ class TeamViewBody extends StatelessWidget {
                   : null,
               style: TextButton.styleFrom(
                   primary: changed ? Colors.red[400] : Colors.grey),
-              child: const Text("Cancel"),
+              child: Text(strings(context).cancel),
             ),
             OutlinedButton(
               onPressed: () => changed
@@ -233,7 +234,7 @@ class TeamViewBody extends StatelessWidget {
                 primary: changed ? Colors.white : Colors.grey[500],
                 backgroundColor: changed ? Colors.blue[400] : Colors.grey[50],
               ),
-              child: const Text("Save"),
+              child: Text(strings(context).save),
             ),
           ],
         ),
