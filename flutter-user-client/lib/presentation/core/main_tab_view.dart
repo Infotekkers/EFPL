@@ -42,15 +42,11 @@ class MainTabView extends StatelessWidget {
                 onTap: () {},
               ),
               ListTile(
-                title: const Text('Watch List'),
-                onTap: () {},
-              ),
-              ListTile(
-                title: const Text('Credit'),
-                onTap: () {},
-              ),
-              ListTile(
                 title: const Text('How To'),
+                onTap: () {},
+              ),
+              ListTile(
+                title: const Text('About Us'),
                 onTap: () {},
               ),
               ListTile(

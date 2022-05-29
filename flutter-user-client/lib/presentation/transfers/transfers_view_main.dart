@@ -84,15 +84,15 @@ class TransfersView extends StatelessWidget {
                   },
 
                   // Connection issues
-                  // noConnection: (_) {
-                  //   CustomSnackBar().showCustomSnackBar(
-                  //     showContext: context,
-                  //     headlineText: "No Connection!",
-                  //     message:
-                  //         "Could not contact the server. Please check your connection!",
-                  //     snackBarType: "warning",
-                  //   );
-                  // },
+                  noConnection: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: "No Connection!",
+                      message:
+                          "Could not contact the server. Please check your connection!",
+                      snackBarType: "warning",
+                    );
+                  },
                   socketError: (_) {
                     CustomSnackBar().showCustomSnackBar(
                       showContext: context,
@@ -147,14 +147,14 @@ class TransfersView extends StatelessWidget {
                     );
                   },
 
-                  orElse: () {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Something went wrong.",
-                      message: "Something went wrong. Try again!",
-                      snackBarType: "error",
-                    );
-                  },
+                  // orElse: () {
+                  //   CustomSnackBar().showCustomSnackBar(
+                  //     showContext: context,
+                  //     headlineText: "Something went wrong.",
+                  //     message: "Something went wrong. Try again!",
+                  //     snackBarType: "error",
+                  //   );
+                  // },
                 );
               },
               (_) {},
