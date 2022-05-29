@@ -14,8 +14,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$ClassicLeagueFailuresTearOff {
-  const _$ClassicLeagueFailuresTearOff();
+class _$CustomLeaguesFailuresTearOff {
+  const _$CustomLeaguesFailuresTearOff();
 
   InvalidLeagueCode<T> invalidLeagueId<T>({required String leagueCode}) {
     return InvalidLeagueCode<T>(
@@ -33,10 +33,10 @@ class _$ClassicLeagueFailuresTearOff {
 }
 
 /// @nodoc
-const $ClassicLeagueFailures = _$ClassicLeagueFailuresTearOff();
+const $CustomLeaguesFailures = _$CustomLeaguesFailuresTearOff();
 
 /// @nodoc
-mixin _$ClassicLeagueFailures<T> {
+mixin _$CustomLeaguesFailures<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String leagueCode) invalidLeagueId,
@@ -84,20 +84,20 @@ mixin _$ClassicLeagueFailures<T> {
 }
 
 /// @nodoc
-abstract class $ClassicLeagueFailuresCopyWith<T, $Res> {
-  factory $ClassicLeagueFailuresCopyWith(ClassicLeagueFailures<T> value,
-          $Res Function(ClassicLeagueFailures<T>) then) =
-      _$ClassicLeagueFailuresCopyWithImpl<T, $Res>;
+abstract class $CustomLeaguesFailuresCopyWith<T, $Res> {
+  factory $CustomLeaguesFailuresCopyWith(CustomLeaguesFailures<T> value,
+          $Res Function(CustomLeaguesFailures<T>) then) =
+      _$CustomLeaguesFailuresCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class _$ClassicLeagueFailuresCopyWithImpl<T, $Res>
-    implements $ClassicLeagueFailuresCopyWith<T, $Res> {
-  _$ClassicLeagueFailuresCopyWithImpl(this._value, this._then);
+class _$CustomLeaguesFailuresCopyWithImpl<T, $Res>
+    implements $CustomLeaguesFailuresCopyWith<T, $Res> {
+  _$CustomLeaguesFailuresCopyWithImpl(this._value, this._then);
 
-  final ClassicLeagueFailures<T> _value;
+  final CustomLeaguesFailures<T> _value;
   // ignore: unused_field
-  final $Res Function(ClassicLeagueFailures<T>) _then;
+  final $Res Function(CustomLeaguesFailures<T>) _then;
 }
 
 /// @nodoc
@@ -110,7 +110,7 @@ abstract class $InvalidLeagueCodeCopyWith<T, $Res> {
 
 /// @nodoc
 class _$InvalidLeagueCodeCopyWithImpl<T, $Res>
-    extends _$ClassicLeagueFailuresCopyWithImpl<T, $Res>
+    extends _$CustomLeaguesFailuresCopyWithImpl<T, $Res>
     implements $InvalidLeagueCodeCopyWith<T, $Res> {
   _$InvalidLeagueCodeCopyWithImpl(
       InvalidLeagueCode<T> _value, $Res Function(InvalidLeagueCode<T>) _then)
@@ -142,7 +142,7 @@ class _$InvalidLeagueCode<T> implements InvalidLeagueCode<T> {
 
   @override
   String toString() {
-    return 'ClassicLeagueFailures<$T>.invalidLeagueId(leagueCode: $leagueCode)';
+    return 'CustomLeaguesFailures<$T>.invalidLeagueId(leagueCode: $leagueCode)';
   }
 
   @override
@@ -233,7 +233,7 @@ class _$InvalidLeagueCode<T> implements InvalidLeagueCode<T> {
   }
 }
 
-abstract class InvalidLeagueCode<T> implements ClassicLeagueFailures<T> {
+abstract class InvalidLeagueCode<T> implements CustomLeaguesFailures<T> {
   const factory InvalidLeagueCode({required String leagueCode}) =
       _$InvalidLeagueCode<T>;
 
@@ -252,7 +252,7 @@ abstract class $NetworkErrorCopyWith<T, $Res> {
 
 /// @nodoc
 class _$NetworkErrorCopyWithImpl<T, $Res>
-    extends _$ClassicLeagueFailuresCopyWithImpl<T, $Res>
+    extends _$CustomLeaguesFailuresCopyWithImpl<T, $Res>
     implements $NetworkErrorCopyWith<T, $Res> {
   _$NetworkErrorCopyWithImpl(
       NetworkError<T> _value, $Res Function(NetworkError<T>) _then)
@@ -269,7 +269,7 @@ class _$NetworkError<T> implements NetworkError<T> {
 
   @override
   String toString() {
-    return 'ClassicLeagueFailures<$T>.networkError()';
+    return 'CustomLeaguesFailures<$T>.networkError()';
   }
 
   @override
@@ -350,7 +350,7 @@ class _$NetworkError<T> implements NetworkError<T> {
   }
 }
 
-abstract class NetworkError<T> implements ClassicLeagueFailures<T> {
+abstract class NetworkError<T> implements CustomLeaguesFailures<T> {
   const factory NetworkError() = _$NetworkError<T>;
 }
 
@@ -363,7 +363,7 @@ abstract class $ServerErrorCopyWith<T, $Res> {
 
 /// @nodoc
 class _$ServerErrorCopyWithImpl<T, $Res>
-    extends _$ClassicLeagueFailuresCopyWithImpl<T, $Res>
+    extends _$CustomLeaguesFailuresCopyWithImpl<T, $Res>
     implements $ServerErrorCopyWith<T, $Res> {
   _$ServerErrorCopyWithImpl(
       ServerError<T> _value, $Res Function(ServerError<T>) _then)
@@ -380,7 +380,7 @@ class _$ServerError<T> implements ServerError<T> {
 
   @override
   String toString() {
-    return 'ClassicLeagueFailures<$T>.serverError()';
+    return 'CustomLeaguesFailures<$T>.serverError()';
   }
 
   @override
@@ -461,6 +461,6 @@ class _$ServerError<T> implements ServerError<T> {
   }
 }
 
-abstract class ServerError<T> implements ClassicLeagueFailures<T> {
+abstract class ServerError<T> implements CustomLeaguesFailures<T> {
   const factory ServerError() = _$ServerError<T>;
 }

@@ -14,44 +14,44 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$UserCustomLeagueTearOff {
-  const _$UserCustomLeagueTearOff();
+class _$CustomLeaguesTearOff {
+  const _$CustomLeaguesTearOff();
 
-  _UserCustomLeague call({required List<dynamic> userCustomLeagues}) {
-    return _UserCustomLeague(
+  _CustomLeagues call({required List<dynamic> userCustomLeagues}) {
+    return _CustomLeagues(
       userCustomLeagues: userCustomLeagues,
     );
   }
 }
 
 /// @nodoc
-const $UserCustomLeague = _$UserCustomLeagueTearOff();
+const $CustomLeagues = _$CustomLeaguesTearOff();
 
 /// @nodoc
-mixin _$UserCustomLeague {
+mixin _$CustomLeagues {
   List<dynamic> get userCustomLeagues => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UserCustomLeagueCopyWith<UserCustomLeague> get copyWith =>
+  $CustomLeaguesCopyWith<CustomLeagues> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserCustomLeagueCopyWith<$Res> {
-  factory $UserCustomLeagueCopyWith(
-          UserCustomLeague value, $Res Function(UserCustomLeague) then) =
-      _$UserCustomLeagueCopyWithImpl<$Res>;
+abstract class $CustomLeaguesCopyWith<$Res> {
+  factory $CustomLeaguesCopyWith(
+          CustomLeagues value, $Res Function(CustomLeagues) then) =
+      _$CustomLeaguesCopyWithImpl<$Res>;
   $Res call({List<dynamic> userCustomLeagues});
 }
 
 /// @nodoc
-class _$UserCustomLeagueCopyWithImpl<$Res>
-    implements $UserCustomLeagueCopyWith<$Res> {
-  _$UserCustomLeagueCopyWithImpl(this._value, this._then);
+class _$CustomLeaguesCopyWithImpl<$Res>
+    implements $CustomLeaguesCopyWith<$Res> {
+  _$CustomLeaguesCopyWithImpl(this._value, this._then);
 
-  final UserCustomLeague _value;
+  final CustomLeagues _value;
   // ignore: unused_field
-  final $Res Function(UserCustomLeague) _then;
+  final $Res Function(CustomLeagues) _then;
 
   @override
   $Res call({
@@ -67,31 +67,31 @@ class _$UserCustomLeagueCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$UserCustomLeagueCopyWith<$Res>
-    implements $UserCustomLeagueCopyWith<$Res> {
-  factory _$UserCustomLeagueCopyWith(
-          _UserCustomLeague value, $Res Function(_UserCustomLeague) then) =
-      __$UserCustomLeagueCopyWithImpl<$Res>;
+abstract class _$CustomLeaguesCopyWith<$Res>
+    implements $CustomLeaguesCopyWith<$Res> {
+  factory _$CustomLeaguesCopyWith(
+          _CustomLeagues value, $Res Function(_CustomLeagues) then) =
+      __$CustomLeaguesCopyWithImpl<$Res>;
   @override
   $Res call({List<dynamic> userCustomLeagues});
 }
 
 /// @nodoc
-class __$UserCustomLeagueCopyWithImpl<$Res>
-    extends _$UserCustomLeagueCopyWithImpl<$Res>
-    implements _$UserCustomLeagueCopyWith<$Res> {
-  __$UserCustomLeagueCopyWithImpl(
-      _UserCustomLeague _value, $Res Function(_UserCustomLeague) _then)
-      : super(_value, (v) => _then(v as _UserCustomLeague));
+class __$CustomLeaguesCopyWithImpl<$Res>
+    extends _$CustomLeaguesCopyWithImpl<$Res>
+    implements _$CustomLeaguesCopyWith<$Res> {
+  __$CustomLeaguesCopyWithImpl(
+      _CustomLeagues _value, $Res Function(_CustomLeagues) _then)
+      : super(_value, (v) => _then(v as _CustomLeagues));
 
   @override
-  _UserCustomLeague get _value => super._value as _UserCustomLeague;
+  _CustomLeagues get _value => super._value as _CustomLeagues;
 
   @override
   $Res call({
     Object? userCustomLeagues = freezed,
   }) {
-    return _then(_UserCustomLeague(
+    return _then(_CustomLeagues(
       userCustomLeagues: userCustomLeagues == freezed
           ? _value.userCustomLeagues
           : userCustomLeagues // ignore: cast_nullable_to_non_nullable
@@ -102,22 +102,22 @@ class __$UserCustomLeagueCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UserCustomLeague implements _UserCustomLeague {
-  const _$_UserCustomLeague({required this.userCustomLeagues});
+class _$_CustomLeagues implements _CustomLeagues {
+  const _$_CustomLeagues({required this.userCustomLeagues});
 
   @override
   final List<dynamic> userCustomLeagues;
 
   @override
   String toString() {
-    return 'UserCustomLeague(userCustomLeagues: $userCustomLeagues)';
+    return 'CustomLeagues(userCustomLeagues: $userCustomLeagues)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserCustomLeague &&
+            other is _CustomLeagues &&
             const DeepCollectionEquality()
                 .equals(other.userCustomLeagues, userCustomLeagues));
   }
@@ -128,18 +128,18 @@ class _$_UserCustomLeague implements _UserCustomLeague {
 
   @JsonKey(ignore: true)
   @override
-  _$UserCustomLeagueCopyWith<_UserCustomLeague> get copyWith =>
-      __$UserCustomLeagueCopyWithImpl<_UserCustomLeague>(this, _$identity);
+  _$CustomLeaguesCopyWith<_CustomLeagues> get copyWith =>
+      __$CustomLeaguesCopyWithImpl<_CustomLeagues>(this, _$identity);
 }
 
-abstract class _UserCustomLeague implements UserCustomLeague {
-  const factory _UserCustomLeague({required List<dynamic> userCustomLeagues}) =
-      _$_UserCustomLeague;
+abstract class _CustomLeagues implements CustomLeagues {
+  const factory _CustomLeagues({required List<dynamic> userCustomLeagues}) =
+      _$_CustomLeagues;
 
   @override
   List<dynamic> get userCustomLeagues;
   @override
   @JsonKey(ignore: true)
-  _$UserCustomLeagueCopyWith<_UserCustomLeague> get copyWith =>
+  _$CustomLeaguesCopyWith<_CustomLeagues> get copyWith =>
       throw _privateConstructorUsedError;
 }
