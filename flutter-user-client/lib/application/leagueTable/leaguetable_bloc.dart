@@ -1,13 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:efpl/domain/league_table/i_league_table_repository.dart';
 import 'package:efpl/domain/league_table/league_table.dart';
-import 'package:efpl/domain/league_table/league_table.dart';
 import 'package:efpl/domain/league_table/league_table_failure.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../domain/league_table/league_table.dart';
 
 part 'leaguetable_event.dart';
