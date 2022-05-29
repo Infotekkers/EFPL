@@ -8,6 +8,7 @@ import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/domain/auth/user.dart';
 import 'package:efpl/infrastructure/auth/auth_dtos.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,6 +31,8 @@ class AuthRepository implements IAuthRepository {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
         print(response.body);
+        final user = userDtoIn.toDomain();
+
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 400) {
         return left(const AuthFailure.invalidEmailPasswordCombination());
@@ -48,20 +51,18 @@ class AuthRepository implements IAuthRepository {
       {required User user, required Password password}) async {
     final Uri url = Uri.parse("$_baseUrl/register");
     final UserDto userDtoOut = UserDto.fromDomain(user);
-    print(user);
 
     final outGoingJson =
         userDtoOut.copyWith(password: password.getOrCrash()).toJson();
     try {
-      print(outGoingJson);
       final response = await client!.post(url, body: outGoingJson);
-      print('e');
-      print(response.body);
+
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
         // ignore: avoid_print
-        print('success');
+        print(userDtoIn.token);
+        // store token on secure store
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 400) {
         return left(const AuthFailure.emailAlreadyInUse());
@@ -77,9 +78,22 @@ class AuthRepository implements IAuthRepository {
 
   // getSignedInUser
   @override
-  Future<Option<User>> getSignedInUser() {
-    // TODO: implement getSignedInUser
-    throw UnimplementedError();
+  Future<Option<User>> getSignedInUser() async {
+    const storage = FlutterSecureStorage();
+
+    try {
+      String? value = await storage.read(key: 'user');
+      print(value);
+      final UserDto userDtoIn =
+          UserDto.fromJson(jsonDecode(value!) as Map<String, dynamic>);
+
+      return optionOf(userDtoIn.toDomain());
+    } catch (err) {
+      print(err);
+      return none();
+    }
+
+    // throw UnimplementedError();
   }
 
   //  requestReset
@@ -114,5 +128,21 @@ class AuthRepository implements IAuthRepository {
   Future<void> signOut() {
     // TODO: implement signOut
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> setSignedInUser(
+      {required User user}) async {
+    try {
+      final storage = new FlutterSecureStorage();
+
+      final UserDto userDtoOut = UserDto.fromDomain(user);
+
+      storage.write(key: 'user', value: jsonEncode(userDtoOut.toJson()));
+
+      return right(unit);
+    } catch (err) {
+      return left(const AuthFailure.serverError());
+    }
   }
 }

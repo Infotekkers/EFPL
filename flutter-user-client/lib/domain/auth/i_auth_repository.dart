@@ -7,7 +7,7 @@ import 'auth_value_objects.dart';
 abstract class IAuthRepository {
   // get currently signed in user
   Future<Option<User>> getSignedInUser();
-
+  Future<Either<AuthFailure, Unit>> setSignedInUser({required User user});
   // register user
   Future<Either<AuthFailure, User>> registerUser({
     required User user,
@@ -27,6 +27,4 @@ abstract class IAuthRepository {
   Future<Either<AuthFailure, User>> requestReset({
     required User user,
   });
-
-  // Future<void> getTeams();
 }

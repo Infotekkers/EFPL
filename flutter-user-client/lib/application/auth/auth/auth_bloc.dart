@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -17,6 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthCheckRequested>(
       (event, emit) async {
         final userOption = await _authRepository.getSignedInUser();
+
         emit(
           userOption.fold(
             () => const AuthState.unauthenticated(),

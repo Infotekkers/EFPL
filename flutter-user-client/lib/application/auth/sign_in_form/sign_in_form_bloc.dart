@@ -71,6 +71,11 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
             authFailureOrSuccessOption: some(failureOrSuccess!),
           ),
         );
+        if (failureOrSuccess.isRight()) {
+          failureOrSuccess.fold((l) => {}, (r) async {
+            await _authRepository.setSignedInUser(user: r);
+          });
+        }
       },
     );
   }

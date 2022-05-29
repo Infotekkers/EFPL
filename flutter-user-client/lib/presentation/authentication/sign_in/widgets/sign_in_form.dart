@@ -1,3 +1,4 @@
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/presentation/authentication/register/register_view.dart';
 import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
 import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
@@ -140,21 +141,9 @@ class SignInForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-              // DropdownButton(
-              //   items: <String>['1', '2', '2'].map((String value) {
-              //     return DropdownMenuItem<String>(
-              //       child: Text(value),
-              //       value: value,
-              //     );
-              //   }).toList(),
-              //   onChanged: (String? value) {
-              //     print(value);
-              //   },
-              // ),
               const SizedBox(
                 height: 6,
               ),
-
               ElevatedButton(
                 onPressed: state.isSubmitting
                     ? null
@@ -164,7 +153,6 @@ class SignInForm extends StatelessWidget {
                       },
                 child: const Text('Sign In'),
               ),
-
               const SizedBox(height: 6),
               ElevatedButton(
                 onPressed: () {

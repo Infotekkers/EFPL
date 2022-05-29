@@ -61,7 +61,14 @@ class RequestResetForm extends StatelessWidget {
                   },
                 );
               },
-              (_) {},
+              (_) {
+                CustomSnackBar().showCustomSnackBar(
+                  showContext: context,
+                  headlineText: "Success!",
+                  message: "Email Successfully sent",
+                  snackBarType: "success",
+                );
+              },
             );
           },
         );

@@ -7,7 +7,7 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/authentication/auth_bloc.dart' as _i9;
+import 'application/auth/auth/auth_bloc.dart' as _i9;
 import 'application/auth/register_form/register_form_bloc.dart' as _i5;
 import 'application/auth/request_reset_form/request_reset_form_bloc.dart'
     as _i6;
