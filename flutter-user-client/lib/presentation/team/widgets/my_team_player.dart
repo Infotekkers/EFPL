@@ -7,9 +7,9 @@ class MyTeamPlayer extends StatelessWidget {
   final int playerId;
   final String name;
   final String position;
-  final int multiplier;
+  final double multiplier;
   final String eplTeamId;
-  final int price;
+  final double price;
   final bool isCaptain;
   final bool isViceCaptain;
   final bool isTransferable;

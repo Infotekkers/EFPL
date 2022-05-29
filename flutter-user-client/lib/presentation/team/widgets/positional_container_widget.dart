@@ -62,12 +62,13 @@ class PositionalContainerWidget extends StatelessWidget {
                 playerId: players[playerIds[index]]['playerId'],
                 name: players[playerIds[index]]['name'],
                 position: players[playerIds[index]]['position'],
-                multiplier: players[playerIds[index]]['multiplier'],
+                multiplier: players[playerIds[index]]['multiplier'].toDouble(),
                 eplTeamId: players[playerIds[index]]['eplTeamId'],
-                price: players[playerIds[index]]['price'],
+                price: players[playerIds[index]]['price'].toDouble(),
                 isCaptain: players[playerIds[index]]['isCaptain'],
                 isViceCaptain: players[playerIds[index]]['isViceCaptain'],
-                availability: players[playerIds[index]]['availability'],
+                availability: players[playerIds[index]]['availability'] ??
+                    {'injuryStatus': "100", 'injuryMessage': "Fit to play"},
                 toBeTransferredOut:
                     int.parse(playerIds[index]) == toBeTransferredOut
                         ? true

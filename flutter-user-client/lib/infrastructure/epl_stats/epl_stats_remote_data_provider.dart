@@ -12,7 +12,7 @@ import 'package:injectable/injectable.dart';
 class EPLStatsRemoteDataProvider {
   http.Client? client = http.Client();
 
-  final String _baseUrl = "${dotenv.env["BASE_URL"]}";
+  final String _baseUrl = "${dotenv.env["API"]}";
 
   EPLStatsRemoteDataProvider();
 

@@ -15,7 +15,7 @@ class TransferPlayerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String _baseURL = dotenv.env["BASE_URL"].toString();
+    final String _baseURL = dotenv.env["API"].toString();
     final TransferBloc _transferBloc = getIt<TransferBloc>();
     return BlocConsumer<TransferBloc, TransferState>(
       listener: (context, state) {

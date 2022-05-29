@@ -272,10 +272,11 @@ class UserPlayerWidget extends StatelessWidget {
                     width: 70,
                     child: Center(
                       child: Text(
-                        currentUserPlayer.currentPrice.value.fold(
-                          (l) => '',
-                          (r) => r.toString(),
-                        ),
+                        // currentUserPlayer.currentPrice.value.fold(
+                        //   (l) => '',
+                        //   (r) => r.toString(),
+                        currentUserPlayer.multiplier.toString(),
+                        // ),
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           color: ConstantColors.primary_900,

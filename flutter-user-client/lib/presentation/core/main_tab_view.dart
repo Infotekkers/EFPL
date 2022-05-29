@@ -137,22 +137,14 @@ class MainTabView extends StatelessWidget {
           ),
         ),
         body: TabBarView(
-          children: [
+          children: const [
             TeamView(),
             PointsView(),
             TransfersView(),
             FixturesView(),
             LeaguesView(),
-            SettingsView(),
             EPLStatsView(),
-            MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => getIt<UtilBloc>(),
-                )
-              ],
-              child: SettingsView(),
-            )
+            SettingsView(),
           ],
         ),
       ),

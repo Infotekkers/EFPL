@@ -46,7 +46,10 @@ class MyTeamRemoteDataProvider {
 
     final outgoingJson = jsonEncode({
       "userId": userId,
-      "incomingTeam": myTeamDto.toJson(),
+      "data": {
+        "incomingTeam": myTeamDto.toJson(),
+        "isSetTeam": true,
+      }
     });
 
     try {

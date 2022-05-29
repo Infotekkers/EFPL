@@ -560,6 +560,11 @@ class TransferRemoteDataProvider {
   }
 
   Future<Either<dynamic, bool>> saveUserPlayers({required Map userTeam}) async {
+    print("*****************************");
+    for (var key in userTeam['incomingTeam']['players'].keys) {
+      print(userTeam['incomingTeam']['players'][key]);
+    }
+    print("*****************************");
     try {
       var apiResponse =
           await instance.client.patch(Uri.parse('$_baseURL/user/team'), body: {
