@@ -88,7 +88,7 @@ export default {
           });
         });
     },
-    // reset pass
+    // admin reset pass
     async resetPassword(context, password) {
       const token = router.currentRoute.value.params.token;
       console.log(token);
@@ -119,6 +119,35 @@ export default {
         });
     },
 
+    // user reset pass
+    async userResetPassword(context, password) {
+      const token = router.currentRoute.value.params.token;
+      console.log(token);
+      axios
+        .post(`${baseURL}/user/resetPass/${token}`, {
+          password: password,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: `Password Successfully Reset `,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+          if (err.response.status === 400) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: true,
+              notificationMessage: `${err.response.data.message}`,
+            });
+          }
+        });
+    },
     // send email
     async sendEmail(context, { receiverEmail, emailBody }) {
       await axios

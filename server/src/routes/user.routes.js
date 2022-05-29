@@ -12,6 +12,7 @@ router.patch("/deleteUser/:id", userController.deleteUser);
 router.post("/requestReset", userController.requestReset);
 router.post("/resetPass/:token", userController.resetPass);
 router.put("/transfer", userController.transfer);
+router.post("/validateUser", userController.validateUser);
 
 // new
 router.get("/team", userController.getUserTeam);

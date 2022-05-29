@@ -278,6 +278,7 @@ const addTestPlayer = async () => {
 };
 
 const addTestUser = async () => {
+
   // Test USER
   const testUser = new User({
     userName: "MaduserYaknow",
@@ -285,7 +286,7 @@ const addTestUser = async () => {
     email: "tester@testy.com",
     teamName: "Mad Team Ya know",
     country: "ET",
-    favouriteEplTeam: "",
+    favouriteEplTeam: "Buna",
     team: [
       // {
       //   gameweekId: "1",
@@ -489,8 +490,117 @@ const addTestUser = async () => {
       // },
     ],
   });
+  const testUser2 = new User({
+    userName:"Test Man 2",
+    password:"SoStrong123!!!",
+    email:"mikealexiv565@gmail.com",
+    teamName:"ChaosServidoras",
+    country:"ET",
+    favouriteEplTeam: "St.George",
+    team: [
+      {
+        gameweekId: "1",
+        players: {
+          101: {
+            playerId: "101",
+            eplTeamId: "10",
+            price: "5",
+            multiplier: "1",
+            isCaptain: true,
+          },
+          102: {
+            playerId: "102",
+            eplTeamId: "10",
+            price: "5",
+            multiplier: "1",
+            isViceCaptain: true,
+          },
+          201: {
+            playerId: "201",
+            eplTeamId: "10",
+            price: "5",
+            multiplier: "1",
+          },
+          202: {
+            playerId: "202",
+            eplTeamId: "20",
+            price: "5",
+            multiplier: "1",
+          },
+          203: {
+            playerId: "203",
+            eplTeamId: "20",
+            price: "5",
+            multiplier: "1",
+          },
+          204: {
+            playerId: "204",
+            eplTeamId: "20",
+            price: "5",
+            multiplier: "1",
+          },
+          205: {
+            playerId: "205",
+            eplTeamId: "30",
+            price: "5",
+            multiplier: "1",
+          },
+          301: {
+            playerId: "301",
+            eplTeamId: "30",
+            price: "5",
+            multiplier: "1",
+          },
+          302: {
+            playerId: "302",
+            eplTeamId: "30",
+            price: "5",
+            multiplier: "1",
+          },
+          303: {
+            playerId: "303",
+            eplTeamId: "40",
+            price: "5",
+            multiplier: "1",
+          },
+          304: {
+            playerId: "304",
+            eplTeamId: "40",
+            price: "5",
+            multiplier: "1",
+          },
+          305: {
+            playerId: "305",
+            eplTeamId: "40",
+            price: "5",
+            multiplier: "0",
+          },
+          401: {
+            playerId: "401",
+            eplTeamId: "50",
+            price: "5",
+            multiplier: "0",
+          },
+          402: {
+            playerId: "402",
+            eplTeamId: "50",
+            price: "5",
+            multiplier: "0",
+          },
+          403: {
+            playerId: "403",
+            eplTeamId: "50",
+            price: "5",
+            multiplier: "0",
+          },
+        },
+      },
+    ],
+
+  })
 
   await testUser.save();
+  await testUser2.save();
 };
 
 const addTestAdmin = async () => {

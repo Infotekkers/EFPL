@@ -21,13 +21,11 @@ const transporter = nodemailer.createTransport({
 });
 
 const register = asyncHandler(async (req, res) => {
-  // check for preexisting email
-  const emailExists = await User.findOne({ email: req.body.email });
-  // check for used team name
-  const teamNameExists = await User.findOne({ teamName: req.body.teamName });
+  console.log(req.body);
 
+  // check for prexisting email
+  const emailExists = await User.findOne({ email: req.body.email });
   if (emailExists) return res.status(400).send("Email in Use");
-  if (teamNameExists) return res.status(400).send("Team Name in Use");
 
   // create user
   const user = new User({
@@ -36,7 +34,7 @@ const register = asyncHandler(async (req, res) => {
     email: req.body.email,
     teamName: req.body.teamName,
     country: req.body.country,
-    favoriteEplTeamId: req.body.favoriteEplTeamId,
+    favouriteEplTeam: req.body.favouriteEplTeam,
   });
   // save user to db
   await user.save();
@@ -58,20 +56,25 @@ const register = asyncHandler(async (req, res) => {
   // return token  with user
   res.status(201).json({
     token: token,
-    name: user.userName,
+    userName: user.userName,
     email: user.email,
+    country: user.country,
+    favouriteEplTeam: user.favouriteEplTeam,
+    teamName: user.teamName,
   });
 });
 
 const login = asyncHandler(async (req, res) => {
   // check if email exists
   const user = await User.findOne({ email: req.body.email });
+
   // check if password valid
   if (user) {
     const passwordCheck = await bcrypt.compare(
       req.body.password,
       user.password
     );
+
     if (passwordCheck) {
       // fetch id
       const userId = await user._id;
@@ -91,13 +94,18 @@ const login = asyncHandler(async (req, res) => {
       // return token  with user
       res.status(201).json({
         token: token,
-        name: user.userName,
+        userName: user.userName,
         email: user.email,
+        country: user.country,
+        favouriteEplTeam: user.favouriteEplTeam,
+        teamName: user.teamName,
       });
+    } else {
+      res.status(400).json({ message: "invalid email - password combination" });
     }
+  } else {
     res.status(400).json({ message: "invalid email - password combination" });
   }
-  res.status(400).json({ message: "invalid email - password combination" });
 });
 
 const fetchUsers = asyncHandler(async (req, res) => {
@@ -108,7 +116,7 @@ const fetchUsers = asyncHandler(async (req, res) => {
 const fetchOneUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user == null) {
-    return res.status(404).json({ messaage: "No user found" });
+    return res.status(404).json({ message: "No user found" });
   }
   res.user = user;
   res.json(res.user);
@@ -150,13 +158,13 @@ const fetchUserTeam = asyncHandler(async (req, res) => {
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user == null) {
-    return res.status(404).json({ messaage: "No user found" });
+    return res.status(404).json({ message: "No user found" });
   }
   res.user = user;
 
-  // change favorite team
-  if (req.body.favoriteEplTeamId != null) {
-    res.user.favoriteEplTeamId = req.body.favoriteEplTeamId;
+  // change favourite team
+  if (req.body.favouriteEplTeam != null) {
+    res.user.favouriteEplTeam = req.body.favouriteEplTeam;
   }
   // change userName
   if (req.body.userName != null) {
@@ -179,45 +187,54 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   const user = await User.findById(req.params.id);
   if (user == null) {
-    return res.status(404).json({ messaage: "No user found" });
+    return res.status(404).json({ message: "No user found" });
   }
   res.user = user;
   // delete user
   await res.user.remove();
-  res.json({ messaage: `user ${user.userName} removed` });
+  res.json({ message: `user ${user.userName} removed` });
 });
 
 const requestReset = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
-  // generate reset token
-  const resetToken = jwt.sign(
-    {
-      data: email,
-    },
-    secretKey,
-    { expiresIn: 60 * 60 }
-  );
+  // check if email exists
+  const user = await User.findOne({ email: { $eq: email } });
 
-  // TODO:make from base url
-  const resetUrl = `http://localhost:5000/user1/resetPass/${resetToken}`;
+  if (user) {
+    // generate reset token
+    const resetToken = jwt.sign(
+      {
+        data: email,
+      },
+      secretKey,
+      { expiresIn: 60 * 60 }
+    );
+    const resetUrl = `${
+      process.env.BASE_URL_WITHOUT_PORT
+    }${8080}/passwordReset/${resetToken}`;
 
-  const mailOptions = {
-    from: process.env.user,
-    to: "mikealexiv565@gmail.com",
-    subject: "Reset Email via Node",
-    text: `${resetUrl}`,
-  };
+    const mailOptions = {
+      from: process.env.user,
+      to: email,
+      subject: "Reset Email via Node",
+      text: `${resetUrl}`,
+    };
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      res.status(400).json({
-        messaage: "could not send reset email",
-      });
-    } else {
-      res.status(200).json({ messaage: "Email Sent Successfully" });
-    }
-  });
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        res.status(400).json({
+          message: "could not send reset email",
+        });
+        console.log(error);
+      } else {
+        res.status(200).json({ message: "Email Sent Successfully" });
+        console.log("email sent: " + info.response);
+      }
+    });
+  } else {
+    res.status(404).send({ message: "email not found" });
+  }
 });
 
 const resetPass = asyncHandler(async (req, res) => {
@@ -771,7 +788,21 @@ const getUserPoints = asyncHandler(async (req, res) => {
     res.status(404).send(finalFormat);
   }
 });
+const validateUser = asyncHandler(async (req, res) => {
+  const token = req.body.token;
 
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const admin = await User.findById(decoded.data).select("-password");
+    if (admin) {
+      res.status(200).json({ message: "Validated" });
+    } else {
+      res.status(403).json({ message: "Something went wrong" });
+    }
+  } catch (err) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
+});
 module.exports = {
   register,
   login,
@@ -787,4 +818,5 @@ module.exports = {
   // New
   getUserTeam,
   getUserPoints,
+  validateUser,
 };

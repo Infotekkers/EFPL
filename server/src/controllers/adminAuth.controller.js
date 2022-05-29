@@ -89,7 +89,7 @@ const requestReset = asyncHandler(async (req, res) => {
       }
     });
   } else {
-    res.status(404).send({ message: "user with that email doesn't exist" });
+    res.status(404).send({ message: "email doesn't exist" });
   }
 });
 

@@ -3,6 +3,9 @@ import 'package:efpl/application/points/points_bloc.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
+import 'package:efpl/presentation/authentication/register/register_view.dart';
+import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
+import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
 import 'package:efpl/presentation/authentication/splash_view.dart';
 import 'package:efpl/presentation/core/main_tab_view.dart';
 import 'package:efpl/presentation/player/player_view.dart';
@@ -93,5 +96,8 @@ class AppRouter {
           ],
           child: const ConfirmTransfersPage(),
         ),
+    "/request-reset": (context) => const RequestResetPage(),
+    "/sign-in": (context) => const SignInPage(),
+    "/register": (context) => const RegisterPage(),
   };
 }

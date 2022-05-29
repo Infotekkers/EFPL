@@ -1,3 +1,4 @@
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/locale/l10n.dart';
@@ -15,9 +16,21 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppRouter _appRouter = AppRouter();
 
-    return BlocProvider(
-      create: (context) =>
-          getIt<UtilBloc>()..add(const UtilEvent.setDefaultLocale()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<UtilBloc>()
+            ..add(
+              const UtilEvent.setDefaultLocale(),
+            ),
+        ),
+        BlocProvider(
+          create: (context) => getIt<AuthBloc>()
+            ..add(
+              const AuthEvent.authCheckRequested(),
+            ),
+        ),
+      ],
       child: BlocConsumer<UtilBloc, UtilState>(
         listener: (context, state) {},
         builder: (context, state) {
