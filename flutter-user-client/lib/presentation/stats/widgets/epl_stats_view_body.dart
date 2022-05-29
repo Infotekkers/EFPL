@@ -20,6 +20,11 @@ class EPLStatsViewBody extends StatelessWidget {
           child: Text("Error"),
         ),
       ),
+      // builder: (context, state) {
+      //   return Center(
+      //     child: Text(state.toString()),
+      //   );
+      // },
     );
   }
 

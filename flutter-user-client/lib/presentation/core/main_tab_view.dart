@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:efpl/application/epl_stats/epl_stats_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
@@ -21,6 +22,9 @@ class MainTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     final UtilBloc _utilBloc = getIt<UtilBloc>();
     _utilBloc.add(const UtilEvent.setDefaultLocale());
+
+    final _eplStatsBloc = getIt<EPLStatsBloc>()
+      ..add(const EPLStatsEvent.getEplStats());
 
     return DefaultTabController(
       length: 7,
@@ -130,7 +134,10 @@ class MainTabView extends StatelessWidget {
             TransfersView(),
             FixtureView(),
             LeaguesView(),
-            EPLStatsView(),
+            BlocProvider(
+              create: (context) => _eplStatsBloc,
+              child: const EPLStatsView(),
+            ),
             MultiBlocProvider(
               providers: [
                 BlocProvider(

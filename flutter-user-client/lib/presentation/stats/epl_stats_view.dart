@@ -14,11 +14,7 @@ class EPLStatsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: BlocProvider(
-        create: (context) =>
-            getIt<EPLStatsBloc>()..add(const EPLStatsEvent.getEplStats()),
-        child: const EPLStatsViewBody(),
-      ),
+      child: EPLStatsViewBody(),
     );
   }
 }
