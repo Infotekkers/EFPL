@@ -13,7 +13,7 @@ const customLeagueSchema = mongoose.Schema({
   leagueName: { type: String, required: true },
   leagueCode: { type: String, unique: true },
   teams: { type: Array, required: true }, // Player team Ids
-  adminId: { type: Number, required: true },
+  adminId: { type: String, required: true },
   leagueStartGameWeek: { type: Number, required: true },
 });
 

@@ -5,6 +5,8 @@ const customLeagueController = require("../controllers/customLeague.controllers"
 
 router.get("/", customLeagueController.getAllCustomLeagues);
 
+router.get("/user", customLeagueController.getUserCustomLeagues);
+
 router.post("/create", customLeagueController.createCustomLeague);
 router.delete("/delete", customLeagueController.deleteCustomLeague);
 router.post("/remove", customLeagueController.removePlayerFromCustomLeague);
