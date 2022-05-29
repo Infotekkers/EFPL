@@ -68,7 +68,6 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   MdiIcons.accountGroup,
-                  // color: ConstantColors.neutral_200,
                 ),
               ),
 
@@ -76,7 +75,6 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   MdiIcons.counter,
-                  // color: ConstantColors.neutral_200,
                 ),
               ),
               // Transfers
@@ -84,7 +82,6 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   Boxicons.bx_transfer,
-                  // color: ConstantColors.neutral_200,
                 ),
               ),
 
@@ -92,21 +89,18 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   MdiIcons.calendarMonth,
-                  // color: ConstantColors.neutral_200,
                 ),
               ),
               // My Leagues
               Tab(
                 icon: Icon(
                   MdiIcons.trophy,
-                  // color: ConstantColors.neutral_200,
                 ),
               ),
               // Stats
               Tab(
                 icon: Icon(
                   Icons.leaderboard,
-                  // color: ConstantColors.neutral_200,
                 ),
               ),
 
@@ -114,7 +108,6 @@ class MainTabView extends StatelessWidget {
               Tab(
                 icon: Icon(
                   Icons.settings,
-                  // color: ConstantColors.neutral_200,
                 ),
               ),
             ],

@@ -114,6 +114,39 @@ const fetchOneUser = asyncHandler(async (req, res) => {
   res.json(res.user);
 });
 
+const fetchUserTeam = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).lean();
+  if (user == null) {
+    return res.status(404).json({ messaage: "No user found" });
+  }
+
+  const team = user.team[req.params.gw - 1];
+
+  for (const playerId in team.players) {
+    const player = await Player.findOne(
+      { playerId },
+      {
+        playerName: 1,
+        position: 1,
+        availability: 1,
+      }
+    );
+    team.players[playerId].name = player?.playerName;
+    team.players[playerId].position = player?.position;
+    team.players[playerId].availability = player?.availability;
+  }
+
+  const response = {
+    teamName: user.teamName,
+    activeGameweek: req.params.gw,
+    availableChips: user.availableChips,
+    activeChip: team.activeChip,
+    players: team.players,
+  };
+
+  res.status(200).json(response);
+});
+
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user == null) {
@@ -744,6 +777,7 @@ module.exports = {
   login,
   fetchUsers,
   fetchOneUser,
+  fetchUserTeam,
   updateUser,
   deleteUser,
   requestReset,
