@@ -237,8 +237,10 @@ abstract class _getUserCustomLeagues implements CustomLeaguesEvent {
 class _$CustomLeaguesStateTearOff {
   const _$CustomLeaguesStateTearOff();
 
-  _CustomLeaguesState call({required CustomLeagues userCustomLeagues}) {
+  _CustomLeaguesState call(
+      {required bool isLoading, required List<dynamic> userCustomLeagues}) {
     return _CustomLeaguesState(
+      isLoading: isLoading,
       userCustomLeagues: userCustomLeagues,
     );
   }
@@ -249,7 +251,8 @@ const $CustomLeaguesState = _$CustomLeaguesStateTearOff();
 
 /// @nodoc
 mixin _$CustomLeaguesState {
-  CustomLeagues get userCustomLeagues => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  List<dynamic> get userCustomLeagues => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomLeaguesStateCopyWith<CustomLeaguesState> get copyWith =>
@@ -261,9 +264,7 @@ abstract class $CustomLeaguesStateCopyWith<$Res> {
   factory $CustomLeaguesStateCopyWith(
           CustomLeaguesState value, $Res Function(CustomLeaguesState) then) =
       _$CustomLeaguesStateCopyWithImpl<$Res>;
-  $Res call({CustomLeagues userCustomLeagues});
-
-  $CustomLeaguesCopyWith<$Res> get userCustomLeagues;
+  $Res call({bool isLoading, List<dynamic> userCustomLeagues});
 }
 
 /// @nodoc
@@ -277,21 +278,19 @@ class _$CustomLeaguesStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? isLoading = freezed,
     Object? userCustomLeagues = freezed,
   }) {
     return _then(_value.copyWith(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       userCustomLeagues: userCustomLeagues == freezed
           ? _value.userCustomLeagues
           : userCustomLeagues // ignore: cast_nullable_to_non_nullable
-              as CustomLeagues,
+              as List<dynamic>,
     ));
-  }
-
-  @override
-  $CustomLeaguesCopyWith<$Res> get userCustomLeagues {
-    return $CustomLeaguesCopyWith<$Res>(_value.userCustomLeagues, (value) {
-      return _then(_value.copyWith(userCustomLeagues: value));
-    });
   }
 }
 
@@ -302,10 +301,7 @@ abstract class _$CustomLeaguesStateCopyWith<$Res>
           _CustomLeaguesState value, $Res Function(_CustomLeaguesState) then) =
       __$CustomLeaguesStateCopyWithImpl<$Res>;
   @override
-  $Res call({CustomLeagues userCustomLeagues});
-
-  @override
-  $CustomLeaguesCopyWith<$Res> get userCustomLeagues;
+  $Res call({bool isLoading, List<dynamic> userCustomLeagues});
 }
 
 /// @nodoc
@@ -321,13 +317,18 @@ class __$CustomLeaguesStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? isLoading = freezed,
     Object? userCustomLeagues = freezed,
   }) {
     return _then(_CustomLeaguesState(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       userCustomLeagues: userCustomLeagues == freezed
           ? _value.userCustomLeagues
           : userCustomLeagues // ignore: cast_nullable_to_non_nullable
-              as CustomLeagues,
+              as List<dynamic>,
     ));
   }
 }
@@ -335,14 +336,17 @@ class __$CustomLeaguesStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CustomLeaguesState implements _CustomLeaguesState {
-  const _$_CustomLeaguesState({required this.userCustomLeagues});
+  const _$_CustomLeaguesState(
+      {required this.isLoading, required this.userCustomLeagues});
 
   @override
-  final CustomLeagues userCustomLeagues;
+  final bool isLoading;
+  @override
+  final List<dynamic> userCustomLeagues;
 
   @override
   String toString() {
-    return 'CustomLeaguesState(userCustomLeagues: $userCustomLeagues)';
+    return 'CustomLeaguesState(isLoading: $isLoading, userCustomLeagues: $userCustomLeagues)';
   }
 
   @override
@@ -350,13 +354,16 @@ class _$_CustomLeaguesState implements _CustomLeaguesState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _CustomLeaguesState &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
                 .equals(other.userCustomLeagues, userCustomLeagues));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userCustomLeagues));
+      runtimeType,
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(userCustomLeagues));
 
   @JsonKey(ignore: true)
   @override
@@ -366,10 +373,13 @@ class _$_CustomLeaguesState implements _CustomLeaguesState {
 
 abstract class _CustomLeaguesState implements CustomLeaguesState {
   const factory _CustomLeaguesState(
-      {required CustomLeagues userCustomLeagues}) = _$_CustomLeaguesState;
+      {required bool isLoading,
+      required List<dynamic> userCustomLeagues}) = _$_CustomLeaguesState;
 
   @override
-  CustomLeagues get userCustomLeagues;
+  bool get isLoading;
+  @override
+  List<dynamic> get userCustomLeagues;
   @override
   @JsonKey(ignore: true)
   _$CustomLeaguesStateCopyWith<_CustomLeaguesState> get copyWith =>

@@ -10,11 +10,12 @@ const getAllCustomLeagues = asyncHandler(async function (req, res) {
 });
 
 const getUserCustomLeagues = asyncHandler(async function (req, res) {
-  const { userId } = req.body;
+  console.log("requested");
+  const { userId } = req.params;
 
   const user = await UserModel.findOne({ id: userId });
 
-  res.send(user.fantasyLeagues);
+  res.json(user.fantasyLeagues);
 });
 
 const createCustomLeague = asyncHandler(async function (req, res) {

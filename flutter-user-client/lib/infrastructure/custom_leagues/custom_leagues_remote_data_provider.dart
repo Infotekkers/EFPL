@@ -24,7 +24,19 @@ class CustomLeaguesRemoteDataProvider {
       if (apiResponse.statusCode == 200) {
         final parsedReponseBody = jsonDecode(apiResponse.body);
 
-        print(parsedReponseBody);
+        print("\n");
+        print("\n");
+        print("\n");
+        print("\n");
+        print("\n");
+
+        print(parsedReponseBody.runtimeType);
+
+        print("\n");
+        print("\n");
+        print("\n");
+        print("\n");
+        print("\n");
 
         final CustomLeaguesDTO customLeaguesDTO =
             CustomLeaguesDTO.fromJson(parsedReponseBody);
