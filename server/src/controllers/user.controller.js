@@ -256,203 +256,217 @@ const resetPass = asyncHandler(async (req, res) => {
 
 const transfer = asyncHandler(async (req, res) => {
   // Destructure request body
-  const { data } = req.body;
-  // const { userId, incomingTeam } = JSON.parse(data);
-  const userId = "6296348d988244c442925ee9";
+  try {
+    const { data } = req.body;
+    // get user id from token
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
 
-  const { isSetTeam } = data;
+    const { isSetTeam } = data;
 
-  let incomingTeam;
+    let incomingTeam;
 
-  if (!isSetTeam) {
-    incomingTeam = JSON.parse(data).incomingTeam;
-  } else {
-    incomingTeam = data.incomingTeam;
-  }
+    if (!isSetTeam) {
+      incomingTeam = JSON.parse(data).incomingTeam;
+    } else {
+      incomingTeam = data.incomingTeam;
+    }
 
-  // create starter team if none => multiplier == 1
-  const incomingPlayers = incomingTeam.players;
-  const countMap = {
-    GK: 0,
-    DEF: 0,
-    MID: 0,
-    ATT: 0,
-    isCaptain: 0,
-    isViceCaptain: 0,
-  };
+    // create starter team if none => multiplier == 1
+    const incomingPlayers = incomingTeam.players;
+    const countMap = {
+      GK: 0,
+      DEF: 0,
+      MID: 0,
+      ATT: 0,
+      isCaptain: 0,
+      isViceCaptain: 0,
+    };
 
-  if (!isSetTeam) {
-    for (const key in incomingPlayers) {
-      // get player position
-      const currentPlayer = await Player.findOne({
-        playerId: incomingPlayers[key].playerId,
-      }).select("position -_id");
+    if (!isSetTeam) {
+      for (const key in incomingPlayers) {
+        // get player position
+        const currentPlayer = await Player.findOne({
+          playerId: incomingPlayers[key].playerId,
+        }).select("position -_id");
 
-      // goalkeeper
-      if (currentPlayer.position === "GK" && countMap.GK === 0) {
-        incomingPlayers[key].multiplier = 1;
-        countMap.GK = countMap.GK + 1;
+        // goalkeeper
+        if (currentPlayer.position === "GK" && countMap.GK === 0) {
+          incomingPlayers[key].multiplier = 1;
+          countMap.GK = countMap.GK + 1;
 
-        if (!countMap.isCaptain) {
-          incomingPlayers[key].isCaptain = true;
-          countMap.isCaptain = true;
+          if (!countMap.isCaptain) {
+            incomingPlayers[key].isCaptain = true;
+            countMap.isCaptain = true;
+          }
         }
-      }
-      // defender
-      else if (currentPlayer.position === "DEF" && countMap.DEF < 4) {
-        incomingPlayers[key].multiplier = 1;
-        countMap.DEF = countMap.DEF + 1;
+        // defender
+        else if (currentPlayer.position === "DEF" && countMap.DEF < 4) {
+          incomingPlayers[key].multiplier = 1;
+          countMap.DEF = countMap.DEF + 1;
 
-        if (!countMap.isViceCaptain) {
-          incomingPlayers[key].isViceCaptain = true;
-          countMap.isViceCaptain = true;
+          if (!countMap.isViceCaptain) {
+            incomingPlayers[key].isViceCaptain = true;
+            countMap.isViceCaptain = true;
+          }
         }
-      }
-      // mid
-      else if (currentPlayer.position === "MID" && countMap.MID < 3) {
-        incomingPlayers[key].multiplier = 1;
-        countMap.MID = countMap.MID + 1;
-      }
-      // att
-      else if (currentPlayer.position === "ATT" && countMap.ATT < 3) {
-        incomingPlayers[key].multiplier = 1;
-        countMap.ATT = countMap.ATT + 1;
+        // mid
+        else if (currentPlayer.position === "MID" && countMap.MID < 3) {
+          incomingPlayers[key].multiplier = 1;
+          countMap.MID = countMap.MID + 1;
+        }
+        // att
+        else if (currentPlayer.position === "ATT" && countMap.ATT < 3) {
+          incomingPlayers[key].multiplier = 1;
+          countMap.ATT = countMap.ATT + 1;
+        }
       }
     }
-  }
 
-  // Fetch active gameweek
-  let activeGameweek = await Gameweek.findOne({ status: "active" }).exec();
+    // Fetch active gameweek
+    let activeGameweek = await Gameweek.findOne({ status: "active" }).exec();
 
-  if (activeGameweek) {
-    activeGameweek = activeGameweek.gameWeekNumber;
-  } else {
-    activeGameweek = 1;
-  }
+    if (activeGameweek) {
+      activeGameweek = activeGameweek.gameWeekNumber;
+    }
+    //
+    else {
+      activeGameweek = 1;
+    }
 
-  // activeGameweek = activeGameweek + 1;
+    // Fetch User Details
+    const user = await User.findById(userId).exec();
 
-  // Fetch User Details
-  const user = await User.findById(userId).exec();
+    let activeTeam;
 
-  const activeTeam = user.team[activeGameweek - 2];
+    if (activeGameweek === 1) {
+      // get user id from token
+      activeTeam = user.team[0];
+    } else {
+      activeGameweek = user.team[activeGameweek - 2];
+    }
 
-  if (user.team.length > 0) {
-    const [isTeamValid, errorType] = await validateTeam(
-      incomingTeam,
-      user.availableChips
-    );
+    if (user.team.length > 0) {
+      const [isTeamValid, errorType] = await validateTeam(
+        incomingTeam,
+        user.availableChips
+      );
 
-    // Save team || Send err
-    if (isTeamValid === true) {
-      // Calculate deduction
-      let deduction = 0;
-      let transfersMade = "";
-      if (activeTeam) {
-        [deduction, transfersMade] = pointDeductor(activeTeam, incomingTeam);
+      console.log(isTeamValid, errorType);
 
-        // Deduct free transfer
-        if (activeTeam.freeTransfers > 0 && transfersMade > 1) {
-          if (activeTeam.freeTransfers > transfersMade) {
-            activeTeam.freeTransfers = activeTeam.freeTransfers - transfersMade;
-          } else {
-            activeTeam.freeTransfers = activeTeam.freeTransfers - 1;
+      // Save team || Send err
+      if (isTeamValid === true) {
+        // Calculate deduction
+        let deduction = 0;
+        let transfersMade = "";
+        if (activeTeam) {
+          [deduction, transfersMade] = pointDeductor(activeTeam, incomingTeam);
+
+          // Deduct free transfer
+          if (activeTeam.freeTransfers > 0 && transfersMade > 1) {
+            if (activeTeam.freeTransfers > transfersMade) {
+              activeTeam.freeTransfers =
+                activeTeam.freeTransfers - transfersMade;
+            } else {
+              activeTeam.freeTransfers = activeTeam.freeTransfers - 1;
+            }
           }
+
+          // activeTeam.freeTransfers =
+          //   activeTeam.freeTransfers < transfersMade
+          //     ? 0
+          //     : activeTeam.freeTransfers - transfersMade;
         }
 
-        // activeTeam.freeTransfers =
-        //   activeTeam.freeTransfers < transfersMade
-        //     ? 0
-        //     : activeTeam.freeTransfers - transfersMade;
-      }
+        console.log(deduction, transfersMade, activeTeam.freeTransfers);
 
-      // Remove active chips from available chips
-      if (incomingTeam.activeChip) {
-        const remainingChips = user.availableChips.filter(
-          (word) => word !== incomingTeam.activeChip
-        );
-        await User.findByIdAndUpdate(userId, {
-          availableChips: remainingChips,
-        });
-      }
+        // Remove active chips from available chips
+        if (incomingTeam.activeChip) {
+          const remainingChips = user.availableChips.filter(
+            (word) => word !== incomingTeam.activeChip
+          );
+          await User.findByIdAndUpdate(userId, {
+            availableChips: remainingChips,
+          });
+        }
 
+        const updatedUserTeam = [];
+
+        // get old teams as is
+        for (let i = 0; i < activeGameweek - 1; i++) {
+          updatedUserTeam.push(user.team[i]);
+        }
+
+        // update current gw team
+        const currentGwTeam = user.team[activeGameweek - 1];
+        currentGwTeam.players = incomingTeam.players;
+        currentGwTeam.deduction = deduction;
+        currentGwTeam.freeTransfers = activeTeam.freeTransfers;
+        updatedUserTeam.push(currentGwTeam);
+
+        // update future teams
+        for (let i = activeGameweek; i < 30; i++) {
+          let currentTeam = user.team[i];
+
+          if (currentTeam) {
+            // if free hit played skip
+            if (incomingTeam.activeChip !== "FH") {
+              currentTeam.players = incomingTeam.players;
+            }
+          } else {
+            const currentNewTeam = {
+              gameweekId: i + 1,
+              activeChip: "",
+              freeTransfers: 1,
+              deduction: 0,
+              players: incomingTeam.players,
+            };
+
+            currentTeam = currentNewTeam;
+          }
+
+          updatedUserTeam.push(currentTeam);
+        }
+        // update user team
+        await User.findByIdAndUpdate(userId, { team: updatedUserTeam });
+
+        res.status(200).json({ message: "Successfully saved team" });
+      } else {
+        res.status(412).json(errorType);
+      }
+    }
+    // initial transfer
+    else {
       const updatedUserTeam = [];
-
-      // get old teams as is
-      for (let i = 0; i < activeGameweek; i++) {
-        updatedUserTeam.push(user.team[i]);
-      }
-
-      // update current gw team
-      const currentGwTeam = user.team[activeGameweek];
-      currentGwTeam.players = incomingTeam.players;
-      currentGwTeam.deduction = deduction;
-      currentGwTeam.freeTransfers = activeTeam.freeTransfers;
-      updatedUserTeam.push(currentGwTeam);
-
       // update future teams
-      for (let i = activeGameweek + 1; i < 30; i++) {
+      for (let i = 0; i < 30; i++) {
         let currentTeam = user.team[i];
 
-        if (currentTeam) {
-          // if free hit played skip
-          if (incomingTeam.activeChip !== "FH") {
-            currentTeam.players = incomingTeam.players;
-          }
-        } else {
-          const currentNewTeam = {
-            gameweekId: i + 1,
-            activeChip: "",
-            freeTransfers: 1,
-            deduction: 0,
-            players: incomingTeam.players,
-          };
+        const currentNewTeam = {
+          gameweekId: i + 1,
+          activeChip: "",
+          freeTransfers: 1,
+          deduction: 0,
+          players: incomingTeam.players,
+        };
 
-          currentTeam = currentNewTeam;
-        }
+        currentTeam = currentNewTeam;
 
         updatedUserTeam.push(currentTeam);
       }
-      // update user team
       await User.findByIdAndUpdate(userId, { team: updatedUserTeam });
-
-      res.status(200).json({ message: "Successfully saved team" });
-    } else {
-      res.status(412).json(errorType);
+      res.status(201).json({ Message: "Me" });
     }
-  }
-  // initial transfer
-  else {
-    const updatedUserTeam = [];
-    // update future teams
-    for (let i = 0; i < 30; i++) {
-      let currentTeam = user.team[i];
-
-      const currentNewTeam = {
-        gameweekId: i + 1,
-        activeChip: "",
-        freeTransfers: 1,
-        deduction: 0,
-        players: incomingTeam.players,
-      };
-
-      currentTeam = currentNewTeam;
-
-      updatedUserTeam.push(currentTeam);
-    }
-    await User.findByIdAndUpdate(userId, { team: updatedUserTeam });
-    res.status(201).json({ Message: "Me" });
+  } catch (err) {
+    console.log(err);
   }
 });
 
 const getUserTeam = asyncHandler(async (req, res) => {
   try {
     // get user id from token
-    // const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
-    // const userId = token.data;
-
-    // TODO:MAKE TOKEN BASED
-    const userId = "6296348d988244c442925ee9";
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
 
     // get active game week
     const gameWeek = await Gameweek.find({ status: "active" });
@@ -586,137 +600,143 @@ const getUserTeam = asyncHandler(async (req, res) => {
 });
 
 const getUserPoints = asyncHandler(async (req, res) => {
-  const gwId = req.params.gameWeekId;
+  try {
+    const gwId = req.params.gameWeekId;
 
-  // const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
-  // const userId = token.data;
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
 
-  // TODO:Replace
-  const userId = "6296348d988244c442925ee9";
+    // get the gw number from frontend
+    let gameWeekId = gwId;
 
-  // get the gw number from frontend
-  let gameWeekId = gwId;
+    // get current active gw
+    const activeGw = await Gameweek.find({ status: "active" });
 
-  // get current active gw
-  const activeGw = await Gameweek.find({ status: "active" });
-
-  // if zero send active gw info
-  if (gwId.toString() === "0") {
-    // if active gw exists
-    if (activeGw.length > 0) {
+    // if zero send active gw info
+    if (gwId.toString() === "0") {
+      // if active gw exists
+      if (activeGw.length > 0) {
+        gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber;
+      }
+      // if no active gws
+      else {
+        gameWeekId = 1;
+      }
+    }
+    // if info requested by gw & is after active reset to active
+    else if (
+      activeGw[activeGw.length - 1] &&
+      gameWeekId > activeGw[activeGw.length - 1].gameWeekNumber
+    ) {
       gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber;
     }
-    // if no active gws
+    //
     else {
       gameWeekId = 1;
     }
-  }
-  // if info requested by gw & is after active reset to active
-  else if (
-    activeGw[activeGw.length - 1] &&
-    gameWeekId > activeGw[activeGw.length - 1].gameWeekNumber
-  ) {
-    gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber;
-  } else {
-    gameWeekId = 1;
-  }
 
-  // get user team
-  const user = await User.findOne({ _id: userId })
-    .select("-_id -password -country")
-    .lean();
+    // get user team
+    const user = await User.findOne({ _id: userId })
+      .select("-_id -password -country")
+      .lean();
 
-  // get user team
+    // get user team
 
-  if (user.team && user.team[gameWeekId - 1] !== null) {
-    const userTeam = user.team[gameWeekId - 1];
+    if (user.team && user.team[gameWeekId - 1] !== null) {
+      const userTeam = user.team[gameWeekId - 1];
 
-    if (userTeam && userTeam.players) {
-      const userPlayers = userTeam.players;
-      const allPlayersInfo = [];
-      const finalFormat = {
-        gameWeekId: gameWeekId,
-        activeChip: userTeam.activeChip,
-        deduction: userTeam.deduction,
-        maxActiveCount: activeGw[activeGw.length - 1]
-          ? activeGw[activeGw.length - 1].gameWeekNumber
-          : 1,
-        teamName: user.teamName,
-      };
-
-      for (const key in userPlayers) {
-        // get current player from key
-        const currentPlayer = userPlayers[key];
-
-        // get player info of current player
-        const playerInfo = await Player.findOne({
-          playerId: currentPlayer.playerId,
-        }).lean();
-
-        // get player score
-        const currentPlayerAllScore = playerInfo.score ? playerInfo.score : [];
-
-        const currentPlayerCurrentGwScore = currentPlayerAllScore.filter(
-          (scoreInfo) =>
-            scoreInfo.gameweekId.toString() === gameWeekId.toString()
-        );
-
-        const currentPlayerTeamFixture = await Fixture.findOne({
-          eplTeamId: playerInfo.eplTeamId,
-          gameweekId: gameWeekId,
-        });
-
-        const currentPlayerInfo = {
-          playerId: currentPlayer.playerId,
-          playerName: playerInfo.playerName,
-          playerPosition: playerInfo.position,
-          eplTeamId: playerInfo.eplTeamId,
-          multiplier: currentPlayer.multiplier,
-          isCaptain: currentPlayer.isCaptain,
-          isViceCaptain: currentPlayer.isViceCaptain,
-          score: currentPlayerCurrentGwScore,
-          fixtureStatus: currentPlayerTeamFixture.status,
-          fixtureScore: currentPlayerTeamFixture.score,
-          fixtureTeams:
-            currentPlayerTeamFixture.homeTeam +
-            " v " +
-            currentPlayerTeamFixture.awayTeam,
+      if (userTeam && userTeam.players) {
+        const userPlayers = userTeam.players;
+        const allPlayersInfo = [];
+        const finalFormat = {
+          gameWeekId: gameWeekId,
+          activeChip: userTeam.activeChip,
+          deduction: userTeam.deduction,
+          maxActiveCount: activeGw[activeGw.length - 1]
+            ? activeGw[activeGw.length - 1].gameWeekNumber
+            : 1,
+          teamName: user.teamName,
         };
 
-        allPlayersInfo.push(currentPlayerInfo);
+        for (const key in userPlayers) {
+          // get current player from key
+          const currentPlayer = userPlayers[key];
+
+          // get player info of current player
+          const playerInfo = await Player.findOne({
+            playerId: currentPlayer.playerId,
+          }).lean();
+
+          // get player score
+          const currentPlayerAllScore = playerInfo.score
+            ? playerInfo.score
+            : [];
+
+          const currentPlayerCurrentGwScore = currentPlayerAllScore.filter(
+            (scoreInfo) =>
+              scoreInfo.gameweekId.toString() === gameWeekId.toString()
+          );
+
+          const currentPlayerTeamFixture = await Fixture.findOne({
+            eplTeamId: playerInfo.eplTeamId,
+            gameweekId: gameWeekId,
+          });
+
+          const currentPlayerInfo = {
+            playerId: currentPlayer.playerId,
+            playerName: playerInfo.playerName,
+            playerPosition: playerInfo.position,
+            eplTeamId: playerInfo.eplTeamId,
+            multiplier: currentPlayer.multiplier,
+            isCaptain: currentPlayer.isCaptain,
+            isViceCaptain: currentPlayer.isViceCaptain,
+            score: currentPlayerCurrentGwScore,
+            fixtureStatus: currentPlayerTeamFixture.status,
+            fixtureScore: currentPlayerTeamFixture.score,
+            fixtureTeams:
+              currentPlayerTeamFixture.homeTeam +
+              " v " +
+              currentPlayerTeamFixture.awayTeam,
+          };
+
+          allPlayersInfo.push(currentPlayerInfo);
+        }
+
+        finalFormat.allPlayers = allPlayersInfo;
+
+        res.status(200).send(finalFormat);
+      } else {
+        const finalFormat = {
+          gameWeekId: gameWeekId,
+          activeChip: "",
+          deduction: 0,
+          maxActiveCount: activeGw[activeGw.length - 1]
+            ? activeGw[activeGw.length - 1].gameWeekNumber
+            : 1,
+          teamName: user.teamName,
+          allPlayers: [],
+          maxBudget: user.maxBudget,
+        };
+
+        res.status(404).send(finalFormat);
       }
-
-      finalFormat.allPlayers = allPlayersInfo;
-
-      res.status(200).send(finalFormat);
-    } else {
+    }
+    //
+    else {
       const finalFormat = {
         gameWeekId: gameWeekId,
         activeChip: "",
         deduction: 0,
-        maxActiveCount: activeGw[activeGw.length - 1]
-          ? activeGw[activeGw.length - 1].gameWeekNumber
-          : 1,
+        maxActiveCount: activeGw[activeGw.length - 1].gameWeekNumber,
         teamName: user.teamName,
         allPlayers: [],
-        maxBudget: user.maxBudget,
       };
 
       res.status(404).send(finalFormat);
     }
-  }
-  //
-  else {
-    const finalFormat = {
-      gameWeekId: gameWeekId,
-      activeChip: "",
-      deduction: 0,
-      maxActiveCount: activeGw[activeGw.length - 1].gameWeekNumber,
-      teamName: user.teamName,
-      allPlayers: [],
-    };
-
-    res.status(404).send(finalFormat);
+  } catch (err) {
+    console.log(err);
+    res.status(403).send("Error Decoding token");
   }
 });
 const validateUser = asyncHandler(async (req, res) => {
