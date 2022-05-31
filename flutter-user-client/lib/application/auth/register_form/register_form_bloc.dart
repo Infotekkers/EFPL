@@ -155,6 +155,11 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
             authFailureOrSuccessOption: optionOf(failureOrSuccess),
           ),
         );
+        if (failureOrSuccess?.isRight() ?? false) {
+          failureOrSuccess!.fold((l) => {}, (r) async {
+            await _authRepository.setSignedInUser(user: r);
+          });
+        }
       },
     );
   }
