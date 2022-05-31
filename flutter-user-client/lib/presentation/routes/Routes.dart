@@ -27,56 +27,15 @@ class AppRouter {
       const UtilEvent.setDefaultLocale(),
     );
 
-  final _eplStatsBloc = getIt<EPLStatsBloc>()
-    ..add(const EPLStatsEvent.getEplStats());
-
   Map<String, Widget Function(BuildContext)> allRoutes = {
     "/": (context) => const SplashView(),
     "/team": (context) => const TeamView(),
     "/player": (context) => const PlayerView(),
-    "/home": (context) => MultiBlocProvider(
-          providers: [
-            BlocProvider.value(
-              value: getIt<UtilBloc>(),
-            ),
-            BlocProvider.value(
-              value: getIt<EPLStatsBloc>(),
-            )
-          ],
-          child: const MainTabView(),
-        ),
-    "/fixtureDetails": (context) => MultiBlocProvider(
-          providers: [
-            BlocProvider.value(
-              value: getIt<FixtureBloc>(),
-            ),
-          ],
-          child: const FixtureDetailView(),
-        ),
-    "/transfer/initial": (context) => MultiBlocProvider(
-          providers: [
-            BlocProvider.value(
-              value: getIt<TransferBloc>(),
-            ),
-          ],
-          child: const InitialTransferPage(),
-        ),
-    "/transfer": (context) => MultiBlocProvider(
-          providers: [
-            BlocProvider.value(
-              value: getIt<TransferBloc>(),
-            ),
-          ],
-          child: const TransferPlayerView(),
-        ),
-    "/transfer/confirm": (context) => MultiBlocProvider(
-          providers: [
-            BlocProvider.value(
-              value: getIt<TransferBloc>(),
-            ),
-          ],
-          child: const ConfirmTransfersPage(),
-        ),
+    "/home": (context) => const MainTabView(),
+    "/fixtureDetails": (context) => const FixtureDetailView(),
+    "/transfer/initial": (context) => const InitialTransferPage(),
+    "/transfer": (context) => const TransferPlayerView(),
+    "/transfer/confirm": (context) => const ConfirmTransfersPage(),
     "/request-reset": (context) => const RequestResetPage(),
     "/sign-in": (context) => const SignInPage(),
     "/register": (context) => const RegisterPage(),

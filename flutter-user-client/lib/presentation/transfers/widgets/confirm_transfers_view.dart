@@ -16,25 +16,32 @@ class ConfirmTransfersPage extends StatelessWidget {
     dynamic args = ModalRoute.of(context)!.settings.arguments;
     List allPlayers = args['allPlayers'];
 
-    return BlocBuilder<TransferBloc, TransferState>(
-      builder: (context, state) {
-        List allTransferInfo = formatSwappedPlayers(state, allPlayers);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: _transferBloc,
+        ),
+      ],
+      child: BlocBuilder<TransferBloc, TransferState>(
+        builder: (context, state) {
+          List allTransferInfo = formatSwappedPlayers(state, allPlayers);
 
-        int freeTransferCount = state.userTeam.freeTransfers;
-        return Scaffold(
-          appBar: _buildAppBar(context: context),
-          body: Container(
-            color: Colors.blue[50],
-            child: _buildMainView(
-              context: context,
-              freeTransferCount: freeTransferCount,
-              state: state,
-              transferBloc: _transferBloc,
-              allTransferInfo: allTransferInfo,
+          int freeTransferCount = state.userTeam.freeTransfers;
+          return Scaffold(
+            appBar: _buildAppBar(context: context),
+            body: Container(
+              color: Colors.blue[50],
+              child: _buildMainView(
+                context: context,
+                freeTransferCount: freeTransferCount,
+                state: state,
+                transferBloc: _transferBloc,
+                allTransferInfo: allTransferInfo,
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

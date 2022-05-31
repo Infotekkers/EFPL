@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/epl_stats/epl_stats_bloc.dart';
 import 'package:efpl/domain/epl_stats/value_objects.dart';
+import 'package:efpl/injectable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,23 +12,40 @@ class EPLStatsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<EPLStatsBloc, EPLStatsState>(
-      listener: (_, state) => {},
-      builder: (context, state) => state.map(
-        initial: (_) => Container(),
-        loadInProgress: (_) => const Center(
-          child: Text('Loading'),
-        ),
-        loadSuccess: (state) => _buildStats(state, context),
-        loadFailure: (_) => const Center(
-          child: Text("Error"),
+    final _eplStatsBloc = getIt<EPLStatsBloc>()
+      ..add(
+        const EPLStatsEvent.getEplStats(),
+      );
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: _eplStatsBloc,
+        )
+      ],
+      child: BlocConsumer<EPLStatsBloc, EPLStatsState>(
+        listener: (_, state) => {},
+        builder: (context, state) => state.map(
+          initial: (_) => Container(),
+          loadInProgress: (_) => Container(
+            height: MediaQuery.of(context).size.height,
+            color: Colors.blue[50],
+            child: const Center(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          ),
+          loadSuccess: (state) => _buildStats(state, context),
+          loadFailure: (_) => Container(
+            height: MediaQuery.of(context).size.height,
+            color: Colors.blue[50],
+            child: const Center(
+              child: Text("Error"),
+            ),
+          ),
         ),
       ),
-      // builder: (context, state) {
-      //   return Center(
-      //     child: Text(state.toString()),
-      //   );
-      // },
     );
   }
 
@@ -130,11 +148,11 @@ class StatsTable extends StatelessWidget {
               Text(
                 "Most ${statType.toLowerCase()}",
                 // textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.blue[900],
-                ),
+                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.blue[900],
+                    ),
               ),
               const SizedBox(
                 height: 8,
@@ -164,12 +182,18 @@ class StatsTable extends StatelessWidget {
                             const SizedBox(
                               width: 6,
                             ),
-                            Text("${stat[index]["name"]}"),
+                            Text(
+                              "${stat[index]["name"]}",
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
                           ],
                         ),
                         Row(
                           children: [
-                            Text("${stat[index][statType]}"),
+                            Text(
+                              "${stat[index][statType]}",
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
                             const SizedBox(
                               width: 16,
                             ),

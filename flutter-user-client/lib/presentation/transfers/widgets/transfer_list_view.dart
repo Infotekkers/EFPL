@@ -18,143 +18,180 @@ class TransferPlayerView extends StatelessWidget {
   Widget build(BuildContext context) {
     final String _baseURL = dotenv.env["API"].toString();
     final TransferBloc _transferBloc = getIt<TransferBloc>();
-    return BlocConsumer<TransferBloc, TransferState>(
-      listener: (context, state) {
-        state.valueFailureOrSuccess.fold(
-          () {},
-          (either) {
-            either.fold(
-              (failure) {
-                failure[1].maybeMap(
-                  // Connection issues
-                  noConnection: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact server. Showing cached team data.",
-                      snackBarType: "warning",
-                    );
-                  },
-                  socketError: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact server. Showing cached team data.",
-                      snackBarType: "warning",
-                    );
-                  },
-                  handShakeError: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact server. Showing cached team data.",
-                      snackBarType: "warning",
-                    );
-                  },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: _transferBloc,
+        ),
+      ],
+      child: BlocConsumer<TransferBloc, TransferState>(
+        listener: (context, state) {
+          state.valueFailureOrSuccess.fold(
+            () {},
+            (either) {
+              either.fold(
+                (failure) {
+                  failure[1].maybeMap(
+                    noConnection: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.noConnection + "!",
+                        message: AppLocalizations.of(context)!
+                                .couldNotContactTheServer +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseCheckYourConnection +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
+                    socketError: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.noConnection + "!",
+                        message: AppLocalizations.of(context)!
+                                .pleaseCheckYourConnection +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
+                    handShakeError: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.noConnection + "!",
+                        message: AppLocalizations.of(context)!
+                                .pleaseCheckYourConnection +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
 
-                  // token issues
-                  unauthorized: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Login to EFPL!",
-                      message: "Please login to use EFPL.",
-                      snackBarType: "error",
-                    );
-                    Navigator.pushNamed(context, "/");
-                  },
-                  unauthenticated: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Login to EFPL!",
-                      message: "Please login to use EFPL.",
-                      snackBarType: "error",
-                    );
-                    Navigator.pushNamed(context, "/");
-                  },
+                    // token issues
+                    unauthorized: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.pleaseLogin + "!",
+                        message: AppLocalizations.of(context)!.couldNotVerify +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseLoginAndTryAgain +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
+                    unauthenticated: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.pleaseLogin + " !",
+                        message: AppLocalizations.of(context)!.couldNotVerify +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseLoginAndTryAgain +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
+                    unexpectedError: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.somethingWentWrong,
+                        message:
+                            AppLocalizations.of(context)!.somethingWentWrong +
+                                "." +
+                                AppLocalizations.of(context)!
+                                    .pleaseLoginAndTryAgain +
+                                " !",
+                        snackBarType: "warning",
+                      );
+                    },
 
-                  // Value failures
+                    // Value failures
 
-                  orElse: () {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Something went wrong.",
-                      message: "Something went wrong. Try again!",
-                      snackBarType: "error",
-                    );
-                  },
-                );
-              },
-              (_) {},
-            );
-          },
-        );
-      },
-      builder: (context, state) {
-        List<UserPlayer> allPositionPlayers =
-            state.filteredSelectedPlayerReplacements;
-        List<UserPlayer> userPlayers = state.userTeam.allUserPlayers;
-        // remove players in user team from list
-        List<UserPlayer> allPositionPlayerFiltered = [];
-        for (var i = 0; i < allPositionPlayers.length; i++) {
-          List checkPlayer = userPlayers
-              .where((element) =>
-                  element.playerId == allPositionPlayers[i].playerId)
-              .toList();
+                    orElse: () {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText: "Something went wrong.",
+                        message: "Something went wrong. Try again!",
+                        snackBarType: "error",
+                      );
+                    },
+                  );
+                },
+                (_) {},
+              );
+            },
+          );
+        },
+        builder: (context, state) {
+          List<UserPlayer> allPositionPlayers =
+              state.filteredSelectedPlayerReplacements;
+          List<UserPlayer> userPlayers = state.userTeam.allUserPlayers;
+          // remove players in user team from list
+          List<UserPlayer> allPositionPlayerFiltered = [];
+          for (var i = 0; i < allPositionPlayers.length; i++) {
+            List checkPlayer = userPlayers
+                .where((element) =>
+                    element.playerId == allPositionPlayers[i].playerId)
+                .toList();
 
-          if (checkPlayer.isEmpty) {
-            allPositionPlayerFiltered.add(allPositionPlayers[i]);
+            if (checkPlayer.isEmpty) {
+              allPositionPlayerFiltered.add(allPositionPlayers[i]);
+            }
           }
-        }
-        // get args
-        final args = ModalRoute.of(context)!.settings.arguments as Map;
-        String currentTransferredPlayerId = args['currentPlayerId'];
-        bool isInitial = args['isInitial'];
-        List currentPlayerFilter = state.selectedPlayerReplacements
-            .where((player) =>
-                player.playerId.toString() == currentTransferredPlayerId)
-            .toList();
-        double currentPlayerPrice = 0.0;
-        if (currentPlayerFilter.isNotEmpty) {
-          UserPlayer currentPlayer = currentPlayerFilter[0];
-          currentPlayerPrice = currentPlayerPrice +
-              currentPlayer.currentPrice.value.fold((l) => 0.0, (r) => r);
-        }
-        List allTeams = args['allTeams'];
-        List<String> allTeamsNames = ["Select a Team"];
-        for (var team in allTeams) {
-          allTeamsNames.add(team['teamName']);
-        }
-        SfRangeValues _values =
-            SfRangeValues(state.minPriceSet, state.maxPriceSet);
+          // get args
+          final args = ModalRoute.of(context)!.settings.arguments as Map;
+          String currentTransferredPlayerId = args['currentPlayerId'];
+          bool isInitial = args['isInitial'];
+          List currentPlayerFilter = state.selectedPlayerReplacements
+              .where((player) =>
+                  player.playerId.toString() == currentTransferredPlayerId)
+              .toList();
+          double currentPlayerPrice = 0.0;
+          if (currentPlayerFilter.isNotEmpty) {
+            UserPlayer currentPlayer = currentPlayerFilter[0];
+            currentPlayerPrice = currentPlayerPrice +
+                currentPlayer.currentPrice.value.fold((l) => 0.0, (r) => r);
+          }
+          List allTeams = args['allTeams'];
+          List<String> allTeamsNames = ["Select a Team"];
+          for (var team in allTeams) {
+            allTeamsNames.add(team['teamName']);
+          }
+          SfRangeValues _values =
+              SfRangeValues(state.minPriceSet, state.maxPriceSet);
 
-        return Scaffold(
-          appBar: _buildAppBar(
-              context: context,
-              state: state,
-              currentPlayerPrice: currentPlayerPrice),
-          body: Container(
-            color: Colors.blue[50],
-            child: state.isLoading
-                ? _buildLoadingView()
-                : allPositionPlayerFiltered.isEmpty
-                    ? _buildNoPlayersView()
-                    : _buildPlayersListView(
-                        allPositionPlayerFiltered: allPositionPlayerFiltered,
-                        context: context,
-                        state: state,
-                        transferBloc: _transferBloc,
-                        allTeams: allTeams,
-                        allTeamsNames: allTeamsNames,
-                        values: _values,
-                        baseURL: _baseURL,
-                        isInitial: isInitial,
-                      ),
-          ),
-        );
-      },
+          return Scaffold(
+            appBar: _buildAppBar(
+                context: context,
+                state: state,
+                currentPlayerPrice: currentPlayerPrice),
+            body: Container(
+              color: Colors.blue[50],
+              child: state.isLoading
+                  ? _buildLoadingView()
+                  : allPositionPlayerFiltered.isEmpty
+                      ? _buildNoPlayersView()
+                      : _buildPlayersListView(
+                          allPositionPlayerFiltered: allPositionPlayerFiltered,
+                          context: context,
+                          state: state,
+                          transferBloc: _transferBloc,
+                          allTeams: allTeams,
+                          allTeamsNames: allTeamsNames,
+                          values: _values,
+                          baseURL: _baseURL,
+                          isInitial: isInitial,
+                        ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
