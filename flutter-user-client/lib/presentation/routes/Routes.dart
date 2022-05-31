@@ -7,7 +7,6 @@ import 'package:efpl/presentation/authentication/register/register_view.dart';
 import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
 import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
 import 'package:efpl/application/epl_stats/epl_stats_bloc.dart';
-import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/authentication/splash_view.dart';
 import 'package:efpl/presentation/core/main_tab_view.dart';
 import 'package:efpl/presentation/player/player_view.dart';
@@ -21,10 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
-  final PointsBloc _pointsBloc = getIt<PointsBloc>()
-    ..add(
-      const PointsEvent.getPointsInfo(),
-    );
+  //
 
   final UtilBloc _utilBloc = getIt<UtilBloc>()
     ..add(
@@ -40,9 +36,6 @@ class AppRouter {
     "/player": (context) => const PlayerView(),
     "/home": (context) => MultiBlocProvider(
           providers: [
-            BlocProvider.value(
-              value: getIt<PointsBloc>(),
-            ),
             BlocProvider.value(
               value: getIt<UtilBloc>(),
             ),
