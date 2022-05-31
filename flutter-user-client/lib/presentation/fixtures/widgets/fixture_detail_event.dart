@@ -15,26 +15,20 @@ class FixtureDetailEvent extends StatelessWidget {
     List commonEvents = getAllEvents(fixture: fixture);
     bool isEvent = checkEvent(commonEvents: commonEvents);
 
-    // print(commonEvents);
-
     return BlocProvider.value(
       value: getIt<FixtureBloc>(),
-      child: BlocConsumer<FixtureBloc, FixtureState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+      child: BlocBuilder<FixtureBloc, FixtureState>(
         builder: (context, state) {
           return isEvent == false
-              ? const SizedBox(
+              ? SizedBox(
                   height: 350,
                   child: Center(
                     child: Text(
                       "No Events yet",
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "Architect",
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                   ),
                 )

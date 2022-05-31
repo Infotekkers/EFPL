@@ -58,11 +58,11 @@ class FixtureDetailView extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               getMatchAcronym(fixture: currentFixture),
-              style: const TextStyle(
-                letterSpacing: 0.5,
-                fontFamily: "Architect",
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    letterSpacing: 0.5,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
             ),
             backgroundColor: Colors.blue[50],
             foregroundColor: ConstantColors.primary_900,
@@ -78,8 +78,8 @@ class FixtureDetailView extends StatelessWidget {
             },
             height: 60,
             showChildOpacityTransition: false,
-            animSpeedFactor: 2,
             color: ConstantColors.primary_900,
+            animSpeedFactor: 2,
             child: Container(
               color: Colors.blue[50],
               child: Column(
@@ -119,10 +119,13 @@ class FixtureDetailView extends StatelessWidget {
                               Text(
                                 getShortName(
                                     fixture: currentFixture, isHome: 1),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -141,7 +144,11 @@ class FixtureDetailView extends StatelessWidget {
                                   ? Text(
                                       getShortStatus(fixture: currentFixture),
                                     )
-                                  : const Text(""),
+                                  : Text(
+                                      "",
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
                               //
                               const SizedBox(
                                 height: 8,
@@ -155,17 +162,23 @@ class FixtureDetailView extends StatelessWidget {
                                         (r) =>
                                             r.toString().split("v").join(" - "),
                                       ),
-                                      style: const TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     )
                                   : Text(
                                       getFormattedTime(fixture: currentFixture),
-                                      style: const TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                               const SizedBox(
                                 height: 8,
@@ -175,6 +188,7 @@ class FixtureDetailView extends StatelessWidget {
                                   (l) => '',
                                   (r) => r.toString(),
                                 ),
+                                style: Theme.of(context).textTheme.bodyText1,
                               ),
                               const SizedBox(
                                 height: 8,
@@ -184,6 +198,7 @@ class FixtureDetailView extends StatelessWidget {
                                   (l) => '',
                                   (r) => r.toString(),
                                 ),
+                                style: Theme.of(context).textTheme.bodyText1,
                                 textAlign: TextAlign.center,
                               ),
 
@@ -194,7 +209,10 @@ class FixtureDetailView extends StatelessWidget {
                                       (r) => r.toString(),
                                     ) +
                                     " )",
-                                style: const TextStyle(fontSize: 10),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(fontSize: 10),
                               ),
                             ],
                           ),
@@ -228,10 +246,13 @@ class FixtureDetailView extends StatelessWidget {
                               Text(
                                 getShortName(
                                     fixture: currentFixture, isHome: 0),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -289,6 +310,9 @@ class FixtureDetailView extends StatelessWidget {
                                           Text(
                                             allHomePlayersWhoScored[index]
                                                 ['playerName'],
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                           const SizedBox(
                                             width: 8,
@@ -342,6 +366,9 @@ class FixtureDetailView extends StatelessWidget {
                                             Text(
                                               allAwayPlayersWhoScored[index]
                                                   ['playerName'],
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1,
                                             ),
                                             const SizedBox(
                                               width: 8,

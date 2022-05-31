@@ -40,8 +40,10 @@ class TransfersView extends StatelessWidget {
                     noTeamSelected: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
-                        headlineText: "No Team Selected!",
-                        message: "Please select your initial team! It's on us!",
+                        headlineText:
+                            AppLocalizations.of(context)!.noTeamSelected + "!",
+                        message: AppLocalizations.of(context)!
+                            .pleaseSelectYourInitialTeam,
                         snackBarType: "warning",
                       );
 
@@ -52,30 +54,37 @@ class TransfersView extends StatelessWidget {
                       );
                       Navigator.popAndPushNamed(context, "/transfer/initial");
                     },
+
                     exceededPrice: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
-                        headlineText: "Price Limit Exceeded!",
-                        message:
-                            "The team you have selected exceeds the limit by ${state.priceExceededBy.toStringAsFixed(1)}. Please select a team again.",
+                        headlineText:
+                            AppLocalizations.of(context)!.priceLimitExceeded +
+                                "!",
+                        message: AppLocalizations.of(context)!
+                                .theTeamYouHaveSelectedExceedsTheLimit +
+                            " ${state.priceExceededBy.toStringAsFixed(1)}.",
                         snackBarType: "warning",
                       );
                     },
                     exceededTeamCount: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
-                        headlineText: "Players from Team!",
-                        message:
-                            "You have selected more than 3 players from ${state.countExceededTeam}. Please select a team again.",
+                        headlineText:
+                            AppLocalizations.of(context)!.playersFromTeam + "!",
+                        message: AppLocalizations.of(context)!
+                                .youHaveSelectedMoreThanPlayersFrom +
+                            " ${state.countExceededTeam}.",
                         snackBarType: "warning",
                       );
                     },
                     incompleteTeam: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
-                        headlineText: "Incomplete Team!",
-                        message:
-                            "The Team you have selected is incomplete. Try again!",
+                        headlineText:
+                            AppLocalizations.of(context)!.incompleteTeam + "!",
+                        message: AppLocalizations.of(context)!
+                            .theTeamYouHaveSelectedIsIncomplete,
                         snackBarType: "error",
                       );
 
@@ -90,31 +99,39 @@ class TransfersView extends StatelessWidget {
                       print("deadlinePassed");
                     },
 
-                    // Connection issues
                     noConnection: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
-                        headlineText: "No Connection!",
-                        message:
-                            "Could not contact the server. Please check your connection!",
+                        headlineText:
+                            AppLocalizations.of(context)!.noConnection + "!",
+                        message: AppLocalizations.of(context)!
+                                .couldNotContactTheServer +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseCheckYourConnection +
+                            " !",
                         snackBarType: "warning",
                       );
                     },
                     socketError: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
-                        headlineText: "No Connection!",
-                        message:
-                            "Could not contact the server. Please check your connection!",
+                        headlineText:
+                            AppLocalizations.of(context)!.noConnection + "!",
+                        message: AppLocalizations.of(context)!
+                                .pleaseCheckYourConnection +
+                            " !",
                         snackBarType: "warning",
                       );
                     },
                     handShakeError: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
-                        headlineText: "No Connection!",
-                        message:
-                            "Could not contact the server. Please check your connection!",
+                        headlineText:
+                            AppLocalizations.of(context)!.noConnection + "!",
+                        message: AppLocalizations.of(context)!
+                                .pleaseCheckYourConnection +
+                            " !",
                         snackBarType: "warning",
                       );
                     },
@@ -123,47 +140,43 @@ class TransfersView extends StatelessWidget {
                     unauthorized: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
-                        headlineText: "Please Login!",
-                        message:
-                            "Could not verify. Please login and try again!",
+                        headlineText:
+                            AppLocalizations.of(context)!.pleaseLogin + "!",
+                        message: AppLocalizations.of(context)!.couldNotVerify +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseLoginAndTryAgain +
+                            " !",
                         snackBarType: "warning",
                       );
                     },
                     unauthenticated: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
-                        headlineText: "Please Login!",
-                        message:
-                            "Could not verify. Please login and try again!",
+                        headlineText:
+                            AppLocalizations.of(context)!.pleaseLogin + " !",
+                        message: AppLocalizations.of(context)!.couldNotVerify +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseLoginAndTryAgain +
+                            " !",
                         snackBarType: "warning",
                       );
                     },
                     unexpectedError: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
-                        headlineText: "Something went wrong!",
-                        message: "Something went wrong. Please try again!",
+                        headlineText:
+                            AppLocalizations.of(context)!.somethingWentWrong,
+                        message:
+                            AppLocalizations.of(context)!.somethingWentWrong +
+                                "." +
+                                AppLocalizations.of(context)!
+                                    .pleaseLoginAndTryAgain +
+                                " !",
                         snackBarType: "warning",
                       );
                     },
-
-                    hiveError: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText: "Caching Disabled!",
-                        message: "Something went wrong. Please try again!",
-                        snackBarType: "warning",
-                      );
-                    },
-
-                    // orElse: () {
-                    //   CustomSnackBar().showCustomSnackBar(
-                    //     showContext: context,
-                    //     headlineText: "Something went wrong.",
-                    //     message: "Something went wrong. Try again!",
-                    //     snackBarType: "error",
-                    //   );
-                    // },
                   );
                 },
                 (_) {},

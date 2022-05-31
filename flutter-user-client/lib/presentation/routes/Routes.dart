@@ -21,17 +21,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
-  // ignore: unused_field
-  final FixtureBloc _fixtureBloc = getIt<FixtureBloc>()
-    ..add(
-      const FixtureEvent.loadFixtures(),
-    );
-
-  // final TransferBloc _transferBloc = getIt<TransferBloc>()
-  //   ..add(
-  //     const TransferEvent.getUserPlayers(),
-  //   );
-
   final PointsBloc _pointsBloc = getIt<PointsBloc>()
     ..add(
       const PointsEvent.getPointsInfo(),
@@ -51,22 +40,12 @@ class AppRouter {
     "/player": (context) => const PlayerView(),
     "/home": (context) => MultiBlocProvider(
           providers: [
-            // Fixtures
-            BlocProvider.value(
-              value: getIt<FixtureBloc>(),
-            ),
-
-            // BlocProvider.value(
-            //   value: getIt<TransferBloc>(),
-            // ),
-
             BlocProvider.value(
               value: getIt<PointsBloc>(),
             ),
             BlocProvider.value(
               value: getIt<UtilBloc>(),
             ),
-
             BlocProvider.value(
               value: getIt<EPLStatsBloc>(),
             )

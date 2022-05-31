@@ -61,10 +61,11 @@ class FixtureWidget extends StatelessWidget {
                         child: Text(
                           getShortName(fixture: fixture, isHome: 1),
                           // "Team",
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -112,10 +113,10 @@ class FixtureWidget extends StatelessWidget {
                                 (l) => '',
                                 (r) => r.split("v").join(" - "),
                               ),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                     ],
                   ),
@@ -127,7 +128,9 @@ class FixtureWidget extends StatelessWidget {
                 ),
                 Text(
                   getShortStatus(fixture: fixture),
-                  style: const TextStyle(fontSize: 12),
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 12,
+                      ),
                 )
               ],
             ),
@@ -161,10 +164,11 @@ class FixtureWidget extends StatelessWidget {
                         child: Text(
                           getShortName(fixture: fixture, isHome: 0),
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ),
                     ],

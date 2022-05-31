@@ -269,8 +269,8 @@ Widget _buildInjuryView(
           top: 5,
           left: 10,
           child: Container(
-            height: 20,
-            width: 20,
+            height: 22,
+            width: 22,
             decoration: BoxDecoration(
               color: int.parse(injuryStatus.toString()) >= 50
                   ? Colors.amber
@@ -281,7 +281,7 @@ Widget _buildInjuryView(
               child: Text(
                 injuryStatus,
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                      fontSize: 11,
+                      fontSize: 10.5,
                       fontWeight: FontWeight.bold,
                       color: int.parse(injuryStatus.toString()) >= 50
                           ? Colors.black

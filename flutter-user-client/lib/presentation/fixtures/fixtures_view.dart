@@ -15,213 +15,259 @@ class FixturesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get The bloc value from the provider
-    final FixtureBloc _fixtureBloc = BlocProvider.of<FixtureBloc>(context);
+    final FixtureBloc _fixtureBloc = getIt<FixtureBloc>()
+      ..add(
+        const FixtureEvent.loadFixtures(),
+      );
 
-    return BlocConsumer<FixtureBloc, FixtureState>(
-      listener: (context, state) {
-        state.valueFailureOrSuccess.fold(
-          () {},
-          (either) {
-            either.fold(
-              (failure) {
-                failure[1].maybeMap(
-                  // Connection issues
-                  noConnection: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact the server. Please check your connection!",
-                      snackBarType: "warning",
-                    );
-                  },
-                  socketError: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact the server. Please check your connection!",
-                      snackBarType: "warning",
-                    );
-                  },
-                  handShakeError: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "No Connection!",
-                      message:
-                          "Could not contact the server. Please check your connection!",
-                      snackBarType: "warning",
-                    );
-                  },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: _fixtureBloc,
+        ),
+      ],
+      child: BlocConsumer<FixtureBloc, FixtureState>(
+        listener: (context, state) {
+          state.valueFailureOrSuccess.fold(
+            () {},
+            (either) {
+              either.fold(
+                (failure) {
+                  failure[1].maybeMap(
+                    // Connection issues
+                    noConnection: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.noConnection + "!",
+                        message: AppLocalizations.of(context)!
+                                .couldNotContactTheServer +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseCheckYourConnection +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
+                    socketError: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.noConnection + "!",
+                        message: AppLocalizations.of(context)!
+                                .pleaseCheckYourConnection +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
+                    handShakeError: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.noConnection + "!",
+                        message: AppLocalizations.of(context)!
+                                .pleaseCheckYourConnection +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
 
-                  // token issues
-                  unauthorized: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Please Login!",
-                      message: "Could not verify. Please login and try again!",
-                      snackBarType: "warning",
-                    );
-                  },
-                  unauthenticated: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Please Login!",
-                      message: "Could not verify. Please login and try again!",
-                      snackBarType: "warning",
-                    );
-                  },
-                  unexpectedError: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Something went wrong!",
-                      message: "Something went wrong. Please try again!",
-                      snackBarType: "warning",
-                    );
-                  },
+                    // token issues
+                    unauthorized: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.pleaseLogin + "!",
+                        message: AppLocalizations.of(context)!.couldNotVerify +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseLoginAndTryAgain +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
+                    unauthenticated: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.pleaseLogin + " !",
+                        message: AppLocalizations.of(context)!.couldNotVerify +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseLoginAndTryAgain +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
+                    unexpectedError: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.somethingWentWrong,
+                        message:
+                            AppLocalizations.of(context)!.somethingWentWrong +
+                                "." +
+                                AppLocalizations.of(context)!
+                                    .pleaseLoginAndTryAgain +
+                                " !",
+                        snackBarType: "warning",
+                      );
+                    },
 
-                  hiveError: (_) {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Caching Disabled!",
-                      message: "Something went wrong. Please try again!",
-                      snackBarType: "warning",
-                    );
-                  },
+                    orElse: () {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText: "Something went wrong.",
+                        message: "Something went wrong. Try again!",
+                        snackBarType: "error",
+                      );
+                    },
+                  );
+                },
+                (_) {},
+              );
+            },
+          );
+        },
+        builder: (context, state) {
+          var allFixtures = [state.allFixtures];
+          if (state.allFixtures.isNotEmpty) {
+            allFixtures = formatByDate(state.allFixtures);
+          }
 
-                  orElse: () {
-                    CustomSnackBar().showCustomSnackBar(
-                      showContext: context,
-                      headlineText: "Something went wrong.",
-                      message: "Something went wrong. Try again!",
-                      snackBarType: "error",
-                    );
-                  },
-                );
-              },
-              (_) {},
-            );
-          },
-        );
-      },
-      builder: (context, state) {
-        var allFixtures = [state.allFixtures];
-        if (state.allFixtures.isNotEmpty) {
-          allFixtures = formatByDate(state.allFixtures);
-        }
-
-        return LiquidPullToRefresh(
-          onRefresh: () async {
-            getIt<FixtureBloc>().add(
-              const FixtureEvent.loadFixtures(),
-            );
-          },
-          height: 60,
-          showChildOpacityTransition: false,
-          animSpeedFactor: 2,
-          color: ConstantColors.primary_900,
-          child: state.isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : SingleChildScrollView(
-                  child: Container(
-                    color: Colors.blue[50],
-                    child: Column(
-                      children: [
-                        // Gw controller
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 100, vertical: 12),
-                          // margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-                          height: 50,
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  _fixtureBloc.add(
-                                    const FixtureEvent.decreaseGameWeek(),
-                                  );
-                                },
-                                child: const Icon(Icons.arrow_back_ios),
-                              ),
-                              Text(AppLocalizations.of(context)!.gameWeek +
-                                  " " +
-                                  state.gameWeekId.toString()),
-                              InkWell(
-                                onTap: () {
-                                  _fixtureBloc.add(
-                                    const FixtureEvent.increaseGameWeek(),
-                                  );
-                                },
-                                child: const Icon(Icons.arrow_forward_ios),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          color: ConstantColors.neutral_300,
-                          height: MediaQuery.of(context).size.height - 60,
-                          child: state.allFixtures.length < 2
-                              ? Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 250, 0, 0),
-                                  child: const Text("No Fixtures"))
-                              : ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: allFixtures.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    List<Fixture> fixture = allFixtures[index];
-                                    var date = '';
-                                    if (fixture.isNotEmpty) {
-                                      date = formatMatchDate(fixture[0]);
-                                    }
-
-                                    return Column(
-                                      children: [
-                                        Container(
-                                          margin: const EdgeInsets.fromLTRB(
-                                              0, 24, 0, 1),
-                                          child: Text(
-                                            date,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        Column(
-                                          children: List.generate(
-                                            fixture.length,
-                                            (index) {
-                                              return Container(
-                                                color: index % 2 == 0
-                                                    ? Colors.white
-                                                    : (Colors.blue[50]),
-                                                child: FixtureWidget(
-                                                  fixture: fixture[index],
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ),
-                        ),
-                      ],
+          return LiquidPullToRefresh(
+            onRefresh: () async {
+              getIt<FixtureBloc>().add(
+                const FixtureEvent.loadFixtures(),
+              );
+            },
+            height: 60,
+            showChildOpacityTransition: false,
+            color: ConstantColors.primary_900,
+            animSpeedFactor: 2,
+            child: Container(
+              color: Colors.blue[50],
+              child: state.isLoading
+                  ? _buildLoaderView()
+                  : _buildFixturesView(
+                      allFixtures: allFixtures,
+                      state: state,
+                      context: context,
+                      fixtureBloc: _fixtureBloc,
                     ),
-                  ),
-                ),
-        );
-      },
+            ),
+          );
+        },
+      ),
     );
   }
+}
+
+Widget _buildLoaderView() {
+  return const Center(child: CircularProgressIndicator());
+}
+
+Widget _buildFixturesView(
+    {required BuildContext context,
+    required FixtureBloc fixtureBloc,
+    required FixtureState state,
+    required List allFixtures}) {
+  return SingleChildScrollView(
+    child: Column(
+      children: [
+        // Gw controller
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 12),
+          height: 50,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () {
+                  fixtureBloc.add(
+                    const FixtureEvent.decreaseGameWeek(),
+                  );
+                },
+                child: const Icon(Icons.arrow_back_ios),
+              ),
+              Text(
+                AppLocalizations.of(context)!.gameWeek +
+                    " " +
+                    state.gameWeekId.toString(),
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              InkWell(
+                onTap: () {
+                  fixtureBloc.add(
+                    const FixtureEvent.increaseGameWeek(),
+                  );
+                },
+                child: const Icon(Icons.arrow_forward_ios),
+              )
+            ],
+          ),
+        ),
+        Container(
+          color: ConstantColors.neutral_300,
+          height: MediaQuery.of(context).size.height - 60,
+          child: state.allFixtures.length < 2
+              ? Container(
+                  padding: const EdgeInsets.fromLTRB(0, 250, 0, 0),
+                  child: Text(
+                    AppLocalizations.of(context)!.noFixtures,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                )
+              : ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: allFixtures.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    List<Fixture> fixture = allFixtures[index];
+                    var date = '';
+                    if (fixture.isNotEmpty) {
+                      date = formatMatchDate(fixture[0]);
+                    }
+
+                    return Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(0, 24, 0, 1),
+                          child: Text(
+                            date,
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                    ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Column(
+                          children: List.generate(
+                            fixture.length,
+                            (index) {
+                              return Container(
+                                color: index % 2 == 0
+                                    ? Colors.white
+                                    : (Colors.blue[50]),
+                                child: FixtureWidget(
+                                  fixture: fixture[index],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+        ),
+      ],
+    ),
+  );
 }
 
 List<List<Fixture>> formatByDate(List<Fixture> allFixtures) {

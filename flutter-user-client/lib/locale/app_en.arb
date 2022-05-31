@@ -1,8 +1,5 @@
 {
   "language": "English",
-  "@language": {
-    "description": "The current Language"
-  },
   "authentication": "Authentication",
   "login": "login",
   "team": "Team",
@@ -27,7 +24,23 @@
   "def": "DEF",
   "mid": "MID",
   "att": "ATT",
-  "transfers_translations": "Transfers_Translations",
+  "notificationTranslation": "notificationTranslation",
+  "noConnection": "No Connection",
+  "couldNotContactTheServer": "Could not contact the server",
+  "pleaseCheckYourConnection": "Please check your connection",
+  "pleaseLogin": "Please Login",
+  "couldNotVerify": "Could not verify",
+  "pleaseLoginAndTryAgain": "Please login and try again",
+  "somethingWentWrong": "Something went wrong",
+  "noTeamSelected": "No Team Selected",
+  "pleaseSelectYourInitialTeam": "Please select your initial team! It's on us!",
+  "priceLimitExceeded": "Price Limit Exceeded",
+  "theTeamYouHaveSelectedExceedsTheLimit": "The team you have selected exceeds the limit",
+  "playersFromTeam": "Players from Team",
+  "youHaveSelectedMoreThanPlayersFrom": "You have selected more than 3 players from",
+  "incompleteTeam": "Incomplete Team",
+  "theTeamYouHaveSelectedIsIncomplete": "The Team you have selected is incomplete",
+  "transfersTranslations": "Transfers_Translations",
   "bank": "Bank",
   "deduction": "Deduction",
   "freeTransfers": "Free Transfers",
@@ -51,6 +64,8 @@
   "willBeDeductedFromYourScore": "will be deducted from your score.",
   "wildcardAlreadyPlayed": "Wildcard already played",
   "playWildCard": "Play WildCard",
-  "freeHitAlreadyPlayed": "ነፃ ሂት አስቀድሞ ተጫውቷል",
-  "playFreeHit": "Play Free Hit"
+  "freeHitAlreadyPlayed": "Free Hit Already Played",
+  "playFreeHit": "Play Free Hit",
+  "fixturesTranslation": "Fixtures_Translation",
+  "noFixtures": "No Fixtures"
 }
