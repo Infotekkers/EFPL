@@ -488,6 +488,7 @@ const addTestUser = async () => {
       //   },
       // },
     ],
+    maxBudget: 100.0,
   });
   const testUser2 = new User({
     userName: "Test Man 2",

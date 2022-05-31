@@ -21,8 +21,6 @@ const transporter = nodemailer.createTransport({
 });
 
 const register = asyncHandler(async (req, res) => {
-  console.log(req.body);
-
   // check for prexisting email
   const emailExists = await User.findOne({ email: req.body.email });
   if (emailExists) return res.status(400).send("Email in Use");
@@ -260,10 +258,9 @@ const transfer = asyncHandler(async (req, res) => {
   // Destructure request body
   const { data } = req.body;
   // const { userId, incomingTeam } = JSON.parse(data);
+  const userId = "6296348d988244c442925ee9";
 
   const { isSetTeam } = data;
-
-  console.log(isSetTeam);
 
   let incomingTeam;
 
@@ -324,8 +321,6 @@ const transfer = asyncHandler(async (req, res) => {
     }
   }
 
-  const userId = "6293cde1db48842cd25d70d5";
-
   // Fetch active gameweek
   let activeGameweek = await Gameweek.findOne({ status: "active" }).exec();
 
@@ -356,7 +351,6 @@ const transfer = asyncHandler(async (req, res) => {
       if (activeTeam) {
         [deduction, transfersMade] = pointDeductor(activeTeam, incomingTeam);
 
-        console.log(transfersMade);
         // Deduct free transfer
         if (activeTeam.freeTransfers > 0 && transfersMade > 1) {
           if (activeTeam.freeTransfers > transfersMade) {
@@ -365,7 +359,7 @@ const transfer = asyncHandler(async (req, res) => {
             activeTeam.freeTransfers = activeTeam.freeTransfers - 1;
           }
         }
-        console.log(activeTeam.freeTransfers);
+
         // activeTeam.freeTransfers =
         //   activeTeam.freeTransfers < transfersMade
         //     ? 0
@@ -458,7 +452,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
     // const userId = token.data;
 
     // TODO:MAKE TOKEN BASED
-    const userId = "6293cde1db48842cd25d70d5";
+    const userId = "6296348d988244c442925ee9";
 
     // get active game week
     const gameWeek = await Gameweek.find({ status: "active" });
@@ -598,7 +592,7 @@ const getUserPoints = asyncHandler(async (req, res) => {
   // const userId = token.data;
 
   // TODO:Replace
-  const userId = "6293cde1db48842cd25d70d5";
+  const userId = "6296348d988244c442925ee9";
 
   // get the gw number from frontend
   let gameWeekId = gwId;
@@ -609,7 +603,7 @@ const getUserPoints = asyncHandler(async (req, res) => {
   // if zero send active gw info
   if (gwId.toString() === "0") {
     // if active gw exists
-    if (activeGw) {
+    if (activeGw.length > 0) {
       gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber;
     }
     // if no active gws
@@ -618,8 +612,13 @@ const getUserPoints = asyncHandler(async (req, res) => {
     }
   }
   // if info requested by gw & is after active reset to active
-  else if (gameWeekId > activeGw[activeGw.length - 1].gameWeekNumber) {
+  else if (
+    activeGw[activeGw.length - 1] &&
+    gameWeekId > activeGw[activeGw.length - 1].gameWeekNumber
+  ) {
     gameWeekId = activeGw[activeGw.length - 1].gameWeekNumber;
+  } else {
+    gameWeekId = 1;
   }
 
   // get user team
@@ -629,63 +628,85 @@ const getUserPoints = asyncHandler(async (req, res) => {
 
   // get user team
 
-  if (user.team && user.team[gameWeekId - 1]) {
+  if (user.team && user.team[gameWeekId - 1] !== null) {
     const userTeam = user.team[gameWeekId - 1];
-    const userPlayers = userTeam.players;
-    const allPlayersInfo = [];
-    const finalFormat = {
-      gameWeekId: gameWeekId,
-      activeChip: userTeam.activeChip,
-      deduction: userTeam.deduction,
-      maxActiveCount: activeGw[activeGw.length - 1].gameWeekNumber,
-      teamName: user.teamName,
-    };
 
-    for (const key in userPlayers) {
-      // get current player from key
-      const currentPlayer = userPlayers[key];
-
-      // get player info of current player
-      const playerInfo = await Player.findOne({
-        playerId: currentPlayer.playerId,
-      }).lean();
-
-      // get player score
-      const currentPlayerAllScore = playerInfo.score ? playerInfo.score : [];
-
-      const currentPlayerCurrentGwScore = currentPlayerAllScore.filter(
-        (scoreInfo) => scoreInfo.gameweekId.toString() === gameWeekId.toString()
-      );
-
-      const currentPlayerTeamFixture = await Fixture.findOne({
-        eplTeamId: playerInfo.eplTeamId,
-        gameweekId: gameWeekId,
-      });
-
-      const currentPlayerInfo = {
-        playerId: currentPlayer.playerId,
-        playerName: playerInfo.playerName,
-        playerPosition: playerInfo.position,
-        eplTeamId: playerInfo.eplTeamId,
-        multiplier: currentPlayer.multiplier,
-        isCaptain: currentPlayer.isCaptain,
-        isViceCaptain: currentPlayer.isViceCaptain,
-        score: currentPlayerCurrentGwScore,
-        fixtureStatus: currentPlayerTeamFixture.status,
-        fixtureScore: currentPlayerTeamFixture.score,
-        fixtureTeams:
-          currentPlayerTeamFixture.homeTeam +
-          " v " +
-          currentPlayerTeamFixture.awayTeam,
+    if (userTeam && userTeam.players) {
+      const userPlayers = userTeam.players;
+      const allPlayersInfo = [];
+      const finalFormat = {
+        gameWeekId: gameWeekId,
+        activeChip: userTeam.activeChip,
+        deduction: userTeam.deduction,
+        maxActiveCount: activeGw[activeGw.length - 1]
+          ? activeGw[activeGw.length - 1].gameWeekNumber
+          : 1,
+        teamName: user.teamName,
       };
 
-      allPlayersInfo.push(currentPlayerInfo);
+      for (const key in userPlayers) {
+        // get current player from key
+        const currentPlayer = userPlayers[key];
+
+        // get player info of current player
+        const playerInfo = await Player.findOne({
+          playerId: currentPlayer.playerId,
+        }).lean();
+
+        // get player score
+        const currentPlayerAllScore = playerInfo.score ? playerInfo.score : [];
+
+        const currentPlayerCurrentGwScore = currentPlayerAllScore.filter(
+          (scoreInfo) =>
+            scoreInfo.gameweekId.toString() === gameWeekId.toString()
+        );
+
+        const currentPlayerTeamFixture = await Fixture.findOne({
+          eplTeamId: playerInfo.eplTeamId,
+          gameweekId: gameWeekId,
+        });
+
+        const currentPlayerInfo = {
+          playerId: currentPlayer.playerId,
+          playerName: playerInfo.playerName,
+          playerPosition: playerInfo.position,
+          eplTeamId: playerInfo.eplTeamId,
+          multiplier: currentPlayer.multiplier,
+          isCaptain: currentPlayer.isCaptain,
+          isViceCaptain: currentPlayer.isViceCaptain,
+          score: currentPlayerCurrentGwScore,
+          fixtureStatus: currentPlayerTeamFixture.status,
+          fixtureScore: currentPlayerTeamFixture.score,
+          fixtureTeams:
+            currentPlayerTeamFixture.homeTeam +
+            " v " +
+            currentPlayerTeamFixture.awayTeam,
+        };
+
+        allPlayersInfo.push(currentPlayerInfo);
+      }
+
+      finalFormat.allPlayers = allPlayersInfo;
+
+      res.status(200).send(finalFormat);
+    } else {
+      const finalFormat = {
+        gameWeekId: gameWeekId,
+        activeChip: "",
+        deduction: 0,
+        maxActiveCount: activeGw[activeGw.length - 1]
+          ? activeGw[activeGw.length - 1].gameWeekNumber
+          : 1,
+        teamName: user.teamName,
+        allPlayers: [],
+        maxBudget: user.maxBudget,
+      };
+
+      res.status(404).send(finalFormat);
     }
-
-    finalFormat.allPlayers = allPlayersInfo;
-
-    res.status(200).send(finalFormat);
-  } else {
+  }
+  //
+  else {
     const finalFormat = {
       gameWeekId: gameWeekId,
       activeChip: "",

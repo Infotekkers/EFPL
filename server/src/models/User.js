@@ -91,6 +91,11 @@ const userSchema = mongoose.Schema({
   availableChips: { type: [String], default: ["BB", "WC", "TC", "FH"] },
   fantasyLeagues: { type: [fantasyLeaguesSchema], default: [] },
   team: [teamSchema],
+  maxBudget: {
+    type: Number,
+    default: 100.0,
+    required: true,
+  },
 });
 
 userSchema.pre("save", async function (next) {
