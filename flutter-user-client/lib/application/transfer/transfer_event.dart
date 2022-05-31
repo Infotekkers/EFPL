@@ -49,4 +49,7 @@ class TransferEvent with _$TransferEvent {
 
   const factory TransferEvent.setInitialSelection({required bool valueToSet}) =
       _setInitialSelection;
+
+  const factory TransferEvent.cancelTransferFromConfirm() =
+      _cancelTransferFromConfirm;
 }

@@ -106,6 +106,10 @@ class _$TransferEventTearOff {
       valueToSet: valueToSet,
     );
   }
+
+  _cancelTransferFromConfirm cancelTransferFromConfirm() {
+    return const _cancelTransferFromConfirm();
+  }
 }
 
 /// @nodoc
@@ -133,6 +137,7 @@ mixin _$TransferEvent {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -153,6 +158,7 @@ mixin _$TransferEvent {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -173,6 +179,7 @@ mixin _$TransferEvent {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -195,6 +202,8 @@ mixin _$TransferEvent {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -216,6 +225,8 @@ mixin _$TransferEvent {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -237,6 +248,8 @@ mixin _$TransferEvent {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -318,6 +331,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return getUserPlayers();
   }
@@ -341,6 +355,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return getUserPlayers?.call();
   }
@@ -364,6 +379,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (getUserPlayers != null) {
@@ -392,6 +408,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return getUserPlayers(this);
   }
@@ -416,6 +434,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return getUserPlayers?.call(this);
   }
@@ -440,6 +460,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (getUserPlayers != null) {
@@ -550,6 +572,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return setTransferOutPlayer(transferOutPlayerId, playerPosition);
   }
@@ -573,6 +596,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return setTransferOutPlayer?.call(transferOutPlayerId, playerPosition);
   }
@@ -596,6 +620,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setTransferOutPlayer != null) {
@@ -624,6 +649,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return setTransferOutPlayer(this);
   }
@@ -648,6 +675,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return setTransferOutPlayer?.call(this);
   }
@@ -672,6 +701,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setTransferOutPlayer != null) {
@@ -756,6 +787,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return getPlayersInSelectedPosition();
   }
@@ -779,6 +811,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return getPlayersInSelectedPosition?.call();
   }
@@ -802,6 +835,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (getPlayersInSelectedPosition != null) {
@@ -830,6 +864,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return getPlayersInSelectedPosition(this);
   }
@@ -854,6 +890,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return getPlayersInSelectedPosition?.call(this);
   }
@@ -878,6 +916,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (getPlayersInSelectedPosition != null) {
@@ -976,6 +1016,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return transferUserPlayer(transferInPlayerId);
   }
@@ -999,6 +1040,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return transferUserPlayer?.call(transferInPlayerId);
   }
@@ -1022,6 +1064,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (transferUserPlayer != null) {
@@ -1050,6 +1093,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return transferUserPlayer(this);
   }
@@ -1074,6 +1119,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return transferUserPlayer?.call(this);
   }
@@ -1098,6 +1145,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (transferUserPlayer != null) {
@@ -1204,6 +1253,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return transferUserPlayerInitial(transferInPlayerId);
   }
@@ -1227,6 +1277,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return transferUserPlayerInitial?.call(transferInPlayerId);
   }
@@ -1250,6 +1301,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (transferUserPlayerInitial != null) {
@@ -1278,6 +1330,8 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return transferUserPlayerInitial(this);
   }
@@ -1302,6 +1356,8 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return transferUserPlayerInitial?.call(this);
   }
@@ -1326,6 +1382,8 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (transferUserPlayerInitial != null) {
@@ -1404,6 +1462,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return cancelTransfer();
   }
@@ -1427,6 +1486,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return cancelTransfer?.call();
   }
@@ -1450,6 +1510,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (cancelTransfer != null) {
@@ -1478,6 +1539,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return cancelTransfer(this);
   }
@@ -1502,6 +1565,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return cancelTransfer?.call(this);
   }
@@ -1526,6 +1591,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (cancelTransfer != null) {
@@ -1623,6 +1690,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return cancelOneTransfer(playerToCancelId);
   }
@@ -1646,6 +1714,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return cancelOneTransfer?.call(playerToCancelId);
   }
@@ -1669,6 +1738,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (cancelOneTransfer != null) {
@@ -1697,6 +1767,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return cancelOneTransfer(this);
   }
@@ -1721,6 +1793,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return cancelOneTransfer?.call(this);
   }
@@ -1745,6 +1819,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (cancelOneTransfer != null) {
@@ -1848,6 +1924,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return saveUserPlayers(gameWeekId);
   }
@@ -1871,6 +1948,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return saveUserPlayers?.call(gameWeekId);
   }
@@ -1894,6 +1972,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (saveUserPlayers != null) {
@@ -1922,6 +2001,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return saveUserPlayers(this);
   }
@@ -1946,6 +2027,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return saveUserPlayers?.call(this);
   }
@@ -1970,6 +2053,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (saveUserPlayers != null) {
@@ -2081,6 +2166,7 @@ class _$_setFilter implements _setFilter {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return setFilter(filterBy, filterValue);
   }
@@ -2104,6 +2190,7 @@ class _$_setFilter implements _setFilter {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return setFilter?.call(filterBy, filterValue);
   }
@@ -2127,6 +2214,7 @@ class _$_setFilter implements _setFilter {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setFilter != null) {
@@ -2155,6 +2243,8 @@ class _$_setFilter implements _setFilter {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return setFilter(this);
   }
@@ -2179,6 +2269,8 @@ class _$_setFilter implements _setFilter {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return setFilter?.call(this);
   }
@@ -2203,6 +2295,8 @@ class _$_setFilter implements _setFilter {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setFilter != null) {
@@ -2306,6 +2400,7 @@ class _$_setSortFilter implements _setSortFilter {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return setSortFilter(sortBy);
   }
@@ -2329,6 +2424,7 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return setSortFilter?.call(sortBy);
   }
@@ -2352,6 +2448,7 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setSortFilter != null) {
@@ -2380,6 +2477,8 @@ class _$_setSortFilter implements _setSortFilter {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return setSortFilter(this);
   }
@@ -2404,6 +2503,8 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return setSortFilter?.call(this);
   }
@@ -2428,6 +2529,8 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setSortFilter != null) {
@@ -2539,6 +2642,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return setPriceFilter(minValue, maxValue);
   }
@@ -2562,6 +2666,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return setPriceFilter?.call(minValue, maxValue);
   }
@@ -2585,6 +2690,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setPriceFilter != null) {
@@ -2613,6 +2719,8 @@ class _$_setPriceFilter implements _setPriceFilter {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return setPriceFilter(this);
   }
@@ -2637,6 +2745,8 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return setPriceFilter?.call(this);
   }
@@ -2661,6 +2771,8 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setPriceFilter != null) {
@@ -2740,6 +2852,7 @@ class _$_filterByPrice implements _filterByPrice {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return filterByPrice();
   }
@@ -2763,6 +2876,7 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return filterByPrice?.call();
   }
@@ -2786,6 +2900,7 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (filterByPrice != null) {
@@ -2814,6 +2929,8 @@ class _$_filterByPrice implements _filterByPrice {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return filterByPrice(this);
   }
@@ -2838,6 +2955,8 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return filterByPrice?.call(this);
   }
@@ -2862,6 +2981,8 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (filterByPrice != null) {
@@ -2955,6 +3076,7 @@ class _$_setChip implements _setChip {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return setChip(chipName);
   }
@@ -2978,6 +3100,7 @@ class _$_setChip implements _setChip {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return setChip?.call(chipName);
   }
@@ -3001,6 +3124,7 @@ class _$_setChip implements _setChip {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setChip != null) {
@@ -3029,6 +3153,8 @@ class _$_setChip implements _setChip {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return setChip(this);
   }
@@ -3053,6 +3179,8 @@ class _$_setChip implements _setChip {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return setChip?.call(this);
   }
@@ -3077,6 +3205,8 @@ class _$_setChip implements _setChip {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setChip != null) {
@@ -3178,6 +3308,7 @@ class _$_validateTeam implements _validateTeam {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return validateTeam(context);
   }
@@ -3201,6 +3332,7 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return validateTeam?.call(context);
   }
@@ -3224,6 +3356,7 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (validateTeam != null) {
@@ -3252,6 +3385,8 @@ class _$_validateTeam implements _validateTeam {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return validateTeam(this);
   }
@@ -3276,6 +3411,8 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return validateTeam?.call(this);
   }
@@ -3300,6 +3437,8 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (validateTeam != null) {
@@ -3404,6 +3543,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     required TResult Function(String chipName) setChip,
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
   }) {
     return setInitialSelection(valueToSet);
   }
@@ -3427,6 +3567,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
   }) {
     return setInitialSelection?.call(valueToSet);
   }
@@ -3450,6 +3591,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(String chipName)? setChip,
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setInitialSelection != null) {
@@ -3478,6 +3620,8 @@ class _$_setInitialSelection implements _setInitialSelection {
     required TResult Function(_setChip value) setChip,
     required TResult Function(_validateTeam value) validateTeam,
     required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
   }) {
     return setInitialSelection(this);
   }
@@ -3502,6 +3646,8 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
   }) {
     return setInitialSelection?.call(this);
   }
@@ -3526,6 +3672,8 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(_setChip value)? setChip,
     TResult Function(_validateTeam value)? validateTeam,
     TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
     required TResult orElse(),
   }) {
     if (setInitialSelection != null) {
@@ -3543,6 +3691,211 @@ abstract class _setInitialSelection implements TransferEvent {
   @JsonKey(ignore: true)
   _$setInitialSelectionCopyWith<_setInitialSelection> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$cancelTransferFromConfirmCopyWith<$Res> {
+  factory _$cancelTransferFromConfirmCopyWith(_cancelTransferFromConfirm value,
+          $Res Function(_cancelTransferFromConfirm) then) =
+      __$cancelTransferFromConfirmCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$cancelTransferFromConfirmCopyWithImpl<$Res>
+    extends _$TransferEventCopyWithImpl<$Res>
+    implements _$cancelTransferFromConfirmCopyWith<$Res> {
+  __$cancelTransferFromConfirmCopyWithImpl(_cancelTransferFromConfirm _value,
+      $Res Function(_cancelTransferFromConfirm) _then)
+      : super(_value, (v) => _then(v as _cancelTransferFromConfirm));
+
+  @override
+  _cancelTransferFromConfirm get _value =>
+      super._value as _cancelTransferFromConfirm;
+}
+
+/// @nodoc
+
+class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
+  const _$_cancelTransferFromConfirm();
+
+  @override
+  String toString() {
+    return 'TransferEvent.cancelTransferFromConfirm()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _cancelTransferFromConfirm);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getUserPlayers,
+    required TResult Function(
+            String transferOutPlayerId, PlayerPosition playerPosition)
+        setTransferOutPlayer,
+    required TResult Function() getPlayersInSelectedPosition,
+    required TResult Function(String transferInPlayerId) transferUserPlayer,
+    required TResult Function(String transferInPlayerId)
+        transferUserPlayerInitial,
+    required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
+    required TResult Function(int gameWeekId) saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
+    required TResult Function(String chipName) setChip,
+    required TResult Function(BuildContext context) validateTeam,
+    required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
+  }) {
+    return cancelTransferFromConfirm();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function(int gameWeekId)? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
+    TResult Function(String chipName)? setChip,
+    TResult Function(BuildContext context)? validateTeam,
+    TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
+  }) {
+    return cancelTransferFromConfirm?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function(int gameWeekId)? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
+    TResult Function(String chipName)? setChip,
+    TResult Function(BuildContext context)? validateTeam,
+    TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
+    required TResult orElse(),
+  }) {
+    if (cancelTransferFromConfirm != null) {
+      return cancelTransferFromConfirm();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_getUserPlayers value) getUserPlayers,
+    required TResult Function(_setTransferOutPlayer value) setTransferOutPlayer,
+    required TResult Function(_getPlayersInSelectedPosition value)
+        getPlayersInSelectedPosition,
+    required TResult Function(_transferUserPlayer value) transferUserPlayer,
+    required TResult Function(_transferUserPlayerInitial value)
+        transferUserPlayerInitial,
+    required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
+    required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
+    required TResult Function(_setChip value) setChip,
+    required TResult Function(_validateTeam value) validateTeam,
+    required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
+  }) {
+    return cancelTransferFromConfirm(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_transferUserPlayerInitial value)?
+        transferUserPlayerInitial,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
+    TResult Function(_setChip value)? setChip,
+    TResult Function(_validateTeam value)? validateTeam,
+    TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
+  }) {
+    return cancelTransferFromConfirm?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_transferUserPlayerInitial value)?
+        transferUserPlayerInitial,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
+    TResult Function(_setChip value)? setChip,
+    TResult Function(_validateTeam value)? validateTeam,
+    TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
+    required TResult orElse(),
+  }) {
+    if (cancelTransferFromConfirm != null) {
+      return cancelTransferFromConfirm(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _cancelTransferFromConfirm implements TransferEvent {
+  const factory _cancelTransferFromConfirm() = _$_cancelTransferFromConfirm;
 }
 
 /// @nodoc

@@ -64,5 +64,9 @@ flutter:
     - family: Architect
       fonts:
         - asset: assets/fonts/ArchitectsDaughter-Regular.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Medium.ttf
+
   uses-material-design: true
   generate: true

@@ -3,23 +3,9 @@
   "@language": {
     "description": "The current Language"
   },
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "A programmer greeting"
-  },
-  "hello": "Hello {username}",
-  "@hello": {
-    "description": "A welcome message",
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
   "authentication": "Authentication",
   "login": "login",
   "team": "Team",
-  "points": "Points",
   "transfers": "Transfers",
   "fixtures": "Fixtures",
   "league": "League",
@@ -40,5 +26,31 @@
   "gk": "GK",
   "def": "DEF",
   "mid": "MID",
-  "att": "ATT"
+  "att": "ATT",
+  "transfers_translations": "Transfers_Translations",
+  "bank": "Bank",
+  "deduction": "Deduction",
+  "freeTransfers": "Free Transfers",
+  "deadline": "Deadline",
+  "transferList": "Transfer List",
+  "selectTeam": "Select a Team",
+  "availableInjury": "Available",
+  "unavailableInjury": "Unavailable",
+  "all": "All",
+  "minimumPrice": "Min",
+  "maximumPrice": "Max",
+  "player": "Player",
+  "price": "Price",
+  "points": "Points",
+  "confirmTransfers": "Confirm Transfers",
+  "cancelTransfers": "Cancel Transfers",
+  "theseTransfersWillBeActiveFor": "These transfers will be active for",
+  "and": "and",
+  "noPoints": "no points",
+  "noWillBeDeductedFromYourScore": "will be deducted from your score.",
+  "willBeDeductedFromYourScore": "will be deducted from your score.",
+  "wildcardAlreadyPlayed": "Wildcard already played",
+  "playWildCard": "Play WildCard",
+  "freeHitAlreadyPlayed": "ነፃ ሂት አስቀድሞ ተጫውቷል",
+  "playFreeHit": "Play Free Hit"
 }

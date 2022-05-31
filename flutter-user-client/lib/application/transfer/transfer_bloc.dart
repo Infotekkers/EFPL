@@ -1043,5 +1043,18 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         isInitialSelection: event.valueToSet,
       ));
     });
+
+    on<_cancelTransferFromConfirm>((event, emit) async {
+      print("Cleaning");
+      emit(
+        state.copyWith(
+          transfersMade: false,
+          transfersMadeCount: 0,
+          transferOutPlayerId: "",
+          transferredInPlayerIdList: [],
+          swappedPlayerIdsList: [],
+        ),
+      );
+    });
   }
 }

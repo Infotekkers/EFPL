@@ -27,10 +27,10 @@ class AppRouter {
       const FixtureEvent.loadFixtures(),
     );
 
-  final TransferBloc _transferBloc = getIt<TransferBloc>()
-    ..add(
-      const TransferEvent.getUserPlayers(),
-    );
+  // final TransferBloc _transferBloc = getIt<TransferBloc>()
+  //   ..add(
+  //     const TransferEvent.getUserPlayers(),
+  //   );
 
   final PointsBloc _pointsBloc = getIt<PointsBloc>()
     ..add(
@@ -56,9 +56,9 @@ class AppRouter {
               value: getIt<FixtureBloc>(),
             ),
 
-            BlocProvider.value(
-              value: getIt<TransferBloc>(),
-            ),
+            // BlocProvider.value(
+            //   value: getIt<TransferBloc>(),
+            // ),
 
             BlocProvider.value(
               value: getIt<PointsBloc>(),

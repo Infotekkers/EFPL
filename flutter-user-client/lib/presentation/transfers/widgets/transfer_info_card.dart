@@ -43,12 +43,12 @@ class TransferInfoCard extends StatelessWidget {
                               transferInfo['playerOut']['playerPrice']
                                   .toString() +
                               " )",
-                          style: const TextStyle(
-                            fontFamily: "Architect",
-                            fontSize: 16,
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 16,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ),
                     ],
@@ -75,12 +75,12 @@ class TransferInfoCard extends StatelessWidget {
                               transferInfo['playerIn']['playerPrice']
                                   .toString() +
                               " )",
-                          style: const TextStyle(
-                            fontFamily: "Architect",
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                  ),
                         ),
                       ),
                     ],
@@ -95,13 +95,12 @@ class TransferInfoCard extends StatelessWidget {
             width: (MediaQuery.of(context).size.width - 10) * 0.3,
             child: Center(
               child: Text(
-                hasFreeTransfer ? "0pts" : "4pts",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Architect",
-                  color: hasFreeTransfer ? Colors.green : Colors.red,
-                ),
+                hasFreeTransfer ? "0pts" : "-4pts",
+                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: hasFreeTransfer ? Colors.green : Colors.red,
+                    ),
               ),
             ),
           )
