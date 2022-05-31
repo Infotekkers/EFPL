@@ -31,23 +31,6 @@ class InitialTransferPage extends StatelessWidget {
                 (failure) {
                   failure[1].maybeMap(
                     // Value failures
-                    noTeamSelected: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.noTeamSelected + "!",
-                        message: AppLocalizations.of(context)!
-                            .pleaseSelectYourInitialTeam,
-                        snackBarType: "warning",
-                      );
-
-                      getIt<TransferBloc>().add(
-                        const TransferEvent.setInitialSelection(
-                          valueToSet: true,
-                        ),
-                      );
-                      Navigator.popAndPushNamed(context, "/transfer/initial");
-                    },
 
                     exceededPrice: (_) {
                       CustomSnackBar().showCustomSnackBar(
@@ -61,6 +44,7 @@ class InitialTransferPage extends StatelessWidget {
                         snackBarType: "warning",
                       );
                     },
+
                     exceededTeamCount: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -72,23 +56,7 @@ class InitialTransferPage extends StatelessWidget {
                         snackBarType: "warning",
                       );
                     },
-                    incompleteTeam: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.incompleteTeam + "!",
-                        message: AppLocalizations.of(context)!
-                            .theTeamYouHaveSelectedIsIncomplete,
-                        snackBarType: "error",
-                      );
 
-                      getIt<TransferBloc>().add(
-                        const TransferEvent.setInitialSelection(
-                          valueToSet: true,
-                        ),
-                      );
-                      Navigator.popAndPushNamed(context, "/transfer/initial");
-                    },
                     deadlinePassed: (_) {
                       print("deadlinePassed");
                     },
@@ -171,6 +139,7 @@ class InitialTransferPage extends StatelessWidget {
                         snackBarType: "warning",
                       );
                     },
+                    orElse: () {},
                   );
                 },
                 (_) {},
@@ -301,27 +270,33 @@ class InitialTransferPage extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        child: PlayerWidget(
-                                          playerName: allFormattedPlayers[0]
-                                                  [index]
-                                              .playerName
-                                              .value
-                                              .fold(
-                                                (l) => '',
-                                                (r) => r,
-                                              ),
-                                          description: playerPrice == 0
-                                              ? ' '
-                                              : playerPrice.toStringAsFixed(1),
-                                          teamName: allFormattedPlayers[0]
-                                                  [index]
-                                              .eplTeamId
-                                              .value
-                                              .fold(
-                                                (l) => '  ',
-                                                (r) =>
-                                                    r.toString().split(" ")[0],
-                                              ),
+                                        child: Container(
+                                          width: 90,
+                                          height: 80,
+                                          child: PlayerWidget(
+                                            playerName: allFormattedPlayers[0]
+                                                    [index]
+                                                .playerName
+                                                .value
+                                                .fold(
+                                                  (l) => '',
+                                                  (r) => r,
+                                                ),
+                                            description: playerPrice == 0
+                                                ? ' '
+                                                : playerPrice
+                                                    .toStringAsFixed(1),
+                                            teamName: allFormattedPlayers[0]
+                                                    [index]
+                                                .eplTeamId
+                                                .value
+                                                .fold(
+                                                  (l) => '  ',
+                                                  (r) => r
+                                                      .toString()
+                                                      .split(" ")[0],
+                                                ),
+                                          ),
                                         ),
                                       );
                                     },
@@ -413,27 +388,32 @@ class InitialTransferPage extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        child: PlayerWidget(
-                                          playerName: allFormattedPlayers[1]
-                                                  [index]
-                                              .playerName
-                                              .value
-                                              .fold(
-                                                (l) => '',
-                                                (r) => r,
-                                              ),
-                                          description: playerPrice == 0
-                                              ? ' '
-                                              : playerPrice.toStringAsFixed(1),
-                                          teamName: allFormattedPlayers[1]
-                                                  [index]
-                                              .eplTeamId
-                                              .value
-                                              .fold(
-                                                (l) => '   ',
-                                                (r) =>
-                                                    r.toString().split(" ")[0],
-                                              ),
+                                        child: Container(
+                                          width: 80,
+                                          child: PlayerWidget(
+                                            playerName: allFormattedPlayers[1]
+                                                    [index]
+                                                .playerName
+                                                .value
+                                                .fold(
+                                                  (l) => '',
+                                                  (r) => r,
+                                                ),
+                                            description: playerPrice == 0
+                                                ? ' '
+                                                : playerPrice
+                                                    .toStringAsFixed(1),
+                                            teamName: allFormattedPlayers[1]
+                                                    [index]
+                                                .eplTeamId
+                                                .value
+                                                .fold(
+                                                  (l) => '   ',
+                                                  (r) => r
+                                                      .toString()
+                                                      .split(" ")[0],
+                                                ),
+                                          ),
                                         ),
                                       );
                                     },
@@ -525,27 +505,32 @@ class InitialTransferPage extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        child: PlayerWidget(
-                                          playerName: allFormattedPlayers[2]
-                                                  [index]
-                                              .playerName
-                                              .value
-                                              .fold(
-                                                (l) => '',
-                                                (r) => r,
-                                              ),
-                                          description: playerPrice == 0
-                                              ? ' '
-                                              : playerPrice.toStringAsFixed(1),
-                                          teamName: allFormattedPlayers[2]
-                                                  [index]
-                                              .eplTeamId
-                                              .value
-                                              .fold(
-                                                (l) => '   ',
-                                                (r) =>
-                                                    r.toString().split(" ")[0],
-                                              ),
+                                        child: Container(
+                                          width: 80,
+                                          child: PlayerWidget(
+                                            playerName: allFormattedPlayers[2]
+                                                    [index]
+                                                .playerName
+                                                .value
+                                                .fold(
+                                                  (l) => '',
+                                                  (r) => r,
+                                                ),
+                                            description: playerPrice == 0
+                                                ? ' '
+                                                : playerPrice
+                                                    .toStringAsFixed(1),
+                                            teamName: allFormattedPlayers[2]
+                                                    [index]
+                                                .eplTeamId
+                                                .value
+                                                .fold(
+                                                  (l) => '   ',
+                                                  (r) => r
+                                                      .toString()
+                                                      .split(" ")[0],
+                                                ),
+                                          ),
                                         ),
                                       );
                                     },
@@ -637,27 +622,32 @@ class InitialTransferPage extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        child: PlayerWidget(
-                                          playerName: allFormattedPlayers[3]
-                                                  [index]
-                                              .playerName
-                                              .value
-                                              .fold(
-                                                (l) => '',
-                                                (r) => r,
-                                              ),
-                                          description: playerPrice == 0
-                                              ? ' '
-                                              : playerPrice.toStringAsFixed(1),
-                                          teamName: allFormattedPlayers[3]
-                                                  [index]
-                                              .eplTeamId
-                                              .value
-                                              .fold(
-                                                (l) => '   ',
-                                                (r) =>
-                                                    r.toString().split(" ")[0],
-                                              ),
+                                        child: Container(
+                                          width: 80,
+                                          child: PlayerWidget(
+                                            playerName: allFormattedPlayers[3]
+                                                    [index]
+                                                .playerName
+                                                .value
+                                                .fold(
+                                                  (l) => '',
+                                                  (r) => r,
+                                                ),
+                                            description: playerPrice == 0
+                                                ? ' '
+                                                : playerPrice
+                                                    .toStringAsFixed(1),
+                                            teamName: allFormattedPlayers[3]
+                                                    [index]
+                                                .eplTeamId
+                                                .value
+                                                .fold(
+                                                  (l) => '   ',
+                                                  (r) => r
+                                                      .toString()
+                                                      .split(" ")[0],
+                                                ),
+                                          ),
                                         ),
                                       );
                                     },

@@ -1,9 +1,4 @@
 import 'package:efpl/presentation/colors.dart';
-// ignore_for_file: prefer_const_constructors
-
-import 'package:efpl/application/auth/auth/auth_bloc.dart';
-import 'package:efpl/application/epl_stats/epl_stats_bloc.dart';
-import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
@@ -14,7 +9,6 @@ import 'package:efpl/presentation/stats/epl_stats_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
 import 'package:efpl/presentation/transfers/transfers_view_main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 

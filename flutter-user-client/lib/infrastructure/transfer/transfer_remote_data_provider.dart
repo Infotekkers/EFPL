@@ -229,7 +229,8 @@ class TransferRemoteDataProvider {
 
         // if response has players
 
-        if (parseResponseTeam['players'].length > 0) {
+        if (parseResponseTeam.length > 0 &&
+            parseResponseTeam['players'].length > 0) {
           // List allPlayers = parseResponseTeam['players'];
           // for (var i = 0; i < allPlayers.length; i++) {
           //   Map<String, dynamic> availability = {
@@ -366,23 +367,25 @@ class TransferRemoteDataProvider {
             _transferLocalDataProvider.saveAllTeamsAndLogo(allTeams: allTeams);
           }
 
-          return left([
-            UserTeam(
-              gameWeekId: GameWeekId(value: 1),
-              gameWeekDeadline:
-                  parsedResponseBody['gameWeekDeadline'].toString(),
-              allUserPlayers: [],
-              freeTransfers: 0,
-              deduction: 0,
-              activeChip: '',
-              availableChips: parsedResponseBody['availableChips'],
-              maxBudget:
-                  double.parse(parsedResponseBody['maxBudget'].toString()),
-              teamName: parsedResponseBody['teamName'],
-            ),
-            const TransferFailure.noTeamSelected(
-                failedValue: "No Team. Please select a team.")
-          ]);
+          return left(
+            [
+              UserTeam(
+                gameWeekId: GameWeekId(value: 1),
+                gameWeekDeadline:
+                    parsedResponseBody['gameWeekDeadline'].toString(),
+                allUserPlayers: [],
+                freeTransfers: 0,
+                deduction: 0,
+                activeChip: '',
+                availableChips: parsedResponseBody['availableChips'],
+                maxBudget:
+                    double.parse(parsedResponseBody['maxBudget'].toString()),
+                teamName: parsedResponseBody['teamName'],
+              ),
+              const TransferFailure.noTeamSelected(
+                  failedValue: "No Team. Please select a team.")
+            ],
+          );
         }
       }
 

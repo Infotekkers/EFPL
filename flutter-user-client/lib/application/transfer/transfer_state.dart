@@ -35,7 +35,7 @@ class TransferState with _$TransferState {
     // price range values
     required double minPriceSet,
     required double maxPriceSet,
-    required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
+    required Option<Either<TransferFailure, dynamic>> valueFailureOrSuccess,
     required double priceExceededBy,
     required String countExceededTeam,
     required bool isInitialSelection,

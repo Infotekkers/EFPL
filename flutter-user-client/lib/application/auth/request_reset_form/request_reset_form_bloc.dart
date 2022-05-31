@@ -1,13 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:efpl/domain/auth/auth_failure.dart';
 import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/domain/auth/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
-
-import '../../../../domain/auth/auth_failure.dart';
 
 part 'request_reset_form_event.dart';
 part 'request_reset_form_state.dart';

@@ -36,7 +36,7 @@ class TransfersView extends StatelessWidget {
               either.fold(
                 (failure) {
                   failure[1].maybeMap(
-                    // Value failures
+                    // Team Issues
                     noTeamSelected: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -55,6 +55,23 @@ class TransfersView extends StatelessWidget {
                       Navigator.popAndPushNamed(context, "/transfer/initial");
                     },
 
+                    incompleteTeam: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.incompleteTeam + "!",
+                        message: AppLocalizations.of(context)!
+                            .theTeamYouHaveSelectedIsIncomplete,
+                        snackBarType: "error",
+                      );
+
+                      getIt<TransferBloc>().add(
+                        const TransferEvent.setInitialSelection(
+                          valueToSet: true,
+                        ),
+                      );
+                      Navigator.popAndPushNamed(context, "/transfer/initial");
+                    },
                     exceededPrice: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -78,27 +95,39 @@ class TransfersView extends StatelessWidget {
                         snackBarType: "warning",
                       );
                     },
-                    incompleteTeam: (_) {
+                    deadlinePassed: (_) {
+                      print("Deadline Passed");
+                    },
+
+                    // Auth Issues
+                    unauthenticated: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
                         headlineText:
-                            AppLocalizations.of(context)!.incompleteTeam + "!",
-                        message: AppLocalizations.of(context)!
-                            .theTeamYouHaveSelectedIsIncomplete,
-                        snackBarType: "error",
+                            AppLocalizations.of(context)!.pleaseLogin + "!",
+                        message: AppLocalizations.of(context)!.couldNotVerify +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseLoginAndTryAgain +
+                            " !",
+                        snackBarType: "warning",
                       );
-
-                      getIt<TransferBloc>().add(
-                        const TransferEvent.setInitialSelection(
-                          valueToSet: true,
-                        ),
+                    },
+                    unauthorized: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.pleaseLogin + " !",
+                        message: AppLocalizations.of(context)!.couldNotVerify +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseLoginAndTryAgain +
+                            " !",
+                        snackBarType: "warning",
                       );
-                      Navigator.popAndPushNamed(context, "/transfer/initial");
-                    },
-                    deadlinePassed: (_) {
-                      print("deadlinePassed");
                     },
 
+                    // Connection Issues
                     noConnection: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -135,34 +164,6 @@ class TransfersView extends StatelessWidget {
                         snackBarType: "warning",
                       );
                     },
-
-                    // token issues
-                    unauthorized: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + "!",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    unauthenticated: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + " !",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
                     unexpectedError: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -175,6 +176,15 @@ class TransfersView extends StatelessWidget {
                                     .pleaseLoginAndTryAgain +
                                 " !",
                         snackBarType: "warning",
+                      );
+                    },
+
+                    orElse: () {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText: "Something went wrong.",
+                        message: "Something went wrong. Try again!",
+                        snackBarType: "error",
                       );
                     },
                   );
@@ -206,11 +216,11 @@ class TransfersView extends StatelessWidget {
             showChildOpacityTransition: false,
             color: ConstantColors.primary_900,
             animSpeedFactor: 2,
-            child: state.isLoading
-                ? _buildLoaderView()
-                : Container(
-                    color: Colors.blue[50],
-                    child: Stack(
+            child: Container(
+              color: Colors.blue[50],
+              child: state.isLoading
+                  ? _buildLoaderView()
+                  : Stack(
                       children: [
                         isTeamComplete == false
                             ?
@@ -230,7 +240,7 @@ class TransfersView extends StatelessWidget {
                             transferBloc: _transferBloc),
                       ],
                     ),
-                  ),
+            ),
           );
         },
       ),

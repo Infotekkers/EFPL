@@ -26,107 +26,107 @@ class TransferPlayerView extends StatelessWidget {
       ],
       child: BlocConsumer<TransferBloc, TransferState>(
         listener: (context, state) {
-          state.valueFailureOrSuccess.fold(
-            () {},
-            (either) {
-              either.fold(
-                (failure) {
-                  failure[1].maybeMap(
-                    noConnection: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.noConnection + "!",
-                        message: AppLocalizations.of(context)!
-                                .couldNotContactTheServer +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseCheckYourConnection +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    socketError: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.noConnection + "!",
-                        message: AppLocalizations.of(context)!
-                                .pleaseCheckYourConnection +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    handShakeError: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.noConnection + "!",
-                        message: AppLocalizations.of(context)!
-                                .pleaseCheckYourConnection +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
+          // state.valueFailureOrSuccess.fold(
+          //   () {},
+          //   (either) {
+          //     either.fold(
+          //       (failure) {
+          //         failure[1].maybeMap(
+          //           noConnection: (_) {
+          //             CustomSnackBar().showCustomSnackBar(
+          //               showContext: context,
+          //               headlineText:
+          //                   AppLocalizations.of(context)!.noConnection + "!",
+          //               message: AppLocalizations.of(context)!
+          //                       .couldNotContactTheServer +
+          //                   "." +
+          //                   AppLocalizations.of(context)!
+          //                       .pleaseCheckYourConnection +
+          //                   " !",
+          //               snackBarType: "warning",
+          //             );
+          //           },
+          //           socketError: (_) {
+          //             CustomSnackBar().showCustomSnackBar(
+          //               showContext: context,
+          //               headlineText:
+          //                   AppLocalizations.of(context)!.noConnection + "!",
+          //               message: AppLocalizations.of(context)!
+          //                       .pleaseCheckYourConnection +
+          //                   " !",
+          //               snackBarType: "warning",
+          //             );
+          //           },
+          //           handShakeError: (_) {
+          //             CustomSnackBar().showCustomSnackBar(
+          //               showContext: context,
+          //               headlineText:
+          //                   AppLocalizations.of(context)!.noConnection + "!",
+          //               message: AppLocalizations.of(context)!
+          //                       .pleaseCheckYourConnection +
+          //                   " !",
+          //               snackBarType: "warning",
+          //             );
+          //           },
 
-                    // token issues
-                    unauthorized: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + "!",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    unauthenticated: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + " !",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    unexpectedError: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.somethingWentWrong,
-                        message:
-                            AppLocalizations.of(context)!.somethingWentWrong +
-                                "." +
-                                AppLocalizations.of(context)!
-                                    .pleaseLoginAndTryAgain +
-                                " !",
-                        snackBarType: "warning",
-                      );
-                    },
+          //           // token issues
+          //           unauthorized: (_) {
+          //             CustomSnackBar().showCustomSnackBar(
+          //               showContext: context,
+          //               headlineText:
+          //                   AppLocalizations.of(context)!.pleaseLogin + "!",
+          //               message: AppLocalizations.of(context)!.couldNotVerify +
+          //                   "." +
+          //                   AppLocalizations.of(context)!
+          //                       .pleaseLoginAndTryAgain +
+          //                   " !",
+          //               snackBarType: "warning",
+          //             );
+          //           },
+          //           unauthenticated: (_) {
+          //             CustomSnackBar().showCustomSnackBar(
+          //               showContext: context,
+          //               headlineText:
+          //                   AppLocalizations.of(context)!.pleaseLogin + " !",
+          //               message: AppLocalizations.of(context)!.couldNotVerify +
+          //                   "." +
+          //                   AppLocalizations.of(context)!
+          //                       .pleaseLoginAndTryAgain +
+          //                   " !",
+          //               snackBarType: "warning",
+          //             );
+          //           },
+          //           unexpectedError: (_) {
+          //             CustomSnackBar().showCustomSnackBar(
+          //               showContext: context,
+          //               headlineText:
+          //                   AppLocalizations.of(context)!.somethingWentWrong,
+          //               message:
+          //                   AppLocalizations.of(context)!.somethingWentWrong +
+          //                       "." +
+          //                       AppLocalizations.of(context)!
+          //                           .pleaseLoginAndTryAgain +
+          //                       " !",
+          //               snackBarType: "warning",
+          //             );
+          //           },
 
-                    // Value failures
+          //           // Value failures
 
-                    orElse: () {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText: "Something went wrong.",
-                        message: "Something went wrong. Try again!",
-                        snackBarType: "error",
-                      );
-                    },
-                  );
-                },
-                (_) {},
-              );
-            },
-          );
+          //           orElse: () {
+          //             CustomSnackBar().showCustomSnackBar(
+          //               showContext: context,
+          //               headlineText: "Something went wrong.",
+          //               message: "Something went wrong. Try again!",
+          //               snackBarType: "error",
+          //             );
+          //           },
+          //         );
+          //       },
+          //       (_) {},
+          //     );
+          //   },
+          // );
         },
         builder: (context, state) {
           List<UserPlayer> allPositionPlayers =

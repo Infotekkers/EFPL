@@ -112,6 +112,21 @@ class PointsView extends StatelessWidget {
                       );
                     },
 
+                    noTeamSelected: (_) {
+                      CustomSnackBar().showCustomSnackBar(
+                        showContext: context,
+                        headlineText:
+                            AppLocalizations.of(context)!.noTeamSelected,
+                        message: AppLocalizations.of(context)!
+                                .theTeamYouHaveSelectedIsIncomplete +
+                            "." +
+                            AppLocalizations.of(context)!
+                                .pleaseLoginAndTryAgain +
+                            " !",
+                        snackBarType: "warning",
+                      );
+                    },
+
                     orElse: () {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -350,6 +365,9 @@ Widget _buildMainView(
                                   .toString())
                               : '0',
                       teamName: "shirt.svg",
+                      isCaptain: allFormattedPlayers[0][index].isCaptain,
+                      isViceCaptain:
+                          allFormattedPlayers[0][index].isViceCaptain,
                     ),
                   );
                 },
@@ -420,8 +438,7 @@ Widget _buildMainView(
         ),
 
         // DEFENDERS
-        Container(
-          // padding: const EdgeInsets.symmetric(vertical: 5),
+        SizedBox(
           height: 130,
           child: Center(
             child: ListView.builder(
@@ -451,6 +468,8 @@ Widget _buildMainView(
                             .toString())
                         : '0',
                     teamName: "shirt.svg",
+                    isCaptain: allFormattedPlayers[1][index].isCaptain,
+                    isViceCaptain: allFormattedPlayers[1][index].isViceCaptain,
                   ),
                 );
               },
@@ -459,8 +478,7 @@ Widget _buildMainView(
         ),
 
         // MIDFIELDERS
-        Container(
-          // padding: const EdgeInsets.symmetric(vertical: 5),
+        SizedBox(
           height: 130,
           child: Center(
             child: ListView.builder(
@@ -487,6 +505,8 @@ Widget _buildMainView(
                             .toString())
                         : '0',
                     teamName: "shirt.svg",
+                    isCaptain: allFormattedPlayers[2][index].isCaptain,
+                    isViceCaptain: allFormattedPlayers[2][index].isViceCaptain,
                   ),
                 );
               },
@@ -495,8 +515,7 @@ Widget _buildMainView(
         ),
 
         // ATTACKERS
-        Container(
-          // padding: const EdgeInsets.symmetric(vertical: 5),
+        SizedBox(
           height: 130,
           child: Center(
             child: ListView.builder(
@@ -523,6 +542,8 @@ Widget _buildMainView(
                             .toString())
                         : '0',
                     teamName: "shirt.svg",
+                    isCaptain: allFormattedPlayers[3][index].isCaptain,
+                    isViceCaptain: allFormattedPlayers[3][index].isViceCaptain,
                   ),
                 );
               },

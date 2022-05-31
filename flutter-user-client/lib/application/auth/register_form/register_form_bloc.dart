@@ -3,13 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/auth/auth_failure.dart';
 import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
-import 'package:efpl/domain/core/value_failures.dart';
+import 'package:efpl/domain/auth/user.dart';
 import 'package:efpl/domain/core/value_validators.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
-
-import '../../../domain/auth/user.dart';
 
 part 'register_form_event.dart';
 part 'register_form_state.dart';
@@ -58,14 +55,9 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
             state.copyWith(
                 isMatch: some(left(const AuthFailure.passwordDontMatch()))),
           );
-          print(state.authFailureOrSuccessOption);
         }
-
-        print('e');
-        print(passMatch);
       },
     );
-    print(state.authFailureOrSuccessOption);
 
     // user name
     on<UserNameChanged>(

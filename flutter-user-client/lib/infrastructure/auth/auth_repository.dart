@@ -22,7 +22,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, User>> signInUser(
       {required User user, required Password password}) async {
     final Uri url = Uri.parse("$_baseUrl/login");
-    print(url);
+
     final UserDto userDtoOut = UserDto.fromDomain(user);
     final outGoingJson =
         userDtoOut.copyWith(password: password.getOrCrash()).toJson();
@@ -31,7 +31,7 @@ class AuthRepository implements IAuthRepository {
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        print(response.body);
+
         final user = userDtoIn.toDomain();
 
         return right(userDtoIn.toDomain());
@@ -61,8 +61,7 @@ class AuthRepository implements IAuthRepository {
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        // ignore: avoid_print
-        print(userDtoIn.token);
+
         // store token on secure store
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 400) {
@@ -84,7 +83,7 @@ class AuthRepository implements IAuthRepository {
 
     try {
       String? value = await storage.read(key: 'user');
-      print(value);
+
       final UserDto userDtoIn =
           UserDto.fromJson(jsonDecode(value!) as Map<String, dynamic>);
 
@@ -133,12 +132,10 @@ class AuthRepository implements IAuthRepository {
     try {
       final response = await client!.post(url, body: outGoingJson);
       // ignore: avoid_print
-      print(response.body);
       if (response.statusCode == 200) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        // ignore: avoid_print
-        print('success');
+
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 404) {
         return left(const AuthFailure.emailNotFound());

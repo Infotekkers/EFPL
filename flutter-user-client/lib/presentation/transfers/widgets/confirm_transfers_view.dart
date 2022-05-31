@@ -348,6 +348,7 @@ Widget _buildMainView(
                     Navigator.pop(context);
 
                     if (state.isInitialSelection == true) {
+                      Navigator.pop(context);
                       Navigator.pushNamed(context, "/home");
                     }
                   },
