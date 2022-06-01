@@ -13,7 +13,35 @@ class UserCustomLeaguesView extends StatelessWidget {
         initial: (_) => Container(),
         loadFailure: (_) => const Text("Failure"),
         loadInProgress: (_) => const Text("Loading"),
-        loadUserCustomLeaguesSuccess: (_) => const Text("Load Success!"),
+        loadUserCustomLeaguesSuccess: (_) => _buildView(state, context),
+      ),
+    );
+  }
+
+  _buildView(state, context) {
+    List userCustomLeagues = state.userCustomLeagues;
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text("Classic Leagues"),
+          const SizedBox(height: 8.0),
+          Expanded(
+            child: ListView.builder(
+              itemCount: userCustomLeagues.length,
+              shrinkWrap: true,
+              itemBuilder: (_, index) => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("${userCustomLeagues[index].leagueName.getOrCrash()}"),
+                  Text("${userCustomLeagues[index].previousRank.getOrCrash()}"),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
