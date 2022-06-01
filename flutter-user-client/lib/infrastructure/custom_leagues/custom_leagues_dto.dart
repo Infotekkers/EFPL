@@ -12,7 +12,7 @@ abstract class CustomLeaguesDTO implements _$CustomLeaguesDTO {
   const CustomLeaguesDTO._();
 
   const factory CustomLeaguesDTO({
-    required String leagueId,
+    required int leagueId,
     required String leagueName,
     required int previousRank,
   }) = _CustomLeaguesDTO;

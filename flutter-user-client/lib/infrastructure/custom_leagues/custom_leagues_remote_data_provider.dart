@@ -36,6 +36,7 @@ class CustomLeaguesRemoteDataProvider {
 
           final CustomLeaguesDTO customLeaguesDTO =
               CustomLeaguesDTO.fromJson(finalParsedCustomLeague);
+
           allUserCustomLeagues.add(customLeaguesDTO.toDomain());
         }
 

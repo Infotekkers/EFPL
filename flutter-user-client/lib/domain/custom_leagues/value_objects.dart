@@ -6,9 +6,9 @@ import 'value_validators.dart';
 
 class LeagueId extends ValueObject {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<String>, int> value;
 
-  factory LeagueId({required String value}) {
+  factory LeagueId({required int value}) {
     return LeagueId._(value: validateLeagueId(leagueId: value));
   }
 

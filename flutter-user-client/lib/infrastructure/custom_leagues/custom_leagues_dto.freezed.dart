@@ -22,7 +22,7 @@ class _$CustomLeaguesDTOTearOff {
   const _$CustomLeaguesDTOTearOff();
 
   _CustomLeaguesDTO call(
-      {required String leagueId,
+      {required int leagueId,
       required String leagueName,
       required int previousRank}) {
     return _CustomLeaguesDTO(
@@ -42,7 +42,7 @@ const $CustomLeaguesDTO = _$CustomLeaguesDTOTearOff();
 
 /// @nodoc
 mixin _$CustomLeaguesDTO {
-  String get leagueId => throw _privateConstructorUsedError;
+  int get leagueId => throw _privateConstructorUsedError;
   String get leagueName => throw _privateConstructorUsedError;
   int get previousRank => throw _privateConstructorUsedError;
 
@@ -57,7 +57,7 @@ abstract class $CustomLeaguesDTOCopyWith<$Res> {
   factory $CustomLeaguesDTOCopyWith(
           CustomLeaguesDTO value, $Res Function(CustomLeaguesDTO) then) =
       _$CustomLeaguesDTOCopyWithImpl<$Res>;
-  $Res call({String leagueId, String leagueName, int previousRank});
+  $Res call({int leagueId, String leagueName, int previousRank});
 }
 
 /// @nodoc
@@ -79,7 +79,7 @@ class _$CustomLeaguesDTOCopyWithImpl<$Res>
       leagueId: leagueId == freezed
           ? _value.leagueId
           : leagueId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       leagueName: leagueName == freezed
           ? _value.leagueName
           : leagueName // ignore: cast_nullable_to_non_nullable
@@ -99,7 +99,7 @@ abstract class _$CustomLeaguesDTOCopyWith<$Res>
           _CustomLeaguesDTO value, $Res Function(_CustomLeaguesDTO) then) =
       __$CustomLeaguesDTOCopyWithImpl<$Res>;
   @override
-  $Res call({String leagueId, String leagueName, int previousRank});
+  $Res call({int leagueId, String leagueName, int previousRank});
 }
 
 /// @nodoc
@@ -123,7 +123,7 @@ class __$CustomLeaguesDTOCopyWithImpl<$Res>
       leagueId: leagueId == freezed
           ? _value.leagueId
           : leagueId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       leagueName: leagueName == freezed
           ? _value.leagueName
           : leagueName // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ class _$_CustomLeaguesDTO extends _CustomLeaguesDTO {
       _$$_CustomLeaguesDTOFromJson(json);
 
   @override
-  final String leagueId;
+  final int leagueId;
   @override
   final String leagueName;
   @override
@@ -192,7 +192,7 @@ class _$_CustomLeaguesDTO extends _CustomLeaguesDTO {
 
 abstract class _CustomLeaguesDTO extends CustomLeaguesDTO {
   const factory _CustomLeaguesDTO(
-      {required String leagueId,
+      {required int leagueId,
       required String leagueName,
       required int previousRank}) = _$_CustomLeaguesDTO;
   const _CustomLeaguesDTO._() : super._();
@@ -201,7 +201,7 @@ abstract class _CustomLeaguesDTO extends CustomLeaguesDTO {
       _$_CustomLeaguesDTO.fromJson;
 
   @override
-  String get leagueId;
+  int get leagueId;
   @override
   String get leagueName;
   @override

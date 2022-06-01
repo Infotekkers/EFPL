@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/value_failures.dart';
 
-Either<ValueFailure<String>, String> validateLeagueId(
-    {required String leagueId}) {
+Either<ValueFailure<String>, int> validateLeagueId({required int leagueId}) {
   return right(leagueId);
 }
 

@@ -2,14 +2,10 @@ part of 'custom_leagues_bloc.dart';
 
 @freezed
 class CustomLeaguesState with _$CustomLeaguesState {
-  const factory CustomLeaguesState({
-    required bool isLoading,
-    required List userCustomLeagues,
-  }) = _CustomLeaguesState;
-
-  // ignore: prefer_const_constructors
-  factory CustomLeaguesState.initial() => CustomLeaguesState(
-        isLoading: false,
-        userCustomLeagues: [],
-      );
+  const factory CustomLeaguesState.initial() = _Initial;
+  const factory CustomLeaguesState.loadInProgress() = _LoadInProgress;
+  const factory CustomLeaguesState.loadUserCustomLeaguesSuccess(
+      List<CustomLeagues> userCustomLeagues) = _LoadUserCustomLeaguesSuccess;
+  const factory CustomLeaguesState.loadFailure(CustomLeaguesFailures failure) =
+      _LoadFailure;
 }

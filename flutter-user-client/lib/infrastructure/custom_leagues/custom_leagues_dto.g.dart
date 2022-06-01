@@ -8,7 +8,7 @@ part of 'custom_leagues_dto.dart';
 
 _$_CustomLeaguesDTO _$$_CustomLeaguesDTOFromJson(Map<String, dynamic> json) =>
     _$_CustomLeaguesDTO(
-      leagueId: json['leagueId'] as String,
+      leagueId: json['leagueId'] as int,
       leagueName: json['leagueName'] as String,
       previousRank: json['previousRank'] as int,
     );

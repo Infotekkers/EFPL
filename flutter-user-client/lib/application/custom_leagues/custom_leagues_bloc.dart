@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
+import 'package:efpl/domain/custom_leagues/custom_leagues_failures.dart';
 import 'package:efpl/domain/custom_leagues/i_custom_leagues_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -12,36 +13,26 @@ part 'custom_leagues_state.dart';
 
 @lazySingleton
 class CustomLeaguesBloc extends Bloc<CustomLeaguesEvent, CustomLeaguesState> {
-  final ICustomLeaguesRepository _iCustomLeaguesRepository;
+  final ICustomLeaguesRepository iCustomLeaguesRepository;
 
-  CustomLeaguesBloc(this._iCustomLeaguesRepository)
-      : super(CustomLeaguesState.initial()) {
-    on<_getUserCustomLeagues>(
-      (event, emit) async {
-        emit(
-          state.copyWith(
-            isLoading: true,
-          ),
-        );
+  CustomLeaguesBloc(this.iCustomLeaguesRepository)
+      : super(
+          const CustomLeaguesState.initial(),
+        ) {
+    on<_GetUserCustomLeagues>(_onGetUserCustomLeagues);
+  }
 
-        final Either<dynamic, List> failureOrSuccess =
-            await _iCustomLeaguesRepository.getUserCustomLeagues(
-                userId: '628a258d9c666191581a83f9');
+  void _onGetUserCustomLeagues(
+      _GetUserCustomLeagues e, Emitter<CustomLeaguesState> emit) async {
+    emit(const CustomLeaguesState.loadInProgress());
 
-        final List userCustomLeagues = failureOrSuccess.fold(
-          (l) => l[0],
-          (r) => r,
-        );
+    final failureOrSuccess =
+        await iCustomLeaguesRepository.getUserCustomLeagues(userId: e.userId);
 
-        print("here");
-
-        emit(
-          state.copyWith(
-            userCustomLeagues: userCustomLeagues,
-            isLoading: false,
-          ),
-        );
-      },
-    );
+    failureOrSuccess.fold(
+        (failure) => emit(CustomLeaguesState.loadFailure(failure)),
+        (userCustomLeagues) => emit(
+            CustomLeaguesState.loadUserCustomLeaguesSuccess(
+                userCustomLeagues)));
   }
 }

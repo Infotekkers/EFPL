@@ -10,7 +10,6 @@ const getAllCustomLeagues = asyncHandler(async function (req, res) {
 });
 
 const getUserCustomLeagues = asyncHandler(async function (req, res) {
-  // console.log("requested");
   const { userId } = req.params;
 
   const user = await UserModel.findOne({ id: userId });
