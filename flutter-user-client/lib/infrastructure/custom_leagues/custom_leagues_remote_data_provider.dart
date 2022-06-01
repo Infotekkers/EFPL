@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
 import 'package:efpl/infrastructure/custom_leagues/custom_leagues_dto.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues_failures.dart';
 import 'package:efpl/injectable.dart';
@@ -14,7 +15,7 @@ class CustomLeaguesRemoteDataProvider {
 
   CustomLeaguesRemoteDataProvider();
 
-  Future<Either<dynamic, List>> getUserCustomLeagues({
+  Future<Either<dynamic, List<CustomLeagues>>> getUserCustomLeagues({
     required String userId,
   }) async {
     try {
@@ -22,28 +23,23 @@ class CustomLeaguesRemoteDataProvider {
           .get(Uri.parse('$_baseURL/customLeagues/user/$userId'));
 
       if (apiResponse.statusCode == 200) {
-        final parsedReponseBody = jsonDecode(apiResponse.body);
+        final List<CustomLeagues> allUserCustomLeagues = <CustomLeagues>[];
 
-        print("\n");
-        print("\n");
-        print("\n");
-        print("\n");
-        print("\n");
+        final parsedResponseBody =
+            jsonDecode(apiResponse.body) as List<dynamic>;
 
-        print(parsedReponseBody.runtimeType);
+        for (var customLeagueJson in parsedResponseBody) {
+          Map<String, dynamic> finalParsedCustomLeague = <String, dynamic>{};
 
-        print("\n");
-        print("\n");
-        print("\n");
-        print("\n");
-        print("\n");
+          customLeagueJson
+              .forEach((key, value) => {finalParsedCustomLeague[key] = value});
 
-        final CustomLeaguesDTO customLeaguesDTO =
-            CustomLeaguesDTO.fromJson(parsedReponseBody);
+          final CustomLeaguesDTO customLeaguesDTO =
+              CustomLeaguesDTO.fromJson(finalParsedCustomLeague);
+          allUserCustomLeagues.add(customLeaguesDTO.toDomain());
+        }
 
-        print(customLeaguesDTO);
-
-        return right([]);
+        return right(allUserCustomLeagues);
       }
 
       return left(const CustomLeaguesFailures.serverError());

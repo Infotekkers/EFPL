@@ -17,9 +17,14 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CustomLeaguesTearOff {
   const _$CustomLeaguesTearOff();
 
-  _CustomLeagues call({required List<dynamic> userCustomLeagues}) {
+  _CustomLeagues call(
+      {required LeagueId leagueId,
+      required LeagueName leagueName,
+      required PreviousRank previousRank}) {
     return _CustomLeagues(
-      userCustomLeagues: userCustomLeagues,
+      leagueId: leagueId,
+      leagueName: leagueName,
+      previousRank: previousRank,
     );
   }
 }
@@ -29,7 +34,9 @@ const $CustomLeagues = _$CustomLeaguesTearOff();
 
 /// @nodoc
 mixin _$CustomLeagues {
-  List<dynamic> get userCustomLeagues => throw _privateConstructorUsedError;
+  LeagueId get leagueId => throw _privateConstructorUsedError;
+  LeagueName get leagueName => throw _privateConstructorUsedError;
+  PreviousRank get previousRank => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomLeaguesCopyWith<CustomLeagues> get copyWith =>
@@ -41,7 +48,8 @@ abstract class $CustomLeaguesCopyWith<$Res> {
   factory $CustomLeaguesCopyWith(
           CustomLeagues value, $Res Function(CustomLeagues) then) =
       _$CustomLeaguesCopyWithImpl<$Res>;
-  $Res call({List<dynamic> userCustomLeagues});
+  $Res call(
+      {LeagueId leagueId, LeagueName leagueName, PreviousRank previousRank});
 }
 
 /// @nodoc
@@ -55,13 +63,23 @@ class _$CustomLeaguesCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userCustomLeagues = freezed,
+    Object? leagueId = freezed,
+    Object? leagueName = freezed,
+    Object? previousRank = freezed,
   }) {
     return _then(_value.copyWith(
-      userCustomLeagues: userCustomLeagues == freezed
-          ? _value.userCustomLeagues
-          : userCustomLeagues // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      leagueId: leagueId == freezed
+          ? _value.leagueId
+          : leagueId // ignore: cast_nullable_to_non_nullable
+              as LeagueId,
+      leagueName: leagueName == freezed
+          ? _value.leagueName
+          : leagueName // ignore: cast_nullable_to_non_nullable
+              as LeagueName,
+      previousRank: previousRank == freezed
+          ? _value.previousRank
+          : previousRank // ignore: cast_nullable_to_non_nullable
+              as PreviousRank,
     ));
   }
 }
@@ -73,7 +91,8 @@ abstract class _$CustomLeaguesCopyWith<$Res>
           _CustomLeagues value, $Res Function(_CustomLeagues) then) =
       __$CustomLeaguesCopyWithImpl<$Res>;
   @override
-  $Res call({List<dynamic> userCustomLeagues});
+  $Res call(
+      {LeagueId leagueId, LeagueName leagueName, PreviousRank previousRank});
 }
 
 /// @nodoc
@@ -89,13 +108,23 @@ class __$CustomLeaguesCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userCustomLeagues = freezed,
+    Object? leagueId = freezed,
+    Object? leagueName = freezed,
+    Object? previousRank = freezed,
   }) {
     return _then(_CustomLeagues(
-      userCustomLeagues: userCustomLeagues == freezed
-          ? _value.userCustomLeagues
-          : userCustomLeagues // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      leagueId: leagueId == freezed
+          ? _value.leagueId
+          : leagueId // ignore: cast_nullable_to_non_nullable
+              as LeagueId,
+      leagueName: leagueName == freezed
+          ? _value.leagueName
+          : leagueName // ignore: cast_nullable_to_non_nullable
+              as LeagueName,
+      previousRank: previousRank == freezed
+          ? _value.previousRank
+          : previousRank // ignore: cast_nullable_to_non_nullable
+              as PreviousRank,
     ));
   }
 }
@@ -103,14 +132,21 @@ class __$CustomLeaguesCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CustomLeagues implements _CustomLeagues {
-  const _$_CustomLeagues({required this.userCustomLeagues});
+  const _$_CustomLeagues(
+      {required this.leagueId,
+      required this.leagueName,
+      required this.previousRank});
 
   @override
-  final List<dynamic> userCustomLeagues;
+  final LeagueId leagueId;
+  @override
+  final LeagueName leagueName;
+  @override
+  final PreviousRank previousRank;
 
   @override
   String toString() {
-    return 'CustomLeagues(userCustomLeagues: $userCustomLeagues)';
+    return 'CustomLeagues(leagueId: $leagueId, leagueName: $leagueName, previousRank: $previousRank)';
   }
 
   @override
@@ -118,13 +154,19 @@ class _$_CustomLeagues implements _CustomLeagues {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _CustomLeagues &&
+            const DeepCollectionEquality().equals(other.leagueId, leagueId) &&
             const DeepCollectionEquality()
-                .equals(other.userCustomLeagues, userCustomLeagues));
+                .equals(other.leagueName, leagueName) &&
+            const DeepCollectionEquality()
+                .equals(other.previousRank, previousRank));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userCustomLeagues));
+      runtimeType,
+      const DeepCollectionEquality().hash(leagueId),
+      const DeepCollectionEquality().hash(leagueName),
+      const DeepCollectionEquality().hash(previousRank));
 
   @JsonKey(ignore: true)
   @override
@@ -133,11 +175,17 @@ class _$_CustomLeagues implements _CustomLeagues {
 }
 
 abstract class _CustomLeagues implements CustomLeagues {
-  const factory _CustomLeagues({required List<dynamic> userCustomLeagues}) =
-      _$_CustomLeagues;
+  const factory _CustomLeagues(
+      {required LeagueId leagueId,
+      required LeagueName leagueName,
+      required PreviousRank previousRank}) = _$_CustomLeagues;
 
   @override
-  List<dynamic> get userCustomLeagues;
+  LeagueId get leagueId;
+  @override
+  LeagueName get leagueName;
+  @override
+  PreviousRank get previousRank;
   @override
   @JsonKey(ignore: true)
   _$CustomLeaguesCopyWith<_CustomLeagues> get copyWith =>

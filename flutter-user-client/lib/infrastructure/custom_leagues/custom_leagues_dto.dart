@@ -1,4 +1,5 @@
 import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
+import 'package:efpl/domain/custom_leagues/value_objects.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,16 +12,22 @@ abstract class CustomLeaguesDTO implements _$CustomLeaguesDTO {
   const CustomLeaguesDTO._();
 
   const factory CustomLeaguesDTO({
-    required List userCustomLeagues,
+    required String leagueId,
+    required String leagueName,
+    required int previousRank,
   }) = _CustomLeaguesDTO;
 
   factory CustomLeaguesDTO.fromDomain({required CustomLeagues customLeague}) =>
       CustomLeaguesDTO(
-        userCustomLeagues: customLeague.userCustomLeagues,
+        leagueId: customLeague.leagueId.getOrCrash(),
+        leagueName: customLeague.leagueName.getOrCrash(),
+        previousRank: customLeague.previousRank.getOrCrash(),
       );
 
   CustomLeagues toDomain() => CustomLeagues(
-        userCustomLeagues: userCustomLeagues,
+        leagueId: LeagueId(value: leagueId),
+        leagueName: LeagueName(value: leagueName),
+        previousRank: PreviousRank(value: previousRank),
       );
 
   factory CustomLeaguesDTO.fromJson(Map<String, dynamic> json) =>

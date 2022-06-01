@@ -21,9 +21,14 @@ CustomLeaguesDTO _$CustomLeaguesDTOFromJson(Map<String, dynamic> json) {
 class _$CustomLeaguesDTOTearOff {
   const _$CustomLeaguesDTOTearOff();
 
-  _CustomLeaguesDTO call({required List<dynamic> userCustomLeagues}) {
+  _CustomLeaguesDTO call(
+      {required String leagueId,
+      required String leagueName,
+      required int previousRank}) {
     return _CustomLeaguesDTO(
-      userCustomLeagues: userCustomLeagues,
+      leagueId: leagueId,
+      leagueName: leagueName,
+      previousRank: previousRank,
     );
   }
 
@@ -37,7 +42,9 @@ const $CustomLeaguesDTO = _$CustomLeaguesDTOTearOff();
 
 /// @nodoc
 mixin _$CustomLeaguesDTO {
-  List<dynamic> get userCustomLeagues => throw _privateConstructorUsedError;
+  String get leagueId => throw _privateConstructorUsedError;
+  String get leagueName => throw _privateConstructorUsedError;
+  int get previousRank => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +57,7 @@ abstract class $CustomLeaguesDTOCopyWith<$Res> {
   factory $CustomLeaguesDTOCopyWith(
           CustomLeaguesDTO value, $Res Function(CustomLeaguesDTO) then) =
       _$CustomLeaguesDTOCopyWithImpl<$Res>;
-  $Res call({List<dynamic> userCustomLeagues});
+  $Res call({String leagueId, String leagueName, int previousRank});
 }
 
 /// @nodoc
@@ -64,13 +71,23 @@ class _$CustomLeaguesDTOCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userCustomLeagues = freezed,
+    Object? leagueId = freezed,
+    Object? leagueName = freezed,
+    Object? previousRank = freezed,
   }) {
     return _then(_value.copyWith(
-      userCustomLeagues: userCustomLeagues == freezed
-          ? _value.userCustomLeagues
-          : userCustomLeagues // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      leagueId: leagueId == freezed
+          ? _value.leagueId
+          : leagueId // ignore: cast_nullable_to_non_nullable
+              as String,
+      leagueName: leagueName == freezed
+          ? _value.leagueName
+          : leagueName // ignore: cast_nullable_to_non_nullable
+              as String,
+      previousRank: previousRank == freezed
+          ? _value.previousRank
+          : previousRank // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -82,7 +99,7 @@ abstract class _$CustomLeaguesDTOCopyWith<$Res>
           _CustomLeaguesDTO value, $Res Function(_CustomLeaguesDTO) then) =
       __$CustomLeaguesDTOCopyWithImpl<$Res>;
   @override
-  $Res call({List<dynamic> userCustomLeagues});
+  $Res call({String leagueId, String leagueName, int previousRank});
 }
 
 /// @nodoc
@@ -98,13 +115,23 @@ class __$CustomLeaguesDTOCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userCustomLeagues = freezed,
+    Object? leagueId = freezed,
+    Object? leagueName = freezed,
+    Object? previousRank = freezed,
   }) {
     return _then(_CustomLeaguesDTO(
-      userCustomLeagues: userCustomLeagues == freezed
-          ? _value.userCustomLeagues
-          : userCustomLeagues // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      leagueId: leagueId == freezed
+          ? _value.leagueId
+          : leagueId // ignore: cast_nullable_to_non_nullable
+              as String,
+      leagueName: leagueName == freezed
+          ? _value.leagueName
+          : leagueName // ignore: cast_nullable_to_non_nullable
+              as String,
+      previousRank: previousRank == freezed
+          ? _value.previousRank
+          : previousRank // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -112,17 +139,25 @@ class __$CustomLeaguesDTOCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_CustomLeaguesDTO extends _CustomLeaguesDTO {
-  const _$_CustomLeaguesDTO({required this.userCustomLeagues}) : super._();
+  const _$_CustomLeaguesDTO(
+      {required this.leagueId,
+      required this.leagueName,
+      required this.previousRank})
+      : super._();
 
   factory _$_CustomLeaguesDTO.fromJson(Map<String, dynamic> json) =>
       _$$_CustomLeaguesDTOFromJson(json);
 
   @override
-  final List<dynamic> userCustomLeagues;
+  final String leagueId;
+  @override
+  final String leagueName;
+  @override
+  final int previousRank;
 
   @override
   String toString() {
-    return 'CustomLeaguesDTO(userCustomLeagues: $userCustomLeagues)';
+    return 'CustomLeaguesDTO(leagueId: $leagueId, leagueName: $leagueName, previousRank: $previousRank)';
   }
 
   @override
@@ -130,13 +165,19 @@ class _$_CustomLeaguesDTO extends _CustomLeaguesDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _CustomLeaguesDTO &&
+            const DeepCollectionEquality().equals(other.leagueId, leagueId) &&
             const DeepCollectionEquality()
-                .equals(other.userCustomLeagues, userCustomLeagues));
+                .equals(other.leagueName, leagueName) &&
+            const DeepCollectionEquality()
+                .equals(other.previousRank, previousRank));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userCustomLeagues));
+      runtimeType,
+      const DeepCollectionEquality().hash(leagueId),
+      const DeepCollectionEquality().hash(leagueName),
+      const DeepCollectionEquality().hash(previousRank));
 
   @JsonKey(ignore: true)
   @override
@@ -150,15 +191,21 @@ class _$_CustomLeaguesDTO extends _CustomLeaguesDTO {
 }
 
 abstract class _CustomLeaguesDTO extends CustomLeaguesDTO {
-  const factory _CustomLeaguesDTO({required List<dynamic> userCustomLeagues}) =
-      _$_CustomLeaguesDTO;
+  const factory _CustomLeaguesDTO(
+      {required String leagueId,
+      required String leagueName,
+      required int previousRank}) = _$_CustomLeaguesDTO;
   const _CustomLeaguesDTO._() : super._();
 
   factory _CustomLeaguesDTO.fromJson(Map<String, dynamic> json) =
       _$_CustomLeaguesDTO.fromJson;
 
   @override
-  List<dynamic> get userCustomLeagues;
+  String get leagueId;
+  @override
+  String get leagueName;
+  @override
+  int get previousRank;
   @override
   @JsonKey(ignore: true)
   _$CustomLeaguesDTOCopyWith<_CustomLeaguesDTO> get copyWith =>

@@ -10,7 +10,7 @@ const getAllCustomLeagues = asyncHandler(async function (req, res) {
 });
 
 const getUserCustomLeagues = asyncHandler(async function (req, res) {
-  console.log("requested");
+  // console.log("requested");
   const { userId } = req.params;
 
   const user = await UserModel.findOne({ id: userId });
@@ -29,7 +29,13 @@ const createCustomLeague = asyncHandler(async function (req, res) {
   const user = await UserModel.findOne({ id: adminId });
 
   const createdLeague = await new CustomLeagueModel({
-    teams: [adminId],
+    teams: [
+      {
+        memberId: adminId,
+        memberTeamName: user.teamName,
+        memberPoints: 0,
+      },
+    ],
     leagueType,
     leagueName,
     adminId,
@@ -38,6 +44,8 @@ const createCustomLeague = asyncHandler(async function (req, res) {
 
   user.fantasyLeagues.push({
     leagueId: createdLeague.leagueId,
+    leagueName: createdLeague.leagueName,
+    previousRank: 1,
   });
 
   await user.save();
@@ -45,6 +53,7 @@ const createCustomLeague = asyncHandler(async function (req, res) {
   res.send(`Custom league '${leagueName}' created!`);
 });
 
+// TODO: remove players from classic league
 const deleteCustomLeague = asyncHandler(async function (req, res) {
   const { leagueId, adminId } = req.body;
 
