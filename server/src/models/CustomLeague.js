@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
 
+const customLeagueMemberSchema = mongoose.Schema({
+  memberId: { type: String, required: true },
+  memberTeamName: { type: String, required: true },
+  memberPoints: { type: Number, required: true },
+});
+
 const customLeagueSchema = mongoose.Schema({
   leagueId: { type: Number, unique: true },
   leagueType: {
@@ -12,7 +18,7 @@ const customLeagueSchema = mongoose.Schema({
   },
   leagueName: { type: String, required: true },
   leagueCode: { type: String, unique: true },
-  teams: { type: Array, required: true }, // Player team Ids
+  teams: { type: [customLeagueMemberSchema], required: true }, // Player team Ids
   adminId: { type: String, required: true },
   leagueStartGameWeek: { type: Number, required: true },
 });

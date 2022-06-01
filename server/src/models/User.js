@@ -7,6 +7,13 @@ const fantasyLeaguesSchema = mongoose.Schema({
     type: Number,
     required: [true, "Custom Error - Required Value *:League ID is required."],
   },
+  leagueName: {
+    type: String,
+    required: [
+      true,
+      "Custom Error - Required Value *:League Name is required.",
+    ],
+  },
   previousRank: Number,
 });
 
