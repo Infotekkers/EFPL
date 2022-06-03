@@ -24,7 +24,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       : super(
           TransferState.initial(),
         ) {
-    // Complete
     on<_getUserPlayers>((event, emit) async {
       // Start spinner
       emit(
@@ -42,8 +41,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         (l) => l[0],
         (r) => r,
       );
-
-      print(userTeam);
 
       // sum cost of all user players
       double playerCostSum = 0.0;
@@ -66,7 +63,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       );
     });
 
-    // Complete
     on<_getPlayersInSelectedPosition>((event, emit) async {
       // start spinner
       emit(
@@ -100,7 +96,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       );
     });
 
-    // Complete
     on<_setTransferOutPlayer>((event, emit) {
       emit(
         state.copyWith(
@@ -180,7 +175,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         transfersMade: state.transfersMadeCount - 1 == 0 ? false : true,
       ));
     });
-    // Complete
+
     on<_transferUserPlayer>(
       (event, emit) {
         // start spinner
@@ -190,20 +185,21 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
 
         // find player to move out
         List<UserPlayer> allUserPlayers = state.userTeam.allUserPlayers;
-        allUserPlayers
+        UserPlayer playerToMoveOut = allUserPlayers
             .where(
               (player) => player.playerId == state.transferOutPlayerId,
             )
             .toList()[0];
 
-        int playerToMoveOutMultiplier = 1;
+        int playerToMoveOutMultiplier = playerToMoveOut.multiplier;
+        bool playerToMoveOutCaptainStatus = playerToMoveOut.isCaptain;
+        bool playerToMoveOutViceCaptainStatus = playerToMoveOut.isViceCaptain;
 
         // find index of player to move out
         int indexOfPlayerToTransferOut = 0;
         for (var i = 0; i < allUserPlayers.length; i++) {
           if (allUserPlayers[i].playerId == state.transferOutPlayerId) {
             indexOfPlayerToTransferOut = i;
-            playerToMoveOutMultiplier = allUserPlayers[i].multiplier;
           }
         }
 
@@ -220,8 +216,11 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
             .toList()[0];
 
         // move in player at index
-        playerToTransferIn =
-            playerToTransferIn.copyWith(multiplier: playerToMoveOutMultiplier);
+        playerToTransferIn = playerToTransferIn.copyWith(
+          multiplier: playerToMoveOutMultiplier,
+          isCaptain: playerToMoveOutCaptainStatus,
+          isViceCaptain: playerToMoveOutViceCaptainStatus,
+        );
         allUserPlayers.insert(indexOfPlayerToTransferOut, playerToTransferIn);
 
         // create a map of swaps
@@ -534,7 +533,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
     );
 
     on<_saveUserPlayers>((event, emit) async {
-      print("SAVING @BLOC");
+      print("@BLOC SAVE");
       // get team to save
       // UserTeam teamToSave = state.userTeam;
       // List<UserPlayer> allUserPlayers = teamToSave.allUserPlayers;
@@ -626,6 +625,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       await _iTransferRepository.saveUserPlayers(
         userTeam: state.userTeam,
         gameWeekId: event.gameWeekId,
+        isInitial: event.isSetTeam,
       );
 
       if (state.isInitialSelection == true) {

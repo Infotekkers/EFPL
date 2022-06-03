@@ -44,22 +44,28 @@ class ApiTransferRepository implements ITransferRepository {
   }
 
   @override
-  Future<Either<dynamic, bool>> saveUserPlayers(
-      {required UserTeam userTeam, required int gameWeekId}) async {
+  Future<Either<dynamic, bool>> saveUserPlayers({
+    required UserTeam userTeam,
+    required int gameWeekId,
+    required bool isInitial,
+  }) async {
+    print("@REPO Save");
     // convert user team to json
     final userTeamPlayers = {};
     for (var userPlayer in userTeam.allUserPlayers) {
       {
         final playerJson =
             UserPlayerDTO.fromDomain(userPlayer: userPlayer).toJson();
+
         final playerInfoJson = {
           "playerId": playerJson['playerId'],
           "eplTeamId": playerJson["eplTeamId"],
           "price": playerJson['currentPrice'],
-          "multiplier": 0,
-          "isCaptain": false,
-          "isViceCaptain": false
+          "multiplier": playerJson['multiplier'],
+          "isCaptain": playerJson['isCaptain'],
+          "isViceCaptain": playerJson['isViceCaptain'],
         };
+        print(playerInfoJson);
 
         // add to main json
         userTeamPlayers[playerJson['playerId']] = playerInfoJson;
@@ -67,7 +73,7 @@ class ApiTransferRepository implements ITransferRepository {
     }
 
     final userTeamJson = {
-      "userId": "627a7798bed9e567269bb8a9",
+      "isInitial": isInitial,
       "incomingTeam": {
         "activeChip": userTeam.activeChip,
         "gameweekId": gameWeekId,
@@ -77,7 +83,9 @@ class ApiTransferRepository implements ITransferRepository {
 
     //
     // if (await utility.hasInternetConnection()) {
-    await _transferRemoteDataProvider.saveUserPlayers(userTeam: userTeamJson);
+    await _transferRemoteDataProvider.saveUserPlayers(
+      userTeam: userTeamJson,
+    );
     return right(true);
     // } else {
     //   _transferLocalDataProvider.saveUserTeamChanges(

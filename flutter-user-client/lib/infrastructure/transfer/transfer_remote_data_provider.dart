@@ -581,15 +581,20 @@ class TransferRemoteDataProvider {
     }
   }
 
-  Future<Either<dynamic, bool>> saveUserPlayers({required Map userTeam}) async {
+  Future<Either<dynamic, bool>> saveUserPlayers({
+    required Map userTeam,
+  }) async {
     try {
       var apiResponse =
           await instance.client.patch(Uri.parse('$_baseURL/user/team'), body: {
         "data": jsonEncode(userTeam),
       }).timeout(
-        Duration(seconds: ConstantValues().httpTimeOutDuration),
+        Duration(
+          seconds: ConstantValues().httpTimeOutDuration,
+        ),
       );
 
+      print(apiResponse.statusCode);
       // success
       if (apiResponse.statusCode == 201) {
         getIt<TransferBloc>().add(

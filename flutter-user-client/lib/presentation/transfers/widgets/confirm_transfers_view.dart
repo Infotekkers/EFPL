@@ -342,6 +342,7 @@ Widget _buildMainView(
                           (l) => 1,
                           (r) => r,
                         ),
+                        isSetTeam: state.isInitialSelection,
                       ),
                     );
 
@@ -423,7 +424,6 @@ List formatSwappedPlayers(TransferState state, List allPlayers) {
     String playerToTransferInId = swappedPair.values.toList()[0];
 
     // get player
-    print(allPlayers);
     dynamic playerToTransferOut = allPlayers
         .where(
             (player) => player['playerId'].toString() == playerToTransferOutId)

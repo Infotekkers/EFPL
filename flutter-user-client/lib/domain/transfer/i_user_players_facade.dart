@@ -10,5 +10,7 @@ abstract class ITransferRepository {
   });
 
   Future<Either<dynamic, bool>> saveUserPlayers(
-      {required UserTeam userTeam, required int gameWeekId});
+      {required UserTeam userTeam,
+      required int gameWeekId,
+      required bool isInitial});
 }
