@@ -52,7 +52,9 @@ class TransfersView extends StatelessWidget {
                           valueToSet: true,
                         ),
                       );
-                      Navigator.popAndPushNamed(context, "/transfer/initial");
+
+                      Navigator.pop(context);
+                      Navigator.pushNamed(context, "/transfer/initial");
                     },
 
                     incompleteTeam: (_) {

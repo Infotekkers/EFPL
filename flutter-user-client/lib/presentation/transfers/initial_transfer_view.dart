@@ -242,6 +242,7 @@ class InitialTransferPage extends StatelessWidget {
                                               );
                                       return InkWell(
                                         onTap: () async {
+                                          // set transfer out player
                                           _transferBloc.add(
                                             TransferEvent.setTransferOutPlayer(
                                               transferOutPlayerId: "",
@@ -250,16 +251,33 @@ class InitialTransferPage extends StatelessWidget {
                                             ),
                                           );
 
+                                          // get all players in position
                                           _transferBloc.add(
                                             const TransferEvent
                                                 .getPlayersInSelectedPosition(),
                                           );
-
                                           var efplCache = await Hive.openBox(
                                               'transferCache');
                                           List? allTeams =
                                               efplCache.get("allTeams");
 
+                                          // if player already selected
+                                          if (allFormattedPlayers[0][index]
+                                                  .playerId !=
+                                              "") {
+                                            // remove current player
+                                            _transferBloc.add(
+                                              TransferEvent
+                                                  .transferOutUserPlayerInitial(
+                                                transferOutPlayerId:
+                                                    allFormattedPlayers[0]
+                                                            [index]
+                                                        .playerId,
+                                              ),
+                                            );
+                                          }
+
+                                          // go to transfer page
                                           Navigator.pushNamed(
                                             context,
                                             "/transfer",
@@ -270,7 +288,7 @@ class InitialTransferPage extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           width: 90,
                                           height: 80,
                                           child: PlayerWidget(
@@ -378,6 +396,22 @@ class InitialTransferPage extends StatelessWidget {
                                           List? allTeams =
                                               efplCache.get("allTeams");
 
+                                          // if player already selected
+                                          if (allFormattedPlayers[1][index]
+                                                  .playerId !=
+                                              "") {
+                                            // remove current player
+                                            _transferBloc.add(
+                                              TransferEvent
+                                                  .transferOutUserPlayerInitial(
+                                                transferOutPlayerId:
+                                                    allFormattedPlayers[1]
+                                                            [index]
+                                                        .playerId,
+                                              ),
+                                            );
+                                          }
+
                                           Navigator.pushNamed(
                                             context,
                                             "/transfer",
@@ -388,7 +422,7 @@ class InitialTransferPage extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           width: 80,
                                           child: PlayerWidget(
                                             playerName: allFormattedPlayers[1]
@@ -494,6 +528,22 @@ class InitialTransferPage extends StatelessWidget {
                                               'transferCache');
                                           List? allTeams =
                                               efplCache.get("allTeams");
+
+                                          // if player already selected
+                                          if (allFormattedPlayers[2][index]
+                                                  .playerId !=
+                                              "") {
+                                            // remove current player
+                                            _transferBloc.add(
+                                              TransferEvent
+                                                  .transferOutUserPlayerInitial(
+                                                transferOutPlayerId:
+                                                    allFormattedPlayers[2]
+                                                            [index]
+                                                        .playerId,
+                                              ),
+                                            );
+                                          }
 
                                           Navigator.pushNamed(
                                             context,
@@ -612,6 +662,22 @@ class InitialTransferPage extends StatelessWidget {
                                           List? allTeams =
                                               efplCache.get("allTeams");
 
+                                          // if player already selected
+                                          if (allFormattedPlayers[3][index]
+                                                  .playerId !=
+                                              "") {
+                                            // remove current player
+                                            _transferBloc.add(
+                                              TransferEvent
+                                                  .transferOutUserPlayerInitial(
+                                                transferOutPlayerId:
+                                                    allFormattedPlayers[3]
+                                                            [index]
+                                                        .playerId,
+                                              ),
+                                            );
+                                          }
+
                                           Navigator.pushNamed(
                                             context,
                                             "/transfer",
@@ -622,7 +688,7 @@ class InitialTransferPage extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           width: 80,
                                           child: PlayerWidget(
                                             playerName: allFormattedPlayers[3]

@@ -47,7 +47,7 @@ const register = asyncHandler(async (req, res) => {
     },
     secretKey,
     {
-      expiresIn: "1h",
+      expiresIn: "8h",
     }
   );
 
@@ -85,7 +85,7 @@ const login = asyncHandler(async (req, res) => {
         secretKey,
         {
           // TODO:Update
-          expiresIn: "4h",
+          expiresIn: "8h",
         }
       );
 

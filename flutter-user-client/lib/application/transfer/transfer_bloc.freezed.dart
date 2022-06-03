@@ -47,6 +47,13 @@ class _$TransferEventTearOff {
     );
   }
 
+  _transferOutUserPlayerInitial transferOutUserPlayerInitial(
+      {required String transferOutPlayerId}) {
+    return _transferOutUserPlayerInitial(
+      transferOutPlayerId: transferOutPlayerId,
+    );
+  }
+
   _cancelTransfer cancelTransfer() {
     return const _cancelTransfer();
   }
@@ -127,6 +134,8 @@ mixin _$TransferEvent {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -148,6 +157,7 @@ mixin _$TransferEvent {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -169,6 +179,7 @@ mixin _$TransferEvent {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -192,6 +203,8 @@ mixin _$TransferEvent {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -215,6 +228,8 @@ mixin _$TransferEvent {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -238,6 +253,8 @@ mixin _$TransferEvent {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -321,6 +338,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -345,6 +364,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -369,6 +389,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -398,6 +419,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -424,6 +447,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -450,6 +475,8 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -562,6 +589,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -586,6 +615,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -610,6 +640,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -639,6 +670,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -665,6 +698,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -691,6 +726,8 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -777,6 +814,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -801,6 +840,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -825,6 +865,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -854,6 +895,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -880,6 +923,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -906,6 +951,8 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -1006,6 +1053,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -1030,6 +1079,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -1054,6 +1104,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -1083,6 +1134,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -1109,6 +1162,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -1135,6 +1190,8 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -1243,6 +1300,8 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -1267,6 +1326,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -1291,6 +1351,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -1320,6 +1381,8 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -1346,6 +1409,8 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -1372,6 +1437,8 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -1400,6 +1467,254 @@ abstract class _transferUserPlayerInitial implements TransferEvent {
   String get transferInPlayerId;
   @JsonKey(ignore: true)
   _$transferUserPlayerInitialCopyWith<_transferUserPlayerInitial>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$transferOutUserPlayerInitialCopyWith<$Res> {
+  factory _$transferOutUserPlayerInitialCopyWith(
+          _transferOutUserPlayerInitial value,
+          $Res Function(_transferOutUserPlayerInitial) then) =
+      __$transferOutUserPlayerInitialCopyWithImpl<$Res>;
+  $Res call({String transferOutPlayerId});
+}
+
+/// @nodoc
+class __$transferOutUserPlayerInitialCopyWithImpl<$Res>
+    extends _$TransferEventCopyWithImpl<$Res>
+    implements _$transferOutUserPlayerInitialCopyWith<$Res> {
+  __$transferOutUserPlayerInitialCopyWithImpl(
+      _transferOutUserPlayerInitial _value,
+      $Res Function(_transferOutUserPlayerInitial) _then)
+      : super(_value, (v) => _then(v as _transferOutUserPlayerInitial));
+
+  @override
+  _transferOutUserPlayerInitial get _value =>
+      super._value as _transferOutUserPlayerInitial;
+
+  @override
+  $Res call({
+    Object? transferOutPlayerId = freezed,
+  }) {
+    return _then(_transferOutUserPlayerInitial(
+      transferOutPlayerId: transferOutPlayerId == freezed
+          ? _value.transferOutPlayerId
+          : transferOutPlayerId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_transferOutUserPlayerInitial implements _transferOutUserPlayerInitial {
+  const _$_transferOutUserPlayerInitial({required this.transferOutPlayerId});
+
+  @override
+  final String transferOutPlayerId;
+
+  @override
+  String toString() {
+    return 'TransferEvent.transferOutUserPlayerInitial(transferOutPlayerId: $transferOutPlayerId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _transferOutUserPlayerInitial &&
+            const DeepCollectionEquality()
+                .equals(other.transferOutPlayerId, transferOutPlayerId));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(transferOutPlayerId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$transferOutUserPlayerInitialCopyWith<_transferOutUserPlayerInitial>
+      get copyWith => __$transferOutUserPlayerInitialCopyWithImpl<
+          _transferOutUserPlayerInitial>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getUserPlayers,
+    required TResult Function(
+            String transferOutPlayerId, PlayerPosition playerPosition)
+        setTransferOutPlayer,
+    required TResult Function() getPlayersInSelectedPosition,
+    required TResult Function(String transferInPlayerId) transferUserPlayer,
+    required TResult Function(String transferInPlayerId)
+        transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
+    required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
+    required TResult Function(int gameWeekId) saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
+    required TResult Function(String chipName) setChip,
+    required TResult Function(BuildContext context) validateTeam,
+    required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
+  }) {
+    return transferOutUserPlayerInitial(transferOutPlayerId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function(int gameWeekId)? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
+    TResult Function(String chipName)? setChip,
+    TResult Function(BuildContext context)? validateTeam,
+    TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
+  }) {
+    return transferOutUserPlayerInitial?.call(transferOutPlayerId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function(int gameWeekId)? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
+    TResult Function(String chipName)? setChip,
+    TResult Function(BuildContext context)? validateTeam,
+    TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
+    required TResult orElse(),
+  }) {
+    if (transferOutUserPlayerInitial != null) {
+      return transferOutUserPlayerInitial(transferOutPlayerId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_getUserPlayers value) getUserPlayers,
+    required TResult Function(_setTransferOutPlayer value) setTransferOutPlayer,
+    required TResult Function(_getPlayersInSelectedPosition value)
+        getPlayersInSelectedPosition,
+    required TResult Function(_transferUserPlayer value) transferUserPlayer,
+    required TResult Function(_transferUserPlayerInitial value)
+        transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
+    required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
+    required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
+    required TResult Function(_setChip value) setChip,
+    required TResult Function(_validateTeam value) validateTeam,
+    required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
+  }) {
+    return transferOutUserPlayerInitial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_transferUserPlayerInitial value)?
+        transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
+    TResult Function(_setChip value)? setChip,
+    TResult Function(_validateTeam value)? validateTeam,
+    TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
+  }) {
+    return transferOutUserPlayerInitial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_transferUserPlayerInitial value)?
+        transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
+    TResult Function(_setChip value)? setChip,
+    TResult Function(_validateTeam value)? validateTeam,
+    TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
+    required TResult orElse(),
+  }) {
+    if (transferOutUserPlayerInitial != null) {
+      return transferOutUserPlayerInitial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _transferOutUserPlayerInitial implements TransferEvent {
+  const factory _transferOutUserPlayerInitial(
+      {required String transferOutPlayerId}) = _$_transferOutUserPlayerInitial;
+
+  String get transferOutPlayerId;
+  @JsonKey(ignore: true)
+  _$transferOutUserPlayerInitialCopyWith<_transferOutUserPlayerInitial>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1452,6 +1767,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -1476,6 +1793,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -1500,6 +1818,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -1529,6 +1848,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -1555,6 +1876,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -1581,6 +1904,8 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -1680,6 +2005,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -1704,6 +2031,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -1728,6 +2056,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -1757,6 +2086,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -1783,6 +2114,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -1809,6 +2142,8 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -1914,6 +2249,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -1938,6 +2275,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -1962,6 +2300,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -1991,6 +2330,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -2017,6 +2358,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -2043,6 +2386,8 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -2156,6 +2501,8 @@ class _$_setFilter implements _setFilter {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -2180,6 +2527,7 @@ class _$_setFilter implements _setFilter {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -2204,6 +2552,7 @@ class _$_setFilter implements _setFilter {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -2233,6 +2582,8 @@ class _$_setFilter implements _setFilter {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -2259,6 +2610,8 @@ class _$_setFilter implements _setFilter {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -2285,6 +2638,8 @@ class _$_setFilter implements _setFilter {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -2390,6 +2745,8 @@ class _$_setSortFilter implements _setSortFilter {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -2414,6 +2771,7 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -2438,6 +2796,7 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -2467,6 +2826,8 @@ class _$_setSortFilter implements _setSortFilter {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -2493,6 +2854,8 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -2519,6 +2882,8 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -2632,6 +2997,8 @@ class _$_setPriceFilter implements _setPriceFilter {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -2656,6 +3023,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -2680,6 +3048,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -2709,6 +3078,8 @@ class _$_setPriceFilter implements _setPriceFilter {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -2735,6 +3106,8 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -2761,6 +3134,8 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -2842,6 +3217,8 @@ class _$_filterByPrice implements _filterByPrice {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -2866,6 +3243,7 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -2890,6 +3268,7 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -2919,6 +3298,8 @@ class _$_filterByPrice implements _filterByPrice {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -2945,6 +3326,8 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -2971,6 +3354,8 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -3066,6 +3451,8 @@ class _$_setChip implements _setChip {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -3090,6 +3477,7 @@ class _$_setChip implements _setChip {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -3114,6 +3502,7 @@ class _$_setChip implements _setChip {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -3143,6 +3532,8 @@ class _$_setChip implements _setChip {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -3169,6 +3560,8 @@ class _$_setChip implements _setChip {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -3195,6 +3588,8 @@ class _$_setChip implements _setChip {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -3298,6 +3693,8 @@ class _$_validateTeam implements _validateTeam {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -3322,6 +3719,7 @@ class _$_validateTeam implements _validateTeam {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -3346,6 +3744,7 @@ class _$_validateTeam implements _validateTeam {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -3375,6 +3774,8 @@ class _$_validateTeam implements _validateTeam {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -3401,6 +3802,8 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -3427,6 +3830,8 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -3533,6 +3938,8 @@ class _$_setInitialSelection implements _setInitialSelection {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -3557,6 +3964,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -3581,6 +3989,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -3610,6 +4019,8 @@ class _$_setInitialSelection implements _setInitialSelection {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -3636,6 +4047,8 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -3662,6 +4075,8 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -3744,6 +4159,8 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     required TResult Function(String transferInPlayerId) transferUserPlayer,
     required TResult Function(String transferInPlayerId)
         transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
     required TResult Function() cancelTransfer,
     required TResult Function(String playerToCancelId) cancelOneTransfer,
     required TResult Function(int gameWeekId) saveUserPlayers,
@@ -3768,6 +4185,7 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -3792,6 +4210,7 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     TResult Function()? getPlayersInSelectedPosition,
     TResult Function(String transferInPlayerId)? transferUserPlayer,
     TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
     TResult Function()? cancelTransfer,
     TResult Function(String playerToCancelId)? cancelOneTransfer,
     TResult Function(int gameWeekId)? saveUserPlayers,
@@ -3821,6 +4240,8 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     required TResult Function(_transferUserPlayer value) transferUserPlayer,
     required TResult Function(_transferUserPlayerInitial value)
         transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
     required TResult Function(_cancelTransfer value) cancelTransfer,
     required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
     required TResult Function(_saveUserPlayers value) saveUserPlayers,
@@ -3847,6 +4268,8 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,
@@ -3873,6 +4296,8 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     TResult Function(_transferUserPlayer value)? transferUserPlayer,
     TResult Function(_transferUserPlayerInitial value)?
         transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
     TResult Function(_cancelTransfer value)? cancelTransfer,
     TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
     TResult Function(_saveUserPlayers value)? saveUserPlayers,

@@ -22,6 +22,9 @@ class TransferEvent with _$TransferEvent {
   const factory TransferEvent.transferUserPlayerInitial(
       {required String transferInPlayerId}) = _transferUserPlayerInitial;
 
+  const factory TransferEvent.transferOutUserPlayerInitial(
+      {required String transferOutPlayerId}) = _transferOutUserPlayerInitial;
+
 // Cancel Transfer
   const factory TransferEvent.cancelTransfer() = _cancelTransfer;
 

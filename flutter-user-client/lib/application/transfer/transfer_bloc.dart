@@ -164,6 +164,20 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       );
     });
 
+    on<_transferOutUserPlayerInitial>((event, emit) async {
+      //  remove player
+      List<UserPlayer> allUserPlayers = state.userTeam.allUserPlayers;
+
+      allUserPlayers.removeWhere(
+        (player) => player.playerId == event.transferOutPlayerId,
+      );
+
+      // emit state
+      emit(state.copyWith(
+        transfersMadeCount: state.transfersMadeCount - 1,
+        transfersMade: state.transfersMadeCount - 1 == 0 ? false : true,
+      ));
+    });
     // Complete
     on<_transferUserPlayer>(
       (event, emit) {
@@ -1045,7 +1059,6 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
     });
 
     on<_cancelTransferFromConfirm>((event, emit) async {
-      print("Cleaning");
       emit(
         state.copyWith(
           transfersMade: false,
