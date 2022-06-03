@@ -7,6 +7,8 @@ const TeamModel = require("../models/Teams");
 const Player = require("../models/Player");
 const GameWeek = require("../models/GameWeek");
 
+const Fixture = require("../models/Fixtures");
+
 const MINUTE_COUNTERS = {};
 
 const postFixture = asyncHandler(async function (req, res) {
@@ -561,13 +563,38 @@ const postponeFixture = asyncHandler(async function (req, res) {
 const updateFixture = asyncHandler(async function (req, res) {
   const { gameweekId, schedule, status, homeTeam, awayTeam } = req.body;
 
+  const scheduleCopy = schedule;
+
+  // get starting date
+  const formattedSchedule = scheduleCopy.split("T")[0] + "T00:00:00.000+00:00";
+
   const matchId = req.params.matchId;
 
   const match = await FixtureModel.findOne({ matchId });
 
+  const nextGameWeekFixture = await FixtureModel.findOne({
+    schedule: {
+      $gt: new Date(formattedSchedule),
+    },
+  }).sort("schedule");
+
+  let newGameWeekId = 1;
+
+  // no match found
+  if (!nextGameWeekFixture) {
+    newGameWeekId = 30;
+  }
+
+  //
+  else {
+    newGameWeekId = nextGameWeekFixture.gameweekId;
+  }
+
+  // console.log(startOfFixtureDay);
+
   if (match) {
     if (match.status === "scheduled") {
-      match.gameweekId = gameweekId ?? match.gameweekId;
+      match.gameweekId = newGameWeekId;
       match.matchId = matchId ?? match.matchId;
       match.schedule = schedule ?? match.schedule;
       match.status = status ?? match.status;
@@ -676,7 +703,27 @@ const updateScore = asyncHandler(async (req, res) => {
   }
 });
 
+// get active gameweek to auto show fixtures in that gw initially
+const getActiveGameWeek = asyncHandler(async function (req, res) {
+  const activeGw = await GameWeek.find({ status: "active" }).select(
+    "-_id,-__v"
+  );
+
+  // if active gw exist
+  if (activeGw.length > 0) {
+    res.status(200).send(activeGw[activeGw.length - 1]);
+  }
+  // if no active gw
+  else {
+    res.status(200).send({
+      gameWeekNumber: 1,
+    });
+  }
+});
+
 const getAllFixtures = asyncHandler(async function (req, res) {
+  // get required
+  // send active fixture
   const matches = await FixtureModel.find().select("-__v");
 
   res.status(200).send(matches);
@@ -804,4 +851,5 @@ module.exports = {
   // New
   getAllFixturesOfGameWeek,
   getFixtureDetail,
+  getActiveGameWeek,
 };

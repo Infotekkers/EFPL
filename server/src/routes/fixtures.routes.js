@@ -35,4 +35,6 @@ router.get("/gw/:gameWeekId/:lang", fixtureController.getAllFixturesOfGameWeek);
 
 router.get("/gw/detail/:matchId", fixtureController.getFixtureDetail);
 
+router.get("/gwf/check/activeGw", fixtureController.getActiveGameWeek);
+
 module.exports = router;

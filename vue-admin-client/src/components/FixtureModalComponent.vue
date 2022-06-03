@@ -114,8 +114,8 @@
                     ref="hour"
                     :value="fixtureHours"
                   >
-                    <option v-for="n in 24" :key="n" :value="n">
-                      {{ n }}
+                    <option v-for="n in 9" :key="n + 9" :value="n + 9">
+                      {{ n + 9 }}
                     </option>
                   </select>
                 </div>
@@ -737,7 +737,16 @@ export default {
           })`,
         });
       } else {
-        const schedule = `${this.$refs.date.value}T${this.$refs.hour.value}:${this.$refs.minutes.value}`;
+        const dateValue = this.$refs.date.value;
+        let hourValue = "";
+        if (this.$refs.hour.value > 13) {
+          hourValue = this.$refs.hour.value - 3;
+          this.$refs.hour.value > 13;
+        } else {
+          hourValue = "0" + (this.$refs.hour.value - 3).toString();
+        }
+
+        const schedule = `${dateValue}T${hourValue}:${this.$refs.minutes.value}:00.000+00:00`;
 
         const newFixture = {
           gameweekId: this.currentGameWeek,
