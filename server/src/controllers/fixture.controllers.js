@@ -7,8 +7,6 @@ const TeamModel = require("../models/Teams");
 const Player = require("../models/Player");
 const GameWeek = require("../models/GameWeek");
 
-const Fixture = require("../models/Fixtures");
-
 const MINUTE_COUNTERS = {};
 
 const postFixture = asyncHandler(async function (req, res) {
@@ -561,7 +559,7 @@ const postponeFixture = asyncHandler(async function (req, res) {
 });
 
 const updateFixture = asyncHandler(async function (req, res) {
-  const { gameweekId, schedule, status, homeTeam, awayTeam } = req.body;
+  const { schedule, status, homeTeam, awayTeam } = req.body;
 
   const scheduleCopy = schedule;
 
