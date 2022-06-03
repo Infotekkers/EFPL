@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/core/core_value_objects.dart';
 import 'package:efpl/domain/core/value_failures.dart';
 import 'package:efpl/domain/epl_stats/value_validators.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopScorers extends ValueObject {
   @override

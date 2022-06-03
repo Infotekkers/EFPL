@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/auth/auth_failure.dart';

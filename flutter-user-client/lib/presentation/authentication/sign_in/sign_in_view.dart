@@ -1,18 +1,18 @@
 import 'package:efpl/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/authentication/sign_in/widgets/sign_in_form.dart';
+import 'package:efpl/presentation/colors.dart';
+import 'package:efpl/presentation/core/auth_locale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/util/util_bloc.dart';
-import '../../../injectable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final UtilBloc _utilBloc = getIt<UtilBloc>();
-    _utilBloc.add(const UtilEvent.setDefaultLocale());
     return Scaffold(
       body: BlocProvider(
         create: (context) => getIt<SignInFormBloc>(),
@@ -26,7 +26,7 @@ class SignInPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.6,
                 child: Image.asset(
-                  'assets/img/King Of Kings 05 - 16x9.jpg',
+                  'assets/images/main-bg.jpg',
                   fit: BoxFit.fill,
                 ),
               ),
@@ -43,25 +43,27 @@ class SignInPage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
-                            "A new way to enjoy the EPL.",
-                            style: TextStyle(
-                              height: 1.15,
-                              fontSize: 26,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                            AppLocalizations.of(context)!.appSloganMain,
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      height: 1.15,
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 26,
                           ),
                           Text(
-                            "Join our community",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
+                            AppLocalizations.of(context)!.appSloganSub,
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                    ),
                           ),
                         ],
                       ),
@@ -88,24 +90,33 @@ class SignInPage extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          "Sign In",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                          ),
+                          AppLocalizations.of(context)!.signIn,
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: ConstantColors.primary_900,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.5,
+                                    fontSize: 20,
+                                  ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
-                        SignInForm(),
+                        const SignInForm(),
                       ],
                     ),
                   ),
                 ),
               ),
+
+              // LOCALE BUTTON
+              const Positioned(
+                right: 10,
+                bottom: 10,
+                child: AuthLocaleWidget(),
+              )
             ],
           ),
         ),

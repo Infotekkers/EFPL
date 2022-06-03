@@ -1,9 +1,11 @@
 import 'package:efpl/application/auth/register_form/register_form_bloc.dart';
-import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/services/snack_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -88,15 +90,19 @@ class RegisterForm extends StatelessWidget {
               // Email Input
               TextFormField(
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.email),
-                  labelText: 'Email',
-                  focusedBorder: OutlineInputBorder(
+                  labelText: AppLocalizations.of(context)!.email,
+                  labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        color: ConstantColors.primary_900.withOpacity(0.55),
+                      ),
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: ConstantColors.primary_900,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     vertical: 0.0,
                     horizontal: 15.0,
                   ),
@@ -120,15 +126,19 @@ class RegisterForm extends StatelessWidget {
               // Username input
               TextFormField(
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.person),
-                  labelText: 'User Name',
-                  focusedBorder: OutlineInputBorder(
+                  labelText: AppLocalizations.of(context)!.userName,
+                  labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        color: ConstantColors.primary_900.withOpacity(0.55),
+                      ),
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: ConstantColors.primary_900,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     vertical: 0.0,
                     horizontal: 15.0,
                   ),
@@ -153,15 +163,19 @@ class RegisterForm extends StatelessWidget {
               // Team Name Input
               TextFormField(
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.sports_soccer),
-                  labelText: 'Team Name',
-                  focusedBorder: OutlineInputBorder(
+                  labelText: AppLocalizations.of(context)!.teamName,
+                  labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        color: ConstantColors.primary_900.withOpacity(0.55),
+                      ),
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: ConstantColors.primary_900,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     vertical: 0.0,
                     horizontal: 15.0,
                   ),
@@ -186,15 +200,19 @@ class RegisterForm extends StatelessWidget {
               // Password Input
               TextFormField(
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.lock),
-                  labelText: 'Password',
-                  focusedBorder: OutlineInputBorder(
+                  labelText: AppLocalizations.of(context)!.password,
+                  labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        color: ConstantColors.primary_900.withOpacity(0.55),
+                      ),
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: ConstantColors.primary_900,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     vertical: 0.0,
                     horizontal: 15.0,
                   ),
@@ -220,15 +238,19 @@ class RegisterForm extends StatelessWidget {
               // Confirm Password
               TextFormField(
                 // keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.lock),
-                  labelText: 'Confirm Password',
-                  focusedBorder: OutlineInputBorder(
+                  labelText: AppLocalizations.of(context)!.confirmPassword,
+                  labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        color: ConstantColors.primary_900.withOpacity(0.55),
+                      ),
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: ConstantColors.primary_900,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     vertical: 0.0,
                     horizontal: 15.0,
                   ),
@@ -277,7 +299,11 @@ class RegisterForm extends StatelessWidget {
                   "Bahir Dar Kenema S.C"
                 ].map((String value) {
                   return DropdownMenuItem<String>(
-                      child: Text(value), value: value);
+                      child: Text(
+                        value,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      value: value);
                 }).toList(),
                 onChanged: (value) =>
                     BlocProvider.of<RegisterFormBloc>(context).add(
@@ -299,14 +325,18 @@ class RegisterForm extends StatelessWidget {
                     "United States Of America",
                   ].map((String value) {
                     return DropdownMenuItem<String>(
-                        child: Text(value), value: value);
+                        child: Text(
+                          value,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        value: value);
                   }).toList(),
                   onChanged: (value) =>
                       BlocProvider.of<RegisterFormBloc>(context)
                           .add(RegisterFormEvent.countryChanged(value!))),
 
               const SizedBox(
-                height: 15,
+                height: 24,
               ),
 
               // Register Button
@@ -320,7 +350,7 @@ class RegisterForm extends StatelessWidget {
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 40,
+                  height: 42,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(5),
@@ -329,16 +359,17 @@ class RegisterForm extends StatelessWidget {
                       bottomLeft: Radius.circular(5),
                     ),
                     // color: Colors.amber,
-                    color: Colors.blue,
+                    color: ConstantColors.primary_900,
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.25,
-                      ),
+                      AppLocalizations.of(context)!.signUp,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.25,
+                            fontSize: 15,
+                          ),
                     ),
                   ),
                 ),
@@ -360,21 +391,25 @@ class RegisterForm extends StatelessWidget {
                       children: [
                         // Normal text
                         TextSpan(
-                          text: "Already have an account?",
-                          style: TextStyle(
-                            color: Colors.grey.withOpacity(0.85),
-                            fontWeight: FontWeight.w700,
-                          ),
+                          text: AppLocalizations.of(context)!
+                                  .alreadyHaveAnAccount +
+                              " ?",
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: Colors.grey.withOpacity(0.85),
+                                    fontWeight: FontWeight.w700,
+                                  ),
                         ),
 
                         // Redirect
-                        const TextSpan(
-                          text: " Sign In",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
+                        TextSpan(
+                          text: " " + AppLocalizations.of(context)!.signIn,
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
                         )
                       ],
                     ),

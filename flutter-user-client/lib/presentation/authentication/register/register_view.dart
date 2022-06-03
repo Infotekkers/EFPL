@@ -1,17 +1,18 @@
+import 'package:efpl/application/auth/register_form/register_form_bloc.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/authentication/register/widgets/register_form.dart';
+import 'package:efpl/presentation/colors.dart';
+import 'package:efpl/presentation/core/auth_locale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../application/auth/register_form/register_form_bloc.dart';
-import '../../../application/util/util_bloc.dart';
-import '../../../injectable.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final UtilBloc _utilBloc = getIt<UtilBloc>();
-    _utilBloc.add(const UtilEvent.setDefaultLocale());
     return Scaffold(
       body: BlocProvider(
         create: (context) => getIt<RegisterFormBloc>(),
@@ -21,11 +22,11 @@ class RegisterPage extends StatelessWidget {
           child: Stack(
             children: [
               // Top Section
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.25,
                 child: Image.asset(
-                  'assets/img/King Of Kings 05 - 16x9.jpg',
+                  'assets/images/main-bg.jpg',
                   fit: BoxFit.fill,
                 ),
               ),
@@ -48,23 +49,32 @@ class RegisterPage extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          "Sign Up",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                          ),
+                          AppLocalizations.of(context)!.signUp,
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: ConstantColors.primary_900,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.5,
+                                    fontSize: 20,
+                                  ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
-                        RegisterForm()
+                        const RegisterForm()
                       ],
                     ),
                   ),
                 ),
+              ),
+
+              // LOCALE BUTTON
+              const Positioned(
+                right: 10,
+                bottom: 10,
+                child: AuthLocaleWidget(),
               )
             ],
           ),

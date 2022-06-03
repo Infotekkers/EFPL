@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 
 import 'package:efpl/domain/transfer/i_user_players_facade.dart';
-import 'package:efpl/domain/transfer/transfer_failures.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';

@@ -1,12 +1,8 @@
-import 'package:efpl/application/fixture/fixture_bloc.dart';
-import 'package:efpl/application/points/points_bloc.dart';
-import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/authentication/register/register_view.dart';
 import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
 import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
-import 'package:efpl/application/epl_stats/epl_stats_bloc.dart';
 import 'package:efpl/presentation/authentication/splash_view.dart';
 import 'package:efpl/presentation/core/main_tab_view.dart';
 import 'package:efpl/presentation/player/player_view.dart';
@@ -17,7 +13,6 @@ import 'package:efpl/presentation/transfers/widgets/confirm_transfers_view.dart'
 import 'package:efpl/presentation/transfers/widgets/transfer_list_view.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
   //

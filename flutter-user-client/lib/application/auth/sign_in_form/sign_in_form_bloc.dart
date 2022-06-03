@@ -6,7 +6,6 @@ import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/domain/auth/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 part 'sign_in_form_event.dart';
 part 'sign_in_form_state.dart';

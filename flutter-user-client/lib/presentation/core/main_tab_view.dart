@@ -9,7 +9,6 @@ import 'package:efpl/presentation/stats/epl_stats_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
 import 'package:efpl/presentation/transfers/transfers_view_main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -26,11 +25,12 @@ class MainTabView extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              const DrawerHeader(
+              DrawerHeader(
                 decoration: BoxDecoration(
-                  color: ConstantColors.primary_800,
+                  // color: ConstantColors.primary_800,
+                  border: Border.all(color: Colors.white, width: 0.0),
                 ),
-                child: Center(child: Text('Drawer Header')),
+                child: const Center(child: Text('Drawer Header')),
               ),
               ListTile(
                 title: const Text('EPL Table'),
@@ -62,9 +62,6 @@ class MainTabView extends StatelessWidget {
           backgroundColor: Colors.blue[50],
           iconTheme: IconThemeData(color: Colors.blue[900]),
           elevation: 0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.blue[50],
-          ),
           bottom: TabBar(
             unselectedLabelColor: const Color.fromARGB(255, 144, 201, 248),
             labelColor: Colors.blue[900],
