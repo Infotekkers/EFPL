@@ -779,30 +779,31 @@ export default {
         });
     },
 
-    async saveScore({ state }, matchId) {
-      let url;
-      let payload;
+    // TODO:Remind got merged with save stats
 
-      url = `/fixtures/update/score/${matchId}`;
-      payload = {
-        score: state.score[matchId],
-      };
-      await axiosInstance
-        .patch(url, payload)
-        .then((res) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "success",
-            notificationMessage: res.data,
-          });
-        })
-        .catch((err) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "error",
-            notificationMessage: err.response.data,
-          });
-        });
+    async saveScore() {
+      //   let url;
+      //   let payload;
+      //   url = `/fixtures/update/score/${matchId}`;
+      //   payload = {
+      //     score: state.score[matchId],
+      //   };
+      //   await axiosInstance
+      //     .patch(url, payload)
+      //     .then((res) => {
+      //       store.dispatch("Global/setNotificationInfo", {
+      //         showNotification: true,
+      //         notificationType: "success",
+      //         notificationMessage: res.data,
+      //       });
+      //     })
+      //     .catch((err) => {
+      //       store.dispatch("Global/setNotificationInfo", {
+      //         showNotification: true,
+      //         notificationType: "error",
+      //         notificationMessage: err.response.data,
+      //       });
+      //     });
     },
   },
 };
