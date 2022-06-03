@@ -67,5 +67,8 @@
   "freeHitAlreadyPlayed": "Free Hit Already Played",
   "playFreeHit": "Play Free Hit",
   "fixturesTranslation": "Fixtures_Translation",
-  "noFixtures": "No Fixtures"
+  "noFixtures": "No Fixtures",
+  "modalTranslations": "modalTranslations",
+  "playerInformation": "Player Information",
+  "upcomingFixtures": "Upcoming Fixtures"
 }

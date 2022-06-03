@@ -68,5 +68,8 @@
   "freeHitAlreadyPlayed": "ነፃ ሂት አስቀድሞ ተጫውቷል",
   "playFreeHit": "ነፃ ምታ ይጫወቱ",
   "fixturesTranslation": "Fixtures_Translation",
-  "noFixtures": "ጨዋታዎች የሉም"
+  "noFixtures": "ጨዋታዎች የሉም",
+  "modalTranslations": "modalTranslations",
+  "playerInformation": "የተጫዋች መረጃ",
+  "upcomingFixtures": "መጪ ጨዋታዎች"
 }

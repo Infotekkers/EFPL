@@ -8,6 +8,8 @@ import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class UserPlayerWidget extends StatelessWidget {
   final UserPlayer currentUserPlayer;
   const UserPlayerWidget({
@@ -105,7 +107,7 @@ void _buildModalSheet(
         child: BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) {
             return Container(
-              height: 235,
+              height: 265,
               padding: const EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 8,
@@ -113,20 +115,40 @@ void _buildModalSheet(
               child: Column(
                 children: [
                   // Player Name
-                  Text(
-                    currentUserPlayer.playerName.value
-                        .fold((l) => '', (r) => r),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Architect",
-                      letterSpacing: 0.25,
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        // Player Name
+                        TextSpan(
+                          text: currentUserPlayer.playerName.value
+                              .fold((l) => '', (r) => r),
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.25,
+                                  ),
+                        ),
+
+                        // Player Team
+                        TextSpan(
+                          text: " ( " +
+                              currentUserPlayer.eplTeamId.value
+                                  .fold((l) => '', (r) => r) +
+                              " )",
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 15,
+                                    letterSpacing: 0.05,
+                                  ),
+                        ),
+                      ],
                     ),
                   ),
 
+                  // Spacer
                   const SizedBox(
-                    height: 10,
+                    height: 16,
                   ),
 
                   // Player Information Button
@@ -135,19 +157,22 @@ void _buildModalSheet(
                       Navigator.of(context).pushNamed("/player",
                           arguments: int.parse(currentUserPlayer.playerId));
                     },
-                    child: Row(
-                      children: [
-                        Container(
-                          child: const Icon(Icons.info),
-                          margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
-                        ),
-                        const Text("Player Information"),
-                      ],
+                    child: SizedBox(
+                      height: 32,
+                      child: Row(
+                        children: [
+                          Container(
+                            child: const Icon(Icons.info),
+                            margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                          ),
+                          Text(AppLocalizations.of(context)!.playerInformation),
+                        ],
+                      ),
                     ),
                   ),
 
                   const SizedBox(
-                    height: 10,
+                    height: 2,
                   ),
 
                   // Transfer
@@ -160,33 +185,35 @@ void _buildModalSheet(
                           : transferPlayer(
                               transferBloc, currentUserPlayer, context);
                     },
-                    child: Row(
-                      children: [
-                        Container(
-                          child: const Icon(Boxicons.bx_transfer),
-                          margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
-                        ),
-                        state.transferredInPlayerIdList
-                                .contains(currentUserPlayer.playerId)
-                            ? const Text("Cancel Transfer")
-                            : const Text("Transfer")
-                      ],
+                    child: SizedBox(
+                      height: 32,
+                      child: Row(
+                        children: [
+                          Container(
+                            child: const Icon(Boxicons.bx_transfer),
+                            margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                          ),
+                          state.transferredInPlayerIdList
+                                  .contains(currentUserPlayer.playerId)
+                              ? const Text("Cancel Transfer")
+                              : const Text("Transfer")
+                        ],
+                      ),
                     ),
                   ),
 
                   const SizedBox(
-                    height: 15,
+                    height: 16,
                   ),
 
-                  const Text(
-                    "Upcoming Fixtures",
+                  Text(
+                    AppLocalizations.of(context)!.upcomingFixtures,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Architect",
-                      letterSpacing: 0.25,
-                    ),
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.25,
+                        ),
                   ),
                   const SizedBox(
                     height: 8,
@@ -205,12 +232,10 @@ void _buildModalSheet(
                       itemCount: 6,
                       itemBuilder: (context, index) {
                         return Container(
-                          width: 40,
-                          height: 28,
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: ConstantColors.primary_900,
-                              width: 0.55,
+                              width: 0.15,
                             ),
                             color: isHomeTeam(
                                       currentUserPlayer.upComingFixtures[index],
