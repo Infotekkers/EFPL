@@ -7,6 +7,7 @@ import 'package:efpl/presentation/fixtures/widgets/fixture_detail_event.dart';
 import 'package:efpl/presentation/fixtures/widgets/fixture_detail_lineup.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
@@ -172,6 +173,9 @@ class FixtureDetailView extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
+              ),
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarColor: Colors.blue[50],
               ),
               backgroundColor: Colors.blue[50],
               foregroundColor: ConstantColors.primary_900,

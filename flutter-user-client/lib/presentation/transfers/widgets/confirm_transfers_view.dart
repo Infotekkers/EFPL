@@ -3,6 +3,7 @@ import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/transfers/widgets/transfer_info_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -52,6 +53,9 @@ PreferredSizeWidget _buildAppBar({required BuildContext context}) {
     automaticallyImplyLeading: false,
     toolbarHeight: 80,
     backgroundColor: Colors.blue[50],
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Colors.blue[50],
+    ),
     foregroundColor: ConstantColors.primary_900,
     title: Text(
       AppLocalizations.of(context)!.confirmTransfers,

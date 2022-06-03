@@ -6,6 +6,7 @@ import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/transfers/widgets/transfer_player_card_widget.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
@@ -205,6 +206,9 @@ PreferredSizeWidget _buildAppBar(
     toolbarHeight: 80,
     backgroundColor: Colors.blue[50],
     foregroundColor: ConstantColors.primary_900,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Colors.blue[50],
+    ),
     title: Container(
       width: MediaQuery.of(context).size.width * 0.85,
       padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
