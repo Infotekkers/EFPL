@@ -10,6 +10,7 @@ const Fixture = require("../models/Fixtures");
 const validateTeam = require("../utils/validators").validateTeam;
 const pointDeductor = require("../utils/helpers").pointDeductor;
 const sumEplPlayerScore = require("../utils/helpers").sumEplPlayerScore;
+const playerInsOutsCounter = require("../utils/helpers").playerInsOutsCounter;
 const secretKey = process.env.JWT_SECRET;
 
 const transporter = nodemailer.createTransport({
@@ -264,6 +265,133 @@ const transfer = asyncHandler(async (req, res) => {
 
     const { isSetTeam } = data;
 
+    // const incomingTeam = {
+    //   activeChip: "",
+    //   gameweekId: 1,
+    //   players: {
+    //     100026: {
+    //       playerId: "100026",
+    //       eplTeamId: "Bahir Dar Kenema S.C",
+    //       price: 5,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100030: {
+    //       playerId: "100030",
+    //       eplTeamId: "Bahir Dar Kenema S.C",
+    //       price: 5.5,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100031: {
+    //       playerId: "100031",
+    //       eplTeamId: "Bahir Dar Kenema S.C",
+    //       price: 5,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100153: {
+    //       playerId: "100153",
+    //       eplTeamId: "Addis Ababa City F.C",
+    //       price: 4.6,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100158: {
+    //       playerId: "100158",
+    //       eplTeamId: "Addis Ababa City F.C",
+    //       price: 4.9,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100159: {
+    //       playerId: "100159",
+    //       eplTeamId: "Addis Ababa City F.C",
+    //       price: 4.7,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100313: {
+    //       playerId: "100313",
+    //       eplTeamId: "Hawassa Kenema S.C",
+    //       price: 4,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100336: {
+    //       playerId: "100336",
+    //       eplTeamId: "Fasil Kenema S.C",
+    //       price: 4,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100338: {
+    //       playerId: "100338",
+    //       eplTeamId: "Fasil Kenema S.C",
+    //       price: 4,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100401: {
+    //       playerId: "100401",
+    //       eplTeamId: "Adama City S.C",
+    //       price: 6,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100402: {
+    //       playerId: "100402",
+    //       eplTeamId: "Adama City S.C",
+    //       price: 6,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100431: {
+    //       playerId: "100431",
+    //       eplTeamId: "Adama City S.C",
+    //       price: 6,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100441: {
+    //       playerId: "100441",
+    //       eplTeamId: "Arba Minch City F.C",
+    //       price: 6,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100453: {
+    //       playerId: "100453",
+    //       eplTeamId: "Arba Minch City F.C",
+    //       price: 6,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //     100455: {
+    //       playerId: "100455",
+    //       eplTeamId: "Arba Minch City F.C",
+    //       price: 6,
+    //       multiplier: 0,
+    //       isCaptain: false,
+    //       isViceCaptain: false,
+    //     },
+    //   },
+    // };
+
     let incomingTeam;
 
     if (!isSetTeam) {
@@ -271,6 +399,8 @@ const transfer = asyncHandler(async (req, res) => {
     } else {
       incomingTeam = data.incomingTeam;
     }
+
+    // console.log(incomingTeam);
 
     // create starter team if none => multiplier == 1
     const incomingPlayers = incomingTeam.players;
@@ -345,6 +475,8 @@ const transfer = asyncHandler(async (req, res) => {
     } else {
       activeGameweek = user.team[activeGameweek - 2];
     }
+
+    await playerInsOutsCounter(activeTeam, incomingTeam);
 
     if (user.team.length > 0) {
       const [isTeamValid, errorType] = await validateTeam(
@@ -454,11 +586,13 @@ const transfer = asyncHandler(async (req, res) => {
 
         updatedUserTeam.push(currentTeam);
       }
+      console.log("Here");
       await User.findByIdAndUpdate(userId, { team: updatedUserTeam });
-      res.status(201).json({ Message: "Me" });
+      res.status(201).json({ Message: "Team Saved" });
     }
   } catch (err) {
     console.log(err);
+    res.status(422).send();
   }
 });
 
@@ -589,6 +723,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
           maxBudget: user.maxBudget,
           gameWeekDeadline: currentGameWeek.startTimestamp,
         };
+        // console.log(finalFormat);
         res.status(200).send(finalFormat);
       }
     }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/transfer/transfer_failures.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
@@ -590,7 +591,10 @@ class TransferRemoteDataProvider {
       );
 
       // success
-      if (apiResponse.statusCode == 200) {
+      if (apiResponse.statusCode == 201) {
+        getIt<TransferBloc>().add(
+          const TransferEvent.getUserPlayers(),
+        );
         return right(true);
       }
       // token issue

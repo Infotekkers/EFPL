@@ -5,6 +5,7 @@ const fs = require("fs");
 const fse = require("fs-extra");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
+const Player = require("../models/Player");
 
 // Function to generate JWT Token
 const generateJWTToken = expressAsyncHandler(async (id) => {
@@ -42,6 +43,59 @@ const pointDeductor = (activeTeam, incomingTeam) => {
   }
 
   return [deduction, transfersMade];
+};
+
+// function to update player ins and outs
+const playerInsOutsCounter = async (activeTeam, incomingTeam) => {
+  const activeTeamPlayerIds = [];
+  const incomingTeamPlayerIds = [];
+  if (activeTeam && activeTeam.players) {
+    // eslint-disable-next-line no-unused-vars
+    for (const [key, value] of activeTeam.players.entries()) {
+      activeTeamPlayerIds.push(key);
+    }
+  }
+
+  for (const incomingPlayerId in incomingTeam.players) {
+    incomingTeamPlayerIds.push(incomingPlayerId);
+  }
+
+  const transferredOutPlayers = [];
+  const transferredInPlayers = [];
+
+  for (const index in activeTeamPlayerIds) {
+    if (!incomingTeamPlayerIds.includes(activeTeamPlayerIds[index])) {
+      transferredOutPlayers.push(activeTeamPlayerIds[index]);
+    }
+  }
+
+  for (const index in incomingTeamPlayerIds) {
+    if (!activeTeamPlayerIds.includes(incomingTeamPlayerIds[index])) {
+      transferredInPlayers.push(incomingTeamPlayerIds[index]);
+    }
+  }
+
+  for (let index = 0; index < transferredInPlayers.length; index++) {
+    const player = await Player.findOne({
+      playerId: transferredInPlayers[index],
+    }).select("score");
+    player.score[incomingTeam.gameweekId - 1].transfersIn =
+      player.score[incomingTeam.gameweekId - 1].transfersIn + 1;
+
+    // score
+    await player.save();
+  }
+
+  for (let index = 0; index < transferredOutPlayers.length; index++) {
+    const player = await Player.findOne({
+      playerId: transferredOutPlayers[index],
+    }).select("score");
+    player.score[activeTeam.gameweekId].transfersOut =
+      player.score[activeTeam.gameweekId].transfersOut + 1;
+
+    // score
+    await player.save();
+  }
 };
 
 // Function to apply statistical updates to existing teams
@@ -376,4 +430,5 @@ module.exports = {
   makeFilePlayer,
   // new
   sumEplPlayerScore,
+  playerInsOutsCounter,
 };

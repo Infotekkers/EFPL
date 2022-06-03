@@ -748,50 +748,51 @@ class InitialTransferPage extends StatelessWidget {
                       ),
                     ),
 
-                    state.transfersMadeCount < 15
-                        ? Container()
-                        : Positioned(
-                            child: InkWell(
-                              onTap: () async {
-                                _transferBloc.add(
-                                  TransferEvent.validateTeam(
-                                    context: context,
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: ConstantColors.primary_900,
-                                  border: Border.all(
-                                    color: ConstantColors.primary_900,
-                                  ),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(50),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ConstantColors.primary_900
-                                          .withOpacity(0.5),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: const Offset(
-                                        0,
-                                        3,
-                                      ), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.save,
-                                  color: ConstantColors.neutral_200,
-                                ),
-                              ),
+                    // state.transfersMadeCount < 15
+                    //     ? Container()
+                    //     :
+                    Positioned(
+                      child: InkWell(
+                        onTap: () async {
+                          _transferBloc.add(
+                            TransferEvent.validateTeam(
+                              context: context,
                             ),
-                            bottom: 15.0,
-                            right: 15.0,
-                          )
+                          );
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: ConstantColors.primary_900,
+                            border: Border.all(
+                              color: ConstantColors.primary_900,
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(50),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    ConstantColors.primary_900.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(
+                                  0,
+                                  3,
+                                ), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.save,
+                            color: ConstantColors.neutral_200,
+                          ),
+                        ),
+                      ),
+                      bottom: 15.0,
+                      right: 15.0,
+                    )
                   ],
                 ),
               ),
