@@ -71,5 +71,20 @@
   "noFixtures": "ጨዋታዎች የሉም",
   "modalTranslations": "modalTranslations",
   "playerInformation": "የተጫዋች መረጃ",
-  "upcomingFixtures": "መጪ ጨዋታዎች"
+  "upcomingFixtures": "መጪ ጨዋታዎች",
+  "pointsTranslation": "pointsTranslation",
+  "statistic": "ስታትስቲክስ",
+  "value": "ተመን",
+  "pts": "ነጥብ",
+  "minutesPlayed": "የተጫዉተዉ ደቂቃ",
+  "goals": "ግቦች",
+  "assists": "አመቻችቶ ያቀበለዉ",
+  "yellows": "ቢጫዎች",
+  "reds": "ቀይ",
+  "penaltyMissed": "የተሳቱ ፍጹም ቅጣት ምቾቻ",
+  "ownGoal": "የራስ ግብ",
+  "saves": "ያዳነዉ",
+  "penaltySaved": "ያዳነዉ ፍጹም ቅጣት ምቾቻ",
+  "cleanSheet": "ምንም ግቦች",
+  "sum": "ጠቅላላ ድምር"
 }

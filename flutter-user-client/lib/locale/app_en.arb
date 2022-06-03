@@ -70,5 +70,20 @@
   "noFixtures": "No Fixtures",
   "modalTranslations": "modalTranslations",
   "playerInformation": "Player Information",
-  "upcomingFixtures": "Upcoming Fixtures"
+  "upcomingFixtures": "Upcoming Fixtures",
+  "pointsTranslation": "pointsTranslation",
+  "statistic": "Statistic",
+  "value": "Value",
+  "pts": "Pts",
+  "minutesPlayed": "Minutes Played",
+  "goals": "Goals",
+  "assists": "Assists",
+  "yellows": "Yellows",
+  "reds": "Red",
+  "penaltyMissed": "Penalty Missed",
+  "ownGoal": "Own Goal",
+  "saves": "Saves",
+  "penaltySaved": "Penalty Saved",
+  "cleanSheet": "Clean Sheet",
+  "sum": "Total Sum"
 }

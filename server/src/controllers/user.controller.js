@@ -393,14 +393,14 @@ const transfer = asyncHandler(async (req, res) => {
     // };
 
     let incomingTeam;
+    let isInitial = false;
 
     if (!isSetTeam) {
       incomingTeam = JSON.parse(data).incomingTeam;
+      isInitial = JSON.parse(data).isInitial;
     } else {
       incomingTeam = data.incomingTeam;
     }
-
-    // console.log(incomingTeam);
 
     // create starter team if none => multiplier == 1
     const incomingPlayers = incomingTeam.players;
@@ -413,7 +413,7 @@ const transfer = asyncHandler(async (req, res) => {
       isViceCaptain: 0,
     };
 
-    if (!isSetTeam) {
+    if (isInitial) {
       for (const key in incomingPlayers) {
         // get player position
         const currentPlayer = await Player.findOne({
@@ -662,7 +662,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
             gameweekId: { $gt: gameWeekId },
           })
             .select("homeTeam awayTeam")
-            .limit(8);
+            .limit(10);
 
           const upComingFixture = [];
 
@@ -671,13 +671,29 @@ const getUserTeam = asyncHandler(async (req, res) => {
               currentTeamFixture[i].homeTeam.toString() ===
               currPlayer.eplTeamId.toString()
             ) {
-              upComingFixture.push(
-                currentTeamFixture[i].awayTeam.toString() + "+-" + "H"
-              );
+              // get team logo
+              const teamInfo = await Team.findOne({
+                teamName: currentTeamFixture[i].awayTeam,
+              }).select("teamLogo");
+
+              // save to list
+              upComingFixture.push({
+                teamInfo:
+                  currentTeamFixture[i].awayTeam.toString() + "+-" + "H",
+                teamLogo: teamInfo.teamLogo,
+              });
             } else {
-              upComingFixture.push(
-                currentTeamFixture[i].homeTeam.toString() + "+-" + "A"
-              );
+              // get team logo
+              const teamInfo = await Team.findOne({
+                teamName: currentTeamFixture[i].homeTeam,
+              }).select("teamLogo");
+
+              // save to list
+              upComingFixture.push({
+                teamInfo:
+                  currentTeamFixture[i].homeTeam.toString() + "+-" + "A",
+                teamLogo: teamInfo.teamLogo,
+              });
             }
           }
 
@@ -815,7 +831,10 @@ const getUserPoints = asyncHandler(async (req, res) => {
           );
 
           const currentPlayerTeamFixture = await Fixture.findOne({
-            eplTeamId: playerInfo.eplTeamId,
+            $or: [
+              { homeTeam: playerInfo.eplTeamId },
+              { awayTeam: playerInfo.eplTeamId },
+            ],
             gameweekId: gameWeekId,
           });
 

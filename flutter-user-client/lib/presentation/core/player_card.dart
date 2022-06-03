@@ -24,7 +24,6 @@ class PlayerWidget extends StatelessWidget {
     return Stack(
       children: [
         // Card
-
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -67,6 +66,7 @@ class PlayerWidget extends StatelessWidget {
                 Container(
                   width: 80,
                   margin: const EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
                   child: Column(
                     children: [
                       Center(

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/injectable.dart';
@@ -5,6 +6,7 @@ import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
@@ -93,6 +95,9 @@ void _buildModalSheet(
     {required BuildContext context,
     required UserPlayer currentUserPlayer,
     required TransferBloc transferBloc}) {
+  // base url
+  final String _baseURL = dotenv.env["API"].toString();
+
   showModalBottomSheet(
     context: context,
     shape: const RoundedRectangleBorder(
@@ -107,7 +112,7 @@ void _buildModalSheet(
         child: BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) {
             return Container(
-              height: 265,
+              height: 310,
               padding: const EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 8,
@@ -115,35 +120,29 @@ void _buildModalSheet(
               child: Column(
                 children: [
                   // Player Name
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        // Player Name
-                        TextSpan(
-                          text: currentUserPlayer.playerName.value
-                              .fold((l) => '', (r) => r),
-                          style:
-                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 0.25,
-                                  ),
+                  Text(
+                    currentUserPlayer.playerName.value
+                        .fold((l) => '', (r) => r),
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.25,
                         ),
+                  ),
 
-                        // Player Team
-                        TextSpan(
-                          text: " ( " +
-                              currentUserPlayer.eplTeamId.value
-                                  .fold((l) => '', (r) => r) +
-                              " )",
-                          style:
-                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    fontSize: 15,
-                                    letterSpacing: 0.05,
-                                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+
+                  Text(
+                    " ( " +
+                        currentUserPlayer.eplTeamId.value
+                            .fold((l) => '', (r) => r) +
+                        " )",
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontSize: 14,
+                          letterSpacing: 0.05,
                         ),
-                      ],
-                    ),
                   ),
 
                   // Spacer
@@ -216,44 +215,80 @@ void _buildModalSheet(
                         ),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: 16,
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 80,
                     width: double.infinity,
-                    child: GridView.builder(
+                    child: ListView.builder(
+                      itemCount: 10,
                       shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 6,
-                        childAspectRatio: 2.8,
-                      ),
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
                         return Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: ConstantColors.primary_900,
-                              width: 0.15,
-                            ),
-                            color: isHomeTeam(
-                                      currentUserPlayer.upComingFixtures[index],
-                                    ) ==
-                                    1
-                                ? ConstantColors.success_300
-                                : ConstantColors.error_300,
-                          ),
-                          child: Center(
-                            child: Text(
-                              getFixtureTeamAcronym(
-                                currentUserPlayer.upComingFixtures[index],
+                          margin: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                          width: 80,
+                          // color: Colors.amber,
+                          child: Column(
+                            children: [
+                              // Team Icon
+                              SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.fill,
+                                  imageUrl: _baseURL +
+                                      currentUserPlayer.upComingFixtures[index]
+                                          ['teamLogo'],
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                ),
                               ),
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
+
+                              // SPACER
+                              const SizedBox(
+                                height: 8,
                               ),
-                            ),
+
+                              // Team Name
+                              SizedBox(
+                                height: 15,
+                                width: 80,
+                                // color: Colors.green,
+                                child: Text(
+                                  getFixtureTeamAcronym(
+                                    currentUserPlayer.upComingFixtures[index]
+                                        ['teamInfo'],
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: 0.35,
+                                      ),
+                                ),
+                              ),
+
+                              const SizedBox(
+                                height: 2,
+                              ),
+
+                              // Match Rate
+                              Container(
+                                height: 5,
+                                width: 80,
+                                color: isHomeTeam(
+                                          currentUserPlayer
+                                              .upComingFixtures[index],
+                                        ) ==
+                                        1
+                                    ? ConstantColors.success_300
+                                    : ConstantColors.error_300,
+                              )
+                            ],
                           ),
                         );
                       },
@@ -460,10 +495,10 @@ String getFixtureTeamAcronym(String fixtureTeam) {
   return acronym;
 }
 
-int isHomeTeam(String fixtureTeam) {
+int isHomeTeam(Map fixtureTeam) {
   int isHomeValue = 0;
 
-  if (fixtureTeam.split("+-").last == "H") {
+  if (fixtureTeam['teamInfo'].split("+-").last == "H") {
     isHomeValue = 1;
   }
 

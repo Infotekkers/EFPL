@@ -364,7 +364,11 @@ Widget _buildMainView(
                                   .score[0]['fantasyScore']
                                   .toString())
                               : '0',
-                      teamName: "shirt.svg",
+                      teamName:
+                          allFormattedPlayers[0][index].eplTeamId.value.fold(
+                                (l) => "",
+                                (r) => r,
+                              ),
                       isCaptain: allFormattedPlayers[0][index].isCaptain,
                       isViceCaptain:
                           allFormattedPlayers[0][index].isViceCaptain,
@@ -467,7 +471,11 @@ Widget _buildMainView(
                             .score[0]['fantasyScore']
                             .toString())
                         : '0',
-                    teamName: "shirt.svg",
+                    teamName:
+                        allFormattedPlayers[1][index].eplTeamId.value.fold(
+                              (l) => "",
+                              (r) => r,
+                            ),
                     isCaptain: allFormattedPlayers[1][index].isCaptain,
                     isViceCaptain: allFormattedPlayers[1][index].isViceCaptain,
                   ),
@@ -504,7 +512,11 @@ Widget _buildMainView(
                             .score[0]['fantasyScore']
                             .toString())
                         : '0',
-                    teamName: "shirt.svg",
+                    teamName:
+                        allFormattedPlayers[2][index].eplTeamId.value.fold(
+                              (l) => "",
+                              (r) => r,
+                            ),
                     isCaptain: allFormattedPlayers[2][index].isCaptain,
                     isViceCaptain: allFormattedPlayers[2][index].isViceCaptain,
                   ),
@@ -541,7 +553,11 @@ Widget _buildMainView(
                             .score[0]['fantasyScore']
                             .toString())
                         : '0',
-                    teamName: "shirt.svg",
+                    teamName:
+                        allFormattedPlayers[3][index].eplTeamId.value.fold(
+                              (l) => "",
+                              (r) => r,
+                            ),
                     isCaptain: allFormattedPlayers[3][index].isCaptain,
                     isViceCaptain: allFormattedPlayers[3][index].isViceCaptain,
                   ),
@@ -556,9 +572,7 @@ Widget _buildMainView(
         ),
         // SUBS
         Container(
-          // borderRadius: BorderRadius.circular(10),
           color: Colors.blue[200],
-          // padding: const EdgeInsets.symmetric(vertical: 5),
           height: 130,
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Center(
@@ -585,7 +599,11 @@ Widget _buildMainView(
                             .score[0]['fantasyScore']
                             .toString())
                         : '0',
-                    teamName: "shirt.svg",
+                    teamName:
+                        allFormattedPlayers[4][index].eplTeamId.value.fold(
+                              (l) => "",
+                              (r) => r,
+                            ),
                   ),
                 );
               },
@@ -667,8 +685,10 @@ void showCustomModal(
           child: BlocBuilder<PointsBloc, PointsState>(
             builder: (context, state) {
               PointUserPlayer currentPlayer = state.pointsInfo.allPlayers
-                  .where((player) =>
-                      player.playerId.toString() == playerId.toString())
+                  .where(
+                    (player) =>
+                        player.playerId.toString() == playerId.toString(),
+                  )
                   .toList()[0];
 
               String currentPlayerPosition =
@@ -678,7 +698,7 @@ void showCustomModal(
               );
 
               return Container(
-                height: 300,
+                height: 310,
                 padding: const EdgeInsets.symmetric(
                   vertical: 20,
                   horizontal: 8,
@@ -687,19 +707,18 @@ void showCustomModal(
                   scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
-                      // Fixture Info
+                      // Player Name
                       Text(
                         currentPlayer.playerName.value.fold(
                           (l) => '',
                           (r) => r,
                         ),
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Architect",
-                          letterSpacing: 0.25,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.25,
+                            ),
                       ),
 
                       const SizedBox(
@@ -710,22 +729,22 @@ void showCustomModal(
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Home Team
+                          // HOME TEAM
                           Text(
                             currentPlayer.fixtureTeams.split("v")[0],
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Architect",
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                           ),
 
                           const SizedBox(
                             width: 5,
                           ),
 
-                          // Score Board
+                          // SCOREBOARD
                           Container(
                             width: 50,
                             height: 30,
@@ -733,11 +752,14 @@ void showCustomModal(
                             child: Center(
                               child: Text(
                                 currentPlayer.fixtureScore.split("v").join("-"),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.45,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.45,
+                                    ),
                               ),
                             ),
                           ),
@@ -750,11 +772,11 @@ void showCustomModal(
                           Text(
                             currentPlayer.fixtureTeams.split("v")[1],
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Architect",
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                           ),
                         ],
                       ),
@@ -768,20 +790,23 @@ void showCustomModal(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         height: 30,
                         width: MediaQuery.of(context).size.width,
-                        color: ConstantColors.neutral_300,
+                        color: Colors.green[50],
                         child: Row(
                           children: [
                             // STATISTICS
                             SizedBox(
                               width:
                                   MediaQuery.of(context).size.width * 0.5 - 10,
-                              child: const Text(
-                                "Statistic",
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.25,
-                                ),
+                              child: Text(
+                                AppLocalizations.of(context)!.statistic,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.25,
+                                    ),
                               ),
                             ),
 
@@ -789,14 +814,17 @@ void showCustomModal(
                             SizedBox(
                               width:
                                   MediaQuery.of(context).size.width * 0.25 - 10,
-                              child: const Text(
-                                "Value",
+                              child: Text(
+                                AppLocalizations.of(context)!.value,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.25,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.25,
+                                    ),
                               ),
                             ),
 
@@ -804,14 +832,17 @@ void showCustomModal(
                             SizedBox(
                               width:
                                   MediaQuery.of(context).size.width * 0.25 - 10,
-                              child: const Text(
-                                "Pts",
+                              child: Text(
+                                AppLocalizations.of(context)!.pts,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.25,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.25,
+                                    ),
                               ),
                             )
                           ],
@@ -831,7 +862,8 @@ void showCustomModal(
                             */
                             // MINUTES PLAYED
                             PlayerStatDisplay(
-                              statisticName: "Minutes Played",
+                              statisticName:
+                                  AppLocalizations.of(context)!.minutesPlayed,
                               statisticValue: currentPlayer.score.isNotEmpty &&
                                       currentPlayer.score[0]['minutesPlayed'] !=
                                           0
@@ -852,7 +884,8 @@ void showCustomModal(
                                         0 &&
                                     currentPlayer.score[0]['goals'] > 0
                                 ? PlayerStatDisplay(
-                                    statisticName: "Goals",
+                                    statisticName:
+                                        AppLocalizations.of(context)!.goals,
                                     statisticValue: currentPlayer.score[0]
                                         ['goals'],
                                     statisticPoint:
@@ -860,6 +893,7 @@ void showCustomModal(
                                                     'goal']! *
                                                 currentPlayer.score[0]['goals'])
                                             .toInt(),
+                                    isColored: true,
                                   )
                                 : Container(),
 
@@ -869,7 +903,8 @@ void showCustomModal(
                                         0 &&
                                     currentPlayer.score[0]['assists'] > 0
                                 ? PlayerStatDisplay(
-                                    statisticName: "Assists",
+                                    statisticName:
+                                        AppLocalizations.of(context)!.assists,
                                     statisticValue: currentPlayer.score[0]
                                         ['assists'],
                                     statisticPoint:
@@ -887,11 +922,13 @@ void showCustomModal(
                                         0 &&
                                     currentPlayer.score[0]['yellows'] > 0
                                 ? PlayerStatDisplay(
-                                    statisticName: "Yellows",
+                                    statisticName:
+                                        AppLocalizations.of(context)!.yellows,
                                     statisticValue: currentPlayer.score[0]
                                         ['yellows'],
                                     statisticPoint:
                                         currentPlayer.score[0]['yellows'] * -1,
+                                    isColored: true,
                                   )
                                 : Container(),
 
@@ -901,7 +938,8 @@ void showCustomModal(
                                         0 &&
                                     currentPlayer.score[0]['reds'] > 0
                                 ? PlayerStatDisplay(
-                                    statisticName: "Reds",
+                                    statisticName:
+                                        AppLocalizations.of(context)!.reds,
                                     statisticValue: currentPlayer.score[0]
                                         ['reds'],
                                     statisticPoint:
@@ -916,12 +954,14 @@ void showCustomModal(
                                     currentPlayer.score[0]['penalitiesMissed'] >
                                         0
                                 ? PlayerStatDisplay(
-                                    statisticName: "Penalty Missed",
+                                    statisticName: AppLocalizations.of(context)!
+                                        .penaltyMissed,
                                     statisticValue: currentPlayer.score[0]
                                         ['penalitiesMissed'],
                                     statisticPoint: currentPlayer.score[0]
                                             ['penalitiesMissed'] *
                                         -3,
+                                    isColored: true,
                                   )
                                 : Container(),
 
@@ -931,7 +971,8 @@ void showCustomModal(
                                         0 &&
                                     currentPlayer.score[0]['ownGoal'] > 0
                                 ? PlayerStatDisplay(
-                                    statisticName: "Own Goal",
+                                    statisticName:
+                                        AppLocalizations.of(context)!.ownGoal,
                                     statisticValue: currentPlayer.score[0]
                                         ['ownGoal'],
                                     statisticPoint:
@@ -951,11 +992,13 @@ void showCustomModal(
                                     currentPlayerPosition == "GK" &&
                                     currentPlayer.score[0]['saves'] > 0
                                 ? PlayerStatDisplay(
-                                    statisticName: "Saves",
+                                    statisticName:
+                                        AppLocalizations.of(context)!.saves,
                                     statisticValue: currentPlayer.score[0]
                                         ['saves'],
                                     statisticPoint:
                                         currentPlayer.score[0]['saves'] * 1,
+                                    isColored: true,
                                   )
                                 : Container(),
 
@@ -967,7 +1010,8 @@ void showCustomModal(
                                     currentPlayer.score[0]['penalitiesSaved'] >
                                         0
                                 ? PlayerStatDisplay(
-                                    statisticName: "Penalty Saved",
+                                    statisticName: AppLocalizations.of(context)!
+                                        .penaltySaved,
                                     statisticValue: currentPlayer.score[0]
                                         ['penalitiesSaved'],
                                     statisticPoint: currentPlayer.score[0]
@@ -989,12 +1033,14 @@ void showCustomModal(
                                         currentPlayerPosition == "MID") &&
                                     currentPlayer.score[0]['cleanSheet'] > 0
                                 ? PlayerStatDisplay(
-                                    statisticName: "Clean Sheet",
+                                    statisticName: AppLocalizations.of(context)!
+                                        .cleanSheet,
                                     statisticValue: currentPlayer.score[0]
                                         ['cleanSheet'],
                                     statisticPoint: currentPlayer.score[0]
                                             ['cleanSheet'] *
                                         4,
+                                    isColored: true,
                                   )
                                 : Container(),
 
@@ -1008,8 +1054,7 @@ void showCustomModal(
                                   const EdgeInsets.symmetric(horizontal: 5),
                               height: 30,
                               width: MediaQuery.of(context).size.width,
-                              color:
-                                  ConstantColors.neutral_300.withOpacity(0.15),
+                              color: Colors.green[100],
                               child: Row(
                                 children: [
                                   // STATISTICS
@@ -1017,13 +1062,16 @@ void showCustomModal(
                                     width: MediaQuery.of(context).size.width *
                                             0.5 -
                                         10,
-                                    child: const Text(
-                                      "Sum",
-                                      style: TextStyle(
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.w700,
-                                        letterSpacing: 0.25,
-                                      ),
+                                    child: Text(
+                                      AppLocalizations.of(context)!.sum,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w700,
+                                            letterSpacing: 0.25,
+                                          ),
                                     ),
                                   ),
 
@@ -1036,7 +1084,7 @@ void showCustomModal(
                                       "",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontSize: 15.0,
+                                        fontSize: 16.0,
                                         fontWeight: FontWeight.w700,
                                         letterSpacing: 0.25,
                                       ),
@@ -1080,15 +1128,19 @@ void showCustomModal(
                           );
                         },
                         child: Container(
-                          width: 150,
-                          height: 32,
+                          width: 170,
+                          height: 35,
                           color: ConstantColors.primary_900,
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              "Player Information",
-                              style: TextStyle(
-                                color: ConstantColors.neutral_200,
-                              ),
+                              AppLocalizations.of(context)!.playerInfo,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                    color: ConstantColors.neutral_200,
+                                    fontSize: 15,
+                                  ),
                             ),
                           ),
                         ),
