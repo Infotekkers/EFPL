@@ -408,7 +408,7 @@ Widget _buildMainView(
                         : Text(
                             (state.pointsInfo.deduction / 4)
                                     .toStringAsFixed(0) +
-                                " ( -" +
+                                " ( " +
                                 state.pointsInfo.deduction.toString() +
                                 " )",
                             style: const TextStyle(
@@ -605,25 +605,25 @@ List<List<PointUserPlayer>> formatPlayersByPosition(
 
   List<PointUserPlayer> allGK = allPlayers
       .where((player) =>
-          player.multiplier == 1 &&
+          player.multiplier >= 1 &&
           player.playerPosition.value.fold((l) => '', (r) => r) == 'GK')
       .toList();
 
   List<PointUserPlayer> allDEF = allPlayers
       .where((player) =>
-          player.multiplier == 1 &&
+          player.multiplier >= 1 &&
           player.playerPosition.value.fold((l) => '', (r) => r) == 'DEF')
       .toList();
 
   List<PointUserPlayer> allMID = allPlayers
       .where((player) =>
-          player.multiplier == 1 &&
+          player.multiplier >= 1 &&
           player.playerPosition.value.fold((l) => '', (r) => r) == 'MID')
       .toList();
 
   List<PointUserPlayer> allATT = allPlayers
       .where((player) =>
-          player.multiplier == 1 &&
+          player.multiplier >= 1 &&
           player.playerPosition.value.fold((l) => '', (r) => r) == 'ATT')
       .toList();
 
@@ -635,20 +635,20 @@ void showCustomModal(
     {required BuildContext showContext, required String playerId}) {
   final Map scoreMap = {
     "GK": {
-      "goal": 5,
-      "assist": 4,
+      "goal": 6,
+      "assist": 3,
     },
     "DEF": {
-      "goal": 5,
-      "assist": 4,
+      "goal": 6,
+      "assist": 3,
     },
     "MID": {
       "goal": 5,
-      "assist": 4,
+      "assist": 3,
     },
     "ATT": {
-      "goal": 5,
-      "assist": 4,
+      "goal": 4,
+      "assist": 3,
     }
   };
 
@@ -664,10 +664,7 @@ void showCustomModal(
       builder: (builder) {
         return BlocProvider.value(
           value: getIt<PointsBloc>(),
-          child: BlocConsumer<PointsBloc, PointsState>(
-            listener: (context, state) {
-              // TODO: implement listener
-            },
+          child: BlocBuilder<PointsBloc, PointsState>(
             builder: (context, state) {
               PointUserPlayer currentPlayer = state.pointsInfo.allPlayers
                   .where((player) =>
@@ -997,7 +994,7 @@ void showCustomModal(
                                         ['cleanSheet'],
                                     statisticPoint: currentPlayer.score[0]
                                             ['cleanSheet'] *
-                                        3,
+                                        4,
                                   )
                                 : Container(),
 
@@ -1117,12 +1114,6 @@ String getSumPoints(
 
   if (currentPlayer.score.isNotEmpty) {
     // minutes played
-    if (currentPlayer.score[0]['minutesPlayed'] > 0 &&
-        currentPlayer.score[0]['minutesPlayed'] < 45) {
-      pointSum = pointSum + 1;
-    } else if (currentPlayer.score[0]['minutesPlayed'] > 45) {
-      pointSum = pointSum + 2;
-    }
 
     // Goals
     pointSum = pointSum +
@@ -1139,27 +1130,33 @@ String getSumPoints(
     pointSum = pointSum + currentPlayer.score[0]['reds'] * -3;
 
     // Clean sheet
-    if ((playerPosition == "GK" ||
-        playerPosition == "DEF" ||
-        playerPosition == "MID")) {
-      pointSum = pointSum + currentPlayer.score[0]['cleanSheet'] * 3;
+    if ((playerPosition == "GK" || playerPosition == "DEF")) {
+      pointSum = pointSum + currentPlayer.score[0]['cleanSheet'] * 4;
     }
-
-    // Pen Saved
-    if (playerPosition == "GK") {
-      pointSum = pointSum + currentPlayer.score[0]['penalitiesSaved'] * 3;
+    if (playerPosition == "MID") {
+      pointSum = pointSum + currentPlayer.score[0]['cleanSheet'] * 1;
     }
 
     // Saves
     if (playerPosition == "GK") {
-      pointSum = pointSum + currentPlayer.score[0]['saves'] * 3;
+      pointSum = pointSum + (currentPlayer.score[0]['saves'] / 3).floor() * 1;
     }
+    // Pen Saved
+    pointSum = pointSum + currentPlayer.score[0]['penalitiesSaved'] * 5;
 
     // pen missed
-    pointSum = pointSum + currentPlayer.score[0]['penalitiesMissed'] * -3;
+    pointSum = pointSum + currentPlayer.score[0]['penalitiesMissed'] * -2;
 
     // own goal
     pointSum = pointSum + currentPlayer.score[0]['ownGoal'] * -2;
+
+    if (currentPlayer.score[0]['minutesPlayed'] > 0 &&
+        currentPlayer.score[0]['minutesPlayed'] < 60) {
+      pointSum = pointSum + 1;
+    } else if (currentPlayer.score[0]['minutesPlayed'] > 60) {
+      pointSum = pointSum + 2;
+    }
   }
+
   return pointSum.toStringAsFixed(0);
 }

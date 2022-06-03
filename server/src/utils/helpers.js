@@ -303,6 +303,13 @@ const sumGwFantasyScore = (activePlayerScoreInfo, activePlayerPosition) => {
     weekScoreSum +
     activePlayerScoreInfo.assists * scoreMap[activePlayerPosition].assist;
 
+  // yellows
+  weekScoreSum =
+    weekScoreSum + activePlayerScoreInfo.yellows * cardScoreMap.yellow;
+
+  // reds
+  weekScoreSum = weekScoreSum + activePlayerScoreInfo.reds * cardScoreMap.red;
+
   // clean sheet
   weekScoreSum =
     weekScoreSum +
@@ -331,14 +338,6 @@ const sumGwFantasyScore = (activePlayerScoreInfo, activePlayerPosition) => {
   weekScoreSum =
     weekScoreSum +
     activePlayerScoreInfo.ownGoal * scoreMap[activePlayerPosition].ownGoal;
-
-  // yellows
-  weekScoreSum =
-    weekScoreSum + activePlayerScoreInfo.yellows * cardScoreMap.yellow;
-
-  // reds
-  weekScoreSum =
-    weekScoreSum + activePlayerScoreInfo.reds * cardScoreMap.yellow;
 
   return weekScoreSum;
 };

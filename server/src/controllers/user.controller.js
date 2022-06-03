@@ -427,6 +427,8 @@ const transfer = asyncHandler(async (req, res) => {
 
           if (!countMap.isCaptain) {
             incomingPlayers[key].isCaptain = true;
+            incomingPlayers[key].multiplier = 2;
+
             countMap.isCaptain = true;
           }
         }

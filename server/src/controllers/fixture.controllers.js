@@ -692,6 +692,7 @@ const updateStats = asyncHandler(async (req, res) => {
     // send socket update
     const io = require("../../server");
     io.emit("fixtureStatUpdated");
+    io.emit("playerScoreUpdated");
 
     res.send("Match stats updated!");
   } else if (!match) {
