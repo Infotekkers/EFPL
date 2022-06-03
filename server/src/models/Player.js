@@ -82,7 +82,6 @@ const playerSchema = mongoose.Schema({
   },
   score: { type: [scoreSchema], default: [] },
   history: { type: [historySchema], default: [] },
-  maxBudget: { type: Number, default: 100 },
 });
 
 playerSchema.plugin(autoIncrement.plugin, {

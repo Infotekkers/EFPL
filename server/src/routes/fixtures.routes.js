@@ -8,7 +8,7 @@ router.post("/add", protectRoute, fixtureController.postFixture);
 
 router.patch("/update/lineup/:matchId", fixtureController.updateLineup);
 router.patch("/update/stats/:matchId", fixtureController.updateStats);
-router.patch("/update/score/:matchId", fixtureController.updateScore);
+// router.patch("/update/score/:matchId", fixtureController.updateScore);
 router.patch("/start/:matchId", protectRoute, fixtureController.startFixture);
 router.patch("/pause/:matchId", protectRoute, fixtureController.pauseFixture);
 router.patch("/resume/:matchId", protectRoute, fixtureController.resumeFixture);

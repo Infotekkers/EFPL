@@ -61,7 +61,8 @@ const statUpdater = ({ activeMatch, activePlayer, incomingUpdate }) => {
     fantasyScore,
   } = incomingUpdate;
 
-  // TODO: Set Fantasy Score
+  const activePlayerPosition = activePlayer.position;
+
   if (!activePlayer.score[gameweekId - 1]) {
     const score = {
       gameweekId,
@@ -94,7 +95,11 @@ const statUpdater = ({ activeMatch, activePlayer, incomingUpdate }) => {
   activePlayer.score[gameweekId - 1].penalitiesSaved = penalitiesSaved;
   activePlayer.score[gameweekId - 1].saves = saves;
   activePlayer.score[gameweekId - 1].ownGoal = ownGoal;
-  activePlayer.score[gameweekId - 1].fantasyScore = fantasyScore;
+  const scoreSum = sumGwFantasyScore(
+    activePlayer.score[gameweekId - 1],
+    activePlayerPosition
+  );
+  activePlayer.score[gameweekId - 1].fantasyScore = scoreSum;
 
   // * Compatability layer to achieve data synchronization with redundant layer in Fixture.MatchStats / Player.score
   const compatFixture = {
@@ -174,6 +179,114 @@ const statUpdater = ({ activeMatch, activePlayer, incomingUpdate }) => {
   }
 
   return { updatedMatch: activeMatch, updatedPlayer: activePlayer };
+};
+
+// calculate score sum for gameweek stats
+const sumGwFantasyScore = (activePlayerScoreInfo, activePlayerPosition) => {
+  // more than 60mins => 2pts
+  const scoreMap = {
+    GK: {
+      goal: 6,
+      assist: 3,
+      cleanSheet: 4,
+      save: 1,
+      penalitiesSaved: 5,
+      penalitiesMissed: -2,
+      ownGoal: -2,
+    },
+    DEF: {
+      goal: 6,
+      assist: 3,
+      cleanSheet: 4,
+      save: 0,
+      penalitiesSaved: 5,
+      penalitiesMissed: -2,
+      ownGoal: -2,
+    },
+    MID: {
+      goal: 5,
+      assist: 3,
+      cleanSheet: 1,
+      save: 0,
+      penalitiesSaved: 5,
+      penalitiesMissed: -2,
+      ownGoal: -2,
+    },
+    ATT: {
+      goal: 4,
+      assist: 3,
+      cleanSheet: 0,
+      save: 0,
+      penalitiesSaved: 5,
+      penalitiesMissed: -2,
+      ownGoal: -2,
+    },
+  };
+
+  const cardScoreMap = {
+    yellow: -1,
+    red: -3,
+  };
+
+  let weekScoreSum = 0;
+
+  // minutes played
+  if (activePlayerScoreInfo.minutesPlayed > 0) {
+    if (activePlayerScoreInfo.minutesPlayed > 60) {
+      weekScoreSum = weekScoreSum + 2;
+    } else {
+      weekScoreSum = weekScoreSum + 1;
+    }
+  }
+
+  // goals
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.goals * scoreMap[activePlayerPosition].goal;
+
+  // assists
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.assists * scoreMap[activePlayerPosition].assist;
+
+  // clean sheet
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.cleanSheet *
+      scoreMap[activePlayerPosition].cleanSheet;
+
+  // saves
+  weekScoreSum =
+    weekScoreSum +
+    Math.floor(activePlayerScoreInfo.saves / 3) *
+      scoreMap[activePlayerPosition].save;
+
+  // pen saved
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.penalitiesSaved *
+      scoreMap[activePlayerPosition].penalitiesSaved;
+
+  // pen missed
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.penalitiesMissed *
+      scoreMap[activePlayerPosition].penalitiesMissed;
+
+  // own goal
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.ownGoal * scoreMap[activePlayerPosition].ownGoal;
+
+  // yellows
+  weekScoreSum =
+    weekScoreSum + activePlayerScoreInfo.yellows * cardScoreMap.yellow;
+
+  // reds
+  weekScoreSum =
+    weekScoreSum + activePlayerScoreInfo.reds * cardScoreMap.yellow;
+
+  return weekScoreSum;
 };
 
 // Function to change base64 to file
