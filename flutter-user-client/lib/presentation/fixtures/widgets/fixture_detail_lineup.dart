@@ -23,11 +23,8 @@ class FixtureDetailLineUp extends StatelessWidget {
         homeTeamLineUpInfo['defenders'].isNotEmpty &&
         homeTeamLineUpInfo['midfielders'].isNotEmpty &&
         homeTeamLineUpInfo['strikers'].isNotEmpty &&
-        homeTeamLineUpInfo['bench'].isNotEmpty) {
-      isLineUpIn = true;
-    }
-
-    if (awayTeamLineUpInfo.isNotEmpty &&
+        homeTeamLineUpInfo['bench'].isNotEmpty &&
+        awayTeamLineUpInfo.isNotEmpty &&
         awayTeamLineUpInfo['defenders'].isNotEmpty &&
         awayTeamLineUpInfo['midfielders'].isNotEmpty &&
         awayTeamLineUpInfo['strikers'].isNotEmpty &&
@@ -110,17 +107,25 @@ class FixtureDetailLineUp extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          homeTeamLineUp['goalkeepers'][index]
-                                                  ['playerName']
-                                              .toString(),
+                                          homeTeamLineUp.isEmpty ||
+                                                  homeTeamLineUp['defenders']
+                                                      .isEmpty
+                                              ? ""
+                                              : homeTeamLineUp['goalkeepers']
+                                                      [index]['playerName']
+                                                  .toString(),
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText1,
                                         ),
                                         Text(
-                                          awayTeamLineUp['goalkeepers'][index]
-                                                  ['playerName']
-                                              .toString(),
+                                          awayTeamLineUp.isEmpty ||
+                                                  awayTeamLineUp['defenders']
+                                                      .isEmpty
+                                              ? ""
+                                              : awayTeamLineUp['goalkeepers']
+                                                      [index]['playerName']
+                                                  .toString(),
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText1,
@@ -509,12 +514,33 @@ List<int> getPlayerCount({required Fixture fixture}) {
   Map<dynamic, dynamic> awayTeamLineUp =
       fixture.awayTeamLineUp.value.fold((l) => {}, (r) => r);
 
-  if (homeTeamLineUp.isNotEmpty && awayTeamLineUp.isNotEmpty) {
-    int maxGkCount = homeTeamLineUp['goalkeepers'].length >
-            awayTeamLineUp['goalkeepers'].length
-        ? homeTeamLineUp['goalkeepers'].length
-        : awayTeamLineUp['goalkeepers'].length;
+  print(awayTeamLineUp);
 
+  // no homeTeam
+  if (homeTeamLineUp['defenders'].isEmpty) {
+    finalCount = [
+      1,
+      awayTeamLineUp['defenders'].length,
+      awayTeamLineUp['midfielders'].length,
+      awayTeamLineUp['strikers'].length,
+      awayTeamLineUp['bench'].length
+    ];
+  }
+  // no away team
+  else if (awayTeamLineUp['defenders'].isEmpty) {
+    finalCount = [
+      1,
+      homeTeamLineUp['defenders'].length,
+      homeTeamLineUp['midfielders'].length,
+      homeTeamLineUp['strikers'].length,
+      homeTeamLineUp['bench'].length
+    ];
+  }
+  // both lineups
+  else if (homeTeamLineUp.isNotEmpty &&
+      awayTeamLineUp.isNotEmpty &&
+      homeTeamLineUp['defenders'].isNotEmpty &&
+      awayTeamLineUp['defenders'].isNotEmpty) {
     int maxDefCount =
         homeTeamLineUp['defenders'].length > awayTeamLineUp['defenders'].length
             ? homeTeamLineUp['defenders'].length
@@ -535,13 +561,7 @@ List<int> getPlayerCount({required Fixture fixture}) {
             ? homeTeamLineUp['bench'].length
             : awayTeamLineUp['bench'].length;
 
-    finalCount = [
-      maxGkCount,
-      maxDefCount,
-      maxMidCount,
-      maxAttCount,
-      maxBenchCount
-    ];
+    finalCount = [1, maxDefCount, maxMidCount, maxAttCount, maxBenchCount];
   }
 
   return finalCount;
