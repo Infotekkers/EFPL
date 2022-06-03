@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserPlayerCard extends StatelessWidget {
   final UserPlayer currentPlayer;
@@ -48,21 +49,185 @@ void _buildModalSheet(
     {required BuildContext context,
     required UserPlayer currentPlayer,
     required bool isInitial}) {
+  // showModalBottomSheet(
+  //   shape: const RoundedRectangleBorder(
+  //     borderRadius: BorderRadius.only(
+  //       topLeft: Radius.circular(30.0),
+  //       topRight: Radius.circular(30.0),
+  //     ),
+  //   ),
+  //   context: context,
+  //   builder: (builder) {
+  //     return BlocProvider.value(
+  //       value: getIt<TransferBloc>(),
+  //       child: BlocBuilder<TransferBloc, TransferState>(
+  //         builder: (context, state) {
+  //           return Container(
+  //             height: 235,
+  //             padding: const EdgeInsets.symmetric(
+  //               vertical: 20,
+  //               horizontal: 8,
+  //             ),
+  //             child: Column(
+  //               children: [
+  //                 // Player Name
+  //                 Text(
+  //                   currentPlayer.playerName.value.fold((l) => '', (r) => r),
+  //                   textAlign: TextAlign.center,
+  //                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
+  //                         fontSize: 18,
+  //                         fontWeight: FontWeight.bold,
+  //                         letterSpacing: 0.25,
+  //                       ),
+  //                 ),
+
+  //                 const SizedBox(
+  //                   height: 10,
+  //                 ),
+
+  //                 // Player Information Button
+  //                 InkWell(
+  //                   onTap: () {
+  //                     Navigator.pop(context);
+  //                     Navigator.of(context).pushNamed("/player",
+  //                         arguments: int.parse(currentPlayer.playerId));
+  //                   },
+  //                   child: Row(
+  //                     children: [
+  //                       Container(
+  //                         child: const Icon(Icons.info),
+  //                         margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
+  //                       ),
+  //                       Text(
+  //                         AppLocalizations.of(context)!.playerInfo,
+  //                         style: Theme.of(context).textTheme.bodyText1,
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+
+  //                 const SizedBox(
+  //                   height: 10,
+  //                 ),
+
+  //                 // Transfer
+  //                 InkWell(
+  //                   onTap: () {
+  //                     if (isInitial) {
+  //                       getIt<TransferBloc>().add(
+  //                         TransferEvent.transferUserPlayerInitial(
+  //                           transferInPlayerId: currentPlayer.playerId,
+  //                         ),
+  //                       );
+  //                     } else {
+  //                       getIt<TransferBloc>().add(
+  //                         TransferEvent.transferUserPlayer(
+  //                           transferInPlayerId: currentPlayer.playerId,
+  //                         ),
+  //                       );
+  //                     }
+  //                     Navigator.pop(context);
+
+  //                     Navigator.pop(context);
+  //                   },
+  //                   child: Row(
+  //                     children: [
+  //                       Container(
+  //                         child: const Icon(Boxicons.bx_transfer),
+  //                         margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
+  //                       ),
+  //                       Text(
+  //                         AppLocalizations.of(context)!.transfer,
+  //                         style: Theme.of(context).textTheme.bodyText1,
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+
+  //                 const SizedBox(
+  //                   height: 15,
+  //                 ),
+
+  //                 // Upcoming Fixtures
+  //                 Text(
+  //                   AppLocalizations.of(context)!.upcomingFixtures,
+  //                   textAlign: TextAlign.center,
+  //                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
+  //                         fontSize: 18,
+  //                         fontWeight: FontWeight.bold,
+  //                         letterSpacing: 0.25,
+  //                       ),
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 8,
+  //                 ),
+  //                 SizedBox(
+  //                   height: 50,
+  //                   width: double.infinity,
+  //                   child: GridView.builder(
+  //                     shrinkWrap: true,
+  //                     physics: const NeverScrollableScrollPhysics(),
+  //                     gridDelegate:
+  //                         const SliverGridDelegateWithFixedCrossAxisCount(
+  //                       crossAxisCount: 6,
+  //                       childAspectRatio: 2.8,
+  //                     ),
+  //                     itemCount: 6,
+  //                     itemBuilder: (context, index) {
+  //                       return Container(
+  //                         width: 40,
+  //                         height: 28,
+  //                         decoration: BoxDecoration(
+  //                           border: Border.all(
+  //                             color: ConstantColors.primary_900,
+  //                             width: 0.55,
+  //                           ),
+  //                           color: isHomeTeam(
+  //                                     currentPlayer.upComingFixtures[index],
+  //                                   ) ==
+  //                                   1
+  //                               ? ConstantColors.success_300
+  //                               : ConstantColors.error_300,
+  //                         ),
+  //                         child: Center(
+  //                           child: Text(
+  //                             getFixtureTeamAcronym(
+  //                               currentPlayer.upComingFixtures[index],
+  //                             ),
+  //                             style: const TextStyle(
+  //                               fontSize: 12,
+  //                               fontWeight: FontWeight.bold,
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       );
+  //                     },
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           );
+  //         },
+  //       ),
+  //     );
+  //   },
+  // );
+  final String _baseURL = dotenv.env["API"].toString();
   showModalBottomSheet(
+    context: context,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(30.0),
         topRight: Radius.circular(30.0),
       ),
     ),
-    context: context,
     builder: (builder) {
       return BlocProvider.value(
         value: getIt<TransferBloc>(),
         child: BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) {
             return Container(
-              height: 235,
+              height: 310,
               padding: const EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 8,
@@ -72,39 +237,55 @@ void _buildModalSheet(
                   // Player Name
                   Text(
                     currentPlayer.playerName.value.fold((l) => '', (r) => r),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Architect",
-                      letterSpacing: 0.25,
-                    ),
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.25,
+                        ),
                   ),
 
                   const SizedBox(
-                    height: 10,
+                    height: 2,
+                  ),
+
+                  Text(
+                    " ( " +
+                        currentPlayer.eplTeamId.value
+                            .fold((l) => '', (r) => r) +
+                        " )",
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontSize: 14,
+                          letterSpacing: 0.05,
+                        ),
+                  ),
+
+                  // Spacer
+                  const SizedBox(
+                    height: 16,
                   ),
 
                   // Player Information Button
                   InkWell(
                     onTap: () {
-                      Navigator.pop(context);
                       Navigator.of(context).pushNamed("/player",
                           arguments: int.parse(currentPlayer.playerId));
                     },
-                    child: Row(
-                      children: [
-                        Container(
-                          child: const Icon(Icons.info),
-                          margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
-                        ),
-                        const Text("Player Information"),
-                      ],
+                    child: SizedBox(
+                      height: 32,
+                      child: Row(
+                        children: [
+                          Container(
+                            child: const Icon(Icons.info),
+                            margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                          ),
+                          Text(AppLocalizations.of(context)!.playerInformation),
+                        ],
+                      ),
                     ),
                   ),
 
                   const SizedBox(
-                    height: 10,
+                    height: 2,
                   ),
 
                   // Transfer
@@ -127,73 +308,117 @@ void _buildModalSheet(
 
                       Navigator.pop(context);
                     },
-                    child: Row(
-                      children: [
-                        Container(
-                          child: const Icon(Boxicons.bx_transfer),
-                          margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
-                        ),
-                        const Text("Transfer"),
-                      ],
+                    child: SizedBox(
+                      height: 32,
+                      child: Row(
+                        children: [
+                          Container(
+                            child: const Icon(Boxicons.bx_transfer),
+                            margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                          ),
+                          state.transferredInPlayerIdList
+                                  .contains(currentPlayer.playerId)
+                              ? Text(
+                                  AppLocalizations.of(context)!.cancelTransfers,
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                )
+                              : Text(
+                                  AppLocalizations.of(context)!.transfer,
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                )
+                        ],
+                      ),
                     ),
                   ),
 
                   const SizedBox(
-                    height: 15,
+                    height: 16,
                   ),
 
-                  // Upcoming Fixtures
-                  const Text(
-                    "Upcoming Fixtures",
+                  Text(
+                    AppLocalizations.of(context)!.upcomingFixtures,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Architect",
-                      letterSpacing: 0.25,
-                    ),
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.25,
+                        ),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: 16,
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 80,
                     width: double.infinity,
-                    child: GridView.builder(
+                    child: ListView.builder(
+                      itemCount: 10,
                       shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 6,
-                        childAspectRatio: 2.8,
-                      ),
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
                         return Container(
-                          width: 40,
-                          height: 28,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: ConstantColors.primary_900,
-                              width: 0.55,
-                            ),
-                            color: isHomeTeam(
-                                      currentPlayer.upComingFixtures[index],
-                                    ) ==
-                                    1
-                                ? ConstantColors.success_300
-                                : ConstantColors.error_300,
-                          ),
-                          child: Center(
-                            child: Text(
-                              getFixtureTeamAcronym(
-                                currentPlayer.upComingFixtures[index],
+                          margin: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                          width: 80,
+                          // color: Colors.amber,
+                          child: Column(
+                            children: [
+                              // Team Icon
+                              SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.fill,
+                                  imageUrl: _baseURL +
+                                      currentPlayer.upComingFixtures[index]
+                                          ['teamLogo'],
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                ),
                               ),
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
+
+                              // SPACER
+                              const SizedBox(
+                                height: 8,
                               ),
-                            ),
+
+                              // Team Name
+                              SizedBox(
+                                height: 15,
+                                width: 80,
+                                // color: Colors.green,
+                                child: Text(
+                                  getFixtureTeamAcronym(
+                                    currentPlayer.upComingFixtures[index]
+                                        ['teamInfo'],
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: 0.35,
+                                      ),
+                                ),
+                              ),
+
+                              const SizedBox(
+                                height: 2,
+                              ),
+
+                              // Match Rate
+                              Container(
+                                height: 5,
+                                width: 80,
+                                color: isHomeTeam(
+                                          currentPlayer.upComingFixtures[index]
+                                              ['teamInfo'],
+                                        ) ==
+                                        1
+                                    ? ConstantColors.success_300
+                                    : ConstantColors.error_300,
+                              )
+                            ],
                           ),
                         );
                       },

@@ -6,6 +6,8 @@
   "login": "ግባ",
   "team": "ቡድን",
   "transfers": "ማስተላለፍያ",
+  "transfer": "ለውጥ",
+  "cancelTransfer": "ለውጥ ሰርዝ",
   "fixtures": "መርሐግብር",
   "league": "ሊግ",
   "stats": "ስታትስቲክስ",

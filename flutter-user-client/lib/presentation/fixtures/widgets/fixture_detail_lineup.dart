@@ -57,7 +57,6 @@ class FixtureDetailLineUp extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
-                              fontFamily: "Architect",
                             ),
                       ),
                     ),

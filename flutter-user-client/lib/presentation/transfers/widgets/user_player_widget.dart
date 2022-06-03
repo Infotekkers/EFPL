@@ -194,8 +194,14 @@ void _buildModalSheet(
                           ),
                           state.transferredInPlayerIdList
                                   .contains(currentUserPlayer.playerId)
-                              ? const Text("Cancel Transfer")
-                              : const Text("Transfer")
+                              ? Text(
+                                  AppLocalizations.of(context)!.cancelTransfers,
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                )
+                              : Text(
+                                  AppLocalizations.of(context)!.transfer,
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                )
                         ],
                       ),
                     ),

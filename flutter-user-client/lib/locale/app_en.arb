@@ -4,6 +4,8 @@
   "login": "login",
   "team": "Team",
   "transfers": "Transfers",
+  "transfer": "Transfer",
+  "cancelTransfer": "Cancel Transfer",
   "fixtures": "Fixtures",
   "league": "League",
   "stats": "Stats",
