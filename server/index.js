@@ -25,6 +25,7 @@ const gameWeekRoutes = require("./src/routes/gameWeek.routes");
 const customLeagueRoutes = require("./src/routes/customLeague.routes");
 const adminAuthRouter = require("./src/routes/adminAuth.routes");
 const backupRouter = require("./src/routes/backup.routes");
+const EFPLStatsRouter = require("./src/routes/EFPLStats.routes");
 
 // Import Middleware
 const errorMiddleware = require("./src/middleware/error.middleware");
@@ -55,6 +56,8 @@ app.use("/user", userRouter);
 app.use("/customLeagues", customLeagueRoutes);
 app.use("/admin", adminAuthRouter);
 app.use("/backup", backupRouter);
+app.use("/backup", backupRouter);
+app.use("/efpl", EFPLStatsRouter);
 
 // Run populate scripts
 // populate.addTestPlayer();
@@ -63,7 +66,7 @@ app.use("/backup", backupRouter);
 // populate.addTestFixture();
 
 // populate.addTestAdmin();
-// populate.populateTeams();
+populate.populateTeams();
 // populate.populatePlayers();
 // populate.populateFixture();
 

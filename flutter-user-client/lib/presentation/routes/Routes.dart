@@ -1,5 +1,3 @@
-import 'package:efpl/application/util/util_bloc.dart';
-import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/authentication/register/register_view.dart';
 import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
 import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
@@ -26,7 +24,7 @@ class AppRouter {
     "/": (context) => const SplashView(),
     "/team": (context) => const TeamView(),
     "/player": (context) => const PlayerView(),
-    "/home": (context) => const EFPLStatsPage(),
+    "/home": (context) => const MainTabView(),
     "/fixtureDetails": (context) => const FixtureDetailView(),
     "/transfer/initial": (context) => const InitialTransferPage(),
     "/transfer": (context) => const TransferPlayerView(),
