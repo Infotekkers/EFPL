@@ -15,7 +15,6 @@ abstract class RegisterFormState with _$RegisterFormState {
     required bool showPass,
     required bool showConfirmPass,
     required Option<Either<AuthFailure, User>> authFailureOrSuccessOption,
-    required Option<Either<AuthFailure, Password>> isMatch,
   }) = _RegisterFormState;
 
   factory RegisterFormState.initial() => RegisterFormState(
@@ -31,6 +30,5 @@ abstract class RegisterFormState with _$RegisterFormState {
         showPass: false,
         showConfirmPass: false,
         authFailureOrSuccessOption: none(),
-        isMatch: none(),
       );
 }

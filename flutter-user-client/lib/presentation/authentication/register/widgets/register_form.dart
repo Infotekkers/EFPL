@@ -68,6 +68,7 @@ class RegisterForm extends StatelessWidget {
                       headlineText: 'Password do not match',
                       message: "Passwords must match",
                       snackBarType: 'warning',
+                      showDuration: 2,
                     );
                   },
 
@@ -82,8 +83,7 @@ class RegisterForm extends StatelessWidget {
                 );
               },
               (_) {
-                // Navigator.popAndPushNamed(context, "/home");
-                print("e");
+                Navigator.popAndPushNamed(context, "/home");
               },
             );
           },
