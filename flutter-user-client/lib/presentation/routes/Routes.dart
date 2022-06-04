@@ -13,20 +13,26 @@ import 'package:efpl/presentation/transfers/widgets/confirm_transfers_view.dart'
 import 'package:efpl/presentation/transfers/widgets/transfer_list_view.dart';
 
 import 'package:flutter/material.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class AppRouter {
   //
 
-  final UtilBloc _utilBloc = getIt<UtilBloc>()
-    ..add(
-      const UtilEvent.setDefaultLocale(),
-    );
+  // final UtilBloc _utilBloc = getIt<UtilBloc>()
+  //   ..add(
+  //     const UtilEvent.setDefaultLocale(),
+  //   );
 
   Map<String, Widget Function(BuildContext)> allRoutes = {
     "/": (context) => const SplashView(),
     "/team": (context) => const TeamView(),
     "/player": (context) => const PlayerView(),
-    "/home": (context) => const MainTabView(),
+    "/home": (context) => ShowCaseWidget(
+          blurValue: 1,
+          builder: Builder(
+            builder: (context) => const MainTabView(),
+          ),
+        ),
     "/fixtureDetails": (context) => const FixtureDetailView(),
     "/transfer/initial": (context) => const InitialTransferPage(),
     "/transfer": (context) => const TransferPlayerView(),
