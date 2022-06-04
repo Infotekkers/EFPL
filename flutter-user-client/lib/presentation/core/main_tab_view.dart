@@ -1,4 +1,3 @@
-import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
@@ -35,6 +34,12 @@ class MainTabView extends StatelessWidget {
               ListTile(
                 title: const Text('EPL Table'),
                 onTap: () {},
+              ),
+              ListTile(
+                title: const Text('EPFL Stats'),
+                onTap: () {
+                  // Navigator.p
+                },
               ),
               ListTile(
                 title: const Text('How To'),

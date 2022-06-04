@@ -9,15 +9,16 @@ class PlayerWidget extends StatelessWidget {
   final String availability;
   final bool isCaptain;
   final bool isViceCaptain;
-  const PlayerWidget(
-      {Key? key,
-      required this.playerName,
-      this.teamName = "shirt.svg",
-      required this.description,
-      this.isCaptain = false,
-      this.isViceCaptain = false,
-      this.availability = ""})
-      : super(key: key);
+
+  const PlayerWidget({
+    Key? key,
+    required this.playerName,
+    this.teamName = "shirt.svg",
+    required this.description,
+    this.isCaptain = false,
+    this.isViceCaptain = false,
+    this.availability = "",
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class PlayerWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
           width: 80,
-          margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+          margin: const EdgeInsets.symmetric(vertical: 8),
           padding: const EdgeInsets.symmetric(horizontal: 3),
           child: Card(
             elevation: 0,
