@@ -256,145 +256,16 @@ const resetPass = asyncHandler(async (req, res) => {
 });
 
 const transfer = asyncHandler(async (req, res) => {
-  // Destructure request body
   try {
+    // get info from req
     const { data } = req.body;
-    // get user id from token
     const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
     const userId = token.data;
-
     const { isSetTeam } = data;
-
-    // const incomingTeam = {
-    //   activeChip: "",
-    //   gameweekId: 1,
-    //   players: {
-    //     100026: {
-    //       playerId: "100026",
-    //       eplTeamId: "Bahir Dar Kenema S.C",
-    //       price: 5,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100030: {
-    //       playerId: "100030",
-    //       eplTeamId: "Bahir Dar Kenema S.C",
-    //       price: 5.5,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100031: {
-    //       playerId: "100031",
-    //       eplTeamId: "Bahir Dar Kenema S.C",
-    //       price: 5,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100153: {
-    //       playerId: "100153",
-    //       eplTeamId: "Addis Ababa City F.C",
-    //       price: 4.6,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100158: {
-    //       playerId: "100158",
-    //       eplTeamId: "Addis Ababa City F.C",
-    //       price: 4.9,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100159: {
-    //       playerId: "100159",
-    //       eplTeamId: "Addis Ababa City F.C",
-    //       price: 4.7,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100313: {
-    //       playerId: "100313",
-    //       eplTeamId: "Hawassa Kenema S.C",
-    //       price: 4,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100336: {
-    //       playerId: "100336",
-    //       eplTeamId: "Fasil Kenema S.C",
-    //       price: 4,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100338: {
-    //       playerId: "100338",
-    //       eplTeamId: "Fasil Kenema S.C",
-    //       price: 4,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100401: {
-    //       playerId: "100401",
-    //       eplTeamId: "Adama City S.C",
-    //       price: 6,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100402: {
-    //       playerId: "100402",
-    //       eplTeamId: "Adama City S.C",
-    //       price: 6,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100431: {
-    //       playerId: "100431",
-    //       eplTeamId: "Adama City S.C",
-    //       price: 6,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100441: {
-    //       playerId: "100441",
-    //       eplTeamId: "Arba Minch City F.C",
-    //       price: 6,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100453: {
-    //       playerId: "100453",
-    //       eplTeamId: "Arba Minch City F.C",
-    //       price: 6,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //     100455: {
-    //       playerId: "100455",
-    //       eplTeamId: "Arba Minch City F.C",
-    //       price: 6,
-    //       multiplier: 0,
-    //       isCaptain: false,
-    //       isViceCaptain: false,
-    //     },
-    //   },
-    // };
-
     let incomingTeam;
     let isInitial = false;
 
+    // parse conditionally
     if (!isSetTeam) {
       incomingTeam = JSON.parse(data).incomingTeam;
       isInitial = JSON.parse(data).isInitial;
@@ -455,9 +326,8 @@ const transfer = asyncHandler(async (req, res) => {
       }
     }
 
-    // Fetch active gameweek
+    // Fetch active game week
     let activeGameweek = await Gameweek.findOne({ status: "active" }).exec();
-
     if (activeGameweek) {
       activeGameweek = activeGameweek.gameWeekNumber;
     }
@@ -468,7 +338,6 @@ const transfer = asyncHandler(async (req, res) => {
 
     // Fetch User Details
     const user = await User.findById(userId).exec();
-
     let activeTeam;
 
     if (activeGameweek === 1) {
@@ -478,8 +347,7 @@ const transfer = asyncHandler(async (req, res) => {
       activeGameweek = user.team[activeGameweek - 2];
     }
 
-    await playerInsOutsCounter(activeTeam, incomingTeam);
-
+    // check team validity
     if (user.team.length > 0) {
       const [isTeamValid, errorType] = await validateTeam(
         incomingTeam,
@@ -490,6 +358,9 @@ const transfer = asyncHandler(async (req, res) => {
 
       // Save team || Send err
       if (isTeamValid === true) {
+        // count transfer ins and outs for players
+        await playerInsOutsCounter(activeTeam, incomingTeam);
+
         // Calculate deduction
         let deduction = 0;
         let transfersMade = "";
@@ -505,14 +376,18 @@ const transfer = asyncHandler(async (req, res) => {
               activeTeam.freeTransfers = activeTeam.freeTransfers - 1;
             }
           }
-
-          // activeTeam.freeTransfers =
-          //   activeTeam.freeTransfers < transfersMade
-          //     ? 0
-          //     : activeTeam.freeTransfers - transfersMade;
         }
 
-        console.log(deduction, transfersMade, activeTeam.freeTransfers);
+        console.log(
+          "DEDUCTION ",
+          deduction,
+          "TransfersMade",
+          transfersMade,
+          "REMAINING FREE TRANSFERS",
+          activeTeam.freeTransfers,
+          "GW",
+          activeGameweek
+        );
 
         // Remove active chips from available chips
         if (incomingTeam.activeChip) {
@@ -527,12 +402,13 @@ const transfer = asyncHandler(async (req, res) => {
         const updatedUserTeam = [];
 
         // get old teams as is
-        for (let i = 0; i < activeGameweek - 1; i++) {
+        for (let i = 0; i < activeGameweek; i++) {
+          console.log(user.team[i]);
           updatedUserTeam.push(user.team[i]);
         }
 
         // update current gw team
-        const currentGwTeam = user.team[activeGameweek - 1];
+        const currentGwTeam = user.team[activeGameweek];
         currentGwTeam.players = incomingTeam.players;
         currentGwTeam.deduction = deduction;
         currentGwTeam.freeTransfers = activeTeam.freeTransfers;
@@ -571,6 +447,7 @@ const transfer = asyncHandler(async (req, res) => {
     }
     // initial transfer
     else {
+      console.log("At ElSE");
       const updatedUserTeam = [];
       // update future teams
       for (let i = 0; i < 30; i++) {
@@ -662,7 +539,7 @@ const getUserTeam = asyncHandler(async (req, res) => {
             gameweekId: { $gt: gameWeekId },
           })
             .select("homeTeam awayTeam")
-            .limit(10);
+            .limit(6);
 
           const upComingFixture = [];
 
@@ -895,6 +772,7 @@ const getUserPoints = asyncHandler(async (req, res) => {
     res.status(403).send("Error Decoding token");
   }
 });
+
 const validateUser = asyncHandler(async (req, res) => {
   const token = req.body.token;
 

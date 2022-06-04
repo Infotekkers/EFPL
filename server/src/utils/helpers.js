@@ -17,7 +17,7 @@ const generateJWTToken = expressAsyncHandler(async (id) => {
 // Function to deduct points from user team
 const pointDeductor = (activeTeam, incomingTeam) => {
   let deduction = activeTeam.deduction;
-  let freeTransers = activeTeam.freeTransfers;
+  let freeTransfers = activeTeam.freeTransfers;
   let transfersMade = 0;
 
   // Check if wildcard or free hit chips are active
@@ -37,8 +37,8 @@ const pointDeductor = (activeTeam, incomingTeam) => {
     // Use free transfers if any
     deduction -= 4 * activeTeam.freeTransfers;
 
-    if (freeTransers > 0) {
-      freeTransers = freeTransers - 1;
+    if (freeTransfers > 0) {
+      freeTransfers = freeTransfers - 1;
     }
   }
 
