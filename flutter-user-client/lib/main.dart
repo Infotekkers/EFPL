@@ -15,6 +15,7 @@ Future main() async {
   await Hive.openBox("transferCache");
   await Hive.openBox("fixtureCache");
   await Hive.openBox("pointsCache");
+  await Hive.openBox("watchListCache");
 
   configureInjection(Environment.prod);
   runApp(const AppWidget());

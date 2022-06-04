@@ -103,5 +103,9 @@
   "saves": "Saves",
   "penaltySaved": "Penalty Saved",
   "cleanSheet": "Clean Sheet",
-  "sum": "Total Sum"
+  "sum": "Total Sum",
+  "watchListTranslations": "Watch List",
+  "yourWatchList": "Your Watch List",
+  "addToWatchList": "Add To WatchList",
+  "removeFromWatchList": "Remove From WatchList"
 }

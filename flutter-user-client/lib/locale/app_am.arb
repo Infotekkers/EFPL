@@ -102,5 +102,9 @@
   "saves": "ያዳነዉ",
   "penaltySaved": "ያዳነዉ ፍጹም ቅጣት ምቾቻ",
   "cleanSheet": "ምንም ግቦች",
-  "sum": "ጠቅላላ ድምር"
+  "sum": "ጠቅላላ ድምር",
+  "watchListTranslations": "Watch List",
+  "yourWatchList": "የምኞት ዝርዝር",
+  "addToWatchList": "የምኞት ዝርዝር ውስጥ ያስገቡ",
+  "removeFromWatchList": "ከምኞት ዝርዝር አስወግድ"
 }

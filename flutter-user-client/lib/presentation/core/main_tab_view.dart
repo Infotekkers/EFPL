@@ -9,6 +9,7 @@ import 'package:efpl/presentation/stats/epl_stats_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
 import 'package:efpl/presentation/transfers/transfers_view_main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -31,6 +32,12 @@ class MainTabView extends StatelessWidget {
                   border: Border.all(color: Colors.white, width: 0.0),
                 ),
                 child: const Center(child: Text('Drawer Header')),
+              ),
+              ListTile(
+                title: const Text('WatchList'),
+                onTap: () {
+                  Navigator.pushNamed(context, "/watchList");
+                },
               ),
               ListTile(
                 title: const Text('EPL Table'),
@@ -59,6 +66,9 @@ class MainTabView extends StatelessWidget {
           ),
         ),
         appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.blue[50],
+          ),
           backgroundColor: Colors.blue[50],
           iconTheme: IconThemeData(color: Colors.blue[900]),
           elevation: 0,
@@ -127,8 +137,8 @@ class MainTabView extends StatelessWidget {
             ),
           ),
         ),
-        body: TabBarView(
-          children: const [
+        body: const TabBarView(
+          children: [
             TeamView(),
             PointsView(),
             TransfersView(),

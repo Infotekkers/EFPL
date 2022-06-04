@@ -96,6 +96,10 @@ const userSchema = mongoose.Schema({
     default: 100.0,
     required: true,
   },
+  watchList: {
+    type: Array,
+    default: [],
+  },
 });
 
 userSchema.pre("save", async function (next) {
