@@ -38,7 +38,7 @@ class MainTabView extends StatelessWidget {
               ListTile(
                 title: const Text('EPFL Stats'),
                 onTap: () {
-                  // Navigator.p
+                  Navigator.pushNamed(context, "/efpl");
                 },
               ),
               ListTile(
