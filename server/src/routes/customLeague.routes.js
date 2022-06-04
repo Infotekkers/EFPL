@@ -3,7 +3,7 @@ const router = express.Router();
 
 const customLeagueController = require("../controllers/customLeague.controllers");
 
-router.get("/", customLeagueController.getAllCustomLeagues);
+router.get("/:customLeagueId", customLeagueController.getCustomLeagueInfo);
 
 router.get("/user/:userId", customLeagueController.getUserCustomLeagues);
 

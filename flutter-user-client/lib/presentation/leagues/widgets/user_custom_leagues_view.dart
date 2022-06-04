@@ -1,5 +1,7 @@
 import 'package:efpl/application/custom_leagues/custom_leagues_bloc.dart';
+import 'package:efpl/injectable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserCustomLeaguesView extends StatelessWidget {
@@ -32,12 +34,18 @@ class UserCustomLeaguesView extends StatelessWidget {
             child: ListView.builder(
               itemCount: userCustomLeagues.length,
               shrinkWrap: true,
-              itemBuilder: (_, index) => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("${userCustomLeagues[index].leagueName.getOrCrash()}"),
-                  Text("${userCustomLeagues[index].previousRank.getOrCrash()}"),
-                ],
+              itemBuilder: (_, index) => InkWell(
+                onTap: () {
+                  print("tapped");
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("${userCustomLeagues[index].leagueName.getOrCrash()}"),
+                    Text(
+                        "${userCustomLeagues[index].previousRank.getOrCrash()}"),
+                  ],
+                ),
               ),
             ),
           ),
