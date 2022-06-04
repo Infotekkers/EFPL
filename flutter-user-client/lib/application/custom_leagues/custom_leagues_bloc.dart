@@ -20,6 +20,7 @@ class CustomLeaguesBloc extends Bloc<CustomLeaguesEvent, CustomLeaguesState> {
           const CustomLeaguesState.initial(),
         ) {
     on<_GetUserCustomLeagues>(_onGetUserCustomLeagues);
+    on<_GetCustomLeagueInfo>(_onGetCustomLeagueInfo);
   }
 
   void _onGetUserCustomLeagues(
@@ -34,5 +35,20 @@ class CustomLeaguesBloc extends Bloc<CustomLeaguesEvent, CustomLeaguesState> {
         (userCustomLeagues) => emit(
             CustomLeaguesState.loadUserCustomLeaguesSuccess(
                 userCustomLeagues)));
+  }
+
+  void _onGetCustomLeagueInfo(
+      _GetCustomLeagueInfo e, Emitter<CustomLeaguesState> emit) async {
+    emit(const CustomLeaguesState.loadInProgress());
+
+    final failureOrSuccess = await iCustomLeaguesRepository.getCustomLeagueInfo(
+        leagueId: e.leagueId);
+
+    failureOrSuccess.fold(
+      (failure) => emit(CustomLeaguesState.loadFailure(failure)),
+      (customLeaguesInfo) => emit(
+        CustomLeaguesState.loadCustomLeagueInfo(customLeaguesInfo),
+      ),
+    );
   }
 }

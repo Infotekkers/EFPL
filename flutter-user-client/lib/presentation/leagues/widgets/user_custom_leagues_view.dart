@@ -37,9 +37,12 @@ class UserCustomLeaguesView extends StatelessWidget {
               shrinkWrap: true,
               itemBuilder: (_, index) => InkWell(
                 onTap: () {
+                  print("tapped");
                   BlocProvider.of<CustomLeaguesBloc>(context).add(
-                      const CustomLeaguesEvent.getUserCustomLeagues(
-                          userId: "62960c04c1a572a276b6e08c"));
+                    CustomLeaguesEvent.getCustomLeagueInfo(
+                      leagueId: userCustomLeagues[index].leagueId.getOrCrash(),
+                    ),
+                  );
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
