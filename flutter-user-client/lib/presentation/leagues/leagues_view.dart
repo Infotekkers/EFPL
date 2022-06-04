@@ -21,7 +21,7 @@ class LeaguesView extends StatelessWidget {
           value: getIt<CustomLeaguesBloc>()
             ..add(
               const CustomLeaguesEvent.getUserCustomLeagues(
-                  userId: "628a258d9c666191581a83f9"),
+                  userId: "62960c04c1a572a276b6e08b"),
             ),
         ),
       ],

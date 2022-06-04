@@ -15,6 +15,7 @@ const getCustomLeagueInfo = asyncHandler(async function (req, res) {
 
 const getUserCustomLeagues = asyncHandler(async function (req, res) {
   const { userId } = req.params;
+  console.log(userId);
 
   const user = await UserModel.findOne({ _id: userId });
 
@@ -117,7 +118,7 @@ const joinCustomLeague = asyncHandler(async function (req, res) {
     return res.status(400).send("Couldn't find a user with the provided ID!");
   }
 
-  if (customLeague.teams.includes(userId)) {
+  if (customLeague.teams.find(({ memberId }) => memberId === user.id)) {
     return res
       .status(400)
       .send("Player is already a member of the custom league!");
@@ -173,7 +174,7 @@ const leaveCustomLeague = asyncHandler(async (req, res) => {
     return res.status(400).send("Couldn't find a user with the provided ID!");
   }
 
-  if (!customLeague.teams.includes(userId)) {
+  if (!customLeague.teams.find(({ memberId }) => memberId === user.id)) {
     return res
       .status(400)
       .send("Player is not a member of this custom league!");

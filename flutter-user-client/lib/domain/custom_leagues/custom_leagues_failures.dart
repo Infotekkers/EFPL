@@ -4,7 +4,7 @@ part 'custom_leagues_failures.freezed.dart';
 
 @freezed
 abstract class CustomLeaguesFailures<T> with _$CustomLeaguesFailures<T> {
-  const factory CustomLeaguesFailures.invalidLeagueId(
+  const factory CustomLeaguesFailures.invalidLeagueCode(
       {required String leagueCode}) = InvalidLeagueCode<T>;
 
   const factory CustomLeaguesFailures.networkError() = NetworkError<T>;

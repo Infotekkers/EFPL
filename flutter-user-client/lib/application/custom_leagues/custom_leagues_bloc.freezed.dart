@@ -22,6 +22,12 @@ class _$CustomLeaguesEventTearOff {
       userId: userId,
     );
   }
+
+  _GetCustomLeagueInfo getCustomLeagueInfo({required int leagueId}) {
+    return _GetCustomLeagueInfo(
+      leagueId: leagueId,
+    );
+  }
 }
 
 /// @nodoc
@@ -29,43 +35,43 @@ const $CustomLeaguesEvent = _$CustomLeaguesEventTearOff();
 
 /// @nodoc
 mixin _$CustomLeaguesEvent {
-  String get userId => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getUserCustomLeagues,
+    required TResult Function(int leagueId) getCustomLeagueInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
+    TResult Function(int leagueId)? getCustomLeagueInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
+    TResult Function(int leagueId)? getCustomLeagueInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
+    required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $CustomLeaguesEventCopyWith<CustomLeaguesEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -74,7 +80,6 @@ abstract class $CustomLeaguesEventCopyWith<$Res> {
   factory $CustomLeaguesEventCopyWith(
           CustomLeaguesEvent value, $Res Function(CustomLeaguesEvent) then) =
       _$CustomLeaguesEventCopyWithImpl<$Res>;
-  $Res call({String userId});
 }
 
 /// @nodoc
@@ -85,27 +90,13 @@ class _$CustomLeaguesEventCopyWithImpl<$Res>
   final CustomLeaguesEvent _value;
   // ignore: unused_field
   final $Res Function(CustomLeaguesEvent) _then;
-
-  @override
-  $Res call({
-    Object? userId = freezed,
-  }) {
-    return _then(_value.copyWith(
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$GetUserCustomLeaguesCopyWith<$Res>
-    implements $CustomLeaguesEventCopyWith<$Res> {
+abstract class _$GetUserCustomLeaguesCopyWith<$Res> {
   factory _$GetUserCustomLeaguesCopyWith(_GetUserCustomLeagues value,
           $Res Function(_GetUserCustomLeagues) then) =
       __$GetUserCustomLeaguesCopyWithImpl<$Res>;
-  @override
   $Res call({String userId});
 }
 
@@ -168,6 +159,7 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getUserCustomLeagues,
+    required TResult Function(int leagueId) getCustomLeagueInfo,
   }) {
     return getUserCustomLeagues(userId);
   }
@@ -176,6 +168,7 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
+    TResult Function(int leagueId)? getCustomLeagueInfo,
   }) {
     return getUserCustomLeagues?.call(userId);
   }
@@ -184,6 +177,7 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
+    TResult Function(int leagueId)? getCustomLeagueInfo,
     required TResult orElse(),
   }) {
     if (getUserCustomLeagues != null) {
@@ -196,6 +190,7 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
+    required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
   }) {
     return getUserCustomLeagues(this);
   }
@@ -204,6 +199,7 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
   }) {
     return getUserCustomLeagues?.call(this);
   }
@@ -212,6 +208,7 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
     required TResult orElse(),
   }) {
     if (getUserCustomLeagues != null) {
@@ -225,11 +222,145 @@ abstract class _GetUserCustomLeagues implements CustomLeaguesEvent {
   const factory _GetUserCustomLeagues({required String userId}) =
       _$_GetUserCustomLeagues;
 
-  @override
   String get userId;
-  @override
   @JsonKey(ignore: true)
   _$GetUserCustomLeaguesCopyWith<_GetUserCustomLeagues> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$GetCustomLeagueInfoCopyWith<$Res> {
+  factory _$GetCustomLeagueInfoCopyWith(_GetCustomLeagueInfo value,
+          $Res Function(_GetCustomLeagueInfo) then) =
+      __$GetCustomLeagueInfoCopyWithImpl<$Res>;
+  $Res call({int leagueId});
+}
+
+/// @nodoc
+class __$GetCustomLeagueInfoCopyWithImpl<$Res>
+    extends _$CustomLeaguesEventCopyWithImpl<$Res>
+    implements _$GetCustomLeagueInfoCopyWith<$Res> {
+  __$GetCustomLeagueInfoCopyWithImpl(
+      _GetCustomLeagueInfo _value, $Res Function(_GetCustomLeagueInfo) _then)
+      : super(_value, (v) => _then(v as _GetCustomLeagueInfo));
+
+  @override
+  _GetCustomLeagueInfo get _value => super._value as _GetCustomLeagueInfo;
+
+  @override
+  $Res call({
+    Object? leagueId = freezed,
+  }) {
+    return _then(_GetCustomLeagueInfo(
+      leagueId: leagueId == freezed
+          ? _value.leagueId
+          : leagueId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
+  const _$_GetCustomLeagueInfo({required this.leagueId});
+
+  @override
+  final int leagueId;
+
+  @override
+  String toString() {
+    return 'CustomLeaguesEvent.getCustomLeagueInfo(leagueId: $leagueId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _GetCustomLeagueInfo &&
+            const DeepCollectionEquality().equals(other.leagueId, leagueId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(leagueId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetCustomLeagueInfoCopyWith<_GetCustomLeagueInfo> get copyWith =>
+      __$GetCustomLeagueInfoCopyWithImpl<_GetCustomLeagueInfo>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) getUserCustomLeagues,
+    required TResult Function(int leagueId) getCustomLeagueInfo,
+  }) {
+    return getCustomLeagueInfo(leagueId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String userId)? getUserCustomLeagues,
+    TResult Function(int leagueId)? getCustomLeagueInfo,
+  }) {
+    return getCustomLeagueInfo?.call(leagueId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? getUserCustomLeagues,
+    TResult Function(int leagueId)? getCustomLeagueInfo,
+    required TResult orElse(),
+  }) {
+    if (getCustomLeagueInfo != null) {
+      return getCustomLeagueInfo(leagueId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
+    required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
+  }) {
+    return getCustomLeagueInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
+  }) {
+    return getCustomLeagueInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
+    required TResult orElse(),
+  }) {
+    if (getCustomLeagueInfo != null) {
+      return getCustomLeagueInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetCustomLeagueInfo implements CustomLeaguesEvent {
+  const factory _GetCustomLeagueInfo({required int leagueId}) =
+      _$_GetCustomLeagueInfo;
+
+  int get leagueId;
+  @JsonKey(ignore: true)
+  _$GetCustomLeagueInfoCopyWith<_GetCustomLeagueInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -252,6 +383,10 @@ class _$CustomLeaguesStateTearOff {
     );
   }
 
+  _LoadCustomLeagueInfoSuccess loadCustomLeagueInfo() {
+    return const _LoadCustomLeagueInfoSuccess();
+  }
+
   _LoadFailure loadFailure(CustomLeaguesFailures<dynamic> failure) {
     return _LoadFailure(
       failure,
@@ -270,6 +405,7 @@ mixin _$CustomLeaguesState {
     required TResult Function() loadInProgress,
     required TResult Function(List<CustomLeagues> userCustomLeagues)
         loadUserCustomLeaguesSuccess,
+    required TResult Function() loadCustomLeagueInfo,
     required TResult Function(CustomLeaguesFailures<dynamic> failure)
         loadFailure,
   }) =>
@@ -280,6 +416,7 @@ mixin _$CustomLeaguesState {
     TResult Function()? loadInProgress,
     TResult Function(List<CustomLeagues> userCustomLeagues)?
         loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
     TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -289,6 +426,7 @@ mixin _$CustomLeaguesState {
     TResult Function()? loadInProgress,
     TResult Function(List<CustomLeagues> userCustomLeagues)?
         loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
     TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -299,6 +437,8 @@ mixin _$CustomLeaguesState {
     required TResult Function(_LoadInProgress value) loadInProgress,
     required TResult Function(_LoadUserCustomLeaguesSuccess value)
         loadUserCustomLeaguesSuccess,
+    required TResult Function(_LoadCustomLeagueInfoSuccess value)
+        loadCustomLeagueInfo,
     required TResult Function(_LoadFailure value) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -308,6 +448,7 @@ mixin _$CustomLeaguesState {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadUserCustomLeaguesSuccess value)?
         loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
     TResult Function(_LoadFailure value)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -317,6 +458,7 @@ mixin _$CustomLeaguesState {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadUserCustomLeaguesSuccess value)?
         loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -383,6 +525,7 @@ class _$_Initial implements _Initial {
     required TResult Function() loadInProgress,
     required TResult Function(List<CustomLeagues> userCustomLeagues)
         loadUserCustomLeaguesSuccess,
+    required TResult Function() loadCustomLeagueInfo,
     required TResult Function(CustomLeaguesFailures<dynamic> failure)
         loadFailure,
   }) {
@@ -396,6 +539,7 @@ class _$_Initial implements _Initial {
     TResult Function()? loadInProgress,
     TResult Function(List<CustomLeagues> userCustomLeagues)?
         loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
     TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
   }) {
     return initial?.call();
@@ -408,6 +552,7 @@ class _$_Initial implements _Initial {
     TResult Function()? loadInProgress,
     TResult Function(List<CustomLeagues> userCustomLeagues)?
         loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
     TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -424,6 +569,8 @@ class _$_Initial implements _Initial {
     required TResult Function(_LoadInProgress value) loadInProgress,
     required TResult Function(_LoadUserCustomLeaguesSuccess value)
         loadUserCustomLeaguesSuccess,
+    required TResult Function(_LoadCustomLeagueInfoSuccess value)
+        loadCustomLeagueInfo,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return initial(this);
@@ -436,6 +583,7 @@ class _$_Initial implements _Initial {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadUserCustomLeaguesSuccess value)?
         loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
     TResult Function(_LoadFailure value)? loadFailure,
   }) {
     return initial?.call(this);
@@ -448,6 +596,7 @@ class _$_Initial implements _Initial {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadUserCustomLeaguesSuccess value)?
         loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
@@ -507,6 +656,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     required TResult Function() loadInProgress,
     required TResult Function(List<CustomLeagues> userCustomLeagues)
         loadUserCustomLeaguesSuccess,
+    required TResult Function() loadCustomLeagueInfo,
     required TResult Function(CustomLeaguesFailures<dynamic> failure)
         loadFailure,
   }) {
@@ -520,6 +670,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function()? loadInProgress,
     TResult Function(List<CustomLeagues> userCustomLeagues)?
         loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
     TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
   }) {
     return loadInProgress?.call();
@@ -532,6 +683,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function()? loadInProgress,
     TResult Function(List<CustomLeagues> userCustomLeagues)?
         loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
     TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -548,6 +700,8 @@ class _$_LoadInProgress implements _LoadInProgress {
     required TResult Function(_LoadInProgress value) loadInProgress,
     required TResult Function(_LoadUserCustomLeaguesSuccess value)
         loadUserCustomLeaguesSuccess,
+    required TResult Function(_LoadCustomLeagueInfoSuccess value)
+        loadCustomLeagueInfo,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadInProgress(this);
@@ -560,6 +714,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadUserCustomLeaguesSuccess value)?
         loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
     TResult Function(_LoadFailure value)? loadFailure,
   }) {
     return loadInProgress?.call(this);
@@ -572,6 +727,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadUserCustomLeaguesSuccess value)?
         loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
@@ -660,6 +816,7 @@ class _$_LoadUserCustomLeaguesSuccess implements _LoadUserCustomLeaguesSuccess {
     required TResult Function() loadInProgress,
     required TResult Function(List<CustomLeagues> userCustomLeagues)
         loadUserCustomLeaguesSuccess,
+    required TResult Function() loadCustomLeagueInfo,
     required TResult Function(CustomLeaguesFailures<dynamic> failure)
         loadFailure,
   }) {
@@ -673,6 +830,7 @@ class _$_LoadUserCustomLeaguesSuccess implements _LoadUserCustomLeaguesSuccess {
     TResult Function()? loadInProgress,
     TResult Function(List<CustomLeagues> userCustomLeagues)?
         loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
     TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
   }) {
     return loadUserCustomLeaguesSuccess?.call(userCustomLeagues);
@@ -685,6 +843,7 @@ class _$_LoadUserCustomLeaguesSuccess implements _LoadUserCustomLeaguesSuccess {
     TResult Function()? loadInProgress,
     TResult Function(List<CustomLeagues> userCustomLeagues)?
         loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
     TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -701,6 +860,8 @@ class _$_LoadUserCustomLeaguesSuccess implements _LoadUserCustomLeaguesSuccess {
     required TResult Function(_LoadInProgress value) loadInProgress,
     required TResult Function(_LoadUserCustomLeaguesSuccess value)
         loadUserCustomLeaguesSuccess,
+    required TResult Function(_LoadCustomLeagueInfoSuccess value)
+        loadCustomLeagueInfo,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadUserCustomLeaguesSuccess(this);
@@ -713,6 +874,7 @@ class _$_LoadUserCustomLeaguesSuccess implements _LoadUserCustomLeaguesSuccess {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadUserCustomLeaguesSuccess value)?
         loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
     TResult Function(_LoadFailure value)? loadFailure,
   }) {
     return loadUserCustomLeaguesSuccess?.call(this);
@@ -725,6 +887,7 @@ class _$_LoadUserCustomLeaguesSuccess implements _LoadUserCustomLeaguesSuccess {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadUserCustomLeaguesSuccess value)?
         loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
@@ -743,6 +906,141 @@ abstract class _LoadUserCustomLeaguesSuccess implements CustomLeaguesState {
   @JsonKey(ignore: true)
   _$LoadUserCustomLeaguesSuccessCopyWith<_LoadUserCustomLeaguesSuccess>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$LoadCustomLeagueInfoSuccessCopyWith<$Res> {
+  factory _$LoadCustomLeagueInfoSuccessCopyWith(
+          _LoadCustomLeagueInfoSuccess value,
+          $Res Function(_LoadCustomLeagueInfoSuccess) then) =
+      __$LoadCustomLeagueInfoSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$LoadCustomLeagueInfoSuccessCopyWithImpl<$Res>
+    extends _$CustomLeaguesStateCopyWithImpl<$Res>
+    implements _$LoadCustomLeagueInfoSuccessCopyWith<$Res> {
+  __$LoadCustomLeagueInfoSuccessCopyWithImpl(
+      _LoadCustomLeagueInfoSuccess _value,
+      $Res Function(_LoadCustomLeagueInfoSuccess) _then)
+      : super(_value, (v) => _then(v as _LoadCustomLeagueInfoSuccess));
+
+  @override
+  _LoadCustomLeagueInfoSuccess get _value =>
+      super._value as _LoadCustomLeagueInfoSuccess;
+}
+
+/// @nodoc
+
+class _$_LoadCustomLeagueInfoSuccess implements _LoadCustomLeagueInfoSuccess {
+  const _$_LoadCustomLeagueInfoSuccess();
+
+  @override
+  String toString() {
+    return 'CustomLeaguesState.loadCustomLeagueInfo()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _LoadCustomLeagueInfoSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadInProgress,
+    required TResult Function(List<CustomLeagues> userCustomLeagues)
+        loadUserCustomLeaguesSuccess,
+    required TResult Function() loadCustomLeagueInfo,
+    required TResult Function(CustomLeaguesFailures<dynamic> failure)
+        loadFailure,
+  }) {
+    return loadCustomLeagueInfo();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadInProgress,
+    TResult Function(List<CustomLeagues> userCustomLeagues)?
+        loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
+    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
+  }) {
+    return loadCustomLeagueInfo?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadInProgress,
+    TResult Function(List<CustomLeagues> userCustomLeagues)?
+        loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
+    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
+    required TResult orElse(),
+  }) {
+    if (loadCustomLeagueInfo != null) {
+      return loadCustomLeagueInfo();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoadInProgress value) loadInProgress,
+    required TResult Function(_LoadUserCustomLeaguesSuccess value)
+        loadUserCustomLeaguesSuccess,
+    required TResult Function(_LoadCustomLeagueInfoSuccess value)
+        loadCustomLeagueInfo,
+    required TResult Function(_LoadFailure value) loadFailure,
+  }) {
+    return loadCustomLeagueInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadInProgress value)? loadInProgress,
+    TResult Function(_LoadUserCustomLeaguesSuccess value)?
+        loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
+    TResult Function(_LoadFailure value)? loadFailure,
+  }) {
+    return loadCustomLeagueInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadInProgress value)? loadInProgress,
+    TResult Function(_LoadUserCustomLeaguesSuccess value)?
+        loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
+    TResult Function(_LoadFailure value)? loadFailure,
+    required TResult orElse(),
+  }) {
+    if (loadCustomLeagueInfo != null) {
+      return loadCustomLeagueInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadCustomLeagueInfoSuccess implements CustomLeaguesState {
+  const factory _LoadCustomLeagueInfoSuccess() = _$_LoadCustomLeagueInfoSuccess;
 }
 
 /// @nodoc
@@ -824,6 +1122,7 @@ class _$_LoadFailure implements _LoadFailure {
     required TResult Function() loadInProgress,
     required TResult Function(List<CustomLeagues> userCustomLeagues)
         loadUserCustomLeaguesSuccess,
+    required TResult Function() loadCustomLeagueInfo,
     required TResult Function(CustomLeaguesFailures<dynamic> failure)
         loadFailure,
   }) {
@@ -837,6 +1136,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function()? loadInProgress,
     TResult Function(List<CustomLeagues> userCustomLeagues)?
         loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
     TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
   }) {
     return loadFailure?.call(failure);
@@ -849,6 +1149,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function()? loadInProgress,
     TResult Function(List<CustomLeagues> userCustomLeagues)?
         loadUserCustomLeaguesSuccess,
+    TResult Function()? loadCustomLeagueInfo,
     TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -865,6 +1166,8 @@ class _$_LoadFailure implements _LoadFailure {
     required TResult Function(_LoadInProgress value) loadInProgress,
     required TResult Function(_LoadUserCustomLeaguesSuccess value)
         loadUserCustomLeaguesSuccess,
+    required TResult Function(_LoadCustomLeagueInfoSuccess value)
+        loadCustomLeagueInfo,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadFailure(this);
@@ -877,6 +1180,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadUserCustomLeaguesSuccess value)?
         loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
     TResult Function(_LoadFailure value)? loadFailure,
   }) {
     return loadFailure?.call(this);
@@ -889,6 +1193,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadUserCustomLeaguesSuccess value)?
         loadUserCustomLeaguesSuccess,
+    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {

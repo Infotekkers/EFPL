@@ -5,4 +5,7 @@ abstract class ICustomLeaguesRepository {
   Future<Either<dynamic, List<CustomLeagues>>> getUserCustomLeagues({
     required String userId,
   });
+  Future<Either<dynamic, CustomLeaguesInfo>> getCustomLeagueInfo({
+    required int leagueId,
+  });
 }

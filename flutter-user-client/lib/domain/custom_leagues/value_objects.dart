@@ -15,6 +15,17 @@ class LeagueId extends ValueObject {
   const LeagueId._({required this.value});
 }
 
+class AdminId extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory AdminId({required String value}) {
+    return AdminId._(value: validateAdminId(adminId: value));
+  }
+
+  const AdminId._({required this.value});
+}
+
 class LeagueName extends ValueObject {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -26,6 +37,40 @@ class LeagueName extends ValueObject {
   const LeagueName._({required this.value});
 }
 
+class LeagueType extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory LeagueType({required String value}) {
+    return LeagueType._(value: validateLeagueType(leagueType: value));
+  }
+
+  const LeagueType._({required this.value});
+}
+
+class LeagueCode extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory LeagueCode({required String value}) {
+    return LeagueCode._(value: validateLeagueCode(leagueCode: value));
+  }
+
+  const LeagueCode._({required this.value});
+}
+
+class LeagueStartGameweek extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, int> value;
+
+  factory LeagueStartGameweek({required int value}) {
+    return LeagueStartGameweek._(
+        value: validateLeagueStartGameweek(leagueStartGameweek: value));
+  }
+
+  const LeagueStartGameweek._({required this.value});
+}
+
 class PreviousRank extends ValueObject {
   @override
   final Either<ValueFailure<String>, int> value;
@@ -35,4 +80,38 @@ class PreviousRank extends ValueObject {
   }
 
   const PreviousRank._({required this.value});
+}
+
+class MemberId extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MemberId({required String value}) {
+    return MemberId._(value: validateMemberId(memberId: value));
+  }
+
+  const MemberId._({required this.value});
+}
+
+class MemberTeamName extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MemberTeamName({required String value}) {
+    return MemberTeamName._(
+        value: validateMemberTeamName(memberTeamName: value));
+  }
+
+  const MemberTeamName._({required this.value});
+}
+
+class MemberPoints extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, int> value;
+
+  factory MemberPoints({required int value}) {
+    return MemberPoints._(value: validateMemberPoints(memberPoints: value));
+  }
+
+  const MemberPoints._({required this.value});
 }

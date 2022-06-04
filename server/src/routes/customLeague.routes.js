@@ -4,7 +4,6 @@ const router = express.Router();
 const customLeagueController = require("../controllers/customLeague.controllers");
 
 router.get("/:customLeagueId", customLeagueController.getCustomLeagueInfo);
-
 router.get("/user/:userId", customLeagueController.getUserCustomLeagues);
 
 router.post("/create", customLeagueController.createCustomLeague);

@@ -16,6 +16,7 @@ class UserCustomLeaguesView extends StatelessWidget {
         loadFailure: (_) => const Text("Failure"),
         loadInProgress: (_) => const Text("Loading"),
         loadUserCustomLeaguesSuccess: (_) => _buildView(state, context),
+        loadCustomLeagueInfo: (_) => Container(),
       ),
     );
   }
@@ -28,7 +29,7 @@ class UserCustomLeaguesView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Classic Leagues"),
+          const Text("Custom Leagues"),
           const SizedBox(height: 8.0),
           Expanded(
             child: ListView.builder(
@@ -36,7 +37,9 @@ class UserCustomLeaguesView extends StatelessWidget {
               shrinkWrap: true,
               itemBuilder: (_, index) => InkWell(
                 onTap: () {
-                  print("tapped");
+                  BlocProvider.of<CustomLeaguesBloc>(context).add(
+                      const CustomLeaguesEvent.getUserCustomLeagues(
+                          userId: "62960c04c1a572a276b6e08c"));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

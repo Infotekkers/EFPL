@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CustomLeaguesFailuresTearOff {
   const _$CustomLeaguesFailuresTearOff();
 
-  InvalidLeagueCode<T> invalidLeagueId<T>({required String leagueCode}) {
+  InvalidLeagueCode<T> invalidLeagueCode<T>({required String leagueCode}) {
     return InvalidLeagueCode<T>(
       leagueCode: leagueCode,
     );
@@ -39,21 +39,21 @@ const $CustomLeaguesFailures = _$CustomLeaguesFailuresTearOff();
 mixin _$CustomLeaguesFailures<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String leagueCode) invalidLeagueId,
+    required TResult Function(String leagueCode) invalidLeagueCode,
     required TResult Function() networkError,
     required TResult Function() serverError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String leagueCode)? invalidLeagueId,
+    TResult Function(String leagueCode)? invalidLeagueCode,
     TResult Function()? networkError,
     TResult Function()? serverError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String leagueCode)? invalidLeagueId,
+    TResult Function(String leagueCode)? invalidLeagueCode,
     TResult Function()? networkError,
     TResult Function()? serverError,
     required TResult orElse(),
@@ -61,21 +61,21 @@ mixin _$CustomLeaguesFailures<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InvalidLeagueCode<T> value) invalidLeagueId,
+    required TResult Function(InvalidLeagueCode<T> value) invalidLeagueCode,
     required TResult Function(NetworkError<T> value) networkError,
     required TResult Function(ServerError<T> value) serverError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueId,
+    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueCode,
     TResult Function(NetworkError<T> value)? networkError,
     TResult Function(ServerError<T> value)? serverError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueId,
+    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueCode,
     TResult Function(NetworkError<T> value)? networkError,
     TResult Function(ServerError<T> value)? serverError,
     required TResult orElse(),
@@ -142,7 +142,7 @@ class _$InvalidLeagueCode<T> implements InvalidLeagueCode<T> {
 
   @override
   String toString() {
-    return 'CustomLeaguesFailures<$T>.invalidLeagueId(leagueCode: $leagueCode)';
+    return 'CustomLeaguesFailures<$T>.invalidLeagueCode(leagueCode: $leagueCode)';
   }
 
   @override
@@ -167,33 +167,33 @@ class _$InvalidLeagueCode<T> implements InvalidLeagueCode<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String leagueCode) invalidLeagueId,
+    required TResult Function(String leagueCode) invalidLeagueCode,
     required TResult Function() networkError,
     required TResult Function() serverError,
   }) {
-    return invalidLeagueId(leagueCode);
+    return invalidLeagueCode(leagueCode);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String leagueCode)? invalidLeagueId,
+    TResult Function(String leagueCode)? invalidLeagueCode,
     TResult Function()? networkError,
     TResult Function()? serverError,
   }) {
-    return invalidLeagueId?.call(leagueCode);
+    return invalidLeagueCode?.call(leagueCode);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String leagueCode)? invalidLeagueId,
+    TResult Function(String leagueCode)? invalidLeagueCode,
     TResult Function()? networkError,
     TResult Function()? serverError,
     required TResult orElse(),
   }) {
-    if (invalidLeagueId != null) {
-      return invalidLeagueId(leagueCode);
+    if (invalidLeagueCode != null) {
+      return invalidLeagueCode(leagueCode);
     }
     return orElse();
   }
@@ -201,33 +201,33 @@ class _$InvalidLeagueCode<T> implements InvalidLeagueCode<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InvalidLeagueCode<T> value) invalidLeagueId,
+    required TResult Function(InvalidLeagueCode<T> value) invalidLeagueCode,
     required TResult Function(NetworkError<T> value) networkError,
     required TResult Function(ServerError<T> value) serverError,
   }) {
-    return invalidLeagueId(this);
+    return invalidLeagueCode(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueId,
+    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueCode,
     TResult Function(NetworkError<T> value)? networkError,
     TResult Function(ServerError<T> value)? serverError,
   }) {
-    return invalidLeagueId?.call(this);
+    return invalidLeagueCode?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueId,
+    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueCode,
     TResult Function(NetworkError<T> value)? networkError,
     TResult Function(ServerError<T> value)? serverError,
     required TResult orElse(),
   }) {
-    if (invalidLeagueId != null) {
-      return invalidLeagueId(this);
+    if (invalidLeagueCode != null) {
+      return invalidLeagueCode(this);
     }
     return orElse();
   }
@@ -284,7 +284,7 @@ class _$NetworkError<T> implements NetworkError<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String leagueCode) invalidLeagueId,
+    required TResult Function(String leagueCode) invalidLeagueCode,
     required TResult Function() networkError,
     required TResult Function() serverError,
   }) {
@@ -294,7 +294,7 @@ class _$NetworkError<T> implements NetworkError<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String leagueCode)? invalidLeagueId,
+    TResult Function(String leagueCode)? invalidLeagueCode,
     TResult Function()? networkError,
     TResult Function()? serverError,
   }) {
@@ -304,7 +304,7 @@ class _$NetworkError<T> implements NetworkError<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String leagueCode)? invalidLeagueId,
+    TResult Function(String leagueCode)? invalidLeagueCode,
     TResult Function()? networkError,
     TResult Function()? serverError,
     required TResult orElse(),
@@ -318,7 +318,7 @@ class _$NetworkError<T> implements NetworkError<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InvalidLeagueCode<T> value) invalidLeagueId,
+    required TResult Function(InvalidLeagueCode<T> value) invalidLeagueCode,
     required TResult Function(NetworkError<T> value) networkError,
     required TResult Function(ServerError<T> value) serverError,
   }) {
@@ -328,7 +328,7 @@ class _$NetworkError<T> implements NetworkError<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueId,
+    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueCode,
     TResult Function(NetworkError<T> value)? networkError,
     TResult Function(ServerError<T> value)? serverError,
   }) {
@@ -338,7 +338,7 @@ class _$NetworkError<T> implements NetworkError<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueId,
+    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueCode,
     TResult Function(NetworkError<T> value)? networkError,
     TResult Function(ServerError<T> value)? serverError,
     required TResult orElse(),
@@ -395,7 +395,7 @@ class _$ServerError<T> implements ServerError<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String leagueCode) invalidLeagueId,
+    required TResult Function(String leagueCode) invalidLeagueCode,
     required TResult Function() networkError,
     required TResult Function() serverError,
   }) {
@@ -405,7 +405,7 @@ class _$ServerError<T> implements ServerError<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String leagueCode)? invalidLeagueId,
+    TResult Function(String leagueCode)? invalidLeagueCode,
     TResult Function()? networkError,
     TResult Function()? serverError,
   }) {
@@ -415,7 +415,7 @@ class _$ServerError<T> implements ServerError<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String leagueCode)? invalidLeagueId,
+    TResult Function(String leagueCode)? invalidLeagueCode,
     TResult Function()? networkError,
     TResult Function()? serverError,
     required TResult orElse(),
@@ -429,7 +429,7 @@ class _$ServerError<T> implements ServerError<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InvalidLeagueCode<T> value) invalidLeagueId,
+    required TResult Function(InvalidLeagueCode<T> value) invalidLeagueCode,
     required TResult Function(NetworkError<T> value) networkError,
     required TResult Function(ServerError<T> value) serverError,
   }) {
@@ -439,7 +439,7 @@ class _$ServerError<T> implements ServerError<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueId,
+    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueCode,
     TResult Function(NetworkError<T> value)? networkError,
     TResult Function(ServerError<T> value)? serverError,
   }) {
@@ -449,7 +449,7 @@ class _$ServerError<T> implements ServerError<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueId,
+    TResult Function(InvalidLeagueCode<T> value)? invalidLeagueCode,
     TResult Function(NetworkError<T> value)? networkError,
     TResult Function(ServerError<T> value)? serverError,
     required TResult orElse(),

@@ -5,9 +5,44 @@ Either<ValueFailure<String>, int> validateLeagueId({required int leagueId}) {
   return right(leagueId);
 }
 
+Either<ValueFailure<String>, String> validateAdminId(
+    {required String adminId}) {
+  return right(adminId);
+}
+
 Either<ValueFailure<String>, String> validateLeagueName(
     {required String leagueName}) {
   return right(leagueName);
+}
+
+Either<ValueFailure<String>, String> validateMemberId(
+    {required String memberId}) {
+  return right(memberId);
+}
+
+Either<ValueFailure<String>, String> validateMemberTeamName(
+    {required String memberTeamName}) {
+  return right(memberTeamName);
+}
+
+Either<ValueFailure<String>, int> validateMemberPoints(
+    {required int memberPoints}) {
+  return right(memberPoints);
+}
+
+Either<ValueFailure<String>, String> validateLeagueType(
+    {required String leagueType}) {
+  return right(leagueType);
+}
+
+Either<ValueFailure<String>, String> validateLeagueCode(
+    {required String leagueCode}) {
+  return right(leagueCode);
+}
+
+Either<ValueFailure<String>, int> validateLeagueStartGameweek(
+    {required int leagueStartGameweek}) {
+  return right(leagueStartGameweek);
 }
 
 Either<ValueFailure<String>, int> validatePreviousRank(
