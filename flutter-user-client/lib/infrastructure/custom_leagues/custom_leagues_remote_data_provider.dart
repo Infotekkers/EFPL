@@ -49,4 +49,21 @@ class CustomLeaguesRemoteDataProvider {
       return left(const CustomLeaguesFailures.networkError());
     }
   }
+
+  Future<Either<dynamic, CustomLeaguesInfo>> getCustomLeagueInfo(
+      {required int leagueId}) async {
+    try {
+      var apiResponse = await instance.client
+          .get(Uri.parse('$_baseURL/customLeagues/$leagueId'));
+
+      if (apiResponse.statusCode == 200) {
+        print("here");
+      }
+    } catch (e) {
+      print(e);
+      return left(const CustomLeaguesFailures.serverError());
+    }
+
+    return left(const CustomLeaguesFailures.networkError());
+  }
 }

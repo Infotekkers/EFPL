@@ -15,4 +15,12 @@ class ApiCustomLeaguesRepository implements ICustomLeaguesRepository {
       userId: userId,
     );
   }
+
+  @override
+  Future<Either<dynamic, CustomLeaguesInfo>> getCustomLeagueInfo(
+      {required int leagueId}) async {
+    return _customLeaguesRemoteDataProvider.getCustomLeagueInfo(
+      leagueId: leagueId,
+    );
+  }
 }

@@ -19,3 +19,27 @@ Map<String, dynamic> _$$_CustomLeaguesDTOToJson(_$_CustomLeaguesDTO instance) =>
       'leagueName': instance.leagueName,
       'previousRank': instance.previousRank,
     };
+
+_$_CustomLeagueInfoDTO _$$_CustomLeagueInfoDTOFromJson(
+        Map<String, dynamic> json) =>
+    _$_CustomLeagueInfoDTO(
+      leagueId: json['leagueId'] as int,
+      leagueName: json['leagueName'] as String,
+      leagueType: json['leagueType'] as String,
+      leagueCode: json['leagueCode'] as String,
+      adminId: json['adminId'] as String,
+      customLeagueMembers: json['customLeagueMembers'] as List<dynamic>,
+      leagueStartGameweek: json['leagueStartGameweek'] as int,
+    );
+
+Map<String, dynamic> _$$_CustomLeagueInfoDTOToJson(
+        _$_CustomLeagueInfoDTO instance) =>
+    <String, dynamic>{
+      'leagueId': instance.leagueId,
+      'leagueName': instance.leagueName,
+      'leagueType': instance.leagueType,
+      'leagueCode': instance.leagueCode,
+      'adminId': instance.adminId,
+      'customLeagueMembers': instance.customLeagueMembers,
+      'leagueStartGameweek': instance.leagueStartGameweek,
+    };
