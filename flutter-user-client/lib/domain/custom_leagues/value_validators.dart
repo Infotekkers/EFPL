@@ -49,3 +49,8 @@ Either<ValueFailure<String>, int> validatePreviousRank(
     {required int previousRank}) {
   return right(previousRank);
 }
+
+Either<ValueFailure<String>, List<dynamic>> validateCustomLeagueMembers(
+    {required List<dynamic> members}) {
+  return right(members);
+}

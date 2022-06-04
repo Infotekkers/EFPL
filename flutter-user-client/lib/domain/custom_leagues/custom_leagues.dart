@@ -20,8 +20,7 @@ abstract class CustomLeaguesInfo with _$CustomLeaguesInfo {
     required LeagueType leagueType,
     required LeagueCode leagueCode,
     required AdminId adminId,
-    // TODO: List<dynamic> ===> List<CustomLeageMember>
-    required List<dynamic> customleagueMembers,
+    required CustomLeagueMembers customleagueMembers,
     required LeagueStartGameWeek leagueStartGameWeek,
   }) = _CustomLeaguesInfo;
 }

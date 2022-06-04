@@ -115,3 +115,15 @@ class MemberPoints extends ValueObject {
 
   const MemberPoints._({required this.value});
 }
+
+class CustomLeagueMembers extends ValueObject {
+  @override
+  final Either<ValueFailure<String>, List<dynamic>> value;
+
+  factory CustomLeagueMembers({required List<dynamic> value}) {
+    return CustomLeagueMembers._(
+        value: validateCustomLeagueMembers(members: value));
+  }
+
+  const CustomLeagueMembers._({required this.value});
+}

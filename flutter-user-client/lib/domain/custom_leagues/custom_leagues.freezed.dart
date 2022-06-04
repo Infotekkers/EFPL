@@ -202,7 +202,7 @@ class _$CustomLeaguesInfoTearOff {
       required LeagueType leagueType,
       required LeagueCode leagueCode,
       required AdminId adminId,
-      required List<dynamic> customleagueMembers,
+      required CustomLeagueMembers customleagueMembers,
       required LeagueStartGameWeek leagueStartGameWeek}) {
     return _CustomLeaguesInfo(
       leagueId: leagueId,
@@ -225,9 +225,9 @@ mixin _$CustomLeaguesInfo {
   LeagueName get leagueName => throw _privateConstructorUsedError;
   LeagueType get leagueType => throw _privateConstructorUsedError;
   LeagueCode get leagueCode => throw _privateConstructorUsedError;
-  AdminId get adminId =>
-      throw _privateConstructorUsedError; // TODO: List<dynamic> ===> List<CustomLeageMember>
-  List<dynamic> get customleagueMembers => throw _privateConstructorUsedError;
+  AdminId get adminId => throw _privateConstructorUsedError;
+  CustomLeagueMembers get customleagueMembers =>
+      throw _privateConstructorUsedError;
   LeagueStartGameWeek get leagueStartGameWeek =>
       throw _privateConstructorUsedError;
 
@@ -247,7 +247,7 @@ abstract class $CustomLeaguesInfoCopyWith<$Res> {
       LeagueType leagueType,
       LeagueCode leagueCode,
       AdminId adminId,
-      List<dynamic> customleagueMembers,
+      CustomLeagueMembers customleagueMembers,
       LeagueStartGameWeek leagueStartGameWeek});
 }
 
@@ -294,7 +294,7 @@ class _$CustomLeaguesInfoCopyWithImpl<$Res>
       customleagueMembers: customleagueMembers == freezed
           ? _value.customleagueMembers
           : customleagueMembers // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as CustomLeagueMembers,
       leagueStartGameWeek: leagueStartGameWeek == freezed
           ? _value.leagueStartGameWeek
           : leagueStartGameWeek // ignore: cast_nullable_to_non_nullable
@@ -316,7 +316,7 @@ abstract class _$CustomLeaguesInfoCopyWith<$Res>
       LeagueType leagueType,
       LeagueCode leagueCode,
       AdminId adminId,
-      List<dynamic> customleagueMembers,
+      CustomLeagueMembers customleagueMembers,
       LeagueStartGameWeek leagueStartGameWeek});
 }
 
@@ -365,7 +365,7 @@ class __$CustomLeaguesInfoCopyWithImpl<$Res>
       customleagueMembers: customleagueMembers == freezed
           ? _value.customleagueMembers
           : customleagueMembers // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as CustomLeagueMembers,
       leagueStartGameWeek: leagueStartGameWeek == freezed
           ? _value.leagueStartGameWeek
           : leagueStartGameWeek // ignore: cast_nullable_to_non_nullable
@@ -396,8 +396,8 @@ class _$_CustomLeaguesInfo implements _CustomLeaguesInfo {
   final LeagueCode leagueCode;
   @override
   final AdminId adminId;
-  @override // TODO: List<dynamic> ===> List<CustomLeageMember>
-  final List<dynamic> customleagueMembers;
+  @override
+  final CustomLeagueMembers customleagueMembers;
   @override
   final LeagueStartGameWeek leagueStartGameWeek;
 
@@ -449,7 +449,7 @@ abstract class _CustomLeaguesInfo implements CustomLeaguesInfo {
       required LeagueType leagueType,
       required LeagueCode leagueCode,
       required AdminId adminId,
-      required List<dynamic> customleagueMembers,
+      required CustomLeagueMembers customleagueMembers,
       required LeagueStartGameWeek leagueStartGameWeek}) = _$_CustomLeaguesInfo;
 
   @override
@@ -462,8 +462,8 @@ abstract class _CustomLeaguesInfo implements CustomLeaguesInfo {
   LeagueCode get leagueCode;
   @override
   AdminId get adminId;
-  @override // TODO: List<dynamic> ===> List<CustomLeageMember>
-  List<dynamic> get customleagueMembers;
+  @override
+  CustomLeagueMembers get customleagueMembers;
   @override
   LeagueStartGameWeek get leagueStartGameWeek;
   @override
