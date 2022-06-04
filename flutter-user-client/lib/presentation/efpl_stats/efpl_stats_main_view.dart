@@ -1,7 +1,10 @@
+import 'package:efpl/application/efpl_stats/efpl_stats_bloc.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/efpl_stats/widgets/efpl_stats_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EFPLStatsPage extends StatelessWidget {
@@ -9,11 +12,29 @@ class EFPLStatsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(
-        context: context,
+    // get bloc
+    final EfplStatsBloc _efplBloc = getIt<EfplStatsBloc>()
+      ..add(
+        const EfplStatsEvent.getEfplStats(gameWeekId: 0),
+      );
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: _efplBloc),
+      ],
+      child: BlocConsumer<EfplStatsBloc, EfplStatsState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          return Scaffold(
+            appBar: _buildAppBar(
+              context: context,
+            ),
+            body: _buildMainBody(context: context, state: state),
+            // body: Text(state.toString()),
+          );
+        },
       ),
-      body: _buildMainBody(context: context),
     );
   }
 }
@@ -46,6 +67,7 @@ PreferredSizeWidget _buildAppBar({
 
 Widget _buildMainBody({
   required BuildContext context,
+  required EfplStatsState state,
 }) {
   return Container(
     height: MediaQuery.of(context).size.height,
@@ -75,6 +97,7 @@ Widget _buildMainBody({
 
         _buildInfoCard(
           context: context,
+          state: state,
         )
       ],
     ),
@@ -115,77 +138,85 @@ Widget _buildGameWeekController({required BuildContext context}) {
   );
 }
 
-Widget _buildInfoCard({required BuildContext context}) {
+Widget _buildInfoCard(
+    {required BuildContext context, required EfplStatsState state}) {
   return Container(
-    height: 460,
+    height: 470,
     // width: MediaQuery.of(context).size.width * 0.9;;,
     child: Column(
       children: [
         // Highest Point
-        const EFPLStatsCard(
+        EFPLStatsCard(
           label: 'Highest Points',
-          value: '120',
+          value: state.highestPoint.toString(),
           isColored: false,
         ),
 
         // Average Point
-        const EFPLStatsCard(
+        EFPLStatsCard(
           label: 'Average Points',
-          value: '120',
+          value: state.averagePoint.toString(),
           isColored: true,
         ),
 
         // Most Selected
-        const EFPLStatsCard(
+        EFPLStatsCard(
           label: 'Most Selected',
-          value: 'Cancelo',
+          value: state.mostSelectedPlayer,
           isColored: false,
         ),
 
         // Most Transferred Out
-        const EFPLStatsCard(
+        EFPLStatsCard(
           label: 'Most Transferred Out',
-          value: 'Zaha',
+          value: state.mostTransferredOutPlayer,
           isColored: true,
         ),
 
         // Most Captained
-        const EFPLStatsCard(
+        EFPLStatsCard(
           label: 'Most Captained',
-          value: 'Son',
+          value: state.mostCaptainedPlayer,
           isColored: false,
         ),
 
         // Most Vice Captained
-        const EFPLStatsCard(
+        EFPLStatsCard(
           label: 'Most Vice Captained',
-          value: 'Sancho',
+          value: state.mostViceCaptainedPlayer,
           isColored: true,
         ),
 
         // Bench Boost Count
-        const EFPLStatsCard(
+        EFPLStatsCard(
           label: 'Bench Boost Played',
-          value: '300000',
+          value: state.benchBoostCount.toString(),
           isColored: false,
         ),
 
         // Free Hit Count
-        const EFPLStatsCard(
+        EFPLStatsCard(
           label: 'Free Hit Played',
-          value: '450300',
+          value: state.freeHitCount.toString(),
           isColored: true,
         ),
 
         // Wildcard Count
-        const EFPLStatsCard(
+        EFPLStatsCard(
           label: 'Wildcards Played',
-          value: '450300',
+          value: state.wildCardCount.toString(),
           isColored: false,
         ),
 
+        // Wildcard Count
+        EFPLStatsCard(
+          label: 'Triple Captain Played',
+          value: state.tripleCaptainCount.toString(),
+          isColored: true,
+        ),
+
         const SizedBox(
-          height: 36,
+          height: 30,
         ),
 
         InkWell(

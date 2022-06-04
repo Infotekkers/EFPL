@@ -5,7 +5,6 @@ import 'package:efpl/infrastructure/efpl_stats/efpl_stats_remote_data_provider.d
 import 'package:efpl/services/utility.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: IEFPLStatsRepository)
 class EFPLStatsRepository implements IEFPLStatsRepository {
   Utility utility = Utility();
 

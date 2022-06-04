@@ -15,9 +15,11 @@ class EfplStatsState with _$EfplStatsState {
     required int wildCardCount,
     required int tripleCaptainCount,
     required Map dreamTeam,
+    required bool isLoading,
+    required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
   }) = _EfplState;
 
-  factory EfplStatsState.initial() => const EfplStatsState(
+  factory EfplStatsState.initial() => EfplStatsState(
         highestPoint: 0,
         averagePoint: 0,
         mostSelectedPlayer: "",
@@ -30,5 +32,7 @@ class EfplStatsState with _$EfplStatsState {
         wildCardCount: 0,
         tripleCaptainCount: 0,
         dreamTeam: {},
+        isLoading: false,
+        valueFailureOrSuccess: none(),
       );
 }

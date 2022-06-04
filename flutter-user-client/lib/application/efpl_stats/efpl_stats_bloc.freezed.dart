@@ -248,7 +248,9 @@ class _$EfplStatsStateTearOff {
       required int freeHitCount,
       required int wildCardCount,
       required int tripleCaptainCount,
-      required Map<dynamic, dynamic> dreamTeam}) {
+      required Map<dynamic, dynamic> dreamTeam,
+      required bool isLoading,
+      required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) {
     return _EfplState(
       highestPoint: highestPoint,
       averagePoint: averagePoint,
@@ -262,6 +264,8 @@ class _$EfplStatsStateTearOff {
       wildCardCount: wildCardCount,
       tripleCaptainCount: tripleCaptainCount,
       dreamTeam: dreamTeam,
+      isLoading: isLoading,
+      valueFailureOrSuccess: valueFailureOrSuccess,
     );
   }
 }
@@ -283,6 +287,9 @@ mixin _$EfplStatsState {
   int get wildCardCount => throw _privateConstructorUsedError;
   int get tripleCaptainCount => throw _privateConstructorUsedError;
   Map<dynamic, dynamic> get dreamTeam => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  Option<Either<dynamic, dynamic>> get valueFailureOrSuccess =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EfplStatsStateCopyWith<EfplStatsState> get copyWith =>
@@ -306,7 +313,9 @@ abstract class $EfplStatsStateCopyWith<$Res> {
       int freeHitCount,
       int wildCardCount,
       int tripleCaptainCount,
-      Map<dynamic, dynamic> dreamTeam});
+      Map<dynamic, dynamic> dreamTeam,
+      bool isLoading,
+      Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
 }
 
 /// @nodoc
@@ -332,6 +341,8 @@ class _$EfplStatsStateCopyWithImpl<$Res>
     Object? wildCardCount = freezed,
     Object? tripleCaptainCount = freezed,
     Object? dreamTeam = freezed,
+    Object? isLoading = freezed,
+    Object? valueFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
       highestPoint: highestPoint == freezed
@@ -382,6 +393,14 @@ class _$EfplStatsStateCopyWithImpl<$Res>
           ? _value.dreamTeam
           : dreamTeam // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      valueFailureOrSuccess: valueFailureOrSuccess == freezed
+          ? _value.valueFailureOrSuccess
+          : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<dynamic, dynamic>>,
     ));
   }
 }
@@ -405,7 +424,9 @@ abstract class _$EfplStateCopyWith<$Res>
       int freeHitCount,
       int wildCardCount,
       int tripleCaptainCount,
-      Map<dynamic, dynamic> dreamTeam});
+      Map<dynamic, dynamic> dreamTeam,
+      bool isLoading,
+      Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
 }
 
 /// @nodoc
@@ -431,6 +452,8 @@ class __$EfplStateCopyWithImpl<$Res> extends _$EfplStatsStateCopyWithImpl<$Res>
     Object? wildCardCount = freezed,
     Object? tripleCaptainCount = freezed,
     Object? dreamTeam = freezed,
+    Object? isLoading = freezed,
+    Object? valueFailureOrSuccess = freezed,
   }) {
     return _then(_EfplState(
       highestPoint: highestPoint == freezed
@@ -481,6 +504,14 @@ class __$EfplStateCopyWithImpl<$Res> extends _$EfplStatsStateCopyWithImpl<$Res>
           ? _value.dreamTeam
           : dreamTeam // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      valueFailureOrSuccess: valueFailureOrSuccess == freezed
+          ? _value.valueFailureOrSuccess
+          : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<dynamic, dynamic>>,
     ));
   }
 }
@@ -500,7 +531,9 @@ class _$_EfplState implements _EfplState {
       required this.freeHitCount,
       required this.wildCardCount,
       required this.tripleCaptainCount,
-      required this.dreamTeam});
+      required this.dreamTeam,
+      required this.isLoading,
+      required this.valueFailureOrSuccess});
 
   @override
   final int highestPoint;
@@ -526,10 +559,14 @@ class _$_EfplState implements _EfplState {
   final int tripleCaptainCount;
   @override
   final Map<dynamic, dynamic> dreamTeam;
+  @override
+  final bool isLoading;
+  @override
+  final Option<Either<dynamic, dynamic>> valueFailureOrSuccess;
 
   @override
   String toString() {
-    return 'EfplStatsState(highestPoint: $highestPoint, averagePoint: $averagePoint, mostSelectedPlayer: $mostSelectedPlayer, mostTransferredOutPlayer: $mostTransferredOutPlayer, transfersMadeCount: $transfersMadeCount, mostCaptainedPlayer: $mostCaptainedPlayer, mostViceCaptainedPlayer: $mostViceCaptainedPlayer, benchBoostCount: $benchBoostCount, freeHitCount: $freeHitCount, wildCardCount: $wildCardCount, tripleCaptainCount: $tripleCaptainCount, dreamTeam: $dreamTeam)';
+    return 'EfplStatsState(highestPoint: $highestPoint, averagePoint: $averagePoint, mostSelectedPlayer: $mostSelectedPlayer, mostTransferredOutPlayer: $mostTransferredOutPlayer, transfersMadeCount: $transfersMadeCount, mostCaptainedPlayer: $mostCaptainedPlayer, mostViceCaptainedPlayer: $mostViceCaptainedPlayer, benchBoostCount: $benchBoostCount, freeHitCount: $freeHitCount, wildCardCount: $wildCardCount, tripleCaptainCount: $tripleCaptainCount, dreamTeam: $dreamTeam, isLoading: $isLoading, valueFailureOrSuccess: $valueFailureOrSuccess)';
   }
 
   @override
@@ -559,7 +596,10 @@ class _$_EfplState implements _EfplState {
                 .equals(other.wildCardCount, wildCardCount) &&
             const DeepCollectionEquality()
                 .equals(other.tripleCaptainCount, tripleCaptainCount) &&
-            const DeepCollectionEquality().equals(other.dreamTeam, dreamTeam));
+            const DeepCollectionEquality().equals(other.dreamTeam, dreamTeam) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.valueFailureOrSuccess, valueFailureOrSuccess));
   }
 
   @override
@@ -576,7 +616,9 @@ class _$_EfplState implements _EfplState {
       const DeepCollectionEquality().hash(freeHitCount),
       const DeepCollectionEquality().hash(wildCardCount),
       const DeepCollectionEquality().hash(tripleCaptainCount),
-      const DeepCollectionEquality().hash(dreamTeam));
+      const DeepCollectionEquality().hash(dreamTeam),
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(valueFailureOrSuccess));
 
   @JsonKey(ignore: true)
   @override
@@ -586,18 +628,21 @@ class _$_EfplState implements _EfplState {
 
 abstract class _EfplState implements EfplStatsState {
   const factory _EfplState(
-      {required int highestPoint,
-      required int averagePoint,
-      required String mostSelectedPlayer,
-      required String mostTransferredOutPlayer,
-      required int transfersMadeCount,
-      required String mostCaptainedPlayer,
-      required String mostViceCaptainedPlayer,
-      required int benchBoostCount,
-      required int freeHitCount,
-      required int wildCardCount,
-      required int tripleCaptainCount,
-      required Map<dynamic, dynamic> dreamTeam}) = _$_EfplState;
+          {required int highestPoint,
+          required int averagePoint,
+          required String mostSelectedPlayer,
+          required String mostTransferredOutPlayer,
+          required int transfersMadeCount,
+          required String mostCaptainedPlayer,
+          required String mostViceCaptainedPlayer,
+          required int benchBoostCount,
+          required int freeHitCount,
+          required int wildCardCount,
+          required int tripleCaptainCount,
+          required Map<dynamic, dynamic> dreamTeam,
+          required bool isLoading,
+          required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) =
+      _$_EfplState;
 
   @override
   int get highestPoint;
@@ -623,6 +668,10 @@ abstract class _EfplState implements EfplStatsState {
   int get tripleCaptainCount;
   @override
   Map<dynamic, dynamic> get dreamTeam;
+  @override
+  bool get isLoading;
+  @override
+  Option<Either<dynamic, dynamic>> get valueFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$EfplStateCopyWith<_EfplState> get copyWith =>

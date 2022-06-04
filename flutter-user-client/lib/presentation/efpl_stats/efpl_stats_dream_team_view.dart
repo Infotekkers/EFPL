@@ -1,7 +1,10 @@
+import 'package:efpl/application/efpl_stats/efpl_stats_bloc.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/core/player_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,9 +14,30 @@ class EFPLStatsDreamTeam extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(context: context),
-      body: _buildBody(context: context),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: getIt<EfplStatsBloc>()),
+      ],
+      child: BlocConsumer<EfplStatsBloc, EfplStatsState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          List allFormattedPlayers =
+              formatAllDreamTeamPlayers(dreamTeam: state.dreamTeam);
+
+          List bestPerformer = getBestPerformer(dreamTeam: state.dreamTeam);
+
+          return Scaffold(
+            appBar: _buildAppBar(context: context),
+            body: _buildBody(
+              context: context,
+              allFormattedPlayers: allFormattedPlayers,
+              bestPerformer: bestPerformer,
+            ),
+          );
+        },
+      ),
     );
   }
 }
@@ -42,7 +66,11 @@ PreferredSizeWidget _buildAppBar({required BuildContext context}) {
   );
 }
 
-Widget _buildBody({required BuildContext context}) {
+Widget _buildBody({
+  required BuildContext context,
+  required List allFormattedPlayers,
+  required List bestPerformer,
+}) {
   return SingleChildScrollView(
     child: Container(
       color: Colors.blue[50],
@@ -52,33 +80,48 @@ Widget _buildBody({required BuildContext context}) {
             height: 12,
           ),
           // GK
-          _buildPlayerView(context: context, count: 1),
+          _buildPlayerView(
+              context: context, count: 1, playerList: allFormattedPlayers[0]),
           const SizedBox(
             height: 12,
           ),
           // DEF
-          _buildPlayerView(context: context, count: 5),
+          _buildPlayerView(
+              context: context,
+              count: allFormattedPlayers[1].length,
+              playerList: allFormattedPlayers[1]),
           const SizedBox(
             height: 12,
           ),
           // MID
-          _buildPlayerView(context: context, count: 3),
+          _buildPlayerView(
+              context: context,
+              count: allFormattedPlayers[2].length,
+              playerList: allFormattedPlayers[2]),
           const SizedBox(
             height: 12,
           ),
           // ATT
-          _buildPlayerView(context: context, count: 2),
+          _buildPlayerView(
+            context: context,
+            count: allFormattedPlayers[3].length,
+            playerList: allFormattedPlayers[3],
+          ),
           const SizedBox(
             height: 16,
           ),
-          _buildInfoView(context: context)
+          _buildInfoView(context: context, bestPerformer: bestPerformer)
         ],
       ),
     ),
   );
 }
 
-Widget _buildPlayerView({required BuildContext context, required int count}) {
+Widget _buildPlayerView({
+  required BuildContext context,
+  required int count,
+  required List playerList,
+}) {
   return SizedBox(
     height: 130,
     child: Center(
@@ -99,26 +142,10 @@ Widget _buildPlayerView({required BuildContext context, required int count}) {
                   //   playerId: currentPlayerId,
                   // );
                 },
-                child: const PlayerWidget(
-                  // playerName: allFormattedPlayers[1][index].playerName.value.fold(
-                  //       (l) => '',
-                  //       (r) => r,
-                  //     ),
-
-                  // description: allFormattedPlayers[1][index].score.isNotEmpty
-                  //     ? (allFormattedPlayers[1][index]
-                  //         .score[0]['fantasyScore']
-                  //         .toString())
-                  //     : '0',
-                  // teamName: allFormattedPlayers[1][index].eplTeamId.value.fold(
-                  //       (l) => "",
-                  //       (r) => r,
-                  //     ),
-                  // isCaptain: allFormattedPlayers[1][index].isCaptain,
-                  // isViceCaptain: allFormattedPlayers[1][index].isViceCaptain,
-                  playerName: "Name",
-                  description: "38",
-                  teamName: "teamName",
+                child: PlayerWidget(
+                  playerName: playerList[index]['playerName'],
+                  description: playerList[index]['score'].toString(),
+                  teamName: playerList[index]['eplTeamId'],
                   isCaptain: false,
                   isViceCaptain: false,
                 ),
@@ -131,7 +158,8 @@ Widget _buildPlayerView({required BuildContext context, required int count}) {
   );
 }
 
-Widget _buildInfoView({required BuildContext context}) {
+Widget _buildInfoView(
+    {required BuildContext context, required List bestPerformer}) {
   return Container(
     height: 130,
     color: ConstantColors.primary_900.withOpacity(0.25),
@@ -161,7 +189,7 @@ Widget _buildInfoView({required BuildContext context}) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Man Utd",
+                      bestPerformer[0]['eplTeamId'].split(" ")[0],
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
                             fontSize: 18,
@@ -173,7 +201,7 @@ Widget _buildInfoView({required BuildContext context}) {
                       height: 3,
                     ),
                     Text(
-                      "36 Pts",
+                      bestPerformer[0]['score'].toString(),
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
                             fontSize: 18,
@@ -185,7 +213,7 @@ Widget _buildInfoView({required BuildContext context}) {
                       height: 3,
                     ),
                     Text(
-                      "Sancho",
+                      bestPerformer[0]['playerName'].split(" ")[0],
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
                             fontSize: 20,
@@ -218,7 +246,7 @@ Widget _buildInfoView({required BuildContext context}) {
                 height: 3,
               ),
               Text(
-                "190",
+                bestPerformer[1].toString(),
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -231,4 +259,33 @@ Widget _buildInfoView({required BuildContext context}) {
       ],
     ),
   );
+}
+
+List formatAllDreamTeamPlayers({required Map dreamTeam}) {
+  return [
+    dreamTeam['goalKeeper'],
+    dreamTeam['defenders'],
+    dreamTeam['midfielders'],
+    dreamTeam['attackers'],
+  ];
+}
+
+List getBestPerformer({required Map dreamTeam}) {
+  List allPlayers = [];
+  int score = 0;
+  for (var position in dreamTeam.keys) {
+    if (position != "_id") {
+      List player = dreamTeam[position];
+      player.forEach((p) {
+        allPlayers.add(p);
+      });
+    }
+  }
+  allPlayers.sort((a, b) => (b['score']).compareTo(a['score']));
+
+  allPlayers.forEach((element) {
+    score = score + int.parse(element['score'].toString());
+  });
+
+  return [allPlayers[0], score];
 }

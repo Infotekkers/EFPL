@@ -39,15 +39,16 @@ class EFPLStatsCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.55,
           ),
           Container(
+            width: MediaQuery.of(context).size.width * 0.3,
             child: Text(
               value,
+              overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     fontSize: 16,
                     letterSpacing: 0.25,
                     fontWeight: FontWeight.w500,
                   ),
             ),
-            width: MediaQuery.of(context).size.width * 0.3,
           ),
         ],
       ),
