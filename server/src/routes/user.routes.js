@@ -18,5 +18,9 @@ router.post("/validateUser", userController.validateUser);
 router.get("/team", userController.getUserTeam);
 router.patch("/team/", userController.transfer);
 router.get("/point/:gameWeekId", userController.getUserPoints);
+router.get("/watchList", userController.getUserWatchList);
+router.patch("/watchList", userController.addUserWatchList);
+router.delete("/watchList", userController.removeUserWatchList);
+router.delete("/watchList/all", userController.removeAllUserWatchList);
 
 module.exports = router;

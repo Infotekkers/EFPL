@@ -11,6 +11,7 @@ const validateTeam = require("../utils/validators").validateTeam;
 const pointDeductor = require("../utils/helpers").pointDeductor;
 const sumEplPlayerScore = require("../utils/helpers").sumEplPlayerScore;
 const playerInsOutsCounter = require("../utils/helpers").playerInsOutsCounter;
+const getUpcomingFixtures = require("../utils/helpers").getUpcomingFixtures;
 const secretKey = process.env.JWT_SECRET;
 
 const transporter = nodemailer.createTransport({
@@ -773,6 +774,114 @@ const getUserPoints = asyncHandler(async (req, res) => {
   }
 });
 
+const getUserWatchList = asyncHandler(async (req, res) => {
+  try {
+    // get user id from token
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
+
+    const user = await User.findOne({ _id: userId }).select("watchList").lean();
+
+    const userWatchList = user.watchList ? user.watchList : [];
+
+    const allTeams = await Team.find({}).lean().select("-_id -__v");
+
+    const activeGw = await Gameweek.find({ status: "active" });
+    let activeGwId = 1;
+
+    if (activeGw.length > 0) {
+      activeGwId = activeGw[activeGw.length - 1].gameWeekNumber;
+    }
+    const finalInfoList = [];
+
+    for (let i = 0; i < userWatchList.length; i++) {
+      const currentPlayer = await Player.findOne({
+        playerId: userWatchList[i],
+      }).lean();
+
+      const currentPlayerTeam = await Team.findOne({
+        teamName: currentPlayer.eplTeamId,
+      });
+
+      const upComingFixtures = await getUpcomingFixtures(
+        6,
+        currentPlayer.eplTeamId,
+        activeGwId,
+        currentPlayer
+      );
+
+      const score = await sumEplPlayerScore(currentPlayer.score);
+
+      const currentPlayerInfo = {
+        playerId: currentPlayer.playerId,
+        playerName: currentPlayer.playerName,
+        currentPrice: currentPlayer.currentPrice,
+        playerPosition: currentPlayer.position,
+        eplTeamId: currentPlayerTeam.teamName,
+        eplTeamLogo: currentPlayerTeam.teamLogo,
+        availability: currentPlayer.availability
+          ? currentPlayer.availability
+          : { injuryStatus: "", injuryMessage: "" },
+        score: score,
+        upComingFixtures: upComingFixtures,
+      };
+
+      finalInfoList.push(currentPlayerInfo);
+    }
+    res.status(200).send({
+      allTeams: allTeams,
+      watchListInfo: finalInfoList,
+    });
+  } catch (e) {
+    res.status(401).send("Error Decoding Token");
+  }
+});
+
+const addUserWatchList = asyncHandler(async (req, res) => {
+  try {
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
+
+    await User.findByIdAndUpdate(
+      { _id: userId },
+      { $addToSet: { watchList: req.body.playerId } }
+    );
+
+    res.status(201).send("WatchList");
+  } catch (e) {
+    res.status(401).send("Error Decoding Token");
+  }
+});
+
+const removeUserWatchList = asyncHandler(async (req, res) => {
+  try {
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
+
+    await User.findByIdAndUpdate(
+      { _id: userId },
+      { $pull: { watchList: req.body.playerId } }
+    );
+
+    res.status(200).send("WatchList");
+  } catch (e) {
+    res.status(401).send("Error Decoding Token");
+  }
+});
+
+const removeAllUserWatchList = asyncHandler(async (req, res) => {
+  try {
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
+
+    await User.findByIdAndUpdate({ _id: userId }, { $set: { watchList: [] } });
+
+    res.status(200).send("WatchList");
+  } catch (e) {
+    res.status(401).send("Error Decoding Token");
+  }
+});
+
 const validateUser = asyncHandler(async (req, res) => {
   const token = req.body.token;
 
@@ -804,4 +913,8 @@ module.exports = {
   getUserTeam,
   getUserPoints,
   validateUser,
+  getUserWatchList,
+  addUserWatchList,
+  removeUserWatchList,
+  removeAllUserWatchList,
 };

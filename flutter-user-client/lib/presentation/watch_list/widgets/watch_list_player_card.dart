@@ -1,28 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/application/watch_list/watch_list_bloc.dart';
-import 'package:efpl/domain/transfer/user_player.dart';
+import 'package:efpl/domain/watch_list/watch_list_player.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class UserPlayerCard extends StatelessWidget {
-  final UserPlayer currentPlayer;
-  final bool isInitial;
-  const UserPlayerCard({
+class WatchListPlayerCard extends StatelessWidget {
+  final WatchListPlayer currentPlayer;
+
+  const WatchListPlayerCard({
     Key? key,
     required this.currentPlayer,
-    required this.isInitial,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    final _transferBloc = getIt<TransferBloc>();
     final String _baseURL = dotenv.env["BASE_URL"].toString();
 
     final String injuryStatus = currentPlayer.availability.value
@@ -33,7 +30,6 @@ class UserPlayerCard extends StatelessWidget {
         _buildModalSheet(
           context: context,
           currentPlayer: currentPlayer,
-          isInitial: isInitial,
         );
       },
       child: _buildPlayerCard(
@@ -46,10 +42,10 @@ class UserPlayerCard extends StatelessWidget {
   }
 }
 
-void _buildModalSheet(
-    {required BuildContext context,
-    required UserPlayer currentPlayer,
-    required bool isInitial}) {
+void _buildModalSheet({
+  required BuildContext context,
+  required WatchListPlayer currentPlayer,
+}) {
   final String _baseURL = dotenv.env["API"].toString();
   showModalBottomSheet(
     context: context,
@@ -65,7 +61,7 @@ void _buildModalSheet(
         child: BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) {
             return Container(
-              height: 344,
+              height: 310,
               padding: const EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 8,
@@ -113,7 +109,10 @@ void _buildModalSheet(
                       child: Row(
                         children: [
                           Container(
-                            child: const Icon(Icons.info),
+                            child: const Icon(
+                              Icons.info,
+                              color: ConstantColors.primary_900,
+                            ),
                             margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
                           ),
                           Text(
@@ -129,58 +128,11 @@ void _buildModalSheet(
                     height: 2,
                   ),
 
-                  // Transfer
-                  InkWell(
-                    onTap: () {
-                      if (isInitial) {
-                        getIt<TransferBloc>().add(
-                          TransferEvent.transferUserPlayerInitial(
-                            transferInPlayerId: currentPlayer.playerId,
-                          ),
-                        );
-                      } else {
-                        getIt<TransferBloc>().add(
-                          TransferEvent.transferUserPlayer(
-                            transferInPlayerId: currentPlayer.playerId,
-                          ),
-                        );
-                      }
-                      Navigator.pop(context);
-
-                      Navigator.pop(context);
-                    },
-                    child: SizedBox(
-                      height: 32,
-                      child: Row(
-                        children: [
-                          Container(
-                            child: const Icon(Boxicons.bx_transfer),
-                            margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
-                          ),
-                          state.transferredInPlayerIdList
-                                  .contains(currentPlayer.playerId)
-                              ? Text(
-                                  AppLocalizations.of(context)!.cancelTransfers,
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                )
-                              : Text(
-                                  AppLocalizations.of(context)!.transfer,
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                )
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(
-                    height: 2,
-                  ),
-
-                  // Add To WatchList
+                  // Remove
                   InkWell(
                     onTap: () {
                       getIt<WatchListBloc>().add(
-                        WatchListEvent.addToUserWatchList(
+                        WatchListEvent.removeFromUserWatchList(
                             playerId: currentPlayer.playerId),
                       );
                       Navigator.pop(context);
@@ -190,11 +142,14 @@ void _buildModalSheet(
                       child: Row(
                         children: [
                           Container(
-                            child: const Icon(Boxicons.bxs_binoculars),
+                            child: const Icon(
+                              MdiIcons.bookmarkCheckOutline,
+                              color: ConstantColors.primary_900,
+                            ),
                             margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
                           ),
                           Text(
-                            AppLocalizations.of(context)!.addToWatchList,
+                            AppLocalizations.of(context)!.removeFromWatchList,
                             style: Theme.of(context).textTheme.bodyText1,
                           )
                         ],
@@ -229,7 +184,6 @@ void _buildModalSheet(
                         return Container(
                           margin: const EdgeInsets.fromLTRB(0, 0, 16, 0),
                           width: 80,
-                          // color: Colors.amber,
                           child: Column(
                             children: [
                               // Team Icon
@@ -308,7 +262,7 @@ void _buildModalSheet(
 Widget _buildPlayerCard(
     {required BuildContext context,
     required String baseURL,
-    required UserPlayer currentPlayer,
+    required WatchListPlayer currentPlayer,
     required String injuryStatus}) {
   return Container(
     decoration: BoxDecoration(
