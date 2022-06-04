@@ -57,10 +57,14 @@ class CustomLeaguesRemoteDataProvider {
           .get(Uri.parse('$_baseURL/customLeagues/$leagueId'));
 
       if (apiResponse.statusCode == 200) {
-        print("here");
+        final parsedResponseBody = jsonDecode(apiResponse.body);
+
+        final CustomLeagueInfoDTO customLeagueInfoDTO =
+            CustomLeagueInfoDTO.fromJson(parsedResponseBody);
+
+        return right(customLeagueInfoDTO.toDomain());
       }
     } catch (e) {
-      print(e);
       return left(const CustomLeaguesFailures.serverError());
     }
 

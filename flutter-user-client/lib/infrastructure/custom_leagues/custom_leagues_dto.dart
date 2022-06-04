@@ -44,8 +44,8 @@ abstract class CustomLeagueInfoDTO implements _$CustomLeagueInfoDTO {
     required String leagueType,
     required String leagueCode,
     required String adminId,
-    required List customLeagueMembers,
-    required int leagueStartGameweek,
+    required List teams,
+    required int leagueStartGameWeek,
   }) = _CustomLeagueInfoDTO;
 
   CustomLeaguesInfo toDomain() => CustomLeaguesInfo(
@@ -54,8 +54,8 @@ abstract class CustomLeagueInfoDTO implements _$CustomLeagueInfoDTO {
         leagueType: LeagueType(value: leagueType),
         leagueCode: LeagueCode(value: leagueCode),
         adminId: AdminId(value: adminId),
-        customleagueMembers: customLeagueMembers as List<CustomLeagueMember>,
-        leagueStartGameweek: LeagueStartGameweek(value: leagueStartGameweek),
+        customleagueMembers: teams,
+        leagueStartGameWeek: LeagueStartGameWeek(value: leagueStartGameWeek),
       );
 
   factory CustomLeagueInfoDTO.fromJson(Map<String, dynamic> json) =>

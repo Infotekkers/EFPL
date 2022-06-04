@@ -59,16 +59,16 @@ class LeagueCode extends ValueObject {
   const LeagueCode._({required this.value});
 }
 
-class LeagueStartGameweek extends ValueObject {
+class LeagueStartGameWeek extends ValueObject {
   @override
   final Either<ValueFailure<String>, int> value;
 
-  factory LeagueStartGameweek({required int value}) {
-    return LeagueStartGameweek._(
-        value: validateLeagueStartGameweek(leagueStartGameweek: value));
+  factory LeagueStartGameWeek({required int value}) {
+    return LeagueStartGameWeek._(
+        value: validateLeagueStartGameWeek(leagueStartGameWeek: value));
   }
 
-  const LeagueStartGameweek._({required this.value});
+  const LeagueStartGameWeek._({required this.value});
 }
 
 class PreviousRank extends ValueObject {

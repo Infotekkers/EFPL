@@ -40,9 +40,9 @@ Either<ValueFailure<String>, String> validateLeagueCode(
   return right(leagueCode);
 }
 
-Either<ValueFailure<String>, int> validateLeagueStartGameweek(
-    {required int leagueStartGameweek}) {
-  return right(leagueStartGameweek);
+Either<ValueFailure<String>, int> validateLeagueStartGameWeek(
+    {required int leagueStartGameWeek}) {
+  return right(leagueStartGameWeek);
 }
 
 Either<ValueFailure<String>, int> validatePreviousRank(

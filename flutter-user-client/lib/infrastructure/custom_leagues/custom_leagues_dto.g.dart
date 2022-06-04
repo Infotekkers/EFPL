@@ -28,8 +28,8 @@ _$_CustomLeagueInfoDTO _$$_CustomLeagueInfoDTOFromJson(
       leagueType: json['leagueType'] as String,
       leagueCode: json['leagueCode'] as String,
       adminId: json['adminId'] as String,
-      customLeagueMembers: json['customLeagueMembers'] as List<dynamic>,
-      leagueStartGameweek: json['leagueStartGameweek'] as int,
+      teams: json['teams'] as List<dynamic>,
+      leagueStartGameWeek: json['leagueStartGameWeek'] as int,
     );
 
 Map<String, dynamic> _$$_CustomLeagueInfoDTOToJson(
@@ -40,6 +40,6 @@ Map<String, dynamic> _$$_CustomLeagueInfoDTOToJson(
       'leagueType': instance.leagueType,
       'leagueCode': instance.leagueCode,
       'adminId': instance.adminId,
-      'customLeagueMembers': instance.customLeagueMembers,
-      'leagueStartGameweek': instance.leagueStartGameweek,
+      'teams': instance.teams,
+      'leagueStartGameWeek': instance.leagueStartGameWeek,
     };

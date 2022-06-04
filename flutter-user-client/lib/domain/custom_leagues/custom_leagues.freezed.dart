@@ -202,8 +202,8 @@ class _$CustomLeaguesInfoTearOff {
       required LeagueType leagueType,
       required LeagueCode leagueCode,
       required AdminId adminId,
-      required List<CustomLeagueMember> customleagueMembers,
-      required LeagueStartGameweek leagueStartGameweek}) {
+      required List<dynamic> customleagueMembers,
+      required LeagueStartGameWeek leagueStartGameWeek}) {
     return _CustomLeaguesInfo(
       leagueId: leagueId,
       leagueName: leagueName,
@@ -211,7 +211,7 @@ class _$CustomLeaguesInfoTearOff {
       leagueCode: leagueCode,
       adminId: adminId,
       customleagueMembers: customleagueMembers,
-      leagueStartGameweek: leagueStartGameweek,
+      leagueStartGameWeek: leagueStartGameWeek,
     );
   }
 }
@@ -225,10 +225,10 @@ mixin _$CustomLeaguesInfo {
   LeagueName get leagueName => throw _privateConstructorUsedError;
   LeagueType get leagueType => throw _privateConstructorUsedError;
   LeagueCode get leagueCode => throw _privateConstructorUsedError;
-  AdminId get adminId => throw _privateConstructorUsedError;
-  List<CustomLeagueMember> get customleagueMembers =>
-      throw _privateConstructorUsedError;
-  LeagueStartGameweek get leagueStartGameweek =>
+  AdminId get adminId =>
+      throw _privateConstructorUsedError; // TODO: List<dynamic> ===> List<CustomLeageMember>
+  List<dynamic> get customleagueMembers => throw _privateConstructorUsedError;
+  LeagueStartGameWeek get leagueStartGameWeek =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -247,8 +247,8 @@ abstract class $CustomLeaguesInfoCopyWith<$Res> {
       LeagueType leagueType,
       LeagueCode leagueCode,
       AdminId adminId,
-      List<CustomLeagueMember> customleagueMembers,
-      LeagueStartGameweek leagueStartGameweek});
+      List<dynamic> customleagueMembers,
+      LeagueStartGameWeek leagueStartGameWeek});
 }
 
 /// @nodoc
@@ -268,7 +268,7 @@ class _$CustomLeaguesInfoCopyWithImpl<$Res>
     Object? leagueCode = freezed,
     Object? adminId = freezed,
     Object? customleagueMembers = freezed,
-    Object? leagueStartGameweek = freezed,
+    Object? leagueStartGameWeek = freezed,
   }) {
     return _then(_value.copyWith(
       leagueId: leagueId == freezed
@@ -294,11 +294,11 @@ class _$CustomLeaguesInfoCopyWithImpl<$Res>
       customleagueMembers: customleagueMembers == freezed
           ? _value.customleagueMembers
           : customleagueMembers // ignore: cast_nullable_to_non_nullable
-              as List<CustomLeagueMember>,
-      leagueStartGameweek: leagueStartGameweek == freezed
-          ? _value.leagueStartGameweek
-          : leagueStartGameweek // ignore: cast_nullable_to_non_nullable
-              as LeagueStartGameweek,
+              as List<dynamic>,
+      leagueStartGameWeek: leagueStartGameWeek == freezed
+          ? _value.leagueStartGameWeek
+          : leagueStartGameWeek // ignore: cast_nullable_to_non_nullable
+              as LeagueStartGameWeek,
     ));
   }
 }
@@ -316,8 +316,8 @@ abstract class _$CustomLeaguesInfoCopyWith<$Res>
       LeagueType leagueType,
       LeagueCode leagueCode,
       AdminId adminId,
-      List<CustomLeagueMember> customleagueMembers,
-      LeagueStartGameweek leagueStartGameweek});
+      List<dynamic> customleagueMembers,
+      LeagueStartGameWeek leagueStartGameWeek});
 }
 
 /// @nodoc
@@ -339,7 +339,7 @@ class __$CustomLeaguesInfoCopyWithImpl<$Res>
     Object? leagueCode = freezed,
     Object? adminId = freezed,
     Object? customleagueMembers = freezed,
-    Object? leagueStartGameweek = freezed,
+    Object? leagueStartGameWeek = freezed,
   }) {
     return _then(_CustomLeaguesInfo(
       leagueId: leagueId == freezed
@@ -365,11 +365,11 @@ class __$CustomLeaguesInfoCopyWithImpl<$Res>
       customleagueMembers: customleagueMembers == freezed
           ? _value.customleagueMembers
           : customleagueMembers // ignore: cast_nullable_to_non_nullable
-              as List<CustomLeagueMember>,
-      leagueStartGameweek: leagueStartGameweek == freezed
-          ? _value.leagueStartGameweek
-          : leagueStartGameweek // ignore: cast_nullable_to_non_nullable
-              as LeagueStartGameweek,
+              as List<dynamic>,
+      leagueStartGameWeek: leagueStartGameWeek == freezed
+          ? _value.leagueStartGameWeek
+          : leagueStartGameWeek // ignore: cast_nullable_to_non_nullable
+              as LeagueStartGameWeek,
     ));
   }
 }
@@ -384,7 +384,7 @@ class _$_CustomLeaguesInfo implements _CustomLeaguesInfo {
       required this.leagueCode,
       required this.adminId,
       required this.customleagueMembers,
-      required this.leagueStartGameweek});
+      required this.leagueStartGameWeek});
 
   @override
   final LeagueId leagueId;
@@ -396,14 +396,14 @@ class _$_CustomLeaguesInfo implements _CustomLeaguesInfo {
   final LeagueCode leagueCode;
   @override
   final AdminId adminId;
+  @override // TODO: List<dynamic> ===> List<CustomLeageMember>
+  final List<dynamic> customleagueMembers;
   @override
-  final List<CustomLeagueMember> customleagueMembers;
-  @override
-  final LeagueStartGameweek leagueStartGameweek;
+  final LeagueStartGameWeek leagueStartGameWeek;
 
   @override
   String toString() {
-    return 'CustomLeaguesInfo(leagueId: $leagueId, leagueName: $leagueName, leagueType: $leagueType, leagueCode: $leagueCode, adminId: $adminId, customleagueMembers: $customleagueMembers, leagueStartGameweek: $leagueStartGameweek)';
+    return 'CustomLeaguesInfo(leagueId: $leagueId, leagueName: $leagueName, leagueType: $leagueType, leagueCode: $leagueCode, adminId: $adminId, customleagueMembers: $customleagueMembers, leagueStartGameWeek: $leagueStartGameWeek)';
   }
 
   @override
@@ -422,7 +422,7 @@ class _$_CustomLeaguesInfo implements _CustomLeaguesInfo {
             const DeepCollectionEquality()
                 .equals(other.customleagueMembers, customleagueMembers) &&
             const DeepCollectionEquality()
-                .equals(other.leagueStartGameweek, leagueStartGameweek));
+                .equals(other.leagueStartGameWeek, leagueStartGameWeek));
   }
 
   @override
@@ -434,7 +434,7 @@ class _$_CustomLeaguesInfo implements _CustomLeaguesInfo {
       const DeepCollectionEquality().hash(leagueCode),
       const DeepCollectionEquality().hash(adminId),
       const DeepCollectionEquality().hash(customleagueMembers),
-      const DeepCollectionEquality().hash(leagueStartGameweek));
+      const DeepCollectionEquality().hash(leagueStartGameWeek));
 
   @JsonKey(ignore: true)
   @override
@@ -449,8 +449,8 @@ abstract class _CustomLeaguesInfo implements CustomLeaguesInfo {
       required LeagueType leagueType,
       required LeagueCode leagueCode,
       required AdminId adminId,
-      required List<CustomLeagueMember> customleagueMembers,
-      required LeagueStartGameweek leagueStartGameweek}) = _$_CustomLeaguesInfo;
+      required List<dynamic> customleagueMembers,
+      required LeagueStartGameWeek leagueStartGameWeek}) = _$_CustomLeaguesInfo;
 
   @override
   LeagueId get leagueId;
@@ -462,10 +462,10 @@ abstract class _CustomLeaguesInfo implements CustomLeaguesInfo {
   LeagueCode get leagueCode;
   @override
   AdminId get adminId;
+  @override // TODO: List<dynamic> ===> List<CustomLeageMember>
+  List<dynamic> get customleagueMembers;
   @override
-  List<CustomLeagueMember> get customleagueMembers;
-  @override
-  LeagueStartGameweek get leagueStartGameweek;
+  LeagueStartGameWeek get leagueStartGameWeek;
   @override
   @JsonKey(ignore: true)
   _$CustomLeaguesInfoCopyWith<_CustomLeaguesInfo> get copyWith =>

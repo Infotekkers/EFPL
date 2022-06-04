@@ -226,16 +226,16 @@ class _$CustomLeagueInfoDTOTearOff {
       required String leagueType,
       required String leagueCode,
       required String adminId,
-      required List<dynamic> customLeagueMembers,
-      required int leagueStartGameweek}) {
+      required List<dynamic> teams,
+      required int leagueStartGameWeek}) {
     return _CustomLeagueInfoDTO(
       leagueId: leagueId,
       leagueName: leagueName,
       leagueType: leagueType,
       leagueCode: leagueCode,
       adminId: adminId,
-      customLeagueMembers: customLeagueMembers,
-      leagueStartGameweek: leagueStartGameweek,
+      teams: teams,
+      leagueStartGameWeek: leagueStartGameWeek,
     );
   }
 
@@ -254,8 +254,8 @@ mixin _$CustomLeagueInfoDTO {
   String get leagueType => throw _privateConstructorUsedError;
   String get leagueCode => throw _privateConstructorUsedError;
   String get adminId => throw _privateConstructorUsedError;
-  List<dynamic> get customLeagueMembers => throw _privateConstructorUsedError;
-  int get leagueStartGameweek => throw _privateConstructorUsedError;
+  List<dynamic> get teams => throw _privateConstructorUsedError;
+  int get leagueStartGameWeek => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -274,8 +274,8 @@ abstract class $CustomLeagueInfoDTOCopyWith<$Res> {
       String leagueType,
       String leagueCode,
       String adminId,
-      List<dynamic> customLeagueMembers,
-      int leagueStartGameweek});
+      List<dynamic> teams,
+      int leagueStartGameWeek});
 }
 
 /// @nodoc
@@ -294,8 +294,8 @@ class _$CustomLeagueInfoDTOCopyWithImpl<$Res>
     Object? leagueType = freezed,
     Object? leagueCode = freezed,
     Object? adminId = freezed,
-    Object? customLeagueMembers = freezed,
-    Object? leagueStartGameweek = freezed,
+    Object? teams = freezed,
+    Object? leagueStartGameWeek = freezed,
   }) {
     return _then(_value.copyWith(
       leagueId: leagueId == freezed
@@ -318,13 +318,13 @@ class _$CustomLeagueInfoDTOCopyWithImpl<$Res>
           ? _value.adminId
           : adminId // ignore: cast_nullable_to_non_nullable
               as String,
-      customLeagueMembers: customLeagueMembers == freezed
-          ? _value.customLeagueMembers
-          : customLeagueMembers // ignore: cast_nullable_to_non_nullable
+      teams: teams == freezed
+          ? _value.teams
+          : teams // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      leagueStartGameweek: leagueStartGameweek == freezed
-          ? _value.leagueStartGameweek
-          : leagueStartGameweek // ignore: cast_nullable_to_non_nullable
+      leagueStartGameWeek: leagueStartGameWeek == freezed
+          ? _value.leagueStartGameWeek
+          : leagueStartGameWeek // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -343,8 +343,8 @@ abstract class _$CustomLeagueInfoDTOCopyWith<$Res>
       String leagueType,
       String leagueCode,
       String adminId,
-      List<dynamic> customLeagueMembers,
-      int leagueStartGameweek});
+      List<dynamic> teams,
+      int leagueStartGameWeek});
 }
 
 /// @nodoc
@@ -365,8 +365,8 @@ class __$CustomLeagueInfoDTOCopyWithImpl<$Res>
     Object? leagueType = freezed,
     Object? leagueCode = freezed,
     Object? adminId = freezed,
-    Object? customLeagueMembers = freezed,
-    Object? leagueStartGameweek = freezed,
+    Object? teams = freezed,
+    Object? leagueStartGameWeek = freezed,
   }) {
     return _then(_CustomLeagueInfoDTO(
       leagueId: leagueId == freezed
@@ -389,13 +389,13 @@ class __$CustomLeagueInfoDTOCopyWithImpl<$Res>
           ? _value.adminId
           : adminId // ignore: cast_nullable_to_non_nullable
               as String,
-      customLeagueMembers: customLeagueMembers == freezed
-          ? _value.customLeagueMembers
-          : customLeagueMembers // ignore: cast_nullable_to_non_nullable
+      teams: teams == freezed
+          ? _value.teams
+          : teams // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      leagueStartGameweek: leagueStartGameweek == freezed
-          ? _value.leagueStartGameweek
-          : leagueStartGameweek // ignore: cast_nullable_to_non_nullable
+      leagueStartGameWeek: leagueStartGameWeek == freezed
+          ? _value.leagueStartGameWeek
+          : leagueStartGameWeek // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -410,8 +410,8 @@ class _$_CustomLeagueInfoDTO extends _CustomLeagueInfoDTO {
       required this.leagueType,
       required this.leagueCode,
       required this.adminId,
-      required this.customLeagueMembers,
-      required this.leagueStartGameweek})
+      required this.teams,
+      required this.leagueStartGameWeek})
       : super._();
 
   factory _$_CustomLeagueInfoDTO.fromJson(Map<String, dynamic> json) =>
@@ -428,13 +428,13 @@ class _$_CustomLeagueInfoDTO extends _CustomLeagueInfoDTO {
   @override
   final String adminId;
   @override
-  final List<dynamic> customLeagueMembers;
+  final List<dynamic> teams;
   @override
-  final int leagueStartGameweek;
+  final int leagueStartGameWeek;
 
   @override
   String toString() {
-    return 'CustomLeagueInfoDTO(leagueId: $leagueId, leagueName: $leagueName, leagueType: $leagueType, leagueCode: $leagueCode, adminId: $adminId, customLeagueMembers: $customLeagueMembers, leagueStartGameweek: $leagueStartGameweek)';
+    return 'CustomLeagueInfoDTO(leagueId: $leagueId, leagueName: $leagueName, leagueType: $leagueType, leagueCode: $leagueCode, adminId: $adminId, teams: $teams, leagueStartGameWeek: $leagueStartGameWeek)';
   }
 
   @override
@@ -450,10 +450,9 @@ class _$_CustomLeagueInfoDTO extends _CustomLeagueInfoDTO {
             const DeepCollectionEquality()
                 .equals(other.leagueCode, leagueCode) &&
             const DeepCollectionEquality().equals(other.adminId, adminId) &&
+            const DeepCollectionEquality().equals(other.teams, teams) &&
             const DeepCollectionEquality()
-                .equals(other.customLeagueMembers, customLeagueMembers) &&
-            const DeepCollectionEquality()
-                .equals(other.leagueStartGameweek, leagueStartGameweek));
+                .equals(other.leagueStartGameWeek, leagueStartGameWeek));
   }
 
   @override
@@ -464,8 +463,8 @@ class _$_CustomLeagueInfoDTO extends _CustomLeagueInfoDTO {
       const DeepCollectionEquality().hash(leagueType),
       const DeepCollectionEquality().hash(leagueCode),
       const DeepCollectionEquality().hash(adminId),
-      const DeepCollectionEquality().hash(customLeagueMembers),
-      const DeepCollectionEquality().hash(leagueStartGameweek));
+      const DeepCollectionEquality().hash(teams),
+      const DeepCollectionEquality().hash(leagueStartGameWeek));
 
   @JsonKey(ignore: true)
   @override
@@ -486,8 +485,8 @@ abstract class _CustomLeagueInfoDTO extends CustomLeagueInfoDTO {
       required String leagueType,
       required String leagueCode,
       required String adminId,
-      required List<dynamic> customLeagueMembers,
-      required int leagueStartGameweek}) = _$_CustomLeagueInfoDTO;
+      required List<dynamic> teams,
+      required int leagueStartGameWeek}) = _$_CustomLeagueInfoDTO;
   const _CustomLeagueInfoDTO._() : super._();
 
   factory _CustomLeagueInfoDTO.fromJson(Map<String, dynamic> json) =
@@ -504,9 +503,9 @@ abstract class _CustomLeagueInfoDTO extends CustomLeagueInfoDTO {
   @override
   String get adminId;
   @override
-  List<dynamic> get customLeagueMembers;
+  List<dynamic> get teams;
   @override
-  int get leagueStartGameweek;
+  int get leagueStartGameWeek;
   @override
   @JsonKey(ignore: true)
   _$CustomLeagueInfoDTOCopyWith<_CustomLeagueInfoDTO> get copyWith =>
