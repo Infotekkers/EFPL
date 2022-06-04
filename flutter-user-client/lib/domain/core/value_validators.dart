@@ -31,14 +31,6 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
   }
 }
 
-Either<AuthFailure, Password> passWordMatch(Password input1, Password input2) {
-  if (input2 == input1) {
-    return right(input2);
-  } else {
-    return left(const AuthFailure.passwordDontMatch());
-  }
-}
-
 Either<ValueFailure<String>, String> validateName(String input) {
   const nameRegex =
       r"""^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$""";

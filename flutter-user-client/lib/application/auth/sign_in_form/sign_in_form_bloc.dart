@@ -42,6 +42,17 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       },
     );
 
+    // show password
+    on<ShowPressed>(
+      (event, emit) {
+        emit(
+          state.copyWith(
+            showPass: !state.showPass,
+          ),
+        );
+      },
+    );
+
     // Sign In User
     on<SignInUserPressed>(
       (event, emit) async {

@@ -46,16 +46,9 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
         emit(
           state.copyWith(
             confirmPassword: Password(event.confirmPasswordStr),
-            isMatch: none(),
+            authFailureOrSuccessOption: none(),
           ),
         );
-        final passMatch = passWordMatch(state.password, state.confirmPassword);
-        if (passMatch.isLeft()) {
-          emit(
-            state.copyWith(
-                isMatch: some(left(const AuthFailure.passwordDontMatch()))),
-          );
-        }
       },
     );
 
@@ -107,6 +100,26 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
       },
     );
 
+    // show pass pressed
+    on<ShowPressed>(
+      (event, emit) {
+        emit(
+          state.copyWith(
+            showPass: !state.showPass,
+          ),
+        );
+      },
+    );
+    on<ShowConfirmPressed>(
+      (event, emit) {
+        emit(
+          state.copyWith(
+            showConfirmPass: !state.showConfirmPass,
+          ),
+        );
+      },
+    );
+
     // register pressed
     on<RegisterUserPressed>(
       (event, emit) async {
@@ -114,37 +127,41 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
         final isEmailValid = state.email.isValid();
         final isPassValid = state.password.isValid();
         final isConfirmPassValid = state.confirmPassword.isValid();
-        // final isCountryValid = state.confirmPassword.isValid();
         final isUserName = state.userName.isValid();
         final isTeamNameValid = state.teamName.isValid();
-        // final isFavoriteEplTeamValid = state.favouriteEplTeam.isValid();
-        final passMatch = passWordMatch(state.password, state.confirmPassword);
-
+        final passMatch =
+            state.password == state.confirmPassword ? true : false;
+        print(state.password == state.confirmPassword);
         if (isEmailValid &&
-                isPassValid &&
-                isConfirmPassValid &&
-                // isCountryValid &&
-                isUserName &&
-                isTeamNameValid &&
-                passMatch.isRight()
-            // isFavoriteEplTeamValid
-            ) {
+            isPassValid &&
+            isConfirmPassValid &&
+            isUserName &&
+            isTeamNameValid) {
+          if (passMatch == true) {
+            emit(
+              state.copyWith(
+                isSubmitting: true,
+                authFailureOrSuccessOption: none(),
+              ),
+            );
+            final User user = User.initial();
+            failureOrSuccess = await _authRepository.registerUser(
+              user: user.copyWith(
+                email: state.email,
+                userName: state.userName,
+                teamName: state.teamName,
+                country: state.country,
+                favouriteEplTeam: state.favouriteEplTeam,
+              ),
+              password: state.password,
+            );
+          }
           emit(
             state.copyWith(
-              isSubmitting: true,
-              authFailureOrSuccessOption: none(),
+              isSubmitting: false,
+              showErrorMessages: true,
+              authFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
-          );
-          final User user = User.initial();
-          failureOrSuccess = await _authRepository.registerUser(
-            user: user.copyWith(
-              email: state.email,
-              userName: state.userName,
-              teamName: state.teamName,
-              country: state.country,
-              favouriteEplTeam: state.favouriteEplTeam,
-            ),
-            password: state.password,
           );
         }
 

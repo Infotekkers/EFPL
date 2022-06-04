@@ -15,5 +15,8 @@ abstract class RegisterFormEvent with _$RegisterFormEvent {
       CountryChanged;
   const factory RegisterFormEvent.favoriteEplTeamChanged(
       String favoriteEplTeamStr) = FavoriteEplTeamChanged;
+  const factory RegisterFormEvent.showPressed() = ShowPressed;
+  const factory RegisterFormEvent.showConfirmPressed() = ShowConfirmPressed;
+
   const factory RegisterFormEvent.registerUserPressed() = RegisterUserPressed;
 }

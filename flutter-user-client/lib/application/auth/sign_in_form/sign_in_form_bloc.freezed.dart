@@ -29,6 +29,10 @@ class _$SignInFormEventTearOff {
     );
   }
 
+  ShowPressed showPressed() {
+    return const ShowPressed();
+  }
+
   SignInUserPressed signInUserPressed() {
     return const SignInUserPressed();
   }
@@ -43,6 +47,7 @@ mixin _$SignInFormEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String emailStr) emailChanged,
     required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function() showPressed,
     required TResult Function() signInUserPressed,
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +55,7 @@ mixin _$SignInFormEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String emailStr)? emailChanged,
     TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? showPressed,
     TResult Function()? signInUserPressed,
   }) =>
       throw _privateConstructorUsedError;
@@ -57,6 +63,7 @@ mixin _$SignInFormEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String emailStr)? emailChanged,
     TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? showPressed,
     TResult Function()? signInUserPressed,
     required TResult orElse(),
   }) =>
@@ -65,6 +72,7 @@ mixin _$SignInFormEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(EmailChanged value) emailChanged,
     required TResult Function(PasswordChanged value) passwordChanged,
+    required TResult Function(ShowPressed value) showPressed,
     required TResult Function(SignInUserPressed value) signInUserPressed,
   }) =>
       throw _privateConstructorUsedError;
@@ -72,6 +80,7 @@ mixin _$SignInFormEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(EmailChanged value)? emailChanged,
     TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ShowPressed value)? showPressed,
     TResult Function(SignInUserPressed value)? signInUserPressed,
   }) =>
       throw _privateConstructorUsedError;
@@ -79,6 +88,7 @@ mixin _$SignInFormEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(EmailChanged value)? emailChanged,
     TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ShowPressed value)? showPressed,
     TResult Function(SignInUserPressed value)? signInUserPressed,
     required TResult orElse(),
   }) =>
@@ -169,6 +179,7 @@ class _$EmailChanged implements EmailChanged {
   TResult when<TResult extends Object?>({
     required TResult Function(String emailStr) emailChanged,
     required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function() showPressed,
     required TResult Function() signInUserPressed,
   }) {
     return emailChanged(emailStr);
@@ -179,6 +190,7 @@ class _$EmailChanged implements EmailChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String emailStr)? emailChanged,
     TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? showPressed,
     TResult Function()? signInUserPressed,
   }) {
     return emailChanged?.call(emailStr);
@@ -189,6 +201,7 @@ class _$EmailChanged implements EmailChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String emailStr)? emailChanged,
     TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? showPressed,
     TResult Function()? signInUserPressed,
     required TResult orElse(),
   }) {
@@ -203,6 +216,7 @@ class _$EmailChanged implements EmailChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(EmailChanged value) emailChanged,
     required TResult Function(PasswordChanged value) passwordChanged,
+    required TResult Function(ShowPressed value) showPressed,
     required TResult Function(SignInUserPressed value) signInUserPressed,
   }) {
     return emailChanged(this);
@@ -213,6 +227,7 @@ class _$EmailChanged implements EmailChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(EmailChanged value)? emailChanged,
     TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ShowPressed value)? showPressed,
     TResult Function(SignInUserPressed value)? signInUserPressed,
   }) {
     return emailChanged?.call(this);
@@ -223,6 +238,7 @@ class _$EmailChanged implements EmailChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(EmailChanged value)? emailChanged,
     TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ShowPressed value)? showPressed,
     TResult Function(SignInUserPressed value)? signInUserPressed,
     required TResult orElse(),
   }) {
@@ -310,6 +326,7 @@ class _$PasswordChanged implements PasswordChanged {
   TResult when<TResult extends Object?>({
     required TResult Function(String emailStr) emailChanged,
     required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function() showPressed,
     required TResult Function() signInUserPressed,
   }) {
     return passwordChanged(passwordStr);
@@ -320,6 +337,7 @@ class _$PasswordChanged implements PasswordChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String emailStr)? emailChanged,
     TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? showPressed,
     TResult Function()? signInUserPressed,
   }) {
     return passwordChanged?.call(passwordStr);
@@ -330,6 +348,7 @@ class _$PasswordChanged implements PasswordChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String emailStr)? emailChanged,
     TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? showPressed,
     TResult Function()? signInUserPressed,
     required TResult orElse(),
   }) {
@@ -344,6 +363,7 @@ class _$PasswordChanged implements PasswordChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(EmailChanged value) emailChanged,
     required TResult Function(PasswordChanged value) passwordChanged,
+    required TResult Function(ShowPressed value) showPressed,
     required TResult Function(SignInUserPressed value) signInUserPressed,
   }) {
     return passwordChanged(this);
@@ -354,6 +374,7 @@ class _$PasswordChanged implements PasswordChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(EmailChanged value)? emailChanged,
     TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ShowPressed value)? showPressed,
     TResult Function(SignInUserPressed value)? signInUserPressed,
   }) {
     return passwordChanged?.call(this);
@@ -364,6 +385,7 @@ class _$PasswordChanged implements PasswordChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(EmailChanged value)? emailChanged,
     TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ShowPressed value)? showPressed,
     TResult Function(SignInUserPressed value)? signInUserPressed,
     required TResult orElse(),
   }) {
@@ -381,6 +403,123 @@ abstract class PasswordChanged implements SignInFormEvent {
   @JsonKey(ignore: true)
   $PasswordChangedCopyWith<PasswordChanged> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ShowPressedCopyWith<$Res> {
+  factory $ShowPressedCopyWith(
+          ShowPressed value, $Res Function(ShowPressed) then) =
+      _$ShowPressedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ShowPressedCopyWithImpl<$Res>
+    extends _$SignInFormEventCopyWithImpl<$Res>
+    implements $ShowPressedCopyWith<$Res> {
+  _$ShowPressedCopyWithImpl(
+      ShowPressed _value, $Res Function(ShowPressed) _then)
+      : super(_value, (v) => _then(v as ShowPressed));
+
+  @override
+  ShowPressed get _value => super._value as ShowPressed;
+}
+
+/// @nodoc
+
+class _$ShowPressed implements ShowPressed {
+  const _$ShowPressed();
+
+  @override
+  String toString() {
+    return 'SignInFormEvent.showPressed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is ShowPressed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String emailStr) emailChanged,
+    required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function() showPressed,
+    required TResult Function() signInUserPressed,
+  }) {
+    return showPressed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String emailStr)? emailChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? showPressed,
+    TResult Function()? signInUserPressed,
+  }) {
+    return showPressed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String emailStr)? emailChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? showPressed,
+    TResult Function()? signInUserPressed,
+    required TResult orElse(),
+  }) {
+    if (showPressed != null) {
+      return showPressed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmailChanged value) emailChanged,
+    required TResult Function(PasswordChanged value) passwordChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(SignInUserPressed value) signInUserPressed,
+  }) {
+    return showPressed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmailChanged value)? emailChanged,
+    TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(SignInUserPressed value)? signInUserPressed,
+  }) {
+    return showPressed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmailChanged value)? emailChanged,
+    TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(SignInUserPressed value)? signInUserPressed,
+    required TResult orElse(),
+  }) {
+    if (showPressed != null) {
+      return showPressed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowPressed implements SignInFormEvent {
+  const factory ShowPressed() = _$ShowPressed;
 }
 
 /// @nodoc
@@ -426,6 +565,7 @@ class _$SignInUserPressed implements SignInUserPressed {
   TResult when<TResult extends Object?>({
     required TResult Function(String emailStr) emailChanged,
     required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function() showPressed,
     required TResult Function() signInUserPressed,
   }) {
     return signInUserPressed();
@@ -436,6 +576,7 @@ class _$SignInUserPressed implements SignInUserPressed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String emailStr)? emailChanged,
     TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? showPressed,
     TResult Function()? signInUserPressed,
   }) {
     return signInUserPressed?.call();
@@ -446,6 +587,7 @@ class _$SignInUserPressed implements SignInUserPressed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String emailStr)? emailChanged,
     TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? showPressed,
     TResult Function()? signInUserPressed,
     required TResult orElse(),
   }) {
@@ -460,6 +602,7 @@ class _$SignInUserPressed implements SignInUserPressed {
   TResult map<TResult extends Object?>({
     required TResult Function(EmailChanged value) emailChanged,
     required TResult Function(PasswordChanged value) passwordChanged,
+    required TResult Function(ShowPressed value) showPressed,
     required TResult Function(SignInUserPressed value) signInUserPressed,
   }) {
     return signInUserPressed(this);
@@ -470,6 +613,7 @@ class _$SignInUserPressed implements SignInUserPressed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(EmailChanged value)? emailChanged,
     TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ShowPressed value)? showPressed,
     TResult Function(SignInUserPressed value)? signInUserPressed,
   }) {
     return signInUserPressed?.call(this);
@@ -480,6 +624,7 @@ class _$SignInUserPressed implements SignInUserPressed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(EmailChanged value)? emailChanged,
     TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ShowPressed value)? showPressed,
     TResult Function(SignInUserPressed value)? signInUserPressed,
     required TResult orElse(),
   }) {
@@ -503,12 +648,14 @@ class _$SignInFormStateTearOff {
       required Password password,
       required bool showErrorMessages,
       required bool isSubmitting,
+      required bool showPass,
       required Option<Either<AuthFailure, User>> authFailureOrSuccessOption}) {
     return _SignInFormState(
       email: email,
       password: password,
       showErrorMessages: showErrorMessages,
       isSubmitting: isSubmitting,
+      showPass: showPass,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
     );
   }
@@ -523,6 +670,7 @@ mixin _$SignInFormState {
   Password get password => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
+  bool get showPass => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, User>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -541,6 +689,7 @@ abstract class $SignInFormStateCopyWith<$Res> {
       Password password,
       bool showErrorMessages,
       bool isSubmitting,
+      bool showPass,
       Option<Either<AuthFailure, User>> authFailureOrSuccessOption});
 }
 
@@ -559,6 +708,7 @@ class _$SignInFormStateCopyWithImpl<$Res>
     Object? password = freezed,
     Object? showErrorMessages = freezed,
     Object? isSubmitting = freezed,
+    Object? showPass = freezed,
     Object? authFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
@@ -577,6 +727,10 @@ class _$SignInFormStateCopyWithImpl<$Res>
       isSubmitting: isSubmitting == freezed
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showPass: showPass == freezed
+          ? _value.showPass
+          : showPass // ignore: cast_nullable_to_non_nullable
               as bool,
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
@@ -598,6 +752,7 @@ abstract class _$SignInFormStateCopyWith<$Res>
       Password password,
       bool showErrorMessages,
       bool isSubmitting,
+      bool showPass,
       Option<Either<AuthFailure, User>> authFailureOrSuccessOption});
 }
 
@@ -618,6 +773,7 @@ class __$SignInFormStateCopyWithImpl<$Res>
     Object? password = freezed,
     Object? showErrorMessages = freezed,
     Object? isSubmitting = freezed,
+    Object? showPass = freezed,
     Object? authFailureOrSuccessOption = freezed,
   }) {
     return _then(_SignInFormState(
@@ -637,6 +793,10 @@ class __$SignInFormStateCopyWithImpl<$Res>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
+      showPass: showPass == freezed
+          ? _value.showPass
+          : showPass // ignore: cast_nullable_to_non_nullable
+              as bool,
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -653,6 +813,7 @@ class _$_SignInFormState implements _SignInFormState {
       required this.password,
       required this.showErrorMessages,
       required this.isSubmitting,
+      required this.showPass,
       required this.authFailureOrSuccessOption});
 
   @override
@@ -664,11 +825,13 @@ class _$_SignInFormState implements _SignInFormState {
   @override
   final bool isSubmitting;
   @override
+  final bool showPass;
+  @override
   final Option<Either<AuthFailure, User>> authFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'SignInFormState(email: $email, password: $password, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'SignInFormState(email: $email, password: $password, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, showPass: $showPass, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -682,6 +845,7 @@ class _$_SignInFormState implements _SignInFormState {
                 .equals(other.showErrorMessages, showErrorMessages) &&
             const DeepCollectionEquality()
                 .equals(other.isSubmitting, isSubmitting) &&
+            const DeepCollectionEquality().equals(other.showPass, showPass) &&
             const DeepCollectionEquality().equals(
                 other.authFailureOrSuccessOption, authFailureOrSuccessOption));
   }
@@ -693,6 +857,7 @@ class _$_SignInFormState implements _SignInFormState {
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(showErrorMessages),
       const DeepCollectionEquality().hash(isSubmitting),
+      const DeepCollectionEquality().hash(showPass),
       const DeepCollectionEquality().hash(authFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
@@ -707,6 +872,7 @@ abstract class _SignInFormState implements SignInFormState {
       required Password password,
       required bool showErrorMessages,
       required bool isSubmitting,
+      required bool showPass,
       required Option<Either<AuthFailure, User>>
           authFailureOrSuccessOption}) = _$_SignInFormState;
 
@@ -718,6 +884,8 @@ abstract class _SignInFormState implements SignInFormState {
   bool get showErrorMessages;
   @override
   bool get isSubmitting;
+  @override
+  bool get showPass;
   @override
   Option<Either<AuthFailure, User>> get authFailureOrSuccessOption;
   @override
