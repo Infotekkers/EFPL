@@ -594,7 +594,6 @@ class TransferRemoteDataProvider {
         ),
       );
 
-      print(apiResponse.statusCode);
       // success
       if (apiResponse.statusCode == 201) {
         getIt<TransferBloc>().add(
@@ -686,7 +685,7 @@ class TransferRemoteDataProvider {
     }
     // unexpected error
     catch (e) {
-      // print(e);
+      print(e);
       //  cache
       _transferLocalDataProvider.saveUserTeamChanges(changedUserTeam: userTeam);
 

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 
 import 'package:efpl/domain/transfer/i_user_players_facade.dart';
+import 'package:efpl/domain/transfer/transfer_failures.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';
@@ -243,7 +244,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
               : 0,
           deduction: state.userTeam.freeTransfers >= 1
               ? state.userTeam.deduction
-              : state.userTeam.deduction - 4,
+              : state.userTeam.deduction + 4,
           activeChip: state.userTeam.activeChip,
           availableChips: state.userTeam.availableChips,
           maxBudget: state.userTeam.maxBudget,
@@ -371,7 +372,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         freeTransfers:
             transferCount == 0 ? state.userTeam.freeTransfers - 1 : 0,
         deduction:
-            state.userTeam.deduction == 0 ? 0 : state.userTeam.deduction + 4,
+            state.userTeam.deduction == 0 ? 0 : state.userTeam.deduction - 4,
         activeChip: state.userTeam.activeChip,
         availableChips: state.userTeam.availableChips,
         maxBudget: state.userTeam.maxBudget,
@@ -531,121 +532,119 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
       },
     );
 
-    on<_saveUserPlayers>((event, emit) async {
-      print("@BLOC SAVE");
-      // get team to save
-      // UserTeam teamToSave = state.userTeam;
-      // List<UserPlayer> allUserPlayers = teamToSave.allUserPlayers;
+    on<_saveUserPlayers>(
+      (event, emit) async {
+        // get team to save
+        UserTeam teamToSave = state.userTeam;
+        List<UserPlayer> allUserPlayers = teamToSave.allUserPlayers;
 
-      // check price
-      // double allPlayersCostSum = 0.0;
-      // List listOfTeamsFound = [];
-      // for (var player in allUserPlayers) {
-      //   double currentPlayerPrice = player.currentPrice.value.fold(
-      //     (l) => 0.0,
-      //     (r) => r,
-      //   );
+        // check price
+        double allPlayersCostSum = 0.0;
+        List listOfTeamsFound = [];
+        for (var player in allUserPlayers) {
+          double currentPlayerPrice = player.currentPrice.value.fold(
+            (l) => 0.0,
+            (r) => r,
+          );
 
-      //   String currentPlayerTeam = player.eplTeamId.value.fold(
-      //     (l) => '',
-      //     (r) => r,
-      //   );
+          String currentPlayerTeam = player.eplTeamId.value.fold(
+            (l) => '',
+            (r) => r,
+          );
 
-      //   allPlayersCostSum = allPlayersCostSum + currentPlayerPrice;
+          allPlayersCostSum = allPlayersCostSum + currentPlayerPrice;
 
-      //   if (!listOfTeamsFound.contains(currentPlayerTeam)) {
-      //     listOfTeamsFound.add(currentPlayerTeam);
-      //   }
-      // }
+          if (!listOfTeamsFound.contains(currentPlayerTeam)) {
+            listOfTeamsFound.add(currentPlayerTeam);
+          }
+        }
 
-      //
+        // check team count
+        bool teamCountExceeded = false;
+        String exceededTeamName = "";
+        for (var team in listOfTeamsFound) {
+          List teamCount = allUserPlayers
+              .where(
+                (player) =>
+                    player.eplTeamId.value.fold(
+                      (l) => '',
+                      (r) => r,
+                    ) ==
+                    team,
+              )
+              .toList();
 
-      // // check team count
-      // bool teamCountExceeded = false;
-      // String exceededTeamName = "";
-      // for (var team in listOfTeamsFound) {
-      //   List teamCount = allUserPlayers
-      //       .where(
-      //         (player) =>
-      //             player.eplTeamId.value.fold(
-      //               (l) => '',
-      //               (r) => r,
-      //             ) ==
-      //             team,
-      //       )
-      //       .toList();
+          if (teamCount.length > 3) {
+            teamCountExceeded = true;
+            exceededTeamName = team;
+          }
+        }
 
-      //   if (teamCount.length > 3) {
-      //     teamCountExceeded = true;
-      //     exceededTeamName = team;
-      //   }
-      // }
+        // check team length
+        if (allUserPlayers.length != 15) {
+          Either<dynamic, dynamic> valueFailureOrSuccess = left(
+            [
+              [],
+              const TransferFailure.incompleteTeam(failedValue: "Incomplete"),
+            ],
+          );
 
-      // // check team length
-      // if (allUserPlayers.length != 15) {
-      //   Either<dynamic, dynamic> valueFailureOrSuccess = left(
-      //     [
-      //       [],
-      //       const TransferFailure.incompleteTeam(failedValue: "Incomplete"),
-      //     ],
-      //   );
+          emit(state.copyWith(
+            valueFailureOrSuccess: some(valueFailureOrSuccess),
+            countExceededTeam: exceededTeamName,
+          ));
+        } else if (allPlayersCostSum > state.userTeam.maxBudget) {
+          Either<dynamic, dynamic> valueFailureOrSuccess = left(
+            [
+              [],
+              const TransferFailure.exceededPrice(failedValue: "Price"),
+            ],
+          );
 
-      //   emit(state.copyWith(
-      //     valueFailureOrSuccess: some(valueFailureOrSuccess),
-      //     countExceededTeam: exceededTeamName,
-      //   ));
-      // } else if (allPlayersCostSum > state.userTeam.maxBudget) {
-      //   Either<dynamic, dynamic> valueFailureOrSuccess = left(
-      //     [
-      //       [],
-      //       const TransferFailure.exceededPrice(failedValue: "Price"),
-      //     ],
-      //   );
+          emit(state.copyWith(
+            valueFailureOrSuccess: some(valueFailureOrSuccess),
+          ));
+        } else if (teamCountExceeded) {
+          Either<dynamic, dynamic> valueFailureOrSuccess = left(
+            [
+              [],
+              const TransferFailure.exceededTeamCount(
+                  failedValue: "Team Count"),
+            ],
+          );
 
-      //   emit(state.copyWith(
-      //     valueFailureOrSuccess: some(valueFailureOrSuccess),
-      //   ));
-      // } else if (teamCountExceeded) {
-      //   Either<dynamic, dynamic> valueFailureOrSuccess = left(
-      //     [
-      //       [],
-      //       const TransferFailure.exceededTeamCount(
-      //           failedValue: "Team Count"),
-      //     ],
-      //   );
+          emit(state.copyWith(
+            valueFailureOrSuccess: some(valueFailureOrSuccess),
+          ));
+        } else {
+          // if transfer made
+          if (state.transfersMade) {
+            //save team to api from api
+            await _iTransferRepository.saveUserPlayers(
+              userTeam: state.userTeam,
+              gameWeekId: event.gameWeekId,
+              isInitial: event.isSetTeam,
+            );
 
-      //   emit(state.copyWith(
-      //     valueFailureOrSuccess: some(valueFailureOrSuccess),
-      //   ));
-      // } else {
-      // if transfer made
-      // if (state.transfersMade) {
-      //save team to api from api
-      await _iTransferRepository.saveUserPlayers(
-        userTeam: state.userTeam,
-        gameWeekId: event.gameWeekId,
-        isInitial: event.isSetTeam,
-      );
+            if (state.isInitialSelection == true) {
+              getIt<TransferBloc>().add(
+                const TransferEvent.setInitialSelection(valueToSet: false),
+              );
+            }
 
-      if (state.isInitialSelection == true) {
-        getIt<TransferBloc>().add(
-          const TransferEvent.setInitialSelection(valueToSet: false),
-        );
-      }
-
-      emit(
-        state.copyWith(
-          isLoading: false,
-          transfersMade: false,
-          transfersMadeCount: 0,
-          transferredInPlayerIdList: [],
-          swappedPlayerIdsList: [],
-        ),
-      );
-    }
-        // }
-        // },
-        );
+            emit(
+              state.copyWith(
+                isLoading: false,
+                transfersMade: false,
+                transfersMadeCount: 0,
+                transferredInPlayerIdList: [],
+                swappedPlayerIdsList: [],
+              ),
+            );
+          }
+        }
+      },
+    );
 
     on<_setFilter>((event, emit) async {
       // set loading
@@ -945,105 +944,105 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
     );
 
     on<_validateTeam>((event, emit) async {
-      // emit(
-      //   state.copyWith(isLoading: true),
-      // );
-
-      // // // check price
-      // List<UserPlayer> allUserPlayers = state.userTeam.allUserPlayers;
-
-      // double allPlayersSum = 0.0;
-      // for (var player in allUserPlayers) {
-      //   {
-      //     allPlayersSum = allPlayersSum +
-      //         player.currentPrice.value.fold(
-      //           (l) => 0.0,
-      //           (r) => r,
-      //         );
-      //   }
-      // }
-
-      // check team count
-      // Either<dynamic, List> allTeamsCall =
-      //     await TransferLocalDataProvider().getAllTeams();
-      // List allTeams = allTeamsCall.fold(
-      //   (l) => [],
-      //   (r) => r,
-      // );
-
-      // bool teamCountExceeded = false;
-      // String exceededTeam = '';
-      // for (var team in allTeams) {
-      //   List teamCount = allUserPlayers
-      //       .where((player) =>
-      //           player.eplTeamId.value.fold((l) => '', (r) => r) ==
-      //           team['teamName'])
-      //       .toList();
-
-      //   if (teamCount.length > 3) {
-      //     teamCountExceeded = true;
-      //     exceededTeam = team['teamName'];
-      //   }
-      // }
+      emit(
+        state.copyWith(isLoading: true),
+      );
 
       // // check price
-      // if (allPlayersSum > state.userTeam.maxBudget) {
-      //   Either<dynamic, dynamic> valueFailureOrSuccess = left(
-      //     [
-      //       [],
-      //       const TransferFailure.exceededPrice(failedValue: "Price"),
-      //     ],
-      //   );
+      List<UserPlayer> allUserPlayers = state.userTeam.allUserPlayers;
 
-      //   emit(state.copyWith(
-      //     valueFailureOrSuccess: some(valueFailureOrSuccess),
-      //     priceExceededBy: allPlayersSum - state.userTeam.maxBudget,
-      //   ));
-      // }
-      // // team count
-      // else if (teamCountExceeded == true) {
-      //   Either<dynamic, dynamic> valueFailureOrSuccess = left(
-      //     [
-      //       [],
-      //       const TransferFailure.exceededTeamCount(failedValue: "Team Count"),
-      //     ],
-      //   );
+      double allPlayersSum = 0.0;
+      for (var player in allUserPlayers) {
+        {
+          allPlayersSum = allPlayersSum +
+              player.currentPrice.value.fold(
+                (l) => 0.0,
+                (r) => r,
+              );
+        }
+      }
 
-      //   emit(state.copyWith(
-      //     valueFailureOrSuccess: some(valueFailureOrSuccess),
-      //     countExceededTeam: exceededTeam,
-      //   ));
-      // }
-
-      // // player count
-      // else if (allUserPlayers.length != 15) {
-      //   Either<dynamic, dynamic> valueFailureOrSuccess = left(
-      //     [
-      //       [],
-      //       const TransferFailure.incompleteTeam(failedValue: "Incomplete"),
-      //     ],
-      //   );
-
-      //   emit(state.copyWith(
-      //     valueFailureOrSuccess: some(valueFailureOrSuccess),
-      //   ));
-      // }
-      // // validated
-      // else {
-      //   // get all players
-      Either<dynamic, List> allPlayersCall =
-          await TransferLocalDataProvider().getAllPlayers();
-      List allPlayersList = allPlayersCall.fold((l) => [], (r) => r);
-
-      //   // navigate
-      Navigator.pushNamed(
-        event.context,
-        "/transfer/confirm",
-        arguments: {
-          "allPlayers": allPlayersList,
-        },
+      // check team count
+      Either<dynamic, List> allTeamsCall =
+          await TransferLocalDataProvider().getAllTeams();
+      List allTeams = allTeamsCall.fold(
+        (l) => [],
+        (r) => r,
       );
-      // }
+
+      bool teamCountExceeded = false;
+      String exceededTeam = '';
+      for (var team in allTeams) {
+        List teamCount = allUserPlayers
+            .where((player) =>
+                player.eplTeamId.value.fold((l) => '', (r) => r) ==
+                team['teamName'])
+            .toList();
+
+        if (teamCount.length > 3) {
+          teamCountExceeded = true;
+          exceededTeam = team['teamName'];
+        }
+      }
+
+      // check price
+      if (allPlayersSum > state.userTeam.maxBudget) {
+        Either<dynamic, dynamic> valueFailureOrSuccess = left(
+          [
+            [],
+            const TransferFailure.exceededPrice(failedValue: "Price"),
+          ],
+        );
+
+        emit(state.copyWith(
+          valueFailureOrSuccess: some(valueFailureOrSuccess),
+          priceExceededBy: allPlayersSum - state.userTeam.maxBudget,
+        ));
+      }
+      // team count
+      else if (teamCountExceeded == true) {
+        Either<dynamic, dynamic> valueFailureOrSuccess = left(
+          [
+            [],
+            const TransferFailure.exceededTeamCount(failedValue: "Team Count"),
+          ],
+        );
+
+        emit(state.copyWith(
+          valueFailureOrSuccess: some(valueFailureOrSuccess),
+          countExceededTeam: exceededTeam,
+        ));
+      }
+
+      // player count
+      else if (allUserPlayers.length != 15) {
+        Either<dynamic, dynamic> valueFailureOrSuccess = left(
+          [
+            [],
+            const TransferFailure.incompleteTeam(failedValue: "Incomplete"),
+          ],
+        );
+
+        emit(state.copyWith(
+          valueFailureOrSuccess: some(valueFailureOrSuccess),
+        ));
+      }
+      // validated
+      else {
+        // get all players
+        Either<dynamic, List> allPlayersCall =
+            await TransferLocalDataProvider().getAllPlayers();
+        List allPlayersList = allPlayersCall.fold((l) => [], (r) => r);
+
+        //   // navigate
+        Navigator.pushNamed(
+          event.context,
+          "/transfer/confirm",
+          arguments: {
+            "allPlayers": allPlayersList,
+          },
+        );
+      }
       emit(
         state.copyWith(isLoading: false),
       );

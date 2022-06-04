@@ -4,7 +4,6 @@ import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/transfers/widgets/transfer_player_card_widget.dart';
-import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

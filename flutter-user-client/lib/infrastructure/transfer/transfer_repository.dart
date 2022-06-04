@@ -49,7 +49,6 @@ class ApiTransferRepository implements ITransferRepository {
     required int gameWeekId,
     required bool isInitial,
   }) async {
-    print("@REPO Save");
     // convert user team to json
     final userTeamPlayers = {};
     for (var userPlayer in userTeam.allUserPlayers) {
@@ -65,7 +64,6 @@ class ApiTransferRepository implements ITransferRepository {
           "isCaptain": playerJson['isCaptain'],
           "isViceCaptain": playerJson['isViceCaptain'],
         };
-        print(playerInfoJson);
 
         // add to main json
         userTeamPlayers[playerJson['playerId']] = playerInfoJson;

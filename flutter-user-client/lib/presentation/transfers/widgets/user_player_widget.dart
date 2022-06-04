@@ -161,10 +161,19 @@ void _buildModalSheet(
                       child: Row(
                         children: [
                           Container(
-                            child: const Icon(Icons.info),
+                            child: const Icon(
+                              Icons.info,
+                              color: ConstantColors.primary_900,
+                            ),
                             margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
                           ),
-                          Text(AppLocalizations.of(context)!.playerInformation),
+                          Text(
+                            AppLocalizations.of(context)!.playerInformation,
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      fontSize: 15,
+                                    ),
+                          ),
                         ],
                       ),
                     ),
@@ -189,18 +198,31 @@ void _buildModalSheet(
                       child: Row(
                         children: [
                           Container(
-                            child: const Icon(Boxicons.bx_transfer),
+                            child: const Icon(
+                              Boxicons.bx_transfer,
+                              color: ConstantColors.primary_900,
+                            ),
                             margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
                           ),
                           state.transferredInPlayerIdList
                                   .contains(currentUserPlayer.playerId)
                               ? Text(
                                   AppLocalizations.of(context)!.cancelTransfers,
-                                  style: Theme.of(context).textTheme.bodyText1,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
+                                        fontSize: 15,
+                                      ),
                                 )
                               : Text(
                                   AppLocalizations.of(context)!.transfer,
-                                  style: Theme.of(context).textTheme.bodyText1,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
+                                        fontSize: 15,
+                                      ),
                                 )
                         ],
                       ),
@@ -227,7 +249,7 @@ void _buildModalSheet(
                     height: 80,
                     width: double.infinity,
                     child: ListView.builder(
-                      itemCount: 10,
+                      itemCount: 6,
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) {

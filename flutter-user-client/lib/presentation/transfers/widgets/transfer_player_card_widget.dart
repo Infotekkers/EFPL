@@ -351,7 +351,7 @@ void _buildModalSheet(
                     height: 80,
                     width: double.infinity,
                     child: ListView.builder(
-                      itemCount: 10,
+                      itemCount: 6,
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) {
