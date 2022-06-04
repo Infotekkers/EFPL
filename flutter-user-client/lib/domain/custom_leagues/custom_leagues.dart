@@ -20,6 +20,7 @@ abstract class CustomLeaguesInfo with _$CustomLeaguesInfo {
     required LeagueType leagueType,
     required LeagueCode leagueCode,
     required AdminId adminId,
+    required List<CustomLeagueMember> customleagueMembers,
     required LeagueStartGameweek leagueStartGameweek,
   }) = _CustomLeaguesInfo;
 }
