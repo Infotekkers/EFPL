@@ -57,7 +57,6 @@ class _MainTabViewState extends State<MainTabView> {
 
   @override
   Widget build(BuildContext context) {
-    print("Main Tab");
     final AuthBloc _authBloc = getIt<AuthBloc>();
     _authBloc.add(
       const AuthEvent.tokenCheckRequested(),
