@@ -6,6 +6,7 @@ const Teams = require("../models/Teams");
 
 const getStats = asyncHandler(async (req, res) => {
   const gwId = req.params.gwId;
+  console.log(gwId);
 
   const activeGw = await GameWeek.find({ status: "active" }).lean();
   let activeGwId = gwId;
@@ -23,7 +24,9 @@ const getStats = asyncHandler(async (req, res) => {
   }
 
   const stats = await EFPLStats.find({ gameWeekNumber: activeGwId }).lean();
-
+  stats[0].allStats.maxActiveCount = activeGwId;
+  stats[0].allStats.gameWeekId = stats[0].gameWeekNumber;
+  console.log(stats);
   res.status(200).send(stats);
 });
 
@@ -32,15 +35,16 @@ const updateStats = asyncHandler(async (req, res) => {
 
   // TODO:Complete
   const finalData = {
+    a: "4",
     highestPoint: 98,
     averagePoint: 36,
-    mostSelectedPlayer: ["Tariku Aredo"],
+    mostSelectedPlayer: [],
     mostTransferredOutPlayer: ["Temesgen Castro"],
     transfersMadeCount: 3000,
     mostCaptainedPlayer: ["Tsion Meried"],
     mostViceCaptainedPlayer: ["Sinegiorgis Eshetu"],
     benchBoostCount: 1000,
-    freeHitCount: 65,
+    freeHitCount: 56,
     wildCardCount: 3,
     tripleCaptainCount: 69,
     dreamTeam: {
@@ -76,7 +80,7 @@ const updateStats = asyncHandler(async (req, res) => {
       mostSelectedPlayerNames.push(player.name);
     }
   });
-  finalData.mostSelected = mostSelectedPlayerNames;
+  finalData.mostSelectedPlayer = mostSelectedPlayerNames;
 
   /*
     =======================================================

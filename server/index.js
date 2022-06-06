@@ -66,7 +66,7 @@ app.use("/efpl", EFPLStatsRouter);
 // populate.addTestFixture();
 
 // populate.addTestAdmin();
-populate.populateTeams();
+// populate.populateTeams();
 // populate.populatePlayers();
 // populate.populateFixture();
 
