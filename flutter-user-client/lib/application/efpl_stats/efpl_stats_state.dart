@@ -16,6 +16,8 @@ class EfplStatsState with _$EfplStatsState {
     required int tripleCaptainCount,
     required Map dreamTeam,
     required bool isLoading,
+    required int gameWeekId,
+    required int maxActiveCount,
     required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
   }) = _EfplState;
 
@@ -33,6 +35,8 @@ class EfplStatsState with _$EfplStatsState {
         tripleCaptainCount: 0,
         dreamTeam: {},
         isLoading: false,
+        gameWeekId: 0,
+        maxActiveCount: 0,
         valueFailureOrSuccess: none(),
       );
 }

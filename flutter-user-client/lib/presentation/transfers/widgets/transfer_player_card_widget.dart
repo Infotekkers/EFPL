@@ -23,7 +23,7 @@ class UserPlayerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     final _transferBloc = getIt<TransferBloc>();
-    final String _baseURL = dotenv.env["BASE_URL"].toString();
+    final String _baseURL = dotenv.env["API"].toString();
 
     final String injuryStatus = currentPlayer.availability.value
         .fold((l) => '', (r) => r['injuryStatus'].toString());

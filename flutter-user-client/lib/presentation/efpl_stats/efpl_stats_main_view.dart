@@ -54,7 +54,7 @@ PreferredSizeWidget _buildAppBar({
       width: MediaQuery.of(context).size.width * 0.85,
       padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
       child: Text(
-        AppLocalizations.of(context)!.transferList,
+        AppLocalizations.of(context)!.efplStats,
         style: Theme.of(context).textTheme.bodyText1!.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -75,7 +75,11 @@ Widget _buildMainBody({
     color: Colors.blue[50],
     child: Column(
       children: [
-        _buildGameWeekController(context: context),
+        _buildGameWeekController(
+          context: context,
+          state: state,
+          efplStatsBloc: getIt<EfplStatsBloc>(),
+        ),
 
         const SizedBox(
           height: 30,
@@ -83,7 +87,11 @@ Widget _buildMainBody({
 
         // TITLE
         Text(
-          "Gameweek 30 Summary",
+          AppLocalizations.of(context)!.gameWeek +
+              " " +
+              state.gameWeekId.toString() +
+              " " +
+              AppLocalizations.of(context)!.summary,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -104,7 +112,10 @@ Widget _buildMainBody({
   );
 }
 
-Widget _buildGameWeekController({required BuildContext context}) {
+Widget _buildGameWeekController(
+    {required BuildContext context,
+    required EfplStatsBloc efplStatsBloc,
+    required EfplStatsState state}) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 12),
     height: 50,
@@ -114,22 +125,23 @@ Widget _buildGameWeekController({required BuildContext context}) {
       children: [
         InkWell(
           onTap: () {
-            // fixtureBloc.add(
-            //   const FixtureEvent.decreaseGameWeek(),
-            // );
+            efplStatsBloc.add(
+              const EfplStatsEvent.decreaseGameWeek(),
+            );
           },
           child: const Icon(Icons.arrow_back_ios),
         ),
-        Text(AppLocalizations.of(context)!.gameWeek +
-            " " +
-            //     state.gameWeekId.toString(),
-            // style: Theme.of(context).textTheme.bodyText1,
-            "30"),
+        Text(
+          AppLocalizations.of(context)!.gameWeek +
+              " " +
+              state.gameWeekId.toString(),
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
         InkWell(
           onTap: () {
-            // fixtureBloc.add(
-            //   const FixtureEvent.increaseGameWeek(),
-            // );
+            efplStatsBloc.add(
+              const EfplStatsEvent.increaseGameWeek(),
+            );
           },
           child: const Icon(Icons.arrow_forward_ios),
         )
@@ -140,77 +152,76 @@ Widget _buildGameWeekController({required BuildContext context}) {
 
 Widget _buildInfoCard(
     {required BuildContext context, required EfplStatsState state}) {
-  return Container(
-    height: 470,
-    // width: MediaQuery.of(context).size.width * 0.9;;,
+  return SizedBox(
+    height: 490,
     child: Column(
       children: [
         // Highest Point
         EFPLStatsCard(
-          label: 'Highest Points',
+          label: AppLocalizations.of(context)!.highestPoints,
           value: state.highestPoint.toString(),
           isColored: false,
         ),
 
         // Average Point
         EFPLStatsCard(
-          label: 'Average Points',
+          label: AppLocalizations.of(context)!.averagePoints,
           value: state.averagePoint.toString(),
           isColored: true,
         ),
 
         // Most Selected
         EFPLStatsCard(
-          label: 'Most Selected',
+          label: AppLocalizations.of(context)!.mostSelected,
           value: state.mostSelectedPlayer,
           isColored: false,
         ),
 
         // Most Transferred Out
         EFPLStatsCard(
-          label: 'Most Transferred Out',
+          label: AppLocalizations.of(context)!.mostTransferredOut,
           value: state.mostTransferredOutPlayer,
           isColored: true,
         ),
 
         // Most Captained
         EFPLStatsCard(
-          label: 'Most Captained',
+          label: AppLocalizations.of(context)!.mostCaptained,
           value: state.mostCaptainedPlayer,
           isColored: false,
         ),
 
         // Most Vice Captained
         EFPLStatsCard(
-          label: 'Most Vice Captained',
+          label: AppLocalizations.of(context)!.mostViceCaptained,
           value: state.mostViceCaptainedPlayer,
           isColored: true,
         ),
 
         // Bench Boost Count
         EFPLStatsCard(
-          label: 'Bench Boost Played',
+          label: AppLocalizations.of(context)!.benchBoostPlayed,
           value: state.benchBoostCount.toString(),
           isColored: false,
         ),
 
         // Free Hit Count
         EFPLStatsCard(
-          label: 'Free Hit Played',
+          label: AppLocalizations.of(context)!.freeHitPlayed,
           value: state.freeHitCount.toString(),
           isColored: true,
         ),
 
         // Wildcard Count
         EFPLStatsCard(
-          label: 'Wildcards Played',
+          label: AppLocalizations.of(context)!.wildcardsPlayed,
           value: state.wildCardCount.toString(),
           isColored: false,
         ),
 
         // Wildcard Count
         EFPLStatsCard(
-          label: 'Triple Captain Played',
+          label: AppLocalizations.of(context)!.tripleCaptainPlayed,
           value: state.tripleCaptainCount.toString(),
           isColored: true,
         ),
@@ -224,12 +235,16 @@ Widget _buildInfoCard(
             Navigator.pushNamed(context, "/efpl/dreamTeam");
           },
           child: Container(
-            width: 275,
-            height: 40,
+            width: 285,
+            height: 45,
             color: ConstantColors.primary_900,
             child: Center(
               child: Text(
-                "GAMEWEEK 38 DREAM TEAM",
+                AppLocalizations.of(context)!.gameWeek +
+                    " " +
+                    state.gameWeekId.toString() +
+                    " " +
+                    AppLocalizations.of(context)!.dreamTeam,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       fontSize: 16,
                       color: ConstantColors.neutral_200,

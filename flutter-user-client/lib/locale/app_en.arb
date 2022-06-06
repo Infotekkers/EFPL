@@ -107,5 +107,19 @@
   "watchListTranslations": "Watch List",
   "yourWatchList": "Your Watch List",
   "addToWatchList": "Add To WatchList",
-  "removeFromWatchList": "Remove From WatchList"
+  "removeFromWatchList": "Remove From WatchList",
+  "summary": "Summary",
+  "efplStatsTranslation": "EFPL STATS Translation",
+  "efplStats": "EFPL Stats",
+  "highestPoints": "Highest Points",
+  "averagePoints": "Average Points",
+  "mostSelected": "Most Selected",
+  "mostTransferredOut": "Most Transferred Out",
+  "mostCaptained": "Most Captained",
+  "mostViceCaptained": "Most Vice Captained",
+  "benchBoostPlayed": "Bench Boost Played",
+  "freeHitPlayed": "Free Hit Played",
+  "wildcardsPlayed": "Wildcards Played",
+  "tripleCaptainPlayed": "Triple Captain Played",
+  "dreamTeam": "Dream Team"
 }

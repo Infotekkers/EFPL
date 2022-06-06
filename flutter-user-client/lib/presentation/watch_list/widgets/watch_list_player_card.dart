@@ -20,7 +20,7 @@ class WatchListPlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String _baseURL = dotenv.env["BASE_URL"].toString();
+    final String _baseURL = dotenv.env["API"].toString();
 
     final String injuryStatus = currentPlayer.availability.value
         .fold((l) => '', (r) => r['injuryStatus'].toString());

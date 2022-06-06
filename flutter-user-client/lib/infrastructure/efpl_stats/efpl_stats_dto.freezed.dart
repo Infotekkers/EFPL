@@ -33,7 +33,9 @@ class _$EFPLStatsDtoTearOff {
       required int freeHitCount,
       required int wildCardCount,
       required int tripleCaptainCount,
-      required Map<dynamic, dynamic> dreamTeam}) {
+      required Map<dynamic, dynamic> dreamTeam,
+      required int maxActiveCount,
+      required int gameWeekId}) {
     return _EFPLStatsDto(
       highestPoint: highestPoint,
       averagePoint: averagePoint,
@@ -47,6 +49,8 @@ class _$EFPLStatsDtoTearOff {
       wildCardCount: wildCardCount,
       tripleCaptainCount: tripleCaptainCount,
       dreamTeam: dreamTeam,
+      maxActiveCount: maxActiveCount,
+      gameWeekId: gameWeekId,
     );
   }
 
@@ -74,6 +78,8 @@ mixin _$EFPLStatsDto {
   int get wildCardCount => throw _privateConstructorUsedError;
   int get tripleCaptainCount => throw _privateConstructorUsedError;
   Map<dynamic, dynamic> get dreamTeam => throw _privateConstructorUsedError;
+  int get maxActiveCount => throw _privateConstructorUsedError;
+  int get gameWeekId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -98,7 +104,9 @@ abstract class $EFPLStatsDtoCopyWith<$Res> {
       int freeHitCount,
       int wildCardCount,
       int tripleCaptainCount,
-      Map<dynamic, dynamic> dreamTeam});
+      Map<dynamic, dynamic> dreamTeam,
+      int maxActiveCount,
+      int gameWeekId});
 }
 
 /// @nodoc
@@ -123,6 +131,8 @@ class _$EFPLStatsDtoCopyWithImpl<$Res> implements $EFPLStatsDtoCopyWith<$Res> {
     Object? wildCardCount = freezed,
     Object? tripleCaptainCount = freezed,
     Object? dreamTeam = freezed,
+    Object? maxActiveCount = freezed,
+    Object? gameWeekId = freezed,
   }) {
     return _then(_value.copyWith(
       highestPoint: highestPoint == freezed
@@ -173,6 +183,14 @@ class _$EFPLStatsDtoCopyWithImpl<$Res> implements $EFPLStatsDtoCopyWith<$Res> {
           ? _value.dreamTeam
           : dreamTeam // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
+      maxActiveCount: maxActiveCount == freezed
+          ? _value.maxActiveCount
+          : maxActiveCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      gameWeekId: gameWeekId == freezed
+          ? _value.gameWeekId
+          : gameWeekId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -196,7 +214,9 @@ abstract class _$EFPLStatsDtoCopyWith<$Res>
       int freeHitCount,
       int wildCardCount,
       int tripleCaptainCount,
-      Map<dynamic, dynamic> dreamTeam});
+      Map<dynamic, dynamic> dreamTeam,
+      int maxActiveCount,
+      int gameWeekId});
 }
 
 /// @nodoc
@@ -223,6 +243,8 @@ class __$EFPLStatsDtoCopyWithImpl<$Res> extends _$EFPLStatsDtoCopyWithImpl<$Res>
     Object? wildCardCount = freezed,
     Object? tripleCaptainCount = freezed,
     Object? dreamTeam = freezed,
+    Object? maxActiveCount = freezed,
+    Object? gameWeekId = freezed,
   }) {
     return _then(_EFPLStatsDto(
       highestPoint: highestPoint == freezed
@@ -273,6 +295,14 @@ class __$EFPLStatsDtoCopyWithImpl<$Res> extends _$EFPLStatsDtoCopyWithImpl<$Res>
           ? _value.dreamTeam
           : dreamTeam // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
+      maxActiveCount: maxActiveCount == freezed
+          ? _value.maxActiveCount
+          : maxActiveCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      gameWeekId: gameWeekId == freezed
+          ? _value.gameWeekId
+          : gameWeekId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -292,7 +322,9 @@ class _$_EFPLStatsDto extends _EFPLStatsDto {
       required this.freeHitCount,
       required this.wildCardCount,
       required this.tripleCaptainCount,
-      required this.dreamTeam})
+      required this.dreamTeam,
+      required this.maxActiveCount,
+      required this.gameWeekId})
       : super._();
 
   factory _$_EFPLStatsDto.fromJson(Map<String, dynamic> json) =>
@@ -322,10 +354,14 @@ class _$_EFPLStatsDto extends _EFPLStatsDto {
   final int tripleCaptainCount;
   @override
   final Map<dynamic, dynamic> dreamTeam;
+  @override
+  final int maxActiveCount;
+  @override
+  final int gameWeekId;
 
   @override
   String toString() {
-    return 'EFPLStatsDto(highestPoint: $highestPoint, averagePoint: $averagePoint, mostSelectedPlayer: $mostSelectedPlayer, mostTransferredOutPlayer: $mostTransferredOutPlayer, transfersMadeCount: $transfersMadeCount, mostCaptainedPlayer: $mostCaptainedPlayer, mostViceCaptainedPlayer: $mostViceCaptainedPlayer, benchBoostCount: $benchBoostCount, freeHitCount: $freeHitCount, wildCardCount: $wildCardCount, tripleCaptainCount: $tripleCaptainCount, dreamTeam: $dreamTeam)';
+    return 'EFPLStatsDto(highestPoint: $highestPoint, averagePoint: $averagePoint, mostSelectedPlayer: $mostSelectedPlayer, mostTransferredOutPlayer: $mostTransferredOutPlayer, transfersMadeCount: $transfersMadeCount, mostCaptainedPlayer: $mostCaptainedPlayer, mostViceCaptainedPlayer: $mostViceCaptainedPlayer, benchBoostCount: $benchBoostCount, freeHitCount: $freeHitCount, wildCardCount: $wildCardCount, tripleCaptainCount: $tripleCaptainCount, dreamTeam: $dreamTeam, maxActiveCount: $maxActiveCount, gameWeekId: $gameWeekId)';
   }
 
   @override
@@ -355,7 +391,11 @@ class _$_EFPLStatsDto extends _EFPLStatsDto {
                 .equals(other.wildCardCount, wildCardCount) &&
             const DeepCollectionEquality()
                 .equals(other.tripleCaptainCount, tripleCaptainCount) &&
-            const DeepCollectionEquality().equals(other.dreamTeam, dreamTeam));
+            const DeepCollectionEquality().equals(other.dreamTeam, dreamTeam) &&
+            const DeepCollectionEquality()
+                .equals(other.maxActiveCount, maxActiveCount) &&
+            const DeepCollectionEquality()
+                .equals(other.gameWeekId, gameWeekId));
   }
 
   @override
@@ -372,7 +412,9 @@ class _$_EFPLStatsDto extends _EFPLStatsDto {
       const DeepCollectionEquality().hash(freeHitCount),
       const DeepCollectionEquality().hash(wildCardCount),
       const DeepCollectionEquality().hash(tripleCaptainCount),
-      const DeepCollectionEquality().hash(dreamTeam));
+      const DeepCollectionEquality().hash(dreamTeam),
+      const DeepCollectionEquality().hash(maxActiveCount),
+      const DeepCollectionEquality().hash(gameWeekId));
 
   @JsonKey(ignore: true)
   @override
@@ -398,7 +440,9 @@ abstract class _EFPLStatsDto extends EFPLStatsDto {
       required int freeHitCount,
       required int wildCardCount,
       required int tripleCaptainCount,
-      required Map<dynamic, dynamic> dreamTeam}) = _$_EFPLStatsDto;
+      required Map<dynamic, dynamic> dreamTeam,
+      required int maxActiveCount,
+      required int gameWeekId}) = _$_EFPLStatsDto;
   const _EFPLStatsDto._() : super._();
 
   factory _EFPLStatsDto.fromJson(Map<String, dynamic> json) =
@@ -428,6 +472,10 @@ abstract class _EFPLStatsDto extends EFPLStatsDto {
   int get tripleCaptainCount;
   @override
   Map<dynamic, dynamic> get dreamTeam;
+  @override
+  int get maxActiveCount;
+  @override
+  int get gameWeekId;
   @override
   @JsonKey(ignore: true)
   _$EFPLStatsDtoCopyWith<_EFPLStatsDto> get copyWith =>

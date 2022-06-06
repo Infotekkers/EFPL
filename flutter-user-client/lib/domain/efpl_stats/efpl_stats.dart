@@ -17,6 +17,8 @@ abstract class EFPLStats with _$EFPLStats {
     required int wildCardCount,
     required int tripleCaptainCount,
     required Map dreamTeam,
+    required int maxActiveCount,
+    required int gameWeekId,
   }) = _EFPLStat;
 
   factory EFPLStats.initial() => const EFPLStats(
@@ -31,6 +33,8 @@ abstract class EFPLStats with _$EFPLStats {
         freeHitCount: 0,
         wildCardCount: 0,
         tripleCaptainCount: 0,
+        maxActiveCount: 0,
+        gameWeekId: 0,
         dreamTeam: {},
       );
 }

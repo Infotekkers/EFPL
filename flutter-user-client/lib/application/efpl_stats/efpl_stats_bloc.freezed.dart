@@ -22,6 +22,14 @@ class _$EfplStatsEventTearOff {
       gameWeekId: gameWeekId,
     );
   }
+
+  _IncreaseGameWeek increaseGameWeek() {
+    return const _IncreaseGameWeek();
+  }
+
+  _DecreaseGameWeek decreaseGameWeek() {
+    return const _DecreaseGameWeek();
+  }
 }
 
 /// @nodoc
@@ -29,43 +37,49 @@ const $EfplStatsEvent = _$EfplStatsEventTearOff();
 
 /// @nodoc
 mixin _$EfplStatsEvent {
-  int get gameWeekId => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int gameWeekId) getEfplStats,
+    required TResult Function() increaseGameWeek,
+    required TResult Function() decreaseGameWeek,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int gameWeekId)? getEfplStats,
+    TResult Function()? increaseGameWeek,
+    TResult Function()? decreaseGameWeek,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int gameWeekId)? getEfplStats,
+    TResult Function()? increaseGameWeek,
+    TResult Function()? decreaseGameWeek,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetEfplStats value) getEfplStats,
+    required TResult Function(_IncreaseGameWeek value) increaseGameWeek,
+    required TResult Function(_DecreaseGameWeek value) decreaseGameWeek,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetEfplStats value)? getEfplStats,
+    TResult Function(_IncreaseGameWeek value)? increaseGameWeek,
+    TResult Function(_DecreaseGameWeek value)? decreaseGameWeek,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetEfplStats value)? getEfplStats,
+    TResult Function(_IncreaseGameWeek value)? increaseGameWeek,
+    TResult Function(_DecreaseGameWeek value)? decreaseGameWeek,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $EfplStatsEventCopyWith<EfplStatsEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -74,7 +88,6 @@ abstract class $EfplStatsEventCopyWith<$Res> {
   factory $EfplStatsEventCopyWith(
           EfplStatsEvent value, $Res Function(EfplStatsEvent) then) =
       _$EfplStatsEventCopyWithImpl<$Res>;
-  $Res call({int gameWeekId});
 }
 
 /// @nodoc
@@ -85,27 +98,13 @@ class _$EfplStatsEventCopyWithImpl<$Res>
   final EfplStatsEvent _value;
   // ignore: unused_field
   final $Res Function(EfplStatsEvent) _then;
-
-  @override
-  $Res call({
-    Object? gameWeekId = freezed,
-  }) {
-    return _then(_value.copyWith(
-      gameWeekId: gameWeekId == freezed
-          ? _value.gameWeekId
-          : gameWeekId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$GetEfplStatsCopyWith<$Res>
-    implements $EfplStatsEventCopyWith<$Res> {
+abstract class _$GetEfplStatsCopyWith<$Res> {
   factory _$GetEfplStatsCopyWith(
           _GetEfplStats value, $Res Function(_GetEfplStats) then) =
       __$GetEfplStatsCopyWithImpl<$Res>;
-  @override
   $Res call({int gameWeekId});
 }
 
@@ -168,6 +167,8 @@ class _$_GetEfplStats implements _GetEfplStats {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int gameWeekId) getEfplStats,
+    required TResult Function() increaseGameWeek,
+    required TResult Function() decreaseGameWeek,
   }) {
     return getEfplStats(gameWeekId);
   }
@@ -176,6 +177,8 @@ class _$_GetEfplStats implements _GetEfplStats {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int gameWeekId)? getEfplStats,
+    TResult Function()? increaseGameWeek,
+    TResult Function()? decreaseGameWeek,
   }) {
     return getEfplStats?.call(gameWeekId);
   }
@@ -184,6 +187,8 @@ class _$_GetEfplStats implements _GetEfplStats {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int gameWeekId)? getEfplStats,
+    TResult Function()? increaseGameWeek,
+    TResult Function()? decreaseGameWeek,
     required TResult orElse(),
   }) {
     if (getEfplStats != null) {
@@ -196,6 +201,8 @@ class _$_GetEfplStats implements _GetEfplStats {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetEfplStats value) getEfplStats,
+    required TResult Function(_IncreaseGameWeek value) increaseGameWeek,
+    required TResult Function(_DecreaseGameWeek value) decreaseGameWeek,
   }) {
     return getEfplStats(this);
   }
@@ -204,6 +211,8 @@ class _$_GetEfplStats implements _GetEfplStats {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetEfplStats value)? getEfplStats,
+    TResult Function(_IncreaseGameWeek value)? increaseGameWeek,
+    TResult Function(_DecreaseGameWeek value)? decreaseGameWeek,
   }) {
     return getEfplStats?.call(this);
   }
@@ -212,6 +221,8 @@ class _$_GetEfplStats implements _GetEfplStats {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetEfplStats value)? getEfplStats,
+    TResult Function(_IncreaseGameWeek value)? increaseGameWeek,
+    TResult Function(_DecreaseGameWeek value)? decreaseGameWeek,
     required TResult orElse(),
   }) {
     if (getEfplStats != null) {
@@ -224,12 +235,232 @@ class _$_GetEfplStats implements _GetEfplStats {
 abstract class _GetEfplStats implements EfplStatsEvent {
   const factory _GetEfplStats({required int gameWeekId}) = _$_GetEfplStats;
 
-  @override
   int get gameWeekId;
-  @override
   @JsonKey(ignore: true)
   _$GetEfplStatsCopyWith<_GetEfplStats> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$IncreaseGameWeekCopyWith<$Res> {
+  factory _$IncreaseGameWeekCopyWith(
+          _IncreaseGameWeek value, $Res Function(_IncreaseGameWeek) then) =
+      __$IncreaseGameWeekCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$IncreaseGameWeekCopyWithImpl<$Res>
+    extends _$EfplStatsEventCopyWithImpl<$Res>
+    implements _$IncreaseGameWeekCopyWith<$Res> {
+  __$IncreaseGameWeekCopyWithImpl(
+      _IncreaseGameWeek _value, $Res Function(_IncreaseGameWeek) _then)
+      : super(_value, (v) => _then(v as _IncreaseGameWeek));
+
+  @override
+  _IncreaseGameWeek get _value => super._value as _IncreaseGameWeek;
+}
+
+/// @nodoc
+
+class _$_IncreaseGameWeek implements _IncreaseGameWeek {
+  const _$_IncreaseGameWeek();
+
+  @override
+  String toString() {
+    return 'EfplStatsEvent.increaseGameWeek()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _IncreaseGameWeek);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int gameWeekId) getEfplStats,
+    required TResult Function() increaseGameWeek,
+    required TResult Function() decreaseGameWeek,
+  }) {
+    return increaseGameWeek();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int gameWeekId)? getEfplStats,
+    TResult Function()? increaseGameWeek,
+    TResult Function()? decreaseGameWeek,
+  }) {
+    return increaseGameWeek?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int gameWeekId)? getEfplStats,
+    TResult Function()? increaseGameWeek,
+    TResult Function()? decreaseGameWeek,
+    required TResult orElse(),
+  }) {
+    if (increaseGameWeek != null) {
+      return increaseGameWeek();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetEfplStats value) getEfplStats,
+    required TResult Function(_IncreaseGameWeek value) increaseGameWeek,
+    required TResult Function(_DecreaseGameWeek value) decreaseGameWeek,
+  }) {
+    return increaseGameWeek(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GetEfplStats value)? getEfplStats,
+    TResult Function(_IncreaseGameWeek value)? increaseGameWeek,
+    TResult Function(_DecreaseGameWeek value)? decreaseGameWeek,
+  }) {
+    return increaseGameWeek?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetEfplStats value)? getEfplStats,
+    TResult Function(_IncreaseGameWeek value)? increaseGameWeek,
+    TResult Function(_DecreaseGameWeek value)? decreaseGameWeek,
+    required TResult orElse(),
+  }) {
+    if (increaseGameWeek != null) {
+      return increaseGameWeek(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IncreaseGameWeek implements EfplStatsEvent {
+  const factory _IncreaseGameWeek() = _$_IncreaseGameWeek;
+}
+
+/// @nodoc
+abstract class _$DecreaseGameWeekCopyWith<$Res> {
+  factory _$DecreaseGameWeekCopyWith(
+          _DecreaseGameWeek value, $Res Function(_DecreaseGameWeek) then) =
+      __$DecreaseGameWeekCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$DecreaseGameWeekCopyWithImpl<$Res>
+    extends _$EfplStatsEventCopyWithImpl<$Res>
+    implements _$DecreaseGameWeekCopyWith<$Res> {
+  __$DecreaseGameWeekCopyWithImpl(
+      _DecreaseGameWeek _value, $Res Function(_DecreaseGameWeek) _then)
+      : super(_value, (v) => _then(v as _DecreaseGameWeek));
+
+  @override
+  _DecreaseGameWeek get _value => super._value as _DecreaseGameWeek;
+}
+
+/// @nodoc
+
+class _$_DecreaseGameWeek implements _DecreaseGameWeek {
+  const _$_DecreaseGameWeek();
+
+  @override
+  String toString() {
+    return 'EfplStatsEvent.decreaseGameWeek()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _DecreaseGameWeek);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int gameWeekId) getEfplStats,
+    required TResult Function() increaseGameWeek,
+    required TResult Function() decreaseGameWeek,
+  }) {
+    return decreaseGameWeek();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int gameWeekId)? getEfplStats,
+    TResult Function()? increaseGameWeek,
+    TResult Function()? decreaseGameWeek,
+  }) {
+    return decreaseGameWeek?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int gameWeekId)? getEfplStats,
+    TResult Function()? increaseGameWeek,
+    TResult Function()? decreaseGameWeek,
+    required TResult orElse(),
+  }) {
+    if (decreaseGameWeek != null) {
+      return decreaseGameWeek();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetEfplStats value) getEfplStats,
+    required TResult Function(_IncreaseGameWeek value) increaseGameWeek,
+    required TResult Function(_DecreaseGameWeek value) decreaseGameWeek,
+  }) {
+    return decreaseGameWeek(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GetEfplStats value)? getEfplStats,
+    TResult Function(_IncreaseGameWeek value)? increaseGameWeek,
+    TResult Function(_DecreaseGameWeek value)? decreaseGameWeek,
+  }) {
+    return decreaseGameWeek?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetEfplStats value)? getEfplStats,
+    TResult Function(_IncreaseGameWeek value)? increaseGameWeek,
+    TResult Function(_DecreaseGameWeek value)? decreaseGameWeek,
+    required TResult orElse(),
+  }) {
+    if (decreaseGameWeek != null) {
+      return decreaseGameWeek(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DecreaseGameWeek implements EfplStatsEvent {
+  const factory _DecreaseGameWeek() = _$_DecreaseGameWeek;
 }
 
 /// @nodoc
@@ -250,6 +481,8 @@ class _$EfplStatsStateTearOff {
       required int tripleCaptainCount,
       required Map<dynamic, dynamic> dreamTeam,
       required bool isLoading,
+      required int gameWeekId,
+      required int maxActiveCount,
       required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) {
     return _EfplState(
       highestPoint: highestPoint,
@@ -265,6 +498,8 @@ class _$EfplStatsStateTearOff {
       tripleCaptainCount: tripleCaptainCount,
       dreamTeam: dreamTeam,
       isLoading: isLoading,
+      gameWeekId: gameWeekId,
+      maxActiveCount: maxActiveCount,
       valueFailureOrSuccess: valueFailureOrSuccess,
     );
   }
@@ -288,6 +523,8 @@ mixin _$EfplStatsState {
   int get tripleCaptainCount => throw _privateConstructorUsedError;
   Map<dynamic, dynamic> get dreamTeam => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  int get gameWeekId => throw _privateConstructorUsedError;
+  int get maxActiveCount => throw _privateConstructorUsedError;
   Option<Either<dynamic, dynamic>> get valueFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
@@ -315,6 +552,8 @@ abstract class $EfplStatsStateCopyWith<$Res> {
       int tripleCaptainCount,
       Map<dynamic, dynamic> dreamTeam,
       bool isLoading,
+      int gameWeekId,
+      int maxActiveCount,
       Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
 }
 
@@ -342,6 +581,8 @@ class _$EfplStatsStateCopyWithImpl<$Res>
     Object? tripleCaptainCount = freezed,
     Object? dreamTeam = freezed,
     Object? isLoading = freezed,
+    Object? gameWeekId = freezed,
+    Object? maxActiveCount = freezed,
     Object? valueFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
@@ -397,6 +638,14 @@ class _$EfplStatsStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      gameWeekId: gameWeekId == freezed
+          ? _value.gameWeekId
+          : gameWeekId // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxActiveCount: maxActiveCount == freezed
+          ? _value.maxActiveCount
+          : maxActiveCount // ignore: cast_nullable_to_non_nullable
+              as int,
       valueFailureOrSuccess: valueFailureOrSuccess == freezed
           ? _value.valueFailureOrSuccess
           : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -426,6 +675,8 @@ abstract class _$EfplStateCopyWith<$Res>
       int tripleCaptainCount,
       Map<dynamic, dynamic> dreamTeam,
       bool isLoading,
+      int gameWeekId,
+      int maxActiveCount,
       Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
 }
 
@@ -453,6 +704,8 @@ class __$EfplStateCopyWithImpl<$Res> extends _$EfplStatsStateCopyWithImpl<$Res>
     Object? tripleCaptainCount = freezed,
     Object? dreamTeam = freezed,
     Object? isLoading = freezed,
+    Object? gameWeekId = freezed,
+    Object? maxActiveCount = freezed,
     Object? valueFailureOrSuccess = freezed,
   }) {
     return _then(_EfplState(
@@ -508,6 +761,14 @@ class __$EfplStateCopyWithImpl<$Res> extends _$EfplStatsStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      gameWeekId: gameWeekId == freezed
+          ? _value.gameWeekId
+          : gameWeekId // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxActiveCount: maxActiveCount == freezed
+          ? _value.maxActiveCount
+          : maxActiveCount // ignore: cast_nullable_to_non_nullable
+              as int,
       valueFailureOrSuccess: valueFailureOrSuccess == freezed
           ? _value.valueFailureOrSuccess
           : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -533,6 +794,8 @@ class _$_EfplState implements _EfplState {
       required this.tripleCaptainCount,
       required this.dreamTeam,
       required this.isLoading,
+      required this.gameWeekId,
+      required this.maxActiveCount,
       required this.valueFailureOrSuccess});
 
   @override
@@ -562,11 +825,15 @@ class _$_EfplState implements _EfplState {
   @override
   final bool isLoading;
   @override
+  final int gameWeekId;
+  @override
+  final int maxActiveCount;
+  @override
   final Option<Either<dynamic, dynamic>> valueFailureOrSuccess;
 
   @override
   String toString() {
-    return 'EfplStatsState(highestPoint: $highestPoint, averagePoint: $averagePoint, mostSelectedPlayer: $mostSelectedPlayer, mostTransferredOutPlayer: $mostTransferredOutPlayer, transfersMadeCount: $transfersMadeCount, mostCaptainedPlayer: $mostCaptainedPlayer, mostViceCaptainedPlayer: $mostViceCaptainedPlayer, benchBoostCount: $benchBoostCount, freeHitCount: $freeHitCount, wildCardCount: $wildCardCount, tripleCaptainCount: $tripleCaptainCount, dreamTeam: $dreamTeam, isLoading: $isLoading, valueFailureOrSuccess: $valueFailureOrSuccess)';
+    return 'EfplStatsState(highestPoint: $highestPoint, averagePoint: $averagePoint, mostSelectedPlayer: $mostSelectedPlayer, mostTransferredOutPlayer: $mostTransferredOutPlayer, transfersMadeCount: $transfersMadeCount, mostCaptainedPlayer: $mostCaptainedPlayer, mostViceCaptainedPlayer: $mostViceCaptainedPlayer, benchBoostCount: $benchBoostCount, freeHitCount: $freeHitCount, wildCardCount: $wildCardCount, tripleCaptainCount: $tripleCaptainCount, dreamTeam: $dreamTeam, isLoading: $isLoading, gameWeekId: $gameWeekId, maxActiveCount: $maxActiveCount, valueFailureOrSuccess: $valueFailureOrSuccess)';
   }
 
   @override
@@ -599,6 +866,10 @@ class _$_EfplState implements _EfplState {
             const DeepCollectionEquality().equals(other.dreamTeam, dreamTeam) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
+                .equals(other.gameWeekId, gameWeekId) &&
+            const DeepCollectionEquality()
+                .equals(other.maxActiveCount, maxActiveCount) &&
+            const DeepCollectionEquality()
                 .equals(other.valueFailureOrSuccess, valueFailureOrSuccess));
   }
 
@@ -618,6 +889,8 @@ class _$_EfplState implements _EfplState {
       const DeepCollectionEquality().hash(tripleCaptainCount),
       const DeepCollectionEquality().hash(dreamTeam),
       const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(gameWeekId),
+      const DeepCollectionEquality().hash(maxActiveCount),
       const DeepCollectionEquality().hash(valueFailureOrSuccess));
 
   @JsonKey(ignore: true)
@@ -641,6 +914,8 @@ abstract class _EfplState implements EfplStatsState {
           required int tripleCaptainCount,
           required Map<dynamic, dynamic> dreamTeam,
           required bool isLoading,
+          required int gameWeekId,
+          required int maxActiveCount,
           required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) =
       _$_EfplState;
 
@@ -670,6 +945,10 @@ abstract class _EfplState implements EfplStatsState {
   Map<dynamic, dynamic> get dreamTeam;
   @override
   bool get isLoading;
+  @override
+  int get gameWeekId;
+  @override
+  int get maxActiveCount;
   @override
   Option<Either<dynamic, dynamic>> get valueFailureOrSuccess;
   @override

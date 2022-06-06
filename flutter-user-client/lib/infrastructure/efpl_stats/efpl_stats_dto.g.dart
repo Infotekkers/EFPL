@@ -21,6 +21,8 @@ _$_EFPLStatsDto _$$_EFPLStatsDtoFromJson(Map<String, dynamic> json) =>
       wildCardCount: json['wildCardCount'] as int,
       tripleCaptainCount: json['tripleCaptainCount'] as int,
       dreamTeam: json['dreamTeam'] as Map<String, dynamic>,
+      maxActiveCount: json['maxActiveCount'] as int,
+      gameWeekId: json['gameWeekId'] as int,
     );
 
 Map<String, dynamic> _$$_EFPLStatsDtoToJson(_$_EFPLStatsDto instance) =>
@@ -37,4 +39,6 @@ Map<String, dynamic> _$$_EFPLStatsDtoToJson(_$_EFPLStatsDto instance) =>
       'wildCardCount': instance.wildCardCount,
       'tripleCaptainCount': instance.tripleCaptainCount,
       'dreamTeam': instance.dreamTeam,
+      'maxActiveCount': instance.maxActiveCount,
+      'gameWeekId': instance.gameWeekId,
     };

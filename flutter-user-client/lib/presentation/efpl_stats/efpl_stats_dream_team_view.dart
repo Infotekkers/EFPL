@@ -55,7 +55,7 @@ PreferredSizeWidget _buildAppBar({required BuildContext context}) {
       width: MediaQuery.of(context).size.width * 0.85,
       padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
       child: Text(
-        AppLocalizations.of(context)!.transferList,
+        AppLocalizations.of(context)!.dreamTeam,
         style: Theme.of(context).textTheme.bodyText1!.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -72,48 +72,68 @@ Widget _buildBody({
   required List bestPerformer,
 }) {
   return SingleChildScrollView(
-    child: Container(
-      color: Colors.blue[50],
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 12,
+    child: allFormattedPlayers[0].isEmpty
+        ? Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            color: Colors.blue[50],
+            child: Center(
+              child: Text(
+                "No Dream Team",
+                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+            ),
+          )
+        : Container(
+            color: Colors.blue[50],
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 12,
+                ),
+                // GK
+                _buildPlayerView(
+                    context: context,
+                    count: 1,
+                    playerList: allFormattedPlayers[0]),
+                const SizedBox(
+                  height: 12,
+                ),
+                // DEF
+                _buildPlayerView(
+                    context: context,
+                    count: allFormattedPlayers[1].length,
+                    playerList: allFormattedPlayers[1]),
+                const SizedBox(
+                  height: 12,
+                ),
+                // MID
+                _buildPlayerView(
+                    context: context,
+                    count: allFormattedPlayers[2].length,
+                    playerList: allFormattedPlayers[2]),
+                const SizedBox(
+                  height: 12,
+                ),
+                // ATT
+                _buildPlayerView(
+                  context: context,
+                  count: allFormattedPlayers[3].length,
+                  playerList: allFormattedPlayers[3],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                bestPerformer[0].isNotEmpty
+                    ? _buildInfoView(
+                        context: context, bestPerformer: bestPerformer)
+                    : Container(),
+              ],
+            ),
           ),
-          // GK
-          _buildPlayerView(
-              context: context, count: 1, playerList: allFormattedPlayers[0]),
-          const SizedBox(
-            height: 12,
-          ),
-          // DEF
-          _buildPlayerView(
-              context: context,
-              count: allFormattedPlayers[1].length,
-              playerList: allFormattedPlayers[1]),
-          const SizedBox(
-            height: 12,
-          ),
-          // MID
-          _buildPlayerView(
-              context: context,
-              count: allFormattedPlayers[2].length,
-              playerList: allFormattedPlayers[2]),
-          const SizedBox(
-            height: 12,
-          ),
-          // ATT
-          _buildPlayerView(
-            context: context,
-            count: allFormattedPlayers[3].length,
-            playerList: allFormattedPlayers[3],
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          _buildInfoView(context: context, bestPerformer: bestPerformer)
-        ],
-      ),
-    ),
   );
 }
 
@@ -246,7 +266,7 @@ Widget _buildInfoView(
                 height: 3,
               ),
               Text(
-                bestPerformer[1].toString(),
+                bestPerformer.isNotEmpty ? bestPerformer[1].toString() : "",
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -286,6 +306,6 @@ List getBestPerformer({required Map dreamTeam}) {
   allPlayers.forEach((element) {
     score = score + int.parse(element['score'].toString());
   });
-
-  return [allPlayers[0], score];
+  print(allPlayers);
+  return [allPlayers.isNotEmpty ? allPlayers[0] : [], score];
 }

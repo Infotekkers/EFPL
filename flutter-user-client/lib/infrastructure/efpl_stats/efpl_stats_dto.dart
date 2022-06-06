@@ -23,6 +23,8 @@ abstract class EFPLStatsDto implements _$EFPLStatsDto {
     required int wildCardCount,
     required int tripleCaptainCount,
     required Map dreamTeam,
+    required int maxActiveCount,
+    required int gameWeekId,
   }) = _EFPLStatsDto;
 
   factory EFPLStatsDto.fromDomain(EFPLStats efplStats) {
@@ -39,6 +41,8 @@ abstract class EFPLStatsDto implements _$EFPLStatsDto {
       freeHitCount: efplStats.freeHitCount,
       tripleCaptainCount: efplStats.tripleCaptainCount,
       dreamTeam: efplStats.dreamTeam,
+      gameWeekId: efplStats.gameWeekId,
+      maxActiveCount: efplStats.maxActiveCount,
     );
   }
 
@@ -46,16 +50,25 @@ abstract class EFPLStatsDto implements _$EFPLStatsDto {
     return EFPLStats(
       highestPoint: highestPoint,
       averagePoint: averagePoint,
-      mostSelectedPlayer: mostSelectedPlayer[0],
-      mostTransferredOutPlayer: mostTransferredOutPlayer[0],
+      mostSelectedPlayer:
+          mostSelectedPlayer.isNotEmpty ? mostSelectedPlayer[0] : "",
+      mostTransferredOutPlayer: mostTransferredOutPlayer.isNotEmpty
+          ? mostTransferredOutPlayer[0]
+          : "",
       transfersMadeCount: transfersMadeCount,
-      mostViceCaptainedPlayer: mostCaptainedPlayer[0],
-      mostCaptainedPlayer: mostCaptainedPlayer[0],
+      mostViceCaptainedPlayer:
+          mostCaptainedPlayer.isNotEmpty ? mostCaptainedPlayer[0] : "",
+      mostCaptainedPlayer:
+          mostCaptainedPlayer.isNotEmpty ? mostCaptainedPlayer[0] : "",
       benchBoostCount: benchBoostCount,
       wildCardCount: wildCardCount,
       freeHitCount: freeHitCount,
       tripleCaptainCount: tripleCaptainCount,
       dreamTeam: dreamTeam,
+      maxActiveCount: int.parse(
+        maxActiveCount.toString(),
+      ),
+      gameWeekId: gameWeekId,
     );
   }
 
