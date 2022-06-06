@@ -35,7 +35,12 @@ class AppRouter {
         ),
     "/fixtureDetails": (context) => const FixtureDetailView(),
     "/transfer/initial": (context) => const InitialTransferPage(),
-    "/transfer": (context) => const TransferPlayerView(),
+    "/transfer": (context) => ShowCaseWidget(
+          blurValue: 1,
+          builder: Builder(
+            builder: (context) => const TransferPlayerView(),
+          ),
+        ),
     "/transfer/confirm": (context) => const ConfirmTransfersPage(),
     "/request-reset": (context) => const RequestResetPage(),
     "/sign-in": (context) => const SignInPage(),
