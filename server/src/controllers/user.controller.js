@@ -775,6 +775,7 @@ const getUserPoints = asyncHandler(async (req, res) => {
 
 const validateUser = asyncHandler(async (req, res) => {
   const token = req.body.token;
+  console.log(req.body);
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

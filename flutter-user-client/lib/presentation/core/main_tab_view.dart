@@ -1,4 +1,4 @@
-import 'package:efpl/application/util/util_bloc.dart';
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/injectable.dart';
@@ -11,6 +11,7 @@ import 'package:efpl/presentation/team/team_view.dart';
 import 'package:efpl/presentation/transfers/transfers_view_main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:showcaseview/showcaseview.dart';
 
@@ -56,6 +57,12 @@ class _MainTabViewState extends State<MainTabView> {
 
   @override
   Widget build(BuildContext context) {
+    print("Main Tab");
+    final AuthBloc _authBloc = getIt<AuthBloc>();
+    _authBloc.add(
+      const AuthEvent.tokenCheckRequested(),
+    );
+
     return DefaultTabController(
       length: 7,
       initialIndex: 2,
@@ -93,7 +100,14 @@ class _MainTabViewState extends State<MainTabView> {
                   getIt<IAuthRepository>().removeUser();
                   Navigator.popAndPushNamed(context, "/sign-in");
                 },
-              )
+              ),
+              ListTile(
+                title: const Text('check token'),
+                onTap: () async {
+                  const storage = FlutterSecureStorage();
+                  await storage.delete(key: 'user');
+                },
+              ),
             ],
           ),
         ),

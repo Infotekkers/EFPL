@@ -16,6 +16,14 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppRouter _appRouter = AppRouter();
 
+    final AuthBloc _authBloc = getIt<AuthBloc>()
+      ..add(
+        const AuthEvent.authCheckRequested(),
+      );
+    _authBloc.add(
+      const AuthEvent.tokenCheckRequested(),
+    );
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -24,12 +32,13 @@ class AppWidget extends StatelessWidget {
               const UtilEvent.setDefaultLocale(),
             ),
         ),
-        BlocProvider(
-          create: (context) => getIt<AuthBloc>()
-            ..add(
-              const AuthEvent.authCheckRequested(),
-            ),
-        ),
+        BlocProvider.value(value: _authBloc),
+        // BlocProvider(
+        //   create: (context) => getIt<AuthBloc>()
+        //     ..add(
+        //       const AuthEvent.tokenCheckRequested(),
+        //     ),
+        // )
       ],
       child: BlocConsumer<UtilBloc, UtilState>(
         listener: (context, state) {},
