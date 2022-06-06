@@ -247,21 +247,6 @@ Widget _buildMainView(
     required PointsBloc pointsBloc,
     required String activeChip,
     required List allFormattedPlayers}) {
-  final _teamNameKey = GlobalKey();
-  final _nextGameWeekKey = GlobalKey();
-  final _previousGameWeekKey = GlobalKey();
-  final _gameWeekInfoKey = GlobalKey();
-  final _pointsSumKey = GlobalKey();
-  final _playerCardKey = GlobalKey();
-  final _playerJersyKey = GlobalKey();
-  final _playerName = GlobalKey();
-  final _playerPoint = GlobalKey();
-  final _captainKey = GlobalKey();
-  final _deductionBoxKey = GlobalKey();
-  final _viceCaptainKey = GlobalKey();
-  final _startersKey = GlobalKey();
-  final _benchKey = GlobalKey();
-
   return SingleChildScrollView(
     child: Column(
       children: [
@@ -273,18 +258,19 @@ Widget _buildMainView(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // TEAM NAME
-              Showcase(
-                key: _teamNameKey,
-                title: "Team Name",
-                description: 'This is your team name.',
-                child: Text(
-                  state.pointsInfo.teamName,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.25,
-                      ),
-                ),
+              // Showcase(
+              // key: _teamNameKey,
+              // title: "Team Name",
+              // description: 'This is your team name.',
+              // child:
+              Text(
+                state.pointsInfo.teamName,
+                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.25,
+                    ),
+                // ),
               ),
             ],
           ),

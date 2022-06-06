@@ -106,13 +106,13 @@ class _MainTabViewState extends State<MainTabView> {
               onTap: () {
                 setState(() {
                   ShowCaseWidget.of(context)!.startShowCase([
-                    // _myTeamTab,
-                    // _pointsTab,
-                    // _transfersTab,
-                    // _fixturesTab,
-                    // _leaugesTab,
-                    // _eplStatsTab,
-                    // _settingsTab
+                    _myTeamTab,
+                    _pointsTab,
+                    _transfersTab,
+                    _fixturesTab,
+                    _leaugesTab,
+                    _eplStatsTab,
+                    _settingsTab
                   ]);
                 });
               },
