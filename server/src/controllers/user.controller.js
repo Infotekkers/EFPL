@@ -7,6 +7,7 @@ const Gameweek = require("../models/GameWeek");
 const Player = require("../models/Player");
 const Team = require("../models/Teams");
 const Fixture = require("../models/Fixtures");
+const FanstasyStats = require("../models/EFPLStats");
 const validateTeam = require("../utils/validators").validateTeam;
 const pointDeductor = require("../utils/helpers").pointDeductor;
 const sumEplPlayerScore = require("../utils/helpers").sumEplPlayerScore;
@@ -440,6 +441,18 @@ const transfer = asyncHandler(async (req, res) => {
         }
         // update user team
         await User.findByIdAndUpdate(userId, { team: updatedUserTeam });
+
+        // * CHIP COUNTER
+        if (incomingTeam.activeChip) {
+          if (incomingTeam.activeChip === "TC")
+            await FanstasyStats.updateMany({ $inc: { tripleCaptainCount: 1 } });
+          else if (incomingTeam.activeChip === "BB")
+            await FanstasyStats.updateMany({ $inc: { benchBoostCount: 1 } });
+          else if (incomingTeam.activeChip === "WC")
+            await FanstasyStats.updateMany({ $inc: { wildCardCount: 1 } });
+          else if (incomingTeam.activeChip === "FH")
+            await FanstasyStats.updateMany({ $inc: { freeHitCount: 1 } });
+        }
 
         res.status(200).json({ message: "Successfully saved team" });
       } else {
