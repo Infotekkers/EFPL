@@ -46,6 +46,10 @@ class LeagueTableRemoteDataProvider {
           print("middle");
           leagueTable.add(leagueTableDto.toDomain());
         }
+        leagueTable.sort(
+          (teamOne, teamTwo) =>
+              teamTwo.teamPoint.getOrCrash() - teamOne.teamPoint.getOrCrash(),
+        );
         return right(leagueTable);
       }
 
