@@ -444,14 +444,23 @@ const transfer = asyncHandler(async (req, res) => {
 
         // * CHIP COUNTER
         if (incomingTeam.activeChip) {
+          const filter = { gameWeekNumber: activeGameweek };
           if (incomingTeam.activeChip === "TC")
-            await FanstasyStats.updateMany({ $inc: { tripleCaptainCount: 1 } });
+            await FanstasyStats.findOneAndUpdate(filter, {
+              $inc: { "allStats.tripleCaptainCount": 1 },
+            });
           else if (incomingTeam.activeChip === "BB")
-            await FanstasyStats.updateMany({ $inc: { benchBoostCount: 1 } });
+            await FanstasyStats.findOneAndUpdate(filter, {
+              $inc: { "allStats.benchBoostCount": 1 },
+            });
           else if (incomingTeam.activeChip === "WC")
-            await FanstasyStats.updateMany({ $inc: { wildCardCount: 1 } });
+            await FanstasyStats.findOneAndUpdate(filter, {
+              $inc: { "allStats.wildCardCount": 1 },
+            });
           else if (incomingTeam.activeChip === "FH")
-            await FanstasyStats.updateMany({ $inc: { freeHitCount: 1 } });
+            await FanstasyStats.findOneAndUpdate(filter, {
+              $inc: { "allStats.freeHitCount": 1 },
+            });
         }
 
         res.status(200).json({ message: "Successfully saved team" });
