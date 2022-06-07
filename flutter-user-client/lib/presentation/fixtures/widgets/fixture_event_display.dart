@@ -22,7 +22,7 @@ class FixtureEventDisplay extends StatelessWidget {
               commonEvents['assists'].length == 0
                   ? Container()
                   : Container(
-                      margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
@@ -53,6 +53,8 @@ class FixtureEventDisplay extends StatelessWidget {
                                       commonEvents['assists'][index]
                                               ['playerName']
                                           .toString(),
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
                                     ),
                                     const SizedBox(
                                       width: 8,
@@ -123,6 +125,8 @@ class FixtureEventDisplay extends StatelessWidget {
                                       commonEvents['penalitiesMissed'][index]
                                               ['playerName']
                                           .toString(),
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
                                     ),
                                     Wrap(
                                       direction: Axis.horizontal,
@@ -190,6 +194,8 @@ class FixtureEventDisplay extends StatelessWidget {
                                       commonEvents['yellows'][index]
                                               ['playerName']
                                           .toString(),
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
                                     ),
 
                                     // RED Card from 2 yellows
@@ -257,6 +263,8 @@ class FixtureEventDisplay extends StatelessWidget {
                                     Text(
                                       commonEvents['reds'][index]['playerName']
                                           .toString(),
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
                                     ),
                                     Container(
                                       height: 20,

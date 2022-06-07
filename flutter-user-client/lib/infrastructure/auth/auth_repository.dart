@@ -1,5 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
+import 'dart:io';
 
 import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/auth/auth_failure.dart';
@@ -7,6 +8,7 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/domain/auth/user.dart';
 import 'package:efpl/infrastructure/auth/auth_dtos.dart';
+import 'package:efpl/services/constants.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
@@ -22,17 +24,18 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, User>> signInUser(
       {required User user, required Password password}) async {
     final Uri url = Uri.parse("$_baseUrl/login");
-    print(url);
+
     final UserDto userDtoOut = UserDto.fromDomain(user);
     final outGoingJson =
         userDtoOut.copyWith(password: password.getOrCrash()).toJson();
     try {
-      final response = await client!.post(url, body: outGoingJson);
+      final response = await client!.post(url, body: outGoingJson).timeout(
+            Duration(seconds: ConstantValues().httpTimeOutDuration),
+          );
+
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        print(response.body);
-        final user = userDtoIn.toDomain();
 
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 400) {
@@ -40,7 +43,22 @@ class AuthRepository implements IAuthRepository {
       } else {
         return left(const AuthFailure.serverError());
       }
-    } catch (err) {
+    }
+    // Timeout Exception
+    on TimeoutException catch (_) {
+      return left(const AuthFailure.networkError());
+    }
+    // Socket Exception
+    on SocketException catch (_) {
+      return left(const AuthFailure.networkError());
+    }
+    // Handshake Exception
+    on HandshakeException catch (_) {
+      return left(const AuthFailure.networkError());
+    }
+
+    // unexpected error
+    catch (err) {
       print(err);
       return left(const AuthFailure.networkError());
     }
@@ -56,21 +74,43 @@ class AuthRepository implements IAuthRepository {
     final outGoingJson =
         userDtoOut.copyWith(password: password.getOrCrash()).toJson();
     try {
-      final response = await client!.post(url, body: outGoingJson);
+      final response = await client!.post(url, body: outGoingJson).timeout(
+            Duration(seconds: ConstantValues().httpTimeOutDuration),
+          );
 
+      // success
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        // ignore: avoid_print
-        print(userDtoIn.token);
+
         // store token on secure store
         return right(userDtoIn.toDomain());
-      } else if (response.statusCode == 400) {
+      }
+      // email in use
+      else if (response.statusCode == 400) {
         return left(const AuthFailure.emailAlreadyInUse());
-      } else {
+      }
+      // other error
+      else {
         return left(const AuthFailure.serverError());
       }
-    } catch (err) {
+    }
+
+    // Timeout Exception
+    on TimeoutException catch (_) {
+      return left(const AuthFailure.networkError());
+    }
+    // Socket Exception
+    on SocketException catch (_) {
+      return left(const AuthFailure.networkError());
+    }
+    // Handshake Exception
+    on HandshakeException catch (_) {
+      return left(const AuthFailure.networkError());
+    }
+
+    // Unexpected Error
+    catch (err) {
       // ignore: avoid_print
       print(err);
       return left(const AuthFailure.networkError());
@@ -84,7 +124,7 @@ class AuthRepository implements IAuthRepository {
 
     try {
       String? value = await storage.read(key: 'user');
-      print(value);
+
       final UserDto userDtoIn =
           UserDto.fromJson(jsonDecode(value!) as Map<String, dynamic>);
 
@@ -99,14 +139,17 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Unit>> setSignedInUser(
       {required User user}) async {
     try {
-      final storage = new FlutterSecureStorage();
+      const storage = FlutterSecureStorage();
 
       final UserDto userDtoOut = UserDto.fromDomain(user);
 
       storage.write(key: 'user', value: jsonEncode(userDtoOut.toJson()));
 
       return right(unit);
-    } catch (err) {
+    }
+
+    // TODO:MAKE STORAGE ERROR NOT SEVER
+    catch (err) {
       return left(const AuthFailure.serverError());
     }
   }
@@ -117,7 +160,9 @@ class AuthRepository implements IAuthRepository {
       const storage = FlutterSecureStorage();
       await storage.delete(key: 'user');
       return right(unit);
-    } catch (err) {
+    }
+    // TODO:MAKE STORAGE ERROR NOT SEVER
+    catch (err) {
       print(err);
       return left(const AuthFailure.serverError());
     }
@@ -131,29 +176,42 @@ class AuthRepository implements IAuthRepository {
     final UserDto userDtoOut = UserDto.fromDomain(user);
     final outGoingJson = userDtoOut.toJson();
     try {
-      final response = await client!.post(url, body: outGoingJson);
-      // ignore: avoid_print
-      print(response.body);
+      final response = await client!.post(url, body: outGoingJson).timeout(
+            Duration(seconds: ConstantValues().httpTimeOutDuration),
+          );
+
+      // success
       if (response.statusCode == 200) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        // ignore: avoid_print
-        print('success');
+
         return right(userDtoIn.toDomain());
-      } else if (response.statusCode == 404) {
+      }
+      // email not found
+      else if (response.statusCode == 404) {
         return left(const AuthFailure.emailNotFound());
-      } else {
+      }
+      // error
+      else {
         return left(const AuthFailure.serverError());
       }
-    } catch (err) {
+    }
+    // Timeout Exception
+    on TimeoutException catch (_) {
       return left(const AuthFailure.networkError());
     }
-  }
+    // Socket Exception
+    on SocketException catch (_) {
+      return left(const AuthFailure.networkError());
+    }
+    // Handshake Exception
+    on HandshakeException catch (_) {
+      return left(const AuthFailure.networkError());
+    }
 
-  // signOut
-  @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+    // Unexpected Error
+    catch (err) {
+      return left(const AuthFailure.networkError());
+    }
   }
 }

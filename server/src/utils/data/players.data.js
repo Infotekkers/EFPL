@@ -612,12 +612,6 @@ const ethiopianCoffee = [
 const defenceForce = [
   // GK
   {
-    playerName: "Abel Mamo",
-    eplTeamId: "Defence Force S.C",
-    currentPrice: 6,
-    position: "GK",
-  },
-  {
     playerName: "Tariku Aredo",
     eplTeamId: "Defence Force S.C",
     currentPrice: 6.5,
@@ -631,12 +625,6 @@ const defenceForce = [
   },
 
   //   DEF
-  {
-    playerName: "Abebe Tilahun",
-    eplTeamId: "Defence Force S.C",
-    currentPrice: 11.9,
-    position: "DEF",
-  },
   {
     playerName: "Adisu Tesfaye",
     eplTeamId: "Defence Force S.C",

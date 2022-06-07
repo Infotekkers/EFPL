@@ -1,9 +1,10 @@
 import 'package:efpl/application/auth/sign_in_form/sign_in_form_bloc.dart';
-import 'package:efpl/presentation/authentication/register/register_view.dart';
-import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({Key? key}) : super(key: key);
@@ -90,15 +91,19 @@ class SignInForm extends StatelessWidget {
               TextFormField(
                 key: const ValueKey("loginPageUserName"),
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.email),
-                  labelText: 'Email',
-                  focusedBorder: OutlineInputBorder(
+                  labelText: AppLocalizations.of(context)!.email,
+                  labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        color: ConstantColors.primary_900.withOpacity(0.55),
+                      ),
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: ConstantColors.primary_900,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     vertical: 0.0,
                     horizontal: 15.0,
                   ),
@@ -121,23 +126,37 @@ class SignInForm extends StatelessWidget {
               const SizedBox(height: 15),
 
               // Password Input
+
               TextFormField(
                 key: const ValueKey("loginPagePassword"),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.lock),
-                  labelText: 'Password',
-                  focusedBorder: OutlineInputBorder(
+                  labelText: AppLocalizations.of(context)!.password,
+                  labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        color: ConstantColors.primary_900.withOpacity(0.55),
+                      ),
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: ConstantColors.primary_900,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     vertical: 0.0,
                     horizontal: 10.0,
                   ),
+                  suffixIcon: IconButton(
+                    icon: Icon(state.showPass
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      BlocProvider.of<SignInFormBloc>(context)
+                          .add(const SignInFormEvent.showPressed());
+                    },
+                  ),
                 ),
                 autocorrect: false,
-                obscureText: true,
+                obscureText: !state.showPass,
                 onChanged: (value) => BlocProvider.of<SignInFormBloc>(context)
                     .add(SignInFormEvent.passwordChanged(value)),
                 validator: (_) => context
@@ -152,9 +171,8 @@ class SignInForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-
               const SizedBox(
-                height: 15,
+                height: 24,
               ),
 
               // Sign In Button
@@ -167,7 +185,7 @@ class SignInForm extends StatelessWidget {
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 40,
+                  height: 42,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(5),
@@ -176,16 +194,17 @@ class SignInForm extends StatelessWidget {
                       bottomLeft: Radius.circular(5),
                     ),
                     // color: Colors.amber,
-                    color: Colors.blue,
+                    color: ConstantColors.primary_900,
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.25,
-                      ),
+                      AppLocalizations.of(context)!.signIn,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.25,
+                            fontSize: 15,
+                          ),
                     ),
                   ),
                 ),
@@ -199,11 +218,11 @@ class SignInForm extends StatelessWidget {
                   Navigator.pushNamed(context, "/request-reset");
                 },
                 child: Text(
-                  "Forgot Password ?",
-                  style: TextStyle(
-                    color: Colors.grey.withOpacity(0.85),
-                    fontWeight: FontWeight.w700,
-                  ),
+                  AppLocalizations.of(context)!.forgotPassword,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        color: Colors.grey.withOpacity(0.85),
+                        fontWeight: FontWeight.w700,
+                      ),
                 ),
               ),
 
@@ -220,21 +239,23 @@ class SignInForm extends StatelessWidget {
                       children: [
                         // Normal text
                         TextSpan(
-                          text: "Don't have an account?",
-                          style: TextStyle(
-                            color: Colors.grey.withOpacity(0.85),
-                            fontWeight: FontWeight.w700,
-                          ),
+                          text: AppLocalizations.of(context)!.dontHaveAnAccount,
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: Colors.grey.withOpacity(0.85),
+                                    fontWeight: FontWeight.w700,
+                                  ),
                         ),
 
                         // Redirect
-                        const TextSpan(
-                          text: " Sign Up",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
+                        TextSpan(
+                          text: " " + AppLocalizations.of(context)!.signUp,
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
                         )
                       ],
                     ),

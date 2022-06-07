@@ -466,9 +466,18 @@ export default {
       // this.isFixtureLoading = false;
 
       // TODO: Remove Timer
-      setTimeout(() => {
-        this.isFixtureLoading = false;
-      }, 2000);
+
+      this.isFixtureLoading = false;
+    },
+    getActiveGameWeek() {
+      //   Set Loader
+      this.isFixtureLoading = true;
+
+      // Dispatch Store Action
+      store.dispatch("Fixture/getActiveGameWeek");
+      // this.isFixtureLoading = false;
+
+      this.isFixtureLoading = false;
     },
 
     // Get all teams
@@ -481,9 +490,8 @@ export default {
       // this.isTeamLoading = false;
 
       // TODO: Remove Timer
-      setTimeout(() => {
-        this.isTeamLoading = false;
-      }, 3000);
+
+      this.isTeamLoading = false;
     },
 
     // Event Handlers
@@ -551,9 +559,7 @@ export default {
       ).length;
 
       // number of fixtures should be more than 0 and 2 * number of teams
-      return teamCount === fixturesCount * 2 && fixturesCount > 0
-        ? true
-        : false;
+      return teamCount <= fixturesCount * 2 && fixturesCount > 0 ? true : false;
     },
 
     // filter gameweek fixtures by date for display
@@ -581,8 +587,6 @@ export default {
 
         formattedAndFiltered.push(fix);
       });
-
-      console.log(formattedAndFiltered);
 
       return formattedAndFiltered;
     },
@@ -654,6 +658,7 @@ export default {
 
   // get data before component mounts
   beforeMount() {
+    this.getActiveGameWeek();
     this.getFixtures();
     this.getTeams();
   },

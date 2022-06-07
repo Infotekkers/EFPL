@@ -488,6 +488,7 @@ const addTestUser = async () => {
       //   },
       // },
     ],
+    maxBudget: 100.0,
   });
   const testUser2 = new User({
     userName: "Test Man 2",
@@ -728,10 +729,12 @@ const populatePlayers = async () => {
   if (players.data.data.length === 0) {
     playersData.forEach(async (team) => {
       team.forEach(async (player) => {
-        player.score = [
-          {
-            gameweekId: "1",
-            price: "8",
+        const allScores = [];
+
+        for (let index = 0; index <= 29; index++) {
+          allScores.push({
+            gameweekId: index + 1,
+            price: player.currentPrice,
             fantasyScore: 0,
             minutesPlayed: 0,
             goals: 0,
@@ -746,8 +749,9 @@ const populatePlayers = async () => {
             transfersIn: 0,
             transfersOut: 0,
             form: 0,
-          },
-        ];
+          });
+        }
+        player.score = allScores;
         await Player.create(player);
       });
     });

@@ -5,6 +5,7 @@ const fs = require("fs");
 const fse = require("fs-extra");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
+const Player = require("../models/Player");
 
 // Function to generate JWT Token
 const generateJWTToken = expressAsyncHandler(async (id) => {
@@ -16,7 +17,7 @@ const generateJWTToken = expressAsyncHandler(async (id) => {
 // Function to deduct points from user team
 const pointDeductor = (activeTeam, incomingTeam) => {
   let deduction = activeTeam.deduction;
-  let freeTransers = activeTeam.freeTransfers;
+  let freeTransfers = activeTeam.freeTransfers;
   let transfersMade = 0;
 
   // Check if wildcard or free hit chips are active
@@ -36,12 +37,65 @@ const pointDeductor = (activeTeam, incomingTeam) => {
     // Use free transfers if any
     deduction -= 4 * activeTeam.freeTransfers;
 
-    if (freeTransers > 0) {
-      freeTransers = freeTransers - 1;
+    if (freeTransfers > 0) {
+      freeTransfers = freeTransfers - 1;
     }
   }
 
   return [deduction, transfersMade];
+};
+
+// function to update player ins and outs
+const playerInsOutsCounter = async (activeTeam, incomingTeam) => {
+  const activeTeamPlayerIds = [];
+  const incomingTeamPlayerIds = [];
+  if (activeTeam && activeTeam.players) {
+    // eslint-disable-next-line no-unused-vars
+    for (const [key, value] of activeTeam.players.entries()) {
+      activeTeamPlayerIds.push(key);
+    }
+  }
+
+  for (const incomingPlayerId in incomingTeam.players) {
+    incomingTeamPlayerIds.push(incomingPlayerId);
+  }
+
+  const transferredOutPlayers = [];
+  const transferredInPlayers = [];
+
+  for (const index in activeTeamPlayerIds) {
+    if (!incomingTeamPlayerIds.includes(activeTeamPlayerIds[index])) {
+      transferredOutPlayers.push(activeTeamPlayerIds[index]);
+    }
+  }
+
+  for (const index in incomingTeamPlayerIds) {
+    if (!activeTeamPlayerIds.includes(incomingTeamPlayerIds[index])) {
+      transferredInPlayers.push(incomingTeamPlayerIds[index]);
+    }
+  }
+
+  for (let index = 0; index < transferredInPlayers.length; index++) {
+    const player = await Player.findOne({
+      playerId: transferredInPlayers[index],
+    }).select("score");
+    player.score[incomingTeam.gameweekId - 1].transfersIn =
+      player.score[incomingTeam.gameweekId - 1].transfersIn + 1;
+
+    // score
+    await player.save();
+  }
+
+  for (let index = 0; index < transferredOutPlayers.length; index++) {
+    const player = await Player.findOne({
+      playerId: transferredOutPlayers[index],
+    }).select("score");
+    player.score[activeTeam.gameweekId].transfersOut =
+      player.score[activeTeam.gameweekId].transfersOut + 1;
+
+    // score
+    await player.save();
+  }
 };
 
 // Function to apply statistical updates to existing teams
@@ -61,7 +115,8 @@ const statUpdater = ({ activeMatch, activePlayer, incomingUpdate }) => {
     fantasyScore,
   } = incomingUpdate;
 
-  // TODO: Set Fantasy Score
+  const activePlayerPosition = activePlayer.position;
+
   if (!activePlayer.score[gameweekId - 1]) {
     const score = {
       gameweekId,
@@ -94,7 +149,11 @@ const statUpdater = ({ activeMatch, activePlayer, incomingUpdate }) => {
   activePlayer.score[gameweekId - 1].penalitiesSaved = penalitiesSaved;
   activePlayer.score[gameweekId - 1].saves = saves;
   activePlayer.score[gameweekId - 1].ownGoal = ownGoal;
-  activePlayer.score[gameweekId - 1].fantasyScore = fantasyScore;
+  const scoreSum = sumGwFantasyScore(
+    activePlayer.score[gameweekId - 1],
+    activePlayerPosition
+  );
+  activePlayer.score[gameweekId - 1].fantasyScore = scoreSum;
 
   // * Compatability layer to achieve data synchronization with redundant layer in Fixture.MatchStats / Player.score
   const compatFixture = {
@@ -174,6 +233,113 @@ const statUpdater = ({ activeMatch, activePlayer, incomingUpdate }) => {
   }
 
   return { updatedMatch: activeMatch, updatedPlayer: activePlayer };
+};
+
+// calculate score sum for gameweek stats
+const sumGwFantasyScore = (activePlayerScoreInfo, activePlayerPosition) => {
+  // more than 60mins => 2pts
+  const scoreMap = {
+    GK: {
+      goal: 6,
+      assist: 3,
+      cleanSheet: 4,
+      save: 1,
+      penalitiesSaved: 5,
+      penalitiesMissed: -2,
+      ownGoal: -2,
+    },
+    DEF: {
+      goal: 6,
+      assist: 3,
+      cleanSheet: 4,
+      save: 0,
+      penalitiesSaved: 5,
+      penalitiesMissed: -2,
+      ownGoal: -2,
+    },
+    MID: {
+      goal: 5,
+      assist: 3,
+      cleanSheet: 1,
+      save: 0,
+      penalitiesSaved: 5,
+      penalitiesMissed: -2,
+      ownGoal: -2,
+    },
+    ATT: {
+      goal: 4,
+      assist: 3,
+      cleanSheet: 0,
+      save: 0,
+      penalitiesSaved: 5,
+      penalitiesMissed: -2,
+      ownGoal: -2,
+    },
+  };
+
+  const cardScoreMap = {
+    yellow: -1,
+    red: -3,
+  };
+
+  let weekScoreSum = 0;
+
+  // minutes played
+  if (activePlayerScoreInfo.minutesPlayed > 0) {
+    if (activePlayerScoreInfo.minutesPlayed > 60) {
+      weekScoreSum = weekScoreSum + 2;
+    } else {
+      weekScoreSum = weekScoreSum + 1;
+    }
+  }
+
+  // goals
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.goals * scoreMap[activePlayerPosition].goal;
+
+  // assists
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.assists * scoreMap[activePlayerPosition].assist;
+
+  // yellows
+  weekScoreSum =
+    weekScoreSum + activePlayerScoreInfo.yellows * cardScoreMap.yellow;
+
+  // reds
+  weekScoreSum = weekScoreSum + activePlayerScoreInfo.reds * cardScoreMap.red;
+
+  // clean sheet
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.cleanSheet *
+      scoreMap[activePlayerPosition].cleanSheet;
+
+  // saves
+  weekScoreSum =
+    weekScoreSum +
+    Math.floor(activePlayerScoreInfo.saves / 3) *
+      scoreMap[activePlayerPosition].save;
+
+  // pen saved
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.penalitiesSaved *
+      scoreMap[activePlayerPosition].penalitiesSaved;
+
+  // pen missed
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.penalitiesMissed *
+      scoreMap[activePlayerPosition].penalitiesMissed;
+
+  // own goal
+  weekScoreSum =
+    weekScoreSum +
+    activePlayerScoreInfo.ownGoal * scoreMap[activePlayerPosition].ownGoal;
+
+  return weekScoreSum;
 };
 
 // Function to change base64 to file
@@ -263,4 +429,5 @@ module.exports = {
   makeFilePlayer,
   // new
   sumEplPlayerScore,
+  playerInsOutsCounter,
 };

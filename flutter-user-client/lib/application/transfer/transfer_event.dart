@@ -22,14 +22,17 @@ class TransferEvent with _$TransferEvent {
   const factory TransferEvent.transferUserPlayerInitial(
       {required String transferInPlayerId}) = _transferUserPlayerInitial;
 
+  const factory TransferEvent.transferOutUserPlayerInitial(
+      {required String transferOutPlayerId}) = _transferOutUserPlayerInitial;
+
 // Cancel Transfer
   const factory TransferEvent.cancelTransfer() = _cancelTransfer;
 
   const factory TransferEvent.cancelOneTransfer(
       {required String playerToCancelId}) = _cancelOneTransfer;
 
-  const factory TransferEvent.saveUserPlayers({required int gameWeekId}) =
-      _saveUserPlayers;
+  const factory TransferEvent.saveUserPlayers(
+      {required int gameWeekId, required bool isSetTeam}) = _saveUserPlayers;
 
   const factory TransferEvent.setFilter(
       {required String filterBy, required String filterValue}) = _setFilter;
@@ -49,4 +52,7 @@ class TransferEvent with _$TransferEvent {
 
   const factory TransferEvent.setInitialSelection({required bool valueToSet}) =
       _setInitialSelection;
+
+  const factory TransferEvent.cancelTransferFromConfirm() =
+      _cancelTransferFromConfirm;
 }

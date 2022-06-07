@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:efpl/application/transfer/transfer_bloc.dart';
 import 'package:efpl/domain/transfer/transfer_failures.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/user_team.dart';
@@ -229,7 +230,8 @@ class TransferRemoteDataProvider {
 
         // if response has players
 
-        if (parseResponseTeam['players'].length > 0) {
+        if (parseResponseTeam.length > 0 &&
+            parseResponseTeam['players'].length > 0) {
           // List allPlayers = parseResponseTeam['players'];
           // for (var i = 0; i < allPlayers.length; i++) {
           //   Map<String, dynamic> availability = {
@@ -366,23 +368,25 @@ class TransferRemoteDataProvider {
             _transferLocalDataProvider.saveAllTeamsAndLogo(allTeams: allTeams);
           }
 
-          return left([
-            UserTeam(
-              gameWeekId: GameWeekId(value: 1),
-              gameWeekDeadline:
-                  parsedResponseBody['gameWeekDeadline'].toString(),
-              allUserPlayers: [],
-              freeTransfers: 0,
-              deduction: 0,
-              activeChip: '',
-              availableChips: parsedResponseBody['availableChips'],
-              maxBudget:
-                  double.parse(parsedResponseBody['maxBudget'].toString()),
-              teamName: parsedResponseBody['teamName'],
-            ),
-            const TransferFailure.noTeamSelected(
-                failedValue: "No Team. Please select a team.")
-          ]);
+          return left(
+            [
+              UserTeam(
+                gameWeekId: GameWeekId(value: 1),
+                gameWeekDeadline:
+                    parsedResponseBody['gameWeekDeadline'].toString(),
+                allUserPlayers: [],
+                freeTransfers: 0,
+                deduction: 0,
+                activeChip: '',
+                availableChips: parsedResponseBody['availableChips'],
+                maxBudget:
+                    double.parse(parsedResponseBody['maxBudget'].toString()),
+                teamName: parsedResponseBody['teamName'],
+              ),
+              const TransferFailure.noTeamSelected(
+                  failedValue: "No Team. Please select a team.")
+            ],
+          );
         }
       }
 
@@ -577,17 +581,24 @@ class TransferRemoteDataProvider {
     }
   }
 
-  Future<Either<dynamic, bool>> saveUserPlayers({required Map userTeam}) async {
+  Future<Either<dynamic, bool>> saveUserPlayers({
+    required Map userTeam,
+  }) async {
     try {
       var apiResponse =
           await instance.client.patch(Uri.parse('$_baseURL/user/team'), body: {
         "data": jsonEncode(userTeam),
       }).timeout(
-        Duration(seconds: ConstantValues().httpTimeOutDuration),
+        Duration(
+          seconds: ConstantValues().httpTimeOutDuration,
+        ),
       );
 
       // success
-      if (apiResponse.statusCode == 200) {
+      if (apiResponse.statusCode == 201) {
+        getIt<TransferBloc>().add(
+          const TransferEvent.getUserPlayers(),
+        );
         return right(true);
       }
       // token issue
@@ -674,7 +685,7 @@ class TransferRemoteDataProvider {
     }
     // unexpected error
     catch (e) {
-      // print(e);
+      print(e);
       //  cache
       _transferLocalDataProvider.saveUserTeamChanges(changedUserTeam: userTeam);
 

@@ -3,13 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/auth/auth_failure.dart';
 import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
-import 'package:efpl/domain/core/value_failures.dart';
+import 'package:efpl/domain/auth/user.dart';
 import 'package:efpl/domain/core/value_validators.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
-
-import '../../../domain/auth/user.dart';
 
 part 'register_form_event.dart';
 part 'register_form_state.dart';
@@ -49,23 +46,11 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
         emit(
           state.copyWith(
             confirmPassword: Password(event.confirmPasswordStr),
-            isMatch: none(),
+            authFailureOrSuccessOption: none(),
           ),
         );
-        final passMatch = passWordMatch(state.password, state.confirmPassword);
-        if (passMatch.isLeft()) {
-          emit(
-            state.copyWith(
-                isMatch: some(left(const AuthFailure.passwordDontMatch()))),
-          );
-          print(state.authFailureOrSuccessOption);
-        }
-
-        print('e');
-        print(passMatch);
       },
     );
-    print(state.authFailureOrSuccessOption);
 
     // user name
     on<UserNameChanged>(
@@ -115,6 +100,26 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
       },
     );
 
+    // show pass pressed
+    on<ShowPressed>(
+      (event, emit) {
+        emit(
+          state.copyWith(
+            showPass: !state.showPass,
+          ),
+        );
+      },
+    );
+    on<ShowConfirmPressed>(
+      (event, emit) {
+        emit(
+          state.copyWith(
+            showConfirmPass: !state.showConfirmPass,
+          ),
+        );
+      },
+    );
+
     // register pressed
     on<RegisterUserPressed>(
       (event, emit) async {
@@ -122,37 +127,41 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
         final isEmailValid = state.email.isValid();
         final isPassValid = state.password.isValid();
         final isConfirmPassValid = state.confirmPassword.isValid();
-        // final isCountryValid = state.confirmPassword.isValid();
         final isUserName = state.userName.isValid();
         final isTeamNameValid = state.teamName.isValid();
-        // final isFavoriteEplTeamValid = state.favouriteEplTeam.isValid();
-        final passMatch = passWordMatch(state.password, state.confirmPassword);
+        final passMatch =
+            state.password == state.confirmPassword ? true : false;
 
         if (isEmailValid &&
-                isPassValid &&
-                isConfirmPassValid &&
-                // isCountryValid &&
-                isUserName &&
-                isTeamNameValid &&
-                passMatch.isRight()
-            // isFavoriteEplTeamValid
-            ) {
+            isPassValid &&
+            isConfirmPassValid &&
+            isUserName &&
+            isTeamNameValid) {
+          if (passMatch == true) {
+            emit(
+              state.copyWith(
+                isSubmitting: true,
+                authFailureOrSuccessOption: none(),
+              ),
+            );
+            final User user = User.initial();
+            failureOrSuccess = await _authRepository.registerUser(
+              user: user.copyWith(
+                email: state.email,
+                userName: state.userName,
+                teamName: state.teamName,
+                country: state.country,
+                favouriteEplTeam: state.favouriteEplTeam,
+              ),
+              password: state.password,
+            );
+          }
           emit(
             state.copyWith(
-              isSubmitting: true,
-              authFailureOrSuccessOption: none(),
-            ),
-          );
-          final User user = User.initial();
-          failureOrSuccess = await _authRepository.registerUser(
-            user: user.copyWith(
-              email: state.email,
-              userName: state.userName,
-              teamName: state.teamName,
-              country: state.country,
-              favouriteEplTeam: state.favouriteEplTeam,
-            ),
-            password: state.password,
+                isSubmitting: false,
+                showErrorMessages: true,
+                authFailureOrSuccessOption:
+                    some(left(const AuthFailure.passwordDontMatch()))),
           );
         }
 
@@ -163,6 +172,11 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
             authFailureOrSuccessOption: optionOf(failureOrSuccess),
           ),
         );
+        if (failureOrSuccess?.isRight() ?? false) {
+          failureOrSuccess!.fold((l) => {}, (r) async {
+            await _authRepository.setSignedInUser(user: r);
+          });
+        }
       },
     );
   }

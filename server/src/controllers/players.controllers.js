@@ -306,13 +306,25 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
         currentTeamFixture[i].homeTeam.toString() ===
         allPlayersInPosition[i].eplTeamId.toString()
       ) {
-        upComingFixture.push(
-          currentTeamFixture[i].awayTeam.toString() + "+-" + "H"
-        );
+        // get team logo
+        const teamInfo = await Teams.findOne({
+          teamName: currentTeamFixture[i].awayTeam,
+        }).select("teamLogo");
+
+        upComingFixture.push({
+          teamLogo: teamInfo.teamLogo,
+          teamInfo: currentTeamFixture[i].awayTeam.toString() + "+-" + "H",
+        });
       } else {
-        upComingFixture.push(
-          currentTeamFixture[i].homeTeam.toString() + "+-" + "A"
-        );
+        // get team logo
+        const teamInfo = await Teams.findOne({
+          teamName: currentTeamFixture[i].homeTeam,
+        }).select("teamLogo");
+
+        upComingFixture.push({
+          teamInfo: currentTeamFixture[i].homeTeam.toString() + "+-" + "A",
+          teamLogo: teamInfo.teamLogo,
+        });
       }
     }
 

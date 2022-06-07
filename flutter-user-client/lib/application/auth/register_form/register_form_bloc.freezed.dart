@@ -59,6 +59,14 @@ class _$RegisterFormEventTearOff {
     );
   }
 
+  ShowPressed showPressed() {
+    return const ShowPressed();
+  }
+
+  ShowConfirmPressed showConfirmPressed() {
+    return const ShowConfirmPressed();
+  }
+
   RegisterUserPressed registerUserPressed() {
     return const RegisterUserPressed();
   }
@@ -78,6 +86,8 @@ mixin _$RegisterFormEvent {
     required TResult Function(String teamNameStr) teamNameChanged,
     required TResult Function(String countryStr) countryChanged,
     required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
     required TResult Function() registerUserPressed,
   }) =>
       throw _privateConstructorUsedError;
@@ -90,6 +100,8 @@ mixin _$RegisterFormEvent {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
   }) =>
       throw _privateConstructorUsedError;
@@ -102,6 +114,8 @@ mixin _$RegisterFormEvent {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
     required TResult orElse(),
   }) =>
@@ -117,6 +131,8 @@ mixin _$RegisterFormEvent {
     required TResult Function(CountryChanged value) countryChanged,
     required TResult Function(FavoriteEplTeamChanged value)
         favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
     required TResult Function(RegisterUserPressed value) registerUserPressed,
   }) =>
       throw _privateConstructorUsedError;
@@ -129,6 +145,8 @@ mixin _$RegisterFormEvent {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
   }) =>
       throw _privateConstructorUsedError;
@@ -141,6 +159,8 @@ mixin _$RegisterFormEvent {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
     required TResult orElse(),
   }) =>
@@ -236,6 +256,8 @@ class _$EmailChanged implements EmailChanged {
     required TResult Function(String teamNameStr) teamNameChanged,
     required TResult Function(String countryStr) countryChanged,
     required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
     required TResult Function() registerUserPressed,
   }) {
     return emailChanged(emailStr);
@@ -251,6 +273,8 @@ class _$EmailChanged implements EmailChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
   }) {
     return emailChanged?.call(emailStr);
@@ -266,6 +290,8 @@ class _$EmailChanged implements EmailChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -287,6 +313,8 @@ class _$EmailChanged implements EmailChanged {
     required TResult Function(CountryChanged value) countryChanged,
     required TResult Function(FavoriteEplTeamChanged value)
         favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
     required TResult Function(RegisterUserPressed value) registerUserPressed,
   }) {
     return emailChanged(this);
@@ -302,6 +330,8 @@ class _$EmailChanged implements EmailChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
   }) {
     return emailChanged?.call(this);
@@ -317,6 +347,8 @@ class _$EmailChanged implements EmailChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -409,6 +441,8 @@ class _$PasswordChanged implements PasswordChanged {
     required TResult Function(String teamNameStr) teamNameChanged,
     required TResult Function(String countryStr) countryChanged,
     required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
     required TResult Function() registerUserPressed,
   }) {
     return passwordChanged(passwordStr);
@@ -424,6 +458,8 @@ class _$PasswordChanged implements PasswordChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
   }) {
     return passwordChanged?.call(passwordStr);
@@ -439,6 +475,8 @@ class _$PasswordChanged implements PasswordChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -460,6 +498,8 @@ class _$PasswordChanged implements PasswordChanged {
     required TResult Function(CountryChanged value) countryChanged,
     required TResult Function(FavoriteEplTeamChanged value)
         favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
     required TResult Function(RegisterUserPressed value) registerUserPressed,
   }) {
     return passwordChanged(this);
@@ -475,6 +515,8 @@ class _$PasswordChanged implements PasswordChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
   }) {
     return passwordChanged?.call(this);
@@ -490,6 +532,8 @@ class _$PasswordChanged implements PasswordChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -583,6 +627,8 @@ class _$ConfirmPasswordChanged implements ConfirmPasswordChanged {
     required TResult Function(String teamNameStr) teamNameChanged,
     required TResult Function(String countryStr) countryChanged,
     required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
     required TResult Function() registerUserPressed,
   }) {
     return confirmPasswordChanged(confirmPasswordStr);
@@ -598,6 +644,8 @@ class _$ConfirmPasswordChanged implements ConfirmPasswordChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
   }) {
     return confirmPasswordChanged?.call(confirmPasswordStr);
@@ -613,6 +661,8 @@ class _$ConfirmPasswordChanged implements ConfirmPasswordChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -634,6 +684,8 @@ class _$ConfirmPasswordChanged implements ConfirmPasswordChanged {
     required TResult Function(CountryChanged value) countryChanged,
     required TResult Function(FavoriteEplTeamChanged value)
         favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
     required TResult Function(RegisterUserPressed value) registerUserPressed,
   }) {
     return confirmPasswordChanged(this);
@@ -649,6 +701,8 @@ class _$ConfirmPasswordChanged implements ConfirmPasswordChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
   }) {
     return confirmPasswordChanged?.call(this);
@@ -664,6 +718,8 @@ class _$ConfirmPasswordChanged implements ConfirmPasswordChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -757,6 +813,8 @@ class _$UserNameChanged implements UserNameChanged {
     required TResult Function(String teamNameStr) teamNameChanged,
     required TResult Function(String countryStr) countryChanged,
     required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
     required TResult Function() registerUserPressed,
   }) {
     return userNameChanged(userNameStr);
@@ -772,6 +830,8 @@ class _$UserNameChanged implements UserNameChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
   }) {
     return userNameChanged?.call(userNameStr);
@@ -787,6 +847,8 @@ class _$UserNameChanged implements UserNameChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -808,6 +870,8 @@ class _$UserNameChanged implements UserNameChanged {
     required TResult Function(CountryChanged value) countryChanged,
     required TResult Function(FavoriteEplTeamChanged value)
         favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
     required TResult Function(RegisterUserPressed value) registerUserPressed,
   }) {
     return userNameChanged(this);
@@ -823,6 +887,8 @@ class _$UserNameChanged implements UserNameChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
   }) {
     return userNameChanged?.call(this);
@@ -838,6 +904,8 @@ class _$UserNameChanged implements UserNameChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -930,6 +998,8 @@ class _$TeamNameChanged implements TeamNameChanged {
     required TResult Function(String teamNameStr) teamNameChanged,
     required TResult Function(String countryStr) countryChanged,
     required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
     required TResult Function() registerUserPressed,
   }) {
     return teamNameChanged(teamNameStr);
@@ -945,6 +1015,8 @@ class _$TeamNameChanged implements TeamNameChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
   }) {
     return teamNameChanged?.call(teamNameStr);
@@ -960,6 +1032,8 @@ class _$TeamNameChanged implements TeamNameChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -981,6 +1055,8 @@ class _$TeamNameChanged implements TeamNameChanged {
     required TResult Function(CountryChanged value) countryChanged,
     required TResult Function(FavoriteEplTeamChanged value)
         favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
     required TResult Function(RegisterUserPressed value) registerUserPressed,
   }) {
     return teamNameChanged(this);
@@ -996,6 +1072,8 @@ class _$TeamNameChanged implements TeamNameChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
   }) {
     return teamNameChanged?.call(this);
@@ -1011,6 +1089,8 @@ class _$TeamNameChanged implements TeamNameChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -1103,6 +1183,8 @@ class _$CountryChanged implements CountryChanged {
     required TResult Function(String teamNameStr) teamNameChanged,
     required TResult Function(String countryStr) countryChanged,
     required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
     required TResult Function() registerUserPressed,
   }) {
     return countryChanged(countryStr);
@@ -1118,6 +1200,8 @@ class _$CountryChanged implements CountryChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
   }) {
     return countryChanged?.call(countryStr);
@@ -1133,6 +1217,8 @@ class _$CountryChanged implements CountryChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -1154,6 +1240,8 @@ class _$CountryChanged implements CountryChanged {
     required TResult Function(CountryChanged value) countryChanged,
     required TResult Function(FavoriteEplTeamChanged value)
         favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
     required TResult Function(RegisterUserPressed value) registerUserPressed,
   }) {
     return countryChanged(this);
@@ -1169,6 +1257,8 @@ class _$CountryChanged implements CountryChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
   }) {
     return countryChanged?.call(this);
@@ -1184,6 +1274,8 @@ class _$CountryChanged implements CountryChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -1277,6 +1369,8 @@ class _$FavoriteEplTeamChanged implements FavoriteEplTeamChanged {
     required TResult Function(String teamNameStr) teamNameChanged,
     required TResult Function(String countryStr) countryChanged,
     required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
     required TResult Function() registerUserPressed,
   }) {
     return favoriteEplTeamChanged(favoriteEplTeamStr);
@@ -1292,6 +1386,8 @@ class _$FavoriteEplTeamChanged implements FavoriteEplTeamChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
   }) {
     return favoriteEplTeamChanged?.call(favoriteEplTeamStr);
@@ -1307,6 +1403,8 @@ class _$FavoriteEplTeamChanged implements FavoriteEplTeamChanged {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -1328,6 +1426,8 @@ class _$FavoriteEplTeamChanged implements FavoriteEplTeamChanged {
     required TResult Function(CountryChanged value) countryChanged,
     required TResult Function(FavoriteEplTeamChanged value)
         favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
     required TResult Function(RegisterUserPressed value) registerUserPressed,
   }) {
     return favoriteEplTeamChanged(this);
@@ -1343,6 +1443,8 @@ class _$FavoriteEplTeamChanged implements FavoriteEplTeamChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
   }) {
     return favoriteEplTeamChanged?.call(this);
@@ -1358,6 +1460,8 @@ class _$FavoriteEplTeamChanged implements FavoriteEplTeamChanged {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -1376,6 +1480,316 @@ abstract class FavoriteEplTeamChanged implements RegisterFormEvent {
   @JsonKey(ignore: true)
   $FavoriteEplTeamChangedCopyWith<FavoriteEplTeamChanged> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ShowPressedCopyWith<$Res> {
+  factory $ShowPressedCopyWith(
+          ShowPressed value, $Res Function(ShowPressed) then) =
+      _$ShowPressedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ShowPressedCopyWithImpl<$Res>
+    extends _$RegisterFormEventCopyWithImpl<$Res>
+    implements $ShowPressedCopyWith<$Res> {
+  _$ShowPressedCopyWithImpl(
+      ShowPressed _value, $Res Function(ShowPressed) _then)
+      : super(_value, (v) => _then(v as ShowPressed));
+
+  @override
+  ShowPressed get _value => super._value as ShowPressed;
+}
+
+/// @nodoc
+
+class _$ShowPressed implements ShowPressed {
+  const _$ShowPressed();
+
+  @override
+  String toString() {
+    return 'RegisterFormEvent.showPressed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is ShowPressed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String emailStr) emailChanged,
+    required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function(String confirmPasswordStr) confirmPasswordChanged,
+    required TResult Function(String userNameStr) userNameChanged,
+    required TResult Function(String teamNameStr) teamNameChanged,
+    required TResult Function(String countryStr) countryChanged,
+    required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
+    required TResult Function() registerUserPressed,
+  }) {
+    return showPressed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String emailStr)? emailChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function(String confirmPasswordStr)? confirmPasswordChanged,
+    TResult Function(String userNameStr)? userNameChanged,
+    TResult Function(String teamNameStr)? teamNameChanged,
+    TResult Function(String countryStr)? countryChanged,
+    TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
+    TResult Function()? registerUserPressed,
+  }) {
+    return showPressed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String emailStr)? emailChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function(String confirmPasswordStr)? confirmPasswordChanged,
+    TResult Function(String userNameStr)? userNameChanged,
+    TResult Function(String teamNameStr)? teamNameChanged,
+    TResult Function(String countryStr)? countryChanged,
+    TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
+    TResult Function()? registerUserPressed,
+    required TResult orElse(),
+  }) {
+    if (showPressed != null) {
+      return showPressed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmailChanged value) emailChanged,
+    required TResult Function(PasswordChanged value) passwordChanged,
+    required TResult Function(ConfirmPasswordChanged value)
+        confirmPasswordChanged,
+    required TResult Function(UserNameChanged value) userNameChanged,
+    required TResult Function(TeamNameChanged value) teamNameChanged,
+    required TResult Function(CountryChanged value) countryChanged,
+    required TResult Function(FavoriteEplTeamChanged value)
+        favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
+    required TResult Function(RegisterUserPressed value) registerUserPressed,
+  }) {
+    return showPressed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmailChanged value)? emailChanged,
+    TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ConfirmPasswordChanged value)? confirmPasswordChanged,
+    TResult Function(UserNameChanged value)? userNameChanged,
+    TResult Function(TeamNameChanged value)? teamNameChanged,
+    TResult Function(CountryChanged value)? countryChanged,
+    TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
+    TResult Function(RegisterUserPressed value)? registerUserPressed,
+  }) {
+    return showPressed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmailChanged value)? emailChanged,
+    TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ConfirmPasswordChanged value)? confirmPasswordChanged,
+    TResult Function(UserNameChanged value)? userNameChanged,
+    TResult Function(TeamNameChanged value)? teamNameChanged,
+    TResult Function(CountryChanged value)? countryChanged,
+    TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
+    TResult Function(RegisterUserPressed value)? registerUserPressed,
+    required TResult orElse(),
+  }) {
+    if (showPressed != null) {
+      return showPressed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowPressed implements RegisterFormEvent {
+  const factory ShowPressed() = _$ShowPressed;
+}
+
+/// @nodoc
+abstract class $ShowConfirmPressedCopyWith<$Res> {
+  factory $ShowConfirmPressedCopyWith(
+          ShowConfirmPressed value, $Res Function(ShowConfirmPressed) then) =
+      _$ShowConfirmPressedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ShowConfirmPressedCopyWithImpl<$Res>
+    extends _$RegisterFormEventCopyWithImpl<$Res>
+    implements $ShowConfirmPressedCopyWith<$Res> {
+  _$ShowConfirmPressedCopyWithImpl(
+      ShowConfirmPressed _value, $Res Function(ShowConfirmPressed) _then)
+      : super(_value, (v) => _then(v as ShowConfirmPressed));
+
+  @override
+  ShowConfirmPressed get _value => super._value as ShowConfirmPressed;
+}
+
+/// @nodoc
+
+class _$ShowConfirmPressed implements ShowConfirmPressed {
+  const _$ShowConfirmPressed();
+
+  @override
+  String toString() {
+    return 'RegisterFormEvent.showConfirmPressed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is ShowConfirmPressed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String emailStr) emailChanged,
+    required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function(String confirmPasswordStr) confirmPasswordChanged,
+    required TResult Function(String userNameStr) userNameChanged,
+    required TResult Function(String teamNameStr) teamNameChanged,
+    required TResult Function(String countryStr) countryChanged,
+    required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
+    required TResult Function() registerUserPressed,
+  }) {
+    return showConfirmPressed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String emailStr)? emailChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function(String confirmPasswordStr)? confirmPasswordChanged,
+    TResult Function(String userNameStr)? userNameChanged,
+    TResult Function(String teamNameStr)? teamNameChanged,
+    TResult Function(String countryStr)? countryChanged,
+    TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
+    TResult Function()? registerUserPressed,
+  }) {
+    return showConfirmPressed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String emailStr)? emailChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function(String confirmPasswordStr)? confirmPasswordChanged,
+    TResult Function(String userNameStr)? userNameChanged,
+    TResult Function(String teamNameStr)? teamNameChanged,
+    TResult Function(String countryStr)? countryChanged,
+    TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
+    TResult Function()? registerUserPressed,
+    required TResult orElse(),
+  }) {
+    if (showConfirmPressed != null) {
+      return showConfirmPressed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmailChanged value) emailChanged,
+    required TResult Function(PasswordChanged value) passwordChanged,
+    required TResult Function(ConfirmPasswordChanged value)
+        confirmPasswordChanged,
+    required TResult Function(UserNameChanged value) userNameChanged,
+    required TResult Function(TeamNameChanged value) teamNameChanged,
+    required TResult Function(CountryChanged value) countryChanged,
+    required TResult Function(FavoriteEplTeamChanged value)
+        favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
+    required TResult Function(RegisterUserPressed value) registerUserPressed,
+  }) {
+    return showConfirmPressed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmailChanged value)? emailChanged,
+    TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ConfirmPasswordChanged value)? confirmPasswordChanged,
+    TResult Function(UserNameChanged value)? userNameChanged,
+    TResult Function(TeamNameChanged value)? teamNameChanged,
+    TResult Function(CountryChanged value)? countryChanged,
+    TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
+    TResult Function(RegisterUserPressed value)? registerUserPressed,
+  }) {
+    return showConfirmPressed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmailChanged value)? emailChanged,
+    TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(ConfirmPasswordChanged value)? confirmPasswordChanged,
+    TResult Function(UserNameChanged value)? userNameChanged,
+    TResult Function(TeamNameChanged value)? teamNameChanged,
+    TResult Function(CountryChanged value)? countryChanged,
+    TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
+    TResult Function(RegisterUserPressed value)? registerUserPressed,
+    required TResult orElse(),
+  }) {
+    if (showConfirmPressed != null) {
+      return showConfirmPressed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowConfirmPressed implements RegisterFormEvent {
+  const factory ShowConfirmPressed() = _$ShowConfirmPressed;
 }
 
 /// @nodoc
@@ -1426,6 +1840,8 @@ class _$RegisterUserPressed implements RegisterUserPressed {
     required TResult Function(String teamNameStr) teamNameChanged,
     required TResult Function(String countryStr) countryChanged,
     required TResult Function(String favoriteEplTeamStr) favoriteEplTeamChanged,
+    required TResult Function() showPressed,
+    required TResult Function() showConfirmPressed,
     required TResult Function() registerUserPressed,
   }) {
     return registerUserPressed();
@@ -1441,6 +1857,8 @@ class _$RegisterUserPressed implements RegisterUserPressed {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
   }) {
     return registerUserPressed?.call();
@@ -1456,6 +1874,8 @@ class _$RegisterUserPressed implements RegisterUserPressed {
     TResult Function(String teamNameStr)? teamNameChanged,
     TResult Function(String countryStr)? countryChanged,
     TResult Function(String favoriteEplTeamStr)? favoriteEplTeamChanged,
+    TResult Function()? showPressed,
+    TResult Function()? showConfirmPressed,
     TResult Function()? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -1477,6 +1897,8 @@ class _$RegisterUserPressed implements RegisterUserPressed {
     required TResult Function(CountryChanged value) countryChanged,
     required TResult Function(FavoriteEplTeamChanged value)
         favoriteEplTeamChanged,
+    required TResult Function(ShowPressed value) showPressed,
+    required TResult Function(ShowConfirmPressed value) showConfirmPressed,
     required TResult Function(RegisterUserPressed value) registerUserPressed,
   }) {
     return registerUserPressed(this);
@@ -1492,6 +1914,8 @@ class _$RegisterUserPressed implements RegisterUserPressed {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
   }) {
     return registerUserPressed?.call(this);
@@ -1507,6 +1931,8 @@ class _$RegisterUserPressed implements RegisterUserPressed {
     TResult Function(TeamNameChanged value)? teamNameChanged,
     TResult Function(CountryChanged value)? countryChanged,
     TResult Function(FavoriteEplTeamChanged value)? favoriteEplTeamChanged,
+    TResult Function(ShowPressed value)? showPressed,
+    TResult Function(ShowConfirmPressed value)? showConfirmPressed,
     TResult Function(RegisterUserPressed value)? registerUserPressed,
     required TResult orElse(),
   }) {
@@ -1535,8 +1961,9 @@ class _$RegisterFormStateTearOff {
       required FavoriteEplTeam favouriteEplTeam,
       required bool showErrorMessages,
       required bool isSubmitting,
-      required Option<Either<AuthFailure, User>> authFailureOrSuccessOption,
-      required Option<Either<AuthFailure, Password>> isMatch}) {
+      required bool showPass,
+      required bool showConfirmPass,
+      required Option<Either<AuthFailure, User>> authFailureOrSuccessOption}) {
     return _RegisterFormState(
       email: email,
       password: password,
@@ -1547,8 +1974,9 @@ class _$RegisterFormStateTearOff {
       favouriteEplTeam: favouriteEplTeam,
       showErrorMessages: showErrorMessages,
       isSubmitting: isSubmitting,
+      showPass: showPass,
+      showConfirmPass: showConfirmPass,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
-      isMatch: isMatch,
     );
   }
 }
@@ -1567,9 +1995,9 @@ mixin _$RegisterFormState {
   FavoriteEplTeam get favouriteEplTeam => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
+  bool get showPass => throw _privateConstructorUsedError;
+  bool get showConfirmPass => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, User>> get authFailureOrSuccessOption =>
-      throw _privateConstructorUsedError;
-  Option<Either<AuthFailure, Password>> get isMatch =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1592,8 +2020,9 @@ abstract class $RegisterFormStateCopyWith<$Res> {
       FavoriteEplTeam favouriteEplTeam,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthFailure, User>> authFailureOrSuccessOption,
-      Option<Either<AuthFailure, Password>> isMatch});
+      bool showPass,
+      bool showConfirmPass,
+      Option<Either<AuthFailure, User>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -1616,8 +2045,9 @@ class _$RegisterFormStateCopyWithImpl<$Res>
     Object? favouriteEplTeam = freezed,
     Object? showErrorMessages = freezed,
     Object? isSubmitting = freezed,
+    Object? showPass = freezed,
+    Object? showConfirmPass = freezed,
     Object? authFailureOrSuccessOption = freezed,
-    Object? isMatch = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed
@@ -1656,14 +2086,18 @@ class _$RegisterFormStateCopyWithImpl<$Res>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
+      showPass: showPass == freezed
+          ? _value.showPass
+          : showPass // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showConfirmPass: showConfirmPass == freezed
+          ? _value.showConfirmPass
+          : showConfirmPass // ignore: cast_nullable_to_non_nullable
+              as bool,
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<AuthFailure, User>>,
-      isMatch: isMatch == freezed
-          ? _value.isMatch
-          : isMatch // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, Password>>,
     ));
   }
 }
@@ -1685,8 +2119,9 @@ abstract class _$RegisterFormStateCopyWith<$Res>
       FavoriteEplTeam favouriteEplTeam,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthFailure, User>> authFailureOrSuccessOption,
-      Option<Either<AuthFailure, Password>> isMatch});
+      bool showPass,
+      bool showConfirmPass,
+      Option<Either<AuthFailure, User>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -1711,8 +2146,9 @@ class __$RegisterFormStateCopyWithImpl<$Res>
     Object? favouriteEplTeam = freezed,
     Object? showErrorMessages = freezed,
     Object? isSubmitting = freezed,
+    Object? showPass = freezed,
+    Object? showConfirmPass = freezed,
     Object? authFailureOrSuccessOption = freezed,
-    Object? isMatch = freezed,
   }) {
     return _then(_RegisterFormState(
       email: email == freezed
@@ -1751,14 +2187,18 @@ class __$RegisterFormStateCopyWithImpl<$Res>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
+      showPass: showPass == freezed
+          ? _value.showPass
+          : showPass // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showConfirmPass: showConfirmPass == freezed
+          ? _value.showConfirmPass
+          : showConfirmPass // ignore: cast_nullable_to_non_nullable
+              as bool,
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<AuthFailure, User>>,
-      isMatch: isMatch == freezed
-          ? _value.isMatch
-          : isMatch // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, Password>>,
     ));
   }
 }
@@ -1776,8 +2216,9 @@ class _$_RegisterFormState implements _RegisterFormState {
       required this.favouriteEplTeam,
       required this.showErrorMessages,
       required this.isSubmitting,
-      required this.authFailureOrSuccessOption,
-      required this.isMatch});
+      required this.showPass,
+      required this.showConfirmPass,
+      required this.authFailureOrSuccessOption});
 
   @override
   final EmailAddress email;
@@ -1798,13 +2239,15 @@ class _$_RegisterFormState implements _RegisterFormState {
   @override
   final bool isSubmitting;
   @override
-  final Option<Either<AuthFailure, User>> authFailureOrSuccessOption;
+  final bool showPass;
   @override
-  final Option<Either<AuthFailure, Password>> isMatch;
+  final bool showConfirmPass;
+  @override
+  final Option<Either<AuthFailure, User>> authFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'RegisterFormState(email: $email, password: $password, confirmPassword: $confirmPassword, userName: $userName, teamName: $teamName, country: $country, favouriteEplTeam: $favouriteEplTeam, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption, isMatch: $isMatch)';
+    return 'RegisterFormState(email: $email, password: $password, confirmPassword: $confirmPassword, userName: $userName, teamName: $teamName, country: $country, favouriteEplTeam: $favouriteEplTeam, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, showPass: $showPass, showConfirmPass: $showConfirmPass, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -1825,9 +2268,11 @@ class _$_RegisterFormState implements _RegisterFormState {
                 .equals(other.showErrorMessages, showErrorMessages) &&
             const DeepCollectionEquality()
                 .equals(other.isSubmitting, isSubmitting) &&
+            const DeepCollectionEquality().equals(other.showPass, showPass) &&
+            const DeepCollectionEquality()
+                .equals(other.showConfirmPass, showConfirmPass) &&
             const DeepCollectionEquality().equals(
-                other.authFailureOrSuccessOption, authFailureOrSuccessOption) &&
-            const DeepCollectionEquality().equals(other.isMatch, isMatch));
+                other.authFailureOrSuccessOption, authFailureOrSuccessOption));
   }
 
   @override
@@ -1842,8 +2287,9 @@ class _$_RegisterFormState implements _RegisterFormState {
       const DeepCollectionEquality().hash(favouriteEplTeam),
       const DeepCollectionEquality().hash(showErrorMessages),
       const DeepCollectionEquality().hash(isSubmitting),
-      const DeepCollectionEquality().hash(authFailureOrSuccessOption),
-      const DeepCollectionEquality().hash(isMatch));
+      const DeepCollectionEquality().hash(showPass),
+      const DeepCollectionEquality().hash(showConfirmPass),
+      const DeepCollectionEquality().hash(authFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
@@ -1853,18 +2299,19 @@ class _$_RegisterFormState implements _RegisterFormState {
 
 abstract class _RegisterFormState implements RegisterFormState {
   const factory _RegisterFormState(
-          {required EmailAddress email,
-          required Password password,
-          required Password confirmPassword,
-          required UserName userName,
-          required TeamName teamName,
-          required Country country,
-          required FavoriteEplTeam favouriteEplTeam,
-          required bool showErrorMessages,
-          required bool isSubmitting,
-          required Option<Either<AuthFailure, User>> authFailureOrSuccessOption,
-          required Option<Either<AuthFailure, Password>> isMatch}) =
-      _$_RegisterFormState;
+      {required EmailAddress email,
+      required Password password,
+      required Password confirmPassword,
+      required UserName userName,
+      required TeamName teamName,
+      required Country country,
+      required FavoriteEplTeam favouriteEplTeam,
+      required bool showErrorMessages,
+      required bool isSubmitting,
+      required bool showPass,
+      required bool showConfirmPass,
+      required Option<Either<AuthFailure, User>>
+          authFailureOrSuccessOption}) = _$_RegisterFormState;
 
   @override
   EmailAddress get email;
@@ -1885,9 +2332,11 @@ abstract class _RegisterFormState implements RegisterFormState {
   @override
   bool get isSubmitting;
   @override
-  Option<Either<AuthFailure, User>> get authFailureOrSuccessOption;
+  bool get showPass;
   @override
-  Option<Either<AuthFailure, Password>> get isMatch;
+  bool get showConfirmPass;
+  @override
+  Option<Either<AuthFailure, User>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$RegisterFormStateCopyWith<_RegisterFormState> get copyWith =>

@@ -23,11 +23,8 @@ class FixtureDetailLineUp extends StatelessWidget {
         homeTeamLineUpInfo['defenders'].isNotEmpty &&
         homeTeamLineUpInfo['midfielders'].isNotEmpty &&
         homeTeamLineUpInfo['strikers'].isNotEmpty &&
-        homeTeamLineUpInfo['bench'].isNotEmpty) {
-      isLineUpIn = true;
-    }
-
-    if (awayTeamLineUpInfo.isNotEmpty &&
+        homeTeamLineUpInfo['bench'].isNotEmpty &&
+        awayTeamLineUpInfo.isNotEmpty &&
         awayTeamLineUpInfo['defenders'].isNotEmpty &&
         awayTeamLineUpInfo['midfielders'].isNotEmpty &&
         awayTeamLineUpInfo['strikers'].isNotEmpty &&
@@ -48,23 +45,19 @@ class FixtureDetailLineUp extends StatelessWidget {
 
     return BlocProvider.value(
       value: getIt<FixtureBloc>(),
-      child: BlocConsumer<FixtureBloc, FixtureState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+      child: BlocBuilder<FixtureBloc, FixtureState>(
         builder: (context, state) {
           return Container(
             child: isLineUpIn == false
-                ? const SizedBox(
+                ? SizedBox(
                     height: 350,
                     child: Center(
                       child: Text(
                         "No Lineups yet",
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Architect",
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                     ),
                   )
@@ -86,12 +79,15 @@ class FixtureDetailLineUp extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           child: Column(
                             children: [
-                              const Text(
+                              Text(
                                 "GOALKEEPERS",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(
@@ -110,14 +106,28 @@ class FixtureDetailLineUp extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          homeTeamLineUp['goalkeepers'][index]
-                                                  ['playerName']
-                                              .toString(),
+                                          homeTeamLineUp.isEmpty ||
+                                                  homeTeamLineUp['defenders']
+                                                      .isEmpty
+                                              ? ""
+                                              : homeTeamLineUp['goalkeepers']
+                                                      [index]['playerName']
+                                                  .toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
                                         ),
                                         Text(
-                                          awayTeamLineUp['goalkeepers'][index]
-                                                  ['playerName']
-                                              .toString(),
+                                          awayTeamLineUp.isEmpty ||
+                                                  awayTeamLineUp['defenders']
+                                                      .isEmpty
+                                              ? ""
+                                              : awayTeamLineUp['goalkeepers']
+                                                      [index]['playerName']
+                                                  .toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
                                         )
                                       ],
                                     );
@@ -142,12 +152,15 @@ class FixtureDetailLineUp extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           child: Column(
                             children: [
-                              const Text(
+                              Text(
                                 "DEFENDERS",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 textAlign: TextAlign.center,
                               ),
                               Container(
@@ -176,6 +189,9 @@ class FixtureDetailLineUp extends StatelessWidget {
                                                         [index]['playerName']
                                                     .toString()
                                                 : "",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                           Text(
                                             awayTeamLineUp['defenders'].length -
@@ -185,6 +201,9 @@ class FixtureDetailLineUp extends StatelessWidget {
                                                         [index]['playerName']
                                                     .toString()
                                                 : "",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                         ],
                                       ),
@@ -204,18 +223,24 @@ class FixtureDetailLineUp extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                  width: 0.5, color: Colors.lightBlue.shade900),
+                                width: 0.5,
+                                color:
+                                    Colors.lightBlue.shade900.withOpacity(0.35),
+                              ),
                             ),
                           ),
                           width: MediaQuery.of(context).size.width,
                           child: Column(
                             children: [
-                              const Text(
+                              Text(
                                 "MIDFIELDERS",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 textAlign: TextAlign.center,
                               ),
                               Container(
@@ -245,6 +270,9 @@ class FixtureDetailLineUp extends StatelessWidget {
                                                         [index]['playerName']
                                                     .toString()
                                                 : "",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                           Text(
                                             awayTeamLineUp['midfielders']
@@ -255,6 +283,9 @@ class FixtureDetailLineUp extends StatelessWidget {
                                                         [index]['playerName']
                                                     .toString()
                                                 : "",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                         ],
                                       ),
@@ -280,12 +311,15 @@ class FixtureDetailLineUp extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           child: Column(
                             children: [
-                              const Text(
+                              Text(
                                 "ATTACKERS",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 textAlign: TextAlign.center,
                               ),
                               Container(
@@ -314,6 +348,9 @@ class FixtureDetailLineUp extends StatelessWidget {
                                                         [index]['playerName']
                                                     .toString()
                                                 : "",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                           Text(
                                             awayTeamLineUp['strikers'].length -
@@ -323,6 +360,9 @@ class FixtureDetailLineUp extends StatelessWidget {
                                                         [index]['playerName']
                                                     .toString()
                                                 : "",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                         ],
                                       ),
@@ -342,12 +382,15 @@ class FixtureDetailLineUp extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           child: Column(
                             children: [
-                              const Text(
+                              Text(
                                 "SUBSTITUTES",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 textAlign: TextAlign.center,
                               ),
                               Container(
@@ -376,6 +419,9 @@ class FixtureDetailLineUp extends StatelessWidget {
                                                         ['playerName']
                                                     .toString()
                                                 : "",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                           Text(
                                             awayTeamLineUp['bench'].length -
@@ -385,6 +431,9 @@ class FixtureDetailLineUp extends StatelessWidget {
                                                         ['playerName']
                                                     .toString()
                                                 : "",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                         ],
                                       ),
@@ -405,23 +454,23 @@ class FixtureDetailLineUp extends StatelessWidget {
                             border: Border(
                               top: BorderSide(
                                 width: 0.5,
-                                color: Colors.lightBlue.shade900,
-                              ),
-                              bottom: BorderSide(
-                                width: 0.5,
-                                color: Colors.lightBlue.shade900,
+                                color:
+                                    Colors.lightBlue.shade900.withOpacity(0.35),
                               ),
                             ),
                           ),
                           width: MediaQuery.of(context).size.width,
                           child: Column(
                             children: [
-                              const Text(
+                              Text(
                                 "COACHES",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 textAlign: TextAlign.center,
                               ),
                               Row(
@@ -431,10 +480,14 @@ class FixtureDetailLineUp extends StatelessWidget {
                                   Text(
                                     fixture.homeTeamCoach.value
                                         .fold((l) => '', (r) => r),
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
                                   ),
                                   Text(
                                     fixture.awayTeamCoach.value.fold((l) => '',
                                         (r) => r.isEmpty ? "---" : r),
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
                                   )
                                 ],
                               )
@@ -460,12 +513,33 @@ List<int> getPlayerCount({required Fixture fixture}) {
   Map<dynamic, dynamic> awayTeamLineUp =
       fixture.awayTeamLineUp.value.fold((l) => {}, (r) => r);
 
-  if (homeTeamLineUp.isNotEmpty && awayTeamLineUp.isNotEmpty) {
-    int maxGkCount = homeTeamLineUp['goalkeepers'].length >
-            awayTeamLineUp['goalkeepers'].length
-        ? homeTeamLineUp['goalkeepers'].length
-        : awayTeamLineUp['goalkeepers'].length;
+  print(awayTeamLineUp);
 
+  // no homeTeam
+  if (homeTeamLineUp['defenders'].isEmpty) {
+    finalCount = [
+      1,
+      awayTeamLineUp['defenders'].length,
+      awayTeamLineUp['midfielders'].length,
+      awayTeamLineUp['strikers'].length,
+      awayTeamLineUp['bench'].length
+    ];
+  }
+  // no away team
+  else if (awayTeamLineUp['defenders'].isEmpty) {
+    finalCount = [
+      1,
+      homeTeamLineUp['defenders'].length,
+      homeTeamLineUp['midfielders'].length,
+      homeTeamLineUp['strikers'].length,
+      homeTeamLineUp['bench'].length
+    ];
+  }
+  // both lineups
+  else if (homeTeamLineUp.isNotEmpty &&
+      awayTeamLineUp.isNotEmpty &&
+      homeTeamLineUp['defenders'].isNotEmpty &&
+      awayTeamLineUp['defenders'].isNotEmpty) {
     int maxDefCount =
         homeTeamLineUp['defenders'].length > awayTeamLineUp['defenders'].length
             ? homeTeamLineUp['defenders'].length
@@ -486,13 +560,7 @@ List<int> getPlayerCount({required Fixture fixture}) {
             ? homeTeamLineUp['bench'].length
             : awayTeamLineUp['bench'].length;
 
-    finalCount = [
-      maxGkCount,
-      maxDefCount,
-      maxMidCount,
-      maxAttCount,
-      maxBenchCount
-    ];
+    finalCount = [1, maxDefCount, maxMidCount, maxAttCount, maxBenchCount];
   }
 
   return finalCount;

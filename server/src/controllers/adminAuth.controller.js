@@ -34,7 +34,7 @@ const login = asyncHandler(async (req, res) => {
         },
         secretKey,
         {
-          expiresIn: "1h",
+          expiresIn: "8h",
         }
       );
 

@@ -559,15 +559,40 @@ const postponeFixture = asyncHandler(async function (req, res) {
 });
 
 const updateFixture = asyncHandler(async function (req, res) {
-  const { gameweekId, schedule, status, homeTeam, awayTeam } = req.body;
+  const { schedule, status, homeTeam, awayTeam } = req.body;
+
+  const scheduleCopy = schedule;
+
+  // get starting date
+  const formattedSchedule = scheduleCopy.split("T")[0] + "T00:00:00.000+00:00";
 
   const matchId = req.params.matchId;
 
   const match = await FixtureModel.findOne({ matchId });
 
+  const nextGameWeekFixture = await FixtureModel.findOne({
+    schedule: {
+      $gt: new Date(formattedSchedule),
+    },
+  }).sort("schedule");
+
+  let newGameWeekId = 1;
+
+  // no match found
+  if (!nextGameWeekFixture) {
+    newGameWeekId = 30;
+  }
+
+  //
+  else {
+    newGameWeekId = nextGameWeekFixture.gameweekId;
+  }
+
+  // console.log(startOfFixtureDay);
+
   if (match) {
     if (match.status === "scheduled") {
-      match.gameweekId = gameweekId ?? match.gameweekId;
+      match.gameweekId = newGameWeekId;
       match.matchId = matchId ?? match.matchId;
       match.schedule = schedule ?? match.schedule;
       match.status = status ?? match.status;
@@ -623,6 +648,14 @@ const updateStats = asyncHandler(async (req, res) => {
 
   const player = await Player.findOne({ playerId }).lean();
 
+  // match score update info
+  let homeTeamScore = 0;
+  const homeTeamName = match.homeTeam;
+  let awayTeamScore = 0;
+  const awayTeamName = match.awayTeam;
+
+  console.log(match.matchStat.goalsScored);
+
   if (match) {
     const { updatedMatch, updatedPlayer } = statUpdater({
       activeMatch: match,
@@ -638,10 +671,28 @@ const updateStats = asyncHandler(async (req, res) => {
       upsert: false,
     });
 
-    const io = require("../../server");
+    const matchGoals = match.matchStat.goalsScored;
+    for (const player in matchGoals) {
+      const playerTeamInfo = await Player.findOne({
+        playerId: player,
+      }).select("eplTeamId -_id");
 
-    // TODO:Handle on Frontend
+      if (playerTeamInfo.eplTeamId === homeTeamName) {
+        homeTeamScore = parseInt(homeTeamScore) + matchGoals[player].noOfGoals;
+      } else if (playerTeamInfo.eplTeamId === awayTeamName) {
+        awayTeamScore = parseInt(awayTeamScore) + matchGoals[player].noOfGoals;
+      }
+    }
+
+    match.score = `${homeTeamScore}v${awayTeamScore}`;
+    await FixtureModel.updateOne({ matchId: matchId }, match);
+
+    console.log(homeTeamScore, awayTeamScore);
+
+    // send socket update
+    const io = require("../../server");
     io.emit("fixtureStatUpdated");
+    io.emit("playerScoreUpdated");
 
     res.send("Match stats updated!");
   } else if (!match) {
@@ -651,32 +702,74 @@ const updateStats = asyncHandler(async (req, res) => {
   }
 });
 
-const updateScore = asyncHandler(async (req, res) => {
-  const matchId = req.params.matchId;
-  const { score } = req.body;
+// TODO:Remind got merged with save stats
+// const updateScore = asyncHandler(async (req, res) => {
+//   const matchId = req.params.matchId;
+//   // const { score } = req.body;
 
-  const match = await FixtureModel.findOne({ matchId });
+//   const match = await FixtureModel.findOne({ matchId }).lean();
 
-  if (match) {
-    if (!match.score) match.score = "0v0";
-    match.score = score;
+//   let homeTeamScore = match.score.split("v")[0];
+//   const homeTeamName = match.homeTeam;
 
-    await match.save();
+//   let awayTeamScore = match.score.split("v")[1];
+//   const awayTeamName = match.awayTeam;
 
-    const io = require("../../server");
+//   console.log(match.matchStat.goalsScored);
 
-    //  TODO:Handle on Frontend
-    io.emit("fixtureScoreUpdated");
+//   if (match) {
+//     // if (!match.score) match.score = "0v0";
+//     // match.score = score;
 
-    res.send("Match score updated!");
-  } else if (!match) {
-    res.status(404).send("Match doesn't exist!");
-  } else {
-    res.status(400).send("Match with provided matchid doesn't exist.");
+//     // await match.save();
+//     const matchGoals = match.matchStat.goalsScored;
+//     for (const player in matchGoals) {
+//       const playerTeamInfo = await Player.findOne({ playerId: player }).select(
+//         "eplTeamId -_id"
+//       );
+
+//       if (playerTeamInfo.eplTeamId === homeTeamName) {
+//         homeTeamScore = parseInt(homeTeamScore) + matchGoals[player].noOfGoals;
+//       } else if (playerTeamInfo.eplTeamId === awayTeamName) {
+//         awayTeamScore = parseInt(awayTeamScore) + matchGoals[player].noOfGoals;
+//       }
+//     }
+
+//     console.log(homeTeamScore, awayTeamScore);
+
+//     // send socket update
+//     const io = require("../../server");
+//     io.emit("fixtureScoreUpdated");
+
+//     res.send("Match score updated!");
+//   } else if (!match) {
+//     res.status(404).send("Match doesn't exist!");
+//   } else {
+//     res.status(400).send("Match with provided matchid doesn't exist.");
+//   }
+// });
+
+// get active gameweek to auto show fixtures in that gw initially
+const getActiveGameWeek = asyncHandler(async function (req, res) {
+  const activeGw = await GameWeek.find({ status: "active" }).select(
+    "-_id,-__v"
+  );
+
+  // if active gw exist
+  if (activeGw.length > 0) {
+    res.status(200).send(activeGw[activeGw.length - 1]);
+  }
+  // if no active gw
+  else {
+    res.status(200).send({
+      gameWeekNumber: 1,
+    });
   }
 });
 
 const getAllFixtures = asyncHandler(async function (req, res) {
+  // get required
+  // send active fixture
   const matches = await FixtureModel.find().select("-__v");
 
   res.status(200).send(matches);
@@ -799,9 +892,10 @@ module.exports = {
   updateFixture,
   updateLineup,
   updateStats,
-  updateScore,
+  // updateScore,
 
   // New
   getAllFixturesOfGameWeek,
   getFixtureDetail,
+  getActiveGameWeek,
 };

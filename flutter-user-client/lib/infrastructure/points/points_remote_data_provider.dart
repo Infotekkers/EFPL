@@ -121,16 +121,17 @@ class PointsInfoRemoteDataProvider {
 
       // 404
       else if (apiResponse.statusCode == 404) {
+        final parsedResponseBody = (jsonDecode(apiResponse.body));
         return left([
-          const PointsInfo(
+          PointsInfo(
             allPlayers: [],
             gameWeekId: 0,
             activeChip: '',
             deduction: 0,
             maxActiveCount: 1,
-            teamName: '',
+            teamName: parsedResponseBody['teamName'],
           ),
-          const PointFailure.unexpectedError(failedValue: "")
+          const PointFailure.noTeamSelected(failedValue: "")
         ]);
       }
 

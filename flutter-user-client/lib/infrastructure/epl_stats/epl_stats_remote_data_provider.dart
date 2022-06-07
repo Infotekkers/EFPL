@@ -25,10 +25,8 @@ class EPLStatsRemoteDataProvider {
 
       if (response.statusCode == 200) {
         final parsedResponseBody = jsonDecode(response.body);
-        // print(parsedResponseBody);
-        final EPLStatsDto eplStatDto = EPLStatsDto.fromJson(parsedResponseBody);
 
-        print(eplStatDto);
+        final EPLStatsDto eplStatDto = EPLStatsDto.fromJson(parsedResponseBody);
 
         return right(eplStatDto.toDomain());
       }

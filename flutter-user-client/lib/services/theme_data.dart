@@ -17,10 +17,7 @@ ThemeData lightTheme = ThemeData(
 
   // text styles
   textTheme: const TextTheme(
-    headline1: TextStyle(
-      fontSize: 72.0,
-      fontWeight: FontWeight.bold,
-      color: Colors.pink,
+    bodyText1: TextStyle(
       fontFamily: "Architect",
     ),
   ),

@@ -1,7 +1,10 @@
 import 'package:efpl/application/auth/request_reset_form/request_reset_form_bloc.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RequestResetForm extends StatelessWidget {
   const RequestResetForm({Key? key}) : super(key: key);
@@ -78,10 +81,10 @@ class RequestResetForm extends StatelessWidget {
           autovalidateMode: AutovalidateMode.always,
           child: Column(
             children: [
-              const Text(
-                'Input your email so we can send reset your password',
+              Text(
+                AppLocalizations.of(context)!.resetInfoLine,
                 // textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   // fontWeight: FontWeight.bold,
                 ),
@@ -91,15 +94,19 @@ class RequestResetForm extends StatelessWidget {
               ),
               TextFormField(
                 key: const ValueKey("requestPageUserName"),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.email),
-                  labelText: 'Email',
-                  focusedBorder: OutlineInputBorder(
+                  labelText: AppLocalizations.of(context)!.email,
+                  labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        color: ConstantColors.primary_900.withOpacity(0.55),
+                      ),
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: ConstantColors.primary_900,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     vertical: 0.0,
                     horizontal: 15.0,
                   ),
@@ -135,7 +142,7 @@ class RequestResetForm extends StatelessWidget {
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 40,
+                  height: 42,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(5),
@@ -144,16 +151,16 @@ class RequestResetForm extends StatelessWidget {
                       bottomLeft: Radius.circular(5),
                     ),
                     // color: Colors.amber,
-                    color: Colors.blue,
+                    color: ConstantColors.primary_900,
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Reset Password',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.25,
-                      ),
+                      AppLocalizations.of(context)!.resetPassword,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.25,
+                          ),
                     ),
                   ),
                 ),

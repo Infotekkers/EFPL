@@ -1,9 +1,11 @@
 import 'package:efpl/application/auth/request_reset_form/request_reset_form_bloc.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/authentication/request_reset/widgets/request_reset_form.dart';
+import 'package:efpl/presentation/core/auth_locale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../injectable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RequestResetPage extends StatefulWidget {
   const RequestResetPage({Key? key}) : super(key: key);
@@ -18,59 +20,57 @@ class _RequestResetPageState extends State<RequestResetPage> {
     return Scaffold(
       body: BlocProvider(
         create: (context) => getIt<RequestResetFormBloc>(),
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.height * 0.6,
                 width: MediaQuery.of(context).size.width,
                 child: Image.asset(
-                  'assets/img/King Of Kings 05 - 16x9.jpg',
+                  'assets/images/main-bg.jpg',
                   fit: BoxFit.fill,
                 ),
               ),
               Positioned(
                 top: 0,
                 left: 0,
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.6,
-                  width: MediaQuery.of(context).size.width,
-                  child: Wrap(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        width: MediaQuery.of(context).size.width * 0.75,
-                        height: MediaQuery.of(context).size.height * 0.6,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              "A new way to enjoy the EPL.",
-                              style: TextStyle(
-                                height: 1.15,
-                                fontSize: 26,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 26,
-                            ),
-                            Text(
-                              "Join our community",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
+                child: Wrap(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      height: MediaQuery.of(context).size.height * 0.6,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.appSloganMain,
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      height: 1.15,
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                          ),
+                          const SizedBox(
+                            height: 26,
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.appSloganSub,
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                    ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               Positioned(
@@ -90,23 +90,30 @@ class _RequestResetPageState extends State<RequestResetPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          "Reset Password",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                          ),
+                          AppLocalizations.of(context)!.resetPassword,
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18,
+                                  ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
-                        RequestResetForm()
+                        const RequestResetForm()
                       ],
                     ),
                   ),
                 ),
+              ),
+              // LOCALE BUTTON
+              const Positioned(
+                right: 10,
+                bottom: 10,
+                child: AuthLocaleWidget(),
               )
             ],
           ),

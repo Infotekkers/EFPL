@@ -12,8 +12,9 @@ abstract class RegisterFormState with _$RegisterFormState {
     required FavoriteEplTeam favouriteEplTeam,
     required bool showErrorMessages,
     required bool isSubmitting,
+    required bool showPass,
+    required bool showConfirmPass,
     required Option<Either<AuthFailure, User>> authFailureOrSuccessOption,
-    required Option<Either<AuthFailure, Password>> isMatch,
   }) = _RegisterFormState;
 
   factory RegisterFormState.initial() => RegisterFormState(
@@ -26,7 +27,8 @@ abstract class RegisterFormState with _$RegisterFormState {
         favouriteEplTeam: FavoriteEplTeam("Saint George S.C"),
         showErrorMessages: false,
         isSubmitting: false,
+        showPass: false,
+        showConfirmPass: false,
         authFailureOrSuccessOption: none(),
-        isMatch: none(),
       );
 }

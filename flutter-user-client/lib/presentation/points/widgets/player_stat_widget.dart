@@ -5,11 +5,13 @@ class PlayerStatDisplay extends StatelessWidget {
   final String statisticName;
   final int statisticValue;
   final int statisticPoint;
+  final bool isColored;
   const PlayerStatDisplay({
     Key? key,
     required this.statisticName,
     required this.statisticValue,
     required this.statisticPoint,
+    this.isColored = false,
   }) : super(key: key);
 
   @override
@@ -17,13 +19,16 @@ class PlayerStatDisplay extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       width: double.infinity,
-      height: 25,
+      height: 30,
       child: Center(
         child: Row(
           children: [
             // STATISTICS
             SizedBox(
-              child: Text(statisticName),
+              child: Text(
+                statisticName,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
               width: MediaQuery.of(context).size.width * 0.5 - 10,
             ),
 
@@ -32,6 +37,7 @@ class PlayerStatDisplay extends StatelessWidget {
               child: Text(
                 statisticValue.toString(),
                 textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
               width: MediaQuery.of(context).size.width * 0.25 - 10,
             ),
@@ -41,6 +47,7 @@ class PlayerStatDisplay extends StatelessWidget {
               child: Text(
                 statisticPoint.toString(),
                 textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
               width: MediaQuery.of(context).size.width * 0.25 - 10,
             ),
@@ -50,10 +57,11 @@ class PlayerStatDisplay extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: 0.5,
+            width: 0.25,
             color: ConstantColors.primary_900.withOpacity(0.5),
           ),
         ),
+        color: isColored == true ? Colors.green[50] : Colors.white,
       ),
     );
   }
