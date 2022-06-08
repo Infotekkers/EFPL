@@ -10,4 +10,6 @@ class CustomLeaguesState with _$CustomLeaguesState {
       CustomLeaguesInfo customLeaguesInfo) = _LoadCustomLeagueInfoSuccess;
   const factory CustomLeaguesState.loadFailure(CustomLeaguesFailures failure) =
       _LoadFailure;
+  const factory CustomLeaguesState.createLeagueSuccess(
+      CustomLeaguesInfo customLeaguesInfo) = _CreateLeagueSuccess;
 }

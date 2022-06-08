@@ -10,7 +10,7 @@ class AppRouter {
   // ignore: unused_field
   final CustomLeaguesBloc _customLeaguesBloc = getIt<CustomLeaguesBloc>()
     ..add(const CustomLeaguesEvent.getUserCustomLeagues(
-        userId: '628a258d9c666191581a83f9'));
+        userId: '62960c04c1a572a276b6e08b'));
 
   Map<String, Widget Function(BuildContext)> allRoutes = {
     "/": (context) => const SplashView(),

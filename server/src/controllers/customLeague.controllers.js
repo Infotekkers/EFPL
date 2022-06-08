@@ -18,6 +18,10 @@ const getUserCustomLeagues = asyncHandler(async function (req, res) {
 
   const user = await UserModel.findOne({ _id: userId });
 
+  if (!user) {
+    return res.status(400).send("Couldn't find a user with the provided ID!");
+  }
+
   res.json(user.fantasyLeagues);
 });
 
@@ -53,7 +57,11 @@ const createCustomLeague = asyncHandler(async function (req, res) {
 
   await user.save();
 
-  res.send(`Custom league '${leagueName}' created!`);
+  res.send({
+    message: `Custom league '${leagueName}' created!`,
+    leagueCode: createdLeague.leagueCode,
+    leagueId: createdLeague.leagueId,
+  });
 });
 
 // TODO: remove custom league from player's lists or mark as deleted
