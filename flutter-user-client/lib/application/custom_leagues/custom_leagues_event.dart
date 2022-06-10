@@ -7,9 +7,6 @@ class CustomLeaguesEvent with _$CustomLeaguesEvent {
   const factory CustomLeaguesEvent.getCustomLeagueInfo(
       {required int leagueId}) = _GetCustomLeagueInfo;
 
-  const factory CustomLeaguesEvent.createLeague({required String leagueName}) =
-      _CreateLeague;
-
   const factory CustomLeaguesEvent.joinPublicLeague({required int leagueId}) =
       _JoinPublicLeague;
   const factory CustomLeaguesEvent.joinPrivateLeague(

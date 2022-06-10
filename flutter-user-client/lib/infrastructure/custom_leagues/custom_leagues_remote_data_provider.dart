@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
+import 'package:efpl/domain/custom_leagues/value_objects.dart';
 import 'package:efpl/infrastructure/custom_leagues/custom_leagues_dto.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues_failures.dart';
 import 'package:efpl/injectable.dart';
@@ -55,6 +56,32 @@ class CustomLeaguesRemoteDataProvider {
     try {
       var apiResponse = await instance.client
           .get(Uri.parse('$_baseURL/customLeagues/$leagueId'));
+
+      if (apiResponse.statusCode == 200) {
+        final parsedResponseBody = jsonDecode(apiResponse.body);
+
+        final CustomLeagueInfoDTO customLeagueInfoDTO =
+            CustomLeagueInfoDTO.fromJson(parsedResponseBody);
+
+        return right(customLeagueInfoDTO.toDomain());
+      }
+    } catch (e) {
+      return left(const CustomLeaguesFailures.serverError());
+    }
+
+    return left(const CustomLeaguesFailures.networkError());
+  }
+
+  Future<Either<dynamic, CustomLeaguesInfo>> createCustomLeague({
+    required AdminId userId,
+    required LeagueName leagueName,
+  }) async {
+    try {
+      var apiResponse = await instance.client.post(
+          Uri.parse('$_baseURL/customLeagues/create'),
+          body: {userId, leagueName});
+
+      print(apiResponse.body);
 
       if (apiResponse.statusCode == 200) {
         final parsedResponseBody = jsonDecode(apiResponse.body);

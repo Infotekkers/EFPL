@@ -29,12 +29,6 @@ class _$CustomLeaguesEventTearOff {
     );
   }
 
-  _CreateLeague createLeague({required String leagueName}) {
-    return _CreateLeague(
-      leagueName: leagueName,
-    );
-  }
-
   _JoinPublicLeague joinPublicLeague({required int leagueId}) {
     return _JoinPublicLeague(
       leagueId: leagueId,
@@ -57,7 +51,6 @@ mixin _$CustomLeaguesEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getUserCustomLeagues,
     required TResult Function(int leagueId) getCustomLeagueInfo,
-    required TResult Function(String leagueName) createLeague,
     required TResult Function(int leagueId) joinPublicLeague,
     required TResult Function(String leagueCode) joinPrivateLeague,
   }) =>
@@ -66,7 +59,6 @@ mixin _$CustomLeaguesEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
     TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
     TResult Function(int leagueId)? joinPublicLeague,
     TResult Function(String leagueCode)? joinPrivateLeague,
   }) =>
@@ -75,7 +67,6 @@ mixin _$CustomLeaguesEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
     TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
     TResult Function(int leagueId)? joinPublicLeague,
     TResult Function(String leagueCode)? joinPrivateLeague,
     required TResult orElse(),
@@ -85,7 +76,6 @@ mixin _$CustomLeaguesEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
     required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_CreateLeague value) createLeague,
     required TResult Function(_JoinPublicLeague value) joinPublicLeague,
     required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
   }) =>
@@ -94,7 +84,6 @@ mixin _$CustomLeaguesEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
     TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
     TResult Function(_JoinPublicLeague value)? joinPublicLeague,
     TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
   }) =>
@@ -103,7 +92,6 @@ mixin _$CustomLeaguesEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
     TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
     TResult Function(_JoinPublicLeague value)? joinPublicLeague,
     TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
     required TResult orElse(),
@@ -196,7 +184,6 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getUserCustomLeagues,
     required TResult Function(int leagueId) getCustomLeagueInfo,
-    required TResult Function(String leagueName) createLeague,
     required TResult Function(int leagueId) joinPublicLeague,
     required TResult Function(String leagueCode) joinPrivateLeague,
   }) {
@@ -208,7 +195,6 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
     TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
     TResult Function(int leagueId)? joinPublicLeague,
     TResult Function(String leagueCode)? joinPrivateLeague,
   }) {
@@ -220,7 +206,6 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
     TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
     TResult Function(int leagueId)? joinPublicLeague,
     TResult Function(String leagueCode)? joinPrivateLeague,
     required TResult orElse(),
@@ -236,7 +221,6 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
     required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_CreateLeague value) createLeague,
     required TResult Function(_JoinPublicLeague value) joinPublicLeague,
     required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
   }) {
@@ -248,7 +232,6 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
     TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
     TResult Function(_JoinPublicLeague value)? joinPublicLeague,
     TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
   }) {
@@ -260,7 +243,6 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
     TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
     TResult Function(_JoinPublicLeague value)? joinPublicLeague,
     TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
     required TResult orElse(),
@@ -350,7 +332,6 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getUserCustomLeagues,
     required TResult Function(int leagueId) getCustomLeagueInfo,
-    required TResult Function(String leagueName) createLeague,
     required TResult Function(int leagueId) joinPublicLeague,
     required TResult Function(String leagueCode) joinPrivateLeague,
   }) {
@@ -362,7 +343,6 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
     TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
     TResult Function(int leagueId)? joinPublicLeague,
     TResult Function(String leagueCode)? joinPrivateLeague,
   }) {
@@ -374,7 +354,6 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
     TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
     TResult Function(int leagueId)? joinPublicLeague,
     TResult Function(String leagueCode)? joinPrivateLeague,
     required TResult orElse(),
@@ -390,7 +369,6 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
     required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_CreateLeague value) createLeague,
     required TResult Function(_JoinPublicLeague value) joinPublicLeague,
     required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
   }) {
@@ -402,7 +380,6 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
     TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
     TResult Function(_JoinPublicLeague value)? joinPublicLeague,
     TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
   }) {
@@ -414,7 +391,6 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
     TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
     TResult Function(_JoinPublicLeague value)? joinPublicLeague,
     TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
     required TResult orElse(),
@@ -433,159 +409,6 @@ abstract class _GetCustomLeagueInfo implements CustomLeaguesEvent {
   int get leagueId;
   @JsonKey(ignore: true)
   _$GetCustomLeagueInfoCopyWith<_GetCustomLeagueInfo> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$CreateLeagueCopyWith<$Res> {
-  factory _$CreateLeagueCopyWith(
-          _CreateLeague value, $Res Function(_CreateLeague) then) =
-      __$CreateLeagueCopyWithImpl<$Res>;
-  $Res call({String leagueName});
-}
-
-/// @nodoc
-class __$CreateLeagueCopyWithImpl<$Res>
-    extends _$CustomLeaguesEventCopyWithImpl<$Res>
-    implements _$CreateLeagueCopyWith<$Res> {
-  __$CreateLeagueCopyWithImpl(
-      _CreateLeague _value, $Res Function(_CreateLeague) _then)
-      : super(_value, (v) => _then(v as _CreateLeague));
-
-  @override
-  _CreateLeague get _value => super._value as _CreateLeague;
-
-  @override
-  $Res call({
-    Object? leagueName = freezed,
-  }) {
-    return _then(_CreateLeague(
-      leagueName: leagueName == freezed
-          ? _value.leagueName
-          : leagueName // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_CreateLeague implements _CreateLeague {
-  const _$_CreateLeague({required this.leagueName});
-
-  @override
-  final String leagueName;
-
-  @override
-  String toString() {
-    return 'CustomLeaguesEvent.createLeague(leagueName: $leagueName)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _CreateLeague &&
-            const DeepCollectionEquality()
-                .equals(other.leagueName, leagueName));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(leagueName));
-
-  @JsonKey(ignore: true)
-  @override
-  _$CreateLeagueCopyWith<_CreateLeague> get copyWith =>
-      __$CreateLeagueCopyWithImpl<_CreateLeague>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) getUserCustomLeagues,
-    required TResult Function(int leagueId) getCustomLeagueInfo,
-    required TResult Function(String leagueName) createLeague,
-    required TResult Function(int leagueId) joinPublicLeague,
-    required TResult Function(String leagueCode) joinPrivateLeague,
-  }) {
-    return createLeague(leagueName);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userId)? getUserCustomLeagues,
-    TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
-    TResult Function(int leagueId)? joinPublicLeague,
-    TResult Function(String leagueCode)? joinPrivateLeague,
-  }) {
-    return createLeague?.call(leagueName);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? getUserCustomLeagues,
-    TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
-    TResult Function(int leagueId)? joinPublicLeague,
-    TResult Function(String leagueCode)? joinPrivateLeague,
-    required TResult orElse(),
-  }) {
-    if (createLeague != null) {
-      return createLeague(leagueName);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
-    required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_CreateLeague value) createLeague,
-    required TResult Function(_JoinPublicLeague value) joinPublicLeague,
-    required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
-  }) {
-    return createLeague(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
-  }) {
-    return createLeague?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
-    required TResult orElse(),
-  }) {
-    if (createLeague != null) {
-      return createLeague(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _CreateLeague implements CustomLeaguesEvent {
-  const factory _CreateLeague({required String leagueName}) = _$_CreateLeague;
-
-  String get leagueName;
-  @JsonKey(ignore: true)
-  _$CreateLeagueCopyWith<_CreateLeague> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -656,7 +479,6 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getUserCustomLeagues,
     required TResult Function(int leagueId) getCustomLeagueInfo,
-    required TResult Function(String leagueName) createLeague,
     required TResult Function(int leagueId) joinPublicLeague,
     required TResult Function(String leagueCode) joinPrivateLeague,
   }) {
@@ -668,7 +490,6 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
     TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
     TResult Function(int leagueId)? joinPublicLeague,
     TResult Function(String leagueCode)? joinPrivateLeague,
   }) {
@@ -680,7 +501,6 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
     TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
     TResult Function(int leagueId)? joinPublicLeague,
     TResult Function(String leagueCode)? joinPrivateLeague,
     required TResult orElse(),
@@ -696,7 +516,6 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
     required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_CreateLeague value) createLeague,
     required TResult Function(_JoinPublicLeague value) joinPublicLeague,
     required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
   }) {
@@ -708,7 +527,6 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
     TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
     TResult Function(_JoinPublicLeague value)? joinPublicLeague,
     TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
   }) {
@@ -720,7 +538,6 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
     TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
     TResult Function(_JoinPublicLeague value)? joinPublicLeague,
     TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
     required TResult orElse(),
@@ -810,7 +627,6 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getUserCustomLeagues,
     required TResult Function(int leagueId) getCustomLeagueInfo,
-    required TResult Function(String leagueName) createLeague,
     required TResult Function(int leagueId) joinPublicLeague,
     required TResult Function(String leagueCode) joinPrivateLeague,
   }) {
@@ -822,7 +638,6 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
     TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
     TResult Function(int leagueId)? joinPublicLeague,
     TResult Function(String leagueCode)? joinPrivateLeague,
   }) {
@@ -834,7 +649,6 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getUserCustomLeagues,
     TResult Function(int leagueId)? getCustomLeagueInfo,
-    TResult Function(String leagueName)? createLeague,
     TResult Function(int leagueId)? joinPublicLeague,
     TResult Function(String leagueCode)? joinPrivateLeague,
     required TResult orElse(),
@@ -850,7 +664,6 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
     required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_CreateLeague value) createLeague,
     required TResult Function(_JoinPublicLeague value) joinPublicLeague,
     required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
   }) {
@@ -862,7 +675,6 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
     TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
     TResult Function(_JoinPublicLeague value)? joinPublicLeague,
     TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
   }) {
@@ -874,7 +686,6 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
     TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_CreateLeague value)? createLeague,
     TResult Function(_JoinPublicLeague value)? joinPublicLeague,
     TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
     required TResult orElse(),

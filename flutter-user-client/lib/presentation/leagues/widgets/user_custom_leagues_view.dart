@@ -136,25 +136,44 @@ class UserCustomLeaguesView extends StatelessWidget {
       context: context,
       builder: (builder) {
         return Form(
-          child: Column(
-            children: [
-              TextFormField(
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  // prefixIcon: Icon(Icons.email),
-                  labelText: "League Name",
-                  labelStyle: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(fontSize: 18),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 0.0,
-                    horizontal: 15.0,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFormField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    labelText: "League Name",
+                    labelStyle: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .copyWith(fontSize: 18),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 0.0,
+                      horizontal: 15.0,
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueAccent,
+                      ),
+                    ),
                   ),
+                  autocorrect: false,
                 ),
-                autocorrect: false,
-              ),
-            ],
+                ElevatedButton(
+                  onPressed: () {
+                    print("pressed");
+                    // BlocProvider.of<CustomLeaguesBloc>(context).add(
+                    //   // const CustomLeaguesEvent.createLeague(
+                    //   //   leagueName: "",
+                    //   ),
+                    // );
+                  },
+                  child: const Text("Create"),
+                )
+              ],
+            ),
           ),
         );
       },

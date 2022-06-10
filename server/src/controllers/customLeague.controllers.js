@@ -57,11 +57,7 @@ const createCustomLeague = asyncHandler(async function (req, res) {
 
   await user.save();
 
-  res.send({
-    message: `Custom league '${leagueName}' created!`,
-    leagueCode: createdLeague.leagueCode,
-    leagueId: createdLeague.leagueId,
-  });
+  res.send(createdLeague);
 });
 
 // TODO: remove custom league from player's lists or mark as deleted

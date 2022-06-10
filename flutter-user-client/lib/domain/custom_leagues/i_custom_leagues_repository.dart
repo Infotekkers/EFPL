@@ -8,4 +8,8 @@ abstract class ICustomLeaguesRepository {
   Future<Either<dynamic, CustomLeaguesInfo>> getCustomLeagueInfo({
     required int leagueId,
   });
+  Future<Either<dynamic, CustomLeaguesInfo>> createCustomLeague({
+    required String userId,
+    required String leagueName,
+  });
 }
