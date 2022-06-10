@@ -6,7 +6,7 @@ router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.get("/fetchAll", userController.fetchUsers);
 router.get("/fetchOne/:id", userController.fetchOneUser);
-router.get("/fetchUserTeam/:id/:gw", userController.fetchUserTeam);
+router.get("/fetchUserTeam/:gw", userController.fetchUserTeam);
 router.patch("/updateUser/:id", userController.updateUser);
 router.patch("/deleteUser/:id", userController.deleteUser);
 router.post("/requestReset", userController.requestReset);

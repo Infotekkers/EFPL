@@ -15,10 +15,8 @@ class MyTeamRemoteDataProvider {
 
   MyTeamRemoteDataProvider();
 
-  Future<Either<MyTeamFailure, MyTeam>> getUserTeam(
-      String userId, String gameweekId) async {
-    final Uri url =
-        Uri.parse("$_baseUrl/user/fetchUserTeam/$userId/$gameweekId");
+  Future<Either<MyTeamFailure, MyTeam>> getUserTeam(String gameweekId) async {
+    final Uri url = Uri.parse("$_baseUrl/user/fetchUserTeam/$gameweekId");
 
     try {
       final response = await client!.get(url);
@@ -39,15 +37,13 @@ class MyTeamRemoteDataProvider {
     }
   }
 
-  Future<Either<MyTeamFailure, Unit>> saveUserTeam(
-      MyTeam myTeam, String userId) async {
+  Future<Either<MyTeamFailure, Unit>> saveUserTeam(MyTeam myTeam) async {
     final Uri url = Uri.parse("$_baseUrl/user/transfer");
 
     MyTeamDto myTeamDto = MyTeamDto.fromDomain(myTeam);
     myTeamDto = declassifyPlayers(myTeamDto);
 
     final outgoingJson = jsonEncode({
-      "userId": userId,
       "data": {
         "incomingTeam": myTeamDto.toJson(),
         "isSetTeam": true,

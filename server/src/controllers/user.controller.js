@@ -113,7 +113,10 @@ const fetchUsers = asyncHandler(async (req, res) => {
 });
 
 const fetchOneUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+  const userId = token.data;
+
+  const user = await User.findById(userId);
   if (user == null) {
     return res.status(404).json({ message: "No user found" });
   }

@@ -29,9 +29,7 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
   void _onLoadMyTeam(_LoadMyTeam e, Emitter<MyTeamState> emit) async {
     emit(const MyTeamState.loadInProgress());
 
-    final failureOrSuccess =
-        await iMyTeamRepository.getUserTeam(e.userId, e.gameweekId);
-    print(failureOrSuccess);
+    final failureOrSuccess = await iMyTeamRepository.getUserTeam(e.gameweekId);
 
     failureOrSuccess.fold(
       (failure) => emit(
@@ -302,8 +300,7 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
 
   void _onSaveMyTeam(_SaveMyTeam e, Emitter<MyTeamState> emit) async {
     emit(const MyTeamState.loadInProgress());
-    final failureOrSuccess =
-        await iMyTeamRepository.saveUserTeam(e.myTeam, e.userId);
+    final failureOrSuccess = await iMyTeamRepository.saveUserTeam(e.myTeam);
 
     if (failureOrSuccess.fold(
       (failure) => false,

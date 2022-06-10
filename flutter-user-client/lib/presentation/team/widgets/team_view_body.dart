@@ -60,9 +60,8 @@ class TeamViewBody extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32.0),
                   child: OutlinedButton(
-                    onPressed: () => BlocProvider.of<MyTeamBloc>(context).add(
-                        const MyTeamEvent.loadMyTeam(
-                            "6296348d988244c442925ee9", "1")),
+                    onPressed: () => BlocProvider.of<MyTeamBloc>(context)
+                        .add(const MyTeamEvent.loadMyTeam("1")),
                     style: OutlinedButton.styleFrom(
                       primary: Colors.white,
                       backgroundColor: Colors.blue[400],
@@ -240,9 +239,8 @@ class TeamViewBody extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () => changed
-                  ? BlocProvider.of<MyTeamBloc>(context).add(
-                      const MyTeamEvent.loadMyTeam(
-                          "6296348d988244c442925ee9", "1"))
+                  ? BlocProvider.of<MyTeamBloc>(context)
+                      .add(const MyTeamEvent.loadMyTeam("1"))
                   : null,
               style: TextButton.styleFrom(
                   primary: changed ? Colors.red[400] : Colors.grey),
@@ -250,9 +248,8 @@ class TeamViewBody extends StatelessWidget {
             ),
             OutlinedButton(
               onPressed: () => changed
-                  ? BlocProvider.of<MyTeamBloc>(context).add(
-                      MyTeamEvent.saveMyTeam(
-                          state.myTeam, '6296348d988244c442925ee9'))
+                  ? BlocProvider.of<MyTeamBloc>(context)
+                      .add(MyTeamEvent.saveMyTeam(state.myTeam))
                   : null,
               style: OutlinedButton.styleFrom(
                 primary: changed ? Colors.white : Colors.grey[500],
