@@ -29,6 +29,8 @@ class MyTeamRemoteDataProvider {
         myTeamDto = classifyPlayers(myTeamDto);
 
         return right(myTeamDto.toDomain());
+      } else if (response.statusCode == 403) {
+        return left(const MyTeamFailure.authError());
       }
 
       return left(const MyTeamFailure.serverError());

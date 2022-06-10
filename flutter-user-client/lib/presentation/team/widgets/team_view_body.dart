@@ -1,4 +1,5 @@
 import 'package:efpl/application/my_team/myteam_bloc.dart';
+import 'package:efpl/presentation/core/widgets/auth_problem_widget.dart';
 import 'package:efpl/presentation/core/widgets/bouncing_ball_loading_indicator.dart';
 import 'package:efpl/presentation/core/widgets/no_connection_widget.dart';
 import 'package:efpl/presentation/team/widgets/chips_dialog.dart';
@@ -27,27 +28,50 @@ class TeamViewBody extends StatelessWidget {
       },
       builder: (context, state) => state.map(
         initial: (_) => Container(),
-        loadFailure: (_) => Transform.scale(
-          scale: 0.8,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const NoConnectionWidget(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: OutlinedButton(
-                  onPressed: () => BlocProvider.of<MyTeamBloc>(context).add(
-                      const MyTeamEvent.loadMyTeam(
-                          "6296348d988244c442925ee9", "1")),
-                  style: OutlinedButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Colors.blue[400],
+        loadFailure: (state) => state.myTeamFailure.maybeMap(
+          authError: (_) => Transform.scale(
+            scale: 0.8,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const AuthProblemWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.of(context).pushNamed("/"),
+                    style: OutlinedButton.styleFrom(
+                      primary: Colors.white,
+                      backgroundColor: Colors.blue[400],
+                    ),
+                    child: Text(strings(context).login),
                   ),
-                  child: Text(strings(context).retry),
                 ),
-              ),
-            ],
+              ],
+            ),
+          ),
+          orElse: () => Transform.scale(
+            scale: 0.8,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const NoConnectionWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                  child: OutlinedButton(
+                    onPressed: () => BlocProvider.of<MyTeamBloc>(context).add(
+                        const MyTeamEvent.loadMyTeam(
+                            "6296348d988244c442925ee9", "1")),
+                    style: OutlinedButton.styleFrom(
+                      primary: Colors.white,
+                      backgroundColor: Colors.blue[400],
+                    ),
+                    child: Text(strings(context).retry),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         loadInProgress: (_) => const BouncingBallLoadingIndicator(),
