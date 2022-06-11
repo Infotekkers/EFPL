@@ -5,6 +5,7 @@ import 'package:efpl/presentation/core/widgets/no_connection_widget.dart';
 import 'package:efpl/presentation/team/widgets/chips_dialog.dart';
 import 'package:efpl/presentation/team/widgets/positional_container_widget.dart';
 import 'package:efpl/services/global_vars.dart';
+import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,12 +18,20 @@ class TeamViewBody extends StatelessWidget {
       listener: (_, state) => {
         state.maybeMap(
             loadFailure: (state) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(strings(context).checkConn)));
+              CustomSnackBar().showCustomSnackBar(
+                showContext: context,
+                headlineText: 'Error',
+                message: strings(context).checkConn,
+                snackBarType: "warning",
+              );
             },
             saved: (state) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(strings(context).teamSaved)));
+              CustomSnackBar().showCustomSnackBar(
+                showContext: context,
+                headlineText: 'Success',
+                message: strings(context).teamSaved,
+                snackBarType: "success",
+              );
             },
             orElse: () {})
       },

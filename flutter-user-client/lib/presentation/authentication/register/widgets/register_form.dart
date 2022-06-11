@@ -42,7 +42,7 @@ class RegisterForm extends StatelessWidget {
                     CustomSnackBar().showCustomSnackBar(
                       showContext: context,
                       headlineText: "Cancellation!",
-                      message: "Process Cancelled by USer",
+                      message: "Process Cancelled by User",
                       snackBarType: "warning",
                     );
                   },
@@ -50,7 +50,7 @@ class RegisterForm extends StatelessWidget {
                     CustomSnackBar().showCustomSnackBar(
                       showContext: context,
                       headlineText: "Credential Issue",
-                      message: "Email Alrady In Use",
+                      message: "Email Already In Use",
                       snackBarType: "warning",
                     );
                   },

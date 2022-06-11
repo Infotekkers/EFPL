@@ -3,13 +3,14 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/my_team_failures.dart';
 import 'package:efpl/infrastructure/my_team/my_team_dto.dart';
+import 'package:efpl/injectable.dart';
+import 'package:efpl/services/http_instance.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
 @injectable
 class MyTeamRemoteDataProvider {
-  http.Client? client = http.Client();
+  HTTPInstance instance = getIt<HTTPInstance>();
 
   static final String _baseUrl = "${dotenv.env["API"]}";
 
@@ -19,7 +20,7 @@ class MyTeamRemoteDataProvider {
     final Uri url = Uri.parse("$_baseUrl/user/fetchUserTeam/$gameweekId");
 
     try {
-      final response = await client!.get(url);
+      final response = await instance.client.get(url);
 
       if (response.statusCode == 200) {
         MyTeamDto myTeamDto = MyTeamDto.fromJson(jsonDecode(response.body));
@@ -51,7 +52,7 @@ class MyTeamRemoteDataProvider {
     });
 
     try {
-      final response = await client!.put(url,
+      final response = await instance.client.put(url,
           body: outgoingJson, headers: {"Content-Type": "application/json"});
 
       if (response.statusCode == 200) {
