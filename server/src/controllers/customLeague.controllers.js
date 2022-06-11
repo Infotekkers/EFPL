@@ -33,8 +33,6 @@ const createCustomLeague = asyncHandler(async function (req, res) {
     leagueStartGameWeek = 1,
   } = req.body;
 
-  console.log("requested");
-
   const user = await UserModel.findOne({ _id: adminId });
 
   const createdLeague = await new CustomLeagueModel({

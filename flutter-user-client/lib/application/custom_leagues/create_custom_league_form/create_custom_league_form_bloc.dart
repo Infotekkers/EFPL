@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:efpl/application/custom_leagues/custom_leagues_bloc.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
 import 'package:efpl/domain/custom_leagues/i_custom_leagues_repository.dart';
 import 'package:efpl/domain/custom_leagues/value_objects.dart';
@@ -28,6 +27,8 @@ class CreateCustomLeagueFormBloc
 
     on<_createLeaguePressed>(
       (event, emit) async {
+        final leagueNameStr = state.leagueName.getOrCrash();
+
         emit(
           state.copyWith(
             isLoading: true,
@@ -36,8 +37,8 @@ class CreateCustomLeagueFormBloc
 
         final Either<dynamic, CustomLeaguesInfo> failureOrSuccess =
             await _customLeaguesRepository.createCustomLeague(
-          userId: event.userId,
-          leagueName: event.leagueName,
+          userId: "62960c04c1a572a276b6e08b",
+          leagueName: leagueNameStr,
         );
 
         final CustomLeaguesInfo customLeaguesInfo = failureOrSuccess.fold(

@@ -1,5 +1,6 @@
 import 'package:efpl/application/custom_leagues/custom_leagues_bloc.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
+import 'package:efpl/infrastructure/custom_leagues/custom_leagues_dto.dart';
 import 'package:efpl/injectable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -128,15 +129,18 @@ class UserCustomLeaguesView extends StatelessWidget {
                         ),
                       ),
                       autocorrect: false,
+                      onChanged: (value) =>
+                          BlocProvider.of<CreateCustomLeagueFormBloc>(context)
+                              .add(
+                        CreateCustomLeagueFormEvent.leagueNameChanged(value),
+                      ),
                     ),
                     ElevatedButton(
                       onPressed: () {
                         BlocProvider.of<CreateCustomLeagueFormBloc>(context)
                             .add(
-                          const CreateCustomLeagueFormEvent.createLeaguePressed(
-                            userId: "62960c04c1a572a276b6e08b",
-                            leagueName: "ayewready",
-                          ),
+                          const CreateCustomLeagueFormEvent
+                              .createLeaguePressed(),
                         );
                       },
                       child: const Text("Create"),
