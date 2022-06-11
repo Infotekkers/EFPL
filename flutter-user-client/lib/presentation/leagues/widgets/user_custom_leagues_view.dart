@@ -10,28 +10,14 @@ class UserCustomLeaguesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CustomLeaguesBloc, CustomLeaguesState>(
-      listener: (_, state) => {
-        state.maybeMap(
-          createLeagueSuccess: (state) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("League created")),
-            );
-          },
-          loadFailure: (state) {
-            const Text("Failure");
-          },
-          orElse: () {},
-        )
+      listener: (context, state) {},
+      builder: (context, state) {
+        return state.isLoading
+            ? const Center(
+                child: Text("Loading"),
+              )
+            : _buildView(state, context);
       },
-      builder: (_, state) => state.map(
-        initial: (_) => Container(),
-        loadFailure: (_) => const Text("Failure"),
-        loadInProgress: (_) => const Text("Loading"),
-        loadUserCustomLeaguesSuccess: (_) => _buildView(state, context),
-        loadCustomLeagueInfo: (_) =>
-            _buildCustomLeagueMembersView(state, context),
-        createLeagueSuccess: (_) => _buildView(state, context),
-      ),
     );
   }
 
@@ -84,6 +70,11 @@ class UserCustomLeaguesView extends StatelessWidget {
                       leagueId: userCustomLeagues[index].leagueId.getOrCrash(),
                     ),
                   );
+
+                  Navigator.pushNamed(
+                    context,
+                    "/customLeagueOverview",
+                  );
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,36 +84,6 @@ class UserCustomLeaguesView extends StatelessWidget {
                         "${userCustomLeagues[index].previousRank.getOrCrash()}"),
                   ],
                 ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _buildCustomLeagueMembersView(state, context) {
-    CustomLeaguesInfo customLeagueInfo = state.customLeaguesInfo;
-    final customLeagueMembers =
-        state.customLeaguesInfo.customleagueMembers.getOrCrash();
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(customLeagueInfo.leagueName.getOrCrash()),
-          const SizedBox(height: 8.0),
-          Expanded(
-            child: ListView.builder(
-              itemCount: customLeagueMembers.length,
-              shrinkWrap: true,
-              itemBuilder: (_, index) => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("${customLeagueMembers[index]["memberTeamName"]}"),
-                  Text("${customLeagueMembers[index]["memberPoints"]}"),
-                ],
               ),
             ),
           ),

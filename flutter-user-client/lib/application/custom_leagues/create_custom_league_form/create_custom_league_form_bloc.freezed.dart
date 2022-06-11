@@ -17,12 +17,15 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CreateCustomLeagueFormEventTearOff {
   const _$CreateCustomLeagueFormEventTearOff();
 
-  CreateLeaguePressed createLeaguePressed() {
-    return const CreateLeaguePressed();
+  _createLeaguePressed createLeaguePressed(String userId, String leagueName) {
+    return _createLeaguePressed(
+      userId,
+      leagueName,
+    );
   }
 
-  LeagueNameChanged leagueNameChanged(String leagueNameStr) {
-    return LeagueNameChanged(
+  _leagueNameChanged leagueNameChanged(String leagueNameStr) {
+    return _leagueNameChanged(
       leagueNameStr,
     );
   }
@@ -35,39 +38,40 @@ const $CreateCustomLeagueFormEvent = _$CreateCustomLeagueFormEventTearOff();
 mixin _$CreateCustomLeagueFormEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() createLeaguePressed,
+    required TResult Function(String userId, String leagueName)
+        createLeaguePressed,
     required TResult Function(String leagueNameStr) leagueNameChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? createLeaguePressed,
+    TResult Function(String userId, String leagueName)? createLeaguePressed,
     TResult Function(String leagueNameStr)? leagueNameChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? createLeaguePressed,
+    TResult Function(String userId, String leagueName)? createLeaguePressed,
     TResult Function(String leagueNameStr)? leagueNameChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CreateLeaguePressed value) createLeaguePressed,
-    required TResult Function(LeagueNameChanged value) leagueNameChanged,
+    required TResult Function(_createLeaguePressed value) createLeaguePressed,
+    required TResult Function(_leagueNameChanged value) leagueNameChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CreateLeaguePressed value)? createLeaguePressed,
-    TResult Function(LeagueNameChanged value)? leagueNameChanged,
+    TResult Function(_createLeaguePressed value)? createLeaguePressed,
+    TResult Function(_leagueNameChanged value)? leagueNameChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CreateLeaguePressed value)? createLeaguePressed,
-    TResult Function(LeagueNameChanged value)? leagueNameChanged,
+    TResult Function(_createLeaguePressed value)? createLeaguePressed,
+    TResult Function(_leagueNameChanged value)? leagueNameChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -92,70 +96,107 @@ class _$CreateCustomLeagueFormEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class $CreateLeaguePressedCopyWith<$Res> {
-  factory $CreateLeaguePressedCopyWith(
-          CreateLeaguePressed value, $Res Function(CreateLeaguePressed) then) =
-      _$CreateLeaguePressedCopyWithImpl<$Res>;
+abstract class _$createLeaguePressedCopyWith<$Res> {
+  factory _$createLeaguePressedCopyWith(_createLeaguePressed value,
+          $Res Function(_createLeaguePressed) then) =
+      __$createLeaguePressedCopyWithImpl<$Res>;
+  $Res call({String userId, String leagueName});
 }
 
 /// @nodoc
-class _$CreateLeaguePressedCopyWithImpl<$Res>
+class __$createLeaguePressedCopyWithImpl<$Res>
     extends _$CreateCustomLeagueFormEventCopyWithImpl<$Res>
-    implements $CreateLeaguePressedCopyWith<$Res> {
-  _$CreateLeaguePressedCopyWithImpl(
-      CreateLeaguePressed _value, $Res Function(CreateLeaguePressed) _then)
-      : super(_value, (v) => _then(v as CreateLeaguePressed));
+    implements _$createLeaguePressedCopyWith<$Res> {
+  __$createLeaguePressedCopyWithImpl(
+      _createLeaguePressed _value, $Res Function(_createLeaguePressed) _then)
+      : super(_value, (v) => _then(v as _createLeaguePressed));
 
   @override
-  CreateLeaguePressed get _value => super._value as CreateLeaguePressed;
+  _createLeaguePressed get _value => super._value as _createLeaguePressed;
+
+  @override
+  $Res call({
+    Object? userId = freezed,
+    Object? leagueName = freezed,
+  }) {
+    return _then(_createLeaguePressed(
+      userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      leagueName == freezed
+          ? _value.leagueName
+          : leagueName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$CreateLeaguePressed implements CreateLeaguePressed {
-  const _$CreateLeaguePressed();
+class _$_createLeaguePressed implements _createLeaguePressed {
+  const _$_createLeaguePressed(this.userId, this.leagueName);
+
+  @override
+  final String userId;
+  @override
+  final String leagueName;
 
   @override
   String toString() {
-    return 'CreateCustomLeagueFormEvent.createLeaguePressed()';
+    return 'CreateCustomLeagueFormEvent.createLeaguePressed(userId: $userId, leagueName: $leagueName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is CreateLeaguePressed);
+        (other.runtimeType == runtimeType &&
+            other is _createLeaguePressed &&
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality()
+                .equals(other.leagueName, leagueName));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(leagueName));
+
+  @JsonKey(ignore: true)
+  @override
+  _$createLeaguePressedCopyWith<_createLeaguePressed> get copyWith =>
+      __$createLeaguePressedCopyWithImpl<_createLeaguePressed>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() createLeaguePressed,
+    required TResult Function(String userId, String leagueName)
+        createLeaguePressed,
     required TResult Function(String leagueNameStr) leagueNameChanged,
   }) {
-    return createLeaguePressed();
+    return createLeaguePressed(userId, leagueName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? createLeaguePressed,
+    TResult Function(String userId, String leagueName)? createLeaguePressed,
     TResult Function(String leagueNameStr)? leagueNameChanged,
   }) {
-    return createLeaguePressed?.call();
+    return createLeaguePressed?.call(userId, leagueName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? createLeaguePressed,
+    TResult Function(String userId, String leagueName)? createLeaguePressed,
     TResult Function(String leagueNameStr)? leagueNameChanged,
     required TResult orElse(),
   }) {
     if (createLeaguePressed != null) {
-      return createLeaguePressed();
+      return createLeaguePressed(userId, leagueName);
     }
     return orElse();
   }
@@ -163,8 +204,8 @@ class _$CreateLeaguePressed implements CreateLeaguePressed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CreateLeaguePressed value) createLeaguePressed,
-    required TResult Function(LeagueNameChanged value) leagueNameChanged,
+    required TResult Function(_createLeaguePressed value) createLeaguePressed,
+    required TResult Function(_leagueNameChanged value) leagueNameChanged,
   }) {
     return createLeaguePressed(this);
   }
@@ -172,8 +213,8 @@ class _$CreateLeaguePressed implements CreateLeaguePressed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CreateLeaguePressed value)? createLeaguePressed,
-    TResult Function(LeagueNameChanged value)? leagueNameChanged,
+    TResult Function(_createLeaguePressed value)? createLeaguePressed,
+    TResult Function(_leagueNameChanged value)? leagueNameChanged,
   }) {
     return createLeaguePressed?.call(this);
   }
@@ -181,8 +222,8 @@ class _$CreateLeaguePressed implements CreateLeaguePressed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CreateLeaguePressed value)? createLeaguePressed,
-    TResult Function(LeagueNameChanged value)? leagueNameChanged,
+    TResult Function(_createLeaguePressed value)? createLeaguePressed,
+    TResult Function(_leagueNameChanged value)? leagueNameChanged,
     required TResult orElse(),
   }) {
     if (createLeaguePressed != null) {
@@ -192,34 +233,41 @@ class _$CreateLeaguePressed implements CreateLeaguePressed {
   }
 }
 
-abstract class CreateLeaguePressed implements CreateCustomLeagueFormEvent {
-  const factory CreateLeaguePressed() = _$CreateLeaguePressed;
+abstract class _createLeaguePressed implements CreateCustomLeagueFormEvent {
+  const factory _createLeaguePressed(String userId, String leagueName) =
+      _$_createLeaguePressed;
+
+  String get userId;
+  String get leagueName;
+  @JsonKey(ignore: true)
+  _$createLeaguePressedCopyWith<_createLeaguePressed> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LeagueNameChangedCopyWith<$Res> {
-  factory $LeagueNameChangedCopyWith(
-          LeagueNameChanged value, $Res Function(LeagueNameChanged) then) =
-      _$LeagueNameChangedCopyWithImpl<$Res>;
+abstract class _$leagueNameChangedCopyWith<$Res> {
+  factory _$leagueNameChangedCopyWith(
+          _leagueNameChanged value, $Res Function(_leagueNameChanged) then) =
+      __$leagueNameChangedCopyWithImpl<$Res>;
   $Res call({String leagueNameStr});
 }
 
 /// @nodoc
-class _$LeagueNameChangedCopyWithImpl<$Res>
+class __$leagueNameChangedCopyWithImpl<$Res>
     extends _$CreateCustomLeagueFormEventCopyWithImpl<$Res>
-    implements $LeagueNameChangedCopyWith<$Res> {
-  _$LeagueNameChangedCopyWithImpl(
-      LeagueNameChanged _value, $Res Function(LeagueNameChanged) _then)
-      : super(_value, (v) => _then(v as LeagueNameChanged));
+    implements _$leagueNameChangedCopyWith<$Res> {
+  __$leagueNameChangedCopyWithImpl(
+      _leagueNameChanged _value, $Res Function(_leagueNameChanged) _then)
+      : super(_value, (v) => _then(v as _leagueNameChanged));
 
   @override
-  LeagueNameChanged get _value => super._value as LeagueNameChanged;
+  _leagueNameChanged get _value => super._value as _leagueNameChanged;
 
   @override
   $Res call({
     Object? leagueNameStr = freezed,
   }) {
-    return _then(LeagueNameChanged(
+    return _then(_leagueNameChanged(
       leagueNameStr == freezed
           ? _value.leagueNameStr
           : leagueNameStr // ignore: cast_nullable_to_non_nullable
@@ -230,8 +278,8 @@ class _$LeagueNameChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LeagueNameChanged implements LeagueNameChanged {
-  const _$LeagueNameChanged(this.leagueNameStr);
+class _$_leagueNameChanged implements _leagueNameChanged {
+  const _$_leagueNameChanged(this.leagueNameStr);
 
   @override
   final String leagueNameStr;
@@ -245,7 +293,7 @@ class _$LeagueNameChanged implements LeagueNameChanged {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is LeagueNameChanged &&
+            other is _leagueNameChanged &&
             const DeepCollectionEquality()
                 .equals(other.leagueNameStr, leagueNameStr));
   }
@@ -256,13 +304,14 @@ class _$LeagueNameChanged implements LeagueNameChanged {
 
   @JsonKey(ignore: true)
   @override
-  $LeagueNameChangedCopyWith<LeagueNameChanged> get copyWith =>
-      _$LeagueNameChangedCopyWithImpl<LeagueNameChanged>(this, _$identity);
+  _$leagueNameChangedCopyWith<_leagueNameChanged> get copyWith =>
+      __$leagueNameChangedCopyWithImpl<_leagueNameChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() createLeaguePressed,
+    required TResult Function(String userId, String leagueName)
+        createLeaguePressed,
     required TResult Function(String leagueNameStr) leagueNameChanged,
   }) {
     return leagueNameChanged(leagueNameStr);
@@ -271,7 +320,7 @@ class _$LeagueNameChanged implements LeagueNameChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? createLeaguePressed,
+    TResult Function(String userId, String leagueName)? createLeaguePressed,
     TResult Function(String leagueNameStr)? leagueNameChanged,
   }) {
     return leagueNameChanged?.call(leagueNameStr);
@@ -280,7 +329,7 @@ class _$LeagueNameChanged implements LeagueNameChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? createLeaguePressed,
+    TResult Function(String userId, String leagueName)? createLeaguePressed,
     TResult Function(String leagueNameStr)? leagueNameChanged,
     required TResult orElse(),
   }) {
@@ -293,8 +342,8 @@ class _$LeagueNameChanged implements LeagueNameChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CreateLeaguePressed value) createLeaguePressed,
-    required TResult Function(LeagueNameChanged value) leagueNameChanged,
+    required TResult Function(_createLeaguePressed value) createLeaguePressed,
+    required TResult Function(_leagueNameChanged value) leagueNameChanged,
   }) {
     return leagueNameChanged(this);
   }
@@ -302,8 +351,8 @@ class _$LeagueNameChanged implements LeagueNameChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CreateLeaguePressed value)? createLeaguePressed,
-    TResult Function(LeagueNameChanged value)? leagueNameChanged,
+    TResult Function(_createLeaguePressed value)? createLeaguePressed,
+    TResult Function(_leagueNameChanged value)? leagueNameChanged,
   }) {
     return leagueNameChanged?.call(this);
   }
@@ -311,8 +360,8 @@ class _$LeagueNameChanged implements LeagueNameChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CreateLeaguePressed value)? createLeaguePressed,
-    TResult Function(LeagueNameChanged value)? leagueNameChanged,
+    TResult Function(_createLeaguePressed value)? createLeaguePressed,
+    TResult Function(_leagueNameChanged value)? leagueNameChanged,
     required TResult orElse(),
   }) {
     if (leagueNameChanged != null) {
@@ -322,12 +371,12 @@ class _$LeagueNameChanged implements LeagueNameChanged {
   }
 }
 
-abstract class LeagueNameChanged implements CreateCustomLeagueFormEvent {
-  const factory LeagueNameChanged(String leagueNameStr) = _$LeagueNameChanged;
+abstract class _leagueNameChanged implements CreateCustomLeagueFormEvent {
+  const factory _leagueNameChanged(String leagueNameStr) = _$_leagueNameChanged;
 
   String get leagueNameStr;
   @JsonKey(ignore: true)
-  $LeagueNameChangedCopyWith<LeagueNameChanged> get copyWith =>
+  _$leagueNameChangedCopyWith<_leagueNameChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -336,10 +385,13 @@ class _$CreateCustomLeagueFormStateTearOff {
   const _$CreateCustomLeagueFormStateTearOff();
 
   _CreateCustomLeagueFormState call(
-      {required LeagueName leagueName, required AdminId userId}) {
+      {required LeagueName leagueName,
+      required AdminId userId,
+      required bool isLoading}) {
     return _CreateCustomLeagueFormState(
       leagueName: leagueName,
       userId: userId,
+      isLoading: isLoading,
     );
   }
 }
@@ -351,6 +403,7 @@ const $CreateCustomLeagueFormState = _$CreateCustomLeagueFormStateTearOff();
 mixin _$CreateCustomLeagueFormState {
   LeagueName get leagueName => throw _privateConstructorUsedError;
   AdminId get userId => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreateCustomLeagueFormStateCopyWith<CreateCustomLeagueFormState>
@@ -363,7 +416,7 @@ abstract class $CreateCustomLeagueFormStateCopyWith<$Res> {
           CreateCustomLeagueFormState value,
           $Res Function(CreateCustomLeagueFormState) then) =
       _$CreateCustomLeagueFormStateCopyWithImpl<$Res>;
-  $Res call({LeagueName leagueName, AdminId userId});
+  $Res call({LeagueName leagueName, AdminId userId, bool isLoading});
 }
 
 /// @nodoc
@@ -379,6 +432,7 @@ class _$CreateCustomLeagueFormStateCopyWithImpl<$Res>
   $Res call({
     Object? leagueName = freezed,
     Object? userId = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_value.copyWith(
       leagueName: leagueName == freezed
@@ -389,6 +443,10 @@ class _$CreateCustomLeagueFormStateCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as AdminId,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -401,7 +459,7 @@ abstract class _$CreateCustomLeagueFormStateCopyWith<$Res>
           $Res Function(_CreateCustomLeagueFormState) then) =
       __$CreateCustomLeagueFormStateCopyWithImpl<$Res>;
   @override
-  $Res call({LeagueName leagueName, AdminId userId});
+  $Res call({LeagueName leagueName, AdminId userId, bool isLoading});
 }
 
 /// @nodoc
@@ -421,6 +479,7 @@ class __$CreateCustomLeagueFormStateCopyWithImpl<$Res>
   $Res call({
     Object? leagueName = freezed,
     Object? userId = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_CreateCustomLeagueFormState(
       leagueName: leagueName == freezed
@@ -431,6 +490,10 @@ class __$CreateCustomLeagueFormStateCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as AdminId,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -439,16 +502,20 @@ class __$CreateCustomLeagueFormStateCopyWithImpl<$Res>
 
 class _$_CreateCustomLeagueFormState implements _CreateCustomLeagueFormState {
   const _$_CreateCustomLeagueFormState(
-      {required this.leagueName, required this.userId});
+      {required this.leagueName,
+      required this.userId,
+      required this.isLoading});
 
   @override
   final LeagueName leagueName;
   @override
   final AdminId userId;
+  @override
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'CreateCustomLeagueFormState(leagueName: $leagueName, userId: $userId)';
+    return 'CreateCustomLeagueFormState(leagueName: $leagueName, userId: $userId, isLoading: $isLoading)';
   }
 
   @override
@@ -458,14 +525,16 @@ class _$_CreateCustomLeagueFormState implements _CreateCustomLeagueFormState {
             other is _CreateCustomLeagueFormState &&
             const DeepCollectionEquality()
                 .equals(other.leagueName, leagueName) &&
-            const DeepCollectionEquality().equals(other.userId, userId));
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(leagueName),
-      const DeepCollectionEquality().hash(userId));
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(isLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -478,12 +547,15 @@ abstract class _CreateCustomLeagueFormState
     implements CreateCustomLeagueFormState {
   const factory _CreateCustomLeagueFormState(
       {required LeagueName leagueName,
-      required AdminId userId}) = _$_CreateCustomLeagueFormState;
+      required AdminId userId,
+      required bool isLoading}) = _$_CreateCustomLeagueFormState;
 
   @override
   LeagueName get leagueName;
   @override
   AdminId get userId;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$CreateCustomLeagueFormStateCopyWith<_CreateCustomLeagueFormState>

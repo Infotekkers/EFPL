@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues_failures.dart';
 import 'package:efpl/domain/custom_leagues/i_custom_leagues_repository.dart';
+import 'package:efpl/domain/custom_leagues/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -17,37 +18,58 @@ class CustomLeaguesBloc extends Bloc<CustomLeaguesEvent, CustomLeaguesState> {
 
   CustomLeaguesBloc(this.iCustomLeaguesRepository)
       : super(
-          const CustomLeaguesState.initial(),
+          CustomLeaguesState.initial(),
         ) {
-    on<_GetUserCustomLeagues>(_onGetUserCustomLeagues);
-    on<_GetCustomLeagueInfo>(_onGetCustomLeagueInfo);
+    on<_getUserCustomLeagues>(_onGetUserCustomLeagues);
+    on<_getCustomLeagueInfo>(_onGetCustomLeagueInfo);
   }
 
   void _onGetUserCustomLeagues(
-      _GetUserCustomLeagues e, Emitter<CustomLeaguesState> emit) async {
-    emit(const CustomLeaguesState.loadInProgress());
+      _getUserCustomLeagues e, Emitter<CustomLeaguesState> emit) async {
+    emit(
+      state.copyWith(
+        isLoading: true,
+      ),
+    );
 
-    final failureOrSuccess =
+    final Either<dynamic, List<CustomLeagues>> failureOrSuccess =
         await iCustomLeaguesRepository.getUserCustomLeagues(userId: e.userId);
 
-    failureOrSuccess.fold(
-        (failure) => emit(CustomLeaguesState.loadFailure(failure)),
-        (userCustomLeagues) => emit(
-            CustomLeaguesState.loadUserCustomLeaguesSuccess(
-                userCustomLeagues)));
+    final List<CustomLeagues> userCustomLeagues = failureOrSuccess.fold(
+      (l) => l,
+      (r) => r,
+    );
+
+    emit(
+      state.copyWith(
+        userCustomLeagues: userCustomLeagues,
+        isLoading: false,
+        valueFailureOrSuccess: some(failureOrSuccess),
+      ),
+    );
   }
 
   void _onGetCustomLeagueInfo(
-      _GetCustomLeagueInfo e, Emitter<CustomLeaguesState> emit) async {
-    emit(const CustomLeaguesState.loadInProgress());
+      _getCustomLeagueInfo e, Emitter<CustomLeaguesState> emit) async {
+    emit(
+      state.copyWith(
+        isLoading: true,
+      ),
+    );
 
-    final failureOrSuccess = await iCustomLeaguesRepository.getCustomLeagueInfo(
-        leagueId: e.leagueId);
+    final Either<dynamic, CustomLeaguesInfo> failureOrSuccess =
+        await iCustomLeaguesRepository.getCustomLeagueInfo(
+            leagueId: e.leagueId);
 
-    failureOrSuccess.fold(
-      (failure) => emit(CustomLeaguesState.loadFailure(failure)),
-      (customLeaguesInfo) => emit(
-        CustomLeaguesState.loadCustomLeagueInfo(customLeaguesInfo),
+    final CustomLeaguesInfo customLeaguesInfo = failureOrSuccess.fold(
+      (l) => l,
+      (r) => r,
+    );
+
+    emit(
+      state.copyWith(
+        isLoading: false,
+        customLeaguesInfo: customLeaguesInfo,
       ),
     );
   }

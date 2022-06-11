@@ -3,12 +3,12 @@ part of 'custom_leagues_bloc.dart';
 @freezed
 class CustomLeaguesEvent with _$CustomLeaguesEvent {
   const factory CustomLeaguesEvent.getUserCustomLeagues(
-      {required String userId}) = _GetUserCustomLeagues;
+      {required String userId}) = _getUserCustomLeagues;
   const factory CustomLeaguesEvent.getCustomLeagueInfo(
-      {required int leagueId}) = _GetCustomLeagueInfo;
+      {required int leagueId}) = _getCustomLeagueInfo;
 
   const factory CustomLeaguesEvent.joinPublicLeague({required int leagueId}) =
-      _JoinPublicLeague;
+      _joinPublicLeague;
   const factory CustomLeaguesEvent.joinPrivateLeague(
-      {required String leagueCode}) = _JoinPrivateLeague;
+      {required String leagueCode}) = _joinPrivateLeague;
 }

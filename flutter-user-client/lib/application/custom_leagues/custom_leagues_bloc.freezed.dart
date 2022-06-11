@@ -17,26 +17,26 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CustomLeaguesEventTearOff {
   const _$CustomLeaguesEventTearOff();
 
-  _GetUserCustomLeagues getUserCustomLeagues({required String userId}) {
-    return _GetUserCustomLeagues(
+  _getUserCustomLeagues getUserCustomLeagues({required String userId}) {
+    return _getUserCustomLeagues(
       userId: userId,
     );
   }
 
-  _GetCustomLeagueInfo getCustomLeagueInfo({required int leagueId}) {
-    return _GetCustomLeagueInfo(
+  _getCustomLeagueInfo getCustomLeagueInfo({required int leagueId}) {
+    return _getCustomLeagueInfo(
       leagueId: leagueId,
     );
   }
 
-  _JoinPublicLeague joinPublicLeague({required int leagueId}) {
-    return _JoinPublicLeague(
+  _joinPublicLeague joinPublicLeague({required int leagueId}) {
+    return _joinPublicLeague(
       leagueId: leagueId,
     );
   }
 
-  _JoinPrivateLeague joinPrivateLeague({required String leagueCode}) {
-    return _JoinPrivateLeague(
+  _joinPrivateLeague joinPrivateLeague({required String leagueCode}) {
+    return _joinPrivateLeague(
       leagueCode: leagueCode,
     );
   }
@@ -74,26 +74,26 @@ mixin _$CustomLeaguesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
-    required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_JoinPublicLeague value) joinPublicLeague,
-    required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
+    required TResult Function(_getUserCustomLeagues value) getUserCustomLeagues,
+    required TResult Function(_getCustomLeagueInfo value) getCustomLeagueInfo,
+    required TResult Function(_joinPublicLeague value) joinPublicLeague,
+    required TResult Function(_joinPrivateLeague value) joinPrivateLeague,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
+    TResult Function(_getUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_getCustomLeagueInfo value)? getCustomLeagueInfo,
+    TResult Function(_joinPublicLeague value)? joinPublicLeague,
+    TResult Function(_joinPrivateLeague value)? joinPrivateLeague,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
+    TResult Function(_getUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_getCustomLeagueInfo value)? getCustomLeagueInfo,
+    TResult Function(_joinPublicLeague value)? joinPublicLeague,
+    TResult Function(_joinPrivateLeague value)? joinPrivateLeague,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,29 +117,29 @@ class _$CustomLeaguesEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$GetUserCustomLeaguesCopyWith<$Res> {
-  factory _$GetUserCustomLeaguesCopyWith(_GetUserCustomLeagues value,
-          $Res Function(_GetUserCustomLeagues) then) =
-      __$GetUserCustomLeaguesCopyWithImpl<$Res>;
+abstract class _$getUserCustomLeaguesCopyWith<$Res> {
+  factory _$getUserCustomLeaguesCopyWith(_getUserCustomLeagues value,
+          $Res Function(_getUserCustomLeagues) then) =
+      __$getUserCustomLeaguesCopyWithImpl<$Res>;
   $Res call({String userId});
 }
 
 /// @nodoc
-class __$GetUserCustomLeaguesCopyWithImpl<$Res>
+class __$getUserCustomLeaguesCopyWithImpl<$Res>
     extends _$CustomLeaguesEventCopyWithImpl<$Res>
-    implements _$GetUserCustomLeaguesCopyWith<$Res> {
-  __$GetUserCustomLeaguesCopyWithImpl(
-      _GetUserCustomLeagues _value, $Res Function(_GetUserCustomLeagues) _then)
-      : super(_value, (v) => _then(v as _GetUserCustomLeagues));
+    implements _$getUserCustomLeaguesCopyWith<$Res> {
+  __$getUserCustomLeaguesCopyWithImpl(
+      _getUserCustomLeagues _value, $Res Function(_getUserCustomLeagues) _then)
+      : super(_value, (v) => _then(v as _getUserCustomLeagues));
 
   @override
-  _GetUserCustomLeagues get _value => super._value as _GetUserCustomLeagues;
+  _getUserCustomLeagues get _value => super._value as _getUserCustomLeagues;
 
   @override
   $Res call({
     Object? userId = freezed,
   }) {
-    return _then(_GetUserCustomLeagues(
+    return _then(_getUserCustomLeagues(
       userId: userId == freezed
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -150,8 +150,8 @@ class __$GetUserCustomLeaguesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
-  const _$_GetUserCustomLeagues({required this.userId});
+class _$_getUserCustomLeagues implements _getUserCustomLeagues {
+  const _$_getUserCustomLeagues({required this.userId});
 
   @override
   final String userId;
@@ -165,7 +165,7 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _GetUserCustomLeagues &&
+            other is _getUserCustomLeagues &&
             const DeepCollectionEquality().equals(other.userId, userId));
   }
 
@@ -175,8 +175,8 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
 
   @JsonKey(ignore: true)
   @override
-  _$GetUserCustomLeaguesCopyWith<_GetUserCustomLeagues> get copyWith =>
-      __$GetUserCustomLeaguesCopyWithImpl<_GetUserCustomLeagues>(
+  _$getUserCustomLeaguesCopyWith<_getUserCustomLeagues> get copyWith =>
+      __$getUserCustomLeaguesCopyWithImpl<_getUserCustomLeagues>(
           this, _$identity);
 
   @override
@@ -219,10 +219,10 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
-    required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_JoinPublicLeague value) joinPublicLeague,
-    required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
+    required TResult Function(_getUserCustomLeagues value) getUserCustomLeagues,
+    required TResult Function(_getCustomLeagueInfo value) getCustomLeagueInfo,
+    required TResult Function(_joinPublicLeague value) joinPublicLeague,
+    required TResult Function(_joinPrivateLeague value) joinPrivateLeague,
   }) {
     return getUserCustomLeagues(this);
   }
@@ -230,10 +230,10 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
+    TResult Function(_getUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_getCustomLeagueInfo value)? getCustomLeagueInfo,
+    TResult Function(_joinPublicLeague value)? joinPublicLeague,
+    TResult Function(_joinPrivateLeague value)? joinPrivateLeague,
   }) {
     return getUserCustomLeagues?.call(this);
   }
@@ -241,10 +241,10 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
+    TResult Function(_getUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_getCustomLeagueInfo value)? getCustomLeagueInfo,
+    TResult Function(_joinPublicLeague value)? joinPublicLeague,
+    TResult Function(_joinPrivateLeague value)? joinPrivateLeague,
     required TResult orElse(),
   }) {
     if (getUserCustomLeagues != null) {
@@ -254,40 +254,40 @@ class _$_GetUserCustomLeagues implements _GetUserCustomLeagues {
   }
 }
 
-abstract class _GetUserCustomLeagues implements CustomLeaguesEvent {
-  const factory _GetUserCustomLeagues({required String userId}) =
-      _$_GetUserCustomLeagues;
+abstract class _getUserCustomLeagues implements CustomLeaguesEvent {
+  const factory _getUserCustomLeagues({required String userId}) =
+      _$_getUserCustomLeagues;
 
   String get userId;
   @JsonKey(ignore: true)
-  _$GetUserCustomLeaguesCopyWith<_GetUserCustomLeagues> get copyWith =>
+  _$getUserCustomLeaguesCopyWith<_getUserCustomLeagues> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$GetCustomLeagueInfoCopyWith<$Res> {
-  factory _$GetCustomLeagueInfoCopyWith(_GetCustomLeagueInfo value,
-          $Res Function(_GetCustomLeagueInfo) then) =
-      __$GetCustomLeagueInfoCopyWithImpl<$Res>;
+abstract class _$getCustomLeagueInfoCopyWith<$Res> {
+  factory _$getCustomLeagueInfoCopyWith(_getCustomLeagueInfo value,
+          $Res Function(_getCustomLeagueInfo) then) =
+      __$getCustomLeagueInfoCopyWithImpl<$Res>;
   $Res call({int leagueId});
 }
 
 /// @nodoc
-class __$GetCustomLeagueInfoCopyWithImpl<$Res>
+class __$getCustomLeagueInfoCopyWithImpl<$Res>
     extends _$CustomLeaguesEventCopyWithImpl<$Res>
-    implements _$GetCustomLeagueInfoCopyWith<$Res> {
-  __$GetCustomLeagueInfoCopyWithImpl(
-      _GetCustomLeagueInfo _value, $Res Function(_GetCustomLeagueInfo) _then)
-      : super(_value, (v) => _then(v as _GetCustomLeagueInfo));
+    implements _$getCustomLeagueInfoCopyWith<$Res> {
+  __$getCustomLeagueInfoCopyWithImpl(
+      _getCustomLeagueInfo _value, $Res Function(_getCustomLeagueInfo) _then)
+      : super(_value, (v) => _then(v as _getCustomLeagueInfo));
 
   @override
-  _GetCustomLeagueInfo get _value => super._value as _GetCustomLeagueInfo;
+  _getCustomLeagueInfo get _value => super._value as _getCustomLeagueInfo;
 
   @override
   $Res call({
     Object? leagueId = freezed,
   }) {
-    return _then(_GetCustomLeagueInfo(
+    return _then(_getCustomLeagueInfo(
       leagueId: leagueId == freezed
           ? _value.leagueId
           : leagueId // ignore: cast_nullable_to_non_nullable
@@ -298,8 +298,8 @@ class __$GetCustomLeagueInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
-  const _$_GetCustomLeagueInfo({required this.leagueId});
+class _$_getCustomLeagueInfo implements _getCustomLeagueInfo {
+  const _$_getCustomLeagueInfo({required this.leagueId});
 
   @override
   final int leagueId;
@@ -313,7 +313,7 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _GetCustomLeagueInfo &&
+            other is _getCustomLeagueInfo &&
             const DeepCollectionEquality().equals(other.leagueId, leagueId));
   }
 
@@ -323,8 +323,8 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
 
   @JsonKey(ignore: true)
   @override
-  _$GetCustomLeagueInfoCopyWith<_GetCustomLeagueInfo> get copyWith =>
-      __$GetCustomLeagueInfoCopyWithImpl<_GetCustomLeagueInfo>(
+  _$getCustomLeagueInfoCopyWith<_getCustomLeagueInfo> get copyWith =>
+      __$getCustomLeagueInfoCopyWithImpl<_getCustomLeagueInfo>(
           this, _$identity);
 
   @override
@@ -367,10 +367,10 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
-    required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_JoinPublicLeague value) joinPublicLeague,
-    required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
+    required TResult Function(_getUserCustomLeagues value) getUserCustomLeagues,
+    required TResult Function(_getCustomLeagueInfo value) getCustomLeagueInfo,
+    required TResult Function(_joinPublicLeague value) joinPublicLeague,
+    required TResult Function(_joinPrivateLeague value) joinPrivateLeague,
   }) {
     return getCustomLeagueInfo(this);
   }
@@ -378,10 +378,10 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
+    TResult Function(_getUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_getCustomLeagueInfo value)? getCustomLeagueInfo,
+    TResult Function(_joinPublicLeague value)? joinPublicLeague,
+    TResult Function(_joinPrivateLeague value)? joinPrivateLeague,
   }) {
     return getCustomLeagueInfo?.call(this);
   }
@@ -389,10 +389,10 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
+    TResult Function(_getUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_getCustomLeagueInfo value)? getCustomLeagueInfo,
+    TResult Function(_joinPublicLeague value)? joinPublicLeague,
+    TResult Function(_joinPrivateLeague value)? joinPrivateLeague,
     required TResult orElse(),
   }) {
     if (getCustomLeagueInfo != null) {
@@ -402,40 +402,40 @@ class _$_GetCustomLeagueInfo implements _GetCustomLeagueInfo {
   }
 }
 
-abstract class _GetCustomLeagueInfo implements CustomLeaguesEvent {
-  const factory _GetCustomLeagueInfo({required int leagueId}) =
-      _$_GetCustomLeagueInfo;
+abstract class _getCustomLeagueInfo implements CustomLeaguesEvent {
+  const factory _getCustomLeagueInfo({required int leagueId}) =
+      _$_getCustomLeagueInfo;
 
   int get leagueId;
   @JsonKey(ignore: true)
-  _$GetCustomLeagueInfoCopyWith<_GetCustomLeagueInfo> get copyWith =>
+  _$getCustomLeagueInfoCopyWith<_getCustomLeagueInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$JoinPublicLeagueCopyWith<$Res> {
-  factory _$JoinPublicLeagueCopyWith(
-          _JoinPublicLeague value, $Res Function(_JoinPublicLeague) then) =
-      __$JoinPublicLeagueCopyWithImpl<$Res>;
+abstract class _$joinPublicLeagueCopyWith<$Res> {
+  factory _$joinPublicLeagueCopyWith(
+          _joinPublicLeague value, $Res Function(_joinPublicLeague) then) =
+      __$joinPublicLeagueCopyWithImpl<$Res>;
   $Res call({int leagueId});
 }
 
 /// @nodoc
-class __$JoinPublicLeagueCopyWithImpl<$Res>
+class __$joinPublicLeagueCopyWithImpl<$Res>
     extends _$CustomLeaguesEventCopyWithImpl<$Res>
-    implements _$JoinPublicLeagueCopyWith<$Res> {
-  __$JoinPublicLeagueCopyWithImpl(
-      _JoinPublicLeague _value, $Res Function(_JoinPublicLeague) _then)
-      : super(_value, (v) => _then(v as _JoinPublicLeague));
+    implements _$joinPublicLeagueCopyWith<$Res> {
+  __$joinPublicLeagueCopyWithImpl(
+      _joinPublicLeague _value, $Res Function(_joinPublicLeague) _then)
+      : super(_value, (v) => _then(v as _joinPublicLeague));
 
   @override
-  _JoinPublicLeague get _value => super._value as _JoinPublicLeague;
+  _joinPublicLeague get _value => super._value as _joinPublicLeague;
 
   @override
   $Res call({
     Object? leagueId = freezed,
   }) {
-    return _then(_JoinPublicLeague(
+    return _then(_joinPublicLeague(
       leagueId: leagueId == freezed
           ? _value.leagueId
           : leagueId // ignore: cast_nullable_to_non_nullable
@@ -446,8 +446,8 @@ class __$JoinPublicLeagueCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_JoinPublicLeague implements _JoinPublicLeague {
-  const _$_JoinPublicLeague({required this.leagueId});
+class _$_joinPublicLeague implements _joinPublicLeague {
+  const _$_joinPublicLeague({required this.leagueId});
 
   @override
   final int leagueId;
@@ -461,7 +461,7 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _JoinPublicLeague &&
+            other is _joinPublicLeague &&
             const DeepCollectionEquality().equals(other.leagueId, leagueId));
   }
 
@@ -471,8 +471,8 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
 
   @JsonKey(ignore: true)
   @override
-  _$JoinPublicLeagueCopyWith<_JoinPublicLeague> get copyWith =>
-      __$JoinPublicLeagueCopyWithImpl<_JoinPublicLeague>(this, _$identity);
+  _$joinPublicLeagueCopyWith<_joinPublicLeague> get copyWith =>
+      __$joinPublicLeagueCopyWithImpl<_joinPublicLeague>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -514,10 +514,10 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
-    required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_JoinPublicLeague value) joinPublicLeague,
-    required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
+    required TResult Function(_getUserCustomLeagues value) getUserCustomLeagues,
+    required TResult Function(_getCustomLeagueInfo value) getCustomLeagueInfo,
+    required TResult Function(_joinPublicLeague value) joinPublicLeague,
+    required TResult Function(_joinPrivateLeague value) joinPrivateLeague,
   }) {
     return joinPublicLeague(this);
   }
@@ -525,10 +525,10 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
+    TResult Function(_getUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_getCustomLeagueInfo value)? getCustomLeagueInfo,
+    TResult Function(_joinPublicLeague value)? joinPublicLeague,
+    TResult Function(_joinPrivateLeague value)? joinPrivateLeague,
   }) {
     return joinPublicLeague?.call(this);
   }
@@ -536,10 +536,10 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
+    TResult Function(_getUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_getCustomLeagueInfo value)? getCustomLeagueInfo,
+    TResult Function(_joinPublicLeague value)? joinPublicLeague,
+    TResult Function(_joinPrivateLeague value)? joinPrivateLeague,
     required TResult orElse(),
   }) {
     if (joinPublicLeague != null) {
@@ -549,40 +549,40 @@ class _$_JoinPublicLeague implements _JoinPublicLeague {
   }
 }
 
-abstract class _JoinPublicLeague implements CustomLeaguesEvent {
-  const factory _JoinPublicLeague({required int leagueId}) =
-      _$_JoinPublicLeague;
+abstract class _joinPublicLeague implements CustomLeaguesEvent {
+  const factory _joinPublicLeague({required int leagueId}) =
+      _$_joinPublicLeague;
 
   int get leagueId;
   @JsonKey(ignore: true)
-  _$JoinPublicLeagueCopyWith<_JoinPublicLeague> get copyWith =>
+  _$joinPublicLeagueCopyWith<_joinPublicLeague> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$JoinPrivateLeagueCopyWith<$Res> {
-  factory _$JoinPrivateLeagueCopyWith(
-          _JoinPrivateLeague value, $Res Function(_JoinPrivateLeague) then) =
-      __$JoinPrivateLeagueCopyWithImpl<$Res>;
+abstract class _$joinPrivateLeagueCopyWith<$Res> {
+  factory _$joinPrivateLeagueCopyWith(
+          _joinPrivateLeague value, $Res Function(_joinPrivateLeague) then) =
+      __$joinPrivateLeagueCopyWithImpl<$Res>;
   $Res call({String leagueCode});
 }
 
 /// @nodoc
-class __$JoinPrivateLeagueCopyWithImpl<$Res>
+class __$joinPrivateLeagueCopyWithImpl<$Res>
     extends _$CustomLeaguesEventCopyWithImpl<$Res>
-    implements _$JoinPrivateLeagueCopyWith<$Res> {
-  __$JoinPrivateLeagueCopyWithImpl(
-      _JoinPrivateLeague _value, $Res Function(_JoinPrivateLeague) _then)
-      : super(_value, (v) => _then(v as _JoinPrivateLeague));
+    implements _$joinPrivateLeagueCopyWith<$Res> {
+  __$joinPrivateLeagueCopyWithImpl(
+      _joinPrivateLeague _value, $Res Function(_joinPrivateLeague) _then)
+      : super(_value, (v) => _then(v as _joinPrivateLeague));
 
   @override
-  _JoinPrivateLeague get _value => super._value as _JoinPrivateLeague;
+  _joinPrivateLeague get _value => super._value as _joinPrivateLeague;
 
   @override
   $Res call({
     Object? leagueCode = freezed,
   }) {
-    return _then(_JoinPrivateLeague(
+    return _then(_joinPrivateLeague(
       leagueCode: leagueCode == freezed
           ? _value.leagueCode
           : leagueCode // ignore: cast_nullable_to_non_nullable
@@ -593,8 +593,8 @@ class __$JoinPrivateLeagueCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_JoinPrivateLeague implements _JoinPrivateLeague {
-  const _$_JoinPrivateLeague({required this.leagueCode});
+class _$_joinPrivateLeague implements _joinPrivateLeague {
+  const _$_joinPrivateLeague({required this.leagueCode});
 
   @override
   final String leagueCode;
@@ -608,7 +608,7 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _JoinPrivateLeague &&
+            other is _joinPrivateLeague &&
             const DeepCollectionEquality()
                 .equals(other.leagueCode, leagueCode));
   }
@@ -619,8 +619,8 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
 
   @JsonKey(ignore: true)
   @override
-  _$JoinPrivateLeagueCopyWith<_JoinPrivateLeague> get copyWith =>
-      __$JoinPrivateLeagueCopyWithImpl<_JoinPrivateLeague>(this, _$identity);
+  _$joinPrivateLeagueCopyWith<_joinPrivateLeague> get copyWith =>
+      __$joinPrivateLeagueCopyWithImpl<_joinPrivateLeague>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -662,10 +662,10 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetUserCustomLeagues value) getUserCustomLeagues,
-    required TResult Function(_GetCustomLeagueInfo value) getCustomLeagueInfo,
-    required TResult Function(_JoinPublicLeague value) joinPublicLeague,
-    required TResult Function(_JoinPrivateLeague value) joinPrivateLeague,
+    required TResult Function(_getUserCustomLeagues value) getUserCustomLeagues,
+    required TResult Function(_getCustomLeagueInfo value) getCustomLeagueInfo,
+    required TResult Function(_joinPublicLeague value) joinPublicLeague,
+    required TResult Function(_joinPrivateLeague value) joinPrivateLeague,
   }) {
     return joinPrivateLeague(this);
   }
@@ -673,10 +673,10 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
+    TResult Function(_getUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_getCustomLeagueInfo value)? getCustomLeagueInfo,
+    TResult Function(_joinPublicLeague value)? joinPublicLeague,
+    TResult Function(_joinPrivateLeague value)? joinPrivateLeague,
   }) {
     return joinPrivateLeague?.call(this);
   }
@@ -684,10 +684,10 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetUserCustomLeagues value)? getUserCustomLeagues,
-    TResult Function(_GetCustomLeagueInfo value)? getCustomLeagueInfo,
-    TResult Function(_JoinPublicLeague value)? joinPublicLeague,
-    TResult Function(_JoinPrivateLeague value)? joinPrivateLeague,
+    TResult Function(_getUserCustomLeagues value)? getUserCustomLeagues,
+    TResult Function(_getCustomLeagueInfo value)? getCustomLeagueInfo,
+    TResult Function(_joinPublicLeague value)? joinPublicLeague,
+    TResult Function(_joinPrivateLeague value)? joinPrivateLeague,
     required TResult orElse(),
   }) {
     if (joinPrivateLeague != null) {
@@ -697,13 +697,13 @@ class _$_JoinPrivateLeague implements _JoinPrivateLeague {
   }
 }
 
-abstract class _JoinPrivateLeague implements CustomLeaguesEvent {
-  const factory _JoinPrivateLeague({required String leagueCode}) =
-      _$_JoinPrivateLeague;
+abstract class _joinPrivateLeague implements CustomLeaguesEvent {
+  const factory _joinPrivateLeague({required String leagueCode}) =
+      _$_joinPrivateLeague;
 
   String get leagueCode;
   @JsonKey(ignore: true)
-  _$JoinPrivateLeagueCopyWith<_JoinPrivateLeague> get copyWith =>
+  _$joinPrivateLeagueCopyWith<_joinPrivateLeague> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -711,38 +711,16 @@ abstract class _JoinPrivateLeague implements CustomLeaguesEvent {
 class _$CustomLeaguesStateTearOff {
   const _$CustomLeaguesStateTearOff();
 
-  _Initial initial() {
-    return const _Initial();
-  }
-
-  _LoadInProgress loadInProgress() {
-    return const _LoadInProgress();
-  }
-
-  _LoadUserCustomLeaguesSuccess loadUserCustomLeaguesSuccess(
-      List<CustomLeagues> userCustomLeagues) {
-    return _LoadUserCustomLeaguesSuccess(
-      userCustomLeagues,
-    );
-  }
-
-  _LoadCustomLeagueInfoSuccess loadCustomLeagueInfo(
-      CustomLeaguesInfo customLeaguesInfo) {
-    return _LoadCustomLeagueInfoSuccess(
-      customLeaguesInfo,
-    );
-  }
-
-  _LoadFailure loadFailure(CustomLeaguesFailures<dynamic> failure) {
-    return _LoadFailure(
-      failure,
-    );
-  }
-
-  _CreateLeagueSuccess createLeagueSuccess(
-      CustomLeaguesInfo customLeaguesInfo) {
-    return _CreateLeagueSuccess(
-      customLeaguesInfo,
+  _CustomLeaguesState call(
+      {required List<CustomLeagues> userCustomLeagues,
+      required CustomLeaguesInfo customLeaguesInfo,
+      required bool isLoading,
+      required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) {
+    return _CustomLeaguesState(
+      userCustomLeagues: userCustomLeagues,
+      customLeaguesInfo: customLeaguesInfo,
+      isLoading: isLoading,
+      valueFailureOrSuccess: valueFailureOrSuccess,
     );
   }
 }
@@ -752,77 +730,15 @@ const $CustomLeaguesState = _$CustomLeaguesStateTearOff();
 
 /// @nodoc
 mixin _$CustomLeaguesState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(List<CustomLeagues> userCustomLeagues)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        loadCustomLeagueInfo,
-    required TResult Function(CustomLeaguesFailures<dynamic> failure)
-        loadFailure,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        createLeagueSuccess,
-  }) =>
+  List<CustomLeagues> get userCustomLeagues =>
       throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-  }) =>
+  CustomLeaguesInfo get customLeaguesInfo => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  Option<Either<dynamic, dynamic>> get valueFailureOrSuccess =>
       throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadUserCustomLeaguesSuccess value)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(_LoadCustomLeagueInfoSuccess value)
-        loadCustomLeagueInfo,
-    required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_CreateLeagueSuccess value) createLeagueSuccess,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-    required TResult orElse(),
-  }) =>
+
+  @JsonKey(ignore: true)
+  $CustomLeaguesStateCopyWith<CustomLeaguesState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -831,6 +747,13 @@ abstract class $CustomLeaguesStateCopyWith<$Res> {
   factory $CustomLeaguesStateCopyWith(
           CustomLeaguesState value, $Res Function(CustomLeaguesState) then) =
       _$CustomLeaguesStateCopyWithImpl<$Res>;
+  $Res call(
+      {List<CustomLeagues> userCustomLeagues,
+      CustomLeaguesInfo customLeaguesInfo,
+      bool isLoading,
+      Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
+
+  $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo;
 }
 
 /// @nodoc
@@ -841,996 +764,167 @@ class _$CustomLeaguesStateCopyWithImpl<$Res>
   final CustomLeaguesState _value;
   // ignore: unused_field
   final $Res Function(CustomLeaguesState) _then;
-}
-
-/// @nodoc
-abstract class _$InitialCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-      __$InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$InitialCopyWithImpl<$Res>
-    extends _$CustomLeaguesStateCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
-      : super(_value, (v) => _then(v as _Initial));
-
-  @override
-  _Initial get _value => super._value as _Initial;
-}
-
-/// @nodoc
-
-class _$_Initial implements _Initial {
-  const _$_Initial();
-
-  @override
-  String toString() {
-    return 'CustomLeaguesState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(List<CustomLeagues> userCustomLeagues)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        loadCustomLeagueInfo,
-    required TResult Function(CustomLeaguesFailures<dynamic> failure)
-        loadFailure,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        createLeagueSuccess,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadUserCustomLeaguesSuccess value)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(_LoadCustomLeagueInfoSuccess value)
-        loadCustomLeagueInfo,
-    required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_CreateLeagueSuccess value) createLeagueSuccess,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements CustomLeaguesState {
-  const factory _Initial() = _$_Initial;
-}
-
-/// @nodoc
-abstract class _$LoadInProgressCopyWith<$Res> {
-  factory _$LoadInProgressCopyWith(
-          _LoadInProgress value, $Res Function(_LoadInProgress) then) =
-      __$LoadInProgressCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$LoadInProgressCopyWithImpl<$Res>
-    extends _$CustomLeaguesStateCopyWithImpl<$Res>
-    implements _$LoadInProgressCopyWith<$Res> {
-  __$LoadInProgressCopyWithImpl(
-      _LoadInProgress _value, $Res Function(_LoadInProgress) _then)
-      : super(_value, (v) => _then(v as _LoadInProgress));
-
-  @override
-  _LoadInProgress get _value => super._value as _LoadInProgress;
-}
-
-/// @nodoc
-
-class _$_LoadInProgress implements _LoadInProgress {
-  const _$_LoadInProgress();
-
-  @override
-  String toString() {
-    return 'CustomLeaguesState.loadInProgress()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _LoadInProgress);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(List<CustomLeagues> userCustomLeagues)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        loadCustomLeagueInfo,
-    required TResult Function(CustomLeaguesFailures<dynamic> failure)
-        loadFailure,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        createLeagueSuccess,
-  }) {
-    return loadInProgress();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-  }) {
-    return loadInProgress?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadInProgress != null) {
-      return loadInProgress();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadUserCustomLeaguesSuccess value)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(_LoadCustomLeagueInfoSuccess value)
-        loadCustomLeagueInfo,
-    required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_CreateLeagueSuccess value) createLeagueSuccess,
-  }) {
-    return loadInProgress(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-  }) {
-    return loadInProgress?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadInProgress != null) {
-      return loadInProgress(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadInProgress implements CustomLeaguesState {
-  const factory _LoadInProgress() = _$_LoadInProgress;
-}
-
-/// @nodoc
-abstract class _$LoadUserCustomLeaguesSuccessCopyWith<$Res> {
-  factory _$LoadUserCustomLeaguesSuccessCopyWith(
-          _LoadUserCustomLeaguesSuccess value,
-          $Res Function(_LoadUserCustomLeaguesSuccess) then) =
-      __$LoadUserCustomLeaguesSuccessCopyWithImpl<$Res>;
-  $Res call({List<CustomLeagues> userCustomLeagues});
-}
-
-/// @nodoc
-class __$LoadUserCustomLeaguesSuccessCopyWithImpl<$Res>
-    extends _$CustomLeaguesStateCopyWithImpl<$Res>
-    implements _$LoadUserCustomLeaguesSuccessCopyWith<$Res> {
-  __$LoadUserCustomLeaguesSuccessCopyWithImpl(
-      _LoadUserCustomLeaguesSuccess _value,
-      $Res Function(_LoadUserCustomLeaguesSuccess) _then)
-      : super(_value, (v) => _then(v as _LoadUserCustomLeaguesSuccess));
-
-  @override
-  _LoadUserCustomLeaguesSuccess get _value =>
-      super._value as _LoadUserCustomLeaguesSuccess;
 
   @override
   $Res call({
     Object? userCustomLeagues = freezed,
+    Object? customLeaguesInfo = freezed,
+    Object? isLoading = freezed,
+    Object? valueFailureOrSuccess = freezed,
   }) {
-    return _then(_LoadUserCustomLeaguesSuccess(
-      userCustomLeagues == freezed
+    return _then(_value.copyWith(
+      userCustomLeagues: userCustomLeagues == freezed
           ? _value.userCustomLeagues
           : userCustomLeagues // ignore: cast_nullable_to_non_nullable
               as List<CustomLeagues>,
+      customLeaguesInfo: customLeaguesInfo == freezed
+          ? _value.customLeaguesInfo
+          : customLeaguesInfo // ignore: cast_nullable_to_non_nullable
+              as CustomLeaguesInfo,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      valueFailureOrSuccess: valueFailureOrSuccess == freezed
+          ? _value.valueFailureOrSuccess
+          : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<dynamic, dynamic>>,
+    ));
+  }
+
+  @override
+  $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo {
+    return $CustomLeaguesInfoCopyWith<$Res>(_value.customLeaguesInfo, (value) {
+      return _then(_value.copyWith(customLeaguesInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$CustomLeaguesStateCopyWith<$Res>
+    implements $CustomLeaguesStateCopyWith<$Res> {
+  factory _$CustomLeaguesStateCopyWith(
+          _CustomLeaguesState value, $Res Function(_CustomLeaguesState) then) =
+      __$CustomLeaguesStateCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {List<CustomLeagues> userCustomLeagues,
+      CustomLeaguesInfo customLeaguesInfo,
+      bool isLoading,
+      Option<Either<dynamic, dynamic>> valueFailureOrSuccess});
+
+  @override
+  $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo;
+}
+
+/// @nodoc
+class __$CustomLeaguesStateCopyWithImpl<$Res>
+    extends _$CustomLeaguesStateCopyWithImpl<$Res>
+    implements _$CustomLeaguesStateCopyWith<$Res> {
+  __$CustomLeaguesStateCopyWithImpl(
+      _CustomLeaguesState _value, $Res Function(_CustomLeaguesState) _then)
+      : super(_value, (v) => _then(v as _CustomLeaguesState));
+
+  @override
+  _CustomLeaguesState get _value => super._value as _CustomLeaguesState;
+
+  @override
+  $Res call({
+    Object? userCustomLeagues = freezed,
+    Object? customLeaguesInfo = freezed,
+    Object? isLoading = freezed,
+    Object? valueFailureOrSuccess = freezed,
+  }) {
+    return _then(_CustomLeaguesState(
+      userCustomLeagues: userCustomLeagues == freezed
+          ? _value.userCustomLeagues
+          : userCustomLeagues // ignore: cast_nullable_to_non_nullable
+              as List<CustomLeagues>,
+      customLeaguesInfo: customLeaguesInfo == freezed
+          ? _value.customLeaguesInfo
+          : customLeaguesInfo // ignore: cast_nullable_to_non_nullable
+              as CustomLeaguesInfo,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      valueFailureOrSuccess: valueFailureOrSuccess == freezed
+          ? _value.valueFailureOrSuccess
+          : valueFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<dynamic, dynamic>>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_LoadUserCustomLeaguesSuccess implements _LoadUserCustomLeaguesSuccess {
-  const _$_LoadUserCustomLeaguesSuccess(this.userCustomLeagues);
+class _$_CustomLeaguesState implements _CustomLeaguesState {
+  const _$_CustomLeaguesState(
+      {required this.userCustomLeagues,
+      required this.customLeaguesInfo,
+      required this.isLoading,
+      required this.valueFailureOrSuccess});
 
   @override
   final List<CustomLeagues> userCustomLeagues;
+  @override
+  final CustomLeaguesInfo customLeaguesInfo;
+  @override
+  final bool isLoading;
+  @override
+  final Option<Either<dynamic, dynamic>> valueFailureOrSuccess;
 
   @override
   String toString() {
-    return 'CustomLeaguesState.loadUserCustomLeaguesSuccess(userCustomLeagues: $userCustomLeagues)';
+    return 'CustomLeaguesState(userCustomLeagues: $userCustomLeagues, customLeaguesInfo: $customLeaguesInfo, isLoading: $isLoading, valueFailureOrSuccess: $valueFailureOrSuccess)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LoadUserCustomLeaguesSuccess &&
+            other is _CustomLeaguesState &&
             const DeepCollectionEquality()
-                .equals(other.userCustomLeagues, userCustomLeagues));
+                .equals(other.userCustomLeagues, userCustomLeagues) &&
+            const DeepCollectionEquality()
+                .equals(other.customLeaguesInfo, customLeaguesInfo) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.valueFailureOrSuccess, valueFailureOrSuccess));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userCustomLeagues));
+      runtimeType,
+      const DeepCollectionEquality().hash(userCustomLeagues),
+      const DeepCollectionEquality().hash(customLeaguesInfo),
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(valueFailureOrSuccess));
 
   @JsonKey(ignore: true)
   @override
-  _$LoadUserCustomLeaguesSuccessCopyWith<_LoadUserCustomLeaguesSuccess>
-      get copyWith => __$LoadUserCustomLeaguesSuccessCopyWithImpl<
-          _LoadUserCustomLeaguesSuccess>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(List<CustomLeagues> userCustomLeagues)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        loadCustomLeagueInfo,
-    required TResult Function(CustomLeaguesFailures<dynamic> failure)
-        loadFailure,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        createLeagueSuccess,
-  }) {
-    return loadUserCustomLeaguesSuccess(userCustomLeagues);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-  }) {
-    return loadUserCustomLeaguesSuccess?.call(userCustomLeagues);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadUserCustomLeaguesSuccess != null) {
-      return loadUserCustomLeaguesSuccess(userCustomLeagues);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadUserCustomLeaguesSuccess value)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(_LoadCustomLeagueInfoSuccess value)
-        loadCustomLeagueInfo,
-    required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_CreateLeagueSuccess value) createLeagueSuccess,
-  }) {
-    return loadUserCustomLeaguesSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-  }) {
-    return loadUserCustomLeaguesSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadUserCustomLeaguesSuccess != null) {
-      return loadUserCustomLeaguesSuccess(this);
-    }
-    return orElse();
-  }
+  _$CustomLeaguesStateCopyWith<_CustomLeaguesState> get copyWith =>
+      __$CustomLeaguesStateCopyWithImpl<_CustomLeaguesState>(this, _$identity);
 }
 
-abstract class _LoadUserCustomLeaguesSuccess implements CustomLeaguesState {
-  const factory _LoadUserCustomLeaguesSuccess(
-      List<CustomLeagues> userCustomLeagues) = _$_LoadUserCustomLeaguesSuccess;
+abstract class _CustomLeaguesState implements CustomLeaguesState {
+  const factory _CustomLeaguesState(
+          {required List<CustomLeagues> userCustomLeagues,
+          required CustomLeaguesInfo customLeaguesInfo,
+          required bool isLoading,
+          required Option<Either<dynamic, dynamic>> valueFailureOrSuccess}) =
+      _$_CustomLeaguesState;
 
+  @override
   List<CustomLeagues> get userCustomLeagues;
-  @JsonKey(ignore: true)
-  _$LoadUserCustomLeaguesSuccessCopyWith<_LoadUserCustomLeaguesSuccess>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$LoadCustomLeagueInfoSuccessCopyWith<$Res> {
-  factory _$LoadCustomLeagueInfoSuccessCopyWith(
-          _LoadCustomLeagueInfoSuccess value,
-          $Res Function(_LoadCustomLeagueInfoSuccess) then) =
-      __$LoadCustomLeagueInfoSuccessCopyWithImpl<$Res>;
-  $Res call({CustomLeaguesInfo customLeaguesInfo});
-
-  $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo;
-}
-
-/// @nodoc
-class __$LoadCustomLeagueInfoSuccessCopyWithImpl<$Res>
-    extends _$CustomLeaguesStateCopyWithImpl<$Res>
-    implements _$LoadCustomLeagueInfoSuccessCopyWith<$Res> {
-  __$LoadCustomLeagueInfoSuccessCopyWithImpl(
-      _LoadCustomLeagueInfoSuccess _value,
-      $Res Function(_LoadCustomLeagueInfoSuccess) _then)
-      : super(_value, (v) => _then(v as _LoadCustomLeagueInfoSuccess));
-
   @override
-  _LoadCustomLeagueInfoSuccess get _value =>
-      super._value as _LoadCustomLeagueInfoSuccess;
-
-  @override
-  $Res call({
-    Object? customLeaguesInfo = freezed,
-  }) {
-    return _then(_LoadCustomLeagueInfoSuccess(
-      customLeaguesInfo == freezed
-          ? _value.customLeaguesInfo
-          : customLeaguesInfo // ignore: cast_nullable_to_non_nullable
-              as CustomLeaguesInfo,
-    ));
-  }
-
-  @override
-  $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo {
-    return $CustomLeaguesInfoCopyWith<$Res>(_value.customLeaguesInfo, (value) {
-      return _then(_value.copyWith(customLeaguesInfo: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_LoadCustomLeagueInfoSuccess implements _LoadCustomLeagueInfoSuccess {
-  const _$_LoadCustomLeagueInfoSuccess(this.customLeaguesInfo);
-
-  @override
-  final CustomLeaguesInfo customLeaguesInfo;
-
-  @override
-  String toString() {
-    return 'CustomLeaguesState.loadCustomLeagueInfo(customLeaguesInfo: $customLeaguesInfo)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _LoadCustomLeagueInfoSuccess &&
-            const DeepCollectionEquality()
-                .equals(other.customLeaguesInfo, customLeaguesInfo));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(customLeaguesInfo));
-
-  @JsonKey(ignore: true)
-  @override
-  _$LoadCustomLeagueInfoSuccessCopyWith<_LoadCustomLeagueInfoSuccess>
-      get copyWith => __$LoadCustomLeagueInfoSuccessCopyWithImpl<
-          _LoadCustomLeagueInfoSuccess>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(List<CustomLeagues> userCustomLeagues)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        loadCustomLeagueInfo,
-    required TResult Function(CustomLeaguesFailures<dynamic> failure)
-        loadFailure,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        createLeagueSuccess,
-  }) {
-    return loadCustomLeagueInfo(customLeaguesInfo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-  }) {
-    return loadCustomLeagueInfo?.call(customLeaguesInfo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadCustomLeagueInfo != null) {
-      return loadCustomLeagueInfo(customLeaguesInfo);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadUserCustomLeaguesSuccess value)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(_LoadCustomLeagueInfoSuccess value)
-        loadCustomLeagueInfo,
-    required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_CreateLeagueSuccess value) createLeagueSuccess,
-  }) {
-    return loadCustomLeagueInfo(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-  }) {
-    return loadCustomLeagueInfo?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadCustomLeagueInfo != null) {
-      return loadCustomLeagueInfo(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadCustomLeagueInfoSuccess implements CustomLeaguesState {
-  const factory _LoadCustomLeagueInfoSuccess(
-      CustomLeaguesInfo customLeaguesInfo) = _$_LoadCustomLeagueInfoSuccess;
-
   CustomLeaguesInfo get customLeaguesInfo;
+  @override
+  bool get isLoading;
+  @override
+  Option<Either<dynamic, dynamic>> get valueFailureOrSuccess;
+  @override
   @JsonKey(ignore: true)
-  _$LoadCustomLeagueInfoSuccessCopyWith<_LoadCustomLeagueInfoSuccess>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$LoadFailureCopyWith<$Res> {
-  factory _$LoadFailureCopyWith(
-          _LoadFailure value, $Res Function(_LoadFailure) then) =
-      __$LoadFailureCopyWithImpl<$Res>;
-  $Res call({CustomLeaguesFailures<dynamic> failure});
-
-  $CustomLeaguesFailuresCopyWith<dynamic, $Res> get failure;
-}
-
-/// @nodoc
-class __$LoadFailureCopyWithImpl<$Res>
-    extends _$CustomLeaguesStateCopyWithImpl<$Res>
-    implements _$LoadFailureCopyWith<$Res> {
-  __$LoadFailureCopyWithImpl(
-      _LoadFailure _value, $Res Function(_LoadFailure) _then)
-      : super(_value, (v) => _then(v as _LoadFailure));
-
-  @override
-  _LoadFailure get _value => super._value as _LoadFailure;
-
-  @override
-  $Res call({
-    Object? failure = freezed,
-  }) {
-    return _then(_LoadFailure(
-      failure == freezed
-          ? _value.failure
-          : failure // ignore: cast_nullable_to_non_nullable
-              as CustomLeaguesFailures<dynamic>,
-    ));
-  }
-
-  @override
-  $CustomLeaguesFailuresCopyWith<dynamic, $Res> get failure {
-    return $CustomLeaguesFailuresCopyWith<dynamic, $Res>(_value.failure,
-        (value) {
-      return _then(_value.copyWith(failure: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_LoadFailure implements _LoadFailure {
-  const _$_LoadFailure(this.failure);
-
-  @override
-  final CustomLeaguesFailures<dynamic> failure;
-
-  @override
-  String toString() {
-    return 'CustomLeaguesState.loadFailure(failure: $failure)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _LoadFailure &&
-            const DeepCollectionEquality().equals(other.failure, failure));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(failure));
-
-  @JsonKey(ignore: true)
-  @override
-  _$LoadFailureCopyWith<_LoadFailure> get copyWith =>
-      __$LoadFailureCopyWithImpl<_LoadFailure>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(List<CustomLeagues> userCustomLeagues)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        loadCustomLeagueInfo,
-    required TResult Function(CustomLeaguesFailures<dynamic> failure)
-        loadFailure,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        createLeagueSuccess,
-  }) {
-    return loadFailure(failure);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-  }) {
-    return loadFailure?.call(failure);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadFailure != null) {
-      return loadFailure(failure);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadUserCustomLeaguesSuccess value)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(_LoadCustomLeagueInfoSuccess value)
-        loadCustomLeagueInfo,
-    required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_CreateLeagueSuccess value) createLeagueSuccess,
-  }) {
-    return loadFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-  }) {
-    return loadFailure?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadFailure != null) {
-      return loadFailure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadFailure implements CustomLeaguesState {
-  const factory _LoadFailure(CustomLeaguesFailures<dynamic> failure) =
-      _$_LoadFailure;
-
-  CustomLeaguesFailures<dynamic> get failure;
-  @JsonKey(ignore: true)
-  _$LoadFailureCopyWith<_LoadFailure> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$CreateLeagueSuccessCopyWith<$Res> {
-  factory _$CreateLeagueSuccessCopyWith(_CreateLeagueSuccess value,
-          $Res Function(_CreateLeagueSuccess) then) =
-      __$CreateLeagueSuccessCopyWithImpl<$Res>;
-  $Res call({CustomLeaguesInfo customLeaguesInfo});
-
-  $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo;
-}
-
-/// @nodoc
-class __$CreateLeagueSuccessCopyWithImpl<$Res>
-    extends _$CustomLeaguesStateCopyWithImpl<$Res>
-    implements _$CreateLeagueSuccessCopyWith<$Res> {
-  __$CreateLeagueSuccessCopyWithImpl(
-      _CreateLeagueSuccess _value, $Res Function(_CreateLeagueSuccess) _then)
-      : super(_value, (v) => _then(v as _CreateLeagueSuccess));
-
-  @override
-  _CreateLeagueSuccess get _value => super._value as _CreateLeagueSuccess;
-
-  @override
-  $Res call({
-    Object? customLeaguesInfo = freezed,
-  }) {
-    return _then(_CreateLeagueSuccess(
-      customLeaguesInfo == freezed
-          ? _value.customLeaguesInfo
-          : customLeaguesInfo // ignore: cast_nullable_to_non_nullable
-              as CustomLeaguesInfo,
-    ));
-  }
-
-  @override
-  $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo {
-    return $CustomLeaguesInfoCopyWith<$Res>(_value.customLeaguesInfo, (value) {
-      return _then(_value.copyWith(customLeaguesInfo: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_CreateLeagueSuccess implements _CreateLeagueSuccess {
-  const _$_CreateLeagueSuccess(this.customLeaguesInfo);
-
-  @override
-  final CustomLeaguesInfo customLeaguesInfo;
-
-  @override
-  String toString() {
-    return 'CustomLeaguesState.createLeagueSuccess(customLeaguesInfo: $customLeaguesInfo)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _CreateLeagueSuccess &&
-            const DeepCollectionEquality()
-                .equals(other.customLeaguesInfo, customLeaguesInfo));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(customLeaguesInfo));
-
-  @JsonKey(ignore: true)
-  @override
-  _$CreateLeagueSuccessCopyWith<_CreateLeagueSuccess> get copyWith =>
-      __$CreateLeagueSuccessCopyWithImpl<_CreateLeagueSuccess>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(List<CustomLeagues> userCustomLeagues)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        loadCustomLeagueInfo,
-    required TResult Function(CustomLeaguesFailures<dynamic> failure)
-        loadFailure,
-    required TResult Function(CustomLeaguesInfo customLeaguesInfo)
-        createLeagueSuccess,
-  }) {
-    return createLeagueSuccess(customLeaguesInfo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-  }) {
-    return createLeagueSuccess?.call(customLeaguesInfo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(List<CustomLeagues> userCustomLeagues)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? loadCustomLeagueInfo,
-    TResult Function(CustomLeaguesFailures<dynamic> failure)? loadFailure,
-    TResult Function(CustomLeaguesInfo customLeaguesInfo)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (createLeagueSuccess != null) {
-      return createLeagueSuccess(customLeaguesInfo);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadUserCustomLeaguesSuccess value)
-        loadUserCustomLeaguesSuccess,
-    required TResult Function(_LoadCustomLeagueInfoSuccess value)
-        loadCustomLeagueInfo,
-    required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_CreateLeagueSuccess value) createLeagueSuccess,
-  }) {
-    return createLeagueSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-  }) {
-    return createLeagueSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadUserCustomLeaguesSuccess value)?
-        loadUserCustomLeaguesSuccess,
-    TResult Function(_LoadCustomLeagueInfoSuccess value)? loadCustomLeagueInfo,
-    TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_CreateLeagueSuccess value)? createLeagueSuccess,
-    required TResult orElse(),
-  }) {
-    if (createLeagueSuccess != null) {
-      return createLeagueSuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _CreateLeagueSuccess implements CustomLeaguesState {
-  const factory _CreateLeagueSuccess(CustomLeaguesInfo customLeaguesInfo) =
-      _$_CreateLeagueSuccess;
-
-  CustomLeaguesInfo get customLeaguesInfo;
-  @JsonKey(ignore: true)
-  _$CreateLeagueSuccessCopyWith<_CreateLeagueSuccess> get copyWith =>
+  _$CustomLeaguesStateCopyWith<_CustomLeaguesState> get copyWith =>
       throw _privateConstructorUsedError;
 }

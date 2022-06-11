@@ -54,7 +54,7 @@ abstract class CustomLeagueInfoDTO implements _$CustomLeagueInfoDTO {
         leagueType: LeagueType(value: leagueType),
         leagueCode: LeagueCode(value: leagueCode),
         adminId: AdminId(value: adminId),
-        customleagueMembers: CustomLeagueMembers(value: teams),
+        customLeagueMembers: CustomLeagueMembers(value: teams),
         leagueStartGameWeek: LeagueStartGameWeek(value: leagueStartGameWeek),
       );
 

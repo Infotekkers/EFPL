@@ -202,7 +202,7 @@ class _$CustomLeaguesInfoTearOff {
       required LeagueType leagueType,
       required LeagueCode leagueCode,
       required AdminId adminId,
-      required CustomLeagueMembers customleagueMembers,
+      required CustomLeagueMembers customLeagueMembers,
       required LeagueStartGameWeek leagueStartGameWeek}) {
     return _CustomLeaguesInfo(
       leagueId: leagueId,
@@ -210,7 +210,7 @@ class _$CustomLeaguesInfoTearOff {
       leagueType: leagueType,
       leagueCode: leagueCode,
       adminId: adminId,
-      customleagueMembers: customleagueMembers,
+      customLeagueMembers: customLeagueMembers,
       leagueStartGameWeek: leagueStartGameWeek,
     );
   }
@@ -226,7 +226,7 @@ mixin _$CustomLeaguesInfo {
   LeagueType get leagueType => throw _privateConstructorUsedError;
   LeagueCode get leagueCode => throw _privateConstructorUsedError;
   AdminId get adminId => throw _privateConstructorUsedError;
-  CustomLeagueMembers get customleagueMembers =>
+  CustomLeagueMembers get customLeagueMembers =>
       throw _privateConstructorUsedError;
   LeagueStartGameWeek get leagueStartGameWeek =>
       throw _privateConstructorUsedError;
@@ -247,7 +247,7 @@ abstract class $CustomLeaguesInfoCopyWith<$Res> {
       LeagueType leagueType,
       LeagueCode leagueCode,
       AdminId adminId,
-      CustomLeagueMembers customleagueMembers,
+      CustomLeagueMembers customLeagueMembers,
       LeagueStartGameWeek leagueStartGameWeek});
 }
 
@@ -267,7 +267,7 @@ class _$CustomLeaguesInfoCopyWithImpl<$Res>
     Object? leagueType = freezed,
     Object? leagueCode = freezed,
     Object? adminId = freezed,
-    Object? customleagueMembers = freezed,
+    Object? customLeagueMembers = freezed,
     Object? leagueStartGameWeek = freezed,
   }) {
     return _then(_value.copyWith(
@@ -291,9 +291,9 @@ class _$CustomLeaguesInfoCopyWithImpl<$Res>
           ? _value.adminId
           : adminId // ignore: cast_nullable_to_non_nullable
               as AdminId,
-      customleagueMembers: customleagueMembers == freezed
-          ? _value.customleagueMembers
-          : customleagueMembers // ignore: cast_nullable_to_non_nullable
+      customLeagueMembers: customLeagueMembers == freezed
+          ? _value.customLeagueMembers
+          : customLeagueMembers // ignore: cast_nullable_to_non_nullable
               as CustomLeagueMembers,
       leagueStartGameWeek: leagueStartGameWeek == freezed
           ? _value.leagueStartGameWeek
@@ -316,7 +316,7 @@ abstract class _$CustomLeaguesInfoCopyWith<$Res>
       LeagueType leagueType,
       LeagueCode leagueCode,
       AdminId adminId,
-      CustomLeagueMembers customleagueMembers,
+      CustomLeagueMembers customLeagueMembers,
       LeagueStartGameWeek leagueStartGameWeek});
 }
 
@@ -338,7 +338,7 @@ class __$CustomLeaguesInfoCopyWithImpl<$Res>
     Object? leagueType = freezed,
     Object? leagueCode = freezed,
     Object? adminId = freezed,
-    Object? customleagueMembers = freezed,
+    Object? customLeagueMembers = freezed,
     Object? leagueStartGameWeek = freezed,
   }) {
     return _then(_CustomLeaguesInfo(
@@ -362,9 +362,9 @@ class __$CustomLeaguesInfoCopyWithImpl<$Res>
           ? _value.adminId
           : adminId // ignore: cast_nullable_to_non_nullable
               as AdminId,
-      customleagueMembers: customleagueMembers == freezed
-          ? _value.customleagueMembers
-          : customleagueMembers // ignore: cast_nullable_to_non_nullable
+      customLeagueMembers: customLeagueMembers == freezed
+          ? _value.customLeagueMembers
+          : customLeagueMembers // ignore: cast_nullable_to_non_nullable
               as CustomLeagueMembers,
       leagueStartGameWeek: leagueStartGameWeek == freezed
           ? _value.leagueStartGameWeek
@@ -383,7 +383,7 @@ class _$_CustomLeaguesInfo implements _CustomLeaguesInfo {
       required this.leagueType,
       required this.leagueCode,
       required this.adminId,
-      required this.customleagueMembers,
+      required this.customLeagueMembers,
       required this.leagueStartGameWeek});
 
   @override
@@ -397,13 +397,13 @@ class _$_CustomLeaguesInfo implements _CustomLeaguesInfo {
   @override
   final AdminId adminId;
   @override
-  final CustomLeagueMembers customleagueMembers;
+  final CustomLeagueMembers customLeagueMembers;
   @override
   final LeagueStartGameWeek leagueStartGameWeek;
 
   @override
   String toString() {
-    return 'CustomLeaguesInfo(leagueId: $leagueId, leagueName: $leagueName, leagueType: $leagueType, leagueCode: $leagueCode, adminId: $adminId, customleagueMembers: $customleagueMembers, leagueStartGameWeek: $leagueStartGameWeek)';
+    return 'CustomLeaguesInfo(leagueId: $leagueId, leagueName: $leagueName, leagueType: $leagueType, leagueCode: $leagueCode, adminId: $adminId, customLeagueMembers: $customLeagueMembers, leagueStartGameWeek: $leagueStartGameWeek)';
   }
 
   @override
@@ -420,7 +420,7 @@ class _$_CustomLeaguesInfo implements _CustomLeaguesInfo {
                 .equals(other.leagueCode, leagueCode) &&
             const DeepCollectionEquality().equals(other.adminId, adminId) &&
             const DeepCollectionEquality()
-                .equals(other.customleagueMembers, customleagueMembers) &&
+                .equals(other.customLeagueMembers, customLeagueMembers) &&
             const DeepCollectionEquality()
                 .equals(other.leagueStartGameWeek, leagueStartGameWeek));
   }
@@ -433,7 +433,7 @@ class _$_CustomLeaguesInfo implements _CustomLeaguesInfo {
       const DeepCollectionEquality().hash(leagueType),
       const DeepCollectionEquality().hash(leagueCode),
       const DeepCollectionEquality().hash(adminId),
-      const DeepCollectionEquality().hash(customleagueMembers),
+      const DeepCollectionEquality().hash(customLeagueMembers),
       const DeepCollectionEquality().hash(leagueStartGameWeek));
 
   @JsonKey(ignore: true)
@@ -449,7 +449,7 @@ abstract class _CustomLeaguesInfo implements CustomLeaguesInfo {
       required LeagueType leagueType,
       required LeagueCode leagueCode,
       required AdminId adminId,
-      required CustomLeagueMembers customleagueMembers,
+      required CustomLeagueMembers customLeagueMembers,
       required LeagueStartGameWeek leagueStartGameWeek}) = _$_CustomLeaguesInfo;
 
   @override
@@ -463,7 +463,7 @@ abstract class _CustomLeaguesInfo implements CustomLeaguesInfo {
   @override
   AdminId get adminId;
   @override
-  CustomLeagueMembers get customleagueMembers;
+  CustomLeagueMembers get customLeagueMembers;
   @override
   LeagueStartGameWeek get leagueStartGameWeek;
   @override

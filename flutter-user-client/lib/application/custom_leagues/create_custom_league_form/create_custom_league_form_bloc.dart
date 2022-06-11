@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:efpl/application/custom_leagues/custom_leagues_bloc.dart';
+import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
 import 'package:efpl/domain/custom_leagues/i_custom_leagues_repository.dart';
 import 'package:efpl/domain/custom_leagues/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,7 +18,7 @@ class CreateCustomLeagueFormBloc
   final ICustomLeaguesRepository _customLeaguesRepository;
   CreateCustomLeagueFormBloc(this._customLeaguesRepository)
       : super(CreateCustomLeagueFormState.initial()) {
-    on<LeagueNameChanged>(
+    on<_leagueNameChanged>(
       (event, emit) {
         emit(state.copyWith(
           leagueName: LeagueName(value: event.leagueNameStr),
@@ -24,8 +26,29 @@ class CreateCustomLeagueFormBloc
       },
     );
 
-    on<CreateLeaguePressed>(
-      (event, emit) {},
+    on<_createLeaguePressed>(
+      (event, emit) async {
+        emit(
+          state.copyWith(
+            isLoading: true,
+          ),
+        );
+
+        final Either<dynamic, CustomLeaguesInfo> failureOrSuccess =
+            await _customLeaguesRepository.createCustomLeague(
+          userId: event.userId,
+          leagueName: event.leagueName,
+        );
+
+        final CustomLeaguesInfo customLeaguesInfo = failureOrSuccess.fold(
+          (l) => l,
+          (r) => r,
+        );
+
+        // emit(
+        //   state.copyWith();
+        // );
+      },
     );
   }
 }
