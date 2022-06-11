@@ -33,4 +33,13 @@ class ApiCustomLeaguesRepository implements ICustomLeaguesRepository {
       leagueName: LeagueName(value: leagueName),
     );
   }
+
+  @override
+  Future<Either<dynamic, CustomLeaguesInfo>> joinCustomLeague(
+      {required String userId, required String leagueCode}) async {
+    return _customLeaguesRemoteDataProvider.joinCustomLeague(
+      userId: AdminId(value: userId),
+      leagueCode: LeagueCode(value: leagueCode),
+    );
+  }
 }

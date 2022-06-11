@@ -1,4 +1,5 @@
 import 'package:efpl/application/custom_leagues/custom_leagues_bloc.dart';
+import 'package:efpl/application/custom_leagues/join_custom_league_form/join_custom_league_form_bloc.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
 import 'package:efpl/infrastructure/custom_leagues/custom_leagues_dto.dart';
 import 'package:efpl/injectable.dart';
@@ -37,7 +38,7 @@ class UserCustomLeaguesView extends StatelessWidget {
             children: [
               OutlinedButton(
                 onPressed: () {
-                  _showCustomModal(context: context);
+                  _showCreateLeagueCustomModal(context: context);
                 },
                 style: ButtonStyle(
                   fixedSize: MaterialStateProperty.all<Size>(
@@ -49,7 +50,7 @@ class UserCustomLeaguesView extends StatelessWidget {
               const SizedBox(width: 10.0),
               ElevatedButton(
                 onPressed: () {
-                  print("pressed");
+                  _showJoinLeagueCustomModal(context: context);
                 },
                 style: ButtonStyle(
                   fixedSize: MaterialStateProperty.all<Size>(
@@ -60,7 +61,6 @@ class UserCustomLeaguesView extends StatelessWidget {
               ),
             ],
           ),
-          const Text("Custom Leagues"),
           const SizedBox(height: 8.0),
           Expanded(
             child: ListView.builder(
@@ -95,7 +95,7 @@ class UserCustomLeaguesView extends StatelessWidget {
     );
   }
 
-  _showCustomModal({required BuildContext context}) {
+  _showCreateLeagueCustomModal({required BuildContext context}) {
     final CreateCustomLeagueFormBloc _createCustomLeagueFormBloc =
         getIt<CreateCustomLeagueFormBloc>();
 
@@ -149,6 +149,62 @@ class UserCustomLeaguesView extends StatelessWidget {
                 ),
               ),
             ));
+      },
+    );
+  }
+
+  _showJoinLeagueCustomModal({required BuildContext context}) {
+    final JoinCustomLeagueFormBloc _joinCustomLeagueFormBloc =
+        getIt<JoinCustomLeagueFormBloc>();
+
+    showModalBottomSheet(
+      context: context,
+      builder: (builder) {
+        return BlocProvider.value(
+          value: _joinCustomLeagueFormBloc,
+          child: Form(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      labelText: "League Code",
+                      labelStyle: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(fontSize: 18),
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 0.0,
+                        horizontal: 15.0,
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                    ),
+                    autocorrect: false,
+                    onChanged: (value) =>
+                        BlocProvider.of<JoinCustomLeagueFormBloc>(context).add(
+                      JoinCustomLeagueFormEvent.leagueCodeChanged(value),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      BlocProvider.of<JoinCustomLeagueFormBloc>(context).add(
+                        const JoinCustomLeagueFormEvent.joinLeaguePressed(),
+                      );
+                    },
+                    child: const Text("Join"),
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
       },
     );
   }

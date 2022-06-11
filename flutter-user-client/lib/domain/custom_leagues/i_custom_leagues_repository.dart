@@ -12,4 +12,8 @@ abstract class ICustomLeaguesRepository {
     required String userId,
     required String leagueName,
   });
+  Future<Either<dynamic, CustomLeaguesInfo>> joinCustomLeague({
+    required String userId,
+    required String leagueCode,
+  });
 }

@@ -106,10 +106,10 @@ const removePlayerFromCustomLeague = asyncHandler(async function (req, res) {
 });
 
 const joinCustomLeague = asyncHandler(async function (req, res) {
-  const { userId, leagueId, leagueCode } = req.body;
+  const { userId, leagueCode } = req.body;
 
   const user = await UserModel.findOne({ _id: userId });
-  const customLeague = await CustomLeagueModel.findOne({ leagueId });
+  const customLeague = await CustomLeagueModel.findOne({ leagueCode });
 
   if (!customLeague) {
     return res
@@ -158,7 +158,7 @@ const joinCustomLeague = asyncHandler(async function (req, res) {
   await user.save();
   await customLeague.save();
 
-  res.send(`Successfully joined ${customLeague.leagueName}!`);
+  res.send(customLeague);
 });
 
 const leaveCustomLeague = asyncHandler(async (req, res) => {

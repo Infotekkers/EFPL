@@ -57,3 +57,17 @@ Map<String, dynamic> _$$_CreateCustomLeagueInputDtoToJson(
       'adminId': instance.adminId,
       'leagueName': instance.leagueName,
     };
+
+_$_JoinCustomLeagueInputDto _$$_JoinCustomLeagueInputDtoFromJson(
+        Map<String, dynamic> json) =>
+    _$_JoinCustomLeagueInputDto(
+      userId: json['userId'] as String,
+      leagueCode: json['leagueCode'] as String,
+    );
+
+Map<String, dynamic> _$$_JoinCustomLeagueInputDtoToJson(
+        _$_JoinCustomLeagueInputDto instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+      'leagueCode': instance.leagueCode,
+    };
