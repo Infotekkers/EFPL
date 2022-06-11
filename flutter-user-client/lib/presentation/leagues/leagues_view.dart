@@ -1,3 +1,4 @@
+import 'package:efpl/application/custom_leagues/create_custom_league_form/create_custom_league_form_bloc.dart';
 import 'package:efpl/application/custom_leagues/custom_leagues_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/injectable.dart';
@@ -23,6 +24,9 @@ class LeaguesView extends StatelessWidget {
               const CustomLeaguesEvent.getUserCustomLeagues(
                   userId: "62960c04c1a572a276b6e08b"),
             ),
+        ),
+        BlocProvider.value(
+          value: getIt<CreateCustomLeagueFormBloc>(),
         ),
       ],
       child: const UserCustomLeaguesView(),

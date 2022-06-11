@@ -61,3 +61,26 @@ abstract class CustomLeagueInfoDTO implements _$CustomLeagueInfoDTO {
   factory CustomLeagueInfoDTO.fromJson(Map<String, dynamic> json) =>
       _$CustomLeagueInfoDTOFromJson(json);
 }
+
+@freezed
+abstract class CreateCustomLeagueInputDto
+    implements _$CreateCustomLeagueInputDto {
+  const CreateCustomLeagueInputDto._();
+
+  const factory CreateCustomLeagueInputDto({
+    required String adminId,
+    required String leagueName,
+  }) = _CreateCustomLeagueInputDto;
+
+  factory CreateCustomLeagueInputDto.fromDomain({
+    required AdminId userId,
+    required LeagueName leagueName,
+  }) =>
+      CreateCustomLeagueInputDto(
+        adminId: userId.getOrCrash(),
+        leagueName: leagueName.getOrCrash(),
+      );
+
+  factory CreateCustomLeagueInputDto.fromJson(Map<String, dynamic> json) =>
+      _$CreateCustomLeagueInputDtoFromJson(json);
+}

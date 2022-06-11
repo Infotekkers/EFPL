@@ -511,3 +511,182 @@ abstract class _CustomLeagueInfoDTO extends CustomLeagueInfoDTO {
   _$CustomLeagueInfoDTOCopyWith<_CustomLeagueInfoDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+CreateCustomLeagueInputDto _$CreateCustomLeagueInputDtoFromJson(
+    Map<String, dynamic> json) {
+  return _CreateCustomLeagueInputDto.fromJson(json);
+}
+
+/// @nodoc
+class _$CreateCustomLeagueInputDtoTearOff {
+  const _$CreateCustomLeagueInputDtoTearOff();
+
+  _CreateCustomLeagueInputDto call(
+      {required String adminId, required String leagueName}) {
+    return _CreateCustomLeagueInputDto(
+      adminId: adminId,
+      leagueName: leagueName,
+    );
+  }
+
+  CreateCustomLeagueInputDto fromJson(Map<String, Object?> json) {
+    return CreateCustomLeagueInputDto.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $CreateCustomLeagueInputDto = _$CreateCustomLeagueInputDtoTearOff();
+
+/// @nodoc
+mixin _$CreateCustomLeagueInputDto {
+  String get adminId => throw _privateConstructorUsedError;
+  String get leagueName => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CreateCustomLeagueInputDtoCopyWith<CreateCustomLeagueInputDto>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CreateCustomLeagueInputDtoCopyWith<$Res> {
+  factory $CreateCustomLeagueInputDtoCopyWith(CreateCustomLeagueInputDto value,
+          $Res Function(CreateCustomLeagueInputDto) then) =
+      _$CreateCustomLeagueInputDtoCopyWithImpl<$Res>;
+  $Res call({String adminId, String leagueName});
+}
+
+/// @nodoc
+class _$CreateCustomLeagueInputDtoCopyWithImpl<$Res>
+    implements $CreateCustomLeagueInputDtoCopyWith<$Res> {
+  _$CreateCustomLeagueInputDtoCopyWithImpl(this._value, this._then);
+
+  final CreateCustomLeagueInputDto _value;
+  // ignore: unused_field
+  final $Res Function(CreateCustomLeagueInputDto) _then;
+
+  @override
+  $Res call({
+    Object? adminId = freezed,
+    Object? leagueName = freezed,
+  }) {
+    return _then(_value.copyWith(
+      adminId: adminId == freezed
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
+              as String,
+      leagueName: leagueName == freezed
+          ? _value.leagueName
+          : leagueName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$CreateCustomLeagueInputDtoCopyWith<$Res>
+    implements $CreateCustomLeagueInputDtoCopyWith<$Res> {
+  factory _$CreateCustomLeagueInputDtoCopyWith(
+          _CreateCustomLeagueInputDto value,
+          $Res Function(_CreateCustomLeagueInputDto) then) =
+      __$CreateCustomLeagueInputDtoCopyWithImpl<$Res>;
+  @override
+  $Res call({String adminId, String leagueName});
+}
+
+/// @nodoc
+class __$CreateCustomLeagueInputDtoCopyWithImpl<$Res>
+    extends _$CreateCustomLeagueInputDtoCopyWithImpl<$Res>
+    implements _$CreateCustomLeagueInputDtoCopyWith<$Res> {
+  __$CreateCustomLeagueInputDtoCopyWithImpl(_CreateCustomLeagueInputDto _value,
+      $Res Function(_CreateCustomLeagueInputDto) _then)
+      : super(_value, (v) => _then(v as _CreateCustomLeagueInputDto));
+
+  @override
+  _CreateCustomLeagueInputDto get _value =>
+      super._value as _CreateCustomLeagueInputDto;
+
+  @override
+  $Res call({
+    Object? adminId = freezed,
+    Object? leagueName = freezed,
+  }) {
+    return _then(_CreateCustomLeagueInputDto(
+      adminId: adminId == freezed
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
+              as String,
+      leagueName: leagueName == freezed
+          ? _value.leagueName
+          : leagueName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_CreateCustomLeagueInputDto extends _CreateCustomLeagueInputDto {
+  const _$_CreateCustomLeagueInputDto(
+      {required this.adminId, required this.leagueName})
+      : super._();
+
+  factory _$_CreateCustomLeagueInputDto.fromJson(Map<String, dynamic> json) =>
+      _$$_CreateCustomLeagueInputDtoFromJson(json);
+
+  @override
+  final String adminId;
+  @override
+  final String leagueName;
+
+  @override
+  String toString() {
+    return 'CreateCustomLeagueInputDto(adminId: $adminId, leagueName: $leagueName)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _CreateCustomLeagueInputDto &&
+            const DeepCollectionEquality().equals(other.adminId, adminId) &&
+            const DeepCollectionEquality()
+                .equals(other.leagueName, leagueName));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(adminId),
+      const DeepCollectionEquality().hash(leagueName));
+
+  @JsonKey(ignore: true)
+  @override
+  _$CreateCustomLeagueInputDtoCopyWith<_CreateCustomLeagueInputDto>
+      get copyWith => __$CreateCustomLeagueInputDtoCopyWithImpl<
+          _CreateCustomLeagueInputDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CreateCustomLeagueInputDtoToJson(this);
+  }
+}
+
+abstract class _CreateCustomLeagueInputDto extends CreateCustomLeagueInputDto {
+  const factory _CreateCustomLeagueInputDto(
+      {required String adminId,
+      required String leagueName}) = _$_CreateCustomLeagueInputDto;
+  const _CreateCustomLeagueInputDto._() : super._();
+
+  factory _CreateCustomLeagueInputDto.fromJson(Map<String, dynamic> json) =
+      _$_CreateCustomLeagueInputDto.fromJson;
+
+  @override
+  String get adminId;
+  @override
+  String get leagueName;
+  @override
+  @JsonKey(ignore: true)
+  _$CreateCustomLeagueInputDtoCopyWith<_CreateCustomLeagueInputDto>
+      get copyWith => throw _privateConstructorUsedError;
+}

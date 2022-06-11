@@ -17,10 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CreateCustomLeagueFormEventTearOff {
   const _$CreateCustomLeagueFormEventTearOff();
 
-  _createLeaguePressed createLeaguePressed(String userId, String leagueName) {
+  _createLeaguePressed createLeaguePressed(
+      {required String userId, required String leagueName}) {
     return _createLeaguePressed(
-      userId,
-      leagueName,
+      userId: userId,
+      leagueName: leagueName,
     );
   }
 
@@ -120,11 +121,11 @@ class __$createLeaguePressedCopyWithImpl<$Res>
     Object? leagueName = freezed,
   }) {
     return _then(_createLeaguePressed(
-      userId == freezed
+      userId: userId == freezed
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      leagueName == freezed
+      leagueName: leagueName == freezed
           ? _value.leagueName
           : leagueName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -135,7 +136,8 @@ class __$createLeaguePressedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_createLeaguePressed implements _createLeaguePressed {
-  const _$_createLeaguePressed(this.userId, this.leagueName);
+  const _$_createLeaguePressed(
+      {required this.userId, required this.leagueName});
 
   @override
   final String userId;
@@ -234,8 +236,9 @@ class _$_createLeaguePressed implements _createLeaguePressed {
 }
 
 abstract class _createLeaguePressed implements CreateCustomLeagueFormEvent {
-  const factory _createLeaguePressed(String userId, String leagueName) =
-      _$_createLeaguePressed;
+  const factory _createLeaguePressed(
+      {required String userId,
+      required String leagueName}) = _$_createLeaguePressed;
 
   String get userId;
   String get leagueName;
@@ -387,10 +390,14 @@ class _$CreateCustomLeagueFormStateTearOff {
   _CreateCustomLeagueFormState call(
       {required LeagueName leagueName,
       required AdminId userId,
+      required LeagueStartGameWeek leagueStartGameWeek,
+      required CustomLeaguesInfo customLeaguesInfo,
       required bool isLoading}) {
     return _CreateCustomLeagueFormState(
       leagueName: leagueName,
       userId: userId,
+      leagueStartGameWeek: leagueStartGameWeek,
+      customLeaguesInfo: customLeaguesInfo,
       isLoading: isLoading,
     );
   }
@@ -403,6 +410,9 @@ const $CreateCustomLeagueFormState = _$CreateCustomLeagueFormStateTearOff();
 mixin _$CreateCustomLeagueFormState {
   LeagueName get leagueName => throw _privateConstructorUsedError;
   AdminId get userId => throw _privateConstructorUsedError;
+  LeagueStartGameWeek get leagueStartGameWeek =>
+      throw _privateConstructorUsedError;
+  CustomLeaguesInfo get customLeaguesInfo => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -416,7 +426,14 @@ abstract class $CreateCustomLeagueFormStateCopyWith<$Res> {
           CreateCustomLeagueFormState value,
           $Res Function(CreateCustomLeagueFormState) then) =
       _$CreateCustomLeagueFormStateCopyWithImpl<$Res>;
-  $Res call({LeagueName leagueName, AdminId userId, bool isLoading});
+  $Res call(
+      {LeagueName leagueName,
+      AdminId userId,
+      LeagueStartGameWeek leagueStartGameWeek,
+      CustomLeaguesInfo customLeaguesInfo,
+      bool isLoading});
+
+  $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo;
 }
 
 /// @nodoc
@@ -432,6 +449,8 @@ class _$CreateCustomLeagueFormStateCopyWithImpl<$Res>
   $Res call({
     Object? leagueName = freezed,
     Object? userId = freezed,
+    Object? leagueStartGameWeek = freezed,
+    Object? customLeaguesInfo = freezed,
     Object? isLoading = freezed,
   }) {
     return _then(_value.copyWith(
@@ -443,11 +462,26 @@ class _$CreateCustomLeagueFormStateCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as AdminId,
+      leagueStartGameWeek: leagueStartGameWeek == freezed
+          ? _value.leagueStartGameWeek
+          : leagueStartGameWeek // ignore: cast_nullable_to_non_nullable
+              as LeagueStartGameWeek,
+      customLeaguesInfo: customLeaguesInfo == freezed
+          ? _value.customLeaguesInfo
+          : customLeaguesInfo // ignore: cast_nullable_to_non_nullable
+              as CustomLeaguesInfo,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
+  }
+
+  @override
+  $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo {
+    return $CustomLeaguesInfoCopyWith<$Res>(_value.customLeaguesInfo, (value) {
+      return _then(_value.copyWith(customLeaguesInfo: value));
+    });
   }
 }
 
@@ -459,7 +493,15 @@ abstract class _$CreateCustomLeagueFormStateCopyWith<$Res>
           $Res Function(_CreateCustomLeagueFormState) then) =
       __$CreateCustomLeagueFormStateCopyWithImpl<$Res>;
   @override
-  $Res call({LeagueName leagueName, AdminId userId, bool isLoading});
+  $Res call(
+      {LeagueName leagueName,
+      AdminId userId,
+      LeagueStartGameWeek leagueStartGameWeek,
+      CustomLeaguesInfo customLeaguesInfo,
+      bool isLoading});
+
+  @override
+  $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo;
 }
 
 /// @nodoc
@@ -479,6 +521,8 @@ class __$CreateCustomLeagueFormStateCopyWithImpl<$Res>
   $Res call({
     Object? leagueName = freezed,
     Object? userId = freezed,
+    Object? leagueStartGameWeek = freezed,
+    Object? customLeaguesInfo = freezed,
     Object? isLoading = freezed,
   }) {
     return _then(_CreateCustomLeagueFormState(
@@ -490,6 +534,14 @@ class __$CreateCustomLeagueFormStateCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as AdminId,
+      leagueStartGameWeek: leagueStartGameWeek == freezed
+          ? _value.leagueStartGameWeek
+          : leagueStartGameWeek // ignore: cast_nullable_to_non_nullable
+              as LeagueStartGameWeek,
+      customLeaguesInfo: customLeaguesInfo == freezed
+          ? _value.customLeaguesInfo
+          : customLeaguesInfo // ignore: cast_nullable_to_non_nullable
+              as CustomLeaguesInfo,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -504,6 +556,8 @@ class _$_CreateCustomLeagueFormState implements _CreateCustomLeagueFormState {
   const _$_CreateCustomLeagueFormState(
       {required this.leagueName,
       required this.userId,
+      required this.leagueStartGameWeek,
+      required this.customLeaguesInfo,
       required this.isLoading});
 
   @override
@@ -511,11 +565,15 @@ class _$_CreateCustomLeagueFormState implements _CreateCustomLeagueFormState {
   @override
   final AdminId userId;
   @override
+  final LeagueStartGameWeek leagueStartGameWeek;
+  @override
+  final CustomLeaguesInfo customLeaguesInfo;
+  @override
   final bool isLoading;
 
   @override
   String toString() {
-    return 'CreateCustomLeagueFormState(leagueName: $leagueName, userId: $userId, isLoading: $isLoading)';
+    return 'CreateCustomLeagueFormState(leagueName: $leagueName, userId: $userId, leagueStartGameWeek: $leagueStartGameWeek, customLeaguesInfo: $customLeaguesInfo, isLoading: $isLoading)';
   }
 
   @override
@@ -526,6 +584,10 @@ class _$_CreateCustomLeagueFormState implements _CreateCustomLeagueFormState {
             const DeepCollectionEquality()
                 .equals(other.leagueName, leagueName) &&
             const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality()
+                .equals(other.leagueStartGameWeek, leagueStartGameWeek) &&
+            const DeepCollectionEquality()
+                .equals(other.customLeaguesInfo, customLeaguesInfo) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
@@ -534,6 +596,8 @@ class _$_CreateCustomLeagueFormState implements _CreateCustomLeagueFormState {
       runtimeType,
       const DeepCollectionEquality().hash(leagueName),
       const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(leagueStartGameWeek),
+      const DeepCollectionEquality().hash(customLeaguesInfo),
       const DeepCollectionEquality().hash(isLoading));
 
   @JsonKey(ignore: true)
@@ -548,12 +612,18 @@ abstract class _CreateCustomLeagueFormState
   const factory _CreateCustomLeagueFormState(
       {required LeagueName leagueName,
       required AdminId userId,
+      required LeagueStartGameWeek leagueStartGameWeek,
+      required CustomLeaguesInfo customLeaguesInfo,
       required bool isLoading}) = _$_CreateCustomLeagueFormState;
 
   @override
   LeagueName get leagueName;
   @override
   AdminId get userId;
+  @override
+  LeagueStartGameWeek get leagueStartGameWeek;
+  @override
+  CustomLeaguesInfo get customLeaguesInfo;
   @override
   bool get isLoading;
   @override

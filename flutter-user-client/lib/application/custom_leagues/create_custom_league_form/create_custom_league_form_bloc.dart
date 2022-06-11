@@ -45,9 +45,12 @@ class CreateCustomLeagueFormBloc
           (r) => r,
         );
 
-        // emit(
-        //   state.copyWith();
-        // );
+        emit(
+          state.copyWith(
+            isLoading: false,
+            customLeaguesInfo: customLeaguesInfo,
+          ),
+        );
       },
     );
   }

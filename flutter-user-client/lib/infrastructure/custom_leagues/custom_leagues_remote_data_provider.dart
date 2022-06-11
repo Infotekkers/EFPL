@@ -51,8 +51,9 @@ class CustomLeaguesRemoteDataProvider {
     }
   }
 
-  Future<Either<dynamic, CustomLeaguesInfo>> getCustomLeagueInfo(
-      {required int leagueId}) async {
+  Future<Either<dynamic, CustomLeaguesInfo>> getCustomLeagueInfo({
+    required int leagueId,
+  }) async {
     try {
       var apiResponse = await instance.client
           .get(Uri.parse('$_baseURL/customLeagues/$leagueId'));
@@ -76,12 +77,19 @@ class CustomLeaguesRemoteDataProvider {
     required AdminId userId,
     required LeagueName leagueName,
   }) async {
+    final CreateCustomLeagueInputDto createCustomLeagueInputDtoOut =
+        CreateCustomLeagueInputDto.fromDomain(
+      userId: userId,
+      leagueName: leagueName,
+    );
+
+    final outGoingJson = createCustomLeagueInputDtoOut.toJson();
+
     try {
       var apiResponse = await instance.client.post(
-          Uri.parse('$_baseURL/customLeagues/create'),
-          body: {userId, leagueName});
-
-      print(apiResponse.body);
+        Uri.parse('$_baseURL/customLeagues/create'),
+        body: outGoingJson,
+      );
 
       if (apiResponse.statusCode == 200) {
         final parsedResponseBody = jsonDecode(apiResponse.body);
