@@ -285,6 +285,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         (l) => [],
         (r) => r,
       );
+
       // all user players
       List<UserPlayer> allNewUserPlayers = state.userTeam.allUserPlayers;
 
@@ -315,7 +316,9 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         // find new player to add
         dynamic playerToTransferInJson = allPlayers
             .where(
-              (player) => player['playerId'].toString() == playerToTransferInId,
+              (player) =>
+                  player['playerId'].toString() ==
+                  playerToTransferInId.toString(),
             )
             .toList()[0];
 

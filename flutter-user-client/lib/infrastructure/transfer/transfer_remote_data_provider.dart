@@ -91,14 +91,14 @@ class TransferRemoteDataProvider {
               await _transferLocalDataProvider.getAllPlayersInPosition(
                   playerPosition: playerPosition);
 
-          if (!(result.isRight() &&
-              result.fold((l) => [], (r) => r).isNotEmpty)) {
-            // add to cache
-            _transferLocalDataProvider.saveAllPlayersInPosition(
-              allPlayersInPosition: allPlayers,
-              playersPosition: playerPosition,
-            );
-          }
+          // if (!(result.isRight() &&
+          //     result.fold((l) => [], (r) => r).isNotEmpty)) {
+          // add to cache
+          _transferLocalDataProvider.saveAllPlayersInPosition(
+            allPlayersInPosition: allPlayers,
+            playersPosition: playerPosition,
+          );
+          // }
         }
         return right(allPlayersInPosition);
       }
