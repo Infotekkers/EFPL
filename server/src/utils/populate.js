@@ -14,7 +14,7 @@ const Admin = require("../models/Admin");
 const { teamData } = require("./data/teams.data");
 const { playersData } = require("../utils/data/players.data");
 const { allPairedMatches } = require("../utils/data/fixture.data");
-const EFPLStats = require("../models/EFPLStats");
+// const EFPLStats = require("../models/EFPLStats");
 
 const addTestPlayer = async () => {
   // Test PLAYER
