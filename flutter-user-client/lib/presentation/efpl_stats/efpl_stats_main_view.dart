@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class EFPLStatsPage extends StatelessWidget {
   const EFPLStatsPage({Key? key}) : super(key: key);
@@ -30,7 +31,11 @@ class EFPLStatsPage extends StatelessWidget {
             appBar: _buildAppBar(
               context: context,
             ),
-            body: _buildMainBody(context: context, state: state),
+            body: _buildMainBody(
+              context: context,
+              state: state,
+              efplBloc: _efplBloc,
+            ),
             // body: Text(state.toString()),
           );
         },
@@ -68,46 +73,58 @@ PreferredSizeWidget _buildAppBar({
 Widget _buildMainBody({
   required BuildContext context,
   required EfplStatsState state,
+  required EfplStatsBloc efplBloc,
 }) {
-  return Container(
-    height: MediaQuery.of(context).size.height,
-    width: MediaQuery.of(context).size.width,
-    color: Colors.blue[50],
-    child: Column(
-      children: [
-        _buildGameWeekController(
-          context: context,
-          state: state,
-          efplStatsBloc: getIt<EfplStatsBloc>(),
-        ),
+  return LiquidPullToRefresh(
+    height: 60,
+    showChildOpacityTransition: false,
+    color: ConstantColors.primary_900,
+    animSpeedFactor: 2,
+    onRefresh: () async {
+      efplBloc.add(
+        const EfplStatsEvent.getEfplStats(gameWeekId: 0),
+      );
+    },
+    child: Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      color: Colors.blue[50],
+      child: Column(
+        children: [
+          _buildGameWeekController(
+            context: context,
+            state: state,
+            efplStatsBloc: getIt<EfplStatsBloc>(),
+          ),
 
-        const SizedBox(
-          height: 30,
-        ),
+          const SizedBox(
+            height: 30,
+          ),
 
-        // TITLE
-        Text(
-          AppLocalizations.of(context)!.gameWeek +
-              " " +
-              state.gameWeekId.toString() +
-              " " +
-              AppLocalizations.of(context)!.summary,
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.55,
-              ),
-        ),
+          // TITLE
+          Text(
+            AppLocalizations.of(context)!.gameWeek +
+                " " +
+                state.gameWeekId.toString() +
+                " " +
+                AppLocalizations.of(context)!.summary,
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.55,
+                ),
+          ),
 
-        const SizedBox(
-          height: 24,
-        ),
+          const SizedBox(
+            height: 24,
+          ),
 
-        _buildInfoCard(
-          context: context,
-          state: state,
-        )
-      ],
+          _buildInfoCard(
+            context: context,
+            state: state,
+          )
+        ],
+      ),
     ),
   );
 }

@@ -265,9 +265,9 @@ const deletePlayer = asyncHandler(async (req, res) => {
 });
 
 const getPlayersByPosition = asyncHandler(async (req, res) => {
-  // const position = req.params.position.toUpperCase();
+  const position = req.params.position.toUpperCase();
 
-  const allPlayersInPosition = await PlayerModel.find()
+  const allPlayersInPosition = await PlayerModel.find({ position: position })
     .select("-_id -__v -history")
     .sort("playerName");
 
@@ -288,24 +288,32 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
       (team) => team.teamName === allPlayersInPosition[i].eplTeamId
     );
 
-    const currentTeamFixture = await Fixture.find({
-      $or: [
-        { homeTeam: allPlayersInPosition[i].eplTeamId },
-        { awayTeam: allPlayersInPosition[i].eplTeamId },
-      ],
+    const teamName = allPlayersInPosition[i].eplTeamId;
 
+    const currentTeamFixtureHome = await Fixture.find({
+      homeTeam: allPlayersInPosition[i].eplTeamId,
       gameweekId: { $gt: nextGameWeekNumber },
     })
-      .select("homeTeam awayTeam")
-      .limit(8);
+      .select("homeTeam awayTeam gameweekId")
+      .limit(4);
+
+    const currentTeamFixtureAway = await Fixture.find({
+      awayTeam: teamName,
+      gameweekId: { $gt: nextGameWeekNumber },
+    })
+      .select("homeTeam awayTeam gameweekId")
+      .limit(4);
+
+    const currentTeamFixture = [
+      ...new Set([...currentTeamFixtureHome, ...currentTeamFixtureAway]),
+    ];
+
+    currentTeamFixture.sort((a, b) => a.gameweekId - b.gameweekId);
 
     const upComingFixture = [];
 
     for (let i = 0; i < currentTeamFixture.length; i++) {
-      if (
-        currentTeamFixture[i].homeTeam.toString() ===
-        allPlayersInPosition[i].eplTeamId.toString()
-      ) {
+      if (currentTeamFixture[i].homeTeam.toString() === teamName) {
         // get team logo
         const teamInfo = await Teams.findOne({
           teamName: currentTeamFixture[i].awayTeam,
@@ -331,7 +339,7 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
     const currentPlayerInfo = {
       playerName: allPlayersInPosition[i].playerName,
       eplTeamId: allPlayersInPosition[i].eplTeamId,
-      eplTeamLogo: currentTeam[0].teamLogo,
+      eplTeamLogo: currentTeam.length > 0 ? currentTeam[0].teamLogo : "",
       currentPrice: allPlayersInPosition[i].currentPrice,
       position: allPlayersInPosition[i].position,
       playerId: allPlayersInPosition[i].playerId,

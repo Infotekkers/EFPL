@@ -306,6 +306,5 @@ List getBestPerformer({required Map dreamTeam}) {
   allPlayers.forEach((element) {
     score = score + int.parse(element['score'].toString());
   });
-  print(allPlayers);
   return [allPlayers.isNotEmpty ? allPlayers[0] : [], score];
 }

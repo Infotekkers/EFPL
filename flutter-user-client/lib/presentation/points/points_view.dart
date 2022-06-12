@@ -387,9 +387,14 @@ Widget _buildMainView(
                               ),
                       description:
                           allFormattedPlayers[0][index].score.isNotEmpty
-                              ? (allFormattedPlayers[0][index]
-                                  .score[0]['fantasyScore']
-                                  .toString())
+                              ? allFormattedPlayers[0][index].isCaptain == true
+                                  ? ((allFormattedPlayers[0][index].score[0]
+                                              ['fantasyScore'] *
+                                          2)
+                                      .toString())
+                                  : (allFormattedPlayers[0][index]
+                                      .score[0]['fantasyScore']
+                                      .toString())
                               : '0',
                       teamName:
                           allFormattedPlayers[0][index].eplTeamId.value.fold(

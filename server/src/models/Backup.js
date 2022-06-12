@@ -275,6 +275,7 @@ const fixtureSchema = mongoose.Schema({
   },
   gameweekId: {
     type: Number,
+    index: true,
     required: [
       true,
       "Custom Error - Required Value *:Game week ID is required.",

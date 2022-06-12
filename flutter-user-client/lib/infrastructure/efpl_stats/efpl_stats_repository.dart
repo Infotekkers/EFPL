@@ -22,7 +22,7 @@ class EFPLStatsRepository implements IEFPLStatsRepository {
     // if (await utility.hasInternetConnection()) {
     // return _efplStatsRemoteDataProvider.getEFPLStats(gameWeekId: gameWeekId);
     // } else {
-    return _efplStatsLocalDataProvider.getEFPLStats(gameWeekId: gameWeekId);
+    return _efplStatsRemoteDataProvider.getEFPLStats(gameWeekId: gameWeekId);
     // }
   }
 }

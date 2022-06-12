@@ -3,6 +3,7 @@ const EFPLStats = require("../models/EFPLStats");
 const GameWeek = require("../models/GameWeek");
 const Player = require("../models/Player");
 const Teams = require("../models/Teams");
+const Users = require("../models/User");
 
 const getStats = asyncHandler(async (req, res) => {
   const gwId = req.params.gwId;
@@ -35,18 +36,27 @@ const updateStats = asyncHandler(async (req, res) => {
 
   // TODO:Complete
   const finalData = {
-    a: "4",
-    highestPoint: 98,
-    averagePoint: 36,
+    // Done
     mostSelectedPlayer: [],
-    mostTransferredOutPlayer: ["Temesgen Castro"],
+    // Done
+    mostTransferredOutPlayer: [],
+    // Done
+    mostCaptainedPlayer: [],
+    // Done
+    mostViceCaptainedPlayer: [],
+    // Done
+    highestPoint: 0,
+    // Done
+    averagePoint: 0,
+
+    // TODO:Check with Nati
     transfersMadeCount: 3000,
-    mostCaptainedPlayer: ["Tsion Meried"],
-    mostViceCaptainedPlayer: ["Sinegiorgis Eshetu"],
     benchBoostCount: 1000,
     freeHitCount: 56,
     wildCardCount: 3,
     tripleCaptainCount: 69,
+
+    // Done
     dreamTeam: {
       goalKeeper: [],
       defenders: [],
@@ -107,7 +117,96 @@ const updateStats = asyncHandler(async (req, res) => {
       mostRemovedPlayerNames.push(player.name);
     }
   });
-  finalData.mostRemoved = mostRemovedPlayerNames;
+  finalData.mostTransferredOutPlayer = mostRemovedPlayerNames;
+
+  /*
+    =======================================================
+    Most Removed Players
+    =======================================================
+  */
+  const mostCaptainedResult = await Player.aggregate([
+    { $unwind: "$score" },
+    { $match: { "score.gameweekId": activeGwId } },
+
+    {
+      $group: {
+        _id: "$_id",
+        name: { $first: "$playerName" },
+        transfersOut: { $sum: "$score.captainCount" },
+      },
+    },
+    // Sort in ascending order
+    { $sort: { transfersOut: -1, name: 1 } },
+  ]).limit(3);
+  const mostCaptained = [];
+  mostCaptainedResult.forEach((player) => {
+    if (player.transfersOut > 0) {
+      mostCaptained.push(player.name);
+    }
+  });
+  finalData.mostCaptainedPlayer = mostCaptained;
+
+  /*
+    =======================================================
+    Most Removed Players
+    =======================================================
+  */
+  const mostViceCaptainedResult = await Player.aggregate([
+    { $unwind: "$score" },
+    { $match: { "score.gameweekId": activeGwId } },
+
+    {
+      $group: {
+        _id: "$_id",
+        name: { $first: "$playerName" },
+        transfersOut: { $sum: "$score.viceCaptainCount" },
+      },
+    },
+    // Sort in ascending order
+    { $sort: { transfersOut: -1, name: 1 } },
+  ]).limit(3);
+  const mostViceCaptained = [];
+  mostViceCaptainedResult.forEach((player) => {
+    if (player.transfersOut > 0) {
+      mostViceCaptained.push(player.name);
+    }
+  });
+  finalData.mostViceCaptainedPlayer = mostViceCaptained;
+
+  /*
+    =======================================================
+    USER POINT STAT
+    =======================================================
+  */
+  const allUserTeam = await Users.find({}).select("team").lean();
+  const allUsersCount = allUserTeam.length;
+  let userScoreSum = 0;
+  let highestUserScore = 0;
+  for (let index = 0; index < allUserTeam.length; index++) {
+    let currentUserScoreSum = 0;
+    //  each user info
+    const currentUserPlayers = allUserTeam[index].team[activeGwId - 1].players;
+
+    //  each player info
+    for (const [key, value] of Object.entries(currentUserPlayers)) {
+      if (value.multiplier !== 0) {
+        const currentPlayerInfo = await Player.findOne({ playerId: key });
+
+        currentUserScoreSum =
+          currentUserScoreSum +
+          currentPlayerInfo.score[activeGwId - 1].fantasyScore *
+            value.multiplier;
+      }
+    }
+
+    if (currentUserScoreSum > highestUserScore) {
+      highestUserScore = currentUserScoreSum;
+    }
+
+    userScoreSum = userScoreSum + currentUserScoreSum;
+  }
+  finalData.highestPoint = highestUserScore;
+  finalData.averagePoint = Math.floor(userScoreSum / allUsersCount);
 
   /*
     =======================================================
@@ -304,7 +403,7 @@ const updateStats = asyncHandler(async (req, res) => {
     }
   }
 
-  await EFPLStats.updateOne({ gameWeekNumber: 1 }, { allStats: finalData });
+  // await EFPLStats.updateOne({ gameWeekNumber: 1 }, { allStats: finalData });
   res.send(finalData);
 });
 

@@ -24,6 +24,8 @@ const scoreSchema = mongoose.Schema({
   ownGoal: { type: Number, default: 0 },
   transfersIn: { type: Number, default: 0 },
   transfersOut: { type: Number, default: 0 },
+  captainCount: { type: Number, default: 0 },
+  viceCaptainCount: { type: Number, default: 0 },
   form: { type: Number, default: 0 },
 });
 
@@ -56,6 +58,7 @@ const playerSchema = mongoose.Schema({
   },
   eplTeamId: {
     type: String,
+    index: true,
     required: [
       true,
       "Custom Error - required Value *: Player Team is required.",
@@ -70,6 +73,7 @@ const playerSchema = mongoose.Schema({
   },
   position: {
     type: String,
+    index: true,
     required: [
       true,
       "Custom Error - required Value *: Player Position is required.",
