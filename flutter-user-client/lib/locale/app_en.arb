@@ -121,5 +121,22 @@
   "freeHitPlayed": "Free Hit Played",
   "wildcardsPlayed": "Wildcards Played",
   "tripleCaptainPlayed": "Triple Captain Played",
-  "dreamTeam": "Dream Team"
+  "dreamTeam": "Dream Team",
+  "showCaseTranslations": "Show Case Translations",
+  "bankKeyTitle": "Remaining Money",
+  "bankKey": "The amount of money left after building your team.",
+  "teamFilterKeyTitle": "Filter By Team",
+  "teamFilterKey": "Filter players based on the team they play for.",
+  "injuryFilterKeyTitle": "Filter By Injury",
+  "injuryFilterKey": "Filter players based on their injury status.",
+  "minPriceKeyTitle": "Minimum Price",
+  "minPriceKey": "The minimum cost to filter a player by.",
+  "sliderKeyTitle": "Slider",
+  "sliderKey": "Price range adjuster to filter players by price.",
+  "maxPriceKeyTitle": "Maximum Price",
+  "maxPriceKey": "The maximum cost to filter a player by.",
+  "playerHeaderSortKeyTitle": "Sorter Header",
+  "playerHeaderSortKey": "Sort player list by respective label",
+  "playerCardKeyTitle": "Player Info",
+  "playerCardKey": "All required info of a player"
 }

@@ -14,8 +14,11 @@ import 'package:efpl/presentation/transfers/widgets/transfer_list_view.dart';
 import 'package:efpl/presentation/watch_list/watch_list_view_main.dart';
 
 import 'package:flutter/material.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class AppRouter {
+  //
+
   // final UtilBloc _utilBloc = getIt<UtilBloc>()
   //   ..add(
   //     const UtilEvent.setDefaultLocale(),
@@ -25,10 +28,20 @@ class AppRouter {
     "/": (context) => const SplashView(),
     "/team": (context) => const TeamView(),
     "/player": (context) => const PlayerView(),
-    "/home": (context) => const MainTabView(),
+    "/home": (context) => ShowCaseWidget(
+          blurValue: 1,
+          builder: Builder(
+            builder: (context) => const MainTabView(),
+          ),
+        ),
     "/fixtureDetails": (context) => const FixtureDetailView(),
     "/transfer/initial": (context) => const InitialTransferPage(),
-    "/transfer": (context) => const TransferPlayerView(),
+    "/transfer": (context) => ShowCaseWidget(
+          blurValue: 1,
+          builder: Builder(
+            builder: (context) => const TransferPlayerView(),
+          ),
+        ),
     "/transfer/confirm": (context) => const ConfirmTransfersPage(),
     "/request-reset": (context) => const RequestResetPage(),
     "/sign-in": (context) => const SignInPage(),

@@ -230,6 +230,7 @@ class TransferLocalDataProvider {
   void saveAllPlayersInPosition(
       {required List allPlayersInPosition,
       required String playersPosition}) async {
+    print("Caching Players in Position");
     try {
       await transfersCache.put(
           'allPlayersInPosition-$playersPosition', allPlayersInPosition);

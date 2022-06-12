@@ -62,6 +62,15 @@ class RegisterForm extends StatelessWidget {
                       snackBarType: "error",
                     );
                   },
+                  passwordDontMatch: (_) {
+                    CustomSnackBar().showCustomSnackBar(
+                      showContext: context,
+                      headlineText: 'Password do not match',
+                      message: "Passwords must match",
+                      snackBarType: 'warning',
+                      showDuration: 2,
+                    );
+                  },
 
                   orElse: () {
                     CustomSnackBar().showCustomSnackBar(
@@ -216,8 +225,18 @@ class RegisterForm extends StatelessWidget {
                     vertical: 0.0,
                     horizontal: 15.0,
                   ),
+                  suffixIcon: IconButton(
+                    icon: Icon(state.showPass
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      BlocProvider.of<RegisterFormBloc>(context)
+                          .add(const RegisterFormEvent.showPressed());
+                    },
+                  ),
                 ),
                 autocorrect: false,
+                obscureText: !state.showPass,
                 onChanged: (value) => BlocProvider.of<RegisterFormBloc>(context)
                     .add(RegisterFormEvent.passwordChanged(value)),
                 validator: (_) => context
@@ -254,8 +273,18 @@ class RegisterForm extends StatelessWidget {
                     vertical: 0.0,
                     horizontal: 15.0,
                   ),
+                  suffixIcon: IconButton(
+                    icon: Icon(state.showConfirmPass
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      BlocProvider.of<RegisterFormBloc>(context)
+                          .add(const RegisterFormEvent.showConfirmPressed());
+                    },
+                  ),
                 ),
                 autocorrect: false,
+                obscureText: !state.showConfirmPass,
                 onChanged: (value) => BlocProvider.of<RegisterFormBloc>(context)
                     .add(RegisterFormEvent.confirmPasswordChanged(value)),
                 validator: (_) => context

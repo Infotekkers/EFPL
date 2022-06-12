@@ -8,12 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class TransferPlayerView extends StatelessWidget {
+class TransferPlayerView extends StatefulWidget {
   const TransferPlayerView({Key? key}) : super(key: key);
 
+  @override
+  State<TransferPlayerView> createState() => _TransferPlayerViewState();
+}
+
+class _TransferPlayerViewState extends State<TransferPlayerView> {
   @override
   Widget build(BuildContext context) {
     final String _baseURL = dotenv.env["API"].toString();
@@ -65,10 +71,78 @@ class TransferPlayerView extends StatelessWidget {
               SfRangeValues(state.minPriceSet, state.maxPriceSet);
 
           return Scaffold(
-            appBar: _buildAppBar(
-                context: context,
-                state: state,
-                currentPlayerPrice: currentPlayerPrice),
+            appBar: AppBar(
+              elevation: 0,
+              toolbarHeight: 80,
+              backgroundColor: Colors.blue[50],
+              foregroundColor: ConstantColors.primary_900,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarColor: Colors.blue[50],
+              ),
+              title: Container(
+                width: MediaQuery.of(context).size.width * 0.85,
+                padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // TITLE
+                    Text(
+                      AppLocalizations.of(context)!.transferList,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.25,
+                          ),
+                    ),
+
+                    // BANK INFO
+                    Column(
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.bank,
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 14,
+                                  ),
+                        ),
+
+                        // SPACER
+                        const SizedBox(height: 0.25),
+
+                        // PRICE INFO
+                        Text(
+                          (state.remainingInBank + currentPlayerPrice)
+                              .toStringAsFixed(1),
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: state.remainingInBank > 0
+                                        ? Colors.green
+                                        : Colors.red,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      ShowCaseWidget.of(context)!.startShowCase(
+                        [],
+                      );
+                    });
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.fromLTRB(8.0, 8.0, 12.0, 8.0),
+                    child: Icon(Icons.help_outline),
+                  ),
+                )
+              ],
+            ),
             body: Container(
               color: Colors.blue[50],
               child: state.isLoading
@@ -92,65 +166,6 @@ class TransferPlayerView extends StatelessWidget {
       ),
     );
   }
-}
-
-PreferredSizeWidget _buildAppBar(
-    {required BuildContext context,
-    required TransferState state,
-    required num currentPlayerPrice}) {
-  return AppBar(
-    elevation: 0,
-    toolbarHeight: 80,
-    backgroundColor: Colors.blue[50],
-    foregroundColor: ConstantColors.primary_900,
-    systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.blue[50],
-    ),
-    title: Container(
-      width: MediaQuery.of(context).size.width * 0.85,
-      padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // TITLE
-          Text(
-            AppLocalizations.of(context)!.transferList,
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.25,
-                ),
-          ),
-
-          // BANK INFO
-          Column(
-            children: [
-              Text(
-                AppLocalizations.of(context)!.bank,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      fontSize: 14,
-                    ),
-              ),
-
-              // SPACER
-              const SizedBox(height: 0.25),
-
-              // PRICE INFO
-              Text(
-                (state.remainingInBank + currentPlayerPrice).toStringAsFixed(1),
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      color:
-                          state.remainingInBank > 0 ? Colors.green : Colors.red,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    ),
-  );
 }
 
 Widget _buildLoadingView() {
@@ -337,7 +352,7 @@ Widget _buildPlayersListView({
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -388,7 +403,7 @@ Widget _buildPlayersListView({
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
-                          )
+                          ),
                         ],
                       ),
                     ),

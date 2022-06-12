@@ -265,6 +265,8 @@ void _buildModalSheet(
                                 width: 40,
                                 child: CachedNetworkImage(
                                   fit: BoxFit.fill,
+                                  // imageUrl:
+
                                   imageUrl: _baseURL +
                                       currentUserPlayer.upComingFixtures[index]
                                           ['teamLogo'],

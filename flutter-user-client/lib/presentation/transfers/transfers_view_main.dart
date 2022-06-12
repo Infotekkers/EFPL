@@ -16,6 +16,7 @@ class TransfersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("@TransfersView");
     // get bloc
     final TransferBloc _transferBloc = getIt<TransferBloc>()
       ..add(
@@ -53,8 +54,7 @@ class TransfersView extends StatelessWidget {
                         ),
                       );
 
-                      // Navigator.pop(context);
-                      Navigator.pushNamed(context, "/transfer/initial");
+                      Navigator.popAndPushNamed(context, "/transfer/initial");
                     },
 
                     incompleteTeam: (_) {
@@ -72,7 +72,7 @@ class TransfersView extends StatelessWidget {
                           valueToSet: true,
                         ),
                       );
-                      Navigator.popAndPushNamed(context, "/transfer/initial");
+                      // Navigator.popAndPushNamed(context, "/transfer/initial");
                     },
                     exceededPrice: (_) {
                       CustomSnackBar().showCustomSnackBar(

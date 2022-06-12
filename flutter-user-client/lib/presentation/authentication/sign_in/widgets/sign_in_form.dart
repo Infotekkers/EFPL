@@ -126,6 +126,7 @@ class SignInForm extends StatelessWidget {
               const SizedBox(height: 15),
 
               // Password Input
+
               TextFormField(
                 key: const ValueKey("loginPagePassword"),
                 decoration: InputDecoration(
@@ -144,9 +145,18 @@ class SignInForm extends StatelessWidget {
                     vertical: 0.0,
                     horizontal: 10.0,
                   ),
+                  suffixIcon: IconButton(
+                    icon: Icon(state.showPass
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      BlocProvider.of<SignInFormBloc>(context)
+                          .add(const SignInFormEvent.showPressed());
+                    },
+                  ),
                 ),
                 autocorrect: false,
-                obscureText: true,
+                obscureText: !state.showPass,
                 onChanged: (value) => BlocProvider.of<SignInFormBloc>(context)
                     .add(SignInFormEvent.passwordChanged(value)),
                 validator: (_) => context
@@ -161,7 +171,6 @@ class SignInForm extends StatelessWidget {
                             orElse: () => null),
                         (_) => null),
               ),
-
               const SizedBox(
                 height: 24,
               ),

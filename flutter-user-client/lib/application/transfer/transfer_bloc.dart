@@ -948,7 +948,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         state.copyWith(isLoading: true),
       );
 
-      // // check price
+      // check price
       List<UserPlayer> allUserPlayers = state.userTeam.allUserPlayers;
 
       double allPlayersSum = 0.0;

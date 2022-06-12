@@ -26,7 +26,7 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
       }
 
       emit(
-        UtilState(
+        state.copyWith(
           locale: Locale(defaultLocale),
         ),
       );
@@ -37,15 +37,13 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
 
       prefs.setString("lang", event.newLocale.toString());
 
-      emit(UtilState(locale: event.newLocale));
+      emit(state.copyWith(locale: event.newLocale));
     });
 
     on<_ClearLocale>((event, emit) {
-      emit(
-        const UtilState(
-          locale: Locale("en"),
-        ),
-      );
+      emit(state.copyWith(
+        locale: Locale("en"),
+      ));
     });
   }
 }

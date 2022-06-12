@@ -4,6 +4,7 @@ import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
+import 'package:efpl/presentation/core/main_tab_view.dart';
 import 'package:efpl/presentation/core/player_card.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class InitialTransferPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("@Initial Transfer");
     final _transferBloc = getIt<TransferBloc>();
 
     return MultiBlocProvider(
@@ -748,51 +750,50 @@ class InitialTransferPage extends StatelessWidget {
                       ),
                     ),
 
-                    // state.transfersMadeCount < 15
-                    //     ? Container()
-                    //     :
-                    Positioned(
-                      child: InkWell(
-                        onTap: () async {
-                          _transferBloc.add(
-                            TransferEvent.validateTeam(
-                              context: context,
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: ConstantColors.primary_900,
-                            border: Border.all(
-                              color: ConstantColors.primary_900,
-                            ),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(50),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color:
-                                    ConstantColors.primary_900.withOpacity(0.5),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: const Offset(
-                                  0,
-                                  3,
-                                ), // changes position of shadow
+                    state.transfersMadeCount < 15
+                        ? Container()
+                        : Positioned(
+                            child: InkWell(
+                              onTap: () async {
+                                _transferBloc.add(
+                                  TransferEvent.validateTeam(
+                                    context: context,
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: ConstantColors.primary_900,
+                                  border: Border.all(
+                                    color: ConstantColors.primary_900,
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(50),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ConstantColors.primary_900
+                                          .withOpacity(0.5),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: const Offset(
+                                        0,
+                                        3,
+                                      ), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.save,
+                                  color: ConstantColors.neutral_200,
+                                ),
                               ),
-                            ],
-                          ),
-                          child: const Icon(
-                            Icons.save,
-                            color: ConstantColors.neutral_200,
-                          ),
-                        ),
-                      ),
-                      bottom: 15.0,
-                      right: 15.0,
-                    )
+                            ),
+                            bottom: 15.0,
+                            right: 15.0,
+                          )
                   ],
                 ),
               ),
