@@ -403,7 +403,7 @@ const updateStats = asyncHandler(async (req, res) => {
     }
   }
 
-  // await EFPLStats.updateOne({ gameWeekNumber: 1 }, { allStats: finalData });
+  await EFPLStats.updateOne({ gameWeekNumber: 1 }, { allStats: finalData });
   res.send(finalData);
 });
 

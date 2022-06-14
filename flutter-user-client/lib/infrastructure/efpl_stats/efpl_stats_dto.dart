@@ -1,6 +1,4 @@
 import 'package:efpl/domain/efpl_stats/efpl_stats.dart';
-import 'package:efpl/domain/epl_stats/epl_stats.dart';
-import 'package:efpl/domain/epl_stats/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'efpl_stats_dto.freezed.dart';

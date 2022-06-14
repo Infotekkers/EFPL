@@ -56,7 +56,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i7.FixtureBloc>(
       () => _i7.FixtureBloc(get<_i8.IFixtureRepository>()));
   gh.factory<_i9.HTTPInstance>(() => _i9.HTTPInstance());
-  gh.lazySingleton<_i10.IAuthRepository>(() => _i11.AuthRepository());
+  gh.lazySingleton<_i10.IAuthRepository>(() => _i11.authorize());
   gh.lazySingleton<_i12.IEPLStatsRepository>(
       () => _i13.EPLStatsRepository(get<_i4.EPLStatsRemoteDataProvider>()));
   gh.factory<_i14.MyTeamLocalDataProvider>(

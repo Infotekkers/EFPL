@@ -12,12 +12,11 @@ import 'package:efpl/infrastructure/auth/auth_dtos.dart';
 import 'package:efpl/services/constants.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:http_interceptor/http_interceptor.dart';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 
 @LazySingleton(as: IAuthRepository)
-class AuthRepository implements IAuthRepository {
+class authorize implements IAuthRepository {
   static final String _baseUrl = "${dotenv.env["API"]}/user";
 
   http.Client? client = http.Client();

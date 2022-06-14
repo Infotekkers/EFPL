@@ -4,7 +4,6 @@ import 'package:efpl/domain/efpl_stats/i_efpl_stats_facade..dart';
 import 'package:efpl/infrastructure/efpl_stats/efpl_stats_local_data_provider.dart';
 import 'package:efpl/infrastructure/efpl_stats/efpl_stats_remote_data_provider.dart';
 import 'package:efpl/services/utility.dart';
-import 'package:injectable/injectable.dart';
 
 class EFPLStatsRepository implements IEFPLStatsRepository {
   Utility utility = Utility();

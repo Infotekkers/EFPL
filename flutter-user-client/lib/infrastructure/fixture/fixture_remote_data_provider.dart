@@ -150,10 +150,6 @@ class FixtureRemoteDataProvider {
           await _fixtureLocalDataProvider.getFixtureByGameWeekId(
               gameWeekId: gameWeekId);
 
-      List<Fixture> allGWFixture = allCachedFixtureCall.fold(
-        (l) => [],
-        (r) => r,
-      );
       return left([
         const FixtureFailures.socketError(failedValue: "failedValue"),
       ]);

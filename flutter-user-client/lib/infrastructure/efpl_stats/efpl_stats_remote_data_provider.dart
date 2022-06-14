@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/efpl_stats/efpl_stats.dart';
 import 'package:efpl/domain/efpl_stats/efpl_stats_failure.dart';
-import 'package:efpl/domain/epl_stats/epl_stats_failure.dart';
 import 'package:efpl/infrastructure/efpl_stats/efpl_stats_dto.dart';
 import 'package:efpl/infrastructure/efpl_stats/efpl_stats_local_data_provider.dart';
 import 'package:efpl/injectable.dart';

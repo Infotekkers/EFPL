@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:efpl/domain/core/value_failures.dart';
 import 'package:efpl/domain/my_team/i_my_team_repository.dart';
 import 'package:efpl/domain/my_team/my_team.dart';
 import 'package:efpl/domain/my_team/my_team_failures.dart';
@@ -31,7 +30,6 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
 
     final failureOrSuccess =
         await iMyTeamRepository.getUserTeam(e.userId, e.gameweekId);
-    print(failureOrSuccess);
 
     failureOrSuccess.fold(
       (failure) => emit(

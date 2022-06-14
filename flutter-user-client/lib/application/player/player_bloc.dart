@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:efpl/domain/my_team/value_objects.dart';
 import 'package:efpl/domain/player/i_player_repository.dart';
 import 'package:efpl/domain/player/player.dart';
 import 'package:efpl/domain/player/player_failures.dart';

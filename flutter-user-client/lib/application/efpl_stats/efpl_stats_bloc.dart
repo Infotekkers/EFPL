@@ -2,11 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/efpl_stats/efpl_stats.dart';
 import 'package:efpl/domain/efpl_stats/i_efpl_stats_facade..dart';
-import 'package:efpl/domain/fixture/value_objects.dart';
-import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 part 'efpl_stats_event.dart';
 part 'efpl_stats_state.dart';

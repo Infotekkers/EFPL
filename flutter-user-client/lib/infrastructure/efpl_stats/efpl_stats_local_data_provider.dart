@@ -1,8 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/efpl_stats/efpl_stats.dart';
-import 'package:efpl/domain/fixture/fixture.dart';
-import 'package:efpl/domain/fixture/fixture_failures.dart';
-import 'package:efpl/domain/fixture/value_objects.dart';
 import 'package:efpl/infrastructure/efpl_stats/efpl_stats_dto.dart';
 import 'package:hive/hive.dart';
 

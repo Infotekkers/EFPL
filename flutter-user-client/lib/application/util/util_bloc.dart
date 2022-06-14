@@ -42,7 +42,7 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
 
     on<_ClearLocale>((event, emit) {
       emit(state.copyWith(
-        locale: Locale("en"),
+        locale: const Locale("en"),
       ));
     });
   }
