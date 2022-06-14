@@ -1068,5 +1068,34 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         ),
       );
     });
+
+    on<_setSearchQuery>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+
+      List<UserPlayer> allFilteredPlayers =
+          state.filteredSelectedPlayerReplacements;
+
+      if (event.query == "") {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            filteredSelectedPlayerReplacements:
+                state.selectedPlayerReplacements,
+          ),
+        );
+      } else {
+        List<UserPlayer> searchQueryFiltered = allFilteredPlayers
+            .where((player) => player.playerName.value
+                .fold((l) => "", (r) => r.toUpperCase())
+                .contains(event.query.toUpperCase()))
+            .toList();
+        emit(
+          state.copyWith(
+            isLoading: false,
+            filteredSelectedPlayerReplacements: searchQueryFiltered,
+          ),
+        );
+      }
+    });
   }
 }

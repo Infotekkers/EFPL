@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -145,21 +146,32 @@ class _TransferPlayerViewState extends State<TransferPlayerView> {
             ),
             body: Container(
               color: Colors.blue[50],
-              child: state.isLoading
-                  ? _buildLoadingView()
-                  : allPositionPlayerFiltered.isEmpty
-                      ? _buildNoPlayersView()
-                      : _buildPlayersListView(
-                          allPositionPlayerFiltered: allPositionPlayerFiltered,
-                          context: context,
-                          state: state,
-                          transferBloc: _transferBloc,
-                          allTeams: allTeams,
-                          allTeamsNames: allTeamsNames,
-                          values: _values,
-                          baseURL: _baseURL,
-                          isInitial: isInitial,
-                        ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _buildSearchBarView(
+                        context: context, transferBloc: _transferBloc),
+                    Container(
+                      child: state.isLoading
+                          ? _buildLoadingView()
+                          : allPositionPlayerFiltered.isEmpty
+                              ? _buildNoPlayersView(context: context)
+                              : _buildPlayersListView(
+                                  allPositionPlayerFiltered:
+                                      allPositionPlayerFiltered,
+                                  context: context,
+                                  state: state,
+                                  transferBloc: _transferBloc,
+                                  allTeams: allTeams,
+                                  allTeamsNames: allTeamsNames,
+                                  values: _values,
+                                  baseURL: _baseURL,
+                                  isInitial: isInitial,
+                                ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           );
         },
@@ -174,10 +186,60 @@ Widget _buildLoadingView() {
   );
 }
 
-Widget _buildNoPlayersView() {
-  return const Center(
-    child: Text(
-      "No Players",
+Widget _buildNoPlayersView({required BuildContext context}) {
+  return Container(
+    height: MediaQuery.of(context).size.height - 200,
+    child: const Center(
+      child: Text(
+        "No Players",
+      ),
+    ),
+  );
+}
+
+Widget _buildSearchBarView(
+    {required BuildContext context, required TransferBloc transferBloc}) {
+  return // SEARCH BAR
+      SizedBox(
+    height: 60,
+    width: MediaQuery.of(context).size.width,
+    child: FloatingSearchBar(
+      backgroundColor: Colors.blue[50],
+      backdropColor: ConstantColors.primary_900,
+      hint: 'Search Here...',
+      scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
+      transitionDuration: const Duration(milliseconds: 600),
+      transitionCurve: Curves.easeInOut,
+      physics: const BouncingScrollPhysics(),
+      debounceDelay: const Duration(milliseconds: 500),
+      onQueryChanged: (query) {
+        transferBloc.add(TransferEvent.setSearchQuery(query: query));
+      },
+      // Specify a custom transition to be used for
+      // animating between opened and closed stated.
+      transition: CircularFloatingSearchBarTransition(),
+      actions: [
+        FloatingSearchBarAction.searchToClear(
+          showIfClosed: false,
+        ),
+      ],
+      builder: (context, transition) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Material(
+            color: Colors.red,
+            // color: Colors.white,
+            elevation: 2.0,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: Colors.accents.map((color) {
+                return Container(
+                    height: 112, color: ConstantColors.primary_900);
+              }).toList(),
+            ),
+          ),
+        );
+      },
     ),
   );
 }
@@ -270,7 +332,7 @@ Widget _buildPlayersListView({
                                           .textTheme
                                           .bodyText1!
                                           .copyWith(
-                                            fontSize: 13,
+                                            fontSize: 12,
                                           ),
                                     )
                                   ],

@@ -16,7 +16,6 @@ class TransfersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("@TransfersView");
     // get bloc
     final TransferBloc _transferBloc = getIt<TransferBloc>()
       ..add(

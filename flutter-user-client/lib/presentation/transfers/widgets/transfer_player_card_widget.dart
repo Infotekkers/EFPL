@@ -386,14 +386,15 @@ Widget _buildPlayerCard(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 20,
+                      height: 24,
                       child: Text(
                         currentPlayer.playerName.value.fold(
                           (l) => '',
                           (r) => r,
                         ),
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              fontSize: 18,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w100,
                             ),
                         textAlign: TextAlign.start,
                       ),
@@ -406,7 +407,7 @@ Widget _buildPlayerCard(
 
                     // PLAYER POSITION
                     SizedBox(
-                      height: 15,
+                      height: 13,
                       child: Text(
                         currentPlayer.playerPosition.value
                                 .fold((l) => '', (r) => r) +
@@ -416,7 +417,7 @@ Widget _buildPlayerCard(
                               (r) => r,
                             ),
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              fontSize: 12,
+                              fontSize: 10,
                             ),
                       ),
                     ),

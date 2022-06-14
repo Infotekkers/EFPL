@@ -38,6 +38,7 @@ dependencies:
   transparent_image: ^2.0.0
   flutter_secure_storage: ^5.0.2
   showcaseview: ^1.1.5
+  material_floating_search_bar: ^0.3.7
 
 dev_dependencies:
   bloc_test: ^9.0.3

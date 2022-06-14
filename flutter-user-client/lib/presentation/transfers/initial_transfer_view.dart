@@ -17,7 +17,6 @@ class InitialTransferPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("@Initial Transfer");
     final _transferBloc = getIt<TransferBloc>();
 
     return MultiBlocProvider(
