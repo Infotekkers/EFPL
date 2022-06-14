@@ -12,6 +12,11 @@ describe("Testing Game week routes ", () => {
     mongoose.connection.close();
     bkConnection.close();
   });
+
+  beforeAll(async () => {
+    await GameWeek.deleteMany();
+  });
+
   let gameWeekId;
   const data = {
     gameWeekNumber: 2,

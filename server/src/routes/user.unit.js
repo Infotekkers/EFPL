@@ -606,27 +606,28 @@ describe("Testing User Routes", () => {
     //    expect response
     expect(res.statusCode).toBe(422);
   });
-  test("POST /user1/requestReset SUCCESS", async () => {
-    // Register user
-    await User.deleteMany();
 
-    // send request
-    await req.post("/user/register").send({
-      userName: "EFPL User",
-      email: "efplTestUsesr@gmail.com",
-      password: "StrongPass@123456",
-      teamName: "EFPL TEAM",
-      country: "Ethiopia",
-    });
+  // test("POST /user1/requestReset SUCCESS", async () => {
+  //   // Register user
+  //   await User.deleteMany();
 
-    // send request
-    const res = await req.post(`/user/requestReset`).send({
-      email: "efplTestUsesr@gmail.com",
-    });
+  //   // send request
+  //   await req.post("/user/register").send({
+  //     userName: "EFPL User",
+  //     email: "efplTestUsesr@gmail.com",
+  //     password: "StrongPass@123456",
+  //     teamName: "EFPL TEAM",
+  //     country: "Ethiopia",
+  //   });
 
-    //    expect response
-    expect(res.statusCode).toBe(400);
-  });
+  //   // send request
+  //   const res = await req.post(`/user/requestReset`).send({
+  //     email: "efplTestUsesr@gmail.com",
+  //   });
+
+  //   //    expect response
+  //   expect(res.statusCode).toBe(400);
+  // });
 
   /*
     =================================================
