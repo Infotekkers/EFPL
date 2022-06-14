@@ -145,5 +145,19 @@
   "playerPointSortKeyTitle": "Sorter by Points",
   "playerPointSortKeyDesc": "Sort player list by sum of total sum of point.",
   "playerCardKeyTitle": "Player Info",
-  "playerCardKeyDesc": "All required information of a player"
+  "playerCardKeyDesc": "All required information of a player",
+  "myTeamTabKeyTitle": "My Team",
+  "myTeamTabKeyDesc": "View your team, set captain and vice captain. Play chips like wildcard, free hit and triple captain. Swap players between bench and starter.",
+  "pointsTabKeyTitle": "Points",
+  "pointsTabKeyDesc": "View your team's achieved point, chips played and sum points gained by all your players. View each player's in game achievement.",
+  "transfersTabKeyTitle": "Transfers",
+  "transfersTabKeyDesc": "Transfer players in and out from the transfer market for next gameweek. View remaining amount in bank and deducted point.",
+  "fixturesTabKeyTitle": "Fixtures",
+  "fixturesTabKeyDesc": "View upcoming and past fixtures, their score, their schedule and lineup. View goals scored, assists made and cards received by players.",
+  "leaguesTabKeyTitle": "Leagues",
+  "leaguesTabKeyDesc": "View all the leagues you are a member of and all the members of those leagues.",
+  "statsTabKeyTitle": "EPL Stats",
+  "statsTabKeyDesc": "View top scorers, assisters, clean sheets,received cards and saves by Ethiopian Premier League players.",
+  "settingTabKeyTitle": "Settings",
+  "settingsTabKeyDesc": "Change your set preferences such as language and more information."
 }
