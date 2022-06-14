@@ -103,7 +103,7 @@ class RegisterForm extends StatelessWidget {
                   // prefixIcon: Icon(Icons.email),
                   labelText: AppLocalizations.of(context)!.email,
                   labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: ConstantColors.primary_900.withOpacity(0.55),
                       ),
                   focusedBorder: const OutlineInputBorder(
@@ -139,7 +139,7 @@ class RegisterForm extends StatelessWidget {
                   // prefixIcon: Icon(Icons.person),
                   labelText: AppLocalizations.of(context)!.userName,
                   labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: ConstantColors.primary_900.withOpacity(0.55),
                       ),
                   focusedBorder: const OutlineInputBorder(
@@ -176,7 +176,7 @@ class RegisterForm extends StatelessWidget {
                   // prefixIcon: Icon(Icons.sports_soccer),
                   labelText: AppLocalizations.of(context)!.teamName,
                   labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: ConstantColors.primary_900.withOpacity(0.55),
                       ),
                   focusedBorder: const OutlineInputBorder(
@@ -213,7 +213,7 @@ class RegisterForm extends StatelessWidget {
                   // prefixIcon: Icon(Icons.lock),
                   labelText: AppLocalizations.of(context)!.password,
                   labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: ConstantColors.primary_900.withOpacity(0.55),
                       ),
                   focusedBorder: const OutlineInputBorder(
@@ -261,7 +261,7 @@ class RegisterForm extends StatelessWidget {
                   // prefixIcon: Icon(Icons.lock),
                   labelText: AppLocalizations.of(context)!.confirmPassword,
                   labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: ConstantColors.primary_900.withOpacity(0.55),
                       ),
                   focusedBorder: const OutlineInputBorder(
@@ -427,6 +427,7 @@ class RegisterForm extends StatelessWidget {
                               Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Colors.grey.withOpacity(0.85),
                                     fontWeight: FontWeight.w700,
+                                    fontSize: 12,
                                   ),
                         ),
 

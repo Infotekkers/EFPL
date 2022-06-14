@@ -65,7 +65,7 @@ void _buildModalSheet(
         child: BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) {
             return Container(
-              height: 344,
+              height: 375,
               padding: const EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 8,
@@ -76,7 +76,7 @@ void _buildModalSheet(
                   Text(
                     currentPlayer.playerName.value.fold((l) => '', (r) => r),
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.25,
                         ),
@@ -92,7 +92,7 @@ void _buildModalSheet(
                             .fold((l) => '', (r) => r) +
                         " )",
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: 14,
+                          fontSize: 12,
                           letterSpacing: 0.05,
                         ),
                   ),
@@ -109,7 +109,7 @@ void _buildModalSheet(
                           arguments: int.parse(currentPlayer.playerId));
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
@@ -150,7 +150,7 @@ void _buildModalSheet(
                       Navigator.pop(context);
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
@@ -186,7 +186,7 @@ void _buildModalSheet(
                       Navigator.pop(context);
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
@@ -216,7 +216,7 @@ void _buildModalSheet(
                         ),
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 20,
                   ),
                   SizedBox(
                     height: 80,

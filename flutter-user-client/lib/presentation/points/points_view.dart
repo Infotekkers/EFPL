@@ -267,7 +267,7 @@ Widget _buildMainView(
                 state.pointsInfo.teamName,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                      // fontWeight: FontWeight.w600,
                       letterSpacing: 0.25,
                     ),
                 // ),

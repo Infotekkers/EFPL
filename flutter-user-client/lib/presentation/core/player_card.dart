@@ -29,8 +29,8 @@ class PlayerWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
           ),
-          width: 80,
-          margin: const EdgeInsets.symmetric(vertical: 8),
+          width: 85,
+          margin: const EdgeInsets.symmetric(vertical: 4),
           padding: const EdgeInsets.symmetric(horizontal: 3),
           child: Card(
             elevation: 0,

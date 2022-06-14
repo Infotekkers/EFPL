@@ -110,7 +110,7 @@ Widget _buildMainBody({
                 AppLocalizations.of(context)!.summary,
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                   fontSize: 22,
-                  fontWeight: FontWeight.bold,
+                  // fontWeight: FontWeight.bold,
                   letterSpacing: 0.55,
                 ),
           ),

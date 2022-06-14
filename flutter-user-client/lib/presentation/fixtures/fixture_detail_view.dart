@@ -236,8 +236,7 @@ class FixtureDetailView extends StatelessWidget {
                                       .textTheme
                                       .bodyText1!
                                       .copyWith(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
                                       ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -282,7 +281,7 @@ class FixtureDetailView extends StatelessWidget {
                                             .textTheme
                                             .bodyText1!
                                             .copyWith(
-                                              fontSize: 30,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.bold,
                                             ),
                                       )
@@ -293,12 +292,12 @@ class FixtureDetailView extends StatelessWidget {
                                             .textTheme
                                             .bodyText1!
                                             .copyWith(
-                                              fontSize: 30,
+                                              fontSize: 24,
                                               fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                 const SizedBox(
-                                  height: 8,
+                                  height: 6,
                                 ),
                                 Text(
                                   currentFixture.homeTeamCity.value.fold(
@@ -308,7 +307,7 @@ class FixtureDetailView extends StatelessWidget {
                                   style: Theme.of(context).textTheme.bodyText1,
                                 ),
                                 const SizedBox(
-                                  height: 8,
+                                  height: 6,
                                 ),
                                 Text(
                                   currentFixture.homeTeamStadium.value.fold(
@@ -319,19 +318,19 @@ class FixtureDetailView extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
 
-                                Text(
-                                  "( " +
-                                      currentFixture.homeTeamCapacity.value
-                                          .fold(
-                                        (l) => '',
-                                        (r) => r.toString(),
-                                      ) +
-                                      " )",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(fontSize: 10),
-                                ),
+                                // Text(
+                                //   "( " +
+                                //       currentFixture.homeTeamCapacity.value
+                                //           .fold(
+                                //         (l) => '',
+                                //         (r) => r.toString(),
+                                //       ) +
+                                //       " )",
+                                //   style: Theme.of(context)
+                                //       .textTheme
+                                //       .bodyText1!
+                                //       .copyWith(fontSize: 10),
+                                // ),
                               ],
                             ),
                           ),
@@ -369,7 +368,6 @@ class FixtureDetailView extends StatelessWidget {
                                       .bodyText1!
                                       .copyWith(
                                         fontSize: 14,
-                                        fontWeight: FontWeight.bold,
                                       ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -443,7 +441,11 @@ class FixtureDetailView extends StatelessWidget {
                                                     (i) => const Padding(
                                                       padding:
                                                           EdgeInsets.fromLTRB(
-                                                              3, 0, 0, 0),
+                                                        3,
+                                                        0,
+                                                        0,
+                                                        0,
+                                                      ),
                                                       child: Icon(
                                                         FontAwesome.soccer_ball,
                                                         size: 15,

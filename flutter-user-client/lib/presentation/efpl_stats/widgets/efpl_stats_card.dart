@@ -31,7 +31,7 @@ class EFPLStatsCard extends StatelessWidget {
             child: Text(
               label,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontSize: 16,
+                    fontSize: 14,
                     letterSpacing: 0.25,
                     fontWeight: FontWeight.w500,
                   ),
@@ -44,7 +44,7 @@ class EFPLStatsCard extends StatelessWidget {
               value,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontSize: 16,
+                    fontSize: 14,
                     letterSpacing: 0.25,
                     fontWeight: FontWeight.w500,
                   ),

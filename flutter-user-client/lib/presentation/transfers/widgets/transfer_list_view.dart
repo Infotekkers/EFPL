@@ -153,7 +153,7 @@ class _TransferPlayerViewState extends State<TransferPlayerView> {
                         context: context, transferBloc: _transferBloc),
                     Container(
                       child: state.isLoading
-                          ? _buildLoadingView()
+                          ? _buildLoadingView(context: context)
                           : allPositionPlayerFiltered.isEmpty
                               ? _buildNoPlayersView(context: context)
                               : _buildPlayersListView(
@@ -180,9 +180,13 @@ class _TransferPlayerViewState extends State<TransferPlayerView> {
   }
 }
 
-Widget _buildLoadingView() {
-  return const Center(
-    child: CircularProgressIndicator(),
+Widget _buildLoadingView({required BuildContext context}) {
+  return Container(
+    height: MediaQuery.of(context).size.height - 200,
+    color: Colors.blue[50],
+    child: const Center(
+      child: CircularProgressIndicator(),
+    ),
   );
 }
 
