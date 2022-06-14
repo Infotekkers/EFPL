@@ -186,7 +186,7 @@ Widget _buildMainBody({
                                                 .textTheme
                                                 .bodyText1!
                                                 .copyWith(
-                                                  fontSize: 13,
+                                                  fontSize: 12,
                                                 ),
                                           )
                                         ],

@@ -61,7 +61,7 @@ void _buildModalSheet({
         child: BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) {
             return Container(
-              height: 310,
+              height: 375,
               padding: const EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 8,
@@ -105,7 +105,7 @@ void _buildModalSheet({
                           arguments: int.parse(currentPlayer.playerId));
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
@@ -138,7 +138,7 @@ void _buildModalSheet({
                       Navigator.pop(context);
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
@@ -171,7 +171,7 @@ void _buildModalSheet({
                         ),
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 24,
                   ),
                   SizedBox(
                     height: 80,

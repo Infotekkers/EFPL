@@ -15,17 +15,13 @@ class SplashView extends StatelessWidget {
             print("Initial");
           },
           authorised: (_) async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              Navigator.popAndPushNamed(context, "/home");
-            });
+            Navigator.pushNamed(context, "/home");
           },
           unauthorised: (_) {
             Navigator.popAndPushNamed(context, "/sign-in");
           },
           authenticated: (_) async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              Navigator.popAndPushNamed(context, "/home");
-            });
+            Navigator.popAndPushNamed(context, "/home");
           },
           unauthenticated: (_) {
             Navigator.popAndPushNamed(context, "/sign-in");
