@@ -49,7 +49,8 @@ class RequestResetFormBloc
       emit(
         state.copyWith(
           isSubmitting: false,
-          authFailureOrSuccessOption: some(failureOrSuccess!),
+          showErrorMessages: true,
+          authFailureOrSuccessOption: optionOf(failureOrSuccess),
         ),
       );
     });

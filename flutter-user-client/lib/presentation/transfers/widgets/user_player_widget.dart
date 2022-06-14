@@ -112,7 +112,7 @@ void _buildModalSheet(
         child: BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) {
             return Container(
-              height: 310,
+              height: 370,
               padding: const EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 8,
@@ -124,7 +124,7 @@ void _buildModalSheet(
                     currentUserPlayer.playerName.value
                         .fold((l) => '', (r) => r),
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.25,
                         ),
@@ -140,7 +140,7 @@ void _buildModalSheet(
                             .fold((l) => '', (r) => r) +
                         " )",
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: 14,
+                          fontSize: 12,
                           letterSpacing: 0.05,
                         ),
                   ),
@@ -157,7 +157,7 @@ void _buildModalSheet(
                           arguments: int.parse(currentUserPlayer.playerId));
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
@@ -194,7 +194,7 @@ void _buildModalSheet(
                               transferBloc, currentUserPlayer, context);
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
@@ -230,7 +230,7 @@ void _buildModalSheet(
                   ),
 
                   const SizedBox(
-                    height: 16,
+                    height: 20,
                   ),
 
                   Text(
@@ -265,6 +265,8 @@ void _buildModalSheet(
                                 width: 40,
                                 child: CachedNetworkImage(
                                   fit: BoxFit.fill,
+                                  // imageUrl:
+
                                   imageUrl: _baseURL +
                                       currentUserPlayer.upComingFixtures[index]
                                           ['teamLogo'],
@@ -418,11 +420,11 @@ Widget _buildPlayerPriceView(
     width: 70,
     child: Center(
       child: Text(
-        // currentUserPlayer.currentPrice.value.fold(
-        //   (l) => '',
-        //   (r) => r.toString(),
-        currentUserPlayer.multiplier.toString(),
-        // ),
+        currentUserPlayer.currentPrice.value.fold(
+          (l) => '',
+          (r) => r.toString(),
+          // currentUserPlayer.multiplier.toString(),
+        ),
         overflow: TextOverflow.ellipsis,
         style: Theme.of(context).textTheme.bodyText1?.copyWith(
               color: ConstantColors.primary_900,
@@ -448,6 +450,7 @@ Widget _buildPlayerNameView(
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodyText1?.copyWith(
               color: ConstantColors.primary_900,
+              fontSize: 14,
             ),
       ),
     ),

@@ -6,6 +6,8 @@ const fse = require("fs-extra");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const Player = require("../models/Player");
+const Teams = require("../models/Teams");
+const Fixture = require("../models/Fixtures");
 
 // Function to generate JWT Token
 const generateJWTToken = expressAsyncHandler(async (id) => {
@@ -96,6 +98,55 @@ const playerInsOutsCounter = async (activeTeam, incomingTeam) => {
     // score
     await player.save();
   }
+};
+
+const getUpcomingFixtures = async (
+  count,
+  eplTeamId,
+  gameWeekId,
+  currPlayer
+) => {
+  // get players upcoming fixtures
+  const currentTeamFixture = await Fixture.find({
+    $or: [{ homeTeam: eplTeamId }, { awayTeam: eplTeamId }],
+
+    gameweekId: { $gt: gameWeekId },
+  })
+    .select("homeTeam awayTeam")
+    .limit(count);
+
+  const upComingFixture = [];
+
+  for (let i = 0; i < currentTeamFixture.length; i++) {
+    if (
+      currentTeamFixture[i].homeTeam.toString() ===
+      currPlayer.eplTeamId.toString()
+    ) {
+      // get team logo
+      const teamInfo = await Teams.findOne({
+        teamName: currentTeamFixture[i].awayTeam,
+      }).select("teamLogo");
+
+      // save to list
+      upComingFixture.push({
+        teamInfo: currentTeamFixture[i].awayTeam.toString() + "+-" + "H",
+        teamLogo: teamInfo.teamLogo,
+      });
+    } else {
+      // get team logo
+      const teamInfo = await Teams.findOne({
+        teamName: currentTeamFixture[i].homeTeam,
+      }).select("teamLogo");
+
+      // save to list
+      upComingFixture.push({
+        teamInfo: currentTeamFixture[i].homeTeam.toString() + "+-" + "A",
+        teamLogo: teamInfo.teamLogo,
+      });
+    }
+  }
+
+  return upComingFixture;
 };
 
 // Function to apply statistical updates to existing teams
@@ -430,4 +481,5 @@ module.exports = {
   // new
   sumEplPlayerScore,
   playerInsOutsCounter,
+  getUpcomingFixtures,
 };

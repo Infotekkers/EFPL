@@ -14,6 +14,7 @@ const Admin = require("../models/Admin");
 const { teamData } = require("./data/teams.data");
 const { playersData } = require("../utils/data/players.data");
 const { allPairedMatches } = require("../utils/data/fixture.data");
+// const EFPLStats = require("../models/EFPLStats");
 
 const addTestPlayer = async () => {
   // Test PLAYER
@@ -699,6 +700,32 @@ const addTestFixture = async () => {
   ===============================================================
 */
 const populateTeams = async () => {
+  // for (let i = 0; i < 30; i++) {
+  //   await EFPLStats.create({
+  //     allStats: {
+  //       gameWeekNumber: i + 1,
+  //       highestPoint: 0,
+  //       averagePoint: 0,
+  //       mostSelectedPlayer: [],
+  //       mostTransferredOutPlayer: [],
+  //       transfersMadeCount: 0,
+  //       mostCaptainedPlayer: [],
+  //       mostViceCaptainedPlayer: [],
+  //       benchBoostCount: 0,
+  //       freeHitCount: 0,
+  //       wildCardCount: 0,
+  //       tripleCaptainCount: 0,
+  //       dreamTeam: {
+  //         goalKeeper: [],
+  //         defenders: [],
+  //         midfielders: [],
+  //         attackers: [],
+  //       },
+  //     },
+  //     gameWeekNumber: i + 1,
+  //   });
+  // }
+
   // check teams
   const teams = await axios.get(`${baseURL}/teams/all`);
 
@@ -946,6 +973,8 @@ const populateFixture = async () => {
     );
   }
 };
+
+const pouplateStatsInit = async () => {};
 module.exports = {
   addTestUser,
   addTestGameweek,
@@ -957,4 +986,5 @@ module.exports = {
   populateTeams,
   populatePlayers,
   populateFixture,
+  pouplateStatsInit,
 };

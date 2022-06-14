@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:efpl/domain/auth/auth_failure.dart';
-import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/core/value_failures.dart';
 
 Either<ValueFailure<String>, String> validateNotEmpty(String input) {

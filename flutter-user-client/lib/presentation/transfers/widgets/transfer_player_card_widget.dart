@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/transfer/transfer_bloc.dart';
+import 'package:efpl/application/watch_list/watch_list_bloc.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
@@ -22,7 +23,7 @@ class UserPlayerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     final _transferBloc = getIt<TransferBloc>();
-    final String _baseURL = dotenv.env["BASE_URL"].toString();
+    final String _baseURL = dotenv.env["API"].toString();
 
     final String injuryStatus = currentPlayer.availability.value
         .fold((l) => '', (r) => r['injuryStatus'].toString());
@@ -49,169 +50,6 @@ void _buildModalSheet(
     {required BuildContext context,
     required UserPlayer currentPlayer,
     required bool isInitial}) {
-  // showModalBottomSheet(
-  //   shape: const RoundedRectangleBorder(
-  //     borderRadius: BorderRadius.only(
-  //       topLeft: Radius.circular(30.0),
-  //       topRight: Radius.circular(30.0),
-  //     ),
-  //   ),
-  //   context: context,
-  //   builder: (builder) {
-  //     return BlocProvider.value(
-  //       value: getIt<TransferBloc>(),
-  //       child: BlocBuilder<TransferBloc, TransferState>(
-  //         builder: (context, state) {
-  //           return Container(
-  //             height: 235,
-  //             padding: const EdgeInsets.symmetric(
-  //               vertical: 20,
-  //               horizontal: 8,
-  //             ),
-  //             child: Column(
-  //               children: [
-  //                 // Player Name
-  //                 Text(
-  //                   currentPlayer.playerName.value.fold((l) => '', (r) => r),
-  //                   textAlign: TextAlign.center,
-  //                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
-  //                         fontSize: 18,
-  //                         fontWeight: FontWeight.bold,
-  //                         letterSpacing: 0.25,
-  //                       ),
-  //                 ),
-
-  //                 const SizedBox(
-  //                   height: 10,
-  //                 ),
-
-  //                 // Player Information Button
-  //                 InkWell(
-  //                   onTap: () {
-  //                     Navigator.pop(context);
-  //                     Navigator.of(context).pushNamed("/player",
-  //                         arguments: int.parse(currentPlayer.playerId));
-  //                   },
-  //                   child: Row(
-  //                     children: [
-  //                       Container(
-  //                         child: const Icon(Icons.info),
-  //                         margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
-  //                       ),
-  //                       Text(
-  //                         AppLocalizations.of(context)!.playerInfo,
-  //                         style: Theme.of(context).textTheme.bodyText1,
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-
-  //                 const SizedBox(
-  //                   height: 10,
-  //                 ),
-
-  //                 // Transfer
-  //                 InkWell(
-  //                   onTap: () {
-  //                     if (isInitial) {
-  //                       getIt<TransferBloc>().add(
-  //                         TransferEvent.transferUserPlayerInitial(
-  //                           transferInPlayerId: currentPlayer.playerId,
-  //                         ),
-  //                       );
-  //                     } else {
-  //                       getIt<TransferBloc>().add(
-  //                         TransferEvent.transferUserPlayer(
-  //                           transferInPlayerId: currentPlayer.playerId,
-  //                         ),
-  //                       );
-  //                     }
-  //                     Navigator.pop(context);
-
-  //                     Navigator.pop(context);
-  //                   },
-  //                   child: Row(
-  //                     children: [
-  //                       Container(
-  //                         child: const Icon(Boxicons.bx_transfer),
-  //                         margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
-  //                       ),
-  //                       Text(
-  //                         AppLocalizations.of(context)!.transfer,
-  //                         style: Theme.of(context).textTheme.bodyText1,
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-
-  //                 const SizedBox(
-  //                   height: 15,
-  //                 ),
-
-  //                 // Upcoming Fixtures
-  //                 Text(
-  //                   AppLocalizations.of(context)!.upcomingFixtures,
-  //                   textAlign: TextAlign.center,
-  //                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
-  //                         fontSize: 18,
-  //                         fontWeight: FontWeight.bold,
-  //                         letterSpacing: 0.25,
-  //                       ),
-  //                 ),
-  //                 const SizedBox(
-  //                   height: 8,
-  //                 ),
-  //                 SizedBox(
-  //                   height: 50,
-  //                   width: double.infinity,
-  //                   child: GridView.builder(
-  //                     shrinkWrap: true,
-  //                     physics: const NeverScrollableScrollPhysics(),
-  //                     gridDelegate:
-  //                         const SliverGridDelegateWithFixedCrossAxisCount(
-  //                       crossAxisCount: 6,
-  //                       childAspectRatio: 2.8,
-  //                     ),
-  //                     itemCount: 6,
-  //                     itemBuilder: (context, index) {
-  //                       return Container(
-  //                         width: 40,
-  //                         height: 28,
-  //                         decoration: BoxDecoration(
-  //                           border: Border.all(
-  //                             color: ConstantColors.primary_900,
-  //                             width: 0.55,
-  //                           ),
-  //                           color: isHomeTeam(
-  //                                     currentPlayer.upComingFixtures[index],
-  //                                   ) ==
-  //                                   1
-  //                               ? ConstantColors.success_300
-  //                               : ConstantColors.error_300,
-  //                         ),
-  //                         child: Center(
-  //                           child: Text(
-  //                             getFixtureTeamAcronym(
-  //                               currentPlayer.upComingFixtures[index],
-  //                             ),
-  //                             style: const TextStyle(
-  //                               fontSize: 12,
-  //                               fontWeight: FontWeight.bold,
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       );
-  //                     },
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           );
-  //         },
-  //       ),
-  //     );
-  //   },
-  // );
   final String _baseURL = dotenv.env["API"].toString();
   showModalBottomSheet(
     context: context,
@@ -227,7 +65,7 @@ void _buildModalSheet(
         child: BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) {
             return Container(
-              height: 310,
+              height: 375,
               padding: const EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 8,
@@ -238,7 +76,7 @@ void _buildModalSheet(
                   Text(
                     currentPlayer.playerName.value.fold((l) => '', (r) => r),
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.25,
                         ),
@@ -254,7 +92,7 @@ void _buildModalSheet(
                             .fold((l) => '', (r) => r) +
                         " )",
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: 14,
+                          fontSize: 12,
                           letterSpacing: 0.05,
                         ),
                   ),
@@ -271,14 +109,17 @@ void _buildModalSheet(
                           arguments: int.parse(currentPlayer.playerId));
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
                             child: const Icon(Icons.info),
                             margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
                           ),
-                          Text(AppLocalizations.of(context)!.playerInformation),
+                          Text(
+                            AppLocalizations.of(context)!.playerInformation,
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
                         ],
                       ),
                     ),
@@ -309,7 +150,7 @@ void _buildModalSheet(
                       Navigator.pop(context);
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
@@ -332,6 +173,36 @@ void _buildModalSheet(
                   ),
 
                   const SizedBox(
+                    height: 2,
+                  ),
+
+                  // Add To WatchList
+                  InkWell(
+                    onTap: () {
+                      getIt<WatchListBloc>().add(
+                        WatchListEvent.addToUserWatchList(
+                            playerId: currentPlayer.playerId),
+                      );
+                      Navigator.pop(context);
+                    },
+                    child: SizedBox(
+                      height: 38,
+                      child: Row(
+                        children: [
+                          Container(
+                            child: const Icon(Boxicons.bxs_binoculars),
+                            margin: const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.addToWatchList,
+                            style: Theme.of(context).textTheme.bodyText1,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(
                     height: 16,
                   ),
 
@@ -345,7 +216,7 @@ void _buildModalSheet(
                         ),
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 20,
                   ),
                   SizedBox(
                     height: 80,
@@ -515,14 +386,15 @@ Widget _buildPlayerCard(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 20,
+                      height: 24,
                       child: Text(
                         currentPlayer.playerName.value.fold(
                           (l) => '',
                           (r) => r,
                         ),
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              fontSize: 18,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w100,
                             ),
                         textAlign: TextAlign.start,
                       ),
@@ -535,7 +407,7 @@ Widget _buildPlayerCard(
 
                     // PLAYER POSITION
                     SizedBox(
-                      height: 15,
+                      height: 13,
                       child: Text(
                         currentPlayer.playerPosition.value
                                 .fold((l) => '', (r) => r) +
@@ -545,7 +417,7 @@ Widget _buildPlayerCard(
                               (r) => r,
                             ),
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              fontSize: 12,
+                              fontSize: 10,
                             ),
                       ),
                     ),

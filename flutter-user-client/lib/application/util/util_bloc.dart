@@ -20,13 +20,14 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
       final SharedPreferences prefs = await _prefs;
       String defaultLocale = "en";
       try {
-        prefs.getString("lang")!.isEmpty ? 'en' : prefs.getString("lang")!;
+        defaultLocale =
+            prefs.getString("lang")!.isEmpty ? 'en' : prefs.getString("lang")!;
       } catch (e) {
         // print(e);
       }
 
       emit(
-        UtilState(
+        state.copyWith(
           locale: Locale(defaultLocale),
         ),
       );
@@ -37,15 +38,13 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
 
       prefs.setString("lang", event.newLocale.toString());
 
-      emit(UtilState(locale: event.newLocale));
+      emit(state.copyWith(locale: event.newLocale));
     });
 
     on<_ClearLocale>((event, emit) {
-      emit(
-        const UtilState(
-          locale: Locale("en"),
-        ),
-      );
+      emit(state.copyWith(
+        locale: const Locale("en"),
+      ));
     });
   }
 }

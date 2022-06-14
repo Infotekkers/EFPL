@@ -17,7 +17,7 @@ const bahirDarKenema = [
     position: "GK",
   },
   {
-    playerName: " Harriston Hessou",
+    playerName: "Harriston Hessou",
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 4.5,
     position: "GK",

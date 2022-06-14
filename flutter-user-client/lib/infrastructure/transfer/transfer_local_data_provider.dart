@@ -175,7 +175,11 @@ class TransferLocalDataProvider {
         allPlayers.add(att);
       }
 
-      return right(allPlayersGK);
+      var newList = [allPlayersGK, allPlayersDEF, allPlayersMID, allPlayersATT]
+          .expand((x) => x)
+          .toList();
+
+      return right(newList);
     } catch (e) {
       print(e);
       return left(
@@ -230,6 +234,7 @@ class TransferLocalDataProvider {
   void saveAllPlayersInPosition(
       {required List allPlayersInPosition,
       required String playersPosition}) async {
+    print("Caching Players in Position");
     try {
       await transfersCache.put(
           'allPlayersInPosition-$playersPosition', allPlayersInPosition);
