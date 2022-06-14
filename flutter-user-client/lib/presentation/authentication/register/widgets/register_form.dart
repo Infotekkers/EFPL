@@ -1,9 +1,14 @@
+// import 'dart:convert';
+
 import 'package:efpl/application/auth/register_form/register_form_bloc.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/services/snack_bar.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:http/http.dart' as http;
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -12,6 +17,36 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final String baseURL = dotenv.env["API"].toString();
+    // List<dynamic> allTeam = [];
+
+    // http.Client? client = http.Client();
+    // final Uri url = Uri.parse("$baseURL/teams/all");
+    // List allTeams = [];
+    // List<String> allTeamNames = [];
+    // Future<List> getTeamLogo() async {
+    //   List allTeams = [];
+    //   var res = await client.get(url);
+    //   List<dynamic> parsedResponseBody = jsonDecode(res.body);
+
+    //   for (var i = 0; i < parsedResponseBody.length; i++) {
+    //     Map currentTeam = {
+    //       "teamName": parsedResponseBody[i]['teamName'].toString(),
+    //       "teamLogo": parsedResponseBody[i]['teamLogo'].toString(),
+    //     };
+    //     allTeams.add(currentTeam);
+    //     allTeam = allTeams;
+    //   }
+    //   print(allTeam);
+    //   // print(allTeams);
+    //   // for (var team in allTeams) {
+    //   //   allTeamNames.add(team['teamName']);
+    //   // }
+
+    //   return allTeams;
+    // }
+
+    // getTeamLogo()
     return BlocConsumer<RegisterFormBloc, RegisterFormState>(
       listener: (context, state) {
         state.authFailureOrSuccessOption.fold(
@@ -341,7 +376,37 @@ class RegisterForm extends StatelessWidget {
               ),
 
               const SizedBox(height: 15),
-
+              // const SizedBox(height: 15),
+              // DropdownButton<String>(
+              //     isExpanded: true,
+              //     items: allTeamNames.map((String teamName) {
+              //       String finalURL = baseURL;
+              //       List teamLogoList = allTeams
+              //           .where((team) => team['teamName'] == teamName)
+              //           .toList();
+              //       if (teamLogoList.isNotEmpty) {
+              //         finalURL = finalURL + teamLogoList[0]['teamLogo'];
+              //       }
+              //       return DropdownMenuItem<String>(
+              //         child: Row(
+              //           crossAxisAlignment: CrossAxisAlignment.center,
+              //           children: [
+              //             Container(
+              //               height: 25,
+              //               width: 25,
+              //               child: CachedNetworkImage(
+              //                 imageUrl: finalURL == baseURL
+              //                     ? '$baseURL/uploads/teams/placeholder_team.png'
+              //                     : finalURL,
+              //               ),
+              //             ),
+              //             Text(teamName)
+              //           ],
+              //         ),
+              //         value: teamName,
+              //       );
+              //     }).toList(),
+              //     onChanged: (teamName) => print(teamName)),
               DropdownButton<String>(
                   value: state.country.value.fold(
                       (f) => f.maybeMap(empty: (_) => 'e', orElse: () => null),
