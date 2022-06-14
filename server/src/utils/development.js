@@ -3,7 +3,8 @@ require("dotenv");
 const asyncHandler = require("express-async-handler");
 const GameWeek = require("../models/GameWeek");
 require("dotenv").config({ path: "../../.env" });
-const ENV = process.env.EXPRESS_ENV || "PRODUCTION";
+// const ENV = process.env.EXPRESS_ENV || "PRODUCTION";
+const ENV = "PRODUCTION";
 /*
   ===============================================================
   DEBUG PRINT WITH COLORS SUPPORT
@@ -88,26 +89,26 @@ function getUnderline(data, underline) {
   ===============================================================
 */
 const devAddGameWeekRoute = asyncHandler(async (req, res) => {
-  if (ENV === "development") {
-    // get data from body
-    const { newGameWeekData } = req.body;
+  // if (ENV === "development") {
+  // get data from body
+  const { newGameWeekData } = req.body;
 
-    // create data from model
-    const newGameWeek = await GameWeek.create(newGameWeekData);
+  // create data from model
+  const newGameWeek = await GameWeek.create(newGameWeekData);
 
-    // send response
-    res.status(201).json(newGameWeek);
+  // send response
+  res.status(201).json(newGameWeek);
 
-    // print dev warning
-    printConsole(
-      { data: "Request for Adding New Game Week" },
-      { printLocation: "development.js:101 - Development Feature" },
-      {
-        bgColor: "bgRed",
-        textColor: "black",
-      }
-    );
-  }
+  // print dev warning
+  printConsole(
+    { data: "Request for Adding New Game Week" },
+    { printLocation: "development.js:101 - Development Feature" },
+    {
+      bgColor: "bgRed",
+      textColor: "black",
+    }
+  );
+  // }
 });
 
 const devClearGameWeekRoute = asyncHandler(async (req, res) => {

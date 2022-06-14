@@ -7,13 +7,22 @@ const teamSchema = mongoose.Schema({
   teamName: {
     type: String,
     required: [true, "Custom Error - Required Value *:Team name is required."],
+    minlength: 4,
+    maxLength: 72,
+    validate: /^[a-zA-Z,.,-,_ ]*$/,
   },
   teamCity: {
     type: String,
+    minlength: 4,
+    maxLength: 72,
     required: [true, "Custom Error - Required Value *:Team city is required."],
+    validate: /^[a-zA-Z,.,-,_ ]*$/,
   },
   teamStadium: {
     type: String,
+    minlength: 4,
+    maxLength: 72,
+    validate: /^[a-zA-Z,.,-,_ ]*$/,
     required: [
       true,
       "Custom Error - Required Value *:Team stadium is required.",
@@ -25,12 +34,16 @@ const teamSchema = mongoose.Schema({
   },
   stadiumCapacity: {
     type: Number,
+    min: 0,
   },
   foundedIn: {
     type: Number,
+    min: 1700,
   },
   teamCoach: {
     type: String,
+    minlength: 4,
+    maxLength: 72,
   },
 });
 

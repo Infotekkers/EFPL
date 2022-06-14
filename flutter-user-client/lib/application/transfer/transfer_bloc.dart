@@ -285,6 +285,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         (l) => [],
         (r) => r,
       );
+
       // all user players
       List<UserPlayer> allNewUserPlayers = state.userTeam.allUserPlayers;
 
@@ -315,7 +316,9 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         // find new player to add
         dynamic playerToTransferInJson = allPlayers
             .where(
-              (player) => player['playerId'].toString() == playerToTransferInId,
+              (player) =>
+                  player['playerId'].toString() ==
+                  playerToTransferInId.toString(),
             )
             .toList()[0];
 
@@ -948,7 +951,7 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
         state.copyWith(isLoading: true),
       );
 
-      // // check price
+      // check price
       List<UserPlayer> allUserPlayers = state.userTeam.allUserPlayers;
 
       double allPlayersSum = 0.0;
@@ -1064,6 +1067,35 @@ class TransferBloc extends Bloc<TransferEvent, TransferState> {
           swappedPlayerIdsList: [],
         ),
       );
+    });
+
+    on<_setSearchQuery>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+
+      List<UserPlayer> allFilteredPlayers =
+          state.filteredSelectedPlayerReplacements;
+
+      if (event.query == "") {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            filteredSelectedPlayerReplacements:
+                state.selectedPlayerReplacements,
+          ),
+        );
+      } else {
+        List<UserPlayer> searchQueryFiltered = allFilteredPlayers
+            .where((player) => player.playerName.value
+                .fold((l) => "", (r) => r.toUpperCase())
+                .contains(event.query.toUpperCase()))
+            .toList();
+        emit(
+          state.copyWith(
+            isLoading: false,
+            filteredSelectedPlayerReplacements: searchQueryFiltered,
+          ),
+        );
+      }
     });
   }
 }

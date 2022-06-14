@@ -55,7 +55,7 @@ class FixtureDetailLineUp extends StatelessWidget {
                       child: Text(
                         "No Lineups yet",
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              fontSize: 32,
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
                       ),
@@ -94,7 +94,7 @@ class FixtureDetailLineUp extends StatelessWidget {
                                 height: 12,
                               ),
                               SizedBox(
-                                height: 16,
+                                height: 20,
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),

@@ -1,4 +1,5 @@
-const incomingTeam = {
+// eslint-disable-next-line no-unused-vars
+const x = {
   activeChip: "",
   gameweekId: 1,
   players: {

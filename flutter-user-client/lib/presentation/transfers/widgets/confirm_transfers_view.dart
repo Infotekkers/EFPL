@@ -353,9 +353,10 @@ Widget _buildMainView(
                     Navigator.pop(context);
 
                     if (state.isInitialSelection == true) {
-                      Navigator.pop(context);
-                      // Navigator.pop(context);
-                      Navigator.pushNamed(context, "/home");
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/home', (Route<dynamic> route) => false);
+
+                      Navigator.of(context).pushNamed("/home");
                     }
                   },
                   child: Text(
