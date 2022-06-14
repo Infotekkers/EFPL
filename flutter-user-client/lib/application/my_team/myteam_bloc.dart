@@ -28,11 +28,7 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
   void _onLoadMyTeam(_LoadMyTeam e, Emitter<MyTeamState> emit) async {
     emit(const MyTeamState.loadInProgress());
 
-    final failureOrSuccess =
-        await iMyTeamRepository.getUserTeam(e.userId, e.gameweekId);
-
     final failureOrSuccess = await iMyTeamRepository.getUserTeam(e.gameweekId);
-
 
     failureOrSuccess.fold(
       (failure) => emit(
