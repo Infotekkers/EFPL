@@ -20,7 +20,8 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
       final SharedPreferences prefs = await _prefs;
       String defaultLocale = "en";
       try {
-        prefs.getString("lang")!.isEmpty ? 'en' : prefs.getString("lang")!;
+        defaultLocale =
+            prefs.getString("lang")!.isEmpty ? 'en' : prefs.getString("lang")!;
       } catch (e) {
         // print(e);
       }
