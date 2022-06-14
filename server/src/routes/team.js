@@ -18,36 +18,257 @@ describe("Testing teams", () => {
     await TeamModel.deleteMany();
   });
 
-  // Add teams test success
-  test("POST /teams/ SUCCESS: Team added Successfully ", async () => {
-    // send request
+  /*
+    =================================================
+    Add Team
+    =================================================
+  */
+  // test("POST /teams/ SUCCESS: Team added Successfully ", async () => {
+  //   // send request
+  //   await TeamModel.deleteMany();
+  //   const res = await req.post(`/teams/`).send(teamData[0]);
+  //   // expect response
+  //   expect(res.statusCode).toBe(201);
+  //   expect(res.text).toBe(`${teamData[0].teamName} added Successfully `);
+  // });
 
+  /*
+    =================================================
+    Team Name
+    =================================================
+  */
+  test("POST /teams/ FAIL Team Name Empty", async () => {
+    // send request
     await TeamModel.deleteMany();
-    const res = await req.post(`/teams/`).send({
-      teamName: teamData[0],
-    });
+    const info = teamData[0];
+    info.teamName = "";
+    const res = await req.post(`/teams/`).send(info);
     // expect response
-    expect(res.statusCode).toBe(201);
-    expect(res.text).toBe(`${teamData[0]} added Successfully `);
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Name Too Long > 72", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamName =
+      "Ethiopian Fantasy Premier League Team Name Is Too Long to Save to the Database";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Name Too Short > 4 ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamName = "Sai";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Name has Symbol - @ ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamName = "Saint George F@C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Name has Symbol - ! ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamName = "Saint George F!C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Name has Symbol - > ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamName = "Saint George F>C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Name has Symbol - < ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamName = "Saint George F<C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
   });
 
-  // update teams test success
-  test("PATCH /teams/:teamId SUCCESS", async () => {
+  /*
+    =================================================
+    Team City
+    =================================================
+  */
+  test("POST /teams/ FAIL Team City Empty", async () => {
     // send request
-    const res = await req.patch(`/teams/1`).send({
-      teamName: teamData[0],
-    });
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamCity = "";
+    const res = await req.post(`/teams/`).send(info);
     // expect response
-    expect(res.statusCode).toBe(201);
-    expect(res.text).toBe(`${teamData[0]} Info updated Successfully `);
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team City Too Long > 72", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamCity =
+      "Ethiopian Fantasy Premier League Team Name Is Too Long to Save to the Database";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team City Too Short > 4 ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamCity = "Sai";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team City has Symbol - @ ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamCity = "Saint George F@C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team City has Symbol - ! ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamCity = "Saint George F!C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team City has Symbol - > ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamCity = "Saint George F>C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team City has Symbol - < ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamCity = "Saint George F<C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
   });
 
-  // Add score test success
-  test("PATCH /teams/:teamId SUCCESS", async () => {
+  /*
+    =================================================
+    Team Stadium
+    =================================================
+  */
+  test("POST /teams/ FAIL Team Stadium Empty", async () => {
     // send request
-    const res = await req.delete(`/teams/1`);
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamStadium = "";
+    const res = await req.post(`/teams/`).send(info);
     // expect response
-    expect(res.statusCode).toBe(204);
-    // expect(res.text).toBe(`Team is removed.`);
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Stadium Too Long > 72", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamStadium =
+      "Ethiopian Fantasy Premier League Team Name Is Too Long to Save to the Database";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Stadium Too Short > 4 ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamStadium = "Sai";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Stadium has Symbol - @ ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamStadium = "Saint George F@C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Stadium has Symbol - ! ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamStadium = "Saint George F!C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Stadium has Symbol - > ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamStadium = "Saint George F>C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+  test("POST /teams/ FAIL Team Stadium has Symbol - < ", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.teamStadium = "Saint George F<C";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+
+  /*
+    =================================================
+    Team Stadium Capacity
+    =================================================
+  */
+  test("POST /teams/ FAIL Team Stadium Capacity < 0", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.stadiumCapacity = "-32";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
+  });
+
+  /*
+    =================================================
+    Founded
+    =================================================
+  */
+  test("POST /teams/ FAIL Team Founded In < 0", async () => {
+    // send request
+    await TeamModel.deleteMany();
+    const info = teamData[0];
+    info.foundedIn = "-32";
+    const res = await req.post(`/teams/`).send(info);
+    // expect response
+    expect(res.statusCode).toBe(422);
   });
 });

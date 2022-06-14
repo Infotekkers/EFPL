@@ -374,7 +374,7 @@ const updateStats = asyncHandler(async (req, res) => {
       }
 
       // MID CASES
-      else if (mostPointMISC[i].position === "MID" && midCount < 5) {
+      else if (mostPointMISC[i].position === "MID" && midCount < 4) {
         if (
           finalData.dreamTeam.midfielders.filter(
             (player) => player.playerName === mostPointMISC[i].name

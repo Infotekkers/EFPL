@@ -4,6 +4,7 @@ const asyncHandler = require("express-async-handler");
 const GameWeek = require("../models/GameWeek");
 require("dotenv").config({ path: "../../.env" });
 const ENV = process.env.EXPRESS_ENV || "PRODUCTION";
+// const ENV = "PRODUCTION";
 /*
   ===============================================================
   DEBUG PRINT WITH COLORS SUPPORT
