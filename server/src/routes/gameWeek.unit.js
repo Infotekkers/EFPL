@@ -20,7 +20,7 @@ describe("Testing Game week routes ", () => {
   };
 
   // Add new game week - Error Scenario
-  test("POST /gameWeek/dev/add --Error", async () => {
+  test("POST /gameWeek/dev/add -- Error - Empty Gameweek Number", async () => {
     // Send request
     const res = await req.post("/gameWeek/dev/add").send({
       newGameWeekData: {
@@ -33,6 +33,123 @@ describe("Testing Game week routes ", () => {
     // Expect response
     expect(res.statusCode).toBe(422);
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+  });
+
+  test("POST /gameWeek/dev/add -- Error - Invalid Gameweek number < 0", async () => {
+    // Send request
+    const res = await req.post("/gameWeek/dev/add").send({
+      newGameWeekData: {
+        gameWeekNumber: "-2",
+        startTimestamp: 1646724092556,
+        status: "Active",
+      },
+    });
+
+    // Expect response
+    expect(res.statusCode).toBe(422);
+    expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+  });
+
+  test("POST /gameWeek/dev/add -- Error - Invalid Gameweek number > 30", async () => {
+    // Send request
+    const res = await req.post("/gameWeek/dev/add").send({
+      newGameWeekData: {
+        gameWeekNumber: "36",
+        startTimestamp: 1646724092556,
+        status: "Active",
+      },
+    });
+
+    // Expect response
+    expect(res.statusCode).toBe(422);
+    expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+  });
+
+  test("POST /gameWeek/dev/add -- Error - Invalid Gameweek number Text", async () => {
+    // Send request
+    const res = await req.post("/gameWeek/dev/add").send({
+      newGameWeekData: {
+        gameWeekNumber: "GWN",
+        startTimestamp: 1646724092556,
+        status: "Active",
+      },
+    });
+
+    // Expect response
+    expect(res.statusCode).toBe(422);
+    expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+  });
+
+  test("POST /gameWeek/dev/add -- Error - Invalid Gameweek number Symbols", async () => {
+    // Send request
+    const res = await req.post("/gameWeek/dev/add").send({
+      newGameWeekData: {
+        gameWeekNumber: "@1234",
+        startTimestamp: 1646724092556,
+        status: "Active",
+      },
+    });
+
+    // Expect response
+    expect(res.statusCode).toBe(422);
+    expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+  });
+
+  test("POST /gameWeek/dev/add -- Error - Duplicate Timestamp Number", async () => {
+    // Send request
+    const resOne = await req.post("/gameWeek/dev/add").send({
+      newGameWeekData: {
+        gameWeekNumber: "5",
+        startTimestamp: 1646724092556,
+        status: "Active",
+      },
+    });
+
+    // Send request
+    const resTwo = await req.post("/gameWeek/dev/add").send({
+      newGameWeekData: {
+        gameWeekNumber: "4",
+        startTimestamp: 1646724092556,
+        status: "Active",
+      },
+    });
+
+    // Expect response
+    expect(resOne.statusCode).toBe(201);
+    expect(resOne.header["content-type"]).toBe(
+      "application/json; charset=utf-8"
+    );
+
+    // Expect response
+    expect(resTwo.statusCode).toBe(422);
+  });
+
+  test("POST /gameWeek/dev/add -- Error - Invalid Status", async () => {
+    // Send request
+    const resOne = await req.post("/gameWeek/dev/add").send({
+      newGameWeekData: {
+        gameWeekNumber: "1",
+        startTimestamp: 1646724092556,
+        status: "FH",
+      },
+    });
+
+    // Expect response
+    expect(resOne.statusCode).toBe(422);
+  });
+
+  test("POST /gameWeek/dev/add -- Error - Invalid Status", async () => {
+    // Send request
+    const resOne = await req.post("/gameWeek/dev/add").send({
+      newGameWeekData: {
+        gameWeekNumber: "1",
+        startTimestamp: 1646724092556,
+        status: "SH",
+      },
+    });
+
+    // Expect response
+    expect(resOne.statusCode).toBe(422);
   });
 
   //   Add new game week - Success Scenario
