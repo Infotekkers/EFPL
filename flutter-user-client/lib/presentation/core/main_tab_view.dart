@@ -54,14 +54,15 @@ class _MainTabViewState extends State<MainTabView> {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Container(
                   height: 250,
-                  padding: EdgeInsets.fromLTRB(16, 30, 12, 16),
+                  padding: const EdgeInsets.fromLTRB(16, 30, 12, 16),
                   width: MediaQuery.of(context).size.width,
-                  color: ConstantColors.primary_900,
+                  // color: ConstantColors.primary_900,
+                  color: Colors.blue[50],
                   child: Stack(
                     children: [
                       // Title
@@ -70,7 +71,7 @@ class _MainTabViewState extends State<MainTabView> {
                           "Ethiopian Fantasy Premier League",
                           style:
                               Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: ConstantColors.neutral_200,
+                                    color: ConstantColors.primary_900,
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 0.55,
@@ -80,7 +81,7 @@ class _MainTabViewState extends State<MainTabView> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 ListTile(
