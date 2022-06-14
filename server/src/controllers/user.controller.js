@@ -24,7 +24,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const register = asyncHandler(async (req, res) => {
-  // check for prexisting email
+  // check for pre-existing email
   const emailExists = await User.findOne({ email: req.body.email });
   if (emailExists) return res.status(400).send("Email in Use");
 
