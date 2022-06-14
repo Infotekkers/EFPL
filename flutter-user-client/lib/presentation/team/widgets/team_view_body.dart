@@ -1,9 +1,11 @@
 import 'package:efpl/application/my_team/myteam_bloc.dart';
+import 'package:efpl/presentation/core/widgets/auth_problem_widget.dart';
 import 'package:efpl/presentation/core/widgets/bouncing_ball_loading_indicator.dart';
 import 'package:efpl/presentation/core/widgets/no_connection_widget.dart';
 import 'package:efpl/presentation/team/widgets/chips_dialog.dart';
 import 'package:efpl/presentation/team/widgets/positional_container_widget.dart';
 import 'package:efpl/services/global_vars.dart';
+import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,38 +18,68 @@ class TeamViewBody extends StatelessWidget {
       listener: (_, state) => {
         state.maybeMap(
             loadFailure: (state) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(strings(context).checkConn)));
+              CustomSnackBar().showCustomSnackBar(
+                showContext: context,
+                headlineText: 'Error',
+                message: strings(context).checkConn,
+                snackBarType: "warning",
+              );
             },
             saved: (state) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(strings(context).teamSaved)));
+              CustomSnackBar().showCustomSnackBar(
+                showContext: context,
+                headlineText: 'Success',
+                message: strings(context).teamSaved,
+                snackBarType: "success",
+              );
             },
             orElse: () {})
       },
       builder: (context, state) => state.map(
         initial: (_) => Container(),
-        loadFailure: (_) => Transform.scale(
-          scale: 0.8,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const NoConnectionWidget(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: OutlinedButton(
-                  onPressed: () => BlocProvider.of<MyTeamBloc>(context).add(
-                      const MyTeamEvent.loadMyTeam(
-                          "6296348d988244c442925ee9", "1")),
-                  style: OutlinedButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Colors.blue[400],
+        loadFailure: (state) => state.myTeamFailure.maybeMap(
+          authError: (_) => Transform.scale(
+            scale: 0.8,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const AuthProblemWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.of(context).pushNamed("/"),
+                    style: OutlinedButton.styleFrom(
+                      primary: Colors.white,
+                      backgroundColor: Colors.blue[400],
+                    ),
+                    child: Text(strings(context).login),
                   ),
-                  child: Text(strings(context).retry),
                 ),
-              ),
-            ],
+              ],
+            ),
+          ),
+          orElse: () => Transform.scale(
+            scale: 0.8,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const NoConnectionWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                  child: OutlinedButton(
+                    onPressed: () => BlocProvider.of<MyTeamBloc>(context)
+                        .add(const MyTeamEvent.loadMyTeam("1")),
+                    style: OutlinedButton.styleFrom(
+                      primary: Colors.white,
+                      backgroundColor: Colors.blue[400],
+                    ),
+                    child: Text(strings(context).retry),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         loadInProgress: (_) => const BouncingBallLoadingIndicator(),
@@ -216,9 +248,8 @@ class TeamViewBody extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () => changed
-                  ? BlocProvider.of<MyTeamBloc>(context).add(
-                      const MyTeamEvent.loadMyTeam(
-                          "6296348d988244c442925ee9", "1"))
+                  ? BlocProvider.of<MyTeamBloc>(context)
+                      .add(const MyTeamEvent.loadMyTeam("1"))
                   : null,
               style: TextButton.styleFrom(
                   primary: changed ? Colors.red[400] : Colors.grey),
@@ -226,9 +257,8 @@ class TeamViewBody extends StatelessWidget {
             ),
             OutlinedButton(
               onPressed: () => changed
-                  ? BlocProvider.of<MyTeamBloc>(context).add(
-                      MyTeamEvent.saveMyTeam(
-                          state.myTeam, '6296348d988244c442925ee9'))
+                  ? BlocProvider.of<MyTeamBloc>(context)
+                      .add(MyTeamEvent.saveMyTeam(state.myTeam))
                   : null,
               style: OutlinedButton.styleFrom(
                 primary: changed ? Colors.white : Colors.grey[500],
