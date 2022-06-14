@@ -181,10 +181,7 @@ class authorize implements IAuthRepository {
 
       // success
       if (response.statusCode == 200) {
-        final UserDto userDtoIn =
-            UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-
-        return right(userDtoIn.toDomain());
+        return right(user);
       }
       // email not found
       else if (response.statusCode == 404) {
