@@ -21,9 +21,9 @@ const addPlayer = asyncHandler(async (req, res) => {
     playerName: req.body.playerName,
   });
 
-  const teamId = await Teams.findOne({ teamName: eplTeamId });
+  // const teamId = await Teams.findOne({ teamName: eplTeamId });
 
-  const id = teamId.teamId;
+  // const id = teamId.teamId;
 
   // If player does not exist
   if (!verifyPlayer) {
@@ -40,7 +40,7 @@ const addPlayer = asyncHandler(async (req, res) => {
           currentPrice,
           availability,
           playerImage: playerImagePath,
-          eplTeamId: id,
+          eplTeamId: eplTeamId,
         }).save();
 
         const io = require("../../server");
@@ -62,7 +62,7 @@ const addPlayer = asyncHandler(async (req, res) => {
         currentPrice,
         availability,
         playerImage: "",
-        eplTeamId: id,
+        eplTeamId: eplTeamId,
       }).save();
       res.status(201).send(`${playerName} added successfully`);
     }
@@ -76,6 +76,7 @@ const addPlayer = asyncHandler(async (req, res) => {
 const updatePlayer = asyncHandler(async (req, res) => {
   const {
     playerName,
+    emitSocket,
     eplTeamId,
     availability,
     position,
@@ -112,7 +113,7 @@ const updatePlayer = asyncHandler(async (req, res) => {
     };
   }
 
-  if (playerImage !== "") {
+  if (playerImage && playerImage !== "") {
     const filePath = makeFilePlayer(playerImage, logoName);
 
     if (filePath !== "") {
@@ -132,17 +133,18 @@ const updatePlayer = asyncHandler(async (req, res) => {
       }
     );
 
-    const io = require("../../server");
-    io.emit("playerUpdated");
-
+    if (emitSocket !== 0) {
+      const io = require("../../server");
+      io.emit("playerUpdated");
+    }
     res.status(201).send(` ${playerName} Info updated successful`);
   } else {
-    return res.status(404).send(`player with ${playerName}exist`);
+    return res.status(404).send(`player with ${playerName} exist`);
   }
 });
 
 const updateScore = asyncHandler(async (req, res) => {
-  const { score } = req.body;
+  const { score, emitSocket } = req.body;
   const verifyPlayer = await PlayerModel.findOne({
     playerId: req.params.playerId,
   });
@@ -158,8 +160,10 @@ const updateScore = asyncHandler(async (req, res) => {
 
     await verifyPlayer.save();
 
-    const io = require("../../server");
-    io.emit("playerUpdated");
+    if (emitSocket !== 0) {
+      const io = require("../../server");
+      io.emit("playerUpdated");
+    }
 
     res.status(201).send(`Score for Gameweek update successful`);
   } else {
@@ -168,7 +172,7 @@ const updateScore = asyncHandler(async (req, res) => {
 });
 
 const addScore = asyncHandler(async (req, res) => {
-  const { score } = req.body;
+  const { score, emitSocket } = req.body;
   const verifyPlayer = await PlayerModel.findOne({
     playerId: req.params.playerId,
   });
@@ -181,8 +185,10 @@ const addScore = asyncHandler(async (req, res) => {
         },
       }
     );
-    const io = require("../../server");
-    io.emit("playerUpdated");
+    if (emitSocket !== 0) {
+      const io = require("../../server");
+      io.emit("playerUpdated");
+    }
 
     res.status(201).send(`Score added successfully`);
   } else {
