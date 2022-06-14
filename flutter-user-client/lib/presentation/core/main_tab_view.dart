@@ -54,53 +54,120 @@ class _MainTabViewState extends State<MainTabView> {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    // color: ConstantColors.primary_800,
-                    border: Border.all(color: Colors.white, width: 0.0),
+                SizedBox(
+                  height: 40,
+                ),
+                Container(
+                  height: 250,
+                  padding: EdgeInsets.fromLTRB(16, 30, 12, 16),
+                  width: MediaQuery.of(context).size.width,
+                  color: ConstantColors.primary_900,
+                  child: Stack(
+                    children: [
+                      // Title
+                      Center(
+                        child: Text(
+                          "Ethiopian Fantasy Premier League",
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: ConstantColors.neutral_200,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.55,
+                                  ),
+                        ),
+                      )
+                    ],
                   ),
-                  child: const Center(child: Text('Drawer Header')),
+                ),
+                SizedBox(
+                  height: 8,
                 ),
                 ListTile(
-                  title: const Text('WatchList'),
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.star,
+                        color: ConstantColors.primary_900,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Center(child: Text('Watch List'))
+                    ],
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, "/watchList");
                   },
                 ),
                 ListTile(
-                  title: const Text('EPL Table'),
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.table_chart,
+                        color: ConstantColors.primary_900,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Center(child: Text('EPL Table'))
+                    ],
+                  ),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: const Text('EPFL Stats'),
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Boxicons.bx_stats,
+                        color: ConstantColors.primary_900,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Center(child: Text('EPFL Stats'))
+                    ],
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, "/efpl");
                   },
                 ),
                 ListTile(
-                  title: const Text('How To'),
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        MdiIcons.accountGroup,
+                        color: ConstantColors.primary_900,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Center(child: Text('About Us'))
+                    ],
+                  ),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: const Text('About Us'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: const Text('Settings'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: const Text('LogOut'),
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        MdiIcons.logout,
+                        color: ConstantColors.primary_900,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text('LogOut')
+                    ],
+                  ),
                   onTap: () {
                     getIt<IAuthRepository>().removeUser();
                     Navigator.popAndPushNamed(context, "/sign-in");
-                  },
-                ),
-                ListTile(
-                  title: const Text('check token'),
-                  onTap: () async {
-                    const storage = FlutterSecureStorage();
-                    await storage.delete(key: 'user');
                   },
                 ),
               ],
