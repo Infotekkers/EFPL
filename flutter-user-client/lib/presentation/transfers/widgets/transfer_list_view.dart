@@ -20,6 +20,29 @@ class TransferPlayerView extends StatefulWidget {
   State<TransferPlayerView> createState() => _TransferPlayerViewState();
 }
 
+// Remaining In Bank
+final _bankKey = GlobalKey();
+// Search Bar
+final _searchBarKey = GlobalKey();
+// Filter by Team
+final _filterByTeamKey = GlobalKey();
+// Filter by Availabilty
+final _filterByAvailabiltyKey = GlobalKey();
+// Min Label
+final _minPriceLabelKey = GlobalKey();
+// Slider
+final _sliderKey = GlobalKey();
+// Max Label
+final _maxPriceLabelKey = GlobalKey();
+// Player Name Sorter
+final _playerNameSorterKey = GlobalKey();
+// Player Price Sorter
+final _playerPriceSorterKey = GlobalKey();
+// Player Point Sorter
+final _playerPointSorterKey = GlobalKey();
+// Player Information
+final _playerCardKey = GlobalKey();
+
 class _TransferPlayerViewState extends State<TransferPlayerView> {
   @override
   Widget build(BuildContext context) {
@@ -111,17 +134,40 @@ class _TransferPlayerViewState extends State<TransferPlayerView> {
                         const SizedBox(height: 0.25),
 
                         // PRICE INFO
-                        Text(
-                          (state.remainingInBank + currentPlayerPrice)
-                              .toStringAsFixed(1),
-                          style:
+                        Showcase(
+                          key: _bankKey,
+                          title: AppLocalizations.of(context)!.bankKeyTitle,
+                          description:
+                              AppLocalizations.of(context)!.bankKeyDesc,
+                          shapeBorder: const CircleBorder(),
+                          showcaseBackgroundColor: ConstantColors.primary_900,
+                          titleTextStyle:
                               Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: state.remainingInBank > 0
-                                        ? Colors.green
-                                        : Colors.red,
+                                    color: ConstantColors.neutral_200,
+                                    height: 1.5,
                                     fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 0.55,
                                   ),
+                          descTextStyle:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: ConstantColors.neutral_200,
+                                    height: 1.5,
+                                  ),
+                          overlayPadding: const EdgeInsets.all(8),
+                          contentPadding: const EdgeInsets.all(20),
+                          child: Text(
+                            (state.remainingInBank + currentPlayerPrice)
+                                .toStringAsFixed(1),
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      color: state.remainingInBank > 0
+                                          ? Colors.green
+                                          : Colors.red,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
                         ),
                       ],
                     ),
@@ -133,7 +179,19 @@ class _TransferPlayerViewState extends State<TransferPlayerView> {
                   onTap: () {
                     setState(() {
                       ShowCaseWidget.of(context)!.startShowCase(
-                        [],
+                        [
+                          _bankKey,
+                          _searchBarKey,
+                          _filterByTeamKey,
+                          _filterByAvailabiltyKey,
+                          _minPriceLabelKey,
+                          _sliderKey,
+                          _maxPriceLabelKey,
+                          _playerNameSorterKey,
+                          _playerPriceSorterKey,
+                          _playerPointSorterKey,
+                          _playerCardKey,
+                        ],
                       );
                     });
                   },
@@ -207,43 +265,63 @@ Widget _buildSearchBarView(
       SizedBox(
     height: 60,
     width: MediaQuery.of(context).size.width,
-    child: FloatingSearchBar(
-      backgroundColor: Colors.blue[50],
-      backdropColor: ConstantColors.primary_900,
-      hint: 'Search Here...',
-      scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
-      transitionDuration: const Duration(milliseconds: 600),
-      transitionCurve: Curves.easeInOut,
-      physics: const BouncingScrollPhysics(),
-      debounceDelay: const Duration(milliseconds: 500),
-      onQueryChanged: (query) {
-        transferBloc.add(TransferEvent.setSearchQuery(query: query));
-      },
-      // Specify a custom transition to be used for
-      // animating between opened and closed stated.
-      transition: CircularFloatingSearchBarTransition(),
-      actions: [
-        FloatingSearchBarAction.searchToClear(
-          showIfClosed: false,
-        ),
-      ],
-      builder: (context, transition) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Material(
-            color: Colors.red,
-            // color: Colors.white,
-            elevation: 2.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: Colors.accents.map((color) {
-                return Container(
-                    height: 112, color: ConstantColors.primary_900);
-              }).toList(),
-            ),
+    child: Showcase(
+      key: _searchBarKey,
+      title: AppLocalizations.of(context)!.searchBarKeyTitle,
+      description: AppLocalizations.of(context)!.searchBarDesc,
+      shapeBorder: const CircleBorder(),
+      showcaseBackgroundColor: ConstantColors.primary_900,
+      titleTextStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+            color: ConstantColors.neutral_200,
+            height: 1.5,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.55,
           ),
-        );
-      },
+      descTextStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+            color: ConstantColors.neutral_200,
+            height: 1.5,
+          ),
+      overlayPadding: const EdgeInsets.all(8),
+      contentPadding: const EdgeInsets.all(20),
+      child: FloatingSearchBar(
+        backgroundColor: Colors.blue[50],
+        backdropColor: ConstantColors.primary_900,
+        hint: 'Search Here...',
+        scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
+        transitionDuration: const Duration(milliseconds: 600),
+        transitionCurve: Curves.easeInOut,
+        physics: const BouncingScrollPhysics(),
+        debounceDelay: const Duration(milliseconds: 500),
+        onQueryChanged: (query) {
+          transferBloc.add(TransferEvent.setSearchQuery(query: query));
+        },
+        // Specify a custom transition to be used for
+        // animating between opened and closed stated.
+        transition: CircularFloatingSearchBarTransition(),
+        actions: [
+          FloatingSearchBarAction.searchToClear(
+            showIfClosed: false,
+          ),
+        ],
+        builder: (context, transition) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Material(
+              color: Colors.red,
+              // color: Colors.white,
+              elevation: 2.0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: Colors.accents.map((color) {
+                  return Container(
+                      height: 112, color: ConstantColors.primary_900);
+                }).toList(),
+              ),
+            ),
+          );
+        },
+      ),
     ),
   );
 }
@@ -286,63 +364,91 @@ Widget _buildPlayersListView({
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: state.selectedDropDownTeamValue,
-                            style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      color: ConstantColors.primary_900,
-                                    ),
-                            onChanged: (String? newTeamName) {
-                              transferBloc.add(
-                                TransferEvent.setFilter(
-                                  filterBy: "team",
-                                  filterValue: newTeamName!,
-                                ),
-                              );
-                            },
-                            items: allTeamsNames.map((String teamName) {
-                              String finalURL = baseURL;
+                        child: Showcase(
+                          key: _filterByTeamKey,
+                          title:
+                              AppLocalizations.of(context)!.teamFilterKeyTitle,
+                          description:
+                              AppLocalizations.of(context)!.teamFilterKeyDesc,
+                          shapeBorder: const CircleBorder(),
+                          showcaseBackgroundColor: ConstantColors.primary_900,
+                          titleTextStyle:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: ConstantColors.neutral_200,
+                                    height: 1.5,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 0.55,
+                                  ),
+                          descTextStyle:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: ConstantColors.neutral_200,
+                                    height: 1.5,
+                                  ),
+                          overlayPadding: const EdgeInsets.all(8),
+                          contentPadding: const EdgeInsets.all(20),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: state.selectedDropDownTeamValue,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                    color: ConstantColors.primary_900,
+                                  ),
+                              onChanged: (String? newTeamName) {
+                                transferBloc.add(
+                                  TransferEvent.setFilter(
+                                    filterBy: "team",
+                                    filterValue: newTeamName!,
+                                  ),
+                                );
+                              },
+                              items: allTeamsNames.map((String teamName) {
+                                String finalURL = baseURL;
 
-                              List teamLogoList = allTeams
-                                  .where((team) => team['teamName'] == teamName)
-                                  .toList();
+                                List teamLogoList = allTeams
+                                    .where(
+                                        (team) => team['teamName'] == teamName)
+                                    .toList();
 
-                              if (teamLogoList.isNotEmpty) {
-                                finalURL =
-                                    finalURL + teamLogoList[0]['teamLogo'];
-                              }
+                                if (teamLogoList.isNotEmpty) {
+                                  finalURL =
+                                      finalURL + teamLogoList[0]['teamLogo'];
+                                }
 
-                              // TEAM FILTER DROP DOWN
-                              return DropdownMenuItem<String>(
-                                value: teamName,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: 25,
-                                      width: 25,
-                                      margin:
-                                          const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                      child: CachedNetworkImage(
-                                        imageUrl: finalURL == baseURL
-                                            ? '$baseURL/uploads/teams/placeholder_team.png'
-                                            : finalURL,
+                                // TEAM FILTER DROP DOWN
+                                return DropdownMenuItem<String>(
+                                  value: teamName,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 25,
+                                        width: 25,
+                                        margin: const EdgeInsets.fromLTRB(
+                                            0, 0, 8, 0),
+                                        child: CachedNetworkImage(
+                                          imageUrl: finalURL == baseURL
+                                              ? '$baseURL/uploads/teams/placeholder_team.png'
+                                              : finalURL,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      teamName,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1!
-                                          .copyWith(
-                                            fontSize: 12,
-                                          ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            }).toList(),
+                                      Text(
+                                        teamName,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
+                                              fontSize: 12,
+                                            ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
                       ),
@@ -363,28 +469,57 @@ Widget _buildPlayersListView({
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: state.selectedDropDownInjuryStatusValue,
-                            style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      color: ConstantColors.primary_900,
-                                    ),
-                            onChanged: (String? injuryStatus) {
-                              transferBloc.add(
-                                TransferEvent.setFilter(
-                                  filterBy: "injury status",
-                                  filterValue: injuryStatus!,
-                                ),
-                              );
-                            },
-                            items: <String>["All", "Available", "Unavailable"]
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
+                        child: Showcase(
+                          key: _filterByAvailabiltyKey,
+                          title: AppLocalizations.of(context)!
+                              .injuryFilterKeyTitle,
+                          description:
+                              AppLocalizations.of(context)!.injuryFilterKeyDesc,
+                          shapeBorder: const CircleBorder(),
+                          showcaseBackgroundColor: ConstantColors.primary_900,
+                          titleTextStyle:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: ConstantColors.neutral_200,
+                                    height: 1.5,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 0.55,
+                                  ),
+                          descTextStyle:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: ConstantColors.neutral_200,
+                                    height: 1.5,
+                                  ),
+                          overlayPadding: const EdgeInsets.all(8),
+                          contentPadding: const EdgeInsets.all(20),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: state.selectedDropDownInjuryStatusValue,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                    color: ConstantColors.primary_900,
+                                  ),
+                              onChanged: (String? injuryStatus) {
+                                transferBloc.add(
+                                  TransferEvent.setFilter(
+                                    filterBy: "injury status",
+                                    filterValue: injuryStatus!,
+                                  ),
+                                );
+                              },
+                              items: <String>[
+                                "All",
+                                "Available",
+                                "Unavailable"
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
                       ),
@@ -399,53 +534,103 @@ Widget _buildPlayersListView({
                 child: Row(
                   children: [
                     // MIN LABEL
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.12,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.minimumPrice,
-                            style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      fontSize: 13,
-                                    ),
-                          ),
-                          Text(
-                            state.minPriceSet.toStringAsFixed(1),
-                            style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                          ),
-                        ],
+                    Showcase(
+                      key: _minPriceLabelKey,
+                      title: AppLocalizations.of(context)!.minPriceKeyTitle,
+                      description:
+                          AppLocalizations.of(context)!.minPriceKeyDesc,
+                      shapeBorder: const CircleBorder(),
+                      showcaseBackgroundColor: ConstantColors.primary_900,
+                      titleTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.55,
+                              ),
+                      descTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                              ),
+                      overlayPadding: const EdgeInsets.all(8),
+                      contentPadding: const EdgeInsets.all(20),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.12,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!.minimumPrice,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                    fontSize: 13,
+                                  ),
+                            ),
+                            Text(
+                              state.minPriceSet.toStringAsFixed(1),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
 
                     // SLIDER
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.76,
-                      child: SfRangeSlider(
-                        min: 3.5,
-                        max: 15.0,
-                        values: values,
-                        interval: 0.1,
-                        activeColor: ConstantColors.primary_900,
-                        inactiveColor: ConstantColors.primary_400,
-                        onChangeEnd: (SfRangeValues value) {
-                          transferBloc.add(
-                            const TransferEvent.filterByPrice(),
-                          );
-                        },
-                        onChanged: (SfRangeValues value) {
-                          transferBloc.add(
-                            TransferEvent.setPriceFilter(
-                              minValue: value.start,
-                              maxValue: value.end,
-                            ),
-                          );
-                        },
+                      child: Showcase(
+                        key: _sliderKey,
+                        title: AppLocalizations.of(context)!.sliderKeyTitle,
+                        description:
+                            AppLocalizations.of(context)!.sliderKeyDesc,
+                        shapeBorder: const CircleBorder(),
+                        showcaseBackgroundColor: ConstantColors.primary_900,
+                        titleTextStyle:
+                            Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  color: ConstantColors.neutral_200,
+                                  height: 1.5,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 0.55,
+                                ),
+                        descTextStyle:
+                            Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  color: ConstantColors.neutral_200,
+                                  height: 1.5,
+                                ),
+                        overlayPadding: const EdgeInsets.all(8),
+                        contentPadding: const EdgeInsets.all(20),
+                        child: SfRangeSlider(
+                          min: 3.5,
+                          max: 15.0,
+                          values: values,
+                          interval: 0.1,
+                          activeColor: ConstantColors.primary_900,
+                          inactiveColor: ConstantColors.primary_400,
+                          onChangeEnd: (SfRangeValues value) {
+                            transferBloc.add(
+                              const TransferEvent.filterByPrice(),
+                            );
+                          },
+                          onChanged: (SfRangeValues value) {
+                            transferBloc.add(
+                              TransferEvent.setPriceFilter(
+                                minValue: value.start,
+                                maxValue: value.end,
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
 
@@ -455,12 +640,38 @@ Widget _buildPlayersListView({
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            AppLocalizations.of(context)!.maximumPrice,
-                            style:
+                          Showcase(
+                            key: _maxPriceLabelKey,
+                            title:
+                                AppLocalizations.of(context)!.maxPriceKeyTitle,
+                            description:
+                                AppLocalizations.of(context)!.maxPriceKeyDesc,
+                            shapeBorder: const CircleBorder(),
+                            showcaseBackgroundColor: ConstantColors.primary_900,
+                            titleTextStyle:
                                 Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      fontSize: 13,
+                                      color: ConstantColors.neutral_200,
+                                      height: 1.5,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 0.55,
                                     ),
+                            descTextStyle:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      color: ConstantColors.neutral_200,
+                                      height: 1.5,
+                                    ),
+                            overlayPadding: const EdgeInsets.all(8),
+                            contentPadding: const EdgeInsets.all(20),
+                            child: Text(
+                              AppLocalizations.of(context)!.maximumPrice,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                    fontSize: 13,
+                                  ),
+                            ),
                           ),
                           Text(
                             state.maxPriceSet.toStringAsFixed(1),
@@ -490,136 +701,205 @@ Widget _buildPlayersListView({
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // PLAYER NAME
-                InkWell(
-                  onTap: () {
-                    transferBloc.add(
-                      const TransferEvent.setSortFilter(
-                        sortBy: 'name',
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    child: Row(
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.player,
-                          style:
-                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    fontSize: 16,
-                                    letterSpacing: 0.5,
-                                    fontWeight: FontWeight.bold,
-                                    color: ConstantColors.neutral_200,
-                                  ),
+                Showcase(
+                  key: _playerNameSorterKey,
+                  title: AppLocalizations.of(context)!.playerNameSortKeyTitle,
+                  description:
+                      AppLocalizations.of(context)!.playerNameSortKeyDesc,
+                  shapeBorder: const CircleBorder(),
+                  showcaseBackgroundColor: ConstantColors.primary_900,
+                  titleTextStyle:
+                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: ConstantColors.neutral_200,
+                            height: 1.5,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.55,
+                          ),
+                  descTextStyle:
+                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: ConstantColors.neutral_200,
+                            height: 1.5,
+                          ),
+                  overlayPadding: const EdgeInsets.all(8),
+                  contentPadding: const EdgeInsets.all(20),
+                  child: InkWell(
+                    onTap: () {
+                      transferBloc.add(
+                        const TransferEvent.setSortFilter(
+                          sortBy: 'name',
                         ),
-                        state.playerNameCurrentSortOrder == ""
-                            ? const SizedBox(
-                                height: 0,
-                                width: 0,
-                              )
-                            : state.playerNameCurrentSortOrder == "a"
-                                ? const Icon(
-                                    Icons.arrow_drop_up,
-                                    size: 25,
-                                    color: ConstantColors.success_300,
-                                  )
-                                : const Icon(
-                                    Icons.arrow_drop_down,
-                                    size: 25,
-                                    color: ConstantColors.error_300,
-                                  ),
-                      ],
+                      );
+                    },
+                    child: SizedBox(
+                      child: Row(
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.player,
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      fontSize: 16,
+                                      letterSpacing: 0.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: ConstantColors.neutral_200,
+                                    ),
+                          ),
+                          state.playerNameCurrentSortOrder == ""
+                              ? const SizedBox(
+                                  height: 0,
+                                  width: 0,
+                                )
+                              : state.playerNameCurrentSortOrder == "a"
+                                  ? const Icon(
+                                      Icons.arrow_drop_up,
+                                      size: 25,
+                                      color: ConstantColors.success_300,
+                                    )
+                                  : const Icon(
+                                      Icons.arrow_drop_down,
+                                      size: 25,
+                                      color: ConstantColors.error_300,
+                                    ),
+                        ],
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.55,
                     ),
-                    width: MediaQuery.of(context).size.width * 0.55,
                   ),
                 ),
 
                 // PLAYER PRICE
-                InkWell(
-                  onTap: () {
-                    transferBloc.add(
-                      const TransferEvent.setSortFilter(
-                        sortBy: 'price',
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.price,
-                          style:
-                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    fontSize: 16,
-                                    letterSpacing: 0.5,
-                                    fontWeight: FontWeight.bold,
-                                    color: ConstantColors.neutral_200,
-                                  ),
+                Showcase(
+                  key: _playerPriceSorterKey,
+                  title: AppLocalizations.of(context)!.playerPriceSortKeyTitle,
+                  description:
+                      AppLocalizations.of(context)!.playerPriceSortKeyDesc,
+                  shapeBorder: const CircleBorder(),
+                  showcaseBackgroundColor: ConstantColors.primary_900,
+                  titleTextStyle:
+                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: ConstantColors.neutral_200,
+                            height: 1.5,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.55,
+                          ),
+                  descTextStyle:
+                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: ConstantColors.neutral_200,
+                            height: 1.5,
+                          ),
+                  overlayPadding: const EdgeInsets.all(8),
+                  contentPadding: const EdgeInsets.all(20),
+                  child: InkWell(
+                    onTap: () {
+                      transferBloc.add(
+                        const TransferEvent.setSortFilter(
+                          sortBy: 'price',
                         ),
-                        state.playerPriceCurrentSortOrder == ""
-                            ? const SizedBox(
-                                height: 0,
-                                width: 0,
-                              )
-                            : state.playerPriceCurrentSortOrder == "a"
-                                ? const Icon(
-                                    Icons.arrow_drop_up,
-                                    size: 25,
-                                    color: ConstantColors.success_300,
-                                  )
-                                : const Icon(
-                                    Icons.arrow_drop_down,
-                                    size: 25,
-                                    color: ConstantColors.error_300,
-                                  ),
-                      ],
+                      );
+                    },
+                    child: SizedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.price,
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      fontSize: 16,
+                                      letterSpacing: 0.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: ConstantColors.neutral_200,
+                                    ),
+                          ),
+                          state.playerPriceCurrentSortOrder == ""
+                              ? const SizedBox(
+                                  height: 0,
+                                  width: 0,
+                                )
+                              : state.playerPriceCurrentSortOrder == "a"
+                                  ? const Icon(
+                                      Icons.arrow_drop_up,
+                                      size: 25,
+                                      color: ConstantColors.success_300,
+                                    )
+                                  : const Icon(
+                                      Icons.arrow_drop_down,
+                                      size: 25,
+                                      color: ConstantColors.error_300,
+                                    ),
+                        ],
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.17,
                     ),
-                    width: MediaQuery.of(context).size.width * 0.17,
                   ),
                 ),
 
                 // PLAYER POINT
-                InkWell(
-                  onTap: () {
-                    transferBloc.add(
-                      const TransferEvent.setSortFilter(
-                        sortBy: 'point',
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.points,
-                          style:
-                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    fontSize: 16,
-                                    letterSpacing: 0.5,
-                                    fontWeight: FontWeight.bold,
-                                    color: ConstantColors.neutral_200,
-                                  ),
+                Showcase(
+                  key: _playerPointSorterKey,
+                  title: AppLocalizations.of(context)!.playerPointSortKeyTitle,
+                  description:
+                      AppLocalizations.of(context)!.playerPointSortKeyDesc,
+                  shapeBorder: const CircleBorder(),
+                  showcaseBackgroundColor: ConstantColors.primary_900,
+                  titleTextStyle:
+                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: ConstantColors.neutral_200,
+                            height: 1.5,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.55,
+                          ),
+                  descTextStyle:
+                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: ConstantColors.neutral_200,
+                            height: 1.5,
+                          ),
+                  overlayPadding: const EdgeInsets.all(8),
+                  contentPadding: const EdgeInsets.all(20),
+                  child: InkWell(
+                    onTap: () {
+                      transferBloc.add(
+                        const TransferEvent.setSortFilter(
+                          sortBy: 'point',
                         ),
-                        state.playerScoreCurrentSortOrder == ""
-                            ? const SizedBox(
-                                height: 0,
-                                width: 0,
-                              )
-                            : state.playerScoreCurrentSortOrder == "a"
-                                ? const Icon(
-                                    Icons.arrow_drop_up,
-                                    size: 25,
-                                    color: ConstantColors.success_300,
-                                  )
-                                : const Icon(
-                                    Icons.arrow_drop_down,
-                                    size: 25,
-                                    color: ConstantColors.error_300,
-                                  ),
-                      ],
+                      );
+                    },
+                    child: SizedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.points,
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      fontSize: 16,
+                                      letterSpacing: 0.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: ConstantColors.neutral_200,
+                                    ),
+                          ),
+                          state.playerScoreCurrentSortOrder == ""
+                              ? const SizedBox(
+                                  height: 0,
+                                  width: 0,
+                                )
+                              : state.playerScoreCurrentSortOrder == "a"
+                                  ? const Icon(
+                                      Icons.arrow_drop_up,
+                                      size: 25,
+                                      color: ConstantColors.success_300,
+                                    )
+                                  : const Icon(
+                                      Icons.arrow_drop_down,
+                                      size: 25,
+                                      color: ConstantColors.error_300,
+                                    ),
+                        ],
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.19,
                     ),
-                    width: MediaQuery.of(context).size.width * 0.19,
                   ),
                 )
               ],
@@ -627,17 +907,37 @@ Widget _buildPlayersListView({
           ),
 
           // PLAYERS LIST
-          ListView.builder(
-            itemCount: allPositionPlayerFiltered.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (BuildContext context, int index) {
-              // USER PLAYER CARD
-              return UserPlayerCard(
-                currentPlayer: allPositionPlayerFiltered[index],
-                isInitial: isInitial,
-              );
-            },
+          Showcase(
+            key: _playerCardKey,
+            title: AppLocalizations.of(context)!.playerCardKeyTitle,
+            description: AppLocalizations.of(context)!.playerCardKeyDesc,
+            shapeBorder: const CircleBorder(),
+            showcaseBackgroundColor: ConstantColors.primary_900,
+            titleTextStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  color: ConstantColors.neutral_200,
+                  height: 1.5,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.55,
+                ),
+            descTextStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  color: ConstantColors.neutral_200,
+                  height: 1.5,
+                ),
+            overlayPadding: const EdgeInsets.all(8),
+            contentPadding: const EdgeInsets.all(20),
+            child: ListView.builder(
+              itemCount: allPositionPlayerFiltered.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                // USER PLAYER CARD
+                return UserPlayerCard(
+                  currentPlayer: allPositionPlayerFiltered[index],
+                  isInitial: isInitial,
+                );
+              },
+            ),
           ),
         ],
       ),
