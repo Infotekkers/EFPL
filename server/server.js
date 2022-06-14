@@ -19,7 +19,7 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {});
 
-server.listen(PORT, "192.168.100.4", () => {
+server.listen(PORT, () => {
   printConsole(
     { data: `Server+Socket is live @${PORT}` },
     { printLocation: "index.js:28" },
