@@ -115,7 +115,9 @@ class _MainTabViewState extends State<MainTabView> {
                       Center(child: Text('EPL Table'))
                     ],
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, "/EPLeagueTable");
+                  },
                 ),
                 ListTile(
                   title: Row(

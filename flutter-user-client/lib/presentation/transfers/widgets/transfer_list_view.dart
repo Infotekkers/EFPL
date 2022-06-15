@@ -927,6 +927,7 @@ Widget _buildPlayersListView({
             overlayPadding: const EdgeInsets.all(8),
             contentPadding: const EdgeInsets.all(20),
             child: ListView.builder(
+              key: const Key("transferListViewListViewMain"),
               itemCount: allPositionPlayerFiltered.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

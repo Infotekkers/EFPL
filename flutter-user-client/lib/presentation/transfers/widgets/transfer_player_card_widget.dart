@@ -131,6 +131,7 @@ void _buildModalSheet(
 
                   // Transfer
                   InkWell(
+                    key: const Key("transferPlayerCardTransferButton"),
                     onTap: () {
                       if (isInitial) {
                         getIt<TransferBloc>().add(

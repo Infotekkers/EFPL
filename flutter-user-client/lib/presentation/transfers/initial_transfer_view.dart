@@ -154,6 +154,7 @@ class InitialTransferPage extends StatelessWidget {
 
           final _transferBloc = getIt<TransferBloc>();
           return Scaffold(
+            key: const Key("intialTransferViewMainKey"),
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Stack(
@@ -242,6 +243,8 @@ class InitialTransferPage extends StatelessWidget {
                                                 (r) => r,
                                               );
                                       return InkWell(
+                                        key: const Key(
+                                            "initialTransferViewGKKey"),
                                         onTap: () async {
                                           // set transfer out player
                                           _transferBloc.add(
@@ -293,6 +296,10 @@ class InitialTransferPage extends StatelessWidget {
                                           width: 90,
                                           height: 80,
                                           child: PlayerWidget(
+                                            key: Key(
+                                              "initialTransferViewGKKey" +
+                                                  (index + 1).toString(),
+                                            ),
                                             playerName: allFormattedPlayers[0]
                                                     [index]
                                                 .playerName

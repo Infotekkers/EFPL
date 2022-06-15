@@ -46,6 +46,7 @@ class SplashView extends StatelessWidget {
               ),
               // Title
               Container(
+                key: const Key("splashViewMainKey"),
                 margin: const EdgeInsets.symmetric(horizontal: 15),
                 child: Center(
                   child: Text(

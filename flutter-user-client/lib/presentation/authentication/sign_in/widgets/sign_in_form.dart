@@ -89,7 +89,7 @@ class SignInForm extends StatelessWidget {
             children: [
               // Email Input
               TextFormField(
-                key: const ValueKey("loginPageUserName"),
+                key: const ValueKey("loginViewUserName"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.email),
@@ -128,7 +128,7 @@ class SignInForm extends StatelessWidget {
               // Password Input
 
               TextFormField(
-                key: const ValueKey("loginPagePassword"),
+                key: const ValueKey("loginViewPassword"),
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.lock),
                   labelText: AppLocalizations.of(context)!.password,
@@ -177,7 +177,6 @@ class SignInForm extends StatelessWidget {
 
               // Sign In Button
               InkWell(
-                key: const Key("loginViewSignUpRedirect"),
                 onTap: () {
                   state.isSubmitting
                       ? null
@@ -231,6 +230,7 @@ class SignInForm extends StatelessWidget {
               const SizedBox(height: 36),
 
               InkWell(
+                key: const Key("loginViewSignUpRedirect"),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, "/register");

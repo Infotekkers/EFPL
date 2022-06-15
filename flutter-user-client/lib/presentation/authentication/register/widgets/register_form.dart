@@ -133,6 +133,7 @@ class RegisterForm extends StatelessWidget {
 
               // Username input
               TextFormField(
+                key: const ValueKey("registerViewUsernameField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.person),
@@ -170,6 +171,7 @@ class RegisterForm extends StatelessWidget {
 
               // Team Name Input
               TextFormField(
+                key: const ValueKey("registerViewTeamNameField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.sports_soccer),
@@ -207,6 +209,7 @@ class RegisterForm extends StatelessWidget {
 
               // Password Input
               TextFormField(
+                key: const ValueKey("registerViewPasswordField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.lock),
@@ -255,6 +258,7 @@ class RegisterForm extends StatelessWidget {
 
               // Confirm Password
               TextFormField(
+                key: const ValueKey("registerViewConfirmPasswordField"),
                 // keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.lock),
