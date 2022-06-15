@@ -9,6 +9,7 @@ abstract class User with _$User {
   const factory User({
     required Token token,
     required EmailAddress email,
+    required Id id,
     required UserName userName,
     required TeamName teamName,
     required Country country,
@@ -18,6 +19,7 @@ abstract class User with _$User {
   factory User.initial() => User(
         token: Token(""),
         email: EmailAddress(""),
+        id: Id(""),
         userName: UserName(""),
         teamName: TeamName(""),
         country: Country(""),

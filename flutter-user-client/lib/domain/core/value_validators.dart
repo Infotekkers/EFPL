@@ -21,6 +21,14 @@ Either<ValueFailure<String>, String> validateEmailAddress(String input) {
   }
 }
 
+Either<ValueFailure<String>, String> validateId(String input) {
+  if (input.isNotEmpty) {
+    return right(input);
+  } else {
+    return left(ValueFailure.empty(failedValue: input));
+  }
+}
+
 Either<ValueFailure<String>, String> validatePassword(String input) {
   const passRegex =
       r"""^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$""";

@@ -90,7 +90,7 @@ class SignInForm extends StatelessWidget {
               // Email Input
               TextFormField(
                 key: const ValueKey("loginPageUserName"),
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.email),
                   labelText: AppLocalizations.of(context)!.email,

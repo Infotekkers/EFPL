@@ -17,6 +17,18 @@ class EmailAddress extends ValueObject<String> {
   const EmailAddress._(this.value);
 }
 
+class Id extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+  factory Id(String id) {
+    return Id._(
+      validateId(id),
+    );
+  }
+
+  const Id._(this.value);
+}
+
 // Password
 class Password extends ValueObject<String> {
   @override

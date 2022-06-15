@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
+import 'package:efpl/domain/auth/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -20,7 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(
           userOption.fold(
             () => const AuthState.unauthenticated(),
-            (_) => const AuthState.authenticated(),
+            (user) => AuthState.authenticated(user),
           ),
         );
       },

@@ -1,3 +1,4 @@
+import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/injectable.dart';
@@ -9,14 +10,22 @@ import 'package:efpl/presentation/stats/epl_stats_view.dart';
 import 'package:efpl/presentation/team/team_view.dart';
 import 'package:efpl/presentation/transfers/transfers_view_main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class MainTabView extends StatelessWidget {
-  const MainTabView({Key? key}) : super(key: key);
+import '../../domain/auth/user.dart';
 
+// ignore: must_be_immutable
+class MainTabView extends StatelessWidget {
+  MainTabView({Key? key}) : super(key: key);
+  User? user;
   @override
   Widget build(BuildContext context) {
+    var state = BlocProvider.of<AuthBloc>(context).state;
+    if (state is Authenticated) {
+      user = state.user;
+    }
     return DefaultTabController(
       length: 7,
       initialIndex: 2,
@@ -128,14 +137,16 @@ class MainTabView extends StatelessWidget {
           ),
         ),
         body: TabBarView(
-          children: const [
-            TeamView(),
-            PointsView(),
-            TransfersView(),
-            FixturesView(),
-            LeaguesView(),
-            EPLStatsView(),
-            SettingsView(),
+          children: [
+            const TeamView(),
+            const PointsView(),
+            const TransfersView(),
+            const FixturesView(),
+            const LeaguesView(),
+            const EPLStatsView(),
+            SettingsView(
+              user: user!,
+            ),
           ],
         ),
       ),

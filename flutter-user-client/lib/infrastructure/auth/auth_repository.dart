@@ -28,15 +28,21 @@ class AuthRepository implements IAuthRepository {
     final UserDto userDtoOut = UserDto.fromDomain(user);
     final outGoingJson =
         userDtoOut.copyWith(password: password.getOrCrash()).toJson();
+    print("sign in event is called");
     try {
       final response = await client!.post(url, body: outGoingJson).timeout(
             Duration(seconds: ConstantValues().httpTimeOutDuration),
           );
-
+      print("body ${response.body}");
+      print("runtime type");
+      print(response.body.runtimeType);
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-
+        print("userdtn");
+        print(userDtoIn);
+        const storage = FlutterSecureStorage();
+        storage.write(key: "user", value: jsonEncode(userDtoIn));
         return right(userDtoIn.toDomain());
       } else if (response.statusCode == 400) {
         return left(const AuthFailure.invalidEmailPasswordCombination());

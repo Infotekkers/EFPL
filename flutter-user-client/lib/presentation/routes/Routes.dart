@@ -26,7 +26,7 @@ class AppRouter {
     "/": (context) => const SplashView(),
     "/team": (context) => const TeamView(),
     "/player": (context) => const PlayerView(),
-    "/home": (context) => const MainTabView(),
+    "/home": (context) => MainTabView(),
     "/fixtureDetails": (context) => const FixtureDetailView(),
     "/transfer/initial": (context) => const InitialTransferPage(),
     "/transfer": (context) => const TransferPlayerView(),

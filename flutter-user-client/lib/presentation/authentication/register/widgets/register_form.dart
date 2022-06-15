@@ -98,7 +98,7 @@ class RegisterForm extends StatelessWidget {
             children: [
               // Email Input
               TextFormField(
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.email),
                   labelText: AppLocalizations.of(context)!.email,

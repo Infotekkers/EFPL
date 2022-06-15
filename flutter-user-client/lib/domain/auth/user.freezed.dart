@@ -20,6 +20,7 @@ class _$UserTearOff {
   _User call(
       {required Token token,
       required EmailAddress email,
+      required Id id,
       required UserName userName,
       required TeamName teamName,
       required Country country,
@@ -27,6 +28,7 @@ class _$UserTearOff {
     return _User(
       token: token,
       email: email,
+      id: id,
       userName: userName,
       teamName: teamName,
       country: country,
@@ -42,6 +44,7 @@ const $User = _$UserTearOff();
 mixin _$User {
   Token get token => throw _privateConstructorUsedError;
   EmailAddress get email => throw _privateConstructorUsedError;
+  Id get id => throw _privateConstructorUsedError;
   UserName get userName => throw _privateConstructorUsedError;
   TeamName get teamName => throw _privateConstructorUsedError;
   Country get country => throw _privateConstructorUsedError;
@@ -58,6 +61,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {Token token,
       EmailAddress email,
+      Id id,
       UserName userName,
       TeamName teamName,
       Country country,
@@ -76,6 +80,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   $Res call({
     Object? token = freezed,
     Object? email = freezed,
+    Object? id = freezed,
     Object? userName = freezed,
     Object? teamName = freezed,
     Object? country = freezed,
@@ -90,6 +95,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as EmailAddress,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as Id,
       userName: userName == freezed
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -118,6 +127,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {Token token,
       EmailAddress email,
+      Id id,
       UserName userName,
       TeamName teamName,
       Country country,
@@ -137,6 +147,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   $Res call({
     Object? token = freezed,
     Object? email = freezed,
+    Object? id = freezed,
     Object? userName = freezed,
     Object? teamName = freezed,
     Object? country = freezed,
@@ -151,6 +162,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as EmailAddress,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as Id,
       userName: userName == freezed
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -177,6 +192,7 @@ class _$_User implements _User {
   const _$_User(
       {required this.token,
       required this.email,
+      required this.id,
       required this.userName,
       required this.teamName,
       required this.country,
@@ -186,6 +202,8 @@ class _$_User implements _User {
   final Token token;
   @override
   final EmailAddress email;
+  @override
+  final Id id;
   @override
   final UserName userName;
   @override
@@ -197,7 +215,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(token: $token, email: $email, userName: $userName, teamName: $teamName, country: $country, favouriteEplTeam: $favouriteEplTeam)';
+    return 'User(token: $token, email: $email, id: $id, userName: $userName, teamName: $teamName, country: $country, favouriteEplTeam: $favouriteEplTeam)';
   }
 
   @override
@@ -207,6 +225,7 @@ class _$_User implements _User {
             other is _User &&
             const DeepCollectionEquality().equals(other.token, token) &&
             const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality().equals(other.teamName, teamName) &&
             const DeepCollectionEquality().equals(other.country, country) &&
@@ -219,6 +238,7 @@ class _$_User implements _User {
       runtimeType,
       const DeepCollectionEquality().hash(token),
       const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(teamName),
       const DeepCollectionEquality().hash(country),
@@ -234,6 +254,7 @@ abstract class _User implements User {
   const factory _User(
       {required Token token,
       required EmailAddress email,
+      required Id id,
       required UserName userName,
       required TeamName teamName,
       required Country country,
@@ -243,6 +264,8 @@ abstract class _User implements User {
   Token get token;
   @override
   EmailAddress get email;
+  @override
+  Id get id;
   @override
   UserName get userName;
   @override
