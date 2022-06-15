@@ -14,6 +14,6 @@ class LeagueTableView extends StatelessWidget {
         value: getIt<LeagueTableBloc>()
           ..add(const LeagueTableEvent.loadLeagueTable()),
       )
-    ], child: LeagueTableViewBody());
+    ], child: const LeagueTableViewBody());
   }
 }

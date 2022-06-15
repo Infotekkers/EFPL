@@ -103,5 +103,15 @@
   "saves": "Saves",
   "penaltySaved": "Penalty Saved",
   "cleanSheet": "Clean Sheet",
-  "sum": "Total Sum"
+  "sum": "Total Sum",
+  "tableTranslations": "Table Translations",
+  "standings": "Standings",
+  "epl": "EFPL",
+  "pos": "Pos",
+  "club": "Club",
+  "p": "P",
+  "w": "W",
+  "d": "d",
+  "l": "L",
+  "gd": "GD"
 }

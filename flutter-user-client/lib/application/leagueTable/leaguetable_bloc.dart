@@ -4,7 +4,6 @@ import 'package:efpl/domain/league_table/league_table.dart';
 import 'package:efpl/domain/league_table/league_table_failure.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../domain/league_table/league_table.dart';
 
@@ -27,13 +26,12 @@ class LeagueTableBloc extends Bloc<LeagueTableEvent, LeagueTableState> {
     emit(const LeagueTableState.loadInProgress());
 
     final failureOrSuccess = await iLeagueTableRepository.getTeams();
-    print("status $failureOrSuccess");
     failureOrSuccess.fold(
       (failure) => emit(
         LeagueTableState.loadFailure(failure),
       ),
       (leagueTable) {
-        print(leagueTable);
+        // print(leagueTable);
         emit(
           LeagueTableState.loadSuccess(leagueTable),
         );

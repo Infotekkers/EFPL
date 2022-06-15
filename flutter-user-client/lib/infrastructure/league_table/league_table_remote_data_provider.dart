@@ -20,30 +20,27 @@ class LeagueTableRemoteDataProvider {
 
     try {
       final response = await client!.get(url);
-      print("response ${response.statusCode}");
       if (response.statusCode == 200) {
         final leagueTable = <LeagueTable>[];
         final leagueTableDtoJson = [];
-
         final parsedResponseBody = jsonDecode(response.body) as List<dynamic>;
         for (var leagueTableJson in parsedResponseBody) {
-          print("leagueTableJson $leagueTableJson");
+          // print("leagueTableJson $leagueTableJson");
           var newJson = {
             "teamName": leagueTableJson['teamName'],
             "teamLogo": leagueTableJson['teamLogo'],
-            "teamPoint": leagueTableJson['teamPosition']['teamPoint'],
-            "won": leagueTableJson['teamPosition']['won'],
-            "lost": leagueTableJson['teamPosition']['lost'],
-            "Draw": leagueTableJson['teamPosition']['Draw'],
-            "goalsFor": leagueTableJson['teamPosition']['goalsFor'],
-            "goalsAgainst": leagueTableJson['teamPosition']['goalsAgainst'],
-            "goalDifferential": leagueTableJson['teamPosition']
-                ['goalDifferential'],
+            "teamPoint": leagueTableJson['teamPosition']['teamPoint'] ?? 0,
+            "won": leagueTableJson['teamPosition']['won'] ?? 0,
+            "lost": leagueTableJson['teamPosition']['lost'] ?? 0,
+            "Draw": leagueTableJson['teamPosition']['Draw'] ?? 0,
+            "goalsFor": leagueTableJson['teamPosition']['goalsFor'] ?? 0,
+            "goalsAgainst":
+                leagueTableJson['teamPosition']['goalsAgainst'] ?? 0,
+            "goalDifferential":
+                leagueTableJson['teamPosition']['goalDifferential'] ?? 0,
           };
-          print("new json $newJson");
           final LeagueTableDto leagueTableDto =
               LeagueTableDto.fromJson(newJson);
-          print("middle");
           leagueTable.add(leagueTableDto.toDomain());
         }
         leagueTable.sort(

@@ -1,11 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/leagueTable/leaguetable_bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:efpl/presentation/core/widgets/bouncing_ball_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../colors.dart';
+
+final String _baseUrl = "${dotenv.env["API"]}";
 
 class LeagueTableViewBody extends StatelessWidget {
   const LeagueTableViewBody({Key? key}) : super(key: key);
@@ -18,7 +21,17 @@ class LeagueTableViewBody extends StatelessWidget {
         initial: (_) => const Text("Initial"),
         loadFailure: (_) => Scaffold(
           appBar: AppBar(
-            title: const Text("EPL Table"),
+            title: Text(
+              AppLocalizations.of(context)!.epl +
+                  " " +
+                  AppLocalizations.of(context)!.standings,
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    letterSpacing: 0.5,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: ConstantColors.primary_900,
+                  ),
+            ),
           ),
           body: const Center(
             child: Text("Failure"),
@@ -29,11 +42,14 @@ class LeagueTableViewBody extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                "EPL Table",
+                AppLocalizations.of(context)!.epl +
+                    " " +
+                    AppLocalizations.of(context)!.standings,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       letterSpacing: 0.5,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
+                      color: ConstantColors.primary_900,
                     ),
               ),
               systemOverlayStyle: SystemUiOverlayStyle(
@@ -50,8 +66,8 @@ class LeagueTableViewBody extends StatelessWidget {
                   itemCount: state.leagueTable.length,
                   itemBuilder: ((context, index) {
                     return Container(
-                      padding: const EdgeInsets.only(left: 10),
-                      height: 40,
+                      padding: const EdgeInsets.fromLTRB(4, 2, 0, 2),
+                      height: 50,
                       decoration: BoxDecoration(
                         color: index % 2 != 0 ? Colors.blue[50] : Colors.white,
                         border: Border(
@@ -62,10 +78,27 @@ class LeagueTableViewBody extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: Text(
-                              '${index + 1}',
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 16),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 4,
+                                  color: index == 0
+                                      ? Colors.green
+                                      : index > 12
+                                          ? Colors.red
+                                          : index % 2 != 0
+                                              ? Colors.blue[50]
+                                              : Colors.white,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '${index + 1}',
+                                  style: const TextStyle(
+                                      color: Colors.black, fontSize: 16),
+                                ),
+                              ],
                             ),
                           ),
                           Expanded(
@@ -73,11 +106,15 @@ class LeagueTableViewBody extends StatelessWidget {
                             child: Row(
                               children: [
                                 Flexible(
-                                  child: Image.asset(
-                                    "assets/images${state.leagueTable[index].teamLogo.getOrCrash()}",
+                                  child: CachedNetworkImage(
                                     width: 30,
                                     height: 30,
+                                    imageUrl:
+                                        "$_baseUrl${state.leagueTable[index].teamLogo.getOrCrash()}",
                                   ),
+                                ),
+                                const SizedBox(
+                                  width: 8,
                                 ),
                                 Text(
                                   "${state.leagueTable[index].teamName.getOrCrash().split(" ")[0][0]}${state.leagueTable[index].teamName.getOrCrash().split(" ")[1][0]}",
@@ -89,11 +126,13 @@ class LeagueTableViewBody extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             child: Text(
-                              '0',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16),
+                              state.leagueTable[index].teamPoint
+                                  .getOrCrash()
+                                  .toString(),
+                              style: const TextStyle(
+                                  color: Colors.black, fontSize: 16),
                             ),
                           ),
                           Expanded(
@@ -156,6 +195,7 @@ class TableHeader extends StatelessWidget {
           letterSpacing: 0.5,
           fontWeight: FontWeight.w500,
           fontSize: 16,
+          color: ConstantColors.primary_900,
         );
     return Container(
       height: 30,
@@ -163,49 +203,50 @@ class TableHeader extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-              child: Text(
-            "Pos",
-            style: style,
-          )),
+            child: Text(
+              AppLocalizations.of(context)!.pos,
+              style: style,
+            ),
+          ),
           Expanded(
               flex: 2,
               child: Text(
-                "Club",
+                AppLocalizations.of(context)!.club,
                 style: style,
               )),
           Expanded(
             child: Text(
-              "P",
+              AppLocalizations.of(context)!.p,
               style: style,
             ),
           ),
           Expanded(
             child: Text(
-              "W",
+              AppLocalizations.of(context)!.w,
               style: style,
             ),
           ),
           Expanded(
             child: Text(
-              "D",
+              AppLocalizations.of(context)!.d,
               style: style,
             ),
           ),
           Expanded(
             child: Text(
-              "L",
+              AppLocalizations.of(context)!.l,
               style: style,
             ),
           ),
           Expanded(
             child: Text(
-              "GD",
+              AppLocalizations.of(context)!.gd,
               style: style,
             ),
           ),
           Expanded(
             child: Text(
-              "Pts",
+              AppLocalizations.of(context)!.pts,
               style: style,
             ),
           ),
