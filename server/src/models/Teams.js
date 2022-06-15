@@ -2,38 +2,23 @@ const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
 
 autoIncrement.initialize(mongoose.connection);
-
 const teamPosition = mongoose.Schema({
   teamPoint: {
     type: Number,
-    default: 0,
   },
   won: {
     type: Number,
-    default: 0,
   },
   lost: {
     type: Number,
-    default: 0,
   },
   Draw: {
     type: Number,
-    default: 0,
   },
-  goalsFor: {
-    type: Number,
-    default: 0,
-  },
-  goalsAgainst: {
-    type: Number,
-    default: 0,
-  },
-  goalDifferential: {
-    type: Number,
-    default: 0,
-  },
+  goalDifferntial: {},
+  goalAgainst: {},
+  goalFor: {},
 });
-
 const teamSchema = mongoose.Schema({
   teamName: {
     type: String,

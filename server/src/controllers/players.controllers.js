@@ -207,7 +207,6 @@ const getPlayer = asyncHandler(async (req, res) => {
 
   res.send(player);
 });
-
 const getPlayers = asyncHandler(async (req, res) => {
   const players = await PlayerModel.find();
 

@@ -13,13 +13,13 @@ const teamData = [
     teamLogo: "/uploads/teams/St-George.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalDifferntial: 0,
+      goalAgainst: 0,
+      goalFor: 0,
+    },
   },
 
   // "Welayta Dicha" 2
@@ -36,13 +36,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Wolaita-dicha.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Hawassa" 3
@@ -56,13 +56,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Hawassa-Ketema.jpg",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Fasil Ketema" 4
@@ -76,13 +76,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Fasil-Kenema.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Adama City" 5
@@ -96,13 +96,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Adama-City.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Sidama Coffee" 6
@@ -116,13 +116,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Sidama-Coffee.jpg",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Bahir Dar Kenema" 7
@@ -136,13 +136,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Bahir-Dar.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Ethiopian Coffee" 8
@@ -156,13 +156,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Ethiopian-Coffee.jpg",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Wolkite Ketema" 9
@@ -176,13 +176,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Wolkite-City.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Arba Minch" 10
@@ -196,13 +196,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Arba-Minch.jpg",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Defence Force" 11
@@ -217,13 +217,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Defense-Force.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Hadiya Hossana" 12
@@ -237,13 +237,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Hadiya-Hossana.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Dire Dawa Kenema" 13
@@ -257,13 +257,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Dire-Dawa.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Addis Ababa City" 14
@@ -277,13 +277,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Addis-Ababa.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Jimma Kenema" 15
@@ -297,13 +297,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Jimma-Aba.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 
   // "Sebeta City" 16
@@ -317,13 +317,13 @@ const teamData = [
     teamLogo: "/uploads/teams/Sebeta-City.png",
     teamPosition: {
       teamPoint: 0,
-      won:0,
-      lost:0,
-      Draw:0,
-      goalsFor:0,
-      goalsAgainst:0,
-      goalDifferential:0,
-    }
+      won: 0,
+      lost: 0,
+      Draw: 0,
+      goalsFor: 0,
+      goalsAgainst: 0,
+      goalDifferential: 0,
+    },
   },
 ];
 
