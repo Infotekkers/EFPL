@@ -11,9 +11,7 @@ class SplashView extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) => {
         state.map(
-          intial: (_) {
-            print("Initial");
-          },
+          intial: (_) {},
           authorised: (_) async {
             Navigator.pushNamed(context, "/home");
           },

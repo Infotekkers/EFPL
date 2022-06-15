@@ -29,7 +29,6 @@ class WatchListLocalDataProvider {
 
     // Unexpected Error
     catch (e) {
-      print(e);
       return left(
         const WatchListFailure.hiveError(failedValue: "Hive Error"),
       );
@@ -47,7 +46,6 @@ class WatchListLocalDataProvider {
 
     // Unexpected Error
     catch (e) {
-      print(e);
       return left(
         const WatchListFailure.hiveError(failedValue: "Hive Error"),
       );

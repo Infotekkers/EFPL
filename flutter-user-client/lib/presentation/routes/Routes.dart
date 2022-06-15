@@ -1,3 +1,4 @@
+// ignore_for_file: unused_field
 import 'package:efpl/presentation/authentication/register/register_view.dart';
 import 'package:efpl/presentation/authentication/request_reset/request_reset_view.dart';
 import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
@@ -24,7 +25,6 @@ import 'package:efpl/presentation/watch_list/watch_list_view_main.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 class AppRouter {
-  // ignore: unused_field
   final LeagueTableBloc _leagueTableBloc = getIt<LeagueTableBloc>()
     ..add(
       const LeagueTableEvent.loadLeagueTable(),

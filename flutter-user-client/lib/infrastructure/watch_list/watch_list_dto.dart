@@ -1,4 +1,3 @@
-import 'package:efpl/domain/transfer/user_player.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:efpl/domain/watch_list/watch_list_player.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

@@ -513,8 +513,6 @@ List<int> getPlayerCount({required Fixture fixture}) {
   Map<dynamic, dynamic> awayTeamLineUp =
       fixture.awayTeamLineUp.value.fold((l) => {}, (r) => r);
 
-  print(awayTeamLineUp);
-
   // no homeTeam
   if (homeTeamLineUp['defenders'].isEmpty) {
     finalCount = [

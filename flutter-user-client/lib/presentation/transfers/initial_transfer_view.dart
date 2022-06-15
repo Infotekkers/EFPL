@@ -4,7 +4,6 @@ import 'package:efpl/domain/transfer/user_team.dart';
 import 'package:efpl/domain/transfer/value_objects.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
-import 'package:efpl/presentation/core/main_tab_view.dart';
 import 'package:efpl/presentation/core/player_card.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +58,7 @@ class InitialTransferPage extends StatelessWidget {
                     },
 
                     deadlinePassed: (_) {
+                      // ignore: avoid_print
                       print("deadlinePassed");
                     },
 
@@ -556,7 +556,7 @@ class InitialTransferPage extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           width: 80,
                                           child: PlayerWidget(
                                             playerName: allFormattedPlayers[2]
@@ -885,7 +885,7 @@ List getAllFormattedPlayers({required UserTeam userTeam}) {
         isCaptain: false,
         isViceCaptain: false,
         availability: PlayerAvailability(
-          value: {"injuryStatus": "", "injuryMessage": ""},
+          value: const {"injuryStatus": "", "injuryMessage": ""},
         ),
         score: 0,
         upComingFixtures: [],
@@ -906,7 +906,7 @@ List getAllFormattedPlayers({required UserTeam userTeam}) {
         isCaptain: false,
         isViceCaptain: false,
         availability: PlayerAvailability(
-          value: {"injuryStatus": "", "injuryMessage": ""},
+          value: const {"injuryStatus": "", "injuryMessage": ""},
         ),
         score: 0,
         upComingFixtures: [],

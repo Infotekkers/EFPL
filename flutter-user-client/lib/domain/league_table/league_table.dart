@@ -11,6 +11,7 @@ abstract class LeagueTable with _$LeagueTable {
     required TeamPoint teamPoint,
     required TeamWon won,
     required TeamLost lost,
+    // ignore: non_constant_identifier_names
     required TeamDraw Draw,
     required TeamGoalDifferntial goalDifferential,
     required TeamGoalAgainst goalsAgainst,

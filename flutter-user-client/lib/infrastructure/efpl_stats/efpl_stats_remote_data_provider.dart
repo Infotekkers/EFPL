@@ -133,8 +133,6 @@ class EFPLStatsRemoteDataProvider {
 
     // unexpected error
     catch (e) {
-      print(e);
-
       return left(
         const EFPLStatsFailure.unexpectedError(
             failedValue: "Something went wrong. Try again!"),

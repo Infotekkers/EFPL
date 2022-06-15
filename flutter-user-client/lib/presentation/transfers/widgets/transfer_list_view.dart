@@ -249,7 +249,7 @@ Widget _buildLoadingView({required BuildContext context}) {
 }
 
 Widget _buildNoPlayersView({required BuildContext context}) {
-  return Container(
+  return SizedBox(
     height: MediaQuery.of(context).size.height - 200,
     child: const Center(
       child: Text(

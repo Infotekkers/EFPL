@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/efpl_stats/efpl_stats.dart';
 import 'package:efpl/infrastructure/efpl_stats/efpl_stats_dto.dart';
@@ -12,9 +14,7 @@ class EFPLStatsLocalDataProvider {
       {required Map efplStat, required int gameWeekId}) {
     try {
       efplCache.put("efplStats-$gameWeekId", efplStat);
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   Future<Either<dynamic, EFPLStats>> getEFPLStats(
@@ -50,7 +50,6 @@ class EFPLStatsLocalDataProvider {
         EFPLStatsDto.fromJson(statsInfo).toDomain(),
       );
     } catch (e) {
-      print(e);
       return left(
         const EFPLStats(
           highestPoint: 0,

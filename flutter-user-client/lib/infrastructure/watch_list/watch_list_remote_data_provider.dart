@@ -131,7 +131,6 @@ class WatchListRemoteDataProvider {
 
     // Unexpected Error
     catch (e) {
-      print(e);
       return left(
         const WatchListFailure.unexpectedError(failedValue: "Unexpected Error"),
       );
@@ -177,7 +176,6 @@ class WatchListRemoteDataProvider {
 
     // Unexpected Error
     catch (e) {
-      print(e);
       return left(
         const WatchListFailure.unexpectedError(failedValue: "No Connection"),
       );
@@ -194,8 +192,6 @@ class WatchListRemoteDataProvider {
         Duration(seconds: ConstantValues().httpTimeOutDuration),
       );
 
-      print("@INF");
-
       if (apiResponse.statusCode == 201) {
         return right(true);
       } else {
@@ -225,7 +221,6 @@ class WatchListRemoteDataProvider {
 
     // Unexpected Error
     catch (e) {
-      print(e);
       return left(false);
     }
   }
@@ -237,8 +232,6 @@ class WatchListRemoteDataProvider {
         Duration(seconds: ConstantValues().httpTimeOutDuration),
       );
 
-      print("@INF");
-
       if (apiResponse.statusCode == 201) {
         return right(true);
       } else {
@@ -262,7 +255,6 @@ class WatchListRemoteDataProvider {
 
     // Unexpected Error
     catch (e) {
-      print(e);
       return left(false);
     }
   }

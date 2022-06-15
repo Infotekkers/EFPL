@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:efpl/domain/league_table/league_table.dart';
 import 'package:efpl/domain/league_table/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

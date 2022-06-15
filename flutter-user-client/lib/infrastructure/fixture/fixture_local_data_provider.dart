@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/domain/fixture/fixture_failures.dart';
@@ -13,9 +15,7 @@ class FixtureLocalDataProvider {
       {required List gameWeekFixture, required int gameWeekId}) {
     try {
       fixturesCache.put("fixtures-$gameWeekId", gameWeekFixture);
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   Future<Either<dynamic, List<Fixture>>> getFixtureByGameWeekId(
@@ -126,7 +126,6 @@ class FixtureLocalDataProvider {
       }
       return right(allFixtures);
     } catch (e) {
-      print(e);
       return left(
         [
           [

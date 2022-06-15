@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/league_table/league_table.dart';
@@ -52,7 +54,6 @@ class LeagueTableRemoteDataProvider {
 
       return left(const LeagueTableFailure.serverError());
     } catch (e) {
-      print(e.toString());
       return left(const LeagueTableFailure.networkError());
     }
   }

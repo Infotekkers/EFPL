@@ -12,12 +12,10 @@ class LeagueTableLocalDataProvider {
   Future<Either<LeagueTableFailure, List<LeagueTable>>> getTeams() async {
     try {
       var cachedLeagueTables = await leagueTableCache.get('leagueTable');
-      print("sads $cachedLeagueTables");
+
       List<LeagueTable> leagueTables = <LeagueTable>[];
       if (cachedLeagueTables != null) {
-        print("ot ull ");
         for (var cachedLeagueTable in cachedLeagueTables) {
-          print("CL $cachedLeagueTable");
           Map<String, dynamic> parsedCachedleagueTable = <String, dynamic>{};
           cachedLeagueTable.forEach(
             (key, value) => {
@@ -59,7 +57,6 @@ class LeagueTableLocalDataProvider {
 
       return right(leagueTables);
     } catch (e) {
-      print("err $e");
       return left(const LeagueTableFailure.localDBError());
     }
   }

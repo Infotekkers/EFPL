@@ -10,9 +10,7 @@ class LeaguesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UtilBloc, UtilState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Center(
           child: Text(

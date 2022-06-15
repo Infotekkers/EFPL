@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -7,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Injects token at send
 class TokenInjectionInterceptor implements InterceptorContract {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   @override
   Future<RequestData> interceptRequest({required RequestData data}) async {
     try {
@@ -19,14 +21,10 @@ class TokenInjectionInterceptor implements InterceptorContract {
       try {
         String? value = await storage.read(key: 'user');
         token = (jsonDecode(value!)['token']);
-      } catch (err) {
-        print(err);
-      }
+      } catch (err) {}
 
       data.params["token"] = token;
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
     return data;
   }
 

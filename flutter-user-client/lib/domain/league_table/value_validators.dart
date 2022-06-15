@@ -43,6 +43,7 @@ Either<ValueFailure<String>, int> validateTeamLost({required int lost}) {
   return right(lost);
 }
 
+// ignore: non_constant_identifier_names
 Either<ValueFailure<String>, int> validateTeamDraw({required int Draw}) {
   return right(Draw);
 }

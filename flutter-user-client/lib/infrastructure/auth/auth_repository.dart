@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -60,7 +62,6 @@ class authorize implements IAuthRepository {
 
     // unexpected error
     catch (err) {
-      print(err);
       return left(const AuthFailure.networkError());
     }
   }
@@ -162,7 +163,6 @@ class authorize implements IAuthRepository {
     }
     // TODO:MAKE STORAGE ERROR NOT SEVER
     catch (err) {
-      print(err);
       return left(const AuthFailure.serverError());
     }
   }

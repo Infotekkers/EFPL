@@ -50,7 +50,8 @@ mixin _$LeagueTable {
   TeamLogo get teamLogo => throw _privateConstructorUsedError;
   TeamPoint get teamPoint => throw _privateConstructorUsedError;
   TeamWon get won => throw _privateConstructorUsedError;
-  TeamLost get lost => throw _privateConstructorUsedError;
+  TeamLost get lost =>
+      throw _privateConstructorUsedError; // ignore: non_constant_identifier_names
   TeamDraw get Draw => throw _privateConstructorUsedError;
   TeamGoalDifferntial get goalDifferential =>
       throw _privateConstructorUsedError;
@@ -246,7 +247,7 @@ class _$_LeagueTable implements _LeagueTable {
   final TeamWon won;
   @override
   final TeamLost lost;
-  @override
+  @override // ignore: non_constant_identifier_names
   final TeamDraw Draw;
   @override
   final TeamGoalDifferntial goalDifferential;
@@ -319,7 +320,7 @@ abstract class _LeagueTable implements LeagueTable {
   TeamWon get won;
   @override
   TeamLost get lost;
-  @override
+  @override // ignore: non_constant_identifier_names
   TeamDraw get Draw;
   @override
   TeamGoalDifferntial get goalDifferential;

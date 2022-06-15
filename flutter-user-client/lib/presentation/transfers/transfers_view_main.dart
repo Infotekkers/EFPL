@@ -97,6 +97,7 @@ class TransfersView extends StatelessWidget {
                       );
                     },
                     deadlinePassed: (_) {
+                      // ignore: avoid_print
                       print("Deadline Passed");
                     },
 
