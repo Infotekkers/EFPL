@@ -33,7 +33,7 @@
           {{ $t("Ethiopian Premier League") }} - {{ getSeason }}
           {{ $t("Fixtures") }}
         </div>
-        <div class="gameweek-add-new" @click="activateModal">
+        <div class="gameweek-add-new" @click="activateModal" data-cp="add-gw">
           <div>
             <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
           </div>
