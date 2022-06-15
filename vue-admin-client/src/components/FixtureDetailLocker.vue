@@ -61,6 +61,9 @@ export default {
       "addPlayerToLocker",
       "deletePlayerFromLocker",
     ]),
+    log(e) {
+      console.log(e);
+    },
 
     //   Dragganle Handlers
     lockerPlayerDragStart(e, player) {

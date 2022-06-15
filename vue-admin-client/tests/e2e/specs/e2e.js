@@ -1,5 +1,6 @@
 // https://docs.cypress.io/api/table-of-contents
 import "cypress-localstorage-commands";
+import "@4tw/cypress-drag-drop";
 
 describe("E2E Test", () => {
   before(() => {
@@ -30,22 +31,22 @@ describe("E2E Test", () => {
       .should("have.length", 8);
   });
 
-  it("Removes fixture", () => {
-    cy.get('[class="fixture-main-container"]')
-      .contains("Adama City S.C")
-      .parentsUntil('[class="fixture-main-container"]')
-      .find('[data-cp="delete-match"]')
-      .click();
-  });
+  // it("Removes fixture", () => {
+  //   cy.get('[class="fixture-main-container"]')
+  //     .contains("Adama City S.C")
+  //     .parentsUntil('[class="fixture-main-container"]')
+  //     .find('[data-cp="delete-match"]')
+  //     .click();
+  // });
 
-  it("Adds new fixture", () => {
-    cy.get('[data-cp="add-gw"]').click();
-    cy.get('[class="fixture-modal-save-button"]').click();
-    cy.get('[class="fixture-modal-close"]').click();
-    cy.get('[class="fixture-main-container"]')
-      // .wait(2000)
-      .should("have.length", 8);
-  });
+  // it("Adds new fixture", () => {
+  //   cy.get('[data-cp="add-gw"]').click();
+  //   cy.get('[class="fixture-modal-save-button"]').click();
+  //   cy.get('[class="fixture-modal-close"]').click();
+  //   cy.get('[class="fixture-main-container"]')
+  //     // .wait(2000)
+  //     .should("have.length", 8);
+  // });
 
   it("Visits fixture details", () => {
     cy.get('[class="fixture-main-container"]')
@@ -54,56 +55,85 @@ describe("E2E Test", () => {
   });
 
   it("Adds player lineup", () => {
-    var player = cy.get(".locker-room").first();
-    console.log(player);
-    // cy.get(".locker-room").debug();
-    cy.get(".locker-room").children().first().trigger("mousedown");
     cy.get(".locker-room")
       .children()
-      .first()
-      .trigger("mousemove", -100, 0, { force: true });
-    cy.get(".locker-room").children().first().trigger("mouseup");
+      // .its("length")
+      .then((players) => {
+        // let noOfPlayersInLineup = 0;
+        let positionCount = {
+          gk: 0,
+          def: 0,
+          mid: 0,
+          att: 0,
+        };
+        let index = 1;
+
+        for (const player of players) {
+          const position = player.children[1].innerText.toLowerCase();
+          if (Object.values(positionCount).reduce((a, b) => a + b) < 18) {
+            if (position === "gk" && positionCount.gk < 1) {
+              cy.get(`.locker-room > :nth-child(${index})`).drag(
+                "#goalkeepers"
+              );
+              positionCount.gk++;
+            } else if (position === "def" && positionCount.def < 4) {
+              cy.get(`.locker-room > :nth-child(${index})`).drag("#defenders");
+              positionCount.def++;
+            } else if (position === "mid" && positionCount.mid < 4) {
+              cy.get(`.locker-room > :nth-child(${index})`).drag(
+                "#midfielders"
+              );
+              positionCount.mid++;
+            } else if (position === "att" && positionCount.att < 2) {
+              cy.get(`.locker-room > :nth-child(${index})`).drag("#strikers");
+              positionCount.att++;
+            } else cy.get(`.locker-room > :nth-child(${index})`).drag("#bench");
+          }
+          index++;
+        }
+      });
+    cy.get(".locker-room").children().should("have.length.below", 30);
   });
 
-  it("Visits players", () => {
-    cy.get('[href="/admin/players"]').click();
-    cy.get('[class="players-container"]')
-      .wait(3000)
-      .children()
-      .should("have.length", 454);
-  });
+  // it("Visits players", () => {
+  //   cy.get('[href="/admin/players"]').click();
+  //   cy.get('[class="players-container"]')
+  //     .wait(3000)
+  //     .children()
+  //     .should("have.length", 454);
+  // });
 
-  it("Visits teams", () => {
-    cy.get('[href="/admin/teams"]').click();
-    cy.get('[class="teams-container"]')
-      .wait(3000)
-      .children()
-      .should("have.length", 16);
-  });
+  // it("Visits teams", () => {
+  //   cy.get('[href="/admin/teams"]').click();
+  //   cy.get('[class="teams-container"]')
+  //     .wait(3000)
+  //     .children()
+  //     .should("have.length", 16);
+  // });
 
-  it("Edits team", () => {
-    cy.get('[class="teams-container"]')
-      .contains("Addis Ababa City F.C")
-      .parent()
-      .find('[data-cp="edit-team"]')
-      .click();
-    cy.get('input[name="teamStadium"]').clear().type("Abebe Bikila Stadium");
-    cy.get(".main-button-primary").click();
-    cy.get(".main-modal-close").click();
+  // it("Edits team", () => {
+  //   cy.get('[class="teams-container"]')
+  //     .contains("Addis Ababa City F.C")
+  //     .parent()
+  //     .find('[data-cp="edit-team"]')
+  //     .click();
+  //   cy.get('input[name="teamStadium"]').clear().type("Abebe Bikila Stadium");
+  //   cy.get(".main-button-primary").click();
+  //   cy.get(".main-modal-close").click();
 
-    cy.get('[class="teams-container"]')
-      .contains("Addis Ababa City F.C")
-      .parent()
-      .find('[data-cp="edit-team"]')
-      .click();
-    cy.get('input[name="teamStadium"]').clear().type("Addis Ababa Stadium");
-    cy.get(".main-button-primary").click();
-    cy.get(".main-modal-close").click();
-  });
+  //   cy.get('[class="teams-container"]')
+  //     .contains("Addis Ababa City F.C")
+  //     .parent()
+  //     .find('[data-cp="edit-team"]')
+  //     .click();
+  //   cy.get('input[name="teamStadium"]').clear().type("Addis Ababa Stadium");
+  //   cy.get(".main-button-primary").click();
+  //   cy.get(".main-modal-close").click();
+  // });
 
-  it("Logs out", () => {
-    cy.get('[href="/admin/settings"]').click();
-    cy.get('button[class="collapseAcc"]').click();
-    cy.get('button[class="accLink-2 "]').click();
-  });
+  // it("Logs out", () => {
+  //   cy.get('[href="/admin/settings"]').click();
+  //   cy.get('button[class="collapseAcc"]').click();
+  //   cy.get('button[class="accLink-2 "]').click();
+  // });
 });
