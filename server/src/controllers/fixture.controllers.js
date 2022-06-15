@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const statUpdater = require("../utils/helpers").statUpdater;
 const validator = require("../utils/validators");
+const axios = require("axios");
+const baseURL = process.env.BASE_URL;
 
 const FixtureModel = require("../models/Fixtures");
 const TeamModel = require("../models/Teams");
@@ -379,7 +381,7 @@ const pauseFixture = asyncHandler(async function (req, res) {
   if (match?.status === "liveFH") {
     match.status = "HT";
 
-    MINUTE_COUNTERS[req.params.matchId].status = "paused";
+    // MINUTE_COUNTERS[req.params.matchId].status = "paused";
 
     match
       .save()
@@ -416,7 +418,7 @@ const pauseFixture = asyncHandler(async function (req, res) {
 const resumeFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
-  MINUTE_COUNTERS[req.params.matchId].status = "active";
+  // MINUTE_COUNTERS[req.params.matchId].status = "active";
   const homeTeam = await TeamModel.find({
     teamId: parseInt(req.params.matchId.split("|")[0]),
   });
@@ -470,11 +472,13 @@ const endFixture = asyncHandler(async function (req, res) {
     teamId: parseInt(req.params.matchId.split("|")[1]),
   });
 
+  //
+
   if (match?.status === "liveSH") {
     match.status = "FT";
 
-    MINUTE_COUNTERS[req.params.matchId].status = "ended";
-    clearInterval(MINUTE_COUNTERS[req.params.matchId].intervalId);
+    //   // MINUTE_COUNTERS[req.params.matchId].status = "ended";
+    //   // clearInterval(MINUTE_COUNTERS[req.params.matchId].intervalId);
 
     match
       .save()
@@ -487,6 +491,29 @@ const endFixture = asyncHandler(async function (req, res) {
 
     const io = require("../../server");
     io.emit("fixtureUpdated");
+
+    // ge active gw
+    const activeGw = await GameWeek.find({ status: "active" });
+    const activeGwId =
+      activeGw.length > 0 ? activeGw[activeGw.length - 1].gameWeekNumber : 0;
+
+    // check if all matches are ended
+    const activeMatch = await FixtureModel.find({
+      gameweekId: activeGwId,
+      status: { $ne: "FT" },
+    });
+    if (activeMatch.length === 1) {
+      // micro service call to update stat
+      await axios.patch(`${baseURL}/efpl/update`);
+
+      await GameWeek.findOne({ gameWeekNumber: activeGwId }).updateOne({
+        status: "Played",
+      });
+
+      await GameWeek.findOne({ gameWeekNumber: activeGwId + 1 }).updateOne({
+        status: "active",
+      });
+    }
   } else if (!match) {
     res
       .status(404)
@@ -588,8 +615,6 @@ const updateFixture = asyncHandler(async function (req, res) {
     newGameWeekId = nextGameWeekFixture.gameweekId;
   }
 
-  // console.log(startOfFixtureDay);
-
   if (match) {
     if (match.status === "scheduled") {
       match.gameweekId = newGameWeekId;
@@ -654,8 +679,6 @@ const updateStats = asyncHandler(async (req, res) => {
   let awayTeamScore = 0;
   const awayTeamName = match.awayTeam;
 
-  console.log(match.matchStat.goalsScored);
-
   if (match) {
     const { updatedMatch, updatedPlayer } = statUpdater({
       activeMatch: match,
@@ -687,8 +710,6 @@ const updateStats = asyncHandler(async (req, res) => {
     match.score = `${homeTeamScore}v${awayTeamScore}`;
     await FixtureModel.updateOne({ matchId: matchId }, match);
 
-    console.log(homeTeamScore, awayTeamScore);
-
     // send socket update
     const io = require("../../server");
     io.emit("fixtureStatUpdated");
@@ -715,8 +736,6 @@ const updateStats = asyncHandler(async (req, res) => {
 //   let awayTeamScore = match.score.split("v")[1];
 //   const awayTeamName = match.awayTeam;
 
-//   console.log(match.matchStat.goalsScored);
-
 //   if (match) {
 //     // if (!match.score) match.score = "0v0";
 //     // match.score = score;
@@ -734,8 +753,6 @@ const updateStats = asyncHandler(async (req, res) => {
 //         awayTeamScore = parseInt(awayTeamScore) + matchGoals[player].noOfGoals;
 //       }
 //     }
-
-//     console.log(homeTeamScore, awayTeamScore);
 
 //     // send socket update
 //     const io = require("../../server");

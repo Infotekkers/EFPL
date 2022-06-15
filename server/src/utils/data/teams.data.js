@@ -2,9 +2,12 @@ const teamData = [
   // Saint George S.C 1
   {
     teamName: "Saint George S.C",
+    teamNameAm: "ቅዱስ ጊዮርጊስ",
     foundedIn: 1935,
     teamStadium: "Addis Ababa Stadium",
+    teamStadiumAm: "አዲስ አበባ ስታዲየም",
     teamCity: "Addis Ababa",
+    teamCityAm: "አዲስ አበባ",
     stadiumCapacity: 34000,
     teamCoach: "Zlatko Krmpotić",
     teamLogo: "/uploads/teams/St-George.png",
@@ -13,9 +16,12 @@ const teamData = [
   // "Welayta Dicha" 2
   {
     teamName: "Wolaita Dicha S.C",
+    teamNameAm: "ወላይታ ዲቻ",
     foundedIn: 2009,
     teamStadium: "Wolaita Sodo Stadium",
+    teamStadiumAm: "ወላይታ ሶዶ ስታዲየም",
     teamCity: "Wolaita Sodo",
+    teamCityAm: "ወላይታ ሶዶ",
     stadiumCapacity: 30000,
     teamCoach: "Tsegaye Kidane-mariyam",
     teamLogo: "/uploads/teams/Wolaita-dicha.png",
@@ -150,7 +156,7 @@ const teamData = [
     teamStadium: "Addis Ababa Stadium",
     teamCity: "Addis Ababa",
     stadiumCapacity: 5000,
-    teamCoach: "",
+    teamCoach: "Ismail Abubeker",
     teamLogo: "/uploads/teams/Addis-Ababa.png",
   },
 

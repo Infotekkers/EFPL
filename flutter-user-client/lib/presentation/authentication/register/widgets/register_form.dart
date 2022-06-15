@@ -97,6 +97,7 @@ class RegisterForm extends StatelessWidget {
             children: [
               // Email Input
               TextFormField(
+                key: const ValueKey("registerViewEmailField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.email),
@@ -429,6 +430,7 @@ class RegisterForm extends StatelessWidget {
 
               // Register Button
               InkWell(
+                key: const Key("registerViewRegisterButton"),
                 onTap: () {
                   state.isSubmitting
                       ? null
@@ -466,6 +468,7 @@ class RegisterForm extends StatelessWidget {
               const SizedBox(height: 36),
 
               InkWell(
+                key: const Key("registerViewSignUpRedirect"),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(

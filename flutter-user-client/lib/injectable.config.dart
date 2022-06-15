@@ -78,7 +78,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i24.UtilBloc>(() => _i24.UtilBloc());
   gh.lazySingleton<_i25.WatchListBloc>(
       () => _i25.WatchListBloc(get<_i26.IWatchListRepository>()));
-  gh.factory<_i27.AuthBloc>(() => _i27.AuthBloc(get<_i10.IAuthRepository>()));
+  gh.lazySingleton<_i27.AuthBloc>(
+      () => _i27.AuthBloc(get<_i10.IAuthRepository>()));
   gh.lazySingleton<_i28.EPLStatsBloc>(
       () => _i28.EPLStatsBloc(get<_i12.IEPLStatsRepository>()));
   gh.lazySingleton<_i29.IMyTeamRepository>(() => _i30.MyTeamRepository(

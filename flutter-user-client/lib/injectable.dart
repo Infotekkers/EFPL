@@ -1,3 +1,4 @@
+import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/domain/efpl_stats/i_efpl_stats_facade..dart';
 import 'package:efpl/domain/fixture/i_fixture_facade.dart';
 import 'package:efpl/domain/points/i_points_facade.dart';
@@ -13,6 +14,7 @@ import 'package:efpl/services/socket.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
+import 'infrastructure/auth/auth_repository.dart';
 import 'infrastructure/fixture/fixture_repository.dart';
 
 final GetIt getIt = GetIt.instance;

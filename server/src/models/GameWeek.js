@@ -34,7 +34,7 @@ const gameWeekSchema = mongoose.Schema({
 
     // These are the only possible values
     enum: {
-      values: ["Played", "Active", "ToBePlayed", "TBD"],
+      values: ["Played", "active", "ToBePlayed", "TBD"],
       message:
         "Custom Error - Invalid ENUM Value *:{VALUE} is not allowed for game week status.",
     },

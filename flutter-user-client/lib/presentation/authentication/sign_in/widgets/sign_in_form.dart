@@ -177,6 +177,7 @@ class SignInForm extends StatelessWidget {
 
               // Sign In Button
               InkWell(
+                key: const Key("loginViewSignUpRedirect"),
                 onTap: () {
                   state.isSubmitting
                       ? null
