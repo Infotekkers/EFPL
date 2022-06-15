@@ -1,6 +1,19 @@
 <template>
   <div class="team-container">
-    <!-- <div class="team-id-container">{{ team.relative_id }}</div> -->
+    <div
+      class="team-highlighter"
+      :class="
+        team.relative_id == 1
+          ? 'green-highlight'
+          : team.relative_id > 13
+          ? 'red-highlight'
+          : 'no-color-highlight'
+      "
+    ></div>
+    <div class="team-id-container">
+      {{ team.relative_id }}
+    </div>
+
     <div
       class="team-logo-container"
       :style="{
@@ -8,20 +21,20 @@
       }"
     ></div>
     <div class="team-name-container">{{ team.teamName }}</div>
-    <div class="team-point-container">{{ team.teamPosition[0].teamPoint }}</div>
-    <div class="team-point-container">{{ team.teamPosition[0].won }}</div>
-    <div class="team-point-container">{{ team.teamPosition[0].lost }}</div>
-    <div class="team-point-container">{{ team.teamPosition[0].Draw }}</div>
-    <div class="team-point-container">{{ team.teamPosition[0].goalFor }}</div>
-    <div class="team-point-container">
-      {{ team.teamPosition[0].goalAgainst }}
+    <div class="team-gf-container">
+      {{ team.teamPosition[0].goalsFor }}
     </div>
-    <div class="team-point-container">
-      {{ team.teamPosition[0].goalDifferntial }}
+    <div class="team-ga-container">
+      {{ team.teamPosition[0].goalsAgainst }}
     </div>
+    <div class="team-gd-container">
+      {{ team.teamPosition[0].goalDifferential }}
+    </div>
+    <div class="team-win-container">{{ team.teamPosition[0].won }}</div>
+    <div class="team-draw-container">{{ team.teamPosition[0].lost }}</div>
+    <div class="team-loss-container">{{ team.teamPosition[0].Draw }}</div>
     <div class="team-point-container">
-      <span v-if="team.foundedIn">{{ team.teamPosition[0].teamPoint }}</span>
-      <span v-else>-</span>
+      {{ team.teamPosition[0].teamPoint }}
     </div>
   </div>
 </template>
@@ -55,11 +68,12 @@ export default {
   object-fit: contain;
 }
 .team-container {
+  width: 100%;
+  margin-top: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 16px;
-  min-height: 110px;
+  min-height: 90px;
   border-bottom: 2px solid var(--neutral-200);
   font-size: 16px;
   color: var(--neutral-900);
@@ -67,42 +81,53 @@ export default {
 .team-container:nth-of-type(odd) {
   background: var(--neutral-200);
 }
+.team-container-colored {
+  background: var(--primary-100);
+}
 .team-id-container {
-  width: 5%;
+  width: 3%;
   min-width: 45px;
 }
+.team-highlighter {
+  min-width: 4px;
+  height: 90px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.red-highlight {
+  background: red;
+}
+.green-highlight {
+  background: lightgreen;
+}
 .team-logo-container {
-  text-align: start;
-  width: 60px;
-  min-width: 60px;
-  padding-right: 10px;
-  min-height: 60px;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+  height: 50px;
+  width: 5%;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .team-name-container {
-  width: 17%;
-  min-width: 130px;
-  display: flex;
-  margin-right: 40px;
-  margin-left: 30px;
-}
-.team-container-colored {
-  background: var(--primary-100);
+  width: 32.5%;
+  text-align: start;
 }
 
-.team-city-container {
-  min-width: 100px;
-  width: 17%;
-  display: flex;
+.team-point-container,
+.team-win-container,
+.team-loss-container,
+.team-draw-container,
+.team-gf-container,
+.team-ga-container,
+.team-gd-container {
+  width: 7.5%;
+  display: grid;
+  place-items: center;
 }
-.team-point-container {
-  min-width: 100px;
-  width: 17%;
-  display: flex;
-}
+
 .team-stadium-container {
   display: flex;
   flex-direction: column;
