@@ -1,5 +1,4 @@
 import 'package:efpl/application/custom_leagues/custom_leagues_bloc.dart';
-import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
 import 'package:efpl/injectable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +31,17 @@ _buildCustomLeagueMembersView(context, state) {
   return Scaffold(
     appBar: AppBar(
       title: Text(state.customLeaguesInfo.leagueName.getOrCrash()),
+      actions: [
+        TextButton(
+          onPressed: () {
+            _showLeaveConfirmationModal(context: context);
+          },
+          child: const Text(
+            "Leave",
+            style: TextStyle(color: Colors.white),
+          ),
+        )
+      ],
     ),
     body: Padding(
       padding: const EdgeInsets.all(8.0),
@@ -54,5 +64,39 @@ _buildCustomLeagueMembersView(context, state) {
         ],
       ),
     ),
+  );
+}
+
+_showLeaveConfirmationModal({required BuildContext context}) {
+  showModalBottomSheet(
+    context: context,
+    builder: (builder) {
+      return Column(
+        children: [
+          const Text("Are you sure you want to leave?"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Close modal
+                  Navigator.of(context).pop();
+
+                  // Navigate to custom leagues page
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Confirm"),
+              )
+            ],
+          ),
+        ],
+      );
+    },
   );
 }
