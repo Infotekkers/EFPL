@@ -5,27 +5,34 @@ autoIncrement.initialize(mongoose.connection);
 
 const teamPosition = mongoose.Schema({
   teamPoint: {
-    type:Number
+    type: Number,
+    default: 0,
   },
-  won:{
-    type:Number
+  won: {
+    type: Number,
+    default: 0,
   },
-  lost:{
-    type:Number
+  lost: {
+    type: Number,
+    default: 0,
   },
-  Draw:{
-    type:Number
+  Draw: {
+    type: Number,
+    default: 0,
   },
   goalsFor: {
-    type:Number
+    type: Number,
+    default: 0,
   },
-  goalsAgainst:{
-    type:Number
+  goalsAgainst: {
+    type: Number,
+    default: 0,
   },
-  goalDifferential:{
-    type:Number
-  }
-})
+  goalDifferential: {
+    type: Number,
+    default: 0,
+  },
+});
 
 const teamSchema = mongoose.Schema({
   teamName: {
@@ -57,8 +64,8 @@ const teamSchema = mongoose.Schema({
     type: String,
   },
   teamPosition: {
-    type: teamPosition
-  }
+    type: teamPosition,
+  },
 });
 
 teamSchema.plugin(autoIncrement.plugin, {
