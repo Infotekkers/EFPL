@@ -7,6 +7,7 @@ class CustomLeaguesState with _$CustomLeaguesState {
     required CustomLeaguesInfo customLeaguesInfo,
     required bool isLoading,
     required Option<Either<dynamic, dynamic>> valueFailureOrSuccess,
+    bool? leaveLeagueSuccess,
   }) = _CustomLeaguesState;
 
   factory CustomLeaguesState.initial() => CustomLeaguesState(
@@ -22,5 +23,6 @@ class CustomLeaguesState with _$CustomLeaguesState {
         ),
         isLoading: false,
         valueFailureOrSuccess: none(),
+        leaveLeagueSuccess: false,
       );
 }

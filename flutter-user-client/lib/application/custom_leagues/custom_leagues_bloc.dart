@@ -22,10 +22,13 @@ class CustomLeaguesBloc extends Bloc<CustomLeaguesEvent, CustomLeaguesState> {
         ) {
     on<_getUserCustomLeagues>(_onGetUserCustomLeagues);
     on<_getCustomLeagueInfo>(_onGetCustomLeagueInfo);
+    on<_leaveCustomLeague>(_onLeaveCustomLeague);
   }
 
   void _onGetUserCustomLeagues(
-      _getUserCustomLeagues e, Emitter<CustomLeaguesState> emit) async {
+    _getUserCustomLeagues e,
+    Emitter<CustomLeaguesState> emit,
+  ) async {
     emit(
       state.copyWith(
         isLoading: true,
@@ -50,7 +53,9 @@ class CustomLeaguesBloc extends Bloc<CustomLeaguesEvent, CustomLeaguesState> {
   }
 
   void _onGetCustomLeagueInfo(
-      _getCustomLeagueInfo e, Emitter<CustomLeaguesState> emit) async {
+    _getCustomLeagueInfo e,
+    Emitter<CustomLeaguesState> emit,
+  ) async {
     emit(
       state.copyWith(
         isLoading: true,
@@ -72,5 +77,26 @@ class CustomLeaguesBloc extends Bloc<CustomLeaguesEvent, CustomLeaguesState> {
         customLeaguesInfo: customLeaguesInfo,
       ),
     );
+  }
+
+  void _onLeaveCustomLeague(
+    _leaveCustomLeague e,
+    Emitter<CustomLeaguesState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        isLoading: true,
+      ),
+    );
+
+    final Either<dynamic, dynamic> failureOrSuccess =
+        await iCustomLeaguesRepository.leaveCustomLeague(
+      userId: e.userId,
+      leagueCode: e.leagueCode,
+    );
+
+    emit(state.copyWith(
+      isLoading: false,
+    ));
   }
 }

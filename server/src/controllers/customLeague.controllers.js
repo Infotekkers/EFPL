@@ -162,10 +162,10 @@ const joinCustomLeague = asyncHandler(async function (req, res) {
 });
 
 const leaveCustomLeague = asyncHandler(async (req, res) => {
-  const { leagueId, userId } = req.body;
+  const { userId, leagueCode } = req.body;
 
   const user = await UserModel.findOne({ _id: userId });
-  const customLeague = await CustomLeagueModel.findOne({ leagueId });
+  const customLeague = await CustomLeagueModel.findOne({ leagueCode });
 
   if (!customLeague) {
     return res
@@ -183,9 +183,12 @@ const leaveCustomLeague = asyncHandler(async (req, res) => {
       .send("Player is not a member of this custom league!");
   }
 
-  customLeague.teams = customLeague.teams.filter((teamId) => teamId !== userId);
-  user.fantasyLeagues = user.fantasyLeagues.filter(
-    (league) => league.leaugeId !== leagueId
+  customLeague.teams = await customLeague.teams.filter(
+    (team) => team.memberId !== userId
+  );
+
+  user.fantasyLeagues = await user.fantasyLeagues.filter(
+    (league) => league.leagueId !== customLeague.leagueId
   );
 
   await customLeague.save();

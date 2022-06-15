@@ -34,7 +34,10 @@ _buildCustomLeagueMembersView(context, state) {
       actions: [
         TextButton(
           onPressed: () {
-            _showLeaveConfirmationModal(context: context);
+            _showLeaveConfirmationModal(
+              context: context,
+              leagueCode: state.customLeaguesInfo.leagueCode.getOrCrash(),
+            );
           },
           child: const Text(
             "Leave",
@@ -67,7 +70,10 @@ _buildCustomLeagueMembersView(context, state) {
   );
 }
 
-_showLeaveConfirmationModal({required BuildContext context}) {
+_showLeaveConfirmationModal({
+  required BuildContext context,
+  required String leagueCode,
+}) {
   showModalBottomSheet(
     context: context,
     builder: (builder) {
@@ -85,6 +91,13 @@ _showLeaveConfirmationModal({required BuildContext context}) {
               ),
               ElevatedButton(
                 onPressed: () {
+                  BlocProvider.of<CustomLeaguesBloc>(context).add(
+                    CustomLeaguesEvent.leavePublicLeague(
+                      userId: "62960c04c1a572a276b6e08b",
+                      leagueCode: leagueCode,
+                    ),
+                  );
+
                   // Close modal
                   Navigator.of(context).pop();
 

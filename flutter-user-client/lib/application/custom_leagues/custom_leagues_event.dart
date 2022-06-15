@@ -11,4 +11,8 @@ class CustomLeaguesEvent with _$CustomLeaguesEvent {
       _joinPublicLeague;
   const factory CustomLeaguesEvent.joinPrivateLeague(
       {required String leagueCode}) = _joinPrivateLeague;
+
+  const factory CustomLeaguesEvent.leavePublicLeague(
+      {required String userId,
+      required String leagueCode}) = _leaveCustomLeague;
 }

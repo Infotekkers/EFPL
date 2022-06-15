@@ -136,4 +136,33 @@ class CustomLeaguesRemoteDataProvider {
 
     return left(const CustomLeaguesFailures.networkError());
   }
+
+  Future<Either<dynamic, CustomLeaguesInfo>> leaveCustomLeague(
+      {required AdminId userId, required LeagueCode leagueCode}) async {
+    // Todo: refactor
+    final JoinCustomLeagueInputDto leaveCustomLeagueDtoOut =
+        JoinCustomLeagueInputDto.fromDomain(
+      userId: userId,
+      leagueCode: leagueCode,
+    );
+
+    final outGoingJson = leaveCustomLeagueDtoOut.toJson();
+
+    try {
+      var apiResponse = await instance.client.post(
+        Uri.parse('$_baseURL/customLeagues/leave'),
+        body: outGoingJson,
+      );
+
+      if (apiResponse.statusCode == 200) {
+        final parsedResponseBody = jsonDecode(apiResponse.body);
+
+        return right(parsedResponseBody);
+      }
+    } catch (e) {
+      return left(const CustomLeaguesFailures.serverError());
+    }
+
+    return left(const CustomLeaguesFailures.networkError());
+  }
 }

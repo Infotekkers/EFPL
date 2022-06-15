@@ -42,4 +42,13 @@ class ApiCustomLeaguesRepository implements ICustomLeaguesRepository {
       leagueCode: LeagueCode(value: leagueCode),
     );
   }
+
+  @override
+  Future<Either<dynamic, dynamic>> leaveCustomLeague(
+      {required String userId, required String leagueCode}) async {
+    return _customLeaguesRemoteDataProvider.leaveCustomLeague(
+      userId: AdminId(value: userId),
+      leagueCode: LeagueCode(value: leagueCode),
+    );
+  }
 }
