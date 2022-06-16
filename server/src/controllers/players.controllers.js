@@ -207,7 +207,6 @@ const getPlayer = asyncHandler(async (req, res) => {
 
   res.send(player);
 });
-
 const getPlayers = asyncHandler(async (req, res) => {
   const players = await PlayerModel.find();
 
@@ -359,8 +358,6 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
     };
 
     allPlayersInPositionFormatted.push(currentPlayerInfo);
-
-    // console.log(currentPlayerInfo);
   }
 
   res.status(200).send(allPlayersInPositionFormatted);

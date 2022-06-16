@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO:Add Result Display -->
   <div class="fixture-main-container">
     <!-- teams loading -->
     <div v-if="isTeamLoading == true" class="main-spinner-container">
@@ -420,6 +419,10 @@ export default {
         });
       }
     },
+  },
+  beforeMount() {
+    console.log("@TEST");
+    console.log(this.fixture);
   },
 };
 </script>

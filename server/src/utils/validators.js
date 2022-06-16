@@ -16,8 +16,6 @@ const validateTeam = async (team, availableChips) => {
   for (const playerId in team.players) {
     teamBudget += parseInt(team.players[playerId].price);
 
-    // console.log(playerId)
-
     // Unique captain and vice-captain
     if (team.players[playerId].isCaptain) {
       isCaptainUnique = !isCaptainUnique;

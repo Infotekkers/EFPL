@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1cb"
+  },
+  "model": "players",
+  "field": "playerId",
+  "count": 100431,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1cd"
+  },
+  "model": "teams",
+  "field": "teamId",
+  "count": 16,
+  "__v": 0
+}]

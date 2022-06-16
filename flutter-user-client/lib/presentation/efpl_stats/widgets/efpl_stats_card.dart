@@ -1,7 +1,5 @@
 import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EFPLStatsCard extends StatelessWidget {
   final String label;
@@ -27,7 +25,7 @@ class EFPLStatsCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         children: [
-          Container(
+          SizedBox(
             child: Text(
               label,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
@@ -38,7 +36,7 @@ class EFPLStatsCard extends StatelessWidget {
             ),
             width: MediaQuery.of(context).size.width * 0.55,
           ),
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width * 0.3,
             child: Text(
               value,

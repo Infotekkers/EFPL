@@ -19,9 +19,7 @@ class EFPLStatsDreamTeam extends StatelessWidget {
         BlocProvider.value(value: getIt<EfplStatsBloc>()),
       ],
       child: BlocConsumer<EfplStatsBloc, EfplStatsState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           List allFormattedPlayers =
               formatAllDreamTeamPlayers(dreamTeam: state.dreamTeam);
@@ -187,12 +185,12 @@ Widget _buildInfoView(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // PLayer Info
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width * 0.5,
           child: Row(
             children: [
               // Player Shirt
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.2,
                 child: SvgPicture.asset(
                   "assets/icons/shirt.svg",
@@ -296,15 +294,15 @@ List getBestPerformer({required Map dreamTeam}) {
   for (var position in dreamTeam.keys) {
     if (position != "_id") {
       List player = dreamTeam[position];
-      player.forEach((p) {
+      for (var p in player) {
         allPlayers.add(p);
-      });
+      }
     }
   }
   allPlayers.sort((a, b) => (b['score']).compareTo(a['score']));
 
-  allPlayers.forEach((element) {
+  for (var element in allPlayers) {
     score = score + int.parse(element['score'].toString());
-  });
+  }
   return [allPlayers.isNotEmpty ? allPlayers[0] : [], score];
 }

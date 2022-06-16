@@ -1,0 +1,209 @@
+[{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1d2"
+  },
+  "teamName": "Saint George S.C",
+  "teamCity": "Addis Ababa",
+  "teamStadium": "Addis Ababa Stadium",
+  "teamLogo": "/uploads/teams/St-George.png",
+  "stadiumCapacity": 34000,
+  "foundedIn": 1935,
+  "teamCoach": "Zlatko Krmpotić",
+  "teamId": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1d3"
+  },
+  "teamName": "Wolaita Dicha S.C",
+  "teamCity": "Wolaita Sodo",
+  "teamStadium": "Wolaita Sodo Stadium",
+  "teamLogo": "/uploads/teams/Wolaita-dicha.png",
+  "stadiumCapacity": 30000,
+  "foundedIn": 2009,
+  "teamCoach": "Tsegaye Kidane-mariyam",
+  "teamId": 2,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1d4"
+  },
+  "teamName": "Hawassa Kenema S.C",
+  "teamCity": "Hawassa",
+  "teamStadium": "Awassa Kenema Stadium",
+  "teamLogo": "/uploads/teams/Hawassa-Ketema.jpg",
+  "stadiumCapacity": 15000,
+  "foundedIn": 1977,
+  "teamCoach": "Mulugeta Mihret",
+  "teamId": 3,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1d5"
+  },
+  "teamName": "Fasil Kenema S.C",
+  "teamCity": "Gondar",
+  "teamStadium": "Fasiledes Stadium",
+  "teamLogo": "/uploads/teams/Fasil-Kenema.png",
+  "stadiumCapacity": 20000,
+  "foundedIn": 1968,
+  "teamCoach": "Seyoum Kebede",
+  "teamId": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1d6"
+  },
+  "teamName": "Adama City S.C",
+  "teamCity": "Adama",
+  "teamStadium": "Abebe Bikila Stadium",
+  "teamLogo": "/uploads/teams/Adama-City.png",
+  "stadiumCapacity": 4000,
+  "foundedIn": 1991,
+  "teamCoach": "Zeray Mulu",
+  "teamId": 5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1d7"
+  },
+  "teamName": "Sidama Coffee S.C",
+  "teamCity": "Sidama",
+  "teamStadium": "Hawasa Metropolitan Stadium",
+  "teamLogo": "/uploads/teams/Sidama-Coffee.jpg",
+  "stadiumCapacity": 25000,
+  "foundedIn": 2006,
+  "teamCoach": "Gebremedin Haile",
+  "teamId": 6,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1d8"
+  },
+  "teamName": "Bahir Dar Kenema S.C",
+  "teamCity": "Bahir Dar",
+  "teamStadium": "Bahir Dar Stadium",
+  "teamLogo": "/uploads/teams/Bahir-Dar.png",
+  "stadiumCapacity": 60000,
+  "foundedIn": 1973,
+  "teamCoach": "Fasil Tekalegn",
+  "teamId": 7,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1d9"
+  },
+  "teamName": "Ethiopian Coffee S.C",
+  "teamCity": "Addis Ababa",
+  "teamStadium": "Addis Ababa Stadium",
+  "teamLogo": "/uploads/teams/Ethiopian-Coffee.jpg",
+  "stadiumCapacity": 35000,
+  "foundedIn": 1976,
+  "teamCoach": "Kassaye Arage",
+  "teamId": 8,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1da"
+  },
+  "teamName": "Wolkite City F.C",
+  "teamCity": "Wolkite",
+  "teamStadium": "Wolkite Stadium",
+  "teamLogo": "/uploads/teams/Wolkite-City.png",
+  "stadiumCapacity": 5000,
+  "foundedIn": 2010,
+  "teamCoach": "Paulos Getachew",
+  "teamId": 9,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1db"
+  },
+  "teamName": "Arba Minch City F.C",
+  "teamCity": "Arba Minch",
+  "teamStadium": "Arba Minch Stadium",
+  "teamLogo": "/uploads/teams/Arba-Minch.jpg",
+  "stadiumCapacity": 5000,
+  "foundedIn": 2000,
+  "teamCoach": "Mesay Teferi",
+  "teamId": 10,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1dc"
+  },
+  "teamName": "Defence Force S.C",
+  "teamCity": "Addis Ababa",
+  "teamStadium": "Addis Ababa Stadium",
+  "teamLogo": "/uploads/teams/Defense-Force.png",
+  "stadiumCapacity": 35000,
+  "foundedIn": 1938,
+  "teamCoach": "Yohannes Sahle",
+  "teamId": 11,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1dd"
+  },
+  "teamName": "Hadiya Hossana F.C",
+  "teamCity": "Hosaena",
+  "teamStadium": "Abiy Hersamo Stadium",
+  "teamLogo": "/uploads/teams/Hadiya-Hossana.png",
+  "stadiumCapacity": 5000,
+  "foundedIn": 2006,
+  "teamCoach": "Ashenafi Bekele",
+  "teamId": 12,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1de"
+  },
+  "teamName": "Dire Dawa City S.C",
+  "teamCity": "Dire Dawa",
+  "teamStadium": "Dire Dawa Stadium",
+  "teamLogo": "/uploads/teams/Dire-Dawa.png",
+  "stadiumCapacity": 18000,
+  "foundedIn": 1982,
+  "teamCoach": "Zemariam Woldegiorgis",
+  "teamId": 13,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1df"
+  },
+  "teamName": "Addis Ababa City F.C",
+  "teamCity": "Addis Ababa",
+  "teamStadium": "Addis Ababa Stadium",
+  "teamLogo": "/uploads/teams/Addis-Ababa.png",
+  "stadiumCapacity": 5000,
+  "foundedIn": 1986,
+  "teamCoach": "Ismail Abubeker",
+  "teamId": 14,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1e0"
+  },
+  "teamName": "Jimma Aba Jifar F.C",
+  "teamCity": "Jimma",
+  "teamStadium": "Jimma Stadium",
+  "teamLogo": "/uploads/teams/Jimma-Aba.png",
+  "stadiumCapacity": 15000,
+  "foundedIn": 1983,
+  "teamCoach": "Zemariam Damtew",
+  "teamId": 15,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977abc8e011b00ab3b1e1"
+  },
+  "teamName": "Sebeta City F.C",
+  "teamCity": "Sebeta",
+  "teamStadium": "Sebeta Stadium",
+  "teamLogo": "/uploads/teams/Sebeta-City.png",
+  "stadiumCapacity": 5000,
+  "foundedIn": 2005,
+  "teamCoach": "Abraham Mebratu",
+  "teamId": 16,
+  "__v": 0
+}]

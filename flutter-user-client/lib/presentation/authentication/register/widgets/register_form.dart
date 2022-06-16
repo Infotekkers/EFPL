@@ -3,7 +3,6 @@ import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterForm extends StatelessWidget {
@@ -97,6 +96,7 @@ class RegisterForm extends StatelessWidget {
             children: [
               // Email Input
               TextFormField(
+                key: const ValueKey("registerViewEmailField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.email),
@@ -133,6 +133,7 @@ class RegisterForm extends StatelessWidget {
 
               // Username input
               TextFormField(
+                key: const ValueKey("registerViewUsernameField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.person),
@@ -170,6 +171,7 @@ class RegisterForm extends StatelessWidget {
 
               // Team Name Input
               TextFormField(
+                key: const ValueKey("registerViewTeamNameField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.sports_soccer),
@@ -207,6 +209,7 @@ class RegisterForm extends StatelessWidget {
 
               // Password Input
               TextFormField(
+                key: const ValueKey("registerViewPasswordField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.lock),
@@ -255,6 +258,7 @@ class RegisterForm extends StatelessWidget {
 
               // Confirm Password
               TextFormField(
+                key: const ValueKey("registerViewConfirmPasswordField"),
                 // keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.lock),
@@ -429,6 +433,7 @@ class RegisterForm extends StatelessWidget {
 
               // Register Button
               InkWell(
+                key: const Key("registerViewRegisterButton"),
                 onTap: () {
                   state.isSubmitting
                       ? null
@@ -466,6 +471,7 @@ class RegisterForm extends StatelessWidget {
               const SizedBox(height: 36),
 
               InkWell(
+                key: const Key("registerViewSignUpRedirect"),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(

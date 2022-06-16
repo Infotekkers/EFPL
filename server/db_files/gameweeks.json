@@ -1,0 +1,301 @@
+[{
+  "_id": {
+    "$oid": "62a977aec8e011b00ab3ea00"
+  },
+  "gameWeekNumber": 1,
+  "startTimestamp": {
+    "$numberLong": "1655273390892"
+  },
+  "status": "active",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ea12"
+  },
+  "gameWeekNumber": 2,
+  "startTimestamp": {
+    "$numberLong": "1655273996011"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ea2d"
+  },
+  "gameWeekNumber": 3,
+  "startTimestamp": {
+    "$numberLong": "1655274600822"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ea47"
+  },
+  "gameWeekNumber": 4,
+  "startTimestamp": {
+    "$numberLong": "1655275205633"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ea61"
+  },
+  "gameWeekNumber": 5,
+  "startTimestamp": {
+    "$numberLong": "1655275810445"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ea7c"
+  },
+  "gameWeekNumber": 6,
+  "startTimestamp": {
+    "$numberLong": "1655276415257"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ea96"
+  },
+  "gameWeekNumber": 7,
+  "startTimestamp": {
+    "$numberLong": "1655277020066"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3eab0"
+  },
+  "gameWeekNumber": 8,
+  "startTimestamp": {
+    "$numberLong": "1655277624877"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3eaca"
+  },
+  "gameWeekNumber": 9,
+  "startTimestamp": {
+    "$numberLong": "1655278229687"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3eae4"
+  },
+  "gameWeekNumber": 10,
+  "startTimestamp": {
+    "$numberLong": "1655278834497"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3eafe"
+  },
+  "gameWeekNumber": 11,
+  "startTimestamp": {
+    "$numberLong": "1655279439311"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3eb18"
+  },
+  "gameWeekNumber": 12,
+  "startTimestamp": {
+    "$numberLong": "1655280044121"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3eb32"
+  },
+  "gameWeekNumber": 13,
+  "startTimestamp": {
+    "$numberLong": "1655280648930"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3eb4c"
+  },
+  "gameWeekNumber": 14,
+  "startTimestamp": {
+    "$numberLong": "1655281253737"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3eb66"
+  },
+  "gameWeekNumber": 15,
+  "startTimestamp": {
+    "$numberLong": "1655281858544"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3eb80"
+  },
+  "gameWeekNumber": 16,
+  "startTimestamp": {
+    "$numberLong": "1655282463352"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3eb9a"
+  },
+  "gameWeekNumber": 17,
+  "startTimestamp": {
+    "$numberLong": "1655283068159"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ebb4"
+  },
+  "gameWeekNumber": 18,
+  "startTimestamp": {
+    "$numberLong": "1655283672967"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ebce"
+  },
+  "gameWeekNumber": 19,
+  "startTimestamp": {
+    "$numberLong": "1655284277774"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ebe8"
+  },
+  "gameWeekNumber": 20,
+  "startTimestamp": {
+    "$numberLong": "1655284882584"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ec02"
+  },
+  "gameWeekNumber": 21,
+  "startTimestamp": {
+    "$numberLong": "1655285487392"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ec1c"
+  },
+  "gameWeekNumber": 22,
+  "startTimestamp": {
+    "$numberLong": "1655286092199"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ec36"
+  },
+  "gameWeekNumber": 23,
+  "startTimestamp": {
+    "$numberLong": "1655286697006"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ec50"
+  },
+  "gameWeekNumber": 24,
+  "startTimestamp": {
+    "$numberLong": "1655287301813"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ec6a"
+  },
+  "gameWeekNumber": 25,
+  "startTimestamp": {
+    "$numberLong": "1655287906620"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ec84"
+  },
+  "gameWeekNumber": 26,
+  "startTimestamp": {
+    "$numberLong": "1655288511428"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ec9e"
+  },
+  "gameWeekNumber": 27,
+  "startTimestamp": {
+    "$numberLong": "1655289116236"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ecb8"
+  },
+  "gameWeekNumber": 28,
+  "startTimestamp": {
+    "$numberLong": "1655289721043"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ecd2"
+  },
+  "gameWeekNumber": 29,
+  "startTimestamp": {
+    "$numberLong": "1655290325851"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a977afc8e011b00ab3ecec"
+  },
+  "gameWeekNumber": 30,
+  "startTimestamp": {
+    "$numberLong": "1655290930659"
+  },
+  "status": "ToBePlayed",
+  "__v": 0
+}]

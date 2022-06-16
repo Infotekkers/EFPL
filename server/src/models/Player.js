@@ -50,8 +50,9 @@ const historySchema = mongoose.Schema({
 
 const playerSchema = mongoose.Schema({
   playerName: {
+    unique: true,
     type: String,
-    validate: /^[a-zA-Z ]*$/,
+    validate: /^[a-zA-Z,-,. ]*$/,
     minlength: 4,
     maxLength: 56,
     required: [

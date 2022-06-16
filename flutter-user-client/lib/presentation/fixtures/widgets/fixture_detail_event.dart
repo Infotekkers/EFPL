@@ -1,7 +1,6 @@
 import 'package:efpl/application/fixture/fixture_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/injectable.dart';
-import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/presentation/fixtures/widgets/fixture_event_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

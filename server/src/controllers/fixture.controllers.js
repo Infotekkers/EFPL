@@ -1,11 +1,14 @@
 const asyncHandler = require("express-async-handler");
 const statUpdater = require("../utils/helpers").statUpdater;
 const validator = require("../utils/validators");
+const axios = require("axios");
+const baseURL = process.env.BASE_URL;
 
 const FixtureModel = require("../models/Fixtures");
 const TeamModel = require("../models/Teams");
 const Player = require("../models/Player");
 const GameWeek = require("../models/GameWeek");
+const Teams = require("../models/Teams");
 
 const MINUTE_COUNTERS = {};
 
@@ -379,7 +382,7 @@ const pauseFixture = asyncHandler(async function (req, res) {
   if (match?.status === "liveFH") {
     match.status = "HT";
 
-    MINUTE_COUNTERS[req.params.matchId].status = "paused";
+    // MINUTE_COUNTERS[req.params.matchId].status = "paused";
 
     match
       .save()
@@ -416,7 +419,7 @@ const pauseFixture = asyncHandler(async function (req, res) {
 const resumeFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
-  MINUTE_COUNTERS[req.params.matchId].status = "active";
+  // MINUTE_COUNTERS[req.params.matchId].status = "active";
   const homeTeam = await TeamModel.find({
     teamId: parseInt(req.params.matchId.split("|")[0]),
   });
@@ -462,20 +465,73 @@ const resumeFixture = asyncHandler(async function (req, res) {
 const endFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
-  const homeTeam = await TeamModel.find({
+  const homeTeam = await TeamModel.findOne({
     teamId: parseInt(req.params.matchId.split("|")[0]),
   });
 
-  const awayTeam = await TeamModel.find({
+  const awayTeam = await TeamModel.findOne({
     teamId: parseInt(req.params.matchId.split("|")[1]),
   });
+
+  //
 
   if (match?.status === "liveSH") {
     match.status = "FT";
 
-    MINUTE_COUNTERS[req.params.matchId].status = "ended";
-    clearInterval(MINUTE_COUNTERS[req.params.matchId].intervalId);
+    //   // MINUTE_COUNTERS[req.params.matchId].status = "ended";
+    //   // clearInterval(MINUTE_COUNTERS[req.params.matchId].intervalId);
 
+    const splitscore = match.score.split("v");
+    const hometeamScore = splitscore[0];
+    const awayteamScore = splitscore[1];
+    const awayteamPosition = awayTeam.teamPosition;
+    const hometeamPosition = homeTeam.teamPosition;
+    console.log(awayteamPosition);
+    const awayteamPoint = awayteamPosition[0].teamPoint;
+    const hometeamPoint = hometeamPosition[0].teamPoint;
+    if (hometeamScore > awayteamScore) {
+      const teamPoint = hometeamPoint + 3;
+      const hometeamGoalDce = hometeamScore - awayteamScore;
+      homeTeam.teamPosition[0].teamPoint = teamPoint;
+      homeTeam.teamPosition[0].won += 1;
+      awayTeam.teamPosition[0].lost += 1;
+      homeTeam.teamPosition[0].goalDifferntial += hometeamGoalDce;
+      homeTeam.teamPosition[0].goalFor = hometeamScore;
+      homeTeam.teamPosition[0].goalAgainst = awayteamScore;
+      awayTeam.teamPosition[0].lost += 1;
+
+      await homeTeam.save();
+    } else if (hometeamScore === awayteamScore) {
+      const Hteampoint = hometeamPoint + 1;
+      const Ateampoint = awayteamPoint + 1;
+      const hometeamGoalDce = hometeamScore - awayteamScore;
+      homeTeam.teamPosition[0].teamPoint = Hteampoint;
+      homeTeam.teamPosition[0].Draw += 1;
+      homeTeam.teamPosition[0].goalDifferntial += hometeamGoalDce;
+      homeTeam.teamPosition[0].goalFor = hometeamScore;
+      homeTeam.teamPosition[0].goalAgainst = awayteamScore;
+
+      const awayteamGoalDce = awayteamScore - hometeamScore;
+      awayTeam.teamPosition[0].teamPoint = Ateampoint;
+      awayTeam.teamPosition[0].Draw += 1;
+      awayTeam.teamPosition[0].goalDifferntial += awayteamGoalDce;
+      awayTeam.teamPosition[0].goalFor = awayteamScore;
+      awayTeam.teamPosition[0].goalAgainst = hometeamScore;
+
+      await homeTeam.save();
+      await awayTeam.save();
+    } else {
+      const Ateampoint = awayteamPoint + 3;
+
+      const awayteamGoalDce = hometeamScore - awayteamScore;
+      awayTeam.teamPosition[0].teamPoint = Ateampoint;
+      awayTeam.teamPosition[0].won += 1;
+      homeTeam.teamPosition[0].lost += 1;
+      awayTeam.teamPosition[0].goalDifferntial += awayteamGoalDce;
+      awayTeam.teamPosition[0].goalFor = hometeamScore;
+      awayTeam.teamPosition[0].goalAgainst = awayteamScore;
+      await awayTeam.save();
+    }
     match
       .save()
       .then(() =>
@@ -487,6 +543,29 @@ const endFixture = asyncHandler(async function (req, res) {
 
     const io = require("../../server");
     io.emit("fixtureUpdated");
+
+    // ge active gw
+    const activeGw = await GameWeek.find({ status: "active" });
+    const activeGwId =
+      activeGw.length > 0 ? activeGw[activeGw.length - 1].gameWeekNumber : 0;
+
+    // check if all matches are ended
+    const activeMatch = await FixtureModel.find({
+      gameweekId: activeGwId,
+      status: { $ne: "FT" },
+    });
+    if (activeMatch.length === 1) {
+      // micro service call to update stat
+      await axios.patch(`${baseURL}/efpl/update`);
+
+      await GameWeek.findOne({ gameWeekNumber: activeGwId }).updateOne({
+        status: "Played",
+      });
+
+      await GameWeek.findOne({ gameWeekNumber: activeGwId + 1 }).updateOne({
+        status: "active",
+      });
+    }
   } else if (!match) {
     res
       .status(404)
@@ -588,8 +667,6 @@ const updateFixture = asyncHandler(async function (req, res) {
     newGameWeekId = nextGameWeekFixture.gameweekId;
   }
 
-  // console.log(startOfFixtureDay);
-
   if (match) {
     if (match.status === "scheduled") {
       match.gameweekId = newGameWeekId;
@@ -654,8 +731,6 @@ const updateStats = asyncHandler(async (req, res) => {
   let awayTeamScore = 0;
   const awayTeamName = match.awayTeam;
 
-  console.log(match.matchStat.goalsScored);
-
   if (match) {
     const { updatedMatch, updatedPlayer } = statUpdater({
       activeMatch: match,
@@ -687,8 +762,6 @@ const updateStats = asyncHandler(async (req, res) => {
     match.score = `${homeTeamScore}v${awayTeamScore}`;
     await FixtureModel.updateOne({ matchId: matchId }, match);
 
-    console.log(homeTeamScore, awayTeamScore);
-
     // send socket update
     const io = require("../../server");
     io.emit("fixtureStatUpdated");
@@ -715,8 +788,6 @@ const updateStats = asyncHandler(async (req, res) => {
 //   let awayTeamScore = match.score.split("v")[1];
 //   const awayTeamName = match.awayTeam;
 
-//   console.log(match.matchStat.goalsScored);
-
 //   if (match) {
 //     // if (!match.score) match.score = "0v0";
 //     // match.score = score;
@@ -734,8 +805,6 @@ const updateStats = asyncHandler(async (req, res) => {
 //         awayTeamScore = parseInt(awayTeamScore) + matchGoals[player].noOfGoals;
 //       }
 //     }
-
-//     console.log(homeTeamScore, awayTeamScore);
 
 //     // send socket update
 //     const io = require("../../server");
@@ -771,6 +840,22 @@ const getAllFixtures = asyncHandler(async function (req, res) {
   // get required
   // send active fixture
   const matches = await FixtureModel.find().select("-__v");
+
+  for (let index = 0; index < matches.length; index++) {
+    const homeTeamId = matches[index].matchId.split("|")[0];
+    const awayTeamId = matches[index].matchId.split("|")[1];
+
+    const homeTeam = await Teams.findOne({ teamId: homeTeamId }).select(
+      "teamName"
+    );
+
+    const awayTeam = await Teams.findOne({ teamId: awayTeamId }).select(
+      "teamName"
+    );
+
+    matches[index].homeTeam = homeTeam.teamName;
+    matches[index].awayTeam = awayTeam.teamName;
+  }
 
   res.status(200).send(matches);
 });

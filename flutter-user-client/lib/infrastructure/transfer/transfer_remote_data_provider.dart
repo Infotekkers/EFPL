@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -197,7 +199,6 @@ class TransferRemoteDataProvider {
 
     // unexpected error
     catch (e) {
-      print(e);
       Either<dynamic, List<UserPlayer>> cacheCall =
           await _transferLocalDataProvider.getAllPlayersInPosition(
               playerPosition: playerPosition);
@@ -567,8 +568,6 @@ class TransferRemoteDataProvider {
     }
     // unexpected error
     catch (e) {
-      print(e);
-
       // get cache team
       return left([
         UserTeam(
@@ -692,7 +691,6 @@ class TransferRemoteDataProvider {
     }
     // unexpected error
     catch (e) {
-      print(e);
       //  cache
       _transferLocalDataProvider.saveUserTeamChanges(changedUserTeam: userTeam);
 

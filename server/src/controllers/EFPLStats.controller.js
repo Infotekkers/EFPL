@@ -7,7 +7,6 @@ const Users = require("../models/User");
 
 const getStats = asyncHandler(async (req, res) => {
   const gwId = req.params.gwId;
-  console.log(gwId);
 
   const activeGw = await GameWeek.find({ status: "active" }).lean();
   let activeGwId = gwId;
@@ -27,12 +26,14 @@ const getStats = asyncHandler(async (req, res) => {
   const stats = await EFPLStats.find({ gameWeekNumber: activeGwId }).lean();
   stats[0].allStats.maxActiveCount = activeGwId;
   stats[0].allStats.gameWeekId = stats[0].gameWeekNumber;
-  console.log(stats);
+
   res.status(200).send(stats);
 });
 
 const updateStats = asyncHandler(async (req, res) => {
-  const activeGwId = 1;
+  const activeGw = await GameWeek.find({ status: "active" });
+  const activeGwId =
+    activeGw.length > 0 ? activeGw[activeGw.length - 1].gameWeekNumber : 0;
 
   // TODO:Complete
   const finalData = {
@@ -206,7 +207,12 @@ const updateStats = asyncHandler(async (req, res) => {
     userScoreSum = userScoreSum + currentUserScoreSum;
   }
   finalData.highestPoint = highestUserScore;
-  finalData.averagePoint = Math.floor(userScoreSum / allUsersCount);
+
+  if (allUsersCount > 0 && userScoreSum > 0) {
+    finalData.averagePoint = Math.floor(userScoreSum / allUsersCount);
+  } else {
+    finalData.averagePoint = 0;
+  }
 
   /*
     =======================================================

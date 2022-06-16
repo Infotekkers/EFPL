@@ -264,6 +264,30 @@ export default {
         });
       }
     },
+    async sortbyGoalScored() {
+      // // reset
+      // store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+      // if (order == 1) {
+      store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+        let playerOneSum = 0;
+        let playerTwoSum = 0;
+
+        playerOne.score.forEach((element) => {
+          playerOneSum += element.goals;
+        });
+
+        playerTwo.Score.forEach((element) => {
+          playerTwoSum += element.goals;
+        });
+        return playerOneSum < playerTwoSum
+          ? -1
+          : playerOneSum > playerTwoSum
+          ? 1
+          : 0;
+      });
+      // return store.state.Player.allPlayers[0];
+      // console.log(store.state.Player.allPlayers);
+    },
     sortByName(context, order) {
       // // reset
       // store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;

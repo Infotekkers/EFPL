@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -178,7 +180,6 @@ class FixtureRemoteDataProvider {
     }
     //
     catch (e) {
-      print(e);
       // get cache
       Either<dynamic, List<Fixture>> allCachedFixtureCall =
           await _fixtureLocalDataProvider.getFixtureByGameWeekId(
