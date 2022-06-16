@@ -23,9 +23,7 @@ class EFPLStatsPage extends StatelessWidget {
         BlocProvider.value(value: _efplBloc),
       ],
       child: BlocConsumer<EfplStatsBloc, EfplStatsState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
             appBar: _buildAppBar(

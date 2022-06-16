@@ -46,6 +46,8 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
+  flutter_driver:
+    sdk: flutter
   freezed: ^1.0.9
   hive_generator: ^1.1.2
   injectable_generator: ^1.4.9
@@ -61,6 +63,8 @@ flutter:
     - .env
     - assets/images/
     - assets/icons/
+    - assets/flags/
+    - assets/teams/
   fonts:
     - family: Architect
       fonts:

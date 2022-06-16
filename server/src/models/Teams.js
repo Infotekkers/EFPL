@@ -3,6 +3,37 @@ const autoIncrement = require("mongoose-auto-increment");
 
 autoIncrement.initialize(mongoose.connection);
 
+const teamPosition = mongoose.Schema({
+  teamPoint: {
+    type: Number,
+    default: 0,
+  },
+  won: {
+    type: Number,
+    default: 0,
+  },
+  lost: {
+    type: Number,
+    default: 0,
+  },
+  Draw: {
+    type: Number,
+    default: 0,
+  },
+  goalsFor: {
+    type: Number,
+    default: 0,
+  },
+  goalsAgainst: {
+    type: Number,
+    default: 0,
+  },
+  goalDifferential: {
+    type: Number,
+    default: 0,
+  },
+});
+
 const teamSchema = mongoose.Schema({
   teamName: {
     type: String,
@@ -10,6 +41,15 @@ const teamSchema = mongoose.Schema({
     minlength: 4,
     maxLength: 72,
     validate: /^[a-zA-Z,.,-,_ ]*$/,
+  },
+  teamNameAmh: {
+    type: String,
+    required: [
+      true,
+      "Custom Error - Required Value *:Team name Amharic is required.",
+    ],
+    minlength: 4,
+    maxLength: 72,
   },
   teamCity: {
     type: String,
@@ -44,6 +84,9 @@ const teamSchema = mongoose.Schema({
     type: String,
     minlength: 4,
     maxLength: 72,
+  },
+  teamPosition: {
+    type: teamPosition,
   },
 });
 

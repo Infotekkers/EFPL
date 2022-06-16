@@ -15,6 +15,7 @@ const addPlayer = asyncHandler(async (req, res) => {
     availability,
     playerImage,
     logoName,
+    playerNameAmh,
   } = req.body;
 
   const verifyPlayer = await PlayerModel.findOne({
@@ -41,6 +42,7 @@ const addPlayer = asyncHandler(async (req, res) => {
           availability,
           playerImage: playerImagePath,
           eplTeamId: eplTeamId,
+          playerNameAmh,
         }).save();
 
         const io = require("../../server");
@@ -63,6 +65,7 @@ const addPlayer = asyncHandler(async (req, res) => {
         availability,
         playerImage: "",
         eplTeamId: eplTeamId,
+        playerNameAmh,
       }).save();
       res.status(201).send(`${playerName} added successfully`);
     }
@@ -83,6 +86,7 @@ const updatePlayer = asyncHandler(async (req, res) => {
     playerImage,
     logoName,
     currentPrice,
+    playerNameAmh,
   } = req.body;
 
   let newData;
@@ -102,6 +106,7 @@ const updatePlayer = asyncHandler(async (req, res) => {
       eplTeamId,
       availability,
       position,
+      playerNameAmh,
     };
   } else {
     newData = {
@@ -110,6 +115,7 @@ const updatePlayer = asyncHandler(async (req, res) => {
       availability,
       position,
       currentPrice,
+      playerNameAmh,
     };
   }
 
@@ -207,7 +213,6 @@ const getPlayer = asyncHandler(async (req, res) => {
 
   res.send(player);
 });
-
 const getPlayers = asyncHandler(async (req, res) => {
   const players = await PlayerModel.find();
 
@@ -359,8 +364,6 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
     };
 
     allPlayersInPositionFormatted.push(currentPlayerInfo);
-
-    // console.log(currentPlayerInfo);
   }
 
   res.status(200).send(allPlayersInPositionFormatted);

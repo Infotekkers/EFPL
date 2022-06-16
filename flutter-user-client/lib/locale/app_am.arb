@@ -158,5 +158,15 @@
   "statsTabKeyTitle": "EPL Stats",
   "statsTabKeyDesc": "View top scorers, assisters, clean sheets,received cards and saves by Ethiopian Premier League players.",
   "settingTabKeyTitle": "Settings",
-  "settingsTabKeyDesc": "Change your set preferences such as language and more information."
+  "settingsTabKeyDesc": "Change your set preferences such as language and more information.",
+  "tableTranslations": "Table Translations",
+  "standings": "Standings",
+  "epl": "EFPL",
+  "pos": "Pos",
+  "club": "Club",
+  "p": "P",
+  "w": "W",
+  "d": "d",
+  "l": "L",
+  "gd": "GD"
 }

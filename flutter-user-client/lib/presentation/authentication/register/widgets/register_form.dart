@@ -1,15 +1,8 @@
-// import 'dart:convert';
-
 import 'package:efpl/application/auth/register_form/register_form_bloc.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/services/snack_bar.dart';
-// import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:http/http.dart' as http;
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterForm extends StatelessWidget {
@@ -17,36 +10,6 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final String baseURL = dotenv.env["API"].toString();
-    // List<dynamic> allTeam = [];
-
-    // http.Client? client = http.Client();
-    // final Uri url = Uri.parse("$baseURL/teams/all");
-    // List allTeams = [];
-    // List<String> allTeamNames = [];
-    // Future<List> getTeamLogo() async {
-    //   List allTeams = [];
-    //   var res = await client.get(url);
-    //   List<dynamic> parsedResponseBody = jsonDecode(res.body);
-
-    //   for (var i = 0; i < parsedResponseBody.length; i++) {
-    //     Map currentTeam = {
-    //       "teamName": parsedResponseBody[i]['teamName'].toString(),
-    //       "teamLogo": parsedResponseBody[i]['teamLogo'].toString(),
-    //     };
-    //     allTeams.add(currentTeam);
-    //     allTeam = allTeams;
-    //   }
-    //   print(allTeam);
-    //   // print(allTeams);
-    //   // for (var team in allTeams) {
-    //   //   allTeamNames.add(team['teamName']);
-    //   // }
-
-    //   return allTeams;
-    // }
-
-    // getTeamLogo()
     return BlocConsumer<RegisterFormBloc, RegisterFormState>(
       listener: (context, state) {
         state.authFailureOrSuccessOption.fold(
@@ -133,6 +96,7 @@ class RegisterForm extends StatelessWidget {
             children: [
               // Email Input
               TextFormField(
+                key: const ValueKey("registerViewEmailField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.email),
@@ -169,6 +133,7 @@ class RegisterForm extends StatelessWidget {
 
               // Username input
               TextFormField(
+                key: const ValueKey("registerViewUsernameField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.person),
@@ -206,6 +171,7 @@ class RegisterForm extends StatelessWidget {
 
               // Team Name Input
               TextFormField(
+                key: const ValueKey("registerViewTeamNameField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.sports_soccer),
@@ -243,6 +209,7 @@ class RegisterForm extends StatelessWidget {
 
               // Password Input
               TextFormField(
+                key: const ValueKey("registerViewPasswordField"),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.lock),
@@ -291,6 +258,7 @@ class RegisterForm extends StatelessWidget {
 
               // Confirm Password
               TextFormField(
+                key: const ValueKey("registerViewConfirmPasswordField"),
                 // keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.lock),
@@ -345,29 +313,64 @@ class RegisterForm extends StatelessWidget {
                 // value: "Saint George S.C",
                 isExpanded: true,
                 items: [
-                  "Saint George S.C",
-                  "Wolaita Dicha S.C",
+                  "Adama City S.C",
+                  "Addis Ababa City F.C",
+                  "Arba Minch City F.C",
+                  "Bahir Dar Kenema S.C",
+                  "Defence Force S.C",
+                  "Dire Dawa City S.C",
+                  "Ethiopian Coffee S.C",
+                  "Fasil Kenema S.C",
+                  "Hadiya Hossana F.C",
                   "Hawassa Kenema S.C",
                   "Jimma Aba Jifar F.C",
-                  "Sidama Coffee S.C",
-                  "Addis Ababa City F.C",
+                  "Saint George S.C",
                   "Sebeta City F.C",
-                  "Adama City S.C",
-                  "Fasil Kenema S.C",
-                  "Arba Minch City F.C",
-                  "Dire Dawa City S.C",
-                  "Defence Force S.C",
+                  "Sidama Coffee S.C",
+                  "Wolaita Dicha S.C",
                   "Wolkite City F.C",
-                  "Ethiopian Coffee S.C",
-                  "Hadiya Hossana F.C",
-                  "Bahir Dar Kenema S.C"
                 ].map((String value) {
+                  String logo = "assets/teams/" +
+                      value
+                          .split(" ")
+                          .join("")
+                          .replaceAll("S.C", "")
+                          .replaceAll("F.C", "") +
+                      ".png";
+
                   return DropdownMenuItem<String>(
-                      child: Text(
-                        value,
-                        style: Theme.of(context).textTheme.bodyText1,
+                    value: value,
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 35,
+                            width: 35,
+                            child: Image.asset(
+                              logo,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Center(
+                            child: Text(
+                              value,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                    fontSize: 14,
+                                  ),
+                            ),
+                          )
+                        ],
                       ),
-                      value: value);
+                    ),
+                  );
                 }).toList(),
                 onChanged: (value) =>
                     BlocProvider.of<RegisterFormBloc>(context).add(
@@ -376,54 +379,49 @@ class RegisterForm extends StatelessWidget {
               ),
 
               const SizedBox(height: 15),
-              // const SizedBox(height: 15),
-              // DropdownButton<String>(
-              //     isExpanded: true,
-              //     items: allTeamNames.map((String teamName) {
-              //       String finalURL = baseURL;
-              //       List teamLogoList = allTeams
-              //           .where((team) => team['teamName'] == teamName)
-              //           .toList();
-              //       if (teamLogoList.isNotEmpty) {
-              //         finalURL = finalURL + teamLogoList[0]['teamLogo'];
-              //       }
-              //       return DropdownMenuItem<String>(
-              //         child: Row(
-              //           crossAxisAlignment: CrossAxisAlignment.center,
-              //           children: [
-              //             Container(
-              //               height: 25,
-              //               width: 25,
-              //               child: CachedNetworkImage(
-              //                 imageUrl: finalURL == baseURL
-              //                     ? '$baseURL/uploads/teams/placeholder_team.png'
-              //                     : finalURL,
-              //               ),
-              //             ),
-              //             Text(teamName)
-              //           ],
-              //         ),
-              //         value: teamName,
-              //       );
-              //     }).toList(),
-              //     onChanged: (teamName) => print(teamName)),
               DropdownButton<String>(
                   value: state.country.value.fold(
                       (f) => f.maybeMap(empty: (_) => 'e', orElse: () => null),
                       (r) => r),
-                  // value: "Saint George S.C",
                   isExpanded: true,
                   items: [
                     "Ethiopia",
-                    "United Kingdom",
+                    "Eritrea",
+                    "Djibouti",
+                    "Kenya",
+                    "Somalia",
+                    "Uganda",
                     "United States Of America",
+                    "Other"
                   ].map((String value) {
+                    String flagUrl = "assets/flags/";
+
                     return DropdownMenuItem<String>(
-                        child: Text(
-                          value,
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        value: value);
+                      value: value,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 30,
+                            width: 40,
+                            margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                            child: Image.asset(
+                              value == "Others"
+                                  ? ""
+                                  : flagUrl + value + "-Flag.png",
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          Text(
+                            value,
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      fontSize: 14,
+                                    ),
+                          )
+                        ],
+                      ),
+                    );
                   }).toList(),
                   onChanged: (value) =>
                       BlocProvider.of<RegisterFormBloc>(context)
@@ -435,6 +433,7 @@ class RegisterForm extends StatelessWidget {
 
               // Register Button
               InkWell(
+                key: const Key("registerViewRegisterButton"),
                 onTap: () {
                   state.isSubmitting
                       ? null
@@ -472,6 +471,7 @@ class RegisterForm extends StatelessWidget {
               const SizedBox(height: 36),
 
               InkWell(
+                key: const Key("registerViewSignUpRedirect"),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/efpl_stats/efpl_stats.dart';
 import 'package:efpl/domain/efpl_stats/i_efpl_stats_facade..dart';

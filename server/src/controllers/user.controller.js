@@ -233,10 +233,8 @@ const requestReset = asyncHandler(async (req, res) => {
         res.status(400).json({
           message: "could not send reset email",
         });
-        console.log(error);
       } else {
         res.status(200).json({ message: "Email Sent Successfully" });
-        console.log("email sent: " + info.response);
       }
     });
   } else {
@@ -362,8 +360,6 @@ const transfer = asyncHandler(async (req, res) => {
         user.availableChips
       );
 
-      console.log(isTeamValid, errorType);
-
       // Save team || Send err
       if (isTeamValid === true) {
         // count transfer ins and outs for players
@@ -386,17 +382,6 @@ const transfer = asyncHandler(async (req, res) => {
           }
         }
 
-        console.log(
-          "DEDUCTION ",
-          deduction,
-          "TransfersMade",
-          transfersMade,
-          "REMAINING FREE TRANSFERS",
-          activeTeam.freeTransfers,
-          "GW",
-          activeGameweek
-        );
-
         // Remove active chips from available chips
         if (incomingTeam.activeChip) {
           const remainingChips = user.availableChips.filter(
@@ -411,7 +396,6 @@ const transfer = asyncHandler(async (req, res) => {
 
         // get old teams as is
         for (let i = 0; i < activeGameweek; i++) {
-          console.log(user.team[i]);
           updatedUserTeam.push(user.team[i]);
         }
 
@@ -476,7 +460,6 @@ const transfer = asyncHandler(async (req, res) => {
     }
     // initial transfer
     else {
-      console.log("At ElSE");
       const updatedUserTeam = [];
       // update future teams
       for (let i = 0; i < 30; i++) {
@@ -494,12 +477,11 @@ const transfer = asyncHandler(async (req, res) => {
 
         updatedUserTeam.push(currentTeam);
       }
-      console.log("Here");
+
       await User.findByIdAndUpdate(userId, { team: updatedUserTeam });
       res.status(201).json({ Message: "Team Saved" });
     }
   } catch (err) {
-    console.log(err);
     res.status(422).send();
   }
 });
@@ -647,13 +629,13 @@ const getUserTeam = asyncHandler(async (req, res) => {
           maxBudget: user.maxBudget,
           gameWeekDeadline: currentGameWeek.startTimestamp,
         };
-        // console.log(finalFormat);
+
         res.status(200).send(finalFormat);
       }
     }
   } catch (e) {
     // error verifying token
-    console.log(e);
+
     res.status(401).send("Error Decoding token");
   }
 });
@@ -797,7 +779,6 @@ const getUserPoints = asyncHandler(async (req, res) => {
       res.status(404).send(finalFormat);
     }
   } catch (err) {
-    console.log(err);
     res.status(403).send("Error Decoding token");
   }
 });
@@ -912,7 +893,6 @@ const removeAllUserWatchList = asyncHandler(async (req, res) => {
 
 const validateUser = asyncHandler(async (req, res) => {
   const token = req.body.token;
-  console.log(req.body);
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/transfer/transfer_failures.dart';
 import 'package:efpl/domain/transfer/user_player.dart';
@@ -49,7 +51,6 @@ class TransferLocalDataProvider {
       }
       return right(allUserPlayers);
     } catch (e) {
-      print(e);
       return left([
         <UserPlayer>[],
         const TransferFailure.hiveError(failedValue: "Hive Error")
@@ -122,7 +123,6 @@ class TransferLocalDataProvider {
         );
       }
     } catch (e) {
-      print(e);
       return left([
         UserTeam(
           gameWeekId: GameWeekId(value: 1),
@@ -181,7 +181,6 @@ class TransferLocalDataProvider {
 
       return right(newList);
     } catch (e) {
-      print(e);
       return left(
         [
           [],
@@ -218,36 +217,27 @@ class TransferLocalDataProvider {
   void saveUserTeam({required Map userTeam}) async {
     try {
       await transfersCache.put("userTeam", userTeam);
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   void saveAllTeamsAndLogo({required List allTeams}) async {
     try {
       await transfersCache.put("allTeams", allTeams);
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   void saveAllPlayersInPosition(
       {required List allPlayersInPosition,
       required String playersPosition}) async {
-    print("Caching Players in Position");
     try {
       await transfersCache.put(
           'allPlayersInPosition-$playersPosition', allPlayersInPosition);
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   void saveUserTeamChanges({required Map changedUserTeam}) async {
     try {
       await transfersCache.put("changedUserTeam", changedUserTeam);
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 }

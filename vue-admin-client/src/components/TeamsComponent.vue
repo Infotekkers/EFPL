@@ -259,6 +259,8 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  height: 100%;
+  min-width: 10px;
 }
 .teams-logo-sorter {
   width: 60px;

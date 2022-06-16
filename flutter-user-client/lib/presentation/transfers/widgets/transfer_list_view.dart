@@ -249,7 +249,7 @@ Widget _buildLoadingView({required BuildContext context}) {
 }
 
 Widget _buildNoPlayersView({required BuildContext context}) {
-  return Container(
+  return SizedBox(
     height: MediaQuery.of(context).size.height - 200,
     child: const Center(
       child: Text(
@@ -927,6 +927,7 @@ Widget _buildPlayersListView({
             overlayPadding: const EdgeInsets.all(8),
             contentPadding: const EdgeInsets.all(20),
             child: ListView.builder(
+              key: const Key("transferListViewListViewMain"),
               itemCount: allPositionPlayerFiltered.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

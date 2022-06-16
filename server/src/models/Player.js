@@ -50,14 +50,25 @@ const historySchema = mongoose.Schema({
 
 const playerSchema = mongoose.Schema({
   playerName: {
+    unique: true,
     type: String,
-    validate: /^[a-zA-Z ]*$/,
+    validate: /^[a-zA-Z,-,. ]*$/,
     minlength: 4,
     maxLength: 56,
     required: [
       true,
       "Custom Error - required Value *: Player Name is required.",
     ],
+  },
+  playerNameAmh: {
+    unique: true,
+    type: String,
+    minlength: 4,
+    maxLength: 56,
+    // required: [
+    //   true,
+    //   "Custom Error - required Value *: Player Name Amh is required.",
+    // ],
   },
   eplTeamId: {
     type: String,

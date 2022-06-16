@@ -13,7 +13,7 @@ part 'auth_state.dart';
 
 part 'auth_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthRepository _authRepository;
 

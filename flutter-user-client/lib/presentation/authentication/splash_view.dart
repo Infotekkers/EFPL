@@ -11,21 +11,15 @@ class SplashView extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) => {
         state.map(
-          intial: (_) {
-            print("Initial");
-          },
+          intial: (_) {},
           authorised: (_) async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              Navigator.popAndPushNamed(context, "/home");
-            });
+            Navigator.pushNamed(context, "/home");
           },
           unauthorised: (_) {
             Navigator.popAndPushNamed(context, "/sign-in");
           },
           authenticated: (_) async {
-            await Future.delayed(const Duration(seconds: 1), () {
-              Navigator.popAndPushNamed(context, "/home");
-            });
+            Navigator.popAndPushNamed(context, "/home");
           },
           unauthenticated: (_) {
             Navigator.popAndPushNamed(context, "/sign-in");
@@ -52,6 +46,7 @@ class SplashView extends StatelessWidget {
               ),
               // Title
               Container(
+                key: const Key("splashViewMainKey"),
                 margin: const EdgeInsets.symmetric(horizontal: 15),
                 child: Center(
                   child: Text(

@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/points/point_user_player.dart';
 import 'package:efpl/domain/points/points.dart';
@@ -60,7 +62,6 @@ class PointsInfoLocalDataProvider {
     }
     //
     catch (e) {
-      print(e);
       return left([
         const PointsInfo(
           allPlayers: [],
@@ -79,8 +80,6 @@ class PointsInfoLocalDataProvider {
       {required int gameWeekId, required Map userPointTeam}) {
     try {
       pointsCache.put('userPoint-$gameWeekId', userPointTeam);
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 }
