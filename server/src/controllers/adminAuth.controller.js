@@ -67,7 +67,7 @@ const requestReset = asyncHandler(async (req, res) => {
       { expiresIn: 60 * 60 }
     );
     const resetUrl = `${
-      process.env.BASE_URL
+      process.env.BASE_URL_WITHOUT_PORT
     }${8080}/resetPassword/${resetToken}`;
 
     const mailOptions = {

@@ -3,29 +3,37 @@
     <form @submit.prevent="handleSubmit">
       <h3>Reset Your Password</h3>
       <div>
-        <label> {{ $t("new") }} {{ $t("Password") }} </label>
-        <input
-          v-model="password"
-          required
-          placeholder="Password"
-          :type="showPassword ? 'text' : 'password'"
-        />
+        <div class="password">
+          <label> {{ $t("new") }} {{ $t("Password") }} </label>
+          <input
+            v-model="password"
+            required
+            placeholder="Password"
+            :type="showPassword ? 'text' : 'password'"
+          />
+          <button @click="showPassword = !showPassword">
+            {{ $t("show password") }}
+          </button>
+        </div>
       </div>
       <div>
-        <label> {{ $t("Password") }} {{ $t("Confirm") }}</label>
-        <input
-          v-model="password_confirm"
-          required
-          placeholder="Cofirm password"
-          :type="showPassword ? 'text' : 'password'"
-        />
+        <div class="confirm-pass">
+          <label> {{ $t("Password") }} {{ $t("Confirm") }}</label>
+          <input
+            v-model="password_confirm"
+            required
+            placeholder="Cofirm password"
+            :type="showPassword ? 'text' : 'password'"
+          />
+        </div>
+        <button @click="showPassword = !showPassword">
+          {{ $t("show password") }}
+        </button>
       </div>
 
       <button>Submit</button>
     </form>
-    <button @click="showPassword = !showPassword">
-      {{ $t("የይለፍ ቃል አሳይ") }}
-    </button>
+
     <div>{{ error }}</div>
   </div>
 </template>
@@ -96,6 +104,36 @@ button {
 }
 .submit {
   text-align: center;
+}
+.password {
+  position: relative;
+}
+
+.password > button {
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-base);
+  transform: translateY(-50%);
+
+  background: none;
+  color: var(--success-400);
+  padding: 0;
+  margin: 0;
+}
+.confirm-pass {
+  position: relative;
+}
+
+.confirm-pass > button {
+  position: absolute;
+  top: 70%;
+  right: var(--spacing-base);
+  transform: translateY(-50%);
+
+  background: none;
+  color: var(--success-400);
+  padding: 0;
+  margin: 0;
 }
 @media screen and (max-width: 768px) {
   .reset-pass {
