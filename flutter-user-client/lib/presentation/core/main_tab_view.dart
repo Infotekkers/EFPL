@@ -23,15 +23,14 @@ class MainTabView extends StatefulWidget {
   State<MainTabView> createState() => _MainTabViewState();
 }
 
-final _myTeamTabKey = GlobalKey();
-final _pointsTabKey = GlobalKey();
-final _transferTabKey = GlobalKey();
-final _fixtureTabKey = GlobalKey();
-final _leaguesTabKey = GlobalKey();
-final _statsTabKey = GlobalKey();
-final _settingTabKey = GlobalKey();
-
 class _MainTabViewState extends State<MainTabView> {
+  final _myTeamTabKey = GlobalKey();
+  final _pointsTabKey = GlobalKey();
+  final _transferTabKey = GlobalKey();
+  final _fixtureTabKey = GlobalKey();
+  final _leaguesTabKey = GlobalKey();
+  final _statsTabKey = GlobalKey();
+  final _settingTabKey = GlobalKey();
   @override
   void initState() {
     super.initState();

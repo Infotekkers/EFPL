@@ -617,6 +617,8 @@ const getUserTeam = asyncHandler(async (req, res) => {
           gameWeekDeadline: currentGameWeek.startTimestamp,
         };
 
+        console.log(finalFormat);
+
         res.status(200).send(finalFormat);
       }
       // no team
@@ -629,6 +631,8 @@ const getUserTeam = asyncHandler(async (req, res) => {
           maxBudget: user.maxBudget,
           gameWeekDeadline: currentGameWeek.startTimestamp,
         };
+
+        console.log(finalFormat);
 
         res.status(200).send(finalFormat);
       }
