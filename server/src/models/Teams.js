@@ -42,6 +42,15 @@ const teamSchema = mongoose.Schema({
     maxLength: 72,
     validate: /^[a-zA-Z,.,-,_ ]*$/,
   },
+  teamNameAmh: {
+    type: String,
+    required: [
+      true,
+      "Custom Error - Required Value *:Team name Amharic is required.",
+    ],
+    minlength: 4,
+    maxLength: 72,
+  },
   teamCity: {
     type: String,
     minlength: 4,

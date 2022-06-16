@@ -368,7 +368,7 @@ export default {
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
-            notificationMessage: err.response.data,
+            notificationMessage: err.response.data.message,
           });
         });
     },
@@ -401,7 +401,8 @@ export default {
           team.teamName == updatedTeam.teamName &&
           team.teamCity == updatedTeam.teamCity &&
           team.teamStadium == updatedTeam.teamStadium &&
-          team.teamCoach == updatedTeam.teamCoach
+          team.teamCoach == updatedTeam.teamCoach &&
+          team.teamNameAmh == updatedTeam.teamNameAmh
         );
       });
 

@@ -48,6 +48,21 @@
           </div>
           <!-- Team Name -->
 
+          <!-- Team Name Amh -->
+          <div class="container-col input-container">
+            <label for="teamName" class="main-label"
+              >{{ $t("Name") }} {{ $t("Amharic") }}</label
+            >
+            <input
+              name="teamNameAmh"
+              type="text"
+              ref="teamNameAmh"
+              v-model="teamNameAmh"
+              class="main-text-input"
+            />
+          </div>
+          <!-- Team Name Amh -->
+
           <!-- Team City -->
           <div class="container-col input-container">
             <label for="teamCity" class="main-label">{{ $t("City") }}</label>
@@ -92,6 +107,7 @@
             />
           </div>
           <!-- Coach -->
+
           <!-- Stadium -->
           <div class="container-col input-container">
             <label for="stadiumCapacity" class="main-label"
@@ -100,6 +116,7 @@
             <input
               name="stadiumCapacity"
               type="number"
+              min="0"
               ref="stadiumCapacity"
               v-model="stadiumCapacity"
               class="main-text-input"
@@ -148,6 +165,223 @@
     </div>
   </div>
 </template>
+
+<script>
+// utils
+import store from "../store/index";
+
+export default {
+  name: "TeamModal",
+  props: {
+    isEditMode: Boolean,
+  },
+  data() {
+    return {
+      selectedImage: null,
+      allowedExtensions: ["jpg", "png", "jpeg"],
+      imageChanged: false,
+      teamName: null,
+      teamNameAmh: null,
+      teamCity: null,
+      teamStadium: null,
+      stadiumCapacity: null,
+      foundedIn: null,
+      teamCoach: null,
+    };
+  },
+  methods: {
+    closeModal() {
+      this.setItem("");
+      store.dispatch("Team/setEditTeamId", "");
+      this.removeImage();
+      this.$emit("closeModal");
+    },
+    teamLogoChange(e) {
+      const files = e.target.files;
+      // no file uploaded
+      if (files.length == 0) {
+        // TODO:Handle
+        // console.log("No File");
+      } else {
+        const extension = files[0].name.split(".");
+        // valid format
+        if (this.allowedExtensions.includes(extension[extension.length - 1])) {
+          this.selectedImage = files[0];
+          const preview = this.$refs.preview;
+
+          store.dispatch("Team/setImageChanged", true);
+          //   Display on preview
+          const reader = new FileReader();
+
+          reader.addEventListener("load", function () {
+            preview.style.backgroundImage = `url(${this.result})`;
+          });
+          reader.readAsDataURL(this.selectedImage);
+        }
+        // invalid format
+        else {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: `Invalid image format ${
+              extension[extension.length - 1]
+            }`,
+          });
+        }
+      }
+    },
+
+    removeImage() {
+      this.$refs.imageInput.value = "";
+      this.$refs.preview.style.backgroundImage = ``;
+    },
+    cancelSave() {
+      this.setItem("");
+      store.dispatch("Team/setEditTeamId", "");
+      this.removeImage();
+      this.$emit("closeModal");
+    },
+    async saveTeam() {
+      const teamName = this.$refs.teamName.value;
+      const teamNameAmh = this.$refs.teamNameAmh.value;
+      const teamCity = this.$refs.teamCity.value;
+      const teamStadium = this.$refs.teamStadium.value;
+      const stadiumCapacity = this.$refs.stadiumCapacity.value;
+      const foundedIn = this.$refs.foundedIn.value;
+      let teamLogo = "";
+      if (store.state.Team.imageChanged === true) {
+        teamLogo = await this.getBase64();
+      }
+      const teamCoach = this.$refs.teamCoach.value;
+
+      if (!teamName) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Team Name is required",
+        });
+      } else if (!teamCity) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Team City is required",
+        });
+      } else if (!teamStadium) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Team Stadium is required",
+        });
+      } else if (!this.selectedImage) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Team Logo is required",
+        });
+      } else {
+        const teamData = {
+          teamName,
+          teamCity,
+          teamStadium,
+          teamLogo,
+          foundedIn,
+          stadiumCapacity,
+          logoName: this.selectedImage.name,
+          teamCoach,
+          teamNameAmh,
+        };
+
+        store.dispatch("Team/saveTeam", teamData);
+        this.removeImage();
+        this.setItem("");
+      }
+    },
+
+    async updateTeam() {
+      const teamName = this.$refs.teamName.value;
+      const teamNameAmh = this.$refs.teamNameAmh.value;
+      const teamCity = this.$refs.teamCity.value;
+      const teamStadium = this.$refs.teamStadium.value;
+      const teamCoach = this.$refs.teamCoach.value;
+      let teamLogo = "";
+      if (store.state.Team.imageChanged === true) {
+        teamLogo = await this.getBase64();
+      }
+
+      const updatedTeam = {
+        teamName,
+        teamCity,
+        teamStadium,
+        teamLogo,
+        teamCoach,
+        teamNameAmh,
+        logoName: this.selectedImage ? this.selectedImage.name : "",
+      };
+      const imageStatus = this.imageChanged;
+
+      store.dispatch("Team/updateTeam", updatedTeam, imageStatus);
+
+      // this.$router.go();
+    },
+
+    // Image processor
+    getBase64() {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        if (reader) {
+          reader.readAsDataURL(this.selectedImage);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        }
+      });
+    },
+
+    setItem(team) {
+      this.teamName = team.teamName;
+      this.teamCity = team.teamCity;
+      this.teamStadium = team.teamStadium;
+      this.stadiumCapacity = team.stadiumCapacity;
+      this.foundedIn = team.foundedIn;
+      this.teamCoach = team.teamCoach;
+      this.teamNameAmh = team.teamNameAmh;
+    },
+  },
+  computed: {
+    getImageChanged() {
+      return this.imageChanged;
+    },
+    getTeam() {
+      const allTeams = store.state.Team.allTeams;
+
+      if (allTeams.length > 0) {
+        const baseURL = process.env.VUE_APP_API_BASE_URL;
+
+        const currentTeam = JSON.parse(
+          JSON.stringify(
+            allTeams.filter((team) => {
+              return team.teamId == store.state.Team.editTeamId;
+            })
+          )
+        );
+
+        const showPreview = this.$refs.preview;
+        showPreview.style.backgroundImage = `url(${baseURL}${currentTeam[0].teamLogo})`;
+        this.setItem(currentTeam[0]);
+        return currentTeam[0];
+      } else {
+        return "";
+      }
+    },
+  },
+
+  updated() {
+    if (this.isEditMode) {
+      this.getTeam;
+    }
+  },
+};
+</script>
 
 <style scoped>
 .team-modal-content {
@@ -212,214 +446,3 @@
   margin-right: 4px;
 }
 </style>
-
-<script>
-// utils
-import store from "../store/index";
-
-export default {
-  name: "TeamModal",
-  props: {
-    isEditMode: Boolean,
-  },
-  data() {
-    return {
-      selectedImage: null,
-      allowedExtensions: ["jpg", "png", "jpeg"],
-      imageChanged: false,
-      teamName: null,
-      teamCity: null,
-      teamStadium: null,
-      stadiumCapacity: null,
-      foundedIn: null,
-      teamCoach: null,
-    };
-  },
-  methods: {
-    closeModal() {
-      this.setItem("");
-      store.dispatch("Team/setEditTeamId", "");
-      this.removeImage();
-      this.$emit("closeModal");
-    },
-    teamLogoChange(e) {
-      const files = e.target.files;
-      // no file uploaded
-      if (files.length == 0) {
-        // TODO:Handle
-        // console.log("No File");
-      } else {
-        const extension = files[0].name.split(".");
-        // valid format
-        if (this.allowedExtensions.includes(extension[extension.length - 1])) {
-          this.selectedImage = files[0];
-          const preview = this.$refs.preview;
-
-          store.dispatch("Team/setImageChanged", true);
-          //   Display on preview
-          const reader = new FileReader();
-
-          reader.addEventListener("load", function () {
-            preview.style.backgroundImage = `url(${this.result})`;
-          });
-          reader.readAsDataURL(this.selectedImage);
-        }
-        // invalid format
-        else {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "error",
-            notificationMessage: `Invalid image format ${
-              extension[extension.length - 1]
-            }`,
-          });
-        }
-      }
-    },
-
-    removeImage() {
-      this.$refs.imageInput.value = "";
-      this.$refs.preview.style.backgroundImage = ``;
-    },
-    cancelSave() {
-      this.setItem("");
-      store.dispatch("Team/setEditTeamId", "");
-      this.removeImage();
-      this.$emit("closeModal");
-    },
-    async saveTeam() {
-      const teamName = this.$refs.teamName.value;
-      const teamCity = this.$refs.teamCity.value;
-      const teamStadium = this.$refs.teamStadium.value;
-      const stadiumCapacity = this.$refs.stadiumCapacity.value;
-      const foundedIn = this.$refs.foundedIn.value;
-      let teamLogo = "";
-      if (store.state.Team.imageChanged === true) {
-        teamLogo = await this.getBase64();
-      }
-      const teamCoach = this.$refs.teamCoach.value;
-
-      if (!teamName) {
-        store.dispatch("Global/setNotificationInfo", {
-          showNotification: true,
-          notificationType: "error",
-          notificationMessage: "Team Name is required",
-        });
-      } else if (!teamCity) {
-        store.dispatch("Global/setNotificationInfo", {
-          showNotification: true,
-          notificationType: "error",
-          notificationMessage: "Team City is required",
-        });
-      } else if (!teamStadium) {
-        store.dispatch("Global/setNotificationInfo", {
-          showNotification: true,
-          notificationType: "error",
-          notificationMessage: "Team Stadium is required",
-        });
-      } else if (!this.selectedImage) {
-        store.dispatch("Global/setNotificationInfo", {
-          showNotification: true,
-          notificationType: "error",
-          notificationMessage: "Team Logo is required",
-        });
-      } else {
-        const teamData = {
-          teamName,
-          teamCity,
-          teamStadium,
-          teamLogo,
-          foundedIn,
-          stadiumCapacity,
-          logoName: this.selectedImage.name,
-          teamCoach,
-        };
-
-        store.dispatch("Team/saveTeam", teamData);
-        this.removeImage();
-        this.setItem("");
-      }
-    },
-
-    async updateTeam() {
-      const teamName = this.$refs.teamName.value;
-      const teamCity = this.$refs.teamCity.value;
-      const teamStadium = this.$refs.teamStadium.value;
-      const teamCoach = this.$refs.teamCoach.value;
-      let teamLogo = "";
-      if (store.state.Team.imageChanged === true) {
-        teamLogo = await this.getBase64();
-      }
-
-      const updatedTeam = {
-        teamName,
-        teamCity,
-        teamStadium,
-        teamLogo,
-        teamCoach,
-        logoName: this.selectedImage ? this.selectedImage.name : "",
-      };
-      const imageStatus = this.imageChanged;
-
-      store.dispatch("Team/updateTeam", updatedTeam, imageStatus);
-
-      // this.$router.go();
-    },
-
-    // Image processor
-    getBase64() {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        if (reader) {
-          reader.readAsDataURL(this.selectedImage);
-          reader.onload = () => resolve(reader.result);
-          reader.onerror = (error) => reject(error);
-        }
-      });
-    },
-
-    setItem(team) {
-      this.teamName = team.teamName;
-      this.teamCity = team.teamCity;
-      this.teamStadium = team.teamStadium;
-      this.stadiumCapacity = team.stadiumCapacity;
-      this.foundedIn = team.foundedIn;
-      this.teamCoach = team.teamCoach;
-    },
-  },
-  computed: {
-    getImageChanged() {
-      return this.imageChanged;
-    },
-    getTeam() {
-      const allTeams = store.state.Team.allTeams;
-
-      if (allTeams.length > 0) {
-        const baseURL = process.env.VUE_APP_API_BASE_URL;
-
-        const currentTeam = JSON.parse(
-          JSON.stringify(
-            allTeams.filter((team) => {
-              return team.teamId == store.state.Team.editTeamId;
-            })
-          )
-        );
-
-        const showPreview = this.$refs.preview;
-        showPreview.style.backgroundImage = `url(${baseURL}${currentTeam[0].teamLogo})`;
-        this.setItem(currentTeam[0]);
-        return currentTeam[0];
-      } else {
-        return "";
-      }
-    },
-  },
-
-  updated() {
-    if (this.isEditMode) {
-      this.getTeam;
-    }
-  },
-};
-</script>

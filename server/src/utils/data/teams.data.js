@@ -2,12 +2,10 @@ const teamData = [
   // Saint George S.C 1
   {
     teamName: "Saint George S.C",
-    teamNameAm: "ቅዱስ ጊዮርጊስ",
+    teamNameAmh: "ቅዱስ ጊዮርጊስ",
     foundedIn: 1935,
     teamStadium: "Addis Ababa Stadium",
-    teamStadiumAm: "አዲስ አበባ ስታዲየም",
     teamCity: "Addis Ababa",
-    teamCityAm: "አዲስ አበባ",
     stadiumCapacity: 34000,
     teamCoach: "Zlatko Krmpotić",
     teamLogo: "/uploads/teams/St-George.png",
@@ -25,12 +23,10 @@ const teamData = [
   // "Welayta Dicha" 2
   {
     teamName: "Wolaita Dicha S.C",
-    teamNameAm: "ወላይታ ዲቻ",
+    teamNameAmh: "ወላይታ ዲቻ",
     foundedIn: 2009,
     teamStadium: "Wolaita Sodo Stadium",
-    teamStadiumAm: "ወላይታ ሶዶ ስታዲየም",
     teamCity: "Wolaita Sodo",
-    teamCityAm: "ወላይታ ሶዶ",
     stadiumCapacity: 30000,
     teamCoach: "Tsegaye Kidane-mariyam",
     teamLogo: "/uploads/teams/Wolaita-dicha.png",
@@ -48,6 +44,7 @@ const teamData = [
   // "Hawassa" 3
   {
     teamName: "Hawassa Kenema S.C",
+    teamNameAmh: "ሀዋሳ ከነማ",
     foundedIn: 1977,
     teamStadium: "Awassa Kenema Stadium",
     teamCity: "Hawassa",
@@ -68,6 +65,7 @@ const teamData = [
   // "Fasil Ketema" 4
   {
     teamName: "Fasil Kenema S.C",
+    teamNameAmh: "ፋሲል ከነማ",
     foundedIn: 1968,
     teamStadium: "Fasiledes Stadium",
     teamCity: "Gondar",
@@ -88,6 +86,7 @@ const teamData = [
   // "Adama City" 5
   {
     teamName: "Adama City S.C",
+    teamNameAmh: "አዳማ ከተማ",
     foundedIn: 1991,
     teamStadium: "Abebe Bikila Stadium",
     teamCity: "Adama",
@@ -108,6 +107,7 @@ const teamData = [
   // "Sidama Coffee" 6
   {
     teamName: "Sidama Coffee S.C",
+    teamNameAmh: "ሲዳማ ቡና",
     foundedIn: 2006,
     teamStadium: "Hawasa Metropolitan Stadium",
     teamCity: "Sidama",
@@ -128,6 +128,7 @@ const teamData = [
   // "Bahir Dar Kenema" 7
   {
     teamName: "Bahir Dar Kenema S.C",
+    teamNameAmh: "ባህር ዳር ከነማ",
     foundedIn: 1973,
     teamStadium: "Bahir Dar Stadium",
     teamCity: "Bahir Dar",
@@ -148,6 +149,7 @@ const teamData = [
   // "Ethiopian Coffee" 8
   {
     teamName: "Ethiopian Coffee S.C",
+    teamNameAmh: "ኢትዮጵያ ቡና",
     foundedIn: 1976,
     teamStadium: "Addis Ababa Stadium",
     teamCity: "Addis Ababa",
@@ -168,6 +170,7 @@ const teamData = [
   // "Wolkite Ketema" 9
   {
     teamName: "Wolkite City F.C",
+    teamNameAmh: "ወልቂጤ ከተማ",
     foundedIn: 2010,
     teamStadium: "Wolkite Stadium",
     teamCity: "Wolkite",
@@ -188,6 +191,7 @@ const teamData = [
   // "Arba Minch" 10
   {
     teamName: "Arba Minch City F.C",
+    teamNameAmh: "አርባምንጭ",
     foundedIn: 2000,
     teamStadium: "Arba Minch Stadium",
     teamCity: "Arba Minch",
@@ -206,9 +210,9 @@ const teamData = [
   },
 
   // "Defence Force" 11
-
   {
     teamName: "Defence Force S.C",
+    teamNameAmh: "የመከላከያ ሰራዊት",
     foundedIn: 1938,
     teamStadium: "Addis Ababa Stadium",
     teamCity: "Addis Ababa",
@@ -229,6 +233,7 @@ const teamData = [
   // "Hadiya Hossana" 12
   {
     teamName: "Hadiya Hossana F.C",
+    teamNameAmh: "ሀዲያ ​​ሆሣዕና",
     foundedIn: 2006,
     teamStadium: "Abiy Hersamo Stadium",
     teamCity: "Hosaena",
@@ -249,6 +254,7 @@ const teamData = [
   // "Dire Dawa Kenema" 13
   {
     teamName: "Dire Dawa City S.C",
+    teamNameAmh: "ድሬዳዋ ከተማ",
     foundedIn: 1982,
     teamStadium: "Dire Dawa Stadium",
     teamCity: "Dire Dawa",
@@ -269,6 +275,7 @@ const teamData = [
   // "Addis Ababa City" 14
   {
     teamName: "Addis Ababa City F.C",
+    teamNameAmh: "አዲስ አበባ ከተማ",
     foundedIn: 1986,
     teamStadium: "Addis Ababa Stadium",
     teamCity: "Addis Ababa",
@@ -289,6 +296,7 @@ const teamData = [
   // "Jimma Kenema" 15
   {
     teamName: "Jimma Aba Jifar F.C",
+    teamNameAmh: "ጅማ አባ ጅፋር",
     foundedIn: 1983,
     teamStadium: "Jimma Stadium",
     teamCity: "Jimma",
@@ -309,6 +317,7 @@ const teamData = [
   // "Sebeta City" 16
   {
     teamName: "Sebeta City F.C",
+    teamNameAmh: "ሰበታ ከተማ",
     foundedIn: 2005,
     teamStadium: "Sebeta Stadium",
     teamCity: "Sebeta",

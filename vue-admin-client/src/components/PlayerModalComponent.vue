@@ -48,11 +48,30 @@
           </div>
           <!-- Player Name -->
 
-          <!-- Player City -->
+          <!-- Player Name -->
+          <div class="container-col input-container">
+            <label for="playerName" class="main-label"
+              >{{ $t("Name") }} {{ $t("Amharic") }}</label
+            >
+            <input
+              name="playerNameAmh"
+              type="text"
+              ref="playerNameAmh"
+              v-model="playerNameAmh"
+              class="main-text-input"
+            />
+          </div>
+          <!-- Player Name -->
+
+          <!-- Player Team -->
           <div class="container-col input-container">
             <label for="PlayerTeam" class="main-label">{{ $t("Team") }}</label>
 
-            <select name="PlayerTeam" ref="eplTeamId" class="main-select-input">
+            <select
+              name="PlayerTeam"
+              ref="playerTeam"
+              class="main-select-input"
+            >
               <option
                 v-for="team in getTeams"
                 :key="team.teamName"
@@ -62,7 +81,7 @@
               </option>
             </select>
           </div>
-          <!-- Player City -->
+          <!-- Player Team -->
 
           <!-- Player Stadium -->
           <div class="container-col input-container">
@@ -71,7 +90,7 @@
             }}</label>
             <select
               name="PlayerPosition"
-              ref="position"
+              ref="playerPosition"
               class="main-select-input"
             >
               <option
@@ -114,7 +133,7 @@
             <input
               name="currentPrice"
               type="number"
-              ref="currentPrice"
+              ref="playerPrice"
               :value="isEditMode ? getPlayer.currentPrice : ''"
               class="main-text-input"
               :disabled="isEditMode && getLiveMatch == true"
@@ -296,12 +315,14 @@ export default {
     },
 
     async savePlayer() {
-      const playerName = this.playerName;
-      const eplTeamId = this.playerTeam;
-      const position = this.playerPosition;
-      const currentPrice = this.playerPrice;
-      const injuryStatus = this.injuryStatus;
-      const injuryMessage = this.injuryMessage;
+      const playerName = this.$refs.playerName.value;
+      const eplTeamId = this.$refs.playerTeam.value;
+      const position = this.$refs.playerPosition.value;
+      const currentPrice = this.$refs.playerPrice.value;
+      const injuryStatus = this.$refs.injuryStatus.value;
+      const injuryMessage = this.$refs.injuryMessage.value;
+      const playerNameAmh = this.$refs.playerNameAmh.value;
+
       let playerImage = "";
 
       if (store.state.Player.imageChanged === true) {
@@ -314,19 +335,21 @@ export default {
           notificationType: "error",
           notificationMessage: "Player Name is required",
         });
-      } else if (!eplTeamId) {
-        store.dispatch("Global/setNotificationInfo", {
-          showNotification: true,
-          notificationType: "error",
-          notificationMessage: "Team is required",
-        });
-      } else if (!position) {
-        store.dispatch("Global/setNotificationInfo", {
-          showNotification: true,
-          notificationType: "error",
-          notificationMessage: "Position is required",
-        });
-      } else if (!currentPrice) {
+      }
+      //  else if (!eplTeamId) {
+      //   store.dispatch("Global/setNotificationInfo", {
+      //     showNotification: true,
+      //     notificationType: "error",
+      //     notificationMessage: "Team is required",
+      //   });
+      // } else if (!position) {
+      //   store.dispatch("Global/setNotificationInfo", {
+      //     showNotification: true,
+      //     notificationType: "error",
+      //     notificationMessage: "Position is required",
+      //   });
+      // }
+      else if (!currentPrice) {
         store.dispatch("Global/setNotificationInfo", {
           showNotification: true,
           notificationType: "error",
@@ -347,6 +370,7 @@ export default {
           injuryStatus,
           injuryMessage,
           playerImage,
+          playerNameAmh,
         };
 
         if (this.selectedImage) {
@@ -361,11 +385,12 @@ export default {
     },
     async updatePlayer() {
       const playerName = this.$refs.playerName.value;
-      const eplTeamId = this.$refs.eplTeamId.value;
-      const position = this.$refs.position.value;
-      const currentPrice = this.$refs.currentPrice.value;
+      const eplTeamId = this.$refs.playerTeam.value;
+      const position = this.$refs.playerPosition.value;
+      const currentPrice = this.$refs.playerPrice.value;
       const injuryStatus = this.$refs.injuryStatus.value;
       const injuryMessage = this.$refs.injuryMessage.value;
+      const playerNameAmh = this.$refs.playerNameAmh.value;
       const availability = {
         injuryStatus: injuryStatus,
         injuryMessage: injuryMessage,
@@ -383,6 +408,7 @@ export default {
         currentPrice,
         availability,
         logoName: this.selectedImage ? this.selectedImage.name : "",
+        playerNameAmh,
       };
       const imageStatus = this.imageChanged;
       console.log(updatedPlayer, imageStatus);
@@ -402,11 +428,16 @@ export default {
     },
     setItem(player) {
       this.playerName = player.playerName;
+      this.playerNameAmh = player.playerNameAmh;
       this.playerTeam = player.eplTeamId;
       this.playerPosition = player.position;
       this.playerPrice = player.currentPrice;
-      this.injuryStatus = player.availability.injuryStatus;
-      this.injuryMessage = player.availability.injuryMessage;
+      this.injuryStatus = player.availability
+        ? player.availability.injuryStatus
+        : "Available";
+      this.injuryMessage = player.availability
+        ? player.availability.injuryMessage
+        : "";
     },
   },
   computed: {
@@ -450,6 +481,14 @@ export default {
 <style scoped>
 .player-modal-image-section {
   width: 250px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.player-model-image-section {
+  /* display: none; */
   height: 300px;
   display: flex;
   flex-direction: column;

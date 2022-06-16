@@ -15,6 +15,7 @@ const addTeam = asyncHandler(async (req, res) => {
     foundedIn,
     stadiumCapacity,
     teamCoach,
+    teamNameAmh,
   } = req.body;
 
   const verifyTeam = await TeamModel.findOne({
@@ -35,6 +36,7 @@ const addTeam = asyncHandler(async (req, res) => {
           stadiumCapacity,
           foundedIn,
           teamCoach,
+          teamNameAmh,
         }).save();
         res.status(201).send(`${teamName} added Successfully `);
       }
@@ -49,6 +51,7 @@ const addTeam = asyncHandler(async (req, res) => {
         stadiumCapacity,
         foundedIn,
         teamCoach,
+        teamNameAmh,
       }).save();
       res.status(201).send(`${teamName} added Successfully `);
     }
@@ -70,14 +73,22 @@ const getTeam = asyncHandler(async (req, res) => {
 const updateTeam = asyncHandler(async (req, res) => {
   console.log("Here");
 
-  const { teamName, teamCity, teamStadium, teamLogo, logoName, teamCoach } =
-    req.body;
+  const {
+    teamName,
+    teamCity,
+    teamStadium,
+    teamLogo,
+    logoName,
+    teamCoach,
+    teamNameAmh,
+  } = req.body;
 
   const newData = {
     teamName,
     teamCity,
     teamStadium,
     teamCoach,
+    teamNameAmh,
   };
 
   // if image is changed
