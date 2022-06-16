@@ -410,23 +410,23 @@ const transfer = asyncHandler(async (req, res) => {
         for (let i = activeGameweek; i < 30; i++) {
           let currentTeam = user.team[i];
 
-          if (currentTeam) {
+          if (currentTeam !== null) {
             // if free hit played skip
-            if (incomingTeam.activeChip !== "FH") {
+            if (incomingTeam.activeChip === "FH") {
               currentTeam.players = incomingTeam.players;
+            } else {
+              const currentNewTeam = {
+                gameweekId: i + 2,
+                activeChip: "",
+                freeTransfers: 1,
+                deduction: 0,
+                players: incomingTeam.players,
+              };
+              console.log("HERE");
+              currentTeam = currentNewTeam;
+              console.log(currentTeam);
             }
-          } else {
-            const currentNewTeam = {
-              gameweekId: i + 1,
-              activeChip: "",
-              freeTransfers: 1,
-              deduction: 0,
-              players: incomingTeam.players,
-            };
-
-            currentTeam = currentNewTeam;
           }
-
           updatedUserTeam.push(currentTeam);
         }
         // update user team
@@ -617,8 +617,6 @@ const getUserTeam = asyncHandler(async (req, res) => {
           gameWeekDeadline: currentGameWeek.startTimestamp,
         };
 
-        console.log(finalFormat);
-
         res.status(200).send(finalFormat);
       }
       // no team
@@ -631,8 +629,6 @@ const getUserTeam = asyncHandler(async (req, res) => {
           maxBudget: user.maxBudget,
           gameWeekDeadline: currentGameWeek.startTimestamp,
         };
-
-        console.log(finalFormat);
 
         res.status(200).send(finalFormat);
       }
