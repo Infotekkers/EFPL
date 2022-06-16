@@ -581,8 +581,6 @@ export default {
 
         formattedAndFiltered.push(fix);
       });
-      console.log(formattedAndFiltered);
-
       return formattedAndFiltered;
     },
 

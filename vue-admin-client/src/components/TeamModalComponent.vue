@@ -247,7 +247,7 @@ export default {
       // no file uploaded
       if (files.length == 0) {
         // TODO:Handle
-        console.log("No File");
+        // console.log("No File");
       } else {
         const extension = files[0].name.split(".");
         // valid format

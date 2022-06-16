@@ -246,7 +246,7 @@ export default {
       const files = e.target.files;
       // no file uploaded
       if (files.length == 0) {
-        console.log("No File");
+        // console.log("No File");
       } else {
         const extension = files[0].name.split(".");
 

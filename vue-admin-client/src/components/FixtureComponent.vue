@@ -421,7 +421,6 @@ export default {
     },
   },
   beforeMount() {
-    console.log("@TEST");
     console.log(this.fixture);
   },
 };

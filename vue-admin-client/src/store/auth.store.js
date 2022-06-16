@@ -23,7 +23,7 @@ export default {
           })
           .then((response) => {
             if (response.status.code === 200) {
-              console.log("success");
+              // console.log("success");
               commit("SET_CURRENT_ADMIN", currentAdmin);
             }
           })

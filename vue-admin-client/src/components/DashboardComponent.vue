@@ -181,7 +181,6 @@ export default {
     },
 
     getAllTeams() {
-      console.log(store.state.Team.allTeams);
       return store.state.Team.allTeams;
     },
   },
