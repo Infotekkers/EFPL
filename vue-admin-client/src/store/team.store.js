@@ -294,8 +294,6 @@ export default {
         });
       }
     },
-
-    // TODO:Improve filter
     filterByTerm(context, filterTerm) {
       // reset previous filter result
       store.state.Team.allTeams = store.state.Team.allTeamsUnfiltered;
@@ -397,6 +395,7 @@ export default {
 
     async updateTeam(context, updatedTeam) {
       const teamId = store.state.Team.editTeamId;
+
       const verifyChange = store.state.Team.allTeams.filter((team) => {
         return (
           team.teamName == updatedTeam.teamName &&
@@ -424,7 +423,9 @@ export default {
               notificationMessage: err.response.data,
             });
           });
-      } else {
+      }
+      // no change
+      else {
         store.dispatch("Global/setNotificationInfo", {
           showNotification: true,
           notificationType: "warning",

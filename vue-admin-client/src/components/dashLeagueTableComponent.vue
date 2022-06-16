@@ -13,28 +13,28 @@
     <div class="team-id-container">
       {{ team.relative_id }}
     </div>
-
     <div
       class="team-logo-container"
       :style="{
         'background-image': 'url(' + getTeamLogo + ')',
       }"
     ></div>
+
     <div class="team-name-container">{{ team.teamName }}</div>
     <div class="team-gf-container">
-      {{ team.teamPosition[0].goalsFor }}
+      {{ team.teamPosition.goalsFor }}
     </div>
     <div class="team-ga-container">
-      {{ team.teamPosition[0].goalsAgainst }}
+      {{ team.teamPosition.goalsAgainst }}
     </div>
     <div class="team-gd-container">
-      {{ team.teamPosition[0].goalDifferential }}
+      {{ team.teamPosition.goalDifferential }}
     </div>
-    <div class="team-win-container">{{ team.teamPosition[0].won }}</div>
-    <div class="team-draw-container">{{ team.teamPosition[0].lost }}</div>
-    <div class="team-loss-container">{{ team.teamPosition[0].Draw }}</div>
+    <div class="team-win-container">{{ team.teamPosition.won }}</div>
+    <div class="team-draw-container">{{ team.teamPosition.lost }}</div>
+    <div class="team-loss-container">{{ team.teamPosition.Draw }}</div>
     <div class="team-point-container">
-      {{ team.teamPosition[0].teamPoint }}
+      {{ team.teamPosition.teamPoint }}
     </div>
   </div>
 </template>

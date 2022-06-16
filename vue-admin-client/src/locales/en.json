@@ -113,5 +113,14 @@
   "Penalities Missed": "Penalities Missed",
   "Penalities Saved": "Penalities Saved",
   "Saves": "Saves",
-  "Own Goal": "Own Goal"
+  "Own Goal": "Own Goal",
+
+  "__comment_dash": "Dashboard Translations",
+  "GF": "GF",
+  "GD": "GD",
+  "GA": "GA",
+  "Won": "Won",
+  "Draw": "Draw",
+  "Lost": "Lost",
+  "Points": "Points"
 }

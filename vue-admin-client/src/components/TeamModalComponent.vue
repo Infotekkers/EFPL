@@ -238,6 +238,7 @@ export default {
   methods: {
     closeModal() {
       this.setItem("");
+      store.dispatch("Team/setEditTeamId", "");
       this.removeImage();
       this.$emit("closeModal");
     },
@@ -282,6 +283,7 @@ export default {
     },
     cancelSave() {
       this.setItem("");
+      store.dispatch("Team/setEditTeamId", "");
       this.removeImage();
       this.$emit("closeModal");
     },
@@ -332,6 +334,7 @@ export default {
           logoName: this.selectedImage.name,
           teamCoach,
         };
+
         store.dispatch("Team/saveTeam", teamData);
         this.removeImage();
         this.setItem("");
@@ -357,7 +360,10 @@ export default {
         logoName: this.selectedImage ? this.selectedImage.name : "",
       };
       const imageStatus = this.imageChanged;
+
       store.dispatch("Team/updateTeam", updatedTeam, imageStatus);
+      store.dispatch("Team/setEditTeamId");
+      // this.$router.go();
     },
 
     // Image processor
@@ -388,21 +394,26 @@ export default {
     },
     getTeam() {
       const allTeams = store.state.Team.allTeams;
+      console.log(allTeams);
 
-      const baseURL = process.env.VUE_APP_API_BASE_URL;
+      if (allTeams.length > 0) {
+        const baseURL = process.env.VUE_APP_API_BASE_URL;
 
-      const currentTeam = JSON.parse(
-        JSON.stringify(
-          allTeams.filter((team) => {
-            return team.teamId == store.state.Team.editTeamId;
-          })
-        )
-      );
+        const currentTeam = JSON.parse(
+          JSON.stringify(
+            allTeams.filter((team) => {
+              return team.teamId == store.state.Team.editTeamId;
+            })
+          )
+        );
 
-      const showPreview = this.$refs.preview;
-      showPreview.style.backgroundImage = `url(${baseURL}${currentTeam[0].teamLogo})`;
-      this.setItem(currentTeam[0]);
-      return currentTeam[0];
+        const showPreview = this.$refs.preview;
+        showPreview.style.backgroundImage = `url(${baseURL}${currentTeam[0].teamLogo})`;
+        this.setItem(currentTeam[0]);
+        return currentTeam[0];
+      } else {
+        return "";
+      }
     },
   },
 
