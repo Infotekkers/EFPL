@@ -16,7 +16,7 @@
             minlength="8"
             name="password"
           />
-          <button @click="showPassword = !showPassword">
+          <button @click.prevent="showPassword = !showPassword">
             {{ $t("show password") }}
           </button>
         </div>
