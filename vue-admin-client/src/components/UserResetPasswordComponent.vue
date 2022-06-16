@@ -11,7 +11,7 @@
             placeholder="Password"
             :type="showPassword ? 'text' : 'password'"
           />
-          <button @click="showPassword = !showPassword">
+          <button @click.prevent="showPassword = !showPassword">
             {{ $t("show password") }}
           </button>
         </div>
@@ -26,7 +26,7 @@
             :type="showPassword ? 'text' : 'password'"
           />
         </div>
-        <button @click="showPassword = !showPassword">
+        <button @click.prevent="showPassword = !showPassword">
           {{ $t("show password") }}
         </button>
       </div>
