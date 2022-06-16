@@ -60,7 +60,6 @@ const addTeam = asyncHandler(async (req, res) => {
 const getTeams = asyncHandler(async (req, res) => {
   const team = await TeamModel.find().sort("teamName");
   res.status(200).send(team);
-  
 });
 
 const getTeam = asyncHandler(async (req, res) => {
@@ -69,6 +68,8 @@ const getTeam = asyncHandler(async (req, res) => {
 });
 
 const updateTeam = asyncHandler(async (req, res) => {
+  console.log("Here");
+
   const { teamName, teamCity, teamStadium, teamLogo, logoName, teamCoach } =
     req.body;
 
@@ -99,6 +100,13 @@ const updateTeam = asyncHandler(async (req, res) => {
         $set: newData,
       }
     );
+    await Player.updateMany(
+      {
+        eplTeamId: verifyTeam.teamName,
+      },
+      { eplTeamId: newData.teamName }
+    );
+
     res.status(201).send(`${teamName} Info updated Successfully `);
   } else {
     res.status(404).send(`${teamName} EXIST.`);

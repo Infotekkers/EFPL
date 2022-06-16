@@ -639,7 +639,7 @@ const addTestGameweek = async () => {
   const testGameweek = new Gameweek({
     gameWeekNumber: 1,
     startTimestamp: 1647595217,
-    status: "Active",
+    status: "active",
   });
 
   await testGameweek.save();

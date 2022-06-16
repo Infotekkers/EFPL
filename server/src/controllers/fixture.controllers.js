@@ -8,6 +8,7 @@ const FixtureModel = require("../models/Fixtures");
 const TeamModel = require("../models/Teams");
 const Player = require("../models/Player");
 const GameWeek = require("../models/GameWeek");
+const Teams = require("../models/Teams");
 
 const MINUTE_COUNTERS = {};
 
@@ -839,6 +840,22 @@ const getAllFixtures = asyncHandler(async function (req, res) {
   // get required
   // send active fixture
   const matches = await FixtureModel.find().select("-__v");
+
+  for (let index = 0; index < matches.length; index++) {
+    const homeTeamId = matches[index].matchId.split("|")[0];
+    const awayTeamId = matches[index].matchId.split("|")[1];
+
+    const homeTeam = await Teams.findOne({ teamId: homeTeamId }).select(
+      "teamName"
+    );
+
+    const awayTeam = await Teams.findOne({ teamId: awayTeamId }).select(
+      "teamName"
+    );
+
+    matches[index].homeTeam = homeTeam.teamName;
+    matches[index].awayTeam = awayTeam.teamName;
+  }
 
   res.status(200).send(matches);
 });

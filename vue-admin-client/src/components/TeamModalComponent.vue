@@ -362,7 +362,7 @@ export default {
       const imageStatus = this.imageChanged;
 
       store.dispatch("Team/updateTeam", updatedTeam, imageStatus);
-      store.dispatch("Team/setEditTeamId");
+
       // this.$router.go();
     },
 
@@ -394,7 +394,6 @@ export default {
     },
     getTeam() {
       const allTeams = store.state.Team.allTeams;
-      console.log(allTeams);
 
       if (allTeams.length > 0) {
         const baseURL = process.env.VUE_APP_API_BASE_URL;

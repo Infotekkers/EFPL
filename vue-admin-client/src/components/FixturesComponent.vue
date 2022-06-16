@@ -464,9 +464,6 @@ export default {
       // Dispatch Store Action
       store.dispatch("Fixture/setAllFixtures");
       // this.isFixtureLoading = false;
-
-      // TODO: Remove Timer
-
       this.isFixtureLoading = false;
     },
     getActiveGameWeek() {
@@ -488,9 +485,6 @@ export default {
       store.dispatch("Fixture/setAllTeams");
 
       // this.isTeamLoading = false;
-
-      // TODO: Remove Timer
-
       this.isTeamLoading = false;
     },
 
@@ -587,6 +581,7 @@ export default {
 
         formattedAndFiltered.push(fix);
       });
+      console.log(formattedAndFiltered);
 
       return formattedAndFiltered;
     },
