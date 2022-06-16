@@ -3,16 +3,12 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Register Account', () {
-    final goToRegisterPageButton = find.byValueKey("loginViewSignUpRedirect");
-    final emailInputField = find.byValueKey('registerViewEmailField');
-    final userNameInputField = find.byValueKey('registerViewUsernameField');
-    final teamNameInputField = find.byValueKey('registerViewTeamNameField');
-    final passwordInputField = find.byValueKey('registerViewPasswordField');
-    final confirmPasswordInputField =
-        find.byValueKey('registerViewConfirmPasswordField');
-    final signUpButton = find.byValueKey('registerViewRegisterButton');
+  group('Login User Tests', () {
+    final emailInputField = find.byValueKey('loginViewUserName');
+    final passwordInputField = find.byValueKey('loginViewPassword');
+    final loginButton = find.byValueKey("loginViewLoginButton");
     final initialTransferMainKey = find.byValueKey("intialTransferViewMainKey");
+
     final transferListViewMainView =
         find.byValueKey("transferListViewListViewMain");
     final transferPlayerCardTransferButton =
@@ -26,59 +22,31 @@ void main() {
 
     late FlutterDriver driver;
 
-    Future<bool> isPresent(SerializableFinder byValueKey,
-        {Duration timeout = const Duration(seconds: 1)}) async {
-      try {
-        await driver.waitFor(byValueKey, timeout: timeout);
-        return true;
-      } catch (exception) {
-        return false;
-      }
-    }
-
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
 
     // Close the connection to the driver after the tests have completed.
-    tearDownAll(() async {
-      if (driver != null) {
-        driver.close();
-      }
-    });
 
-    test('Register User', () async {
+    test('Full Test', () async {
+      // await render
       await driver.waitUntilFirstFrameRasterized();
 
-      await driver.waitFor(goToRegisterPageButton);
-      await driver.tap(goToRegisterPageButton);
-
-      // email
-      await driver.waitFor(emailInputField);
+      // Valid email Valid password
       await driver.tap(emailInputField);
       await driver.enterText("efpltest@gmail.com");
 
-      // username
-      await driver.tap(userNameInputField);
-      await driver.enterText("Efpluser");
-
-      // team name
-      await driver.tap(teamNameInputField);
-      await driver.enterText("Infotekkers");
-
-      // password
       await driver.tap(passwordInputField);
       await driver.enterText("StrongPass@123456");
 
-      // c password
-      await driver.tap(confirmPasswordInputField);
-      await driver.enterText("StrongPass@123456");
+      await driver.tap(loginButton);
 
-      // click button
-      await driver.tap(signUpButton);
+      // expect
+      await driver.waitFor(initialTransferMainKey);
 
-      //
+      await driver.waitFor(transferListViewMainView);
+
       await driver.waitFor(initialTransferMainKey);
       await driver.waitFor(initialTransferGKKey1);
 
@@ -95,8 +63,10 @@ void main() {
           dyScroll: -100);
       await driver.tap(selectedGK2);
       await driver.tap(transferPlayerCardTransferButton);
+    });
 
-      await Future.delayed(const Duration(seconds: 2));
+    tearDownAll(() async {
+      await driver.close();
     });
   });
 }
