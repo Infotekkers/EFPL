@@ -422,7 +422,7 @@ const transfer = asyncHandler(async (req, res) => {
                 deduction: 0,
                 players: incomingTeam.players,
               };
-              console.log("HERE");
+
               currentTeam = currentNewTeam;
               console.log(currentTeam);
             }
