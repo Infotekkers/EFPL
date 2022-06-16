@@ -111,7 +111,7 @@
         <div @click="editMatch">
           <img :src="editIcon.path" :alt="editIcon.alt" class="small-icon" />
         </div>
-        <div @click="deleteMatch">
+        <div @click="deleteMatch" data-cp="delete-match">
           <img
             :src="deleteIcon.path"
             :alt="deleteIcon.alt"

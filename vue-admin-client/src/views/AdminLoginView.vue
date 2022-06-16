@@ -4,7 +4,7 @@
     <form @submit.prevent="loginAdmin">
       <div class="email">
         <label>{{ $t("Email") }}:</label>
-        <input required type="email" v-model="loginInfo.email" />
+        <input required type="email" v-model="loginInfo.email" name="email" />
       </div>
       <div>
         <label>{{ $t("Password") }}:</label>
@@ -14,6 +14,7 @@
             required
             v-model="loginInfo.password"
             minlength="8"
+            name="password"
           />
           <button @click="showPassword = !showPassword">
             {{ $t("show password") }}
@@ -27,7 +28,7 @@
           }}</router-link>
         </p>
         <div class="submit">
-          <button>{{ $t("Login") }}</button>
+          <button name="submit">{{ $t("Login") }}</button>
         </div>
       </div>
     </form>
