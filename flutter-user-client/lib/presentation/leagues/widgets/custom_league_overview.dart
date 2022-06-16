@@ -77,38 +77,58 @@ _showLeaveConfirmationModal({
   showModalBottomSheet(
     context: context,
     builder: (builder) {
-      return Column(
-        children: [
-          const Text("Are you sure you want to leave?"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+      return SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 32.0,
+            horizontal: 16.0,
+          ),
+          child: Column(
             children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text("Cancel"),
+              const Text(
+                "Are you sure you want to leave?",
+                style: TextStyle(
+                  fontSize: 24.0,
+                ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  BlocProvider.of<CustomLeaguesBloc>(context).add(
-                    CustomLeaguesEvent.leavePublicLeague(
-                      userId: "62960c04c1a572a276b6e08b",
-                      leagueCode: leagueCode,
+              const SizedBox(height: 32.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      "Cancel",
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
                     ),
-                  );
+                  ),
+                  const SizedBox(width: 16.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      BlocProvider.of<CustomLeaguesBloc>(context).add(
+                        CustomLeaguesEvent.leavePublicLeague(
+                          userId: "62960c04c1a572a276b6e08b",
+                          leagueCode: leagueCode,
+                        ),
+                      );
 
-                  // Close modal
-                  Navigator.of(context).pop();
+                      // Close modal
+                      Navigator.of(context).pop();
 
-                  // Navigate to custom leagues page
-                  Navigator.of(context).pop();
-                },
-                child: const Text("Confirm"),
-              )
+                      // Navigate to custom leagues page
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Confirm"),
+                  )
+                ],
+              ),
             ],
           ),
-        ],
+        ),
       );
     },
   );

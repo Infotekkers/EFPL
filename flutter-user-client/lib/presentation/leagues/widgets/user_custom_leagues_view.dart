@@ -28,24 +28,40 @@ class UserCustomLeaguesView extends StatelessWidget {
   _buildView(state, context) {
     List userCustomLeagues = state.userCustomLeagues;
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+    if (userCustomLeagues.isEmpty) {
+      return const Center(
+        child: Text("Empty"),
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: 8.0,
+            horizontal: 16.0,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              OutlinedButton(
+              ElevatedButton(
                 onPressed: () {
                   _showCreateLeagueCustomModal(context: context);
                 },
                 style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
                   fixedSize: MaterialStateProperty.all<Size>(
-                    const Size.fromWidth(200.0),
+                    const Size.fromWidth(150.0),
                   ),
                 ),
-                child: const Text("Create League"),
+                child: const Text(
+                  "Create League",
+                  style: TextStyle(
+                    color: Colors.blue,
+                  ),
+                ),
               ),
               const SizedBox(width: 10.0),
               ElevatedButton(
@@ -54,44 +70,80 @@ class UserCustomLeaguesView extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   fixedSize: MaterialStateProperty.all<Size>(
-                    const Size.fromWidth(200.0),
+                    const Size.fromWidth(150.0),
                   ),
                 ),
                 child: const Text("Join League"),
               ),
             ],
           ),
-          const SizedBox(height: 8.0),
-          Expanded(
-            child: ListView.builder(
-              itemCount: userCustomLeagues.length,
-              shrinkWrap: true,
-              itemBuilder: (_, index) => InkWell(
-                onTap: () {
-                  BlocProvider.of<CustomLeaguesBloc>(context).add(
-                    CustomLeaguesEvent.getCustomLeagueInfo(
-                      leagueId: userCustomLeagues[index].leagueId.getOrCrash(),
-                    ),
-                  );
+        ),
+        const SizedBox(height: 8.0),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "League",
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+              Text(
+                "Position",
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: userCustomLeagues.length,
+            shrinkWrap: true,
+            itemBuilder: (_, index) => InkWell(
+              onTap: () {
+                BlocProvider.of<CustomLeaguesBloc>(context).add(
+                  CustomLeaguesEvent.getCustomLeagueInfo(
+                    leagueId: userCustomLeagues[index].leagueId.getOrCrash(),
+                  ),
+                );
 
-                  Navigator.pushNamed(
-                    context,
-                    "/customLeagueOverview",
-                  );
-                },
+                Navigator.pushNamed(
+                  context,
+                  "/customLeagueOverview",
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8.0,
+                  horizontal: 16.0,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text("${userCustomLeagues[index].leagueName.getOrCrash()}"),
                     Text(
-                        "${userCustomLeagues[index].previousRank.getOrCrash()}"),
+                      "${userCustomLeagues[index].leagueName.getOrCrash()}",
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    Text(
+                      "${userCustomLeagues[index].previousRank.getOrCrash()}",
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
