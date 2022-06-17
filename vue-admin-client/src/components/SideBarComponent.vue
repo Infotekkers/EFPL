@@ -1,5 +1,5 @@
 <template>
-  <aside>
+  <aside v-if="showSidebar">
     <button class="collapse-sidebar">
       <span>&#11164;</span>
     </button>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import store from "../store/index";
+
 export default {
   data() {
     return {
@@ -57,6 +59,11 @@ export default {
   mounted() {
     const toggle = document.querySelector(".collapse-sidebar");
     toggle.addEventListener("click", this.toggleSidebar);
+  },
+  computed: {
+    showSidebar() {
+      return store.state.Global.showSidebar;
+    },
   },
 };
 </script>
