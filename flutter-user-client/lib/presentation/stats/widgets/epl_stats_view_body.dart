@@ -4,6 +4,7 @@ import 'package:efpl/injectable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EPLStatsViewBody extends StatelessWidget {
   const EPLStatsViewBody({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class EPLStatsViewBody extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             color: Colors.blue[50],
             child: const Center(
-              child: Text("Error"),
+              child: Text("Something Went Wrong"),
             ),
           ),
         ),
@@ -65,6 +66,7 @@ class EPLStatsViewBody extends StatelessWidget {
             StatsTable(
               stat: topScorers,
               statType: "goals",
+              title: AppLocalizations.of(context)!.goals,
             ),
             const SizedBox(
               height: 10.0,
@@ -72,6 +74,7 @@ class EPLStatsViewBody extends StatelessWidget {
             StatsTable(
               stat: mostAssists,
               statType: "assists",
+              title: AppLocalizations.of(context)!.assists,
             ),
             const SizedBox(
               height: 10.0,
@@ -79,6 +82,7 @@ class EPLStatsViewBody extends StatelessWidget {
             StatsTable(
               stat: mostCleanSheets,
               statType: "cleanSheets",
+              title: AppLocalizations.of(context)!.cleanSheet,
             ),
             const SizedBox(
               height: 10.0,
@@ -86,6 +90,7 @@ class EPLStatsViewBody extends StatelessWidget {
             StatsTable(
               stat: mostReds,
               statType: "reds",
+              title: AppLocalizations.of(context)!.reds,
             ),
             const SizedBox(
               height: 10.0,
@@ -93,6 +98,7 @@ class EPLStatsViewBody extends StatelessWidget {
             StatsTable(
               stat: mostYellows,
               statType: "yellows",
+              title: AppLocalizations.of(context)!.yellows,
             ),
             const SizedBox(
               height: 10.0,
@@ -100,6 +106,7 @@ class EPLStatsViewBody extends StatelessWidget {
             StatsTable(
               stat: mostSaves,
               statType: "saves",
+              title: AppLocalizations.of(context)!.saves,
             ),
             const SizedBox(
               height: 10.0,
@@ -107,6 +114,7 @@ class EPLStatsViewBody extends StatelessWidget {
             StatsTable(
               stat: mostMinutesPlayed,
               statType: "minutesPlayed",
+              title: AppLocalizations.of(context)!.minutesPlayed,
             ),
           ],
         ),
@@ -120,10 +128,12 @@ class StatsTable extends StatelessWidget {
     Key? key,
     required this.stat,
     required this.statType,
+    required this.title,
   }) : super(key: key);
 
   final List stat;
   final String statType;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +154,7 @@ class StatsTable extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Most ${statType.toLowerCase()}",
+                AppLocalizations.of(context)!.most + " " + title,
                 // textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       fontWeight: FontWeight.bold,
