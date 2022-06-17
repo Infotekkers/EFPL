@@ -2,6 +2,7 @@ import 'package:efpl/application/my_team/myteam_bloc.dart';
 import 'package:efpl/services/global_vars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MyTeamPlayer extends StatelessWidget {
   final int playerId;
@@ -66,8 +67,8 @@ class MyTeamPlayer extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  Image.asset(
-                    "assets/images/shirt_placeholder.png",
+                  SvgPicture.asset(
+                    "assets/jerseys/" + eplTeamId + ".svg",
                     width: 60,
                     height: 50,
                   ),

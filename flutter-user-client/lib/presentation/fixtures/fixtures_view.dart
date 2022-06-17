@@ -226,7 +226,7 @@ Widget _buildFixturesView(
                     List<Fixture> fixture = allFixtures[index];
                     var date = '';
                     if (fixture.isNotEmpty) {
-                      date = formatMatchDate(fixture[0]);
+                      date = formatMatchDate(fixture[0], context);
                     }
 
                     return Column(
@@ -302,20 +302,33 @@ List<List<Fixture>> formatByDate(List<Fixture> allFixtures) {
   return formattedFixtures;
 }
 
-String formatMatchDate(Fixture fixture) {
+String formatMatchDate(Fixture fixture, BuildContext context) {
   final List<String> monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
+    // 'January',
+    // 'February',
+    // 'March',
+    // 'April',
+    // 'May',
+    // 'June',
+    // 'July',
+    // 'August',
+    // 'September',
+    // 'October',
+    // 'November',
+    // 'December'
+    //  AppLocalizations.of(context)!.j
+    AppLocalizations.of(context)!.january,
+    AppLocalizations.of(context)!.february,
+    AppLocalizations.of(context)!.march,
+    AppLocalizations.of(context)!.april,
+    AppLocalizations.of(context)!.may,
+    AppLocalizations.of(context)!.june,
+    AppLocalizations.of(context)!.july,
+    AppLocalizations.of(context)!.august,
+    AppLocalizations.of(context)!.september,
+    AppLocalizations.of(context)!.october,
+    AppLocalizations.of(context)!.november,
+    AppLocalizations.of(context)!.december
   ];
   final schedule = fixture.schedule.value.fold(
     (l) => '',

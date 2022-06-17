@@ -1,8 +1,11 @@
+import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FixtureWidget extends StatelessWidget {
   final Fixture fixture;
@@ -127,7 +130,7 @@ class FixtureWidget extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  getShortStatus(fixture: fixture),
+                  getShortStatus(fixture: fixture, context: context),
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontSize: 12,
                       ),
@@ -216,35 +219,46 @@ String getImageUrl({required Fixture fixture, required int isHome}) {
 }
 
 String getShortName({required Fixture fixture, required int isHome}) {
+  final Locale locale = getIt<UtilBloc>().state.locale;
   if (isHome == 1) {
-    List nameLong = fixture.homeTeam.value
-        .fold(
-          (l) => '',
-          (r) => r.toString(),
-        )
-        .split(" ");
+    if (locale.languageCode == "en") {
+      List nameLong = fixture.homeTeam.value
+          .fold(
+            (l) => '',
+            (r) => r.toString(),
+          )
+          .split(" ");
 
-    nameLong.removeLast();
-    return nameLong.join(" ");
+      nameLong.removeLast();
+      return nameLong.join(" ");
+    } else {
+      return fixture.homeTeamAmh.value.fold((l) => "", (r) => r);
+    }
   } else {
-    List nameLong = fixture.awayTeam.value
-        .fold(
-          (l) => '',
-          (r) => r.toString(),
-        )
-        .split(" ");
-    nameLong.removeLast();
-    return nameLong.join(" ");
+    if (locale.languageCode == "en") {
+      List nameLong = fixture.awayTeam.value
+          .fold(
+            (l) => '',
+            (r) => r.toString(),
+          )
+          .split(" ");
+      nameLong.removeLast();
+      return nameLong.join(" ");
+    } else {
+      return fixture.awayTeamAmh.value.fold((l) => "", (r) => r);
+    }
   }
 }
 
-String getShortStatus({required Fixture fixture}) {
+String getShortStatus(
+    {required Fixture fixture, required BuildContext context}) {
   String status = fixture.status.value.fold((l) => '', (r) => r);
 
   String finalStatus = "Not Live";
 
   if (status == "liveFH") {
     finalStatus = "FH";
+    // AppLocalizations.of(context).
   } else if (status == "HT") {
     finalStatus = "HT";
   } else if (status == "liveSH") {

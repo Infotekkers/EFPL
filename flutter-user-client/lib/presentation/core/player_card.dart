@@ -13,7 +13,7 @@ class PlayerWidget extends StatelessWidget {
   const PlayerWidget({
     Key? key,
     required this.playerName,
-    this.teamName = "shirt.svg",
+    this.teamName = "shirt",
     required this.description,
     this.isCaptain = false,
     this.isViceCaptain = false,
@@ -44,7 +44,7 @@ class PlayerWidget extends StatelessWidget {
                   children: [
                     Center(
                       child: SvgPicture.asset(
-                        "assets/icons/shirt.svg",
+                        "assets/jerseys/" + teamName + ".svg",
                         width: 50,
                         height: 50,
                       ),

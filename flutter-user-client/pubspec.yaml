@@ -65,6 +65,7 @@ flutter:
     - assets/icons/
     - assets/flags/
     - assets/teams/
+    - assets/jerseys/
   fonts:
     - family: Architect
       fonts:

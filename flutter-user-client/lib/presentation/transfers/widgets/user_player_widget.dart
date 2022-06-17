@@ -26,6 +26,9 @@ class UserPlayerWidget extends StatelessWidget {
       (r) => r['injuryStatus'].toString(),
     );
 
+    final String teamName = currentUserPlayer.eplTeamId.value
+        .fold((l) => "shirt", (r) => r.toString());
+
     return BlocBuilder<TransferBloc, TransferState>(
       builder: (context, state) {
         TransferBloc _transferBloc = getIt<TransferBloc>();
@@ -53,7 +56,7 @@ class UserPlayerWidget extends StatelessWidget {
                   Stack(
                     children: [
                       // SHIRT
-                      _buildShirtView(),
+                      _buildShirtView(teamName: teamName),
 
                       // INJURY STATUS
                       _buildInjuryView(
@@ -334,7 +337,7 @@ void _buildModalSheet(
   );
 }
 
-Widget _buildShirtView() {
+Widget _buildShirtView({required String teamName}) {
   return Center(
     child: Container(
       width: 50,
@@ -343,7 +346,7 @@ Widget _buildShirtView() {
         shape: BoxShape.circle,
       ),
       child: SvgPicture.asset(
-        "assets/icons/shirt.svg",
+        "assets/jerseys/" + teamName + ".svg",
         width: 50,
         height: 50,
       ),

@@ -313,15 +313,23 @@ class InitialTransferPage extends StatelessWidget {
                                                 : playerPrice
                                                     .toStringAsFixed(1),
                                             teamName: allFormattedPlayers[0]
-                                                    [index]
-                                                .eplTeamId
-                                                .value
-                                                .fold(
-                                                  (l) => '  ',
-                                                  (r) => r
-                                                      .toString()
-                                                      .split(" ")[0],
-                                                ),
+                                                            [index]
+                                                        .eplTeamId
+                                                        .value
+                                                        .fold(
+                                                          (l) => '  ',
+                                                          (r) => r.toString(),
+                                                        )
+                                                        .toString() ==
+                                                    "         "
+                                                ? "shirt"
+                                                : allFormattedPlayers[0][index]
+                                                    .eplTeamId
+                                                    .value
+                                                    .fold(
+                                                      (l) => '  ',
+                                                      (r) => r.toString(),
+                                                    ),
                                           ),
                                         ),
                                       );
@@ -446,15 +454,34 @@ class InitialTransferPage extends StatelessWidget {
                                                 : playerPrice
                                                     .toStringAsFixed(1),
                                             teamName: allFormattedPlayers[1]
-                                                    [index]
-                                                .eplTeamId
-                                                .value
-                                                .fold(
-                                                  (l) => '   ',
-                                                  (r) => r
-                                                      .toString()
-                                                      .split(" ")[0],
-                                                ),
+                                                                [index]
+                                                            .eplTeamId
+                                                            .value
+                                                            .fold(
+                                                              (l) => '  ',
+                                                              (r) =>
+                                                                  r.toString(),
+                                                            )
+                                                            .toString() ==
+                                                        "         " ||
+                                                    allFormattedPlayers[1]
+                                                            [index]
+                                                        .eplTeamId
+                                                        .value
+                                                        .fold(
+                                                          (l) => '  ',
+                                                          (r) => r.toString(),
+                                                        )
+                                                        .toString()
+                                                        .isEmpty
+                                                ? "shirt"
+                                                : allFormattedPlayers[1][index]
+                                                    .eplTeamId
+                                                    .value
+                                                    .fold(
+                                                      (l) => '  ',
+                                                      (r) => r.toString(),
+                                                    ),
                                           ),
                                         ),
                                       );
@@ -579,15 +606,34 @@ class InitialTransferPage extends StatelessWidget {
                                                 : playerPrice
                                                     .toStringAsFixed(1),
                                             teamName: allFormattedPlayers[2]
-                                                    [index]
-                                                .eplTeamId
-                                                .value
-                                                .fold(
-                                                  (l) => '   ',
-                                                  (r) => r
-                                                      .toString()
-                                                      .split(" ")[0],
-                                                ),
+                                                                [index]
+                                                            .eplTeamId
+                                                            .value
+                                                            .fold(
+                                                              (l) => '  ',
+                                                              (r) =>
+                                                                  r.toString(),
+                                                            )
+                                                            .toString() ==
+                                                        "         " ||
+                                                    allFormattedPlayers[2]
+                                                            [index]
+                                                        .eplTeamId
+                                                        .value
+                                                        .fold(
+                                                          (l) => '  ',
+                                                          (r) => r.toString(),
+                                                        )
+                                                        .toString()
+                                                        .isEmpty
+                                                ? "shirt"
+                                                : allFormattedPlayers[2][index]
+                                                    .eplTeamId
+                                                    .value
+                                                    .fold(
+                                                      (l) => '  ',
+                                                      (r) => r.toString(),
+                                                    ),
                                           ),
                                         ),
                                       );
@@ -712,15 +758,34 @@ class InitialTransferPage extends StatelessWidget {
                                                 : playerPrice
                                                     .toStringAsFixed(1),
                                             teamName: allFormattedPlayers[3]
-                                                    [index]
-                                                .eplTeamId
-                                                .value
-                                                .fold(
-                                                  (l) => '   ',
-                                                  (r) => r
-                                                      .toString()
-                                                      .split(" ")[0],
-                                                ),
+                                                                [index]
+                                                            .eplTeamId
+                                                            .value
+                                                            .fold(
+                                                              (l) => '  ',
+                                                              (r) =>
+                                                                  r.toString(),
+                                                            )
+                                                            .toString() ==
+                                                        "         " ||
+                                                    allFormattedPlayers[3]
+                                                            [index]
+                                                        .eplTeamId
+                                                        .value
+                                                        .fold(
+                                                          (l) => '  ',
+                                                          (r) => r.toString(),
+                                                        )
+                                                        .toString()
+                                                        .isEmpty
+                                                ? "shirt"
+                                                : allFormattedPlayers[3][index]
+                                                    .eplTeamId
+                                                    .value
+                                                    .fold(
+                                                      (l) => '  ',
+                                                      (r) => r.toString(),
+                                                    ),
                                           ),
                                         ),
                                       );

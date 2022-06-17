@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/fixture/fixture_bloc.dart';
+import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
@@ -554,12 +555,23 @@ class FixtureDetailView extends StatelessWidget {
 }
 
 String getMatchAcronym({required Fixture fixture}) {
-  List homeTeamLong = fixture.homeTeam.value
-      .fold(
-        (l) => null,
-        (r) => r,
-      )!
-      .split(" ");
+  List homeTeamLong = [];
+
+  if (getIt<UtilBloc>().state.locale.languageCode == "en") {
+    homeTeamLong = fixture.homeTeam.value
+        .fold(
+          (l) => null,
+          (r) => r,
+        )!
+        .split(" ");
+  } else {
+    homeTeamLong = fixture.homeTeamAmh.value
+        .fold(
+          (l) => null,
+          (r) => r,
+        )!
+        .split(" ");
+  }
 
   homeTeamLong.removeLast();
 
@@ -580,12 +592,23 @@ String getMatchAcronym({required Fixture fixture}) {
   }
 
   //
-  List? awayTeamLong = fixture.awayTeam.value
-      .fold(
-        (l) => null,
-        (r) => r,
-      )!
-      .split(" ");
+  List? awayTeamLong = [];
+
+  if (getIt<UtilBloc>().state.locale.languageCode == "en") {
+    awayTeamLong = fixture.awayTeam.value
+        .fold(
+          (l) => null,
+          (r) => r,
+        )!
+        .split(" ");
+  } else {
+    awayTeamLong = fixture.awayTeamAmh.value
+        .fold(
+          (l) => null,
+          (r) => r,
+        )!
+        .split(" ");
+  }
 
   String awayTeamShort = "";
   awayTeamLong.removeLast();
@@ -608,25 +631,34 @@ String getMatchAcronym({required Fixture fixture}) {
 }
 
 String getShortName({required Fixture fixture, required int isHome}) {
+  final Locale locale = getIt<UtilBloc>().state.locale;
   if (isHome == 1) {
-    List nameLong = fixture.homeTeam.value
-        .fold(
-          (l) => '',
-          (r) => r.toString(),
-        )
-        .split(" ");
+    if (locale.languageCode == "en") {
+      List nameLong = fixture.homeTeam.value
+          .fold(
+            (l) => '',
+            (r) => r.toString(),
+          )
+          .split(" ");
 
-    nameLong.removeLast();
-    return nameLong.join(" ");
+      nameLong.removeLast();
+      return nameLong.join(" ");
+    } else {
+      return fixture.homeTeamAmh.value.fold((l) => "", (r) => r);
+    }
   } else {
-    List nameLong = fixture.awayTeam.value
-        .fold(
-          (l) => '',
-          (r) => r.toString(),
-        )
-        .split(" ");
-    nameLong.removeLast();
-    return nameLong.join(" ");
+    if (locale.languageCode == "en") {
+      List nameLong = fixture.awayTeam.value
+          .fold(
+            (l) => '',
+            (r) => r.toString(),
+          )
+          .split(" ");
+      nameLong.removeLast();
+      return nameLong.join(" ");
+    } else {
+      return fixture.awayTeamAmh.value.fold((l) => "", (r) => r);
+    }
   }
 }
 
