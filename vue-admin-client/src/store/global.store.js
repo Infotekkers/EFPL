@@ -10,7 +10,7 @@ export default {
     notificationDuration: 4000,
 
     // sidebar
-    showSidebar: false,
+    showSidebar: localStorage.getItem("currentAdmin") ? true : false,
   },
   getters: {
     getConnection: function (state) {
