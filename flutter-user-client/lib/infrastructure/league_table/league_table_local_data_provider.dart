@@ -61,24 +61,24 @@ class LeagueTableLocalDataProvider {
     }
   }
 }
- // teamPoint: TeamPoint(
-          //   value: parsedCachedleagueTable['teamPoint'],
-          // ),
-          // won: TeamWon(
-          //   value: parsedCachedleagueTable['teamWon'],
-          // ),
-          // lost: TeamLost(
-          //   value: parsedCachedleagueTable['teamLost'],
-          // ),
-          // Draw: TeamDraw(
-          //   value: parsedCachedleagueTable['teamDraw'],
-          // ),
-          // goalDifferntial: TeamGoalDifferntial(
-          //   value: parsedCachedleagueTable['teamGoalDifferntial'],
-          // ),
-          // goalAgainst: TeamGoalAgainst(
-          //   value: parsedCachedleagueTable['teamGoalAgainst'],
-          // ),
-          // goalFor: TeamGoalFor(
-          //   value: parsedCachedleagueTable['teamGoalFor'],
-          // ),
+// teamPoint: TeamPoint(
+//   value: parsedCachedleagueTable['teamPoint'],
+// ),
+// won: TeamWon(
+//   value: parsedCachedleagueTable['teamWon'],
+// ),
+// lost: TeamLost(
+//   value: parsedCachedleagueTable['teamLost'],
+// ),
+// Draw: TeamDraw(
+//   value: parsedCachedleagueTable['teamDraw'],
+// ),
+// goalDifferntial: TeamGoalDifferntial(
+//   value: parsedCachedleagueTable['teamGoalDifferntial'],
+// ),
+// goalAgainst: TeamGoalAgainst(
+//   value: parsedCachedleagueTable['teamGoalAgainst'],
+// ),
+// goalFor: TeamGoalFor(
+//   value: parsedCachedleagueTable['teamGoalFor'],
+// ),
