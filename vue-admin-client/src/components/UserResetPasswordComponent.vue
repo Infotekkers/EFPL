@@ -11,8 +11,20 @@
             placeholder="Password"
             :type="showPassword ? 'text' : 'password'"
           />
-          <button @click.prevent="showPassword = !showPassword">
-            {{ $t("show password") }}
+          <button
+            class="toggle-password"
+            @click.prevent="showPassword = !showPassword"
+          >
+            <img
+              :src="passwordVisibleIcon.path"
+              :alt="passwordVisibleIcon.alt"
+              v-if="showPassword"
+            />
+            <img
+              :src="hiddenPasswordIcon.path"
+              :alt="hiddenPasswordIcon.alt"
+              v-else
+            />
           </button>
         </div>
       </div>
@@ -26,8 +38,20 @@
             :type="showPassword ? 'text' : 'password'"
           />
         </div>
-        <button @click.prevent="showPassword = !showPassword">
-          {{ $t("show password") }}
+        <button
+          class="toggle-password"
+          @click.prevent="showPassword = !showPassword"
+        >
+          <img
+            :src="passwordVisibleIcon.path"
+            :alt="passwordVisibleIcon.alt"
+            v-if="showPassword"
+          />
+          <img
+            :src="hiddenPasswordIcon.path"
+            :alt="hiddenPasswordIcon.alt"
+            v-else
+          />
         </button>
       </div>
 
@@ -39,6 +63,8 @@
 </template>
 
 <script>
+import { passwordVisibleIcon, hiddenPasswordIcon } from "@/utils/Icons";
+
 export default {
   name: "UserResetPasswordComponent",
   data() {
@@ -48,6 +74,10 @@ export default {
       password: "",
       password_confirm: "",
       isLoading: false,
+
+      // icons
+      passwordVisibleIcon: passwordVisibleIcon,
+      hiddenPasswordIcon: hiddenPasswordIcon,
     };
   },
   methods: {
@@ -102,6 +132,11 @@ button {
   cursor: pointer;
   width: 30%;
 }
+
+.toggle-password img {
+  width: 25px;
+}
+
 .submit {
   text-align: center;
 }
