@@ -23,7 +23,6 @@ export default {
           })
           .then((response) => {
             if (response.status.code === 200) {
-              // console.log("success");
               commit("SET_CURRENT_ADMIN", currentAdmin);
             }
           })
@@ -62,7 +61,6 @@ export default {
 
             commit("SET_CURRENT_ADMIN", response.data);
             router.replace({ name: "Home" });
-            console.log("logged in");
           }
         })
         .catch((err) => {
@@ -78,7 +76,6 @@ export default {
       axios
         .post(`${baseURL}/admin/requestReset`, { email: email })
         .then((response) => {
-          console.log(response.data);
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
@@ -98,13 +95,12 @@ export default {
     // admin reset pass
     async resetPassword(context, password) {
       const token = router.currentRoute.value.params.token;
-      console.log(token);
+
       axios
         .post(`${baseURL}/admin/resetPass/${token}`, {
           password: password,
         })
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
@@ -115,7 +111,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.response.data.message);
           if (err.response.status === 400) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
@@ -129,13 +124,11 @@ export default {
     // user reset pass
     async userResetPassword(context, password) {
       const token = router.currentRoute.value.params.token;
-      console.log(token);
       axios
         .post(`${baseURL}/user/resetPass/${token}`, {
           password: password,
         })
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
@@ -145,7 +138,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.response.data.message);
           if (err.response.status === 400) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
@@ -163,14 +155,12 @@ export default {
           emailBody: emailBody,
         })
         .then((response) => {
-          console.log(response.status);
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: `successfully sent`,
             });
-            console.log("sent");
             router.push({ name: "settings" });
           }
         })
