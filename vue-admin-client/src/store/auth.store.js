@@ -36,6 +36,9 @@ export default {
     // log out admin
     logOutAdmin({ commit }) {
       commit("LOG_OUT");
+      store.dispatch("Global/setShowSidebar", {
+        showSidebar: false,
+      });
       router.push({ name: "admin-login" });
     },
     // login admin
@@ -52,6 +55,10 @@ export default {
             //   notificationType: "success",
             //   notificationMessage: `${response.data.email} successfully logged in`,
             // });
+            store.dispatch("Global/setShowSidebar", {
+              showSidebar: true,
+            });
+
             commit("SET_CURRENT_ADMIN", response.data);
             router.replace({ name: "Home" });
           }
