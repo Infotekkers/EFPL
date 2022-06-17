@@ -12,12 +12,12 @@
     <div class="team-point-container">{{ team.teamPosition[0].won }}</div>
     <div class="team-point-container">{{ team.teamPosition[0].lost }}</div>
     <div class="team-point-container">{{ team.teamPosition[0].Draw }}</div>
-    <div class="team-point-container">{{ team.teamPosition[0].goalFor }}</div>
+    <div class="team-point-container">{{ team.teamPosition[0].goalsFor }}</div>
     <div class="team-point-container">
-      {{ team.teamPosition[0].goalAgainst }}
+      {{ team.teamPosition[0].goalsAgainst }}
     </div>
     <div class="team-point-container">
-      {{ team.teamPosition[0].goalDifferntial }}
+      {{ team.teamPosition[0].goalsDifferntial }}
     </div>
     <div class="team-point-container">
       <span v-if="team.foundedIn">{{ team.teamPosition[0].teamPoint }}</span>
