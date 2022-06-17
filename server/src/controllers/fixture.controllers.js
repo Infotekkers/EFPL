@@ -473,7 +473,7 @@ const endFixture = asyncHandler(async function (req, res) {
     teamId: parseInt(req.params.matchId.split("|")[1]),
   });
 
-  console.log(awayTeam);
+  // console.log(awayTeam);
 
   if (match?.status === "liveSH") {
     match.status = "FT";
@@ -486,37 +486,38 @@ const endFixture = asyncHandler(async function (req, res) {
     const awayteamScore = splitscore[1];
     const awayteamPosition = awayTeam.teamPosition;
     const hometeamPosition = homeTeam.teamPosition;
-    console.log(awayteamPosition);
+    // console.log(awayteamPosition);
     const awayteamPoint = awayteamPosition.teamPoint;
     const hometeamPoint = hometeamPosition.teamPoint;
     if (hometeamScore > awayteamScore) {
       const teamPoint = hometeamPoint + 3;
       const hometeamGoalDce = hometeamScore - awayteamScore;
-      homeTeam.teamPosition[0].teamPoint = teamPoint;
-      homeTeam.teamPosition[0].won += 1;
-      awayTeam.teamPosition[0].lost += 1;
-      homeTeam.teamPosition[0].goalDifferntial += hometeamGoalDce;
-      homeTeam.teamPosition[0].goalFor = hometeamScore;
-      homeTeam.teamPosition[0].goalAgainst = awayteamScore;
-      awayTeam.teamPosition[0].lost += 1;
+      console.log(homeTeam);
+      homeTeam.teamPosition.teamPoint = teamPoint;
+      homeTeam.teamPosition.won += 1;
+      awayTeam.teamPosition.lost += 1;
+      homeTeam.teamPosition.goalDifferntial += hometeamGoalDce;
+      homeTeam.teamPosition.goalFor = hometeamScore;
+      homeTeam.teamPosition.goalAgainst = awayteamScore;
+      awayTeam.teamPosition.lost += 1;
 
       await homeTeam.save();
     } else if (hometeamScore === awayteamScore) {
       const Hteampoint = hometeamPoint + 1;
       const Ateampoint = awayteamPoint + 1;
       const hometeamGoalDce = hometeamScore - awayteamScore;
-      homeTeam.teamPosition[0].teamPoint = Hteampoint;
-      homeTeam.teamPosition[0].Draw += 1;
-      homeTeam.teamPosition[0].goalDifferntial += hometeamGoalDce;
-      homeTeam.teamPosition[0].goalFor = hometeamScore;
-      homeTeam.teamPosition[0].goalAgainst = awayteamScore;
+      homeTeam.teamPosition.teamPoint = Hteampoint;
+      homeTeam.teamPosition.Draw += 1;
+      homeTeam.teamPosition.goalDifferntial += hometeamGoalDce;
+      homeTeam.teamPosition.goalFor = hometeamScore;
+      homeTeam.teamPosition.goalAgainst = awayteamScore;
 
       const awayteamGoalDce = awayteamScore - hometeamScore;
-      awayTeam.teamPosition[0].teamPoint = Ateampoint;
-      awayTeam.teamPosition[0].Draw += 1;
-      awayTeam.teamPosition[0].goalDifferntial += awayteamGoalDce;
-      awayTeam.teamPosition[0].goalFor = awayteamScore;
-      awayTeam.teamPosition[0].goalAgainst = hometeamScore;
+      awayTeam.teamPosition.teamPoint = Ateampoint;
+      awayTeam.teamPosition.Draw += 1;
+      awayTeam.teamPosition.goalDifferntial += awayteamGoalDce;
+      awayTeam.teamPosition.goalFor = awayteamScore;
+      awayTeam.teamPosition.goalAgainst = hometeamScore;
 
       await homeTeam.save();
       await awayTeam.save();
@@ -524,12 +525,12 @@ const endFixture = asyncHandler(async function (req, res) {
       const Ateampoint = awayteamPoint + 3;
 
       const awayteamGoalDce = hometeamScore - awayteamScore;
-      awayTeam.teamPosition[0].teamPoint = Ateampoint;
-      awayTeam.teamPosition[0].won += 1;
-      homeTeam.teamPosition[0].lost += 1;
-      awayTeam.teamPosition[0].goalDifferntial += awayteamGoalDce;
-      awayTeam.teamPosition[0].goalFor = hometeamScore;
-      awayTeam.teamPosition[0].goalAgainst = awayteamScore;
+      awayTeam.teamPosition.teamPoint = Ateampoint;
+      awayTeam.teamPosition.won += 1;
+      homeTeam.teamPosition.lost += 1;
+      awayTeam.teamPosition.goalDifferntial += awayteamGoalDce;
+      awayTeam.teamPosition.goalFor = hometeamScore;
+      awayTeam.teamPosition.goalAgainst = awayteamScore;
       await awayTeam.save();
     }
     match

@@ -44,10 +44,10 @@ const teamSchema = mongoose.Schema({
   },
   teamNameAmh: {
     type: String,
-    required: [
-      true,
-      "Custom Error - Required Value *:Team name Amharic is required.",
-    ],
+    // required: [
+    //   true,
+    //   "Custom Error - Required Value *:Team name Amharic is required.",
+    // ],
     minlength: 4,
     maxLength: 72,
   },
