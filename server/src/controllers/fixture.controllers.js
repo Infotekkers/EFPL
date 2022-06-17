@@ -930,7 +930,10 @@ const getAllFixturesOfGameWeek = asyncHandler(async function (req, res) {
     currMatch.status = matches[i].status;
     currMatch.score = matches[i].score;
     currMatch.homeTeam = matches[i].homeTeam;
+    currMatch.homeTeamAmh = homeTeamInfo.teamNameAmh;
+
     currMatch.awayTeam = matches[i].awayTeam;
+    currMatch.awayTeamAmh = awayTeamInfo.teamNameAmh;
 
     currMatch.homeTeamCity = homeTeamInfo.teamCity;
     currMatch.homeTeamStadium = homeTeamInfo.teamStadium;
