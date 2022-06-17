@@ -89,4 +89,12 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidMatchStat({
     required T failedValue,
   }) = InvalidMatchStat<T>;
+  //invalidTeamName Failure
+  // const factory ValueFailure.invalidTeamName({
+  //   required T failedValue,
+  // }) = InvalidTeamName<T>;
+  // // invalidUserName Failure
+  // const factory ValueFailure.invalidUserName({
+  //   required T failedValue,
+  // }) = InvalidUserName<T>;
 }
