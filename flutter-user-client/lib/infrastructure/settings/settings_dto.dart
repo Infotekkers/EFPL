@@ -17,10 +17,9 @@ abstract class UserDetailDto implements _$UserDetailDto {
 
   factory UserDetailDto.fromDomain(UserDetail userDetail) {
     return UserDetailDto(
-      teamName: userDetail.teamName.isValid() ? userDetail.getOrCrash() : '',
-      favouriteEplTeam:
-          userDetail.favouriteEplTeam.isValid() ? userDetail.getOrCrash() : '',
-      userName: userDetail.userName.isValid() ? userDetail.getOrCrash() : '',
+      teamName: userDetail.teamName.getOrCrash(),
+      favouriteEplTeam: userDetail.favouriteEplTeam.getOrCrash(),
+      userName: userDetail.userName.getOrCrash(),
     );
   }
 
