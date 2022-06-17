@@ -113,11 +113,17 @@ const routes = [
     component: () => import("../components/ForgotPasswordComponent.vue"),
   },
 
-  // reset password
+  // admin reset password
   {
     path: "/resetPassword/:token",
     name: "reset-password",
     component: () => import("../components/ResetPasswordComponent.vue"),
+  },
+  // user reset password
+  {
+    path: "/passwordReset/:token",
+    name: "user-reset-password",
+    component: () => import("../components/UserResetPasswordComponent.vue"),
   },
 
   // 404 page should always be the last route add routes above this

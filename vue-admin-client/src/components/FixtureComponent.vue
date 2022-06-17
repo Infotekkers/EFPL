@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO:Add Result Display -->
   <div class="fixture-main-container">
     <!-- teams loading -->
     <div v-if="isTeamLoading == true" class="main-spinner-container">
@@ -111,7 +110,7 @@
         <div @click="editMatch">
           <img :src="editIcon.path" :alt="editIcon.alt" class="small-icon" />
         </div>
-        <div @click="deleteMatch">
+        <div @click="deleteMatch" data-cp="delete-match">
           <img
             :src="deleteIcon.path"
             :alt="deleteIcon.alt"
@@ -420,6 +419,9 @@ export default {
         });
       }
     },
+  },
+  beforeMount() {
+    console.log(this.fixture);
   },
 };
 </script>

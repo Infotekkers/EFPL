@@ -50,214 +50,27 @@
 
     <!-- Sorter Header -->
     <div class="teams-sorter-header">
-      <!-- ID -->
-      <!-- <div class="teams-id-sorter">
-          <span @click="sortByID(-1)">
-            <img
-              :src="sortDownIcon.path"
-              :alt="sortDownIcon.alt"
-              class="extra-small-icon"
-            />
-          </span>
-          <span class="sorter-content">
-            {{ $t("ID") }}
-          </span>
-          <span @click="sortByID(1)">
-            <img
-              :src="sortUpIcon.path"
-              :alt="sortUpIcon.alt"
-              class="extra-small-icon"
-            />
-          </span>
-        </div> -->
-      <!-- ID -->
-      <!-- //////////////////////////////////////// -->
-      <!-- Logo -->
-      <div class="teams-point-sorter">
-        <span @click="sortByLogo(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-        <span class="sorter-content">
-          {{ $t("Logo") }}
-        </span>
-        <span @click="sortByLogo(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
+      <div class="teams-id-header">
+        {{ $t("ID") }}
       </div>
-      <!-- Name -->
-      <!-- Name -->
-      <div class="teams-point-sorter">
-        <span @click="sortByName(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-        <span class="sorter-content">
-          {{ $t("Team") }}
-        </span>
-        <span @click="sortByName(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- Name -->
-      <!-- Played Games -->
-      <div class="teams-point-sorter">
-        <span @click="sortByPoint(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-        /></span>
-        <span class="sorter-content"> {{ $t("Played Game") }}</span>
-        <span @click="sortByPoint(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- Played Games -->
-      <!-- won -->
-      <div class="teams-point-sorter">
-        <span @click="sortByWon(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-        /></span>
-        <span class="sorter-content"> {{ $t("Won") }}</span>
-        <span @click="sortByWon(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- Won -->
-      <!-- Lost -->
-      <div class="teams-point-sorter">
-        <span @click="sortByLost(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-        /></span>
-        <span class="sorter-content"> {{ $t("Lost") }}</span>
-        <span @click="sortByLost(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- Lost -->
-      <!-- Draw -->
-      <div class="teams-point-sorter">
-        <span @click="sortByDraw(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-        /></span>
-        <span class="sorter-content"> {{ $t("Draw") }}</span>
-        <span @click="sortByDraw(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- Draw -->
-      <!-- Goal For -->
-      <div class="teams-point-sorter">
-        <span @click="sortByFor(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-        /></span>
-        <span class="sorter-content"> {{ $t("GF") }}</span>
-        <span @click="sortByFor(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- Goal For -->
-      <!-- Goal Against -->
-      <div class="teams-point-sorter">
-        <span @click="sortByAgainst(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-        /></span>
-        <span class="sorter-content"> {{ $t("GA") }}</span>
-        <span @click="sortByAgainst(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- Goal Against -->
-      <!-- Goal Differnce -->
-      <div class="teams-point-sorter">
-        <span @click="sortByGD(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-        /></span>
-        <span class="sorter-content"> {{ $t("GD") }}</span>
-        <span @click="sortByGD(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- Goal Differnce -->
-      <!-- Points -->
-      <div class="teams-point-sorter">
-        <span @click="sortByPoint(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-        /></span>
-        <span class="sorter-content"> {{ $t("Point") }}</span>
-        <span @click="sortByPoint(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- Points -->
+
+      <div class="teams-logo-header"></div>
+
+      <div class="teams-team-header">{{ $t("Teams") }}</div>
+
+      <div class="teams-gf-header">{{ $t("GF") }}</div>
+
+      <div class="teams-ga-header">{{ $t("GA") }}</div>
+
+      <div class="teams-gd-header">{{ $t("GD") }}</div>
+
+      <div class="teams-won-header">{{ $t("Won") }}</div>
+
+      <div class="teams-draw-header">{{ $t("Draw") }}</div>
+
+      <div class="teams-lost-header">{{ $t("Lost") }}</div>
+
+      <div class="teams-pts-header">{{ $t("Points") }}</div>
     </div>
     <!-- Sorter Header -->
     <div
@@ -434,7 +247,6 @@ export default {
   color: var(--neutral-100);
   display: flex;
 }
-
 .teams-add-new > div {
   width: 20px;
   height: 20px;
@@ -444,70 +256,32 @@ export default {
   place-items: center;
   margin-right: 6px;
 }
+
 .teams-sorter-header {
-  padding: 0 12px;
-  margin: var(--spacing-xlarge) 0 var(--spacing-regular) 0;
   display: flex;
-  justify-content: space-between;
-  font-weight: 500;
-  font-size: 15px;
-  color: var(--neutral-700);
-}
-.teams-id-sorter,
-.teams-name-sorter,
-.teams-point-sorter,
-.teams-stadium-sorter,
-.teams-founded-sorter {
-  display: flex;
-  align-items: center;
-}
-.teams-id-sorter {
-  width: 5%;
-  min-width: 45px;
-}
-.sorter-content {
-  margin-right: 8px;
-  margin-left: 8px;
-}
-.teams-id-sorter > span,
-.teams-name-sorter > span,
-.teams-city-sorter > span,
-.teams-stadium-sorter > span,
-.teams-founded-sorter > span {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-.teams-logo-sorter {
-  width: 60px;
-}
-.teams-name-sorter {
-  width: 20%;
-  min-width: 130px;
-}
-.teams-point-sorter {
-  min-width: 100px;
-  width: 17%;
-}
-.teams-stadium-sorter {
-  width: 18%;
-}
-.teams-founded-sorter {
-  width: 8%;
-}
-.teams-controls-sorter {
-  width: 10%;
-}
-.no-teams-container {
-  margin-top: var(--spacing-xlarge);
   width: 100%;
-  min-height: 200px;
-  display: grid;
-  place-items: center;
-  font-weight: bold;
-  font-size: var(--text-medium);
+  margin-top: 24px;
+}
+.teams-id-header {
+  width: 5%;
+}
+.teams-team-header {
+  width: 42.5%;
+}
+.teams-won-header {
+  width: 7.5%;
+}
+.teams-draw-header {
+  width: 7.5%;
 }
 
+.teams-gd-header,
+.teams-pts-header,
+.teams-ga-header,
+.teams-gf-header,
+.teams-lost-header {
+  width: 7.5%;
+}
 * {
   padding: 0;
   margin: 0;

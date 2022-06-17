@@ -24,7 +24,7 @@
   "forgot password": "Forgot Password",
   "Reset link will be sent to the email you enter below": "Reset link will be sent to the email you enter below",
   "Login": "Login",
-  "Login Page": "Login Page",
+  "Login Page": "Login",
   "Logout": "LogOut",
   "Select language": "Select Language",
   "English": "English",
@@ -113,5 +113,14 @@
   "Penalities Missed": "Penalities Missed",
   "Penalities Saved": "Penalities Saved",
   "Saves": "Saves",
-  "Own Goal": "Own Goal"
+  "Own Goal": "Own Goal",
+
+  "__comment_dash": "Dashboard Translations",
+  "GF": "GF",
+  "GD": "GD",
+  "GA": "GA",
+  "Won": "Won",
+  "Draw": "Draw",
+  "Lost": "Lost",
+  "Points": "Points"
 }

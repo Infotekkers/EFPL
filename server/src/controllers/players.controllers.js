@@ -1,7 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const Fixture = require("../models/Fixtures");
+const GameWeek = require("../models/GameWeek");
 const PlayerModel = require("../models/Player");
 const Teams = require("../models/Teams");
+const sumEplPlayerScore = require("../utils/helpers").sumEplPlayerScore;
 const { makeFilePlayer } = require("../utils/helpers");
 
 const addPlayer = asyncHandler(async (req, res) => {
@@ -13,25 +15,16 @@ const addPlayer = asyncHandler(async (req, res) => {
     availability,
     playerImage,
     logoName,
+    playerNameAmh,
   } = req.body;
 
   const verifyPlayer = await PlayerModel.findOne({
     playerName: req.body.playerName,
   });
 
-  const teamId = await Teams.findOne({ teamName: eplTeamId });
+  // const teamId = await Teams.findOne({ teamName: eplTeamId });
 
-  const id = teamId.teamId;
-
-  console.log({
-    playerName,
-    eplTeamId,
-    position,
-    currentPrice,
-    availability,
-    playerImage,
-    logoName,
-  });
+  // const id = teamId.teamId;
 
   // If player does not exist
   if (!verifyPlayer) {
@@ -48,8 +41,13 @@ const addPlayer = asyncHandler(async (req, res) => {
           currentPrice,
           availability,
           playerImage: playerImagePath,
-          eplTeamId: id,
+          eplTeamId: eplTeamId,
+          playerNameAmh,
         }).save();
+
+        const io = require("../../server");
+        io.emit("playerUpdated");
+
         res.status(201).send(`${playerName} added successfully`);
       }
       // if file is not saved
@@ -66,7 +64,8 @@ const addPlayer = asyncHandler(async (req, res) => {
         currentPrice,
         availability,
         playerImage: "",
-        eplTeamId: id,
+        eplTeamId: eplTeamId,
+        playerNameAmh,
       }).save();
       res.status(201).send(`${playerName} added successfully`);
     }
@@ -80,12 +79,14 @@ const addPlayer = asyncHandler(async (req, res) => {
 const updatePlayer = asyncHandler(async (req, res) => {
   const {
     playerName,
+    emitSocket,
     eplTeamId,
     availability,
     position,
     playerImage,
     logoName,
     currentPrice,
+    playerNameAmh,
   } = req.body;
 
   let newData;
@@ -105,6 +106,7 @@ const updatePlayer = asyncHandler(async (req, res) => {
       eplTeamId,
       availability,
       position,
+      playerNameAmh,
     };
   } else {
     newData = {
@@ -113,10 +115,11 @@ const updatePlayer = asyncHandler(async (req, res) => {
       availability,
       position,
       currentPrice,
+      playerNameAmh,
     };
   }
 
-  if (playerImage !== "") {
+  if (playerImage && playerImage !== "") {
     const filePath = makeFilePlayer(playerImage, logoName);
 
     if (filePath !== "") {
@@ -135,14 +138,19 @@ const updatePlayer = asyncHandler(async (req, res) => {
         $set: newData,
       }
     );
+
+    if (emitSocket !== 0) {
+      const io = require("../../server");
+      io.emit("playerUpdated");
+    }
     res.status(201).send(` ${playerName} Info updated successful`);
   } else {
-    return res.status(404).send(`player with ${playerName}exist`);
+    return res.status(404).send(`player with ${playerName} exist`);
   }
 });
 
 const updateScore = asyncHandler(async (req, res) => {
-  const { score } = req.body;
+  const { score, emitSocket } = req.body;
   const verifyPlayer = await PlayerModel.findOne({
     playerId: req.params.playerId,
   });
@@ -157,6 +165,12 @@ const updateScore = asyncHandler(async (req, res) => {
     verifyPlayer.score = scorearray;
 
     await verifyPlayer.save();
+
+    if (emitSocket !== 0) {
+      const io = require("../../server");
+      io.emit("playerUpdated");
+    }
+
     res.status(201).send(`Score for Gameweek update successful`);
   } else {
     res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
@@ -164,7 +178,7 @@ const updateScore = asyncHandler(async (req, res) => {
 });
 
 const addScore = asyncHandler(async (req, res) => {
-  const { score } = req.body;
+  const { score, emitSocket } = req.body;
   const verifyPlayer = await PlayerModel.findOne({
     playerId: req.params.playerId,
   });
@@ -177,6 +191,11 @@ const addScore = asyncHandler(async (req, res) => {
         },
       }
     );
+    if (emitSocket !== 0) {
+      const io = require("../../server");
+      io.emit("playerUpdated");
+    }
+
     res.status(201).send(`Score added successfully`);
   } else {
     res.status(404).send(`player ${verifyPlayer.playerName} doesn exist`);
@@ -184,7 +203,13 @@ const addScore = asyncHandler(async (req, res) => {
 });
 
 const getPlayer = asyncHandler(async (req, res) => {
-  const player = await PlayerModel.find({ playerId: req.params.playerId });
+  const player = await PlayerModel.find({
+    playerId: req.params.playerId,
+  }).lean();
+
+  const team = await Teams.find({ teamName: player[0].eplTeamId });
+
+  player[0].teamLogoUrl = team[0]?.teamLogo;
 
   res.send(player);
 });
@@ -244,9 +269,104 @@ const deletePlayer = asyncHandler(async (req, res) => {
     playerId: req.params.playerId,
   });
 
-  console.log(currentPlayer);
+  const io = require("../../server");
+  io.emit("playerUpdated");
   await PlayerModel.deleteOne({ playerId: req.params.playerId });
   res.send(`Player ${currentPlayer[0].playerName} removed`);
+});
+
+const getPlayersByPosition = asyncHandler(async (req, res) => {
+  const position = req.params.position.toUpperCase();
+
+  const allPlayersInPosition = await PlayerModel.find({ position: position })
+    .select("-_id -__v -history")
+    .sort("playerName");
+
+  const allPlayersInPositionFormatted = [];
+
+  const allTeams = await Teams.find();
+  const gameWeek = await GameWeek.findOne({ status: "active" }).select(
+    "gameWeekNumber"
+  );
+
+  let nextGameWeekNumber = 1;
+  if (gameWeek) {
+    nextGameWeekNumber = gameWeek.gameWeekNumber;
+  }
+
+  for (let i = 0; i < allPlayersInPosition.length; i++) {
+    const currentTeam = allTeams.filter(
+      (team) => team.teamName === allPlayersInPosition[i].eplTeamId
+    );
+
+    const teamName = allPlayersInPosition[i].eplTeamId;
+
+    const currentTeamFixtureHome = await Fixture.find({
+      homeTeam: allPlayersInPosition[i].eplTeamId,
+      gameweekId: { $gt: nextGameWeekNumber },
+    })
+      .select("homeTeam awayTeam gameweekId")
+      .limit(4);
+
+    const currentTeamFixtureAway = await Fixture.find({
+      awayTeam: teamName,
+      gameweekId: { $gt: nextGameWeekNumber },
+    })
+      .select("homeTeam awayTeam gameweekId")
+      .limit(4);
+
+    const currentTeamFixture = [
+      ...new Set([...currentTeamFixtureHome, ...currentTeamFixtureAway]),
+    ];
+
+    currentTeamFixture.sort((a, b) => a.gameweekId - b.gameweekId);
+
+    const upComingFixture = [];
+
+    for (let i = 0; i < currentTeamFixture.length; i++) {
+      if (currentTeamFixture[i].homeTeam.toString() === teamName) {
+        // get team logo
+        const teamInfo = await Teams.findOne({
+          teamName: currentTeamFixture[i].awayTeam,
+        }).select("teamLogo");
+
+        upComingFixture.push({
+          teamLogo: teamInfo.teamLogo,
+          teamInfo: currentTeamFixture[i].awayTeam.toString() + "+-" + "H",
+        });
+      } else {
+        // get team logo
+        const teamInfo = await Teams.findOne({
+          teamName: currentTeamFixture[i].homeTeam,
+        }).select("teamLogo");
+
+        upComingFixture.push({
+          teamInfo: currentTeamFixture[i].homeTeam.toString() + "+-" + "A",
+          teamLogo: teamInfo.teamLogo,
+        });
+      }
+    }
+
+    const currentPlayerInfo = {
+      playerName: allPlayersInPosition[i].playerName,
+      eplTeamId: allPlayersInPosition[i].eplTeamId,
+      eplTeamLogo: currentTeam.length > 0 ? currentTeam[0].teamLogo : "",
+      currentPrice: allPlayersInPosition[i].currentPrice,
+      position: allPlayersInPosition[i].position,
+      playerId: allPlayersInPosition[i].playerId,
+      score: sumEplPlayerScore(allPlayersInPosition[i].score),
+      availability: allPlayersInPosition[i].availability
+        ? allPlayersInPosition[i].availability
+        : { injuryStatus: "", injuryMessage: "" },
+
+      upComingFixtures: upComingFixture,
+      multiplier: allPlayersInPosition[i].multiplier,
+    };
+
+    allPlayersInPositionFormatted.push(currentPlayerInfo);
+  }
+
+  res.status(200).send(allPlayersInPositionFormatted);
 });
 
 module.exports = {
@@ -258,4 +378,7 @@ module.exports = {
   deletePlayer,
   updateScore,
   addScore,
+
+  // New
+  getPlayersByPosition,
 };

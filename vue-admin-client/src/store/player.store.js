@@ -112,16 +112,16 @@ export default {
       const playerId = store.state.Player.editPlayerId;
 
       const verifyChange = store.state.Player.allPlayers.filter((player) => {
-        return (
-          player.playerName == updatedPlayer.playerName &&
+        return player.playerName == updatedPlayer.playerName &&
           player.eplTeamId == updatedPlayer.eplTeamId &&
           player.position == updatedPlayer.position &&
           player.currentPrice == updatedPlayer.currentPrice &&
-          player.availability.injuryStatus ==
-            updatedPlayer.availability.injuryStatus &&
-          player.availability.injuryMessage ==
-            updatedPlayer.availability.injuryMessage
-        );
+          player.availability
+          ? player.availability.injuryStatus ==
+              updatedPlayer.availability.injuryStatus &&
+              player.availability.injuryMessage ==
+                updatedPlayer.availability.injuryMessage
+          : false;
       });
 
       if (!verifyChange.length > 0 || store.state.Player.imageChanged) {

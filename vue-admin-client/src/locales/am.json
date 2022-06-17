@@ -113,5 +113,14 @@
   "Penalities Missed": "የተሳቱ ፍፁም ቅጣቶች",
   "Penalities Saved": "የተመለሱ ፍፁም ቅጣቶች",
   "Saves": "የዳኑ ኳሶች",
-  "Own Goal": "የራስ ግብ"
+  "Own Goal": "የራስ ግብ",
+
+  "__comment_dash": "Dashboard Translations",
+  "GF": "GF",
+  "GD": "GD",
+  "GA": "GA",
+  "Won": "Won",
+  "Draw": "Draw",
+  "Lost": "Lost",
+  "Points": "Points"
 }

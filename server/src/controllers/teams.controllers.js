@@ -15,6 +15,7 @@ const addTeam = asyncHandler(async (req, res) => {
     foundedIn,
     stadiumCapacity,
     teamCoach,
+    teamNameAmh,
   } = req.body;
 
   const verifyTeam = await TeamModel.findOne({
@@ -35,6 +36,7 @@ const addTeam = asyncHandler(async (req, res) => {
           stadiumCapacity,
           foundedIn,
           teamCoach,
+          teamNameAmh,
         }).save();
         res.status(201).send(`${teamName} added Successfully `);
       }
@@ -49,6 +51,7 @@ const addTeam = asyncHandler(async (req, res) => {
         stadiumCapacity,
         foundedIn,
         teamCoach,
+        teamNameAmh,
       }).save();
       res.status(201).send(`${teamName} added Successfully `);
     }
@@ -58,7 +61,7 @@ const addTeam = asyncHandler(async (req, res) => {
 });
 
 const getTeams = asyncHandler(async (req, res) => {
-  const team = await TeamModel.find();
+  const team = await TeamModel.find().sort("teamName");
   res.status(200).send(team);
 });
 
@@ -68,14 +71,24 @@ const getTeam = asyncHandler(async (req, res) => {
 });
 
 const updateTeam = asyncHandler(async (req, res) => {
-  const { teamName, teamCity, teamStadium, teamLogo, logoName, teamCoach } =
-    req.body;
+  console.log("Here");
+
+  const {
+    teamName,
+    teamCity,
+    teamStadium,
+    teamLogo,
+    logoName,
+    teamCoach,
+    teamNameAmh,
+  } = req.body;
 
   const newData = {
     teamName,
     teamCity,
     teamStadium,
     teamCoach,
+    teamNameAmh,
   };
 
   // if image is changed
@@ -98,6 +111,13 @@ const updateTeam = asyncHandler(async (req, res) => {
         $set: newData,
       }
     );
+    await Player.updateMany(
+      {
+        eplTeamId: verifyTeam.teamName,
+      },
+      { eplTeamId: newData.teamName }
+    );
+
     res.status(201).send(`${teamName} Info updated Successfully `);
   } else {
     res.status(404).send(`${teamName} EXIST.`);

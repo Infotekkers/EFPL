@@ -8,7 +8,7 @@ part 'util_event.dart';
 part 'util_state.dart';
 part 'util_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class UtilBloc extends Bloc<UtilEvent, UtilState> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -18,11 +18,16 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
         ) {
     on<_SetDefaultLocale>((event, emit) async {
       final SharedPreferences prefs = await _prefs;
-      String defaultLocale =
-          prefs.getString("lang")!.isEmpty ? 'en' : prefs.getString("lang")!;
+      String defaultLocale = "en";
+      try {
+        defaultLocale =
+            prefs.getString("lang")!.isEmpty ? 'en' : prefs.getString("lang")!;
+      } catch (e) {
+        // print(e);
+      }
 
       emit(
-        UtilState(
+        state.copyWith(
           locale: Locale(defaultLocale),
         ),
       );
@@ -33,15 +38,13 @@ class UtilBloc extends Bloc<UtilEvent, UtilState> {
 
       prefs.setString("lang", event.newLocale.toString());
 
-      emit(UtilState(locale: event.newLocale));
+      emit(state.copyWith(locale: event.newLocale));
     });
 
     on<_ClearLocale>((event, emit) {
-      emit(
-        const UtilState(
-          locale: Locale("en"),
-        ),
-      );
+      emit(state.copyWith(
+        locale: const Locale("en"),
+      ));
     });
   }
 }

@@ -36,3 +36,12 @@ abstract class ValueObject<T> {
   @override
   String toString() => 'Value($value)';
 }
+
+class Token extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+  factory Token(String tokenStr) {
+    return Token._(right(tokenStr));
+  }
+  const Token._(this.value);
+}

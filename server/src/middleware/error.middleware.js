@@ -12,7 +12,7 @@ const errorHandler = (err, req, res, next) => {
   };
 
   res.status(errorObject.status).json(processErrorMessage(errorObject));
-
+  // console.log(err);
   printConsole(
     {
       data: errorObject.message,

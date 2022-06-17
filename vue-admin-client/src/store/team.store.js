@@ -294,8 +294,6 @@ export default {
         });
       }
     },
-
-    // TODO:Improve filter
     filterByTerm(context, filterTerm) {
       // reset previous filter result
       store.state.Team.allTeams = store.state.Team.allTeamsUnfiltered;
@@ -370,7 +368,7 @@ export default {
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
-            notificationMessage: err.response.data,
+            notificationMessage: err.response.data.message,
           });
         });
     },
@@ -397,12 +395,14 @@ export default {
 
     async updateTeam(context, updatedTeam) {
       const teamId = store.state.Team.editTeamId;
+
       const verifyChange = store.state.Team.allTeams.filter((team) => {
         return (
           team.teamName == updatedTeam.teamName &&
           team.teamCity == updatedTeam.teamCity &&
           team.teamStadium == updatedTeam.teamStadium &&
-          team.teamCoach == updatedTeam.teamCoach
+          team.teamCoach == updatedTeam.teamCoach &&
+          team.teamNameAmh == updatedTeam.teamNameAmh
         );
       });
 
@@ -424,7 +424,9 @@ export default {
               notificationMessage: err.response.data,
             });
           });
-      } else {
+      }
+      // no change
+      else {
         store.dispatch("Global/setNotificationInfo", {
           showNotification: true,
           notificationType: "warning",

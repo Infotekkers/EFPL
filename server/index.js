@@ -25,6 +25,7 @@ const gameWeekRoutes = require("./src/routes/gameWeek.routes");
 const customLeagueRoutes = require("./src/routes/customLeague.routes");
 const adminAuthRouter = require("./src/routes/adminAuth.routes");
 const backupRouter = require("./src/routes/backup.routes");
+const EFPLStatsRouter = require("./src/routes/EFPLStats.routes");
 
 // Import Middleware
 const errorMiddleware = require("./src/middleware/error.middleware");
@@ -37,6 +38,10 @@ app.use(cors());
 // Add Rate Limit
 const rateLimiter = require("./src/config/rate_config");
 app.use(rateLimiter);
+
+app.get("/test", (res, req) => {
+  res.send("Live");
+});
 
 // Serve static files
 app.use("/uploads/", express.static(path.join(__dirname, "/uploads")));
@@ -51,6 +56,8 @@ app.use("/user", userRouter);
 app.use("/customLeagues", customLeagueRoutes);
 app.use("/admin", adminAuthRouter);
 app.use("/backup", backupRouter);
+app.use("/backup", backupRouter);
+app.use("/efpl", EFPLStatsRouter);
 
 // Run populate scripts
 // populate.addTestPlayer();

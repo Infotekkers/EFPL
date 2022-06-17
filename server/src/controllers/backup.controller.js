@@ -28,6 +28,7 @@ const verifySeasonStatus = asyncHandler(async (req, res) => {
 
 // export data to legacy db
 const backup = asyncHandler(async (req, res) => {
+  // TODO:Make Fixtures Deleted with team
   // backup type
   const backupType = req.params.type;
 
@@ -170,13 +171,10 @@ const backup = asyncHandler(async (req, res) => {
   if (backupType === "complete") {
     // // Delete teams
     // await Teams.deleteMany();
-
     // // delete players
     // await Players.deleteMany();
-
     // // delete fixtures
     // await Fixture.deleteMany();
-    console.log("DELETINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
   }
 
   if (

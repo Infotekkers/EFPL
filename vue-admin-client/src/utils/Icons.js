@@ -111,6 +111,16 @@ const errorIcon = {
   alt: "Error",
 };
 
+const passwordVisibleIcon = {
+  path: require("../assets/icons/eye-icon.svg"),
+  alt: "Show password",
+};
+
+const hiddenPasswordIcon = {
+  path: require("../assets/icons/eye-closed-icon.svg"),
+  alt: "Hide password",
+};
+
 module.exports = {
   playIcon,
   pauseIcon,
@@ -142,4 +152,7 @@ module.exports = {
   successIcon,
   warningIcon,
   errorIcon,
+
+  passwordVisibleIcon,
+  hiddenPasswordIcon,
 };
