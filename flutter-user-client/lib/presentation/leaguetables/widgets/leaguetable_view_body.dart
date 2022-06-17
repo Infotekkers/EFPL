@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/leagueTable/leaguetable_bloc.dart';
+import 'package:efpl/application/util/util_bloc.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/core/widgets/bouncing_ball_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,7 +36,7 @@ class LeagueTableViewBody extends StatelessWidget {
             ),
           ),
           body: const Center(
-            child: Text("Failure"),
+            child: Text("Something Went Wrong"),
           ),
         ),
         loadInProgress: (_) => const BouncingBallLoadingIndicator(),
@@ -117,7 +119,28 @@ class LeagueTableViewBody extends StatelessWidget {
                                   width: 8,
                                 ),
                                 Text(
-                                  "${state.leagueTable[index].teamName.getOrCrash().split(" ")[0][0]}${state.leagueTable[index].teamName.getOrCrash().split(" ")[1][0]}",
+                                  getIt<UtilBloc>().state.locale.languageCode ==
+                                          "am"
+                                      ? (state.leagueTable[index].teamNameAmh
+                                                      .getOrCrash()
+                                                      .split(" "))
+                                                  .length >
+                                              1
+                                          ? state.leagueTable[index].teamNameAmh
+                                                  .getOrCrash()
+                                                  .split(" ")[0][0] +
+                                              state.leagueTable[index]
+                                                  .teamNameAmh
+                                                  .getOrCrash()
+                                                  .split(" ")[1][0]
+                                          : state.leagueTable[index].teamNameAmh
+                                                  .getOrCrash()
+                                                  .split(" ")[0][0] +
+                                              state.leagueTable[index]
+                                                  .teamNameAmh
+                                                  .getOrCrash()
+                                                  .split(" ")[0][1]
+                                      : "${state.leagueTable[index].teamName.getOrCrash().split(" ")[0][0]}${state.leagueTable[index].teamName.getOrCrash().split(" ")[1][0]}",
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 16,

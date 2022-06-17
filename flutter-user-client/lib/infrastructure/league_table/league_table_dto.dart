@@ -13,6 +13,7 @@ abstract class LeagueTableDto implements _$LeagueTableDto {
 
   const factory LeagueTableDto({
     required String teamName,
+    required String teamNameAmh,
     required String teamLogo,
     required int teamPoint,
     required int won,
@@ -29,6 +30,7 @@ abstract class LeagueTableDto implements _$LeagueTableDto {
   LeagueTable toDomain() {
     return LeagueTable(
       teamName: TeamName(value: teamName),
+      teamNameAmh: TeamName(value: teamNameAmh),
       teamLogo: TeamLogo(value: teamLogo),
       teamPoint: TeamPoint(value: teamPoint),
       won: TeamWon(value: won),

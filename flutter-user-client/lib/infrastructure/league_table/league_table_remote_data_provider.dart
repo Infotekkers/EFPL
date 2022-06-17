@@ -30,6 +30,7 @@ class LeagueTableRemoteDataProvider {
           // print("leagueTableJson $leagueTableJson");
           var newJson = {
             "teamName": leagueTableJson['teamName'],
+            "teamNameAmh": leagueTableJson['teamNameAmh'],
             "teamLogo": leagueTableJson['teamLogo'],
             "teamPoint": leagueTableJson['teamPosition']['teamPoint'] ?? 0,
             "won": leagueTableJson['teamPosition']['won'] ?? 0,

@@ -25,7 +25,7 @@ class PublicHome extends StatelessWidget {
             backgroundColor: Colors.blue[50],
             iconTheme: IconThemeData(color: Colors.blue[900]),
             elevation: 0,
-            toolbarHeight: 50,
+            toolbarHeight: 45,
             bottom: TabBar(
               unselectedLabelColor: const Color.fromARGB(255, 144, 201, 248),
               labelColor: Colors.blue[900],
@@ -57,7 +57,7 @@ class PublicHome extends StatelessWidget {
               ],
             ),
             title: Container(
-              margin: const EdgeInsets.fromLTRB(32, 32, 12, 32),
+              margin: const EdgeInsets.fromLTRB(32, 24, 12, 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -29,8 +29,6 @@ class FixtureBloc extends Bloc<FixtureEvent, FixtureState> {
           gameWeekId: state.gameWeekId,
         );
 
-        print(failureOrSuccess);
-
         final List<Fixture> allFixtures = failureOrSuccess.fold(
           (l) => l[0],
           (r) => r,

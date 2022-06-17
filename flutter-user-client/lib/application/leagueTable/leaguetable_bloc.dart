@@ -26,6 +26,7 @@ class LeagueTableBloc extends Bloc<LeagueTableEvent, LeagueTableState> {
     emit(const LeagueTableState.loadInProgress());
 
     final failureOrSuccess = await iLeagueTableRepository.getTeams();
+    print(failureOrSuccess);
     failureOrSuccess.fold(
       (failure) => emit(
         LeagueTableState.loadFailure(failure),
