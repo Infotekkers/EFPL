@@ -1,4 +1,4 @@
-import 'package:efpl/presentation/colors.dart';
+import 'package:efpl/presentation/core/auth_locale_widget.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
 import 'package:efpl/presentation/leaguetables/leaguetable_view.dart';
 import 'package:efpl/presentation/stats/epl_stats_view.dart';
@@ -25,7 +25,7 @@ class PublicHome extends StatelessWidget {
             backgroundColor: Colors.blue[50],
             iconTheme: IconThemeData(color: Colors.blue[900]),
             elevation: 0,
-            toolbarHeight: 80,
+            toolbarHeight: 50,
             bottom: TabBar(
               unselectedLabelColor: const Color.fromARGB(255, 144, 201, 248),
               labelColor: Colors.blue[900],
@@ -33,31 +33,31 @@ class PublicHome extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 // color: Colors.blue[600],
               ),
-              tabs: [
+              tabs: const [
                 // Fixtures
                 Tab(
-                  child: const Icon(
+                  child: Icon(
                     MdiIcons.calendarMonth,
                   ),
                 ),
 
                 // EPL Stats
                 Tab(
-                  child: const Icon(
+                  child: Icon(
                     Icons.leaderboard,
                   ),
                 ),
 
                 // Table
                 Tab(
-                  child: const Icon(
+                  child: Icon(
                     Icons.table_chart,
                   ),
                 ),
               ],
             ),
             title: Container(
-              margin: EdgeInsets.fromLTRB(32, 32, 12, 32),
+              margin: const EdgeInsets.fromLTRB(32, 32, 12, 32),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -127,11 +127,20 @@ class PublicHome extends StatelessWidget {
               ),
             ),
           ),
-          body: const TabBarView(
-            children: [
-              FixturesView(),
-              EPLStatsView(),
-              LeagueTableView(),
+          body: Stack(
+            children: const [
+              TabBarView(
+                children: [
+                  FixturesView(),
+                  EPLStatsView(),
+                  LeagueTableView(),
+                ],
+              ),
+              Positioned(
+                right: 10,
+                bottom: 10,
+                child: AuthLocaleWidget(),
+              )
             ],
           ),
         ),
