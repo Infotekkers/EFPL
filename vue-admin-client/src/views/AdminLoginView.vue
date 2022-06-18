@@ -184,7 +184,7 @@ export default {
         store.dispatch("Global/setNotificationInfo", {
           showNotification: true,
           notificationType: "error",
-          notificationMessage: "Invalid Password",
+          notificationMessage: "Invalid Password Format",
         });
       }
       this.isLoading = false;
