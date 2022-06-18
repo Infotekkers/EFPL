@@ -1,5 +1,6 @@
 <template>
   <div class="team-container">
+    <!-- 
     <div
       class="team-highlighter"
       :class="
@@ -35,7 +36,7 @@
     <div class="team-loss-container">{{ team.teamPosition.Draw }}</div>
     <div class="team-point-container">
       {{ team.teamPosition.teamPoint }}
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
