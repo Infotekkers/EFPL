@@ -81,6 +81,19 @@ describe("E2E Test", () => {
     cy.get(".main-modal-close").click();
   });
 
+  it("Edits team", () => {
+    cy.get('[class="teams-container"]')
+      .contains("Testers")
+      .parent()
+      .find('[data-cp="edit-team"]')
+      .click();
+    cy.get('input[name="teamStadium"]')
+      .clear({ force: true })
+      .type("Legit Big Awesome Stadium");
+    cy.get(".main-button-primary").click();
+    cy.get(".main-modal-close").click();
+  });
+
   it("Removes team", () => {
     cy.get('[class="teams-container"]')
       .contains("Testers")
@@ -88,30 +101,6 @@ describe("E2E Test", () => {
       .find('[data-cp="delete-team"]')
       .click();
   });
-
-  // it("Edits team", () => {
-  //   cy.get('[class="teams-container"]')
-  //     .contains("Addis Ababa City F.C")
-  //     .parent()
-  //     .find('[data-cp="edit-team"]')
-  //     .click();
-  //   cy.get('input[name="teamStadium"]')
-  //     .clear({ force: true })
-  //     .type("Abebe Bikila Stadium");
-  //   cy.get(".main-button-primary").click();
-  //   cy.get(".main-modal-close").click();
-
-  //   cy.get('[class="teams-container"]')
-  //     .contains("Addis Ababa City F.C")
-  //     .parent()
-  //     .find('[data-cp="edit-team"]')
-  //     .click();
-  //   cy.get('input[name="teamStadium"]')
-  //     .clear({ force: true })
-  //     .type("Addis Ababa Stadium");
-  //   cy.get(".main-button-primary").click();
-  //   cy.get(".main-modal-close").click();
-  // });
 
   it("Visits fixtures", () => {
     cy.get('[href="/admin/fixtures"]').click();
