@@ -64,6 +64,7 @@
 
 <script>
 import { passwordVisibleIcon, hiddenPasswordIcon } from "@/utils/Icons";
+import store from "../store/index";
 
 export default {
   name: "UserResetPasswordComponent",
@@ -83,7 +84,11 @@ export default {
   methods: {
     async handleSubmit() {
       if (!(this.password === this.password_confirm)) {
-        this.error = "Passwords don't match";
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Passwords Don't Match",
+        });
       } else {
         this.$store.dispatch("userResetPassword", this.password);
       }

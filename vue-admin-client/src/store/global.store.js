@@ -36,9 +36,7 @@ export default {
           : 6000);
     },
     SET_SHOW_SIDEBAR(state, payload) {
-      console.log(payload);
       state.showSidebar = payload.showSidebar;
-      console.log(state.showSidebar);
     },
   },
   actions: {

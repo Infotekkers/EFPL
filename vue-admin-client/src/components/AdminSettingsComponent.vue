@@ -27,9 +27,9 @@
     </button>
     <div v-if="accMenu" class="accMenu">
       <div>
-        <router-link :to="{ name: 'forgot-password' }"
+        <router-link :to="{ name: 'change-password' }"
           ><button class="accLink-1">
-            <h3>{{ $t("Reset Password") }}</h3>
+            <h3>{{ $t("Change Password") }}</h3>
           </button></router-link
         >
       </div>
