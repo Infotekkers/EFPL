@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
@@ -34,8 +36,6 @@ class CustomLeaguesBloc extends Bloc<CustomLeaguesEvent, CustomLeaguesState> {
         isLoading: true,
       ),
     );
-
-    print("here");
 
     final Either<dynamic, List<CustomLeagues>> failureOrSuccess =
         await iCustomLeaguesRepository.getUserCustomLeagues(userId: e.userId);
@@ -97,8 +97,15 @@ class CustomLeaguesBloc extends Bloc<CustomLeaguesEvent, CustomLeaguesState> {
       leagueCode: e.leagueCode,
     );
 
+    bool leaveLeagueSuccess = failureOrSuccess.fold(
+      (l) => false,
+      (r) => true,
+    );
+
     emit(state.copyWith(
       isLoading: false,
+      leaveLeagueSuccess: leaveLeagueSuccess,
+      valueFailureOrSuccess: some(failureOrSuccess),
     ));
   }
 }

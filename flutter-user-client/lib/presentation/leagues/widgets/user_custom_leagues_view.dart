@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:efpl/application/custom_leagues/custom_leagues_bloc.dart';
 import 'package:efpl/application/custom_leagues/join_custom_league_form/join_custom_league_form_bloc.dart';
 import 'package:efpl/domain/custom_leagues/custom_leagues.dart';
@@ -14,7 +15,51 @@ class UserCustomLeaguesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CustomLeaguesBloc, CustomLeaguesState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state.leaveLeagueSuccess) {
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("Hurray");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+          print("\n");
+        }
+
+        // state.valueFailureOrSuccess.fold(
+        //   () {},
+        //   (either) {
+        //     either.fold(
+        //       (failure) {
+        //         failure.maybeMap(
+        //           serverError: () {
+        //             print("Server go brrrr");
+        //           },
+        //           networkError: () {
+        //             print("Network go brrrr");
+        //           },
+        //           orElse: () {},
+        //         );
+        //       },
+        //       (_) {},
+        //     );
+        //   },
+        // );
+      },
       builder: (context, state) {
         return state.isLoading
             ? const Center(
