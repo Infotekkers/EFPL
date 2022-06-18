@@ -2,23 +2,22 @@ import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/settings/value_objects.dart';
 import '../core/value_failures.dart';
 
-Either<ValueFailure<String>, String> validateStringNotEmpty(
-    String teamNameStr) {
-  if (teamNameStr.isNotEmpty) {
-    return right(teamNameStr);
+Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
+  if (input.isNotEmpty) {
+    return right(input);
   } else {
-    return left(ValueFailure.empty(failedValue: teamNameStr));
+    return left(ValueFailure.empty(failedValue: input));
   }
 }
 
 Either<ValueFailure<String>, String> validateMaxStringLength(
-  String teamNameStr,
+  String input,
   int maxLength,
 ) {
-  if (teamNameStr.length <= maxLength) {
-    return right(teamNameStr);
+  if (input.length <= maxLength) {
+    return right(input);
   } else {
     return left(
-        ValueFailure.exceedingLength(failedValue: teamNameStr, max: maxLength));
+        ValueFailure.exceedingLength(failedValue: input, max: maxLength));
   }
 }

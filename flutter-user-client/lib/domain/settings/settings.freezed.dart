@@ -14,14 +14,14 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$UserDetailTearOff {
-  const _$UserDetailTearOff();
+class _$SettingsTearOff {
+  const _$SettingsTearOff();
 
-  _UserDetail call(
+  _Settings call(
       {required UserName userName,
       required TeamName teamName,
       required FavouriteEplTeam favouriteEplTeam}) {
-    return _UserDetail(
+    return _Settings(
       userName: userName,
       teamName: teamName,
       favouriteEplTeam: favouriteEplTeam,
@@ -30,24 +30,23 @@ class _$UserDetailTearOff {
 }
 
 /// @nodoc
-const $UserDetail = _$UserDetailTearOff();
+const $Settings = _$SettingsTearOff();
 
 /// @nodoc
-mixin _$UserDetail {
+mixin _$Settings {
   UserName get userName => throw _privateConstructorUsedError;
   TeamName get teamName => throw _privateConstructorUsedError;
   FavouriteEplTeam get favouriteEplTeam => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UserDetailCopyWith<UserDetail> get copyWith =>
+  $SettingsCopyWith<Settings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserDetailCopyWith<$Res> {
-  factory $UserDetailCopyWith(
-          UserDetail value, $Res Function(UserDetail) then) =
-      _$UserDetailCopyWithImpl<$Res>;
+abstract class $SettingsCopyWith<$Res> {
+  factory $SettingsCopyWith(Settings value, $Res Function(Settings) then) =
+      _$SettingsCopyWithImpl<$Res>;
   $Res call(
       {UserName userName,
       TeamName teamName,
@@ -55,12 +54,12 @@ abstract class $UserDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserDetailCopyWithImpl<$Res> implements $UserDetailCopyWith<$Res> {
-  _$UserDetailCopyWithImpl(this._value, this._then);
+class _$SettingsCopyWithImpl<$Res> implements $SettingsCopyWith<$Res> {
+  _$SettingsCopyWithImpl(this._value, this._then);
 
-  final UserDetail _value;
+  final Settings _value;
   // ignore: unused_field
-  final $Res Function(UserDetail) _then;
+  final $Res Function(Settings) _then;
 
   @override
   $Res call({
@@ -86,10 +85,9 @@ class _$UserDetailCopyWithImpl<$Res> implements $UserDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$UserDetailCopyWith<$Res> implements $UserDetailCopyWith<$Res> {
-  factory _$UserDetailCopyWith(
-          _UserDetail value, $Res Function(_UserDetail) then) =
-      __$UserDetailCopyWithImpl<$Res>;
+abstract class _$SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
+  factory _$SettingsCopyWith(_Settings value, $Res Function(_Settings) then) =
+      __$SettingsCopyWithImpl<$Res>;
   @override
   $Res call(
       {UserName userName,
@@ -98,14 +96,13 @@ abstract class _$UserDetailCopyWith<$Res> implements $UserDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$UserDetailCopyWithImpl<$Res> extends _$UserDetailCopyWithImpl<$Res>
-    implements _$UserDetailCopyWith<$Res> {
-  __$UserDetailCopyWithImpl(
-      _UserDetail _value, $Res Function(_UserDetail) _then)
-      : super(_value, (v) => _then(v as _UserDetail));
+class __$SettingsCopyWithImpl<$Res> extends _$SettingsCopyWithImpl<$Res>
+    implements _$SettingsCopyWith<$Res> {
+  __$SettingsCopyWithImpl(_Settings _value, $Res Function(_Settings) _then)
+      : super(_value, (v) => _then(v as _Settings));
 
   @override
-  _UserDetail get _value => super._value as _UserDetail;
+  _Settings get _value => super._value as _Settings;
 
   @override
   $Res call({
@@ -113,7 +110,7 @@ class __$UserDetailCopyWithImpl<$Res> extends _$UserDetailCopyWithImpl<$Res>
     Object? teamName = freezed,
     Object? favouriteEplTeam = freezed,
   }) {
-    return _then(_UserDetail(
+    return _then(_Settings(
       userName: userName == freezed
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -132,8 +129,8 @@ class __$UserDetailCopyWithImpl<$Res> extends _$UserDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UserDetail implements _UserDetail {
-  const _$_UserDetail(
+class _$_Settings implements _Settings {
+  const _$_Settings(
       {required this.userName,
       required this.teamName,
       required this.favouriteEplTeam});
@@ -147,14 +144,14 @@ class _$_UserDetail implements _UserDetail {
 
   @override
   String toString() {
-    return 'UserDetail(userName: $userName, teamName: $teamName, favouriteEplTeam: $favouriteEplTeam)';
+    return 'Settings(userName: $userName, teamName: $teamName, favouriteEplTeam: $favouriteEplTeam)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserDetail &&
+            other is _Settings &&
             const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality().equals(other.teamName, teamName) &&
             const DeepCollectionEquality()
@@ -170,15 +167,15 @@ class _$_UserDetail implements _UserDetail {
 
   @JsonKey(ignore: true)
   @override
-  _$UserDetailCopyWith<_UserDetail> get copyWith =>
-      __$UserDetailCopyWithImpl<_UserDetail>(this, _$identity);
+  _$SettingsCopyWith<_Settings> get copyWith =>
+      __$SettingsCopyWithImpl<_Settings>(this, _$identity);
 }
 
-abstract class _UserDetail implements UserDetail {
-  const factory _UserDetail(
+abstract class _Settings implements Settings {
+  const factory _Settings(
       {required UserName userName,
       required TeamName teamName,
-      required FavouriteEplTeam favouriteEplTeam}) = _$_UserDetail;
+      required FavouriteEplTeam favouriteEplTeam}) = _$_Settings;
 
   @override
   UserName get userName;
@@ -188,6 +185,6 @@ abstract class _UserDetail implements UserDetail {
   FavouriteEplTeam get favouriteEplTeam;
   @override
   @JsonKey(ignore: true)
-  _$UserDetailCopyWith<_UserDetail> get copyWith =>
+  _$SettingsCopyWith<_Settings> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -260,8 +260,6 @@ abstract class _$UpdateUserDetailCopyWith<$Res>
       __$UpdateUserDetailCopyWithImpl<$Res>;
   @override
   $Res call({UserDetail userDetail, String userId});
-
-  $UserDetailCopyWith<$Res> get userDetail;
 }
 
 /// @nodoc
@@ -290,13 +288,6 @@ class __$UpdateUserDetailCopyWithImpl<$Res>
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
-  }
-
-  @override
-  $UserDetailCopyWith<$Res> get userDetail {
-    return $UserDetailCopyWith<$Res>(_value.userDetail, (value) {
-      return _then(_value.copyWith(userDetail: value));
-    });
   }
 }
 
@@ -770,8 +761,6 @@ abstract class _$LoadSuccessCopyWith<$Res> {
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
   $Res call({UserDetail userDetail});
-
-  $UserDetailCopyWith<$Res> get userDetail;
 }
 
 /// @nodoc
@@ -794,13 +783,6 @@ class __$LoadSuccessCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
           : userDetail // ignore: cast_nullable_to_non_nullable
               as UserDetail,
     ));
-  }
-
-  @override
-  $UserDetailCopyWith<$Res> get userDetail {
-    return $UserDetailCopyWith<$Res>(_value.userDetail, (value) {
-      return _then(_value.copyWith(userDetail: value));
-    });
   }
 }
 
@@ -1091,8 +1073,6 @@ abstract class _$UpdateCopyWith<$Res> {
   factory _$UpdateCopyWith(_Update value, $Res Function(_Update) then) =
       __$UpdateCopyWithImpl<$Res>;
   $Res call({UserDetail userDetail});
-
-  $UserDetailCopyWith<$Res> get userDetail;
 }
 
 /// @nodoc
@@ -1114,13 +1094,6 @@ class __$UpdateCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
           : userDetail // ignore: cast_nullable_to_non_nullable
               as UserDetail,
     ));
-  }
-
-  @override
-  $UserDetailCopyWith<$Res> get userDetail {
-    return $UserDetailCopyWith<$Res>(_value.userDetail, (value) {
-      return _then(_value.copyWith(userDetail: value));
-    });
   }
 }
 
