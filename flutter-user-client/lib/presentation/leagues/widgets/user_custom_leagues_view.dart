@@ -29,8 +29,49 @@ class UserCustomLeaguesView extends StatelessWidget {
     List userCustomLeagues = state.userCustomLeagues;
 
     if (userCustomLeagues.isEmpty) {
-      return const Center(
-        child: Text("Empty"),
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Football is always better with friends.",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16.0),
+            ),
+            const SizedBox(height: 32.0),
+            ElevatedButton(
+              onPressed: () {
+                _showCreateLeagueCustomModal(context: context);
+              },
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all<Size>(
+                  const Size.fromWidth(350.0),
+                ),
+                padding: MaterialStateProperty.all<EdgeInsets>(
+                    const EdgeInsets.all(24.0)),
+              ),
+              child: const Text(
+                "Create League",
+              ),
+            ),
+            const SizedBox(height: 10.0),
+            const Text("or"),
+            const SizedBox(height: 10.0),
+            ElevatedButton(
+              onPressed: () {
+                _showJoinLeagueCustomModal(context: context);
+              },
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all<Size>(
+                  const Size.fromWidth(350.0),
+                ),
+                padding: MaterialStateProperty.all<EdgeInsets>(
+                    const EdgeInsets.all(24.0)),
+              ),
+              child: const Text("Join League"),
+            ),
+          ],
+        ),
       );
     }
 
@@ -154,53 +195,85 @@ class UserCustomLeaguesView extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (builder) {
-        return BlocProvider.value(
-            value: _createCustomLeagueFormBloc,
-            child: Form(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 32.0,
+              horizontal: 16.0,
+            ),
+            child: BlocProvider.value(
+                value: _createCustomLeagueFormBloc,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelText: "League Name",
-                        labelStyle: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(fontSize: 18),
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 0.0,
-                          horizontal: 15.0,
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.blueAccent,
-                          ),
-                        ),
-                      ),
-                      autocorrect: false,
-                      onChanged: (value) =>
-                          BlocProvider.of<CreateCustomLeagueFormBloc>(context)
-                              .add(
-                        CreateCustomLeagueFormEvent.leagueNameChanged(value),
+                    const Text(
+                      "Create league",
+                      style: TextStyle(
+                        fontSize: 20.0,
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        BlocProvider.of<CreateCustomLeagueFormBloc>(context)
-                            .add(
-                          const CreateCustomLeagueFormEvent
-                              .createLeaguePressed(),
-                        );
-                      },
-                      child: const Text("Create"),
-                    )
+                    const SizedBox(height: 10.0),
+                    Form(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          TextFormField(
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              labelText: "League Name",
+                              labelStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(fontSize: 18),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 0.0,
+                                horizontal: 15.0,
+                              ),
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueAccent,
+                                ),
+                              ),
+                            ),
+                            autocorrect: false,
+                            onChanged: (value) =>
+                                BlocProvider.of<CreateCustomLeagueFormBloc>(
+                                        context)
+                                    .add(
+                              CreateCustomLeagueFormEvent.leagueNameChanged(
+                                  value),
+                            ),
+                          ),
+                          const SizedBox(height: 10.0),
+                          ElevatedButton(
+                            onPressed: () {
+                              BlocProvider.of<CreateCustomLeagueFormBloc>(
+                                      context)
+                                  .add(
+                                const CreateCustomLeagueFormEvent
+                                    .createLeaguePressed(),
+                              );
+                            },
+                            child: const Text("Create"),
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all<EdgeInsets>(
+                                  const EdgeInsets.all(16.0)),
+                              fixedSize: MaterialStateProperty.all<Size>(
+                                  const Size.fromWidth(150.0)),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
-                ),
-              ),
-            ));
+                )),
+          ),
+        );
       },
     );
   }
@@ -212,46 +285,78 @@ class UserCustomLeaguesView extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (builder) {
-        return BlocProvider.value(
-          value: _joinCustomLeagueFormBloc,
-          child: Form(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 32.0,
+              horizontal: 16.0,
+            ),
+            child: BlocProvider.value(
+              value: _joinCustomLeagueFormBloc,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      labelText: "League Code",
-                      labelStyle: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(fontSize: 18),
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 0.0,
-                        horizontal: 15.0,
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blueAccent,
-                        ),
-                      ),
-                    ),
-                    autocorrect: false,
-                    onChanged: (value) =>
-                        BlocProvider.of<JoinCustomLeagueFormBloc>(context).add(
-                      JoinCustomLeagueFormEvent.leagueCodeChanged(value),
+                  const Text(
+                    "Join league",
+                    style: TextStyle(
+                      fontSize: 20.0,
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      BlocProvider.of<JoinCustomLeagueFormBloc>(context).add(
-                        const JoinCustomLeagueFormEvent.joinLeaguePressed(),
-                      );
-                    },
-                    child: const Text("Join"),
-                  )
+                  const SizedBox(height: 10.0),
+                  Form(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: "League Code",
+                            labelStyle: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(fontSize: 18),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 0.0,
+                              horizontal: 15.0,
+                            ),
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                              ),
+                            ),
+                          ),
+                          autocorrect: false,
+                          onChanged: (value) =>
+                              BlocProvider.of<JoinCustomLeagueFormBloc>(context)
+                                  .add(
+                            JoinCustomLeagueFormEvent.leagueCodeChanged(value),
+                          ),
+                        ),
+                        const SizedBox(height: 10.0),
+                        ElevatedButton(
+                          onPressed: () {
+                            BlocProvider.of<JoinCustomLeagueFormBloc>(context)
+                                .add(
+                              const JoinCustomLeagueFormEvent
+                                  .joinLeaguePressed(),
+                            );
+                          },
+                          child: const Text("Join"),
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all<EdgeInsets>(
+                                const EdgeInsets.all(16.0)),
+                            fixedSize: MaterialStateProperty.all<Size>(
+                                const Size.fromWidth(150.0)),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -116,6 +116,11 @@ _showLeaveConfirmationModal({
                         ),
                       );
 
+                      BlocProvider.of<CustomLeaguesBloc>(context).add(
+                        const CustomLeaguesEvent.getUserCustomLeagues(
+                            userId: "62960c04c1a572a276b6e08b"),
+                      );
+
                       // Close modal
                       Navigator.of(context).pop();
 

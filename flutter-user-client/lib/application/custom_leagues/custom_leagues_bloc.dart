@@ -35,6 +35,8 @@ class CustomLeaguesBloc extends Bloc<CustomLeaguesEvent, CustomLeaguesState> {
       ),
     );
 
+    print("here");
+
     final Either<dynamic, List<CustomLeagues>> failureOrSuccess =
         await iCustomLeaguesRepository.getUserCustomLeagues(userId: e.userId);
 
