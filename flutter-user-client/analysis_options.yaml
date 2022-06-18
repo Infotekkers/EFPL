@@ -2,7 +2,7 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
-    # require_trailing_commas: true
+    avoid_print: false    # require_trailing_commas: true
     
 analyzer:
   errors:

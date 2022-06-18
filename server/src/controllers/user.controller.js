@@ -160,7 +160,9 @@ const updateUser = asyncHandler(async (req, res) => {
     return res.status(404).json({ message: "No user found" });
   }
   res.user = user;
-
+  if (req.body.teamName != null) {
+    res.user.teamName = req.body.teamName;
+  }
   // change favourite team
   if (req.body.favouriteEplTeam != null) {
     res.user.favouriteEplTeam = req.body.favouriteEplTeam;

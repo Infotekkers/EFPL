@@ -23,10 +23,12 @@ class _$SettingsEventTearOff {
     );
   }
 
-  _UpdateUserDetail updateUserDetail(UserDetail userDetail, String userId) {
-    return _UpdateUserDetail(
-      userDetail,
+  _UpdateSettings updateUserDetail(
+      Settings settings, String userId, String updateType) {
+    return _UpdateSettings(
+      settings,
       userId,
+      updateType,
     );
   }
 }
@@ -41,39 +43,42 @@ mixin _$SettingsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) loadUserDetail,
-    required TResult Function(UserDetail userDetail, String userId)
+    required TResult Function(
+            Settings settings, String userId, String updateType)
         updateUserDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId)? loadUserDetail,
-    TResult Function(UserDetail userDetail, String userId)? updateUserDetail,
+    TResult Function(Settings settings, String userId, String updateType)?
+        updateUserDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? loadUserDetail,
-    TResult Function(UserDetail userDetail, String userId)? updateUserDetail,
+    TResult Function(Settings settings, String userId, String updateType)?
+        updateUserDetail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadUserDetail value) loadUserDetail,
-    required TResult Function(_UpdateUserDetail value) updateUserDetail,
+    required TResult Function(_UpdateSettings value) updateUserDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_LoadUserDetail value)? loadUserDetail,
-    TResult Function(_UpdateUserDetail value)? updateUserDetail,
+    TResult Function(_UpdateSettings value)? updateUserDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadUserDetail value)? loadUserDetail,
-    TResult Function(_UpdateUserDetail value)? updateUserDetail,
+    TResult Function(_UpdateSettings value)? updateUserDetail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -181,7 +186,8 @@ class _$_LoadUserDetail implements _LoadUserDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) loadUserDetail,
-    required TResult Function(UserDetail userDetail, String userId)
+    required TResult Function(
+            Settings settings, String userId, String updateType)
         updateUserDetail,
   }) {
     return loadUserDetail(userId);
@@ -191,7 +197,8 @@ class _$_LoadUserDetail implements _LoadUserDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId)? loadUserDetail,
-    TResult Function(UserDetail userDetail, String userId)? updateUserDetail,
+    TResult Function(Settings settings, String userId, String updateType)?
+        updateUserDetail,
   }) {
     return loadUserDetail?.call(userId);
   }
@@ -200,7 +207,8 @@ class _$_LoadUserDetail implements _LoadUserDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? loadUserDetail,
-    TResult Function(UserDetail userDetail, String userId)? updateUserDetail,
+    TResult Function(Settings settings, String userId, String updateType)?
+        updateUserDetail,
     required TResult orElse(),
   }) {
     if (loadUserDetail != null) {
@@ -213,7 +221,7 @@ class _$_LoadUserDetail implements _LoadUserDetail {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadUserDetail value) loadUserDetail,
-    required TResult Function(_UpdateUserDetail value) updateUserDetail,
+    required TResult Function(_UpdateSettings value) updateUserDetail,
   }) {
     return loadUserDetail(this);
   }
@@ -222,7 +230,7 @@ class _$_LoadUserDetail implements _LoadUserDetail {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_LoadUserDetail value)? loadUserDetail,
-    TResult Function(_UpdateUserDetail value)? updateUserDetail,
+    TResult Function(_UpdateSettings value)? updateUserDetail,
   }) {
     return loadUserDetail?.call(this);
   }
@@ -231,7 +239,7 @@ class _$_LoadUserDetail implements _LoadUserDetail {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadUserDetail value)? loadUserDetail,
-    TResult Function(_UpdateUserDetail value)? updateUserDetail,
+    TResult Function(_UpdateSettings value)? updateUserDetail,
     required TResult orElse(),
   }) {
     if (loadUserDetail != null) {
@@ -253,108 +261,129 @@ abstract class _LoadUserDetail implements SettingsEvent {
 }
 
 /// @nodoc
-abstract class _$UpdateUserDetailCopyWith<$Res>
+abstract class _$UpdateSettingsCopyWith<$Res>
     implements $SettingsEventCopyWith<$Res> {
-  factory _$UpdateUserDetailCopyWith(
-          _UpdateUserDetail value, $Res Function(_UpdateUserDetail) then) =
-      __$UpdateUserDetailCopyWithImpl<$Res>;
+  factory _$UpdateSettingsCopyWith(
+          _UpdateSettings value, $Res Function(_UpdateSettings) then) =
+      __$UpdateSettingsCopyWithImpl<$Res>;
   @override
-  $Res call({UserDetail userDetail, String userId});
+  $Res call({Settings settings, String userId, String updateType});
+
+  $SettingsCopyWith<$Res> get settings;
 }
 
 /// @nodoc
-class __$UpdateUserDetailCopyWithImpl<$Res>
+class __$UpdateSettingsCopyWithImpl<$Res>
     extends _$SettingsEventCopyWithImpl<$Res>
-    implements _$UpdateUserDetailCopyWith<$Res> {
-  __$UpdateUserDetailCopyWithImpl(
-      _UpdateUserDetail _value, $Res Function(_UpdateUserDetail) _then)
-      : super(_value, (v) => _then(v as _UpdateUserDetail));
+    implements _$UpdateSettingsCopyWith<$Res> {
+  __$UpdateSettingsCopyWithImpl(
+      _UpdateSettings _value, $Res Function(_UpdateSettings) _then)
+      : super(_value, (v) => _then(v as _UpdateSettings));
 
   @override
-  _UpdateUserDetail get _value => super._value as _UpdateUserDetail;
+  _UpdateSettings get _value => super._value as _UpdateSettings;
 
   @override
   $Res call({
-    Object? userDetail = freezed,
+    Object? settings = freezed,
     Object? userId = freezed,
+    Object? updateType = freezed,
   }) {
-    return _then(_UpdateUserDetail(
-      userDetail == freezed
-          ? _value.userDetail
-          : userDetail // ignore: cast_nullable_to_non_nullable
-              as UserDetail,
+    return _then(_UpdateSettings(
+      settings == freezed
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as Settings,
       userId == freezed
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      updateType == freezed
+          ? _value.updateType
+          : updateType // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
+  }
+
+  @override
+  $SettingsCopyWith<$Res> get settings {
+    return $SettingsCopyWith<$Res>(_value.settings, (value) {
+      return _then(_value.copyWith(settings: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$_UpdateUserDetail implements _UpdateUserDetail {
-  const _$_UpdateUserDetail(this.userDetail, this.userId);
+class _$_UpdateSettings implements _UpdateSettings {
+  const _$_UpdateSettings(this.settings, this.userId, this.updateType);
 
   @override
-  final UserDetail userDetail;
+  final Settings settings;
   @override
   final String userId;
+  @override
+  final String updateType;
 
   @override
   String toString() {
-    return 'SettingsEvent.updateUserDetail(userDetail: $userDetail, userId: $userId)';
+    return 'SettingsEvent.updateUserDetail(settings: $settings, userId: $userId, updateType: $updateType)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UpdateUserDetail &&
+            other is _UpdateSettings &&
+            const DeepCollectionEquality().equals(other.settings, settings) &&
+            const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality()
-                .equals(other.userDetail, userDetail) &&
-            const DeepCollectionEquality().equals(other.userId, userId));
+                .equals(other.updateType, updateType));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(userDetail),
-      const DeepCollectionEquality().hash(userId));
+      const DeepCollectionEquality().hash(settings),
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(updateType));
 
   @JsonKey(ignore: true)
   @override
-  _$UpdateUserDetailCopyWith<_UpdateUserDetail> get copyWith =>
-      __$UpdateUserDetailCopyWithImpl<_UpdateUserDetail>(this, _$identity);
+  _$UpdateSettingsCopyWith<_UpdateSettings> get copyWith =>
+      __$UpdateSettingsCopyWithImpl<_UpdateSettings>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) loadUserDetail,
-    required TResult Function(UserDetail userDetail, String userId)
+    required TResult Function(
+            Settings settings, String userId, String updateType)
         updateUserDetail,
   }) {
-    return updateUserDetail(userDetail, userId);
+    return updateUserDetail(settings, userId, updateType);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String userId)? loadUserDetail,
-    TResult Function(UserDetail userDetail, String userId)? updateUserDetail,
+    TResult Function(Settings settings, String userId, String updateType)?
+        updateUserDetail,
   }) {
-    return updateUserDetail?.call(userDetail, userId);
+    return updateUserDetail?.call(settings, userId, updateType);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? loadUserDetail,
-    TResult Function(UserDetail userDetail, String userId)? updateUserDetail,
+    TResult Function(Settings settings, String userId, String updateType)?
+        updateUserDetail,
     required TResult orElse(),
   }) {
     if (updateUserDetail != null) {
-      return updateUserDetail(userDetail, userId);
+      return updateUserDetail(settings, userId, updateType);
     }
     return orElse();
   }
@@ -363,7 +392,7 @@ class _$_UpdateUserDetail implements _UpdateUserDetail {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadUserDetail value) loadUserDetail,
-    required TResult Function(_UpdateUserDetail value) updateUserDetail,
+    required TResult Function(_UpdateSettings value) updateUserDetail,
   }) {
     return updateUserDetail(this);
   }
@@ -372,7 +401,7 @@ class _$_UpdateUserDetail implements _UpdateUserDetail {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_LoadUserDetail value)? loadUserDetail,
-    TResult Function(_UpdateUserDetail value)? updateUserDetail,
+    TResult Function(_UpdateSettings value)? updateUserDetail,
   }) {
     return updateUserDetail?.call(this);
   }
@@ -381,7 +410,7 @@ class _$_UpdateUserDetail implements _UpdateUserDetail {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadUserDetail value)? loadUserDetail,
-    TResult Function(_UpdateUserDetail value)? updateUserDetail,
+    TResult Function(_UpdateSettings value)? updateUserDetail,
     required TResult orElse(),
   }) {
     if (updateUserDetail != null) {
@@ -391,16 +420,17 @@ class _$_UpdateUserDetail implements _UpdateUserDetail {
   }
 }
 
-abstract class _UpdateUserDetail implements SettingsEvent {
-  const factory _UpdateUserDetail(UserDetail userDetail, String userId) =
-      _$_UpdateUserDetail;
+abstract class _UpdateSettings implements SettingsEvent {
+  const factory _UpdateSettings(
+      Settings settings, String userId, String updateType) = _$_UpdateSettings;
 
-  UserDetail get userDetail;
+  Settings get settings;
   @override
   String get userId;
+  String get updateType;
   @override
   @JsonKey(ignore: true)
-  _$UpdateUserDetailCopyWith<_UpdateUserDetail> get copyWith =>
+  _$UpdateSettingsCopyWith<_UpdateSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -416,9 +446,9 @@ class _$SettingsStateTearOff {
     return const _Loading();
   }
 
-  _LoadSuccess loadSuccess(UserDetail userDetail) {
+  _LoadSuccess loadSuccess(Settings settings) {
     return _LoadSuccess(
-      userDetail,
+      settings,
     );
   }
 
@@ -428,9 +458,9 @@ class _$SettingsStateTearOff {
     );
   }
 
-  _Update update(UserDetail userDetail) {
-    return _Update(
-      userDetail,
+  _UpdateSettingsSuccess settingsUpdateSuccess(String message) {
+    return _UpdateSettingsSuccess(
+      message,
     );
   }
 }
@@ -444,27 +474,27 @@ mixin _$SettingsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(UserDetail userDetail) loadSuccess,
+    required TResult Function(Settings settings) loadSuccess,
     required TResult Function(SettingsFailure settingsFailure) loadFailure,
-    required TResult Function(UserDetail userDetail) update,
+    required TResult Function(String message) settingsUpdateSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -474,7 +504,8 @@ mixin _$SettingsState {
     required TResult Function(_Loading value) loadInProgress,
     required TResult Function(_LoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_Update value) update,
+    required TResult Function(_UpdateSettingsSuccess value)
+        settingsUpdateSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -483,7 +514,7 @@ mixin _$SettingsState {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -492,7 +523,7 @@ mixin _$SettingsState {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -555,9 +586,9 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(UserDetail userDetail) loadSuccess,
+    required TResult Function(Settings settings) loadSuccess,
     required TResult Function(SettingsFailure settingsFailure) loadFailure,
-    required TResult Function(UserDetail userDetail) update,
+    required TResult Function(String message) settingsUpdateSuccess,
   }) {
     return initial();
   }
@@ -567,9 +598,9 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
   }) {
     return initial?.call();
   }
@@ -579,9 +610,9 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -597,7 +628,8 @@ class _$_Initial implements _Initial {
     required TResult Function(_Loading value) loadInProgress,
     required TResult Function(_LoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_Update value) update,
+    required TResult Function(_UpdateSettingsSuccess value)
+        settingsUpdateSuccess,
   }) {
     return initial(this);
   }
@@ -609,7 +641,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
   }) {
     return initial?.call(this);
   }
@@ -621,7 +653,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -675,9 +707,9 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(UserDetail userDetail) loadSuccess,
+    required TResult Function(Settings settings) loadSuccess,
     required TResult Function(SettingsFailure settingsFailure) loadFailure,
-    required TResult Function(UserDetail userDetail) update,
+    required TResult Function(String message) settingsUpdateSuccess,
   }) {
     return loadInProgress();
   }
@@ -687,9 +719,9 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
   }) {
     return loadInProgress?.call();
   }
@@ -699,9 +731,9 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -717,7 +749,8 @@ class _$_Loading implements _Loading {
     required TResult Function(_Loading value) loadInProgress,
     required TResult Function(_LoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_Update value) update,
+    required TResult Function(_UpdateSettingsSuccess value)
+        settingsUpdateSuccess,
   }) {
     return loadInProgress(this);
   }
@@ -729,7 +762,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
   }) {
     return loadInProgress?.call(this);
   }
@@ -741,7 +774,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -760,7 +793,9 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({UserDetail userDetail});
+  $Res call({Settings settings});
+
+  $SettingsCopyWith<$Res> get settings;
 }
 
 /// @nodoc
@@ -775,28 +810,35 @@ class __$LoadSuccessCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userDetail = freezed,
+    Object? settings = freezed,
   }) {
     return _then(_LoadSuccess(
-      userDetail == freezed
-          ? _value.userDetail
-          : userDetail // ignore: cast_nullable_to_non_nullable
-              as UserDetail,
+      settings == freezed
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as Settings,
     ));
+  }
+
+  @override
+  $SettingsCopyWith<$Res> get settings {
+    return $SettingsCopyWith<$Res>(_value.settings, (value) {
+      return _then(_value.copyWith(settings: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess(this.userDetail);
+  const _$_LoadSuccess(this.settings);
 
   @override
-  final UserDetail userDetail;
+  final Settings settings;
 
   @override
   String toString() {
-    return 'SettingsState.loadSuccess(userDetail: $userDetail)';
+    return 'SettingsState.loadSuccess(settings: $settings)';
   }
 
   @override
@@ -804,13 +846,12 @@ class _$_LoadSuccess implements _LoadSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _LoadSuccess &&
-            const DeepCollectionEquality()
-                .equals(other.userDetail, userDetail));
+            const DeepCollectionEquality().equals(other.settings, settings));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(userDetail));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(settings));
 
   @JsonKey(ignore: true)
   @override
@@ -822,11 +863,11 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(UserDetail userDetail) loadSuccess,
+    required TResult Function(Settings settings) loadSuccess,
     required TResult Function(SettingsFailure settingsFailure) loadFailure,
-    required TResult Function(UserDetail userDetail) update,
+    required TResult Function(String message) settingsUpdateSuccess,
   }) {
-    return loadSuccess(userDetail);
+    return loadSuccess(settings);
   }
 
   @override
@@ -834,11 +875,11 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
   }) {
-    return loadSuccess?.call(userDetail);
+    return loadSuccess?.call(settings);
   }
 
   @override
@@ -846,13 +887,13 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess(userDetail);
+      return loadSuccess(settings);
     }
     return orElse();
   }
@@ -864,7 +905,8 @@ class _$_LoadSuccess implements _LoadSuccess {
     required TResult Function(_Loading value) loadInProgress,
     required TResult Function(_LoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_Update value) update,
+    required TResult Function(_UpdateSettingsSuccess value)
+        settingsUpdateSuccess,
   }) {
     return loadSuccess(this);
   }
@@ -876,7 +918,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
   }) {
     return loadSuccess?.call(this);
   }
@@ -888,7 +930,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -899,9 +941,9 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements SettingsState {
-  const factory _LoadSuccess(UserDetail userDetail) = _$_LoadSuccess;
+  const factory _LoadSuccess(Settings settings) = _$_LoadSuccess;
 
-  UserDetail get userDetail;
+  Settings get settings;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -983,9 +1025,9 @@ class _$_LoadFailure implements _LoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(UserDetail userDetail) loadSuccess,
+    required TResult Function(Settings settings) loadSuccess,
     required TResult Function(SettingsFailure settingsFailure) loadFailure,
-    required TResult Function(UserDetail userDetail) update,
+    required TResult Function(String message) settingsUpdateSuccess,
   }) {
     return loadFailure(settingsFailure);
   }
@@ -995,9 +1037,9 @@ class _$_LoadFailure implements _LoadFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
   }) {
     return loadFailure?.call(settingsFailure);
   }
@@ -1007,9 +1049,9 @@ class _$_LoadFailure implements _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
@@ -1025,7 +1067,8 @@ class _$_LoadFailure implements _LoadFailure {
     required TResult Function(_Loading value) loadInProgress,
     required TResult Function(_LoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_Update value) update,
+    required TResult Function(_UpdateSettingsSuccess value)
+        settingsUpdateSuccess,
   }) {
     return loadFailure(this);
   }
@@ -1037,7 +1080,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
   }) {
     return loadFailure?.call(this);
   }
@@ -1049,7 +1092,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
@@ -1069,75 +1112,78 @@ abstract class _LoadFailure implements SettingsState {
 }
 
 /// @nodoc
-abstract class _$UpdateCopyWith<$Res> {
-  factory _$UpdateCopyWith(_Update value, $Res Function(_Update) then) =
-      __$UpdateCopyWithImpl<$Res>;
-  $Res call({UserDetail userDetail});
+abstract class _$UpdateSettingsSuccessCopyWith<$Res> {
+  factory _$UpdateSettingsSuccessCopyWith(_UpdateSettingsSuccess value,
+          $Res Function(_UpdateSettingsSuccess) then) =
+      __$UpdateSettingsSuccessCopyWithImpl<$Res>;
+  $Res call({String message});
 }
 
 /// @nodoc
-class __$UpdateCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
-    implements _$UpdateCopyWith<$Res> {
-  __$UpdateCopyWithImpl(_Update _value, $Res Function(_Update) _then)
-      : super(_value, (v) => _then(v as _Update));
+class __$UpdateSettingsSuccessCopyWithImpl<$Res>
+    extends _$SettingsStateCopyWithImpl<$Res>
+    implements _$UpdateSettingsSuccessCopyWith<$Res> {
+  __$UpdateSettingsSuccessCopyWithImpl(_UpdateSettingsSuccess _value,
+      $Res Function(_UpdateSettingsSuccess) _then)
+      : super(_value, (v) => _then(v as _UpdateSettingsSuccess));
 
   @override
-  _Update get _value => super._value as _Update;
+  _UpdateSettingsSuccess get _value => super._value as _UpdateSettingsSuccess;
 
   @override
   $Res call({
-    Object? userDetail = freezed,
+    Object? message = freezed,
   }) {
-    return _then(_Update(
-      userDetail == freezed
-          ? _value.userDetail
-          : userDetail // ignore: cast_nullable_to_non_nullable
-              as UserDetail,
+    return _then(_UpdateSettingsSuccess(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_Update implements _Update {
-  const _$_Update(this.userDetail);
+class _$_UpdateSettingsSuccess implements _UpdateSettingsSuccess {
+  const _$_UpdateSettingsSuccess(this.message);
 
   @override
-  final UserDetail userDetail;
+  final String message;
 
   @override
   String toString() {
-    return 'SettingsState.update(userDetail: $userDetail)';
+    return 'SettingsState.settingsUpdateSuccess(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Update &&
-            const DeepCollectionEquality()
-                .equals(other.userDetail, userDetail));
+            other is _UpdateSettingsSuccess &&
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(userDetail));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
-  _$UpdateCopyWith<_Update> get copyWith =>
-      __$UpdateCopyWithImpl<_Update>(this, _$identity);
+  _$UpdateSettingsSuccessCopyWith<_UpdateSettingsSuccess> get copyWith =>
+      __$UpdateSettingsSuccessCopyWithImpl<_UpdateSettingsSuccess>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(UserDetail userDetail) loadSuccess,
+    required TResult Function(Settings settings) loadSuccess,
     required TResult Function(SettingsFailure settingsFailure) loadFailure,
-    required TResult Function(UserDetail userDetail) update,
+    required TResult Function(String message) settingsUpdateSuccess,
   }) {
-    return update(userDetail);
+    return settingsUpdateSuccess(message);
   }
 
   @override
@@ -1145,11 +1191,11 @@ class _$_Update implements _Update {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
   }) {
-    return update?.call(userDetail);
+    return settingsUpdateSuccess?.call(message);
   }
 
   @override
@@ -1157,13 +1203,13 @@ class _$_Update implements _Update {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(UserDetail userDetail)? loadSuccess,
+    TResult Function(Settings settings)? loadSuccess,
     TResult Function(SettingsFailure settingsFailure)? loadFailure,
-    TResult Function(UserDetail userDetail)? update,
+    TResult Function(String message)? settingsUpdateSuccess,
     required TResult orElse(),
   }) {
-    if (update != null) {
-      return update(userDetail);
+    if (settingsUpdateSuccess != null) {
+      return settingsUpdateSuccess(message);
     }
     return orElse();
   }
@@ -1175,9 +1221,10 @@ class _$_Update implements _Update {
     required TResult Function(_Loading value) loadInProgress,
     required TResult Function(_LoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
-    required TResult Function(_Update value) update,
+    required TResult Function(_UpdateSettingsSuccess value)
+        settingsUpdateSuccess,
   }) {
-    return update(this);
+    return settingsUpdateSuccess(this);
   }
 
   @override
@@ -1187,9 +1234,9 @@ class _$_Update implements _Update {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
   }) {
-    return update?.call(this);
+    return settingsUpdateSuccess?.call(this);
   }
 
   @override
@@ -1199,20 +1246,22 @@ class _$_Update implements _Update {
     TResult Function(_Loading value)? loadInProgress,
     TResult Function(_LoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
-    TResult Function(_Update value)? update,
+    TResult Function(_UpdateSettingsSuccess value)? settingsUpdateSuccess,
     required TResult orElse(),
   }) {
-    if (update != null) {
-      return update(this);
+    if (settingsUpdateSuccess != null) {
+      return settingsUpdateSuccess(this);
     }
     return orElse();
   }
 }
 
-abstract class _Update implements SettingsState {
-  const factory _Update(UserDetail userDetail) = _$_Update;
+abstract class _UpdateSettingsSuccess implements SettingsState {
+  const factory _UpdateSettingsSuccess(String message) =
+      _$_UpdateSettingsSuccess;
 
-  UserDetail get userDetail;
+  String get message;
   @JsonKey(ignore: true)
-  _$UpdateCopyWith<_Update> get copyWith => throw _privateConstructorUsedError;
+  _$UpdateSettingsSuccessCopyWith<_UpdateSettingsSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
 }

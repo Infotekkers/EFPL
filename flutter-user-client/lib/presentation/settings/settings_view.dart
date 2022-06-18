@@ -1,159 +1,233 @@
 import 'package:efpl/application/auth/auth/auth_bloc.dart';
+import 'package:efpl/application/settings/bloc/settings_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/auth/user.dart';
 import 'package:efpl/infrastructure/auth/auth_repository.dart';
+import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/settings/action_types.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../colors.dart';
+import '../core/widgets/bouncing_ball_loading_indicator.dart';
 
+// ignore: must_be_immutable
 class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key, required this.user}) : super(key: key);
-  final User user;
+  SettingsView({
+    Key? key,
+  }) : super(key: key);
+  User? user;
   @override
   Widget build(BuildContext context) {
     // Get The bloc value from the provider
+    var state = BlocProvider.of<AuthBloc>(context).state;
+    if (state is Authenticated) {
+      user = state.user;
+    }
     final UtilBloc _utilBloc = BlocProvider.of<UtilBloc>(context);
-    // _utilBloc.add(const UtilEvent.setDefaultLocale());
-    return BlocConsumer<UtilBloc, UtilState>(
-      listener: (context, state) {},
+
+    _utilBloc.add(
+      const UtilEvent.setDefaultLocale(),
+    );
+    return BlocConsumer<SettingsBloc, SettingsState>(
+      listener: (context, state) {
+        state.maybeMap(
+            loadFailure: ((value) => {}),
+            loadSuccess: (value) {},
+            settingsUpdateSuccess: (value) => {},
+            orElse: () {});
+      },
       builder: (context, state) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Icon(
-                    Icons.person,
-                    size: 50,
-                    color: Color.fromARGB(255, 18, 140, 240),
-                  ),
-                  Text(
-                    user.userName.getOrCrash(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    user.email.getOrCrash(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(fontSize: 20),
-                  ),
-                ],
+        return state.map(
+          initial: (context) => Scaffold(
+            appBar: AppBar(),
+            body: Scaffold(
+              appBar: AppBar(),
+              body: const Center(
+                child: Text("initial"),
               ),
             ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                UserDetailRow(
-                  title: "Team Name",
-                  value: user.teamName.getOrCrash(),
-                ),
-                UserDetailRow(
-                  title: "Favorite Team",
-                  value: user.favouriteEplTeam.getOrCrash(),
-                ),
-              ],
+          ),
+          loadFailure: (_) => Scaffold(
+            appBar: AppBar(),
+            body: const Center(
+              child: Text("Load failure"),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height / 2,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.blue[50],
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+          ),
+          settingsUpdateSuccess: (_) =>
+              Scaffold(appBar: AppBar(), body: Container()),
+          loadInProgress: (_) => Scaffold(
+              appBar: AppBar(), body: const BouncingBallLoadingIndicator()),
+          loadSuccess: (state) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pushNamed(context, "/home");
+              return true;
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    }),
+                title: Text(
+                  "Settings",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                 ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.blue[50],
+                ),
+                backgroundColor: Colors.blue[50],
+                foregroundColor: ConstantColors.primary_900,
+                elevation: 0,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ActionWidget(
-                    icon: Icons.group,
-                    label: "Update team",
-                    onTap: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(10),
-                          ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Icon(
+                          Icons.person,
+                          size: 50,
+                          color: Color.fromARGB(255, 18, 140, 240),
                         ),
-                        context: context,
-                        builder: (context) => Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: BottomSheetWidget(
-                            label: "update team",
-                            initialValue: user.teamName.getOrCrash(),
-                          ),
+                        Text(
+                          state.settings.userName.getOrCrash(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
                         ),
-                      );
-                    },
+                        Text(
+                          user!.email.getOrCrash(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontSize: 20),
+                        ),
+                      ],
+                    ),
                   ),
-                  ActionWidget(
-                    icon: Icons.favorite_border_sharp,
-                    label: "Update Favorite team",
-                    onTap: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(10),
-                          ),
-                        ),
-                        context: context,
-                        builder: (context) => Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: BottomSheetWidget(
-                            label: updateFavoriteTeam,
-                            initialValue: user.favouriteEplTeam.getOrCrash(),
-                          ),
-                        ),
-                      );
-                    },
+                  const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      UserDetailRow(
+                        title: "Team Name",
+                        value: state.settings.teamName.getOrCrash(),
+                      ),
+                      UserDetailRow(
+                        title: "Favorite Team",
+                        value: state.settings.favouriteEplTeam.getOrCrash(),
+                      ),
+                    ],
                   ),
-                  ActionWidget(
-                    icon: Icons.assignment_ind,
-                    label: updateTeamName,
-                    onTap: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(10),
-                          ),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 2,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[50],
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ActionWidget(
+                          icon: Icons.group,
+                          label: "Update Team Name",
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(10),
+                                ),
+                              ),
+                              context: context,
+                              builder: (context) => Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: BottomSheetWidget(
+                                  label: updateTeamName,
+                                  initialValue:
+                                      state.settings.teamName.getOrCrash(),
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                        context: context,
-                        builder: (context) => Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: BottomSheetWidget(
-                            label: updateUserName,
-                            initialValue: user.userName.getOrCrash(),
-                          ),
+                        ActionWidget(
+                          icon: Icons.favorite_border_sharp,
+                          label: "Update Favorite team",
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(10),
+                                ),
+                              ),
+                              context: context,
+                              builder: (context) => Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: BottomSheetWidget(
+                                  label: updateFavoriteTeam,
+                                  initialValue: state.settings.favouriteEplTeam
+                                      .getOrCrash(),
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                  ActionWidget(
-                    icon: Icons.logout,
-                    label: "Logout",
-                    onTap: () {},
+                        ActionWidget(
+                          icon: Icons.assignment_ind,
+                          label: updateUserName,
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(10),
+                                ),
+                              ),
+                              context: context,
+                              builder: (context) => Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: BottomSheetWidget(
+                                  label: updateUserName,
+                                  initialValue:
+                                      state.settings.userName.getOrCrash(),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        ActionWidget(
+                          icon: Icons.logout,
+                          label: "Logout",
+                          onTap: () {},
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
-            )
-          ],
+            ),
+          ),
         );
       },
     );
@@ -162,7 +236,7 @@ class SettingsView extends StatelessWidget {
 
 // ignore: must_be_immutable
 class BottomSheetWidget extends StatefulWidget {
-  BottomSheetWidget({
+  const BottomSheetWidget({
     required this.label,
     required this.initialValue,
     Key? key,
@@ -219,7 +293,6 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     autofocus: true,
                     decoration: InputDecoration(
                       // prefixIcon: Icon(Icons.email),
-                      labelText: AppLocalizations.of(context)!.email,
                       labelStyle: Theme.of(context)
                           .textTheme
                           .bodyText1!

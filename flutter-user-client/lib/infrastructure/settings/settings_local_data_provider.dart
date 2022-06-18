@@ -6,22 +6,21 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class UserDetailLocalDataProvider {
+class SettingsLocalDataProvider {
   Box userDetailCache = Hive.box('userDetailCache');
 
-  Future<Either<SettingsFailure, UserDetail>> getUserDetail(
-      String userId) async {
+  Future<Either<SettingsFailure, Settings>> getUserDetail(String userId) async {
     try {
       var userDetail = await userDetailCache.get('userDetail');
-      return right(UserDetailDto.fromJson(userDetail).toDomain());
+      return right(SettingsDto.fromJson(userDetail).toDomain());
     } catch (e) {
       return left(const SettingsFailure.localDBError());
     }
   }
 
   Future<Either<SettingsFailure, Unit>> updateUserDetail(
-      UserDetail userDetail, String userId) async {
-    UserDetailDto userDetailDto = UserDetailDto.fromDomain(userDetail);
+      Settings userDetail, String userId) async {
+    SettingsDto userDetailDto = SettingsDto.fromDomain(userDetail);
 
     try {
       await userDetailCache.put('userDetail', userDetailDto.toJson());

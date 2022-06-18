@@ -1,5 +1,4 @@
 import 'package:efpl/application/auth/auth/auth_bloc.dart';
-import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/fixtures/fixtures_view.dart';
@@ -14,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../application/settings/bloc/settings_bloc.dart';
 import '../../domain/auth/user.dart';
 
 // ignore: must_be_immutable
@@ -27,7 +27,7 @@ class MainTabView extends StatelessWidget {
       user = state.user;
     }
     return DefaultTabController(
-      length: 7,
+      length: 6,
       initialIndex: 2,
       child: Scaffold(
         drawer: Drawer(
@@ -55,7 +55,14 @@ class MainTabView extends StatelessWidget {
               ),
               ListTile(
                 title: const Text('Settings'),
-                onTap: () {},
+                onTap: () {
+                  BlocProvider.of<SettingsBloc>(context).add(
+                    SettingsEvent.loadUserDetail(
+                      user!.id.getOrCrash(),
+                    ),
+                  );
+                  Navigator.pushReplacementNamed(context, "/settings");
+                },
               ),
               ListTile(
                 title: const Text('LogOut'),
@@ -120,11 +127,11 @@ class MainTabView extends StatelessWidget {
               ),
 
               // Settings
-              Tab(
-                icon: Icon(
-                  Icons.settings,
-                ),
-              ),
+              // Tab(
+              //   icon: Icon(
+              //     Icons.settings,
+              //   ),
+              // ),
             ],
           ),
           title: Text(
@@ -136,17 +143,14 @@ class MainTabView extends StatelessWidget {
             ),
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            const TeamView(),
-            const PointsView(),
-            const TransfersView(),
-            const FixturesView(),
-            const LeaguesView(),
-            const EPLStatsView(),
-            SettingsView(
-              user: user!,
-            ),
+            TeamView(),
+            PointsView(),
+            TransfersView(),
+            FixturesView(),
+            LeaguesView(),
+            EPLStatsView(),
           ],
         ),
       ),
