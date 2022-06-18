@@ -44,7 +44,7 @@ class ApiCustomLeaguesRepository implements ICustomLeaguesRepository {
   }
 
   @override
-  Future<Either<dynamic, dynamic>> leaveCustomLeague(
+  Future<Either<dynamic, String>> leaveCustomLeague(
       {required String userId, required String leagueCode}) async {
     return _customLeaguesRemoteDataProvider.leaveCustomLeague(
       userId: AdminId(value: userId),

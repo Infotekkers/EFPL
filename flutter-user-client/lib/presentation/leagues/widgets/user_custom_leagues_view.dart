@@ -16,28 +16,14 @@ class UserCustomLeaguesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<CustomLeaguesBloc, CustomLeaguesState>(
       listener: (context, state) {
+        print("here");
+        print(getIt<CreateCustomLeagueFormBloc>().state.createLeagueSuccess);
+
         if (state.leaveLeagueSuccess) {
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("Hurray");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
-          print("\n");
+        } else if (getIt<CreateCustomLeagueFormBloc>()
+            .state
+            .createLeagueSuccess) {
+          print("success");
         }
 
         // state.valueFailureOrSuccess.fold(
@@ -294,7 +280,11 @@ class UserCustomLeaguesView extends StatelessWidget {
                                   value),
                             ),
                           ),
-                          const SizedBox(height: 10.0),
+                          Container(
+                            height: 10.0,
+                            width: 100.0,
+                            color: Colors.blue[50],
+                          ),
                           ElevatedButton(
                             onPressed: () {
                               BlocProvider.of<CreateCustomLeagueFormBloc>(
@@ -310,6 +300,8 @@ class UserCustomLeaguesView extends StatelessWidget {
                                   const EdgeInsets.all(16.0)),
                               fixedSize: MaterialStateProperty.all<Size>(
                                   const Size.fromWidth(150.0)),
+                              backgroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
                             ),
                           )
                         ],

@@ -137,7 +137,7 @@ class CustomLeaguesRemoteDataProvider {
     return left(const CustomLeaguesFailures.networkError());
   }
 
-  Future<Either<dynamic, CustomLeaguesInfo>> leaveCustomLeague(
+  Future<Either<dynamic, String>> leaveCustomLeague(
       {required AdminId userId, required LeagueCode leagueCode}) async {
     // Todo: refactor
     final JoinCustomLeagueInputDto leaveCustomLeagueDtoOut =
@@ -155,12 +155,11 @@ class CustomLeaguesRemoteDataProvider {
       );
 
       if (apiResponse.statusCode == 200) {
-        final parsedResponseBody = jsonDecode(apiResponse.body);
-
-        return right(parsedResponseBody);
+        return right(apiResponse.body);
       }
     } catch (e) {
-      return left(const CustomLeaguesFailures.serverError());
+      print(e);
+      return left(const CustomLeaguesFailures.networkError());
     }
 
     return left(const CustomLeaguesFailures.networkError());

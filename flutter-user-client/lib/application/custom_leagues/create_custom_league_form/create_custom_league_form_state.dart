@@ -8,6 +8,7 @@ abstract class CreateCustomLeagueFormState with _$CreateCustomLeagueFormState {
     required LeagueStartGameWeek leagueStartGameWeek,
     required CustomLeaguesInfo customLeaguesInfo,
     required bool isLoading,
+    required bool createLeagueSuccess,
   }) = _CreateCustomLeagueFormState;
 
   factory CreateCustomLeagueFormState.initial() => CreateCustomLeagueFormState(
@@ -24,5 +25,6 @@ abstract class CreateCustomLeagueFormState with _$CreateCustomLeagueFormState {
           leagueStartGameWeek: LeagueStartGameWeek(value: 1),
         ),
         isLoading: false,
+        createLeagueSuccess: false,
       );
 }

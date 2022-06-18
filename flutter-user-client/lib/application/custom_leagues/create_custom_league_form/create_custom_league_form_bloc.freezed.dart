@@ -340,13 +340,15 @@ class _$CreateCustomLeagueFormStateTearOff {
       required AdminId userId,
       required LeagueStartGameWeek leagueStartGameWeek,
       required CustomLeaguesInfo customLeaguesInfo,
-      required bool isLoading}) {
+      required bool isLoading,
+      required bool createLeagueSuccess}) {
     return _CreateCustomLeagueFormState(
       leagueName: leagueName,
       userId: userId,
       leagueStartGameWeek: leagueStartGameWeek,
       customLeaguesInfo: customLeaguesInfo,
       isLoading: isLoading,
+      createLeagueSuccess: createLeagueSuccess,
     );
   }
 }
@@ -362,6 +364,7 @@ mixin _$CreateCustomLeagueFormState {
       throw _privateConstructorUsedError;
   CustomLeaguesInfo get customLeaguesInfo => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get createLeagueSuccess => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreateCustomLeagueFormStateCopyWith<CreateCustomLeagueFormState>
@@ -379,7 +382,8 @@ abstract class $CreateCustomLeagueFormStateCopyWith<$Res> {
       AdminId userId,
       LeagueStartGameWeek leagueStartGameWeek,
       CustomLeaguesInfo customLeaguesInfo,
-      bool isLoading});
+      bool isLoading,
+      bool createLeagueSuccess});
 
   $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo;
 }
@@ -400,6 +404,7 @@ class _$CreateCustomLeagueFormStateCopyWithImpl<$Res>
     Object? leagueStartGameWeek = freezed,
     Object? customLeaguesInfo = freezed,
     Object? isLoading = freezed,
+    Object? createLeagueSuccess = freezed,
   }) {
     return _then(_value.copyWith(
       leagueName: leagueName == freezed
@@ -421,6 +426,10 @@ class _$CreateCustomLeagueFormStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createLeagueSuccess: createLeagueSuccess == freezed
+          ? _value.createLeagueSuccess
+          : createLeagueSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -446,7 +455,8 @@ abstract class _$CreateCustomLeagueFormStateCopyWith<$Res>
       AdminId userId,
       LeagueStartGameWeek leagueStartGameWeek,
       CustomLeaguesInfo customLeaguesInfo,
-      bool isLoading});
+      bool isLoading,
+      bool createLeagueSuccess});
 
   @override
   $CustomLeaguesInfoCopyWith<$Res> get customLeaguesInfo;
@@ -472,6 +482,7 @@ class __$CreateCustomLeagueFormStateCopyWithImpl<$Res>
     Object? leagueStartGameWeek = freezed,
     Object? customLeaguesInfo = freezed,
     Object? isLoading = freezed,
+    Object? createLeagueSuccess = freezed,
   }) {
     return _then(_CreateCustomLeagueFormState(
       leagueName: leagueName == freezed
@@ -494,6 +505,10 @@ class __$CreateCustomLeagueFormStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      createLeagueSuccess: createLeagueSuccess == freezed
+          ? _value.createLeagueSuccess
+          : createLeagueSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -506,7 +521,8 @@ class _$_CreateCustomLeagueFormState implements _CreateCustomLeagueFormState {
       required this.userId,
       required this.leagueStartGameWeek,
       required this.customLeaguesInfo,
-      required this.isLoading});
+      required this.isLoading,
+      required this.createLeagueSuccess});
 
   @override
   final LeagueName leagueName;
@@ -518,10 +534,12 @@ class _$_CreateCustomLeagueFormState implements _CreateCustomLeagueFormState {
   final CustomLeaguesInfo customLeaguesInfo;
   @override
   final bool isLoading;
+  @override
+  final bool createLeagueSuccess;
 
   @override
   String toString() {
-    return 'CreateCustomLeagueFormState(leagueName: $leagueName, userId: $userId, leagueStartGameWeek: $leagueStartGameWeek, customLeaguesInfo: $customLeaguesInfo, isLoading: $isLoading)';
+    return 'CreateCustomLeagueFormState(leagueName: $leagueName, userId: $userId, leagueStartGameWeek: $leagueStartGameWeek, customLeaguesInfo: $customLeaguesInfo, isLoading: $isLoading, createLeagueSuccess: $createLeagueSuccess)';
   }
 
   @override
@@ -536,7 +554,9 @@ class _$_CreateCustomLeagueFormState implements _CreateCustomLeagueFormState {
                 .equals(other.leagueStartGameWeek, leagueStartGameWeek) &&
             const DeepCollectionEquality()
                 .equals(other.customLeaguesInfo, customLeaguesInfo) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.createLeagueSuccess, createLeagueSuccess));
   }
 
   @override
@@ -546,7 +566,8 @@ class _$_CreateCustomLeagueFormState implements _CreateCustomLeagueFormState {
       const DeepCollectionEquality().hash(userId),
       const DeepCollectionEquality().hash(leagueStartGameWeek),
       const DeepCollectionEquality().hash(customLeaguesInfo),
-      const DeepCollectionEquality().hash(isLoading));
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(createLeagueSuccess));
 
   @JsonKey(ignore: true)
   @override
@@ -562,7 +583,8 @@ abstract class _CreateCustomLeagueFormState
       required AdminId userId,
       required LeagueStartGameWeek leagueStartGameWeek,
       required CustomLeaguesInfo customLeaguesInfo,
-      required bool isLoading}) = _$_CreateCustomLeagueFormState;
+      required bool isLoading,
+      required bool createLeagueSuccess}) = _$_CreateCustomLeagueFormState;
 
   @override
   LeagueName get leagueName;
@@ -574,6 +596,8 @@ abstract class _CreateCustomLeagueFormState
   CustomLeaguesInfo get customLeaguesInfo;
   @override
   bool get isLoading;
+  @override
+  bool get createLeagueSuccess;
   @override
   @JsonKey(ignore: true)
   _$CreateCustomLeagueFormStateCopyWith<_CreateCustomLeagueFormState>

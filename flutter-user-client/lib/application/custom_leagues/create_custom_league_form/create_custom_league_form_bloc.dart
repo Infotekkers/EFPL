@@ -35,7 +35,7 @@ class CreateCustomLeagueFormBloc
           ),
         );
 
-        final Either<dynamic, CustomLeaguesInfo> failureOrSuccess =
+        final Either<dynamic, dynamic> failureOrSuccess =
             await _customLeaguesRepository.createCustomLeague(
           userId: "62960c04c1a572a276b6e08b",
           leagueName: leagueNameStr,
@@ -46,10 +46,18 @@ class CreateCustomLeagueFormBloc
           (r) => r,
         );
 
+        bool createLeagueSuccess = failureOrSuccess.fold(
+          (l) => false,
+          (r) => true,
+        );
+
+        print(failureOrSuccess);
+
         emit(
           state.copyWith(
             isLoading: false,
             customLeaguesInfo: customLeaguesInfo,
+            createLeagueSuccess: createLeagueSuccess,
           ),
         );
       },

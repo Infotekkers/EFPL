@@ -16,7 +16,7 @@ abstract class ICustomLeaguesRepository {
     required String userId,
     required String leagueCode,
   });
-  Future<Either<dynamic, dynamic>> leaveCustomLeague({
+  Future<Either<dynamic, String>> leaveCustomLeague({
     required String userId,
     required String leagueCode,
   });
