@@ -3,31 +3,44 @@
     <button class="collapse-sidebar">
       <span>&#11164;</span>
     </button>
+
     <div class="sidebar-wrapper">
+      <h1>
+        Ethiopian <br />
+        Fantasy PL <br />
+        Admin
+      </h1>
       <!-- Home -->
-      <div class="sidebar__link">
-        <router-link to="/admin/home">{{ $t("home") }}</router-link>
-      </div>
+
+      <router-link class="sidebar__link" to="/admin/home"
+        ><img :src="homeIcon.path" :alt="homeIcon.alt" />{{
+          $t("home")
+        }}</router-link
+      >
 
       <!-- Fixtures -->
-      <div class="sidebar__link">
-        <router-link to="/admin/fixtures">{{ $t("Fixtures") }}</router-link>
-      </div>
+
+      <router-link class="sidebar__link" to="/admin/fixtures">{{
+        $t("Fixtures")
+      }}</router-link>
 
       <!-- Teams -->
-      <div class="sidebar__link">
-        <router-link to="/admin/teams">{{ $t("Teams") }}</router-link>
-      </div>
+
+      <router-link class="sidebar__link" to="/admin/teams">{{
+        $t("Teams")
+      }}</router-link>
 
       <!-- Players -->
-      <div class="sidebar__link">
-        <router-link to="/admin/players">{{ $t("Players") }}</router-link>
-      </div>
+
+      <router-link class="sidebar__link" to="/admin/players">{{
+        $t("Players")
+      }}</router-link>
 
       <!-- settings -->
-      <div class="sidebar__link">
-        <router-link to="/admin/settings">{{ $t("Settings") }}</router-link>
-      </div>
+
+      <router-link class="sidebar__link" to="/admin/settings">{{
+        $t("Settings")
+      }}</router-link>
     </div>
   </aside>
 </template>
@@ -35,10 +48,25 @@
 <script>
 import store from "../store/index";
 
+import {
+  homeIcon,
+  settingsSidebarIcon,
+  matchesIcon,
+  infoIcon,
+  teamsIcon,
+} from "@/utils/Icons";
+
 export default {
   data() {
     return {
       sidebar: 1,
+
+      // Icons
+      homeIcon,
+      settingsSidebarIcon,
+      matchesIcon,
+      infoIcon,
+      teamsIcon,
     };
   },
   methods: {
@@ -71,7 +99,42 @@ export default {
 <style lang="scss" scoped>
 aside {
   position: relative;
-  background: var(--neutral-50);
+
+  &:before,
+  &:after {
+    content: "";
+    height: 100%;
+    width: 100%;
+
+    display: block;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+  }
+
+  &:before {
+    background-image: url("../assets/img/Ethiopian_Premier_League_logo.png"),
+      linear-gradient(90deg, var(--primary-900), var(--primary-900));
+    background-position: 35% -150%, 0 0;
+    background-size: 200%, cover;
+    background-repeat: no-repeat;
+  }
+
+  &:after {
+    opacity: 0.6;
+    background: url("../assets/img/overlay.jpg");
+    background-size: cover;
+    background-position: center center;
+  }
+
+  h1 {
+    text-align: left;
+    color: white;
+    font-size: var(--text-large);
+
+    margin-bottom: var(--spacing-regular);
+  }
+
   box-shadow: 1px 0 4px 0 var(--neutral-200);
   .collapse-sidebar {
     padding: var(--spacing-3xsmall) var(--spacing-xsmall);
@@ -87,7 +150,7 @@ aside {
 
   .sidebar-wrapper {
     padding: 0 var(--spacing-regular);
-    width: 250px;
+    width: 300px;
     height: 100%;
 
     display: flex;
@@ -100,27 +163,24 @@ aside {
     align-items: center;
     margin-bottom: var(--spacing-xsmall);
 
-    &:before {
-      content: "";
-      width: 30px;
-      height: 30px;
+    padding: var(--spacing-small);
+    text-decoration: none;
 
-      background: var(--neutral-400);
-      border-radius: 50%;
-      display: block;
-    }
-
-    a {
-      padding: var(--spacing-small);
-      text-decoration: none;
-
-      font-size: var(--text-regular);
-      font-weight: 500;
-      color: var(--neutral-900);
-    }
+    font-size: var(--text-regular);
+    font-weight: 500;
+    color: var(--neutral-200);
   }
 
-  .sidebar__link.active {
+  .sidebar__link img {
+    width: 5px;
+    fill: red;
+  }
+
+  .sidebar__link.router-link-active {
+    background: var(--neutral-200);
+    color: var(--neutral-900);
+
+    border-radius: 999px;
   }
 }
 </style>

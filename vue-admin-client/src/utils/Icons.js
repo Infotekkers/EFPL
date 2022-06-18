@@ -121,6 +121,31 @@ const hiddenPasswordIcon = {
   alt: "Hide password",
 };
 
+const settingsSidebarIcon = {
+  path: require("../assets/icons/settings-sidebar-icon.svg"),
+  alt: "Settings",
+};
+
+const teamsIcon = {
+  path: require("../assets/icons/teams-icon.svg"),
+  alt: "Teams",
+};
+
+const matchesIcon = {
+  path: require("../assets/icons/matches-icon.svg"),
+  alt: "Matches",
+};
+
+const playerSidebarIcon = {
+  path: require("../assets/icons/player-sidebar-icon.svg"),
+  alt: "Players",
+};
+
+const infoIcon = {
+  path: require("../assets/icons/info-icon.svg"),
+  alt: "Info",
+};
+
 module.exports = {
   playIcon,
   pauseIcon,
@@ -155,4 +180,10 @@ module.exports = {
 
   passwordVisibleIcon,
   hiddenPasswordIcon,
+
+  matchesIcon,
+  teamsIcon,
+  playerSidebarIcon,
+  settingsSidebarIcon,
+  infoIcon,
 };
