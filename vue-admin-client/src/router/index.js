@@ -64,6 +64,12 @@ const routes = [
         name: "settings",
         component: () => import("../views/SettingsView.vue"),
       },
+      // change password
+      {
+        path: "settings/changepassword",
+        name: "change-password",
+        component: () => import("../components/ChangePasswordComponent.vue"),
+      },
       // contact
       {
         path: "settings/contact",
