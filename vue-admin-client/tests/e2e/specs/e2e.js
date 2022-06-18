@@ -106,45 +106,72 @@ describe("E2E Test", () => {
     cy.get(".actions > button").click();
   });
 
-  // it("Visits players", () => {
-  //   cy.get('[href="/admin/players"]').click();
-  //   cy.get('[class="players-container"]')
-  //     .wait(3000)
-  //     .children()
-  //     .should("have.length", 454);
-  // });
+  it("Updates player stats", () => {
+    cy.visit("/admin/fixtures");
 
-  // it("Visits teams", () => {
-  //   cy.get('[href="/admin/teams"]').click();
-  //   cy.get('[class="teams-container"]')
-  //     .wait(3000)
-  //     .children()
-  //     .should("have.length", 16);
-  // });
+    cy.get('[class="fixture-main-container"]')
+      .contains("Adama City S.C")
+      .parentsUntil('[class="fixture-main-container"]')
+      .find('[data-cp="start-match"]')
+      .wait(2000)
+      .click();
 
-  // it("Edits team", () => {
-  //   cy.get('[class="teams-container"]')
-  //     .contains("Addis Ababa City F.C")
-  //     .parent()
-  //     .find('[data-cp="edit-team"]')
-  //     .click();
-  //   cy.get('input[name="teamStadium"]')
-  //     .clear({ force: true })
-  //     .type("Abebe Bikila Stadium");
-  //   cy.get(".main-button-primary").click();
-  //   cy.get(".main-modal-close").click();
+    cy.get('[class="fixture-main-container"]')
+      .contains("Adama City S.C")
+      .parentsUntil('[class="fixture-main-container"]')
+      .find('[data-cp="pause-match"]')
+      .wait(2000)
+      .click();
 
-  //   cy.get('[class="teams-container"]')
-  //     .contains("Addis Ababa City F.C")
-  //     .parent()
-  //     .find('[data-cp="edit-team"]')
-  //     .click();
-  //   cy.get('input[name="teamStadium"]')
-  //     .clear({ force: true })
-  //     .type("Addis Ababa Stadium");
-  //   cy.get(".main-button-primary").click();
-  //   cy.get(".main-modal-close").click();
-  // });
+    cy.get('[class="fixture-main-container"]')
+      .contains("Adama City S.C")
+      .click();
+
+    cy.get("#goalkeepers > .field-player").click();
+    cy.get("#goals > :nth-child(4)").click();
+    cy.get(".action-primary").click();
+    cy.get("#close > button").wait(1000).click();
+  });
+
+  it("Visits players", () => {
+    cy.get('[href="/admin/players"]').click();
+    cy.get('[class="players-container"]')
+      .wait(3000)
+      .children()
+      .should("have.length", 454);
+  });
+
+  it("Visits teams", () => {
+    cy.get('[href="/admin/teams"]').click();
+    cy.get('[class="teams-container"]')
+      .wait(3000)
+      .children()
+      .should("have.length", 16);
+  });
+
+  it("Edits team", () => {
+    cy.get('[class="teams-container"]')
+      .contains("Addis Ababa City F.C")
+      .parent()
+      .find('[data-cp="edit-team"]')
+      .click();
+    cy.get('input[name="teamStadium"]')
+      .clear({ force: true })
+      .type("Abebe Bikila Stadium");
+    cy.get(".main-button-primary").click();
+    cy.get(".main-modal-close").click();
+
+    cy.get('[class="teams-container"]')
+      .contains("Addis Ababa City F.C")
+      .parent()
+      .find('[data-cp="edit-team"]')
+      .click();
+    cy.get('input[name="teamStadium"]')
+      .clear({ force: true })
+      .type("Addis Ababa Stadium");
+    cy.get(".main-button-primary").click();
+    cy.get(".main-modal-close").click();
+  });
 
   it("Logs out", () => {
     cy.get('[href="/admin/settings"]').click();
