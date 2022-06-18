@@ -72,6 +72,35 @@ describe("E2E Test", () => {
       .click();
   });
 
+  it("Updates fixture", () => {
+    cy.get('[class="fixture-main-container"]')
+      .contains("Fasil Kenema S.C")
+      .parentsUntil('[class="fixture-main-container"]')
+      .find('[data-cp="edit-match"]')
+      .click();
+
+    // // Invalid away team
+    // cy.get(".fixture-away-team-next > .small-icon").click();
+    // cy.get('[class="fixture-modal-save-button"]').click();
+    // cy.get(".message-container").contains(
+    //   "Both home and away team are the same.(Adama City S.C)"
+    // );
+    // cy.get(".fixture-away-team-next > .small-icon").click();
+
+    // // Invalid home team
+    // cy.get(".fixture-home-team-next > .small-icon").click();
+    // cy.get('[class="fixture-modal-save-button"]').click();
+    // cy.get(".message-container").contains(
+    //   "Both home and away team are the same.(Saint George S.C)"
+    // );
+    // cy.get(".fixture-home-team-next > .small-icon").click();
+
+    // // Valid update
+    cy.get("#hour").select("16");
+    cy.get('[class="fixture-modal-save-button"]').click();
+    cy.get('[class="fixture-modal-close"]').click();
+  });
+
   it("Adds new fixture", () => {
     cy.get('[data-cp="add-gw"]').click();
 
