@@ -424,7 +424,6 @@ const transfer = asyncHandler(async (req, res) => {
               };
 
               currentTeam = currentNewTeam;
-              console.log(currentTeam);
             }
           }
           updatedUserTeam.push(currentTeam);

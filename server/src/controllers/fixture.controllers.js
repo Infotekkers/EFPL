@@ -486,7 +486,7 @@ const endFixture = asyncHandler(async function (req, res) {
     const awayteamScore = splitscore[1];
     const awayteamPosition = awayTeam.teamPosition;
     const hometeamPosition = homeTeam.teamPosition;
-    console.log(awayteamPosition);
+
     const awayteamPoint = awayteamPosition[0].teamPoint;
     const hometeamPoint = hometeamPosition[0].teamPoint;
     if (hometeamScore > awayteamScore) {
