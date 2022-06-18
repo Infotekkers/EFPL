@@ -180,7 +180,7 @@ class MyTeamPlayer extends StatelessWidget {
         ),
       ),
       builder: (_) => SizedBox(
-        height: 250,
+        height: 280,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
           child: Column(
@@ -196,6 +196,20 @@ class MyTeamPlayer extends StatelessWidget {
                       ),
                 ),
               ),
+              Center(
+                child: Text(
+                  "( " + eplTeamId + " )",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 12,
+                        letterSpacing: 0.25,
+                      ),
+                ),
+              ),
+              // Spacer
+              const SizedBox(
+                height: 16,
+              ),
+
               GestureDetector(
                 onTap: () => Navigator.of(context)
                     .pushNamed("/player", arguments: playerId),
@@ -215,6 +229,11 @@ class MyTeamPlayer extends StatelessWidget {
                   ],
                 ),
               ),
+              // Spacer
+              const SizedBox(
+                height: 16,
+              ),
+
               GestureDetector(
                 onTap: () {
                   myTeamBloc.add(MyTeamEvent.transferOptionsRequested(
@@ -237,6 +256,11 @@ class MyTeamPlayer extends StatelessWidget {
                   ],
                 ),
               ),
+              // Spacer
+              const SizedBox(
+                height: 16,
+              ),
+
               GestureDetector(
                 onTap: multiplier > 0
                     ? () {
@@ -260,6 +284,11 @@ class MyTeamPlayer extends StatelessWidget {
                   ],
                 ),
               ),
+              // Spacer
+              const SizedBox(
+                height: 16,
+              ),
+
               GestureDetector(
                 onTap: multiplier > 0
                     ? () {

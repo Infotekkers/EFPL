@@ -19,7 +19,7 @@ ThemeData lightTheme = ThemeData(
   // text styles
   textTheme: const TextTheme(
     bodyText1: TextStyle(
-      fontFamily: "Architect",
+      fontFamily: "Poppins",
     ),
   ),
 );
