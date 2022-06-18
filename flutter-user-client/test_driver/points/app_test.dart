@@ -28,6 +28,9 @@ void main() {
 
       await driver.tap(loginButton);
 
+      // go to points tab
+      await driver.tap(find.byTooltip("Points"));
+
       await driver.waitFor(find.text("Daniel"));
       await driver.tap(find.text("Daniel"));
 
@@ -36,6 +39,8 @@ void main() {
       await driver.tap(find.text("Player Information"));
 
       await driver.waitFor(find.text("Daniel Teshome"));
+
+      await driver.waitFor(find.byTooltip("Back"));
     });
 
     tearDownAll(() async {
