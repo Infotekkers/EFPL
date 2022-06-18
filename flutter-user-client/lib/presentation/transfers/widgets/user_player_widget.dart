@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -345,8 +344,8 @@ Widget _buildShirtView({required String teamName}) {
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
       ),
-      child: SvgPicture.asset(
-        "assets/jerseys/" + teamName + ".svg",
+      child: Image.asset(
+        "assets/jerseys/" + teamName + ".png",
         width: 50,
         height: 50,
       ),

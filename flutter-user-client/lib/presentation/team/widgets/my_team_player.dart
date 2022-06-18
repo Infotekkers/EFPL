@@ -2,7 +2,6 @@ import 'package:efpl/application/my_team/myteam_bloc.dart';
 import 'package:efpl/services/global_vars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MyTeamPlayer extends StatelessWidget {
   final int playerId;
@@ -33,48 +32,41 @@ class MyTeamPlayer extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Material(
-        elevation: isTransferable
-            ? 5
-            : toBeTransferredOut
-                ? 5
-                : 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        color: isTransferable
-            ? Colors.green[300]
-            : toBeTransferredOut
-                ? Colors.amber[800]
-                : Colors.white,
+  Widget build(BuildContext context) => Container(
+        // margin: const EdgeInsets.symmetric(vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 3),
+        width: 85,
+        color: Colors.white,
         child: GestureDetector(
           onTap: () {
             if (toBeTransferredOut) {
             } else if (isTransferable) {
               BlocProvider.of<MyTeamBloc>(context).add(
-                  MyTeamEvent.transferConfirmed(
-                      playerId, position, multiplier == 0 ? true : false));
+                MyTeamEvent.transferConfirmed(
+                    playerId, position, multiplier == 0 ? true : false),
+              );
             } else {
               showBottomModal(context, multiplier == 0 ? true : false);
             }
           },
           onLongPress: () {
             BlocProvider.of<MyTeamBloc>(context).add(
-                MyTeamEvent.transferOptionsRequested(
-                    playerId, position, multiplier == 0 ? true : false));
+              MyTeamEvent.transferOptionsRequested(
+                  playerId, position, multiplier == 0 ? true : false),
+            );
           },
           child: Column(
             children: [
               Stack(
                 children: [
-                  SvgPicture.asset(
-                    "assets/jerseys/" + eplTeamId + ".svg",
-                    width: 60,
+                  Image.asset(
+                    "assets/jerseys/" + eplTeamId + ".png",
+                    width: 50,
                     height: 50,
                   ),
                   Positioned(
-                    left: 35,
-                    top: 30,
+                    bottom: 5,
+                    right: 2,
                     child: Card(
                       elevation: 1,
                       color: Colors.blue[400],
@@ -89,21 +81,21 @@ class MyTeamPlayer extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    left: 35,
-                    top: 0,
+                    top: 5,
+                    left: 10,
                     child: availability['injuryStatus'] == '100'
                         ? Container()
-                        : _buildAvailabilityIndicator(),
+                        : _buildAvailabilityIndicator(context: context),
                   )
                 ],
               ),
-              _buildInfoBox(),
+              _buildInfoBox(context: context),
             ],
           ),
         ),
       );
 
-  _buildAvailabilityIndicator() {
+  _buildAvailabilityIndicator({required BuildContext context}) {
     return Card(
       elevation: 2,
       color: Colors.red,
@@ -111,19 +103,22 @@ class MyTeamPlayer extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
       ),
       child: SizedBox(
-        height: 20,
-        width: 20,
+        height: 22,
+        width: 22,
         child: Center(
           child: Text(
             availability['injuryStatus'],
-            style: const TextStyle(color: Colors.white),
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(color: Colors.white),
           ),
         ),
       ),
     );
   }
 
-  _buildInfoBox() {
+  _buildInfoBox({required BuildContext context}) {
     return SizedBox(
       height: 50,
       width: 80,
@@ -135,10 +130,10 @@ class MyTeamPlayer extends StatelessWidget {
             Text(name.split(" ")[0], overflow: TextOverflow.ellipsis),
             Text(
               position.toUpperCase(),
-              style: const TextStyle(
-                fontSize: 12,
-                color: Colors.blueGrey,
-              ),
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    fontSize: 12,
+                    color: Colors.blueGrey,
+                  ),
             ),
           ],
         ),
@@ -148,8 +143,8 @@ class MyTeamPlayer extends StatelessWidget {
 
   _buildCaptainBadge(power) {
     return SizedBox(
+      height: 20,
       width: 20,
-      height: 15,
       child: Center(
         child: Text(
           power,

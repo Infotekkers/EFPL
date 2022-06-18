@@ -8,6 +8,7 @@ import 'package:efpl/services/global_vars.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TeamViewBody extends StatelessWidget {
   const TeamViewBody({Key? key}) : super(key: key);
@@ -128,7 +129,7 @@ class TeamViewBody extends StatelessWidget {
                       ),
                     )
                   : null,
-              child: const Icon(Icons.child_care_sharp),
+              child: const Icon(MdiIcons.pokerChip),
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(24.0),

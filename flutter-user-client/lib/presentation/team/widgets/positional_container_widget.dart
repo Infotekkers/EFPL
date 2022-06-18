@@ -25,7 +25,7 @@ class PositionalContainerWidget extends StatelessWidget {
     return Expanded(
       child: SizedBox(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 2.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
           decoration: position == 'sub'
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(10),

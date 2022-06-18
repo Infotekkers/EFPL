@@ -1,6 +1,5 @@
 import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class PlayerWidget extends StatelessWidget {
   final String playerName;
@@ -43,8 +42,8 @@ class PlayerWidget extends StatelessWidget {
                 Stack(
                   children: [
                     Center(
-                      child: SvgPicture.asset(
-                        "assets/jerseys/" + teamName + ".svg",
+                      child: Image.asset(
+                        "assets/jerseys/" + teamName + ".png",
                         width: 50,
                         height: 50,
                       ),
