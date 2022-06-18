@@ -325,6 +325,8 @@ const startFixture = asyncHandler(async function (req, res) {
         }
       }, 60000);
 
+      console.log(homeTeam);
+
       matchParent
         .save()
         .then(() =>
@@ -334,7 +336,10 @@ const startFixture = asyncHandler(async function (req, res) {
               `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} is live!`
             )
         )
-        .catch(() => res.status(500).send("Try again!"));
+        .catch((err) => {
+          res.status(500).send("Try again!");
+          console.log(err);
+        });
 
       const io = require("../../server");
       io.emit("fixtureUpdated");
@@ -465,6 +470,8 @@ const resumeFixture = asyncHandler(async function (req, res) {
 const endFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
+  console.log("Match");
+
   const homeTeam = await TeamModel.findOne({
     teamId: parseInt(req.params.matchId.split("|")[0]),
   });
@@ -481,6 +488,11 @@ const endFixture = asyncHandler(async function (req, res) {
     //   // MINUTE_COUNTERS[req.params.matchId].status = "ended";
     //   // clearInterval(MINUTE_COUNTERS[req.params.matchId].intervalId);
 
+    /*
+      ==================================
+      League Table Updates
+      ==================================
+    */
     const splitscore = match.score.split("v");
     const hometeamScore = splitscore[0];
     const awayteamScore = splitscore[1];
@@ -488,58 +500,81 @@ const endFixture = asyncHandler(async function (req, res) {
     const hometeamPosition = homeTeam.teamPosition;
     const awayteamPoint = awayteamPosition.teamPoint;
     const hometeamPoint = hometeamPosition.teamPoint;
+
+    // Home Team Win
     if (hometeamScore > awayteamScore) {
       const teamPoint = hometeamPoint + 3;
       const hometeamGoalDce = hometeamScore - awayteamScore;
       homeTeam.teamPosition.teamPoint = teamPoint;
       homeTeam.teamPosition.won += 1;
-      awayTeam.teamPosition.lost += 1;
-      homeTeam.teamPosition.goalDifferntial += hometeamGoalDce;
-      homeTeam.teamPosition.goalFor = hometeamScore;
-      homeTeam.teamPosition.goalAgainst = awayteamScore;
+      homeTeam.teamPosition.goalDifferential += hometeamGoalDce;
+      homeTeam.teamPosition.goalsFor += parseInt(hometeamScore);
+      homeTeam.teamPosition.goalsAgainst += parseInt(awayteamScore);
+
+      awayTeam.teamPosition.goalsFor += parseInt(awayteamScore);
+      awayTeam.teamPosition.goalDifferential += awayteamScore - hometeamScore;
+      awayTeam.teamPosition.goalsAgainst += parseInt(hometeamScore);
       awayTeam.teamPosition.lost += 1;
 
+      await awayTeam.save();
       await homeTeam.save();
-    } else if (hometeamScore === awayteamScore) {
+    }
+    // draw
+    else if (hometeamScore === awayteamScore) {
       const Hteampoint = hometeamPoint + 1;
       const Ateampoint = awayteamPoint + 1;
       const hometeamGoalDce = hometeamScore - awayteamScore;
-      homeTeam.teamPosition.teamPoint = Hteampoint;
+      homeTeam.teamPosition.teamPoint += Hteampoint;
       homeTeam.teamPosition.Draw += 1;
-      homeTeam.teamPosition.goalDifferntial += hometeamGoalDce;
-      homeTeam.teamPosition.goalFor = hometeamScore;
-      homeTeam.teamPosition.goalAgainst = awayteamScore;
+      homeTeam.teamPosition.goalDifferential += parseInt(hometeamGoalDce);
+      homeTeam.teamPosition.goalsFor += parseInt(hometeamScore);
+      homeTeam.teamPosition.goalsAgainst += parseInt(awayteamScore);
 
       const awayteamGoalDce = awayteamScore - hometeamScore;
       awayTeam.teamPosition.teamPoint = Ateampoint;
       awayTeam.teamPosition.Draw += 1;
-      awayTeam.teamPosition.goalDifferntial += awayteamGoalDce;
-      awayTeam.teamPosition.goalFor = awayteamScore;
-      awayTeam.teamPosition.goalAgainst = hometeamScore;
+      awayTeam.teamPosition.goalDifferential += parseInt(awayteamGoalDce);
+      awayTeam.teamPosition.goalsFor += parseInt(awayteamScore);
+      awayTeam.teamPosition.goalsAgainst += parseInt(hometeamScore);
 
       await homeTeam.save();
       await awayTeam.save();
-    } else {
+    }
+    // away team win
+    else {
       const Ateampoint = awayteamPoint + 3;
 
-      const awayteamGoalDce = hometeamScore - awayteamScore;
+      const awayteamGoalDce = awayteamScore - hometeamScore;
       awayTeam.teamPosition.teamPoint = Ateampoint;
       awayTeam.teamPosition.won += 1;
+      awayTeam.teamPosition.goalDifferential += parseInt(awayteamGoalDce);
+      awayTeam.teamPosition.goalFor += parseInt(hometeamScore);
+      awayTeam.teamPosition.goalAgainst += parseInt(awayteamScore);
+
       homeTeam.teamPosition.lost += 1;
-      awayTeam.teamPosition.goalDifferntial += awayteamGoalDce;
-      awayTeam.teamPosition.goalFor = hometeamScore;
-      awayTeam.teamPosition.goalAgainst = awayteamScore;
+      homeTeam.teamPosition.goalsFor += parseInt(hometeamScore);
+      homeTeam.teamPosition.goalDifferential += hometeamScore - awayteamScore;
+      homeTeam.teamPosition.goalsAgainst += parseInt(awayteamScore);
+      homeTeam.teamPosition.lost += 1;
+
       await awayTeam.save();
+      await homeTeam.save();
     }
+
+    // update match
     match
       .save()
       .then(() =>
         res.send(
-          `Full time for match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName}!`
+          `Full time for match ${homeTeam.teamName} vs ${awayTeam.teamName}!`
         )
       )
-      .catch(() => res.status(500).send("Try again!"));
+      .catch((err) => {
+        res.status(500).send("Try again!");
+        console.log(err);
+      });
 
+    // send socket update
     const io = require("../../server");
     io.emit("fixtureUpdated");
 
@@ -565,19 +600,25 @@ const endFixture = asyncHandler(async function (req, res) {
         status: "active",
       });
     }
-  } else if (!match) {
+  }
+  // if no match
+  else if (!match) {
     res
       .status(404)
       .send(
         `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} doesn't exist!`
       );
-  } else if (match.status === "FT") {
+  }
+  // match already FT
+  else if (match.status === "FT") {
     res
       .status(400)
       .send(
         `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} has already ended!`
       );
-  } else {
+  }
+  // server error
+  else {
     res
       .status(400)
       .send(
