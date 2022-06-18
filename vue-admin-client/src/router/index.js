@@ -6,7 +6,7 @@ const redirectIfLoggedIn = (to, from, next) => {
   const currentAdmin = JSON.parse(window.localStorage.getItem("currentAdmin"));
 
   if (currentAdmin && currentAdmin.token) {
-    next("/admin");
+    next("/admin/home");
   } else {
     next();
   }
@@ -66,11 +66,10 @@ const routes = [
       },
       // contact
       {
-        path: "contact",
+        path: "settings/contact",
         name: "contact",
         component: () => import("../components/ContactComponent.vue"),
       },
-
       {
         path: "players",
         name: "Players",
@@ -109,7 +108,6 @@ const routes = [
   {
     path: "/forgotpassword",
     name: "forgot-password",
-    beforeEnter: redirectIfLoggedIn,
     component: () => import("../components/ForgotPasswordComponent.vue"),
   },
 
