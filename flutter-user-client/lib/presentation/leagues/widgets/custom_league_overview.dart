@@ -47,20 +47,68 @@ _buildCustomLeagueMembersView(context, state) {
       ],
     ),
     body: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8.0,
+        vertical: 16.0,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Team name",
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+              Text(
+                "Points",
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10.0),
           Expanded(
             child: ListView.builder(
               itemCount: customLeagueMembers.length,
               shrinkWrap: true,
-              itemBuilder: (_, index) => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("${customLeagueMembers[index]["memberTeamName"]}"),
-                  Text("${customLeagueMembers[index]["memberPoints"]}"),
-                ],
+              itemBuilder: (_, index) => Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16.0,
+                  horizontal: 16.0,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 1),
+                      blurRadius: 2,
+                      color: Colors.black.withOpacity(0.3),
+                    ),
+                  ],
+                ),
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 4.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "${customLeagueMembers[index]["memberTeamName"]}",
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    Text(
+                      "${customLeagueMembers[index]["memberPoints"]}",
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -95,20 +143,24 @@ _showLeaveConfirmationModal({
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text(
-                      "Cancel",
-                      style: TextStyle(
-                        color: Colors.grey,
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      width: 150.0,
+                      child: const Text(
+                        "Cancel",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 16.0),
-                  ElevatedButton(
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       BlocProvider.of<CustomLeaguesBloc>(context).add(
                         CustomLeaguesEvent.leavePublicLeague(
                           userId: "62960c04c1a572a276b6e08b",
@@ -127,8 +179,19 @@ _showLeaveConfirmationModal({
                       // Navigate to custom leagues page
                       Navigator.of(context).pop();
                     },
-                    child: const Text("Confirm"),
-                  )
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      width: 150.0,
+                      child: const Text(
+                        "Confirm",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      color: const Color(0xFF38BDF8),
+                    ),
+                  ),
                 ],
               ),
             ],

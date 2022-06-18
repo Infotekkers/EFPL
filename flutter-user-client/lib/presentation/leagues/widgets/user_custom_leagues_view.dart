@@ -70,36 +70,42 @@ class UserCustomLeaguesView extends StatelessWidget {
               style: TextStyle(fontSize: 16.0),
             ),
             const SizedBox(height: 32.0),
-            ElevatedButton(
-              onPressed: () {
+            InkWell(
+              onTap: () {
                 _showCreateLeagueCustomModal(context: context);
               },
-              style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all<Size>(
-                  const Size.fromWidth(350.0),
+              child: Container(
+                padding: const EdgeInsets.all(24.0),
+                width: 350.0,
+                child: const Text(
+                  "Create league",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
-                padding: MaterialStateProperty.all<EdgeInsets>(
-                    const EdgeInsets.all(24.0)),
-              ),
-              child: const Text(
-                "Create League",
+                color: const Color(0xFF2698D1),
               ),
             ),
             const SizedBox(height: 10.0),
             const Text("or"),
             const SizedBox(height: 10.0),
-            ElevatedButton(
-              onPressed: () {
+            InkWell(
+              onTap: () {
                 _showJoinLeagueCustomModal(context: context);
               },
-              style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all<Size>(
-                  const Size.fromWidth(350.0),
+              child: Container(
+                padding: const EdgeInsets.all(24.0),
+                width: 350.0,
+                child: const Text(
+                  "Create league",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
-                padding: MaterialStateProperty.all<EdgeInsets>(
-                    const EdgeInsets.all(24.0)),
+                color: const Color(0xFF2698D1),
               ),
-              child: const Text("Join League"),
             ),
           ],
         ),
@@ -110,49 +116,51 @@ class UserCustomLeaguesView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: 8.0,
-            horizontal: 16.0,
-          ),
+          padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ElevatedButton(
-                onPressed: () {
+              InkWell(
+                onTap: () {
                   _showCreateLeagueCustomModal(context: context);
                 },
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  fixedSize: MaterialStateProperty.all<Size>(
-                    const Size.fromWidth(150.0),
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  width: 150.0,
+                  child: const Text(
+                    "Create League",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                child: const Text(
-                  "Create League",
-                  style: TextStyle(
-                    color: Colors.blue,
-                  ),
+                  color: const Color(0xFF2698D1),
                 ),
               ),
               const SizedBox(width: 10.0),
-              ElevatedButton(
-                onPressed: () {
+              InkWell(
+                onTap: () {
                   _showJoinLeagueCustomModal(context: context);
                 },
-                style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all<Size>(
-                    const Size.fromWidth(150.0),
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  width: 150.0,
+                  child: const Text(
+                    "Join League",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
+                  color: const Color(0xFF2698D1),
                 ),
-                child: const Text("Join League"),
               ),
             ],
           ),
         ),
         const SizedBox(height: 8.0),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
@@ -172,44 +180,58 @@ class UserCustomLeaguesView extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: ListView.builder(
-            itemCount: userCustomLeagues.length,
-            shrinkWrap: true,
-            itemBuilder: (_, index) => InkWell(
-              onTap: () {
-                BlocProvider.of<CustomLeaguesBloc>(context).add(
-                  CustomLeaguesEvent.getCustomLeagueInfo(
-                    leagueId: userCustomLeagues[index].leagueId.getOrCrash(),
-                  ),
-                );
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+              itemCount: userCustomLeagues.length,
+              shrinkWrap: true,
+              itemBuilder: (_, index) => InkWell(
+                onTap: () {
+                  BlocProvider.of<CustomLeaguesBloc>(context).add(
+                    CustomLeaguesEvent.getCustomLeagueInfo(
+                      leagueId: userCustomLeagues[index].leagueId.getOrCrash(),
+                    ),
+                  );
 
-                Navigator.pushNamed(
-                  context,
-                  "/customLeagueOverview",
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 16.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "${userCustomLeagues[index].leagueName.getOrCrash()}",
-                      style: const TextStyle(
-                        fontSize: 16.0,
+                  Navigator.pushNamed(
+                    context,
+                    "/customLeagueOverview",
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16.0,
+                    horizontal: 16.0,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 1),
+                        blurRadius: 2,
+                        color: Colors.black.withOpacity(0.3),
                       ),
-                    ),
-                    Text(
-                      "${userCustomLeagues[index].previousRank.getOrCrash()}",
-                      style: const TextStyle(
-                        fontSize: 16.0,
+                    ],
+                  ),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 4.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${userCustomLeagues[index].leagueName.getOrCrash()}",
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                        ),
                       ),
-                    ),
-                  ],
+                      Text(
+                        "${userCustomLeagues[index].previousRank.getOrCrash()}",
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -280,13 +302,9 @@ class UserCustomLeaguesView extends StatelessWidget {
                                   value),
                             ),
                           ),
-                          Container(
-                            height: 10.0,
-                            width: 100.0,
-                            color: Colors.blue[50],
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
+                          const SizedBox(height: 10.0),
+                          InkWell(
+                            onTap: () {
                               BlocProvider.of<CreateCustomLeagueFormBloc>(
                                       context)
                                   .add(
@@ -294,16 +312,19 @@ class UserCustomLeaguesView extends StatelessWidget {
                                     .createLeaguePressed(),
                               );
                             },
-                            child: const Text("Create"),
-                            style: ButtonStyle(
-                              padding: MaterialStateProperty.all<EdgeInsets>(
-                                  const EdgeInsets.all(16.0)),
-                              fixedSize: MaterialStateProperty.all<Size>(
-                                  const Size.fromWidth(150.0)),
-                              backgroundColor:
-                                  MaterialStateProperty.all<Color>(Colors.blue),
+                            child: Container(
+                              padding: const EdgeInsets.all(8.0),
+                              width: 150.0,
+                              child: const Text(
+                                "Create",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              color: const Color(0xFF2698D1),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -375,22 +396,27 @@ class UserCustomLeaguesView extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10.0),
-                        ElevatedButton(
-                          onPressed: () {
+                        InkWell(
+                          onTap: () {
                             BlocProvider.of<JoinCustomLeagueFormBloc>(context)
                                 .add(
                               const JoinCustomLeagueFormEvent
                                   .joinLeaguePressed(),
                             );
                           },
-                          child: const Text("Join"),
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all<EdgeInsets>(
-                                const EdgeInsets.all(16.0)),
-                            fixedSize: MaterialStateProperty.all<Size>(
-                                const Size.fromWidth(150.0)),
+                          child: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            width: 150.0,
+                            child: const Text(
+                              "Join",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            color: const Color(0xFF2698D1),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
