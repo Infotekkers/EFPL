@@ -81,11 +81,6 @@ const teamIcon = {
   alt: "Teams",
 };
 
-const homeIcon = {
-  path: require("../assets/icons/home-icon.svg"),
-  alt: "Home",
-};
-
 const settingsIcon = {
   path: require("../assets/icons/settings-icon.svg"),
   alt: "Settings",
@@ -121,28 +116,32 @@ const hiddenPasswordIcon = {
   alt: "Hide password",
 };
 
+const homeSidebarIcon = {
+  path: require("../assets/icons/sidebar-home-icon.svg"),
+  alt: "Home",
+};
 const settingsSidebarIcon = {
-  path: require("../assets/icons/settings-sidebar-icon.svg"),
+  path: require("../assets/icons/sidebar-settings-icon.svg"),
   alt: "Settings",
 };
 
-const teamsIcon = {
-  path: require("../assets/icons/teams-icon.svg"),
+const teamsSidebarIcon = {
+  path: require("../assets/icons/sidebar-teams-icon.svg"),
   alt: "Teams",
 };
 
-const matchesIcon = {
-  path: require("../assets/icons/matches-icon.svg"),
+const fixturesSidebarIcon = {
+  path: require("../assets/icons/sidebar-fixtures-icon.svg"),
   alt: "Matches",
 };
 
-const playerSidebarIcon = {
-  path: require("../assets/icons/player-sidebar-icon.svg"),
+const playersSidebarIcon = {
+  path: require("../assets/icons/sidebar-players-icon.svg"),
   alt: "Players",
 };
 
-const infoIcon = {
-  path: require("../assets/icons/info-icon.svg"),
+const infoSidebarIcon = {
+  path: require("../assets/icons/sidebar-info-icon.svg"),
   alt: "Info",
 };
 
@@ -169,7 +168,6 @@ module.exports = {
   injuredIcon,
 
   resetIcon,
-  homeIcon,
   settingsIcon,
   playerIcon,
   teamIcon,
@@ -181,9 +179,10 @@ module.exports = {
   passwordVisibleIcon,
   hiddenPasswordIcon,
 
-  matchesIcon,
-  teamsIcon,
-  playerSidebarIcon,
+  homeSidebarIcon,
+  fixturesSidebarIcon,
+  teamsSidebarIcon,
+  playersSidebarIcon,
   settingsSidebarIcon,
-  infoIcon,
+  infoSidebarIcon,
 };

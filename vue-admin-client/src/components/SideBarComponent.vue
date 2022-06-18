@@ -13,34 +13,42 @@
       <!-- Home -->
 
       <router-link class="sidebar__link" to="/admin/home"
-        ><img :src="homeIcon.path" :alt="homeIcon.alt" />{{
+        ><img :src="homeSidebarIcon.path" :alt="homeSidebarIcon.alt" />{{
           $t("home")
         }}</router-link
       >
 
       <!-- Fixtures -->
 
-      <router-link class="sidebar__link" to="/admin/fixtures">{{
-        $t("Fixtures")
-      }}</router-link>
+      <router-link class="sidebar__link" to="/admin/fixtures">
+        <img :src="fixturesSidebarIcon.path" :alt="fixturesSidebarIcon.alt" />
+        {{ $t("Fixtures") }}</router-link
+      >
 
       <!-- Teams -->
 
-      <router-link class="sidebar__link" to="/admin/teams">{{
-        $t("Teams")
-      }}</router-link>
+      <router-link class="sidebar__link" to="/admin/teams">
+        <img :src="teamsSidebarIcon.path" :alt="teamsSidebarIcon.alt" />{{
+          $t("Teams")
+        }}</router-link
+      >
 
       <!-- Players -->
 
-      <router-link class="sidebar__link" to="/admin/players">{{
-        $t("Players")
-      }}</router-link>
+      <router-link class="sidebar__link" to="/admin/players">
+        <img :src="playersSidebarIcon.path" :alt="playersSidebarIcon.alt" />{{
+          $t("Players")
+        }}</router-link
+      >
 
       <!-- settings -->
 
-      <router-link class="sidebar__link" to="/admin/settings">{{
-        $t("Settings")
-      }}</router-link>
+      <router-link class="sidebar__link" to="/admin/settings"
+        ><img
+          :src="settingsSidebarIcon.path"
+          :alt="settingsSidebarIcon.alt"
+        />{{ $t("Settings") }}</router-link
+      >
     </div>
   </aside>
 </template>
@@ -49,11 +57,12 @@
 import store from "../store/index";
 
 import {
-  homeIcon,
+  homeSidebarIcon,
+  fixturesSidebarIcon,
+  teamsSidebarIcon,
+  playersSidebarIcon,
   settingsSidebarIcon,
-  matchesIcon,
-  infoIcon,
-  teamsIcon,
+  // infoSidebarIcon,
 } from "@/utils/Icons";
 
 export default {
@@ -62,11 +71,12 @@ export default {
       sidebar: 1,
 
       // Icons
-      homeIcon,
+      homeSidebarIcon,
+      fixturesSidebarIcon,
+      teamsSidebarIcon,
+      playersSidebarIcon,
       settingsSidebarIcon,
-      matchesIcon,
-      infoIcon,
-      teamsIcon,
+      // infoSidebarIcon,
     };
   },
   methods: {
@@ -172,8 +182,8 @@ aside {
   }
 
   .sidebar__link img {
-    width: 5px;
-    fill: red;
+    width: 20px;
+    margin-right: var(--spacing-xsmall);
   }
 
   .sidebar__link.router-link-active {
