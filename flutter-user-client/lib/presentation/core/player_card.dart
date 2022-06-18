@@ -161,7 +161,10 @@ Widget _buildInjuryView(
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontSize: 10.5,
                       fontWeight: FontWeight.bold,
-                      color: int.parse(injuryStatus.toString()) >= 50
+                      color: int.parse(
+                                injuryStatus.toString(),
+                              ) >=
+                              50
                           ? Colors.black
                           : Colors.white,
                     ),

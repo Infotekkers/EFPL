@@ -33,27 +33,33 @@ class MyTeamPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        // margin: const EdgeInsets.symmetric(vertical: 4),
-        padding: const EdgeInsets.symmetric(horizontal: 3),
-        width: 85,
-        color: Colors.white,
+        // padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        width: 69,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: isTransferable
+              ? Colors.green[300]
+              : toBeTransferredOut
+                  ? Colors.amber[800]
+                  : Colors.white,
+        ),
+
         child: GestureDetector(
           onTap: () {
             if (toBeTransferredOut) {
             } else if (isTransferable) {
               BlocProvider.of<MyTeamBloc>(context).add(
-                MyTeamEvent.transferConfirmed(
-                    playerId, position, multiplier == 0 ? true : false),
-              );
+                  MyTeamEvent.transferConfirmed(
+                      playerId, position, multiplier == 0 ? true : false));
             } else {
               showBottomModal(context, multiplier == 0 ? true : false);
             }
           },
           onLongPress: () {
             BlocProvider.of<MyTeamBloc>(context).add(
-              MyTeamEvent.transferOptionsRequested(
-                  playerId, position, multiplier == 0 ? true : false),
-            );
+                MyTeamEvent.transferOptionsRequested(
+                    playerId, position, multiplier == 0 ? true : false));
           },
           child: Column(
             children: [
@@ -61,12 +67,12 @@ class MyTeamPlayer extends StatelessWidget {
                 children: [
                   Image.asset(
                     "assets/jerseys/" + eplTeamId + ".png",
-                    width: 50,
+                    width: 60,
                     height: 50,
                   ),
                   Positioned(
-                    bottom: 5,
-                    right: 2,
+                    left: 35,
+                    top: 30,
                     child: Card(
                       elevation: 1,
                       color: Colors.blue[400],
@@ -74,28 +80,28 @@ class MyTeamPlayer extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: isCaptain
-                          ? _buildCaptainBadge("C")
+                          ? _buildCaptainBadge("C", context)
                           : isViceCaptain
-                              ? _buildCaptainBadge("V")
+                              ? _buildCaptainBadge("V", context)
                               : null,
                     ),
                   ),
                   Positioned(
-                    top: 5,
-                    left: 10,
+                    left: 35,
+                    top: 0,
                     child: availability['injuryStatus'] == '100'
                         ? Container()
-                        : _buildAvailabilityIndicator(context: context),
+                        : _buildAvailabilityIndicator(context),
                   )
                 ],
               ),
-              _buildInfoBox(context: context),
+              _buildInfoBox(),
             ],
           ),
         ),
       );
 
-  _buildAvailabilityIndicator({required BuildContext context}) {
+  _buildAvailabilityIndicator(context) {
     return Card(
       elevation: 2,
       color: Colors.red,
@@ -103,22 +109,22 @@ class MyTeamPlayer extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
       ),
       child: SizedBox(
-        height: 22,
-        width: 22,
+        height: 20,
+        width: 20,
         child: Center(
           child: Text(
             availability['injuryStatus'],
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1!
-                .copyWith(color: Colors.white),
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  color: Colors.white,
+                  fontSize: 10.5,
+                ),
           ),
         ),
       ),
     );
   }
 
-  _buildInfoBox({required BuildContext context}) {
+  _buildInfoBox() {
     return SizedBox(
       height: 50,
       width: 80,
@@ -130,10 +136,10 @@ class MyTeamPlayer extends StatelessWidget {
             Text(name.split(" ")[0], overflow: TextOverflow.ellipsis),
             Text(
               position.toUpperCase(),
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontSize: 12,
-                    color: Colors.blueGrey,
-                  ),
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.blueGrey,
+              ),
             ),
           ],
         ),
@@ -141,14 +147,17 @@ class MyTeamPlayer extends StatelessWidget {
     );
   }
 
-  _buildCaptainBadge(power) {
+  _buildCaptainBadge(power, context) {
     return SizedBox(
-      height: 20,
       width: 20,
+      height: 15,
       child: Center(
         child: Text(
           power,
-          style: TextStyle(color: Colors.grey[50]),
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                color: Colors.grey[50],
+                fontSize: 10.5,
+              ),
         ),
       ),
     );
