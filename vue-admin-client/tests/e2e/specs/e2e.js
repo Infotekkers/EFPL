@@ -67,15 +67,50 @@ describe("E2E Test", () => {
 
   it("Adds team", () => {
     cy.get(".teams-add-new").click();
-    cy.get('input[name="teamName"]').type("Testers");
-    cy.get('input[name="teamNameAmh"]').type("ፈታኞቹ");
-    cy.get('input[name="teamCity"]').type("Skypeia");
-    cy.get('input[name="teamStadium"]').type("Wellness Center", {
-      force: true,
-    });
-    cy.get('input[name="teamCoach"]').type("Coach Margaret");
-    cy.get('input[name="stadiumCapacity"]').type("200");
-    cy.get('input[name="foundedIn"]').type("2022");
+
+    // Invalid team name
+    cy.get('input[name="teamName"]').clear().type("Sebeta City F.C");
+    cy.get('input[name="teamNameAmh"]').clear().type("ፈታኞቹ");
+    cy.get('input[name="teamCity"]').clear().type("Skypeia");
+    cy.get('input[name="teamStadium"]')
+      .clear({ force: true })
+      .type("Wellness Center", {
+        force: true,
+      });
+    cy.get('input[name="teamCoach"]').clear().type("Coach Margaret");
+    cy.get('input[name="stadiumCapacity"]').clear().type("200");
+    cy.get('input[name="foundedIn"]').clear().type("2022");
+    cy.get('input[name="teamLogo"]').attachFile("wellness_center_logo.png");
+    cy.get(".main-button-primary").click();
+    cy.get(".error-fill").should("exist");
+
+    // Empty logo
+    cy.get('input[name="teamName"]').clear().type("Testers");
+    cy.get('input[name="teamNameAmh"]').clear().type("ፈታኞቹ");
+    cy.get('input[name="teamCity"]').clear().type("Skypeia");
+    cy.get('input[name="teamStadium"]')
+      .clear({ force: true })
+      .type("Wellness Center", {
+        force: true,
+      });
+    cy.get('input[name="teamCoach"]').clear().type("Coach Margaret");
+    cy.get('input[name="stadiumCapacity"]').clear().type("200");
+    cy.get('input[name="foundedIn"]').clear().type("2022");
+    cy.get(".main-button-primary").click();
+    cy.get("input:invalid").should("have.length", 1);
+
+    // Valid data
+    cy.get('input[name="teamName"]').clear().type("Testers");
+    cy.get('input[name="teamNameAmh"]').clear().type("ፈታኞቹ");
+    cy.get('input[name="teamCity"]').clear().type("Skypeia");
+    cy.get('input[name="teamStadium"]')
+      .clear({ force: true })
+      .type("Wellness Center", {
+        force: true,
+      });
+    cy.get('input[name="teamCoach"]').clear().type("Coach Margaret");
+    cy.get('input[name="stadiumCapacity"]').clear().type("200");
+    cy.get('input[name="foundedIn"]').clear().type("2022");
     cy.get('input[name="teamLogo"]').attachFile("wellness_center_logo.png");
     cy.get(".main-button-primary").click();
     cy.get(".main-modal-close").click();
@@ -87,9 +122,21 @@ describe("E2E Test", () => {
       .parent()
       .find('[data-cp="edit-team"]')
       .click();
+
+    // Invalid team name
+    cy.get('input[name="teamName"]').clear().type("Sebeta City F.C");
+    cy.get(".error-fill").should("exist");
+
+    // Empty logo
+    cy.get('input[name="teamName"]').clear().type("Testers");
+    cy.get(".team-modal-image-remove").click();
+    cy.get("input:invalid").should("have.length", 1);
+
+    // Valid data
     cy.get('input[name="teamStadium"]')
       .clear({ force: true })
       .type("Legit Big Awesome Stadium");
+    cy.get('input[name="teamLogo"]').attachFile("wellness_center_logo.png");
     cy.get(".main-button-primary").click();
     cy.get(".main-modal-close").click();
   });
