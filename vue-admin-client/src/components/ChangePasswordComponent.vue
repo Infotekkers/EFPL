@@ -105,7 +105,7 @@ export default {
         new_password: "",
       },
       password_confirm: "",
-
+      regExp: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
       isLoading: false,
 
       // icons
@@ -115,20 +115,33 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      if (this.passSet.new_password === this.passSet.old_password) {
-        store.dispatch("Global/setNotificationInfo", {
-          showNotification: true,
-          notificationType: "error",
-          notificationMessage: "New Password Can't Be The Same As Old Password",
-        });
-      } else if (!(this.passSet.new_password === this.password_confirm)) {
-        store.dispatch("Global/setNotificationInfo", {
-          showNotification: true,
-          notificationType: "error",
-          notificationMessage: `Passwords Don't Match `,
-        });
+      if (
+        this.regExp.test(this.passSet.old_password) === true &&
+        this.regExp.test(this.passSet.new_password) === true &&
+        this.regExp.test(this.password_confirm) === true
+      ) {
+        if (this.passSet.new_password === this.passSet.old_password) {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage:
+              "New Password Can't Be The Same As Old Password",
+          });
+        } else if (!(this.passSet.new_password === this.password_confirm)) {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: `Passwords Don't Match `,
+          });
+        } else {
+          this.$store.dispatch("changePassword", this.passSet);
+        }
       } else {
-        this.$store.dispatch("changePassword", this.passSet);
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Invalid Password",
+        });
       }
     },
   },

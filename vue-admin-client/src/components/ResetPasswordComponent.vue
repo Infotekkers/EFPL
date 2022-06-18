@@ -76,6 +76,7 @@ export default {
       password: "",
       password_confirm: "",
       isLoading: false,
+      regExp: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
 
       // icons
       passwordVisibleIcon: passwordVisibleIcon,
@@ -84,14 +85,25 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      if (!(this.password === this.password_confirm)) {
+      if (
+        this.regExp.test(this.password) === true &&
+        this.regExp.test(this.password_confirm) === true
+      ) {
+        if (!(this.password === this.password_confirm)) {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: "Passwords Don't Match",
+          });
+        } else {
+          this.$store.dispatch("resetPassword", this.password);
+        }
+      } else {
         store.dispatch("Global/setNotificationInfo", {
           showNotification: true,
           notificationType: "error",
-          notificationMessage: "Passwords Don't Match",
+          notificationMessage: "Invalid Password",
         });
-      } else {
-        this.$store.dispatch("resetPassword", this.password);
       }
     },
   },
