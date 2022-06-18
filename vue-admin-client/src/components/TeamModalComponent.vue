@@ -24,6 +24,7 @@
           type="file"
           class="input-file"
           ref="imageInput"
+          name="teamLogo"
           @change="teamLogoChange($event)"
         />
       </div>
