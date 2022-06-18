@@ -34,6 +34,12 @@ class LeagueTableViewBody extends StatelessWidget {
                     color: ConstantColors.primary_900,
                   ),
             ),
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.blue[50],
+            ),
+            backgroundColor: Colors.blue[50],
+            foregroundColor: ConstantColors.primary_900,
+            elevation: 0,
           ),
           body: const Center(
             child: Text("Something Went Wrong"),

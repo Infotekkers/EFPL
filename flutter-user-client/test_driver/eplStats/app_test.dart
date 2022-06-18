@@ -16,7 +16,8 @@ void main() {
       driver = await FlutterDriver.connect();
     });
 
-    test('View Most Goals, Most Assists ,Most Reds, Most Yellows, Most Saves',
+    test(
+        'View Most Goals, Most Assists ,Most Reds, Most Yellows, Most Saves & Check League Table',
         () async {
       // await render
       await driver.waitUntilFirstFrameRasterized();
@@ -30,12 +31,21 @@ void main() {
 
       await driver.tap(loginButton);
 
+      // go to points tab
+      await driver.tap(find.byTooltip("EPL Stats"));
+
       await driver.waitFor(find.text("Most Goals"));
       await driver.waitFor(find.text("Most Assists"));
 
       await driver.scrollUntilVisible(
           eflStatsScrollView, find.text("Most Saves"),
           dyScroll: -100);
+
+      final SerializableFinder locateDrawer =
+          find.byTooltip('Open navigation menu');
+
+      await driver.tap(locateDrawer);
+      await driver.tap(find.text("EPL Table"));
     });
 
     tearDownAll(() async {
