@@ -98,6 +98,7 @@ const login = asyncHandler(async (req, res) => {
         country: user.country,
         favouriteEplTeam: user.favouriteEplTeam,
         teamName: user.teamName,
+        id:user._id,
       });
     } else {
       res.status(400).json({ message: "invalid email - password combination" });
