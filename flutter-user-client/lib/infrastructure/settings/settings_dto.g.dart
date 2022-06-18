@@ -6,14 +6,14 @@ part of 'settings_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserDetailDto _$$_UserDetailDtoFromJson(Map<String, dynamic> json) =>
-    _$_UserDetailDto(
+_$_SettingsDto _$$_SettingsDtoFromJson(Map<String, dynamic> json) =>
+    _$_SettingsDto(
       teamName: json['teamName'] as String,
       favouriteEplTeam: json['favouriteEplTeam'] as String,
       userName: json['userName'] as String,
     );
 
-Map<String, dynamic> _$$_UserDetailDtoToJson(_$_UserDetailDto instance) =>
+Map<String, dynamic> _$$_SettingsDtoToJson(_$_SettingsDto instance) =>
     <String, dynamic>{
       'teamName': instance.teamName,
       'favouriteEplTeam': instance.favouriteEplTeam,

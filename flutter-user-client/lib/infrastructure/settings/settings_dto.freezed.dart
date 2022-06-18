@@ -13,61 +13,60 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-UserDetailDto _$UserDetailDtoFromJson(Map<String, dynamic> json) {
-  return _UserDetailDto.fromJson(json);
+SettingsDto _$SettingsDtoFromJson(Map<String, dynamic> json) {
+  return _SettingsDto.fromJson(json);
 }
 
 /// @nodoc
-class _$UserDetailDtoTearOff {
-  const _$UserDetailDtoTearOff();
+class _$SettingsDtoTearOff {
+  const _$SettingsDtoTearOff();
 
-  _UserDetailDto call(
+  _SettingsDto call(
       {required String teamName,
       required String favouriteEplTeam,
       required String userName}) {
-    return _UserDetailDto(
+    return _SettingsDto(
       teamName: teamName,
       favouriteEplTeam: favouriteEplTeam,
       userName: userName,
     );
   }
 
-  UserDetailDto fromJson(Map<String, Object?> json) {
-    return UserDetailDto.fromJson(json);
+  SettingsDto fromJson(Map<String, Object?> json) {
+    return SettingsDto.fromJson(json);
   }
 }
 
 /// @nodoc
-const $UserDetailDto = _$UserDetailDtoTearOff();
+const $SettingsDto = _$SettingsDtoTearOff();
 
 /// @nodoc
-mixin _$UserDetailDto {
+mixin _$SettingsDto {
   String get teamName => throw _privateConstructorUsedError;
   String get favouriteEplTeam => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserDetailDtoCopyWith<UserDetailDto> get copyWith =>
+  $SettingsDtoCopyWith<SettingsDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserDetailDtoCopyWith<$Res> {
-  factory $UserDetailDtoCopyWith(
-          UserDetailDto value, $Res Function(UserDetailDto) then) =
-      _$UserDetailDtoCopyWithImpl<$Res>;
+abstract class $SettingsDtoCopyWith<$Res> {
+  factory $SettingsDtoCopyWith(
+          SettingsDto value, $Res Function(SettingsDto) then) =
+      _$SettingsDtoCopyWithImpl<$Res>;
   $Res call({String teamName, String favouriteEplTeam, String userName});
 }
 
 /// @nodoc
-class _$UserDetailDtoCopyWithImpl<$Res>
-    implements $UserDetailDtoCopyWith<$Res> {
-  _$UserDetailDtoCopyWithImpl(this._value, this._then);
+class _$SettingsDtoCopyWithImpl<$Res> implements $SettingsDtoCopyWith<$Res> {
+  _$SettingsDtoCopyWithImpl(this._value, this._then);
 
-  final UserDetailDto _value;
+  final SettingsDto _value;
   // ignore: unused_field
-  final $Res Function(UserDetailDto) _then;
+  final $Res Function(SettingsDto) _then;
 
   @override
   $Res call({
@@ -93,25 +92,24 @@ class _$UserDetailDtoCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$UserDetailDtoCopyWith<$Res>
-    implements $UserDetailDtoCopyWith<$Res> {
-  factory _$UserDetailDtoCopyWith(
-          _UserDetailDto value, $Res Function(_UserDetailDto) then) =
-      __$UserDetailDtoCopyWithImpl<$Res>;
+abstract class _$SettingsDtoCopyWith<$Res>
+    implements $SettingsDtoCopyWith<$Res> {
+  factory _$SettingsDtoCopyWith(
+          _SettingsDto value, $Res Function(_SettingsDto) then) =
+      __$SettingsDtoCopyWithImpl<$Res>;
   @override
   $Res call({String teamName, String favouriteEplTeam, String userName});
 }
 
 /// @nodoc
-class __$UserDetailDtoCopyWithImpl<$Res>
-    extends _$UserDetailDtoCopyWithImpl<$Res>
-    implements _$UserDetailDtoCopyWith<$Res> {
-  __$UserDetailDtoCopyWithImpl(
-      _UserDetailDto _value, $Res Function(_UserDetailDto) _then)
-      : super(_value, (v) => _then(v as _UserDetailDto));
+class __$SettingsDtoCopyWithImpl<$Res> extends _$SettingsDtoCopyWithImpl<$Res>
+    implements _$SettingsDtoCopyWith<$Res> {
+  __$SettingsDtoCopyWithImpl(
+      _SettingsDto _value, $Res Function(_SettingsDto) _then)
+      : super(_value, (v) => _then(v as _SettingsDto));
 
   @override
-  _UserDetailDto get _value => super._value as _UserDetailDto;
+  _SettingsDto get _value => super._value as _SettingsDto;
 
   @override
   $Res call({
@@ -119,7 +117,7 @@ class __$UserDetailDtoCopyWithImpl<$Res>
     Object? favouriteEplTeam = freezed,
     Object? userName = freezed,
   }) {
-    return _then(_UserDetailDto(
+    return _then(_SettingsDto(
       teamName: teamName == freezed
           ? _value.teamName
           : teamName // ignore: cast_nullable_to_non_nullable
@@ -138,15 +136,15 @@ class __$UserDetailDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserDetailDto extends _UserDetailDto {
-  const _$_UserDetailDto(
+class _$_SettingsDto extends _SettingsDto {
+  const _$_SettingsDto(
       {required this.teamName,
       required this.favouriteEplTeam,
       required this.userName})
       : super._();
 
-  factory _$_UserDetailDto.fromJson(Map<String, dynamic> json) =>
-      _$$_UserDetailDtoFromJson(json);
+  factory _$_SettingsDto.fromJson(Map<String, dynamic> json) =>
+      _$$_SettingsDtoFromJson(json);
 
   @override
   final String teamName;
@@ -157,14 +155,14 @@ class _$_UserDetailDto extends _UserDetailDto {
 
   @override
   String toString() {
-    return 'UserDetailDto(teamName: $teamName, favouriteEplTeam: $favouriteEplTeam, userName: $userName)';
+    return 'SettingsDto(teamName: $teamName, favouriteEplTeam: $favouriteEplTeam, userName: $userName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserDetailDto &&
+            other is _SettingsDto &&
             const DeepCollectionEquality().equals(other.teamName, teamName) &&
             const DeepCollectionEquality()
                 .equals(other.favouriteEplTeam, favouriteEplTeam) &&
@@ -180,24 +178,24 @@ class _$_UserDetailDto extends _UserDetailDto {
 
   @JsonKey(ignore: true)
   @override
-  _$UserDetailDtoCopyWith<_UserDetailDto> get copyWith =>
-      __$UserDetailDtoCopyWithImpl<_UserDetailDto>(this, _$identity);
+  _$SettingsDtoCopyWith<_SettingsDto> get copyWith =>
+      __$SettingsDtoCopyWithImpl<_SettingsDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserDetailDtoToJson(this);
+    return _$$_SettingsDtoToJson(this);
   }
 }
 
-abstract class _UserDetailDto extends UserDetailDto {
-  const factory _UserDetailDto(
+abstract class _SettingsDto extends SettingsDto {
+  const factory _SettingsDto(
       {required String teamName,
       required String favouriteEplTeam,
-      required String userName}) = _$_UserDetailDto;
-  const _UserDetailDto._() : super._();
+      required String userName}) = _$_SettingsDto;
+  const _SettingsDto._() : super._();
 
-  factory _UserDetailDto.fromJson(Map<String, dynamic> json) =
-      _$_UserDetailDto.fromJson;
+  factory _SettingsDto.fromJson(Map<String, dynamic> json) =
+      _$_SettingsDto.fromJson;
 
   @override
   String get teamName;
@@ -207,6 +205,6 @@ abstract class _UserDetailDto extends UserDetailDto {
   String get userName;
   @override
   @JsonKey(ignore: true)
-  _$UserDetailDtoCopyWith<_UserDetailDto> get copyWith =>
+  _$SettingsDtoCopyWith<_SettingsDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

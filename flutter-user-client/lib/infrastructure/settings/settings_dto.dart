@@ -6,31 +6,31 @@ part 'settings_dto.freezed.dart';
 part 'settings_dto.g.dart';
 
 @freezed
-abstract class UserDetailDto implements _$UserDetailDto {
-  const UserDetailDto._();
+abstract class SettingsDto implements _$SettingsDto {
+  const SettingsDto._();
   // user entity data transfer object
-  const factory UserDetailDto({
+  const factory SettingsDto({
     required String teamName,
     required String favouriteEplTeam,
     required String userName,
-  }) = _UserDetailDto;
+  }) = _SettingsDto;
 
-  factory UserDetailDto.fromDomain(UserDetail userDetail) {
-    return UserDetailDto(
-      teamName: userDetail.teamName.getOrCrash(),
-      favouriteEplTeam: userDetail.favouriteEplTeam.getOrCrash(),
-      userName: userDetail.userName.getOrCrash(),
+  factory SettingsDto.fromDomain(Settings settings) {
+    return SettingsDto(
+      teamName: settings.teamName.getOrCrash(),
+      favouriteEplTeam: settings.favouriteEplTeam.getOrCrash(),
+      userName: settings.userName.getOrCrash(),
     );
   }
 
-  UserDetail toDomain() {
-    return UserDetail(
+  Settings toDomain() {
+    return Settings(
       teamName: TeamName(teamName),
       favouriteEplTeam: FavouriteEplTeam(favouriteEplTeam),
       userName: UserName(userName),
     );
   }
 
-  factory UserDetailDto.fromJson(Map<String, dynamic> json) =>
-      _$UserDetailDtoFromJson(json);
+  factory SettingsDto.fromJson(Map<String, dynamic> json) =>
+      _$SettingsDtoFromJson(json);
 }
