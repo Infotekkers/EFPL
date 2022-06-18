@@ -58,6 +58,7 @@ class EPLStatsViewBody extends StatelessWidget {
     final mostMinutesPlayed = state.eplStats.mostMinutesPlayed.getOrCrash();
 
     return SingleChildScrollView(
+      key: const Key("eplStatsScrollView"),
       child: Container(
         padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
         color: Colors.blue[50],

@@ -73,32 +73,32 @@ class FixturesView extends StatelessWidget {
                     },
 
                     // token issues
-                    unauthorized: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + "!",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    unauthenticated: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + " !",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
+                    // unauthorized: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + "!",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
+                    // unauthenticated: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + " !",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
                     unexpectedError: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -114,14 +114,14 @@ class FixturesView extends StatelessWidget {
                       );
                     },
 
-                    orElse: () {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText: "Something went wrong.",
-                        message: "Something went wrong. Try again!",
-                        snackBarType: "error",
-                      );
-                    },
+                    // orElse: () {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText: "Something went wrong.",
+                    //     message: "Something went wrong. Try again!",
+                    //     snackBarType: "error",
+                    //   );
+                    // },
                   );
                 },
                 (_) {},
@@ -184,6 +184,7 @@ Widget _buildFixturesView(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
+                key: const Key("fixtureViewPrevGWKey"),
                 onTap: () {
                   fixtureBloc.add(
                     const FixtureEvent.decreaseGameWeek(),
@@ -198,6 +199,7 @@ Widget _buildFixturesView(
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               InkWell(
+                key: const Key("fixtureViewNextGWKey"),
                 onTap: () {
                   fixtureBloc.add(
                     const FixtureEvent.increaseGameWeek(),
@@ -254,6 +256,12 @@ Widget _buildFixturesView(
                                     ? Colors.white
                                     : (Colors.blue[50]),
                                 child: FixtureWidget(
+                                  key: Key(
+                                    "fixturesCardKey" +
+                                        (index + 1).toString() +
+                                        "G" +
+                                        state.gameWeekId.toString(),
+                                  ),
                                   fixture: fixture[index],
                                 ),
                               );

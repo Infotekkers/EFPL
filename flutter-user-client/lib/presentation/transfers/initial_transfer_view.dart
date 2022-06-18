@@ -157,6 +157,7 @@ class InitialTransferPage extends StatelessWidget {
             key: const Key("intialTransferViewMainKey"),
             body: SafeArea(
               child: SingleChildScrollView(
+                key: const Key("initialTransferMainScrollKey"),
                 child: Stack(
                   children: [
                     // Main Area
@@ -441,6 +442,10 @@ class InitialTransferPage extends StatelessWidget {
                                         child: SizedBox(
                                           width: 80,
                                           child: PlayerWidget(
+                                            key: Key(
+                                              "initialTransferViewDEFKey" +
+                                                  (index + 1).toString(),
+                                            ),
                                             playerName: allFormattedPlayers[1]
                                                     [index]
                                                 .playerName
@@ -593,6 +598,10 @@ class InitialTransferPage extends StatelessWidget {
                                         child: SizedBox(
                                           width: 80,
                                           child: PlayerWidget(
+                                            key: Key(
+                                              "initialTransferViewMIDKey" +
+                                                  (index + 1).toString(),
+                                            ),
                                             playerName: allFormattedPlayers[2]
                                                     [index]
                                                 .playerName
@@ -745,6 +754,10 @@ class InitialTransferPage extends StatelessWidget {
                                         child: SizedBox(
                                           width: 80,
                                           child: PlayerWidget(
+                                            key: Key(
+                                              "initialTransferViewATTKey" +
+                                                  (index + 1).toString(),
+                                            ),
                                             playerName: allFormattedPlayers[3]
                                                     [index]
                                                 .playerName
@@ -825,6 +838,7 @@ class InitialTransferPage extends StatelessWidget {
                         ? Container()
                         : Positioned(
                             child: InkWell(
+                              key: const Key("initialTransferViewSaveKey"),
                               onTap: () async {
                                 _transferBloc.add(
                                   TransferEvent.validateTeam(
