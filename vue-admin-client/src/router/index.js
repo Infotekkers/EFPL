@@ -6,7 +6,7 @@ const redirectIfLoggedIn = (to, from, next) => {
   const currentAdmin = JSON.parse(window.localStorage.getItem("currentAdmin"));
 
   if (currentAdmin && currentAdmin.token) {
-    next("/admin");
+    next("/admin/home");
   } else {
     next();
   }

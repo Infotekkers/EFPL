@@ -13,6 +13,7 @@
   "select email": "select email",
   "subject": "subject",
   "submit": "submit",
+  "Back": "Back",
   "Dev -1": "Dev -1",
   "Dev -2": "Dev -2",
   "Password": "Password",
@@ -23,6 +24,7 @@
   "show password": "Show Password",
   "forgot password": "Forgot Password",
   "Reset link will be sent to the email you enter below": "Reset link will be sent to the email you enter below",
+  "Reset Your Password": "Reset Your Password",
   "Login": "Login",
   "Login Page": "Login",
   "Logout": "LogOut",
@@ -32,6 +34,7 @@
   "Import": "Import",
   "Export": "Export",
   "Page Not Found": "Page Not Found",
+  "Not Found Text": "The page you are looking for might have been removed, had its name changed or is temporarily unavailable",
 
   "_comment_misc": "Miscellaneous Translations",
   "Loading": "Loading",
