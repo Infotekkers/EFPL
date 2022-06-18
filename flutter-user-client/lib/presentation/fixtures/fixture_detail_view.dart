@@ -74,32 +74,32 @@ class FixtureDetailView extends StatelessWidget {
                     },
 
                     // token issues
-                    unauthorized: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + "!",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    unauthenticated: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + " !",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
+                    // unauthorized: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + "!",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
+                    // unauthenticated: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + " !",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
                     unexpectedError: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -116,12 +116,12 @@ class FixtureDetailView extends StatelessWidget {
                     },
 
                     orElse: () {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText: "Something went wrong.",
-                        message: "Something went wrong. Try again!",
-                        snackBarType: "error",
-                      );
+                      // CustomSnackBar().showCustomSnackBar(
+                      //   showContext: context,
+                      //   headlineText: "Something went wrong.",
+                      //   message: "Something went wrong. Try again!",
+                      //   snackBarType: "error",
+                      // );
                     },
                   );
                 },

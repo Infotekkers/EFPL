@@ -20,13 +20,16 @@ class PlayerView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: const Text("Player Information"),
-          iconTheme: IconThemeData(color: Colors.blue[900]),
-          titleTextStyle: TextStyle(
-            color: Colors.blue[900],
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
+          title: Text(
+            "Player Information",
+            style: Theme.of(context).textTheme.bodyText1,
           ),
+          iconTheme: IconThemeData(color: Colors.blue[900]),
+          titleTextStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                color: Colors.blue[900],
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
           backgroundColor: Colors.blue[50],
         ),
         body: BlocConsumer<PlayerBloc, PlayerState>(

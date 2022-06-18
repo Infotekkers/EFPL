@@ -344,6 +344,7 @@ Widget _buildMainView(
                   color: ConstantColors.primary_900,
                 ),
                 child: TextButton(
+                  key: const Key("confirmTransfersPageSaveButton"),
                   onPressed: () {
                     transferBloc.add(
                       TransferEvent.saveUserPlayers(

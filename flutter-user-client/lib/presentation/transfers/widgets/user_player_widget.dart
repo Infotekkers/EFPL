@@ -187,6 +187,7 @@ void _buildModalSheet(
 
                   // Transfer
                   InkWell(
+                    key: const Key("transferViewModalTransferButton"),
                     onTap: () {
                       state.transferredInPlayerIdList
                               .contains(currentUserPlayer.playerId)

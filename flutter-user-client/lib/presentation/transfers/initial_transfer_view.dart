@@ -100,32 +100,32 @@ class InitialTransferPage extends StatelessWidget {
                     },
 
                     // token issues
-                    unauthorized: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + "!",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    unauthenticated: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + " !",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
+                    // unauthorized: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + "!",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
+                    // unauthenticated: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + " !",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
                     unexpectedError: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,

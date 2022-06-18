@@ -3,7 +3,7 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Login User Tests', () {
+  group('Initial Team Tests', () {
     final emailInputField = find.byValueKey('loginViewUserName');
     final passwordInputField = find.byValueKey('loginViewPassword');
     final loginButton = find.byValueKey("loginViewLoginButton");
@@ -238,21 +238,21 @@ void main() {
 
       await driver.waitFor(find.text("Price Limit Exceeded!"));
 
-      // EXCEED BUDGET ATT 1
+      // Exceed Team Count 1
       await driver.tap(initialTransferATTKey1);
       await driver.scrollUntilVisible(transferListViewMainView, selectedATT1,
           dyScroll: -100);
       await driver.tap(selectedATT1);
       await driver.tap(transferPlayerCardTransferButton);
 
-      // EXCEED BUDGET  ATT 2
+      // Exceed Team Count 2
       await driver.tap(initialTransferATTKey2);
       await driver.scrollUntilVisible(transferListViewMainView, selectedATT2,
           dyScroll: -100);
       await driver.tap(selectedATT2);
       await driver.tap(transferPlayerCardTransferButton);
 
-      // EXCEED BUDGET  ATT 3
+      // Exceed Team Count 3
       await driver.tap(initialTransferATTKey3);
       await driver.scrollUntilVisible(
           transferListViewMainView, teamCountExceedATT,
@@ -263,33 +263,34 @@ void main() {
       await driver.tap(intialTransferSaveButton);
 
       await driver.waitFor(find.text("Players from Team!"));
-      await Future.delayed(const Duration(seconds: 5));
 
-      // EXCEED BUDGET  ATT 3
-      await driver.tap(initialTransferATTKey2);
+      //Valid  ATT 1
+      // await driver.tap(find.text("Abel"));
+      // await driver.scrollUntilVisible(transferListViewMainView, selectedATT1,
+      //     dyScroll: -100);
+      // await driver.tap(selectedATT1);
+      // await driver.tap(transferPlayerCardTransferButton);
+      // await Future.delayed(const Duration(seconds: 3));
+
+      // Valid ATT 2
+      await driver.tap(find.text("Abdisa"));
       await driver.scrollUntilVisible(transferListViewMainView, selectedATT2,
           dyScroll: -100);
-      await driver.tap(selectedATT1);
+      await driver.tap(selectedATT2);
       await driver.tap(transferPlayerCardTransferButton);
-      await Future.delayed(const Duration(seconds: 5));
 
-      // EXCEED BUDGET  ATT 2
-      await driver.tap(initialTransferATTKey2);
-      await driver.scrollUntilVisible(transferListViewMainView, selectedATT1,
-          dyScroll: -100);
-      await driver.tap(selectedATT1);
-      await driver.tap(transferPlayerCardTransferButton);
-      await Future.delayed(const Duration(seconds: 5));
-      await driver.tap(initialTransferATTKey3);
+      // Valid Att 3
+      await driver.tap(find.text("Ali"));
       await driver.scrollUntilVisible(transferListViewMainView, selectedATT3,
           dyScroll: -100);
       await driver.tap(selectedATT3);
       await driver.tap(transferPlayerCardTransferButton);
-      await Future.delayed(const Duration(seconds: 5));
+
+      ;
 
       await driver.tap(intialTransferSaveButton);
 
-      await Future.delayed(const Duration(seconds: 5));
+      await driver.tap(find.byValueKey("confirmTransfersPageSaveButton"));
     });
 
     tearDownAll(() async {
