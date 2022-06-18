@@ -36,8 +36,13 @@ class UserDetailRemoteDataProvider {
 
   Future<Either<SettingsFailure, Unit>> updateUserDetail(
       Settings settings, String userId) async {
-    final Uri url = Uri.parse("$_baseUrl/updateUser/$userId");
-
+    final Uri url = Uri.parse("$_baseUrl/user/updateUser/$userId");
+    print("--------------------");
+    print("request data");
+    print("username ${settings.userName.getOrCrash()}");
+    print("teamname ${settings.teamName.getOrCrash()}");
+    print("favorite team ${settings.favouriteEplTeam.getOrCrash()}");
+    print("--------------------");
     SettingsDto settingsDto = SettingsDto.fromDomain(settings);
 
     final outgoingJson = jsonEncode({
@@ -48,9 +53,8 @@ class UserDetailRemoteDataProvider {
     });
 
     try {
-      final response = await client!.put(url,
+      final response = await client!.patch(url,
           body: outgoingJson, headers: {"Content-Type": "application/json"});
-
       if (response.statusCode == 200) {
         return right(unit);
       }

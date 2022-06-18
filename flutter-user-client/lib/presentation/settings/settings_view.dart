@@ -2,15 +2,14 @@ import 'package:efpl/application/auth/auth/auth_bloc.dart';
 import 'package:efpl/application/settings/bloc/settings_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/auth/user.dart';
-import 'package:efpl/infrastructure/auth/auth_repository.dart';
-import 'package:efpl/injectable.dart';
+import 'package:efpl/domain/settings/settings.dart';
 import 'package:efpl/presentation/settings/action_types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../domain/settings/value_objects.dart';
+import '../../services/snack_bar.dart';
 import '../colors.dart';
 import '../core/widgets/bouncing_ball_loading_indicator.dart';
 
@@ -37,30 +36,147 @@ class SettingsView extends StatelessWidget {
         state.maybeMap(
             loadFailure: ((value) => {}),
             loadSuccess: (value) {},
-            settingsUpdateSuccess: (value) => {},
+            settingsUpdateSuccess: (value) {
+              CustomSnackBar().showCustomSnackBar(
+                showContext: context,
+                headlineText: "Update Status",
+                message: value.message,
+                snackBarType: "success",
+              );
+              BlocProvider.of<SettingsBloc>(context).add(
+                SettingsEvent.loadUserDetail(
+                  user!.id.getOrCrash(),
+                ),
+              );
+            },
             orElse: () {});
       },
       builder: (context, state) {
         return state.map(
-          initial: (context) => Scaffold(
-            appBar: AppBar(),
-            body: Scaffold(
-              appBar: AppBar(),
+          initial: (_) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pushNamed(context, "/home");
+              return true;
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    }),
+                title: Text(
+                  "Settings",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.blue[50],
+                ),
+                backgroundColor: Colors.blue[50],
+                foregroundColor: ConstantColors.primary_900,
+                elevation: 0,
+              ),
               body: const Center(
                 child: Text("initial"),
               ),
             ),
           ),
-          loadFailure: (_) => Scaffold(
-            appBar: AppBar(),
-            body: const Center(
-              child: Text("Load failure"),
+          loadFailure: (_) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pushNamed(context, "/home");
+              return true;
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    }),
+                title: Text(
+                  "Settings",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.blue[50],
+                ),
+                backgroundColor: Colors.blue[50],
+                foregroundColor: ConstantColors.primary_900,
+                elevation: 0,
+              ),
+              body: const Center(
+                child: Text("Load failure"),
+              ),
             ),
           ),
-          settingsUpdateSuccess: (_) =>
-              Scaffold(appBar: AppBar(), body: Container()),
-          loadInProgress: (_) => Scaffold(
-              appBar: AppBar(), body: const BouncingBallLoadingIndicator()),
+          settingsUpdateSuccess: (_) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pushNamed(context, "/home");
+              return true;
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    }),
+                title: Text(
+                  "Settings",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.blue[50],
+                ),
+                backgroundColor: Colors.blue[50],
+                foregroundColor: ConstantColors.primary_900,
+                elevation: 0,
+              ),
+              body: Container(),
+            ),
+          ),
+          loadInProgress: (_) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pushNamed(context, "/home");
+              return true;
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    }),
+                title: Text(
+                  "Settings",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.blue[50],
+                ),
+                backgroundColor: Colors.blue[50],
+                foregroundColor: ConstantColors.primary_900,
+                elevation: 0,
+              ),
+              body: const BouncingBallLoadingIndicator(),
+            ),
+          ),
           loadSuccess: (state) => WillPopScope(
             onWillPop: () async {
               Navigator.pushNamed(context, "/home");
@@ -162,10 +278,14 @@ class SettingsView extends StatelessWidget {
                               builder: (context) => Padding(
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: BottomSheetWidget(
-                                  label: updateTeamName,
-                                  initialValue:
-                                      state.settings.teamName.getOrCrash(),
-                                ),
+                                    label: updateTeamName,
+                                    userId: user!.id.getOrCrash(),
+                                    initialValue:
+                                        state.settings.teamName.getOrCrash(),
+                                    selectedTeam: state
+                                        .settings.favouriteEplTeam
+                                        .getOrCrash(),
+                                    settings: state.settings),
                               ),
                             );
                           },
@@ -186,7 +306,11 @@ class SettingsView extends StatelessWidget {
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: BottomSheetWidget(
                                   label: updateFavoriteTeam,
+                                  userId: user!.id.getOrCrash(),
                                   initialValue: state.settings.favouriteEplTeam
+                                      .getOrCrash(),
+                                  settings: state.settings,
+                                  selectedTeam: state.settings.favouriteEplTeam
                                       .getOrCrash(),
                                 ),
                               ),
@@ -209,8 +333,12 @@ class SettingsView extends StatelessWidget {
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: BottomSheetWidget(
                                   label: updateUserName,
+                                  userId: user!.id.getOrCrash(),
                                   initialValue:
                                       state.settings.userName.getOrCrash(),
+                                  selectedTeam: state.settings.favouriteEplTeam
+                                      .getOrCrash(),
+                                  settings: state.settings,
                                 ),
                               ),
                             );
@@ -236,24 +364,27 @@ class SettingsView extends StatelessWidget {
 
 // ignore: must_be_immutable
 class BottomSheetWidget extends StatefulWidget {
-  const BottomSheetWidget({
+  BottomSheetWidget({
     required this.label,
     required this.initialValue,
+    required this.settings,
+    required this.userId,
+    required this.selectedTeam,
     Key? key,
   }) : super(key: key);
   final String label;
   final String initialValue;
-
+  final Settings settings;
+  final String userId;
+  String selectedTeam;
   @override
   State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
 }
 
 class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   var valueController = TextEditingController();
-  var selectedTeam = "";
   @override
   void initState() {
-    selectedTeam = widget.initialValue;
     valueController.text = widget.initialValue;
     super.initState();
   }
@@ -291,6 +422,13 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     autofocus: true,
+                    maxLength: widget.label == updateTeamName ? 10 : null,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Required field";
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                       // prefixIcon: Icon(Icons.email),
                       labelStyle: Theme.of(context)
@@ -318,7 +456,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               : Flexible(
                   child: // Drop Down
                       DropdownButton<String>(
-                    value: selectedTeam,
+                    value: widget.selectedTeam,
                     // value: "Saint George S.C",
                     isExpanded: true,
                     items: [
@@ -348,7 +486,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     }).toList(),
                     onChanged: (value) {
                       setState(() {
-                        selectedTeam = value!;
+                        widget.selectedTeam = value!;
                       });
                     },
                   ),
@@ -358,7 +496,31 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               margin: const EdgeInsets.only(top: 10),
               height: 40,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  var teamName = widget.settings.teamName.getOrCrash();
+                  var userName = widget.settings.userName.getOrCrash();
+                  switch (widget.label) {
+                    case updateUserName:
+                      userName = valueController.text;
+                      break;
+                    case updateTeamName:
+                      teamName = valueController.text;
+                      break;
+                    default:
+                      break;
+                  }
+                  var settings = Settings(
+                    userName: UserName(userName),
+                    teamName: TeamName(teamName),
+                    favouriteEplTeam: FavouriteEplTeam(widget.selectedTeam),
+                  );
+
+                  BlocProvider.of<SettingsBloc>(context).add(
+                    SettingsEvent.updateUserDetail(
+                        settings, widget.userId, widget.label),
+                  );
+                  Navigator.pop(context);
+                },
                 child: const Text("Save"),
               ),
             ),

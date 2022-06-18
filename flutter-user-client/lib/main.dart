@@ -20,7 +20,10 @@ Future main() async {
   await Hive.openBox("userDetailCache");
 
   configureInjection(Environment.prod);
-  BlocOverrides.runZoned(() {
-    runApp(const AppWidget());
-  }, blocObserver: MyBlocObserver());
+  BlocOverrides.runZoned(
+    () {
+      runApp(const AppWidget());
+    },
+    // blocObserver: MyBlocObserver(),
+  );
 }

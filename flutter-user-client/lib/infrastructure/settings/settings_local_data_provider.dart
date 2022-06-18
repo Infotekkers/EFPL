@@ -14,6 +14,8 @@ class SettingsLocalDataProvider {
       var userDetail = await userDetailCache.get('userDetail');
       return right(SettingsDto.fromJson(userDetail).toDomain());
     } catch (e) {
+      print("load error");
+      print(e.toString());
       return left(const SettingsFailure.localDBError());
     }
   }
@@ -26,6 +28,8 @@ class SettingsLocalDataProvider {
       await userDetailCache.put('userDetail', userDetailDto.toJson());
       return right(unit);
     } catch (e) {
+      print("update error");
+      print(e.toString());
       return left(const SettingsFailure.localDBError());
     }
   }

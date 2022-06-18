@@ -85,6 +85,9 @@ class AuthRepository implements IAuthRepository {
           );
 
       // success
+      print("sign in request");
+      print("Status code ${response.statusCode}");
+      print("body ${response.body}");
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);

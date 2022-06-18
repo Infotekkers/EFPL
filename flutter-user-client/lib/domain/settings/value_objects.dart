@@ -7,11 +7,8 @@ class TeamName extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  static const maxLength = 10;
-
   factory TeamName(String input) {
-    return TeamName._(validateMaxStringLength(input, maxLength)
-        .flatMap(validateStringNotEmpty));
+    return TeamName._(validateStringNotEmpty(input));
   }
 
   const TeamName._(this.value);
@@ -21,11 +18,8 @@ class UserName extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  static const maxLength = 10;
-
   factory UserName(String input) {
-    return UserName._(validateMaxStringLength(input, maxLength)
-        .flatMap(validateStringNotEmpty));
+    return UserName._(validateStringNotEmpty(input));
   }
 
   const UserName._(this.value);
