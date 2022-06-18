@@ -102,7 +102,8 @@ export default {
         store.dispatch("Global/setNotificationInfo", {
           showNotification: true,
           notificationType: "error",
-          notificationMessage: "Invalid Password Format",
+          notificationMessage:
+            "Password must be 8 characters and include at least one uppercase, one lowercase, a symbol and a number",
         });
       }
     },
