@@ -1,4 +1,5 @@
 import 'package:efpl/application/my_team/myteam_bloc.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/services/global_vars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,7 +96,7 @@ class MyTeamPlayer extends StatelessWidget {
                   )
                 ],
               ),
-              _buildInfoBox(),
+              _buildInfoBox(context),
             ],
           ),
         ),
@@ -124,7 +125,7 @@ class MyTeamPlayer extends StatelessWidget {
     );
   }
 
-  _buildInfoBox() {
+  _buildInfoBox(context) {
     return SizedBox(
       height: 50,
       width: 80,
@@ -133,13 +134,17 @@ class MyTeamPlayer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(name.split(" ")[0], overflow: TextOverflow.ellipsis),
+            Text(
+              name.split(" ")[0],
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyText1!,
+            ),
             Text(
               position.toUpperCase(),
-              style: const TextStyle(
-                fontSize: 12,
-                color: Colors.blueGrey,
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .copyWith(fontSize: 12, color: Colors.blueGrey),
             ),
           ],
         ),
@@ -182,16 +187,31 @@ class MyTeamPlayer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Center(
-                child: Text(name),
+                child: Text(
+                  name,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.25,
+                      ),
+                ),
               ),
               GestureDetector(
                 onTap: () => Navigator.of(context)
                     .pushNamed("/player", arguments: playerId),
                 child: Row(
                   children: [
-                    const Icon(Icons.info),
+                    const Icon(
+                      Icons.info,
+                      color: ConstantColors.primary_900,
+                    ),
                     const SizedBox(width: 5),
-                    Text(strings(context).playerInfo),
+                    Text(
+                      strings(context).playerInfo,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 15,
+                          ),
+                    ),
                   ],
                 ),
               ),
@@ -203,9 +223,17 @@ class MyTeamPlayer extends StatelessWidget {
                 },
                 child: Row(
                   children: [
-                    const Icon(Icons.compare_arrows),
+                    const Icon(
+                      Icons.compare_arrows,
+                      color: ConstantColors.primary_900,
+                    ),
                     const SizedBox(width: 5),
-                    Text(strings(context).switchPlayer)
+                    Text(
+                      strings(context).switchPlayer,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 15,
+                          ),
+                    )
                   ],
                 ),
               ),
@@ -218,9 +246,17 @@ class MyTeamPlayer extends StatelessWidget {
                     : () {},
                 child: Row(
                   children: [
-                    const Icon(Icons.copyright),
+                    const Icon(
+                      Icons.copyright,
+                      color: ConstantColors.primary_900,
+                    ),
                     const SizedBox(width: 5),
-                    Text(strings(context).makeCaptain),
+                    Text(
+                      strings(context).makeCaptain,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 15,
+                          ),
+                    ),
                   ],
                 ),
               ),
@@ -239,11 +275,17 @@ class MyTeamPlayer extends StatelessWidget {
                       "Ⓥ",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 20,
+                        color: ConstantColors.primary_900,
                       ),
                     ),
                     const SizedBox(width: 7),
-                    Text(strings(context).makeViceCaptain),
+                    Text(
+                      strings(context).makeViceCaptain,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 15,
+                          ),
+                    ),
                   ],
                 ),
               ),
