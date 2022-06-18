@@ -28,7 +28,8 @@ const verifySeasonStatus = asyncHandler(async (req, res) => {
 
 // export data to legacy db
 const backup = asyncHandler(async (req, res) => {
-  // TODO:Make Fixtures Deleted with team
+  console.log("BackUp");
+
   // backup type
   const backupType = req.params.type;
 
@@ -51,8 +52,10 @@ const backup = asyncHandler(async (req, res) => {
     }
 
     const teamName = team.teamName;
+    const teamNameAmh = team.teamNameAmh;
     const teamCity = team.teamCity;
     const teamStadium = team.teamStadium;
+
     const teamLogo = team.teamLogo;
     const stadiumCapacity = team.stadiumCapacity;
     const foundedIn = team.foundedIn;
@@ -76,6 +79,7 @@ const backup = asyncHandler(async (req, res) => {
       foundedIn,
       teamCoach,
       teamId,
+      teamNameAmh,
     });
   });
 
@@ -99,7 +103,7 @@ const backup = asyncHandler(async (req, res) => {
     const eplTeamId = player.eplTeamId;
     const currentPrice = player.currentPrice;
     const position = player.position;
-    const availability = player.availability;
+
     const score = player.score;
     const history = player.history;
     const playerId = player.playerId;
@@ -121,7 +125,7 @@ const backup = asyncHandler(async (req, res) => {
       eplTeamId,
       currentPrice,
       position,
-      availability,
+
       score,
       history,
       playerId,
@@ -246,7 +250,6 @@ const restore = asyncHandler(async (req, res) => {
       eplTeamId: fetchedPlayer.eplTeamId,
       currentPrice: fetchedPlayer.currentPrice,
       position: fetchedPlayer.position,
-      availability: [],
       score: [],
       history: [],
       playerImage: fileName

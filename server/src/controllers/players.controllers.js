@@ -216,6 +216,16 @@ const getPlayer = asyncHandler(async (req, res) => {
 const getPlayers = asyncHandler(async (req, res) => {
   const players = await PlayerModel.find();
 
+  // get team logo
+  for (let index = 0; index < players.length; index++) {
+    const team = await Teams.findOne({ teamName: players[index].eplTeamId });
+
+    try {
+      players[index].playerImage = team.teamLogo;
+    } catch (e) {}
+  }
+
+  // get  if any match is live
   const findLiveMatch = await Fixture.find({
     $or: [
       { status: "liveFH" },

@@ -10,17 +10,66 @@ const bkConnection = mongoose.createConnection(MONGO_LEGACY_DB_URI);
 Teams
 =======================================
 */
+const teamPosition = mongoose.Schema({
+  teamPoint: {
+    type: Number,
+    default: 0,
+  },
+  won: {
+    type: Number,
+    default: 0,
+  },
+  lost: {
+    type: Number,
+    default: 0,
+  },
+  Draw: {
+    type: Number,
+    default: 0,
+  },
+  goalsFor: {
+    type: Number,
+    default: 0,
+  },
+  goalsAgainst: {
+    type: Number,
+    default: 0,
+  },
+  goalDifferential: {
+    type: Number,
+    default: 0,
+  },
+});
+
 const teamSchema = mongoose.Schema({
   teamName: {
     type: String,
     required: [true, "Custom Error - Required Value *:Team name is required."],
+    minlength: 4,
+    maxLength: 72,
+    validate: /^[a-zA-Z,.,-,_ ]*$/,
+  },
+  teamNameAmh: {
+    type: String,
+    required: [
+      true,
+      "Custom Error - Required Value *:Team name Amharic is required.",
+    ],
+    minlength: 4,
+    maxLength: 72,
   },
   teamCity: {
     type: String,
+    minlength: 4,
+    maxLength: 72,
     required: [true, "Custom Error - Required Value *:Team city is required."],
+    validate: /^[a-zA-Z,.,-,_ ]*$/,
   },
   teamStadium: {
     type: String,
+    minlength: 4,
+    maxLength: 72,
+    validate: /^[a-zA-Z,.,-,_ ]*$/,
     required: [
       true,
       "Custom Error - Required Value *:Team stadium is required.",
@@ -32,15 +81,19 @@ const teamSchema = mongoose.Schema({
   },
   stadiumCapacity: {
     type: Number,
+    min: 0,
   },
   foundedIn: {
     type: Number,
+    min: 1700,
   },
   teamCoach: {
     type: String,
+    minlength: 4,
+    maxLength: 72,
   },
-  teamId: {
-    type: Number,
+  teamPosition: {
+    type: teamPosition,
   },
 });
 
@@ -49,10 +102,6 @@ const teamSchema = mongoose.Schema({
 Players
 =======================================
 */
-const availabilitySchema = mongoose.Schema({
-  injuryStatus: String,
-  injuryMessage: { type: String, default: "" },
-});
 
 const scoreSchema = mongoose.Schema({
   gameweekId: { type: Number },
@@ -93,17 +142,66 @@ const historySchema = mongoose.Schema({
 });
 
 const playerSchema = mongoose.Schema({
-  playerName: { type: String },
-  eplTeamId: { type: String },
-  currentPrice: { type: Number },
-  position: { type: String },
-  availability: { type: [availabilitySchema] },
-  score: { type: [scoreSchema] },
-  history: { type: [historySchema] },
-  playerId: { type: Number },
+  playerName: {
+    unique: true,
+    type: String,
+    validate: /^[a-zA-Z,-,. ]*$/,
+    minlength: 4,
+    maxLength: 56,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Name is required.",
+    ],
+  },
+  playerNameAmh: {
+    // unique: true,
+    type: String,
+    minlength: 4,
+    maxLength: 56,
+    // required: [
+    //   true,
+    //   "Custom Error - required Value *: Player Name Amh is required.",
+    // ],
+  },
+  eplTeamId: {
+    type: String,
+    minlength: 4,
+    maxLength: 72,
+    validate: /^[a-zA-Z,.,-,_ ]*$/,
+    index: true,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Team is required.",
+    ],
+  },
+  currentPrice: {
+    type: Number,
+    min: 3.5,
+    required: [
+      true,
+      "Custom Error - required Value *: Player Price is required.",
+    ],
+  },
+  position: {
+    type: String,
+    index: true,
+    validate: /^[a-zA-Z,.,-,_ ]*$/,
+    enum: {
+      values: ["GK", "DEF", "MID", "ATT"],
+      message:
+        "Custom Error - Invalid ENUM Value *:{VALUE} is not allowed for game week status.",
+    },
+    required: [
+      true,
+      "Custom Error - required Value *: Player Position is required.",
+    ],
+  },
+
   playerImage: {
     type: String,
   },
+  score: { type: [scoreSchema], default: [] },
+  history: { type: [historySchema], default: [] },
 });
 
 /*
