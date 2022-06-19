@@ -96,6 +96,8 @@ void main() {
       // await render
       await driver.waitUntilFirstFrameRasterized();
 
+      await driver.tap(find.byValueKey("publicPageSignInButton"));
+
       // Valid email Valid password
       await driver.tap(emailInputField);
       await driver.enterText("efpltest@gmail.com");

@@ -130,7 +130,8 @@ class FixtureWidget extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  getShortStatus(fixture: fixture, context: context),
+                  // getShortStatus(fixture: fixture, context: context),
+                  fixture.fdr > 0 ? 'FDR ' + fixture.fdr.toString() : "",
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontSize: 12,
                       ),

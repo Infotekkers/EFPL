@@ -4,6 +4,9 @@ import 'package:test/test.dart';
 
 void main() {
   group('Register User Tests', () {
+    // public page
+
+    // login page
     final goToRegisterPageButton = find.byValueKey("loginViewSignUpRedirect");
     final emailInputField = find.byValueKey('registerViewEmailField');
     final userNameInputField = find.byValueKey('registerViewUsernameField');
@@ -37,6 +40,8 @@ void main() {
     test('Full Test', () async {
       // await render
       await driver.waitUntilFirstFrameRasterized();
+
+      await driver.tap(find.byValueKey("publicPageSignInButton"));
 
       // go to register page
       await driver.waitFor(goToRegisterPageButton);
