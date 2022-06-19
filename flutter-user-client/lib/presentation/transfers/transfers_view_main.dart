@@ -662,28 +662,28 @@ Widget _buildMoreInfoView(
         ),
 
         // Deadline
-        Container(
-          width: MediaQuery.of(context).size.width * 0.65,
-          padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-          child: Row(
-            children: [
-              Text(
-                AppLocalizations.of(context)!.deadline + " : ",
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                      fontSize: 18,
-                      color: ConstantColors.primary_900,
-                    ),
-              ),
-              Text(
-                formatDeadline(state.userTeam.gameWeekDeadline),
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      fontSize: 18,
-                      color: ConstantColors.primary_900,
-                    ),
-              ),
-            ],
-          ),
-        ),
+        // Container(
+        //   width: MediaQuery.of(context).size.width * 0.65,
+        //   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+        //   child: Row(
+        //     children: [
+        //       Text(
+        //         AppLocalizations.of(context)!.deadline + " : ",
+        //         style: Theme.of(context).textTheme.bodyText1?.copyWith(
+        //               fontSize: 18,
+        //               color: ConstantColors.primary_900,
+        //             ),
+        //       ),
+        //       Text(
+        //         formatDeadline(state.userTeam.gameWeekDeadline),
+        //         style: Theme.of(context).textTheme.bodyText1!.copyWith(
+        //               fontSize: 18,
+        //               color: ConstantColors.primary_900,
+        //             ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ],
     ),
   );
