@@ -225,7 +225,7 @@ describe("E2E Test", () => {
     cy.get('[class="players-container"]')
       // .wait(3000)
       .children()
-      .should("have.length", 454);
+      .should("have.length", 432);
   });
 
   it("Adds player", () => {
