@@ -25,7 +25,7 @@ class PositionalContainerWidget extends StatelessWidget {
     return Expanded(
       child: SizedBox(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 2.0),
+          padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
           decoration: position == 'sub'
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -53,7 +53,7 @@ class PositionalContainerWidget extends StatelessWidget {
                 if (position == 'sub' && index == 0) {
                   return const SizedBox(width: 50);
                 }
-                return const SizedBox(width: 4);
+                return const SizedBox(width: 0);
               },
               itemCount: playerIds.length,
               scrollDirection: Axis.horizontal,

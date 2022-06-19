@@ -1,7 +1,7 @@
 <template>
   <div class="reset-pass">
     <form @submit.prevent="handleSubmit">
-      <h3>Reset Your Password</h3>
+      <h3>{{ $t("Reset Your Password") }}</h3>
       <div>
         <div class="password">
           <label> {{ $t("new") }} {{ $t("Password") }} </label>
@@ -55,7 +55,7 @@
         </button>
       </div>
 
-      <button>Submit</button>
+      <button>{{ $t("submit") }}</button>
     </form>
 
     <div>{{ error }}</div>

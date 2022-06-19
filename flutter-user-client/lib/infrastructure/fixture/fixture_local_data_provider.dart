@@ -51,6 +51,11 @@ class FixtureLocalDataProvider {
           homeTeam: Team(
             value: parsedCachedFixture['homeTeam'],
           ),
+          homeTeamAmh: Team(
+            value: parsedCachedFixture['homeTeamAmh']
+                ? parsedCachedFixture['homeTeamAmh']
+                : "",
+          ),
           homeTeamLineUp: TeamLineUp(
             value: parsedCachedFixture['homeTeamLineUp'],
           ),
@@ -71,6 +76,11 @@ class FixtureLocalDataProvider {
           ),
           awayTeam: Team(
             value: parsedCachedFixture['awayTeam'],
+          ),
+          awayTeamAmh: Team(
+            value: parsedCachedFixture['awayTeamAmh']
+                ? parsedCachedFixture['awayTeamAmh']
+                : "",
           ),
           awayTeamLineUp: TeamLineUp(
             value: parsedCachedFixture['awayTeamLineUp'],
@@ -104,6 +114,7 @@ class FixtureLocalDataProvider {
               schedule: Schedule(value: "2022-05-24T10:40:00.000+00:00"),
               status: Status(value: ""),
               homeTeam: Team(value: ""),
+              homeTeamAmh: Team(value: ""),
               homeTeamLineUp: TeamLineUp(value: const {}),
               homeTeamCity: TeamCity(value: ""),
               homeTeamCoach: TeamCoach(value: ""),
@@ -113,6 +124,7 @@ class FixtureLocalDataProvider {
 
               //
               awayTeam: Team(value: ""),
+              awayTeamAmh: Team(value: ""),
               awayTeamLineUp: TeamLineUp(value: const {}),
               awayTeamCity: TeamCity(value: ""),
               awayTeamCoach: TeamCoach(value: ""),
@@ -135,6 +147,7 @@ class FixtureLocalDataProvider {
               schedule: Schedule(value: "2022-05-24T10:40:00.000+00:00"),
               status: Status(value: ""),
               homeTeam: Team(value: ""),
+              homeTeamAmh: Team(value: ""),
               homeTeamLineUp: TeamLineUp(value: const {}),
               homeTeamCity: TeamCity(value: ""),
               homeTeamCoach: TeamCoach(value: ""),
@@ -144,6 +157,7 @@ class FixtureLocalDataProvider {
 
               //
               awayTeam: Team(value: ""),
+              awayTeamAmh: Team(value: ""),
               awayTeamLineUp: TeamLineUp(value: const {}),
               awayTeamCity: TeamCity(value: ""),
               awayTeamCoach: TeamCoach(value: ""),

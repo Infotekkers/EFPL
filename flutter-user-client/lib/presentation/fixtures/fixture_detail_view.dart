@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/fixture/fixture_bloc.dart';
+import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/colors.dart';
@@ -73,32 +74,32 @@ class FixtureDetailView extends StatelessWidget {
                     },
 
                     // token issues
-                    unauthorized: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + "!",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    unauthenticated: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + " !",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
+                    // unauthorized: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + "!",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
+                    // unauthenticated: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + " !",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
                     unexpectedError: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -115,12 +116,12 @@ class FixtureDetailView extends StatelessWidget {
                     },
 
                     orElse: () {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText: "Something went wrong.",
-                        message: "Something went wrong. Try again!",
-                        snackBarType: "error",
-                      );
+                      // CustomSnackBar().showCustomSnackBar(
+                      //   showContext: context,
+                      //   headlineText: "Something went wrong.",
+                      //   message: "Something went wrong. Try again!",
+                      //   snackBarType: "error",
+                      // );
                     },
                   );
                 },
@@ -300,19 +301,18 @@ class FixtureDetailView extends StatelessWidget {
                                   height: 6,
                                 ),
                                 Text(
-                                  currentFixture.homeTeamCity.value.fold(
-                                    (l) => '',
-                                    (r) => r.toString(),
-                                  ),
+                                  getHomeTeamCity(
+                                      context: context,
+                                      currentFixture: currentFixture),
                                   style: Theme.of(context).textTheme.bodyText1,
                                 ),
                                 const SizedBox(
                                   height: 6,
                                 ),
                                 Text(
-                                  currentFixture.homeTeamStadium.value.fold(
-                                    (l) => '',
-                                    (r) => r.toString(),
+                                  getHomeTeamStadium(
+                                    context: context,
+                                    currentFixture: currentFixture,
                                   ),
                                   style: Theme.of(context).textTheme.bodyText1,
                                   textAlign: TextAlign.center,
@@ -536,9 +536,9 @@ class FixtureDetailView extends StatelessWidget {
                                   FixtureDetailLineUp(fixture: currentFixture)),
                           FixtureDetailEvent(fixture: currentFixture),
                         ],
-                        tabs: const [
-                          'Line Ups',
-                          'Events',
+                        tabs: [
+                          AppLocalizations.of(context)!.lineUps,
+                          AppLocalizations.of(context)!.events,
                         ],
                       ),
                     ),
@@ -554,12 +554,23 @@ class FixtureDetailView extends StatelessWidget {
 }
 
 String getMatchAcronym({required Fixture fixture}) {
-  List homeTeamLong = fixture.homeTeam.value
-      .fold(
-        (l) => null,
-        (r) => r,
-      )!
-      .split(" ");
+  List homeTeamLong = [];
+
+  if (getIt<UtilBloc>().state.locale.languageCode == "en") {
+    homeTeamLong = fixture.homeTeam.value
+        .fold(
+          (l) => null,
+          (r) => r,
+        )!
+        .split(" ");
+  } else {
+    homeTeamLong = fixture.homeTeamAmh.value
+        .fold(
+          (l) => null,
+          (r) => r,
+        )!
+        .split(" ");
+  }
 
   homeTeamLong.removeLast();
 
@@ -580,12 +591,23 @@ String getMatchAcronym({required Fixture fixture}) {
   }
 
   //
-  List? awayTeamLong = fixture.awayTeam.value
-      .fold(
-        (l) => null,
-        (r) => r,
-      )!
-      .split(" ");
+  List? awayTeamLong = [];
+
+  if (getIt<UtilBloc>().state.locale.languageCode == "en") {
+    awayTeamLong = fixture.awayTeam.value
+        .fold(
+          (l) => null,
+          (r) => r,
+        )!
+        .split(" ");
+  } else {
+    awayTeamLong = fixture.awayTeamAmh.value
+        .fold(
+          (l) => null,
+          (r) => r,
+        )!
+        .split(" ");
+  }
 
   String awayTeamShort = "";
   awayTeamLong.removeLast();
@@ -608,25 +630,34 @@ String getMatchAcronym({required Fixture fixture}) {
 }
 
 String getShortName({required Fixture fixture, required int isHome}) {
+  final Locale locale = getIt<UtilBloc>().state.locale;
   if (isHome == 1) {
-    List nameLong = fixture.homeTeam.value
-        .fold(
-          (l) => '',
-          (r) => r.toString(),
-        )
-        .split(" ");
+    if (locale.languageCode == "en") {
+      List nameLong = fixture.homeTeam.value
+          .fold(
+            (l) => '',
+            (r) => r.toString(),
+          )
+          .split(" ");
 
-    nameLong.removeLast();
-    return nameLong.join(" ");
+      nameLong.removeLast();
+      return nameLong.join(" ");
+    } else {
+      return fixture.homeTeamAmh.value.fold((l) => "", (r) => r);
+    }
   } else {
-    List nameLong = fixture.awayTeam.value
-        .fold(
-          (l) => '',
-          (r) => r.toString(),
-        )
-        .split(" ");
-    nameLong.removeLast();
-    return nameLong.join(" ");
+    if (locale.languageCode == "en") {
+      List nameLong = fixture.awayTeam.value
+          .fold(
+            (l) => '',
+            (r) => r.toString(),
+          )
+          .split(" ");
+      nameLong.removeLast();
+      return nameLong.join(" ");
+    } else {
+      return fixture.awayTeamAmh.value.fold((l) => "", (r) => r);
+    }
   }
 }
 
@@ -702,4 +733,117 @@ List getPlayersWhoScored({required Map teamScoreInfo}) {
   }
 
   return allPlayersWhoScored;
+}
+
+String getHomeTeamCity(
+    {required Fixture currentFixture, required BuildContext context}) {
+  String homeTeamCity = currentFixture.homeTeamCity.value.fold(
+    (l) => '',
+    (r) => r.toString(),
+  );
+  String homeTeamCityResult = "";
+  switch (homeTeamCity) {
+    case "Addis Ababa":
+      homeTeamCityResult = AppLocalizations.of(context)!.addisAbaba;
+      break;
+
+    case "Wolaita Sodo":
+      homeTeamCityResult = AppLocalizations.of(context)!.wolaitaSodo;
+      break;
+    case "Hawassa":
+      homeTeamCityResult = AppLocalizations.of(context)!.hawassa;
+      break;
+    case "Gondar":
+      homeTeamCityResult = AppLocalizations.of(context)!.gondar;
+      break;
+    case "Adama":
+      homeTeamCityResult = AppLocalizations.of(context)!.adama;
+      break;
+    case "Sidama":
+      homeTeamCityResult = AppLocalizations.of(context)!.sidama;
+      break;
+    case "Bahir Dar":
+      homeTeamCityResult = AppLocalizations.of(context)!.bahirDar;
+      break;
+    case "Wolkite":
+      homeTeamCityResult = AppLocalizations.of(context)!.wolkite;
+      break;
+    case "Arba Minch":
+      homeTeamCityResult = AppLocalizations.of(context)!.arbaMinch;
+      break;
+    case "Hosaena":
+      homeTeamCityResult = AppLocalizations.of(context)!.hosaena;
+      break;
+    case "Dire Dawa":
+      homeTeamCityResult = AppLocalizations.of(context)!.direDawa;
+      break;
+    case "Jimma":
+      homeTeamCityResult = AppLocalizations.of(context)!.jimma;
+      break;
+    case "Sebeta":
+      homeTeamCityResult = AppLocalizations.of(context)!.sebeta;
+      break;
+    default:
+      homeTeamCityResult = "------";
+  }
+
+  return homeTeamCityResult;
+}
+
+String getHomeTeamStadium(
+    {required Fixture currentFixture, required BuildContext context}) {
+  String homeTeamStadium = currentFixture.homeTeamStadium.value.fold(
+    (l) => '',
+    (r) => r.toString(),
+  );
+  String homeTeamStadiumResult = "";
+  switch (homeTeamStadium) {
+    case "Addis Ababa":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.addisAbaba;
+      break;
+    case "Sebeta Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.sebetaStadium;
+      break;
+    case "Jimma Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.jimmaStadium;
+      break;
+    case "Addis Ababa Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.addisAbabaStadium;
+      break;
+    case "Dire Dawa Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.direDawaStadium;
+      break;
+    case "Abiy Hersamo Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.abiyHersamoStadium;
+      break;
+    case "Arba Minch Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.arbaMinchStadium;
+      break;
+    case "Wolkite Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.wolkiteStadium;
+      break;
+    case "Bahir Dar Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.arbaMinchStadium;
+      break;
+    case "Hawasa Metropolitan Stadium":
+      homeTeamStadiumResult =
+          AppLocalizations.of(context)!.hawasaMetropolitanStadium;
+      break;
+    case "Abebe Bikila Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.abebeBikilaStadium;
+      break;
+    case "Fasiledes Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.fasiledesStadium;
+      break;
+    case "Awassa Kenema Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.awassaKenemaStadium;
+      break;
+    case "Wolaita Sodo Stadium":
+      homeTeamStadiumResult = AppLocalizations.of(context)!.wolaitaSodoStadium;
+      break;
+    default:
+      homeTeamStadiumResult = "------";
+  }
+
+  return homeTeamStadiumResult;
 }

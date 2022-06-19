@@ -73,32 +73,32 @@ class FixturesView extends StatelessWidget {
                     },
 
                     // token issues
-                    unauthorized: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + "!",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    unauthenticated: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + " !",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
+                    // unauthorized: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + "!",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
+                    // unauthenticated: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + " !",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
                     unexpectedError: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -114,14 +114,14 @@ class FixturesView extends StatelessWidget {
                       );
                     },
 
-                    orElse: () {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText: "Something went wrong.",
-                        message: "Something went wrong. Try again!",
-                        snackBarType: "error",
-                      );
-                    },
+                    // orElse: () {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText: "Something went wrong.",
+                    //     message: "Something went wrong. Try again!",
+                    //     snackBarType: "error",
+                    //   );
+                    // },
                   );
                 },
                 (_) {},
@@ -184,6 +184,7 @@ Widget _buildFixturesView(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
+                key: const Key("fixtureViewPrevGWKey"),
                 onTap: () {
                   fixtureBloc.add(
                     const FixtureEvent.decreaseGameWeek(),
@@ -198,6 +199,7 @@ Widget _buildFixturesView(
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               InkWell(
+                key: const Key("fixtureViewNextGWKey"),
                 onTap: () {
                   fixtureBloc.add(
                     const FixtureEvent.increaseGameWeek(),
@@ -226,7 +228,7 @@ Widget _buildFixturesView(
                     List<Fixture> fixture = allFixtures[index];
                     var date = '';
                     if (fixture.isNotEmpty) {
-                      date = formatMatchDate(fixture[0]);
+                      date = formatMatchDate(fixture[0], context);
                     }
 
                     return Column(
@@ -254,6 +256,12 @@ Widget _buildFixturesView(
                                     ? Colors.white
                                     : (Colors.blue[50]),
                                 child: FixtureWidget(
+                                  key: Key(
+                                    "fixturesCardKey" +
+                                        (index + 1).toString() +
+                                        "G" +
+                                        state.gameWeekId.toString(),
+                                  ),
                                   fixture: fixture[index],
                                 ),
                               );
@@ -302,20 +310,33 @@ List<List<Fixture>> formatByDate(List<Fixture> allFixtures) {
   return formattedFixtures;
 }
 
-String formatMatchDate(Fixture fixture) {
+String formatMatchDate(Fixture fixture, BuildContext context) {
   final List<String> monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
+    // 'January',
+    // 'February',
+    // 'March',
+    // 'April',
+    // 'May',
+    // 'June',
+    // 'July',
+    // 'August',
+    // 'September',
+    // 'October',
+    // 'November',
+    // 'December'
+    //  AppLocalizations.of(context)!.j
+    AppLocalizations.of(context)!.january,
+    AppLocalizations.of(context)!.february,
+    AppLocalizations.of(context)!.march,
+    AppLocalizations.of(context)!.april,
+    AppLocalizations.of(context)!.may,
+    AppLocalizations.of(context)!.june,
+    AppLocalizations.of(context)!.july,
+    AppLocalizations.of(context)!.august,
+    AppLocalizations.of(context)!.september,
+    AppLocalizations.of(context)!.october,
+    AppLocalizations.of(context)!.november,
+    AppLocalizations.of(context)!.december
   ];
   final schedule = fixture.schedule.value.fold(
     (l) => '',

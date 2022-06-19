@@ -152,11 +152,13 @@ Widget _buildMainView(
                         children: [
                           TextSpan(
                             text: AppLocalizations.of(context)!
-                                .theseTransfersWillBeActiveFor,
+                                    .theseTransfersWillBeActiveFor +
+                                " ",
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                           TextSpan(
-                            text: AppLocalizations.of(context)!.gameWeek +
+                            text: " " +
+                                AppLocalizations.of(context)!.gameWeek +
                                 " ${state.userTeam.gameWeekId.value.fold((l) => '', (r) => r)} ",
                             style:
                                 Theme.of(context).textTheme.bodyText1!.copyWith(
@@ -168,15 +170,18 @@ Widget _buildMainView(
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                           TextSpan(
-                            text: AppLocalizations.of(context)!.noPoints + " ",
+                            text: " " +
+                                AppLocalizations.of(context)!.noPoints +
+                                " ",
                             style:
                                 Theme.of(context).textTheme.bodyText1!.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),
                           ),
                           TextSpan(
-                            text: AppLocalizations.of(context)!
-                                .noWillBeDeductedFromYourScore,
+                            text: " " +
+                                AppLocalizations.of(context)!
+                                    .noWillBeDeductedFromYourScore,
                             style: Theme.of(context).textTheme.bodyText1,
                           )
                         ],
@@ -339,6 +344,7 @@ Widget _buildMainView(
                   color: ConstantColors.primary_900,
                 ),
                 child: TextButton(
+                  key: const Key("confirmTransfersPageSaveButton"),
                   onPressed: () {
                     transferBloc.add(
                       TransferEvent.saveUserPlayers(

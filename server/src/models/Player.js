@@ -61,7 +61,7 @@ const playerSchema = mongoose.Schema({
     ],
   },
   playerNameAmh: {
-    unique: true,
+    // unique: true,
     type: String,
     minlength: 4,
     maxLength: 56,

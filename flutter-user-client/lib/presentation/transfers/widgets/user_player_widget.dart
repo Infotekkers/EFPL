@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,6 +24,9 @@ class UserPlayerWidget extends StatelessWidget {
       (l) => '',
       (r) => r['injuryStatus'].toString(),
     );
+
+    final String teamName = currentUserPlayer.eplTeamId.value
+        .fold((l) => "shirt", (r) => r.toString());
 
     return BlocBuilder<TransferBloc, TransferState>(
       builder: (context, state) {
@@ -53,7 +55,7 @@ class UserPlayerWidget extends StatelessWidget {
                   Stack(
                     children: [
                       // SHIRT
-                      _buildShirtView(),
+                      _buildShirtView(teamName: teamName),
 
                       // INJURY STATUS
                       _buildInjuryView(
@@ -185,6 +187,7 @@ void _buildModalSheet(
 
                   // Transfer
                   InkWell(
+                    key: const Key("transferViewModalTransferButton"),
                     onTap: () {
                       state.transferredInPlayerIdList
                               .contains(currentUserPlayer.playerId)
@@ -334,7 +337,7 @@ void _buildModalSheet(
   );
 }
 
-Widget _buildShirtView() {
+Widget _buildShirtView({required String teamName}) {
   return Center(
     child: Container(
       width: 50,
@@ -342,8 +345,8 @@ Widget _buildShirtView() {
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
       ),
-      child: SvgPicture.asset(
-        "assets/icons/shirt.svg",
+      child: Image.asset(
+        "assets/jerseys/" + teamName + ".png",
         width: 50,
         height: 50,
       ),

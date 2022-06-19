@@ -23,6 +23,7 @@ class _$LeagueTableDtoTearOff {
 
   _LeagueTableDto call(
       {required String teamName,
+      required String teamNameAmh,
       required String teamLogo,
       required int teamPoint,
       required int won,
@@ -33,6 +34,7 @@ class _$LeagueTableDtoTearOff {
       required int goalDifferential}) {
     return _LeagueTableDto(
       teamName: teamName,
+      teamNameAmh: teamNameAmh,
       teamLogo: teamLogo,
       teamPoint: teamPoint,
       won: won,
@@ -55,6 +57,7 @@ const $LeagueTableDto = _$LeagueTableDtoTearOff();
 /// @nodoc
 mixin _$LeagueTableDto {
   String get teamName => throw _privateConstructorUsedError;
+  String get teamNameAmh => throw _privateConstructorUsedError;
   String get teamLogo => throw _privateConstructorUsedError;
   int get teamPoint => throw _privateConstructorUsedError;
   int get won => throw _privateConstructorUsedError;
@@ -77,6 +80,7 @@ abstract class $LeagueTableDtoCopyWith<$Res> {
       _$LeagueTableDtoCopyWithImpl<$Res>;
   $Res call(
       {String teamName,
+      String teamNameAmh,
       String teamLogo,
       int teamPoint,
       int won,
@@ -99,6 +103,7 @@ class _$LeagueTableDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? teamName = freezed,
+    Object? teamNameAmh = freezed,
     Object? teamLogo = freezed,
     Object? teamPoint = freezed,
     Object? won = freezed,
@@ -112,6 +117,10 @@ class _$LeagueTableDtoCopyWithImpl<$Res>
       teamName: teamName == freezed
           ? _value.teamName
           : teamName // ignore: cast_nullable_to_non_nullable
+              as String,
+      teamNameAmh: teamNameAmh == freezed
+          ? _value.teamNameAmh
+          : teamNameAmh // ignore: cast_nullable_to_non_nullable
               as String,
       teamLogo: teamLogo == freezed
           ? _value.teamLogo
@@ -158,6 +167,7 @@ abstract class _$LeagueTableDtoCopyWith<$Res>
   @override
   $Res call(
       {String teamName,
+      String teamNameAmh,
       String teamLogo,
       int teamPoint,
       int won,
@@ -182,6 +192,7 @@ class __$LeagueTableDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? teamName = freezed,
+    Object? teamNameAmh = freezed,
     Object? teamLogo = freezed,
     Object? teamPoint = freezed,
     Object? won = freezed,
@@ -195,6 +206,10 @@ class __$LeagueTableDtoCopyWithImpl<$Res>
       teamName: teamName == freezed
           ? _value.teamName
           : teamName // ignore: cast_nullable_to_non_nullable
+              as String,
+      teamNameAmh: teamNameAmh == freezed
+          ? _value.teamNameAmh
+          : teamNameAmh // ignore: cast_nullable_to_non_nullable
               as String,
       teamLogo: teamLogo == freezed
           ? _value.teamLogo
@@ -237,6 +252,7 @@ class __$LeagueTableDtoCopyWithImpl<$Res>
 class _$_LeagueTableDto extends _LeagueTableDto {
   const _$_LeagueTableDto(
       {required this.teamName,
+      required this.teamNameAmh,
       required this.teamLogo,
       required this.teamPoint,
       required this.won,
@@ -252,6 +268,8 @@ class _$_LeagueTableDto extends _LeagueTableDto {
 
   @override
   final String teamName;
+  @override
+  final String teamNameAmh;
   @override
   final String teamLogo;
   @override
@@ -271,7 +289,7 @@ class _$_LeagueTableDto extends _LeagueTableDto {
 
   @override
   String toString() {
-    return 'LeagueTableDto(teamName: $teamName, teamLogo: $teamLogo, teamPoint: $teamPoint, won: $won, lost: $lost, Draw: $Draw, goalsFor: $goalsFor, goalsAgainst: $goalsAgainst, goalDifferential: $goalDifferential)';
+    return 'LeagueTableDto(teamName: $teamName, teamNameAmh: $teamNameAmh, teamLogo: $teamLogo, teamPoint: $teamPoint, won: $won, lost: $lost, Draw: $Draw, goalsFor: $goalsFor, goalsAgainst: $goalsAgainst, goalDifferential: $goalDifferential)';
   }
 
   @override
@@ -280,6 +298,8 @@ class _$_LeagueTableDto extends _LeagueTableDto {
         (other.runtimeType == runtimeType &&
             other is _LeagueTableDto &&
             const DeepCollectionEquality().equals(other.teamName, teamName) &&
+            const DeepCollectionEquality()
+                .equals(other.teamNameAmh, teamNameAmh) &&
             const DeepCollectionEquality().equals(other.teamLogo, teamLogo) &&
             const DeepCollectionEquality().equals(other.teamPoint, teamPoint) &&
             const DeepCollectionEquality().equals(other.won, won) &&
@@ -296,6 +316,7 @@ class _$_LeagueTableDto extends _LeagueTableDto {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(teamName),
+      const DeepCollectionEquality().hash(teamNameAmh),
       const DeepCollectionEquality().hash(teamLogo),
       const DeepCollectionEquality().hash(teamPoint),
       const DeepCollectionEquality().hash(won),
@@ -319,6 +340,7 @@ class _$_LeagueTableDto extends _LeagueTableDto {
 abstract class _LeagueTableDto extends LeagueTableDto {
   const factory _LeagueTableDto(
       {required String teamName,
+      required String teamNameAmh,
       required String teamLogo,
       required int teamPoint,
       required int won,
@@ -334,6 +356,8 @@ abstract class _LeagueTableDto extends LeagueTableDto {
 
   @override
   String get teamName;
+  @override
+  String get teamNameAmh;
   @override
   String get teamLogo;
   @override

@@ -24,7 +24,7 @@
       <div @click="editTeam" data-cp="edit-team">
         <img :src="editIcon.path" :alt="editIcon.alt" class="small-icon" />
       </div>
-      <div @click="deleteTeam">
+      <div @click="deleteTeam" data-cp="delete-team">
         <img :src="deleteIcon.path" :alt="deleteIcon.alt" class="small-icon" />
       </div>
     </div>

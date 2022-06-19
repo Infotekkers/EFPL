@@ -410,23 +410,22 @@ const transfer = asyncHandler(async (req, res) => {
         for (let i = activeGameweek; i < 30; i++) {
           let currentTeam = user.team[i];
 
-          if (currentTeam) {
+          if (currentTeam !== null) {
             // if free hit played skip
-            if (incomingTeam.activeChip !== "FH") {
+            if (incomingTeam.activeChip === "FH") {
               currentTeam.players = incomingTeam.players;
+            } else {
+              const currentNewTeam = {
+                gameweekId: i + 2,
+                activeChip: "",
+                freeTransfers: 1,
+                deduction: 0,
+                players: incomingTeam.players,
+              };
+
+              currentTeam = currentNewTeam;
             }
-          } else {
-            const currentNewTeam = {
-              gameweekId: i + 1,
-              activeChip: "",
-              freeTransfers: 1,
-              deduction: 0,
-              players: incomingTeam.players,
-            };
-
-            currentTeam = currentNewTeam;
           }
-
           updatedUserTeam.push(currentTeam);
         }
         // update user team

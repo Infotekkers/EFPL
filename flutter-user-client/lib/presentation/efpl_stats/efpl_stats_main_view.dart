@@ -245,26 +245,29 @@ Widget _buildInfoCard(
           height: 30,
         ),
 
-        InkWell(
-          onTap: () {
-            Navigator.pushNamed(context, "/efpl/dreamTeam");
-          },
-          child: Container(
-            width: 285,
-            height: 45,
-            color: ConstantColors.primary_900,
-            child: Center(
-              child: Text(
-                AppLocalizations.of(context)!.gameWeek +
-                    " " +
-                    state.gameWeekId.toString() +
-                    " " +
-                    AppLocalizations.of(context)!.dreamTeam,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      fontSize: 16,
-                      color: ConstantColors.neutral_200,
-                      letterSpacing: 0.25,
-                    ),
+        Tooltip(
+          message: "Show Gameweek Dream Team",
+          child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, "/efpl/dreamTeam");
+            },
+            child: Container(
+              width: 285,
+              height: 45,
+              color: ConstantColors.primary_900,
+              child: Center(
+                child: Text(
+                  AppLocalizations.of(context)!.gameWeek +
+                      " " +
+                      state.gameWeekId.toString() +
+                      " " +
+                      AppLocalizations.of(context)!.dreamTeam,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 16,
+                        color: ConstantColors.neutral_200,
+                        letterSpacing: 0.25,
+                      ),
+                ),
               ),
             ),
           ),

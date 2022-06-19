@@ -42,6 +42,7 @@
               name="playerName"
               type="text"
               ref="playerName"
+              required
               v-model="playerName"
               class="main-text-input"
             />
@@ -57,6 +58,7 @@
               name="playerNameAmh"
               type="text"
               ref="playerNameAmh"
+              required
               v-model="playerNameAmh"
               class="main-text-input"
             />
@@ -134,6 +136,9 @@
               name="currentPrice"
               type="number"
               ref="playerPrice"
+              required
+              max="16"
+              min="3"
               :value="isEditMode ? getPlayer.currentPrice : ''"
               class="main-text-input"
               :disabled="isEditMode && getLiveMatch == true"
@@ -146,7 +151,11 @@
             <label for="injuryStatus" class="main-label"
               >{{ $t("Injury") }} {{ $t("Status") }}</label
             >
-            <select name="" class="main-select-input" ref="injuryStatus">
+            <select
+              name="injuryStatus"
+              class="main-select-input"
+              ref="injuryStatus"
+            >
               <option value="" :selected="isEditMode ? injuryStatus == '' : ''">
                 Available
               </option>

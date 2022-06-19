@@ -91,10 +91,10 @@
 
       <!-- Control Center -->
       <div class="fixture-controls">
-        <div @click="startMatch">
+        <div @click="startMatch" data-cp="start-match">
           <img :src="playIcon.path" :alt="playIcon.alt" class="small-icon" />
         </div>
-        <div @click="pauseMatch">
+        <div @click="pauseMatch" data-cp="pause-match">
           <img :src="pauseIcon.path" :alt="pauseIcon.alt" class="small-icon" />
         </div>
         <div @click="resumeMatch">
@@ -107,7 +107,7 @@
         <div @click="stopMatch">
           <img :src="stopIcon.path" :alt="stopIcon.alt" class="small-icon" />
         </div>
-        <div @click="editMatch">
+        <div @click="editMatch" data-cp="edit-match">
           <img :src="editIcon.path" :alt="editIcon.alt" class="small-icon" />
         </div>
         <div @click="deleteMatch" data-cp="delete-match">

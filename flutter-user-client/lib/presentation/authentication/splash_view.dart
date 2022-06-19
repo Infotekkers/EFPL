@@ -16,6 +16,7 @@ class SplashView extends StatelessWidget {
             Navigator.pushNamed(context, "/home");
           },
           unauthorised: (_) {
+            // Navigator.popAndPushNamed(context, "/public");
             Navigator.popAndPushNamed(context, "/sign-in");
           },
           authenticated: (_) async {
@@ -23,6 +24,7 @@ class SplashView extends StatelessWidget {
           },
           unauthenticated: (_) {
             Navigator.popAndPushNamed(context, "/sign-in");
+            // Navigator.popAndPushNamed(context, "/public");
           },
         )
       },

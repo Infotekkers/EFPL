@@ -12,6 +12,7 @@ abstract class Fixture with _$Fixture {
     required Status status,
     //
     required Team homeTeam,
+    required Team homeTeamAmh,
     required TeamLineUp homeTeamLineUp,
     required TeamCity homeTeamCity,
     required TeamCoach homeTeamCoach,
@@ -20,6 +21,7 @@ abstract class Fixture with _$Fixture {
     required StadiumCapacity homeTeamCapacity,
     //
     required Team awayTeam,
+    required Team awayTeamAmh,
     required TeamLineUp awayTeamLineUp,
     required TeamCity awayTeamCity,
     required TeamCoach awayTeamCoach,
@@ -37,6 +39,7 @@ abstract class Fixture with _$Fixture {
         schedule: Schedule(value: ""),
         status: Status(value: ""),
         homeTeam: Team(value: ""),
+        homeTeamAmh: Team(value: ""),
         homeTeamLineUp: TeamLineUp(value: const {}),
         homeTeamCity: TeamCity(value: ""),
         homeTeamCoach: TeamCoach(value: ""),
@@ -46,6 +49,7 @@ abstract class Fixture with _$Fixture {
 
         //
         awayTeam: Team(value: ""),
+        awayTeamAmh: Team(value: ""),
         awayTeamLineUp: TeamLineUp(value: const {}),
         awayTeamCity: TeamCity(value: ""),
         awayTeamCoach: TeamCoach(value: ""),
