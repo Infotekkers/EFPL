@@ -66,14 +66,20 @@ const register = asyncHandler(async (req, res) => {
 const login = asyncHandler(async (req, res) => {
   // check if email exists
   const user = await User.findOne({ email: req.body.email });
-
+  if(!user){
+    console.log("user not found");
+  }
   // check if password valid
   if (user) {
+    console.log("user found");
+    console.log(user);
     const passwordCheck = await bcrypt.compare(
       req.body.password,
       user.password
     );
-
+    if(!passwordCheck){
+      console.log("password not matched");
+    }
     if (passwordCheck) {
       // fetch id
       const userId = await user._id;
@@ -86,10 +92,10 @@ const login = asyncHandler(async (req, res) => {
         secretKey,
         {
           // TODO:Update
-          expiresIn: "8h",
+          expiresIn: "48h",
         }
       );
-
+        console.log("sucesss");
       // return token  with user
       res.status(201).json({
         token: token,
@@ -160,7 +166,10 @@ const updateUser = asyncHandler(async (req, res) => {
   if (user == null) {
     return res.status(404).json({ message: "No user found" });
   }
-  res.user = user;
+  res.user = user;  
+  if (req.body.teamName != null) {
+    res.user.teamName = req.body.teamName;
+  }
 
   // change favourite team
   if (req.body.favouriteEplTeam != null) {
