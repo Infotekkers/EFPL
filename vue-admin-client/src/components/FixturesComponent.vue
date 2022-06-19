@@ -33,7 +33,7 @@
           {{ $t("Ethiopian Premier League") }} - {{ getSeason }}
           {{ $t("Fixtures") }}
         </div>
-        <div class="gameweek-add-new" @click="activateModal">
+        <div class="gameweek-add-new" @click="activateModal" data-cp="add-gw">
           <div>
             <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
           </div>
@@ -154,7 +154,13 @@
       </div>
 
       <!-- Content -->
-      <div v-if="currentGWFixtures.length > 0" class="all-fixtures">
+      <div
+        v-if="
+          currentGWFixtures.length > 0 &&
+          allTeams.length >= currentGWFixtures.length / 2
+        "
+        class="all-fixtures"
+      >
         <!-- Classify by dates -->
         <div v-for="(fixtureBatch, index) in currentGWFixtures" :key="index">
           <!-- Date of fixture -->
@@ -458,11 +464,17 @@ export default {
       // Dispatch Store Action
       store.dispatch("Fixture/setAllFixtures");
       // this.isFixtureLoading = false;
+      this.isFixtureLoading = false;
+    },
+    getActiveGameWeek() {
+      //   Set Loader
+      this.isFixtureLoading = true;
 
-      // TODO: Remove Timer
-      setTimeout(() => {
-        this.isFixtureLoading = false;
-      }, 2000);
+      // Dispatch Store Action
+      store.dispatch("Fixture/getActiveGameWeek");
+      // this.isFixtureLoading = false;
+
+      this.isFixtureLoading = false;
     },
 
     // Get all teams
@@ -473,11 +485,7 @@ export default {
       store.dispatch("Fixture/setAllTeams");
 
       // this.isTeamLoading = false;
-
-      // TODO: Remove Timer
-      setTimeout(() => {
-        this.isTeamLoading = false;
-      }, 3000);
+      this.isTeamLoading = false;
     },
 
     // Event Handlers
@@ -545,9 +553,7 @@ export default {
       ).length;
 
       // number of fixtures should be more than 0 and 2 * number of teams
-      return teamCount === fixturesCount * 2 && fixturesCount > 0
-        ? true
-        : false;
+      return teamCount <= fixturesCount * 2 && fixturesCount > 0 ? true : false;
     },
 
     // filter gameweek fixtures by date for display
@@ -575,8 +581,11 @@ export default {
 
         formattedAndFiltered.push(fix);
       });
-
       return formattedAndFiltered;
+    },
+
+    allTeams() {
+      return store.state.Fixture.allTeams;
     },
 
     // format date to readable format
@@ -642,6 +651,7 @@ export default {
 
   // get data before component mounts
   beforeMount() {
+    this.getActiveGameWeek();
     this.getFixtures();
     this.getTeams();
   },

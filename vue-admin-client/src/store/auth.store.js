@@ -1,3 +1,4 @@
+import axiosInstance from "@/services/AxiosTokenInstance";
 import axios from "axios";
 import router from "../router/index";
 import store from "./index";
@@ -23,7 +24,6 @@ export default {
           })
           .then((response) => {
             if (response.status.code === 200) {
-              console.log("success");
               commit("SET_CURRENT_ADMIN", currentAdmin);
             }
           })
@@ -37,6 +37,9 @@ export default {
     // log out admin
     logOutAdmin({ commit }) {
       commit("LOG_OUT");
+      store.dispatch("Global/setShowSidebar", {
+        showSidebar: false,
+      });
       router.push({ name: "admin-login" });
     },
     // login admin
@@ -53,9 +56,12 @@ export default {
             //   notificationType: "success",
             //   notificationMessage: `${response.data.email} successfully logged in`,
             // });
+            store.dispatch("Global/setShowSidebar", {
+              showSidebar: true,
+            });
+
             commit("SET_CURRENT_ADMIN", response.data);
             router.replace({ name: "Home" });
-            console.log("logged in");
           }
         })
         .catch((err) => {
@@ -71,7 +77,6 @@ export default {
       axios
         .post(`${baseURL}/admin/requestReset`, { email: email })
         .then((response) => {
-          console.log(response.data);
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
@@ -88,16 +93,15 @@ export default {
           });
         });
     },
-    // reset pass
+    // admin reset pass
     async resetPassword(context, password) {
       const token = router.currentRoute.value.params.token;
-      console.log(token);
+
       axios
         .post(`${baseURL}/admin/resetPass/${token}`, {
           password: password,
         })
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
@@ -108,42 +112,84 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.response.data.message);
-          if (err.response.status === 400) {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: `${err.response.data.message}`,
+          });
+        });
+    },
+    async changePassword(context, { old_password, new_password }) {
+      await axiosInstance
+        .post(`${baseURL}/admin/changePass`, {
+          oldPass: old_password,
+          newPass: new_password,
+        })
+        .then((response) => {
+          if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
-              notificationType: true,
-              notificationMessage: `${err.response.data.message}`,
+              notificationType: "success",
+              notificationMessage: `Password Changed Successfully`,
             });
           }
+          router.push({ name: "settings" });
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: true,
+            notificationMessage: `${err.response.data.message}`,
+          });
         });
     },
 
+    // user reset pass
+    async userResetPassword(context, password) {
+      const token = router.currentRoute.value.params.token;
+      axios
+        .post(`${baseURL}/user/resetPass/${token}`, {
+          password: password,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            store.dispatch("Global/setNotificationInfo", {
+              showNotification: true,
+              notificationType: "success",
+              notificationMessage: `Password Successfully Reset `,
+            });
+          }
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: `${err.response.data.message}`,
+          });
+        });
+    },
     // send email
     async sendEmail(context, { receiverEmail, emailBody }) {
-      await axios
+      await axiosInstance
         .post(`${baseURL}/admin/sendEmail`, {
           receiverEmail: receiverEmail,
           emailBody: emailBody,
         })
         .then((response) => {
-          console.log(response.status);
           if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
               notificationType: "success",
               notificationMessage: `successfully sent`,
             });
-            console.log("sent");
             router.push({ name: "settings" });
           }
         })
         .catch((err) => {
-          console.log(err);
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
-            notificationMessage: `Something went wrong`,
+            notificationMessage: `Something went wrong ${err}`,
           });
         });
     },

@@ -11,7 +11,12 @@
         <input type="email" required v-model="email" />
       </div>
     </form>
-    <button @click="handleSubmit">Submit</button>
+    <div class="actions">
+      <button class="tertiary" @click.prevent="$router.go(-1)">
+        {{ $t("Back") }}
+      </button>
+      <button @click="handleSubmit">{{ $t("submit") }}</button>
+    </div>
     <p v-if="isLoading">Loading.....</p>
   </div>
 </template>
@@ -36,18 +41,23 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  color: var(--neutral-600);
+  font-weight: 500;
+  font-size: var(--text-base);
+}
+
 .forgot-pass {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  max-width: 600px;
+  width: 90vw;
+  padding: var(--spacing-large);
 }
 form {
   text-align: left;
-  padding: var(--spacing-large);
-  border: 1px solid;
-  border-radius: 10px;
 }
 label {
   color: var(--neutral-900);
@@ -70,19 +80,25 @@ button {
   background: var(--success-200);
   color: var(--neutral-50);
   border: 0;
-  padding: var(--spacing-small) var(--spacing-regular);
+  padding: var(--spacing-small) var(--spacing-large);
   margin-top: var(--spacing-regular);
   border-radius: 20px;
   cursor: pointer;
-  width: 30%;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tertiary {
+  background: none;
+  color: var(--nuetral-200);
 }
 .submit {
   text-align: center;
 }
 @media screen and (max-width: 768px) {
-  .forgot-pass {
-    width: 100%;
-  }
   form {
     border: none;
   }

@@ -21,10 +21,10 @@
       <span v-else>-</span>
     </div>
     <div class="team-controls-container">
-      <div @click="editTeam">
+      <div @click="editTeam" data-cp="edit-team">
         <img :src="editIcon.path" :alt="editIcon.alt" class="small-icon" />
       </div>
-      <div @click="deleteTeam">
+      <div @click="deleteTeam" data-cp="delete-team">
         <img :src="deleteIcon.path" :alt="deleteIcon.alt" class="small-icon" />
       </div>
     </div>
@@ -134,11 +134,13 @@ export default {
     },
     deleteTeam() {
       store.dispatch("Team/deleteTeam", this.team.teamId);
+      store.dispatch("Fixture/setAllTeams");
+      setTimeout(() => {
+        store.dispatch("Fixture/setAllFixtures");
+        store.dispatch("Player/setAllPlayers");
+      }, 200);
 
       // refresh all values
-      store.dispatch("Fixture/setAllTeams");
-      store.dispatch("Fixture/setAllFixtures");
-      store.dispatch("Player/setAllPlayers");
     },
   },
   computed: {

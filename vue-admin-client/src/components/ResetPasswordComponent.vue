@@ -1,53 +1,110 @@
 <template>
   <div class="reset-pass">
     <form @submit.prevent="handleSubmit">
-      <h3>Reset Your Password</h3>
+      <h3>{{ $t("Reset Your Password") }}</h3>
       <div>
         <label> {{ $t("new") }} {{ $t("Password") }} </label>
-        <input
-          v-model="password"
-          required
-          placeholder="Password"
-          :type="showPassword ? 'text' : 'password'"
-        />
+        <div class="password">
+          <input
+            v-model="password"
+            required
+            placeholder="Password"
+            :type="showPassword ? 'text' : 'password'"
+          />
+          <button
+            class="toggle-password"
+            @click.prevent="showPassword = !showPassword"
+          >
+            <img
+              :src="passwordVisibleIcon.path"
+              :alt="passwordVisibleIcon.alt"
+              v-if="showPassword"
+            />
+            <img
+              :src="hiddenPasswordIcon.path"
+              :alt="hiddenPasswordIcon.alt"
+              v-else
+            />
+          </button>
+        </div>
       </div>
       <div>
-        <label> {{ $t("Password") }} {{ $t("Confirm") }}</label>
-        <input
-          v-model="password_confirm"
-          required
-          placeholder="Cofirm password"
-          :type="showPassword ? 'text' : 'password'"
-        />
+        <div class="confirm-pass">
+          <label> {{ $t("Password") }} {{ $t("Confirm") }}</label>
+          <input
+            v-model="password_confirm"
+            required
+            placeholder="Cofirm password"
+            :type="showConfirmPassword ? 'text' : 'password'"
+          />
+          <button
+            class="toggle-password"
+            @click.prevent="showConfirmPassword = !showConfirmPassword"
+          >
+            <img
+              :src="passwordVisibleIcon.path"
+              :alt="passwordVisibleIcon.alt"
+              v-if="showConfirmPassword"
+            />
+            <img
+              :src="hiddenPasswordIcon.path"
+              :alt="hiddenPasswordIcon.alt"
+              v-else
+            />
+          </button>
+        </div>
       </div>
 
-      <button>Submit</button>
+      <button>{{ $t("submit") }}</button>
     </form>
-    <button @click="showPassword = !showPassword">
-      {{ $t("የይለፍ ቃል አሳይ") }}
-    </button>
+
     <div>{{ error }}</div>
   </div>
 </template>
 
 <script>
+import { passwordVisibleIcon, hiddenPasswordIcon } from "@/utils/Icons";
+import store from "../store/index";
 export default {
   name: "ResetPasswordComponent",
   data() {
     return {
       error: "",
       showPassword: false,
+      showConfirmPassword: false,
+
       password: "",
       password_confirm: "",
       isLoading: false,
+      regExp: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+
+      // icons
+      passwordVisibleIcon: passwordVisibleIcon,
+      hiddenPasswordIcon: hiddenPasswordIcon,
     };
   },
   methods: {
     async handleSubmit() {
-      if (!(this.password === this.password_confirm)) {
-        this.error = "Passwords don't match";
+      if (
+        this.regExp.test(this.password) === true &&
+        this.regExp.test(this.password_confirm) === true
+      ) {
+        if (!(this.password === this.password_confirm)) {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: "Passwords Don't Match",
+          });
+        } else {
+          this.$store.dispatch("resetPassword", this.password);
+        }
       } else {
-        this.$store.dispatch("resetPassword", this.password);
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage:
+            "Password must be 8 characters and include at least one uppercase, one lowercase, a symbol and a number",
+        });
       }
     },
   },
@@ -94,8 +151,43 @@ button {
   cursor: pointer;
   width: 30%;
 }
+
+.toggle-password img {
+  width: 25px;
+}
+
 .submit {
   text-align: center;
+}
+.password {
+  position: relative;
+}
+
+.password > button {
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-base);
+  transform: translateY(-50%);
+
+  background: none;
+  color: var(--success-400);
+  padding: 0;
+  margin: 0;
+}
+.confirm-pass {
+  position: relative;
+}
+
+.confirm-pass > button {
+  position: absolute;
+  top: 80%;
+  right: var(--spacing-base);
+  transform: translateY(-50%);
+
+  background: none;
+  color: var(--success-400);
+  padding: 0;
+  margin: 0;
 }
 @media screen and (max-width: 768px) {
   .reset-pass {

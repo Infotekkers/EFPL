@@ -72,6 +72,7 @@ export default {
 
     startImport() {
       store.dispatch("Season/initiateImport");
+      this.$router.go();
     },
   },
   computed: {

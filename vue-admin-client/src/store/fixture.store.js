@@ -173,6 +173,114 @@ export default {
       // update filtered
       context.commit("SET_FILTERED_FIXTURES", filteredFixtures);
     },
+
+    setHomeTeams(context, homeTeams) {
+      context.commit("SET_HOME_TEAMS", homeTeams);
+    },
+
+    // sets away team => useful when filtering
+    setAwayTeams(context, awayTeams) {
+      context.commit("SET_AWAY_TEAMS", awayTeams);
+    },
+
+    // Caching states
+    setTempCache(context, cacheData) {
+      context.commit("SET_TEMP_CACHE", cacheData);
+    },
+
+    // sets the showing gameweek
+    setShowingGameWeek(context, gameWeek) {
+      // TODO: Clear fixture gameweek data
+      context.commit("SET_SHOWING_GAMEWEEK", gameWeek);
+    },
+
+    // Scroller states
+    setHomeTeamIndex(context, homeTeamIndex) {
+      context.commit("SET_HOME_TEAM_INDEX", homeTeamIndex);
+    },
+    setAwayTeamIndex(context, awayTeamIndex) {
+      context.commit("SET_AWAY_TEAM_INDEX", awayTeamIndex);
+    },
+
+    setEditFixtureId(context, matchId) {
+      context.commit("SET_EDIT_FIXTURE_ID", matchId);
+    },
+
+    setFixtureDetailId({ commit }, matchId) {
+      commit("SET_FIXTURE_DETAIL_ID", matchId);
+    },
+
+    setFixtureDetailDataLineup(
+      { commit, state },
+      { teamId, incomingPlayer, position, operation }
+    ) {
+      let updatedLineup;
+
+      updatedLineup = state.fixtureDetailData.lineups[teamId];
+      if (operation === "add")
+        updatedLineup[position].splice(3, 0, parseInt(incomingPlayer));
+      else
+        updatedLineup[position] = updatedLineup[position].filter(
+          (player) => player !== parseInt(incomingPlayer)
+        );
+
+      let payload = {
+        type: "lineups",
+        teamId,
+        data: updatedLineup,
+      };
+
+      commit("SET_FIXTURE_DETAIL_DATA", payload);
+    },
+
+    addPlayerToLocker({ commit, state }, { teamId, playerId }) {
+      const payload = {
+        teamId,
+        playerId,
+        data: state.players[teamId][playerId],
+      };
+      commit("SET_LOCKER_PLAYER", payload);
+    },
+
+    deletePlayerFromLocker({ commit }, { teamId, playerId }) {
+      const payload = {
+        teamId,
+        playerId,
+      };
+      commit("DELETE_LOCKER_PLAYER", payload);
+    },
+
+    setScore({ commit }, { matchId, incomingScore }) {
+      let payload;
+
+      payload = {
+        matchId,
+        data: incomingScore,
+      };
+      commit("SET_SCORE", payload);
+    },
+
+    // get active gameweek
+    async getActiveGameWeek(context) {
+      axiosInstance
+        .get(`${baseURL}/fixtures/gwf/check/activeGw`)
+        .then((response) => {
+          if (response.status === 200) {
+            context.commit(
+              "SET_SHOWING_GAMEWEEK",
+              response.data.gameWeekNumber
+            );
+          }
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data,
+          });
+        });
+    },
+
     // Fetches all fixtures
     async setAllFixtures(context) {
       axiosInstance
@@ -210,38 +318,6 @@ export default {
             notificationMessage: err.response.data,
           });
         });
-    },
-
-    setHomeTeams(context, homeTeams) {
-      context.commit("SET_HOME_TEAMS", homeTeams);
-    },
-
-    // sets away team => useful when filtering
-    setAwayTeams(context, awayTeams) {
-      context.commit("SET_AWAY_TEAMS", awayTeams);
-    },
-
-    // Caching states
-    setTempCache(context, cacheData) {
-      context.commit("SET_TEMP_CACHE", cacheData);
-    },
-
-    // sets the showing gameweek
-    setShowingGameWeek(context, gameWeek) {
-      // TODO: Clear fixture gameweek data
-      context.commit("SET_SHOWING_GAMEWEEK", gameWeek);
-    },
-
-    // Scroller states
-    setHomeTeamIndex(context, homeTeamIndex) {
-      context.commit("SET_HOME_TEAM_INDEX", homeTeamIndex);
-    },
-    setAwayTeamIndex(context, awayTeamIndex) {
-      context.commit("SET_AWAY_TEAM_INDEX", awayTeamIndex);
-    },
-
-    setEditFixtureId(context, matchId) {
-      context.commit("SET_EDIT_FIXTURE_ID", matchId);
     },
 
     // Saves new fixture
@@ -454,10 +530,6 @@ export default {
             });
           }
         });
-    },
-
-    setFixtureDetailId({ commit }, matchId) {
-      commit("SET_FIXTURE_DETAIL_ID", matchId);
     },
 
     async loadFixtureDetails({ commit, state }, matchId) {
@@ -707,80 +779,31 @@ export default {
         });
     },
 
-    setFixtureDetailDataLineup(
-      { commit, state },
-      { teamId, incomingPlayer, position, operation }
-    ) {
-      let updatedLineup;
+    // TODO:Remind got merged with save stats
 
-      updatedLineup = state.fixtureDetailData.lineups[teamId];
-      if (operation === "add")
-        updatedLineup[position].splice(3, 0, parseInt(incomingPlayer));
-      else
-        updatedLineup[position] = updatedLineup[position].filter(
-          (player) => player !== parseInt(incomingPlayer)
-        );
-
-      let payload = {
-        type: "lineups",
-        teamId,
-        data: updatedLineup,
-      };
-
-      commit("SET_FIXTURE_DETAIL_DATA", payload);
-    },
-
-    addPlayerToLocker({ commit, state }, { teamId, playerId }) {
-      const payload = {
-        teamId,
-        playerId,
-        data: state.players[teamId][playerId],
-      };
-      commit("SET_LOCKER_PLAYER", payload);
-    },
-
-    deletePlayerFromLocker({ commit }, { teamId, playerId }) {
-      const payload = {
-        teamId,
-        playerId,
-      };
-      commit("DELETE_LOCKER_PLAYER", payload);
-    },
-
-    setScore({ commit }, { matchId, incomingScore }) {
-      let payload;
-
-      payload = {
-        matchId,
-        data: incomingScore,
-      };
-      commit("SET_SCORE", payload);
-    },
-
-    async saveScore({ state }, matchId) {
-      let url;
-      let payload;
-
-      url = `/fixtures/update/score/${matchId}`;
-      payload = {
-        score: state.score[matchId],
-      };
-      await axiosInstance
-        .patch(url, payload)
-        .then((res) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "success",
-            notificationMessage: res.data,
-          });
-        })
-        .catch((err) => {
-          store.dispatch("Global/setNotificationInfo", {
-            showNotification: true,
-            notificationType: "error",
-            notificationMessage: err.response.data,
-          });
-        });
+    async saveScore() {
+      //   let url;
+      //   let payload;
+      //   url = `/fixtures/update/score/${matchId}`;
+      //   payload = {
+      //     score: state.score[matchId],
+      //   };
+      //   await axiosInstance
+      //     .patch(url, payload)
+      //     .then((res) => {
+      //       store.dispatch("Global/setNotificationInfo", {
+      //         showNotification: true,
+      //         notificationType: "success",
+      //         notificationMessage: res.data,
+      //       });
+      //     })
+      //     .catch((err) => {
+      //       store.dispatch("Global/setNotificationInfo", {
+      //         showNotification: true,
+      //         notificationType: "error",
+      //         notificationMessage: err.response.data,
+      //       });
+      //     });
     },
   },
 };

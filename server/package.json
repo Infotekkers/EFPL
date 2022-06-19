@@ -11,8 +11,10 @@
   "author": "Infotekkers",
   "license": "ISC",
   "dependencies": {
+    "@iamtraction/google-translate": "^1.1.2",
     "axios": "^0.26.1",
     "bcrypt": "^5.0.1",
+    "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "eslint-config-prettier": "^8.5.0",
@@ -21,11 +23,15 @@
     "express-async-handler": "^1.2.0",
     "express-rate-limit": "^6.3.0",
     "fs-extra": "^10.0.1",
+    "google-translate-api": "^2.3.0",
+    "http": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.4",
     "mongoose-auto-increment": "^5.0.1",
     "nodemailer": "^6.7.2",
+    "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
+    "socket.io": "^3.0.2",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.13",
     "validator": "^13.7.0"
@@ -40,5 +46,8 @@
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }

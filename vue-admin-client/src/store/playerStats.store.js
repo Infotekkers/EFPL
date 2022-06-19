@@ -161,7 +161,6 @@ export default {
       };
 
       url = `/fixtures/update/stats/${rootState.Fixture.fixtureDetailId}`;
-      console.log(payload);
       await axios
         .patch(url, payload)
         .then((res) => {
