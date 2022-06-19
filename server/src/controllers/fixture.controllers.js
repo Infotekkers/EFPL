@@ -478,7 +478,7 @@ const endFixture = asyncHandler(async function (req, res) {
     teamId: parseInt(req.params.matchId.split("|")[1]),
   });
 
-  //
+  console.log(awayTeam);
 
   if (match?.status === "liveSH") {
     match.status = "FT";
@@ -498,8 +498,6 @@ const endFixture = asyncHandler(async function (req, res) {
     const hometeamPosition = homeTeam.teamPosition;
     const awayteamPoint = awayteamPosition.teamPoint;
     const hometeamPoint = hometeamPosition.teamPoint;
-
-    // Home Team Win
     if (hometeamScore > awayteamScore) {
       const teamPoint = hometeamPoint + 3;
       const hometeamGoalDce = hometeamScore - awayteamScore;

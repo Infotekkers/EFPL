@@ -100,6 +100,7 @@ const login = asyncHandler(async (req, res) => {
         country: user.country,
         favouriteEplTeam: user.favouriteEplTeam,
         teamName: user.teamName,
+        id:user._id,
       });
     } else {
       res.status(400).json({ message: "invalid email - password combination" });
@@ -115,8 +116,9 @@ const fetchUsers = asyncHandler(async (req, res) => {
 });
 
 const fetchOneUser = asyncHandler(async (req, res) => {
-  const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
-  const userId = token.data;
+  // const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+  // const userId = token.data;
+  const userId = req.params.id;
 
   const user = await User.findById(userId);
   if (user == null) {
