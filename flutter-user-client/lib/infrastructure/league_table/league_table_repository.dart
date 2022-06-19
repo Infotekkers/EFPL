@@ -18,10 +18,10 @@ class APILeagueTableRepository implements ILeagueTableRepository {
 
   @override
   Future<Either<LeagueTableFailure, List<LeagueTable>>> getTeams() async {
-    if (await utility.hasInternetConnection()) {
-      return _leagueTableRemoteDataProvider.getTeams();
-    } else {
-      return _leagueTableLocalDataProvider.getTeams();
-    }
+    // if (await utility.hasInternetConnection()) {
+    return _leagueTableRemoteDataProvider.getTeams();
+    // } else {
+    //   return _leagueTableLocalDataProvider.getTeams();
+    // }
   }
 }

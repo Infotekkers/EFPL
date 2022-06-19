@@ -539,8 +539,22 @@ export default {
 
     // API Callers
     saveLineup() {
-      // TODO: Check if there are 18 players
-      this.saveFixtureLineup();
+      const lineup = this.fixtureDetailData.lineups[this.activeTeamId];
+      let playerCount = 0;
+      for (const position in lineup) {
+        playerCount += lineup[position].length;
+      }
+      if (playerCount > 16) {
+        this.saveFixtureLineup();
+      } else {
+        this.$store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: `Lineup is not complete. Add ${
+            17 - playerCount
+          } player${17 - playerCount == 1 ? "" : "s"} to complete!`,
+        });
+      }
     },
 
     // Score Change Handler

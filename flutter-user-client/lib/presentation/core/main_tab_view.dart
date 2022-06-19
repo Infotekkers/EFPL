@@ -168,7 +168,11 @@ class _MainTabViewState extends State<MainTabView> {
                   ),
                   onTap: () {
                     getIt<IAuthRepository>().removeUser();
-                    Navigator.popAndPushNamed(context, "/sign-in");
+                    // Navigator.pop(context);
+                    // Navigator.pushNamed(context, "/public");
+                    Navigator.of(context)
+                        .popUntil(ModalRoute.withName('/public'));
+                    Navigator.pushNamed(context, "/public");
                   },
                 ),
               ],

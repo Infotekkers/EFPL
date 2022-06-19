@@ -22,6 +22,8 @@ void main() {
       // await render
       await driver.waitUntilFirstFrameRasterized();
 
+      await driver.tap(find.byValueKey("publicPageSignInButton"));
+
       // Valid email Valid password
       await driver.tap(emailInputField);
       await driver.enterText("efpltest@gmail.com");
@@ -47,7 +49,7 @@ void main() {
       await driver.tap(locateDrawer);
       await driver.tap(find.text("EPL Table"));
 
-      await driver.waitFor(find.text("EPL Standings"));
+      await driver.waitFor(find.text("EFPL Standings"));
     });
 
     tearDownAll(() async {

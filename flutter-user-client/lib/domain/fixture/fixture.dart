@@ -19,6 +19,7 @@ abstract class Fixture with _$Fixture {
     required TeamLogo homeTeamLogo,
     required Stadium homeTeamStadium,
     required StadiumCapacity homeTeamCapacity,
+    required int fdr,
     //
     required Team awayTeam,
     required Team awayTeamAmh,
@@ -57,5 +58,6 @@ abstract class Fixture with _$Fixture {
         awayTeamStadium: Stadium(value: ""),
         awayTeamCapacity: StadiumCapacity(value: 0),
         score: Score(value: ''),
+        fdr: 1,
       );
 }

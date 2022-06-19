@@ -36,6 +36,7 @@ class FixtureLocalDataProvider {
         parsedCachedFixture['awayTeamLineUp'] = {};
 
         final Fixture fixture = Fixture(
+          fdr: parsedCachedFixture['fdr'],
           gameWeekId: GameWeekId(
             value: parsedCachedFixture['gameWeekId'],
           ),
@@ -109,6 +110,7 @@ class FixtureLocalDataProvider {
         if (cachedFixtures.isEmpty) {
           return right([
             Fixture(
+              fdr: 1,
               gameWeekId: GameWeekId(value: gameWeekId),
               matchId: MatchId(value: ""),
               schedule: Schedule(value: "2022-05-24T10:40:00.000+00:00"),
@@ -165,6 +167,7 @@ class FixtureLocalDataProvider {
               awayTeamStadium: Stadium(value: ""),
               awayTeamCapacity: StadiumCapacity(value: 0),
               score: Score(value: ''),
+              fdr: 1,
             ),
           ],
           const FixtureFailures.hiveError(failedValue: "Hive Error")

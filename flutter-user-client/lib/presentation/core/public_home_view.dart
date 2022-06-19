@@ -72,56 +72,28 @@ class PublicHome extends StatelessWidget {
                   ),
 
                   const SizedBox(
-                    width: 170,
+                    width: 120,
                   ),
 
-                  // Container(
-                  //   width: 100,
-                  //   height: 36,
-                  //   // color: .primary_900,
-                  //   // color: ,
-                  //   decoration: BoxDecoration(
-                  //     border: Border.all(color: Colors.blueAccent),
-                  //   ),
-                  //   child: Center(
-                  //     child: Text(
-                  //       "Login",
-                  //       style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  //             fontSize: 14,
-                  //             color: ConstantColors.primary_900,
-                  //           ),
-                  //     ),
-                  //   ),
-                  // ),
                   IconButton(
-                      onPressed: () {
-                        Navigator.popAndPushNamed(context, "/register");
-                      },
-                      icon: const Icon(
-                        Typicons.user_add,
-                        size: 30,
-                      )),
-                  // Container(
-                  //   width: 100,
-                  //   height: 36,
-                  //   color: ConstantColors.primary_900,
-                  //   child: Center(
-                  //     child: Text(
-                  //       "Register",
-                  //       style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  //             fontSize: 14,
-                  //             color: ConstantColors.neutral_200,
-                  //           ),
-                  //     ),
-                  //   ),
-                  // )
+                    key: const Key("publicPageSignUpButton"),
+                    onPressed: () {
+                      Navigator.popAndPushNamed(context, "/register");
+                    },
+                    icon: const Icon(
+                      Typicons.user_add,
+                      size: 25,
+                    ),
+                  ),
+
                   IconButton(
+                      key: const Key("publicPageSignInButton"),
                       onPressed: () {
                         Navigator.popAndPushNamed(context, "/sign-in");
                       },
                       icon: const Icon(
                         MdiIcons.login,
-                        size: 30,
+                        size: 25,
                       ))
                 ],
               ),
