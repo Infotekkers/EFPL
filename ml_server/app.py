@@ -7,8 +7,11 @@ import math
 from flask import Flask
 from flask import request
 import json
+from dotenv import load_dotenv
+import os
 
 ml_app = Flask(__name__)
+load_dotenv()
 
 
 @ml_app.route('/fdr', methods=['POST'])
@@ -142,5 +145,11 @@ def fixture_difficulty_rating():
     }
 
 
+@ml_app.route("/initial_price", methods=['POST'])
+def initial_price():
+    data = json.loads(request['data'])
+    print(data.data)
+
+
 if __name__ == '__main__':
-    ml_app.run(port=5001, debug=True)
+    ml_app.run(port=os.getenv("PORT") or 5001, debug=True)
