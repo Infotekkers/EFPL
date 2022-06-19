@@ -28,6 +28,9 @@ _buildCustomLeagueMembersView(context, state) {
   final List customLeagueMembers =
       state.customLeaguesInfo.customLeagueMembers.getOrCrash().toList();
 
+  final String customLeagueCode =
+      state.customLeaguesInfo.leagueCode.getOrCrash();
+
   return Scaffold(
     appBar: AppBar(
       title: Text(state.customLeaguesInfo.leagueName.getOrCrash()),
@@ -54,6 +57,27 @@ _buildCustomLeagueMembersView(context, state) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            alignment: Alignment.centerRight,
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const Text(
+                  "League Code",
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                Text(
+                  customLeagueCode,
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
