@@ -19,6 +19,8 @@ export default {
     eplTeamId: "",
     imageChanged: false,
     liveMatch: false,
+
+    suggestedPrice: 0,
   },
   mutations: {
     SET_ALL_PLAYERS(state, payload) {
@@ -51,6 +53,9 @@ export default {
     },
     SET_PRICE_FILTER(state, payload) {
       state.priceFilterCondition = payload;
+    },
+    SET_SUGGESTED_PRICE(state, payload) {
+      state.suggestedPrice = payload;
     },
   },
   actions: {
@@ -163,6 +168,22 @@ export default {
             notificationMessage: response.data,
           });
           store.dispatch("Player/setAllPlayers");
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: err.response.data.message,
+          });
+        });
+    },
+    async getSuggestedPrice(context, playerName) {
+      axiosInstance
+        .get(`/players/suggested-price/${playerName}`)
+        .then((res) => {
+          console.log(res);
+          const price = res.data;
+          context.commit("SET_SUGGESTED_PRICE", price);
         })
         .catch((err) => {
           store.dispatch("Global/setNotificationInfo", {

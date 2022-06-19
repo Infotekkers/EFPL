@@ -30,5 +30,5 @@ router.get(
 
 // New
 router.get("/position/:position", playersController.getPlayersByPosition);
-
+router.get("/suggested-price/:playerName", playersController.getSuggestedPrice);
 module.exports = router;

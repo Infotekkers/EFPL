@@ -6,6 +6,7 @@ from joblib import dump, load
 import math
 from flask import Flask
 from flask import request
+from flask import Response
 import json
 from dotenv import load_dotenv
 import os
@@ -144,10 +145,10 @@ def fixture_difficulty_rating():
     }
 
 
-@ml_app.route("/initial_price", methods=['POST'])
-def initial_price():
-    data = json.loads(request['data'])
-    print(data.data)
+@ml_app.route("/initial-price/<name>", methods=['GET'])
+def initial_price(name):
+    print(name)
+    return Response('{"price":2}', status=260, mimetype='application/json')
 
 
 if __name__ == '__main__':

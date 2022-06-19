@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const axios = require("axios");
 const Fixture = require("../models/Fixtures");
 const GameWeek = require("../models/GameWeek");
 const PlayerModel = require("../models/Player");
@@ -379,6 +380,14 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
   res.status(200).send(allPlayersInPositionFormatted);
 });
 
+const getSuggestedPrice = asyncHandler(async (req, res) => {
+  const mlRes = await axios.get(
+    `${process.env.ML_API_URL}/initial-price/${req.params.playerName}`
+  );
+  if (mlRes.status === 200) res.send(mlRes.data);
+  else res.status(400).send({ message: "Unable to fetch suggested price" });
+});
+
 module.exports = {
   addPlayer,
   getPlayer,
@@ -391,4 +400,5 @@ module.exports = {
 
   // New
   getPlayersByPosition,
+  getSuggestedPrice,
 };
