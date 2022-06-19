@@ -1,43 +1,5 @@
 <template>
   <main>
-    <div class="cards">
-      <div class="card-single">
-        <div>
-          <h1 id="customer"></h1>
-          <span>Top Scorer</span>
-        </div>
-        <div>
-          <span class="fas fa-users"></span>
-        </div>
-      </div>
-      <div class="card-single">
-        <div>
-          <h1 id="project"></h1>
-          <span>Top Assister</span>
-        </div>
-        <div>
-          <span class="fas fa-clipboard"></span>
-        </div>
-      </div>
-      <div class="card-single">
-        <div>
-          <h1 id="order"></h1>
-          <span>Top Saves</span>
-        </div>
-        <div>
-          <span class="fas fa-shopping-bag"></span>
-        </div>
-      </div>
-      <div class="card-single">
-        <div>
-          <h1 id="Top Rated"></h1>
-          <span>Top Rated</span>
-        </div>
-        <div>
-          <span class="fab fa-google-wallet"></span>
-        </div>
-      </div>
-    </div>
     <!-- Header -->
     <div class="teams-header-container">
       <!-- Title -->
@@ -95,6 +57,22 @@
     <div v-else-if="isTeamLoading == true" class="no-teams-container">
       <SpinnerComponent />
     </div>
+    <div class="spacer"></div>
+    <div class="stats-cards">
+      <EPLStatsComponent :statArray="topScorers || []" statType="goals" />
+      <EPLStatsComponent :statArray="mostAssists || []" statType="assists" />
+      <EPLStatsComponent
+        :statArray="mostCleanSheets || []"
+        statType="cleanSheets"
+      />
+      <EPLStatsComponent :statArray="mostSaves || []" statType="saves" />
+      <EPLStatsComponent :statArray="mostReds || []" statType="reds" />
+      <EPLStatsComponent :statArray="mostYellows || []" statType="yellows" />
+      <EPLStatsComponent
+        :statArray="mostMinutesPlayed || []"
+        statType="minutesPlayed"
+      />
+    </div>
     <!-- Loading -->
   </main>
 </template>
@@ -113,11 +91,14 @@ import {
 // import TeamComponent from "@/components/TeamComponent";
 import DashLeagueTableComponent from "@/components/dashLeagueTableComponent";
 import SpinnerComponent from "@/components/SpinnerComponent.vue";
+import EPLStatsComponent from "@/components/EPLStatsComponent.vue";
+
 export default {
   name: "TeamsComponent",
   components: {
     DashLeagueTableComponent,
     SpinnerComponent,
+    EPLStatsComponent,
   },
   data() {
     return {
@@ -171,6 +152,10 @@ export default {
     sortByFoundedDate(order) {
       store.dispatch("Team/sortByFoundedDate", order);
     },
+
+    getEPLStatsFromAPI() {
+      store.dispatch("EPLStats/getEPLStats");
+    },
   },
 
   computed: {
@@ -187,6 +172,34 @@ export default {
       );
       return store.state.Team.allTeams;
     },
+
+    topScorers() {
+      return store.state.EPLStats.allStats.topScorers;
+    },
+
+    mostAssists() {
+      return store.state.EPLStats.allStats.mostAssists;
+    },
+
+    mostCleanSheets() {
+      return store.state.EPLStats.allStats.mostCleanSheets;
+    },
+
+    mostSaves() {
+      return store.state.EPLStats.allStats.mostSaves;
+    },
+
+    mostYellows() {
+      return store.state.EPLStats.allStats.mostYellows;
+    },
+
+    mostReds() {
+      return store.state.EPLStats.allStats.mostReds;
+    },
+
+    mostMinutesPlayed() {
+      return store.state.EPLStats.allStats.mostMinutesPlayed;
+    },
   },
 
   beforeMount() {
@@ -202,17 +215,33 @@ export default {
       this.showModal = true;
       this.$router.replace({ modal: null });
     }
+
+    // get stats
+    this.getEPLStatsFromAPI();
   },
 };
 </script>
 <style scoped>
+.spacer {
+  height: 32px;
+}
+.no-teams-container {
+  display: grid;
+  place-items: center;
+  height: 450px;
+  width: 100%;
+}
+.stats-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
 /* Icons */
 .extra-small-icon {
   width: 7px;
   height: fit-content;
   object-fit: contain;
 }
-
 .small-icon {
   width: 15px;
   height: fit-content;
@@ -234,7 +263,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
   /*  */
   position: relative;
   z-index: 1;
@@ -260,7 +288,6 @@ export default {
   place-items: center;
   margin-right: 6px;
 }
-
 .teams-sorter-header {
   display: flex;
   width: 100%;
@@ -278,7 +305,6 @@ export default {
 .teams-draw-header {
   width: 7.5%;
 }
-
 .teams-gd-header,
 .teams-pts-header,
 .teams-ga-header,
@@ -298,16 +324,13 @@ export default {
   transition: all 400ms;
   overflow-x: hidden;
 }
-
 /* ===================== */
 @import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap");
-
 body {
   background: rgba(0, 0, 0, 0.1);
   /* background: url(https://image.freepik.com/free-vector/abstract-gradient-shapes-background_79603-156.jpg); */
   backdrop-filter: blur(10px);
 }
-
 .main-wrapper {
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
@@ -315,7 +338,6 @@ body {
 .user-wrapper b {
   filter: brightness(150%);
 }
-
 .video-1,
 .video-2 {
   z-index: -999;
@@ -324,7 +346,6 @@ body {
   height: 100%;
   top: 0;
 }
-
 .video-2 {
   visibility: hidden;
 }
@@ -343,17 +364,14 @@ body {
   box-shadow: 0 0 0 5px rgba(183, 204, 235, 0.378);
   overflow: hidden;
 }
-
 .search:hover,
 .search:active,
 .search:focus {
   width: 400px;
 }
-
 body.light .search.active {
   width: 350px;
 }
-
 .search .icon {
   position: relative;
   top: 0;
@@ -364,7 +382,6 @@ body.light .search.active {
   display: flex;
   justify-content: center;
   align-items: center;
-
   cursor: pointer;
 }
 .search:hover .search-rotate {
@@ -380,7 +397,6 @@ body.light .search.active {
   border: 3px solid var(--new-content);
   transform: translate(-4px, -4px);
 }
-
 .search .icon::after {
   content: "";
   position: absolute;
@@ -389,7 +405,6 @@ body.light .search.active {
   background: var(--new-content);
   transform: translate(6px, 6px) rotate(315deg);
 }
-
 .search .input {
   position: relative;
   width: 300px;
@@ -401,7 +416,6 @@ body.light .search.active {
   justify-content: center;
   align-items: center;
 }
-
 .search .input input {
   position: absolute;
   top: 0;
@@ -428,7 +442,6 @@ body.light .search.active {
   padding: 10px;
   animation: fade 1s ease-in infinite;
 }
-
 .dis-warn {
   position: absolute;
   top: 5rem;
@@ -440,7 +453,6 @@ body.light .search.active {
   border-radius: 12px;
   padding: 10px;
 }
-
 @keyframes fade {
   50% {
     opacity: 0.2;
@@ -461,17 +473,13 @@ body.light .search.active {
 .light .search {
   box-shadow: 0 2px 2px 2px #e70558;
 }
-
 .light .search .icon::before {
   border: 3px solid #e70558;
 }
-
 .light .search .icon::after {
   background: var(--pink);
 }
-
 /* ===================== */
-
 .switch {
   position: absolute;
   top: 99px;
@@ -482,7 +490,6 @@ body.light .search.active {
   justify-content: center;
   align-items: center;
 }
-
 #toggle {
   position: relative;
   display: block;
@@ -507,7 +514,6 @@ body.light .search.active {
   font-weight: 600;
   font-size: 29px;
 }
-
 #toggle:hover:after,
 #dashboard:hover,
 #kleenpulse:hover {
@@ -518,7 +524,6 @@ body.light .search.active {
   background-size: 200% 200%;
   animation: anime 6s linear infinite;
 }
-
 #toggle .fas.fa-moon,
 #toggle .fas.fa-sun {
   position: absolute;
@@ -530,7 +535,6 @@ body.light .search.active {
 #toggle .fas.fa-sun {
   opacity: 0;
 }
-
 .light #toggle .fas.fa-moon {
   opacity: 0;
 }
@@ -542,7 +546,6 @@ body.light .search.active {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 #toggle .indicator {
   position: absolute;
   left: 0;
@@ -555,28 +558,22 @@ body.light .search.active {
   transform: scale(0.9);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 10px 3px var(--indicator);
 }
-
 #toggle:hover .indicator {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 -10px 3px var(--indicator);
 }
-
 #toggle .indicator:active,
 body.light #toggle .indicator:active {
   transform: scale(0.7);
 }
-
 /* #toggle.active .indicator {
     left: calc(160px / 2);
 } */
-
 /* DARK MODE STYLING BEGINS HERE! */
-
 body.light #toggle {
   background: #000b11;
   box-shadow: inset 2px 11px 5px rgb(0 0 0), inset 0 4px 13px #d20260,
     inset 0 4px 0px #d20260;
 }
-
 body.light #toggle:after {
   content: "DARK";
   position: absolute;
@@ -585,7 +582,6 @@ body.light #toggle:after {
   font-weight: 600;
   font-size: 29px;
 }
-
 body.light #toggle .indicator {
   background: transparent;
   cursor: pointer;
@@ -594,50 +590,39 @@ body.light #toggle .indicator {
   box-shadow: 0 3px 12px rgb(0 0 0), inset 0 4px 4px #d20260,
     inset 0 -2px 4px #d20260;
 }
-
 body.light #toggle:hover .indicator {
   box-shadow: 0 3px 12px rgb(0 0 0), inset 0 1px 1px #d20260,
     inset 0 -7px 0px #d20260;
 }
-
 body.light .switch {
   background: transparent;
-
   overflow: hidden;
   display: block;
 }
-
 body.light .card-single {
   box-shadow: 0 0 10px #00d9ff;
   border-radius: 10px;
 }
-
 body.light .card-single:hover {
   box-shadow: 0 0 0px;
 }
-
 body.light .card-single:hover h1 {
   color: var(--content-BG);
 }
-
 body.light .card-single div:last-child span {
   color: var(--dark-text);
 }
-
 body.light header {
   border-bottom: 1px solid rgba(6, 204, 239, 0.548);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
 }
-
 body.light header h2 {
   color: cyan;
 }
-
 body.light .sidebar {
   box-shadow: 5px 0 20px rgba(0, 0, 0, 0.7);
   z-index: 999;
 }
-
 .light .sidebar li a span {
   font-size: 1.5rem;
   filter: brightness(140%);
@@ -646,7 +631,6 @@ body.light .sidebar {
   -webkit-background-clip: text;
   background-clip: text;
 }
-
 body.light .sidebar-menu a:hover {
   background: transparent;
   color: #0ff;
@@ -655,37 +639,29 @@ body.light .sidebar-menu a:hover {
   border-radius: 30px 0 0 30px;
   border: 1px solid #0ff;
 }
-
 body.light .card-single:hover {
   background: linear-gradient(45deg, #00616c, #00f7ff);
   filter: brightness(100%);
 }
-
 body.light .card-header {
   border-bottom: 1px solid var(--dark-text);
 }
-
 body.light thead tr {
   border-top: 1px solid #d20260;
   border-bottom: 1px solid #d20260;
 }
-
 body.light td {
   color: #fff;
 }
-
 body.light .contact span {
   color: var(--dark-text);
 }
-
 body.light .card-header button:hover {
   background: transparent;
   border: 1px solid cyan;
   color: cyan;
 }
-
 /* DARK MODE STYLING ENDS HERE! */
-
 #pop-wrap {
   display: none;
   font-size: 4vmin;
@@ -698,7 +674,6 @@ body.light .card-header button:hover {
   text-align: center;
   transform: translate(-50%, -50%);
 }
-
 #pop-wrap .pop-up {
   background: var(--main-color);
   -webkit-text-fill-color: transparent;
@@ -706,7 +681,6 @@ body.light .card-header button:hover {
   -webkit-background-clip: text;
   background-clip: text;
 }
-
 /* ===========SIDEBAR========== */
 .sidebar {
   width: 250px;
@@ -720,18 +694,15 @@ body.light .card-header button:hover {
   z-index: 100;
   transition: width 300ms;
 }
-
 .sidebar-brand {
   height: 90px;
   padding: 1rem 0rem 1rem 2rem;
   /* 	color:#fff; */
 }
-
 .sidebar-brand span {
   display: inline-block;
   padding-right: 1rem;
 }
-
 .sidebar-brand h2 span:last-child,
 .sidebar-brand h2 span:first-child {
   filter: brightness(140%);
@@ -741,13 +712,11 @@ body.light .card-header button:hover {
   background-clip: text;
   text-transform: uppercase;
 }
-
 .sidebar-menu li {
   width: 100%;
   margin-bottom: 1.7rem;
   padding-left: 1rem;
 }
-
 .sidebar-menu a {
   padding-left: 1rem;
   display: block;
@@ -757,7 +726,6 @@ body.light .card-header button:hover {
   font-size: 1.1rem;
   overflow: hidden;
 }
-
 .sidebar-menu a:hover {
   /* background: var(--off-white); */
   /* color: var(--icon-color); */
@@ -768,57 +736,45 @@ body.light .card-header button:hover {
   backdrop-filter: blur(6px);
   border-radius: 30px 0 0 30px;
 }
-
 .sidebar-menu a span:first-child {
   font-size: 1.5rem;
   padding-right: 1rem;
   transform: translatey(5px);
 }
-
 .sidebar-menu {
   margin-top: 1rem;
 }
-
 #nav-toggle:checked + .sidebar {
   width: 70px;
 }
-
 #nav-toggle:checked + .sidebar {
   width: 70px;
 }
-
 #nav-toggle:checked + .sidebar .sidebar-brand,
 #nav-toggle:checked + .sidebar li {
   padding-left: 1rem;
   text-align: center;
 }
-
 #nav-toggle:checked + .sidebar li a {
   padding-left: 0rem;
 }
-
 #nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
 #nav-toggle:checked + .sidebar li a span:last-child {
   display: none;
 }
-
 /* ===========SIDEBAR========== */
-
 #nav-toggle:checked ~ .main-content {
   margin-left: 70px;
 }
-
 #nav-toggle:checked ~ .main-content header {
   width: calc(100% - 70px);
   left: 70px;
 }
-
 .main-content {
   transition: margin-left 300ms;
   margin-left: 250px;
   background: rgba(0, 0, 0, 0.2);
 }
-
 /* ====GLASSMORPHISM CHANGE HERE!==== */
 header {
   /* 	background:#fff; */
@@ -834,22 +790,18 @@ header {
   z-index: 100;
   transition: left 300ms;
 }
-
 #nav-toggle {
   display: none;
 }
-
 /* ====GLASSMORPHISM CHANGE HERE!==== */
 header h2 {
   color: #fff;
   text-transform: uppercase;
 }
-
 header label span {
   font-size: 1.7rem;
   padding-left: 1rem;
 }
-
 .search-wrapper {
   border: 1px solid #ccc;
   border-radius: 30px;
@@ -858,31 +810,26 @@ header label span {
   align-items: center;
   overflow-x: hidden;
 }
-
 .search-wrapper:focus,
 .search-wrapper:hover {
   border: 1px solid var(--icon-color);
 }
-
 .search-wrapper input {
   height: 100%;
   padding: 0.5rem;
   border: none;
   background: transparent;
 }
-
 input {
   color: #fff;
   font-size: 15px;
 }
-
 .search-wrapper span {
   display: inline-block;
   padding: 0rem 1rem;
   font-size: 1.5rem;
   color: var(--new-content);
 }
-
 .user-wrapper {
   display: flex;
   align-items: center;
@@ -891,21 +838,17 @@ input {
 .light .user-wrapper {
   border-left: 4px solid #ea0565;
 }
-
 .user-wrapper img {
   border-radius: 50%;
   margin-right: 1rem;
 }
-
 .user-wrapper div h4 {
   color: #fff;
 }
-
 .user-wrapper small {
   display: inline-block;
   color: #e0e0e0;
 }
-
 body.light h4 {
   background: var(--orange);
   -webkit-text-fill-color: transparent;
@@ -913,19 +856,15 @@ body.light h4 {
   -webkit-background-clip: text;
   background-clip: text;
 }
-
 /* ====GLASSMORPHISM CHANGE HERE!==== */
 main {
   padding: 1rem 1.5rem;
-
   min-height: calc(100vh - 90px);
 }
-
 /* ====GLASSMORPHISM CHANGE HERE!==== */
 .heading {
   color: #fff;
 }
-
 body.light .heading {
   filter: brightness(140%);
   background: var(--pink);
@@ -934,7 +873,6 @@ body.light .heading {
   -webkit-background-clip: text;
   background-clip: text;
 }
-
 .cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -944,7 +882,6 @@ body.light .heading {
   overflow: hidden;
   height: auto;
 }
-
 .card-single {
   display: flex;
   justify-content: space-between;
@@ -964,7 +901,6 @@ body.light .heading {
   transform: scale(1.04);
   border-radius: 25px;
 }
-
 .card-single div:last-child span {
   font-size: 3rem;
   background: var(--pink);
@@ -973,46 +909,38 @@ body.light .heading {
   -webkit-background-clip: text;
   background-clip: text;
 }
-
 .card-single div:first-child span {
   text-transform: uppercase;
   color: #fff;
 }
-
 .card-single:hover,
 .card:hover,
 .light .card {
   background: rgba(0, 0, 0, 0.564);
 }
-
 .light .card:hover {
   background: rgba(0, 0, 0, 0.713);
 }
-
 .card-single:hover h1,
 .card-single:hover div:last-child span {
   filter: brightness(140%);
 }
-
 .card-single:hover h1,
 .card-single:hover div:last-child span {
   filter: brightness(140%);
 }
-
 .recent-grid {
   margin-top: 3.5rem;
   display: grid;
   grid-gap: 2rem;
   grid-template-columns: 65% auto;
 }
-
 .card {
   /* 	background:#fff; */
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(16px);
   border-radius: 10px;
 }
-
 /* =========COUNTER=========== */
 sup,
 b {
