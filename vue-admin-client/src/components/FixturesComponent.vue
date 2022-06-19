@@ -17,184 +17,225 @@
 
     <!-- After Data Loaded -->
     <div v-else class="gameweek-container">
-      <!-- Search Bar -->
-      <input
-        type="text"
-        class="fixture-search-bar"
-        @keyup="searchBarFilter"
-        placeholder="Search Term Here..."
-        ref="searchBar"
-      />
-      <!-- Search Bar -->
+      <div class="fixtures-control">
+        <div class="filter-group">
+          <h3>Find fixtures</h3>
+          <!-- Search Bar -->
+          <input
+            type="search"
+            class="fixture-search-bar"
+            @keyup="searchBarFilter"
+            placeholder="Start typing..."
+            ref="searchBar"
+          />
+        </div>
+        <!-- Search Bar -->
+        <!-- Header - Gameweek controls, add new & gameweek title -->
+        <div class="filter-group">
+          <h3>Change gameweek</h3>
+          <div class="gameweek-controller">
+            <!-- Previous Game week button -->
+            <div @click="prevGameWeek" class="navigator-button">
+              <img :src="nextLargeIcon.path" :alt="nextLargeIcon.alt" />
+            </div>
+            <!-- Gameweek counter -->
+            <div class="gameweek-controller-main">
+              <div class="gameweek-dropdown" @click="toggleOptions">
+                <div class="selected-gw">
+                  {{ $t("Game week") }} {{ showingGameWeek }}
+                  <div
+                    class="gameweek-complete-verifier"
+                    v-if="isGameWeekComplete === true"
+                  >
+                    ✅
+                  </div>
+                  <div class="gameweek-complete-verifier" v-else>❌</div>
+                </div>
+                <div
+                  class="gameweek-dropdown-options"
+                  v-if="revealDropDownOptions"
+                >
+                  <div
+                    class="gameweek-dropdown-option"
+                    v-for="(gw, index) of numberOfGameweeks"
+                    v-bind:key="index"
+                    @click="setShowingGameweek(index + 1)"
+                  >
+                    {{ $t("Game week") }} {{ index + 1 }}
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      <!-- Title -->
-      <div class="gameweek-main-header">
+            <!-- Next game week Button -->
+            <div @click="nextGameWeek" class="navigator-button">
+              <img :src="previousLargeIcon.path" :alt="previousLargeIcon.alt" />
+            </div>
+            <!-- Add New game week button -->
+          </div>
+        </div>
+
+        <!-- Title -->
+        <div class="filter-group">
+          <h3>Add fixture</h3>
+          <div class="gameweek-add-new" @click="activateModal" data-cp="add-gw">
+            <div>
+              <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
+            </div>
+            {{ $t("Add") }}
+          </div>
+        </div>
+        <!-- Title -->
+
+        <div class="filter-group">
+          <h3>Fiter by status</h3>
+          <div class="filter-container">
+            <div class="filter-item">
+              <label>{{ $t("All") }}</label>
+              <input
+                type="radio"
+                @change="radioFilterChange"
+                value="All"
+                v-model="radioFilter"
+              />
+            </div>
+            <div class="filter-item">
+              <label>{{ $t("Scheduled") }}</label>
+              <input
+                type="radio"
+                @change="radioFilterChange"
+                value="scheduled"
+                v-model="radioFilter"
+              />
+            </div>
+            <div class="filter-item">
+              <label>{{ $t("First Half") }}</label>
+              <input
+                type="radio"
+                @change="radioFilterChange"
+                v-model="radioFilter"
+                value="liveFH"
+              />
+            </div>
+            <div class="filter-item">
+              <label>{{ $t("Half Time") }}</label>
+              <input
+                type="radio"
+                @change="radioFilterChange"
+                v-model="radioFilter"
+                value="HT"
+              />
+            </div>
+            <div class="filter-item">
+              <label>{{ $t("Second Half") }}</label>
+              <input
+                type="radio"
+                @change="radioFilterChange"
+                v-model="radioFilter"
+                value="liveSH"
+              />
+            </div>
+            <div class="filter-item">
+              <label>{{ $t("Full Time") }}</label>
+              <input
+                type="radio"
+                @change="radioFilterChange"
+                v-model="radioFilter"
+                value="FT"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="fixtures-content">
         <div class="gameweek-title">
           {{ $t("Ethiopian Premier League") }} - {{ getSeason }}
           {{ $t("Fixtures") }}
         </div>
-        <div class="gameweek-add-new" @click="activateModal" data-cp="add-gw">
-          <div>
-            <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
+        <div
+          v-if="
+            currentGWFixtures.length > 0 &&
+            allTeams.length >= currentGWFixtures.length / 2
+          "
+          class="all-fixtures"
+        >
+          <!-- Classify by dates -->
+          <div v-for="(fixtureBatch, index) in currentGWFixtures" :key="index">
+            <!-- Date of fixture -->
+            <div class="gameweek-date">
+              {{ formatDate[index] }}
+            </div>
+
+            <!-- Each Fixture  -->
+            <div>
+              <FixtureComponent
+                v-for="fixture in fixtureBatch"
+                :key="fixture.matchId"
+                :fixture="fixture"
+                :isTeamLoading="isTeamLoading"
+                @activateModal="activateModalEdit"
+              />
+            </div>
+            <!-- Each Fixture  -->
           </div>
-          {{ $t("Add") }}
+          <!-- Classify by dates -->
         </div>
+        <!-- Content -->
+
+        <!-- If no fixtures -->
+        <div v-else class="gameweek-no-fixtures">
+          {{ $t("No") }} {{ $t("Fixtures") }}
+        </div>
+        <!-- If no fixtures -->
       </div>
-      <!-- Title -->
-
-      <div class="filter-container">
-        <div class="filter-item">
-          <label>{{ $t("All") }}</label>
-          <input
-            type="radio"
-            @change="radioFilterChange"
-            value="All"
-            v-model="radioFilter"
-          />
-        </div>
-
-        <div class="filter-item">
-          <label>{{ $t("Scheduled") }}</label>
-          <input
-            type="radio"
-            @change="radioFilterChange"
-            value="scheduled"
-            v-model="radioFilter"
-          />
-        </div>
-
-        <div class="filter-item">
-          <label>{{ $t("First Half") }}</label>
-          <input
-            type="radio"
-            @change="radioFilterChange"
-            v-model="radioFilter"
-            value="liveFH"
-          />
-        </div>
-
-        <div class="filter-item">
-          <label>{{ $t("Half Time") }}</label>
-          <input
-            type="radio"
-            @change="radioFilterChange"
-            v-model="radioFilter"
-            value="HT"
-          />
-        </div>
-
-        <div class="filter-item">
-          <label>{{ $t("Second Half") }}</label>
-          <input
-            type="radio"
-            @change="radioFilterChange"
-            v-model="radioFilter"
-            value="liveSH"
-          />
-        </div>
-
-        <div class="filter-item">
-          <label>{{ $t("Full Time") }}</label>
-          <input
-            type="radio"
-            @change="radioFilterChange"
-            v-model="radioFilter"
-            value="FT"
-          />
-        </div>
-      </div>
-
-      <!-- Header - Gameweek controls, add new & gameweek title -->
-      <div class="gameweek-controller">
-        <!-- Previous Game week button -->
-        <div @click="prevGameWeek" class="navigator-button">
-          <div>
-            <img
-              :src="nextLargeIcon.path"
-              :alt="nextLargeIcon.alt"
-              class="medium-icon"
-            />
-          </div>
-
-          <div>
-            {{ $t("Prev") }}
-          </div>
-        </div>
-
-        <!-- Gameweek counter -->
-        <div class="gameweek-controller-main">
-          <div
-            class="gameweek-complete-verifier"
-            v-if="isGameWeekComplete === true"
-          >
-            ✅
-          </div>
-          <div class="gameweek-complete-verifier" v-else>❌</div>
-          <div class="gameweek-controller-title">
-            {{ $t("Game week") }} {{ showingGameWeek }}
-          </div>
-        </div>
-
-        <!-- Next game week Button -->
-        <div @click="nextGameWeek" class="navigator-button">
-          <div>
-            {{ $t("Next") }}
-          </div>
-
-          <div>
-            <img
-              :src="previousLargeIcon.path"
-              :alt="previousLargeIcon.alt"
-              class="medium-icon"
-            />
-          </div>
-        </div>
-
-        <!-- Add New game week button -->
-      </div>
-
-      <!-- Content -->
-      <div
-        v-if="
-          currentGWFixtures.length > 0 &&
-          allTeams.length >= currentGWFixtures.length / 2
-        "
-        class="all-fixtures"
-      >
-        <!-- Classify by dates -->
-        <div v-for="(fixtureBatch, index) in currentGWFixtures" :key="index">
-          <!-- Date of fixture -->
-          <div class="gameweek-date">
-            {{ formatDate[index] }}
-          </div>
-
-          <!-- Each Fixture  -->
-          <div>
-            <FixtureComponent
-              v-for="fixture in fixtureBatch"
-              :key="fixture.matchId"
-              :fixture="fixture"
-              :isTeamLoading="isTeamLoading"
-              @activateModal="activateModalEdit"
-            />
-          </div>
-          <!-- Each Fixture  -->
-        </div>
-        <!-- Classify by dates -->
-      </div>
-      <!-- Content -->
-
-      <!-- If no fixtures -->
-      <div v-else class="gameweek-no-fixtures">
-        {{ $t("No") }} {{ $t("Fixtures") }}
-      </div>
-      <!-- If no fixtures -->
     </div>
+
     <!-- After Data Loaded -->
   </div>
 </template>
 
 <style scoped>
+.gameweek-dropdown {
+  width: 100%;
+  cursor: pointer;
+
+  padding: var(--spacing-xsmall) var(--spacing-base);
+  background: var(--neutral-400);
+
+  position: relative;
+}
+
+.gameweek-dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+
+  margin-top: var(--spacing-3xsmall);
+  height: 200px;
+  overflow: auto;
+}
+
+.gameweek-dropdown-option {
+  padding: var(--spacing-xsmall) var(--spacing-base);
+  background: var(--neutral-300);
+  margin-bottom: var(--spacing-3xsmall);
+}
+
+.navigator-button {
+  padding: var(--spacing-xsmall);
+  background: var(--neutral-300);
+
+  display: flex;
+  align-items: center;
+}
+
+.navigator-button img {
+  width: var(--text-base);
+}
+
 /* Icons */
 .extra-small-icon,
 .small-icon,
@@ -214,42 +255,71 @@
 }
 
 .fixtures-main-container {
-  /* width: 100%; */
-  /* margin-left: 18%; */
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  /* padding: 100px 24px 60px 16px; */
 }
 .gameweek-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 350px minmax(800px, 1fr);
   /* border: 1px solid black; */
   padding: 24px 14px 24px 14px;
 }
-.fixture-search-bar {
-  width: 20%;
-  height: 32px;
-  margin-left: 80%;
-  padding: 0 3px;
-  outline: none;
+
+h3 {
+  text-align: left;
+  font-size: var(--text-small);
+  font-weight: 400;
+  margin-bottom: var(--spacing-2xsmall);
 }
+
+.fixtures-control,
+.fixtures-content {
+  padding: var(--spacing-small);
+}
+
+.fixtures-content {
+  background: var(--neutral-50);
+  padding-bottom: var(--spacing-large);
+
+  overflow: auto;
+}
+
+.filter-group {
+  margin: var(--spacing-regular) 0;
+}
+
+.filter-group:first-child {
+  margin-top: 0;
+}
+
+.fixture-search-bar {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+
+  padding: var(--spacing-small) var(--spacing-xsmall);
+  outline: none;
+  border: none;
+  border-bottom: var(--spacing-3xsmall) solid var(--neutral-900);
+
+  background: var(--neutral-400);
+  font-size: var(--text-base);
+}
+
+.fixture-search-bar::placeholder {
+  color: var(--neutral-900);
+}
+
 .gameweek-main-header {
   margin-top: var(--spacing-medium);
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  position: relative;
+  align-items: stretch;
 }
 .gameweek-title {
   font-size: var(--text-medium);
 }
 .gameweek-add-new {
   font-size: 16px;
-  position: absolute;
   right: 0;
   background: var(--primary-900);
   padding: 5px 22px 5px 16px;
@@ -266,15 +336,9 @@
   margin-right: 6px;
 }
 .filter-container {
-  margin-top: 32px;
-  width: 100%;
-  min-height: 60px;
-
-  /*  */
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
-  padding-right: 30%;
 }
 .filter-item {
   display: flex;
@@ -287,46 +351,35 @@
   margin-left: 5px;
 }
 .gameweek-controller {
-  margin: var(--spacing-medium) 0 var(--spacing-regular) 0;
   display: flex;
   justify-content: space-between;
+  align-items: stretch;
   font-weight: 500;
-  font-size: 15px;
+  font-size: var(--text-base);
   color: var(--neutral-700);
   width: 100%;
 }
 
 .gameweek-controller-main {
-  display: flex;
-  align-items: center;
   font-size: 18px;
   color: var(--neutral-900);
+  flex-grow: 1;
 }
 .gameweek-complete-verifier {
   margin-right: 6px;
+  display: inline;
 }
 .gameweek-controller > div:nth-of-type(odd) {
   font-weight: 400;
-  border: 1px solid black;
-  padding: 2px 8px;
   cursor: pointer;
 }
-.navigator-button {
-  width: 30%;
-  min-height: 32px;
-  padding: 12px 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+
 .gameweek-date {
   margin-top: 42px;
   text-align: center;
   font-size: 20px;
 }
-.all-fixtures {
-  width: 100%;
-}
+
 .gameweek-no-fixtures {
   margin-top: var(--spacing-xlarge);
   width: 100%;
@@ -335,62 +388,6 @@
   place-items: center;
   font-weight: bold;
   font-size: var(--text-medium);
-}
-
-/* Super Small Screen */
-@media screen and (max-width: 400px) {
-  .fixtures-main-container {
-    display: none;
-  }
-}
-
-/* Small Screens */
-@media screen and (min-width: 401px) and (max-width: 576px) {
-  .gameweek-title {
-    font-size: 22px;
-    transform: translateX(-32px);
-  }
-  .filter-container {
-    padding-right: 10%;
-  }
-  .filter-item {
-    font-size: 15px;
-  }
-}
-
-@media screen and (min-width: 577px) and (max-width: 768px) {
-  .gameweek-title {
-    font-size: 22px;
-    transform: translateX(-32px);
-  }
-  .filter-container {
-    padding-right: 10%;
-  }
-  .filter-item {
-    font-size: 15px;
-  }
-}
-
-@media screen and (min-width: 769px) and (max-width: 1200px) {
-  .gameweek-title {
-    font-size: 22px;
-    transform: translateX(-32px);
-  }
-  .filter-container {
-    padding-right: 10%;
-  }
-  .filter-item {
-    font-size: 16px;
-  }
-}
-
-@media screen and (min-width: 1400px) {
-  .filter-container {
-    padding-right: 20vw;
-  }
-  .filter-item {
-    font-size: 18px;
-  }
 }
 </style>
 
@@ -429,6 +426,9 @@ export default {
       isTeamLoading: false,
       isEditMode: false,
       radioFilter: "All",
+
+      numberOfGameweeks: [...new Array(30)],
+      revealDropDownOptions: false,
 
       // Icons
       addIcon: addIcon,
@@ -522,6 +522,14 @@ export default {
 
     radioFilterChange() {
       store.dispatch("Fixture/filterByMatchStatus", this.radioFilter);
+    },
+
+    toggleOptions() {
+      this.revealDropDownOptions = !this.revealDropDownOptions;
+    },
+
+    setShowingGameweek(index) {
+      store.dispatch("Fixture/setShowingGameWeek", index);
     },
   },
 

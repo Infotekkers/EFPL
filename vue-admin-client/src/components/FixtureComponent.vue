@@ -215,12 +215,10 @@
   font-size: 18px;
 }
 .fixture-controls {
-  position: absolute;
-  right: 0;
   display: flex;
   align-items: center;
   width: fit-content;
-  margin-left: auto;
+  margin: var(--spacing-small) auto;
   font-size: 12px;
   height: 100%;
   /* min-height: 15px; */
