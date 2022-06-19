@@ -95,7 +95,18 @@ class TeamViewBody extends StatelessWidget {
             _buildView(state, context, changed: true),
         chipPlayedSuccess: (state) => _buildView(state, context,
             changed: true,
-            informational: state.myTeam.activeChip.getOrCrash() +
+            informational: (state.myTeam.activeChip
+                            .getOrCrash()
+                            .toLowerCase() ==
+                        'tc'
+                    ? strings(context).tc
+                    : state.myTeam.activeChip.getOrCrash().toLowerCase() == 'bb'
+                        ? strings(context).bb
+                        : state.myTeam.activeChip.getOrCrash().toLowerCase() ==
+                                'fh'
+                            ? strings(context).fh
+                            : strings(context).wc) +
+                " " +
                 strings(context).chipConfirmation),
         chipPlayedFailure: (state) => _buildView(state, context),
       ),
@@ -144,7 +155,7 @@ class TeamViewBody extends StatelessWidget {
           ),
           informational != ''
               ? Positioned(
-                  bottom: 8,
+                  top: 8,
                   left: 8,
                   child: Container(
                     padding: const EdgeInsets.all(4.0),
