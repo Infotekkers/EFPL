@@ -122,6 +122,7 @@ export default {
           notificationMessage: "No Selection to import.",
         });
       } else {
+        console.log(importSelectedTeams, importSelectedPlayers);
         await axiosInstance
           .post(`${baseURL}/backup/restore`, {
             importSelectedTeams: importSelectedTeams,
@@ -169,7 +170,6 @@ export default {
     },
 
     async exportSeason(context, backupType) {
-      console.log(backupType);
       await axiosInstance
         .get(`${baseURL}/backup/data/${backupType}`)
         .then((response) => {

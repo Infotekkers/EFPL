@@ -156,8 +156,9 @@ const playerSchema = mongoose.Schema({
   playerNameAmh: {
     // unique: true,
     type: String,
-    minlength: 4,
-    maxLength: 56,
+    // minlength: 4,
+    // maxLength: 56,
+    default: "",
     // required: [
     //   true,
     //   "Custom Error - required Value *: Player Name Amh is required.",

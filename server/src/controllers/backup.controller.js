@@ -28,9 +28,7 @@ const verifySeasonStatus = asyncHandler(async (req, res) => {
 
 // export data to legacy db
 const backup = asyncHandler(async (req, res) => {
-  console.log("BackUp");
-
-  // backup type
+  // // backup type
   const backupType = req.params.type;
 
   // TODO:Make Dynamic
@@ -41,7 +39,11 @@ const backup = asyncHandler(async (req, res) => {
   const currentSeasonPlayers = await Players.find();
   const currentSeasonFixtures = await Fixture.find();
 
-  // backup teams
+  /*
+    =================================
+    Backup Teams
+    =================================
+  */
   currentSeasonTeams.forEach(async (team) => {
     const verifyExistence = await Backup.teamBkModel.find({
       teamName: team.teamName,
@@ -83,7 +85,11 @@ const backup = asyncHandler(async (req, res) => {
     });
   });
 
-  // backup players
+  /*
+    =================================
+    Backup Players
+    =================================
+  */
   currentSeasonPlayers.forEach(async (player) => {
     const verifyExistence = await Backup.playersBkModel.find({
       playerName: player.playerName,
@@ -100,6 +106,7 @@ const backup = asyncHandler(async (req, res) => {
     }
 
     const playerName = player.playerName;
+    const playerNameAmh = player.playerName;
     const eplTeamId = player.eplTeamId;
     const currentPrice = player.currentPrice;
     const position = player.position;
@@ -122,10 +129,10 @@ const backup = asyncHandler(async (req, res) => {
 
     await Backup.playersBkModel.create({
       playerName,
+      playerNameAmh,
       eplTeamId,
       currentPrice,
       position,
-
       score,
       history,
       playerId,
@@ -135,8 +142,7 @@ const backup = asyncHandler(async (req, res) => {
 
   // back up fixture
   currentSeasonFixtures.forEach(async (fixture) => {
-    const verifyExistence = await Backup.playersBkModel.find({
-      gameweekId: fixture.gameweekId,
+    const verifyExistence = await Backup.fixtureBkModel.find({
       matchId: fixture.matchId,
     });
 
@@ -157,7 +163,6 @@ const backup = asyncHandler(async (req, res) => {
     const homeTeamLineUp = fixture.homeTeamLineUp;
     const awayTeamLineUp = fixture.awayTeamLineUp;
     const matchStat = fixture.matchStatSchema;
-
     await Backup.fixtureBkModel.create({
       seasonId,
       gameweekId,
@@ -173,12 +178,12 @@ const backup = asyncHandler(async (req, res) => {
   });
 
   if (backupType === "complete") {
-    // // Delete teams
-    // await Teams.deleteMany();
-    // // delete players
-    // await Players.deleteMany();
-    // // delete fixtures
-    // await Fixture.deleteMany();
+    // Delete teams
+    await Teams.deleteMany();
+    // delete players
+    await Players.deleteMany();
+    // delete fixtures
+    await Fixture.deleteMany();
   }
 
   if (
@@ -196,12 +201,14 @@ const backup = asyncHandler(async (req, res) => {
 
 // import data from legacy db
 const restore = asyncHandler(async (req, res) => {
-  const { importSelectedTeams, importSelectedPlayers } = req.body;
+  const { importSelectedTeams } = req.body;
 
   // import teams
-  importSelectedTeams.forEach(async (team) => {
-    let currentTeam = await Backup.teamBkModel.find({ teamId: team });
-    currentTeam = currentTeam[0];
+  for (let index = 0; index < importSelectedTeams.length; index++) {
+    let currentTeam = await Backup.teamBkModel.find({
+      teamId: importSelectedTeams[index],
+    });
+    currentTeam = currentTeam[index];
 
     const fileName = currentTeam.teamLogo.split("/");
 
@@ -213,6 +220,7 @@ const restore = asyncHandler(async (req, res) => {
 
     const addNewTeam = {
       teamName: currentTeam.teamName,
+      teamNameAmh: currentTeam.teamNameAmh,
       teamCity: currentTeam.teamCity,
       teamStadium: currentTeam.teamStadium,
       teamLogo: `/uploads/teams/${fileName[fileName.length - 1]}`,
@@ -222,43 +230,41 @@ const restore = asyncHandler(async (req, res) => {
     };
 
     await Teams.create(addNewTeam);
-  });
 
-  // TODO:Import Player
-  importSelectedPlayers.forEach(async (player) => {
-    let fetchedPlayer = await Backup.playersBkModel.find({
-      playerId: player.playerId,
-      eplTeamId: player.teamId,
-    });
+    const allPlayers = await Backup.playersBkModel
+      .find({
+        eplTeamId: importSelectedTeams[index],
+      })
+      .lean();
 
-    fetchedPlayer = fetchedPlayer[0];
+    for (let i = 0; i < allPlayers.length; i++) {
+      let fileName = "";
+      allPlayers[i].score = [];
+      allPlayers[i].history = [];
 
-    let fileName = "";
+      if (allPlayers[i].playerImage) {
+        fileName = allPlayers[i].playerImage.split("/");
 
-    if (fetchedPlayer.playerImage) {
-      fileName = fetchedPlayer.playerImage.split("/");
+        // Move file
+        await moveFile(
+          "." + allPlayers[i].playerImage,
+          `./uploads/players/${fileName[fileName.length - 1]}`
+        );
+      }
 
-      // Move file
-      await moveFile(
-        "." + fetchedPlayer.playerImage,
-        `./uploads/players/${fileName[fileName.length - 1]}`
-      );
+      await Players.create({
+        playerName: allPlayers[i].playerName,
+        eplTeamId: allPlayers[i].eplTeamId,
+        currentPrice: allPlayers[i].currentPrice,
+        position: allPlayers[i].position,
+        score: [],
+        history: [],
+        playerImage: fileName
+          ? `/uploads/players/${fileName[fileName.length - 1]}`
+          : "",
+      });
     }
-
-    const addNewPlayer = {
-      playerName: fetchedPlayer.playerName,
-      eplTeamId: fetchedPlayer.eplTeamId,
-      currentPrice: fetchedPlayer.currentPrice,
-      position: fetchedPlayer.position,
-      score: [],
-      history: [],
-      playerImage: fileName
-        ? `/uploads/players/${fileName[fileName.length - 1]}`
-        : "",
-    };
-
-    await Players.create(addNewPlayer);
-  });
+  }
 
   res.status(201).json("Import Complete");
 });

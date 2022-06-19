@@ -86,16 +86,19 @@ export default {
 
       if (this.$refs.teamCheckbox.checked) {
         //   fetch players
+        // store.dispatch(
+        //   "Season/getAllLegacyPlayersByTeam",
+        //   this.legacyTeam.teamName
+        // );
+
+        // add to selection
         store.dispatch(
-          "Season/getAllLegacyPlayersByTeam",
+          "Season/setImportSelectedTeam",
           this.legacyTeam.teamName
         );
 
-        // add to selection
-        store.dispatch("Season/setImportSelectedTeam", this.legacyTeam.teamId);
-
         // check team players
-        this.checkPlayers = true;
+        // this.checkPlayers = true;
       } else {
         //   remove team
         const filtered = store.state.Season.importSelectedTeams.filter(
@@ -119,7 +122,7 @@ export default {
     },
 
     togglePlayerComponent() {
-      this.showPlayerComponent = !this.showPlayerComponent;
+      // this.showPlayerComponent = !this.showPlayerComponent;
     },
   },
   computed: {

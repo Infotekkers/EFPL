@@ -325,8 +325,6 @@ const startFixture = asyncHandler(async function (req, res) {
         }
       }, 60000);
 
-      console.log(homeTeam);
-
       matchParent
         .save()
         .then(() =>
@@ -469,8 +467,6 @@ const resumeFixture = asyncHandler(async function (req, res) {
 
 const endFixture = asyncHandler(async function (req, res) {
   const match = await FixtureModel.findOne({ matchId: req.params.matchId });
-
-  console.log("Match");
 
   const homeTeam = await TeamModel.findOne({
     teamId: parseInt(req.params.matchId.split("|")[0]),
@@ -619,11 +615,7 @@ const endFixture = asyncHandler(async function (req, res) {
   }
   // server error
   else {
-    res
-      .status(400)
-      .send(
-        `Match ${homeTeam[0].teamName} vs ${awayTeam[0].teamName} can not be ended!`
-      );
+    res.status(400).send(`Match can not be ended!`);
   }
 });
 
@@ -739,16 +731,20 @@ const updateLineup = asyncHandler(async (req, res) => {
   const match = await FixtureModel.findOne({ matchId });
 
   if (match) {
-    match.homeTeamLineUp = homeTeamLineUp ?? match.homeTeamLineUp;
-    match.awayTeamLineUp = awayTeamLineUp ?? match.awayTeamLineUp;
-    await match.save();
+    if (match.status !== "FT") {
+      match.homeTeamLineUp = homeTeamLineUp ?? match.homeTeamLineUp;
+      match.awayTeamLineUp = awayTeamLineUp ?? match.awayTeamLineUp;
+      await match.save();
 
-    const io = require("../../server");
+      const io = require("../../server");
 
-    // TODO:Handle in frontend
-    io.emit("fixtureLineUpUpdated");
+      // TODO:Handle in frontend
+      io.emit("fixtureLineUpUpdated");
 
-    res.send("Match lineup updated!");
+      res.send("Match lineup updated!");
+    } else {
+      res.status(422).send("Match Ended!");
+    }
   } else if (!match) {
     res.status(404).send("Match doesn't exist!");
   } else {
@@ -772,42 +768,48 @@ const updateStats = asyncHandler(async (req, res) => {
   const awayTeamName = match.awayTeam;
 
   if (match) {
-    const { updatedMatch, updatedPlayer } = statUpdater({
-      activeMatch: match,
-      activePlayer: player,
-      incomingUpdate: req.body,
-    });
+    if (match.status !== "FT") {
+      const { updatedMatch, updatedPlayer } = statUpdater({
+        activeMatch: match,
+        activePlayer: player,
+        incomingUpdate: req.body,
+      });
 
-    await FixtureModel.findOneAndUpdate({ matchId }, updatedMatch, {
-      upsert: false,
-    });
+      await FixtureModel.findOneAndUpdate({ matchId }, updatedMatch, {
+        upsert: false,
+      });
 
-    await Player.findOneAndUpdate({ playerId }, updatedPlayer, {
-      upsert: false,
-    });
+      await Player.findOneAndUpdate({ playerId }, updatedPlayer, {
+        upsert: false,
+      });
 
-    const matchGoals = match.matchStat.goalsScored;
-    for (const player in matchGoals) {
-      const playerTeamInfo = await Player.findOne({
-        playerId: player,
-      }).select("eplTeamId -_id");
+      const matchGoals = match.matchStat.goalsScored;
+      for (const player in matchGoals) {
+        const playerTeamInfo = await Player.findOne({
+          playerId: player,
+        }).select("eplTeamId -_id");
 
-      if (playerTeamInfo.eplTeamId === homeTeamName) {
-        homeTeamScore = parseInt(homeTeamScore) + matchGoals[player].noOfGoals;
-      } else if (playerTeamInfo.eplTeamId === awayTeamName) {
-        awayTeamScore = parseInt(awayTeamScore) + matchGoals[player].noOfGoals;
+        if (playerTeamInfo.eplTeamId === homeTeamName) {
+          homeTeamScore =
+            parseInt(homeTeamScore) + matchGoals[player].noOfGoals;
+        } else if (playerTeamInfo.eplTeamId === awayTeamName) {
+          awayTeamScore =
+            parseInt(awayTeamScore) + matchGoals[player].noOfGoals;
+        }
       }
+
+      match.score = `${homeTeamScore}v${awayTeamScore}`;
+      await FixtureModel.updateOne({ matchId: matchId }, match);
+
+      // send socket update
+      const io = require("../../server");
+      io.emit("fixtureStatUpdated");
+      io.emit("playerScoreUpdated");
+
+      res.send("Match stats updated!");
+    } else {
+      res.status(422).send("Match Ended!");
     }
-
-    match.score = `${homeTeamScore}v${awayTeamScore}`;
-    await FixtureModel.updateOne({ matchId: matchId }, match);
-
-    // send socket update
-    const io = require("../../server");
-    io.emit("fixtureStatUpdated");
-    io.emit("playerScoreUpdated");
-
-    res.send("Match stats updated!");
   } else if (!match) {
     res.status(404).send("Match doesn't exist!");
   } else {
@@ -893,8 +895,13 @@ const getAllFixtures = asyncHandler(async function (req, res) {
       "teamName"
     );
 
-    matches[index].homeTeam = homeTeam.teamName;
-    matches[index].awayTeam = awayTeam.teamName;
+    if (homeTeam) {
+      matches[index].homeTeam = homeTeam.teamName;
+    }
+
+    if (awayTeam) {
+      matches[index].awayTeam = awayTeam.teamName;
+    }
   }
 
   res.status(200).send(matches);
