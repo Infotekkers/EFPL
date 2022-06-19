@@ -145,6 +145,11 @@ const infoSidebarIcon = {
   alt: "Info",
 };
 
+const toggleSidebarIcon = {
+  path: require("../assets/icons/sidebar-toggle-icon.svg"),
+  alt: "Toggle",
+};
+
 module.exports = {
   playIcon,
   pauseIcon,
@@ -185,4 +190,5 @@ module.exports = {
   playersSidebarIcon,
   settingsSidebarIcon,
   infoSidebarIcon,
+  toggleSidebarIcon,
 };

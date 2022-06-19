@@ -1,7 +1,7 @@
 <template>
   <aside v-if="showSidebar">
     <button class="collapse-sidebar">
-      <span>&#11164;</span>
+      <img :src="toggleSidebarIcon.path" :alt="toggleSidebarIcon.alt" />
     </button>
 
     <div class="sidebar-wrapper">
@@ -12,43 +12,44 @@
       </h1>
       <!-- Home -->
 
-      <router-link class="sidebar__link" to="/admin/home"
-        ><img :src="homeSidebarIcon.path" :alt="homeSidebarIcon.alt" />{{
-          $t("home")
-        }}</router-link
-      >
+      <router-link class="sidebar__link" to="/admin/home">
+        <img :src="homeSidebarIcon.path" :alt="homeSidebarIcon.alt" />
+        <p>
+          {{ $t("home") }}
+        </p>
+      </router-link>
 
       <!-- Fixtures -->
 
       <router-link class="sidebar__link" to="/admin/fixtures">
         <img :src="fixturesSidebarIcon.path" :alt="fixturesSidebarIcon.alt" />
-        {{ $t("Fixtures") }}</router-link
-      >
+        <p>{{ $t("Fixtures") }}</p>
+      </router-link>
 
       <!-- Teams -->
 
       <router-link class="sidebar__link" to="/admin/teams">
-        <img :src="teamsSidebarIcon.path" :alt="teamsSidebarIcon.alt" />{{
-          $t("Teams")
-        }}</router-link
-      >
+        <img :src="teamsSidebarIcon.path" :alt="teamsSidebarIcon.alt" />
+        <p>
+          {{ $t("Teams") }}
+        </p>
+      </router-link>
 
       <!-- Players -->
 
       <router-link class="sidebar__link" to="/admin/players">
-        <img :src="playersSidebarIcon.path" :alt="playersSidebarIcon.alt" />{{
-          $t("Players")
-        }}</router-link
-      >
+        <img :src="playersSidebarIcon.path" :alt="playersSidebarIcon.alt" />
+        <p>
+          {{ $t("Players") }}
+        </p>
+      </router-link>
 
       <!-- settings -->
 
-      <router-link class="sidebar__link" to="/admin/settings"
-        ><img
-          :src="settingsSidebarIcon.path"
-          :alt="settingsSidebarIcon.alt"
-        />{{ $t("Settings") }}</router-link
-      >
+      <router-link class="sidebar__link" to="/admin/settings">
+        <img :src="settingsSidebarIcon.path" :alt="settingsSidebarIcon.alt" />
+        <p>{{ $t("Settings") }}</p>
+      </router-link>
     </div>
   </aside>
 </template>
@@ -62,6 +63,7 @@ import {
   teamsSidebarIcon,
   playersSidebarIcon,
   settingsSidebarIcon,
+  toggleSidebarIcon,
   // infoSidebarIcon,
 } from "@/utils/Icons";
 
@@ -76,6 +78,7 @@ export default {
       teamsSidebarIcon,
       playersSidebarIcon,
       settingsSidebarIcon,
+      toggleSidebarIcon,
       // infoSidebarIcon,
     };
   },
@@ -84,12 +87,12 @@ export default {
       const sidebar = document.querySelector(".sidebar-wrapper");
 
       if (this.sidebar) {
-        sidebar.style.display = "none";
-        e.target.innerHTML = "&#11166;";
+        e.currentTarget.style.transform = "rotate(180deg)";
+        sidebar.classList.add("minimized");
         this.sidebar = 0;
       } else {
-        sidebar.style.display = "flex";
-        e.target.innerHTML = "&#11164;";
+        e.currentTarget.style.transform = "rotate(0deg)";
+        sidebar.classList.remove("minimized");
         this.sidebar = 1;
       }
     },
@@ -143,11 +146,12 @@ aside {
     font-size: var(--text-large);
 
     margin-bottom: var(--spacing-regular);
+    margin-left: var(--spacing-small);
   }
 
   box-shadow: 1px 0 4px 0 var(--neutral-200);
   .collapse-sidebar {
-    padding: var(--spacing-3xsmall) var(--spacing-xsmall);
+    padding: var(--spacing-xsmall) var(--spacing-2xsmall);
     font-size: var(--text-base);
     border: none;
 
@@ -156,6 +160,10 @@ aside {
     position: absolute;
     top: 0;
     left: 100%;
+
+    & img {
+      width: 5px;
+    }
   }
 
   .sidebar-wrapper {
@@ -166,6 +174,33 @@ aside {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    transition: width 800ms;
+  }
+
+  .minimized {
+    width: 80px;
+    padding: var(--spacing-small);
+
+    & h1 {
+      display: none;
+    }
+    & .sidebar__link {
+      max-height: 50px;
+      border-radius: 50%;
+
+      transition: border-radius 800ms;
+
+      & p {
+        display: none;
+      }
+
+      & img {
+        max-height: 100%;
+        width: 30px;
+        margin-right: 0;
+      }
+    }
   }
 
   .sidebar__link {
@@ -187,7 +222,7 @@ aside {
   }
 
   .sidebar__link.router-link-active {
-    background: var(--neutral-200);
+    background: var(--neutral-400);
     color: var(--neutral-900);
 
     border-radius: 999px;
