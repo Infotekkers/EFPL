@@ -3,12 +3,14 @@ const statUpdater = require("../utils/helpers").statUpdater;
 const validator = require("../utils/validators");
 const axios = require("axios");
 const baseURL = process.env.BASE_URL;
+const MLURL = process.env.ML_URL;
 
 const FixtureModel = require("../models/Fixtures");
 const TeamModel = require("../models/Teams");
 const Player = require("../models/Player");
 const GameWeek = require("../models/GameWeek");
 const Teams = require("../models/Teams");
+const TeamData = require("../utils/data/teams.data");
 
 const MINUTE_COUNTERS = {};
 
@@ -466,7 +468,7 @@ const resumeFixture = asyncHandler(async function (req, res) {
 });
 
 const endFixture = asyncHandler(async function (req, res) {
-  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
+  const match = await FixtureModel.findOne({ matchId: "13|9" });
 
   const homeTeam = await TeamModel.findOne({
     teamId: parseInt(req.params.matchId.split("|")[0]),
@@ -595,6 +597,9 @@ const endFixture = asyncHandler(async function (req, res) {
       await GameWeek.findOne({ gameWeekNumber: activeGwId + 1 }).updateOne({
         status: "active",
       });
+
+      // get fdr for next week
+      await getFDR(match);
     }
   }
   // if no match
@@ -817,49 +822,6 @@ const updateStats = asyncHandler(async (req, res) => {
   }
 });
 
-// TODO:Remind got merged with save stats
-// const updateScore = asyncHandler(async (req, res) => {
-//   const matchId = req.params.matchId;
-//   // const { score } = req.body;
-
-//   const match = await FixtureModel.findOne({ matchId }).lean();
-
-//   let homeTeamScore = match.score.split("v")[0];
-//   const homeTeamName = match.homeTeam;
-
-//   let awayTeamScore = match.score.split("v")[1];
-//   const awayTeamName = match.awayTeam;
-
-//   if (match) {
-//     // if (!match.score) match.score = "0v0";
-//     // match.score = score;
-
-//     // await match.save();
-//     const matchGoals = match.matchStat.goalsScored;
-//     for (const player in matchGoals) {
-//       const playerTeamInfo = await Player.findOne({ playerId: player }).select(
-//         "eplTeamId -_id"
-//       );
-
-//       if (playerTeamInfo.eplTeamId === homeTeamName) {
-//         homeTeamScore = parseInt(homeTeamScore) + matchGoals[player].noOfGoals;
-//       } else if (playerTeamInfo.eplTeamId === awayTeamName) {
-//         awayTeamScore = parseInt(awayTeamScore) + matchGoals[player].noOfGoals;
-//       }
-//     }
-
-//     // send socket update
-//     const io = require("../../server");
-//     io.emit("fixtureScoreUpdated");
-
-//     res.send("Match score updated!");
-//   } else if (!match) {
-//     res.status(404).send("Match doesn't exist!");
-//   } else {
-//     res.status(400).send("Match with provided matchid doesn't exist.");
-//   }
-// });
-
 // get active gameweek to auto show fixtures in that gw initially
 const getActiveGameWeek = asyncHandler(async function (req, res) {
   const activeGw = await GameWeek.find({ status: "active" }).select(
@@ -1013,6 +975,151 @@ const getFixtureDetail = asyncHandler(async function (req, res) {
 
   res.status(200).send(match);
 });
+
+async function getFDR(match) {
+  // get next gw fixtures
+  const gameWeekToPredict = match.gameweekId + 1;
+  const fixturesToPredict = await FixtureModel.find({
+    gameweekId: gameWeekToPredict,
+  });
+  const allFixturesToSend = [];
+
+  for (let index = 0; index < fixturesToPredict.length; index++) {
+    const mlInfo = [];
+    const homeTeam = await TeamModel.findOne({
+      teamName: fixturesToPredict[index].homeTeam,
+    });
+    const awayTeam = await TeamModel.findOne({
+      teamName: fixturesToPredict[index].awayTeam,
+    });
+
+    // PD
+    mlInfo.push(
+      homeTeam.teamPosition.teamPoint - awayTeam.teamPosition.teamPoint
+    );
+    // GSD
+    mlInfo.push(
+      homeTeam.teamPosition.goalsFor - awayTeam.teamPosition.goalsFor
+    );
+    // GCD
+    mlInfo.push(
+      homeTeam.teamPosition.goalsAgainst - awayTeam.teamPosition.goalsAgainst
+    );
+
+    // WD
+    mlInfo.push(homeTeam.teamPosition.won - awayTeam.teamPosition.won);
+
+    // LD
+    mlInfo.push(homeTeam.teamPosition.lost - awayTeam.teamPosition.lost);
+
+    // DD
+    mlInfo.push(homeTeam.teamPosition.lost - awayTeam.teamPosition.lost);
+
+    // HTXG
+    if (
+      homeTeam.teamPosition.goalsFor > 0 &&
+      homeTeam.teamPosition.goalsAgainst > 0
+    ) {
+      mlInfo.push(
+        homeTeam.teamPosition.goalsFor / homeTeam.teamPosition.goalsAgainst
+      );
+    } else {
+      mlInfo.push(1.0);
+    }
+
+    // ATXG
+    if (
+      awayTeam.teamPosition.goalsFor > 0 &&
+      awayTeam.teamPosition.goalsAgainst
+    ) {
+      mlInfo.push(
+        awayTeam.teamPosition.goalsFor / awayTeam.teamPosition.goalsAgainst
+      );
+    } else {
+      mlInfo.push(1.0);
+    }
+
+    const homeTeamFormData = TeamData.formData[getForm(12)];
+    const awayTeamFormData = TeamData.formData[getForm(12)];
+
+    const homeTeamGoalsForData = [
+      getGoalsScore(4),
+      getGoalsScore(4),
+      getGoalsScore(4),
+      getGoalsScore(4),
+    ];
+    const awayTeamGoalsForData = [
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+    ];
+
+    const homeTeamGoalsAgainst = [
+      getGoalsScore(4),
+      getGoalsScore(4),
+      getGoalsScore(4),
+      getGoalsScore(4),
+    ];
+    const awayTeamGoalsAgainst = [
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+    ];
+
+    allFixturesToSend.push({
+      form: {
+        homeTeam: {
+          result: homeTeamFormData,
+          goalsFor: homeTeamGoalsForData,
+          goalsAgainst: homeTeamGoalsAgainst,
+        },
+        awayTeam: {
+          result: awayTeamFormData,
+          goalsFor: awayTeamGoalsForData,
+          goalsAgainst: awayTeamGoalsAgainst,
+        },
+      },
+
+      mlInfo: mlInfo,
+    });
+  }
+
+  // make api calls
+  const mlCall = await axios.post(MLURL + "/fdr", {
+    method: "POST",
+    data: allFixturesToSend,
+  });
+  let fdr;
+  if (mlCall.status === 200) {
+    fdr = mlCall.data.fdr;
+  } else {
+    fdr = [1, 2, 1, 3, 1, 1, 2, 2];
+  }
+
+  for (let j = 0; j < fixturesToPredict.length; j++) {
+    const finalFDR = fdr[j] === 0 ? 1 : fdr[j] > 5 ? 5 : fdr[j];
+    await FixtureModel.updateOne(
+      { matchId: fixturesToPredict[j].matchId },
+      { $set: { fdr: finalFDR } }
+    );
+  }
+
+  return allFixturesToSend;
+}
+
+function getForm(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function getGoalsScore(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function getGoalsAgainst(max) {
+  return Math.floor(Math.random() * max);
+}
 
 module.exports = {
   postFixture,

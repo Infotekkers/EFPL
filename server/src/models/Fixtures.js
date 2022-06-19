@@ -169,6 +169,11 @@ const fixtureSchema = mongoose.Schema({
     type: String,
     required: [true, "Custom Error - Required Value *:Match ID is required."],
   },
+  fdr: {
+    type: Number,
+    required: [true, "Custom Error - Required Value *:FDR is required."],
+    default: 1,
+  },
   schedule: {
     type: Date,
     index: true,
