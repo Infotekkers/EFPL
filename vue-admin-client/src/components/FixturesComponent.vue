@@ -76,61 +76,67 @@
         </div>
 
         <div class="filter-group">
-          <h3>Fiter by status</h3>
+          <h3>Filter by status</h3>
           <div class="filter-container">
             <div class="filter-item">
-              <label>{{ $t("All") }}</label>
               <input
                 type="radio"
+                id="all"
                 @change="radioFilterChange"
                 value="All"
                 v-model="radioFilter"
               />
+              <label for="all">{{ $t("All") }}</label>
             </div>
             <div class="filter-item">
-              <label>{{ $t("Scheduled") }}</label>
               <input
                 type="radio"
+                id="scheduled"
                 @change="radioFilterChange"
                 value="scheduled"
                 v-model="radioFilter"
               />
+              <label for="scheduled">{{ $t("Scheduled") }}</label>
             </div>
             <div class="filter-item">
-              <label>{{ $t("First Half") }}</label>
               <input
                 type="radio"
+                id="liveFH"
                 @change="radioFilterChange"
                 v-model="radioFilter"
                 value="liveFH"
               />
+              <label for="liveFH">{{ $t("First Half") }}</label>
             </div>
             <div class="filter-item">
-              <label>{{ $t("Half Time") }}</label>
               <input
                 type="radio"
+                id="HT"
                 @change="radioFilterChange"
                 v-model="radioFilter"
                 value="HT"
               />
+              <label for="HT">{{ $t("Half Time") }}</label>
             </div>
             <div class="filter-item">
-              <label>{{ $t("Second Half") }}</label>
               <input
                 type="radio"
+                id="liveSH"
                 @change="radioFilterChange"
                 v-model="radioFilter"
                 value="liveSH"
               />
+              <label for="liveSH">{{ $t("Second Half") }}</label>
             </div>
             <div class="filter-item">
-              <label>{{ $t("Full Time") }}</label>
               <input
                 type="radio"
+                id="FT"
                 @change="radioFilterChange"
                 v-model="radioFilter"
                 value="FT"
               />
+              <label for="FT">{{ $t("Full Time") }}</label>
             </div>
           </div>
         </div>
@@ -141,6 +147,12 @@
         <div class="gameweek-title">
           {{ $t("Ethiopian Premier League") }} - {{ getSeason }}
           {{ $t("Fixtures") }}
+        </div>
+        <div class="gameweek-add-new" @click="activateModal" data-cp="add-gw">
+          <!-- <div>
+            <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
+          </div> -->
+          {{ $t("Add") }}
         </div>
         <div
           v-if="
@@ -224,6 +236,23 @@
   width: var(--text-base);
 }
 
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + label {
+  padding: var(--spacing-xsmall) var(--spacing-small);
+  font-size: var(--text-base);
+  display: block;
+  width: 100%;
+
+  text-align: center;
+}
+
+input[type="radio"]:checked + label {
+  background: var(--neutral-400);
+}
+
 /* Icons */
 .extra-small-icon,
 .small-icon,
@@ -247,7 +276,7 @@
 }
 .gameweek-container {
   display: grid;
-  grid-template-columns: 350px minmax(800px, 1fr);
+  grid-template-columns: 300px minmax(900px, 1fr);
   /* border: 1px solid black; */
   padding: 24px 14px 24px 14px;
 }
@@ -307,22 +336,26 @@ h3 {
   font-size: var(--text-medium);
 }
 .gameweek-add-new {
-  font-size: 16px;
-  right: 0;
+  font-size: var(--text-base);
+  padding: var(--spacing-small) 0;
+
+  margin: var(--spacing-small) 0;
+  margin-left: auto;
+
+  width: 100px;
+
+  color: var(--neutral-50);
+  cursor: pointer;
   background: var(--primary-900);
-  padding: 5px 22px 5px 16px;
-  color: var(--neutral-100);
-  display: flex;
+  box-shadow: 0 2px 0 var(--primary-400);
+  border-radius: var(--spacing-2xsmall);
 }
-.gameweek-add-new > div {
-  width: 20px;
-  height: 20px;
-  background: var(--primary-800);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  margin-right: 6px;
+
+.gameweek-add-new:hover {
+  color: var(--primary-900);
+  background: var(--primary-200);
 }
+
 .filter-container {
   display: flex;
   flex-direction: column;
