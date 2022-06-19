@@ -72,7 +72,7 @@ class PublicHome extends StatelessWidget {
                   ),
 
                   const SizedBox(
-                    width: 170,
+                    width: 120,
                   ),
 
                   // Container(
@@ -94,13 +94,14 @@ class PublicHome extends StatelessWidget {
                   //   ),
                   // ),
                   IconButton(
-                      onPressed: () {
-                        Navigator.popAndPushNamed(context, "/register");
-                      },
-                      icon: const Icon(
-                        Typicons.user_add,
-                        size: 30,
-                      )),
+                    onPressed: () {
+                      Navigator.popAndPushNamed(context, "/register");
+                    },
+                    icon: const Icon(
+                      Typicons.user_add,
+                      size: 25,
+                    ),
+                  ),
                   // Container(
                   //   width: 100,
                   //   height: 36,
@@ -121,7 +122,7 @@ class PublicHome extends StatelessWidget {
                       },
                       icon: const Icon(
                         MdiIcons.login,
-                        size: 30,
+                        size: 25,
                       ))
                 ],
               ),
