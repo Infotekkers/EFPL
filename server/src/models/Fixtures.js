@@ -159,6 +159,7 @@ const lineupSchema = mongoose.Schema({
 const fixtureSchema = mongoose.Schema({
   gameweekId: {
     type: Number,
+    index: true,
     required: [
       true,
       "Custom Error - Required Value *:Game week ID is required.",
@@ -170,15 +171,17 @@ const fixtureSchema = mongoose.Schema({
   },
   schedule: {
     type: Date,
+    index: true,
     required: [
       true,
       "Custom Error - Required Value *:Fixture Schedule ID is required.",
     ],
   },
   // Concern Here what are the possible values
-  status: { type: String, default: "scheduled" },
+  status: { type: String, default: "scheduled", index: true },
   homeTeam: {
     type: String,
+    index: true,
     required: [
       true,
       "Custom Error - Required Value *:Home Team is required for a fixture.",
@@ -186,6 +189,7 @@ const fixtureSchema = mongoose.Schema({
   },
   awayTeam: {
     type: String,
+    index: true,
     required: [
       true,
       "Custom Error - Required Value *:Away Team is required for a fixture.",

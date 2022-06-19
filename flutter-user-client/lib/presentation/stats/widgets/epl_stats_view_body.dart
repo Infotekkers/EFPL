@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:efpl/application/epl_stats/epl_stats_bloc.dart';
-import 'package:efpl/domain/epl_stats/value_objects.dart';
 import 'package:efpl/injectable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

@@ -7,10 +7,12 @@ const Gameweek = require("../models/GameWeek");
 const Player = require("../models/Player");
 const Team = require("../models/Teams");
 const Fixture = require("../models/Fixtures");
+const FanstasyStats = require("../models/EFPLStats");
 const validateTeam = require("../utils/validators").validateTeam;
 const pointDeductor = require("../utils/helpers").pointDeductor;
 const sumEplPlayerScore = require("../utils/helpers").sumEplPlayerScore;
 const playerInsOutsCounter = require("../utils/helpers").playerInsOutsCounter;
+const getUpcomingFixtures = require("../utils/helpers").getUpcomingFixtures;
 const secretKey = process.env.JWT_SECRET;
 
 const transporter = nodemailer.createTransport({
@@ -22,7 +24,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const register = asyncHandler(async (req, res) => {
-  // check for prexisting email
+  // check for pre-existing email
   const emailExists = await User.findOne({ email: req.body.email });
   if (emailExists) return res.status(400).send("Email in Use");
 
@@ -120,7 +122,10 @@ const fetchUsers = asyncHandler(async (req, res) => {
 });
 
 const fetchOneUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+  const userId = token.data;
+
+  const user = await User.findById(userId);
   if (user == null) {
     return res.status(404).json({ message: "No user found" });
   }
@@ -129,7 +134,10 @@ const fetchOneUser = asyncHandler(async (req, res) => {
 });
 
 const fetchUserTeam = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).lean();
+  const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+  const userId = token.data;
+
+  const user = await User.findById(userId).lean();
   if (user == null) {
     return res.status(404).json({ messaage: "No user found" });
   }
@@ -235,10 +243,8 @@ const requestReset = asyncHandler(async (req, res) => {
         res.status(400).json({
           message: "could not send reset email",
         });
-        console.log(error);
       } else {
         res.status(200).json({ message: "Email Sent Successfully" });
-        console.log("email sent: " + info.response);
       }
     });
   } else {
@@ -364,8 +370,6 @@ const transfer = asyncHandler(async (req, res) => {
         user.availableChips
       );
 
-      console.log(isTeamValid, errorType);
-
       // Save team || Send err
       if (isTeamValid === true) {
         // count transfer ins and outs for players
@@ -388,17 +392,6 @@ const transfer = asyncHandler(async (req, res) => {
           }
         }
 
-        console.log(
-          "DEDUCTION ",
-          deduction,
-          "TransfersMade",
-          transfersMade,
-          "REMAINING FREE TRANSFERS",
-          activeTeam.freeTransfers,
-          "GW",
-          activeGameweek
-        );
-
         // Remove active chips from available chips
         if (incomingTeam.activeChip) {
           const remainingChips = user.availableChips.filter(
@@ -413,7 +406,6 @@ const transfer = asyncHandler(async (req, res) => {
 
         // get old teams as is
         for (let i = 0; i < activeGameweek; i++) {
-          console.log(user.team[i]);
           updatedUserTeam.push(user.team[i]);
         }
 
@@ -450,6 +442,27 @@ const transfer = asyncHandler(async (req, res) => {
         // update user team
         await User.findByIdAndUpdate(userId, { team: updatedUserTeam });
 
+        // * CHIP COUNTER
+        if (incomingTeam.activeChip) {
+          const filter = { gameWeekNumber: activeGameweek };
+          if (incomingTeam.activeChip === "TC")
+            await FanstasyStats.findOneAndUpdate(filter, {
+              $inc: { "allStats.tripleCaptainCount": 1 },
+            });
+          else if (incomingTeam.activeChip === "BB")
+            await FanstasyStats.findOneAndUpdate(filter, {
+              $inc: { "allStats.benchBoostCount": 1 },
+            });
+          else if (incomingTeam.activeChip === "WC")
+            await FanstasyStats.findOneAndUpdate(filter, {
+              $inc: { "allStats.wildCardCount": 1 },
+            });
+          else if (incomingTeam.activeChip === "FH")
+            await FanstasyStats.findOneAndUpdate(filter, {
+              $inc: { "allStats.freeHitCount": 1 },
+            });
+        }
+
         res.status(200).json({ message: "Successfully saved team" });
       } else {
         res.status(412).json(errorType);
@@ -457,7 +470,6 @@ const transfer = asyncHandler(async (req, res) => {
     }
     // initial transfer
     else {
-      console.log("At ElSE");
       const updatedUserTeam = [];
       // update future teams
       for (let i = 0; i < 30; i++) {
@@ -475,12 +487,11 @@ const transfer = asyncHandler(async (req, res) => {
 
         updatedUserTeam.push(currentTeam);
       }
-      console.log("Here");
+
       await User.findByIdAndUpdate(userId, { team: updatedUserTeam });
       res.status(201).json({ Message: "Team Saved" });
     }
   } catch (err) {
-    console.log(err);
     res.status(422).send();
   }
 });
@@ -628,13 +639,13 @@ const getUserTeam = asyncHandler(async (req, res) => {
           maxBudget: user.maxBudget,
           gameWeekDeadline: currentGameWeek.startTimestamp,
         };
-        // console.log(finalFormat);
+
         res.status(200).send(finalFormat);
       }
     }
   } catch (e) {
     // error verifying token
-    console.log(e);
+
     res.status(401).send("Error Decoding token");
   }
 });
@@ -778,8 +789,115 @@ const getUserPoints = asyncHandler(async (req, res) => {
       res.status(404).send(finalFormat);
     }
   } catch (err) {
-    console.log(err);
     res.status(403).send("Error Decoding token");
+  }
+});
+
+const getUserWatchList = asyncHandler(async (req, res) => {
+  try {
+    // get user id from token
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
+
+    const user = await User.findOne({ _id: userId }).select("watchList").lean();
+
+    const userWatchList = user.watchList ? user.watchList : [];
+
+    const allTeams = await Team.find({}).lean().select("-_id -__v");
+
+    const activeGw = await Gameweek.find({ status: "active" });
+    let activeGwId = 1;
+
+    if (activeGw.length > 0) {
+      activeGwId = activeGw[activeGw.length - 1].gameWeekNumber;
+    }
+    const finalInfoList = [];
+
+    for (let i = 0; i < userWatchList.length; i++) {
+      const currentPlayer = await Player.findOne({
+        playerId: userWatchList[i],
+      }).lean();
+
+      const currentPlayerTeam = await Team.findOne({
+        teamName: currentPlayer.eplTeamId,
+      });
+
+      const upComingFixtures = await getUpcomingFixtures(
+        6,
+        currentPlayer.eplTeamId,
+        activeGwId,
+        currentPlayer
+      );
+
+      const score = await sumEplPlayerScore(currentPlayer.score);
+
+      const currentPlayerInfo = {
+        playerId: currentPlayer.playerId,
+        playerName: currentPlayer.playerName,
+        currentPrice: currentPlayer.currentPrice,
+        playerPosition: currentPlayer.position,
+        eplTeamId: currentPlayerTeam.teamName,
+        eplTeamLogo: currentPlayerTeam.teamLogo,
+        availability: currentPlayer.availability
+          ? currentPlayer.availability
+          : { injuryStatus: "", injuryMessage: "" },
+        score: score,
+        upComingFixtures: upComingFixtures,
+      };
+
+      finalInfoList.push(currentPlayerInfo);
+    }
+    res.status(200).send({
+      allTeams: allTeams,
+      watchListInfo: finalInfoList,
+    });
+  } catch (e) {
+    res.status(401).send("Error Decoding Token");
+  }
+});
+
+const addUserWatchList = asyncHandler(async (req, res) => {
+  try {
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
+
+    await User.findByIdAndUpdate(
+      { _id: userId },
+      { $addToSet: { watchList: req.body.playerId } }
+    );
+
+    res.status(201).send("WatchList");
+  } catch (e) {
+    res.status(401).send("Error Decoding Token");
+  }
+});
+
+const removeUserWatchList = asyncHandler(async (req, res) => {
+  try {
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
+
+    await User.findByIdAndUpdate(
+      { _id: userId },
+      { $pull: { watchList: req.body.playerId } }
+    );
+
+    res.status(200).send("WatchList");
+  } catch (e) {
+    res.status(401).send("Error Decoding Token");
+  }
+});
+
+const removeAllUserWatchList = asyncHandler(async (req, res) => {
+  try {
+    const token = jwt.verify(req.query.token, process.env.JWT_SECRET);
+    const userId = token.data;
+
+    await User.findByIdAndUpdate({ _id: userId }, { $set: { watchList: [] } });
+
+    res.status(200).send("WatchList");
+  } catch (e) {
+    res.status(401).send("Error Decoding Token");
   }
 });
 
@@ -814,4 +932,8 @@ module.exports = {
   getUserTeam,
   getUserPoints,
   validateUser,
+  getUserWatchList,
+  addUserWatchList,
+  removeUserWatchList,
+  removeAllUserWatchList,
 };

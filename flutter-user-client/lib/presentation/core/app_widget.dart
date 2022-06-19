@@ -19,6 +19,14 @@ class AppWidget extends StatelessWidget {
     final AppRouter _appRouter = AppRouter();
     final _settingsBloc = getIt<SettingsBloc>();
 
+    final AuthBloc _authBloc = getIt<AuthBloc>()
+      ..add(
+        const AuthEvent.authCheckRequested(),
+      );
+    _authBloc.add(
+      const AuthEvent.tokenCheckRequested(),
+    );
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -36,6 +44,13 @@ class AppWidget extends StatelessWidget {
         BlocProvider.value(
           value: _settingsBloc,
         ),
+        BlocProvider.value(value: _authBloc),
+        // BlocProvider(
+        //   create: (context) => getIt<AuthBloc>()
+        //     ..add(
+        //       const AuthEvent.tokenCheckRequested(),
+        //     ),
+        // )
       ],
       child: BlocConsumer<UtilBloc, UtilState>(
         listener: (context, state) {},

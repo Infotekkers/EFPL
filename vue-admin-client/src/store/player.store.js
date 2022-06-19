@@ -112,16 +112,16 @@ export default {
       const playerId = store.state.Player.editPlayerId;
 
       const verifyChange = store.state.Player.allPlayers.filter((player) => {
-        return (
-          player.playerName == updatedPlayer.playerName &&
+        return player.playerName == updatedPlayer.playerName &&
           player.eplTeamId == updatedPlayer.eplTeamId &&
           player.position == updatedPlayer.position &&
           player.currentPrice == updatedPlayer.currentPrice &&
-          player.availability.injuryStatus ==
-            updatedPlayer.availability.injuryStatus &&
-          player.availability.injuryMessage ==
-            updatedPlayer.availability.injuryMessage
-        );
+          player.availability
+          ? player.availability.injuryStatus ==
+              updatedPlayer.availability.injuryStatus &&
+              player.availability.injuryMessage ==
+                updatedPlayer.availability.injuryMessage
+          : false;
       });
 
       if (!verifyChange.length > 0 || store.state.Player.imageChanged) {
@@ -263,6 +263,30 @@ export default {
             : 0;
         });
       }
+    },
+    async sortbyGoalScored() {
+      // // reset
+      // store.state.Player.allPlayers = store.state.Player.allPlayersUnfiltered;
+      // if (order == 1) {
+      store.state.Player.allPlayers.sort(function (playerOne, playerTwo) {
+        let playerOneSum = 0;
+        let playerTwoSum = 0;
+
+        playerOne.score.forEach((element) => {
+          playerOneSum += element.goals;
+        });
+
+        playerTwo.Score.forEach((element) => {
+          playerTwoSum += element.goals;
+        });
+        return playerOneSum < playerTwoSum
+          ? -1
+          : playerOneSum > playerTwoSum
+          ? 1
+          : 0;
+      });
+      // return store.state.Player.allPlayers[0];
+      // console.log(store.state.Player.allPlayers);
     },
     sortByName(context, order) {
       // // reset

@@ -171,13 +171,10 @@ const backup = asyncHandler(async (req, res) => {
   if (backupType === "complete") {
     // // Delete teams
     // await Teams.deleteMany();
-
     // // delete players
     // await Players.deleteMany();
-
     // // delete fixtures
     // await Fixture.deleteMany();
-    console.log("DELETINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
   }
 
   if (

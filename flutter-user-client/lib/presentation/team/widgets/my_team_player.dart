@@ -229,8 +229,15 @@ class MyTeamPlayer extends StatelessWidget {
                     : (() {}),
                 child: Row(
                   children: [
-                    const Icon(Icons.copyright),
-                    const SizedBox(width: 5),
+                    const SizedBox(width: 1),
+                    const Text(
+                      "Ⓥ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    const SizedBox(width: 7),
                     Text(strings(context).makeViceCaptain),
                   ],
                 ),

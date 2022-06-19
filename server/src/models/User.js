@@ -58,32 +58,37 @@ const userSchema = mongoose.Schema({
   userName: {
     type: String,
     required: [true, "Custom Error - Required Value *:Username is required."],
+    validate: /^[a-zA-Z ]*$/,
+    minlength: 3,
+    maxLength: 32,
   },
   password: {
     type: String,
     minlength: 8,
+    maxLength: 64,
     required: true,
-
-    // Concern here - is this a message
     validate: [
       isStrongPassword,
-      "minimum 8 characters,1uppercase,1lowercase,symbol&number",
+      "minimum 8 characters, 1 uppercase, 1 lowercase, symbol & number",
     ],
   },
   email: {
     type: String,
-
-    // Concern Here - Should Email be required?
     required: [true, "Custom Error - Required Value *:Email is required."],
     validate: [isEmail, "input valid email"],
   },
-
-  // Concern - here Shouldnt this be unique
   teamName: {
     type: String,
     required: [true, "Custom Error - Required Value *:Team name is required."],
+    minlength: 3,
+    maxLength: 32,
   },
-  country: String,
+  country: {
+    type: String,
+    validate: /^[a-zA-Z ]*$/,
+    minlength: 4,
+    maxLength: 56,
+  },
   favouriteEplTeam: {
     type: String,
     // required:[true,"Custom Error - Required Value *:favEplTeam is required,"],
@@ -95,6 +100,10 @@ const userSchema = mongoose.Schema({
     type: Number,
     default: 100.0,
     required: true,
+  },
+  watchList: {
+    type: Array,
+    default: [],
   },
 });
 

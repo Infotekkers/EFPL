@@ -53,7 +53,6 @@ export default {
         });
       }
     },
-
     sortByName(context, order) {
       if (order == 1) {
         store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
@@ -68,6 +67,167 @@ export default {
           return teamOne.teamName.toUpperCase() > teamTwo.teamName.toUpperCase()
             ? -1
             : teamOne.teamName.toUpperCase() < teamTwo.teamName.toUpperCase()
+            ? 1
+            : 0;
+        });
+      }
+    },
+    sortByPoint(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].teamPoint) <
+            parseInt(teamTwo.teamPosition[0].teamPoint)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].teamPoint) >
+              parseInt(teamTwo.teamPosition[0].teamPoint)
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].teamPoint) >
+            parseInt(teamTwo.teamPosition[0].teamPoint)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].teamPoint) <
+              parseInt(teamTwo.teamPosition[0].teamPoint)
+            ? 1
+            : 0;
+        });
+      }
+    },
+    sortByWon(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].won) <
+            parseInt(teamTwo.teamPosition[0].won)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].won) >
+              parseInt(teamTwo.teamPosition[0].won)
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].won) >
+            parseInt(teamTwo.teamPosition[0].won)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].won) <
+              parseInt(teamTwo.teamPosition[0].won)
+            ? 1
+            : 0;
+        });
+      }
+    },
+    sortByDraw(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].Draw) <
+            parseInt(teamTwo.teamPosition[0].Draw)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].Draw) >
+              parseInt(teamTwo.teamPosition[0].Draw)
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].Draw) >
+            parseInt(teamTwo.teamPosition[0].Draw)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].Draw) <
+              parseInt(teamTwo.teamPosition[0].Draw)
+            ? 1
+            : 0;
+        });
+      }
+    },
+    sortByLost(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].lost) <
+            parseInt(teamTwo.teamPosition[0].lost)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].lost) >
+              parseInt(teamTwo.teamPosition[0].lost)
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].lost) >
+            parseInt(teamTwo.teamPosition[0].lost)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].lost) <
+              parseInt(teamTwo.teamPosition[0].lost)
+            ? 1
+            : 0;
+        });
+      }
+    },
+    sortByAgainst(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].goalAgainst) <
+            parseInt(teamTwo.teamPosition[0].goalAgainst)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].goalAgainst) >
+              parseInt(teamTwo.teamPosition[0].goalAgainst)
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].goalAgainst) >
+            parseInt(teamTwo.teamPosition[0].goalAgainst)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].goalAgainst) <
+              parseInt(teamTwo.teamPosition[0].goalAgainst)
+            ? 1
+            : 0;
+        });
+      }
+    },
+    sortByFor(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].goalFor) <
+            parseInt(teamTwo.teamPosition[0].goalFor)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].goalFor) >
+              parseInt(teamTwo.teamPosition[0].goalFor)
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].goalFor) >
+            parseInt(teamTwo.teamPosition[0].goalFor)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].goalFor) <
+              parseInt(teamTwo.teamPosition[0].goalFor)
+            ? 1
+            : 0;
+        });
+      }
+    },
+    sortByGD(context, order) {
+      if (order == 1) {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].goalDifferntial) <
+            parseInt(teamTwo.teamPosition[0].goalDifferntial)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].goalDifferntial) >
+              parseInt(teamTwo.teamPosition[0].goalDifferntial)
+            ? 1
+            : 0;
+        });
+      } else {
+        store.state.Team.allTeams.sort(function (teamOne, teamTwo) {
+          return parseInt(teamOne.teamPosition[0].goalDifferntial) >
+            parseInt(teamTwo.teamPosition[0].goalDifferntial)
+            ? -1
+            : parseInt(teamOne.teamPosition[0].goalDifferntial) <
+              parseInt(teamTwo.teamPosition[0].goalDifferntial)
             ? 1
             : 0;
         });
@@ -134,8 +294,6 @@ export default {
         });
       }
     },
-
-    // TODO:Improve filter
     filterByTerm(context, filterTerm) {
       // reset previous filter result
       store.state.Team.allTeams = store.state.Team.allTeamsUnfiltered;
@@ -210,7 +368,7 @@ export default {
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
-            notificationMessage: err.response.data,
+            notificationMessage: err.response.data.message,
           });
         });
     },
@@ -237,12 +395,14 @@ export default {
 
     async updateTeam(context, updatedTeam) {
       const teamId = store.state.Team.editTeamId;
+
       const verifyChange = store.state.Team.allTeams.filter((team) => {
         return (
           team.teamName == updatedTeam.teamName &&
           team.teamCity == updatedTeam.teamCity &&
           team.teamStadium == updatedTeam.teamStadium &&
-          team.teamCoach == updatedTeam.teamCoach
+          team.teamCoach == updatedTeam.teamCoach &&
+          team.teamNameAmh == updatedTeam.teamNameAmh
         );
       });
 
@@ -264,7 +424,9 @@ export default {
               notificationMessage: err.response.data,
             });
           });
-      } else {
+      }
+      // no change
+      else {
         store.dispatch("Global/setNotificationInfo", {
           showNotification: true,
           notificationType: "warning",

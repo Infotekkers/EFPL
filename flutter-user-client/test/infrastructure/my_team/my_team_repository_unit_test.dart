@@ -21,7 +21,6 @@ void main() async {
   group("My team", () {
     test("should return a valid my team object", () async {
       // final http.Client client = MockClient();
-      const String userId = "101";
       const String gameweekId = "1";
       // final Uri url = Uri.parse("$_baseUrl/user/fetchOne/$userId");
 
@@ -30,7 +29,7 @@ void main() async {
       final myTeamRepo =
           MyTeamRepository(myTeamLocalDataProvider, myTeamRemoteDataProvider);
 
-      final result = await myTeamRepo.getUserTeam(userId, gameweekId);
+      final result = await myTeamRepo.getUserTeam(gameweekId);
 
       expect(result.fold((l) => l, (r) => r), isA<MyTeam>());
     });

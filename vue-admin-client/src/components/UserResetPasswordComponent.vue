@@ -3,34 +3,68 @@
     <form @submit.prevent="handleSubmit">
       <h3>Reset Your Password</h3>
       <div>
-        <label> {{ $t("new") }} {{ $t("Password") }} </label>
-        <input
-          v-model="password"
-          required
-          placeholder="Password"
-          :type="showPassword ? 'text' : 'password'"
-        />
+        <div class="password">
+          <label> {{ $t("new") }} {{ $t("Password") }} </label>
+          <input
+            v-model="password"
+            required
+            placeholder="Password"
+            :type="showPassword ? 'text' : 'password'"
+          />
+          <button
+            class="toggle-password"
+            @click.prevent="showPassword = !showPassword"
+          >
+            <img
+              :src="passwordVisibleIcon.path"
+              :alt="passwordVisibleIcon.alt"
+              v-if="showPassword"
+            />
+            <img
+              :src="hiddenPasswordIcon.path"
+              :alt="hiddenPasswordIcon.alt"
+              v-else
+            />
+          </button>
+        </div>
       </div>
       <div>
-        <label> {{ $t("Password") }} {{ $t("Confirm") }}</label>
-        <input
-          v-model="password_confirm"
-          required
-          placeholder="Cofirm password"
-          :type="showPassword ? 'text' : 'password'"
-        />
+        <div class="confirm-pass">
+          <label> {{ $t("Password") }} {{ $t("Confirm") }}</label>
+          <input
+            v-model="password_confirm"
+            required
+            placeholder="Cofirm password"
+            :type="showPassword ? 'text' : 'password'"
+          />
+        </div>
+        <button
+          class="toggle-password"
+          @click.prevent="showPassword = !showPassword"
+        >
+          <img
+            :src="passwordVisibleIcon.path"
+            :alt="passwordVisibleIcon.alt"
+            v-if="showPassword"
+          />
+          <img
+            :src="hiddenPasswordIcon.path"
+            :alt="hiddenPasswordIcon.alt"
+            v-else
+          />
+        </button>
       </div>
 
       <button>Submit</button>
     </form>
-    <button @click="showPassword = !showPassword">
-      {{ $t("የይለፍ ቃል አሳይ") }}
-    </button>
+
     <div>{{ error }}</div>
   </div>
 </template>
 
 <script>
+import { passwordVisibleIcon, hiddenPasswordIcon } from "@/utils/Icons";
+
 export default {
   name: "UserResetPasswordComponent",
   data() {
@@ -40,6 +74,10 @@ export default {
       password: "",
       password_confirm: "",
       isLoading: false,
+
+      // icons
+      passwordVisibleIcon: passwordVisibleIcon,
+      hiddenPasswordIcon: hiddenPasswordIcon,
     };
   },
   methods: {
@@ -94,8 +132,43 @@ button {
   cursor: pointer;
   width: 30%;
 }
+
+.toggle-password img {
+  width: 25px;
+}
+
 .submit {
   text-align: center;
+}
+.password {
+  position: relative;
+}
+
+.password > button {
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-base);
+  transform: translateY(-50%);
+
+  background: none;
+  color: var(--success-400);
+  padding: 0;
+  margin: 0;
+}
+.confirm-pass {
+  position: relative;
+}
+
+.confirm-pass > button {
+  position: absolute;
+  top: 70%;
+  right: var(--spacing-base);
+  transform: translateY(-50%);
+
+  background: none;
+  color: var(--success-400);
+  padding: 0;
+  margin: 0;
 }
 @media screen and (max-width: 768px) {
   .reset-pass {

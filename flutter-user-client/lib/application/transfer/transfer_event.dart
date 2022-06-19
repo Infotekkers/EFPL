@@ -55,4 +55,7 @@ class TransferEvent with _$TransferEvent {
 
   const factory TransferEvent.cancelTransferFromConfirm() =
       _cancelTransferFromConfirm;
+
+  const factory TransferEvent.setSearchQuery({required String query}) =
+      _setSearchQuery;
 }

@@ -37,9 +37,11 @@ class RequestResetFormBloc
       Either<AuthFailure, User>? failureOrSuccess;
       final isEmailValid = state.email.isValid();
       if (isEmailValid) {
-        state.copyWith(
-          isSubmitting: true,
-          authFailureOrSuccessOption: none(),
+        emit(
+          state.copyWith(
+            isSubmitting: true,
+            authFailureOrSuccessOption: none(),
+          ),
         );
         final User user = User.initial();
         failureOrSuccess = await _authRepository.requestReset(
@@ -49,7 +51,8 @@ class RequestResetFormBloc
       emit(
         state.copyWith(
           isSubmitting: false,
-          authFailureOrSuccessOption: some(failureOrSuccess!),
+          showErrorMessages: true,
+          authFailureOrSuccessOption: optionOf(failureOrSuccess),
         ),
       );
     });

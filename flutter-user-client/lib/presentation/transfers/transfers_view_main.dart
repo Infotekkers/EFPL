@@ -53,8 +53,7 @@ class TransfersView extends StatelessWidget {
                         ),
                       );
 
-                      // Navigator.pop(context);
-                      Navigator.pushNamed(context, "/transfer/initial");
+                      Navigator.popAndPushNamed(context, "/transfer/initial");
                     },
 
                     incompleteTeam: (_) {
@@ -72,7 +71,7 @@ class TransfersView extends StatelessWidget {
                           valueToSet: true,
                         ),
                       );
-                      Navigator.popAndPushNamed(context, "/transfer/initial");
+                      // Navigator.popAndPushNamed(context, "/transfer/initial");
                     },
                     exceededPrice: (_) {
                       CustomSnackBar().showCustomSnackBar(
@@ -98,6 +97,7 @@ class TransfersView extends StatelessWidget {
                       );
                     },
                     deadlinePassed: (_) {
+                      // ignore: avoid_print
                       print("Deadline Passed");
                     },
 
@@ -287,7 +287,7 @@ Widget _buildTeamView(
               Text(
                 state.userTeam.teamName,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: ConstantColors.neutral_700),
               ),
@@ -584,7 +584,6 @@ Widget _buildMoreInfoView(
                 AppLocalizations.of(context)!.bank + " : ",
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
                       color: ConstantColors.primary_900,
                     ),
               ),
@@ -613,7 +612,6 @@ Widget _buildMoreInfoView(
                 AppLocalizations.of(context)!.deduction + " : ",
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
                       color: ConstantColors.primary_900,
                     ),
               ),
@@ -641,7 +639,6 @@ Widget _buildMoreInfoView(
                 AppLocalizations.of(context)!.freeTransfers + " : ",
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
                       color: ConstantColors.primary_900,
                     ),
               ),
@@ -669,14 +666,12 @@ Widget _buildMoreInfoView(
                 AppLocalizations.of(context)!.deadline + " : ",
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
                       color: ConstantColors.primary_900,
                     ),
               ),
               Text(
                 formatDeadline(state.userTeam.gameWeekDeadline),
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      fontWeight: FontWeight.bold,
                       fontSize: 18,
                       color: ConstantColors.primary_900,
                     ),

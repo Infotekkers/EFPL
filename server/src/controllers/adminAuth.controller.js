@@ -67,7 +67,7 @@ const requestReset = asyncHandler(async (req, res) => {
       { expiresIn: 60 * 60 }
     );
     const resetUrl = `${
-      process.env.BASE_URL
+      process.env.BASE_URL_WITHOUT_PORT
     }${8080}/resetPassword/${resetToken}`;
 
     const mailOptions = {
@@ -82,10 +82,8 @@ const requestReset = asyncHandler(async (req, res) => {
         res.status(400).json({
           message: "could not send reset email",
         });
-        console.log(error);
       } else {
         res.status(200).json({ message: "Email Sent Successfully" });
-        console.log("email sent: " + info.response);
       }
     });
   } else {
@@ -106,7 +104,6 @@ const resetPass = asyncHandler(async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(newPass, salt);
   const updateValue = { password: hashedPassword };
-  console.log(updateValue);
 
   // update item
   await Admin.updateOne({ email }, { $set: updateValue });
@@ -127,10 +124,8 @@ const sendEmail = asyncHandler(async (req, res) => {
       res.status(400).json({
         message: "could not send email",
       });
-      console.log(error);
     } else {
       res.status(200).json({ message: "Email Sent Successfully" });
-      console.log("email sent: " + info.response);
     }
   });
 });

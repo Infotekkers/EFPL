@@ -4,7 +4,7 @@
     <form @submit.prevent="loginAdmin">
       <div class="email">
         <label>{{ $t("Email") }}:</label>
-        <input required type="email" v-model="loginInfo.email" />
+        <input required type="email" v-model="loginInfo.email" name="email" />
       </div>
       <div>
         <label>{{ $t("Password") }}:</label>
@@ -14,9 +14,22 @@
             required
             v-model="loginInfo.password"
             minlength="8"
+            name="password"
           />
-          <button @click="showPassword = !showPassword">
-            {{ $t("show password") }}
+          <button
+            class="toggle-password"
+            @click.prevent="showPassword = !showPassword"
+          >
+            <img
+              :src="passwordVisibleIcon.path"
+              :alt="passwordVisibleIcon.alt"
+              v-if="showPassword"
+            />
+            <img
+              :src="hiddenPasswordIcon.path"
+              :alt="hiddenPasswordIcon.alt"
+              v-else
+            />
           </button>
         </div>
       </div>
@@ -27,7 +40,7 @@
           }}</router-link>
         </p>
         <div class="submit">
-          <button>{{ $t("Login") }}</button>
+          <button name="submit">{{ $t("Login") }}</button>
         </div>
       </div>
     </form>
@@ -50,6 +63,7 @@
   background: var(--neutral-200);
   padding: var(--spacing-xlarge);
 }
+
 form {
   text-align: left;
 }
@@ -67,9 +81,15 @@ label {
   margin: var(--spacing-regular) 0 var(--spacing-2xsmall);
   font-size: var(--text-small);
 }
+
 button {
   border: 0;
 }
+
+.toggle-password img {
+  width: 25px;
+}
+
 input {
   display: block;
   padding: var(--spacing-small) var(--spacing-xsmall);
@@ -135,6 +155,8 @@ input {
 </style>
 
 <script>
+import { passwordVisibleIcon, hiddenPasswordIcon } from "@/utils/Icons";
+
 export default {
   data() {
     return {
@@ -145,6 +167,10 @@ export default {
       },
       error: "",
       isLoading: false,
+
+      // icons
+      passwordVisibleIcon: passwordVisibleIcon,
+      hiddenPasswordIcon: hiddenPasswordIcon,
     };
   },
   name: "AdminLoginView",

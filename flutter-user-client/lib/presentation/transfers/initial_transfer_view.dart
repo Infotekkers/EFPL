@@ -58,6 +58,7 @@ class InitialTransferPage extends StatelessWidget {
                     },
 
                     deadlinePassed: (_) {
+                      // ignore: avoid_print
                       print("deadlinePassed");
                     },
 
@@ -153,6 +154,7 @@ class InitialTransferPage extends StatelessWidget {
 
           final _transferBloc = getIt<TransferBloc>();
           return Scaffold(
+            key: const Key("intialTransferViewMainKey"),
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Stack(
@@ -241,6 +243,8 @@ class InitialTransferPage extends StatelessWidget {
                                                 (r) => r,
                                               );
                                       return InkWell(
+                                        key: const Key(
+                                            "initialTransferViewGKKey"),
                                         onTap: () async {
                                           // set transfer out player
                                           _transferBloc.add(
@@ -292,6 +296,10 @@ class InitialTransferPage extends StatelessWidget {
                                           width: 90,
                                           height: 80,
                                           child: PlayerWidget(
+                                            key: Key(
+                                              "initialTransferViewGKKey" +
+                                                  (index + 1).toString(),
+                                            ),
                                             playerName: allFormattedPlayers[0]
                                                     [index]
                                                 .playerName
@@ -555,7 +563,7 @@ class InitialTransferPage extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           width: 80,
                                           child: PlayerWidget(
                                             playerName: allFormattedPlayers[2]
@@ -748,51 +756,50 @@ class InitialTransferPage extends StatelessWidget {
                       ),
                     ),
 
-                    // state.transfersMadeCount < 15
-                    //     ? Container()
-                    //     :
-                    Positioned(
-                      child: InkWell(
-                        onTap: () async {
-                          _transferBloc.add(
-                            TransferEvent.validateTeam(
-                              context: context,
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: ConstantColors.primary_900,
-                            border: Border.all(
-                              color: ConstantColors.primary_900,
-                            ),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(50),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color:
-                                    ConstantColors.primary_900.withOpacity(0.5),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: const Offset(
-                                  0,
-                                  3,
-                                ), // changes position of shadow
+                    state.transfersMadeCount < 15
+                        ? Container()
+                        : Positioned(
+                            child: InkWell(
+                              onTap: () async {
+                                _transferBloc.add(
+                                  TransferEvent.validateTeam(
+                                    context: context,
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: ConstantColors.primary_900,
+                                  border: Border.all(
+                                    color: ConstantColors.primary_900,
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(50),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ConstantColors.primary_900
+                                          .withOpacity(0.5),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: const Offset(
+                                        0,
+                                        3,
+                                      ), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.save,
+                                  color: ConstantColors.neutral_200,
+                                ),
                               ),
-                            ],
-                          ),
-                          child: const Icon(
-                            Icons.save,
-                            color: ConstantColors.neutral_200,
-                          ),
-                        ),
-                      ),
-                      bottom: 15.0,
-                      right: 15.0,
-                    )
+                            ),
+                            bottom: 15.0,
+                            right: 15.0,
+                          )
                   ],
                 ),
               ),
@@ -885,7 +892,7 @@ List getAllFormattedPlayers({required UserTeam userTeam}) {
         isCaptain: false,
         isViceCaptain: false,
         availability: PlayerAvailability(
-          value: {"injuryStatus": "", "injuryMessage": ""},
+          value: const {"injuryStatus": "", "injuryMessage": ""},
         ),
         score: 0,
         upComingFixtures: [],
@@ -906,7 +913,7 @@ List getAllFormattedPlayers({required UserTeam userTeam}) {
         isCaptain: false,
         isViceCaptain: false,
         availability: PlayerAvailability(
-          value: {"injuryStatus": "", "injuryMessage": ""},
+          value: const {"injuryStatus": "", "injuryMessage": ""},
         ),
         score: 0,
         upComingFixtures: [],

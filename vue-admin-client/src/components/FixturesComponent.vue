@@ -33,7 +33,7 @@
           {{ $t("Ethiopian Premier League") }} - {{ getSeason }}
           {{ $t("Fixtures") }}
         </div>
-        <div class="gameweek-add-new" @click="activateModal">
+        <div class="gameweek-add-new" @click="activateModal" data-cp="add-gw">
           <div>
             <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
           </div>
@@ -464,9 +464,6 @@ export default {
       // Dispatch Store Action
       store.dispatch("Fixture/setAllFixtures");
       // this.isFixtureLoading = false;
-
-      // TODO: Remove Timer
-
       this.isFixtureLoading = false;
     },
     getActiveGameWeek() {
@@ -488,9 +485,6 @@ export default {
       store.dispatch("Fixture/setAllTeams");
 
       // this.isTeamLoading = false;
-
-      // TODO: Remove Timer
-
       this.isTeamLoading = false;
     },
 
@@ -587,7 +581,6 @@ export default {
 
         formattedAndFiltered.push(fix);
       });
-
       return formattedAndFiltered;
     },
 
