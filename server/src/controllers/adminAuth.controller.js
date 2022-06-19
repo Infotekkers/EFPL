@@ -142,22 +142,33 @@ const changePass = asyncHandler(async (req, res) => {
 });
 // send email
 const sendEmail = asyncHandler(async (req, res) => {
+  const token = req.query.token;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const adminFromToken = await Admin.findById(decoded.data).select("-password");
   const { receiverEmail, emailBody } = req.body;
-  const mailOptions = {
-    from: `admin`,
-    to: `${receiverEmail}`,
-    subject: `Contact`,
-    text: `${emailBody}`,
-  };
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      res.status(400).json({
-        message: "could not send email",
+  try {
+    if (adminFromToken) {
+      const mailOptions = {
+        from: `${adminFromToken.email}`,
+        to: `${receiverEmail}`,
+        subject: `Contact from ${adminFromToken.email}`,
+        text: `${emailBody}`,
+      };
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          res.status(400).json({
+            message: "could not send email",
+          });
+        } else {
+          res.status(200).json({ message: "Email Sent Successfully" });
+        }
       });
     } else {
-      res.status(200).json({ message: "Email Sent Successfully" });
+      res.status(403).json({ message: "Something went wrong" });
     }
-  });
+  } catch (err) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
 });
 const validateAdmin = asyncHandler(async (req, res) => {
   const token = req.body.token;

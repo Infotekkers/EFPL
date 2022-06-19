@@ -170,7 +170,7 @@ export default {
     },
     // send email
     async sendEmail(context, { receiverEmail, emailBody }) {
-      await axios
+      await axiosInstance
         .post(`${baseURL}/admin/sendEmail`, {
           receiverEmail: receiverEmail,
           emailBody: emailBody,
