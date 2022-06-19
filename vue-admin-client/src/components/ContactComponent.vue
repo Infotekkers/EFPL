@@ -8,17 +8,38 @@
         <option hidden disabled selected value>
           -- {{ $t("select email") }}--
         </option>
-        <option value="mikealexiv565@gmail.com">{{ $t("Dev -1") }}</option>
-        <option value="sorrysoup156@gmail.com">{{ $t("Dev -2") }}</option>
+
+        <option value="it.barok.dagim@gmail.com">
+          {{ $t("Dev -1") }} Barok Dagim it.barok.dagim@gmail.com
+        </option>
+
+        <option value="it.ermias.asmare@gmail.com">
+          {{ $t("Dev -2") }} Ermias Asmare - it.ermias.asmare@gmail.com
+        </option>
+
+        <option value="sorrysoup156@gmail.com">
+          {{ $t("Dev -3") }} Michael Alemayehu - sorrysoup156@gmail.com
+        </option>
+
+        <option value="it.natnael.mekonnen@gmail.com">
+          {{ $t("Dev -4") }} Natnael Mekonnen - it.natnael.mekonnen@gmail.com
+        </option>
+        <option value="thomas2alexmech@gmail.com">
+          {{ $t("Dev -5") }} Thomas Alemayehu - thomas2alexmech@gmail.com
+        </option>
       </select>
       <div></div>
 
       <div class="emailBody">
+        <label>{{ $t("Body") }}:</label>
+
         <textarea
           placeholder="write something.... "
           required
           v-model="info.emailBody"
           style="height: 200px"
+          minlength="10"
+          maxlength="255"
         ></textarea>
       </div>
 
@@ -26,23 +47,36 @@
         <button>{{ $t("submit") }}</button>
       </div>
     </form>
+
     <p v-if="isLoading">{{ $t("Loading") }}</p>
   </div>
 </template>
 
 <script>
+import store from "../store/index";
 export default {
   data() {
     return {
       info: { receiverEmail: "", emailBody: "" },
-      isLoading: null,
+      isLoading: false,
+      textRegEx: /^(?![\s\S]*[^\w -]+)[\s\S]*?$/,
     };
   },
   methods: {
     async handleSubmit() {
       this.isLoading = true;
-      this.$store.dispatch("sendEmail", this.info);
-      this.isLoading = false;
+      if (this.textRegEx.test(this.info.emailBody) == true) {
+        this.$store.dispatch("sendEmail", this.info);
+        this.isLoading = false;
+      } else {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage:
+            "Subject of body cannot contain special characters",
+        });
+        this.isLoading = false;
+      }
     },
   },
 };

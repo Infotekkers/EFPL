@@ -181,6 +181,10 @@ export default {
     },
 
     getAllTeams() {
+      const allTeams = store.state.Team.allTeams;
+      allTeams.sort(
+        (a, b) => b.teamPosition.teamPoint - a.teamPosition.teamPoint
+      );
       return store.state.Team.allTeams;
     },
   },
