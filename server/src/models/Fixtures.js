@@ -172,7 +172,7 @@ const fixtureSchema = mongoose.Schema({
   fdr: {
     type: Number,
     required: [true, "Custom Error - Required Value *:FDR is required."],
-    default: 1,
+    default: 0,
   },
   schedule: {
     type: Date,

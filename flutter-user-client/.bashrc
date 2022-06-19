@@ -7,8 +7,6 @@ alias integrationTestAuth="flutter drive --target=test_driver/auth/reg/app.dart 
 # flutter drive --target=test_driver/auth/login/app.dart --no-sound-null-safety
 # flutter drive --target=test_driver/transfer/selection/app.dart --no-sound-null-safety
 # flutter drive --target=test_driver/transfer/change/app.dart --no-sound-null-safety
-
-# fail
 # flutter drive --target=test_driver/efplStats/app.dart --no-sound-null-safety
 # flutter drive --target=test_driver/fixture/app.dart --no-sound-null-safety
 # flutter drive --target=test_driver/points/app.dart --no-sound-null-safety 

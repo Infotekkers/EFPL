@@ -19,6 +19,8 @@ void main() {
       // await render
       await driver.waitUntilFirstFrameRasterized();
 
+      await driver.tap(find.byValueKey("publicPageSignInButton"));
+
       // Valid email Valid password
       await driver.tap(emailInputField);
       await driver.enterText("efpltest@gmail.com");
@@ -31,14 +33,14 @@ void main() {
       // go to points tab
       await driver.tap(find.byTooltip("Points"));
 
-      await driver.waitFor(find.text("Daniel"));
-      await driver.tap(find.text("Daniel"));
+      await driver.waitFor(find.text("Mignot"));
+      await driver.tap(find.text("Mignot"));
 
       await driver.waitFor(find.text("Total Sum"));
 
       await driver.tap(find.text("Player Information"));
 
-      await driver.waitFor(find.text("Daniel Teshome"));
+      await driver.waitFor(find.text("Mignot Debebe"));
 
       await driver.waitFor(find.byTooltip("Back"));
     });

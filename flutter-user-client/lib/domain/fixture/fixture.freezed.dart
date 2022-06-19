@@ -30,6 +30,7 @@ class _$FixtureTearOff {
       required TeamLogo homeTeamLogo,
       required Stadium homeTeamStadium,
       required StadiumCapacity homeTeamCapacity,
+      required int fdr,
       required Team awayTeam,
       required Team awayTeamAmh,
       required TeamLineUp awayTeamLineUp,
@@ -52,6 +53,7 @@ class _$FixtureTearOff {
       homeTeamLogo: homeTeamLogo,
       homeTeamStadium: homeTeamStadium,
       homeTeamCapacity: homeTeamCapacity,
+      fdr: fdr,
       awayTeam: awayTeam,
       awayTeamAmh: awayTeamAmh,
       awayTeamLineUp: awayTeamLineUp,
@@ -81,7 +83,8 @@ mixin _$Fixture {
   TeamCoach get homeTeamCoach => throw _privateConstructorUsedError;
   TeamLogo get homeTeamLogo => throw _privateConstructorUsedError;
   Stadium get homeTeamStadium => throw _privateConstructorUsedError;
-  StadiumCapacity get homeTeamCapacity => throw _privateConstructorUsedError; //
+  StadiumCapacity get homeTeamCapacity => throw _privateConstructorUsedError;
+  int get fdr => throw _privateConstructorUsedError; //
   Team get awayTeam => throw _privateConstructorUsedError;
   Team get awayTeamAmh => throw _privateConstructorUsedError;
   TeamLineUp get awayTeamLineUp => throw _privateConstructorUsedError;
@@ -113,6 +116,7 @@ abstract class $FixtureCopyWith<$Res> {
       TeamLogo homeTeamLogo,
       Stadium homeTeamStadium,
       StadiumCapacity homeTeamCapacity,
+      int fdr,
       Team awayTeam,
       Team awayTeamAmh,
       TeamLineUp awayTeamLineUp,
@@ -146,6 +150,7 @@ class _$FixtureCopyWithImpl<$Res> implements $FixtureCopyWith<$Res> {
     Object? homeTeamLogo = freezed,
     Object? homeTeamStadium = freezed,
     Object? homeTeamCapacity = freezed,
+    Object? fdr = freezed,
     Object? awayTeam = freezed,
     Object? awayTeamAmh = freezed,
     Object? awayTeamLineUp = freezed,
@@ -205,6 +210,10 @@ class _$FixtureCopyWithImpl<$Res> implements $FixtureCopyWith<$Res> {
           ? _value.homeTeamCapacity
           : homeTeamCapacity // ignore: cast_nullable_to_non_nullable
               as StadiumCapacity,
+      fdr: fdr == freezed
+          ? _value.fdr
+          : fdr // ignore: cast_nullable_to_non_nullable
+              as int,
       awayTeam: awayTeam == freezed
           ? _value.awayTeam
           : awayTeam // ignore: cast_nullable_to_non_nullable
@@ -263,6 +272,7 @@ abstract class _$FixtureCopyWith<$Res> implements $FixtureCopyWith<$Res> {
       TeamLogo homeTeamLogo,
       Stadium homeTeamStadium,
       StadiumCapacity homeTeamCapacity,
+      int fdr,
       Team awayTeam,
       Team awayTeamAmh,
       TeamLineUp awayTeamLineUp,
@@ -297,6 +307,7 @@ class __$FixtureCopyWithImpl<$Res> extends _$FixtureCopyWithImpl<$Res>
     Object? homeTeamLogo = freezed,
     Object? homeTeamStadium = freezed,
     Object? homeTeamCapacity = freezed,
+    Object? fdr = freezed,
     Object? awayTeam = freezed,
     Object? awayTeamAmh = freezed,
     Object? awayTeamLineUp = freezed,
@@ -356,6 +367,10 @@ class __$FixtureCopyWithImpl<$Res> extends _$FixtureCopyWithImpl<$Res>
           ? _value.homeTeamCapacity
           : homeTeamCapacity // ignore: cast_nullable_to_non_nullable
               as StadiumCapacity,
+      fdr: fdr == freezed
+          ? _value.fdr
+          : fdr // ignore: cast_nullable_to_non_nullable
+              as int,
       awayTeam: awayTeam == freezed
           ? _value.awayTeam
           : awayTeam // ignore: cast_nullable_to_non_nullable
@@ -412,6 +427,7 @@ class _$_Fixture implements _Fixture {
       required this.homeTeamLogo,
       required this.homeTeamStadium,
       required this.homeTeamCapacity,
+      required this.fdr,
       required this.awayTeam,
       required this.awayTeamAmh,
       required this.awayTeamLineUp,
@@ -446,6 +462,8 @@ class _$_Fixture implements _Fixture {
   final Stadium homeTeamStadium;
   @override
   final StadiumCapacity homeTeamCapacity;
+  @override
+  final int fdr;
   @override //
   final Team awayTeam;
   @override
@@ -467,7 +485,7 @@ class _$_Fixture implements _Fixture {
 
   @override
   String toString() {
-    return 'Fixture(gameWeekId: $gameWeekId, matchId: $matchId, schedule: $schedule, status: $status, homeTeam: $homeTeam, homeTeamAmh: $homeTeamAmh, homeTeamLineUp: $homeTeamLineUp, homeTeamCity: $homeTeamCity, homeTeamCoach: $homeTeamCoach, homeTeamLogo: $homeTeamLogo, homeTeamStadium: $homeTeamStadium, homeTeamCapacity: $homeTeamCapacity, awayTeam: $awayTeam, awayTeamAmh: $awayTeamAmh, awayTeamLineUp: $awayTeamLineUp, awayTeamCity: $awayTeamCity, awayTeamCoach: $awayTeamCoach, awayTeamLogo: $awayTeamLogo, awayTeamStadium: $awayTeamStadium, awayTeamCapacity: $awayTeamCapacity, score: $score)';
+    return 'Fixture(gameWeekId: $gameWeekId, matchId: $matchId, schedule: $schedule, status: $status, homeTeam: $homeTeam, homeTeamAmh: $homeTeamAmh, homeTeamLineUp: $homeTeamLineUp, homeTeamCity: $homeTeamCity, homeTeamCoach: $homeTeamCoach, homeTeamLogo: $homeTeamLogo, homeTeamStadium: $homeTeamStadium, homeTeamCapacity: $homeTeamCapacity, fdr: $fdr, awayTeam: $awayTeam, awayTeamAmh: $awayTeamAmh, awayTeamLineUp: $awayTeamLineUp, awayTeamCity: $awayTeamCity, awayTeamCoach: $awayTeamCoach, awayTeamLogo: $awayTeamLogo, awayTeamStadium: $awayTeamStadium, awayTeamCapacity: $awayTeamCapacity, score: $score)';
   }
 
   @override
@@ -495,6 +513,7 @@ class _$_Fixture implements _Fixture {
                 .equals(other.homeTeamStadium, homeTeamStadium) &&
             const DeepCollectionEquality()
                 .equals(other.homeTeamCapacity, homeTeamCapacity) &&
+            const DeepCollectionEquality().equals(other.fdr, fdr) &&
             const DeepCollectionEquality().equals(other.awayTeam, awayTeam) &&
             const DeepCollectionEquality()
                 .equals(other.awayTeamAmh, awayTeamAmh) &&
@@ -528,6 +547,7 @@ class _$_Fixture implements _Fixture {
         const DeepCollectionEquality().hash(homeTeamLogo),
         const DeepCollectionEquality().hash(homeTeamStadium),
         const DeepCollectionEquality().hash(homeTeamCapacity),
+        const DeepCollectionEquality().hash(fdr),
         const DeepCollectionEquality().hash(awayTeam),
         const DeepCollectionEquality().hash(awayTeamAmh),
         const DeepCollectionEquality().hash(awayTeamLineUp),
@@ -559,6 +579,7 @@ abstract class _Fixture implements Fixture {
       required TeamLogo homeTeamLogo,
       required Stadium homeTeamStadium,
       required StadiumCapacity homeTeamCapacity,
+      required int fdr,
       required Team awayTeam,
       required Team awayTeamAmh,
       required TeamLineUp awayTeamLineUp,
@@ -593,6 +614,8 @@ abstract class _Fixture implements Fixture {
   Stadium get homeTeamStadium;
   @override
   StadiumCapacity get homeTeamCapacity;
+  @override
+  int get fdr;
   @override //
   Team get awayTeam;
   @override

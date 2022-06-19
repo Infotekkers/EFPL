@@ -26,6 +26,7 @@ class _$FixtureDTOTearOff {
       required String matchId,
       required String schedule,
       required String status,
+      required int fdr,
       required String homeTeam,
       required String homeTeamAmh,
       required Map<dynamic, dynamic> homeTeamLineUp,
@@ -48,6 +49,7 @@ class _$FixtureDTOTearOff {
       matchId: matchId,
       schedule: schedule,
       status: status,
+      fdr: fdr,
       homeTeam: homeTeam,
       homeTeamAmh: homeTeamAmh,
       homeTeamLineUp: homeTeamLineUp,
@@ -81,7 +83,8 @@ mixin _$FixtureDTO {
   int get gameWeekId => throw _privateConstructorUsedError;
   String get matchId => throw _privateConstructorUsedError;
   String get schedule => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError; //
+  String get status => throw _privateConstructorUsedError;
+  int get fdr => throw _privateConstructorUsedError; //
   String get homeTeam => throw _privateConstructorUsedError;
   String get homeTeamAmh => throw _privateConstructorUsedError;
   Map<dynamic, dynamic> get homeTeamLineUp =>
@@ -118,6 +121,7 @@ abstract class $FixtureDTOCopyWith<$Res> {
       String matchId,
       String schedule,
       String status,
+      int fdr,
       String homeTeam,
       String homeTeamAmh,
       Map<dynamic, dynamic> homeTeamLineUp,
@@ -151,6 +155,7 @@ class _$FixtureDTOCopyWithImpl<$Res> implements $FixtureDTOCopyWith<$Res> {
     Object? matchId = freezed,
     Object? schedule = freezed,
     Object? status = freezed,
+    Object? fdr = freezed,
     Object? homeTeam = freezed,
     Object? homeTeamAmh = freezed,
     Object? homeTeamLineUp = freezed,
@@ -186,6 +191,10 @@ class _$FixtureDTOCopyWithImpl<$Res> implements $FixtureDTOCopyWith<$Res> {
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
+      fdr: fdr == freezed
+          ? _value.fdr
+          : fdr // ignore: cast_nullable_to_non_nullable
+              as int,
       homeTeam: homeTeam == freezed
           ? _value.homeTeam
           : homeTeam // ignore: cast_nullable_to_non_nullable
@@ -269,6 +278,7 @@ abstract class _$FixtureDTOCopyWith<$Res> implements $FixtureDTOCopyWith<$Res> {
       String matchId,
       String schedule,
       String status,
+      int fdr,
       String homeTeam,
       String homeTeamAmh,
       Map<dynamic, dynamic> homeTeamLineUp,
@@ -304,6 +314,7 @@ class __$FixtureDTOCopyWithImpl<$Res> extends _$FixtureDTOCopyWithImpl<$Res>
     Object? matchId = freezed,
     Object? schedule = freezed,
     Object? status = freezed,
+    Object? fdr = freezed,
     Object? homeTeam = freezed,
     Object? homeTeamAmh = freezed,
     Object? homeTeamLineUp = freezed,
@@ -339,6 +350,10 @@ class __$FixtureDTOCopyWithImpl<$Res> extends _$FixtureDTOCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
+      fdr: fdr == freezed
+          ? _value.fdr
+          : fdr // ignore: cast_nullable_to_non_nullable
+              as int,
       homeTeam: homeTeam == freezed
           ? _value.homeTeam
           : homeTeam // ignore: cast_nullable_to_non_nullable
@@ -419,6 +434,7 @@ class _$_FixtureDTO extends _FixtureDTO {
       required this.matchId,
       required this.schedule,
       required this.status,
+      required this.fdr,
       required this.homeTeam,
       required this.homeTeamAmh,
       required this.homeTeamLineUp,
@@ -449,6 +465,8 @@ class _$_FixtureDTO extends _FixtureDTO {
   final String schedule;
   @override
   final String status;
+  @override
+  final int fdr;
   @override //
   final String homeTeam;
   @override
@@ -486,7 +504,7 @@ class _$_FixtureDTO extends _FixtureDTO {
 
   @override
   String toString() {
-    return 'FixtureDTO(gameWeekId: $gameWeekId, matchId: $matchId, schedule: $schedule, status: $status, homeTeam: $homeTeam, homeTeamAmh: $homeTeamAmh, homeTeamLineUp: $homeTeamLineUp, homeTeamCity: $homeTeamCity, homeTeamCoach: $homeTeamCoach, homeTeamLogo: $homeTeamLogo, homeTeamStadium: $homeTeamStadium, homeTeamCapacity: $homeTeamCapacity, awayTeam: $awayTeam, awayTeamAmh: $awayTeamAmh, awayTeamLineUp: $awayTeamLineUp, awayTeamCity: $awayTeamCity, awayTeamCoach: $awayTeamCoach, awayTeamLogo: $awayTeamLogo, awayTeamStadium: $awayTeamStadium, awayTeamCapacity: $awayTeamCapacity, score: $score)';
+    return 'FixtureDTO(gameWeekId: $gameWeekId, matchId: $matchId, schedule: $schedule, status: $status, fdr: $fdr, homeTeam: $homeTeam, homeTeamAmh: $homeTeamAmh, homeTeamLineUp: $homeTeamLineUp, homeTeamCity: $homeTeamCity, homeTeamCoach: $homeTeamCoach, homeTeamLogo: $homeTeamLogo, homeTeamStadium: $homeTeamStadium, homeTeamCapacity: $homeTeamCapacity, awayTeam: $awayTeam, awayTeamAmh: $awayTeamAmh, awayTeamLineUp: $awayTeamLineUp, awayTeamCity: $awayTeamCity, awayTeamCoach: $awayTeamCoach, awayTeamLogo: $awayTeamLogo, awayTeamStadium: $awayTeamStadium, awayTeamCapacity: $awayTeamCapacity, score: $score)';
   }
 
   @override
@@ -499,6 +517,7 @@ class _$_FixtureDTO extends _FixtureDTO {
             const DeepCollectionEquality().equals(other.matchId, matchId) &&
             const DeepCollectionEquality().equals(other.schedule, schedule) &&
             const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality().equals(other.fdr, fdr) &&
             const DeepCollectionEquality().equals(other.homeTeam, homeTeam) &&
             const DeepCollectionEquality()
                 .equals(other.homeTeamAmh, homeTeamAmh) &&
@@ -539,6 +558,7 @@ class _$_FixtureDTO extends _FixtureDTO {
         const DeepCollectionEquality().hash(matchId),
         const DeepCollectionEquality().hash(schedule),
         const DeepCollectionEquality().hash(status),
+        const DeepCollectionEquality().hash(fdr),
         const DeepCollectionEquality().hash(homeTeam),
         const DeepCollectionEquality().hash(homeTeamAmh),
         const DeepCollectionEquality().hash(homeTeamLineUp),
@@ -575,6 +595,7 @@ abstract class _FixtureDTO extends FixtureDTO {
       required String matchId,
       required String schedule,
       required String status,
+      required int fdr,
       required String homeTeam,
       required String homeTeamAmh,
       required Map<dynamic, dynamic> homeTeamLineUp,
@@ -605,6 +626,8 @@ abstract class _FixtureDTO extends FixtureDTO {
   String get schedule;
   @override
   String get status;
+  @override
+  int get fdr;
   @override //
   String get homeTeam;
   @override
