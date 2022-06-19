@@ -22,6 +22,8 @@ void main() {
       // await render
       await driver.waitUntilFirstFrameRasterized();
 
+      await driver.tap(find.byValueKey("publicPageSignInButton"));
+
       await driver.tap(loginButton);
 
       // expect
