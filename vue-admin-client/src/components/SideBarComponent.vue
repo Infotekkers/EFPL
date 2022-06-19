@@ -4,7 +4,7 @@
       <img :src="toggleSidebarIcon.path" :alt="toggleSidebarIcon.alt" />
     </button>
 
-    <div class="sidebar-wrapper">
+    <div class="sidebar-wrapper" :class="{ minimized: minimizeSidebar }">
       <h1>
         Ethiopian <br />
         Fantasy PL <br />
@@ -71,6 +71,8 @@ export default {
   data() {
     return {
       sidebar: 1,
+      minimizeSidebar:
+        localStorage.getItem("minimizeSidebar") === "true" ? true : false,
 
       // Icons
       homeSidebarIcon,
@@ -84,16 +86,14 @@ export default {
   },
   methods: {
     toggleSidebar(e) {
-      const sidebar = document.querySelector(".sidebar-wrapper");
+      this.minimizeSidebar = !this.minimizeSidebar;
+      localStorage.setItem("minimizeSidebar", this.minimizeSidebar);
 
-      if (this.sidebar) {
+      // Toggle arrow direction
+      if (this.minimizeSidebar) {
         e.currentTarget.style.transform = "rotate(180deg)";
-        sidebar.classList.add("minimized");
-        this.sidebar = 0;
       } else {
         e.currentTarget.style.transform = "rotate(0deg)";
-        sidebar.classList.remove("minimized");
-        this.sidebar = 1;
       }
     },
   },
