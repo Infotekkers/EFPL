@@ -167,9 +167,19 @@ export default {
 
     getAllTeams() {
       const allTeams = store.state.Team.allTeams;
-      allTeams.sort(
-        (a, b) => b.teamPosition.teamPoint - a.teamPosition.teamPoint
-      );
+      allTeams.sort((a, b) => {
+        if (b.teamPosition.teamPoint == a.teamPosition.teamPoint) {
+          return (
+            b.teamPosition.goalDifferential - a.teamPosition.goalDifferential
+          );
+        } else {
+          return b.teamPosition.teamPoint - a.teamPosition.teamPoint;
+        }
+      });
+
+      for (let index = 0; index < allTeams.length; index++) {
+        allTeams[index].relative_id = index + 1;
+      }
       return store.state.Team.allTeams;
     },
 
