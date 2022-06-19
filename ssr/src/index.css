@@ -6,12 +6,26 @@ body {
   background: linear-gradient(135deg, white 50%, blue 50%);
   background-repeat: no-repeat;
   height: 100vh;
+  font-family: "Inter", sans-serif;
 }
 
 main {
   display: grid;
   grid-template-columns: max-content 1fr;
   place-items: center;
+}
+
+.logo-container {
+  @apply h-8 w-8 overflow-hidden mx-1 grayscale;
+}
+
+.logo-container:hover {
+  @apply grayscale-0;
+}
+
+.logo-container img {
+  max-width: 100%;
+  object-fit: cover;
 }
 
 .phone {

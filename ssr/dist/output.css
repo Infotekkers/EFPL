@@ -562,16 +562,12 @@ video {
   position: absolute;
 }
 
-.top-16 {
-  top: 4rem;
+.top-8 {
+  top: 2rem;
 }
 
 .left-16 {
   left: 4rem;
-}
-
-.top-8 {
-  top: 2rem;
 }
 
 .-mx-2 {
@@ -628,11 +624,6 @@ video {
   line-height: 1;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
 .font-normal {
   font-weight: 400;
 }
@@ -645,6 +636,7 @@ body {
   background: linear-gradient(135deg, white 50%, blue 50%);
   background-repeat: no-repeat;
   height: 100vh;
+  font-family: "Inter", sans-serif;
 }
 
 main {
@@ -652,6 +644,27 @@ main {
   grid-template-columns: -webkit-max-content 1fr;
   grid-template-columns: max-content 1fr;
   place-items: center;
+}
+
+.logo-container {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  height: 2rem;
+  width: 2rem;
+  overflow: hidden;
+  --tw-grayscale: grayscale(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.logo-container:hover {
+  --tw-grayscale: grayscale(0);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.logo-container img {
+  max-width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .phone {
