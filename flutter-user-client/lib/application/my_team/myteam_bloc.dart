@@ -64,16 +64,25 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
         const maxLimitPerPosition = {
           'def': 5,
           'mid': 5,
-          '3': 5,
+          'att': 3,
+        };
+
+        const minLimitPerPosition = {
+          'def': 3,
+          'mid': 3,
+          'att': 1,
         };
 
         if (myTeam.players[e.position].getOrCrash().keys.toList().length <
             maxLimitPerPosition[e.position]) {
           for (String position in ['def', 'mid', 'att']) {
-            for (String playerId
-                in myTeam.players[position].getOrCrash().keys) {
-              if (int.parse(playerId) != e.playerId) {
-                validOptions.add(int.parse(playerId));
+            if (myTeam.players[position].getOrCrash().keys.toList().length >
+                minLimitPerPosition[position]) {
+              for (String playerId
+                  in myTeam.players[position].getOrCrash().keys) {
+                if (int.parse(playerId) != e.playerId) {
+                  validOptions.add(int.parse(playerId));
+                }
               }
             }
           }
@@ -85,11 +94,37 @@ class MyTeamBloc extends Bloc<MyTeamEvent, MyTeamState> {
           }
         }
       } else {
-        // Every player on sub except goalkeeper
-        for (String playerId in myTeam.players['sub'].getOrCrash().keys) {
-          if (myTeam.players['sub'].getOrCrash()[playerId]['position'] !=
-              'gk') {
-            validOptions.add(int.parse(playerId));
+        const maxLimitPerPosition = {
+          'def': 5,
+          'mid': 5,
+          'att': 3,
+        };
+
+        const minLimitPerPosition = {
+          'def': 3,
+          'mid': 3,
+          'att': 1,
+        };
+
+        if (myTeam.players[e.position].getOrCrash().keys.toList().length >
+            minLimitPerPosition[e.position]) {
+          // Every player on sub except goalkeeper
+          for (String playerId in myTeam.players['sub'].getOrCrash().keys) {
+            var subPosition =
+                myTeam.players['sub'].getOrCrash()[playerId]['position'];
+            if (subPosition != 'gk' &&
+                myTeam.players[subPosition].getOrCrash().keys.toList().length <
+                    maxLimitPerPosition[subPosition]) {
+              validOptions.add(int.parse(playerId));
+            }
+          }
+        } else {
+          for (String playerId in myTeam.players['sub'].getOrCrash().keys) {
+            var subPosition =
+                myTeam.players['sub'].getOrCrash()[playerId]['position'];
+            if (subPosition != 'gk' && subPosition == e.position) {
+              validOptions.add(int.parse(playerId));
+            }
           }
         }
       }

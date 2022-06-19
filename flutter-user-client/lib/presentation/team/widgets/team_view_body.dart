@@ -111,7 +111,7 @@ class TeamViewBody extends StatelessWidget {
           Column(
             children: [
               highlight ? _highlightMyTeam(state) : _buildMyTeam(state),
-              _buildActionBtns(changed, context, state),
+              _buildActionBtns(changed, context, state, highlight),
             ],
           ),
           Positioned(
@@ -236,7 +236,7 @@ class TeamViewBody extends StatelessWidget {
     );
   }
 
-  _buildActionBtns(changed, context, state) {
+  _buildActionBtns(changed, context, state, highlight) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 8.0,
@@ -248,12 +248,13 @@ class TeamViewBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
-              onPressed: () => changed
+              onPressed: () => changed || highlight
                   ? BlocProvider.of<MyTeamBloc>(context)
                       .add(const MyTeamEvent.loadMyTeam("1"))
                   : null,
               style: TextButton.styleFrom(
-                  primary: changed ? Colors.red[400] : Colors.grey),
+                  primary:
+                      changed || highlight ? Colors.red[400] : Colors.grey),
               child: Text(strings(context).cancel),
             ),
             OutlinedButton(
