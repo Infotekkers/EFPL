@@ -163,30 +163,37 @@ const fetchUserTeam = asyncHandler(async (req, res) => {
 });
 
 const updateUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
-  if (user == null) {
-    return res.status(404).json({ message: "No user found" });
-  }
-  res.user = user;
+  const token = await req.params.token;
+  const newFavouriteEplTeam = req.body.favouriteEplTeam;
+  const newUserName = req.body.userName;
+  const newteamName = req.body.teamName;
 
-  // change favourite team
-  if (req.body.favouriteEplTeam != null) {
-    res.user.favouriteEplTeam = req.body.favouriteEplTeam;
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.data).select("-password");
+    if (user) {
+      if (newFavouriteEplTeam != null) {
+        const updatedValue = { favouriteEplTeam: newFavouriteEplTeam };
+        await User.updateOne({ user }, { $set: updatedValue });
+        res.status(201).json({ newFavouriteEplTeam });
+      }
+      if (newUserName != null) {
+        const updatedValue = { userName: newUserName };
+        await User.updateOne({ user }, { $set: updatedValue });
+        res.status(201).json({ newUserName });
+      }
+      if (newteamName != null) {
+        const updatedValue = { teamName: newteamName };
+        await User.updateOne({ user }, { $set: updatedValue });
+        res.status(201).json({ newteamName });
+      }
+    } else {
+      res.status(403).json({ message: "Something went wrong" });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: "Something went wrong" });
   }
-  // change userName
-  if (req.body.userName != null) {
-    res.user.userName = req.body.userName;
-  }
-  // change password
-  if (req.body.password != null) {
-    const salt = await bcrypt.genSalt(10);
-    const newPass = await bcrypt.hash(req.body.password, salt);
-    res.user.password = newPass;
-  }
-
-  // save changed data to db
-  const updatedUser = await res.user.save();
-  res.json(updatedUser);
 });
 
 const deleteUser = asyncHandler(async (req, res) => {
@@ -895,8 +902,8 @@ const validateUser = asyncHandler(async (req, res) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const admin = await User.findById(decoded.data).select("-password");
-    if (admin) {
+    const user = await User.findById(decoded.data).select("-password");
+    if (user) {
       res.status(200).json({ message: "Validated" });
     } else {
       res.status(403).json({ message: "Something went wrong" });
