@@ -75,18 +75,6 @@
           </div>
         </div>
 
-        <!-- Title -->
-        <div class="filter-group">
-          <h3>Add fixture</h3>
-          <div class="gameweek-add-new" @click="activateModal" data-cp="add-gw">
-            <div>
-              <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
-            </div>
-            {{ $t("Add") }}
-          </div>
-        </div>
-        <!-- Title -->
-
         <div class="filter-group">
           <h3>Fiter by status</h3>
           <div class="filter-container">

@@ -1,6 +1,6 @@
 <template>
   <aside v-if="showSidebar">
-    <button class="collapse-sidebar">
+    <button class="collapse-sidebar" :class="{ right: minimizeSidebar }">
       <img :src="toggleSidebarIcon.path" :alt="toggleSidebarIcon.alt" />
     </button>
 
@@ -85,16 +85,9 @@ export default {
     };
   },
   methods: {
-    toggleSidebar(e) {
+    toggleSidebar() {
       this.minimizeSidebar = !this.minimizeSidebar;
       localStorage.setItem("minimizeSidebar", this.minimizeSidebar);
-
-      // Toggle arrow direction
-      if (this.minimizeSidebar) {
-        e.currentTarget.style.transform = "rotate(180deg)";
-      } else {
-        e.currentTarget.style.transform = "rotate(0deg)";
-      }
     },
   },
   mounted() {
@@ -166,6 +159,10 @@ aside {
     & img {
       width: 5px;
     }
+  }
+
+  .collapse-sidebar.right {
+    transform: rotate(180deg);
   }
 
   .sidebar-wrapper {
