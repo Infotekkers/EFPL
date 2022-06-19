@@ -17,6 +17,7 @@ abstract class FixtureDTO implements _$FixtureDTO {
     required String status,
     //
     required String homeTeam,
+    required String homeTeamAmh,
     required Map homeTeamLineUp,
     required String homeTeamCity,
     required String homeTeamCoach,
@@ -25,6 +26,7 @@ abstract class FixtureDTO implements _$FixtureDTO {
     required int homeTeamCapacity,
     //
     required String awayTeam,
+    required String awayTeamAmh,
     required Map awayTeamLineUp,
     required String awayTeamCity,
     required String awayTeamCoach,
@@ -46,6 +48,9 @@ abstract class FixtureDTO implements _$FixtureDTO {
         //
         homeTeam:
             fixture.homeTeam.isValid() ? fixture.homeTeam.getOrCrash() : '',
+        homeTeamAmh: fixture.homeTeamAmh.isValid()
+            ? fixture.homeTeamAmh.getOrCrash()
+            : "",
         homeTeamLineUp: fixture.homeTeamLineUp.isValid()
             ? fixture.homeTeamLineUp.getOrCrash()
             : '',
@@ -68,6 +73,9 @@ abstract class FixtureDTO implements _$FixtureDTO {
         //
         awayTeam:
             fixture.awayTeam.isValid() ? fixture.awayTeam.getOrCrash() : '',
+        awayTeamAmh: fixture.awayTeamAmh.isValid()
+            ? fixture.awayTeamAmh.getOrCrash()
+            : "",
         awayTeamLineUp: fixture.awayTeamLineUp.isValid()
             ? fixture.awayTeamLineUp.getOrCrash()
             : '',
@@ -97,6 +105,7 @@ abstract class FixtureDTO implements _$FixtureDTO {
         schedule: Schedule(value: schedule),
         status: Status(value: status),
         homeTeam: Team(value: homeTeam),
+        homeTeamAmh: Team(value: homeTeamAmh),
         homeTeamLineUp: TeamLineUp(value: homeTeamLineUp),
         homeTeamCity: TeamCity(value: homeTeamCity),
         homeTeamCoach: TeamCoach(value: homeTeamCoach),
@@ -105,6 +114,7 @@ abstract class FixtureDTO implements _$FixtureDTO {
         homeTeamCapacity: StadiumCapacity(value: homeTeamCapacity),
         //
         awayTeam: Team(value: awayTeam),
+        awayTeamAmh: Team(value: awayTeamAmh),
         awayTeamLineUp: TeamLineUp(value: awayTeamLineUp),
         awayTeamCity: TeamCity(value: awayTeamCity),
         awayTeamCoach: TeamCoach(value: awayTeamCoach),

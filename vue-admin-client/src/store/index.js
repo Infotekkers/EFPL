@@ -6,6 +6,7 @@ import TeamsStore from "./team.store";
 import SeasonStore from "./season.store";
 import PlayerStore from "./player.store";
 import PlayerStatsStore from "./playerStats.store";
+import EplStatsStore from "./eplStats.store";
 
 export default createStore({
   modules: {
@@ -16,5 +17,6 @@ export default createStore({
     Season: SeasonStore,
     Player: PlayerStore,
     PlayerStats: PlayerStatsStore,
+    EPLStats: EplStatsStore,
   },
 });

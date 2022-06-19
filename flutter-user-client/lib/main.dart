@@ -32,7 +32,9 @@ Future main() async {
   configureInjection(Environment.prod);
   runApp(const AppWidget());
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.blue[50], // navigation bar color
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.blue[50], // navigation bar color
+    ),
+  );
 }

@@ -42,6 +42,7 @@
               name="playerName"
               type="text"
               ref="playerName"
+              required
               v-model="playerName"
               class="main-text-input"
             />
@@ -57,6 +58,7 @@
               name="playerNameAmh"
               type="text"
               ref="playerNameAmh"
+              required
               v-model="playerNameAmh"
               class="main-text-input"
             />
@@ -134,6 +136,9 @@
               name="currentPrice"
               type="number"
               ref="playerPrice"
+              required
+              max="16"
+              min="3"
               :value="isEditMode ? getPlayer.currentPrice : ''"
               class="main-text-input"
               :disabled="isEditMode && getLiveMatch == true"
@@ -146,7 +151,11 @@
             <label for="injuryStatus" class="main-label"
               >{{ $t("Injury") }} {{ $t("Status") }}</label
             >
-            <select name="" class="main-select-input" ref="injuryStatus">
+            <select
+              name="injuryStatus"
+              class="main-select-input"
+              ref="injuryStatus"
+            >
               <option value="" :selected="isEditMode ? injuryStatus == '' : ''">
                 Available
               </option>
@@ -355,13 +364,62 @@ export default {
           notificationType: "error",
           notificationMessage: "Current Price is required",
         });
-      } else if (!injuryStatus) {
+      }
+      // else if (!injuryStatus) {
+      //   store.dispatch("Global/setNotificationInfo", {
+      //     showNotification: true,
+      //     notificationType: "error",
+      //     notificationMessage: "Injury Information is required",
+      //   });
+      // }
+
+      // regexp player name & length
+      else if (
+        !/^[a-zA-Z,-,. ]*$/.test(playerName) ||
+        playerName.length < 4 ||
+        playerName.length > 56
+      ) {
         store.dispatch("Global/setNotificationInfo", {
           showNotification: true,
           notificationType: "error",
-          notificationMessage: "Injury Information is required",
+          notificationMessage: "Invalid Player Name",
         });
-      } else {
+      }
+      // player name amh
+      else if (playerNameAmh.length < 4 || playerNameAmh.length > 56) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Invalid Player Name Amharic",
+        });
+      }
+      // invalid price
+      else if (
+        currentPrice < 3.5 ||
+        currentPrice > 30 ||
+        !/^[0-9]*$/.test(currentPrice)
+      ) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Invalid Player Price",
+        });
+      }
+      // injury condition
+      else if (
+        injuryMessage.includes("@") ||
+        injuryMessage.includes("<") ||
+        injuryMessage.includes(">") ||
+        injuryMessage.includes("$")
+      ) {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage: "Invalid Injury Message",
+        });
+      }
+      // final condition
+      else {
         const playerData = {
           playerName,
           eplTeamId,
@@ -378,6 +436,7 @@ export default {
             ? this.selectedImage.name
             : "";
         }
+
         store.dispatch("Player/savePlayer", playerData);
         this.removeImage();
         this.$refs.inputForm.reset();
@@ -411,7 +470,6 @@ export default {
         playerNameAmh,
       };
       const imageStatus = this.imageChanged;
-      console.log(updatedPlayer, imageStatus);
       store.dispatch("Player/updatePlayer", updatedPlayer, imageStatus);
     },
     // Image processor
@@ -480,6 +538,8 @@ export default {
 </script>
 <style scoped>
 .player-modal-image-section {
+  /* display: none; */
+  /* background: red; */
   width: 250px;
   height: 300px;
   display: flex;
@@ -488,15 +548,17 @@ export default {
   position: relative;
 }
 .player-model-image-section {
-  /* display: none; */
+  display: none;
+  background: red;
   height: 300px;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   justify-content: center;
   position: relative;
 }
 
 .player-modal-image-preview {
+  /* display: none; */
   position: relative;
   width: 120px;
   height: 120px;

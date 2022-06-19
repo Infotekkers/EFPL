@@ -1,7 +1,7 @@
 <template>
   <div class="reset-pass">
     <form @submit.prevent="handleSubmit">
-      <h3>Reset Your Password</h3>
+      <h3>{{ $t("Reset Your Password") }}</h3>
       <div>
         <div class="password">
           <label> {{ $t("new") }} {{ $t("Password") }} </label>
@@ -55,7 +55,7 @@
         </button>
       </div>
 
-      <button>Submit</button>
+      <button>{{ $t("submit") }}</button>
     </form>
 
     <div>{{ error }}</div>
@@ -64,6 +64,7 @@
 
 <script>
 import { passwordVisibleIcon, hiddenPasswordIcon } from "@/utils/Icons";
+import store from "../store/index";
 
 export default {
   name: "UserResetPasswordComponent",
@@ -74,6 +75,7 @@ export default {
       password: "",
       password_confirm: "",
       isLoading: false,
+      regExp: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
 
       // icons
       passwordVisibleIcon: passwordVisibleIcon,
@@ -82,10 +84,26 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      if (!(this.password === this.password_confirm)) {
-        this.error = "Passwords don't match";
+      if (
+        this.regExp.test(this.password) === true &&
+        this.regExp.test(this.password_confirm) === true
+      ) {
+        if (!(this.password === this.password_confirm)) {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: "Passwords Don't Match",
+          });
+        } else {
+          this.$store.dispatch("userResetPassword", this.password);
+        }
       } else {
-        this.$store.dispatch("userResetPassword", this.password);
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage:
+            "Password must be 8 characters and include at least one uppercase, one lowercase, a symbol and a number",
+        });
       }
     },
   },

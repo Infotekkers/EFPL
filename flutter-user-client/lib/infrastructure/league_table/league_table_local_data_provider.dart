@@ -29,6 +29,9 @@ class LeagueTableLocalDataProvider {
             teamName: TeamName(
               value: parsedCachedleagueTable['teamName'],
             ),
+            teamNameAmh: TeamName(
+              value: parsedCachedleagueTable['teamNameAmh'],
+            ),
             teamLogo: TeamLogo(
               value: parsedCachedleagueTable['teamLogo'],
             ),

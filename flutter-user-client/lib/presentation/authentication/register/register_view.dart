@@ -15,6 +15,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        key: const Key("registerViewScrollList"),
         physics: const ClampingScrollPhysics(),
         child: BlocProvider(
           create: (context) => getIt<RegisterFormBloc>(),

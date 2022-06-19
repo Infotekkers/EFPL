@@ -1,3 +1,4 @@
+import axiosInstance from "@/services/AxiosTokenInstance";
 import axios from "axios";
 import router from "../router/index";
 import store from "./index";
@@ -111,13 +112,35 @@ export default {
           }
         })
         .catch((err) => {
-          if (err.response.status === 400) {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: `${err.response.data.message}`,
+          });
+        });
+    },
+    async changePassword(context, { old_password, new_password }) {
+      await axiosInstance
+        .post(`${baseURL}/admin/changePass`, {
+          oldPass: old_password,
+          newPass: new_password,
+        })
+        .then((response) => {
+          if (response.status === 200) {
             store.dispatch("Global/setNotificationInfo", {
               showNotification: true,
-              notificationType: true,
-              notificationMessage: `${err.response.data.message}`,
+              notificationType: "success",
+              notificationMessage: `Password Changed Successfully`,
             });
           }
+          router.push({ name: "settings" });
+        })
+        .catch((err) => {
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: true,
+            notificationMessage: `${err.response.data.message}`,
+          });
         });
     },
 
@@ -138,18 +161,16 @@ export default {
           }
         })
         .catch((err) => {
-          if (err.response.status === 400) {
-            store.dispatch("Global/setNotificationInfo", {
-              showNotification: true,
-              notificationType: true,
-              notificationMessage: `${err.response.data.message}`,
-            });
-          }
+          store.dispatch("Global/setNotificationInfo", {
+            showNotification: true,
+            notificationType: "error",
+            notificationMessage: `${err.response.data.message}`,
+          });
         });
     },
     // send email
     async sendEmail(context, { receiverEmail, emailBody }) {
-      await axios
+      await axiosInstance
         .post(`${baseURL}/admin/sendEmail`, {
           receiverEmail: receiverEmail,
           emailBody: emailBody,
@@ -165,11 +186,10 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err);
           store.dispatch("Global/setNotificationInfo", {
             showNotification: true,
             notificationType: "error",
-            notificationMessage: `Something went wrong`,
+            notificationMessage: `Something went wrong ${err}`,
           });
         });
     },

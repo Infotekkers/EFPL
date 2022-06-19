@@ -18,6 +18,7 @@ const bahirDarKenema = [
   },
   {
     playerName: "Harriston Hessou",
+    playerNameAmh: "ሃሪስተን ሄሱ",
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 4.5,
     position: "GK",
@@ -26,6 +27,7 @@ const bahirDarKenema = [
   //   DEF
   {
     playerName: "Haileyesus Yitayew",
+    playerNameAmh: "ኃይለየሱስ ይታየው ",
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 7,
     position: "DEF",
@@ -36,6 +38,7 @@ const bahirDarKenema = [
   },
   {
     playerName: "Mikias Girma",
+    playerNameAmh: "ሚኪያስ ግርማ ",
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 9,
     position: "DEF",
@@ -48,6 +51,7 @@ const bahirDarKenema = [
   },
   {
     playerName: "Ahmed Reshid",
+    playerNameAmh: " አህመድ ረሺድ ",
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 7.5,
     position: "DEF",
@@ -64,12 +68,14 @@ const bahirDarKenema = [
   },
   {
     playerName: "Samuel Tesfaye",
+    playerNameAmh: "ሳሙኤል ተስፋዬ ",
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 6.1,
     position: "DEF",
   },
   {
     playerName: "Salamlak Tegegn",
+    playerNameAmh: "መሰላልህ እየጮኸ ነው",
     eplTeamId: "Bahir Dar Kenema S.C",
     currentPrice: 4.9,
     position: "DEF",

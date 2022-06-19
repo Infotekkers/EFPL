@@ -28,15 +28,14 @@ class MainTabView extends StatelessWidget {
   State<MainTabView> createState() => _MainTabViewState();
 }
 
-final _myTeamTabKey = GlobalKey();
-final _pointsTabKey = GlobalKey();
-final _transferTabKey = GlobalKey();
-final _fixtureTabKey = GlobalKey();
-final _leaguesTabKey = GlobalKey();
-final _statsTabKey = GlobalKey();
-final _settingTabKey = GlobalKey();
-
 class _MainTabViewState extends State<MainTabView> {
+  final _myTeamTabKey = GlobalKey();
+  final _pointsTabKey = GlobalKey();
+  final _transferTabKey = GlobalKey();
+  final _fixtureTabKey = GlobalKey();
+  final _leaguesTabKey = GlobalKey();
+  final _statsTabKey = GlobalKey();
+  final _settingTabKey = GlobalKey();
   @override
   void initState() {
     super.initState();
@@ -135,7 +134,7 @@ class _MainTabViewState extends State<MainTabView> {
                       SizedBox(
                         width: 5,
                       ),
-                      Center(child: Text('EPFL Stats'))
+                      Center(child: Text('EFPL Stats'))
                     ],
                   ),
                   onTap: () {
@@ -219,205 +218,231 @@ class _MainTabViewState extends State<MainTabView> {
               tabs: [
                 // My Team
                 Tab(
-                  icon: Showcase(
-                    key: _myTeamTabKey,
-                    title: AppLocalizations.of(context)!.myTeamTabKeyTitle,
-                    description: AppLocalizations.of(context)!.myTeamTabKeyDesc,
-                    shapeBorder: const CircleBorder(),
-                    showcaseBackgroundColor: ConstantColors.primary_900,
-                    titleTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.55,
-                            ),
-                    descTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                            ),
-                    overlayPadding: const EdgeInsets.all(8),
-                    contentPadding: const EdgeInsets.all(20),
-                    child: const Icon(
-                      MdiIcons.accountGroup,
+                  icon: Tooltip(
+                    message: "My Team",
+                    child: Showcase(
+                      key: _myTeamTabKey,
+                      title: AppLocalizations.of(context)!.myTeamTabKeyTitle,
+                      description:
+                          AppLocalizations.of(context)!.myTeamTabKeyDesc,
+                      shapeBorder: const CircleBorder(),
+                      showcaseBackgroundColor: ConstantColors.primary_900,
+                      titleTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.55,
+                              ),
+                      descTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                              ),
+                      overlayPadding: const EdgeInsets.all(8),
+                      contentPadding: const EdgeInsets.all(20),
+                      child: const Icon(
+                        MdiIcons.accountGroup,
+                      ),
                     ),
                   ),
                 ),
 
                 // My Points
                 Tab(
-                  icon: Showcase(
-                    key: _pointsTabKey,
-                    title: AppLocalizations.of(context)!.pointsTabKeyTitle,
-                    description: AppLocalizations.of(context)!.pointsTabKeyDesc,
-                    shapeBorder: const CircleBorder(),
-                    showcaseBackgroundColor: ConstantColors.primary_900,
-                    titleTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.55,
-                            ),
-                    descTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                            ),
-                    overlayPadding: const EdgeInsets.all(8),
-                    contentPadding: const EdgeInsets.all(20),
-                    child: const Icon(
-                      MdiIcons.counter,
+                  icon: Tooltip(
+                    message: "Points",
+                    child: Showcase(
+                      key: _pointsTabKey,
+                      title: AppLocalizations.of(context)!.pointsTabKeyTitle,
+                      description:
+                          AppLocalizations.of(context)!.pointsTabKeyDesc,
+                      shapeBorder: const CircleBorder(),
+                      showcaseBackgroundColor: ConstantColors.primary_900,
+                      titleTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.55,
+                              ),
+                      descTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                              ),
+                      overlayPadding: const EdgeInsets.all(8),
+                      contentPadding: const EdgeInsets.all(20),
+                      child: const Icon(
+                        MdiIcons.counter,
+                      ),
                     ),
                   ),
                 ),
-                // Transfers
 
+                // Transfers
                 Tab(
-                  icon: Showcase(
-                    key: _transferTabKey,
-                    title: AppLocalizations.of(context)!.transfersTabKeyTitle,
-                    description:
-                        AppLocalizations.of(context)!.transfersTabKeyDesc,
-                    shapeBorder: const CircleBorder(),
-                    showcaseBackgroundColor: ConstantColors.primary_900,
-                    titleTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.55,
-                            ),
-                    descTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                            ),
-                    overlayPadding: const EdgeInsets.all(8),
-                    contentPadding: const EdgeInsets.fromLTRB(90, 12, 12, 12),
-                    child: const Icon(
-                      Boxicons.bx_transfer,
+                  icon: Tooltip(
+                    message: "Transfers",
+                    child: Showcase(
+                      key: _transferTabKey,
+                      title: AppLocalizations.of(context)!.transfersTabKeyTitle,
+                      description:
+                          AppLocalizations.of(context)!.transfersTabKeyDesc,
+                      shapeBorder: const CircleBorder(),
+                      showcaseBackgroundColor: ConstantColors.primary_900,
+                      titleTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.55,
+                              ),
+                      descTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                              ),
+                      overlayPadding: const EdgeInsets.all(8),
+                      contentPadding: const EdgeInsets.fromLTRB(90, 12, 12, 12),
+                      child: const Icon(
+                        Boxicons.bx_transfer,
+                        key: Key("mainTabViewBarTransferKey"),
+                      ),
                     ),
                   ),
                 ),
 
                 // Fixtures
                 Tab(
-                  icon: Showcase(
-                    key: _fixtureTabKey,
-                    title: AppLocalizations.of(context)!.fixturesTabKeyTitle,
-                    description:
-                        AppLocalizations.of(context)!.fixturesTabKeyDesc,
-                    shapeBorder: const CircleBorder(),
-                    showcaseBackgroundColor: ConstantColors.primary_900,
-                    titleTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.55,
-                            ),
-                    descTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                            ),
-                    overlayPadding: const EdgeInsets.all(8),
-                    contentPadding: const EdgeInsets.all(20),
-                    child: const Icon(
-                      MdiIcons.calendarMonth,
+                  icon: Tooltip(
+                    message: "Fixtures",
+                    child: Showcase(
+                      key: _fixtureTabKey,
+                      title: AppLocalizations.of(context)!.fixturesTabKeyTitle,
+                      description:
+                          AppLocalizations.of(context)!.fixturesTabKeyDesc,
+                      shapeBorder: const CircleBorder(),
+                      showcaseBackgroundColor: ConstantColors.primary_900,
+                      titleTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.55,
+                              ),
+                      descTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                              ),
+                      overlayPadding: const EdgeInsets.all(8),
+                      contentPadding: const EdgeInsets.all(20),
+                      child: const Icon(
+                        MdiIcons.calendarMonth,
+                      ),
                     ),
                   ),
                 ),
+
                 // My Leagues
                 Tab(
-                  icon: Showcase(
-                    key: _leaguesTabKey,
-                    title: AppLocalizations.of(context)!.leaguesTabKeyTitle,
-                    description:
-                        AppLocalizations.of(context)!.leaguesTabKeyDesc,
-                    shapeBorder: const CircleBorder(),
-                    showcaseBackgroundColor: ConstantColors.primary_900,
-                    titleTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.55,
-                            ),
-                    descTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                            ),
-                    overlayPadding: const EdgeInsets.all(8),
-                    contentPadding: const EdgeInsets.all(20),
-                    child: const Icon(
-                      MdiIcons.trophy,
+                  icon: Tooltip(
+                    message: "Leagues",
+                    child: Showcase(
+                      key: _leaguesTabKey,
+                      title: AppLocalizations.of(context)!.leaguesTabKeyTitle,
+                      description:
+                          AppLocalizations.of(context)!.leaguesTabKeyDesc,
+                      shapeBorder: const CircleBorder(),
+                      showcaseBackgroundColor: ConstantColors.primary_900,
+                      titleTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.55,
+                              ),
+                      descTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                              ),
+                      overlayPadding: const EdgeInsets.all(8),
+                      contentPadding: const EdgeInsets.all(20),
+                      child: const Icon(
+                        MdiIcons.trophy,
+                      ),
                     ),
                   ),
                 ),
                 // Stats
                 Tab(
-                  icon: Showcase(
-                    key: _statsTabKey,
-                    title: AppLocalizations.of(context)!.statsTabKeyTitle,
-                    description: AppLocalizations.of(context)!.statsTabKeyDesc,
-                    shapeBorder: const CircleBorder(),
-                    showcaseBackgroundColor: ConstantColors.primary_900,
-                    titleTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.55,
-                            ),
-                    descTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                            ),
-                    overlayPadding: const EdgeInsets.all(8),
-                    contentPadding: const EdgeInsets.all(20),
-                    child: const Icon(
-                      Icons.leaderboard,
+                  icon: Tooltip(
+                    message: "EPL Stats",
+                    child: Showcase(
+                      key: _statsTabKey,
+                      title: AppLocalizations.of(context)!.statsTabKeyTitle,
+                      description:
+                          AppLocalizations.of(context)!.statsTabKeyDesc,
+                      shapeBorder: const CircleBorder(),
+                      showcaseBackgroundColor: ConstantColors.primary_900,
+                      titleTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.55,
+                              ),
+                      descTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                              ),
+                      overlayPadding: const EdgeInsets.all(8),
+                      contentPadding: const EdgeInsets.all(20),
+                      child: const Icon(
+                        Icons.leaderboard,
+                      ),
                     ),
                   ),
                 ),
 
                 // Settings
                 Tab(
-                  icon: Showcase(
-                    key: _settingTabKey,
-                    title: AppLocalizations.of(context)!.settingTabKeyTitle,
-                    description:
-                        AppLocalizations.of(context)!.settingsTabKeyDesc,
-                    shapeBorder: const CircleBorder(),
-                    showcaseBackgroundColor: ConstantColors.primary_900,
-                    titleTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.55,
-                            ),
-                    descTextStyle:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: ConstantColors.neutral_200,
-                              height: 1.5,
-                            ),
-                    overlayPadding: const EdgeInsets.all(8),
-                    contentPadding: const EdgeInsets.all(20),
-                    child: const Icon(
-                      Icons.settings,
+                  icon: Tooltip(
+                    message: "Settings",
+                    child: Showcase(
+                      key: _settingTabKey,
+                      title: AppLocalizations.of(context)!.settingTabKeyTitle,
+                      description:
+                          AppLocalizations.of(context)!.settingsTabKeyDesc,
+                      shapeBorder: const CircleBorder(),
+                      showcaseBackgroundColor: ConstantColors.primary_900,
+                      titleTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.55,
+                              ),
+                      descTextStyle:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: ConstantColors.neutral_200,
+                                height: 1.5,
+                              ),
+                      overlayPadding: const EdgeInsets.all(8),
+                      contentPadding: const EdgeInsets.all(20),
+                      child: const Icon(
+                        Icons.settings,
+                      ),
                     ),
                   ),
                 ),

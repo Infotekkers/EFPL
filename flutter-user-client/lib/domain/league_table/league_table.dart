@@ -7,6 +7,7 @@ part 'league_table.freezed.dart';
 abstract class LeagueTable with _$LeagueTable {
   const factory LeagueTable({
     required TeamName teamName,
+    required TeamName teamNameAmh,
     required TeamLogo teamLogo,
     required TeamPoint teamPoint,
     required TeamWon won,
@@ -19,26 +20,15 @@ abstract class LeagueTable with _$LeagueTable {
   }) = _LeagueTable;
 
   factory LeagueTable.initial() => LeagueTable(
-      teamName: TeamName(value: ""),
-      teamLogo: TeamLogo(value: ""),
-      teamPoint: TeamPoint(value: 0),
-      won: TeamWon(value: 0),
-      lost: TeamLost(value: 0),
-      Draw: TeamDraw(value: 0),
-      goalDifferential: TeamGoalDifferntial(value: 0),
-      goalsAgainst: TeamGoalAgainst(value: 0),
-      goalsFor: TeamGoalFor(value: 0));
-
-// @freezed
-// abstract class TeamLeagueTable with _$TeamLeagueTable {
-//   const factory TeamLeagueTable({
-//     required TeamPoint teamPoint,
-//     required TeamWon won,
-//     required TeamLost lost,
-//     required TeamDraw Draw,
-//     required TeamGoalDifferntial goalDifferntial,
-//     required TeamGoalAgainst goalAgainst,
-//     required TeamGoalFor goalFor,
-//   }) = _TeamLeagueTable;
-
+        teamName: TeamName(value: ""),
+        teamNameAmh: TeamName(value: ""),
+        teamLogo: TeamLogo(value: ""),
+        teamPoint: TeamPoint(value: 0),
+        won: TeamWon(value: 0),
+        lost: TeamLost(value: 0),
+        Draw: TeamDraw(value: 0),
+        goalDifferential: TeamGoalDifferntial(value: 0),
+        goalsAgainst: TeamGoalAgainst(value: 0),
+        goalsFor: TeamGoalFor(value: 0),
+      );
 }

@@ -110,24 +110,65 @@ const resetPass = asyncHandler(async (req, res) => {
   res.json({ message: "password reset successfully" });
 });
 
+// change password
+const changePass = asyncHandler(async (req, res) => {
+  const token = req.query.token;
+  const oldPass = req.body.oldPass;
+  const newPass = req.body.newPass;
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const adminFromToken = await Admin.findById(decoded.data).select(
+      "-password"
+    );
+    const admin = await Admin.findOne({ email: adminFromToken.email });
+    if (admin) {
+      const passwordCheck = await bcrypt.compare(oldPass, admin.password);
+      if (passwordCheck) {
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(newPass, salt);
+        const updateValue = { password: hashedPassword };
+        await Admin.updateOne({ adminFromToken }, { $set: updateValue });
+        res.status(200).send({ message: "password reset successfully" });
+      } else {
+        res.status(400).send({ message: "invalid password" });
+      }
+    } else {
+      res.status(403).json({ message: "Something went wrong" });
+    }
+  } catch (err) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
+});
 // send email
 const sendEmail = asyncHandler(async (req, res) => {
+  const token = req.query.token;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const adminFromToken = await Admin.findById(decoded.data).select("-password");
   const { receiverEmail, emailBody } = req.body;
-  const mailOptions = {
-    from: `admin`,
-    to: `${receiverEmail}`,
-    subject: `Contact`,
-    text: `${emailBody}`,
-  };
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      res.status(400).json({
-        message: "could not send email",
+  try {
+    if (adminFromToken) {
+      const mailOptions = {
+        from: `${adminFromToken.email}`,
+        to: `${receiverEmail}`,
+        subject: `Contact from ${adminFromToken.email}`,
+        text: `${emailBody}`,
+      };
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          res.status(400).json({
+            message: "could not send email",
+          });
+        } else {
+          res.status(200).json({ message: "Email Sent Successfully" });
+        }
       });
     } else {
-      res.status(200).json({ message: "Email Sent Successfully" });
+      res.status(403).json({ message: "Something went wrong" });
     }
-  });
+  } catch (err) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
 });
 const validateAdmin = asyncHandler(async (req, res) => {
   const token = req.body.token;
@@ -145,4 +186,11 @@ const validateAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { login, requestReset, resetPass, validateAdmin, sendEmail };
+module.exports = {
+  login,
+  requestReset,
+  resetPass,
+  validateAdmin,
+  sendEmail,
+  changePass,
+};

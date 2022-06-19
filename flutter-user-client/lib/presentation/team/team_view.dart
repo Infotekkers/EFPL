@@ -10,9 +10,6 @@ class TeamView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UtilBloc _utilBloc = getIt<UtilBloc>();
-    _utilBloc.add(const UtilEvent.setDefaultLocale());
-
     return MultiBlocProvider(
         providers: [
           BlocProvider.value(

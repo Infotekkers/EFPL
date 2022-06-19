@@ -12,8 +12,10 @@
       </div>
     </form>
     <div class="actions">
-      <button class="tertiary" @click.prevent="$router.go(-1)">Back</button>
-      <button @click="handleSubmit">Submit</button>
+      <button class="tertiary" @click.prevent="$router.go(-1)">
+        {{ $t("Back") }}
+      </button>
+      <button @click="handleSubmit">{{ $t("submit") }}</button>
     </div>
     <p v-if="isLoading">Loading.....</p>
   </div>

@@ -9,6 +9,7 @@ part of 'league_table_dto.dart';
 _$_LeagueTableDto _$$_LeagueTableDtoFromJson(Map<String, dynamic> json) =>
     _$_LeagueTableDto(
       teamName: json['teamName'] as String,
+      teamNameAmh: json['teamNameAmh'] as String,
       teamLogo: json['teamLogo'] as String,
       teamPoint: json['teamPoint'] as int,
       won: json['won'] as int,
@@ -22,6 +23,7 @@ _$_LeagueTableDto _$$_LeagueTableDtoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_LeagueTableDtoToJson(_$_LeagueTableDto instance) =>
     <String, dynamic>{
       'teamName': instance.teamName,
+      'teamNameAmh': instance.teamNameAmh,
       'teamLogo': instance.teamLogo,
       'teamPoint': instance.teamPoint,
       'won': instance.won,

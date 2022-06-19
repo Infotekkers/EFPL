@@ -156,7 +156,7 @@ input {
 
 <script>
 import { passwordVisibleIcon, hiddenPasswordIcon } from "@/utils/Icons";
-
+import store from "../store";
 export default {
   data() {
     return {
@@ -165,9 +165,9 @@ export default {
         email: "",
         password: "",
       },
-      error: "",
-      isLoading: false,
 
+      isLoading: false,
+      regExp: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
       // icons
       passwordVisibleIcon: passwordVisibleIcon,
       hiddenPasswordIcon: hiddenPasswordIcon,
@@ -178,8 +178,16 @@ export default {
   methods: {
     loginAdmin() {
       this.isLoading = true;
-      this.$store.dispatch("loginAdmin", this.loginInfo);
-
+      if (this.regExp.test(this.loginInfo.password) === true) {
+        this.$store.dispatch("loginAdmin", this.loginInfo);
+      } else {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage:
+            "Password must be 8 characters and include at least one uppercase, one lowercase, a symbol and a number",
+        });
+      }
       this.isLoading = false;
     },
   },

@@ -8,6 +8,7 @@ import 'package:efpl/services/global_vars.dart';
 import 'package:efpl/services/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TeamViewBody extends StatelessWidget {
   const TeamViewBody({Key? key}) : super(key: key);
@@ -94,7 +95,18 @@ class TeamViewBody extends StatelessWidget {
             _buildView(state, context, changed: true),
         chipPlayedSuccess: (state) => _buildView(state, context,
             changed: true,
-            informational: state.myTeam.activeChip.getOrCrash() +
+            informational: (state.myTeam.activeChip
+                            .getOrCrash()
+                            .toLowerCase() ==
+                        'tc'
+                    ? strings(context).tc
+                    : state.myTeam.activeChip.getOrCrash().toLowerCase() == 'bb'
+                        ? strings(context).bb
+                        : state.myTeam.activeChip.getOrCrash().toLowerCase() ==
+                                'fh'
+                            ? strings(context).fh
+                            : strings(context).wc) +
+                " " +
                 strings(context).chipConfirmation),
         chipPlayedFailure: (state) => _buildView(state, context),
       ),
@@ -110,7 +122,7 @@ class TeamViewBody extends StatelessWidget {
           Column(
             children: [
               highlight ? _highlightMyTeam(state) : _buildMyTeam(state),
-              _buildActionBtns(changed, context, state),
+              _buildActionBtns(changed, context, state, highlight),
             ],
           ),
           Positioned(
@@ -128,7 +140,7 @@ class TeamViewBody extends StatelessWidget {
                       ),
                     )
                   : null,
-              child: const Icon(Icons.child_care_sharp),
+              child: const Icon(MdiIcons.pokerChip),
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(24.0),
@@ -143,7 +155,7 @@ class TeamViewBody extends StatelessWidget {
           ),
           informational != ''
               ? Positioned(
-                  bottom: 8,
+                  top: 8,
                   left: 8,
                   child: Container(
                     padding: const EdgeInsets.all(4.0),
@@ -235,7 +247,7 @@ class TeamViewBody extends StatelessWidget {
     );
   }
 
-  _buildActionBtns(changed, context, state) {
+  _buildActionBtns(changed, context, state, highlight) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 8.0,
@@ -247,12 +259,13 @@ class TeamViewBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
-              onPressed: () => changed
+              onPressed: () => changed || highlight
                   ? BlocProvider.of<MyTeamBloc>(context)
                       .add(const MyTeamEvent.loadMyTeam("1"))
                   : null,
               style: TextButton.styleFrom(
-                  primary: changed ? Colors.red[400] : Colors.grey),
+                  primary:
+                      changed || highlight ? Colors.red[400] : Colors.grey),
               child: Text(strings(context).cancel),
             ),
             OutlinedButton(

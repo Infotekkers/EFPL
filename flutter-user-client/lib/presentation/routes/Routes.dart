@@ -4,6 +4,8 @@ import 'package:efpl/presentation/authentication/request_reset/request_reset_vie
 import 'package:efpl/presentation/authentication/sign_in/sign_in_view.dart';
 import 'package:efpl/presentation/authentication/splash_view.dart';
 import 'package:efpl/presentation/core/main_tab_view.dart';
+import 'package:efpl/presentation/core/public_home_view.dart';
+import 'package:efpl/presentation/efpl_stats/efpl_stats_dream_team_view.dart';
 import 'package:efpl/presentation/efpl_stats/efpl_stats_main_view.dart';
 import 'package:efpl/injectable.dart';
 import 'package:efpl/presentation/leaguetables/leaguetable_view.dart';
@@ -52,6 +54,7 @@ class AppRouter {
 
   Map<String, Widget Function(BuildContext)> allRoutes = {
     "/": (context) => const SplashView(),
+    "/public": (context) => const PublicHome(),
     "/EPLeagueTable": (context) => MultiBlocProvider(providers: [
           BlocProvider.value(value: getIt<LeagueTableBloc>()),
         ], child: const LeagueTableView()),
