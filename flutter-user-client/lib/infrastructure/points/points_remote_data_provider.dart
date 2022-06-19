@@ -225,7 +225,6 @@ class PointsInfoRemoteDataProvider {
 
     // unexpected error
     catch (e) {
-      print(e);
       Either<dynamic, PointsInfo> cacheCall = await _pointsInfoLocalDataProvider
           .getCachedPointInfo(gameWeekId: gameWeekId);
 

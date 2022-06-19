@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const axios = require("axios");
 const Fixture = require("../models/Fixtures");
 const GameWeek = require("../models/GameWeek");
 const PlayerModel = require("../models/Player");
@@ -15,15 +16,16 @@ const addPlayer = asyncHandler(async (req, res) => {
     availability,
     playerImage,
     logoName,
+    playerNameAmh,
   } = req.body;
 
   const verifyPlayer = await PlayerModel.findOne({
     playerName: req.body.playerName,
   });
 
-  const teamId = await Teams.findOne({ teamName: eplTeamId });
+  // const teamId = await Teams.findOne({ teamName: eplTeamId });
 
-  const id = teamId.teamId;
+  // const id = teamId.teamId;
 
   // If player does not exist
   if (!verifyPlayer) {
@@ -40,7 +42,8 @@ const addPlayer = asyncHandler(async (req, res) => {
           currentPrice,
           availability,
           playerImage: playerImagePath,
-          eplTeamId: id,
+          eplTeamId: eplTeamId,
+          playerNameAmh,
         }).save();
 
         const io = require("../../server");
@@ -62,7 +65,8 @@ const addPlayer = asyncHandler(async (req, res) => {
         currentPrice,
         availability,
         playerImage: "",
-        eplTeamId: id,
+        eplTeamId: eplTeamId,
+        playerNameAmh,
       }).save();
       res.status(201).send(`${playerName} added successfully`);
     }
@@ -76,12 +80,14 @@ const addPlayer = asyncHandler(async (req, res) => {
 const updatePlayer = asyncHandler(async (req, res) => {
   const {
     playerName,
+    emitSocket,
     eplTeamId,
     availability,
     position,
     playerImage,
     logoName,
     currentPrice,
+    playerNameAmh,
   } = req.body;
 
   let newData;
@@ -101,6 +107,7 @@ const updatePlayer = asyncHandler(async (req, res) => {
       eplTeamId,
       availability,
       position,
+      playerNameAmh,
     };
   } else {
     newData = {
@@ -109,10 +116,11 @@ const updatePlayer = asyncHandler(async (req, res) => {
       availability,
       position,
       currentPrice,
+      playerNameAmh,
     };
   }
 
-  if (playerImage !== "") {
+  if (playerImage && playerImage !== "") {
     const filePath = makeFilePlayer(playerImage, logoName);
 
     if (filePath !== "") {
@@ -132,17 +140,18 @@ const updatePlayer = asyncHandler(async (req, res) => {
       }
     );
 
-    const io = require("../../server");
-    io.emit("playerUpdated");
-
+    if (emitSocket !== 0) {
+      const io = require("../../server");
+      io.emit("playerUpdated");
+    }
     res.status(201).send(` ${playerName} Info updated successful`);
   } else {
-    return res.status(404).send(`player with ${playerName}exist`);
+    return res.status(404).send(`player with ${playerName} exist`);
   }
 });
 
 const updateScore = asyncHandler(async (req, res) => {
-  const { score } = req.body;
+  const { score, emitSocket } = req.body;
   const verifyPlayer = await PlayerModel.findOne({
     playerId: req.params.playerId,
   });
@@ -158,8 +167,10 @@ const updateScore = asyncHandler(async (req, res) => {
 
     await verifyPlayer.save();
 
-    const io = require("../../server");
-    io.emit("playerUpdated");
+    if (emitSocket !== 0) {
+      const io = require("../../server");
+      io.emit("playerUpdated");
+    }
 
     res.status(201).send(`Score for Gameweek update successful`);
   } else {
@@ -168,7 +179,7 @@ const updateScore = asyncHandler(async (req, res) => {
 });
 
 const addScore = asyncHandler(async (req, res) => {
-  const { score } = req.body;
+  const { score, emitSocket } = req.body;
   const verifyPlayer = await PlayerModel.findOne({
     playerId: req.params.playerId,
   });
@@ -181,8 +192,10 @@ const addScore = asyncHandler(async (req, res) => {
         },
       }
     );
-    const io = require("../../server");
-    io.emit("playerUpdated");
+    if (emitSocket !== 0) {
+      const io = require("../../server");
+      io.emit("playerUpdated");
+    }
 
     res.status(201).send(`Score added successfully`);
   } else {
@@ -201,10 +214,19 @@ const getPlayer = asyncHandler(async (req, res) => {
 
   res.send(player);
 });
-
 const getPlayers = asyncHandler(async (req, res) => {
   const players = await PlayerModel.find();
 
+  // get team logo
+  for (let index = 0; index < players.length; index++) {
+    const team = await Teams.findOne({ teamName: players[index].eplTeamId });
+
+    try {
+      players[index].playerImage = team.teamLogo;
+    } catch (e) {}
+  }
+
+  // get  if any match is live
   const findLiveMatch = await Fixture.find({
     $or: [
       { status: "liveFH" },
@@ -254,20 +276,20 @@ const getHomeAndAwayPlayers = asyncHandler(async (req, res) => {
 });
 
 const deletePlayer = asyncHandler(async (req, res) => {
-  const currentPlayer = await PlayerModel.find({
+  const currentPlayer = await PlayerModel.findOne({
     playerId: req.params.playerId,
   });
 
   const io = require("../../server");
   io.emit("playerUpdated");
   await PlayerModel.deleteOne({ playerId: req.params.playerId });
-  res.send(`Player ${currentPlayer[0].playerName} removed`);
+  res.send(`Player ${currentPlayer.playerName} removed`);
 });
 
 const getPlayersByPosition = asyncHandler(async (req, res) => {
-  // const position = req.params.position.toUpperCase();
+  const position = req.params.position.toUpperCase();
 
-  const allPlayersInPosition = await PlayerModel.find()
+  const allPlayersInPosition = await PlayerModel.find({ position: position })
     .select("-_id -__v -history")
     .sort("playerName");
 
@@ -288,24 +310,32 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
       (team) => team.teamName === allPlayersInPosition[i].eplTeamId
     );
 
-    const currentTeamFixture = await Fixture.find({
-      $or: [
-        { homeTeam: allPlayersInPosition[i].eplTeamId },
-        { awayTeam: allPlayersInPosition[i].eplTeamId },
-      ],
+    const teamName = allPlayersInPosition[i].eplTeamId;
 
+    const currentTeamFixtureHome = await Fixture.find({
+      homeTeam: allPlayersInPosition[i].eplTeamId,
       gameweekId: { $gt: nextGameWeekNumber },
     })
-      .select("homeTeam awayTeam")
-      .limit(8);
+      .select("homeTeam awayTeam gameweekId")
+      .limit(4);
+
+    const currentTeamFixtureAway = await Fixture.find({
+      awayTeam: teamName,
+      gameweekId: { $gt: nextGameWeekNumber },
+    })
+      .select("homeTeam awayTeam gameweekId")
+      .limit(4);
+
+    const currentTeamFixture = [
+      ...new Set([...currentTeamFixtureHome, ...currentTeamFixtureAway]),
+    ];
+
+    currentTeamFixture.sort((a, b) => a.gameweekId - b.gameweekId);
 
     const upComingFixture = [];
 
     for (let i = 0; i < currentTeamFixture.length; i++) {
-      if (
-        currentTeamFixture[i].homeTeam.toString() ===
-        allPlayersInPosition[i].eplTeamId.toString()
-      ) {
+      if (currentTeamFixture[i].homeTeam.toString() === teamName) {
         // get team logo
         const teamInfo = await Teams.findOne({
           teamName: currentTeamFixture[i].awayTeam,
@@ -331,7 +361,7 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
     const currentPlayerInfo = {
       playerName: allPlayersInPosition[i].playerName,
       eplTeamId: allPlayersInPosition[i].eplTeamId,
-      eplTeamLogo: currentTeam[0].teamLogo,
+      eplTeamLogo: currentTeam.length > 0 ? currentTeam[0].teamLogo : "",
       currentPrice: allPlayersInPosition[i].currentPrice,
       position: allPlayersInPosition[i].position,
       playerId: allPlayersInPosition[i].playerId,
@@ -345,11 +375,17 @@ const getPlayersByPosition = asyncHandler(async (req, res) => {
     };
 
     allPlayersInPositionFormatted.push(currentPlayerInfo);
-
-    // console.log(currentPlayerInfo);
   }
 
   res.status(200).send(allPlayersInPositionFormatted);
+});
+
+const getSuggestedPrice = asyncHandler(async (req, res) => {
+  const mlRes = await axios.get(
+    `${process.env.ML_API_URL}/initial-price/${req.params.playerName}`
+  );
+  if (mlRes.status === 200) res.send(mlRes.data);
+  else res.status(400).send({ message: "Unable to fetch suggested price" });
 });
 
 module.exports = {
@@ -364,4 +400,5 @@ module.exports = {
 
   // New
   getPlayersByPosition,
+  getSuggestedPrice,
 };

@@ -37,12 +37,16 @@ dependencies:
   tab_container: ^2.0.0
   transparent_image: ^2.0.0
   flutter_secure_storage: ^5.0.2
+  showcaseview: ^1.1.5
+  material_floating_search_bar: ^0.3.7
 
 dev_dependencies:
   bloc_test: ^9.0.3
   build_runner: ^2.1.7
   flutter_lints: ^1.0.0
   flutter_test:
+    sdk: flutter
+  flutter_driver:
     sdk: flutter
   freezed: ^1.0.9
   hive_generator: ^1.1.2
@@ -59,6 +63,9 @@ flutter:
     - .env
     - assets/images/
     - assets/icons/
+    - assets/flags/
+    - assets/teams/
+    - assets/jerseys/
   fonts:
     - family: Architect
       fonts:

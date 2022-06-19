@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -87,11 +89,18 @@ class TransferRemoteDataProvider {
 
           allPlayers.add(parsedResponseBody[i]);
 
+          final Either<dynamic, List<UserPlayer>> result =
+              await _transferLocalDataProvider.getAllPlayersInPosition(
+                  playerPosition: playerPosition);
+
+          // if (!(result.isRight() &&
+          //     result.fold((l) => [], (r) => r).isNotEmpty)) {
           // add to cache
           _transferLocalDataProvider.saveAllPlayersInPosition(
             allPlayersInPosition: allPlayers,
             playersPosition: playerPosition,
           );
+          // }
         }
         return right(allPlayersInPosition);
       }
@@ -190,7 +199,6 @@ class TransferRemoteDataProvider {
 
     // unexpected error
     catch (e) {
-      print(e);
       Either<dynamic, List<UserPlayer>> cacheCall =
           await _transferLocalDataProvider.getAllPlayersInPosition(
               playerPosition: playerPosition);
@@ -560,8 +568,6 @@ class TransferRemoteDataProvider {
     }
     // unexpected error
     catch (e) {
-      print(e);
-
       // get cache team
       return left([
         UserTeam(
@@ -685,7 +691,6 @@ class TransferRemoteDataProvider {
     }
     // unexpected error
     catch (e) {
-      print(e);
       //  cache
       _transferLocalDataProvider.saveUserTeamChanges(changedUserTeam: userTeam);
 

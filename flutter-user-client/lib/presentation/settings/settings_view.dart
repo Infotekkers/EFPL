@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/auth/i_auth_repository.dart';
 import '../../domain/settings/value_objects.dart';
+import '../../injectable.dart';
 import '../../services/snack_bar.dart';
 import '../colors.dart';
 import '../core/widgets/bouncing_ball_loading_indicator.dart';
@@ -24,6 +26,9 @@ class SettingsView extends StatelessWidget {
     // Get The bloc value from the provider
     var state = BlocProvider.of<AuthBloc>(context).state;
     if (state is Authenticated) {
+      user = state.user;
+    }
+    if (state is Authorised && user == null) {
       user = state.user;
     }
     final UtilBloc _utilBloc = BlocProvider.of<UtilBloc>(context);
@@ -46,6 +51,7 @@ class SettingsView extends StatelessWidget {
               BlocProvider.of<SettingsBloc>(context).add(
                 SettingsEvent.loadUserDetail(
                   user!.id.getOrCrash(),
+                  user!.token.getOrCrash(),
                 ),
               );
             },
@@ -347,7 +353,10 @@ class SettingsView extends StatelessWidget {
                         ActionWidget(
                           icon: Icons.logout,
                           label: "Logout",
-                          onTap: () {},
+                          onTap: () {
+                            getIt<IAuthRepository>().removeUser();
+                            Navigator.popAndPushNamed(context, "/sign-in");
+                          },
                         )
                       ],
                     ),
@@ -402,7 +411,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.label,
+                "Update ${widget.label}",
                 style: const TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(255, 47, 108, 212),
@@ -574,12 +583,17 @@ class UserDetailRow extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              value,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Flexible(
+              child: Text(
+                value,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
             ),
-            Text(
-              title,
+            Flexible(
+              child: Text(
+                title,
+              ),
             ),
           ],
         ),

@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -7,6 +9,7 @@ import 'package:efpl/domain/auth/auth_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/domain/auth/user.dart';
+import 'package:efpl/domain/core/core_value_objects.dart';
 import 'package:efpl/infrastructure/auth/auth_dtos.dart';
 import 'package:efpl/services/constants.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -15,7 +18,7 @@ import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 
 @LazySingleton(as: IAuthRepository)
-class AuthRepository implements IAuthRepository {
+class authorize implements IAuthRepository {
   static final String _baseUrl = "${dotenv.env["API"]}/user";
 
   http.Client? client = http.Client();
@@ -65,7 +68,6 @@ class AuthRepository implements IAuthRepository {
 
     // unexpected error
     catch (err) {
-      print(err);
       return left(const AuthFailure.networkError());
     }
   }
@@ -85,14 +87,10 @@ class AuthRepository implements IAuthRepository {
           );
 
       // success
-      print("sign in request");
-      print("Status code ${response.statusCode}");
-      print("body ${response.body}");
       if (response.statusCode == 201) {
         final UserDto userDtoIn =
             UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
 
-        // store token on secure store
         return right(userDtoIn.toDomain());
       }
       // email in use
@@ -133,10 +131,8 @@ class AuthRepository implements IAuthRepository {
 
     try {
       String? value = await storage.read(key: 'user');
-
       final UserDto userDtoIn =
           UserDto.fromJson(jsonDecode(value!) as Map<String, dynamic>);
-
       return optionOf(userDtoIn.toDomain());
     } catch (err) {
       return none();
@@ -168,11 +164,11 @@ class AuthRepository implements IAuthRepository {
     try {
       const storage = FlutterSecureStorage();
       await storage.delete(key: 'user');
+      print(storage);
       return right(unit);
     }
     // TODO:MAKE STORAGE ERROR NOT SEVER
     catch (err) {
-      print(err);
       return left(const AuthFailure.serverError());
     }
   }
@@ -191,10 +187,7 @@ class AuthRepository implements IAuthRepository {
 
       // success
       if (response.statusCode == 200) {
-        final UserDto userDtoIn =
-            UserDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-
-        return right(userDtoIn.toDomain());
+        return right(user);
       }
       // email not found
       else if (response.statusCode == 404) {
@@ -216,10 +209,29 @@ class AuthRepository implements IAuthRepository {
     // Handshake Exception
     on HandshakeException catch (_) {
       return left(const AuthFailure.networkError());
+    } catch (e) {
+      return left(const AuthFailure.serverError());
     }
+  }
 
-    // Unexpected Error
-    catch (err) {
+// authorise token
+  @override
+  Future<Either<AuthFailure, Unit>> checkToken({required Token token}) async {
+    final Uri url = Uri.parse("$_baseUrl/validateUser");
+    try {
+      final response =
+          await client!.post(url, body: {"token": token.getOrCrash()});
+
+      if (response.statusCode == 200) {
+        return right(unit);
+      } else if (response.statusCode == 403) {
+        return left(const AuthFailure.emailNotFound());
+      } else if (response.statusCode == 404) {
+        return left(const AuthFailure.emailNotFound());
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    } catch (err) {
       return left(const AuthFailure.networkError());
     }
   }

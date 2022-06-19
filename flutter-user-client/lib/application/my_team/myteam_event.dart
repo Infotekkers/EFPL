@@ -2,8 +2,7 @@ part of 'myteam_bloc.dart';
 
 @freezed
 abstract class MyTeamEvent with _$MyTeamEvent {
-  const factory MyTeamEvent.loadMyTeam(String userId, String gameweekId) =
-      _LoadMyTeam;
+  const factory MyTeamEvent.loadMyTeam(String gameweekId) = _LoadMyTeam;
   const factory MyTeamEvent.transferOptionsRequested(
       int playerId, String position, bool isSub) = _TransferOptionsRequested;
   const factory MyTeamEvent.transferConfirmed(
@@ -12,6 +11,5 @@ abstract class MyTeamEvent with _$MyTeamEvent {
   const factory MyTeamEvent.viceCaptainChanged(int playerId) =
       _ViceCaptainChanged;
   const factory MyTeamEvent.chipPlayed(Chip chip) = _ChipPlayed;
-  const factory MyTeamEvent.saveMyTeam(MyTeam myTeam, String userId) =
-      _SaveMyTeam;
+  const factory MyTeamEvent.saveMyTeam(MyTeam myTeam) = _SaveMyTeam;
 }

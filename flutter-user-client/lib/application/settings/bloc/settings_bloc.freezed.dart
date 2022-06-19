@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'settings_bloc.dart';
@@ -17,9 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SettingsEventTearOff {
   const _$SettingsEventTearOff();
 
-  _LoadUserDetail loadUserDetail(String userId) {
+  _LoadUserDetail loadUserDetail(String userId, String token) {
     return _LoadUserDetail(
       userId,
+      token,
     );
   }
 
@@ -42,7 +44,7 @@ mixin _$SettingsEvent {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadUserDetail,
+    required TResult Function(String userId, String token) loadUserDetail,
     required TResult Function(
             Settings settings, String userId, String updateType)
         updateUserDetail,
@@ -50,14 +52,14 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userId)? loadUserDetail,
+    TResult Function(String userId, String token)? loadUserDetail,
     TResult Function(Settings settings, String userId, String updateType)?
         updateUserDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadUserDetail,
+    TResult Function(String userId, String token)? loadUserDetail,
     TResult Function(Settings settings, String userId, String updateType)?
         updateUserDetail,
     required TResult orElse(),
@@ -125,7 +127,7 @@ abstract class _$LoadUserDetailCopyWith<$Res>
           _LoadUserDetail value, $Res Function(_LoadUserDetail) then) =
       __$LoadUserDetailCopyWithImpl<$Res>;
   @override
-  $Res call({String userId});
+  $Res call({String userId, String token});
 }
 
 /// @nodoc
@@ -142,11 +144,16 @@ class __$LoadUserDetailCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = freezed,
+    Object? token = freezed,
   }) {
     return _then(_LoadUserDetail(
       userId == freezed
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -155,14 +162,16 @@ class __$LoadUserDetailCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadUserDetail implements _LoadUserDetail {
-  const _$_LoadUserDetail(this.userId);
+  const _$_LoadUserDetail(this.userId, this.token);
 
   @override
   final String userId;
+  @override
+  final String token;
 
   @override
   String toString() {
-    return 'SettingsEvent.loadUserDetail(userId: $userId)';
+    return 'SettingsEvent.loadUserDetail(userId: $userId, token: $token)';
   }
 
   @override
@@ -170,12 +179,15 @@ class _$_LoadUserDetail implements _LoadUserDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _LoadUserDetail &&
-            const DeepCollectionEquality().equals(other.userId, userId));
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality().equals(other.token, token));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(userId));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(token));
 
   @JsonKey(ignore: true)
   @override
@@ -185,34 +197,34 @@ class _$_LoadUserDetail implements _LoadUserDetail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadUserDetail,
+    required TResult Function(String userId, String token) loadUserDetail,
     required TResult Function(
             Settings settings, String userId, String updateType)
         updateUserDetail,
   }) {
-    return loadUserDetail(userId);
+    return loadUserDetail(userId, token);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userId)? loadUserDetail,
+    TResult Function(String userId, String token)? loadUserDetail,
     TResult Function(Settings settings, String userId, String updateType)?
         updateUserDetail,
   }) {
-    return loadUserDetail?.call(userId);
+    return loadUserDetail?.call(userId, token);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadUserDetail,
+    TResult Function(String userId, String token)? loadUserDetail,
     TResult Function(Settings settings, String userId, String updateType)?
         updateUserDetail,
     required TResult orElse(),
   }) {
     if (loadUserDetail != null) {
-      return loadUserDetail(userId);
+      return loadUserDetail(userId, token);
     }
     return orElse();
   }
@@ -250,10 +262,12 @@ class _$_LoadUserDetail implements _LoadUserDetail {
 }
 
 abstract class _LoadUserDetail implements SettingsEvent {
-  const factory _LoadUserDetail(String userId) = _$_LoadUserDetail;
+  const factory _LoadUserDetail(String userId, String token) =
+      _$_LoadUserDetail;
 
   @override
   String get userId;
+  String get token;
   @override
   @JsonKey(ignore: true)
   _$LoadUserDetailCopyWith<_LoadUserDetail> get copyWith =>
@@ -356,7 +370,7 @@ class _$_UpdateSettings implements _UpdateSettings {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadUserDetail,
+    required TResult Function(String userId, String token) loadUserDetail,
     required TResult Function(
             Settings settings, String userId, String updateType)
         updateUserDetail,
@@ -367,7 +381,7 @@ class _$_UpdateSettings implements _UpdateSettings {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userId)? loadUserDetail,
+    TResult Function(String userId, String token)? loadUserDetail,
     TResult Function(Settings settings, String userId, String updateType)?
         updateUserDetail,
   }) {
@@ -377,7 +391,7 @@ class _$_UpdateSettings implements _UpdateSettings {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadUserDetail,
+    TResult Function(String userId, String token)? loadUserDetail,
     TResult Function(Settings settings, String userId, String updateType)?
         updateUserDetail,
     required TResult orElse(),

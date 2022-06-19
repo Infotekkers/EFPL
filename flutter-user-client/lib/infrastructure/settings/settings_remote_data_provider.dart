@@ -15,7 +15,8 @@ class UserDetailRemoteDataProvider {
 
   UserDetailRemoteDataProvider();
 
-  Future<Either<SettingsFailure, Settings>> getUserDetail(String userId) async {
+  Future<Either<SettingsFailure, Settings>> getUserDetail(
+      String userId, String token) async {
     final Uri url = Uri.parse("$_baseUrl/user/fetchOne/$userId");
 
     try {
@@ -37,20 +38,11 @@ class UserDetailRemoteDataProvider {
   Future<Either<SettingsFailure, Unit>> updateUserDetail(
       Settings settings, String userId) async {
     final Uri url = Uri.parse("$_baseUrl/user/updateUser/$userId");
-    print("--------------------");
-    print("request data");
-    print("username ${settings.userName.getOrCrash()}");
-    print("teamname ${settings.teamName.getOrCrash()}");
-    print("favorite team ${settings.favouriteEplTeam.getOrCrash()}");
-    print("--------------------");
     SettingsDto settingsDto = SettingsDto.fromDomain(settings);
 
-    final outgoingJson = jsonEncode({
-      "userId": userId,
-      "data": {
-        "IncomingUserDetail": settingsDto.toJson(),
-      }
-    });
+    final outgoingJson = jsonEncode(
+      settingsDto.toJson(),
+    );
 
     try {
       final response = await client!.patch(url,

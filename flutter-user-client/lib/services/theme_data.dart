@@ -1,5 +1,6 @@
 library config.globals;
 
+import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
@@ -9,7 +10,7 @@ ThemeData lightTheme = ThemeData(
     primarySwatch: Colors.blue,
   )
       .copyWith(
-        secondary: Colors.amber,
+        secondary: ConstantColors.primary_900,
       )
       .copyWith(
         tertiary: Colors.black,
@@ -18,7 +19,7 @@ ThemeData lightTheme = ThemeData(
   // text styles
   textTheme: const TextTheme(
     bodyText1: TextStyle(
-      fontFamily: "Architect",
+      fontFamily: "Poppins",
     ),
   ),
 );

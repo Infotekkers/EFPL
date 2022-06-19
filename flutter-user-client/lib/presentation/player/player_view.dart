@@ -4,6 +4,7 @@ import 'package:efpl/presentation/core/widgets/bouncing_ball_loading_indicator.d
 import 'package:efpl/presentation/core/widgets/no_connection_widget.dart';
 import 'package:efpl/presentation/player/widgets/player_overview.dart';
 import 'package:efpl/presentation/player/widgets/player_stats.dart';
+import 'package:efpl/services/global_vars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,13 +21,16 @@ class PlayerView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: const Text("Player Information"),
-          iconTheme: IconThemeData(color: Colors.blue[900]),
-          titleTextStyle: TextStyle(
-            color: Colors.blue[900],
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
+          title: Text(
+            strings(context).playerInfo,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
+          iconTheme: IconThemeData(color: Colors.blue[900]),
+          titleTextStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                color: Colors.blue[900],
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
           backgroundColor: Colors.blue[50],
         ),
         body: BlocConsumer<PlayerBloc, PlayerState>(

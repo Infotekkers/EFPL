@@ -10,9 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class PointsView extends StatelessWidget {
+class PointsView extends StatefulWidget {
   const PointsView({Key? key}) : super(key: key);
 
+  @override
+  State<PointsView> createState() => _PointsViewState();
+}
+
+class _PointsViewState extends State<PointsView> {
   @override
   Widget build(BuildContext context) {
     final PointsBloc _pointsBloc = getIt<PointsBloc>()
@@ -71,32 +76,32 @@ class PointsView extends StatelessWidget {
                     },
 
                     // token issues
-                    unauthorized: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + "!",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
-                    unauthenticated: (_) {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText:
-                            AppLocalizations.of(context)!.pleaseLogin + " !",
-                        message: AppLocalizations.of(context)!.couldNotVerify +
-                            "." +
-                            AppLocalizations.of(context)!
-                                .pleaseLoginAndTryAgain +
-                            " !",
-                        snackBarType: "warning",
-                      );
-                    },
+                    // unauthorized: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + "!",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
+                    // unauthenticated: (_) {
+                    //   CustomSnackBar().showCustomSnackBar(
+                    //     showContext: context,
+                    //     headlineText:
+                    //         AppLocalizations.of(context)!.pleaseLogin + " !",
+                    //     message: AppLocalizations.of(context)!.couldNotVerify +
+                    //         "." +
+                    //         AppLocalizations.of(context)!
+                    //             .pleaseLoginAndTryAgain +
+                    //         " !",
+                    //     snackBarType: "warning",
+                    //   );
+                    // },
                     unexpectedError: (_) {
                       CustomSnackBar().showCustomSnackBar(
                         showContext: context,
@@ -128,12 +133,12 @@ class PointsView extends StatelessWidget {
                     },
 
                     orElse: () {
-                      CustomSnackBar().showCustomSnackBar(
-                        showContext: context,
-                        headlineText: "Something went wrong.",
-                        message: "Something went wrong. Try again!",
-                        snackBarType: "error",
-                      );
+                      // CustomSnackBar().showCustomSnackBar(
+                      //   showContext: context,
+                      //   headlineText: "Something went wrong.",
+                      //   message: "Something went wrong. Try again!",
+                      //   snackBarType: "error",
+                      // );
                     },
                   );
                 },
@@ -237,13 +242,19 @@ Widget _buildMainView(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // TEAM NAME
+              // Showcase(
+              // key: _teamNameKey,
+              // title: "Team Name",
+              // description: 'This is your team name.',
+              // child:
               Text(
                 state.pointsInfo.teamName,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                      // fontWeight: FontWeight.w600,
                       letterSpacing: 0.25,
                     ),
+                // ),
               ),
             ],
           ),
@@ -360,9 +371,14 @@ Widget _buildMainView(
                               ),
                       description:
                           allFormattedPlayers[0][index].score.isNotEmpty
-                              ? (allFormattedPlayers[0][index]
-                                  .score[0]['fantasyScore']
-                                  .toString())
+                              ? allFormattedPlayers[0][index].isCaptain == true
+                                  ? ((allFormattedPlayers[0][index].score[0]
+                                              ['fantasyScore'] *
+                                          2)
+                                      .toString())
+                                  : (allFormattedPlayers[0][index]
+                                      .score[0]['fantasyScore']
+                                      .toString())
                               : '0',
                       teamName:
                           allFormattedPlayers[0][index].eplTeamId.value.fold(

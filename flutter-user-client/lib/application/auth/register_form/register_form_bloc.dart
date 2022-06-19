@@ -4,7 +4,6 @@ import 'package:efpl/domain/auth/auth_failure.dart';
 import 'package:efpl/domain/auth/auth_value_objects.dart';
 import 'package:efpl/domain/auth/i_auth_repository.dart';
 import 'package:efpl/domain/auth/user.dart';
-import 'package:efpl/domain/core/value_validators.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -132,12 +131,22 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
         final passMatch =
             state.password == state.confirmPassword ? true : false;
 
+        // check validity
         if (isEmailValid &&
             isPassValid &&
             isConfirmPassValid &&
             isUserName &&
             isTeamNameValid) {
-          if (passMatch == true) {
+          // match password
+          if (passMatch == false) {
+            emit(
+              state.copyWith(
+                  isSubmitting: false,
+                  showErrorMessages: true,
+                  authFailureOrSuccessOption:
+                      some(left(const AuthFailure.passwordDontMatch()))),
+            );
+          } else {
             emit(
               state.copyWith(
                 isSubmitting: true,
@@ -158,10 +167,10 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
           }
           emit(
             state.copyWith(
-                isSubmitting: false,
-                showErrorMessages: true,
-                authFailureOrSuccessOption:
-                    some(left(const AuthFailure.passwordDontMatch()))),
+              isSubmitting: false,
+              showErrorMessages: true,
+              authFailureOrSuccessOption: none(),
+            ),
           );
         }
 

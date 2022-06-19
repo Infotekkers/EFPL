@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/fixture/fixture.dart';
 import 'package:efpl/domain/fixture/fixture_failures.dart';
@@ -13,9 +15,7 @@ class FixtureLocalDataProvider {
       {required List gameWeekFixture, required int gameWeekId}) {
     try {
       fixturesCache.put("fixtures-$gameWeekId", gameWeekFixture);
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   Future<Either<dynamic, List<Fixture>>> getFixtureByGameWeekId(
@@ -36,6 +36,7 @@ class FixtureLocalDataProvider {
         parsedCachedFixture['awayTeamLineUp'] = {};
 
         final Fixture fixture = Fixture(
+          fdr: parsedCachedFixture['fdr'],
           gameWeekId: GameWeekId(
             value: parsedCachedFixture['gameWeekId'],
           ),
@@ -50,6 +51,11 @@ class FixtureLocalDataProvider {
           ),
           homeTeam: Team(
             value: parsedCachedFixture['homeTeam'],
+          ),
+          homeTeamAmh: Team(
+            value: parsedCachedFixture['homeTeamAmh']
+                ? parsedCachedFixture['homeTeamAmh']
+                : "",
           ),
           homeTeamLineUp: TeamLineUp(
             value: parsedCachedFixture['homeTeamLineUp'],
@@ -71,6 +77,11 @@ class FixtureLocalDataProvider {
           ),
           awayTeam: Team(
             value: parsedCachedFixture['awayTeam'],
+          ),
+          awayTeamAmh: Team(
+            value: parsedCachedFixture['awayTeamAmh']
+                ? parsedCachedFixture['awayTeamAmh']
+                : "",
           ),
           awayTeamLineUp: TeamLineUp(
             value: parsedCachedFixture['awayTeamLineUp'],
@@ -99,11 +110,13 @@ class FixtureLocalDataProvider {
         if (cachedFixtures.isEmpty) {
           return right([
             Fixture(
+              fdr: 1,
               gameWeekId: GameWeekId(value: gameWeekId),
               matchId: MatchId(value: ""),
               schedule: Schedule(value: "2022-05-24T10:40:00.000+00:00"),
               status: Status(value: ""),
               homeTeam: Team(value: ""),
+              homeTeamAmh: Team(value: ""),
               homeTeamLineUp: TeamLineUp(value: const {}),
               homeTeamCity: TeamCity(value: ""),
               homeTeamCoach: TeamCoach(value: ""),
@@ -113,6 +126,7 @@ class FixtureLocalDataProvider {
 
               //
               awayTeam: Team(value: ""),
+              awayTeamAmh: Team(value: ""),
               awayTeamLineUp: TeamLineUp(value: const {}),
               awayTeamCity: TeamCity(value: ""),
               awayTeamCoach: TeamCoach(value: ""),
@@ -126,7 +140,6 @@ class FixtureLocalDataProvider {
       }
       return right(allFixtures);
     } catch (e) {
-      print(e);
       return left(
         [
           [
@@ -136,6 +149,7 @@ class FixtureLocalDataProvider {
               schedule: Schedule(value: "2022-05-24T10:40:00.000+00:00"),
               status: Status(value: ""),
               homeTeam: Team(value: ""),
+              homeTeamAmh: Team(value: ""),
               homeTeamLineUp: TeamLineUp(value: const {}),
               homeTeamCity: TeamCity(value: ""),
               homeTeamCoach: TeamCoach(value: ""),
@@ -145,6 +159,7 @@ class FixtureLocalDataProvider {
 
               //
               awayTeam: Team(value: ""),
+              awayTeamAmh: Team(value: ""),
               awayTeamLineUp: TeamLineUp(value: const {}),
               awayTeamCity: TeamCity(value: ""),
               awayTeamCoach: TeamCoach(value: ""),
@@ -152,6 +167,7 @@ class FixtureLocalDataProvider {
               awayTeamStadium: Stadium(value: ""),
               awayTeamCapacity: StadiumCapacity(value: 0),
               score: Score(value: ''),
+              fdr: 1,
             ),
           ],
           const FixtureFailures.hiveError(failedValue: "Hive Error")

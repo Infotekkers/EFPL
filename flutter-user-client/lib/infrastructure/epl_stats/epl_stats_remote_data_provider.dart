@@ -33,7 +33,6 @@ class EPLStatsRemoteDataProvider {
 
       return left(const EPLStatsFailure.serverError());
     } catch (e) {
-      print(e);
       return left(const EPLStatsFailure.networkError());
     }
   }

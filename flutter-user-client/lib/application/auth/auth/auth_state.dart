@@ -7,4 +7,8 @@ abstract class AuthState with _$AuthState {
     User user,
   ) = Authenticated;
   const factory AuthState.unauthenticated() = Unauthenticated;
+  const factory AuthState.authorised(
+    User user,
+  ) = Authorised;
+  const factory AuthState.unauthorised() = Unautorised;
 }

@@ -1,3 +1,4 @@
+import 'package:efpl/services/global_vars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -23,18 +24,24 @@ class PlayerOverview extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  state.player.position.getOrCrash().toUpperCase(),
+                  state.player.position.getOrCrash().toLowerCase() == 'gk'
+                      ? strings(context).gk
+                      : state.player.position.getOrCrash().toLowerCase() ==
+                              'def'
+                          ? strings(context).def
+                          : state.player.position.getOrCrash().toLowerCase() ==
+                                  'mid'
+                              ? strings(context).mid
+                              : strings(context).att,
                   style: boldFacts,
                 ),
-                Transform.scale(
-                  scale: 0.7,
-                  child: FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    image: _baseUrl + state.player.image.getOrCrash(),
-                  ),
+                FadeInImage.memoryNetwork(
+                  imageScale: 2,
+                  placeholder: kTransparentImage,
+                  image: _baseUrl + state.player.image.getOrCrash(),
                 ),
                 Text(
                   state.player.currentPrice.getOrCrash() + "M",
@@ -59,8 +66,7 @@ class PlayerOverview extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Injury: " +
-                    state.player.availability.injuryMessage.getOrCrash(),
+                state.player.availability.injuryMessage.getOrCrash(),
                 style: primaryFacts,
               ),
             ),

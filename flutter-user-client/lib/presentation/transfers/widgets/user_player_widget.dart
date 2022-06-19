@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,6 +24,9 @@ class UserPlayerWidget extends StatelessWidget {
       (l) => '',
       (r) => r['injuryStatus'].toString(),
     );
+
+    final String teamName = currentUserPlayer.eplTeamId.value
+        .fold((l) => "shirt", (r) => r.toString());
 
     return BlocBuilder<TransferBloc, TransferState>(
       builder: (context, state) {
@@ -53,7 +55,7 @@ class UserPlayerWidget extends StatelessWidget {
                   Stack(
                     children: [
                       // SHIRT
-                      _buildShirtView(),
+                      _buildShirtView(teamName: teamName),
 
                       // INJURY STATUS
                       _buildInjuryView(
@@ -112,7 +114,7 @@ void _buildModalSheet(
         child: BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) {
             return Container(
-              height: 310,
+              height: 370,
               padding: const EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 8,
@@ -124,7 +126,7 @@ void _buildModalSheet(
                     currentUserPlayer.playerName.value
                         .fold((l) => '', (r) => r),
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.25,
                         ),
@@ -140,7 +142,7 @@ void _buildModalSheet(
                             .fold((l) => '', (r) => r) +
                         " )",
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: 14,
+                          fontSize: 12,
                           letterSpacing: 0.05,
                         ),
                   ),
@@ -157,7 +159,7 @@ void _buildModalSheet(
                           arguments: int.parse(currentUserPlayer.playerId));
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
@@ -185,6 +187,7 @@ void _buildModalSheet(
 
                   // Transfer
                   InkWell(
+                    key: const Key("transferViewModalTransferButton"),
                     onTap: () {
                       state.transferredInPlayerIdList
                               .contains(currentUserPlayer.playerId)
@@ -194,7 +197,7 @@ void _buildModalSheet(
                               transferBloc, currentUserPlayer, context);
                     },
                     child: SizedBox(
-                      height: 32,
+                      height: 38,
                       child: Row(
                         children: [
                           Container(
@@ -230,7 +233,7 @@ void _buildModalSheet(
                   ),
 
                   const SizedBox(
-                    height: 16,
+                    height: 20,
                   ),
 
                   Text(
@@ -265,6 +268,8 @@ void _buildModalSheet(
                                 width: 40,
                                 child: CachedNetworkImage(
                                   fit: BoxFit.fill,
+                                  // imageUrl:
+
                                   imageUrl: _baseURL +
                                       currentUserPlayer.upComingFixtures[index]
                                           ['teamLogo'],
@@ -332,7 +337,7 @@ void _buildModalSheet(
   );
 }
 
-Widget _buildShirtView() {
+Widget _buildShirtView({required String teamName}) {
   return Center(
     child: Container(
       width: 50,
@@ -340,8 +345,8 @@ Widget _buildShirtView() {
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
       ),
-      child: SvgPicture.asset(
-        "assets/icons/shirt.svg",
+      child: Image.asset(
+        "assets/jerseys/" + teamName + ".png",
         width: 50,
         height: 50,
       ),
@@ -418,11 +423,11 @@ Widget _buildPlayerPriceView(
     width: 70,
     child: Center(
       child: Text(
-        // currentUserPlayer.currentPrice.value.fold(
-        //   (l) => '',
-        //   (r) => r.toString(),
-        currentUserPlayer.multiplier.toString(),
-        // ),
+        currentUserPlayer.currentPrice.value.fold(
+          (l) => '',
+          (r) => r.toString(),
+          // currentUserPlayer.multiplier.toString(),
+        ),
         overflow: TextOverflow.ellipsis,
         style: Theme.of(context).textTheme.bodyText1?.copyWith(
               color: ConstantColors.primary_900,
@@ -448,6 +453,7 @@ Widget _buildPlayerNameView(
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodyText1?.copyWith(
               color: ConstantColors.primary_900,
+              fontSize: 14,
             ),
       ),
     ),

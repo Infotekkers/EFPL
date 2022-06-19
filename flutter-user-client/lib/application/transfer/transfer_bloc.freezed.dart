@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'transfer_bloc.dart';
@@ -119,6 +120,12 @@ class _$TransferEventTearOff {
   _cancelTransferFromConfirm cancelTransferFromConfirm() {
     return const _cancelTransferFromConfirm();
   }
+
+  _setSearchQuery setSearchQuery({required String query}) {
+    return _setSearchQuery(
+      query: query,
+    );
+  }
 }
 
 /// @nodoc
@@ -149,6 +156,7 @@ mixin _$TransferEvent {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -171,6 +179,7 @@ mixin _$TransferEvent {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -193,6 +202,7 @@ mixin _$TransferEvent {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -219,6 +229,7 @@ mixin _$TransferEvent {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -244,6 +255,7 @@ mixin _$TransferEvent {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -269,6 +281,7 @@ mixin _$TransferEvent {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -353,6 +366,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return getUserPlayers();
   }
@@ -378,6 +392,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return getUserPlayers?.call();
   }
@@ -403,6 +418,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (getUserPlayers != null) {
@@ -435,6 +451,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return getUserPlayers(this);
   }
@@ -463,6 +480,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return getUserPlayers?.call(this);
   }
@@ -491,6 +509,7 @@ class _$_getUserPlayers implements _getUserPlayers {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (getUserPlayers != null) {
@@ -604,6 +623,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return setTransferOutPlayer(transferOutPlayerId, playerPosition);
   }
@@ -629,6 +649,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return setTransferOutPlayer?.call(transferOutPlayerId, playerPosition);
   }
@@ -654,6 +675,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setTransferOutPlayer != null) {
@@ -686,6 +708,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return setTransferOutPlayer(this);
   }
@@ -714,6 +737,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return setTransferOutPlayer?.call(this);
   }
@@ -742,6 +766,7 @@ class _$_setTransferOutPlayer implements _setTransferOutPlayer {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setTransferOutPlayer != null) {
@@ -829,6 +854,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return getPlayersInSelectedPosition();
   }
@@ -854,6 +880,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return getPlayersInSelectedPosition?.call();
   }
@@ -879,6 +906,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (getPlayersInSelectedPosition != null) {
@@ -911,6 +939,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return getPlayersInSelectedPosition(this);
   }
@@ -939,6 +968,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return getPlayersInSelectedPosition?.call(this);
   }
@@ -967,6 +997,7 @@ class _$_getPlayersInSelectedPosition implements _getPlayersInSelectedPosition {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (getPlayersInSelectedPosition != null) {
@@ -1068,6 +1099,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return transferUserPlayer(transferInPlayerId);
   }
@@ -1093,6 +1125,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return transferUserPlayer?.call(transferInPlayerId);
   }
@@ -1118,6 +1151,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (transferUserPlayer != null) {
@@ -1150,6 +1184,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return transferUserPlayer(this);
   }
@@ -1178,6 +1213,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return transferUserPlayer?.call(this);
   }
@@ -1206,6 +1242,7 @@ class _$_transferUserPlayer implements _transferUserPlayer {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (transferUserPlayer != null) {
@@ -1315,6 +1352,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return transferUserPlayerInitial(transferInPlayerId);
   }
@@ -1340,6 +1378,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return transferUserPlayerInitial?.call(transferInPlayerId);
   }
@@ -1365,6 +1404,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (transferUserPlayerInitial != null) {
@@ -1397,6 +1437,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return transferUserPlayerInitial(this);
   }
@@ -1425,6 +1466,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return transferUserPlayerInitial?.call(this);
   }
@@ -1453,6 +1495,7 @@ class _$_transferUserPlayerInitial implements _transferUserPlayerInitial {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (transferUserPlayerInitial != null) {
@@ -1563,6 +1606,7 @@ class _$_transferOutUserPlayerInitial implements _transferOutUserPlayerInitial {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return transferOutUserPlayerInitial(transferOutPlayerId);
   }
@@ -1588,6 +1632,7 @@ class _$_transferOutUserPlayerInitial implements _transferOutUserPlayerInitial {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return transferOutUserPlayerInitial?.call(transferOutPlayerId);
   }
@@ -1613,6 +1658,7 @@ class _$_transferOutUserPlayerInitial implements _transferOutUserPlayerInitial {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (transferOutUserPlayerInitial != null) {
@@ -1645,6 +1691,7 @@ class _$_transferOutUserPlayerInitial implements _transferOutUserPlayerInitial {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return transferOutUserPlayerInitial(this);
   }
@@ -1673,6 +1720,7 @@ class _$_transferOutUserPlayerInitial implements _transferOutUserPlayerInitial {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return transferOutUserPlayerInitial?.call(this);
   }
@@ -1701,6 +1749,7 @@ class _$_transferOutUserPlayerInitial implements _transferOutUserPlayerInitial {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (transferOutUserPlayerInitial != null) {
@@ -1782,6 +1831,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return cancelTransfer();
   }
@@ -1807,6 +1857,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return cancelTransfer?.call();
   }
@@ -1832,6 +1883,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (cancelTransfer != null) {
@@ -1864,6 +1916,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return cancelTransfer(this);
   }
@@ -1892,6 +1945,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return cancelTransfer?.call(this);
   }
@@ -1920,6 +1974,7 @@ class _$_cancelTransfer implements _cancelTransfer {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (cancelTransfer != null) {
@@ -2020,6 +2075,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return cancelOneTransfer(playerToCancelId);
   }
@@ -2045,6 +2101,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return cancelOneTransfer?.call(playerToCancelId);
   }
@@ -2070,6 +2127,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (cancelOneTransfer != null) {
@@ -2102,6 +2160,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return cancelOneTransfer(this);
   }
@@ -2130,6 +2189,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return cancelOneTransfer?.call(this);
   }
@@ -2158,6 +2218,7 @@ class _$_cancelOneTransfer implements _cancelOneTransfer {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (cancelOneTransfer != null) {
@@ -2274,6 +2335,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return saveUserPlayers(gameWeekId, isSetTeam);
   }
@@ -2299,6 +2361,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return saveUserPlayers?.call(gameWeekId, isSetTeam);
   }
@@ -2324,6 +2387,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (saveUserPlayers != null) {
@@ -2356,6 +2420,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return saveUserPlayers(this);
   }
@@ -2384,6 +2449,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return saveUserPlayers?.call(this);
   }
@@ -2412,6 +2478,7 @@ class _$_saveUserPlayers implements _saveUserPlayers {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (saveUserPlayers != null) {
@@ -2527,6 +2594,7 @@ class _$_setFilter implements _setFilter {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return setFilter(filterBy, filterValue);
   }
@@ -2552,6 +2620,7 @@ class _$_setFilter implements _setFilter {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return setFilter?.call(filterBy, filterValue);
   }
@@ -2577,6 +2646,7 @@ class _$_setFilter implements _setFilter {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setFilter != null) {
@@ -2609,6 +2679,7 @@ class _$_setFilter implements _setFilter {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return setFilter(this);
   }
@@ -2637,6 +2708,7 @@ class _$_setFilter implements _setFilter {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return setFilter?.call(this);
   }
@@ -2665,6 +2737,7 @@ class _$_setFilter implements _setFilter {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setFilter != null) {
@@ -2771,6 +2844,7 @@ class _$_setSortFilter implements _setSortFilter {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return setSortFilter(sortBy);
   }
@@ -2796,6 +2870,7 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return setSortFilter?.call(sortBy);
   }
@@ -2821,6 +2896,7 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setSortFilter != null) {
@@ -2853,6 +2929,7 @@ class _$_setSortFilter implements _setSortFilter {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return setSortFilter(this);
   }
@@ -2881,6 +2958,7 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return setSortFilter?.call(this);
   }
@@ -2909,6 +2987,7 @@ class _$_setSortFilter implements _setSortFilter {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setSortFilter != null) {
@@ -3023,6 +3102,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return setPriceFilter(minValue, maxValue);
   }
@@ -3048,6 +3128,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return setPriceFilter?.call(minValue, maxValue);
   }
@@ -3073,6 +3154,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setPriceFilter != null) {
@@ -3105,6 +3187,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return setPriceFilter(this);
   }
@@ -3133,6 +3216,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return setPriceFilter?.call(this);
   }
@@ -3161,6 +3245,7 @@ class _$_setPriceFilter implements _setPriceFilter {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setPriceFilter != null) {
@@ -3243,6 +3328,7 @@ class _$_filterByPrice implements _filterByPrice {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return filterByPrice();
   }
@@ -3268,6 +3354,7 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return filterByPrice?.call();
   }
@@ -3293,6 +3380,7 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (filterByPrice != null) {
@@ -3325,6 +3413,7 @@ class _$_filterByPrice implements _filterByPrice {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return filterByPrice(this);
   }
@@ -3353,6 +3442,7 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return filterByPrice?.call(this);
   }
@@ -3381,6 +3471,7 @@ class _$_filterByPrice implements _filterByPrice {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (filterByPrice != null) {
@@ -3477,6 +3568,7 @@ class _$_setChip implements _setChip {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return setChip(chipName);
   }
@@ -3502,6 +3594,7 @@ class _$_setChip implements _setChip {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return setChip?.call(chipName);
   }
@@ -3527,6 +3620,7 @@ class _$_setChip implements _setChip {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setChip != null) {
@@ -3559,6 +3653,7 @@ class _$_setChip implements _setChip {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return setChip(this);
   }
@@ -3587,6 +3682,7 @@ class _$_setChip implements _setChip {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return setChip?.call(this);
   }
@@ -3615,6 +3711,7 @@ class _$_setChip implements _setChip {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setChip != null) {
@@ -3719,6 +3816,7 @@ class _$_validateTeam implements _validateTeam {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return validateTeam(context);
   }
@@ -3744,6 +3842,7 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return validateTeam?.call(context);
   }
@@ -3769,6 +3868,7 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (validateTeam != null) {
@@ -3801,6 +3901,7 @@ class _$_validateTeam implements _validateTeam {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return validateTeam(this);
   }
@@ -3829,6 +3930,7 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return validateTeam?.call(this);
   }
@@ -3857,6 +3959,7 @@ class _$_validateTeam implements _validateTeam {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (validateTeam != null) {
@@ -3964,6 +4067,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return setInitialSelection(valueToSet);
   }
@@ -3989,6 +4093,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return setInitialSelection?.call(valueToSet);
   }
@@ -4014,6 +4119,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setInitialSelection != null) {
@@ -4046,6 +4152,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return setInitialSelection(this);
   }
@@ -4074,6 +4181,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return setInitialSelection?.call(this);
   }
@@ -4102,6 +4210,7 @@ class _$_setInitialSelection implements _setInitialSelection {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (setInitialSelection != null) {
@@ -4185,6 +4294,7 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     required TResult Function(BuildContext context) validateTeam,
     required TResult Function(bool valueToSet) setInitialSelection,
     required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
   }) {
     return cancelTransferFromConfirm();
   }
@@ -4210,6 +4320,7 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
   }) {
     return cancelTransferFromConfirm?.call();
   }
@@ -4235,6 +4346,7 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     TResult Function(BuildContext context)? validateTeam,
     TResult Function(bool valueToSet)? setInitialSelection,
     TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (cancelTransferFromConfirm != null) {
@@ -4267,6 +4379,7 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     required TResult Function(_setInitialSelection value) setInitialSelection,
     required TResult Function(_cancelTransferFromConfirm value)
         cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
   }) {
     return cancelTransferFromConfirm(this);
   }
@@ -4295,6 +4408,7 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
   }) {
     return cancelTransferFromConfirm?.call(this);
   }
@@ -4323,6 +4437,7 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
     TResult Function(_setInitialSelection value)? setInitialSelection,
     TResult Function(_cancelTransferFromConfirm value)?
         cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
     required TResult orElse(),
   }) {
     if (cancelTransferFromConfirm != null) {
@@ -4334,6 +4449,254 @@ class _$_cancelTransferFromConfirm implements _cancelTransferFromConfirm {
 
 abstract class _cancelTransferFromConfirm implements TransferEvent {
   const factory _cancelTransferFromConfirm() = _$_cancelTransferFromConfirm;
+}
+
+/// @nodoc
+abstract class _$setSearchQueryCopyWith<$Res> {
+  factory _$setSearchQueryCopyWith(
+          _setSearchQuery value, $Res Function(_setSearchQuery) then) =
+      __$setSearchQueryCopyWithImpl<$Res>;
+  $Res call({String query});
+}
+
+/// @nodoc
+class __$setSearchQueryCopyWithImpl<$Res>
+    extends _$TransferEventCopyWithImpl<$Res>
+    implements _$setSearchQueryCopyWith<$Res> {
+  __$setSearchQueryCopyWithImpl(
+      _setSearchQuery _value, $Res Function(_setSearchQuery) _then)
+      : super(_value, (v) => _then(v as _setSearchQuery));
+
+  @override
+  _setSearchQuery get _value => super._value as _setSearchQuery;
+
+  @override
+  $Res call({
+    Object? query = freezed,
+  }) {
+    return _then(_setSearchQuery(
+      query: query == freezed
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_setSearchQuery implements _setSearchQuery {
+  const _$_setSearchQuery({required this.query});
+
+  @override
+  final String query;
+
+  @override
+  String toString() {
+    return 'TransferEvent.setSearchQuery(query: $query)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _setSearchQuery &&
+            const DeepCollectionEquality().equals(other.query, query));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(query));
+
+  @JsonKey(ignore: true)
+  @override
+  _$setSearchQueryCopyWith<_setSearchQuery> get copyWith =>
+      __$setSearchQueryCopyWithImpl<_setSearchQuery>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getUserPlayers,
+    required TResult Function(
+            String transferOutPlayerId, PlayerPosition playerPosition)
+        setTransferOutPlayer,
+    required TResult Function() getPlayersInSelectedPosition,
+    required TResult Function(String transferInPlayerId) transferUserPlayer,
+    required TResult Function(String transferInPlayerId)
+        transferUserPlayerInitial,
+    required TResult Function(String transferOutPlayerId)
+        transferOutUserPlayerInitial,
+    required TResult Function() cancelTransfer,
+    required TResult Function(String playerToCancelId) cancelOneTransfer,
+    required TResult Function(int gameWeekId, bool isSetTeam) saveUserPlayers,
+    required TResult Function(String filterBy, String filterValue) setFilter,
+    required TResult Function(String sortBy) setSortFilter,
+    required TResult Function(double minValue, double maxValue) setPriceFilter,
+    required TResult Function() filterByPrice,
+    required TResult Function(String chipName) setChip,
+    required TResult Function(BuildContext context) validateTeam,
+    required TResult Function(bool valueToSet) setInitialSelection,
+    required TResult Function() cancelTransferFromConfirm,
+    required TResult Function(String query) setSearchQuery,
+  }) {
+    return setSearchQuery(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function(int gameWeekId, bool isSetTeam)? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
+    TResult Function(String chipName)? setChip,
+    TResult Function(BuildContext context)? validateTeam,
+    TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
+  }) {
+    return setSearchQuery?.call(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getUserPlayers,
+    TResult Function(String transferOutPlayerId, PlayerPosition playerPosition)?
+        setTransferOutPlayer,
+    TResult Function()? getPlayersInSelectedPosition,
+    TResult Function(String transferInPlayerId)? transferUserPlayer,
+    TResult Function(String transferInPlayerId)? transferUserPlayerInitial,
+    TResult Function(String transferOutPlayerId)? transferOutUserPlayerInitial,
+    TResult Function()? cancelTransfer,
+    TResult Function(String playerToCancelId)? cancelOneTransfer,
+    TResult Function(int gameWeekId, bool isSetTeam)? saveUserPlayers,
+    TResult Function(String filterBy, String filterValue)? setFilter,
+    TResult Function(String sortBy)? setSortFilter,
+    TResult Function(double minValue, double maxValue)? setPriceFilter,
+    TResult Function()? filterByPrice,
+    TResult Function(String chipName)? setChip,
+    TResult Function(BuildContext context)? validateTeam,
+    TResult Function(bool valueToSet)? setInitialSelection,
+    TResult Function()? cancelTransferFromConfirm,
+    TResult Function(String query)? setSearchQuery,
+    required TResult orElse(),
+  }) {
+    if (setSearchQuery != null) {
+      return setSearchQuery(query);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_getUserPlayers value) getUserPlayers,
+    required TResult Function(_setTransferOutPlayer value) setTransferOutPlayer,
+    required TResult Function(_getPlayersInSelectedPosition value)
+        getPlayersInSelectedPosition,
+    required TResult Function(_transferUserPlayer value) transferUserPlayer,
+    required TResult Function(_transferUserPlayerInitial value)
+        transferUserPlayerInitial,
+    required TResult Function(_transferOutUserPlayerInitial value)
+        transferOutUserPlayerInitial,
+    required TResult Function(_cancelTransfer value) cancelTransfer,
+    required TResult Function(_cancelOneTransfer value) cancelOneTransfer,
+    required TResult Function(_saveUserPlayers value) saveUserPlayers,
+    required TResult Function(_setFilter value) setFilter,
+    required TResult Function(_setSortFilter value) setSortFilter,
+    required TResult Function(_setPriceFilter value) setPriceFilter,
+    required TResult Function(_filterByPrice value) filterByPrice,
+    required TResult Function(_setChip value) setChip,
+    required TResult Function(_validateTeam value) validateTeam,
+    required TResult Function(_setInitialSelection value) setInitialSelection,
+    required TResult Function(_cancelTransferFromConfirm value)
+        cancelTransferFromConfirm,
+    required TResult Function(_setSearchQuery value) setSearchQuery,
+  }) {
+    return setSearchQuery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_transferUserPlayerInitial value)?
+        transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
+    TResult Function(_setChip value)? setChip,
+    TResult Function(_validateTeam value)? validateTeam,
+    TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
+  }) {
+    return setSearchQuery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_getUserPlayers value)? getUserPlayers,
+    TResult Function(_setTransferOutPlayer value)? setTransferOutPlayer,
+    TResult Function(_getPlayersInSelectedPosition value)?
+        getPlayersInSelectedPosition,
+    TResult Function(_transferUserPlayer value)? transferUserPlayer,
+    TResult Function(_transferUserPlayerInitial value)?
+        transferUserPlayerInitial,
+    TResult Function(_transferOutUserPlayerInitial value)?
+        transferOutUserPlayerInitial,
+    TResult Function(_cancelTransfer value)? cancelTransfer,
+    TResult Function(_cancelOneTransfer value)? cancelOneTransfer,
+    TResult Function(_saveUserPlayers value)? saveUserPlayers,
+    TResult Function(_setFilter value)? setFilter,
+    TResult Function(_setSortFilter value)? setSortFilter,
+    TResult Function(_setPriceFilter value)? setPriceFilter,
+    TResult Function(_filterByPrice value)? filterByPrice,
+    TResult Function(_setChip value)? setChip,
+    TResult Function(_validateTeam value)? validateTeam,
+    TResult Function(_setInitialSelection value)? setInitialSelection,
+    TResult Function(_cancelTransferFromConfirm value)?
+        cancelTransferFromConfirm,
+    TResult Function(_setSearchQuery value)? setSearchQuery,
+    required TResult orElse(),
+  }) {
+    if (setSearchQuery != null) {
+      return setSearchQuery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _setSearchQuery implements TransferEvent {
+  const factory _setSearchQuery({required String query}) = _$_setSearchQuery;
+
+  String get query;
+  @JsonKey(ignore: true)
+  _$setSearchQueryCopyWith<_setSearchQuery> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

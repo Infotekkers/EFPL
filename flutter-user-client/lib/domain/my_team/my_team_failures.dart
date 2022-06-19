@@ -6,5 +6,6 @@ part 'my_team_failures.freezed.dart';
 abstract class MyTeamFailure with _$MyTeamFailure {
   const factory MyTeamFailure.serverError() = _ServerError;
   const factory MyTeamFailure.localDBError() = _LocalDBError;
+  const factory MyTeamFailure.authError() = _AuthError;
   const factory MyTeamFailure.networkError() = _NetworkError;
 }

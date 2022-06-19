@@ -1,4 +1,5 @@
 import 'package:efpl/application/my_team/myteam_bloc.dart';
+import 'package:efpl/presentation/colors.dart';
 import 'package:efpl/services/global_vars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,20 +33,19 @@ class MyTeamPlayer extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Material(
-        elevation: isTransferable
-            ? 5
-            : toBeTransferredOut
-                ? 5
-                : 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+  Widget build(BuildContext context) => Container(
+        // padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        width: 69,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: isTransferable
+              ? Colors.green[300]
+              : toBeTransferredOut
+                  ? Colors.amber[800]
+                  : Colors.white,
         ),
-        color: isTransferable
-            ? Colors.green[300]
-            : toBeTransferredOut
-                ? Colors.amber[800]
-                : Colors.white,
+
         child: GestureDetector(
           onTap: () {
             if (toBeTransferredOut) {
@@ -67,7 +67,7 @@ class MyTeamPlayer extends StatelessWidget {
               Stack(
                 children: [
                   Image.asset(
-                    "assets/images/shirt_placeholder.png",
+                    "assets/jerseys/" + eplTeamId + ".png",
                     width: 60,
                     height: 50,
                   ),
@@ -81,9 +81,9 @@ class MyTeamPlayer extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: isCaptain
-                          ? _buildCaptainBadge("C")
+                          ? _buildCaptainBadge("C", context)
                           : isViceCaptain
-                              ? _buildCaptainBadge("V")
+                              ? _buildCaptainBadge("V", context)
                               : null,
                     ),
                   ),
@@ -92,17 +92,17 @@ class MyTeamPlayer extends StatelessWidget {
                     top: 0,
                     child: availability['injuryStatus'] == '100'
                         ? Container()
-                        : _buildAvailabilityIndicator(),
+                        : _buildAvailabilityIndicator(context),
                   )
                 ],
               ),
-              _buildInfoBox(),
+              _buildInfoBox(context),
             ],
           ),
         ),
       );
 
-  _buildAvailabilityIndicator() {
+  _buildAvailabilityIndicator(context) {
     return Card(
       elevation: 2,
       color: Colors.red,
@@ -115,14 +115,17 @@ class MyTeamPlayer extends StatelessWidget {
         child: Center(
           child: Text(
             availability['injuryStatus'],
-            style: const TextStyle(color: Colors.white),
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  color: Colors.white,
+                  fontSize: 10.5,
+                ),
           ),
         ),
       ),
     );
   }
 
-  _buildInfoBox() {
+  _buildInfoBox(context) {
     return SizedBox(
       height: 50,
       width: 80,
@@ -131,13 +134,23 @@ class MyTeamPlayer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(name.split(" ")[0], overflow: TextOverflow.ellipsis),
             Text(
-              position.toUpperCase(),
-              style: const TextStyle(
-                fontSize: 12,
-                color: Colors.blueGrey,
-              ),
+              name.split(" ")[0],
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyText1!,
+            ),
+            Text(
+              position.toLowerCase() == 'gk'
+                  ? strings(context).gk
+                  : position.toLowerCase() == 'def'
+                      ? strings(context).def
+                      : position.toLowerCase() == 'mid'
+                          ? strings(context).mid
+                          : strings(context).att,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .copyWith(fontSize: 12, color: Colors.blueGrey),
             ),
           ],
         ),
@@ -145,14 +158,17 @@ class MyTeamPlayer extends StatelessWidget {
     );
   }
 
-  _buildCaptainBadge(power) {
+  _buildCaptainBadge(power, context) {
     return SizedBox(
       width: 20,
       height: 15,
       child: Center(
         child: Text(
           power,
-          style: TextStyle(color: Colors.grey[50]),
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                color: Colors.grey[50],
+                fontSize: 10.5,
+              ),
         ),
       ),
     );
@@ -170,26 +186,60 @@ class MyTeamPlayer extends StatelessWidget {
         ),
       ),
       builder: (_) => SizedBox(
-        height: 250,
+        height: 280,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Center(
-                child: Text(name),
+                child: Text(
+                  name,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.25,
+                      ),
+                ),
               ),
+              Center(
+                child: Text(
+                  "( " + eplTeamId + " )",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 12,
+                        letterSpacing: 0.25,
+                      ),
+                ),
+              ),
+              // Spacer
+              const SizedBox(
+                height: 16,
+              ),
+
               GestureDetector(
                 onTap: () => Navigator.of(context)
                     .pushNamed("/player", arguments: playerId),
                 child: Row(
                   children: [
-                    const Icon(Icons.info),
+                    const Icon(
+                      Icons.info,
+                      color: ConstantColors.primary_900,
+                    ),
                     const SizedBox(width: 5),
-                    Text(strings(context).playerInfo),
+                    Text(
+                      strings(context).playerInfo,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 15,
+                          ),
+                    ),
                   ],
                 ),
               ),
+              // Spacer
+              const SizedBox(
+                height: 16,
+              ),
+
               GestureDetector(
                 onTap: () {
                   myTeamBloc.add(MyTeamEvent.transferOptionsRequested(
@@ -198,12 +248,25 @@ class MyTeamPlayer extends StatelessWidget {
                 },
                 child: Row(
                   children: [
-                    const Icon(Icons.compare_arrows),
+                    const Icon(
+                      Icons.compare_arrows,
+                      color: ConstantColors.primary_900,
+                    ),
                     const SizedBox(width: 5),
-                    Text(strings(context).switchPlayer)
+                    Text(
+                      strings(context).switchPlayer,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 15,
+                          ),
+                    )
                   ],
                 ),
               ),
+              // Spacer
+              const SizedBox(
+                height: 16,
+              ),
+
               GestureDetector(
                 onTap: multiplier > 0
                     ? () {
@@ -213,12 +276,25 @@ class MyTeamPlayer extends StatelessWidget {
                     : () {},
                 child: Row(
                   children: [
-                    const Icon(Icons.copyright),
+                    const Icon(
+                      Icons.copyright,
+                      color: ConstantColors.primary_900,
+                    ),
                     const SizedBox(width: 5),
-                    Text(strings(context).makeCaptain),
+                    Text(
+                      strings(context).makeCaptain,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 15,
+                          ),
+                    ),
                   ],
                 ),
               ),
+              // Spacer
+              const SizedBox(
+                height: 16,
+              ),
+
               GestureDetector(
                 onTap: multiplier > 0
                     ? () {
@@ -229,9 +305,22 @@ class MyTeamPlayer extends StatelessWidget {
                     : (() {}),
                 child: Row(
                   children: [
-                    const Icon(Icons.copyright),
-                    const SizedBox(width: 5),
-                    Text(strings(context).makeViceCaptain),
+                    const SizedBox(width: 1),
+                    const Text(
+                      "Ⓥ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: ConstantColors.primary_900,
+                      ),
+                    ),
+                    const SizedBox(width: 7),
+                    Text(
+                      strings(context).makeViceCaptain,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 15,
+                          ),
+                    ),
                   ],
                 ),
               ),

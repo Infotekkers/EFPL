@@ -7,7 +7,7 @@ class CustomSnackBar {
     required String headlineText,
     required String message,
     required String snackBarType,
-    int showDuration = 5,
+    int showDuration = 3,
   }) {
     ScaffoldMessenger.of(showContext).removeCurrentSnackBar();
     return ScaffoldMessenger.of(showContext).showSnackBar(

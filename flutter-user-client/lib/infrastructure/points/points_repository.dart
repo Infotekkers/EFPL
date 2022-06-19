@@ -1,4 +1,5 @@
-import 'package:efpl/domain/fixture/fixture.dart';
+// ignore_for_file: unused_field
+
 import 'package:dartz/dartz.dart';
 import 'package:efpl/domain/points/i_points_facade.dart';
 import 'package:efpl/domain/points/points.dart';

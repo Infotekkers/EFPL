@@ -23,8 +23,9 @@ class SettingsRepository implements ISettingsRepository {
   Utility utility = Utility();
 
   @override
-  Future<Either<SettingsFailure, Settings>> getUserDetail(String userId) async {
-    return settingsRemoteDataProvider.getUserDetail(userId);
+  Future<Either<SettingsFailure, Settings>> getUserDetail(
+      String userId, String token) async {
+    return settingsRemoteDataProvider.getUserDetail(userId, token);
   }
 
   @override

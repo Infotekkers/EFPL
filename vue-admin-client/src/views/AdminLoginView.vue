@@ -4,7 +4,7 @@
     <form @submit.prevent="loginAdmin">
       <div class="email">
         <label>{{ $t("Email") }}:</label>
-        <input required type="email" v-model="loginInfo.email" />
+        <input required type="email" v-model="loginInfo.email" name="email" />
       </div>
       <div>
         <label>{{ $t("Password") }}:</label>
@@ -14,9 +14,22 @@
             required
             v-model="loginInfo.password"
             minlength="8"
+            name="password"
           />
-          <button @click="showPassword = !showPassword">
-            {{ $t("show password") }}
+          <button
+            class="toggle-password"
+            @click.prevent="showPassword = !showPassword"
+          >
+            <img
+              :src="passwordVisibleIcon.path"
+              :alt="passwordVisibleIcon.alt"
+              v-if="showPassword"
+            />
+            <img
+              :src="hiddenPasswordIcon.path"
+              :alt="hiddenPasswordIcon.alt"
+              v-else
+            />
           </button>
         </div>
       </div>
@@ -27,7 +40,7 @@
           }}</router-link>
         </p>
         <div class="submit">
-          <button>{{ $t("Login") }}</button>
+          <button name="submit">{{ $t("Login") }}</button>
         </div>
       </div>
     </form>
@@ -50,6 +63,7 @@
   background: var(--neutral-200);
   padding: var(--spacing-xlarge);
 }
+
 form {
   text-align: left;
 }
@@ -67,9 +81,15 @@ label {
   margin: var(--spacing-regular) 0 var(--spacing-2xsmall);
   font-size: var(--text-small);
 }
+
 button {
   border: 0;
 }
+
+.toggle-password img {
+  width: 25px;
+}
+
 input {
   display: block;
   padding: var(--spacing-small) var(--spacing-xsmall);
@@ -135,6 +155,8 @@ input {
 </style>
 
 <script>
+import { passwordVisibleIcon, hiddenPasswordIcon } from "@/utils/Icons";
+import store from "../store";
 export default {
   data() {
     return {
@@ -143,8 +165,12 @@ export default {
         email: "",
         password: "",
       },
-      error: "",
+
       isLoading: false,
+      regExp: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      // icons
+      passwordVisibleIcon: passwordVisibleIcon,
+      hiddenPasswordIcon: hiddenPasswordIcon,
     };
   },
   name: "AdminLoginView",
@@ -152,8 +178,16 @@ export default {
   methods: {
     loginAdmin() {
       this.isLoading = true;
-      this.$store.dispatch("loginAdmin", this.loginInfo);
-
+      if (this.regExp.test(this.loginInfo.password) === true) {
+        this.$store.dispatch("loginAdmin", this.loginInfo);
+      } else {
+        store.dispatch("Global/setNotificationInfo", {
+          showNotification: true,
+          notificationType: "error",
+          notificationMessage:
+            "Password must be 8 characters and include at least one uppercase, one lowercase, a symbol and a number",
+        });
+      }
       this.isLoading = false;
     },
   },

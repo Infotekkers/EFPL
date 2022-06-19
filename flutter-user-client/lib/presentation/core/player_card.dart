@@ -1,6 +1,5 @@
 import 'package:efpl/presentation/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class PlayerWidget extends StatelessWidget {
   final String playerName;
@@ -9,15 +8,16 @@ class PlayerWidget extends StatelessWidget {
   final String availability;
   final bool isCaptain;
   final bool isViceCaptain;
-  const PlayerWidget(
-      {Key? key,
-      required this.playerName,
-      this.teamName = "shirt.svg",
-      required this.description,
-      this.isCaptain = false,
-      this.isViceCaptain = false,
-      this.availability = ""})
-      : super(key: key);
+
+  const PlayerWidget({
+    Key? key,
+    required this.playerName,
+    this.teamName = "shirt",
+    required this.description,
+    this.isCaptain = false,
+    this.isViceCaptain = false,
+    this.availability = "",
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,8 @@ class PlayerWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
           ),
-          width: 80,
-          margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+          width: 85,
+          margin: const EdgeInsets.symmetric(vertical: 4),
           padding: const EdgeInsets.symmetric(horizontal: 3),
           child: Card(
             elevation: 0,
@@ -42,8 +42,8 @@ class PlayerWidget extends StatelessWidget {
                 Stack(
                   children: [
                     Center(
-                      child: SvgPicture.asset(
-                        "assets/icons/shirt.svg",
+                      child: Image.asset(
+                        "assets/jerseys/" + teamName + ".png",
                         width: 50,
                         height: 50,
                       ),
@@ -161,7 +161,10 @@ Widget _buildInjuryView(
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontSize: 10.5,
                       fontWeight: FontWeight.bold,
-                      color: int.parse(injuryStatus.toString()) >= 50
+                      color: int.parse(
+                                injuryStatus.toString(),
+                              ) >=
+                              50
                           ? Colors.black
                           : Colors.white,
                     ),

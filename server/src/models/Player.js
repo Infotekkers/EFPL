@@ -24,6 +24,8 @@ const scoreSchema = mongoose.Schema({
   ownGoal: { type: Number, default: 0 },
   transfersIn: { type: Number, default: 0 },
   transfersOut: { type: Number, default: 0 },
+  captainCount: { type: Number, default: 0 },
+  viceCaptainCount: { type: Number, default: 0 },
   form: { type: Number, default: 0 },
 });
 
@@ -48,14 +50,33 @@ const historySchema = mongoose.Schema({
 
 const playerSchema = mongoose.Schema({
   playerName: {
+    unique: true,
     type: String,
+    validate: /^[a-zA-Z,-,. ]*$/,
+    minlength: 4,
+    maxLength: 56,
     required: [
       true,
       "Custom Error - required Value *: Player Name is required.",
     ],
   },
+  playerNameAmh: {
+    // unique: true,
+    type: String,
+    // minlength: 4,
+    // maxLength: 56,
+    default: "",
+    // required: [
+    //   true,
+    //   "Custom Error - required Value *: Player Name Amh is required.",
+    // ],
+  },
   eplTeamId: {
     type: String,
+    minlength: 4,
+    maxLength: 72,
+    validate: /^[a-zA-Z,.,-,_ ]*$/,
+    index: true,
     required: [
       true,
       "Custom Error - required Value *: Player Team is required.",
@@ -63,6 +84,7 @@ const playerSchema = mongoose.Schema({
   },
   currentPrice: {
     type: Number,
+    min: 3.5,
     required: [
       true,
       "Custom Error - required Value *: Player Price is required.",
@@ -70,6 +92,13 @@ const playerSchema = mongoose.Schema({
   },
   position: {
     type: String,
+    index: true,
+    validate: /^[a-zA-Z,.,-,_ ]*$/,
+    enum: {
+      values: ["GK", "DEF", "MID", "ATT"],
+      message:
+        "Custom Error - Invalid ENUM Value *:{VALUE} is not allowed for game week status.",
+    },
     required: [
       true,
       "Custom Error - required Value *: Player Position is required.",

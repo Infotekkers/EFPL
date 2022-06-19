@@ -307,6 +307,7 @@ export default {
       this.showModal = true;
     },
     closeModal() {
+      this.isEditMode = false;
       this.showModal = false;
     },
     sortByID(order) {
@@ -473,6 +474,8 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
+  height: 100%;
+  min-width: 10px;
 }
 .sorter-content {
   margin-right: 8px;

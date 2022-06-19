@@ -22,7 +22,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   void _onLoadUserDetail(_LoadUserDetail e, Emitter<SettingsState> emit) async {
     emit(const SettingsState.loadInProgress());
 
-    final failureOrSuccess = await iSettingsRepository.getUserDetail(e.userId);
+    final failureOrSuccess = await iSettingsRepository.getUserDetail(
+      e.userId,
+      e.token,
+    );
     // print(failureOrSuccess);
 
     failureOrSuccess.fold(
@@ -45,7 +48,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       (failure) => false,
       (success) => true,
     )) {
-      var message = "${e.updateType} update Success";
+      var message = "${e.updateType} Updated Successfully.";
       emit(SettingsState.settingsUpdateSuccess(message));
     } else {
       emit(SettingsState.loadFailure(failureOrSuccess.foldLeft(

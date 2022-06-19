@@ -137,11 +137,9 @@ export default {
   width: 60px;
   min-width: 60px;
   min-height: 60px;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  background: yellow;
 }
 .player-container-playerName {
   width: 20%;
