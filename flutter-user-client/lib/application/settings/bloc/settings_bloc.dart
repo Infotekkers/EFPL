@@ -45,7 +45,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       (failure) => false,
       (success) => true,
     )) {
-      var message = "${e.updateType} update Success";
+      var message = "${e.updateType} Updated Successfully.";
       emit(SettingsState.settingsUpdateSuccess(message));
     } else {
       emit(SettingsState.loadFailure(failureOrSuccess.foldLeft(

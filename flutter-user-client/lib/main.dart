@@ -24,6 +24,6 @@ Future main() async {
     () {
       runApp(const AppWidget());
     },
-    // blocObserver: MyBlocObserver(),
+    blocObserver: MyBlocObserver(),
   );
 }
