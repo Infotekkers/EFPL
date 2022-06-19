@@ -141,6 +141,8 @@ aside {
   }
 
   h1 {
+    transition: opacity 800ms 500ms;
+
     text-align: left;
     color: white;
     font-size: var(--text-large);
@@ -183,7 +185,9 @@ aside {
     padding: var(--spacing-small);
 
     & h1 {
-      display: none;
+      visibility: hidden;
+      height: 0;
+      opacity: 0;
     }
     & .sidebar__link {
       max-height: 50px;
