@@ -9,36 +9,27 @@ import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: ISettingsRepository)
 class SettingsRepository implements ISettingsRepository {
-  final UserDetailLocalDataProvider _userDetailLocalDataProvider;
-  final UserDetailRemoteDataProvider _userDetailRemoteDataProvider;
+  final SettingsLocalDataProvider _settingsLocalDataProvider;
+  final UserDetailRemoteDataProvider _settingsRemoteDataProvider;
 
   SettingsRepository(
-      this._userDetailLocalDataProvider, this._userDetailRemoteDataProvider);
+      this._settingsLocalDataProvider, this._settingsRemoteDataProvider);
 
-  UserDetailLocalDataProvider get userDetailLocalDataProvider =>
-      _userDetailLocalDataProvider;
-  UserDetailRemoteDataProvider get userDetailRemoteDataProvider =>
-      _userDetailRemoteDataProvider;
+  SettingsLocalDataProvider get settingsLocalDataProvider =>
+      _settingsLocalDataProvider;
+  UserDetailRemoteDataProvider get settingsRemoteDataProvider =>
+      _settingsRemoteDataProvider;
 
   Utility utility = Utility();
 
   @override
-  Future<Either<SettingsFailure, UserDetail>> getUserDetail(
-      String userId) async {
-    // if (await utility.hasInternetConnection()) {
-    return userDetailRemoteDataProvider.getUserDetail(userId);
-    // } else {
-    //   return myTeamLocalDataProvider.getUserTeam(userId, gameweekId);
-    // }
+  Future<Either<SettingsFailure, Settings>> getUserDetail(String userId) async {
+    return settingsRemoteDataProvider.getUserDetail(userId);
   }
 
   @override
-  Future<Either<SettingsFailure, Unit>> updateUserDetail(
-      UserDetail userDetail, String userId) async {
-    // if (await utility.hasInternetConnection()) {
-    return userDetailRemoteDataProvider.updateUserDetail(userDetail, userId);
-    // } else {
-    //   return myTeamLocalDataProvider.saveUserTeam(myTeam, userId);
-    // }
+  Future<Either<SettingsFailure, Unit>> update(
+      Settings settings, String userId) async {
+    return settingsRemoteDataProvider.updateUserDetail(settings, userId);
   }
 }

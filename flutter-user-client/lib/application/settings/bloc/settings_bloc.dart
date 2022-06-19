@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:efpl/domain/settings/settings.dart';
 import 'package:efpl/domain/settings/settings_failures.dart';
 import 'package:efpl/domain/settings/i_settings_repository.dart';
-import 'package:efpl/domain/settings/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -17,7 +16,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc(this.iSettingsRepository)
       : super(const SettingsState.initial()) {
     on<_LoadUserDetail>(_onLoadUserDetail);
-    on<_UpdateUserDetail>(_onUpdateUserDetail);
+    on<_UpdateSettings>(_onUpdateUserDetail);
   }
 
   void _onLoadUserDetail(_LoadUserDetail e, Emitter<SettingsState> emit) async {
@@ -37,16 +36,17 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   void _onUpdateUserDetail(
-      _UpdateUserDetail e, Emitter<SettingsState> emit) async {
+      _UpdateSettings e, Emitter<SettingsState> emit) async {
     emit(const SettingsState.loadInProgress());
     final failureOrSuccess =
-        await iSettingsRepository.updateUserDetail(e.userDetail, e.userId);
+        await iSettingsRepository.update(e.settings, e.userId);
 
     if (failureOrSuccess.fold(
       (failure) => false,
       (success) => true,
     )) {
-      emit(SettingsState.update(e.userDetail));
+      var message = "${e.updateType} Updated Successfully.";
+      emit(SettingsState.settingsUpdateSuccess(message));
     } else {
       emit(SettingsState.loadFailure(failureOrSuccess.foldLeft(
           const SettingsFailure.localDBError(), (failure, r) => failure)));

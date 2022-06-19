@@ -15,18 +15,17 @@ class UserDetailRemoteDataProvider {
 
   UserDetailRemoteDataProvider();
 
-  Future<Either<SettingsFailure, UserDetail>> getUserDetail(
-      String userId) async {
+  Future<Either<SettingsFailure, Settings>> getUserDetail(String userId) async {
     final Uri url = Uri.parse("$_baseUrl/user/fetchOne/$userId");
 
     try {
       final response = await client!.get(url);
 
       if (response.statusCode == 200) {
-        UserDetailDto userDetailDto =
-            UserDetailDto.fromJson(jsonDecode(response.body));
+        SettingsDto settingsDto =
+            SettingsDto.fromJson(jsonDecode(response.body));
 
-        return right(userDetailDto.toDomain());
+        return right(settingsDto.toDomain());
       }
 
       return left(const SettingsFailure.serverError());
@@ -36,22 +35,16 @@ class UserDetailRemoteDataProvider {
   }
 
   Future<Either<SettingsFailure, Unit>> updateUserDetail(
-      UserDetail userDetail, String userId) async {
-    final Uri url = Uri.parse("$_baseUrl/updateUser/$userId");
-
-    UserDetailDto userDetailDto = UserDetailDto.fromDomain(userDetail);
-
-    final outgoingJson = jsonEncode({
-      "userId": userId,
-      "data": {
-        "IncomingUserDetail": userDetailDto.toJson(),
-      }
-    });
+      Settings settings, String userId) async {
+    final Uri url = Uri.parse("$_baseUrl/user/updateUser/$userId");
+    SettingsDto settingsDto = SettingsDto.fromDomain(settings);
+    final outgoingJson = jsonEncode(
+      settingsDto.toJson(),
+    );
 
     try {
-      final response = await client!.put(url,
+      final response = await client!.patch(url,
           body: outgoingJson, headers: {"Content-Type": "application/json"});
-
       if (response.statusCode == 200) {
         return right(unit);
       }

@@ -1,159 +1,366 @@
 import 'package:efpl/application/auth/auth/auth_bloc.dart';
+import 'package:efpl/application/settings/bloc/settings_bloc.dart';
 import 'package:efpl/application/util/util_bloc.dart';
 import 'package:efpl/domain/auth/user.dart';
-import 'package:efpl/infrastructure/auth/auth_repository.dart';
+import 'package:efpl/domain/settings/settings.dart';
 import 'package:efpl/presentation/settings/action_types.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../domain/auth/i_auth_repository.dart';
+import '../../domain/settings/value_objects.dart';
+import '../../injectable.dart';
+import '../../services/snack_bar.dart';
 import '../colors.dart';
+import '../core/widgets/bouncing_ball_loading_indicator.dart';
 
+// ignore: must_be_immutable
 class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key, required this.user}) : super(key: key);
-  final User user;
+  SettingsView({
+    Key? key,
+  }) : super(key: key);
+  User? user;
   @override
   Widget build(BuildContext context) {
     // Get The bloc value from the provider
+    var state = BlocProvider.of<AuthBloc>(context).state;
+    if (state is Authenticated) {
+      user = state.user;
+    }
     final UtilBloc _utilBloc = BlocProvider.of<UtilBloc>(context);
-    // _utilBloc.add(const UtilEvent.setDefaultLocale());
-    return BlocConsumer<UtilBloc, UtilState>(
-      listener: (context, state) {},
+
+    _utilBloc.add(
+      const UtilEvent.setDefaultLocale(),
+    );
+    return BlocConsumer<SettingsBloc, SettingsState>(
+      listener: (context, state) {
+        state.maybeMap(
+            loadFailure: ((value) => {}),
+            loadSuccess: (value) {},
+            settingsUpdateSuccess: (value) {
+              CustomSnackBar().showCustomSnackBar(
+                showContext: context,
+                headlineText: "Update Status",
+                message: value.message,
+                snackBarType: "success",
+              );
+              BlocProvider.of<SettingsBloc>(context).add(
+                SettingsEvent.loadUserDetail(
+                  user!.id.getOrCrash(),
+                ),
+              );
+            },
+            orElse: () {});
+      },
       builder: (context, state) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Icon(
-                    Icons.person,
-                    size: 50,
-                    color: Color.fromARGB(255, 18, 140, 240),
-                  ),
-                  Text(
-                    user.userName.getOrCrash(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    user.email.getOrCrash(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(fontSize: 20),
-                  ),
-                ],
+        return state.map(
+          initial: (_) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pushNamed(context, "/home");
+              return true;
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    }),
+                title: Text(
+                  "Settings",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.blue[50],
+                ),
+                backgroundColor: Colors.blue[50],
+                foregroundColor: ConstantColors.primary_900,
+                elevation: 0,
+              ),
+              body: const Center(
+                child: Text("initial"),
               ),
             ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                UserDetailRow(
-                  title: "Team Name",
-                  value: user.teamName.getOrCrash(),
+          ),
+          loadFailure: (_) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pushNamed(context, "/home");
+              return true;
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    }),
+                title: Text(
+                  "Settings",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                 ),
-                UserDetailRow(
-                  title: "Favorite Team",
-                  value: user.favouriteEplTeam.getOrCrash(),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.blue[50],
                 ),
-              ],
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height / 2,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.blue[50],
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
+                backgroundColor: Colors.blue[50],
+                foregroundColor: ConstantColors.primary_900,
+                elevation: 0,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              body: const Center(
+                child: Text("Load failure"),
+              ),
+            ),
+          ),
+          settingsUpdateSuccess: (_) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pushNamed(context, "/home");
+              return true;
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    }),
+                title: Text(
+                  "Settings",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.blue[50],
+                ),
+                backgroundColor: Colors.blue[50],
+                foregroundColor: ConstantColors.primary_900,
+                elevation: 0,
+              ),
+              body: Container(),
+            ),
+          ),
+          loadInProgress: (_) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pushNamed(context, "/home");
+              return true;
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    }),
+                title: Text(
+                  "Settings",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.blue[50],
+                ),
+                backgroundColor: Colors.blue[50],
+                foregroundColor: ConstantColors.primary_900,
+                elevation: 0,
+              ),
+              body: const BouncingBallLoadingIndicator(),
+            ),
+          ),
+          loadSuccess: (state) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pushNamed(context, "/home");
+              return true;
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    }),
+                title: Text(
+                  "Settings",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.blue[50],
+                ),
+                backgroundColor: Colors.blue[50],
+                foregroundColor: ConstantColors.primary_900,
+                elevation: 0,
+              ),
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ActionWidget(
-                    icon: Icons.group,
-                    label: "Update team",
-                    onTap: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(10),
-                          ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Icon(
+                          Icons.person,
+                          size: 50,
+                          color: Color.fromARGB(255, 18, 140, 240),
                         ),
-                        context: context,
-                        builder: (context) => Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: BottomSheetWidget(
-                            label: "update team",
-                            initialValue: user.teamName.getOrCrash(),
-                          ),
+                        Text(
+                          state.settings.userName.getOrCrash(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
                         ),
-                      );
-                    },
+                        Text(
+                          user!.email.getOrCrash(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontSize: 20),
+                        ),
+                      ],
+                    ),
                   ),
-                  ActionWidget(
-                    icon: Icons.favorite_border_sharp,
-                    label: "Update Favorite team",
-                    onTap: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(10),
-                          ),
-                        ),
-                        context: context,
-                        builder: (context) => Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: BottomSheetWidget(
-                            label: updateFavoriteTeam,
-                            initialValue: user.favouriteEplTeam.getOrCrash(),
-                          ),
-                        ),
-                      );
-                    },
+                  const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      UserDetailRow(
+                        title: "Team Name",
+                        value: state.settings.teamName.getOrCrash(),
+                      ),
+                      UserDetailRow(
+                        title: "Favorite Team",
+                        value: state.settings.favouriteEplTeam.getOrCrash(),
+                      ),
+                    ],
                   ),
-                  ActionWidget(
-                    icon: Icons.assignment_ind,
-                    label: updateTeamName,
-                    onTap: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(10),
-                          ),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 2,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[50],
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ActionWidget(
+                          icon: Icons.group,
+                          label: "Update Team Name",
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(10),
+                                ),
+                              ),
+                              context: context,
+                              builder: (context) => Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: BottomSheetWidget(
+                                    label: updateTeamName,
+                                    userId: user!.id.getOrCrash(),
+                                    initialValue:
+                                        state.settings.teamName.getOrCrash(),
+                                    selectedTeam: state
+                                        .settings.favouriteEplTeam
+                                        .getOrCrash(),
+                                    settings: state.settings),
+                              ),
+                            );
+                          },
                         ),
-                        context: context,
-                        builder: (context) => Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: BottomSheetWidget(
-                            label: updateUserName,
-                            initialValue: user.userName.getOrCrash(),
-                          ),
+                        ActionWidget(
+                          icon: Icons.favorite_border_sharp,
+                          label: "Update Favorite team",
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(10),
+                                ),
+                              ),
+                              context: context,
+                              builder: (context) => Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: BottomSheetWidget(
+                                  label: updateFavoriteTeam,
+                                  userId: user!.id.getOrCrash(),
+                                  initialValue: state.settings.favouriteEplTeam
+                                      .getOrCrash(),
+                                  settings: state.settings,
+                                  selectedTeam: state.settings.favouriteEplTeam
+                                      .getOrCrash(),
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                  ActionWidget(
-                    icon: Icons.logout,
-                    label: "Logout",
-                    onTap: () {},
+                        ActionWidget(
+                          icon: Icons.assignment_ind,
+                          label: updateUserName,
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(10),
+                                ),
+                              ),
+                              context: context,
+                              builder: (context) => Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: BottomSheetWidget(
+                                  label: updateUserName,
+                                  userId: user!.id.getOrCrash(),
+                                  initialValue:
+                                      state.settings.userName.getOrCrash(),
+                                  selectedTeam: state.settings.favouriteEplTeam
+                                      .getOrCrash(),
+                                  settings: state.settings,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        ActionWidget(
+                          icon: Icons.logout,
+                          label: "Logout",
+                          onTap: () {
+                            getIt<IAuthRepository>().removeUser();
+                            Navigator.popAndPushNamed(context, "/sign-in");
+                          },
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
-            )
-          ],
+            ),
+          ),
         );
       },
     );
@@ -165,21 +372,24 @@ class BottomSheetWidget extends StatefulWidget {
   BottomSheetWidget({
     required this.label,
     required this.initialValue,
+    required this.settings,
+    required this.userId,
+    required this.selectedTeam,
     Key? key,
   }) : super(key: key);
   final String label;
   final String initialValue;
-
+  final Settings settings;
+  final String userId;
+  String selectedTeam;
   @override
   State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
 }
 
 class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   var valueController = TextEditingController();
-  var selectedTeam = "";
   @override
   void initState() {
-    selectedTeam = widget.initialValue;
     valueController.text = widget.initialValue;
     super.initState();
   }
@@ -197,7 +407,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.label,
+                "Update ${widget.label}",
                 style: const TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(255, 47, 108, 212),
@@ -217,9 +427,15 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     autofocus: true,
+                    maxLength: widget.label == updateTeamName ? 10 : null,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Required field";
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                       // prefixIcon: Icon(Icons.email),
-                      labelText: AppLocalizations.of(context)!.email,
                       labelStyle: Theme.of(context)
                           .textTheme
                           .bodyText1!
@@ -245,7 +461,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               : Flexible(
                   child: // Drop Down
                       DropdownButton<String>(
-                    value: selectedTeam,
+                    value: widget.selectedTeam,
                     // value: "Saint George S.C",
                     isExpanded: true,
                     items: [
@@ -275,7 +491,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     }).toList(),
                     onChanged: (value) {
                       setState(() {
-                        selectedTeam = value!;
+                        widget.selectedTeam = value!;
                       });
                     },
                   ),
@@ -285,7 +501,31 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               margin: const EdgeInsets.only(top: 10),
               height: 40,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  var teamName = widget.settings.teamName.getOrCrash();
+                  var userName = widget.settings.userName.getOrCrash();
+                  switch (widget.label) {
+                    case updateUserName:
+                      userName = valueController.text;
+                      break;
+                    case updateTeamName:
+                      teamName = valueController.text;
+                      break;
+                    default:
+                      break;
+                  }
+                  var settings = Settings(
+                    userName: UserName(userName),
+                    teamName: TeamName(teamName),
+                    favouriteEplTeam: FavouriteEplTeam(widget.selectedTeam),
+                  );
+
+                  BlocProvider.of<SettingsBloc>(context).add(
+                    SettingsEvent.updateUserDetail(
+                        settings, widget.userId, widget.label),
+                  );
+                  Navigator.pop(context);
+                },
                 child: const Text("Save"),
               ),
             ),
@@ -339,12 +579,17 @@ class UserDetailRow extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              value,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Flexible(
+              child: Text(
+                value,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
             ),
-            Text(
-              title,
+            Flexible(
+              child: Text(
+                title,
+              ),
             ),
           ],
         ),

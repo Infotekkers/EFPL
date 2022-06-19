@@ -14,6 +14,8 @@ import 'package:efpl/presentation/transfers/widgets/transfer_list_view.dart';
 
 import 'package:flutter/material.dart';
 
+import '../settings/settings_view.dart';
+
 class AppRouter {
   //
 
@@ -34,5 +36,6 @@ class AppRouter {
     "/request-reset": (context) => const RequestResetPage(),
     "/sign-in": (context) => const SignInPage(),
     "/register": (context) => const RegisterPage(),
+    "/settings": (context) => SettingsView(),
   };
 }

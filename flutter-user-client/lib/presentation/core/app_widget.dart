@@ -9,12 +9,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import '../../application/settings/bloc/settings_bloc.dart';
+
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final AppRouter _appRouter = AppRouter();
+    final _settingsBloc = getIt<SettingsBloc>();
 
     return MultiBlocProvider(
       providers: [
@@ -29,6 +32,9 @@ class AppWidget extends StatelessWidget {
             ..add(
               const AuthEvent.authCheckRequested(),
             ),
+        ),
+        BlocProvider.value(
+          value: _settingsBloc,
         ),
       ],
       child: BlocConsumer<UtilBloc, UtilState>(

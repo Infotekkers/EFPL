@@ -5,5 +5,5 @@ abstract class SettingsEvent with _$SettingsEvent {
   const factory SettingsEvent.loadUserDetail(String userId) = _LoadUserDetail;
 
   const factory SettingsEvent.updateUserDetail(
-      UserDetail userDetail, String userId) = _UpdateUserDetail;
+      Settings settings, String userId, String updateType) = _UpdateSettings;
 }
