@@ -93,3 +93,7 @@ vue-client-admin/*.ntvs*
 vue-client-admin/*.njsproj
 vue-client-admin/*.sln
 vue-client-admin/*.sw?
+
+###################### Flask ########################
+ml_server/mlenv
+ml_server/.env
