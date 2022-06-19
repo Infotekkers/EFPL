@@ -560,27 +560,21 @@ const endFixture = asyncHandler(async function (req, res) {
     }
 
     // update match
-    // match
-    //   .save()
-    //   .then(() =>
-    //     res.send(
-    //       `Full time for match ${homeTeam.teamName} vs ${awayTeam.teamName}!`
-    //     )
-    //   )
-    //   .catch((err) => {
-    //     res.status(500).send("Try again!");
-    //     console.log(err);
-    //   });
-
-    res.send(
-      `Full time for match ${homeTeam.teamName} vs ${awayTeam.teamName}!`
-    );
+    match
+      .save()
+      .then(() =>
+        res.send(
+          `Full time for match ${homeTeam.teamName} vs ${awayTeam.teamName}!`
+        )
+      )
+      .catch((err) => {
+        res.status(500).send("Try again!");
+        console.log(err);
+      });
 
     // send socket update
     const io = require("../../server");
     io.emit("fixtureUpdated");
-
-    await getFDR(match);
 
     // ge active gw
     const activeGw = await GameWeek.find({ status: "active" });
@@ -603,6 +597,9 @@ const endFixture = asyncHandler(async function (req, res) {
       await GameWeek.findOne({ gameWeekNumber: activeGwId + 1 }).updateOne({
         status: "active",
       });
+
+      // get fdr for next week
+      await getFDR(match);
     }
   }
   // if no match
@@ -1045,11 +1042,31 @@ async function getFDR(match) {
     const homeTeamFormData = TeamData.formData[getForm(12)];
     const awayTeamFormData = TeamData.formData[getForm(12)];
 
-    const homeTeamGoalsForData = getGoalsScore(4);
-    const awayTeamGoalsForData = getGoalsScore(4);
+    const homeTeamGoalsForData = [
+      getGoalsScore(4),
+      getGoalsScore(4),
+      getGoalsScore(4),
+      getGoalsScore(4),
+    ];
+    const awayTeamGoalsForData = [
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+    ];
 
-    const homeTeamGoalsAgainst = getGoalsAgainst(4);
-    const awayTeamGoalsAgainst = getGoalsAgainst(4);
+    const homeTeamGoalsAgainst = [
+      getGoalsScore(4),
+      getGoalsScore(4),
+      getGoalsScore(4),
+      getGoalsScore(4),
+    ];
+    const awayTeamGoalsAgainst = [
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+      getGoalsAgainst(4),
+    ];
 
     allFixturesToSend.push({
       form: {
@@ -1070,20 +1087,26 @@ async function getFDR(match) {
   }
 
   // make api calls
-  // const mlCall = await axios.post(MLURL + "/fdr", {
-  //   method: "POST",
-  //   data: allFixturesToSend,
-  // });
-  // let fdr;
-  // if (mlCall.status === 200) {
-  //   fdr = mlCall.data.fdr;
-  // } else {
-  //   fdr = [1, 2, 1, 3, 1, 1.2, 2];
-  // }
+  const mlCall = await axios.post(MLURL + "/fdr", {
+    method: "POST",
+    data: allFixturesToSend,
+  });
+  let fdr;
+  if (mlCall.status === 200) {
+    fdr = mlCall.data.fdr;
+  } else {
+    fdr = [1, 2, 1, 3, 1, 1, 2, 2];
+  }
 
-  // console.log(fdr);
+  for (let j = 0; j < fixturesToPredict.length; j++) {
+    const finalFDR = fdr[j] === 0 ? 1 : fdr[j] > 5 ? 5 : fdr[j];
+    await FixtureModel.updateOne(
+      { matchId: fixturesToPredict[j].matchId },
+      { $set: { fdr: finalFDR } }
+    );
+  }
 
-  // return allFixturesToSend;
+  return allFixturesToSend;
 }
 
 function getForm(max) {

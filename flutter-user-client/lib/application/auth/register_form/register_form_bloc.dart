@@ -131,12 +131,22 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
         final passMatch =
             state.password == state.confirmPassword ? true : false;
 
+        // check validity
         if (isEmailValid &&
             isPassValid &&
             isConfirmPassValid &&
             isUserName &&
             isTeamNameValid) {
-          if (passMatch == true) {
+          // match password
+          if (passMatch == false) {
+            emit(
+              state.copyWith(
+                  isSubmitting: false,
+                  showErrorMessages: true,
+                  authFailureOrSuccessOption:
+                      some(left(const AuthFailure.passwordDontMatch()))),
+            );
+          } else {
             emit(
               state.copyWith(
                 isSubmitting: true,
@@ -157,10 +167,10 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
           }
           emit(
             state.copyWith(
-                isSubmitting: false,
-                showErrorMessages: true,
-                authFailureOrSuccessOption:
-                    some(left(const AuthFailure.passwordDontMatch()))),
+              isSubmitting: false,
+              showErrorMessages: true,
+              authFailureOrSuccessOption: none(),
+            ),
           );
         }
 

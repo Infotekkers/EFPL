@@ -205,5 +205,5 @@ void main() {
     tearDownAll(() async {
       await driver.close();
     });
-  });
+  },timeout: Timeout.none);
 }
