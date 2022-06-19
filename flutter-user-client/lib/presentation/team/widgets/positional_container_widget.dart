@@ -21,6 +21,14 @@ class PositionalContainerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> playerIds = players.keys.toList();
     playerIds.sort((a, b) => a.compareTo(b));
+    if (position == 'sub') {
+      for (var playerId in playerIds) {
+        if (players[playerId]['position'] == 'gk') {
+          playerIds.remove(playerId);
+          playerIds.insert(0, playerId);
+        }
+      }
+    }
 
     return Expanded(
       child: SizedBox(

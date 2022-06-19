@@ -140,7 +140,13 @@ class MyTeamPlayer extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyText1!,
             ),
             Text(
-              position.toUpperCase(),
+              position.toLowerCase() == 'gk'
+                  ? strings(context).gk
+                  : position.toLowerCase() == 'def'
+                      ? strings(context).def
+                      : position.toLowerCase() == 'mid'
+                          ? strings(context).mid
+                          : strings(context).att,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1!

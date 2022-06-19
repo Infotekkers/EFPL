@@ -1,5 +1,6 @@
 import 'package:efpl/application/my_team/myteam_bloc.dart';
 import 'package:efpl/domain/my_team/value_objects.dart' as team_vo;
+import 'package:efpl/services/global_vars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,7 +11,7 @@ class ChipsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Chips"),
+      title: Text(strings(context).chips),
       titleTextStyle: TextStyle(
         color: Colors.blue[900],
         fontSize: 24,
@@ -37,7 +38,7 @@ class ChipsDialog extends StatelessWidget {
                 },
                 child: const Icon(Icons.adjust_sharp),
               ),
-              const Text("Triple Captain")
+              Text(strings(context).tc)
             ],
           ),
           Wrap(
@@ -57,7 +58,7 @@ class ChipsDialog extends StatelessWidget {
                 },
                 child: const Icon(Icons.trending_up_rounded),
               ),
-              const Text("Bench Boost")
+              Text(strings(context).bb)
             ],
           ),
           Wrap(
@@ -77,7 +78,7 @@ class ChipsDialog extends StatelessWidget {
                 },
                 child: const Icon(Icons.av_timer),
               ),
-              const Text("Free Hit")
+              Text(strings(context).fh)
             ],
           ),
           Wrap(
@@ -97,7 +98,7 @@ class ChipsDialog extends StatelessWidget {
                 },
                 child: const Icon(Icons.fast_rewind),
               ),
-              const Text("Wildcard")
+              Text(strings(context).wc)
             ],
           ),
         ],
