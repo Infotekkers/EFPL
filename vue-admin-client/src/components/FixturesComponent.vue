@@ -144,15 +144,14 @@
 
       <!-- Content -->
       <div class="fixtures-content">
-        <div class="gameweek-title">
-          {{ $t("Ethiopian Premier League") }} - {{ getSeason }}
-          {{ $t("Fixtures") }}
-        </div>
-        <div class="gameweek-add-new" @click="activateModal" data-cp="add-gw">
-          <!-- <div>
-            <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
-          </div> -->
-          {{ $t("Add") }}
+        <div class="actions-header">
+          <div class="gameweek-title">
+            {{ $t("Ethiopian Premier League") }} - {{ getSeason }}
+            {{ $t("Fixtures") }}
+          </div>
+          <div class="gameweek-add-new" @click="activateModal" data-cp="add-gw">
+            {{ $t("Add") }}
+          </div>
         </div>
         <div
           v-if="
@@ -197,7 +196,12 @@
 </template>
 
 <style scoped>
-.gameweek-dropdown {
+.actions-header {
+  display: flex;
+  align-items: center;
+}
+
+.actions-header .gameweek-dropdown {
   width: 100%;
   cursor: pointer;
 
@@ -277,7 +281,6 @@ input[type="radio"]:checked + label {
 .gameweek-container {
   display: grid;
   grid-template-columns: 300px minmax(900px, 1fr);
-  /* border: 1px solid black; */
   padding: 24px 14px 24px 14px;
 }
 

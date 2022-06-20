@@ -8,169 +8,213 @@
     />
     <!-- Modal -->
 
-    <input
-      type="text"
-      class="team-search-bar"
-      @keyup="searchBarFilter"
-      placeholder="Search Term Here..."
-      ref="searchBar"
-    />
-
-    <!-- Header -->
-    <div class="teams-header-container">
-      <!-- Title -->
-      <div class="teams-title">
-        {{ $t("Ethiopian Premier League") }} - {{ getSeason }} {{ $t("Teams") }}
+    <div class="teams-control">
+      <div class="filter-group">
+        <h3>Find teams</h3>
+        <input
+          type="search"
+          class="team-search-bar"
+          @keyup="searchBarFilter"
+          placeholder="Start typing..."
+          ref="searchBar"
+        />
       </div>
+    </div>
 
-      <!-- Add Button -->
-      <div class="teams-add-new" @click="activateModal">
-        <div>
-          <img :src="addIcon.path" :alt="addIcon.alt" class="small-icon" />
+    <div class="teams-content">
+      <!-- Header -->
+      <div class="teams-header-container">
+        <!-- Title -->
+        <div class="teams-title">
+          {{ $t("Ethiopian Premier League") }} - {{ getSeason }}
+          {{ $t("Teams") }}
         </div>
-        {{ $t("Add") }}
+        <!-- Add Button -->
+        <div class="teams-add-new" @click="activateModal">
+          {{ $t("Add") }}
+        </div>
       </div>
-    </div>
-    <!-- Header -->
-
-    <!-- Sorter Header -->
-    <div class="teams-sorter-header">
-      <!-- ID -->
-      <div class="teams-id-sorter">
-        <span @click="sortByID(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-        <span class="sorter-content">
-          {{ $t("ID") }}
-        </span>
-        <span @click="sortByID(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
+      <!-- Header -->
+      <!-- Sorter Header -->
+      <div class="teams-sorter-header">
+        <!-- ID -->
+        <div class="teams-id-sorter">
+          <span @click="sortByID(-1)">
+            <img
+              :src="sortDownIcon.path"
+              :alt="sortDownIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+          <span class="sorter-content">
+            {{ $t("ID") }}
+          </span>
+          <span @click="sortByID(1)">
+            <img
+              :src="sortUpIcon.path"
+              :alt="sortUpIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+        </div>
+        <!-- ID -->
+        <div class="teams-logo-sorter">{{ $t("Logo") }}</div>
+        <!-- Name -->
+        <div class="teams-name-sorter">
+          <span @click="sortByName(-1)">
+            <img
+              :src="sortDownIcon.path"
+              :alt="sortDownIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+          <span class="sorter-content">
+            {{ $t("Team") }}
+          </span>
+          <span @click="sortByName(1)">
+            <img
+              :src="sortUpIcon.path"
+              :alt="sortUpIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+        </div>
+        <!-- Name -->
+        <!-- City -->
+        <div class="teams-city-sorter">
+          <span @click="sortByCity(-1)">
+            <img
+              :src="sortDownIcon.path"
+              :alt="sortDownIcon.alt"
+              class="extra-small-icon"
+          /></span>
+          <span class="sorter-content"> {{ $t("City") }}</span>
+          <span @click="sortByCity(1)">
+            <img
+              :src="sortUpIcon.path"
+              :alt="sortUpIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+        </div>
+        <!-- City -->
+        <!-- Stadium -->
+        <div class="teams-stadium-sorter">
+          <span @click="sortbyStadium(-1)">
+            <img
+              :src="sortDownIcon.path"
+              :alt="sortDownIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+          <span class="sorter-content"> {{ $t("Stadium") }}</span>
+          <span @click="sortbyStadium(1)">
+            <img
+              :src="sortUpIcon.path"
+              :alt="sortUpIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+        </div>
+        <!-- Stadium -->
+        <!-- Date -->
+        <div class="teams-founded-sorter">
+          <span @click="sortByFoundedDate(-1)">
+            <img
+              :src="sortDownIcon.path"
+              :alt="sortDownIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+          <span class="sorter-content"> {{ $t("Year") }}</span>
+          <span @click="sortByFoundedDate(1)">
+            <img
+              :src="sortUpIcon.path"
+              :alt="sortUpIcon.alt"
+              class="extra-small-icon"
+            />
+          </span>
+        </div>
+        <!-- Date -->
+        <div class="teams-controls-sorter">{{ $t("Controls") }}</div>
+      </div>
+      <!-- Sorter Header -->
+      <div
+        class="teams-container"
+        v-if="getAllTeams.length > 0 && isTeamLoading == false"
+      >
+        <TeamComponent
+          v-for="team in getAllTeams"
+          :key="team.teamId"
+          :team="team"
+          @activateModalEdit="activateModalEdit"
+        />
+      </div>
+      <!-- No items -->
+      <div
+        class="no-teams-container"
+        v-else-if="getAllTeams.length == 0 && isTeamLoading == false"
+      >
+        {{ $t("No") }} {{ $t("Teams") }}
       </div>
 
-      <!-- ID -->
-      <div class="teams-logo-sorter">{{ $t("Logo") }}</div>
-
-      <!-- Name -->
-      <div class="teams-name-sorter">
-        <span @click="sortByName(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-        <span class="sorter-content">
-          {{ $t("Team") }}
-        </span>
-        <span @click="sortByName(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
+      <!-- Loading -->
+      <div v-else-if="isTeamLoading == true" class="no-teams-container">
+        <SpinnerComponent />
       </div>
-      <!-- Name -->
-
-      <!-- City -->
-      <div class="teams-city-sorter">
-        <span @click="sortByCity(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-        /></span>
-        <span class="sorter-content"> {{ $t("City") }}</span>
-        <span @click="sortByCity(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- City -->
-
-      <!-- Stadium -->
-      <div class="teams-stadium-sorter">
-        <span @click="sortbyStadium(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-        <span class="sorter-content"> {{ $t("Stadium") }}</span>
-        <span @click="sortbyStadium(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-      <!-- Stadium -->
-
-      <!-- Date -->
-      <div class="teams-founded-sorter">
-        <span @click="sortByFoundedDate(-1)">
-          <img
-            :src="sortDownIcon.path"
-            :alt="sortDownIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-        <span class="sorter-content"> {{ $t("Year") }}</span>
-        <span @click="sortByFoundedDate(1)">
-          <img
-            :src="sortUpIcon.path"
-            :alt="sortUpIcon.alt"
-            class="extra-small-icon"
-          />
-        </span>
-      </div>
-
-      <!-- Date -->
-      <div class="teams-controls-sorter">{{ $t("Controls") }}</div>
-    </div>
-    <!-- Sorter Header -->
-    <div
-      class="teams-container"
-      v-if="getAllTeams.length > 0 && isTeamLoading == false"
-    >
-      <TeamComponent
-        v-for="team in getAllTeams"
-        :key="team.teamId"
-        :team="team"
-        @activateModalEdit="activateModalEdit"
-      />
-    </div>
-
-    <!-- No items -->
-    <div
-      class="no-teams-container"
-      v-else-if="getAllTeams.length == 0 && isTeamLoading == false"
-    >
-      {{ $t("No") }} {{ $t("Teams") }}
-    </div>
-
-    <!-- Loading -->
-    <div v-else-if="isTeamLoading == true" class="no-teams-container">
-      <SpinnerComponent />
     </div>
   </main>
 </template>
 
 <style scoped>
+.teams-main-container {
+  display: grid;
+  grid-template-columns: 300px minmax(900px, 1fr);
+  padding: 24px 14px 24px 14px;
+}
+
+.teams-control,
+.teams-content {
+  padding: var(--spacing-small);
+}
+
+.teams-content {
+  background: var(--neutral-50);
+}
+
+.filter-group {
+  margin: var(--spacing-regular) 0;
+}
+
+.filter-group:first-child {
+  margin-top: 0;
+}
+
+h3 {
+  text-align: left;
+  font-size: var(--text-small);
+  font-weight: 400;
+  margin-bottom: var(--spacing-2xsmall);
+}
+
+.team-search-bar {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+
+  padding: var(--spacing-small) var(--spacing-xsmall);
+  outline: none;
+  border: none;
+  border-bottom: var(--spacing-3xsmall) solid var(--neutral-900);
+
+  background: var(--neutral-400);
+  font-size: var(--text-base);
+}
+
+.team-search-bar::placeholder {
+  color: var(--neutral-900);
+}
+
 /* Icons */
 .extra-small-icon {
   width: 7px;
@@ -186,19 +230,12 @@
 .teams-main-container {
   width: 100%;
 }
-.team-search-bar {
-  width: 20%;
-  height: 32px;
-  margin-left: 80%;
-  padding: 0 3px;
-  outline: none;
-}
+
 .teams-header-container {
   margin-top: var(--spacing-medium);
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 
   /*  */
   position: relative;
@@ -208,23 +245,24 @@
   font-size: var(--text-medium);
 }
 .teams-add-new {
-  font-size: 16px;
-  position: absolute;
-  right: 0%;
+  font-size: var(--text-base);
+  padding: var(--spacing-small) 0;
+
+  margin: var(--spacing-small) 0;
+  margin-left: auto;
+
+  width: 100px;
+
+  color: var(--neutral-50);
+  cursor: pointer;
   background: var(--primary-900);
-  padding: 5px 22px 5px 16px;
-  color: var(--neutral-100);
-  display: flex;
+  box-shadow: 0 2px 0 var(--primary-400);
+  border-radius: var(--spacing-2xsmall);
 }
 
-.teams-add-new > div {
-  width: 20px;
-  height: 20px;
-  background: var(--primary-800);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  margin-right: 6px;
+.teams-add-new:hover {
+  color: var(--primary-900);
+  background: var(--primary-200);
 }
 .teams-sorter-header {
   padding: 0 12px;
