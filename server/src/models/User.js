@@ -93,7 +93,7 @@ const userSchema = mongoose.Schema({
   country: {
     type: String,
     validate: /^[a-zA-Z ]*$/,
-    minlength: 4,
+    minlength: 2,
     maxLength: 56,
   },
   favouriteEplTeam: {

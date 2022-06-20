@@ -29,7 +29,7 @@ final GetIt getIt = GetIt.instance;
 void configureInjection(String env) {
   $initGetIt(getIt, environment: env);
 
-  getIt.registerSingleton<HTTPInstance>(HTTPInstance());
+  // getIt.registerSingleton<HTTPInstance>(HTTPInstance());
   getIt.registerSingleton<ICustomLeaguesRepository>(
       ApiCustomLeaguesRepository());
   // getIt.registerSingleton<ILeagueTableRepository>(APILeagueTableRepository());
