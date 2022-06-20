@@ -15,29 +15,30 @@ main {
   place-items: center;
 }
 
-.logo-container {
-  @apply h-8 w-8 overflow-hidden mx-1 grayscale;
+.logos img {
+  @apply h-10 w-10 overflow-hidden mx-1 grayscale object-cover;
 }
 
-.logo-container:hover {
+.logos img:hover {
   @apply grayscale-0;
-}
-
-.logo-container img {
-  max-width: 100%;
-  object-fit: cover;
 }
 
 .phone {
   width: 275px;
   height: 533.6px;
 
-  background: #1c1c1c;
+  background-image: url("../assets/signIn.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 18px;
 
-  box-shadow: 0 0 0 8px red;
+  box-shadow: 0 0 0 8px #212121;
 
   position: relative;
+}
+
+.phone-2 {
+  background-image: url("../assets/teamView.jpg");
 }
 
 .notch {
@@ -46,7 +47,7 @@ main {
   left: 50%;
   transform: translateX(-50%);
 
-  background: red;
+  background: #212121;
   width: 100px;
   height: 16px;
   border-radius: 0 0 12px 12px;

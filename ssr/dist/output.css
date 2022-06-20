@@ -566,6 +566,10 @@ video {
   top: 2rem;
 }
 
+.right-16 {
+  right: 4rem;
+}
+
 .left-16 {
   left: 4rem;
 }
@@ -578,6 +582,10 @@ video {
 .mx-3 {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
+}
+
+.ml-auto {
+  margin-left: auto;
 }
 
 .mt-4 {
@@ -624,12 +632,12 @@ video {
   line-height: 1;
 }
 
-.font-normal {
-  font-weight: 400;
-}
-
 .font-bold {
   font-weight: 700;
+}
+
+.font-normal {
+  font-weight: 400;
 }
 
 body {
@@ -646,34 +654,36 @@ main {
   place-items: center;
 }
 
-.logo-container {
+.logos img {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
-  height: 2rem;
-  width: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
   overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
   --tw-grayscale: grayscale(100%);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.logo-container:hover {
+.logos img:hover {
   --tw-grayscale: grayscale(0);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.logo-container img {
-  max-width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 .phone {
   width: 275px;
   height: 533.6px;
-  background: #1c1c1c;
+  background-image: url("../assets/signIn.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 18px;
-  box-shadow: 0 0 0 8px red;
+  box-shadow: 0 0 0 8px #212121;
   position: relative;
+}
+
+.phone-2 {
+  background-image: url("../assets/teamView.jpg");
 }
 
 .notch {
@@ -681,7 +691,7 @@ main {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background: red;
+  background: #212121;
   width: 100px;
   height: 16px;
   border-radius: 0 0 12px 12px;
