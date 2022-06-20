@@ -143,6 +143,7 @@
               class="main-text-input"
               :disabled="isEditMode && getLiveMatch == true"
             />
+            <button @click="getSuggestedPrice">AI</button>
           </div>
           <!-- Current Price -->
 
@@ -496,6 +497,11 @@ export default {
       this.injuryMessage = player.availability
         ? player.availability.injuryMessage
         : "";
+    },
+
+    getSuggestedPrice() {
+      const playerName = this.$refs.playerName.value;
+      store.dispatch("Player/getSuggestedPrice", playerName);
     },
   },
   computed: {

@@ -6,6 +6,7 @@ from joblib import dump, load
 import math
 from flask import Flask
 from flask import request
+from flask import Response
 import json
 from dotenv import load_dotenv
 import os
@@ -144,10 +145,19 @@ def fixture_difficulty_rating():
     }
 
 
-@ml_app.route("/initial_price", methods=['POST'])
-def initial_price():
-    data = json.loads(request['data'])
-    print(data.data)
+@ml_app.route("/initial-price/<name>", methods=['GET'])
+def initial_price(name):
+    with open("data/player-history-et.json", encoding='cp850') as f:
+        playerIds = json.load(f)
+    with open("data/player-history-x-et.json", encoding='cp850') as f:
+        playerHistory = json.load(f)
+    with open("model/initial-price-model.json", encoding='cp850') as f:
+        model = json.load(f)
+
+    for index in range(len(playerIds)):
+        if (playerIds[index]['name'] in name or name in playerIds[index]['name']):
+            print(index, name, playerIds[0])
+    return Response('{"price":2}', status=260, mimetype='application/json')
 
 
 if __name__ == '__main__':
