@@ -468,7 +468,7 @@ const resumeFixture = asyncHandler(async function (req, res) {
 });
 
 const endFixture = asyncHandler(async function (req, res) {
-  const match = await FixtureModel.findOne({ matchId: "13|9" });
+  const match = await FixtureModel.findOne({ matchId: req.params.matchId });
 
   const homeTeam = await TeamModel.findOne({
     teamId: parseInt(req.params.matchId.split("|")[0]),
@@ -599,7 +599,7 @@ const endFixture = asyncHandler(async function (req, res) {
       });
 
       // get fdr for next week
-      await getFDR(match);
+      // await getFDR(match);
     }
   }
   // if no match

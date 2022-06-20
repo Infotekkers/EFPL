@@ -544,15 +544,15 @@ export default {
       for (const position in lineup) {
         playerCount += lineup[position].length;
       }
-      if (playerCount > 16) {
+      if (playerCount >= 18) {
         this.saveFixtureLineup();
       } else {
         this.$store.dispatch("Global/setNotificationInfo", {
           showNotification: true,
           notificationType: "error",
           notificationMessage: `Lineup is not complete. Add ${
-            17 - playerCount
-          } player${17 - playerCount == 1 ? "" : "s"} to complete!`,
+            18 - playerCount
+          } player${18 - playerCount == 1 ? "" : "s"} to complete!`,
         });
       }
     },
